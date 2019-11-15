@@ -1,5 +1,5 @@
 Package: gdt
-Title: What the Package Does (One Line, Title Case)
+Title: Ease-of-use Tools for data.table
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "First",
