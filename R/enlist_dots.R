@@ -4,7 +4,7 @@
 #'
 #' @param ...
 #'
-#' @return list Returns a list for delayed evaluation in a function
+#' @return
 #' @export
 #'
 #' @examples

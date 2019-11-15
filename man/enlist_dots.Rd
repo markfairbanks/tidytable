@@ -10,7 +10,7 @@ enlist_dots(...)
 \item{...}{}
 }
 \value{
-list Returns a list for delayed evaluation in a function
+
 }
 \description{
 Helper function to capture ... inputs from the user.
