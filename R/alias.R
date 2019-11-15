@@ -9,7 +9,3 @@ set_colon_equal_alias <- function(alias){
   utils::assignInNamespace("[.data.table", temp, "data.table")
   base::invisible()
 }
-
-set_colon_equal_alias("let")
-
-vars <- base::list
