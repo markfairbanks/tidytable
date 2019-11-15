@@ -2,4 +2,5 @@
 
 export("%>%")
 export(enlist_dots)
+export(rename)
 importFrom(magrittr,"%>%")
