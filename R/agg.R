@@ -13,3 +13,6 @@
 agg <- function(...) {
   list(...)
 }
+
+#' @export
+vars <- base::list
