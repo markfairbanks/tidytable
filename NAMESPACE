@@ -2,6 +2,7 @@
 
 export("%>%")
 export(agg)
+export(dt)
 export(enlist_dots)
 export(rename)
 export(vars)
