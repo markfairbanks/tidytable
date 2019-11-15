@@ -12,5 +12,4 @@ set_colon_equal_alias <- function(alias){
 
 set_colon_equal_alias("let")
 
-agg <- base::list
 vars <- base::list
