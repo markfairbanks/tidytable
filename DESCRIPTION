@@ -15,3 +15,5 @@ Imports:
     data.table,
     magrittr
 RoxygenNote: 7.0.0
+URL: https://github.com/mtfairbanks/gdt
+BugReports: https://github.com/mtfairbanks/gdt/issues
