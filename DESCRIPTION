@@ -2,10 +2,10 @@ Package: gdt
 Title: Ease-of-use Tools for data.table
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Mark",
+           family = "Fairbanks",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
+           email = "mark.t.fairbanks@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE

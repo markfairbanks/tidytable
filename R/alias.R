@@ -1,16 +1,16 @@
 set_colon_equal_alias <- function(alias){
-  requireNamespace("data.table")
+  base::requireNamespace("data.table")
   temp <- data.table:::`[.data.table`
-  body(temp)[-1] <- parse(text = gsub(
+  base::body(temp)[-1] <- base::parse(text = base::gsub(
     '== ":="',
-    paste("%in%", deparse(c(":=", alias))) ,
-    body(temp)[-1],
+    base::paste("%in%", base::deparse(c(":=", alias))) ,
+    base::body(temp)[-1],
     fixed = TRUE))
-  assignInNamespace("[.data.table", temp, "data.table")
-  invisible()
+  utils::assignInNamespace("[.data.table", temp, "data.table")
+  base::invisible()
 }
 
 set_colon_equal_alias("let")
 
-agg <- list
-vars <- list
+agg <- base::list
+vars <- base::list
