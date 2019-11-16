@@ -42,7 +42,9 @@ let_if <- function(.data, .predicate, .fun, ...) {
 
   .cols <- colnames(.data)[sapply(.data, .predicate)]
 
-  .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
+  .data <- .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
+
+  .data
 }
 
 #' @export
