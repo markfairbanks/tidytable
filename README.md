@@ -35,8 +35,8 @@ example_dt %>%
   .[, let(double_x = x * 2,
           double_y = y * 2)] %>% # Add columns
   .[, agg(avg_x = mean(x)), by = z] %>% # Summarize/aggregate data
-  rename(new_z = z,
-         new_avg_x = avg_x) # Rename one or multiple columns
+  dt_rename(new_z = z,
+            new_avg_x = avg_x) # Rename one or multiple columns
 #>    new_z new_avg_x
 #> 1:     a       1.5
 #> 2:     b       3.0
