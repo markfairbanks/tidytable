@@ -4,7 +4,7 @@
 #' `data.table::fifelse()` under the hood
 #'
 #' @param ... statements of the form: `condition ~ label``, where the label is applied if the condition is met
-#'
+#' @export
 #' @import data.table
 #'
 #' @examples
@@ -25,7 +25,6 @@
 #'                          pseudo_id == 4 ~ x * 4,
 #'                          pseudo_id == 5 ~ x * 5)]
 #'
-#' @export
 dt_case_when <- function(...){
   # grab the dots
   dots <- list(...)
