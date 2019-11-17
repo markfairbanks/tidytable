@@ -23,10 +23,8 @@ devtools::install_github("mtfairbanks/gdt")
 The code chunk below shows the {gdt} syntax:
 
 ``` r
-library(data.table)
-library(gdt)
-#> Warning: changing locked binding for '[.data.table' in 'data.table' whilst
-#> loading 'gdt'
+library(pacman)
+p_load(data.table, gdt)
 
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
@@ -42,6 +40,24 @@ example_dt %>%
 #>    new_z new_avg_x
 #> 1:     a       1.5
 #> 2:     b       3.0
+```
+
+Or using the pipeable function
+`dt()`:
+
+``` r
+example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
+
+example_dt %>%
+  dt(, list(x, y, z)) %>%
+  dt(x < 4 & y > 1) %>%
+  dt(order(x, y)) %>%
+  dt(, let(double_x = x * 2,
+           double_y = y * 2)) %>%
+  dt(, agg(avg_x = mean(x)), by = z)
+#>    z avg_x
+#> 1: a   1.5
+#> 2: b   3.0
 ```
 
 Compared to original
