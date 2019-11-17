@@ -11,7 +11,8 @@ The goal of gdt is to make {data.table} easier to use.
 
 ## Installation
 
-And the development version from [GitHub](https://github.com/) with:
+You can install development version from [GitHub](https://github.com/)
+with:
 
 ``` r
 # install.packages("devtools")
