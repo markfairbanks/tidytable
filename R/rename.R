@@ -12,7 +12,7 @@
 #'   rename(new_x = x,
 #'          new_y = y)
 #'
-rename <- function(.data, ...) {
+dt_rename <- function(.data, ...) {
 
   is.data.frame(.data) || is.data.table(.data) || stop(".data must be a data.table")
 
