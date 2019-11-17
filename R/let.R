@@ -40,11 +40,10 @@ let_if <- function(.data, .predicate, .fun, ...) {
     .data = as.data.table(.data)
   }
 
-  .cols <- colnames(.data)[sapply(.data, .predicate)]
+  .cols <- colnames(.data)[sapply(.data, .predicate, USE.NAMES = FALSE)]
 
-  .data <- .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
+  .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
 
-  .data
 }
 
 #' @export
