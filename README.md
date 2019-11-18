@@ -81,3 +81,11 @@ example_dt %>%
 #> 1:     a       1.5
 #> 2:     b       3.0
 ```
+
+## Other Functions
+
+Other notable functions include:
+
+  - `dt_case_when()`
+  - `*_join()`
+  - `%notin%`
