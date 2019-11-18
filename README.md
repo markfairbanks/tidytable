@@ -82,10 +82,11 @@ example_dt %>%
 #> 2:     b       3.0
 ```
 
-## Other Functions
+## Notable Functions
 
 Other notable functions include:
 
   - `dt_case_when()`
-  - `*_join()`
+  - `dt_rename()`
+  - `dt_*_join()`
   - `%notin%`
