@@ -40,7 +40,7 @@ let_if <- function(.data, .predicate, .fun, ...) {
     .data = as.data.table(.data)
   }
 
-  .cols <- colnames(.data)[sapply(.data, .predicate, USE.NAMES = FALSE)]
+  .cols <- colnames(.data)[vapply(.data, .predicate, FUN.VALUE = logical(1), USE.NAMES = FALSE)]
 
   .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
 
