@@ -88,5 +88,6 @@ Other notable functions include:
 
   - `dt_case_when()`
   - `dt_rename()`
-  - `dt_*_join()`
+  - `dt_left_join()`, `dt_inner_join()`, etc.
+  - `let_if()` & `let_at`: Equivalent to `mutate_if()` & `mutate_at()`
   - `%notin%`
