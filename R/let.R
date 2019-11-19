@@ -42,8 +42,11 @@ let_if <- function(.data, .predicate, .fun, ...) {
 
   .cols <- colnames(.data)[map_lgl(.data, .predicate)]
 
-  .data[, (.cols) := map(.SD, .fun, ...), .SDcols = .cols]
-
+  if (length(.cols) > 0) {
+    .data[, (.cols) := map(.SD, .fun, ...), .SDcols = .cols]
+  } else {
+    .data
+  }
 }
 
 #' @export
@@ -59,5 +62,9 @@ let_at <- function(.data, .vars, .fun, ...) {
 
   .cols <- map_chr(seq_along(.vars), ~.vars[[.x]])
 
-  .data[, (.cols) := map(.SD, .fun, ...), .SDcols = .cols]
+  if (length(.cols) > 0) {
+    .data[, (.cols) := map(.SD, .fun, ...), .SDcols = .cols]
+  } else {
+    .data
+  }
 }
