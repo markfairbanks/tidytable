@@ -40,9 +40,9 @@ let_if <- function(.data, .predicate, .fun, ...) {
     .data = as.data.table(.data)
   }
 
-  .cols <- colnames(.data)[vapply(.data, .predicate, FUN.VALUE = logical(1), USE.NAMES = FALSE)]
+  .cols <- colnames(.data)[map_lgl(.data, .predicate)]
 
-  .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
+  .data[, (.cols) := map(.SD, .fun, ...), .SDcols = .cols]
 
 }
 
@@ -57,7 +57,7 @@ let_at <- function(.data, .vars, .fun, ...) {
 
   .vars <- as.character(substitute(.vars)[-1])
 
-  .cols <- sapply(seq_along(.vars), function(x) .vars[[x]])
+  .cols <- map_chr(seq_along(.vars), ~.vars[[.x]])
 
-  .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
+  .data[, (.cols) := map(.SD, .fun, ...), .SDcols = .cols]
 }
