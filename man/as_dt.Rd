@@ -20,5 +20,5 @@ example_df <- data.frame(x = 1:10)
 
 example_df \%>\%
   as_dt() \%>\%
-  .[,let(double_x = x * 2)]
+  .[, double_x := x * 2]
 }
