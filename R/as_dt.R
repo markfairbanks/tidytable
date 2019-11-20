@@ -12,7 +12,7 @@
 #'
 #' example_df %>%
 #'   as_dt() %>%
-#'   .[,let(double_x = x * 2)]
+#'   .[, double_x := x * 2]
 as_dt <- function(.data) {
   if (is.data.table(.data)) {
     copy(.data)
