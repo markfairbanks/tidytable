@@ -16,7 +16,7 @@ let_at(.data, .vars, .fun, ...)
 
 \item{...}{Other arguments for the passed function}
 
-\item{.vars}{Variables passed to \code{let_at()}}
+\item{.vars}{\code{list()} of variables for \code{let_at()} to use}
 }
 \value{
 

@@ -58,7 +58,7 @@ let_at <- function(.data, .vars, .fun, ...) {
     .data = as.data.table(.data)
   }
 
-  .cols <- as.character(substitute(.vars))[-1]
+  .cols <- characterize_list(.vars)
 
   if (length(.cols) > 0) {
     .data[, (.cols) := map(.SD, .fun, ...), .SDcols = .cols]

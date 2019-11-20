@@ -21,8 +21,8 @@ dt_pivot_longer <- function(data,
                             cols,
                             names_to = "name",
                             values_to = "value") {
-  if (length(as.character(substitute(cols))[-1]) > 0) {
-    cols <- as.character(substitute(cols))[-1]
+  if (length(characterize_list(cols)) > 0) {
+    cols <- characterize_list(cols)
   } else {
     cols <- colnames(data)
   }
