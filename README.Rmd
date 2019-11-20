@@ -85,6 +85,7 @@ example_dt %>%
 
 Other notable functions include:
 
+* `dt_pivot_longer()`
 * `dt_case_when()`
 * `dt_rename()`
 * `dt_left_join()`, `dt_inner_join()`, etc.
