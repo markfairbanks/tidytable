@@ -16,7 +16,7 @@
 #'
 #' @param .data The data.table
 #' @param .predicate Predicate to specify columns for `let_if()`
-#' @param .vars Variables passed to `let_at()`
+#' @param .vars `list()` of variables for `let_at()` to use
 #' @param .fun Function to pass
 #' @param ... Other arguments for the passed function
 #'
@@ -58,9 +58,7 @@ let_at <- function(.data, .vars, .fun, ...) {
     .data = as.data.table(.data)
   }
 
-  .vars <- as.character(substitute(.vars)[-1])
-
-  .cols <- map_chr(seq_along(.vars), ~.vars[[.x]])
+  .cols <- as.character(substitute(.vars))[-1]
 
   if (length(.cols) > 0) {
     .data[, (.cols) := map(.SD, .fun, ...), .SDcols = .cols]
