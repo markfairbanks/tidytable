@@ -21,10 +21,12 @@ dt_pivot_longer <- function(data,
                             cols,
                             names_to = "name",
                             values_to = "value") {
-  if (length(characterize_list(cols)) > 0) {
-    cols <- characterize_list(cols)
-  } else {
+  if (length(as.character(substitute(cols))) == 0) {
     cols <- colnames(data)
+  } else if (length(as.character(substitute(cols))) == 1) {
+    cols <- as.character(substitute(cols))
+  } else {
+    cols <- as.character(substitute(cols))[-1]
   }
 
   id_vars <- colnames(data)[!colnames(data) %in% cols]
