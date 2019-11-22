@@ -19,18 +19,33 @@ with:
 devtools::install_github("mtfairbanks/gdt")
 ```
 
-## Example
+## Notable Functions
+
+Notable functions in {gdt}:
+
+  - `agg()`: Used inside a data.table for aggregations
+  - `as_dt()`: Used to operate safely on data.tables without altering
+    the original object
+  - `dt_pivot_longer()` & `dt_pivot_wider()`
+  - `dt_case_when()`
+  - `dt_left_join()`, `dt_inner_join()`, etc.
+  - `dt_rename()`
+  - `dt_count()`
+  - `let_if()` & `let_at`: Equivalent to `mutate_if()` & `mutate_at()`
+  - `%notin%`
+
+## General syntax
 
 The code chunk below shows the {gdt} syntax:
 
 ``` r
 library(pacman)
-p_load(data.table, gdt)
+p_load(gdt)
 
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt %>%
-  as_dt() %>% # Use to safely operate on data.tables
+  as_dt() %>%
   .[, list(x, y, z)] %>% # Select columns
   .[x < 4 & y > 1] %>% # Filter columns
   .[order(x, y)] %>% # Reorder columns
@@ -44,8 +59,10 @@ example_dt %>%
 #> 2:     b       3.0
 ```
 
-Or using the pipeable function
-`dt()`:
+#### dt() helper
+
+The `dt()` function makes {data.table} easily
+pipable:
 
 ``` r
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
@@ -61,35 +78,3 @@ example_dt %>%
 #> 1: a   1.5
 #> 2: b   3.0
 ```
-
-Compared to original
-{data.table}:
-
-``` r
-example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
-
-example_dt %>%
-  .[, list(x, y, z)] %>% # Select columns
-  .[x < 4 & y > 1] %>% # Filter columns
-  .[order(x, y)] %>% # Reorder columns
-  .[, ':='(double_x = x * 2,
-           double_y = y * 2)] %>% # Add columns
-  .[, list(avg_x = mean(x)), by = z] %>% # Summarize/aggregate data
-  setnames(old = "z", new = "new_z") %>% # Rename columns
-  setnames(old = "avg_x", new = "new_avg_x") %>%
-  .[]
-#>    new_z new_avg_x
-#> 1:     a       1.5
-#> 2:     b       3.0
-```
-
-## Notable Functions
-
-Other notable functions include:
-
-  - `dt_pivot_longer()` & `dt_pivot_wider()`
-  - `dt_case_when()`
-  - `dt_rename()`
-  - `dt_left_join()`, `dt_inner_join()`, etc.
-  - `let_if()` & `let_at`: Equivalent to `mutate_if()` & `mutate_at()`
-  - `%notin%`

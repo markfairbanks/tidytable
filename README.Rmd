@@ -28,18 +28,33 @@ You can install development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("mtfairbanks/gdt")
 ```
-## Example
+
+## Notable Functions
+
+Notable functions in {gdt}:
+
+* `agg()`: Used inside a data.table for aggregations
+* `as_dt()`: Used to operate safely on data.tables without altering the original object
+* `dt_pivot_longer()` & `dt_pivot_wider()`
+* `dt_case_when()`
+* `dt_left_join()`, `dt_inner_join()`, etc.
+* `dt_rename()`
+* `dt_count()`
+* `let_if()` & `let_at`: Equivalent to `mutate_if()` & `mutate_at()`
+* `%notin%`
+
+## General syntax
 
 The code chunk below shows the {gdt} syntax:
 
-```{r warning=FALSE}
+```{r}
 library(pacman)
-p_load(data.table, gdt)
+p_load(gdt)
 
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt %>%
-  as_dt() %>% # Use to safely operate on data.tables
+  as_dt() %>%
   .[, list(x, y, z)] %>% # Select columns
   .[x < 4 & y > 1] %>% # Filter columns
   .[order(x, y)] %>% # Reorder columns
@@ -50,7 +65,9 @@ example_dt %>%
             new_avg_x = avg_x) # Rename one or multiple columns
 ```
 
-Or using the pipeable function `dt()`:
+#### dt() helper
+
+The `dt()` function makes {data.table} easily pipable:
 
 ```{r}
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
@@ -63,31 +80,3 @@ example_dt %>%
             double_y = y * 2)) %>%
   dt(, agg(avg_x = mean(x)), by = z)
 ```
-
-Compared to original {data.table}:
-
-```{r}
-example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
-
-example_dt %>%
-  .[, list(x, y, z)] %>% # Select columns
-  .[x < 4 & y > 1] %>% # Filter columns
-  .[order(x, y)] %>% # Reorder columns
-  .[, ':='(double_x = x * 2,
-           double_y = y * 2)] %>% # Add columns
-  .[, list(avg_x = mean(x)), by = z] %>% # Summarize/aggregate data
-  setnames(old = "z", new = "new_z") %>% # Rename columns
-  setnames(old = "avg_x", new = "new_avg_x") %>%
-  .[]
-```
-
-## Notable Functions
-
-Other notable functions include:
-
-* `dt_pivot_longer()` & `dt_pivot_wider()`
-* `dt_case_when()`
-* `dt_rename()`
-* `dt_left_join()`, `dt_inner_join()`, etc.
-* `let_if()` & `let_at`: Equivalent to `mutate_if()` & `mutate_at()`
-* `%notin%`
