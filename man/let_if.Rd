@@ -31,6 +31,8 @@ Add columns. There are two variants of \code{let()}:
 \examples{
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
+example_dt \%>\%
+  .[, let(double_x = x * 2)]
 
 example_dt \%>\%
   let_if(is.double, as.character)
