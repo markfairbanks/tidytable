@@ -7,7 +7,7 @@
 
 <!-- badges: end -->
 
-The goal of gdt is to make {data.table} easier to use.
+The goal of {gdt} is to make {data.table} easier to use.
 
 ## Installation
 
