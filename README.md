@@ -45,7 +45,7 @@ p_load(gdt)
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt %>%
-  as_dt() %>%
+  as_dt() %>% # Safely operate on data.tables
   .[, list(x, y, z)] %>% # Select columns
   .[x < 4 & y > 1] %>% # Filter columns
   .[order(x, y)] %>% # Reorder columns
