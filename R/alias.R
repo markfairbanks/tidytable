@@ -1,4 +1,4 @@
-replace_walrus_alias <- function (e) {
+replace_walrus_alias <- function(e) {
   if (is.call(e) && !is.function(e[[1L]])) {
     if (e[[1L]] == "let")
       e[[1L]] = quote(`:=`)
