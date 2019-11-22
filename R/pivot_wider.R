@@ -24,24 +24,13 @@ dt_pivot_wider <- function(data,
                            names_sep = "_",
                            values_from = value) {
 
-  if (length(as.character(substitute(names_from))) == 1) {
-    names_from <- as.character(substitute(names_from))
-  } else {
-    names_from <- as.character(substitute(names_from)[-1])
-  }
-
-  if (length(as.character(substitute(values_from))) == 1) {
-    values_from <- as.character(substitute(values_from))
-  } else {
-    values_from <- as.character(substitute(values_from)[-1])
-  }
+  names_from <- characterize(enexpr(names_from))
+  values_from <- characterize(enexpr(values_from))
 
   if (missing(id_cols)) {
     id_cols <- colnames(data)[!colnames(data) %in% c(names_from, values_from)]
-  } else if (length(as.character(substitute(id_cols))) == 1) {
-    id_cols <- as.character(substitute(id_cols))
   } else {
-    id_cols <- as.character(substitute(id_cols)[-1])
+    id_cols <- characterize(enexpr(id_cols))
   }
 
   if (length(id_cols) == 1) {
