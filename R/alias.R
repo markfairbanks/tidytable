@@ -9,15 +9,15 @@ replace_walrus_alias <- function(e) {
 }
 
 set_colon_equal_alias <- function(){
-  base::requireNamespace("data.table")
+  requireNamespace("data.table")
   temp <- data.table:::`[.data.table`
-  base::body(temp)[-1] <- base::parse(text = base::gsub(
+  body(temp)[-1] <- parse(text = gsub(
     'replace_dot_alias(substitute(j))',
     'gdt:::replace_walrus_alias(replace_dot_alias(substitute(j)))' ,
-    base::body(temp)[-1],
+    body(temp)[-1],
     fixed = TRUE))
-  utils::assignInNamespace("[.data.table", temp, "data.table")
-  base::invisible()
+  assignInNamespace("[.data.table", temp, "data.table")
+  invisible()
 }
 
 
