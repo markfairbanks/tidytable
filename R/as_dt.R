@@ -1,6 +1,6 @@
 #' Safely work with data.tables
 #'
-#' Copies a data.table so you can work on it, or converts a data.frame to a data.table.
+#' Copies a data.table so you can "safely" work on it or converts a data.frame to a data.table.
 #'
 #' @param .data
 #'
@@ -12,7 +12,7 @@
 #'
 #' example_df %>%
 #'   as_dt() %>%
-#'   .[, double_x := x * 2]
+#'   .[, let(double_x = x * 2)]
 as_dt <- function(.data) {
   if (is.data.table(.data)) {
     copy(.data)

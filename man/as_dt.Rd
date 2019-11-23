@@ -13,12 +13,12 @@ as_dt(.data)
 
 }
 \description{
-Copies a data.table so you can work on it, or converts a data.frame to a data.table.
+Copies a data.table so you can "safely" work on it or converts a data.frame to a data.table.
 }
 \examples{
 example_df <- data.frame(x = 1:10)
 
 example_df \%>\%
   as_dt() \%>\%
-  .[, double_x := x * 2]
+  .[, let(double_x = x * 2)]
 }
