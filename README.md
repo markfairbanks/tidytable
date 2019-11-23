@@ -19,12 +19,17 @@ with:
 devtools::install_github("mtfairbanks/gdt")
 ```
 
-## Notable Functions
+## Functions
 
-Notable functions in {gdt}:
+##### Inside a data.table call
 
-  - `let()`: Used inside a data.table call for adding columns
-  - `agg()`: Used inside data.table call for aggregations
+  - `list()`: Select column(s)
+  - `let()`: Add column(s)
+  - `order()`: Order rows
+  - `agg()`: Apply aggregation functions
+
+##### Helper functions
+
   - `as_dt()`: Used to operate safely on data.tables without altering
     the original object
   - `dt_pivot_longer()` & `dt_pivot_wider()`
