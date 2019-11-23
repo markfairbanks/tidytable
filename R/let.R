@@ -51,6 +51,7 @@ let_if <- function(.data, .predicate, .fun, ...) {
 }
 
 #' @export
+#' @inherit let_if
 let_at <- function(.data, .vars, .fun, ...) {
 
   is.data.frame(.data) || stop("data must be a data frame")
