@@ -7,7 +7,7 @@
 
 <!-- badges: end -->
 
-The goal of {gdt} is to make {data.table} easier to use.
+The goal of `gdt` is to make `data.table` easier to use.
 
 ## Installation
 
@@ -42,7 +42,7 @@ devtools::install_github("mtfairbanks/gdt")
 
 ## General syntax
 
-The code chunk below shows the {gdt} syntax:
+The code chunk below shows the `gdt` syntax:
 
 ``` r
 library(pacman)
@@ -67,7 +67,7 @@ example_dt %>%
 
 #### dt() helper
 
-The `dt()` function makes {data.table} easily
+The `dt()` function makes `data.table` easily
 pipeable:
 
 ``` r

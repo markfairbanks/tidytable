@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of {gdt} is to make {data.table} easier to use.
+The goal of `gdt` is to make `data.table` easier to use.
 
 ## Installation
 
@@ -49,7 +49,7 @@ devtools::install_github("mtfairbanks/gdt")
 
 ## General syntax
 
-The code chunk below shows the {gdt} syntax:
+The code chunk below shows the `gdt` syntax:
 
 ```{r}
 library(pacman)
@@ -71,7 +71,7 @@ example_dt %>%
 
 #### dt() helper
 
-The `dt()` function makes {data.table} easily pipeable:
+The `dt()` function makes `data.table` easily pipeable:
 
 ```{r}
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
