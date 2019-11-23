@@ -30,7 +30,8 @@ dt_pivot_longer <- function(data,
     if (any(str_detect(cols, "-"))) {
       drop_cols <- cols[str_detect(cols, "-")] %>% str_replace("-", "")
 
-      cols <- c(cols[!str_detect(cols, "-")], colnames(data)[colnames(data) %notin% drop_cols]) %>% unique()
+      cols <- unique(c(cols[!str_detect(cols, "-")],
+                       colnames(data)[colnames(data) %notin% drop_cols]))
     }
   }
 
