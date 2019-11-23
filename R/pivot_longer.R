@@ -4,8 +4,8 @@
 #' decreasing the number of columns. The inverse transformation is
 #' [pivot_wider()]
 #'
-#' @param data
-#' @param cols Column selection. If empty uses all columns.
+#' @param data The data.table
+#' @param cols Column selection. If empty uses all columns. Can use c(-colname) to unselect column(s)
 #' @param names_to Name of the new "names" column. Must be a string.
 #' @param values_to Name of the new "values" column. Must be a string.
 #'
@@ -26,6 +26,12 @@ dt_pivot_longer <- function(data,
   } else {
     cols <- enexpr(cols)
     cols <- characterize(cols)
+
+    if (any(str_detect(cols, "-"))) {
+      drop_cols <- cols[str_detect(cols, "-")] %>% str_replace("-", "")
+
+      cols <- c(cols[!str_detect(cols, "-")], colnames(data)[colnames(data) %notin% drop_cols]) %>% unique()
+    }
   }
 
   id_vars <- colnames(data)[colnames(data) %notin% cols]
