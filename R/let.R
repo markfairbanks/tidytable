@@ -44,7 +44,7 @@ let_if <- function(.data, .predicate, .fun, ...) {
   .cols <- colnames(.data)[map_lgl(.data, .predicate)]
 
   if (length(.cols) > 0) {
-    .data[, (.cols) := map(.SD, .fun, ...), .SDcols = .cols]
+    .data <- .data[, (.cols) := map(.SD, .fun, ...), .SDcols = .cols]
   } else {
     .data
   }
@@ -56,13 +56,13 @@ let_at <- function(.data, .vars, .fun, ...) {
   is.data.frame(.data) || stop("data must be a data frame")
 
   if (!is.data.table(.data)) {
-    .data = as.data.table(.data)
+    .data <- as.data.table(.data)
   }
 
   .cols <- as.character(substitute(.vars))[-1]
 
   if (length(.cols) > 0) {
-    .data[, (.cols) := map(.SD, .fun, ...), .SDcols = .cols]
+    .data <- .data[, (.cols) := map(.SD, .fun, ...), .SDcols = .cols]
   } else {
     .data
   }
