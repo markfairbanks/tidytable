@@ -73,7 +73,7 @@ dt <- function(data,
                 allow.cartesian = getOption("datatable.allow.cartesian"),   # default: FALSE
                 drop = NULL,
                 on = NULL){
-  is.data.frame(data) || stop("dt: 'data' should be data.frame or data.table")
+  is.data.frame(data) || abort("dt: 'data' should be data.frame or data.table")
   call_expr = sys.call()
   if(!is.data.table(data)){
     call_expr[[2]] = substitute(as.data.table(data))

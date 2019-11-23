@@ -35,7 +35,7 @@
 #' example_dt %>%
 #'   let_at(list(x, y), ~.x * 2)
 let_if <- function(.data, .predicate, .fun, ...) {
-  is.data.frame(.data) || stop("data must be a data frame")
+  is.data.frame(.data) || abort("data must be a data frame")
 
   if (!is.data.table(.data)) {
     .data = as.data.table(.data)
