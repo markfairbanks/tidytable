@@ -18,18 +18,17 @@
 #'   as_dt() %>%
 #'   dt_pivot_longer(cols = c(x, y), names_to = "stuff", values_to = "things")
 dt_pivot_longer <- function(data,
-                            cols,
+                            cols = NULL,
                             names_to = "name",
                             values_to = "value") {
-  if (length(as.character(substitute(cols))) == 0) {
+  if (missing(cols)) {
     cols <- colnames(data)
-  } else if (length(as.character(substitute(cols))) == 1) {
-    cols <- as.character(substitute(cols))
   } else {
-    cols <- as.character(substitute(cols))[-1]
+    cols <- enexpr(cols)
+    cols <- characterize(cols)
   }
 
-  id_vars <- colnames(data)[!colnames(data) %in% cols]
+  id_vars <- colnames(data)[colnames(data) %notin% cols]
 
   data.table::melt(data = data,
                    id.vars = id_vars,

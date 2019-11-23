@@ -4,7 +4,7 @@
 \alias{dt_pivot_longer}
 \title{Pivot data from wide to long}
 \usage{
-dt_pivot_longer(data, cols, names_to = "name", values_to = "value")
+dt_pivot_longer(data, cols = NULL, names_to = "name", values_to = "value")
 }
 \arguments{
 \item{cols}{Column selection. If empty uses all columns.}

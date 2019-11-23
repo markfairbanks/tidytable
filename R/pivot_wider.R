@@ -28,9 +28,10 @@ dt_pivot_wider <- function(data,
   values_from <- characterize(enexpr(values_from))
 
   if (missing(id_cols)) {
-    id_cols <- colnames(data)[!colnames(data) %in% c(names_from, values_from)]
+    id_cols <- colnames(data)[colnames(data) %notin% c(names_from, values_from)]
   } else {
-    id_cols <- characterize(enexpr(id_cols))
+    id_cols <- enexpr(id_cols)
+    id_cols <- characterize(id_cols)
   }
 
   if (length(id_cols) == 1) {
