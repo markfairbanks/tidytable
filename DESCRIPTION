@@ -14,7 +14,8 @@ LazyData: true
 Imports: 
     data.table,
     magrittr,
-    purrr
+    purrr,
+    stringr
 RoxygenNote: 7.0.1
 URL: https://github.com/mtfairbanks/gdt
 BugReports: https://github.com/mtfairbanks/gdt/issues
