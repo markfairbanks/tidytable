@@ -12,7 +12,7 @@
 #'   inv_gc() %>%
 #'   select(col1, col2)
 inv_gc <- function(df = NULL) {
-  if(is.null(df)) {
+  if(missing(df)) {
     invisible(gc())
   } else {
     invisible(gc())
