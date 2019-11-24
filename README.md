@@ -11,8 +11,8 @@ The goal of `gdt` is to make `data.table` easier to use.
 
 ## Installation
 
-You can install development version from [GitHub](https://github.com/)
-with:
+You can install the development version from
+[GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -21,14 +21,14 @@ devtools::install_github("mtfairbanks/gdt")
 
 ## Functions
 
-##### Inside a data.table call
+#### Inside a data.table call
 
   - `list()`: Select column(s)
   - `let()`: Add column(s)
   - `order()`: Order rows
   - `agg()`: Apply aggregation functions
 
-##### Helper functions
+#### Helper functions
 
   - `as_dt()`: Used to operate safely on data.tables without altering
     the original object
@@ -37,7 +37,7 @@ devtools::install_github("mtfairbanks/gdt")
   - `dt_left_join()`, `dt_inner_join()`, etc.
   - `dt_rename()`
   - `dt_count()`
-  - `let_if()` & `let_at`: Equivalent to `mutate_if()` & `mutate_at()`
+  - `let_if()` & `let_at()`: Equivalent to `mutate_if()` & `mutate_at()`
   - `%notin%`
 
 ## General syntax
