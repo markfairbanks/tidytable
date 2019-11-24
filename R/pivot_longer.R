@@ -40,7 +40,6 @@ dt_pivot_longer <- function(data,
     cols <- unique(c(cols[!str_detect(cols, "-")],
                      colnames(data)[colnames(data) %notin% drop_cols]))
   }
-  # cols
 
   id_vars <- colnames(data)[colnames(data) %notin% cols]
 
