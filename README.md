@@ -21,7 +21,7 @@ devtools::install_github("mtfairbanks/gdt")
 
 ## Functions
 
-#### Inside a data.table call
+#### Inside a `data.table` call
 
   - `list()`: Select column(s)
   - `let()`: Add column(s)
@@ -39,7 +39,8 @@ devtools::install_github("mtfairbanks/gdt")
   - `dt_count()`
   - `let_if()` & `let_at()`: Equivalent to `mutate_if()` & `mutate_at()`
   - `%notin%`
-  - `dt()`: Pipeable `data.table` call. *See example below*
+  - `dt()`: Pipeable `data.table` call. [See example
+    here](https://github.com/mtfairbanks/gdt#dt-helper)
 
 ## General syntax
 
@@ -65,7 +66,7 @@ example_dt %>%
 #> 2:     b       3.0
 ```
 
-#### dt() helper
+#### `dt()` helper
 
 The `dt()` function makes `data.table` easily
 pipeable:
