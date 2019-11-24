@@ -9,7 +9,7 @@ dt_pivot_longer(data, cols = NULL, names_to = "name", values_to = "value")
 \arguments{
 \item{data}{The data.table}
 
-\item{cols}{Column selection. If empty uses all columns. Can use c(-colname) to unselect column(s)}
+\item{cols}{Column selection. If empty uses all columns. Can use -colname to unselect column(s)}
 
 \item{names_to}{Name of the new "names" column. Must be a string.}
 

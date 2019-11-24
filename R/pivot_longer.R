@@ -5,7 +5,7 @@
 #' [pivot_wider()]
 #'
 #' @param data The data.table
-#' @param cols Column selection. If empty uses all columns. Can use c(-colname) to unselect column(s)
+#' @param cols Column selection. If empty uses all columns. Can use -colname to unselect column(s)
 #' @param names_to Name of the new "names" column. Must be a string.
 #' @param values_to Name of the new "values" column. Must be a string.
 #'
@@ -22,18 +22,25 @@ dt_pivot_longer <- function(data,
                             names_to = "name",
                             values_to = "value") {
   if (missing(cols)) {
-    cols <- colnames(data)
+    cols <- colnames(data) # All columns if cols = NULL
   } else {
     cols <- enexpr(cols)
     cols <- characterize(cols)
-
-    if (any(str_detect(cols, "-"))) {
-      drop_cols <- cols[str_detect(cols, "-")] %>% str_replace("-", "")
-
-      cols <- unique(c(cols[!str_detect(cols, "-")],
-                       colnames(data)[colnames(data) %notin% drop_cols]))
-    }
   }
+
+  if (cols[1] == "-") {
+    # If cols is a single "unselected" column
+    drop_cols <- cols[2]
+    cols <- colnames(data)[colnames(data) %notin% drop_cols]
+
+  } else if (any(str_detect(cols, "-"))) {
+    # If cols is a vector of bare column names
+    drop_cols <- cols[str_detect(cols, "-")] %>% str_replace("-", "")
+
+    cols <- unique(c(cols[!str_detect(cols, "-")],
+                     colnames(data)[colnames(data) %notin% drop_cols]))
+  }
+  # cols
 
   id_vars <- colnames(data)[colnames(data) %notin% cols]
 

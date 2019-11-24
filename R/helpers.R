@@ -17,6 +17,8 @@ characterize <- function(vec_list_expr) {
   vle_length <- length(vec_list_expr)
   if (vle_length == 1) {
     as.character(vec_list_expr)
+  } else if (as.character(vec_list_expr)[1] == "-"){
+    as.character(vec_list_expr)
   } else {
     as.character(vec_list_expr)[-1]
   }
