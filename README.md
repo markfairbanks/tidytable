@@ -46,8 +46,7 @@ devtools::install_github("mtfairbanks/gdt")
 The code chunk below shows the `gdt` syntax:
 
 ``` r
-library(pacman)
-p_load(gdt)
+library(gdt) # Loads data.table, %>%, purrr, and stringr
 
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
