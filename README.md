@@ -30,8 +30,8 @@ devtools::install_github("mtfairbanks/gdt")
 
 #### Helper functions
 
-  - `as_dt()`: Used to operate safely on data.tables without altering
-    the original object
+  - `as_dt()`: Safely operate on data.tables without altering the
+    original object. Also converts data.frames to data.tables.
   - `dt_pivot_longer()` & `dt_pivot_wider()`
   - `dt_case_when()`
   - `dt_left_join()`, `dt_inner_join()`, etc.
@@ -39,6 +39,7 @@ devtools::install_github("mtfairbanks/gdt")
   - `dt_count()`
   - `let_if()` & `let_at()`: Equivalent to `mutate_if()` & `mutate_at()`
   - `%notin%`
+  - `dt()`: Pipeable `data.table` call. *See example below*
 
 ## General syntax
 
@@ -51,7 +52,7 @@ p_load(gdt)
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt %>%
-  as_dt() %>% # Safely operate on data.tables
+  as_dt() %>% # Safely operate on data.tables/convert data.frames to data.tables
   .[, list(x, y, z)] %>% # Select columns
   .[x < 4 & y > 1] %>% # Filter columns
   .[order(x, y)] %>% # Reorder columns
@@ -74,6 +75,7 @@ pipeable:
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt %>%
+  as_dt() %>%
   dt(, list(x, y, z)) %>%
   dt(x < 4 & y > 1) %>%
   dt(order(x, y)) %>%
