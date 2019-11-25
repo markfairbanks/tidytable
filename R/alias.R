@@ -20,7 +20,7 @@ set_colon_equal_alias <- function(){
 
   body(temp)[-1] <- parse(text = gsub(
     'replace_dot_alias(substitute(jsub))',
-    'gdt:::replace_walrus_alias(replace_dot_alias(substitute(jsub)))' ,
+    'gdt:::replace_walrus_alias(replace_dot_alias(jsub))' ,
     body(temp)[-1],
     fixed = TRUE))
 
