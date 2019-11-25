@@ -23,9 +23,6 @@ variables that is directly related.}
 (or columns) to get the name of the output column (`name_from`), and
 which column (or columns) to get the cell values from (`values_from`).}
 }
-\value{
-
-}
 \description{
 `pivot_wider()` "widens" data, increasing the number of columns and
 decreasing the number of rows. The inverse transformation is

@@ -18,10 +18,11 @@ dt_pivot_longer(data, cols = NULL, names_to = "name", values_to = "value")
 \description{
 `pivot_longer()` "lengthens" data, increasing the number of rows and
 decreasing the number of columns. The inverse transformation is
-`pivot_wider()``
+`pivot_wider()`
 }
 \examples{
 example_df <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "b", "c"))
+
 example_df \%>\%
   as_dt() \%>\%
   dt_pivot_longer(cols = c(x, y), names_to = "stuff", values_to = "things")

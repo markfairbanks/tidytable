@@ -15,7 +15,6 @@
 #'   (or columns) to get the name of the output column (`name_from`), and
 #'   which column (or columns) to get the cell values from (`values_from`).
 #'
-#' @return
 #' @export
 dt_pivot_wider <- function(data,
                            id_cols = NULL,
