@@ -20,6 +20,8 @@ knitr::opts_chunk$set(
 
 The goal of `gdt` is to make `data.table` easier to use.
 
+Several functions within this package are directly from the [`tidyfast` package](https://tysonbarrett.com/tidyfast/)
+
 ## Installation
 
 You can install the development version from [GitHub](https://github.com/) with:
