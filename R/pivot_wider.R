@@ -16,6 +16,14 @@
 #'   which column (or columns) to get the cell values from (`values_from`).
 #'
 #' @export
+#'
+#' @examples
+#' example_dt <- data.table(z = rep(c("a", "b", "c"), 2),
+#'                          stuff = c(rep("x", 3), rep("y", 3)),
+#'                          things = 1:6)
+#'
+#' example_dt %>%
+#'   dt_pivot_wider(names_from = stuff, values_from = things)
 dt_pivot_wider <- function(data,
                            id_cols = NULL,
                            names_from = name,
