@@ -27,7 +27,6 @@ devtools::install_github("mtfairbanks/gdt")
 #### Inside a `data.table` call
 
   - `list()`: Select column(s)
-  - `let()`: Add column(s)
   - `order()`: Order rows
   - `agg()`: Apply aggregation functions
 
@@ -59,8 +58,8 @@ example_dt %>%
   .[, list(x, y, z)] %>% # Select columns
   .[x < 4 & y > 1] %>% # Filter columns
   .[order(x, y)] %>% # Reorder columns
-  .[, let(double_x = x * 2,
-          double_y = y * 2)] %>% # Add columns
+  .[, ':='(double_x = x * 2,
+           double_y = y * 2)] %>% # Add columns
   .[, agg(avg_x = mean(x)), by = z] %>% # Summarize/aggregate data
   dt_rename(new_z = z,
             new_avg_x = avg_x) # Rename one or multiple columns
@@ -82,8 +81,8 @@ example_dt %>%
   dt(, list(x, y, z)) %>%
   dt(x < 4 & y > 1) %>%
   dt(order(x, y)) %>%
-  dt(, let(double_x = x * 2,
-           double_y = y * 2)) %>%
+  dt(, ':='(double_x = x * 2,
+            double_y = y * 2)) %>%
   dt(, agg(avg_x = mean(x)), by = z)
 #>    z avg_x
 #> 1: a   1.5
