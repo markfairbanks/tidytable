@@ -24,6 +24,12 @@ set_colon_equal_alias <- function(){
     body(temp)[-1],
     fixed = TRUE))
 
+  body(temp)[-1] <- parse(text = gsub(
+    '== ":="',
+    paste("%in%", deparse(c(":=", "let"))) ,
+    body(temp)[-1],
+    fixed = TRUE))
+
   assignInNamespace("[.data.table", temp, "data.table")
   invisible()
 }
