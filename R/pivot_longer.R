@@ -2,14 +2,13 @@
 #'
 #' `pivot_longer()` "lengthens" data, increasing the number of rows and
 #' decreasing the number of columns. The inverse transformation is
-#' [pivot_wider()]
+#' `pivot_wider()``
 #'
 #' @param data The data.table
 #' @param cols Column selection. If empty uses all columns. Can use -colname to unselect column(s)
 #' @param names_to Name of the new "names" column. Must be a string.
 #' @param values_to Name of the new "values" column. Must be a string.
 #'
-#' @return
 #' @export
 #'
 #' @examples
