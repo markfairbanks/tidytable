@@ -2,7 +2,7 @@ replace_walrus_alias <- function(e) {
   if (is.call(e) && !is.function(e[[1L]])) {
     if (e[[1L]] == 'bmerge') return(e)
     if (e[[1L]] == "let")
-      e[[1L]] = quote(`:=`)
+      e[[1L]] = quote(':=')
     for (i in seq_along(e)[-1L]) if (!is.null(e[[i]]))
       e[[i]] = replace_walrus_alias(e[[i]])
   }
