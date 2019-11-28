@@ -8,9 +8,9 @@ dt_pivot_wider(
   data,
   id_cols = NULL,
   names_from = name,
-  names_prefix = "",
   names_sep = "_",
-  values_from = value
+  values_from = value,
+  drop = FALSE
 )
 }
 \arguments{
@@ -22,6 +22,10 @@ variables that is directly related.}
 \item{names_from, values_from}{A pair of arguments describing which column
 (or columns) to get the name of the output column (`name_from`), and
 which column (or columns) to get the cell values from (`values_from`).}
+
+\item{drop}{will cast by including all missing combinations.
+c(FALSE, TRUE) will only include all missing combinations of formula LHS;
+c(TRUE, FALSE) will only include all missing combinations of formula RHS. See Examples.}
 }
 \description{
 `pivot_wider()` "widens" data, increasing the number of columns and
@@ -29,6 +33,8 @@ decreasing the number of rows. The inverse transformation is
 [pivot_longer()].
 }
 \examples{
+library(data.table)
+
 example_dt <- data.table(z = rep(c("a", "b", "c"), 2),
                          stuff = c(rep("x", 3), rep("y", 3)),
                          things = 1:6)

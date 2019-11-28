@@ -8,47 +8,61 @@
 #' @param cols Column selection. If empty uses all columns. Can use -colname to unselect column(s)
 #' @param names_to Name of the new "names" column. Must be a string.
 #' @param values_to Name of the new "values" column. Must be a string.
+#' @param ... Additional values to pass to `melt()`
 #'
 #' @export
 #'
 #' @examples
+#' library(data.table)
+#'
 #' example_df <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "b", "c"))
 #'
 #' example_df %>%
-#'   as_dt() %>%
 #'   dt_pivot_longer(cols = c(x, y), names_to = "stuff", values_to = "things")
 dt_pivot_longer <- function(data,
                             cols = NULL,
                             names_to = "name",
-                            values_to = "value") {
+                            values_to = "value",
+                            ...) {
+
+  is.data.frame(data) || is.data.table(data) || stop("data must be a data.frame or data.table")
+
+  if (!is.data.table(data)) {
+    data <- as.data.table(data)
+  }
+
   if (missing(cols)) {
-    cols <- colnames(data) # All columns if cols = NULL
+    # All columns if cols = NULL
+    cols <- colnames(data)
   } else {
-    cols <- enexpr(cols)
-    cols <- characterize(cols)
+    cols <- characterize(substitute(cols))
   }
 
   if (cols[1] == "-") {
     # If cols is a single "unselected" column
+    # Ex: cols = -z
     drop_cols <- cols[2]
-    cols <- colnames(data)[colnames(data) %notin% drop_cols]
+    cols <- colnames(data)[!colnames(data) %in% drop_cols]
 
-  } else if (any(str_detect(cols, "-"))) {
-    # If cols is a vector of bare column names
-    drop_cols <- cols[str_detect(cols, "-")] %>% str_replace("-", "")
+  } else if (all(grepl("-", cols))) {
+    # If cols is a vector of columns to drop
+    # Ex: cols = c(-y, -z)
+    drop_cols <- gsub("-", "", cols)
 
-    cols <- unique(c(cols[!str_detect(cols, "-")],
-                     colnames(data)[colnames(data) %notin% drop_cols]))
+    cols <- colnames(data)[!colnames(data) %in% drop_cols]
+  } else if (any(grepl("-", cols)) && any(grepl("-", cols))) {
+    # Ex: cols = c(x, -z)
+    stop("cols must only contain columns to drop OR columns to add, not both")
   }
 
-  id_vars <- colnames(data)[colnames(data) %notin% cols]
+  id_vars <- colnames(data)[!colnames(data) %in% cols]
 
   data.table::melt(data = data,
                    id.vars = id_vars,
                    measure.vars = cols,
                    variable.name = names_to,
                    value.name = values_to,
-                   # ...,
+                   ...,
                    na.rm = FALSE,
                    variable.factor = FALSE,
                    value.factor = FALSE)

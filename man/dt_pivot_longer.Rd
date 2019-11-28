@@ -4,7 +4,7 @@
 \alias{dt_pivot_longer}
 \title{Pivot data from wide to long}
 \usage{
-dt_pivot_longer(data, cols = NULL, names_to = "name", values_to = "value")
+dt_pivot_longer(data, cols = NULL, names_to = "name", values_to = "value", ...)
 }
 \arguments{
 \item{data}{The data.table}
@@ -14,6 +14,8 @@ dt_pivot_longer(data, cols = NULL, names_to = "name", values_to = "value")
 \item{names_to}{Name of the new "names" column. Must be a string.}
 
 \item{values_to}{Name of the new "values" column. Must be a string.}
+
+\item{...}{Additional values to pass to `melt()`}
 }
 \description{
 `pivot_longer()` "lengthens" data, increasing the number of rows and
@@ -21,9 +23,10 @@ decreasing the number of columns. The inverse transformation is
 `pivot_wider()`
 }
 \examples{
+library(data.table)
+
 example_df <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "b", "c"))
 
 example_df \%>\%
-  as_dt() \%>\%
   dt_pivot_longer(cols = c(x, y), names_to = "stuff", values_to = "things")
 }
