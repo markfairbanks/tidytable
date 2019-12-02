@@ -34,7 +34,6 @@ devtools::install_github("mtfairbanks/gdt")
 
 #### gdt functions
 
-  - `%>%`: Imported from `magrittr`
   - `as_dt()`: Safely operate on data.tables without altering the
     original object. Also converts data.frames to data.tables.
   - `dt_pivot_longer()` & `dt_pivot_wider()`

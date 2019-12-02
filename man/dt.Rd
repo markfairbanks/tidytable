@@ -5,13 +5,13 @@
 \title{Pipeable data.table call}
 \usage{
 dt(
-  data,
+  x,
   i,
   j,
   by,
   keyby,
   with = TRUE,
-  nomatch = getOption("datatable.nomatch"),
+  nomatch = getOption("datatable.nomatch", NA),
   mult = "all",
   roll = FALSE,
   rollends = if (roll == "nearest") c(TRUE, TRUE) else if (roll >= 0) c(FALSE, TRUE)

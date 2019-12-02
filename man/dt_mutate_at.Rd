@@ -31,5 +31,5 @@ example_dt \%>\%
   dt_mutate_if(is.double, as.character)
 
 example_dt \%>\%
-  dt_mutate_at(list(x, y), ~.x * 2)
+  dt_mutate_at(list(x, y), function(.x) .x * 2)
 }
