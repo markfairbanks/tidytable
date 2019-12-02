@@ -1,22 +1,21 @@
-#' Let
+#' Mutate
 #'
 #' @description
 #'
-#' Add columns. There are two variants of `let()`:
+#' Edit existing columns. There are two variants:
 #'
-#' * `let_if()`: Equivalent to `dplyr::mutate_if()`
-#' * `let_at()`: Equivalent to `dplyr::mutate_at()`
+#' * `dt_mutate_if()`
+#' * `dt_mutate_at()`
 #'
-#' @md
 #'
 #' @usage
 #'
-#' let_if(.data, .predicate, .fun, ...) \cr
-#' let_at(.data, .vars, .fun, ...)
+#' dt_mutate_if(.data, .predicate, .fun, ...)
+#' dt_mutate_at(.data, .vars, .fun, ...)
 #'
 #' @param .data The data.table
-#' @param .predicate Predicate to specify columns for `let_if()`
-#' @param .vars `list()` of variables for `let_at()` to use
+#' @param .predicate Predicate to specify columns for `dt_mutate_if()`
+#' @param .vars `list()` of variables for `dt_mutate_at()` to use
 #' @param .fun Function to pass
 #' @param ... Other arguments for the passed function
 #'
@@ -27,15 +26,12 @@
 #' example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 #'
 #' example_dt %>%
-#'   .[, let(double_x = x * 2)]
+#'   dt_mutate_if(is.double, as.character)
 #'
 #' example_dt %>%
-#'   let_if(is.double, as.character)
-#'
-#' example_dt %>%
-#'   let_at(list(x, y), ~.x * 2)
-let_if <- function(.data, .predicate, .fun, ...) {
-  is.data.frame(.data) || abort("data must be a data frame")
+#'   dt_mutate_at(list(x, y), ~.x * 2)
+dt_mutate_if <- function(.data, .predicate, .fun, ...) {
+  is.data.frame(.data) || stop("data must be a data frame")
 
   if (!is.data.table(.data)) {
     .data = as.data.table(.data)
@@ -51,8 +47,8 @@ let_if <- function(.data, .predicate, .fun, ...) {
 }
 
 #' @export
-#' @inherit let_if
-let_at <- function(.data, .vars, .fun, ...) {
+#' @inherit dt_mutate_if
+dt_mutate_at <- function(.data, .vars, .fun, ...) {
 
   is.data.frame(.data) || stop("data must be a data frame")
 

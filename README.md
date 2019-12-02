@@ -7,10 +7,8 @@
 
 <!-- badges: end -->
 
-The goal of `gdt` is to make `data.table` easier to use.
-
-Several functions within this package are directly from the [`tidyfast`
-package](https://tysonbarrett.com/tidyfast/)
+The goal of `gdt` is to complement `tidyfast` and `maditr` as a tidy
+interface to `data.table`.
 
 ## Installation
 
@@ -24,25 +22,30 @@ devtools::install_github("mtfairbanks/gdt")
 
 ## Functions
 
-#### Inside a `data.table` call
-
-  - `list()`: Select column(s)
-  - `order()`: Order rows
-  - `agg()`: Apply aggregation functions
-
-#### Helper functions
+#### gdt functions
 
   - `as_dt()`: Safely operate on data.tables without altering the
     original object. Also converts data.frames to data.tables.
   - `dt_pivot_longer()` & `dt_pivot_wider()`
-  - `dt_case_when()`
-  - `dt_left_join()`, `dt_inner_join()`, etc.
   - `dt_rename()`
-  - `dt_count()`
-  - `let_if()` & `let_at()`: Equivalent to `mutate_if()` & `mutate_at()`
+  - `dt_mutate_if()` & `dt_mutate_at()`
   - `%notin%`
   - `dt()`: Pipeable `data.table` call. [See example
     here](https://github.com/mtfairbanks/gdt#dt-helper)
+
+#### tidyfast functions
+
+  - `dt_case_when()`
+  - `dt_count()`
+  - `dt_separate()`
+
+#### maditr functions
+
+  - `dt_mutate()`
+  - `dt_arrange()`
+  - `dt_summarize()`
+  - `dt_filter()`
+  - `dt_left_join()`, `dt_inner_join()`, etc.
 
 ## General syntax
 
@@ -50,17 +53,19 @@ The code chunk below shows the `gdt` syntax:
 
 ``` r
 library(gdt) # Loads data.table, %>%, purrr, and stringr
+library(maditr)
+library(tidyfast)
 
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt %>%
   as_dt() %>% # Safely operate on data.tables/convert data.frames to data.tables
-  .[, list(x, y, z)] %>% # Select columns
-  .[x < 4 & y > 1] %>% # Filter columns
-  .[order(x, y)] %>% # Reorder columns
-  .[, ':='(double_x = x * 2,
-           double_y = y * 2)] %>% # Add columns
-  .[, agg(avg_x = mean(x)), by = z] %>% # Summarize/aggregate data
+  dt_select(x, y, z) %>%
+  dt_filter(x < 4 & y > 1) %>%
+  dt_arrange(x, y) %>%
+  dt_mutate(double_x = x * 2,
+            double_y = y * 2) %>%
+  dt_summarize(avg_x = mean(x), by = z) %>%
   dt_rename(new_z = z,
             new_avg_x = avg_x) # Rename one or multiple columns
 #>    new_z new_avg_x
@@ -70,7 +75,7 @@ example_dt %>%
 
 #### `dt()` helper
 
-The `dt()` function makes `data.table` easily
+The `dt()` function makes `data.table` syntax
 pipeable:
 
 ``` r
@@ -83,7 +88,7 @@ example_dt %>%
   dt(order(x, y)) %>%
   dt(, ':='(double_x = x * 2,
             double_y = y * 2)) %>%
-  dt(, agg(avg_x = mean(x)), by = z)
+  dt(, list(avg_x = mean(x)), by = z)
 #>    z avg_x
 #> 1: a   1.5
 #> 2: b   3.0
