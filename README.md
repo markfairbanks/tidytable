@@ -7,8 +7,10 @@
 
 <!-- badges: end -->
 
-The goal of `gdt` is to complement `tidyfast` and `maditr` as a tidy
-interface to `data.table`.
+The goal of `gdt` is to complement
+[tidyfast](https://github.com/TysonStanley/tidyfast) and
+[maditr](https://github.com/gdemin/maditr) as a tidy interface to
+`data.table`.
 
 ## Installation
 
@@ -24,6 +26,7 @@ devtools::install_github("mtfairbanks/gdt")
 
 #### gdt functions
 
+  - `%>%`: Imported from `magrittr`
   - `as_dt()`: Safely operate on data.tables without altering the
     original object. Also converts data.frames to data.tables.
   - `dt_pivot_longer()` & `dt_pivot_wider()`
@@ -36,8 +39,10 @@ devtools::install_github("mtfairbanks/gdt")
 #### tidyfast functions
 
   - `dt_case_when()`
-  - `dt_count()`
+  - `dt_count()` & `dt_uncount()`
   - `dt_separate()`
+  - `dt_nest()` & `dt_unnest()`
+  - `dt_fill()`
 
 #### maditr functions
 
