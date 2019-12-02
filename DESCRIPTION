@@ -13,10 +13,10 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     data.table,
-    magrittr,
-    purrr,
-    tidyfast,
-    maditr
+    magrittr
 RoxygenNote: 7.0.1
 URL: https://github.com/mtfairbanks/gdt
 BugReports: https://github.com/mtfairbanks/gdt/issues
+Suggests: 
+    tidyfast,
+    maditr

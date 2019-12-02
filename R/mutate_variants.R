@@ -29,7 +29,7 @@
 #'   dt_mutate_if(is.double, as.character)
 #'
 #' example_dt %>%
-#'   dt_mutate_at(list(x, y), ~.x * 2)
+#'   dt_mutate_at(list(x, y), function(.x) .x * 2)
 dt_mutate_if <- function(.data, .predicate, .fun, ...) {
   is.data.frame(.data) || stop("data must be a data frame")
 
@@ -37,10 +37,10 @@ dt_mutate_if <- function(.data, .predicate, .fun, ...) {
     .data = as.data.table(.data)
   }
 
-  .cols <- colnames(.data)[map_lgl(.data, .predicate)]
+  .cols <- colnames(.data)[sapply(.data, .predicate)]
 
   if (length(.cols) > 0) {
-    .data <- .data[, (.cols) := map(.SD, .fun, ...), .SDcols = .cols]
+    .data <- .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
   } else {
     .data
   }
@@ -59,7 +59,7 @@ dt_mutate_at <- function(.data, .vars, .fun, ...) {
   .cols <- as.character(substitute(.vars))[-1]
 
   if (length(.cols) > 0) {
-    .data <- .data[, (.cols) := map(.SD, .fun, ...), .SDcols = .cols]
+    .data <- .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
   } else {
     .data
   }

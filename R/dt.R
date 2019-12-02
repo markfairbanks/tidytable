@@ -9,4 +9,4 @@
 #'   as_dt() %>%
 #'   dt(, ':='(double_x = x * 2)) %>%
 #'   dt(order(-double_x))
-dt <- maditr::query_if
+dt <- data.table:::`[.data.table`
