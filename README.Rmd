@@ -31,6 +31,13 @@ devtools::install_github("mtfairbanks/gdt")
 
 ## Functions
 
+#### maditr functions
+* `dt_mutate()`
+* `dt_arrange()`
+* `dt_summarize()`
+* `dt_filter()`
+* `dt_left_join()`, `dt_inner_join()`, etc.
+
 #### gdt functions
 * `%>%`: Imported from `magrittr`
 * `as_dt()`: Safely operate on data.tables without altering the original object. Also converts data.frames to data.tables.
@@ -47,12 +54,7 @@ devtools::install_github("mtfairbanks/gdt")
 * `dt_nest()` & `dt_unnest()`
 * `dt_fill()`
 
-#### maditr functions
-* `dt_mutate()`
-* `dt_arrange()`
-* `dt_summarize()`
-* `dt_filter()`
-* `dt_left_join()`, `dt_inner_join()`, etc.
+
 
 ## General syntax
 

@@ -24,6 +24,14 @@ devtools::install_github("mtfairbanks/gdt")
 
 ## Functions
 
+#### maditr functions
+
+  - `dt_mutate()`
+  - `dt_arrange()`
+  - `dt_summarize()`
+  - `dt_filter()`
+  - `dt_left_join()`, `dt_inner_join()`, etc.
+
 #### gdt functions
 
   - `%>%`: Imported from `magrittr`
@@ -43,14 +51,6 @@ devtools::install_github("mtfairbanks/gdt")
   - `dt_separate()`
   - `dt_nest()` & `dt_unnest()`
   - `dt_fill()`
-
-#### maditr functions
-
-  - `dt_mutate()`
-  - `dt_arrange()`
-  - `dt_summarize()`
-  - `dt_filter()`
-  - `dt_left_join()`, `dt_inner_join()`, etc.
 
 ## General syntax
 
