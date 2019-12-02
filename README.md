@@ -8,8 +8,8 @@
 <!-- badges: end -->
 
 The goal of `gdt` is to complement
-[tidyfast](https://github.com/TysonStanley/tidyfast) and
-[maditr](https://github.com/gdemin/maditr) as a tidy interface to
+[`tidyfast`](https://github.com/TysonStanley/tidyfast) and
+[`maditr`](https://github.com/gdemin/maditr) as a tidy interface to
 `data.table`.
 
 ## Installation
