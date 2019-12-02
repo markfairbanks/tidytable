@@ -27,9 +27,7 @@ dt_pivot_longer <- function(data,
 
   is.data.frame(data) || is.data.table(data) || stop("data must be a data.frame or data.table")
 
-  if (!is.data.table(data)) {
-    data <- as.data.table(data)
-  }
+  if (!is.data.table(data)) data <- as.data.table(data)
 
   if (missing(cols)) {
     # All columns if cols = NULL
@@ -50,7 +48,7 @@ dt_pivot_longer <- function(data,
     drop_cols <- gsub("-", "", cols)
 
     cols <- colnames(data)[!colnames(data) %in% drop_cols]
-  } else if (any(grepl("-", cols)) && any(grepl("-", cols))) {
+  } else if (any(grepl("-", cols)) && any(!grepl("-", cols))) {
     # Ex: cols = c(x, -z)
     stop("cols must only contain columns to drop OR columns to add, not both")
   }

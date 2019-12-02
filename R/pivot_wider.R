@@ -38,9 +38,7 @@ dt_pivot_wider <- function(data,
 
   is.data.frame(data) || is.data.table(data) || stop("data must be a data.frame or data.table")
 
-  if (!is.data.table(data)) {
-    data <- as.data.table(data)
-  }
+  if (!is.data.table(data)) data <- as.data.table(data)
 
   names_from <- characterize(substitute(names_from))
   values_from <- characterize(substitute(values_from))
@@ -51,16 +49,27 @@ dt_pivot_wider <- function(data,
     id_cols <- characterize(substitute(id_cols))
   }
 
-  if (length(id_cols) == 1) {
+  if (length(id_cols) == 0) {
+    dcast_form <- as.formula(paste("...", paste(names_from, collapse = " + "), sep = " ~ "))
+  } else if (length(id_cols == 1)) {
     dcast_form <- as.formula(paste(id_cols, paste(names_from, collapse = " + "), sep = " ~ "))
   } else {
     dcast_form <- as.formula(paste(paste(id_cols, collapse = " + "), paste(names_from, collapse=" + "), sep=" ~ "))
   }
 
-  data.table::dcast(data,
-                    formula = dcast_form,
-                    value.var = values_from,
-                    fun.aggregate = NULL,
-                    sep = names_sep,
-                    drop = drop)
+  if (length(id_cols) == 0) {
+    data.table::dcast(data,
+                      formula = dcast_form,
+                      value.var = values_from,
+                      fun.aggregate = NULL,
+                      sep = names_sep,
+                      drop = drop)[, . := NULL][]
+  } else {
+    data.table::dcast(data,
+                      formula = dcast_form,
+                      value.var = values_from,
+                      fun.aggregate = NULL,
+                      sep = names_sep,
+                      drop = drop)
+  }
 }
