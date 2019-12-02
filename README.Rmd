@@ -59,7 +59,7 @@ devtools::install_github("mtfairbanks/gdt")
 The code chunk below shows the `gdt` syntax:
 
 ```{r message = FALSE}
-library(gdt) # Loads data.table, %>%, purrr, and stringr
+library(gdt) # Loads data.table, %>%, & purrr
 library(maditr)
 library(tidyfast)
 

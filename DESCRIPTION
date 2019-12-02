@@ -15,7 +15,6 @@ Imports:
     data.table,
     magrittr,
     purrr,
-    stringr,
     tidyfast,
     maditr
 RoxygenNote: 7.0.1
