@@ -23,7 +23,7 @@ dt_slice <- function(data, rows = NULL, by = NULL) {
 
   is.data.frame(data) || stop("data must be a data.frame or data.table")
 
-  if (is.missing(rows)) stop("rows must be supplied")
+  if (missing(rows)) stop("rows must be supplied")
   if (!is.numeric(rows)) stop("rows must be a numeric vector")
 
   if (!is.data.table(data)) data <- as.data.table(data)
