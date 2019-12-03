@@ -27,18 +27,19 @@ devtools::install_github("mtfairbanks/gdt")
 #### maditr functions
 
   - `dt_mutate()`
+  - `dt_select()`
+  - `dt_filter()`
   - `dt_arrange()`
   - `dt_summarize()`
-  - `dt_filter()`
   - `dt_left_join()`, `dt_inner_join()`, etc.
 
 #### gdt functions
 
   - `as_dt()`: Safely operate on data.tables without altering the
     original object. Also converts data.frames to data.tables.
-  - `dt_pivot_longer()` & `dt_pivot_wider()`
   - `dt_rename()`
   - `dt_mutate_if()` & `dt_mutate_at()`
+  - `dt_slice()`
   - `%notin%`
   - `dt()`: Pipeable `data.table` call. [See example
     here](https://github.com/mtfairbanks/gdt#dt-helper)
@@ -46,6 +47,7 @@ devtools::install_github("mtfairbanks/gdt")
 #### tidyfast functions
 
   - `dt_case_when()`
+  - `dt_pivot_longer()` & `dt_pivot_wider()`
   - `dt_count()` & `dt_uncount()`
   - `dt_separate()`
   - `dt_nest()` & `dt_unnest()`
