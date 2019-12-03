@@ -27,7 +27,7 @@ dt_slice <- function(dt_, rows = NULL, by = NULL) {
   if (!is.numeric(rows)) stop("rows must be a numeric vector")
   if(!is.data.table(dt_)) dt_ <- as.data.table(dt_)
 
-  dt_ <- eval(dt_, parent.frame())
+  dt_ <- eval(dt_, parent.frame(2))
   if (missing(by)) {
     dt_[rows]
   } else {
