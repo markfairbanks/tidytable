@@ -7,12 +7,14 @@
 dt_slice(dt_, rows = NULL, by = NULL)
 }
 \arguments{
+\item{dt_}{A data.frame or data.table}
+
 \item{rows}{Integer row values. Provide either positive values to keep, or negative values to drop. The values provided must be either all positive or all negative.}
 
 \item{by}{A single unquoted column, or a `list()` of columns to group by.}
 }
 \value{
-
+A data.table
 }
 \description{
 Choose rows by their ordinal position in a data.table. Grouped data.tables use the ordinal position within the group.

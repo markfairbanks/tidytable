@@ -1,9 +1,9 @@
 #' Title
 #'
-#' @param .data
+#' @param .data A data.frame or data.table
 #' @param ... Rename expression like dplyr::rename()
 #'
-#' @return
+#' @return A data.table
 #' @export
 #'
 #' @examples

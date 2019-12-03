@@ -7,10 +7,12 @@
 dt_rename(.data, ...)
 }
 \arguments{
+\item{.data}{A data.frame or data.table}
+
 \item{...}{Rename expression like dplyr::rename()}
 }
 \value{
-
+A data.table
 }
 \description{
 Title

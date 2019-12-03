@@ -2,11 +2,11 @@
 #'
 #' Choose rows by their ordinal position in a data.table. Grouped data.tables use the ordinal position within the group.
 #'
-#' @param data
+#' @param dt_ A data.frame or data.table
 #' @param rows Integer row values. Provide either positive values to keep, or negative values to drop. The values provided must be either all positive or all negative.
 #' @param by A single unquoted column, or a `list()` of columns to group by.
 #'
-#' @return
+#' @return A data.table
 #' @export
 #'
 #' @examples
@@ -26,7 +26,6 @@ dt_slice <- function(dt_, rows = NULL, by = NULL) {
   if (missing(rows)) stop("rows must be supplied")
   if (!is.numeric(rows)) stop("rows must be a numeric vector")
 
-  # if (!is.data.table(dt_)) dt_ <- as.data.table(dt_)
   dt_ <- eval(dt_)
   if (missing(by)) {
     dt_[rows]
