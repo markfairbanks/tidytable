@@ -26,12 +26,12 @@ dt_slice <- function(dt_, rows = NULL, by = NULL) {
   if (missing(rows)) stop("rows must be supplied")
   if (!is.numeric(rows)) stop("rows must be a numeric vector")
 
-  dt_ <- eval(dt_)
+  # dt_ <- eval(dt_)
   if (missing(by)) {
-    dt_[rows]
+    eval(dt_)[rows]
     # dt_
   } else {
     by <- characterize(substitute(by))
-    dt_[, .SD[rows], by = by]
+    eval(dt_)[, .SD[rows], by = by]
   }
 }
