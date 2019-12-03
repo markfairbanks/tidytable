@@ -1,6 +1,6 @@
 Package: gdt
 Title: Ease-of-use tools for data.table
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: 
     person(given = "Mark",
            family = "Fairbanks",
