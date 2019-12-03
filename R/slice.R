@@ -31,6 +31,7 @@ dt_slice <- function(data, rows = NULL, by = NULL) {
   if (missing(by)) {
     data[rows]
   } else {
+    by <- characterize(substitute(by))
     data[, .SD[rows], by = by]
   }
 }
