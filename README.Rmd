@@ -73,8 +73,8 @@ example_dt %>%
   dt_arrange(x, y) %>%
   dt_mutate(double_x = x * 2,
             double_y = y * 2) %>%
+  dt_mutate_if(is.character, as.factor) %>%
   dt_summarize(avg_x = mean(x), by = z) %>%
-  dt_mutate_if(is.double, as.character) %>%
   dt_rename(new_z = z,
             new_avg_x = avg_x) # Rename one or multiple columns
 ```
