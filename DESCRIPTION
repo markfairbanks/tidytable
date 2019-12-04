@@ -12,7 +12,6 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    data.table,
     magrittr
 RoxygenNote: 7.0.1
 URL: https://github.com/mtfairbanks/gdt
@@ -20,3 +19,5 @@ BugReports: https://github.com/mtfairbanks/gdt/issues
 Suggests: 
     tidyfast,
     maditr
+Depends: 
+    data.table

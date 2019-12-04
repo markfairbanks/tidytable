@@ -15,9 +15,6 @@ dt_mutate_at(.data, .vars, .fun, ...)
 
 \item{...}{Other arguments for the passed function}
 }
-\value{
-
-}
 \description{
 Edit existing columns. There are two variants:
 

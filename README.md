@@ -39,7 +39,6 @@ devtools::install_github("mtfairbanks/gdt")
     original object. Also converts data.frames to data.tables.
   - `dt_rename()`
   - `dt_mutate_if()` & `dt_mutate_at()`
-  - `dt_slice()`
   - `%notin%`
   - `dt()`: Pipeable `data.table` call. [See example
     here](https://github.com/mtfairbanks/gdt#dt-helper)
@@ -56,7 +55,7 @@ devtools::install_github("mtfairbanks/gdt")
 
 ## General syntax
 
-The code chunk below shows the `gdt` syntax:
+The code chunk below shows the `gdt` syntax combined with `maditr`:
 
 ``` r
 library(gdt) # Loads data.table and %>%
@@ -73,11 +72,9 @@ example_dt %>%
   dt_mutate(double_x = x * 2,
             double_y = y * 2) %>%
   dt_summarize(avg_x = mean(x), by = z) %>%
+  dt_mutate_if(is.double, as.character) %>%
   dt_rename(new_z = z,
             new_avg_x = avg_x) # Rename one or multiple columns
-#>    new_z new_avg_x
-#> 1:     a       1.5
-#> 2:     b       3.0
 ```
 
 #### `dt()` helper

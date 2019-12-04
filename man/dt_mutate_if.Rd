@@ -18,9 +18,6 @@ dt_mutate_at(.data, .vars, .fun, ...)
 
 \item{.vars}{`list()` of variables for `dt_mutate_at()` to use}
 }
-\value{
-
-}
 \description{
 Edit existing columns. There are two variants:
 

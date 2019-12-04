@@ -19,7 +19,7 @@
 #' @param .fun Function to pass
 #' @param ... Other arguments for the passed function
 #'
-#' @return
+#' @import data.table
 #' @export
 #'
 #' @examples
@@ -40,7 +40,7 @@ dt_mutate_if <- function(.data, .predicate, .fun, ...) {
   .cols <- colnames(.data)[sapply(.data, .predicate)]
 
   if (length(.cols) > 0) {
-    .data <- .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
+    .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
   } else {
     .data
   }
@@ -59,7 +59,7 @@ dt_mutate_at <- function(.data, .vars, .fun, ...) {
   .cols <- as.character(substitute(.vars))[-1]
 
   if (length(.cols) > 0) {
-    .data <- .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
+    .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
   } else {
     .data
   }
