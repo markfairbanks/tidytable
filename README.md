@@ -38,6 +38,8 @@ devtools::install_github("mtfairbanks/gdt")
   - `as_dt()`: Safely operate on data.tables without altering the
     original object. Also converts data.frames to data.tables.
   - `dt_rename()`
+  - `dt_slice()`
+  - `dt_pull()`
   - `dt_mutate_if()` & `dt_mutate_at()`
   - `%notin%`
   - `dt()`: Pipeable `data.table` call. [See example
