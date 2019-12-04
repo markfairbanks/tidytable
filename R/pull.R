@@ -14,9 +14,9 @@
 #'   dt_pull(y)
 dt_pull <- function(dt_, column) {
 
-  is.data.frame(data) || stop("data must be a data.frame or data.table")
+  is.data.frame(dt_) || stop("data must be a data.frame or data.table")
 
-  if (!is.data.table(data)) data <- as.data.table(data)
+  if (!is.data.table(dt_)) dt_ <- as.data.table(dt_)
 
   dt_[, eval(substitute(column))]
 }
