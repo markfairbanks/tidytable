@@ -23,3 +23,17 @@ characterize <- function(vec_list_expr) {
     as.character(vec_list_expr)[-1]
   }
 }
+
+#' @export
+insert_empty_i = function(expr){
+  call_list = as.list(expr)
+  call_list =  c(call_list[1:2], list(substitute()), call_list[-(1:2)])
+  as.call(call_list)
+}
+
+#' @export
+insert_empty_j <- function(expr) {
+  call_list = as.list(expr)
+  call_list = c(call_list[1:3], list(substitute()), call_list[-(1:3)])
+  as.call(call_list)
+}
