@@ -8,6 +8,9 @@
 #' dt_bind_rows(...)
 #' dt_bind_cols(...)
 #'
+#' @param ... Data frames to combine.
+#'
+#'
 #' @import data.table
 #' @export
 #'
