@@ -41,6 +41,7 @@ devtools::install_github("mtfairbanks/gdt")
   - `dt_slice()`
   - `dt_pull()`
   - `dt_mutate_if()` & `dt_mutate_at()`
+  - `dt_bind_rows()` & `dt_bind_cols()`
   - `%notin%`
   - `dt()`: Pipeable `data.table` call. [See example
     here](https://github.com/mtfairbanks/gdt#dt-helper)
