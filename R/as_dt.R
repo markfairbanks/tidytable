@@ -2,7 +2,7 @@
 #'
 #' Copies a data.table so you can "safely" work on it or converts a data.frame to a data.table.
 #'
-#' @param .data
+#' @param .data The data frame
 #'
 #' @return
 #' @export
