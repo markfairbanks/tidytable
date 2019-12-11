@@ -13,6 +13,7 @@
 #'
 #' @import data.table
 #' @export
+#' @md
 #'
 #' @examples
 #'

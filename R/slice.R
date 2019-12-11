@@ -9,6 +9,7 @@
 #' @return data.table
 #' @import data.table
 #' @export
+#' @md
 #'
 #' @examples
 #' library(data.table)
