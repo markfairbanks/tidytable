@@ -16,7 +16,7 @@ dt_bind_cols(
 \item{...}{Data frames to combine.}
 }
 \description{
-Simple alias to data.table implementations of `rbind()` and `cbind()`
+Simple alias to data.table implementations of \code{rbind()} and \code{cbind()}
 }
 \examples{
 

@@ -5,6 +5,7 @@
 #'
 #' @param dt_ A data.frame or data.table
 #'
+#' @import data.table
 #' @return A data.table
 #' @export
 #'

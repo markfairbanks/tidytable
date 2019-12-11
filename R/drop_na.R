@@ -6,6 +6,7 @@
 #' @param dt_ A data.frame or data.table
 #' @param ... A selection of columns. If empty, all variables are selected. You can supply bare variable names.
 #'
+#' @import data.table
 #' @return A data.table
 #' @export
 #'

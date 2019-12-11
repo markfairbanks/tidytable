@@ -1,6 +1,6 @@
 Package: gdt
 Title: Ease-of-use tools for data.table
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: 
     person(given = "Mark",
            family = "Fairbanks",
@@ -21,3 +21,4 @@ Suggests:
     maditr
 Depends: 
     data.table
+Roxygen: list(markdown = TRUE)

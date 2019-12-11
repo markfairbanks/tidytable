@@ -9,7 +9,7 @@ dt_mutate_at(.data, .vars, .fun, ...)
 \arguments{
 \item{.data}{The data.table}
 
-\item{.vars}{`list()` of variables for `dt_mutate_at()` to use}
+\item{.vars}{\code{list()} of variables for \code{dt_mutate_at()} to use}
 
 \item{.fun}{Function to pass}
 
@@ -17,9 +17,10 @@ dt_mutate_at(.data, .vars, .fun, ...)
 }
 \description{
 Edit existing columns. There are two variants:
-
-* `dt_mutate_if()`
-* `dt_mutate_at()`
+\itemize{
+\item \code{dt_mutate_if()}
+\item \code{dt_mutate_at()}
+}
 }
 \examples{
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))

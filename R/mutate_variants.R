@@ -7,7 +7,7 @@
 #' * `dt_mutate_if()`
 #' * `dt_mutate_at()`
 #'
-#'
+#' @import data.table
 #' @usage
 #'
 #' dt_mutate_if(.data, .predicate, .fun, ...)

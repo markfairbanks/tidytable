@@ -11,7 +11,7 @@ dt_slice(data, rows = NULL, by = NULL)
 
 \item{rows}{Integer row values. Provide either positive values to keep, or negative values to drop. The values provided must be either all positive or all negative.}
 
-\item{by}{A single unquoted column, or a `list()` of columns to group by.}
+\item{by}{A single unquoted column, or a \code{list()} of columns to group by.}
 }
 \value{
 data.table
