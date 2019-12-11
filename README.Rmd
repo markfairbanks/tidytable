@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# gdt
+# gdt v`r as.character(packageVersion("gdt"))`
 
 <!-- badges: start -->
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
