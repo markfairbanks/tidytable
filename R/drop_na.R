@@ -15,7 +15,7 @@
 #' df <- data.table(x = c(1, 2, NA), y = c("a", NA, "b"))
 #' df %>% dt_drop_na()
 #' df %>% dt_drop_na(x)
-dt_drop_na <- function(dt_, ...) {
+dt_drop_na <- function(.data, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
 

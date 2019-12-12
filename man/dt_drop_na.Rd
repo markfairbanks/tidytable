@@ -4,12 +4,12 @@
 \alias{dt_drop_na}
 \title{Drop rows containing missing values}
 \usage{
-dt_drop_na(dt_, ...)
+dt_drop_na(.data, ...)
 }
 \arguments{
-\item{...}{A selection of columns. If empty, all variables are selected. You can supply bare variable names.}
-
 \item{.data}{A data.frame or data.table}
+
+\item{...}{A selection of columns. If empty, all variables are selected. You can supply bare variable names.}
 }
 \value{
 A data.table
