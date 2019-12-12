@@ -2,7 +2,7 @@
 % Please edit documentation in R/rename.R
 \name{dt_rename}
 \alias{dt_rename}
-\title{Rename variabels}
+\title{Rename variables by name}
 \usage{
 dt_rename(.data, ...)
 }
@@ -15,7 +15,7 @@ dt_rename(.data, ...)
 A data.table
 }
 \description{
-Rename variabels
+Rename variables from a data.table.
 }
 \examples{
 dt <- data.table(x = c(1,2,3), y = c(4,5,6))

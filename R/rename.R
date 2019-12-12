@@ -1,4 +1,7 @@
-#' Rename variabels
+#' Rename variables by name
+#'
+#' @description
+#' Rename variables from a data.table.
 #'
 #' @param .data A data.frame or data.table
 #' @param ... Rename expression like dplyr::rename()
