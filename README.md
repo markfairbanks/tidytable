@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# gdt v0.3.1 <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
+# gdt v0.3.2 <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
 
 <!-- badges: start -->
 

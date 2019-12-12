@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# gdt v`r as.character(packageVersion("gdt"))` <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
+# gdt v`r as.character(packageVersion("gdt"))`  <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
 
 <!-- badges: start -->
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
