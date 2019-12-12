@@ -18,8 +18,7 @@
 dt_drop_na <- function(.data, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-
-  if (!is.data.table(.data)) .data = as.data.table(.data)
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   dots <- enlist_dots(...)
 
