@@ -4,9 +4,11 @@
 \alias{dt_mutate_at}
 \title{Mutate}
 \usage{
-dt_mutate_at(dt_, .vars, .fun, ...)
+dt_mutate_at(.data, .vars, .fun, ...)
 }
 \arguments{
+\item{.data}{A data.frame or data.table}
+
 \item{.vars}{\code{list()} of variables for \code{dt_mutate_at()} to use}
 
 \item{.fun}{Function to pass}

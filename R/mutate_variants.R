@@ -38,7 +38,7 @@ dt_mutate_if <- function(.data, .predicate, .fun, ...) {
 
   if (!is.data.table(.data)) .data = as.data.table(.data)
 
-  .cols <- colnames(.data)[sapply(, .predicate)]
+  .cols <- colnames(.data)[sapply(.data, .predicate)]
 
   if (length(.cols) > 0) {
     .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
@@ -49,7 +49,7 @@ dt_mutate_if <- function(.data, .predicate, .fun, ...) {
 
 #' @export
 #' @inherit dt_mutate_if
-dt_mutate_at <- function(dt_, .vars, .fun, ...) {
+dt_mutate_at <- function(.data, .vars, .fun, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
 
