@@ -35,8 +35,7 @@
 dt_mutate_if <- function(.data, .predicate, .fun, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-
-  if (!is.data.table(.data)) .data = as.data.table(.data)
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   .cols <- colnames(.data)[sapply(.data, .predicate)]
 
@@ -52,8 +51,7 @@ dt_mutate_if <- function(.data, .predicate, .fun, ...) {
 dt_mutate_at <- function(.data, .vars, .fun, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-
-  if (!is.data.table(.data)) .data = as.data.table(.data)
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   .cols <- as.character(substitute(.vars))[-1]
 
@@ -62,4 +60,16 @@ dt_mutate_at <- function(.data, .vars, .fun, ...) {
   } else {
     .data
   }
+}
+
+#' @export
+#' @inherit dt_mutate_if
+dt_mutate_all <- function(.data, .fun, ...) {
+
+  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
+
+  .cols <- colnames(.data)
+
+  .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
 }
