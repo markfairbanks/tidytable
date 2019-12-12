@@ -10,8 +10,8 @@
 #'
 #'
 #' @param .data A data.frame or data.table
-#' @param .predicate Predicate to specify columns for `dt_mutate_if()`
-#' @param .vars `list()` of variables for `dt_mutate_at()` to use
+#' @param .predicate Predicate to specify columns for `dt_rename_if()`
+#' @param .vars `list()` of variables for `dt_rename_at()` to use
 #' @param .fun Function to pass
 #' @param ... Other arguments for the passed function
 #'

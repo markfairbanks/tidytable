@@ -15,9 +15,9 @@ dt_rename_if(.data, .predicate, .fun, ...)
 
 \item{...}{Other arguments for the passed function}
 
-\item{.predicate}{Predicate to specify columns for \code{dt_mutate_if()}}
+\item{.predicate}{Predicate to specify columns for \code{dt_rename_if()}}
 
-\item{.vars}{\code{list()} of variables for \code{dt_mutate_at()} to use}
+\item{.vars}{\code{list()} of variables for \code{dt_rename_at()} to use}
 }
 \value{
 

@@ -9,7 +9,7 @@ dt_rename_if(.data, .predicate, .fun, ...)
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{.predicate}{Predicate to specify columns for \code{dt_mutate_if()}}
+\item{.predicate}{Predicate to specify columns for \code{dt_rename_if()}}
 
 \item{.fun}{Function to pass}
 
