@@ -4,10 +4,10 @@
 \alias{dt_slice}
 \title{Choose rows by position}
 \usage{
-dt_slice(data, rows = NULL, by = NULL)
+dt_slice(.data, rows = NULL, by = NULL)
 }
 \arguments{
-\item{data}{A data.frame or data.table}
+\item{.data}{A data.frame or data.table}
 
 \item{rows}{Integer row values. Provide either positive values to keep, or negative values to drop. The values provided must be either all positive or all negative.}
 

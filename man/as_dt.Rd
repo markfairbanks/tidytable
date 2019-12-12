@@ -7,10 +7,10 @@
 as_dt(.data)
 }
 \arguments{
-\item{.data}{The data frame}
+\item{.data}{A data.frame}
 }
 \value{
-
+A data.table
 }
 \description{
 Copies a data.table so you can "safely" work on it or converts a data.frame to a data.table.

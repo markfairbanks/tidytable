@@ -3,7 +3,7 @@
 #' @description
 #' Simple alias to unique(). Retain only unique/distinct rows from an input df.
 #'
-#' @param dt_ A data.frame or data.table
+#' @param .data A data.frame or data.table
 #'
 #' @import data.table
 #' @return A data.table
@@ -11,11 +11,11 @@
 #'
 #' @examples
 #' dt %>% dt_distinct()
-dt_distinct <- function(dt_) {
+dt_distinct <- function(.data) {
 
-  is.data.frame(dt_) || stop("data must be a data.frame or data.table")
+  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
 
-  if (!is.data.table(dt_)) dt_ <- as.data.table(dt_)
+  if (!is.data.table(.data)) .data = as.data.table(.data)
 
-  unique(dt_)
+  unique(.data)
 }

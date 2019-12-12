@@ -4,16 +4,17 @@
 \alias{dt_mutate_at}
 \title{Mutate}
 \usage{
-dt_mutate_at(.data, .vars, .fun, ...)
+dt_mutate_at(dt_, .vars, .fun, ...)
 }
 \arguments{
-\item{.data}{The data.table}
-
 \item{.vars}{\code{list()} of variables for \code{dt_mutate_at()} to use}
 
 \item{.fun}{Function to pass}
 
 \item{...}{Other arguments for the passed function}
+}
+\value{
+A data.table
 }
 \description{
 Edit existing columns. There are two variants:

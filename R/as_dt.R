@@ -1,10 +1,11 @@
 #' Safely work with data.tables
 #'
+#' @description
 #' Copies a data.table so you can "safely" work on it or converts a data.frame to a data.table.
 #'
-#' @param .data The data frame
+#' @param .data A data.frame
 #'
-#' @return
+#' @return A data.table
 #' @export
 #'
 #' @examples

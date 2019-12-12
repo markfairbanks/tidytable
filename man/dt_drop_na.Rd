@@ -7,9 +7,9 @@
 dt_drop_na(dt_, ...)
 }
 \arguments{
-\item{dt_}{A data.frame or data.table}
-
 \item{...}{A selection of columns. If empty, all variables are selected. You can supply bare variable names.}
+
+\item{.data}{A data.frame or data.table}
 }
 \value{
 A data.table

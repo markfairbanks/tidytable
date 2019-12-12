@@ -14,12 +14,13 @@
 #' dt_mutate_if(.data, .predicate, .fun, ...)
 #' dt_mutate_at(.data, .vars, .fun, ...)
 #'
-#' @param .data The data.table
+#' @param .data A data.frame or data.table
 #' @param .predicate Predicate to specify columns for `dt_mutate_if()`
 #' @param .vars `list()` of variables for `dt_mutate_at()` to use
 #' @param .fun Function to pass
 #' @param ... Other arguments for the passed function
 #'
+#' @return A data.table
 #' @import data.table
 #' @export
 #'
@@ -32,13 +33,12 @@
 #' example_dt %>%
 #'   dt_mutate_at(list(x, y), function(.x) .x * 2)
 dt_mutate_if <- function(.data, .predicate, .fun, ...) {
-  is.data.frame(.data) || stop("data must be a data frame")
 
-  if (!is.data.table(.data)) {
-    .data = as.data.table(.data)
-  }
+  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
 
-  .cols <- colnames(.data)[sapply(.data, .predicate)]
+  if (!is.data.table(.data)) .data = as.data.table(.data)
+
+  .cols <- colnames(.data)[sapply(, .predicate)]
 
   if (length(.cols) > 0) {
     .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
@@ -49,13 +49,11 @@ dt_mutate_if <- function(.data, .predicate, .fun, ...) {
 
 #' @export
 #' @inherit dt_mutate_if
-dt_mutate_at <- function(.data, .vars, .fun, ...) {
+dt_mutate_at <- function(dt_, .vars, .fun, ...) {
 
-  is.data.frame(.data) || stop("data must be a data frame")
+  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
 
-  if (!is.data.table(.data)) {
-    .data <- as.data.table(.data)
-  }
+  if (!is.data.table(.data)) .data = as.data.table(.data)
 
   .cols <- as.character(substitute(.vars))[-1]
 

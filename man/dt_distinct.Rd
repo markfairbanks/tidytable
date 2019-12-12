@@ -4,10 +4,10 @@
 \alias{dt_distinct}
 \title{Select distinct/unique rows}
 \usage{
-dt_distinct(dt_)
+dt_distinct(.data)
 }
 \arguments{
-\item{dt_}{A data.frame or data.table}
+\item{.data}{A data.frame or data.table}
 }
 \value{
 A data.table

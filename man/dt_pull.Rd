@@ -4,18 +4,18 @@
 \alias{dt_pull}
 \title{Pull out a single variable}
 \usage{
-dt_pull(dt_, column)
+dt_pull(.data, .column)
 }
 \arguments{
-\item{dt_}{A data.frame or data.table}
+\item{.data}{A data.frame or data.table}
 
-\item{column}{The column to pull from the data.table}
+\item{.column}{The column to pull from the data.table}
 }
 \value{
 A vector
 }
 \description{
-Pull out a single variable
+Pull a single variable from a data.table as a vector.
 }
 \examples{
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6))

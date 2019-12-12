@@ -8,7 +8,7 @@ dt_mutate_if(.data, .predicate, .fun, ...)
 dt_mutate_at(.data, .vars, .fun, ...)
 }
 \arguments{
-\item{.data}{The data.table}
+\item{.data}{A data.frame or data.table}
 
 \item{.predicate}{Predicate to specify columns for \code{dt_mutate_if()}}
 
@@ -17,6 +17,9 @@ dt_mutate_at(.data, .vars, .fun, ...)
 \item{...}{Other arguments for the passed function}
 
 \item{.vars}{\code{list()} of variables for \code{dt_mutate_at()} to use}
+}
+\value{
+A data.table
 }
 \description{
 Edit existing columns. There are two variants:

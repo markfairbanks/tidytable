@@ -1,5 +1,8 @@
 #' Pipeable data.table call
 #'
+#' @description
+#' Pipeable data.table call
+#'
 #' @export
 #'
 #' @examples

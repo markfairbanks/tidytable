@@ -1,4 +1,4 @@
-#' Title
+#' Rename variabels
 #'
 #' @param .data A data.frame or data.table
 #' @param ... Rename expression like dplyr::rename()
@@ -14,11 +14,9 @@
 #'
 dt_rename <- function(.data, ...) {
 
-  is.data.frame(.data) || is.data.table(.data) || stop(".data must be a data.table")
+  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
 
-  if (!is.data.table(.data)) {
-    .data = as.data.table(.data)
-  }
+  if (!is.data.table(.data)) .data = as.data.table(.data)
 
   .dots <- enlist_dots(...)
 

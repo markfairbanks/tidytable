@@ -1,7 +1,10 @@
 #' Pull out a single variable
 #'
-#' @param dt_ A data.frame or data.table
-#' @param column The column to pull from the data.table
+#' @description
+#' Pull a single variable from a data.table as a vector.
+#'
+#' @param .data A data.frame or data.table
+#' @param .column The column to pull from the data.table
 #'
 #' @return A vector
 #' @import data.table
@@ -12,11 +15,11 @@
 #'
 #' example_dt %>%
 #'   dt_pull(y)
-dt_pull <- function(dt_, column) {
+dt_pull <- function(.data, .column) {
 
-  is.data.frame(dt_) || stop("data must be a data.frame or data.table")
+  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
 
-  if (!is.data.table(dt_)) dt_ <- as.data.table(dt_)
+  if (!is.data.table(.data)) .data = as.data.table(.data)
 
-  dt_[, eval(substitute(column))]
+  .data[, eval(substitute(.column))]
 }
