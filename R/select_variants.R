@@ -1,8 +1,11 @@
-#' Select a selection of variables
+#' Select variables
+#'
+#' @description
+#' Scoped variants of `select()`
 #'
 #' @param .data A data.table
 #' @param .predicate Predicate to specify columns for `dt_select_if()`
-#' @param ...
+#' @param ... Other arguments for the passed function
 #' @import data.table
 #' @return A data.table
 #' @export

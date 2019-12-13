@@ -1,7 +1,7 @@
 #' Rename a selection of variables
 #'
 #' @description
-#' These scoped variants of rename() operate on a selection of variables
+#' These scoped variants of `rename()`` operate on a selection of variables
 #'
 #' @usage
 #' dt_rename_all(.data, .fun, ...)

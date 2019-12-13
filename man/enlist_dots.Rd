@@ -7,7 +7,7 @@
 enlist_dots(...)
 }
 \arguments{
-\item{...}{}
+\item{...}{Dots}
 }
 \value{
 

@@ -2,7 +2,7 @@
 #'
 #' Helper functions to capture ..., list(), or c() inputs from the user.
 #'
-#' @param ...
+#' @param ... Dots
 #'
 #' @return
 #' @export

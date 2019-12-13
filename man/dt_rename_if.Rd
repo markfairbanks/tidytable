@@ -19,5 +19,5 @@ dt_rename_if(.data, .predicate, .fun, ...)
 
 }
 \description{
-These scoped variants of rename() operate on a selection of variables
+These scoped variants of `rename()`` operate on a selection of variables
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/select_variants.R
 \name{dt_select_if}
 \alias{dt_select_if}
-\title{Select a selection of variables}
+\title{Select variables}
 \usage{
 dt_select_if(.data, .predicate, ...)
 }
@@ -10,12 +10,14 @@ dt_select_if(.data, .predicate, ...)
 \item{.data}{A data.table}
 
 \item{.predicate}{Predicate to specify columns for `dt_select_if()`}
+
+\item{...}{Other arguments for the passed function}
 }
 \value{
 A data.table
 }
 \description{
-Select a selection of variables
+Scoped variants of `select()`
 }
 \examples{
 example_dt <- data.table(x = 1, y = 2, z = "a")
