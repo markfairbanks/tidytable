@@ -53,7 +53,7 @@ dt_mutate_at <- function(.data, .vars, .fun, ...) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  .cols <- as.character(substitute(.vars))[-1]
+  .cols <- characterize(substitute(.vars))
 
   if (length(.cols) > 0) {
     .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
