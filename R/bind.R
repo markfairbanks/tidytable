@@ -22,8 +22,13 @@
 #'
 #' example_dt %>%
 #'   dt_bind_cols(another_dt)
-dt_bind_rows <- data.table:::rbind.data.table
+dt_bind_rows <- function(...) {
+
+  rbind(...)
+}
 
 #' @export
 #' @inherit dt_bind_rows
-dt_bind_cols <- data.table:::cbind.data.table
+dt_bind_cols <- function(...) {
+  cbind(...)
+}
