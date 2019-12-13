@@ -41,9 +41,10 @@ devtools::install_github("mtfairbanks/gdt")
     original object. Also converts data.frames to data.tables.
   - `dt_rename()`, `dt_rename_if()`, `dt_rename_at()`, &
     `dt_rename_all()`
+  - `dt_mutate_if()`, `dt_mutate_at()`, & `dt_mutate_all()`
+  - `dt_select_if()`
   - `dt_slice()`
   - `dt_pull()`
-  - `dt_mutate_if()`, `dt_mutate_at()`, & `dt_mutate_all()`
   - `dt_bind_rows()` & `dt_bind_cols()`
   - `dt_distinct()`
   - `dt_drop_na()`
