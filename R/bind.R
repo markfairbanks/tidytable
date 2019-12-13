@@ -23,7 +23,6 @@
 #' example_dt %>%
 #'   dt_bind_cols(another_dt)
 dt_bind_rows <- function(...) {
-
   rbind(...)
 }
 
