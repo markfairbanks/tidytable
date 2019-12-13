@@ -5,7 +5,7 @@
 #'
 #' @param .data A data.table
 #' @param .predicate Predicate to specify columns for `dt_select_if()`
-#' @param ... Other arguments for the passed function
+#'
 #' @import data.table
 #' @return A data.table
 #' @export
@@ -14,12 +14,12 @@
 #' example_dt <- data.table(x = 1, y = 2, z = "a")
 #'
 #' example_dt %>% dt_select_if(is.double)
-dt_select_if <- function(.data, .predicate, ...) {
+dt_select_if <- function(.data, .predicate) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  .cols <- colnames(.data)[sapply(.data, .predicate, ...)]
+  .cols <- colnames(.data)[sapply(.data, .predicate)]
 
   .data[, .SD, .SDcols = .cols]
 }

@@ -4,14 +4,12 @@
 \alias{dt_select_if}
 \title{Select variables}
 \usage{
-dt_select_if(.data, .predicate, ...)
+dt_select_if(.data, .predicate)
 }
 \arguments{
 \item{.data}{A data.table}
 
 \item{.predicate}{Predicate to specify columns for `dt_select_if()`}
-
-\item{...}{Other arguments for the passed function}
 }
 \value{
 A data.table
