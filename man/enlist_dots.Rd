@@ -9,9 +9,6 @@ enlist_dots(...)
 \arguments{
 \item{...}{Dots}
 }
-\value{
-
-}
 \description{
 Helper functions to capture ..., list(), or c() inputs from the user.
 }
