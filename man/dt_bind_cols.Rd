@@ -4,13 +4,7 @@
 \alias{dt_bind_cols}
 \title{Bind data.tables by row and column}
 \usage{
-dt_bind_cols(
-  ...,
-  keep.rownames = FALSE,
-  check.names = FALSE,
-  key = NULL,
-  stringsAsFactors = FALSE
-)
+dt_bind_cols(...)
 }
 \arguments{
 \item{...}{Data frames to combine.}

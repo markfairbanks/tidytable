@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# gdt v`r as.character(packageVersion("gdt"))`   <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
+# gdt v`r as.character(packageVersion("gdt"))`    <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
 
 <!-- badges: start -->
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
@@ -51,6 +51,7 @@ devtools::install_github("mtfairbanks/gdt")
 * `dt_bind_rows()` & `dt_bind_cols()`
 * `dt_distinct()`
 * `dt_drop_na()`
+* `dt_map()`, `dt_map2()`, `dt_map_*()` variants, & `dt_map2_*()` variants
 * `%notin%`
 * `dt()`: Pipeable `data.table` call. [See example here](https://github.com/mtfairbanks/gdt#dt-helper)
 

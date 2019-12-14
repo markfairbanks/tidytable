@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# gdt v0.3.2 <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
+# gdt v0.3.3 <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
 
 <!-- badges: start -->
 
@@ -48,6 +48,8 @@ devtools::install_github("mtfairbanks/gdt")
   - `dt_bind_rows()` & `dt_bind_cols()`
   - `dt_distinct()`
   - `dt_drop_na()`
+  - `dt_map()`, `dt_map2()`, `dt_map_*()` variants, & `dt_map2_*()`
+    variants
   - `%notin%`
   - `dt()`: Pipeable `data.table` call. [See example
     here](https://github.com/mtfairbanks/gdt#dt-helper)
