@@ -37,7 +37,7 @@ dt_mutate_if <- function(.data, .predicate, .fun, ...) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  .cols <- colnames(.data)[sapply(.data, .predicate)]
+  .cols <- colnames(.data)[dt_map_lgl(.data, .predicate)]
 
   if (length(.cols) > 0) {
     .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
