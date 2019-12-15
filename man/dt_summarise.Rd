@@ -4,7 +4,7 @@
 \alias{dt_summarise}
 \title{\code{dplyr} verbs for data.table}
 \usage{
-dt_summarise(.data, ..., by = NULL, keyby = NULL)
+dt_summarise(.data, ..., by, keyby)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}

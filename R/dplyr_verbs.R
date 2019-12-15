@@ -29,12 +29,12 @@
 #'   dt_filter(double_x > 0, double_y > 0) %>%
 #'   dt_arrange(-double_x) %>%
 #'   dt_summarize(avg_x = mean(x), by = z)
-dt_mutate <- function(.data, ..., by = NULL, keyby = NULL) {
+dt_mutate <- function(.data, ..., by, keyby) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   eval.parent(substitute(
-    .data[, ':='(...), by = by, keyby = keyby]
+    .data[, ':='(...), by, keyby]
   ))
 }
 
@@ -62,12 +62,12 @@ dt_arrange <- function(.data, ...) {
 
 #' @export
 #' @inherit dt_mutate
-dt_summarize <- function(.data, ..., by = NULL, keyby = NULL) {
+dt_summarize <- function(.data, ..., by, keyby) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   eval.parent(substitute(
-    .data[, list(...), by = by, keyby = keyby]
+    .data[, list(...), by, keyby]
   ))
 }
 

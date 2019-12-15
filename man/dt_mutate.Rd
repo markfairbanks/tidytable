@@ -4,7 +4,7 @@
 \alias{dt_mutate}
 \title{\code{dplyr} verbs for data.table}
 \usage{
-dt_mutate(.data, ..., by = NULL, keyby = NULL)
+dt_mutate(.data, ..., by, keyby)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
