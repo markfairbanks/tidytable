@@ -63,15 +63,15 @@ dt_map_chr <- function(.x, .f, ...) {
 #' @export
 #' @inherit dt_map
 dt_map_dfc <- function(.x, .f, ...) {
-  res <- dt_map(.x, .f, ...)
-  dt_bind_cols(res)
+  result_list <- dt_map(.x, .f, ...)
+  do.call(cbind, result_list)
 }
 
 #' @export
 #' @inherit dt_map
 dt_map_dfr <- function(.x, .f, ..., .id = NULL) {
-  res <- dt_map(.x, .f, ...)
-  dt_bind_rows(res, .id = .id)
+  result_list<- dt_map(.x, .f, ...)
+  rbindlist(result_list, idcol = .id)
 }
 
 #' @export
@@ -119,15 +119,15 @@ dt_map2_chr <- function(.x, .y, .f, ...) {
 #' @export
 #' @inherit dt_map
 dt_map2_dfc <- function(.x, .y, .f, ...) {
-  res <- dt_map2(.x, .f, ...)
-  dt_bind_cols(res)
+  result_list <- dt_map2(.x, .f, ...)
+  do.call(cbind, result_list)
 }
 
 #' @export
 #' @inherit dt_map
 dt_map2_dfr <- function(.x, .y, .f, ..., .id = NULL) {
-  res <- dt_map2(.x, .f, ...)
-  dt_bind_rows(res, .id = .id)
+  result_list <- dt_map2(.x, .f, ...)
+  rbindlist(result_list, idcol = .id)
 }
 
 # dt_pmap <- function(.l, .f, ...) {
