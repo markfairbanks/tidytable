@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# gdt v0.3.3 <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
+# gdt v0.4.0 <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
 
 <!-- badges: start -->
 
@@ -26,23 +26,18 @@ devtools::install_github("mtfairbanks/gdt")
 
 ## Functions
 
-#### maditr functions
-
-  - `dt_mutate()`
-  - `dt_select()`
-  - `dt_filter()`
-  - `dt_arrange()`
-  - `dt_summarize()`
-  - `dt_left_join()`, `dt_inner_join()`, etc.
-
 #### gdt functions
 
   - `as_dt()`: Safely operate on data.tables without altering the
     original object. Also converts data.frames to data.tables.
+  - `dt_mutate()`, `dt_mutate_if()`, `dt_mutate_at()`, &
+    `dt_mutate_all()`
+  - `dt_select()`, `dt_select_if()`
+  - `dt_filter()`
+  - `dt_arrange()`
+  - `dt_summarize()`
   - `dt_rename()`, `dt_rename_if()`, `dt_rename_at()`, &
     `dt_rename_all()`
-  - `dt_mutate_if()`, `dt_mutate_at()`, & `dt_mutate_all()`
-  - `dt_select_if()`
   - `dt_slice()`
   - `dt_pull()`
   - `dt_bind_rows()` & `dt_bind_cols()`
@@ -64,9 +59,13 @@ devtools::install_github("mtfairbanks/gdt")
   - `dt_nest()` & `dt_unnest()`
   - `dt_fill()`
 
+#### maditr functions
+
+  - `dt_left_join()`, `dt_inner_join()`, etc.
+
 ## General syntax
 
-The code chunk below shows the `gdt` syntax combined with `maditr`:
+The code chunk below shows the `gdt` syntax:
 
 ``` r
 library(gdt) # Loads data.table and %>%
