@@ -69,8 +69,6 @@ The code chunk below shows the `gdt` syntax:
 
 ``` r
 library(gdt) # Loads data.table and %>%
-library(maditr)
-library(tidyfast)
 
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
