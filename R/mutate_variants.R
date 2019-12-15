@@ -2,10 +2,11 @@
 #'
 #' @description
 #'
-#' Edit existing columns. There are two variants:
+#' Edit existing columns. There are three variants:
 #'
 #' * `dt_mutate_if()`
 #' * `dt_mutate_at()`
+#' * `dt_mutate_all()`
 #'
 #' @import data.table
 #' @md
@@ -13,6 +14,7 @@
 #'
 #' dt_mutate_if(.data, .predicate, .fun, ...)
 #' dt_mutate_at(.data, .vars, .fun, ...)
+#' dt_mutate_all(.data, .fun, ...)
 #'
 #' @param .data A data.frame or data.table
 #' @param .predicate Predicate to specify columns for `dt_mutate_if()`

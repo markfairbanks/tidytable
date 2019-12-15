@@ -6,6 +6,7 @@
 \usage{
 dt_mutate_if(.data, .predicate, .fun, ...)
 dt_mutate_at(.data, .vars, .fun, ...)
+dt_mutate_all(.data, .fun, ...)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
@@ -22,10 +23,11 @@ dt_mutate_at(.data, .vars, .fun, ...)
 A data.table
 }
 \description{
-Edit existing columns. There are two variants:
+Edit existing columns. There are three variants:
 \itemize{
 \item \code{dt_mutate_if()}
 \item \code{dt_mutate_at()}
+\item \code{dt_mutate_all()}
 }
 }
 \examples{

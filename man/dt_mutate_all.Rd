@@ -17,10 +17,11 @@ dt_mutate_all(.data, .fun, ...)
 A data.table
 }
 \description{
-Edit existing columns. There are two variants:
+Edit existing columns. There are three variants:
 \itemize{
 \item \code{dt_mutate_if()}
 \item \code{dt_mutate_at()}
+\item \code{dt_mutate_all()}
 }
 }
 \examples{
