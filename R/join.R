@@ -66,5 +66,6 @@ join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
   if (by_y %notin% colnames(y)) stop("by.y columns not in y")
 
   merge(x = x, y = y, by.x = by_x, by.y = by_y, suffixes = suffix,
-        all.x = all_x, all.y = all_y)
+        all.x = all_x, all.y = all_y,
+        allow.cartesian = TRUE)
 }
