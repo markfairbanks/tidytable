@@ -52,7 +52,7 @@ join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
   if (!is.data.table(x)) x <- as.data.table(x)
   if (!is.data.table(y)) y <- as.data.table(y)
 
-  if (missing(by)) {
+  if (is.null(by)) {
     by_x <- by_y <- intersect(colnames(x), colnames(y))
   } else {
     by_x <- names(by)
