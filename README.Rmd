@@ -46,7 +46,7 @@ devtools::install_github("mtfairbanks/gdt")
 * `dt_bind_rows()` & `dt_bind_cols()`
 * `dt_distinct()`
 * `dt_drop_na()`
-* `dt_left_join()`, `dt_inner_join()`, etc.
+* `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`, & `dt_full_join()`
 * `dt_map()`, `dt_map2()`, `dt_map_*()` variants, & `dt_map2_*()` variants
 * `%notin%`
 * `dt()`: Pipeable `data.table` call. [See example here](https://github.com/mtfairbanks/gdt#dt-helper)
