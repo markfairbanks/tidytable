@@ -10,9 +10,8 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 <!-- badges: end -->
 
 The goal of `gdt` is to complement
-[`tidyfast`](https://github.com/TysonStanley/tidyfast) and
-[`maditr`](https://github.com/gdemin/maditr) as a tidy interface to
-`data.table`.
+[`tidyfast`](https://github.com/TysonStanley/tidyfast) as a tidy
+interface to `data.table`.
 
 ## Installation
 
@@ -43,6 +42,7 @@ devtools::install_github("mtfairbanks/gdt")
   - `dt_bind_rows()` & `dt_bind_cols()`
   - `dt_distinct()`
   - `dt_drop_na()`
+  - `dt_left_join()`, `dt_inner_join()`, etc.
   - `dt_map()`, `dt_map2()`, `dt_map_*()` variants, & `dt_map2_*()`
     variants
   - `%notin%`
@@ -58,10 +58,6 @@ devtools::install_github("mtfairbanks/gdt")
   - `dt_separate()`
   - `dt_nest()` & `dt_unnest()`
   - `dt_fill()`
-
-#### maditr functions
-
-  - `dt_left_join()`, `dt_inner_join()`, etc.
 
 ## General syntax
 
