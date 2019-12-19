@@ -5,6 +5,9 @@
 \title{\code{dplyr} verbs for data.table}
 \usage{
 dt_mutate(.data, ..., by, keyby)
+dt_select(.data, ...)
+dt_filter(.data, ...)
+dt_summarize(.data, ..., by, keyby)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}

@@ -14,6 +14,12 @@
 #' @param by `list()` of bare column names to group by
 #' @param keyby `list()` of bare column names to group by or key by
 #'
+#' @usage
+#' dt_mutate(.data, ..., by, keyby)
+#' dt_select(.data, ...)
+#' dt_filter(.data, ...)
+#' dt_summarize(.data, ..., by, keyby)
+#'
 #' @import data.table
 #' @md
 #' @return A data.table
