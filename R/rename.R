@@ -18,7 +18,7 @@
 dt_rename <- function(.data, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  .data <- as.data.table(.data)
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   .dots <- enlist_dots(...)
 

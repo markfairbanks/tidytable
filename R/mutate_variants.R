@@ -37,7 +37,7 @@
 dt_mutate_if <- function(.data, .predicate, .fun, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  .data <- as.data.table(.data)
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   .cols <- colnames(.data)[dt_map_lgl(.data, .predicate)]
 
@@ -53,7 +53,7 @@ dt_mutate_if <- function(.data, .predicate, .fun, ...) {
 dt_mutate_at <- function(.data, .vars, .fun, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  .data <- as.data.table(.data)
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   .cols <- characterize(substitute(.vars))
 
@@ -69,7 +69,7 @@ dt_mutate_at <- function(.data, .vars, .fun, ...) {
 dt_mutate_all <- function(.data, .fun, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  .data <- as.data.table(.data)
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   .cols <- colnames(.data)
 

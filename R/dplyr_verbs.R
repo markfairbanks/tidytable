@@ -38,7 +38,7 @@
 #'   dt_summarize(avg_x = mean(x), by = z)
 dt_mutate <- function(.data, ..., by, keyby) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  .data <- as.data.table(.data)
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   eval.parent(substitute(
     .data[, ':='(...), by, keyby][]
@@ -49,7 +49,7 @@ dt_mutate <- function(.data, ..., by, keyby) {
 #' @inherit dt_mutate
 dt_filter <- function(.data, ...) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  .data <- as.data.table(.data)
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   eval.parent(substitute(
     .data[Reduce(f = '&', list(...)), ]
@@ -60,7 +60,7 @@ dt_filter <- function(.data, ...) {
 #' @inherit dt_mutate
 dt_arrange <- function(.data, ...) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  .data <- as.data.table(.data)
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   eval.parent(substitute(
     .data[order(...), ]
@@ -71,7 +71,7 @@ dt_arrange <- function(.data, ...) {
 #' @inherit dt_mutate
 dt_summarize <- function(.data, ..., by, keyby) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  .data <- as.data.table(.data)
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   eval.parent(substitute(
     .data[, list(...), by, keyby]
@@ -86,7 +86,7 @@ dt_summarise <- dt_summarize
 #' @inherit dt_mutate
 dt_select <- function(.data, ...){
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  .data <- as.data.table(.data)
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   var_list = substitute(list(...))
   all_indexes = as.list(seq_along(.data))

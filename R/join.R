@@ -49,8 +49,8 @@ dt_full_join <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
 
 join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
   if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-  x <- as.data.table(x)
-  y <- as.data.table(y)
+  if (!is.data.table(x)) x <- as.data.table(x)
+  if (!is.data.table(y)) y <- as.data.table(y)
 
   if (is.null(by)) {
     by_x <- by_y <- intersect(colnames(x), colnames(y))
