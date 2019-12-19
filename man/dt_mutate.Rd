@@ -7,6 +7,7 @@
 dt_mutate(.data, ..., by, keyby)
 dt_select(.data, ...)
 dt_filter(.data, ...)
+dt_arrange(.data, ...)
 dt_summarize(.data, ..., by, keyby)
 }
 \arguments{
