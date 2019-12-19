@@ -34,7 +34,7 @@ dt_mutate <- function(.data, ..., by, keyby) {
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   eval.parent(substitute(
-    .data[, ':='(...), by, keyby]
+    .data[, ':='(...), by, keyby][]
   ))
 }
 
