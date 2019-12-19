@@ -46,7 +46,7 @@ dt_rename_all <- function(.data, .fun, ...) {
 dt_rename_at <- function(.data, .vars, .fun, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+  .data <- as.data.table(.data)
 
   .cols <- characterize(substitute(.vars))
 
@@ -66,7 +66,7 @@ dt_rename_at <- function(.data, .vars, .fun, ...) {
 dt_rename_if <- function(.data, .predicate, .fun, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+  .data <- as.data.table(.data)
 
   .cols <- colnames(.data)[dt_map_lgl(.data, .predicate)]
 
