@@ -34,7 +34,7 @@ devtools::install_github("mtfairbanks/gdt")
 
 #### gdt functions
 
-* `as_dt()`: Copy data.tables/convert data.frames to data.tables
+* `as_dt()`: Safely operate on data.tables/convert data.frames to data.tables
 * `dt_mutate()`, `dt_mutate_if()`, `dt_mutate_at()`, & `dt_mutate_all()`
 * `dt_select()`, `dt_select_if()`
 * `dt_filter()`
@@ -69,6 +69,7 @@ library(gdt) # Loads data.table and %>%
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt %>%
+  as_dt() %>%
   dt_select(x, y, z) %>%
   dt_filter(x < 4 & y > 1) %>%
   dt_arrange(x, y) %>%
