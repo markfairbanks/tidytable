@@ -42,7 +42,7 @@ dt_mutate_if <- function(.data, .predicate, .fun, ...) {
   .cols <- colnames(.data)[dt_map_lgl(.data, .predicate)]
 
   if (length(.cols) > 0) {
-    .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
+    .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols][]
   } else {
     .data
   }
@@ -58,7 +58,7 @@ dt_mutate_at <- function(.data, .vars, .fun, ...) {
   .cols <- characterize(substitute(.vars))
 
   if (length(.cols) > 0) {
-    .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
+    .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols][]
   } else {
     .data
   }
@@ -73,5 +73,5 @@ dt_mutate_all <- function(.data, .fun, ...) {
 
   .cols <- colnames(.data)
 
-  .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols]
+  .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols][]
 }
