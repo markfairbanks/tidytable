@@ -26,8 +26,9 @@ dt_drop_na <- function(.data, ...) {
     na.omit(.data)
   } else {
     for (var in dots) {
-      var <- substitute(var)
-      .data <- .data[!is.na(eval(var))]
+      eval.parent(substitute(
+        .data <- .data[!is.na(var)]
+      ))
     }
     .data
   }
