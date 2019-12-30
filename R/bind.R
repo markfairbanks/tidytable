@@ -23,11 +23,29 @@
 #' example_dt %>%
 #'   dt_bind_cols(another_dt)
 dt_bind_rows <- function(...) {
-  rbind(...)
+  dots <- enlist_dots(...)
+  dots <- dt_map(dots, eval)
+
+  if (!all(dt_map_lgl(dots, is.data.frame)))
+    stop("All inputs must be a data.frame or data.table")
+
+  if (!all(dt_map_lgl(dots, is.data.table)))
+    dots <- dt_map(dots, as.data.table)
+
+  rbindlist(dots)
 }
 
 #' @export
 #' @inherit dt_bind_rows
 dt_bind_cols <- function(...) {
-  cbind(...)
+  dots <- enlist_dots(...)
+  dots <- dt_map(dots, eval)
+
+  if (!all(dt_map_lgl(dots, is.data.frame)))
+    stop("All inputs must be a data.frame or data.table")
+
+  if (!all(dt_map_lgl(dots, is.data.table)))
+    dots <- dt_map(dots, as.data.table)
+
+  do.call(cbind, dots)
 }
