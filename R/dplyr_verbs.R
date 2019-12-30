@@ -89,8 +89,7 @@ dt_select <- function(.data, ...){
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   select_vars <- substitute(list(...))
-  data_vars <- as.list(seq_along(.data))
-  names(data_vars) <- colnames(.data)
+  data_vars <- setNames(as.list(seq_along(.data)), colnames(.data))
 
   select_index <- unlist(eval(select_vars, data_vars))
 
