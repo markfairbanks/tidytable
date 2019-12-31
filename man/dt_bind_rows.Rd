@@ -8,7 +8,9 @@ dt_bind_rows(...)
 dt_bind_cols(...)
 }
 \arguments{
-\item{...}{Data frames to combine.}
+\item{.data}{A data frame to bind}
+
+\item{...}{Data frames to bind}
 }
 \description{
 Simple alias to data.table implementations of \code{rbind()} and \code{cbind()}

@@ -4,10 +4,12 @@
 \alias{dt_bind_cols}
 \title{Bind data.tables by row and column}
 \usage{
-dt_bind_cols(...)
+dt_bind_cols(.data, ...)
 }
 \arguments{
-\item{...}{Data frames to combine.}
+\item{.data}{A data frame to bind}
+
+\item{...}{Data frames to bind}
 }
 \description{
 Simple alias to data.table implementations of \code{rbind()} and \code{cbind()}

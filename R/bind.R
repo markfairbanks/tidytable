@@ -8,7 +8,8 @@
 #' dt_bind_rows(...)
 #' dt_bind_cols(...)
 #'
-#' @param ... Data frames to combine.
+#' @param .data A data frame to bind
+#' @param ... Data frames to bind
 #'
 #'
 #' @import data.table
@@ -22,9 +23,10 @@
 #'
 #' example_dt %>%
 #'   dt_bind_cols(another_dt)
-dt_bind_rows <- function(...) {
+dt_bind_rows <- function(.data, ...) {
   dots <- enlist_dots(...)
   dots <- dt_map(dots, eval)
+  dots <- append(list(.data), dots)
 
   if (!all(dt_map_lgl(dots, is.data.frame)))
     stop("All inputs must be a data.frame or data.table")
@@ -37,7 +39,7 @@ dt_bind_rows <- function(...) {
 
 #' @export
 #' @inherit dt_bind_rows
-dt_bind_cols <- function(...) {
+dt_bind_cols <- function(.data, ...) {
   dots <- enlist_dots(...)
   dots <- dt_map(dots, eval)
 
