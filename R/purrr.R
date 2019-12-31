@@ -89,25 +89,25 @@ dt_map2 <- function(.x, .y, .f, ...) {
 #' @export
 #' @inherit dt_map
 dt_map2_lgl <- function(.x, .y, .f, ...) {
-  as.vector(dt_map2(.x, .y, .f, ...), "logical")
+  as.logical(dt_map2(.x, .y, .f, ...))
 }
 
 #' @export
 #' @inherit dt_map
 dt_map2_int <- function(.x, .y, .f, ...) {
-  as.vector(dt_map2(.x, .y, .f, ...), "integer")
+  as.integer(dt_map2(.x, .y, .f, ...))
 }
 
 #' @export
 #' @inherit dt_map
 dt_map2_dbl <- function(.x, .y, .f, ...) {
-  as.vector(dt_map2(.x, .y, .f, ...), "double")
+  as.double(dt_map2(.x, .y, .f, ...))
 }
 
 #' @export
 #' @inherit dt_map
 dt_map2_chr <- function(.x, .y, .f, ...) {
-  as.vector(dt_map2(.x, .y, .f, ...), "character")
+  as.character(dt_map2(.x, .y, .f, ...))
 }
 
 #' @export
