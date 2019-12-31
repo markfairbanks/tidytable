@@ -30,34 +30,28 @@ dt_map <- function(.x, .f, ...) {
   lapply(.x, .f, ...)
 }
 
-map_mold <- function(.x, .f, .mold, ...) {
-  out <- vapply(.x, .f, .mold, ..., USE.NAMES = FALSE)
-  names(out) <- names(.x)
-  out
-}
-
 #' @export
 #' @inherit dt_map
 dt_map_lgl <- function(.x, .f, ...) {
-  map_mold(.x, .f, logical(1), ...)
+  setNames(vapply(.x, .f, logical(1), ..., USE.NAMES = FALSE), names(.x))
 }
 
 #' @export
 #' @inherit dt_map
 dt_map_int <- function(.x, .f, ...) {
-  map_mold(.x, .f, integer(1), ...)
+  setNames(vapply(.x, .f, integer(1), ..., USE.NAMES = FALSE), names(.x))
 }
 
 #' @export
 #' @inherit dt_map
 dt_map_dbl <- function(.x, .f, ...) {
-  map_mold(.x, .f, double(1), ...)
+  setNames(vapply(.x, .f, double(1), ..., USE.NAMES = FALSE), names(.x))
 }
 
 #' @export
 #' @inherit dt_map
 dt_map_chr <- function(.x, .f, ...) {
-  map_mold(.x, .f, character(1), ...)
+  setNames(vapply(.x, .f, character(1), ..., USE.NAMES = FALSE), names(.x))
 }
 
 #' @export
@@ -86,9 +80,9 @@ dt_walk <- function(.x, .f, ...) {
 dt_map2 <- function(.x, .y, .f, ...) {
   out <- mapply(.f, .x, .y, MoreArgs = list(...), SIMPLIFY = FALSE)
   if (length(out) == length(.x)) {
-    set_names(out, names(.x))
+    setNames(out, names(.x))
   } else {
-    set_names(out, NULL)
+    setNames(out, NULL)
   }
 }
 
@@ -129,12 +123,3 @@ dt_map2_dfr <- function(.x, .y, .f, ..., .id = NULL) {
   result_list <- dt_map2(.x, .f, ...)
   rbindlist(result_list, idcol = .id)
 }
-
-# dt_pmap <- function(.l, .f, ...) {
-#   args <- args_recycle(.l)
-#   do.call("mapply", c(
-#     FUN = list(quote(.f)),
-#     args, MoreArgs = quote(list(...)),
-#     SIMPLIFY = FALSE, USE.NAMES = FALSE
-#   ))
-# }
