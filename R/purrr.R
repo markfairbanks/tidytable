@@ -33,25 +33,25 @@ dt_map <- function(.x, .f, ...) {
 #' @export
 #' @inherit dt_map
 dt_map_lgl <- function(.x, .f, ...) {
-  vapply(.x, .f, logical(1), ...)
+  setNames(vapply(.x, .f, logical(1), ..., USE.NAMES=FALSE), names(.x))
 }
 
 #' @export
 #' @inherit dt_map
 dt_map_int <- function(.x, .f, ...) {
-  vapply(.x, .f, integer(1), ...)
+  setNames(vapply(.x, .f, integer(1), ..., USE.NAMES=FALSE), names(.x))
 }
 
 #' @export
 #' @inherit dt_map
 dt_map_dbl <- function(.x, .f, ...) {
-  vapply(.x, .f, double(1), ...)
+  setNames(vapply(.x, .f, double(1), ..., USE.NAMES=FALSE), names(.x))
 }
 
 #' @export
 #' @inherit dt_map
 dt_map_chr <- function(.x, .f, ...) {
-  vapply(.x, .f, character(1), ...)
+  setNames(vapply(.x, .f, character(1), ..., USE.NAMES=FALSE), names(.x))
 }
 
 #' @export
