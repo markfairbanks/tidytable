@@ -15,10 +15,12 @@
 #'
 #' example_dt %>%
 #'   dt_pull(y)
-dt_pull <- function(.data, .column) {
+dt_pull <- function(.data, .var) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  .data[, eval(substitute(.column))]
+  eval.parent(substitute(
+    .data[, .var]
+  ))
 }

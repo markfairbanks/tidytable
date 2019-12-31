@@ -4,7 +4,7 @@
 \alias{dt_pull}
 \title{Pull out a single variable}
 \usage{
-dt_pull(.data, .column)
+dt_pull(.data, .var)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
