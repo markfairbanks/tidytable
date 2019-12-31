@@ -5,7 +5,7 @@
 #' @param ... Dots
 #'
 #' @export
-enlist_dots <- function(...) as.list(substitute(...()))
+enlist_dots <- function(...) substitute(...())
 
 #' @export
 characterize <- function(vec_list_expr) {
