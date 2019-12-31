@@ -88,10 +88,10 @@ dt_select <- function(.data, ...){
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  select_vars <- substitute(list(...))
+  select_vars <- substitute(c(...))
   data_vars <- setNames(as.list(seq_along(.data)), colnames(.data))
 
-  select_index <- unlist(eval(select_vars, data_vars))
+  select_index <- eval(select_vars, data_vars)
 
   eval.parent(substitute(
     .data[, select_index]
