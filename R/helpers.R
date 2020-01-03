@@ -15,9 +15,9 @@ column_selector <- function(.data, select_vars) {
   data_vars <- setNames(as.list(seq_along(.data)), data_names)
 
   select_index <- unlist(eval(select_vars, data_vars))
+  drop_index <- unique(abs(select_index[select_index < 0]))
 
-  if (any(select_index > 0) && any(select_index < 0))
-    stop("cols must only contain columns to drop OR columns to add, not both")
+  select_index <- setdiff(abs(unique(select_index)), drop_index)
 
   select_vars <- data_names[select_index]
 
