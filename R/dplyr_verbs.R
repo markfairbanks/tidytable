@@ -51,8 +51,10 @@ dt_filter <- function(.data, ...) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
+  dots <- enlist_dots(...)
+
   eval.parent(substitute(
-    .data[Reduce(f = '&', list(...)), ]
+    .data[Reduce(f = '&', dots)]
   ))
 }
 
@@ -63,7 +65,7 @@ dt_arrange <- function(.data, ...) {
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   eval.parent(substitute(
-    .data[order(...), ]
+    .data[order(...)]
   ))
 }
 
