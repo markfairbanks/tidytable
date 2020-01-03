@@ -48,7 +48,7 @@ dt_rename_at <- function(.data, .vars, .fun, ...) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  .cols <- characterize(substitute(.vars))
+  .cols <- column_selector(.data, substitute(.vars))
 
   if (length(.cols) > 0) {
     for (old_name in .cols) {
