@@ -90,10 +90,17 @@ dt_select <- function(.data, ...){
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
+  data_names <- colnames(.data)
+
   select_vars <- substitute(c(...))
-  data_vars <- setNames(as.list(seq_along(.data)), colnames(.data))
+
+  data_vars <- setNames(as.list(seq_along(.data)), data_names)
 
   select_index <- eval(select_vars, data_vars)
+  keep_index <- unique(select_index[select_index > 0])
+  drop_index <- unique(abs(select_index[select_index < 0]))
+
+  select_index <- setdiff(keep_index, drop_index)
 
   eval.parent(substitute(
     .data[, select_index]
