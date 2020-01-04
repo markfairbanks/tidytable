@@ -11,7 +11,7 @@ dt_top_n(.data, n = NULL, wt = NULL, by)
 
 \item{n}{Number of rows to return}
 
-\item{wt}{(Optional). The variable to use for ordering.}
+\item{wt}{(Optional). The variable to use for ordering. If NULL uses the last column in the data.table.}
 
 \item{by}{\code{list()} of bare column names to group by}
 }

@@ -5,7 +5,7 @@
 #'
 #' @param .data A data.frame or data.table
 #' @param n Number of rows to return
-#' @param wt (Optional). The variable to use for ordering.
+#' @param wt (Optional). The variable to use for ordering. If NULL uses the last column in the data.table.
 #' @param by `list()` of bare column names to group by
 #'
 #' @md
