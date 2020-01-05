@@ -42,6 +42,7 @@ dt_bind_rows <- function(.data, ...) {
 dt_bind_cols <- function(.data, ...) {
   dots <- enlist_dots(...)
   dots <- dt_map(dots, eval)
+  dots <- append(list(.data), dots)
 
   if (!all(dt_map_lgl(dots, is.data.frame)))
     stop("All inputs must be a data.frame or data.table")
