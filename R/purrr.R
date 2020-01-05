@@ -78,12 +78,7 @@ dt_walk <- function(.x, .f, ...) {
 #' @export
 #' @inherit dt_map
 dt_map2 <- function(.x, .y, .f, ...) {
-  out <- mapply(.f, .x, .y, MoreArgs = list(...), SIMPLIFY = FALSE)
-  if (length(out) == length(.x)) {
-    setNames(out, names(.x))
-  } else {
-    setNames(out, NULL)
-  }
+  mapply(.f, .x, .y, MoreArgs = list(...), SIMPLIFY = FALSE)
 }
 
 #' @export
