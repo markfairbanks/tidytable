@@ -18,10 +18,10 @@
 #'                          z = c(rep("a", 3), rep("b", 2)))
 #'
 #' example_dt %>%
-#'   test_top_n(2, wt = y)
+#'   dt_top_n(2, wt = y)
 #'
 #' example_dt %>%
-#'   test_top_n(2, wt = y, by = z)
+#'   dt_top_n(2, wt = y, by = z)
 dt_top_n <- function(.data, n = NULL, wt = NULL, by) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
