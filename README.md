@@ -54,8 +54,7 @@ devtools::install_github("mtfairbanks/gdt")
 #### tidyfast functions
 
   - `dt_case_when()`
-  - `dt_pivot_longer()` & `dt_pivot_wider()`: `gdt` functions recently
-    accepted to `tidyfast`\!
+  - `dt_pivot_longer()` & `dt_pivot_wider()`
   - `dt_count()` & `dt_uncount()`
   - `dt_separate()`
   - `dt_nest()` & `dt_unnest()`
