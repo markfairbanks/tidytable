@@ -52,7 +52,7 @@ dt_filter <- function(.data, ...) {
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   eval.parent(substitute(
-    .data[Reduce(f = '&', list(...)), ]
+    .data[Reduce(f = '&', list(...))]
   ))
 }
 
