@@ -27,8 +27,8 @@ example_dt <- data.table(x = 1:5,
                          z = c(rep("a", 3), rep("b", 2)))
 
 example_dt \%>\%
-  test_top_n(2, wt = y)
+  dt_top_n(2, wt = y)
 
 example_dt \%>\%
-  test_top_n(2, wt = y, by = z)
+  dt_top_n(2, wt = y, by = z)
 }
