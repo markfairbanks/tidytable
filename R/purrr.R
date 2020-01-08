@@ -108,13 +108,13 @@ dt_map2_chr <- function(.x, .y, .f, ...) {
 #' @export
 #' @inherit dt_map
 dt_map2_dfc <- function(.x, .y, .f, ...) {
-  result_list <- dt_map2(.x, .f, ...)
+  result_list <- dt_map2(.x, .y, .f, ...)
   do.call(cbind, result_list)
 }
 
 #' @export
 #' @inherit dt_map
 dt_map2_dfr <- function(.x, .y, .f, ..., .id = NULL) {
-  result_list <- dt_map2(.x, .f, ...)
+  result_list <- dt_map2(.x, .y, .f, ...)
   rbindlist(result_list, idcol = .id)
 }
