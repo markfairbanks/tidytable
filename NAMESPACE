@@ -3,8 +3,6 @@
 export("%>%")
 export("%notin%")
 export(as_dt)
-export(characterize)
-export(column_selector)
 export(dt)
 export(dt_arrange)
 export(dt_bind_cols)
