@@ -48,8 +48,8 @@ devtools::install_github("markfairbanks/gdt")
   - `dt_map()`, `dt_map2()`, `dt_map_*()` variants, & `dt_map2_*()`
     variants
   - `%notin%`
-  - `dt()`: Pipeable `data.table` call. [See example
-    here](https://github.com/mtfairbanks/gdt#dt-helper)
+  - `dt()`: Pipeable `data.table` call. [See
+    example](https://github.com/mtfairbanks/gdt#dt-helper)
 
 #### tidyfast functions
 
