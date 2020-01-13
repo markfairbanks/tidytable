@@ -103,5 +103,4 @@ dt_select <- function(.data, ...){
   eval.parent(substitute(
     .data[, select_index]
   ))
-
 }
