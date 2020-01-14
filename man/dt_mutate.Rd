@@ -2,6 +2,11 @@
 % Please edit documentation in R/dplyr_verbs.R
 \name{dt_mutate}
 \alias{dt_mutate}
+\alias{dt_filter}
+\alias{dt_arrange}
+\alias{dt_summarize}
+\alias{dt_summarise}
+\alias{dt_select}
 \title{\code{dplyr} verbs for data.table}
 \usage{
 dt_mutate(.data, ..., by, keyby)
@@ -9,6 +14,16 @@ dt_select(.data, ...)
 dt_filter(.data, ...)
 dt_arrange(.data, ...)
 dt_summarize(.data, ..., by, keyby)
+
+dt_filter(.data, ...)
+
+dt_arrange(.data, ...)
+
+dt_summarize(.data, ..., by = NULL)
+
+dt_summarise(.data, ..., by = NULL)
+
+dt_select(.data, ...)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
