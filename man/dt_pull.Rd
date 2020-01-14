@@ -4,12 +4,12 @@
 \alias{dt_pull}
 \title{Pull out a single variable}
 \usage{
-dt_pull(.data, .var)
+dt_pull(.data, var = NULL)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{.column}{The column to pull from the data.table}
+\item{var}{The column to pull from the data.table}
 }
 \value{
 A vector

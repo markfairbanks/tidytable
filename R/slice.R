@@ -21,18 +21,16 @@
 #'
 #' # Select rows by group
 #' dt_slice(example_dt, 1, by = z)
-dt_slice <- function(.data, rows = NULL, by = NULL) {
-
+dt_slice <- function(.data, rows = 1:5, by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  if (missing(rows)) stop("rows must be supplied")
   if (!is.numeric(rows)) stop("rows must be a numeric vector")
 
-  if (missing(by)) {
-    .data[rows]
-  } else {
-    by <- characterize(substitute(by))
-    .data[, .SD[rows], by = by]
-  }
+  rows <- enexpr(rows)
+  by <- enexpr(by)
+
+  eval_tidy(expr(
+    .data[, .SD[!!rows], !!by]
+  ))
 }

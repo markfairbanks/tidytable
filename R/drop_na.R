@@ -20,14 +20,15 @@ dt_drop_na <- function(.data, ...) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  dots <- enlist_dots(...)
+  dots <- enexprs(...)
 
   if (length(dots) == 0) {
     na.omit(.data)
   } else {
-    for (var in dots) {
-      eval.parent(substitute(
-        .data <- .data[!is.na(var)]
+    for (dot in dots) {
+
+      .data <- eval_tidy(expr(
+        .data[!is.na(!!dot)]
       ))
     }
     .data

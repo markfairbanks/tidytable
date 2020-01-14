@@ -20,11 +20,12 @@ dt_rename <- function(.data, ...) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  .dots <- enlist_dots(...)
+  dots <- enexprs(...)
+  dot_names <- names(dots)
 
-  for (i in seq_along(.dots)) {
-    new_name <- names(.dots)[[i]]
-    old_name <- as.character(.dots[[i]])
+  for (i in seq_along(dots)) {
+    new_name <- dot_names[[i]]
+    old_name <- as.character(dots[[i]])
 
     setnames(.data, old_name, new_name)
   }

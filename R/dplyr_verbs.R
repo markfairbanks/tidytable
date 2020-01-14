@@ -36,54 +36,64 @@
 #'   dt_filter(double_x > 0, double_y > 0) %>%
 #'   dt_arrange(-double_x) %>%
 #'   dt_summarize(avg_x = mean(x), by = z)
-dt_mutate <- function(.data, ..., by, keyby) {
+dt_mutate <- function(.data, ..., by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  eval.parent(substitute(
-    .data[, ':='(...), by, keyby][]
+  dots <- enexprs(...)
+  by <- enexpr(by)
+
+  eval_tidy(expr(
+    .data[, ':='(!!!dots), !!by][]
   ))
 }
 
 #' @export
-#' @inherit dt_mutate
+#' @rdname dt_mutate
 dt_filter <- function(.data, ...) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  eval.parent(substitute(
-    .data[Reduce(f = '&', list(...))]
+  dots <- enexprs(...)
+
+  eval_tidy(expr(
+    .data[Reduce(f = '&', list(!!!dots))]
   ))
 }
 
 #' @export
-#' @inherit dt_mutate
+#' @rdname dt_mutate
 dt_arrange <- function(.data, ...) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  eval.parent(substitute(
-    .data[order(...)]
+  dots <- enexprs(...)
+
+  eval_tidy(expr(
+    .data[order(!!!dots)]
   ))
 }
 
 #' @export
-#' @inherit dt_mutate
-dt_summarize <- function(.data, ..., by, keyby) {
+#' @rdname dt_mutate
+dt_summarize <- function(.data, ..., by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  eval.parent(substitute(
-    .data[, list(...), by, keyby]
+  dots <- enexprs(...)
+  by <- enexpr(by)
+
+  eval_tidy(expr(
+    .data[, list(!!!dots), !!by]
   ))
 }
 
 #' @export
-#' @inherit dt_mutate
+#' @rdname dt_mutate
 dt_summarise <- dt_summarize
 
 #' @export
-#' @inherit dt_mutate
+#' @rdname dt_mutate
 dt_select <- function(.data, ...){
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
@@ -99,8 +109,9 @@ dt_select <- function(.data, ...){
   drop_index <- unique(abs(select_index[select_index < 0]))
 
   select_index <- setdiff(keep_index, drop_index)
+  select_index <- enexpr(select_index)
 
-  eval.parent(substitute(
-    .data[, select_index]
+  eval_tidy(expr(
+    .data[, !!select_index]
   ))
 }

@@ -4,7 +4,7 @@
 \alias{dt_top_n}
 \title{Select top (or bottom) n rows (by value)}
 \usage{
-dt_top_n(.data, n = NULL, wt = NULL, by)
+dt_top_n(.data, n = 5, wt = NULL, by = NULL)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}

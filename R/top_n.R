@@ -22,28 +22,21 @@
 #'
 #' example_dt %>%
 #'   dt_top_n(2, wt = y, by = z)
-dt_top_n <- function(.data, n = NULL, wt = NULL, by) {
+dt_top_n <- function(.data, n = 5, wt = NULL, by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  if (is.null(n)) stop("n must be supplied")
   if (!is.numeric(n) | length(n) > 1) stop("n must be a single number")
 
-  wt <- substitute(wt)
+  wt <- enexpr(wt)
+  by <- enexpr(by)
 
   if (is.null(wt)) {
-    wt <- as.symbol(colnames(.data)[length(.data)])
-
-    eval.parent(substitute(
-      .data[order(-wt), head(.SD, n), by]
-    ))
-  } else if (wt >= 0) {
-    eval.parent(substitute(
-      .data[order(-wt)][, head(.SD, n), by]
-    ))
+    .data %>%
+      dt_slice(1:n, !!by)
   } else {
-    eval.parent(substitute(
-      .data[order(wt)][, head(.SD, abs(n)), by]
-    ))
+    .data %>%
+      dt_arrange(-!!wt) %>%
+      dt_slice(1:n, !!by)
   }
 }

@@ -4,7 +4,7 @@
 \alias{dt_summarise}
 \title{\code{dplyr} verbs for data.table}
 \usage{
-dt_summarise(.data, ..., by, keyby)
+dt_summarise(.data, ..., by = NULL)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
@@ -12,8 +12,6 @@ dt_summarise(.data, ..., by, keyby)
 \item{...}{Values passed to \code{gdt} functions}
 
 \item{by}{\code{list()} of bare column names to group by}
-
-\item{keyby}{\code{list()} of bare column names to group by or key by}
 }
 \value{
 A data.table

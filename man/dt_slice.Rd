@@ -4,7 +4,7 @@
 \alias{dt_slice}
 \title{Choose rows by position}
 \usage{
-dt_slice(.data, rows = NULL, by = NULL)
+dt_slice(.data, rows = 1:5, by = NULL)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
