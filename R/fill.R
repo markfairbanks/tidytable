@@ -18,7 +18,7 @@
 #'                       z = c(rep("a", 8), rep("b", 2)))
 #'
 #' test_df %>%
-#'   new_fill(x, y, by = z, .direction = "downup")
+#'   dt_fill(x, y, by = z, .direction = "downup")
 dt_fill <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
