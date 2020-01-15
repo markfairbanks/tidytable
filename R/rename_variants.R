@@ -52,7 +52,7 @@ dt_rename_at <- function(.data, .vars, .fun, ...) {
   .vars <- enexpr(.vars)
   .vars <- column_selector(.data, !!.vars)
 
-  if (length(.cols) > 0) {
+  if (length(.vars) > 0) {
     for (old_name in .vars) {
       new_name <- .fun(old_name, ...)
       setnames(.data, old_name, new_name)
