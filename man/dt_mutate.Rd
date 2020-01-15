@@ -31,8 +31,6 @@ dt_select(.data, ...)
 \item{...}{Values passed to \code{gdt} functions}
 
 \item{by}{\code{list()} of bare column names to group by}
-
-\item{keyby}{\code{list()} of bare column names to group by or key by}
 }
 \value{
 A data.table

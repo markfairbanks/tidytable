@@ -12,7 +12,6 @@
 #' @param .data A data.frame or data.table
 #' @param ... Values passed to `gdt` functions
 #' @param by `list()` of bare column names to group by
-#' @param keyby `list()` of bare column names to group by or key by
 #'
 #' @usage
 #' dt_mutate(.data, ..., by = NULL)
