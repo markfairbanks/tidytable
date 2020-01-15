@@ -9,9 +9,7 @@
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
-The goal of `tidydt` is to complement
-[`tidyfast`](https://github.com/TysonStanley/tidyfast) as a tidy
-interface to `data.table`.
+The goal of `tidydt` is to be a tidy interface to `data.table`.
 
 ## Installation
 
