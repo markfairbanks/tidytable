@@ -125,7 +125,7 @@ Note that quosures are not compatible with `data.table`, so `enexpr()`
 must be used instead of
 `enquo()`.
 
-##### \`dt\_mutate() example
+##### Custom function with `dt_mutate()`
 
 ``` r
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
@@ -146,7 +146,7 @@ example_dt %>%
 #> 3: 3 6 b          4
 ```
 
-##### `dt_summarize()` example
+##### Custom function with `dt_summarize()`
 
 ``` r
 example_df <- data.table(x = 1:10, y = c(rep("a", 6), rep("b", 4)), z = c(rep("a", 6), rep("b", 4)))
