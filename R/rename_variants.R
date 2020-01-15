@@ -11,7 +11,7 @@
 #'
 #' @param .data A data.frame or data.table
 #' @param .predicate Predicate to specify columns for `dt_rename_if()`
-#' @param .vars `list()` of variables for `dt_rename_at()` to use
+#' @param .vars vector `c()` of bare column names for `dt_rename_at()` to use
 #' @param .fun Function to pass
 #' @param ... Other arguments for the passed function
 #'
@@ -49,10 +49,11 @@ dt_rename_at <- function(.data, .vars, .fun, ...) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  .cols <- column_selector(.data, substitute(.vars))
+  .vars <- enexpr(.vars)
+  .vars <- column_selector(.data, !!.vars)
 
   if (length(.cols) > 0) {
-    for (old_name in .cols) {
+    for (old_name in .vars) {
       new_name <- .fun(old_name, ...)
       setnames(.data, old_name, new_name)
     }

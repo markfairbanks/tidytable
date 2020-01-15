@@ -18,7 +18,7 @@
 #'
 #' @param .data A data.frame or data.table
 #' @param .predicate Predicate to specify columns for `dt_mutate_if()`
-#' @param .vars `list()` of variables for `dt_mutate_at()` to use
+#' @param .vars vector `c()` of bare column names for `dt_rename_at()` to use
 #' @param .fun Function to pass
 #' @param ... Other arguments for the passed function
 #'
@@ -55,7 +55,8 @@ dt_mutate_at <- function(.data, .vars, .fun, ...) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  .cols <- column_selector(.data, substitute(.vars))
+  .cols <- enexpr(.vars)
+  .cols <- column_selector(.data, !!.cols)
 
   if (length(.cols) > 0) {
     .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols][]
