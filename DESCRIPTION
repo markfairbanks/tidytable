@@ -18,5 +18,4 @@ RoxygenNote: 7.0.2
 URL: https://github.com/mtfairbanks/tidydt
 BugReports: https://github.com/mtfairbanks/tidydt/issues
 Suggests: 
-    tidyfast,
     testthat (>= 2.1.0)
