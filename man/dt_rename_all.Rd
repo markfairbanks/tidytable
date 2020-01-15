@@ -21,7 +21,7 @@ dt_rename_if(.data, .predicate, .fun, ...)
 
 \item{...}{Other arguments for the passed function}
 
-\item{.vars}{\code{list()} of variables for \code{dt_rename_at()} to use}
+\item{.vars}{vector \code{c()} of bare column names for \code{dt_rename_at()} to use}
 
 \item{.predicate}{Predicate to specify columns for \code{dt_rename_if()}}
 }

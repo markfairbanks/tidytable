@@ -9,7 +9,7 @@ dt_mutate_at(.data, .vars, .fun, ...)
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{.vars}{\code{list()} of variables for \code{dt_mutate_at()} to use}
+\item{.vars}{vector \code{c()} of bare column names for \code{dt_rename_at()} to use}
 
 \item{.fun}{Function to pass}
 

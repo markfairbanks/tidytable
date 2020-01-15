@@ -17,7 +17,7 @@ dt_mutate_all(.data, .fun, ...)
 
 \item{...}{Other arguments for the passed function}
 
-\item{.vars}{\code{list()} of variables for \code{dt_mutate_at()} to use}
+\item{.vars}{vector \code{c()} of bare column names for \code{dt_rename_at()} to use}
 }
 \value{
 A data.table
