@@ -87,12 +87,29 @@ example_dt %>%
   dt_mutate(double_x = x * 2,
             double_y = y * 2) %>%
   dt_mutate_if(is.character, as.factor) %>%
-  dt_summarize(avg_x = mean(x), by = z) %>%
-  dt_rename(new_z = z,
-            new_avg_x = avg_x)
-#>    new_z new_avg_x
-#> 1:     a       1.5
-#> 2:     b       3.0
+  dt_rename(new_x = x,
+            new_y = y)
+#>    new_x new_y z double_x double_y
+#> 1:     1     4 a        2        8
+#> 2:     2     5 a        4       10
+#> 3:     3     6 b        6       12
+```
+
+Group by calls are done from inside `dt_summarize()` or any function
+that has by group functionality.
+
+A single bare column can be passed with `by = z`. Multiple columns can
+be passed with `by = list(y,
+z)`.
+
+``` r
+example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
+
+example_dt %>%
+  dt_summarize(avg_x = mean(x), by = z)
+#>    z avg_x
+#> 1: a   1.5
+#> 2: b   3.0
 ```
 
 #### `rlang` compatibility
