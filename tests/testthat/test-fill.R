@@ -1,18 +1,3 @@
-# test_that("all missings left unchanged", {
-#   df <- data.table::data.table(
-#     lgl = c(NA, NA),
-#     int = c(NA_integer_, NA),
-#     dbl = c(NA_real_, NA),
-#     chr = c(NA_character_, NA)
-#   )
-#
-#   down <- dt_fill(df, lgl, int, dbl, chr)
-#   up <- dt_fill(df, lgl, int, dbl, chr, .direction = "up")
-#
-#   expect_identical(down, df)
-#   expect_identical(up, df)
-# })
-
 test_that("missings are filled correctly", {
   # filled down from last non-missing
   df <- data.table::data.table(x = c(NA, 1, NA, 2, NA, NA))
