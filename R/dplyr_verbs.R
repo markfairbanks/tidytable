@@ -15,11 +15,11 @@
 #' @param keyby `list()` of bare column names to group by or key by
 #'
 #' @usage
-#' dt_mutate(.data, ..., by, keyby)
+#' dt_mutate(.data, ..., by = NULL)
 #' dt_select(.data, ...)
 #' dt_filter(.data, ...)
 #' dt_arrange(.data, ...)
-#' dt_summarize(.data, ..., by, keyby)
+#' dt_summarize(.data, ..., by = NULL)
 #'
 #' @import data.table
 #' @md
@@ -27,7 +27,7 @@
 #' @export
 #'
 #' @examples
-#' example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a","a","b"))
+#' example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a","a","b"), a = c("a","a","b"))
 #'
 #' example_dt %>%
 #'   dt_select(x, y, z) %>%
@@ -35,7 +35,7 @@
 #'             double_y = y * 2) %>%
 #'   dt_filter(double_x > 0, double_y > 0) %>%
 #'   dt_arrange(-double_x) %>%
-#'   dt_summarize(avg_x = mean(x), by = z)
+#'   dt_summarize(avg_x = mean(x), by = list(a, z))
 dt_mutate <- function(.data, ..., by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
