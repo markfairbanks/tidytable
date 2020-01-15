@@ -11,7 +11,7 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 
 The goal of `tidydt` is to be a tidy interface to `data.table`.
 
-`tidydt` is `rlang` compatible
+`tidydt` is `rlang` compatible.
 
 ## Installation
 
@@ -62,7 +62,8 @@ devtools::install_github("markfairbanks/tidydt")
 
   - `dt_pivot_longer()` & `dt_pivot_wider()`
   - `dt_drop_na()`
-  - `dt_fill()`
+  - `dt_replace_na()`
+  - `dt_fill()` & `dt_group_nest()` & `dt_unnest()`
 
 ### purrr
 
