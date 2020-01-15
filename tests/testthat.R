@@ -1,4 +1,4 @@
 library(testthat)
-library(gdt)
+library(tidydt)
 
-test_check("gdt")
+test_check("tidydt")
