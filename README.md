@@ -55,15 +55,18 @@ devtools::install_github("markfairbanks/tidydt")
     `dt_rename_all()`
   - `dt_slice()`
   - `dt_top_n()`
-  - `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`, &
+  - Joins: `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`, &
     `dt_full_join()`
+  - Select helpers: `dt_starts_with()`, `dt_ends_with()`,
+    `dt_contains()`, `dt_everything()`
 
 ### tidyr
 
   - `dt_pivot_longer()` & `dt_pivot_wider()`
   - `dt_drop_na()`
   - `dt_replace_na()`
-  - `dt_fill()` & `dt_group_nest()` & `dt_unnest()`
+  - `dt_fill()`
+  - `dt_group_nest()` & `dt_unnest()`
 
 ### purrr
 
