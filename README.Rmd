@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 
 The goal of `tidydt` is to be a tidy interface to `data.table`.
 
-`tidydt` is also `rlang` compatible!
+`tidydt` is `rlang` compatible
 
 ## Installation
 

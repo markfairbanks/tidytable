@@ -11,7 +11,7 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 
 The goal of `tidydt` is to be a tidy interface to `data.table`.
 
-`tidydt` is also `rlang` compatible\!
+`tidydt` is `rlang` compatible
 
 ## Installation
 
