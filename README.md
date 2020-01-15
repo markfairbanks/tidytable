@@ -23,7 +23,7 @@ devtools::install_github("markfairbanks/tidydt")
 
 ## tidydt functions
 
-#### **tidydt helpers**
+### tidydt helpers
 
   - `as_dt()`: Safely operate on data.tables/convert data.frames to
     data.tables
@@ -31,7 +31,7 @@ devtools::install_github("markfairbanks/tidydt")
   - `dt()`: Pipeable `data.table` call. [See example
     here](https://github.com/mtfairbanks/gdt#dt-helper)
 
-#### **dplyr**
+### dplyr
 
 ##### Core verbs
 
@@ -56,13 +56,13 @@ devtools::install_github("markfairbanks/tidydt")
   - `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`, &
     `dt_full_join()`
 
-#### **tidyr**
+### tidyr
 
   - `dt_pivot_longer()` & `dt_pivot_wider()`
   - `dt_drop_na()`
   - `dt_fill()`
 
-#### **purrr**
+### purrr
 
   - `dt_map()`, `dt_map2()`, `dt_map_*()` variants, & `dt_map2_*()`
     variants
