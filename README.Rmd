@@ -13,13 +13,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-# gdt v`r as.character(packageVersion("gdt"))`   <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
+# tidydt v`r as.character(packageVersion("tidydt"))`   <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
 
 <!-- badges: start -->
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
-The goal of `gdt` is to complement [`tidyfast`](https://github.com/TysonStanley/tidyfast) as a tidy interface to `data.table`.
+The goal of `tidydt` is to complement [`tidyfast`](https://github.com/TysonStanley/tidyfast) as a tidy interface to `data.table`.
 
 ## Installation
 
@@ -65,7 +65,7 @@ devtools::install_github("markfairbanks/gdt")
 The code chunk below shows the `gdt` syntax:
 
 ```{r message = FALSE}
-library(gdt) # Loads data.table and %>%
+library(tidydt) # Loads data.table and %>%
 
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
