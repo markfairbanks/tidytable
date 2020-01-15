@@ -11,6 +11,8 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 
 The goal of `tidydt` is to be a tidy interface to `data.table`.
 
+`tidydt` is also `rlang` compatible\!
+
 ## Installation
 
 You can install the development version from
@@ -91,6 +93,34 @@ example_dt %>%
 #> 1:     a       1.5
 #> 2:     b       3.0
 ```
+
+#### `rlang` compatibility
+
+`rlang` quoting/unquoting can be used to write custom functions with
+`tidydt`
+functions:
+
+``` r
+example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
+
+add_one <- function(.data, new_name, add_col) {
+  new_name <- enexpr(new_name)
+  add_col <- enexpr(add_col)
+  
+  .data %>%
+    dt_mutate(!!new_name := !!add_col + 1)
+}
+
+example_dt %>%
+  add_one(x_plus_one, x)
+#>    x y z x_plus_one
+#> 1: 1 4 a          2
+#> 2: 2 5 a          3
+#> 3: 3 6 b          4
+```
+
+Note that quosures are not compatible with `data.table`, so `enexpr()`
+must be used instead of `enquo()`.
 
 #### `dt()` helper
 
