@@ -94,15 +94,15 @@ dt_summarise <- dt_summarize
 
 #' @export
 #' @rdname dt_mutate
-dt_select <- function(.data, ...){
+dt_select <- function(.data, ...) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   data_names <- colnames(.data)
   data_vars <- setNames(as.list(seq_along(.data)), data_names)
 
-  select_vars <- substitute(c(...))
-  select_index <- eval(select_vars, data_vars)
+  select_vars <- enexprs(...)
+  select_index <- eval(expr(c(!!!select_vars)), data_vars)
 
   keep_index <- unique(select_index[select_index > 0])
   if (length(keep_index) == 0) keep_index <- seq_along(.data)
