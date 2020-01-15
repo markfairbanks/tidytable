@@ -15,32 +15,37 @@
 #' @export
 #'
 #' @examples
+#' example_dt %>%
+#'   dt_select(dt_starts_with("x"))
+#'
+#' example_dt %>%
+#' dt_select(dt_ends_with("y"))
 dt_starts_with <- function(match) {
-  .names <- names(parent.frame())
+  .names <- names(caller_env())
 
   seq_along(.names)[startsWith(.names, match)]
 }
 
 #' @export
-#' @inherit dt_mutate
+#' @rdname dt_starts_with
 dt_contains <- function(match) {
-  .names <- names(parent.frame())
+  .names <- names(caller_env())
 
   seq_along(.names)[grepl(match, .names)]
 }
 
 #' @export
-#' @inherit dt_mutate
+#' @rdname dt_starts_with
 dt_ends_with <- function(match) {
-  .names <- names(parent.frame())
+  .names <- names(caller_env())
 
   seq_along(.names)[endsWith(.names, match)]
 }
 
 #' @export
-#' @inherit dt_mutate
+#' @rdname dt_starts_with
 dt_everything <- function() {
-  .names <- names(parent.frame())
+  .names <- names(caller_env())
 
   seq_along(.names)
 }
