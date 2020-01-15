@@ -1,11 +1,14 @@
 Package: tidydt
 Title: Tidy interface to data.table
 Version: 0.2.0
-Authors@R: 
+Authors@R: c(
     person(given = "Mark",
            family = "Fairbanks",
            role = c("aut", "cre"),
            email = "mark.t.fairbanks@gmail.com")
+    person(given = "Tyson",
+           family = "Barrett",
+           role = "ctb"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Encoding: UTF-8
