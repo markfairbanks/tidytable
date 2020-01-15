@@ -18,12 +18,12 @@ You can install the development version from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("markfairbanks/gdt")
+devtools::install_github("markfairbanks/tidydt")
 ```
 
 ## Functions
 
-#### gdt functions
+#### tidydt functions
 
   - `as_dt()`: Safely operate on data.tables/convert data.frames to
     data.tables
@@ -35,12 +35,14 @@ devtools::install_github("markfairbanks/gdt")
   - `dt_summarize()`
   - `dt_rename()`, `dt_rename_if()`, `dt_rename_at()`, &
     `dt_rename_all()`
+  - `dt_pivot_longer()` & `dt_pivot_wider()`
   - `dt_slice()`
   - `dt_pull()`
   - `dt_bind_rows()` & `dt_bind_cols()`
   - `dt_distinct()`
   - `dt_drop_na()`
   - `dt_top_n()`
+  - `dt_count()`
   - `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`, &
     `dt_full_join()`
   - `dt_map()`, `dt_map2()`, `dt_map_*()` variants, & `dt_map2_*()`
@@ -48,15 +50,6 @@ devtools::install_github("markfairbanks/gdt")
   - `%notin%`
   - `dt()`: Pipeable `data.table` call. [See example
     here](https://github.com/mtfairbanks/gdt#dt-helper)
-
-#### tidyfast functions
-
-  - `dt_case_when()`
-  - `dt_pivot_longer()` & `dt_pivot_wider()`
-  - `dt_count()` & `dt_uncount()`
-  - `dt_separate()`
-  - `dt_nest()` & `dt_unnest()`
-  - `dt_fill()`
 
 ## General syntax
 
