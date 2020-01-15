@@ -21,39 +21,55 @@ You can install the development version from
 devtools::install_github("markfairbanks/tidydt")
 ```
 
-## Functions
+## tidydt functions
 
-#### tidydt functions
+#### tidydt helpers
 
   - `as_dt()`: Safely operate on data.tables/convert data.frames to
     data.tables
-  - `dt_mutate()`, `dt_mutate_if()`, `dt_mutate_at()`, &
-    `dt_mutate_all()`
-  - `dt_select()`, `dt_select_if()`
-  - `dt_filter()`
-  - `dt_arrange()`
-  - `dt_summarize()`
-  - `dt_rename()`, `dt_rename_if()`, `dt_rename_at()`, &
-    `dt_rename_all()`
-  - `dt_pivot_longer()` & `dt_pivot_wider()`
-  - `dt_slice()`
-  - `dt_pull()`
-  - `dt_bind_rows()` & `dt_bind_cols()`
-  - `dt_distinct()`
-  - `dt_drop_na()`
-  - `dt_top_n()`
-  - `dt_count()`
-  - `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`, &
-    `dt_full_join()`
-  - `dt_map()`, `dt_map2()`, `dt_map_*()` variants, & `dt_map2_*()`
-    variants
   - `%notin%`
   - `dt()`: Pipeable `data.table` call. [See example
     here](https://github.com/mtfairbanks/gdt#dt-helper)
 
+#### dplyr
+
+##### Core verbs
+
+  - `dt_arrange()`
+  - `dt_filter()`
+  - `dt_mutate()`, `dt_mutate_if()`, `dt_mutate_at()`, &
+    `dt_mutate_all()`
+  - `dt_select()`, `dt_select_if()`
+  - `dt_summarize()`: Group by specifications called inside. See
+    `?dt_summarize`
+
+##### Other dplyr functions
+
+  - `dt_bind_rows()` & `dt_bind_cols()`
+  - `dt_count()`
+  - `dt_distinct()`
+  - `dt_pull()`
+  - `dt_rename()`, `dt_rename_if()`, `dt_rename_at()`, &
+    `dt_rename_all()`
+  - `dt_slice()`
+  - `dt_top_n()`
+  - `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`, &
+    `dt_full_join()`
+
+#### tidyr
+
+  - `dt_pivot_longer()` & `dt_pivot_wider()`
+  - `dt_drop_na()`
+  - `dt_fill()`
+
+#### purrr
+
+  - `dt_map()`, `dt_map2()`, `dt_map_*()` variants, & `dt_map2_*()`
+    variants
+
 ## General syntax
 
-The code chunk below shows the `gdt` syntax:
+The code chunk below shows the `tidydt` syntax:
 
 ``` r
 library(tidydt) # Loads data.table and %>%
