@@ -2,10 +2,16 @@
 % Please edit documentation in R/rename_variants.R
 \name{dt_rename_all}
 \alias{dt_rename_all}
+\alias{dt_rename_at}
+\alias{dt_rename_if}
 \title{Rename a selection of variables}
 \usage{
 dt_rename_all(.data, .fun, ...)
 dt_rename_at(.data, .vars, .fun, ...)
+dt_rename_if(.data, .predicate, .fun, ...)
+
+dt_rename_at(.data, .vars, .fun, ...)
+
 dt_rename_if(.data, .predicate, .fun, ...)
 }
 \arguments{
@@ -15,13 +21,23 @@ dt_rename_if(.data, .predicate, .fun, ...)
 
 \item{...}{Other arguments for the passed function}
 
-\item{.predicate}{Predicate to specify columns for \code{dt_rename_if()}}
-
 \item{.vars}{\code{list()} of variables for \code{dt_rename_at()} to use}
+
+\item{.predicate}{Predicate to specify columns for \code{dt_rename_if()}}
 }
 \value{
 
 }
 \description{
 These scoped variants of `rename()`` operate on a selection of variables
+}
+\examples{
+
+example_dt <- data.table(x = 1, y = 2, double_x = 2, double_y = 4)
+
+example_dt \%>\% dt_rename_all(str_replace, "x", "stuff")
+
+example_dt \%>\% dt_rename_at(list(x, double_x), str_replace, "x", "stuff")
+
+example_dt \%>\% dt_rename_if(is.double, function(x) str_replace(x, "x", "stuff"))
 }
