@@ -20,9 +20,10 @@
 #' @export
 #'
 #' @examples
+#'
 #' example_dt <- data.table(x = 1, y = 2, double_x = 2, double_y = 4)
 #'
-#' example_dt %>% dt_rename_all(str_replace, "x", "stuff)
+#' example_dt %>% dt_rename_all(str_replace, "x", "stuff")
 #'
 #' example_dt %>% dt_rename_at(list(x, double_x), str_replace, "x", "stuff")
 #'
@@ -42,7 +43,7 @@ dt_rename_all <- function(.data, .fun, ...) {
 }
 
 #' @export
-#' @inherit dt_rename_all
+#' @rdname dt_rename_all
 dt_rename_at <- function(.data, .vars, .fun, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
@@ -62,7 +63,7 @@ dt_rename_at <- function(.data, .vars, .fun, ...) {
 }
 
 #' @export
-#' @inherit dt_rename_all
+#' @rdname dt_rename_all
 dt_rename_if <- function(.data, .predicate, .fun, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
