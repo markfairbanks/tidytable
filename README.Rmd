@@ -53,6 +53,7 @@ devtools::install_github("markfairbanks/tidydt")
 ##### Other dplyr functions
 
 * `dt_bind_rows()` & `dt_bind_cols()`
+* `dt_case_when()`: See `?dt_case_when()` for syntax (slightly different than `dplyr::case_when()`)
 * `dt_count()`
 * `dt_distinct()`
 * `dt_pull()`
@@ -95,7 +96,7 @@ example_dt %>%
             new_y = y)
 ```
 
-Group by calls are done from inside `dt_summarize()` or any function that has group by functionality.
+Group by calls are done from inside any function that has group by functionality (e.g. `dt_summarize()` & `dt_mutate()`) 
 
 A single bare column can be passed with `by = z`. Multiple columns can be passed with `by = list(y, z)`.
 
