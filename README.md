@@ -31,8 +31,6 @@ devtools::install_github("markfairbanks/tidydt")
   - `as_dt()`: Safely operate on data.tables/convert data.frames to
     data.tables
   - `%notin%`
-  - `dt()`: Pipeable `data.table` call. [See example
-    here](https://github.com/mtfairbanks/gdt#dt-helper)
 
 ### dplyr
 
