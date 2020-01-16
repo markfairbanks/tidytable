@@ -11,7 +11,7 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 
 The goal of `tidydt` is to be a tidy interface to `data.table`.
 
-`tidydt` is `rlang` compatible. [See example
+`tidydt` is `rlang` compatible. [See examples
 here](https://github.com/markfairbanks/tidydt#rlang-compatibility)
 
 ## Installation
@@ -63,10 +63,10 @@ devtools::install_github("markfairbanks/tidydt")
 
 ### tidyr
 
-  - `dt_pivot_longer()` & `dt_pivot_wider()`
   - `dt_drop_na()`
-  - `dt_replace_na()`
   - `dt_fill()`
+  - `dt_pivot_longer()` & `dt_pivot_wider()`
+  - `dt_replace_na()`
   - `dt_group_nest()` & `dt_unnest()`
 
 ### purrr
@@ -100,7 +100,7 @@ example_dt %>%
 ```
 
 Group by calls are done from inside `dt_summarize()` or any function
-that has by group functionality.
+that has group by functionality.
 
 A single bare column can be passed with `by = z`. Multiple columns can
 be passed with `by = list(y,
@@ -110,13 +110,14 @@ z)`.
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt %>%
-  dt_summarize(avg_x = mean(x), by = z)
+  dt_summarize(avg_x = mean(x),
+               by = z)
 #>    z avg_x
 #> 1: a   1.5
 #> 2: b   3.0
 ```
 
-#### `rlang` compatibility
+## `rlang` compatibility
 
 `rlang` quoting/unquoting can be used to write custom functions with
 `tidydt` functions.
@@ -167,10 +168,11 @@ example_df %>%
 #> 2: b b 8.5
 ```
 
-#### `dt()` helper
+### `dt()` helper
 
-The `dt()` function makes `data.table` syntax
-pipeable:
+The `dt()` function makes regular `data.table` syntax pipeable, so you
+can easily mix `tidydt` syntax with `data.table`
+syntax:
 
 ``` r
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
