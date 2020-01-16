@@ -55,9 +55,10 @@ dt_filter <- function(.data, ...) {
 
   dots <- enexprs(...)
 
-  eval_tidy(expr(
-    .data[Reduce(f = '&', list(!!!dots))]
-  ))
+  for (dot in dots) {
+    .data <- eval_tidy(expr(.data[!!dot]))
+  }
+  .data
 }
 
 #' @export
