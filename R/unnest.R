@@ -19,34 +19,42 @@ dt_unnest <- function(.data, col, ...) {
   col <- enexpr(col)
   dots <- enexprs(...)
 
-  .data <- .data %>%
-    as_dt() %>%
-    dt_mutate(.count = dt_map(!!col, get_length))
+  if (length(dots) > 0) {
+    .data <- .data %>%
+      as_dt() %>%
+      dt_mutate(.count = dt_map(!!col, documget_length))
 
-  result_list <- dt_map(dots,
-                        function(dot) {
-                          data.table(.unnamed_col = dt_map2(dt_pull(.data, !!dot),
-                                                            dt_pull(.data, .count),
-                                                            function(.x, .y) rep(.x, .y)) %>%
-                                       unname() %>%
-                                       unlist())
-                        })
+    result_list <- dt_map(
+      dots,
+      function(dot) {
+        data.table(.unnamed_col = dt_map2(dt_pull(.data, !!dot),
+                                          dt_pull(.data, .count),
+                                          function(.x, .y) rep(.x, .y)) %>%
+                     unname() %>%
+                     unlist())})
 
-  keep_df <- do.call(cbind, result_list)
+    keep_df <- do.call(cbind, result_list)
 
-  names(keep_df) <- as.character(dots)
+    names(keep_df) <- as.character(dots)
 
-  unnest_list <- .data %>%
-    dt_pull(!!col)
+    unnest_list <- .data %>%
+      dt_pull(!!col)
 
-  if ("data.frame" %in% class(unnest_list[[1]])) {
-    unnest_list <- rbindlist(unnest_list)
+    if ("data.frame" %in% class(unnest_list[[1]])) {
+      unnest_list <- rbindlist(unnest_list)
 
-    return(cbind(keep_df, unnest_list))
+      return(cbind(keep_df, unnest_list))
+    } else {
+      keep_df[[as.character(col)]] <- unlist(unnest_list)
+
+      return(keep_df)
+    }
   } else {
-    keep_df[[as.character(col)]] <- unlist(unnest_list)
+    unnest_df <- .data %>%
+      dt_pull(!!col) %>%
+      rbindlist()
 
-    return(keep_df)
+    return(unnest_df)
   }
 }
 
