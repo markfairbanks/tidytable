@@ -109,10 +109,11 @@ example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt %>%
   dt_summarize(avg_x = mean(x),
+               count = .N,
                by = z)
-#>    z avg_x
-#> 1: a   1.5
-#> 2: b   3.0
+#>    z avg_x count
+#> 1: a   1.5     2
+#> 2: b   3.0     1
 ```
 
 ## `rlang` compatibility
