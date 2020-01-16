@@ -24,7 +24,7 @@
 #' example_dt %>%
 #'   dt_bind_cols(another_dt)
 dt_bind_rows <- function(.data, ...) {
-  dots <- enlist_dots(...)
+  dots <- enexprs(...)
   dots <- dt_map(dots, eval)
   dots <- append(list(.data), dots)
 
@@ -40,7 +40,7 @@ dt_bind_rows <- function(.data, ...) {
 #' @export
 #' @inherit dt_bind_rows
 dt_bind_cols <- function(.data, ...) {
-  dots <- enlist_dots(...)
+  dots <- enexprs(...)
   dots <- dt_map(dots, eval)
   dots <- append(list(.data), dots)
 
