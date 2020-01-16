@@ -151,8 +151,6 @@ example_df %>%
   find_mean(grouping_cols = list(y, z), col = x)
 ```
 
-
-
 ### `dt()` helper
 
 The `dt()` function makes regular `data.table` syntax pipeable, so you can easily mix `tidydt` syntax with `data.table` syntax:

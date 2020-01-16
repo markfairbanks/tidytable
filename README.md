@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidydt v0.2.1 <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
+# tidydt v0.2.0 <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
 
 <!-- badges: start -->
 
