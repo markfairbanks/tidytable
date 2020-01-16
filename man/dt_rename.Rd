@@ -20,7 +20,7 @@ Rename variables from a data.table.
 \examples{
 dt <- data.table(x = c(1,2,3), y = c(4,5,6))
 dt \%>\%
-  rename(new_x = x,
-         new_y = y)
+  dt_rename(new_x = x,
+            new_y = y)
 
 }
