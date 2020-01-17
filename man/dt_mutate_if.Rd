@@ -38,4 +38,7 @@ example_dt \%>\%
 
 example_dt \%>\%
   dt_mutate_at(list(x, y), function(.x) .x * 2)
+
+example_dt \%>\%
+  dt_mutate_at(list(x, y), list(new = function(.x) .x * 2))
 }
