@@ -73,7 +73,9 @@ dt_mutate_at <- function(.data, .vars, .fun, ...) {
     user_function <- .fun[[1]]
 
     for (i in seq_along(new_names)) {
-      .data[, new_names[[i]] := user_function(.data[[.cols[i]]])][]
+      new <- new_names[i]
+      old <- .cols[i]
+      .data[, (new) := user_function(.data[[old]])][]
     }
     .data
   }
