@@ -27,10 +27,10 @@ test_df <- data.table(a = 1:10,
 test_df \%>\%
   as_dt() \%>\%
   dt_mutate(x = dt_case(b < 13, 3,
-                             a > 4, 2,
-                             default = 10))
+                        a > 4, 2,
+                        default = 10))
 test_df \%>\%
   as_dt() \%>\%
   dt_mutate(x = dt_case(c == "a","a",
-                             default = d))
+                        default = d))
 }
