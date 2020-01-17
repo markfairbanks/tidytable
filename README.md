@@ -47,8 +47,8 @@ devtools::install_github("markfairbanks/tidydt")
 ##### Other dplyr functions
 
   - `dt_bind_rows()` & `dt_bind_cols()`
-  - `dt_case_when()`: See `?dt_case_when()` for syntax (slightly
-    different than `dplyr::case_when()`)
+  - `dt_case()`: Similar to `dplyr::case_when()`. See `?dt_case()` for
+    syntax
   - `dt_count()`
   - `dt_distinct()`
   - `dt_pull()`
