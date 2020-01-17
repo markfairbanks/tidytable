@@ -50,7 +50,7 @@ filldown <- function(.data, ..., by = NULL) {
   by <- enexpr(by)
 
   for (dot in dots) {
-    dot_type <- class('$'(.data, !!dot))
+    dot_type <- eval_tidy(expr(class('$'(.data, !!dot))))
 
     if (dot_type %in% c("integer", "double", "numeric")) {
       .data %>%
@@ -77,7 +77,7 @@ fillup <- function(.data, ..., by = NULL) {
   by <- enexpr(by)
 
   for (dot in dots) {
-    dot_type <- class('$'(.data, !!dot))
+    dot_type <- eval_tidy(expr(class('$'(.data, !!dot))))
 
     if (dot_type %in% c("integer", "double", "numeric")) {
       .data %>%
