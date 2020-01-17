@@ -64,7 +64,8 @@ devtools::install_github("markfairbanks/tidydt")
 ### tidyr
 
   - `dt_drop_na()`
-  - `dt_fill()`
+  - `dt_fill()`: Works on character/factor/logical types
+    (`data.table::nafill()` does not)
   - `dt_pivot_longer()` & `dt_pivot_wider()`
   - `dt_replace_na()`
   - `dt_group_nest()` & `dt_unnest()`
@@ -189,4 +190,38 @@ example_dt %>%
 #>    z avg_x
 #> 1: a   1.5
 #> 2: b   3.0
+```
+
+### Speed Comparisons
+
+Below are speed comparisons of various functions. More functions will
+get added to the speed comps over time.
+
+A few notes:
+
+  - `setDTthreads(1)` was used to ensure a fair comparison to the
+    `tidyverse`.
+  - `copy(dt)` was used when testing `dt_mutate()` to ensure a fair
+    comparison to `dplyr::mutate()`.
+  - `dt_fill()` & `tidyr::fill()` both work with
+    character/factor/logical columns, whereas `data.table::nafill()`
+    does not. Testing only included numeric columns due to this
+    constraint.
+  - Currently `data.table` doesn’t have its own `case_when()`
+    translation, so a multiple nested `fifelse()` was used.
+  - All tests can be found in the source code of the README.
+
+<!-- end list -->
+
+``` r
+all_marks
+#> # A tibble: 6 x 5
+#>   function_tested tidyverse tidydt   data.table tidydt_vs_tidyverse
+#>   <chr>           <chr>     <chr>    <chr>      <chr>              
+#> 1 arrange         5780ms    579.92ms 599.66ms   10.0%              
+#> 2 case_when       1200ms    399.5ms  402.8ms    33.3%              
+#> 3 fill            972ms     616ms    430ms      63.4%              
+#> 4 filter          218ms     200ms    189ms      91.7%              
+#> 5 mutate          41.2ms    362.3ms  358.7ms    879.4%             
+#> 6 summarize       452ms     227ms    223ms      50.2%
 ```
