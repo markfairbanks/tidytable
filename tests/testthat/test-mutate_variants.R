@@ -25,6 +25,16 @@ test_that("mutate_at() works for range selection", {
   expect_equal(df$y, c(3,3,3))
 })
 
+test_that("mutate_at() works with newly named columns", {
+  df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
+  df <- df %>%
+    dt_mutate_at(c(x:y), list(new = function(.x) .x + 1))
+
+  expect_named(df, c("x","y","z","x_new","y_new"))
+  expect_equal(df$x_new, c(2,2,2))
+  expect_equal(df$y_new, c(3,3,3))
+})
+
 test_that("mutate_all() works for all variables", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2))
   df <- df %>%
