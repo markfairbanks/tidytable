@@ -152,7 +152,7 @@ example_df %>%
   find_mean(grouping_cols = list(y, z), col = x)
 ```
 
-### `dt()` helper
+## `dt()` helper
 
 The `dt()` function makes regular `data.table` syntax pipeable, so you can easily mix `tidydt` syntax with `data.table` syntax:
 
@@ -171,7 +171,7 @@ example_dt %>%
 
 ### Speed Comparisons
 
-Below are speed comparisons of various functions. More functions will get added to the speed comps over time.
+Below are some speed comparisons of various functions. More functions will get added to the speed comps over time.
 
 A few notes:
 
@@ -180,10 +180,13 @@ A few notes:
 * `dt_fill()` & `tidyr::fill()` both work with character/factor/logical columns, whereas `data.table::nafill()` does not. Testing only included numeric columns due to this constraint.
 * Currently `data.table` doesn't have its own `case_when()` translation, so a multiple nested `fifelse()` was used.
 * All tests can be found in the source code of the README.
+* Lastly I'd like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.
 
 ```{r echo = FALSE}
 pacman::p_load(tidydt, tidyverse)
 setDTthreads(1)
+
+iters <- 15
 
 set.seed(123)
 data_size <- 10000000
@@ -203,7 +206,7 @@ mutate_marks <- bench::mark(
   tidydt = dt_mutate(copy(test_dt), double_a = a * 2, a_plus_b = a + b),
   data.table = copy(test_dt)[, ':='(double_a = a * 2, a_plus_b = a + b)],
   check = FALSE,
-  iterations = 30)
+  iterations = iters)
 
 inv_gc(); inv_gc();
 
@@ -221,7 +224,7 @@ filter_marks <- bench::mark(
   tidydt = dt_filter(test_dt, a <= 7 & c == "a"),
   data.table = test_dt[a <= 7 & c == "a"],
   check = FALSE,
-  iterations = 30)
+  iterations = iters)
 
 inv_gc(); inv_gc();
 
@@ -239,7 +242,7 @@ arrange_marks <- bench::mark(
   tidydt = dt_arrange(test_dt, c, a),
   data.table = test_dt[order(c, a)],
   check = FALSE,
-  iterations = 30)
+  iterations = iters)
 
 inv_gc(); inv_gc();
 
@@ -257,7 +260,7 @@ summarize_marks <- bench::mark(
   tidydt = dt_summarize(test_dt, avg_a = mean(a), by = c),
   data.table = test_dt[, list(avg_a = mean(a)), by = c],
   check = FALSE,
-  iterations = 30)
+  iterations = iters)
 
 inv_gc(); inv_gc();
 
@@ -288,7 +291,7 @@ fill_marks <- bench::mark(
                                      y = nafill(y, type = "locf")),
                               by = id],
   check = FALSE,
-  iterations = 30)
+  iterations = iters)
 
 inv_gc(); inv_gc();
 
@@ -322,7 +325,7 @@ case_marks <- bench::mark(
                                                   fifelse(x >= median_x, "high",
                                                           fifelse(is.na(x), "unknown", "other"))))],
   check = FALSE,
-  iterations = 30)
+  iterations = iters)
 
 inv_gc(); inv_gc();
 

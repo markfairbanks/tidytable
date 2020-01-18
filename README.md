@@ -170,7 +170,7 @@ example_df %>%
 #> 2: b b 8.5
 ```
 
-### `dt()` helper
+## `dt()` helper
 
 The `dt()` function makes regular `data.table` syntax pipeable, so you
 can easily mix `tidydt` syntax with `data.table`
@@ -194,8 +194,8 @@ example_dt %>%
 
 ### Speed Comparisons
 
-Below are speed comparisons of various functions. More functions will
-get added to the speed comps over time.
+Below are some speed comparisons of various functions. More functions
+will get added to the speed comps over time.
 
 A few notes:
 
@@ -210,6 +210,9 @@ A few notes:
   - Currently `data.table` doesn’t have its own `case_when()`
     translation, so a multiple nested `fifelse()` was used.
   - All tests can be found in the source code of the README.
+  - Lastly I’d like to mention that these tests were not rigorously
+    created to cover all angles equally. They are just meant to be used
+    as general insight into the performance of these packages.
 
 <!-- end list -->
 
@@ -218,10 +221,10 @@ all_marks
 #> # A tibble: 6 x 5
 #>   function_tested tidyverse tidydt   data.table tidydt_vs_tidyverse
 #>   <chr>           <chr>     <chr>    <chr>      <chr>              
-#> 1 arrange         5780ms    579.92ms 599.66ms   10.0%              
-#> 2 case_when       1200ms    399.5ms  402.8ms    33.3%              
-#> 3 fill            972ms     616ms    430ms      63.4%              
-#> 4 filter          218ms     200ms    189ms      91.7%              
-#> 5 mutate          41.2ms    362.3ms  358.7ms    879.4%             
-#> 6 summarize       452ms     227ms    223ms      50.2%
+#> 1 arrange         6190ms    689.31ms 677.88ms   11.1%              
+#> 2 case_when       1140ms    375.21ms 442.02ms   32.9%              
+#> 3 fill            892ms     620ms    480ms      69.5%              
+#> 4 filter          220ms     188ms    188ms      85.5%              
+#> 5 mutate          41ms      208ms    365ms      507.3%             
+#> 6 summarize       422ms     221ms    215ms      52.4%
 ```
