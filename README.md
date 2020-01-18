@@ -218,13 +218,15 @@ A few notes:
 
 ``` r
 all_marks
-#> # A tibble: 6 x 5
+#> # A tibble: 8 x 5
 #>   function_tested tidyverse tidydt   data.table tidydt_vs_tidyverse
 #>   <chr>           <chr>     <chr>    <chr>      <chr>              
-#> 1 arrange         6190ms    689.31ms 677.88ms   11.1%              
-#> 2 case_when       1140ms    375.21ms 442.02ms   32.9%              
-#> 3 fill            892ms     620ms    480ms      69.5%              
-#> 4 filter          220ms     188ms    188ms      85.5%              
-#> 5 mutate          41ms      208ms    365ms      507.3%             
-#> 6 summarize       422ms     221ms    215ms      52.4%
+#> 1 arrange         2720ms    319.24ms 322.45ms   11.7%              
+#> 2 case_when       1240ms    389.32ms 467.29ms   31.4%              
+#> 3 fill            902ms     591ms    386ms      65.5%              
+#> 4 filter          222ms     190ms    185ms      85.6%              
+#> 5 mutate          39.1ms    212.8ms  169.2ms    544.2%             
+#> 6 pivot_longer    76.7ms    18.7ms   12.3ms     24.4%              
+#> 7 pivot_wider     1540ms    236.78ms 225.81ms   15.4%              
+#> 8 summarize       432ms     216ms    211ms      50.0%
 ```

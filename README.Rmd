@@ -186,7 +186,7 @@ A few notes:
 pacman::p_load(tidydt, tidyverse)
 setDTthreads(1)
 
-iters <- 15
+iters <- 5
 
 set.seed(123)
 data_size <- 10000000
@@ -235,24 +235,6 @@ filter_marks <- filter_marks %>%
 ```
 
 ```{r echo = FALSE}
-# arrange()
-
-arrange_marks <- bench::mark(
-  tidyverse = arrange(test_tbl, c, a),
-  tidydt = dt_arrange(test_dt, c, a),
-  data.table = test_dt[order(c, a)],
-  check = FALSE,
-  iterations = iters)
-
-inv_gc(); inv_gc();
-
-arrange_marks <- arrange_marks %>%
-  mutate(function_tested = "arrange") %>%
-  select(function_tested, expression, median, mem_alloc) %>%
-  mutate_all(~as.character(.x) %>% str_trim())
-```
-
-```{r echo = FALSE}
 # summarize()
 
 summarize_marks <- bench::mark(
@@ -266,6 +248,35 @@ inv_gc(); inv_gc();
 
 summarize_marks <- summarize_marks %>%
   mutate(function_tested = "summarize") %>%
+  select(function_tested, expression, median, mem_alloc) %>%
+  mutate_all(~as.character(.x) %>% str_trim())
+```
+
+```{r echo = FALSE}
+# arrange()
+
+remove(test_dt, test_tbl)
+inv_gc(); inv_gc();
+
+data_size <- 5000000
+test_dt <- data.table(a = sample(1:20, data_size, TRUE),
+                      b = sample(1:20, data_size, TRUE),
+                      c = sample(c("a","a","b","c","d"), data_size, TRUE),
+                      d = sample(c("a","a","b","c","d"), data_size, TRUE))
+
+test_tbl <- as_tibble(test_dt)
+
+arrange_marks <- bench::mark(
+  tidyverse = arrange(test_tbl, c, a),
+  tidydt = dt_arrange(test_dt, c, a),
+  data.table = test_dt[order(c, a)],
+  check = FALSE,
+  iterations = iters)
+
+inv_gc(); inv_gc();
+
+arrange_marks <- arrange_marks %>%
+  mutate(function_tested = "arrange") %>%
   select(function_tested, expression, median, mem_alloc) %>%
   mutate_all(~as.character(.x) %>% str_trim())
 ```
@@ -339,8 +350,55 @@ case_marks <- case_marks %>%
 remove(case_dt, case_tbl)
 inv_gc(); inv_gc();
 
+wider_tbl <- expand_grid(case = sprintf("%03d", seq(1, 5000)),
+                        year = seq(1900, 2000),
+                        name = c("x", "y", "z")) %>%
+  mutate(value = rnorm(nrow(.)))
+
+wider_dt <- as.data.table(wider_tbl)
+
+wider_marks <- bench::mark(
+  tidyverse = pivot_wider(wider_tbl, names_from = name, values_from = value),
+  tidydt = dt_pivot_wider(wider_dt, names_from = name, values_from = value),
+  data.table = data.table::dcast(wider_dt, case + year ~ name),
+  check = FALSE,
+  iterations = iters
+)
+
+wider_marks <- wider_marks %>%
+  mutate(function_tested = "pivot_wider") %>%
+  select(function_tested, expression, median, mem_alloc) %>%
+  mutate_all(~as.character(.x) %>% str_trim())
+```
+
+```{r echo = FALSE}
+longer_dt <- dt_pivot_wider(wider_dt, names_from = name, values_from = value)
+
+longer_tbl <- as_tibble(longer_dt)
+
+remove(x, wider_dt, wider_tbl)
+inv_gc(); inv_gc();
+
+longer_marks <- bench::mark(
+  tidyverse = pivot_longer(longer_tbl, cols = c(x:z)),
+  tidydt = dt_pivot_longer(longer_dt, cols = c(x:z)),
+  data.table = data.table::melt(longer_dt, measure.vars = c("x","y","z"), variable.name = "name"),
+  check = FALSE,
+  iterations = iters
+)
+
+longer_marks <- longer_marks %>%
+  mutate(function_tested = "pivot_longer") %>%
+  select(function_tested, expression, median, mem_alloc) %>%
+  mutate_all(~as.character(.x) %>% str_trim())
+```
+
+```{r echo = FALSE}
+remove(longer_dt, longer_tbl)
+inv_gc(); inv_gc();
+
 all_marks <- bind_rows(case_marks, fill_marks, filter_marks, mutate_marks, summarize_marks,
-                       arrange_marks)
+                       arrange_marks, wider_marks, longer_marks)
 
 all_marks <- all_marks %>%
   select(function_tested, expression, median) %>%
