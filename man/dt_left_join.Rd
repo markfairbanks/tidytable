@@ -2,12 +2,24 @@
 % Please edit documentation in R/join.R
 \name{dt_left_join}
 \alias{dt_left_join}
+\alias{dt_inner_join}
+\alias{dt_right_join}
+\alias{dt_full_join}
+\alias{dt_anti_join}
 \title{Join two data.tables together}
 \usage{
 dt_left_join(x, y, by = NULL, suffix = c(".x", ".y"))
 dt_inner_join(x, y, by = NULL, suffix = c(".x", ".y"))
 dt_right_join(x, y, by = NULL, suffix = c(".x", ".y"))
 dt_full_join(x, y, by = NULL, suffix = c(".x", ".y"))
+
+dt_inner_join(x, y, by = NULL, suffix = c(".x", ".y"))
+
+dt_right_join(x, y, by = NULL, suffix = c(".x", ".y"))
+
+dt_full_join(x, y, by = NULL, suffix = c(".x", ".y"))
+
+dt_anti_join(x, y, by = NULL, suffix = c(".x", ".y"))
 }
 \arguments{
 \item{x}{A data.frame or data.table}

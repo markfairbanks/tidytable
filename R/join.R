@@ -22,29 +22,89 @@
 #' band_members %>% dt_right_join(band_instruments)
 #' band_members %>% dt_full_join(band_instruments)
 dt_left_join <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
-  join_mold(x, y, by = by, suffix = suffix,
-            all_x = TRUE, all_y = FALSE)
+
+  by_x_y <- get_bys(x, y, by)
+
+  by_x <- by_x_y[[1]]
+  by_y <- by_x_y[[2]]
+
+  on_vec <- by_x
+  names(on_vec) <- by_y
+
+  y[x, on = on_vec, allow.cartesian = TRUE]
 }
 
 #' @export
-#' @inherit dt_left_join
+#' @rdname dt_left_join
 dt_inner_join <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
-  join_mold(x, y, by = by, suffix = suffix,
-            all_x = FALSE, all_y = FALSE)
+
+  by_x_y <- get_bys(x, y, by)
+
+  by_x <- by_x_y[[1]]
+  by_y <- by_x_y[[2]]
+
+  on_vec <- by_y
+  names(on_vec) <- by_x
+
+  x[y, on = on_vec, allow.cartesian = TRUE, nomatch = 0]
 }
 
 #' @export
-#' @inherit dt_left_join
+#' @rdname dt_left_join
 dt_right_join <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
-  join_mold(x, y, by = by, suffix = suffix,
-            all_x = FALSE, all_y = TRUE)
+
+  by_x_y <- get_bys(x, y, by)
+
+  by_x <- by_x_y[[1]]
+  by_y <- by_x_y[[2]]
+
+  on_vec <- by_y
+  names(on_vec) <- by_x
+
+  x[y, on = on_vec, allow.cartesian = TRUE]
 }
 
 #' @export
-#' @inherit dt_left_join
+#' @rdname dt_left_join
 dt_full_join <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
   join_mold(x, y, by = by, suffix = suffix,
             all_x = TRUE, all_y = TRUE)
+}
+
+#' @export
+#' @rdname dt_left_join
+dt_anti_join <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
+
+  by_x_y <- get_on(x, y, by)
+
+  by_x <- by_x_y[[1]]
+  by_y <- by_x_y[[2]]
+
+  on_vec <- by_y
+  names(on_vec) <- by_x
+
+  x[!y, on = on_vec, allow.cartesian = TRUE]
+}
+
+get_bys <- function(x, y, by) {
+  if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
+  if (!is.data.table(x)) x <- as.data.table(x)
+  if (!is.data.table(y)) y <- as.data.table(y)
+
+  if (is.null(by)) {
+    by_x <- by_y <- intersect(colnames(x), colnames(y))
+  } else {
+    by_x <- names(by)
+    by_y <- unname(by)
+    if (is.null(by_x)) {
+      by_x <- by_y
+    }
+  }
+
+  if (by_x %notin% colnames(x)) stop("by.x columns not in x")
+  if (by_y %notin% colnames(y)) stop("by.y columns not in y")
+
+  list(by_x, by_y)
 }
 
 join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
