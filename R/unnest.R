@@ -17,7 +17,7 @@
 #'   dt_unnest(data, c, d)
 dt_unnest_legacy <- function(.data, col, ...) {
   col <- enexpr(col)
-  dots <- enexprs(...)
+  dots <- dots_selector(.data, ...)
 
   if (length(dots) > 0) {
     .data <- .data %>%

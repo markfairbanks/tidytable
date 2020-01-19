@@ -46,7 +46,7 @@ filldown <- function(.data, ..., by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  dots <- enexprs(...)
+  dots <- dots_selector(.data, ...)
   by <- enexpr(by)
 
   for (dot in dots) {
@@ -73,7 +73,7 @@ fillup <- function(.data, ..., by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  dots <- enexprs(...)
+  dots <- dots_selector(.data, ...)
   by <- enexpr(by)
 
   for (dot in dots) {
