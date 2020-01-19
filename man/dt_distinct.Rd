@@ -4,10 +4,12 @@
 \alias{dt_distinct}
 \title{Select distinct/unique rows}
 \usage{
-dt_distinct(.data)
+dt_distinct(.data, ...)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
+
+\item{...}{Columns to select before determining uniqueness. If omitted, will use all columns}
 }
 \value{
 A data.table

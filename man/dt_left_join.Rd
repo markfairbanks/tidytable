@@ -13,13 +13,13 @@ dt_inner_join(x, y, by = NULL, suffix = c(".x", ".y"))
 dt_right_join(x, y, by = NULL, suffix = c(".x", ".y"))
 dt_full_join(x, y, by = NULL, suffix = c(".x", ".y"))
 
-dt_inner_join(x, y, by = NULL, suffix = c(".x", ".y"))
+dt_inner_join(x, y, by = NULL)
 
-dt_right_join(x, y, by = NULL, suffix = c(".x", ".y"))
+dt_right_join(x, y, by = NULL)
 
 dt_full_join(x, y, by = NULL, suffix = c(".x", ".y"))
 
-dt_anti_join(x, y, by = NULL, suffix = c(".x", ".y"))
+dt_anti_join(x, y, by = NULL)
 }
 \arguments{
 \item{x}{A data.frame or data.table}
@@ -27,8 +27,6 @@ dt_anti_join(x, y, by = NULL, suffix = c(".x", ".y"))
 \item{y}{A data.frame or data.table}
 
 \item{by}{A character vector of variables to join by. If NULL, the default, the join will do a natural join, using all variables with common names across the two tables.}
-
-\item{suffix}{}
 }
 \value{
 A data.table
