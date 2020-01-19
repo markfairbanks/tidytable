@@ -11,7 +11,6 @@
 #' @param x A data.frame or data.table
 #' @param y A data.frame or data.table
 #' @param by A character vector of variables to join by. If NULL, the default, the join will do a natural join, using all variables with common names across the two tables.
-#' @param suffix
 #'
 #' @return A data.table
 #' @export
@@ -21,7 +20,7 @@
 #' band_members %>% dt_inner_join(band_instruments)
 #' band_members %>% dt_right_join(band_instruments)
 #' band_members %>% dt_full_join(band_instruments)
-dt_left_join <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
+dt_left_join <- function(x, y, by = NULL) {
 
   by_x_y <- get_bys(x, y, by)
 
@@ -36,7 +35,7 @@ dt_left_join <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
 
 #' @export
 #' @rdname dt_left_join
-dt_inner_join <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
+dt_inner_join <- function(x, y, by = NULL) {
 
   by_x_y <- get_bys(x, y, by)
 
@@ -51,7 +50,7 @@ dt_inner_join <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
 
 #' @export
 #' @rdname dt_left_join
-dt_right_join <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
+dt_right_join <- function(x, y, by = NULL) {
 
   by_x_y <- get_bys(x, y, by)
 
@@ -73,7 +72,7 @@ dt_full_join <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
 
 #' @export
 #' @rdname dt_left_join
-dt_anti_join <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
+dt_anti_join <- function(x, y, by = NULL) {
 
   by_x_y <- get_on(x, y, by)
 
