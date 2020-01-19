@@ -32,5 +32,8 @@ test_df <- data.table(x = c(NA, NA, NA, 4:10),
                       z = c(rep("a", 8), rep("b", 2)))
 
 test_df \%>\%
+  dt_fill(x, y, by = z)
+
+test_df \%>\%
   dt_fill(x, y, by = z, .direction = "downup")
 }
