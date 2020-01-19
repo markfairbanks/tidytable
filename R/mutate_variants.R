@@ -7,6 +7,7 @@
 #' * `dt_mutate_if()`
 #' * `dt_mutate_at()`
 #' * `dt_mutate_all()`
+#' * `dt_mutate_across()`
 #'
 #' @import data.table
 #' @md
@@ -52,7 +53,7 @@ dt_mutate_if <- function(.data, .predicate, .fun, ...) {
 }
 
 #' @export
-#' @inherit dt_mutate_if
+#' @rdname dt_mutate_if
 dt_mutate_at <- function(.data, .vars, .fun, ...) {
 
   .cols <- enexpr(.vars)
@@ -82,7 +83,37 @@ dt_mutate_at <- function(.data, .vars, .fun, ...) {
 }
 
 #' @export
-#' @inherit dt_mutate_if
+#' @rdname dt_mutate_if
+dt_mutate_across <- function(.data, .cols, .fun, ...) {
+
+  .cols <- enexpr(.cols)
+  .cols <- column_selector(.data, !!.cols)
+
+  if (!is.list(.fun)) {
+    if (length(.cols) > 0) {
+      .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols][]
+    } else {
+      .data
+    }
+  } else {
+
+    if (!is_named(.fun)) abort("functions passed in a list must be named")
+    if (length(.fun) > 1) abort("only one function can be passed in dt_mutate_at()")
+
+    new_names <- paste0(.cols, "_", names(.fun))
+    user_function <- .fun[[1]]
+
+    for (i in seq_along(new_names)) {
+      new <- new_names[i]
+      old <- .cols[i]
+      .data[, (new) := user_function(.data[[old]])][]
+    }
+    .data
+  }
+}
+
+#' @export
+#' @rdname dt_mutate_if
 dt_mutate_all <- function(.data, .fun, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
