@@ -29,4 +29,7 @@ test_df <- data.table(a = 1:10,
 
 test_df \%>\%
   dt_group_nest(c, d)
+
+test_df \%>\%
+  dt_group_nest(is.character)
 }

@@ -19,7 +19,7 @@
 #'   dt_distinct()
 #'
 #' example_dt %>%
-#'   distinct(z)
+#'   dt_distinct(z)
 dt_distinct <- function(.data, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")

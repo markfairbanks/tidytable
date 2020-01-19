@@ -20,6 +20,9 @@
 #'
 #' test_df %>%
 #'   dt_group_nest(c, d)
+#'
+#' test_df %>%
+#'   dt_group_nest(is.character)
 dt_group_nest <- function(.data, ..., .key = "data") {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)

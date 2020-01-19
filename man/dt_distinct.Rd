@@ -26,5 +26,5 @@ example_dt \%>\%
   dt_distinct()
 
 example_dt \%>\%
-  distinct(z)
+  dt_distinct(z)
 }
