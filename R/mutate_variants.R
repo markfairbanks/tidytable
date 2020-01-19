@@ -29,13 +29,13 @@
 #' example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 #'
 #' example_dt %>%
-#'   dt_mutate_if(is.double, as.character)
+#'   dt_mutate_across(is.double, as.character)
 #'
 #' example_dt %>%
-#'   dt_mutate_at(list(x, y), function(.x) .x * 2)
+#'   dt_mutate_across(c(x, y), function(.x) .x * 2)
 #'
 #' example_dt %>%
-#'   dt_mutate_at(list(x, y), list(new = function(.x) .x * 2))
+#'   dt_mutate_across(c(x, y), list(new = function(.x) .x * 2))
 dt_mutate_if <- function(.data, .predicate, .fun, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
