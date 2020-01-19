@@ -30,7 +30,13 @@ dt_slice <- function(.data, rows = 1:5, by = NULL) {
   rows <- enexpr(rows)
   by <- enexpr(by)
 
-  eval_tidy(expr(
-    .data[, .SD[!!rows], !!by]
-  ))
+  if (is.null(by)) {
+    eval_tidy(expr(
+      .data[!!rows]
+    ))
+  } else {
+    eval_tidy(expr(
+      .data[, .SD[!!rows], !!by]
+    ))
+  }
 }
