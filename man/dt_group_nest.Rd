@@ -18,6 +18,8 @@ dt_group_nest(.data, ..., .key = "data")
 }
 \description{
 Nest data.tables by group
+
+Supports enhanced selection
 }
 \examples{
 test_df <- data.table(a = 1:10,

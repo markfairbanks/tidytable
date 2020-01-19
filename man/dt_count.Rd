@@ -16,6 +16,8 @@ A data.table
 }
 \description{
 Returns row counts of the dataset. If bare column names are provided, \code{dt_count()} returns counts by group.
+
+Supports enhanced selection
 }
 \examples{
 example_df <- data.table(x = 1:3, y = 4:6, z = c("a", "a", "b"))
@@ -25,4 +27,7 @@ example_df \%>\%
 
 example_df \%>\%
   dt_count()
+
+example_df \%>\%
+  dt_count(is.character)
 }

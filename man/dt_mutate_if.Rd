@@ -7,8 +7,7 @@
 \alias{dt_mutate_all}
 \title{Mutate}
 \usage{
-dt_mutate_if(.data, .predicate, .fun, ...)
-dt_mutate_at(.data, .vars, .fun, ...)
+dt_mutate_across(.data, .cols, .fun, ...)
 dt_mutate_all(.data, .fun, ...)
 
 dt_mutate_at(.data, .vars, .fun, ...)
@@ -20,22 +19,20 @@ dt_mutate_all(.data, .fun, ...)
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{.predicate}{Predicate to specify columns for \code{dt_mutate_if()}}
-
 \item{.fun}{Function to pass}
 
 \item{...}{Other arguments for the passed function}
 
-\item{.vars}{vector \code{c()} of bare column names for \code{dt_rename_at()} to use}
+\item{.cols}{vector \code{c()} of bare column names for \code{dt_mutate_across()} to use}
 }
 \value{
 A data.table
 }
 \description{
-Edit existing columns. There are three variants:
+Edit existing columns. Supports enhanced selection.
+
+There are two variants:
 \itemize{
-\item \code{dt_mutate_if()}
-\item \code{dt_mutate_at()}
 \item \code{dt_mutate_all()}
 \item \code{dt_mutate_across()}
 }

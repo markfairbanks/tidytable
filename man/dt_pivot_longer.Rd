@@ -30,6 +30,8 @@ dt_pivot_longer(
 \code{dt_pivot_wider()} "widens" data, increasing the number of columns and
 decreasing the number of rows. The inverse transformation is
 \code{dt_pivot_longer()}. Syntax based on the \code{tidyr} equivalents.
+
+Supports enhanced selection
 }
 \examples{
 

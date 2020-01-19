@@ -28,7 +28,7 @@ dt_select(.data, ...)
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{...}{Values passed to \code{gdt} functions}
+\item{...}{Values passed to \code{tidydt} functions}
 
 \item{by}{\code{list()} of bare column names to group by}
 }
@@ -36,7 +36,7 @@ dt_select(.data, ...)
 A data.table
 }
 \description{
-The core dplyr verbs can be used in \code{gdt}:
+The core dplyr verbs can be used in \code{tidydt}:
 \itemize{
 \item \code{dt_mutate()}
 \item \code{dt_select()}
@@ -44,6 +44,8 @@ The core dplyr verbs can be used in \code{gdt}:
 \item \code{dt_filter()}
 \item \code{dt_summarize()}
 }
+
+\code{dt_select()} supports enhanced selection
 }
 \examples{
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a","a","b"), a = c("a","a","b"))
