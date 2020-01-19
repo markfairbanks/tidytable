@@ -47,8 +47,8 @@ devtools::install_github("markfairbanks/tidydt")
 
 * `dt_arrange()`
 * `dt_filter()`
-* `dt_mutate()`, `dt_mutate_if()`, `dt_mutate_at()`, & `dt_mutate_all()`
-* `dt_select()`, `dt_select_if()`
+* `dt_mutate()`: `_if()`/`_at()`/`_all()`
+* `dt_select()`: `_if()`
 * `dt_summarize()`: Group by specifications called inside. See `?dt_summarize`
 
 ##### Other dplyr functions
@@ -58,10 +58,10 @@ devtools::install_github("markfairbanks/tidydt")
 * `dt_count()`
 * `dt_distinct()`
 * `dt_pull()`
-* `dt_rename()`, `dt_rename_if()`, `dt_rename_at()`, & `dt_rename_all()`
+* `dt_rename()`: `_if()`/`_at()`/`_all()`
 * `dt_slice()`
 * `dt_top_n()`
-* Joins: `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`, & `dt_full_join()`
+* Joins: `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`, `dt_full_join()`, & `dt_anti_join()`
 * Select helpers: `dt_starts_with()`, `dt_ends_with()`, `dt_contains()`, `dt_everything()`
 
 ### tidyr
@@ -70,7 +70,7 @@ devtools::install_github("markfairbanks/tidydt")
 * `dt_fill()`: Works on character/factor/logical types (`data.table::nafill()` does not)
 * `dt_pivot_longer()` & `dt_pivot_wider()`
 * `dt_replace_na()`
-* `dt_group_nest()` & `dt_unnest()`
+* `dt_group_nest()` & `dt_unnest_legacy()`
 
 ### purrr
 * `dt_map()`, `dt_map2()`, `dt_map_*()` variants, & `dt_map2_*()` variants
@@ -182,7 +182,7 @@ A few notes:
 * All tests can be found in the source code of the README.
 * Lastly I'd like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.
 
-```{r echo = FALSE}
+```{r benchmark_setup, echo=FALSE}
 pacman::p_load(tidydt, tidyverse)
 setDTthreads(1)
 
@@ -198,9 +198,7 @@ test_dt <- data.table(a = sample(1:20, data_size, TRUE),
 test_tbl <- as_tibble(test_dt)
 ```
 
-```{r echo = FALSE}
-# mutate()
-
+```{r mutate, echo=FALSE}
 mutate_marks <- bench::mark(
   tidyverse = mutate(test_tbl, double_a = a * 2, a_plus_b = a + b),
   tidydt = dt_mutate(copy(test_dt), double_a = a * 2, a_plus_b = a + b),
@@ -216,9 +214,7 @@ mutate_marks <- mutate_marks %>%
   mutate_all(~as.character(.x) %>% str_trim())
 ```
 
-```{r echo = FALSE}
-# filter()
-
+```{r filter, echo=FALSE}
 filter_marks <- bench::mark(
   tidyverse = filter(test_tbl, a <= 7, c == "a"),
   tidydt = dt_filter(test_dt, a <= 7 & c == "a"),
@@ -234,9 +230,7 @@ filter_marks <- filter_marks %>%
   mutate_all(~as.character(.x) %>% str_trim())
 ```
 
-```{r echo = FALSE}
-# summarize()
-
+```{r summarize, echo=FALSE}
 summarize_marks <- bench::mark(
   tidyverse = summarize(group_by(test_tbl, c), avg_a = mean(a)),
   tidydt = dt_summarize(test_dt, avg_a = mean(a), by = c),
@@ -252,13 +246,10 @@ summarize_marks <- summarize_marks %>%
   mutate_all(~as.character(.x) %>% str_trim())
 ```
 
-```{r echo = FALSE}
-# arrange()
+```{r arrange, echo=FALSE}
+remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-remove(test_dt, test_tbl)
-inv_gc(); inv_gc();
-
-data_size <- 5000000
+data_size <- 3000000
 test_dt <- data.table(a = sample(1:20, data_size, TRUE),
                       b = sample(1:20, data_size, TRUE),
                       c = sample(c("a","a","b","c","d"), data_size, TRUE),
@@ -273,17 +264,14 @@ arrange_marks <- bench::mark(
   check = FALSE,
   iterations = iters)
 
-inv_gc(); inv_gc();
-
 arrange_marks <- arrange_marks %>%
   mutate(function_tested = "arrange") %>%
   select(function_tested, expression, median, mem_alloc) %>%
   mutate_all(~as.character(.x) %>% str_trim())
 ```
 
-```{r echo = FALSE}
-remove(test_dt, test_tbl)
-inv_gc(); inv_gc();
+```{r fill, echo = FALSE}
+remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
 x <- 1:2e7
 fill_dt <- data.table(
@@ -304,17 +292,14 @@ fill_marks <- bench::mark(
   check = FALSE,
   iterations = iters)
 
-inv_gc(); inv_gc();
-
 fill_marks <- fill_marks %>%
   mutate(function_tested = "fill") %>%
   select(function_tested, expression, median, mem_alloc) %>%
   mutate_all(~as.character(.x) %>% str_trim())
 ```
 
-```{r echo = FALSE}
-remove(x, fill_dt, fill_tbl)
-inv_gc(); inv_gc();
+```{r case, echo=FALSE}
+remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
 case_dt <- data.table(x = rnorm(1e7)) %>%
   dt_mutate(median_x = median(x))
@@ -323,14 +308,14 @@ case_tbl <- as_tibble(case_dt)
 
 case_marks <- bench::mark(
   tidyverse = mutate(case_tbl,
-                 test = case_when(x < median_x ~ "low",
-                                  x >= median_x ~ "high",
-                                  is.na(x) ~ "unknown",
-                                  TRUE ~ "other")),
+                     test = case_when(x < median_x ~ "low",
+                                      x >= median_x ~ "high",
+                                      is.na(x) ~ "unknown",
+                                      TRUE ~ "other")),
   tidydt = dt_mutate(copy(case_dt),
                      test = tidydt::dt_case(x < median_x, "low",
-                                                 x >= median_x, "high",
-                                                 is.na(x), "unknown",
+                                            x >= median_x, "high",
+                                            is.na(x), "unknown",
                                             default = "other")),
   data.table = copy(case_dt)[,':='(test = fifelse(x < median_x, "low",
                                                   fifelse(x >= median_x, "high",
@@ -338,17 +323,14 @@ case_marks <- bench::mark(
   check = FALSE,
   iterations = iters)
 
-inv_gc(); inv_gc();
-
 case_marks <- case_marks %>%
   mutate(function_tested = "case_when") %>%
   select(function_tested, expression, median, mem_alloc) %>%
   mutate_all(~as.character(.x) %>% str_trim())
 ```
 
-```{r echo = FALSE}
-remove(case_dt, case_tbl)
-inv_gc(); inv_gc();
+```{r pivot_wider, echo=FALSE}
+remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
 wider_tbl <- expand_grid(case = sprintf("%03d", seq(1, 5000)),
                         year = seq(1900, 2000),
@@ -371,13 +353,12 @@ wider_marks <- wider_marks %>%
   mutate_all(~as.character(.x) %>% str_trim())
 ```
 
-```{r echo = FALSE}
+```{r pivot_longer, echo=FALSE}
 longer_dt <- dt_pivot_wider(wider_dt, names_from = name, values_from = value)
 
 longer_tbl <- as_tibble(longer_dt)
 
-remove(x, wider_dt, wider_tbl)
-inv_gc(); inv_gc();
+remove(x, wider_dt, wider_tbl); inv_gc(); inv_gc();
 
 longer_marks <- bench::mark(
   tidyverse = pivot_longer(longer_tbl, cols = c(x:z)),
@@ -393,12 +374,54 @@ longer_marks <- longer_marks %>%
   mutate_all(~as.character(.x) %>% str_trim())
 ```
 
-```{r echo = FALSE}
-remove(longer_dt, longer_tbl)
-inv_gc(); inv_gc();
+```{r left_join, echo=FALSE}
+# remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
+# 
+# data_size <- 1000000
+# left_dt <- data.table(a = sample(1:20, data_size, TRUE),
+#                       b = sample(1:20, data_size, TRUE),
+#                       c = sample(c("a","a","b","c","d"), data_size, TRUE),
+#                       d = sample(c("a","a","b","c","d"), data_size, TRUE))
+# 
+# right_dt <- data.table(c = c("a","b","c","d"),
+#                        e = c(1,2,3,4,5))
+# 
+# left_tbl <- as_tibble(left_dt)
+# right_tbl <- as_tibble(right_dt)
+# 
+# left_join_marks <- bench::mark(
+#   tidyverse = left_join(left_tbl, right_tbl, by = "c"),
+#   tidydt = dt_left_join(left_dt, right_dt, by = "c"),
+#   data.table = right_dt[left_dt, on = "c", allow.cartesian = TRUE],
+#   check = FALSE,
+#   iterations = iters)
+# 
+# left_join_marks <- left_join_marks %>%
+#   mutate(function_tested = "left_join") %>%
+#   select(function_tested, expression, median, mem_alloc) %>%
+#   mutate_all(~as.character(.x) %>% str_trim())
+```
 
-all_marks <- bind_rows(case_marks, fill_marks, filter_marks, mutate_marks, summarize_marks,
-                       arrange_marks, wider_marks, longer_marks)
+```{r inner_join, echo=FALSE}
+# inner_join_marks <- bench::mark(
+#   tidyverse = inner_join(left_tbl, right_tbl, by = "c"),
+#   tidydt = dt_inner_join(left_dt, right_dt, by = "c"),
+#   data.table = left_dt[right_dt, on = "c", allow.cartesian = TRUE, nomatch = 0],
+#   check = FALSE,
+#   iterations = iters)
+# 
+# inner_join_marks <- inner_join_marks %>%
+#   mutate(function_tested = "inner_join") %>%
+#   select(function_tested, expression, median, mem_alloc) %>%
+#   mutate_all(~as.character(.x) %>% str_trim())
+```
+
+```{r echo = FALSE}
+remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
+
+all_marks <- ls(pattern="marks$") %>%
+  lapply(get) %>%
+  bind_rows()
 
 all_marks <- all_marks %>%
   select(function_tested, expression, median) %>%

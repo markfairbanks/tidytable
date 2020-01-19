@@ -38,9 +38,8 @@ devtools::install_github("markfairbanks/tidydt")
 
   - `dt_arrange()`
   - `dt_filter()`
-  - `dt_mutate()`, `dt_mutate_if()`, `dt_mutate_at()`, &
-    `dt_mutate_all()`
-  - `dt_select()`, `dt_select_if()`
+  - `dt_mutate()`: `_if()`/`_at()`/`_all()`
+  - `dt_select()`: `_if()`
   - `dt_summarize()`: Group by specifications called inside. See
     `?dt_summarize`
 
@@ -52,12 +51,11 @@ devtools::install_github("markfairbanks/tidydt")
   - `dt_count()`
   - `dt_distinct()`
   - `dt_pull()`
-  - `dt_rename()`, `dt_rename_if()`, `dt_rename_at()`, &
-    `dt_rename_all()`
+  - `dt_rename()`: `_if()`/`_at()`/`_all()`
   - `dt_slice()`
   - `dt_top_n()`
-  - Joins: `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`, &
-    `dt_full_join()`
+  - Joins: `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`,
+    `dt_full_join()`, & `dt_anti_join()`
   - Select helpers: `dt_starts_with()`, `dt_ends_with()`,
     `dt_contains()`, `dt_everything()`
 
@@ -68,7 +66,7 @@ devtools::install_github("markfairbanks/tidydt")
     (`data.table::nafill()` does not)
   - `dt_pivot_longer()` & `dt_pivot_wider()`
   - `dt_replace_na()`
-  - `dt_group_nest()` & `dt_unnest()`
+  - `dt_group_nest()` & `dt_unnest_legacy()`
 
 ### purrr
 
@@ -221,12 +219,12 @@ all_marks
 #> # A tibble: 8 x 5
 #>   function_tested tidyverse tidydt   data.table tidydt_vs_tidyverse
 #>   <chr>           <chr>     <chr>    <chr>      <chr>              
-#> 1 arrange         2720ms    319.24ms 322.45ms   11.7%              
-#> 2 case_when       1240ms    389.32ms 467.29ms   31.4%              
-#> 3 fill            902ms     591ms    386ms      65.5%              
-#> 4 filter          222ms     190ms    185ms      85.6%              
-#> 5 mutate          39.1ms    212.8ms  169.2ms    544.2%             
-#> 6 pivot_longer    76.7ms    18.7ms   12.3ms     24.4%              
-#> 7 pivot_wider     1540ms    236.78ms 225.81ms   15.4%              
-#> 8 summarize       432ms     216ms    211ms      50.0%
+#> 1 arrange         1450ms    174.97ms 175.22ms   12.1%              
+#> 2 case_when       1210ms    339.64ms 395.87ms   28.1%              
+#> 3 fill            869ms     533ms    372ms      61.3%              
+#> 4 filter          218ms     192ms    187ms      88.1%              
+#> 5 mutate          40.9ms    207.7ms  152.7ms    507.8%             
+#> 6 pivot_longer    81.7ms    17.9ms   17.5ms     21.9%              
+#> 7 pivot_wider     1530ms    232.74ms 230.9ms    15.2%              
+#> 8 summarize       407ms     222ms    208ms      54.5%
 ```
