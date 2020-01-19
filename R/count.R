@@ -3,6 +3,8 @@
 #' @description
 #' Returns row counts of the dataset. If bare column names are provided, `dt_count()` returns counts by group.
 #'
+#' Supports enhanced selection
+#'
 #' @param .data A data.frame or data.table
 #' @param ...
 #'
@@ -18,13 +20,23 @@
 #'
 #' example_df %>%
 #'   dt_count()
+#'
+#' example_df %>%
+#'   dt_count(is.character)
 dt_count <- function(.data, ...) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   dots <- enexprs(...)
 
-  eval_tidy(expr(
-    .data[, .N, by = list(!!!dots)]
-  ))
+  if (length(dots) == 0) {
+    .data[, .N]
+  } else {
+    by_vec <- dots_selector(.data, ...) %>%
+      as.character()
+
+    eval_tidy(expr(
+      .data[, .N, by = by_vec]
+    ))
+  }
 }

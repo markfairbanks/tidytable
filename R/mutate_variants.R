@@ -2,10 +2,10 @@
 #'
 #' @description
 #'
-#' Edit existing columns. There are three variants:
+#' Edit existing columns. Supports enhanced selection.
 #'
-#' * `dt_mutate_if()`
-#' * `dt_mutate_at()`
+#' There are two variants:
+#'
 #' * `dt_mutate_all()`
 #' * `dt_mutate_across()`
 #'
@@ -13,13 +13,11 @@
 #' @md
 #' @usage
 #'
-#' dt_mutate_if(.data, .predicate, .fun, ...)
-#' dt_mutate_at(.data, .vars, .fun, ...)
+#' dt_mutate_across(.data, .cols, .fun, ...)
 #' dt_mutate_all(.data, .fun, ...)
 #'
 #' @param .data A data.frame or data.table
-#' @param .predicate Predicate to specify columns for `dt_mutate_if()`
-#' @param .vars vector `c()` of bare column names for `dt_rename_at()` to use
+#' @param .cols vector `c()` of bare column names for `dt_mutate_across()` to use
 #' @param .fun Function to pass
 #' @param ... Other arguments for the passed function
 #'
@@ -57,7 +55,7 @@ dt_mutate_if <- function(.data, .predicate, .fun, ...) {
 dt_mutate_at <- function(.data, .vars, .fun, ...) {
 
   .cols <- enexpr(.vars)
-  .cols <- column_selector(.data, !!.cols)
+  .cols <- vec_selector(.data, !!.cols)
 
   if (!is.list(.fun)) {
     if (length(.cols) > 0) {
@@ -87,7 +85,7 @@ dt_mutate_at <- function(.data, .vars, .fun, ...) {
 dt_mutate_across <- function(.data, .cols, .fun, ...) {
 
   .cols <- enexpr(.cols)
-  .cols <- column_selector(.data, !!.cols)
+  .cols <- vec_selector(.data, !!.cols)
 
   if (!is.list(.fun)) {
     if (length(.cols) > 0) {
