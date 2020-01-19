@@ -15,14 +15,14 @@
 #' test_df %>%
 #'   dt_group_nest(c, d) %>%
 #'   dt_unnest(data, c, d)
-dt_unnest <- function(.data, col, ...) {
+dt_unnest_legacy <- function(.data, col, ...) {
   col <- enexpr(col)
   dots <- enexprs(...)
 
   if (length(dots) > 0) {
     .data <- .data %>%
       as_dt() %>%
-      dt_mutate(.count = dt_map(!!col, documget_length))
+      dt_mutate(.count = dt_map(!!col, get_length))
 
     result_list <- dt_map(
       dots,
@@ -41,15 +41,18 @@ dt_unnest <- function(.data, col, ...) {
       dt_pull(!!col)
 
     if ("data.frame" %in% class(unnest_list[[1]])) {
+      # If data.frame rbindlist() & cbind() to keep_df
       unnest_list <- rbindlist(unnest_list)
 
       return(cbind(keep_df, unnest_list))
     } else {
+      # If vec add as a new column to keep_df
       keep_df[[as.character(col)]] <- unlist(unnest_list)
 
       return(keep_df)
     }
   } else {
+    # If dots are empty, do a simple unnest
     unnest_df <- .data %>%
       dt_pull(!!col) %>%
       rbindlist()
