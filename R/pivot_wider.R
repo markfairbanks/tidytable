@@ -48,7 +48,7 @@ dt_pivot_wider <- function(.data,
   if (is.null(id_cols)) {
     id_cols <- colnames(.data)[!colnames(.data) %in% c(names_from, values_from)]
   } else {
-    id_cols <- column_selector(.data, !!id_cols)
+    id_cols <- vec_selector(.data, !!id_cols)
   }
 
   if (length(id_cols) == 0) {
