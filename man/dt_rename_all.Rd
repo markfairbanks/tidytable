@@ -3,14 +3,16 @@
 \name{dt_rename_all}
 \alias{dt_rename_all}
 \alias{dt_rename_at}
+\alias{dt_rename_across}
 \alias{dt_rename_if}
 \title{Rename a selection of variables}
 \usage{
 dt_rename_all(.data, .fun, ...)
-dt_rename_at(.data, .vars, .fun, ...)
-dt_rename_if(.data, .predicate, .fun, ...)
+dt_rename_across(.data, .predicate, .fun, ...)
 
 dt_rename_at(.data, .vars, .fun, ...)
+
+dt_rename_across(.data, .cols, .fun, ...)
 
 dt_rename_if(.data, .predicate, .fun, ...)
 }
@@ -30,6 +32,8 @@ dt_rename_if(.data, .predicate, .fun, ...)
 }
 \description{
 These scoped variants of `rename()`` operate on a selection of variables
+
+Supports enhanced selection
 }
 \examples{
 

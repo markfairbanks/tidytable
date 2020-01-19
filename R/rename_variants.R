@@ -3,10 +3,10 @@
 #' @description
 #' These scoped variants of `rename()`` operate on a selection of variables
 #'
+#' Supports enhanced selection
 #' @usage
 #' dt_rename_all(.data, .fun, ...)
-#' dt_rename_at(.data, .vars, .fun, ...)
-#' dt_rename_if(.data, .predicate, .fun, ...)
+#' dt_rename_across(.data, .predicate, .fun, ...)
 #'
 #'
 #' @param .data A data.frame or data.table
@@ -50,7 +50,28 @@ dt_rename_at <- function(.data, .vars, .fun, ...) {
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   .vars <- enexpr(.vars)
-  .vars <- column_selector(.data, !!.vars)
+  .vars <- vec_selector(.data, !!.vars)
+
+  if (length(.vars) > 0) {
+    for (old_name in .vars) {
+      new_name <- .fun(old_name, ...)
+      setnames(.data, old_name, new_name)
+    }
+    .data
+  } else {
+    .data
+  }
+}
+
+#' @export
+#' @rdname dt_rename_all
+dt_rename_across <- function(.data, .cols, .fun, ...) {
+
+  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
+
+  .vars <- enexpr(.cols)
+  .vars <- vec_selector(.data, !!.vars)
 
   if (length(.vars) > 0) {
     for (old_name in .vars) {
