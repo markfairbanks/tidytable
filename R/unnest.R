@@ -17,10 +17,10 @@
 #'   dt_unnest(data, c, d)
 dt_unnest_legacy <- function(.data, col, ...) {
   col <- enexpr(col)
-  dots <- enexpr(...)
+  dots <- enexprs(...)
 
   if (length(dots) > 0) {
-    dots <- dot_selector(.data, ...)
+    dots <- dots_selector(.data, ...)
 
     .data <- .data %>%
       as_dt() %>%
