@@ -2,10 +2,19 @@
 % Please edit documentation in R/mutate_variants.R
 \name{dt_mutate_if}
 \alias{dt_mutate_if}
+\alias{dt_mutate_at}
+\alias{dt_mutate_across}
+\alias{dt_mutate_all}
 \title{Mutate}
 \usage{
 dt_mutate_if(.data, .predicate, .fun, ...)
 dt_mutate_at(.data, .vars, .fun, ...)
+dt_mutate_all(.data, .fun, ...)
+
+dt_mutate_at(.data, .vars, .fun, ...)
+
+dt_mutate_across(.data, .cols, .fun, ...)
+
 dt_mutate_all(.data, .fun, ...)
 }
 \arguments{
@@ -28,6 +37,7 @@ Edit existing columns. There are three variants:
 \item \code{dt_mutate_if()}
 \item \code{dt_mutate_at()}
 \item \code{dt_mutate_all()}
+\item \code{dt_mutate_across()}
 }
 }
 \examples{
