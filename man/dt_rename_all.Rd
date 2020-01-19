@@ -41,7 +41,9 @@ example_dt <- data.table(x = 1, y = 2, double_x = 2, double_y = 4)
 
 example_dt \%>\% dt_rename_all(str_replace, "x", "stuff")
 
-example_dt \%>\% dt_rename_at(list(x, double_x), str_replace, "x", "stuff")
+example_dt \%>\%
+  dt_rename_across(c(x, double_x), str_replace, "x", "stuff")
 
-example_dt \%>\% dt_rename_if(is.double, function(x) str_replace(x, "x", "stuff"))
+example_dt \%>\%
+  dt_rename_across(is.double, function(x) str_replace(x, "x", "stuff"))
 }

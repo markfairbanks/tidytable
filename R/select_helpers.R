@@ -15,6 +15,8 @@
 #' @export
 #'
 #' @examples
+#' example_dt <- data.table(x = 1, y = 2, double_x = 2, double_y = 4)
+#'
 #' example_dt %>%
 #'   dt_select(dt_starts_with("x"))
 #'

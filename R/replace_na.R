@@ -14,6 +14,7 @@
 #'
 #' @examples
 #' example_dt <- data.table(x = c(1, 2, NA), y = c(NA, 1, 2))
+#'
 #' example_dt %>%
 #'   dt_mutate(x = dt_replace_na(x, 5))
 dt_replace_na <- function(.col, replace) {

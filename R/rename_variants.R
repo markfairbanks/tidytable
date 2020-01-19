@@ -25,9 +25,11 @@
 #'
 #' example_dt %>% dt_rename_all(str_replace, "x", "stuff")
 #'
-#' example_dt %>% dt_rename_at(list(x, double_x), str_replace, "x", "stuff")
+#' example_dt %>%
+#'   dt_rename_across(c(x, double_x), str_replace, "x", "stuff")
 #'
-#' example_dt %>% dt_rename_if(is.double, function(x) str_replace(x, "x", "stuff"))
+#' example_dt %>%
+#'   dt_rename_across(is.double, function(x) str_replace(x, "x", "stuff"))
 dt_rename_all <- function(.data, .fun, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
