@@ -42,10 +42,25 @@ dt_mutate <- function(.data, ..., by = NULL) {
   dots <- enexprs(...)
   by <- enexpr(by)
 
-  eval_tidy(expr(
-    .data[, ':='(!!!dots), !!by][]
-  ))
+  all_names <- names(dots)
+
+  for (i in seq_along(dots)) {
+    eval_tidy(expr(.data[, ':='(all_names[[i]], !!dots[[i]]), !!by][]))
+  }
+  .data
 }
+
+# dt_mutate <- function(.data, ..., by = NULL) {
+#   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
+#   if (!is.data.table(.data)) .data <- as.data.table(.data)
+#
+#   dots <- enexprs(...)
+#   by <- enexpr(by)
+#
+#   eval_tidy(expr(
+#     .data[, ':='(!!!dots), !!by][]
+#   ))
+# }
 
 #' @export
 #' @rdname dt_mutate
