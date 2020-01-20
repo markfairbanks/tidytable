@@ -15,8 +15,14 @@
 #' @examples
 #' library(data.table)
 #' df <- data.table(x = c(1, 2, NA), y = c("a", NA, "b"))
-#' df %>% dt_drop_na()
-#' df %>% dt_drop_na(x)
+#' df %>%
+#'   dt_drop_na()
+#'
+#' df %>%
+#'   dt_drop_na(x)
+#'
+#' df %>%
+#'   dt_drop_na(is.numeric)
 dt_drop_na <- function(.data, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
