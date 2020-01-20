@@ -125,14 +125,23 @@ example_dt %>%
   dt_select(is.numeric, d)
 ```
 
-This format works to replace all `dt_mutate_*()` variants with one helper, `dt_mutate_across()`:
+You can also use this format to drop columns:
+
+```{r}
+example_dt %>%
+  dt_select(-is.numeric)
+```
+
+##### New variant: `dt_mutate_across()`
+
+This format works to replace `dt_mutate_if()` & `dt_mutate_at()` with one helper, `dt_mutate_across()`:
 
 ```{r}
 example_dt <- data.table(a = c(1,1,1), b = c(1,1,1), c = c("a", "a", "b"), d = c("a", "b", "c"))
 
 # Using dt_mutate_across() instead of dt_mutate_if()
 example_dt %>%
-  dt_mutate_across(is.numeric, function(.x) .x + 1)
+  dt_mutate_across(is.numeric, as.character)
 ```
 
 ```{r}
@@ -143,7 +152,7 @@ example_dt %>%
   dt_mutate_across(c(a, b), function(.x) .x + 1)
 ```
 
-These two approaches can be combined:
+These two approaches can be combined in one call:
 
 ```{r}
 example_dt <- data.table(double_col1 = c(1.0,1.0,1.0),
@@ -154,6 +163,8 @@ example_dt <- data.table(double_col1 = c(1.0,1.0,1.0),
 example_dt %>%
   dt_mutate_across(c(is.double, x_integer), function(.x) .x + 1)
 ```
+
+Currently supported: `is.numeric`/`is.integer`/`is.double`/`is.character`/`is.factor`
 
 ## `rlang` compatibility
 

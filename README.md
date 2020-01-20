@@ -140,8 +140,21 @@ example_dt %>%
 #> 3: 3 6 c
 ```
 
-This format works to replace all `dt_mutate_*()` variants with one
-helper,
+You can also use this format to drop columns:
+
+``` r
+example_dt %>%
+  dt_select(-is.numeric)
+#>    c d
+#> 1: a a
+#> 2: a b
+#> 3: b c
+```
+
+##### New variant: `dt_mutate_across()`
+
+This format works to replace `dt_mutate_if()` & `dt_mutate_at()` with
+one helper,
 `dt_mutate_across()`:
 
 ``` r
@@ -149,11 +162,11 @@ example_dt <- data.table(a = c(1,1,1), b = c(1,1,1), c = c("a", "a", "b"), d = c
 
 # Using dt_mutate_across() instead of dt_mutate_if()
 example_dt %>%
-  dt_mutate_across(is.numeric, function(.x) .x + 1)
+  dt_mutate_across(is.numeric, as.character)
 #>    a b c d
-#> 1: 2 2 a a
-#> 2: 2 2 a b
-#> 3: 2 2 b c
+#> 1: 1 1 a a
+#> 2: 1 1 a b
+#> 3: 1 1 b c
 ```
 
 ``` r
@@ -168,7 +181,7 @@ example_dt %>%
 #> 3: 2 2 b c
 ```
 
-These two approaches can be combined:
+These two approaches can be combined in one call:
 
 ``` r
 example_dt <- data.table(double_col1 = c(1.0,1.0,1.0),
@@ -183,6 +196,9 @@ example_dt %>%
 #> 2:           2           2         2           a
 #> 3:           2           2         2           a
 ```
+
+Currently supported:
+`is.numeric`/`is.integer`/`is.double`/`is.character`/`is.factor`
 
 ## `rlang` compatibility
 
@@ -286,14 +302,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidydt   data.table tidydt_vs_tidyverse
 #>    <chr>           <chr>     <chr>    <chr>      <chr>              
-#>  1 arrange         1610ms    192.87ms 194.94ms   12.0%              
-#>  2 case_when       1270ms    409.36ms 505.81ms   32.2%              
-#>  3 fill            909ms     583ms    419ms      64.1%              
-#>  4 filter          243ms     207ms    214ms      85.2%              
-#>  5 inner_join      74.8ms    85.2ms   77.5ms     113.9%             
-#>  6 left_join       71.5ms    89.4ms   85.4ms     125.0%             
-#>  7 mutate          38.8ms    108.4ms  118.6ms    279.4%             
-#>  8 pivot_longer    97.8ms    20.4ms   13.5ms     20.9%              
-#>  9 pivot_wider     1710ms    252.58ms 245.06ms   14.8%              
-#> 10 summarize       444ms     245ms    235ms      55.2%
+#>  1 arrange         1600ms    192.3ms  193.8ms    12.0%              
+#>  2 case_when       1220ms    404.25ms 509.1ms    33.1%              
+#>  3 fill            974ms     593ms    404ms      60.9%              
+#>  4 filter          240ms     198ms    197ms      82.5%              
+#>  5 inner_join      68.2ms    81.3ms   84.5ms     119.2%             
+#>  6 left_join       73.4ms    96.6ms   93ms       131.6%             
+#>  7 mutate          43.3ms    99ms     125.9ms    228.6%             
+#>  8 pivot_longer    85.7ms    19.9ms   12.2ms     23.2%              
+#>  9 pivot_wider     1730ms    244.36ms 253.44ms   14.1%              
+#> 10 summarize       396ms     241ms    237ms      60.9%
 ```
