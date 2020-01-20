@@ -42,13 +42,16 @@ dt_pivot_wider <- function(.data,
   names_from <- enexpr(names_from)
   values_from <- enexpr(values_from)
 
-  names_from <- vec_selector(.data, !!names_from)
-  values_from <- vec_selector(.data, !!values_from)
+  names_from <- vec_selector(.data, !!names_from) %>%
+    as.character()
+  values_from <- vec_selector(.data, !!values_from) %>%
+    as.character()
 
   if (is.null(id_cols)) {
     id_cols <- colnames(.data)[!colnames(.data) %in% c(names_from, values_from)]
   } else {
-    id_cols <- vec_selector(.data, !!id_cols)
+    id_cols <- vec_selector(.data, !!id_cols) %>%
+      as.character()
   }
 
   if (length(id_cols) == 0) {

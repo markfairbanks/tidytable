@@ -29,7 +29,9 @@ vec_selector <- function(.data, select_vars) {
 
   select_index <- setdiff(keep_index, drop_index)
 
-  select_vars <- data_names[select_index]
+  select_vars <- data_names[select_index] %>%
+    as.list() %>%
+    dt_map(as.name)
 
   select_vars
 }

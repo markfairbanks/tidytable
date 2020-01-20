@@ -55,7 +55,8 @@ dt_mutate_if <- function(.data, .predicate, .fun, ...) {
 dt_mutate_at <- function(.data, .vars, .fun, ...) {
 
   .cols <- enexpr(.vars)
-  .cols <- vec_selector(.data, !!.cols)
+  .cols <- vec_selector(.data, !!.cols) %>%
+    as.character()
 
   if (!is.list(.fun)) {
     if (length(.cols) > 0) {
@@ -85,7 +86,8 @@ dt_mutate_at <- function(.data, .vars, .fun, ...) {
 dt_mutate_across <- function(.data, .cols, .fun, ...) {
 
   .cols <- enexpr(.cols)
-  .cols <- vec_selector(.data, !!.cols)
+  .cols <- vec_selector(.data, !!.cols) %>%
+    as.character()
 
   if (!is.list(.fun)) {
     if (length(.cols) > 0) {

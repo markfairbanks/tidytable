@@ -51,7 +51,8 @@ dt_rename_at <- function(.data, .vars, .fun, ...) {
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   .vars <- enexpr(.vars)
-  .vars <- vec_selector(.data, !!.vars)
+  .vars <- vec_selector(.data, !!.vars) %>%
+    as.character()
 
   if (length(.vars) > 0) {
     for (old_name in .vars) {
@@ -72,7 +73,8 @@ dt_rename_across <- function(.data, .cols, .fun, ...) {
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   .vars <- enexpr(.cols)
-  .vars <- vec_selector(.data, !!.vars)
+  .vars <- vec_selector(.data, !!.vars) %>%
+    as.character()
 
   if (length(.vars) > 0) {
     for (old_name in .vars) {
