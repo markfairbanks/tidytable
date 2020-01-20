@@ -24,9 +24,14 @@
 #' example_dt %>%
 #'   dt_bind_cols(another_dt)
 dt_bind_rows <- function(.data, ...) {
+  # check if input .data is already a list; if not, transform to list
+  if (class(.data) != "list") {
+    .data <- list(.data)
+  }
+
   dots <- enexprs(...)
   dots <- dt_map(dots, eval)
-  dots <- append(list(.data), dots)
+  dots <- append(.data, dots)
 
   if (!all(dt_map_lgl(dots, is.data.frame)))
     stop("All inputs must be a data.frame or data.table")
@@ -40,9 +45,14 @@ dt_bind_rows <- function(.data, ...) {
 #' @export
 #' @inherit dt_bind_rows
 dt_bind_cols <- function(.data, ...) {
+  # check if input .data is already a list; if not, transform to list
+  if (class(.data) != "list") {
+    .data <- list(.data)
+  }
+
   dots <- enexprs(...)
   dots <- dt_map(dots, eval)
-  dots <- append(list(.data), dots)
+  dots <- append(.data, dots)
 
   if (!all(dt_map_lgl(dots, is.data.frame)))
     stop("All inputs must be a data.frame or data.table")
