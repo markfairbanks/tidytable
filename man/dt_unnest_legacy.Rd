@@ -4,27 +4,33 @@
 \alias{dt_unnest_legacy}
 \title{Unnest a nested data.table}
 \usage{
-dt_unnest_legacy(.data, col, ...)
+dt_unnest_legacy(.data, col, keep = NULL)
 }
 \arguments{
 \item{.data}{A nested data.table}
 
 \item{col}{The column to unnest}
 
-\item{...}{Column names to keep}
+\item{keep}{Vector `c()` of bare column names to keep}
 }
 \value{
 A data.table
 }
 \description{
-Unnest a nested data.table
+Unnest a nested data.table.
+
+Supports enhanced selection
 }
 \examples{
-test_df <- data.table(a = 1:10,
+nested_df <- data.table(a = 1:10,
                       b = 11:20,
                       c = c(rep("a", 6), rep("b", 4)),
-                      d = c(rep("a", 4), rep("b", 6)))
-test_df \%>\%
-  dt_group_nest(c, d) \%>\%
-  dt_unnest(data, c, d)
+                      d = c(rep("a", 4), rep("b", 6))) \%>\%
+  dt_group_nest(c, d)
+
+nested_df \%>\%
+  dt_unnest_legacy(data, keep = c(c, d))
+
+nested_df \%>\%
+  dt_unnest_legacy(data, keep = is.character)
 }

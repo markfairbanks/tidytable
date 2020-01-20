@@ -1,35 +1,44 @@
 #' Unnest a nested data.table
 #'
+#' @description
+#' Unnest a nested data.table.
+#'
+#' Supports enhanced selection
+#'
 #' @param .data A nested data.table
 #' @param col The column to unnest
-#' @param ... Column names to keep
+#' @param keep Vector `c()` of bare column names to keep
 #'
 #' @return A data.table
 #' @export
 #'
 #' @examples
-#' test_df <- data.table(a = 1:10,
+#' nested_df <- data.table(a = 1:10,
 #'                       b = 11:20,
 #'                       c = c(rep("a", 6), rep("b", 4)),
-#'                       d = c(rep("a", 4), rep("b", 6)))
-#' test_df %>%
-#'   dt_group_nest(c, d) %>%
-#'   dt_unnest(data, c, d)
-dt_unnest_legacy <- function(.data, col, ...) {
+#'                       d = c(rep("a", 4), rep("b", 6))) %>%
+#'   dt_group_nest(c, d)
+#'
+#' nested_df %>%
+#'   dt_unnest_legacy(data, keep = c(c, d))
+#'
+#' nested_df %>%
+#'   dt_unnest_legacy(data, keep = is.character)
+dt_unnest_legacy <- function(.data, col, keep = NULL) {
   col <- enexpr(col)
-  dots <- enexprs(...)
+  keep_cols <- enexpr(keep)
 
-  if (length(dots) > 0) {
-    dots <- dots_selector(.data, ...)
+  if (!is.null(keep_cols)) {
+    keep_cols <- vec_selector(.data, !!keep_cols)
 
     .data <- .data %>%
       as_dt() %>%
       dt_mutate(.count = dt_map(!!col, get_length))
 
     result_list <- dt_map(
-      dots,
-      function(dot) {
-        data.table(.unnamed_col = dt_map2(dt_pull(.data, !!dot),
+      keep_cols,
+      function(keep_col) {
+        data.table(.unnamed_col = dt_map2(dt_pull(.data, !!keep_col),
                                           dt_pull(.data, .count),
                                           function(.x, .y) rep(.x, .y)) %>%
                      unname() %>%
@@ -37,7 +46,7 @@ dt_unnest_legacy <- function(.data, col, ...) {
 
     keep_df <- as_dt(do.call(cbind, result_list))
 
-    names(keep_df) <- as.character(dots)
+    names(keep_df) <- as.character(keep_cols)
 
     unnest_list <- .data %>%
       dt_pull(!!col)
@@ -54,7 +63,7 @@ dt_unnest_legacy <- function(.data, col, ...) {
       return(keep_df)
     }
   } else {
-    # If dots are empty, do a simple unnest
+    # If keep_cols is empty, do a simple unnest
     unnest_df <- .data %>%
       dt_pull(!!col) %>%
       rbindlist()

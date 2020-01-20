@@ -52,7 +52,8 @@ dt_pivot_longer <- function(.data,
     # All columns if cols = NULL
     cols <- names
   } else {
-    cols <- vec_selector(.data, !!cols)
+    cols <- vec_selector(.data, !!cols) %>%
+      as.character()
   }
 
   if (length(cols) == 0) warning("No columns remaining after removing")
