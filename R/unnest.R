@@ -20,6 +20,8 @@ dt_unnest_legacy <- function(.data, col, ...) {
   dots <- enexprs(...)
 
   if (length(dots) > 0) {
+    dots <- dots_selector(.data, ...)
+
     .data <- .data %>%
       as_dt() %>%
       dt_mutate(.count = dt_map(!!col, get_length))
@@ -33,7 +35,7 @@ dt_unnest_legacy <- function(.data, col, ...) {
                      unname() %>%
                      unlist())})
 
-    keep_df <- do.call(cbind, result_list)
+    keep_df <- as_dt(do.call(cbind, result_list))
 
     names(keep_df) <- as.character(dots)
 

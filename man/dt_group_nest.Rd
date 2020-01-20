@@ -18,6 +18,8 @@ dt_group_nest(.data, ..., .key = "data")
 }
 \description{
 Nest data.tables by group
+
+Supports enhanced selection
 }
 \examples{
 test_df <- data.table(a = 1:10,
@@ -27,4 +29,7 @@ test_df <- data.table(a = 1:10,
 
 test_df \%>\%
   dt_group_nest(c, d)
+
+test_df \%>\%
+  dt_group_nest(is.character)
 }

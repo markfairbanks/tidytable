@@ -2,43 +2,50 @@
 % Please edit documentation in R/mutate_variants.R
 \name{dt_mutate_if}
 \alias{dt_mutate_if}
+\alias{dt_mutate_at}
+\alias{dt_mutate_across}
+\alias{dt_mutate_all}
 \title{Mutate}
 \usage{
-dt_mutate_if(.data, .predicate, .fun, ...)
+dt_mutate_across(.data, .cols, .fun, ...)
+dt_mutate_all(.data, .fun, ...)
+
 dt_mutate_at(.data, .vars, .fun, ...)
+
+dt_mutate_across(.data, .cols, .fun, ...)
+
 dt_mutate_all(.data, .fun, ...)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{.predicate}{Predicate to specify columns for \code{dt_mutate_if()}}
-
 \item{.fun}{Function to pass}
 
 \item{...}{Other arguments for the passed function}
 
-\item{.vars}{vector \code{c()} of bare column names for \code{dt_rename_at()} to use}
+\item{.cols}{vector \code{c()} of bare column names for \code{dt_mutate_across()} to use}
 }
 \value{
 A data.table
 }
 \description{
-Edit existing columns. There are three variants:
+Edit existing columns. Supports enhanced selection.
+
+There are two variants:
 \itemize{
-\item \code{dt_mutate_if()}
-\item \code{dt_mutate_at()}
 \item \code{dt_mutate_all()}
+\item \code{dt_mutate_across()}
 }
 }
 \examples{
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt \%>\%
-  dt_mutate_if(is.double, as.character)
+  dt_mutate_across(is.double, as.character)
 
 example_dt \%>\%
-  dt_mutate_at(list(x, y), function(.x) .x * 2)
+  dt_mutate_across(c(x, y), function(.x) .x * 2)
 
 example_dt \%>\%
-  dt_mutate_at(list(x, y), list(new = function(.x) .x * 2))
+  dt_mutate_across(c(x, y), list(new = function(.x) .x * 2))
 }

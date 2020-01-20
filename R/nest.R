@@ -3,6 +3,8 @@
 #' @description
 #' Nest data.tables by group
 #'
+#' Supports enhanced selection
+#'
 #' @param .data A data.frame or data.table
 #' @param ... bare column names to group by
 #' @param .key Name of the new column created by nesting
@@ -18,11 +20,14 @@
 #'
 #' test_df %>%
 #'   dt_group_nest(c, d)
+#'
+#' test_df %>%
+#'   dt_group_nest(is.character)
 dt_group_nest <- function(.data, ..., .key = "data") {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  dots <- enexprs(...)
+  dots <- dots_selector(.data, ...)
 
   eval_tidy(expr(
     .data[, list(data = list(.SD)), by = list(!!!dots)] %>%

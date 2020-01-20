@@ -20,13 +20,13 @@ data.table
 Choose rows by their ordinal position in a data.table. Grouped data.tables use the ordinal position within the group.
 }
 \examples{
-library(data.table)
+library(tidydt)
 
 example_dt <- data.table(x = c(1,2,3,4), y = c(4,5,6,7), z = c("a", "a", "a", "b"))
 
-# Select rows
-dt_slice(example_dt, 1:10)
+example_dt \%>\%
+  dt_slice(1:4)
 
-# Select rows by group
-dt_slice(example_dt, 1, by = z)
+example_dt \%>\%
+  dt_slice(1, by = z)
 }

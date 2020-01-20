@@ -12,15 +12,15 @@
 #' @md
 #'
 #' @examples
-#' library(data.table)
+#' library(tidydt)
 #'
 #' example_dt <- data.table(x = c(1,2,3,4), y = c(4,5,6,7), z = c("a", "a", "a", "b"))
 #'
-#' # Select rows
-#' dt_slice(example_dt, 1:10)
+#' example_dt %>%
+#'   dt_slice(1:4)
 #'
-#' # Select rows by group
-#' dt_slice(example_dt, 1, by = z)
+#' example_dt %>%
+#'   dt_slice(1, by = z)
 dt_slice <- function(.data, rows = 1:5, by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
@@ -30,7 +30,13 @@ dt_slice <- function(.data, rows = 1:5, by = NULL) {
   rows <- enexpr(rows)
   by <- enexpr(by)
 
-  eval_tidy(expr(
-    .data[, .SD[!!rows], !!by]
-  ))
+  if (is.null(by)) {
+    eval_tidy(expr(
+      .data[!!rows]
+    ))
+  } else {
+    eval_tidy(expr(
+      .data[, .SD[!!rows], !!by]
+    ))
+  }
 }

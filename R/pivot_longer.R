@@ -1,9 +1,12 @@
 #' Pivot data from wide to long
 #'
 #'
+#' @description
 #' \code{dt_pivot_wider()} "widens" data, increasing the number of columns and
 #' decreasing the number of rows. The inverse transformation is
 #' \code{dt_pivot_longer()}. Syntax based on the \code{tidyr} equivalents.
+#'
+#' Supports enhanced selection
 #'
 #' @param .data The data table to pivot longer
 #' @param cols Column selection. If empty, uses all columns. Can use -colname to unselect column(s)
@@ -49,7 +52,7 @@ dt_pivot_longer <- function(.data,
     # All columns if cols = NULL
     cols <- names
   } else {
-    cols <- column_selector(.data, !!cols)
+    cols <- vec_selector(.data, !!cols)
   }
 
   if (length(cols) == 0) warning("No columns remaining after removing")

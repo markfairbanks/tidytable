@@ -3,8 +3,10 @@
 #' @description
 #' Drop rows containing missing values
 #'
+#' Supports enhanced selection
+#'
 #' @param .data A data.frame or data.table
-#' @param ... A selection of columns. If empty, all variables are selected. You can supply bare variable names.
+#' @param ... A selection of columns. If empty, all variables are selected.
 #'
 #' @import data.table
 #' @return A data.table
@@ -25,8 +27,9 @@ dt_drop_na <- function(.data, ...) {
   if (length(dots) == 0) {
     na.omit(.data)
   } else {
-    for (dot in dots) {
+    dots <- dots_selector(.data, ...)
 
+    for (dot in dots) {
       .data <- eval_tidy(expr(
         .data[!is.na(!!dot)]
       ))

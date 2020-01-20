@@ -9,13 +9,15 @@ dt_drop_na(.data, ...)
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{...}{A selection of columns. If empty, all variables are selected. You can supply bare variable names.}
+\item{...}{A selection of columns. If empty, all variables are selected.}
 }
 \value{
 A data.table
 }
 \description{
 Drop rows containing missing values
+
+Supports enhanced selection
 }
 \examples{
 library(data.table)

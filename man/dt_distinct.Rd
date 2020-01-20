@@ -4,17 +4,27 @@
 \alias{dt_distinct}
 \title{Select distinct/unique rows}
 \usage{
-dt_distinct(.data)
+dt_distinct(.data, ...)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
+
+\item{...}{Columns to select before determining uniqueness. If omitted, will use all columns}
 }
 \value{
 A data.table
 }
 \description{
-Simple alias to unique(). Retain only unique/distinct rows from an input df.
+Retain only unique/distinct rows from an input df.
+
+Supports enhanced selection if dots are used
 }
 \examples{
-dt \%>\% dt_distinct()
+example_dt <- data.table(x = 1:3, y = 4:6, z = c("a", "a", "b"))
+
+example_dt \%>\%
+  dt_distinct()
+
+example_dt \%>\%
+  dt_distinct(z)
 }
