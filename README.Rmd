@@ -73,7 +73,7 @@ devtools::install_github("markfairbanks/tidydt")
 
 * `dt_drop_na()` - **ES**
 * `dt_fill()`: Works on character/factor/logical types (`data.table::nafill()` does not) - **ES**
-* `dt_pivot_wider()` & `dt_pivot_longer()` - **ES**
+* `dt_pivot_wider()` - **ES** & `dt_pivot_longer()` - **ES**
 * `dt_replace_na()`
 * `dt_group_nest()` - **ES** & `dt_unnest_legacy()` - **ES**
 

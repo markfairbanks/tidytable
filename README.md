@@ -70,7 +70,7 @@ here](https://github.com/markfairbanks/tidydt#Enhanced-selection)
   - `dt_drop_na()` - **ES**
   - `dt_fill()`: Works on character/factor/logical types
     (`data.table::nafill()` does not) - **ES**
-  - `dt_pivot_wider()` & `dt_pivot_longer()` - **ES**
+  - `dt_pivot_wider()` - **ES** & `dt_pivot_longer()` - **ES**
   - `dt_replace_na()`
   - `dt_group_nest()` - **ES** & `dt_unnest_legacy()` - **ES**
 
@@ -302,14 +302,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidydt   data.table tidydt_vs_tidyverse
 #>    <chr>           <chr>     <chr>    <chr>      <chr>              
-#>  1 arrange         1600ms    192.3ms  193.8ms    12.0%              
-#>  2 case_when       1220ms    404.25ms 509.1ms    33.1%              
-#>  3 fill            974ms     593ms    404ms      60.9%              
-#>  4 filter          240ms     198ms    197ms      82.5%              
-#>  5 inner_join      68.2ms    81.3ms   84.5ms     119.2%             
-#>  6 left_join       73.4ms    96.6ms   93ms       131.6%             
-#>  7 mutate          43.3ms    99ms     125.9ms    228.6%             
-#>  8 pivot_longer    85.7ms    19.9ms   12.2ms     23.2%              
-#>  9 pivot_wider     1730ms    244.36ms 253.44ms   14.1%              
-#> 10 summarize       396ms     241ms    237ms      60.9%
+#>  1 arrange         1500ms    180ms    180.2ms    12.0%              
+#>  2 case_when       1170ms    391.73ms 503.2ms    33.5%              
+#>  3 fill            884ms     589ms    388ms      66.6%              
+#>  4 filter          242ms     198ms    196ms      81.8%              
+#>  5 inner_join      62.3ms    73.5ms   66.8ms     118.0%             
+#>  6 left_join       74.8ms    96.7ms   88.3ms     129.3%             
+#>  7 mutate          38.1ms    99.7ms   108ms      261.7%             
+#>  8 pivot_longer    76.5ms    19.5ms   11.2ms     25.5%              
+#>  9 pivot_wider     1600ms    243.1ms  241.3ms    15.2%              
+#> 10 summarize       436ms     236ms    237ms      54.1%
 ```
