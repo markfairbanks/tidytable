@@ -23,7 +23,7 @@ dt_rename_if(.data, .predicate, .fun, ...)
 
 \item{...}{Other arguments for the passed function}
 
-\item{.vars}{vector \code{c()} of bare column names for \code{dt_rename_at()} to use}
+\item{.cols}{vector \code{c()} of bare column names for \code{dt_rename_at()} to use}
 }
 \value{
 

@@ -10,7 +10,7 @@
 #'
 #'
 #' @param .data A data.frame or data.table
-#' @param .vars vector `c()` of bare column names for `dt_rename_at()` to use
+#' @param .cols vector `c()` of bare column names for `dt_rename_at()` to use
 #' @param .fun Function to pass
 #' @param ... Other arguments for the passed function
 #'
