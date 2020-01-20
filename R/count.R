@@ -16,10 +16,10 @@
 #' example_df <- data.table(x = 1:3, y = 4:6, z = c("a", "a", "b"))
 #'
 #' example_df %>%
-#'   dt_count(z)
+#'   dt_count()
 #'
 #' example_df %>%
-#'   dt_count()
+#'   dt_count(z)
 #'
 #' example_df %>%
 #'   dt_count(is.character)
@@ -30,7 +30,7 @@ dt_count <- function(.data, ...) {
   dots <- enexprs(...)
 
   if (length(dots) == 0) {
-    .data[, .N]
+    .data[, list(N = .N), .N]
   } else {
     by_vec <- dots_selector(.data, ...) %>%
       as.character()
