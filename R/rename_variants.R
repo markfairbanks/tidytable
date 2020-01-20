@@ -10,7 +10,6 @@
 #'
 #'
 #' @param .data A data.frame or data.table
-#' @param .predicate Predicate to specify columns for `dt_rename_if()`
 #' @param .vars vector `c()` of bare column names for `dt_rename_at()` to use
 #' @param .fun Function to pass
 #' @param ... Other arguments for the passed function
