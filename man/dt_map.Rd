@@ -2,6 +2,20 @@
 % Please edit documentation in R/purrr.R
 \name{dt_map}
 \alias{dt_map}
+\alias{dt_map_lgl}
+\alias{dt_map_int}
+\alias{dt_map_dbl}
+\alias{dt_map_chr}
+\alias{dt_map_dfc}
+\alias{dt_map_dfr}
+\alias{dt_walk}
+\alias{dt_map2}
+\alias{dt_map2_lgl}
+\alias{dt_map2_int}
+\alias{dt_map2_dbl}
+\alias{dt_map2_chr}
+\alias{dt_map2_dfc}
+\alias{dt_map2_dfr}
 \title{Apply a function to each element of a vector}
 \usage{
 dt_map(.x, .f, ...)
@@ -11,6 +25,34 @@ dt_map_dbl(.x, .f, ...)
 dt_map_dfr(.x, .f, ...)
 dt_map_dfc(.x, .f, ...)
 dt_walk(.x, .f, ...)
+
+dt_map_lgl(.x, .f, ...)
+
+dt_map_int(.x, .f, ...)
+
+dt_map_dbl(.x, .f, ...)
+
+dt_map_chr(.x, .f, ...)
+
+dt_map_dfc(.x, .f, ...)
+
+dt_map_dfr(.x, .f, ..., .id = NULL)
+
+dt_walk(.x, .f, ...)
+
+dt_map2(.x, .y, .f, ...)
+
+dt_map2_lgl(.x, .y, .f, ...)
+
+dt_map2_int(.x, .y, .f, ...)
+
+dt_map2_dbl(.x, .y, .f, ...)
+
+dt_map2_chr(.x, .y, .f, ...)
+
+dt_map2_dfc(.x, .y, .f, ...)
+
+dt_map2_dfr(.x, .y, .f, ..., .id = NULL)
 }
 \arguments{
 \item{.x}{A list or vector}

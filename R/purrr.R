@@ -31,89 +31,89 @@ dt_map <- function(.x, .f, ...) {
 }
 
 #' @export
-#' @inherit dt_map
+#' @rdname dt_map
 dt_map_lgl <- function(.x, .f, ...) {
   vapply(.x, .f, logical(1), ...)
 }
 
 #' @export
-#' @inherit dt_map
+#' @rdname dt_map
 dt_map_int <- function(.x, .f, ...) {
   vapply(.x, .f, integer(1), ...)
 }
 
 #' @export
-#' @inherit dt_map
+#' @rdname dt_map
 dt_map_dbl <- function(.x, .f, ...) {
   vapply(.x, .f, double(1), ...)
 }
 
 #' @export
-#' @inherit dt_map
+#' @rdname dt_map
 dt_map_chr <- function(.x, .f, ...) {
   vapply(.x, .f, character(1), ...)
 }
 
 #' @export
-#' @inherit dt_map
+#' @rdname dt_map
 dt_map_dfc <- function(.x, .f, ...) {
   result_list <- dt_map(.x, .f, ...)
   do.call(cbind, result_list)
 }
 
 #' @export
-#' @inherit dt_map
+#' @rdname dt_map
 dt_map_dfr <- function(.x, .f, ..., .id = NULL) {
   result_list<- dt_map(.x, .f, ...)
   rbindlist(result_list, idcol = .id)
 }
 
 #' @export
-#' @inherit dt_map
+#' @rdname dt_map
 dt_walk <- function(.x, .f, ...) {
   dt_map(.x, .f, ...)
   invisible(.x)
 }
 
 #' @export
-#' @inherit dt_map
+#' @rdname dt_map
 dt_map2 <- function(.x, .y, .f, ...) {
   mapply(.f, .x, .y, MoreArgs = list(...), SIMPLIFY = FALSE)
 }
 
 #' @export
-#' @inherit dt_map
+#' @rdname dt_map
 dt_map2_lgl <- function(.x, .y, .f, ...) {
   as.logical(dt_map2(.x, .y, .f, ...))
 }
 
 #' @export
-#' @inherit dt_map
+#' @rdname dt_map
 dt_map2_int <- function(.x, .y, .f, ...) {
   as.integer(dt_map2(.x, .y, .f, ...))
 }
 
 #' @export
-#' @inherit dt_map
+#' @rdname dt_map
 dt_map2_dbl <- function(.x, .y, .f, ...) {
   as.double(dt_map2(.x, .y, .f, ...))
 }
 
 #' @export
-#' @inherit dt_map
+#' @rdname dt_map
 dt_map2_chr <- function(.x, .y, .f, ...) {
   as.character(dt_map2(.x, .y, .f, ...))
 }
 
 #' @export
-#' @inherit dt_map
+#' @rdname dt_map
 dt_map2_dfc <- function(.x, .y, .f, ...) {
   result_list <- dt_map2(.x, .y, .f, ...)
   do.call(cbind, result_list)
 }
 
 #' @export
-#' @inherit dt_map
+#' @rdname dt_map
 dt_map2_dfr <- function(.x, .y, .f, ..., .id = NULL) {
   result_list <- dt_map2(.x, .y, .f, ...)
   rbindlist(result_list, idcol = .id)
