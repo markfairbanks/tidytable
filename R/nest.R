@@ -19,6 +19,9 @@
 #'                       d = c(rep("a", 4), rep("b", 6)))
 #'
 #' test_df %>%
+#'   dt_group_nest()
+#'
+#' test_df %>%
 #'   dt_group_nest(c, d)
 #'
 #' test_df %>%
@@ -27,11 +30,21 @@ dt_group_nest <- function(.data, ..., .key = "data") {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  dots <- dots_selector(.data, ...)
+  dots <- enexprs(...)
 
-  eval_tidy(expr(
-    .data[, list(data = list(.SD)), by = list(!!!dots)] %>%
+  if (length(dots) == 0) {
+    .data <- eval_tidy(expr(.data[, list(data = list(.SD))]))
+
+    .data <- .data %>%
       dt_rename(!!.key := data)
-  ))
+  } else {
+    dots <- dots_selector(.data, ...)
+
+    .data <- eval_tidy(expr(.data[, list(data = list(.SD)), by = list(!!!dots)]))
+
+    .data <- .data %>%
+      dt_rename(!!.key := data)
+  }
+  .data
 }
 

@@ -28,6 +28,9 @@ test_df <- data.table(a = 1:10,
                       d = c(rep("a", 4), rep("b", 6)))
 
 test_df \%>\%
+  dt_group_nest()
+
+test_df \%>\%
   dt_group_nest(c, d)
 
 test_df \%>\%
