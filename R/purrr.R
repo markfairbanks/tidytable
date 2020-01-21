@@ -8,13 +8,6 @@
 #'
 #' @usage
 #'
-#' dt_map(.x, .f, ...)
-#' dt_map_lgl(.x, .f, ...)
-#' dt_map_chr(.x, .f, ...)
-#' dt_map_dbl(.x, .f, ...)
-#' dt_map_dfr(.x, .f, ...)
-#' dt_map_dfc(.x, .f, ...)
-#' dt_walk(.x, .f, ...)
 #' @param .x A list or vector
 #' @param .f A function
 #' @param ... Other arguments to pass to a function

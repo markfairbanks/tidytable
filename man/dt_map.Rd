@@ -18,13 +18,7 @@
 \alias{dt_map2_dfr}
 \title{Apply a function to each element of a vector}
 \usage{
-dt_map(.x, .f, ...)
-dt_map_lgl(.x, .f, ...)
-dt_map_chr(.x, .f, ...)
-dt_map_dbl(.x, .f, ...)
-dt_map_dfr(.x, .f, ...)
-dt_map_dfc(.x, .f, ...)
-dt_walk(.x, .f, ...)
+
 
 dt_map_lgl(.x, .f, ...)
 
