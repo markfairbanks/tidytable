@@ -2,13 +2,13 @@
 #'
 #' @description
 #'
-#' Simple alias to data.table implementations of `rbind()` and `cbind()`
+#' Bind rows or columns together.
 #'
 #' @usage
 #' dt_bind_rows(...)
 #' dt_bind_cols(...)
 #'
-#' @param .data A data frame to bind
+#' @param .data A data.table to bind, or a list of data.tables
 #' @param ... Data frames to bind
 #'
 #'
@@ -17,16 +17,26 @@
 #' @md
 #'
 #' @examples
+#' df1 <- data.table(x = c(1,2,3), y = c(3,4,5))
+#' df2 <- data.table(x = c(1,2,3), y = c(3,4,5))
 #'
-#' example_dt %>%
-#'   dt_bind_rows(another_dt)
+#' df1 %>%
+#'   dt_bind_rows(df2)
 #'
-#' example_dt %>%
-#'   dt_bind_cols(another_dt)
+#' dt_bind_rows(list(df1, df2))
+#'
+#' df1 %>%
+#'   dt_bind_cols(df2)
+#'
+#' dt_bind_cols(list(df1, df2))
 dt_bind_rows <- function(.data, ...) {
-  dots <- enexprs(...)
-  dots <- dt_map(dots, eval)
-  dots <- append(list(.data), dots)
+  # check if input .data is already a list; if not, transform to list
+  if (class(.data)[1] != "list") {
+    .data <- list(.data)
+  }
+
+  dots <- list(...)
+  dots <- append(.data, dots)
 
   if (!all(dt_map_lgl(dots, is.data.frame)))
     stop("All inputs must be a data.frame or data.table")
@@ -38,11 +48,15 @@ dt_bind_rows <- function(.data, ...) {
 }
 
 #' @export
-#' @inherit dt_bind_rows
+#' @rdname dt_bind_rows
 dt_bind_cols <- function(.data, ...) {
-  dots <- enexprs(...)
-  dots <- dt_map(dots, eval)
-  dots <- append(list(.data), dots)
+  # check if input .data is already a list; if not, transform to list
+  if (class(.data)[1] != "list") {
+    .data <- list(.data)
+  }
+
+  dots <- list(...)
+  dots <- append(.data, dots)
 
   if (!all(dt_map_lgl(dots, is.data.frame)))
     stop("All inputs must be a data.frame or data.table")

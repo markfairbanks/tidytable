@@ -2,24 +2,33 @@
 % Please edit documentation in R/bind.R
 \name{dt_bind_rows}
 \alias{dt_bind_rows}
+\alias{dt_bind_cols}
 \title{Bind data.tables by row and column}
 \usage{
 dt_bind_rows(...)
 dt_bind_cols(...)
+
+dt_bind_cols(.data, ...)
 }
 \arguments{
-\item{.data}{A data frame to bind}
+\item{.data}{A data.table to bind, or a list of data.tables}
 
 \item{...}{Data frames to bind}
 }
 \description{
-Simple alias to data.table implementations of \code{rbind()} and \code{cbind()}
+Bind rows or columns together.
 }
 \examples{
+df1 <- data.table(x = c(1,2,3), y = c(3,4,5))
+df2 <- data.table(x = c(1,2,3), y = c(3,4,5))
 
-example_dt \%>\%
-  dt_bind_rows(another_dt)
+df1 \%>\%
+  dt_bind_rows(df2)
 
-example_dt \%>\%
-  dt_bind_cols(another_dt)
+dt_bind_rows(list(df1, df2))
+
+df1 \%>\%
+  dt_bind_cols(df2)
+
+dt_bind_cols(list(df1, df2))
 }
