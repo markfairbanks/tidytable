@@ -58,7 +58,7 @@ dt_map_chr <- function(.x, .f, ...) {
 #' @rdname dt_map
 dt_map_dfc <- function(.x, .f, ...) {
   result_list <- dt_map(.x, .f, ...)
-  do.call(cbind, result_list)
+  dt_bind_cols(result_list)
 }
 
 #' @export
@@ -109,7 +109,7 @@ dt_map2_chr <- function(.x, .y, .f, ...) {
 #' @rdname dt_map
 dt_map2_dfc <- function(.x, .y, .f, ...) {
   result_list <- dt_map2(.x, .y, .f, ...)
-  do.call(cbind, result_list)
+  dt_bind_cols(result_list)
 }
 
 #' @export
