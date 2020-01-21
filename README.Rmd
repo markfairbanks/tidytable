@@ -157,11 +157,13 @@ These two approaches can be combined in one call:
 ```{r}
 example_dt <- data.table(double_col1 = c(1.0,1.0,1.0),
                          double_col2 = c(1.0,1.0,1.0),
-                         x_integer = c(1L,1L,1L),
-                         y_character = c("a","a","a"))
+                         integer_col1 = c(1L,1L,1L),
+                         integer_col2 = c(1L,1L,1L),
+                         character_col1 = c("a","a","a"),
+                         character_col2 = c("b","b","b"))
 
 example_dt %>%
-  dt_mutate_across(c(is.double, x_integer), function(.x) .x + 1)
+  dt_mutate_across(c(is.double, integer_col1), function(.x) .x + 1)
 ```
 
 Currently supported: `is.numeric`/`is.integer`/`is.double`/`is.character`/`is.factor`
