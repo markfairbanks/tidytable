@@ -7,7 +7,7 @@
 #' There are two variants:
 #'
 #' * `dt_mutate_all()`
-#' * `dt_mutate_across()`
+#' * `dt_mutate_across()`: Replaces both `mutate_if()` & `mutate_at()`
 #'
 #' @import data.table
 #' @md
@@ -26,16 +26,18 @@
 #' @export
 #'
 #' @examples
-#' example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
+#' example_dt <- data.table(x = c(1,1,1),
+#'                          y = c(2,2,2),
+#'                          z = c("a", "a", "b"))
 #'
 #' example_dt %>%
-#'   dt_mutate_across(is.double, as.character)
+#'   dt_mutate_across(is.numeric, as.character)
 #'
 #' example_dt %>%
-#'   dt_mutate_across(c(x, y), function(.x) .x * 2)
+#'   dt_mutate_across(c(x, y), ~ .x * 2)
 #'
 #' example_dt %>%
-#'   dt_mutate_across(c(x, y), list(new = function(.x) .x * 2))
+#'   dt_mutate_across(c(x, y), list(new = ~ .x * 2))
 dt_mutate_if <- function(.data, .predicate, .fun, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
@@ -44,7 +46,7 @@ dt_mutate_if <- function(.data, .predicate, .fun, ...) {
   .cols <- colnames(.data)[dt_map_lgl(.data, .predicate)]
 
   if (length(.cols) > 0) {
-    .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols][]
+    .data[, (.cols) := dt_map(.SD, .fun, ...), .SDcols = .cols][]
   } else {
     .data
   }
@@ -52,15 +54,15 @@ dt_mutate_if <- function(.data, .predicate, .fun, ...) {
 
 #' @export
 #' @rdname dt_mutate_if
-dt_mutate_at <- function(.data, .vars, .fun, ...) {
+dt_mutate_at <- function(.data, .cols, .fun, ...) {
 
-  .cols <- enexpr(.vars)
+  .cols <- enexpr(.cols)
   .cols <- vec_selector(.data, !!.cols) %>%
     as.character()
 
   if (!is.list(.fun)) {
     if (length(.cols) > 0) {
-      .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols][]
+      .data[, (.cols) := dt_map(.SD, .fun, ...), .SDcols = .cols][]
     } else {
       .data
     }
@@ -70,7 +72,7 @@ dt_mutate_at <- function(.data, .vars, .fun, ...) {
     if (length(.fun) > 1) abort("only one function can be passed in dt_mutate_at()")
 
     new_names <- paste0(.cols, "_", names(.fun))
-    user_function <- .fun[[1]]
+    user_function <- anon_x(.fun[[1]])
 
     for (i in seq_along(new_names)) {
       new <- new_names[i]
@@ -91,7 +93,7 @@ dt_mutate_across <- function(.data, .cols, .fun, ...) {
 
   if (!is.list(.fun)) {
     if (length(.cols) > 0) {
-      .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols][]
+      .data[, (.cols) := dt_map(.SD, .fun, ...), .SDcols = .cols][]
     } else {
       .data
     }
@@ -101,7 +103,7 @@ dt_mutate_across <- function(.data, .cols, .fun, ...) {
     if (length(.fun) > 1) abort("only one function can be passed in dt_mutate_at()")
 
     new_names <- paste0(.cols, "_", names(.fun))
-    user_function <- .fun[[1]]
+    user_function <- anon_x(.fun[[1]])
 
     for (i in seq_along(new_names)) {
       new <- new_names[i]
@@ -121,5 +123,5 @@ dt_mutate_all <- function(.data, .fun, ...) {
 
   .cols <- colnames(.data)
 
-  .data[, (.cols) := lapply(.SD, .fun, ...), .SDcols = .cols][]
+  .data[, (.cols) := dt_map(.SD, .fun, ...), .SDcols = .cols][]
 }
