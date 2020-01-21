@@ -10,7 +10,7 @@
 dt_mutate_across(.data, .cols, .fun, ...)
 dt_mutate_all(.data, .fun, ...)
 
-dt_mutate_at(.data, .vars, .fun, ...)
+dt_mutate_at(.data, .cols, .fun, ...)
 
 dt_mutate_across(.data, .cols, .fun, ...)
 
@@ -34,18 +34,20 @@ Edit existing columns. Supports enhanced selection.
 There are two variants:
 \itemize{
 \item \code{dt_mutate_all()}
-\item \code{dt_mutate_across()}
+\item \code{dt_mutate_across()}: Replaces both \code{mutate_if()} & \code{mutate_at()}
 }
 }
 \examples{
-example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
+example_dt <- data.table(x = c(1,1,1),
+                         y = c(2,2,2),
+                         z = c("a", "a", "b"))
 
 example_dt \%>\%
-  dt_mutate_across(is.double, as.character)
+  dt_mutate_across(is.numeric, as.character)
 
 example_dt \%>\%
-  dt_mutate_across(c(x, y), function(.x) .x * 2)
+  dt_mutate_across(c(x, y), ~ .x * 2)
 
 example_dt \%>\%
-  dt_mutate_across(c(x, y), list(new = function(.x) .x * 2))
+  dt_mutate_across(c(x, y), list(new = ~ .x * 2))
 }

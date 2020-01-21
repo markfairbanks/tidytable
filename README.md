@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidydt v0.3.0 <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
+# tidydt v0.3.1 <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
 
 <!-- badges: start -->
 
@@ -174,7 +174,7 @@ example_dt <- data.table(a = c(1,1,1), b = c(1,1,1), c = c("a", "a", "b"), d = c
 
 # Using dt_mutate_across() instead of dt_mutate_at()
 example_dt %>%
-  dt_mutate_across(c(a, b), function(.x) .x + 1)
+  dt_mutate_across(c(a, b), ~ .x + 1)
 #>    a b c d
 #> 1: 2 2 a a
 #> 2: 2 2 a b
@@ -184,23 +184,19 @@ example_dt %>%
 These two approaches can be combined in one call:
 
 ``` r
-example_dt <- data.table(double_col1 = c(1.0,1.0,1.0),
-                         double_col2 = c(1.0,1.0,1.0),
-                         integer_col1 = c(1L,1L,1L),
-                         integer_col2 = c(1L,1L,1L),
-                         character_col1 = c("a","a","a"),
-                         character_col2 = c("b","b","b"))
+example_dt <- data.table(dbl_col1 = c(1.0,1.0,1.0),
+                         dbl_col2 = c(1.0,1.0,1.0),
+                         int_col1 = c(1L,1L,1L),
+                         int_col2 = c(1L,1L,1L),
+                         char_col1 = c("a","a","a"),
+                         char_col2 = c("b","b","b"))
 
 example_dt %>%
-  dt_mutate_across(c(is.double, integer_col1), function(.x) .x + 1)
-#>    double_col1 double_col2 integer_col1 integer_col2 character_col1
-#> 1:           2           2            2            1              a
-#> 2:           2           2            2            1              a
-#> 3:           2           2            2            1              a
-#>    character_col2
-#> 1:              b
-#> 2:              b
-#> 3:              b
+  dt_mutate_across(c(is.double, int_col1), ~ .x + 1)
+#>    dbl_col1 dbl_col2 int_col1 int_col2 char_col1 char_col2
+#> 1:        2        2        2        1         a         b
+#> 2:        2        2        2        1         a         b
+#> 3:        2        2        2        1         a         b
 ```
 
 Currently supported:
@@ -308,14 +304,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidydt   data.table tidydt_vs_tidyverse
 #>    <chr>           <chr>     <chr>    <chr>      <chr>              
-#>  1 arrange         1520ms    174.59ms 180.97ms   11.5%              
-#>  2 case_when       1210ms    401.93ms 514.76ms   33.2%              
-#>  3 fill            903ms     589ms    392ms      65.2%              
-#>  4 filter          235ms     195ms    197ms      83.0%              
-#>  5 inner_join      66.2ms    79.6ms   67.5ms     120.2%             
-#>  6 left_join       80.3ms    94.8ms   93ms       118.1%             
-#>  7 mutate          39.2ms    99.3ms   110ms      253.3%             
-#>  8 pivot_longer    76.8ms    19.2ms   11.5ms     25.0%              
-#>  9 pivot_wider     1700ms    235.1ms  249.3ms    13.8%              
-#> 10 summarize       417ms     236ms    246ms      56.6%
+#>  1 arrange         1470ms    176.47ms 175.41ms   12.0%              
+#>  2 case_when       1190ms    427.18ms 530.97ms   35.9%              
+#>  3 fill            893ms     553ms    376ms      61.9%              
+#>  4 filter          227ms     196ms    198ms      86.3%              
+#>  5 inner_join      64ms      83.3ms   75.3ms     130.2%             
+#>  6 left_join       71.5ms    105.3ms  97.4ms     147.3%             
+#>  7 mutate          38.2ms    89.9ms   118ms      235.3%             
+#>  8 pivot_longer    80ms      19ms     11.5ms     23.7%              
+#>  9 pivot_wider     1550ms    224.51ms 232.24ms   14.5%              
+#> 10 summarize       425ms     227ms    221ms      53.4%
 ```

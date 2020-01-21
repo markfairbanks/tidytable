@@ -27,7 +27,7 @@ dt_starts_with <- function(match) {
   .names <- .names[!.names %in% c("is.integer", "is.double", "is.numeric",
                                   "is.character", "is.factor", "is.logical")]
 
-  seq_along(.names)[startsWith(.names, match)]
+  seq_along(.names)[dt_str_starts(.names, match)]
 }
 
 #' @export
@@ -37,7 +37,7 @@ dt_contains <- function(match) {
   .names <- .names[!.names %in% c("is.integer", "is.double", "is.numeric",
                                   "is.character", "is.factor", "is.logical")]
 
-  seq_along(.names)[grepl(match, .names)]
+  seq_along(.names)[dt_str_detect(.names, match)]
 }
 
 #' @export
@@ -47,7 +47,7 @@ dt_ends_with <- function(match) {
   .names <- .names[!.names %in% c("is.integer", "is.double", "is.numeric",
                                   "is.character", "is.factor", "is.logical")]
 
-  seq_along(.names)[endsWith(.names, match)]
+  seq_along(.names)[dt_str_ends(.names, match)]
 }
 
 #' @export

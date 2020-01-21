@@ -8,6 +8,7 @@
 \title{Rename a selection of variables}
 \usage{
 dt_rename_all(.data, .fun, ...)
+
 dt_rename_across(.data, .predicate, .fun, ...)
 
 dt_rename_at(.data, .vars, .fun, ...)
@@ -29,13 +30,16 @@ dt_rename_if(.data, .predicate, .fun, ...)
 
 }
 \description{
-These scoped variants of `rename()`` operate on a selection of variables
+These scoped variants of \code{rename()} operate on a selection of variables
 
 Supports enhanced selection
 }
 \examples{
 
-example_dt <- data.table(x = 1, y = 2, double_x = 2, double_y = 4)
+example_dt <- data.table(x = 1,
+                         y = 2,
+                         double_x = 2,
+                         double_y = 4)
 
 example_dt \%>\% dt_rename_all(str_replace, "x", "stuff")
 

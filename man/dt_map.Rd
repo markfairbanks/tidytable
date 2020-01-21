@@ -71,9 +71,11 @@ The dt_map functions transform their input by applying a function to each elemen
 \item \verb{_lgl()}, \verb{_int()}, \verb{_dbl()} and \verb{_chr()} variants return their specified type
 \item \verb{_dfr()} & \verb{_dfc()} Return data frame results binded together
 }
-
-\emph{Note: the '~' alias will not work with any of the \code{dt_map()} functions}
 }
 \examples{
-1:10 \%>\% map(rnorm, n = 10)
+dt_map(c(1,2,3), ~.x + 1)
+
+dt_map_dbl(c(1,2,3), ~.x + 1)
+
+dt_map_chr(c(1,2,3), as.character)
 }

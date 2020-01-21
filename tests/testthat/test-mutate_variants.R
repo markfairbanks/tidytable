@@ -98,3 +98,37 @@ test_that("mutate_across() works with newly named columns", {
   expect_equal(df$x_new, c(2,2,2))
   expect_equal(df$y_new, c(3,3,3))
 })
+
+# twiddle testing ----------------------------
+test_that("mutate_if() works with twiddle", {
+  df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
+  anon_df <- df %>%
+    dt_mutate_if(is.numeric, function(.x) .x + 1)
+
+  twiddle_df <- df %>%
+    dt_mutate_if(is.numeric, ~ .x + 1)
+
+  expect_equal(anon_df, twiddle_df)
+})
+
+test_that("mutate_at() works with twiddle", {
+  df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
+  anon_df <- df %>%
+    dt_mutate_at(c(x:y), function(.x) .x + 1)
+
+  twiddle_df <- df %>%
+    dt_mutate_at(c(x:y), ~ .x + 1)
+
+  expect_equal(anon_df, twiddle_df)
+})
+
+test_that("mutate_across() works with twiddle", {
+  df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
+  anon_df <- df %>%
+    dt_mutate_across(c(x:y), function(.x) .x + 1)
+
+  twiddle_df <- df %>%
+    dt_mutate_across(c(x:y), ~ .x + 1)
+
+  expect_equal(anon_df, twiddle_df)
+})

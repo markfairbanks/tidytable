@@ -1,11 +1,12 @@
 #' Rename a selection of variables
 #'
 #' @description
-#' These scoped variants of `rename()`` operate on a selection of variables
+#' These scoped variants of `rename()` operate on a selection of variables
 #'
 #' Supports enhanced selection
 #' @usage
 #' dt_rename_all(.data, .fun, ...)
+#'
 #' dt_rename_across(.data, .predicate, .fun, ...)
 #'
 #'
@@ -20,7 +21,10 @@
 #'
 #' @examples
 #'
-#' example_dt <- data.table(x = 1, y = 2, double_x = 2, double_y = 4)
+#' example_dt <- data.table(x = 1,
+#'                          y = 2,
+#'                          double_x = 2,
+#'                          double_y = 4)
 #'
 #' example_dt %>% dt_rename_all(str_replace, "x", "stuff")
 #'
@@ -35,6 +39,7 @@ dt_rename_all <- function(.data, .fun, ...) {
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   .cols <- colnames(.data)
+  .fun <- anon_x(.fun)
 
   for (old_name in .cols) {
     new_name <- .fun(old_name, ...)
@@ -53,6 +58,8 @@ dt_rename_at <- function(.data, .vars, .fun, ...) {
   .vars <- enexpr(.vars)
   .vars <- vec_selector(.data, !!.vars) %>%
     as.character()
+
+  .fun <- anon_x(.fun)
 
   if (length(.vars) > 0) {
     for (old_name in .vars) {
@@ -76,6 +83,8 @@ dt_rename_across <- function(.data, .cols, .fun, ...) {
   .vars <- vec_selector(.data, !!.vars) %>%
     as.character()
 
+  .fun <- anon_x(.fun)
+
   if (length(.vars) > 0) {
     for (old_name in .vars) {
       new_name <- .fun(old_name, ...)
@@ -95,6 +104,8 @@ dt_rename_if <- function(.data, .predicate, .fun, ...) {
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   .cols <- colnames(.data)[dt_map_lgl(.data, .predicate)]
+
+  .fun <- anon_x(.fun)
 
   if (length(.cols) > 0) {
     for (old_name in .cols) {

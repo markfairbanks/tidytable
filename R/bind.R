@@ -5,11 +5,12 @@
 #' Bind rows or columns together.
 #'
 #' @usage
-#' dt_bind_rows(...)
+#' dt_bind_rows(..., .id = NULL)
 #' dt_bind_cols(...)
 #'
 #' @param .data A data.table to bind, or a list of data.tables
 #' @param ... Data frames to bind
+#' @param .id If TRUE, and integer column is made as a group id
 #'
 #'
 #' @import data.table
@@ -29,7 +30,7 @@
 #'   dt_bind_cols(df2)
 #'
 #' dt_bind_cols(list(df1, df2))
-dt_bind_rows <- function(.data, ...) {
+dt_bind_rows <- function(.data, ..., .id = NULL) {
   # check if input .data is already a list; if not, transform to list
   if (class(.data)[1] != "list") {
     .data <- list(.data)
@@ -44,7 +45,7 @@ dt_bind_rows <- function(.data, ...) {
   if (!all(dt_map_lgl(dots, is.data.table)))
     dots <- dt_map(dots, as.data.table)
 
-  rbindlist(dots)
+  rbindlist(dots, idcol = .id)
 }
 
 #' @export
