@@ -8,8 +8,11 @@ Authors@R: c(
            email = "mark.t.fairbanks@gmail.com"),
     person(given = "Tyson",
            family = "Barrett",
+           role = "ctb"),
+    person(given = "Ivan",
+           family = "Leung",
            role = "ctb"))
-Description: What the package does (one paragraph).
+Description: Tidy interface to data.table
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
