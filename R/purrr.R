@@ -151,7 +151,7 @@ anon_x <- function(fn) {
     fn %>%
       deparse() %>%
       dt_str_replace("^~", "function(.x)") %>%
-      parse(text = .) %>%
+      parse_expr() %>%
       eval()
   } else {
     fn
@@ -163,7 +163,7 @@ anon_xy <- function(fn) {
     fn %>%
       deparse() %>%
       dt_str_replace("^~", "function(.x,.y)") %>%
-      parse(text = .) %>%
+      parse_expr() %>%
       eval()
   } else {
     fn

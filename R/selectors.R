@@ -29,7 +29,7 @@ vec_selector <- function(.data, select_vars) {
 
   select_vars <- data_names[select_index] %>%
     as.list() %>%
-    dt_map(as.name)
+    dt_map(sym)
 
   select_vars
 }
@@ -65,7 +65,7 @@ dots_selector <- function(.data, ...) {
 
   select_vars <- data_names[select_index] %>%
     as.list() %>%
-    dt_map(as.name)
+    dt_map(sym)
 
   select_vars
 }
