@@ -1,6 +1,4 @@
 vec_selector <- function(.data, select_vars) {
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   data_names <- colnames(.data)
   data_vars <- setNames(as.list(seq_along(.data)), data_names)
@@ -37,8 +35,6 @@ vec_selector <- function(.data, select_vars) {
 }
 
 dots_selector <- function(.data, ...) {
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   data_names <- colnames(.data)
   data_vars <- setNames(as.list(seq_along(.data)), data_names)
