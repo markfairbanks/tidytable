@@ -4,13 +4,10 @@
 #'
 #' Bind rows or columns together.
 #'
-#' @usage
-#' dt_bind_rows(..., .id = NULL)
-#' dt_bind_cols(...)
 #'
 #' @param .data A data.table to bind, or a list of data.tables
 #' @param ... Data frames to bind
-#' @param .id If TRUE, and integer column is made as a group id
+#' @param .id If TRUE, an integer column is made as a group id
 #'
 #'
 #' @import data.table

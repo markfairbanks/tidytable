@@ -20,7 +20,9 @@ Retain only unique/distinct rows from an input df.
 Supports enhanced selection if dots are used
 }
 \examples{
-example_dt <- data.table(x = 1:3, y = 4:6, z = c("a", "a", "b"))
+example_dt <- data.table(x = 1:3,
+                         y = 4:6,
+                         z = c("a", "a", "b"))
 
 example_dt \%>\%
   dt_distinct()

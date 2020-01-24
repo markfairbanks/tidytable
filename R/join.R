@@ -2,24 +2,22 @@
 #'
 #' @description Join two data.tables together
 #'
-#' @usage
-#' dt_left_join(x, y, by = NULL, suffix = c(".x", ".y"))
-#' dt_inner_join(x, y, by = NULL, suffix = c(".x", ".y"))
-#' dt_right_join(x, y, by = NULL, suffix = c(".x", ".y"))
-#' dt_full_join(x, y, by = NULL, suffix = c(".x", ".y"))
-#'
 #' @param x A data.frame or data.table
 #' @param y A data.frame or data.table
 #' @param by A character vector of variables to join by. If NULL, the default, the join will do a natural join, using all variables with common names across the two tables.
+#' @param suffix Append created for duplicated column names when using `dt_full_join()`
 #'
 #' @return A data.table
 #' @export
 #'
 #' @examples
-#' band_members %>% dt_left_join(band_instruments)
-#' band_members %>% dt_inner_join(band_instruments)
-#' band_members %>% dt_right_join(band_instruments)
-#' band_members %>% dt_full_join(band_instruments)
+#' df1 <- data.table(x = c("a","a","a","b","b"), y = 1:5)]
+#' df2 <- data.table(x = c("a","b"), z = 1:2)
+#' df1 %>% dt_left_join(df2)
+#' df1 %>% dt_inner_join(df2)
+#' df1 %>% dt_right_join(df2)
+#' df1 %>% dt_full_join(df2)
+#' df1 %>% dt_anti_join(df2)
 dt_left_join <- function(x, y, by = NULL) {
 
   by_x_y <- get_bys(x, y, by)
@@ -74,7 +72,7 @@ dt_full_join <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
 #' @rdname dt_left_join
 dt_anti_join <- function(x, y, by = NULL) {
 
-  by_x_y <- get_on(x, y, by)
+  by_x_y <- get_bys(x, y, by)
 
   by_x <- by_x_y[[1]]
   by_y <- by_x_y[[2]]

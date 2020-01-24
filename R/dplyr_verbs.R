@@ -15,12 +15,6 @@
 #' @param ... Values passed to `tidydt` functions
 #' @param by `list()` of bare column names to group by
 #'
-#' @usage
-#' dt_mutate(.data, ..., by = NULL)
-#' dt_select(.data, ...)
-#' dt_filter(.data, ...)
-#' dt_arrange(.data, ...)
-#' dt_summarize(.data, ..., by = NULL)
 #'
 #' @import data.table
 #' @md
@@ -28,7 +22,10 @@
 #' @export
 #'
 #' @examples
-#' example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a","a","b"), a = c("a","a","b"))
+#' example_dt <- data.table(x = c(1,2,3),
+#'                          y = c(4,5,6),
+#'                          z = c("a","a","b"),
+#'                          a = c("a","a","b"))
 #'
 #' example_dt %>%
 #'   dt_select(x, y, z) %>%

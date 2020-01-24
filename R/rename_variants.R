@@ -3,15 +3,16 @@
 #' @description
 #' These scoped variants of `rename()` operate on a selection of variables
 #'
-#' Supports enhanced selection
-#' @usage
-#' dt_rename_all(.data, .fun, ...)
+#' There are two variants:
 #'
-#' dt_rename_across(.data, .predicate, .fun, ...)
+#' * `dt_rename_all()`
+#' * `dt_rename_across()`: Replaces both `mutate_if()` & `mutate_at()`
+#'
+#' Supports enhanced selection
 #'
 #'
 #' @param .data A data.frame or data.table
-#' @param .cols vector `c()` of bare column names for `dt_rename_at()` to use
+#' @param .cols vector `c()` of bare column names for `dt_mutate_across()` to use
 #' @param .fun Function to pass
 #' @param ... Other arguments for the passed function
 #'

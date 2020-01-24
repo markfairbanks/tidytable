@@ -13,8 +13,6 @@
 #' @md
 #' @usage
 #'
-#' dt_mutate_across(.data, .cols, .fun, ...)
-#' dt_mutate_all(.data, .fun, ...)
 #'
 #' @param .data A data.frame or data.table
 #' @param .cols vector `c()` of bare column names for `dt_mutate_across()` to use

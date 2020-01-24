@@ -7,7 +7,7 @@
 as_dt(.data)
 }
 \arguments{
-\item{.data}{A data.frame}
+\item{.data}{A data.frame or data.table}
 }
 \value{
 A data.table

@@ -9,8 +9,6 @@
 \usage{
 dt_rename_all(.data, .fun, ...)
 
-dt_rename_across(.data, .predicate, .fun, ...)
-
 dt_rename_at(.data, .vars, .fun, ...)
 
 dt_rename_across(.data, .cols, .fun, ...)
@@ -24,13 +22,19 @@ dt_rename_if(.data, .predicate, .fun, ...)
 
 \item{...}{Other arguments for the passed function}
 
-\item{.cols}{vector \code{c()} of bare column names for \code{dt_rename_at()} to use}
+\item{.cols}{vector \code{c()} of bare column names for \code{dt_mutate_across()} to use}
 }
 \value{
 
 }
 \description{
 These scoped variants of \code{rename()} operate on a selection of variables
+
+There are two variants:
+\itemize{
+\item \code{dt_rename_all()}
+\item \code{dt_rename_across()}: Replaces both \code{mutate_if()} & \code{mutate_at()}
+}
 
 Supports enhanced selection
 }

@@ -4,7 +4,7 @@
 #' This function allows you to use multiple if/else statements in one call.
 #' Note that this function is called differently than `dplyr::case_when`! See examples
 #'
-#' @param ... Sequence of condition, value designations
+#' @param ... Sequence of condition/value designations
 #' @param default Default value. Set to NA. Argument must be named.
 #'
 #' @return A vector

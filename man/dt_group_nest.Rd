@@ -9,7 +9,7 @@ dt_group_nest(.data, ..., .key = "data")
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{...}{bare column names to group by}
+\item{...}{bare column names to group by. If empty nests the entire data.table}
 
 \item{.key}{Name of the new column created by nesting}
 }

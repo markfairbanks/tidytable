@@ -7,8 +7,7 @@
 \alias{dt_mutate_all}
 \title{Mutate}
 \usage{
-dt_mutate_across(.data, .cols, .fun, ...)
-dt_mutate_all(.data, .fun, ...)
+
 
 dt_mutate_at(.data, .cols, .fun, ...)
 

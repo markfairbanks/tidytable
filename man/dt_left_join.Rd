@@ -8,10 +8,7 @@
 \alias{dt_anti_join}
 \title{Join two data.tables together}
 \usage{
-dt_left_join(x, y, by = NULL, suffix = c(".x", ".y"))
-dt_inner_join(x, y, by = NULL, suffix = c(".x", ".y"))
-dt_right_join(x, y, by = NULL, suffix = c(".x", ".y"))
-dt_full_join(x, y, by = NULL, suffix = c(".x", ".y"))
+dt_left_join(x, y, by = NULL)
 
 dt_inner_join(x, y, by = NULL)
 
@@ -27,6 +24,8 @@ dt_anti_join(x, y, by = NULL)
 \item{y}{A data.frame or data.table}
 
 \item{by}{A character vector of variables to join by. If NULL, the default, the join will do a natural join, using all variables with common names across the two tables.}
+
+\item{suffix}{Append created for duplicated column names when using `dt_full_join()`}
 }
 \value{
 A data.table
@@ -35,8 +34,11 @@ A data.table
 Join two data.tables together
 }
 \examples{
-band_members \%>\% dt_left_join(band_instruments)
-band_members \%>\% dt_inner_join(band_instruments)
-band_members \%>\% dt_right_join(band_instruments)
-band_members \%>\% dt_full_join(band_instruments)
+df1 <- data.table(x = c("a","a","a","b","b"), y = 1:5)]
+df2 <- data.table(x = c("a","b"), z = 1:2)
+df1 \%>\% dt_left_join(df2)
+df1 \%>\% dt_inner_join(df2)
+df1 \%>\% dt_right_join(df2)
+df1 \%>\% dt_full_join(df2)
+df1 \%>\% dt_anti_join(df2)
 }

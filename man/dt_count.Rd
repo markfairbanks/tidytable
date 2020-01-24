@@ -9,7 +9,7 @@ dt_count(.data, ...)
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{...}{}
+\item{...}{Optional: Bare column names to group by}
 }
 \value{
 A data.table
