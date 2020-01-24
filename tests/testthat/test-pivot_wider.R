@@ -27,12 +27,10 @@ test_that("implicit missings turn into explicit missings", {
 })
 
 test_that("can override default keys", {
-  df <- dplyr::tribble(
-    ~row, ~name, ~var, ~value,
-    1,    "Sam", "age", 10,
-    2,    "Sam", "height", 1.5,
-    3,    "Bob", "age", 20,
-  )
+  df <- data.table(row = 1:3,
+                   name = c("Sam", "Sam", "Bob"),
+                   var = c("age", "height", "age"),
+                   value = c(10, 1.5, 20))
 
   pv <- dt_pivot_wider(df, id_cols = name, names_from = var, values_from = value)
   expect_equal(nrow(pv), 2)

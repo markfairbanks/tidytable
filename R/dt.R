@@ -3,6 +3,28 @@
 #' @description
 #' Pipeable data.table call
 #'
+#' @param ... See ?data.table:::`[.data.table`
+#' @param keep.rownames See ?data.table:::`[.data.table`
+#' @param check.names See ?data.table:::`[.data.table`
+#' @param key See ?data.table:::`[.data.table`
+#' @param stringsAsFactors See ?data.table:::`[.data.table`
+#' @param x See ?data.table:::`[.data.table`
+#' @param i See ?data.table:::`[.data.table`
+#' @param j See ?data.table:::`[.data.table`
+#' @param by See ?data.table:::`[.data.table`
+#' @param keyby See ?data.table:::`[.data.table`
+#' @param with See ?data.table:::`[.data.table`
+#' @param nomatch See ?data.table:::`[.data.table`
+#' @param mult See ?data.table:::`[.data.table`
+#' @param roll See ?data.table:::`[.data.table`
+#' @param rollends See ?data.table:::`[.data.table`
+#' @param which See ?data.table:::`[.data.table`
+#' @param .SDcols See ?data.table:::`[.data.table`
+#' @param verbose See ?data.table:::`[.data.table`
+#' @param allow.cartesian See ?data.table:::`[.data.table`
+#' @param drop See ?data.table:::`[.data.table`
+#' @param on See ?data.table:::`[.data.table`
+#'
 #' @export
 #'
 #' @examples

@@ -16,7 +16,7 @@ dt_ends_with(match)
 dt_everything()
 }
 \arguments{
-\item{match}{}
+\item{match}{The match for the helper function to use}
 }
 \value{
 

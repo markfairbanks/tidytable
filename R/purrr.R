@@ -9,8 +9,10 @@
 #' @usage
 #'
 #' @param .x A list or vector
+#' @param .y A list or vector
 #' @param .f A function
 #' @param ... Other arguments to pass to a function
+#' @param .id Whether `dt_map_dfr()` should add an id column to the finished dataset
 #'
 #' @md
 #' @return

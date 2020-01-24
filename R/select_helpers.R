@@ -8,7 +8,7 @@
 #' * `dt_contains()`: Contains a literal string
 #' * `dt_everything()`: Matches all variables
 #'
-#' @param match
+#' @param match The match for the helper function to use
 #'
 #' @md
 #' @return

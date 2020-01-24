@@ -54,6 +54,10 @@ dt_map2_dfr(.x, .y, .f, ..., .id = NULL)
 \item{.f}{A function}
 
 \item{...}{Other arguments to pass to a function}
+
+\item{.id}{Whether \code{dt_map_dfr()} should add an id column to the finished dataset}
+
+\item{.y}{A list or vector}
 }
 \value{
 

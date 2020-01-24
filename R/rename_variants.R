@@ -6,13 +6,14 @@
 #' There are two variants:
 #'
 #' * `dt_rename_all()`
-#' * `dt_rename_across()`: Replaces both `mutate_if()` & `mutate_at()`
+#' * `dt_rename_across()`: Replaces both `dt_rename_if()` & `dt_rename_at()`
 #'
 #' Supports enhanced selection
 #'
 #'
 #' @param .data A data.frame or data.table
-#' @param .cols vector `c()` of bare column names for `dt_mutate_across()` to use
+#' @param .cols vector `c()` of bare column names for `dt_rename_across()` to use
+#' @param .vars vector `c()` of bare column names for `dt_rename_at()` to use
 #' @param .fun Function to pass
 #' @param ... Other arguments for the passed function
 #'

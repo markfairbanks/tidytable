@@ -24,6 +24,49 @@ dt(
   on = NULL
 )
 }
+\arguments{
+\item{x}{See ?data.table:::`[.data.table`}
+
+\item{i}{See ?data.table:::`[.data.table`}
+
+\item{j}{See ?data.table:::`[.data.table`}
+
+\item{by}{See ?data.table:::`[.data.table`}
+
+\item{keyby}{See ?data.table:::`[.data.table`}
+
+\item{with}{See ?data.table:::`[.data.table`}
+
+\item{nomatch}{See ?data.table:::`[.data.table`}
+
+\item{mult}{See ?data.table:::`[.data.table`}
+
+\item{roll}{See ?data.table:::`[.data.table`}
+
+\item{rollends}{See ?data.table:::`[.data.table`}
+
+\item{which}{See ?data.table:::`[.data.table`}
+
+\item{.SDcols}{See ?data.table:::`[.data.table`}
+
+\item{verbose}{See ?data.table:::`[.data.table`}
+
+\item{allow.cartesian}{See ?data.table:::`[.data.table`}
+
+\item{drop}{See ?data.table:::`[.data.table`}
+
+\item{on}{See ?data.table:::`[.data.table`}
+
+\item{...}{See ?data.table:::`[.data.table`}
+
+\item{keep.rownames}{See ?data.table:::`[.data.table`}
+
+\item{check.names}{See ?data.table:::`[.data.table`}
+
+\item{key}{See ?data.table:::`[.data.table`}
+
+\item{stringsAsFactors}{See ?data.table:::`[.data.table`}
+}
 \description{
 Pipeable data.table call
 }
