@@ -50,7 +50,8 @@ example_dt <- data.table(x = c(1,2,3),
                          a = c("a","a","b"))
 
 example_dt \%>\%
-  dt_select(x, y, z) \%>\%
+  as_dt() \%<\%
+  dt_select(x, y, z, a) \%>\%
   dt_mutate(double_x = x * 2,
             double_y = y * 2) \%>\%
   dt_filter(double_x > 0, double_y > 0) \%>\%
