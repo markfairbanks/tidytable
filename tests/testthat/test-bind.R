@@ -51,3 +51,18 @@ test_that("bind_cols() works with data.tables", {
   expect_equal(bind_df$a, c(1,2,3))
   expect_equal(bind_df$b, c(3,4,5))
 })
+
+test_that("names are fixed", {
+  df1 <- data.table(x = c(1,2,3), y = c(3,4,5))
+  df2 <- data.table(x = c(1,2,3), y = c(3,4,5))
+
+  df_list <- list(df1, df2)
+
+  bind_df <- dt_bind_cols(df_list)
+
+  expect_named(bind_df, c("x","y","x1","y1"))
+  expect_equal(bind_df$x, c(1,2,3))
+  expect_equal(bind_df$y, c(3,4,5))
+  expect_equal(bind_df$x1, c(1,2,3))
+  expect_equal(bind_df$y1, c(3,4,5))
+})

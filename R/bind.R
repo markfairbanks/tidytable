@@ -65,5 +65,24 @@ dt_bind_cols <- function(.data, ...) {
   if (!all(dt_map_lgl(dots, is.data.table)))
     dots <- dt_map(dots, as.data.table)
 
-  do.call(cbind, dots)
+  result_df <- name_fix(do.call(cbind, dots))
+
+  result_df
+}
+
+
+name_fix <- function(.data) {
+
+  col_names <- names(.data)
+
+  dupe_count <- dt_map_dbl(seq_along(col_names), function(i) sum(col_names[i] == col_names[1:i]))
+
+  col_names[dupe_count > 1] <- paste0(
+    col_names[dupe_count > 1],
+    dupe_count[dupe_count > 1] - 1
+  )
+
+  names(.data) <- col_names
+
+  .data
 }
