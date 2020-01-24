@@ -50,7 +50,7 @@ example_dt <- data.table(x = c(1,2,3),
                          a = c("a","a","b"))
 
 example_dt \%>\%
-  as_dt() \%<\%
+  as_dt() \%>\%
   dt_select(x, y, z, a) \%>\%
   dt_mutate(double_x = x * 2,
             double_y = y * 2) \%>\%
