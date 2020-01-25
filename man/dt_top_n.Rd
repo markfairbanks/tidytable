@@ -22,11 +22,10 @@ A data.table
 This is a wrapper that uses \code{dt[order()]} to select the top or bottom entries in each group, ordered by \code{wt}.
 }
 \examples{
-library(data.table)
-
-example_dt <- data.table(x = 1:5,
-                         y = 6:10,
-                         z = c(rep("a", 3), rep("b", 2)))
+example_dt <- data.table::data.table(
+  x = 1:5,
+  y = 6:10,
+  z = c(rep("a", 3), rep("b", 2)))
 
 example_dt \%>\%
   dt_top_n(2, wt = y)

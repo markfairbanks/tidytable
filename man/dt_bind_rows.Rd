@@ -20,10 +20,8 @@ dt_bind_cols(.data, ...)
 Bind rows or columns together.
 }
 \examples{
-library(data.table)
-
-df1 <- data.table(x = c(1,2,3), y = c(3,4,5))
-df2 <- data.table(x = c(1,2,3), y = c(3,4,5))
+df1 <- data.table::data.table(x = c(1,2,3), y = c(3,4,5))
+df2 <- data.table::data.table(x = c(1,2,3), y = c(3,4,5))
 
 df1 \%>\%
   dt_bind_rows(df2)

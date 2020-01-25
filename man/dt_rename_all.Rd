@@ -40,9 +40,7 @@ There are two variants:
 Supports enhanced selection
 }
 \examples{
-library(data.table)
-
-example_dt <- data.table(x = 1,
+example_dt <- data.table::data.table(x = 1,
                          y = 2,
                          double_x = 2,
                          double_y = 4)

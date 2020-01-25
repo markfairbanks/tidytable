@@ -11,10 +11,9 @@
 #' @export
 #'
 #' @examples
-#' library(data.table)
+#' df1 <- data.table::data.table(x = c("a","a","a","b","b"), y = 1:5)
+#' df2 <- data.table::data.table(x = c("a","b"), z = 1:2)
 #'
-#' df1 <- data.table(x = c("a","a","a","b","b"), y = 1:5)
-#' df2 <- data.table(x = c("a","b"), z = 1:2)
 #' df1 %>% dt_left_join(df2)
 #' df1 %>% dt_inner_join(df2)
 #' df1 %>% dt_right_join(df2)

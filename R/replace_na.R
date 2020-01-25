@@ -12,9 +12,7 @@
 #' @md
 #'
 #' @examples
-#' library(data.table)
-#'
-#' example_dt <- data.table(x = c(1, 2, NA), y = c(NA, 1, 2))
+#' example_dt <- data.table::data.table(x = c(1, 2, NA), y = c(NA, 1, 2))
 #'
 #' example_dt %>%
 #'   dt_mutate(x = dt_replace_na(x, 5))

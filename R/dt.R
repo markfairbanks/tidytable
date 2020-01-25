@@ -25,8 +25,6 @@
 #' @import data.table
 #' @importFrom data.table data.table
 #' @examples
-#' library(data.table)
-#'
 #' example_dt <- data.table::data.table(
 #'   x = c(1,2,3),
 #'   y = c(4,5,6),

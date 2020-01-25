@@ -26,7 +26,7 @@
 #' @examples
 #' library(data.table)
 #'
-#' example_dt <- data.table(x = c(1,1,1),
+#' example_dt <- data.table::data.table(x = c(1,1,1),
 #'                          y = c(2,2,2),
 #'                          z = c("a", "a", "b"))
 #'

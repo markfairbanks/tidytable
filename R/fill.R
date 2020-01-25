@@ -13,9 +13,7 @@
 #' @md
 #'
 #' @examples
-#' library(data.table)
-#'
-#' test_df <- data.table(x = c(NA, NA, NA, 4:10),
+#' test_df <- data.table::data.table(x = c(NA, NA, NA, 4:10),
 #'                       y = c(1:6, NA, 8, NA, 10),
 #'                       z = c(rep("a", 8), rep("b", 2)))
 #'

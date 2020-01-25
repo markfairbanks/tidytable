@@ -21,7 +21,7 @@ Note that this function is called differently than `dplyr::case_when`! See examp
 \examples{
 library(data.table)
 
-test_df <- data.table(
+test_df <- data.table::data.table(
   a = 1:10,
   b = 11:20,
   c = c(rep("a", 6), rep("b", 4)),

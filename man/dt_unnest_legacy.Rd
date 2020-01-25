@@ -22,12 +22,11 @@ Unnest a nested data.table.
 Supports enhanced selection
 }
 \examples{
-library(data.table)
-
-nested_df <- data.table(a = 1:10,
-                      b = 11:20,
-                      c = c(rep("a", 6), rep("b", 4)),
-                      d = c(rep("a", 4), rep("b", 6))) \%>\%
+nested_df <- data.table::data.table(
+  a = 1:10,
+  b = 11:20,
+  c = c(rep("a", 6), rep("b", 4)),
+  d = c(rep("a", 4), rep("b", 6))) \%>\%
   dt_group_nest(c, d)
 
 nested_df \%>\%

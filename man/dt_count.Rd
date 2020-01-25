@@ -20,9 +20,7 @@ Returns row counts of the dataset. If bare column names are provided, \code{dt_c
 Supports enhanced selection
 }
 \examples{
-library(data.table)
-
-example_df <- data.table(x = 1:3, y = 4:6, z = c("a", "a", "b"))
+example_df <- data.table::data.table(x = 1:3, y = 4:6, z = c("a", "a", "b"))
 
 example_df \%>\%
   dt_count()
