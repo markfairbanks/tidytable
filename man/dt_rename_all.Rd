@@ -40,7 +40,6 @@ There are two variants:
 Supports enhanced selection
 }
 \examples{
-library(stringr)
 library(data.table)
 
 example_dt <- data.table(x = 1,
@@ -48,9 +47,9 @@ example_dt <- data.table(x = 1,
                          double_x = 2,
                          double_y = 4)
 
-as_dt(example_dt) \%>\% dt_rename_all(str_replace, "x", "stuff")
+as_dt(example_dt) \%>\% dt_rename_all(~ sub("x", "stuff", .x))
 
 as_dt(example_dt) \%>\%
-  dt_rename_across(c(x, double_x), str_replace, "x", "stuff")
+  dt_rename_across(c(x, double_x), ~ sub("x", "stuff", .x))
 
 }
