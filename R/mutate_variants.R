@@ -24,6 +24,8 @@
 #' @export
 #'
 #' @examples
+#' library(data.table)
+#'
 #' example_dt <- data.table(x = c(1,1,1),
 #'                          y = c(2,2,2),
 #'                          z = c("a", "a", "b"))
@@ -39,6 +41,12 @@
 #' example_dt %>%
 #'   as_dt() %>%
 #'   dt_mutate_across(c(x, y), list(new = ~ .x * 2))
+#'
+#' @import data.table
+#' @importFrom rlang enexprs
+#' @importFrom rlang eval_tidy
+#' @importFrom rlang expr
+#' @importFrom rlang is_named
 dt_mutate_if <- function(.data, .predicate, .fun, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")

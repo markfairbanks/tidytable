@@ -12,7 +12,7 @@
 #' @md
 #'
 #' @examples
-#' library(tidydt)
+#' library(data.table)
 #'
 #' example_dt <- data.table(x = c(1,2,3,4), y = c(4,5,6,7), z = c("a", "a", "a", "b"))
 #'
@@ -21,6 +21,12 @@
 #'
 #' example_dt %>%
 #'   dt_slice(1, by = z)
+#'
+#' @import data.table
+#' @importFrom rlang enexprs
+#' @importFrom rlang eval_tidy
+#' @importFrom rlang expr
+#' @importFrom rlang enexpr
 dt_slice <- function(.data, rows = 1:5, by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)

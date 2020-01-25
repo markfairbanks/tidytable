@@ -14,27 +14,29 @@
 #' @param .data A data.frame or data.table
 #' @param .cols vector `c()` of bare column names for `dt_rename_across()` to use
 #' @param .vars vector `c()` of bare column names for `dt_rename_at()` to use
+#' @param .predicate Predicate to pass to `dt_rename_if()`
 #' @param .fun Function to pass
 #' @param ... Other arguments for the passed function
 #'
 #' @md
-#' @return
 #' @export
 #'
 #' @examples
+#' library(stringr)
+#' library(data.table)
 #'
 #' example_dt <- data.table(x = 1,
 #'                          y = 2,
 #'                          double_x = 2,
 #'                          double_y = 4)
 #'
-#' example_dt %>% dt_rename_all(str_replace, "x", "stuff")
+#' as_dt(example_dt) %>% dt_rename_all(str_replace, "x", "stuff")
 #'
-#' example_dt %>%
+#' as_dt(example_dt) %>%
 #'   dt_rename_across(c(x, double_x), str_replace, "x", "stuff")
 #'
-#' example_dt %>%
-#'   dt_rename_across(is.double, function(x) str_replace(x, "x", "stuff"))
+#' @import data.table
+#' @importFrom rlang expr
 dt_rename_all <- function(.data, .fun, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")

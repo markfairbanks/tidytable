@@ -3,7 +3,6 @@
 #' @param x vector or NULL
 #' @param y vector or NULL
 #'
-#' @return
 #' @export
 #'
 #' @examples

@@ -11,10 +11,11 @@
 #' @param match The match for the helper function to use
 #'
 #' @md
-#' @return
 #' @export
 #'
 #' @examples
+#' library(data.table)
+#'
 #' example_dt <- data.table(x = 1, y = 2, double_x = 2, double_y = 4)
 #'
 #' example_dt %>%
@@ -22,6 +23,9 @@
 #'
 #' example_dt %>%
 #' dt_select(dt_ends_with("y"))
+#'
+#' @import data.table
+#' @importFrom rlang caller_env
 dt_starts_with <- function(match) {
   .names <- names(caller_env())
   .names <- .names[!.names %in% c("is.integer", "is.double", "is.numeric",

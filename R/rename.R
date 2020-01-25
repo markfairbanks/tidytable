@@ -10,12 +10,16 @@
 #' @export
 #'
 #' @examples
+#' library(data.table)
+#'
 #' dt <- data.table(x = c(1,2,3), y = c(4,5,6))
 #'
 #' dt %>%
 #'   dt_rename(new_x = x,
 #'             new_y = y)
 #'
+#' @import data.table
+#' @importFrom rlang enexprs
 dt_rename <- function(.data, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")

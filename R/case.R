@@ -11,10 +11,13 @@
 #' @export
 #'
 #' @examples
-#' test_df <- data.table(a = 1:10,
-#'                       b = 11:20,
-#'                       c = c(rep("a", 6), rep("b", 4)),
-#'                       d = c(rep("a", 4), rep("b", 6)))
+#' library(data.table)
+#'
+#' test_df <- data.table(
+#'   a = 1:10,
+#'   b = 11:20,
+#'   c = c(rep("a", 6), rep("b", 4)),
+#'   d = c(rep("a", 4), rep("b", 6)))
 #'
 #' test_df %>%
 #'   as_dt() %>%
@@ -25,6 +28,9 @@
 #'   as_dt() %>%
 #'   dt_mutate(x = dt_case(c == "a","a",
 #'                         default = d))
+#' @import data.table
+#' @importFrom rlang enexprs
+#' @importFrom rlang abort
 dt_case <- function(..., default = NA) {
   dots <- enexprs(...)
 

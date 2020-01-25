@@ -12,7 +12,7 @@ Authors@R: c(
     person(given = "Ivan",
            family = "Leung",
            role = "ctb"))
-Description: Tidy interface to data.table
+Description: This package is a tidy interface to `data.table`. It is rlang compatible, which allows the user to build custom functions much like they would in the tidyverse
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

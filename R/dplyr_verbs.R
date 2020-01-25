@@ -22,6 +22,8 @@
 #' @export
 #'
 #' @examples
+#' library(data.table)
+#'
 #' example_dt <- data.table(x = c(1,2,3),
 #'                          y = c(4,5,6),
 #'                          z = c("a","a","b"),
@@ -35,6 +37,12 @@
 #'   dt_filter(double_x > 0, double_y > 0) %>%
 #'   dt_arrange(-double_x) %>%
 #'   dt_summarize(avg_x = mean(x), by = list(a, z))
+#'
+#' @import data.table
+#' @importFrom rlang enexpr
+#' @importFrom rlang enexprs
+#' @importFrom rlang eval_tidy
+#' @importFrom rlang expr
 dt_mutate <- function(.data, ..., by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
@@ -49,18 +57,6 @@ dt_mutate <- function(.data, ..., by = NULL) {
   }
   .data
 }
-
-# dt_mutate <- function(.data, ..., by = NULL) {
-#   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-#   if (!is.data.table(.data)) .data <- as.data.table(.data)
-#
-#   dots <- enexprs(...)
-#   by <- enexpr(by)
-#
-#   eval_tidy(expr(
-#     .data[, ':='(!!!dots), !!by][]
-#   ))
-# }
 
 #' @export
 #' @rdname dt_mutate

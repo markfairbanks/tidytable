@@ -4,10 +4,6 @@
 #' Pipeable data.table call
 #'
 #' @param ... See ?data.table:::`[.data.table`
-#' @param keep.rownames See ?data.table:::`[.data.table`
-#' @param check.names See ?data.table:::`[.data.table`
-#' @param key See ?data.table:::`[.data.table`
-#' @param stringsAsFactors See ?data.table:::`[.data.table`
 #' @param x See ?data.table:::`[.data.table`
 #' @param i See ?data.table:::`[.data.table`
 #' @param j See ?data.table:::`[.data.table`
@@ -26,11 +22,15 @@
 #' @param on See ?data.table:::`[.data.table`
 #'
 #' @export
-#'
+#' @import data.table
+#' @importFrom data.table data.table
 #' @examples
-#' example_dt <- data.table(x = c(1,2,3),
-#'                          y = c(4,5,6),
-#'                          z = c("a", "a", "b"))
+#' library(data.table)
+#'
+#' example_dt <- data.table::data.table(
+#'   x = c(1,2,3),
+#'   y = c(4,5,6),
+#'   z = c("a", "a", "b"))
 #'
 #' example_dt %>%
 #'   as_dt() %>%

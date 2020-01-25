@@ -9,10 +9,11 @@
 #' @param ... bare column names to group by. If empty nests the entire data.table
 #' @param .key Name of the new column created by nesting
 #'
-#' @return
 #' @export
 #'
 #' @examples
+#' library(data.table)
+#'
 #' test_df <- data.table(a = 1:10,
 #'                       b = 11:20,
 #'                       c = c(rep("a", 6), rep("b", 4)),
@@ -26,6 +27,11 @@
 #'
 #' test_df %>%
 #'   dt_group_nest(is.character)
+#'
+#' @import data.table
+#' @importFrom rlang enexprs
+#' @importFrom rlang eval_tidy
+#' @importFrom rlang expr
 dt_group_nest <- function(.data, ..., .key = "data") {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)

@@ -13,6 +13,8 @@
 #' @md
 #'
 #' @examples
+#' library(data.table)
+#'
 #' example_df <- data.table(x = 1:3, y = 4:6, z = c("a", "a", "b"))
 #'
 #' example_df %>%
@@ -23,6 +25,9 @@
 #'
 #' example_df %>%
 #'   dt_count(is.character)
+#'
+#' @import data.table
+#' @importFrom rlang enexprs
 dt_count <- function(.data, ...) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)

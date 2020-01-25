@@ -13,6 +13,8 @@
 #' @md
 #'
 #' @examples
+#' library(data.table)
+#'
 #' test_df <- data.table(x = c(NA, NA, NA, 4:10),
 #'                       y = c(1:6, NA, 8, NA, 10),
 #'                       z = c(rep("a", 8), rep("b", 2)))
@@ -22,6 +24,11 @@
 #'
 #' test_df %>%
 #'   dt_fill(x, y, by = z, .direction = "downup")
+#'
+#' @import data.table
+#' @importFrom rlang enexprs
+#' @importFrom rlang eval_tidy
+#' @importFrom rlang expr
 dt_fill <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)

@@ -8,12 +8,12 @@
 #' @param .data A data.frame or data.table
 #' @param ... A selection of columns. If empty, all variables are selected.
 #'
-#' @import data.table
 #' @return A data.table
 #' @export
 #'
 #' @examples
 #' library(data.table)
+#'
 #' df <- data.table(x = c(1, 2, NA), y = c("a", NA, "b"))
 #' df %>%
 #'   dt_drop_na()
@@ -23,6 +23,13 @@
 #'
 #' df %>%
 #'   dt_drop_na(is.numeric)
+#'
+#' @import data.table
+#' @importFrom rlang enexprs
+#' @importFrom rlang eval_tidy
+#' @importFrom rlang expr
+#' @importFrom rlang sym
+#' @importFrom stats na.omit
 dt_drop_na <- function(.data, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
