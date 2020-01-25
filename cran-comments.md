@@ -8,3 +8,6 @@
 0 errors | 0 warnings | 2 notes
 
 * This is a new release.
+
+There was 1 note:
+* These are regarding the use of NSE variables used with data.table.
