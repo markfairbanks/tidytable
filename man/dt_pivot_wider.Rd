@@ -36,6 +36,7 @@ Supports enhanced selection
 \examples{
 
 library(data.table)
+
 example_dt <- data.table(z = rep(c("a", "b", "c"), 2),
                          stuff = c(rep("x", 3), rep("y", 3)),
                          things = 1:6)

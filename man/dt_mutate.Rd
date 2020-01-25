@@ -44,6 +44,8 @@ The core dplyr verbs can be used in \code{tidydt}:
 \code{dt_select()} supports enhanced selection
 }
 \examples{
+library(data.table)
+
 example_dt <- data.table(x = c(1,2,3),
                          y = c(4,5,6),
                          z = c("a","a","b"),
@@ -57,4 +59,5 @@ example_dt \%>\%
   dt_filter(double_x > 0, double_y > 0) \%>\%
   dt_arrange(-double_x) \%>\%
   dt_summarize(avg_x = mean(x), by = list(a, z))
+
 }

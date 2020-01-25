@@ -18,6 +18,8 @@ A data.table
 Rename variables from a data.table.
 }
 \examples{
+library(data.table)
+
 dt <- data.table(x = c(1,2,3), y = c(4,5,6))
 
 dt \%>\%

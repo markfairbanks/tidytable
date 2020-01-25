@@ -19,10 +19,13 @@ This function allows you to use multiple if/else statements in one call.
 Note that this function is called differently than `dplyr::case_when`! See examples
 }
 \examples{
-test_df <- data.table(a = 1:10,
-                      b = 11:20,
-                      c = c(rep("a", 6), rep("b", 4)),
-                      d = c(rep("a", 4), rep("b", 6)))
+library(data.table)
+
+test_df <- data.table(
+  a = 1:10,
+  b = 11:20,
+  c = c(rep("a", 6), rep("b", 4)),
+  d = c(rep("a", 4), rep("b", 6)))
 
 test_df \%>\%
   as_dt() \%>\%

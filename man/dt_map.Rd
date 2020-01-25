@@ -59,9 +59,6 @@ dt_map2_dfr(.x, .y, .f, ..., .id = NULL)
 
 \item{.y}{A list or vector}
 }
-\value{
-
-}
 \description{
 The dt_map functions transform their input by applying a function to each element and returning a vector the same length as the input.
 \itemize{
@@ -76,4 +73,5 @@ dt_map(c(1,2,3), ~.x + 1)
 dt_map_dbl(c(1,2,3), ~.x + 1)
 
 dt_map_chr(c(1,2,3), as.character)
+
 }

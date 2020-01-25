@@ -18,8 +18,11 @@ A vector
 Pull a single variable from a data.table as a vector.
 }
 \examples{
+library(data.table)
+
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6))
 
 example_dt \%>\%
   dt_pull(y)
+
 }

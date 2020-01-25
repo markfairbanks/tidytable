@@ -22,6 +22,8 @@ Unnest a nested data.table.
 Supports enhanced selection
 }
 \examples{
+library(data.table)
+
 nested_df <- data.table(a = 1:10,
                       b = 11:20,
                       c = c(rep("a", 6), rep("b", 4)),
@@ -33,4 +35,5 @@ nested_df \%>\%
 
 nested_df \%>\%
   dt_unnest_legacy(data, keep = is.character)
+
 }

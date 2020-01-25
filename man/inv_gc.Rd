@@ -15,7 +15,11 @@ Run garbage collection without the `gc()` output. Can also be run in the middle 
 \examples{
 inv_gc()
 
+library(data.table)
+
+df <- data.table(col1 = 1, col2 = 2)
+
 df \%>\%
   inv_gc() \%>\%
-  select(col1, col2)
+  dt_select(col1, col2)
 }

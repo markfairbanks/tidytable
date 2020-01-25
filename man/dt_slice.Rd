@@ -20,7 +20,7 @@ data.table
 Choose rows by their ordinal position in a data.table. Grouped data.tables use the ordinal position within the group.
 }
 \examples{
-library(tidydt)
+library(data.table)
 
 example_dt <- data.table(x = c(1,2,3,4), y = c(4,5,6,7), z = c("a", "a", "a", "b"))
 
@@ -29,4 +29,5 @@ example_dt \%>\%
 
 example_dt \%>\%
   dt_slice(1, by = z)
+
 }

@@ -58,22 +58,17 @@ dt(
 \item{on}{See ?data.table:::`[.data.table`}
 
 \item{...}{See ?data.table:::`[.data.table`}
-
-\item{keep.rownames}{See ?data.table:::`[.data.table`}
-
-\item{check.names}{See ?data.table:::`[.data.table`}
-
-\item{key}{See ?data.table:::`[.data.table`}
-
-\item{stringsAsFactors}{See ?data.table:::`[.data.table`}
 }
 \description{
 Pipeable data.table call
 }
 \examples{
-example_dt <- data.table(x = c(1,2,3),
-                         y = c(4,5,6),
-                         z = c("a", "a", "b"))
+library(data.table)
+
+example_dt <- data.table::data.table(
+  x = c(1,2,3),
+  y = c(4,5,6),
+  z = c("a", "a", "b"))
 
 example_dt \%>\%
   as_dt() \%>\%

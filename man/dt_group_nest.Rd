@@ -13,15 +13,14 @@ dt_group_nest(.data, ..., .key = "data")
 
 \item{.key}{Name of the new column created by nesting}
 }
-\value{
-
-}
 \description{
 Nest data.tables by group
 
 Supports enhanced selection
 }
 \examples{
+library(data.table)
+
 test_df <- data.table(a = 1:10,
                       b = 11:20,
                       c = c(rep("a", 6), rep("b", 4)),
@@ -35,4 +34,5 @@ test_df \%>\%
 
 test_df \%>\%
   dt_group_nest(is.character)
+
 }

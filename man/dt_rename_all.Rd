@@ -25,9 +25,8 @@ dt_rename_if(.data, .predicate, .fun, ...)
 \item{.vars}{vector \code{c()} of bare column names for \code{dt_rename_at()} to use}
 
 \item{.cols}{vector \code{c()} of bare column names for \code{dt_rename_across()} to use}
-}
-\value{
 
+\item{.predicate}{Predicate to pass to \code{dt_rename_if()}}
 }
 \description{
 These scoped variants of \code{rename()} operate on a selection of variables
@@ -41,17 +40,17 @@ There are two variants:
 Supports enhanced selection
 }
 \examples{
+library(stringr)
+library(data.table)
 
 example_dt <- data.table(x = 1,
                          y = 2,
                          double_x = 2,
                          double_y = 4)
 
-example_dt \%>\% dt_rename_all(str_replace, "x", "stuff")
+as_dt(example_dt) \%>\% dt_rename_all(str_replace, "x", "stuff")
 
-example_dt \%>\%
+as_dt(example_dt) \%>\%
   dt_rename_across(c(x, double_x), str_replace, "x", "stuff")
 
-example_dt \%>\%
-  dt_rename_across(is.double, function(x) str_replace(x, "x", "stuff"))
 }
