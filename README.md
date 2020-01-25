@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidydt v0.3.1 <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
+# tidydt v0.3.0 <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
 
 <!-- badges: start -->
 
@@ -84,7 +84,7 @@ here](https://github.com/markfairbanks/tidydt#Enhanced-selection)
 The code chunk below shows the `tidydt` syntax:
 
 ``` r
-library(tidydt) # Loads data.table and %>%
+library(tidydt)
 
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
@@ -304,14 +304,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidydt   data.table tidydt_vs_tidyverse
 #>    <chr>           <chr>     <chr>    <chr>      <chr>              
-#>  1 arrange         1470ms    176.47ms 175.41ms   12.0%              
-#>  2 case_when       1190ms    427.18ms 530.97ms   35.9%              
-#>  3 fill            893ms     553ms    376ms      61.9%              
-#>  4 filter          227ms     196ms    198ms      86.3%              
-#>  5 inner_join      64ms      83.3ms   75.3ms     130.2%             
-#>  6 left_join       71.5ms    105.3ms  97.4ms     147.3%             
-#>  7 mutate          38.2ms    89.9ms   118ms      235.3%             
-#>  8 pivot_longer    80ms      19ms     11.5ms     23.7%              
-#>  9 pivot_wider     1550ms    224.51ms 232.24ms   14.5%              
-#> 10 summarize       425ms     227ms    221ms      53.4%
+#>  1 arrange         1470ms    179.2ms  179.04ms   12.2%              
+#>  2 case_when       1190ms    380.22ms 431.43ms   32.0%              
+#>  3 fill            978ms     575ms    397ms      58.8%              
+#>  4 filter          229ms     196ms    192ms      85.6%              
+#>  5 inner_join      64.9ms    81ms     70.6ms     124.8%             
+#>  6 left_join       69.8ms    97.7ms   96.5ms     140.0%             
+#>  7 mutate          37.3ms    97ms     115.6ms    260.1%             
+#>  8 pivot_longer    78ms      19.5ms   14.7ms     25.0%              
+#>  9 pivot_wider     1550ms    249.19ms 256.62ms   16.1%              
+#> 10 summarize       416ms     247ms    231ms      59.4%
 ```
