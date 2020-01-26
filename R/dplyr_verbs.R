@@ -105,6 +105,9 @@ dt_summarise <- dt_summarize
 #' @export
 #' @rdname dt_mutate
 dt_select <- function(.data, ...) {
+  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
+
   dots <- dots_selector(.data, ...)
 
   eval_tidy(expr(
