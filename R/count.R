@@ -13,7 +13,10 @@
 #' @md
 #'
 #' @examples
-#' example_df <- data.table::data.table(x = 1:3, y = 4:6, z = c("a", "a", "b"))
+#' example_df <- data.table::data.table(
+#'   x = 1:3,
+#'   y = 4:6,
+#'   z = c("a", "a", "b"))
 #'
 #' example_df %>%
 #'   dt_count()

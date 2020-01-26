@@ -22,19 +22,20 @@
 #' @export
 #'
 #' @examples
-#' example_dt <- data.table::data.table(x = c(1,2,3),
-#'                          y = c(4,5,6),
-#'                          z = c("a","a","b"),
-#'                          a = c("a","a","b"))
+#' example_dt <- data.table::data.table(
+#'   a = c(1,2,3),
+#'   b = c(4,5,6),
+#'   c = c("a","a","b"),
+#'   d = c("a","a","b"))
 #'
 #' example_dt %>%
 #'   as_dt() %>%
-#'   dt_select(x, y, z, a) %>%
-#'   dt_mutate(double_x = x * 2,
-#'             double_y = y * 2) %>%
-#'   dt_filter(double_x > 0, double_y > 0) %>%
-#'   dt_arrange(-double_x) %>%
-#'   dt_summarize(avg_x = mean(x), by = list(a, z))
+#'   dt_select(a, b, c, d) %>%
+#'   dt_mutate(double_a = a * 2,
+#'             double_b = b * 2) %>%
+#'   dt_filter(double_a > 0, double_b > 0) %>%
+#'   dt_arrange(-double_a) %>%
+#'   dt_summarize(avg_a = mean(a), by = list(c, d))
 #'
 #' @import data.table
 #' @importFrom rlang enexpr

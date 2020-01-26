@@ -15,7 +15,7 @@
 #' example_dt <- data.table::data.table(
 #'   x = c(1,2,3,4),
 #'   y = c(4,5,6,7),
-#'   z = c("a", "a", "a", "b"))
+#'   z = c("a","a","a","b"))
 #'
 #' example_dt %>%
 #'   dt_slice(1:4)
@@ -46,4 +46,70 @@ dt_slice <- function(.data, rows = 1:5, by = NULL) {
       .data[, .SD[!!rows], !!by]
     ))
   }
+}
+
+#' @export
+#' @rdname dt_slice
+dt_slice_head <- function(.data, n, by = NULL) {
+  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
+
+  if (!is.numeric(n) | length(n) > 1) stop("n must be a single number")
+
+  by <- enexpr(by)
+
+  eval_tidy(expr(
+    .data[, head(.SD, n), !!by]
+  ))
+}
+
+#' @export
+#' @rdname dt_slice
+dt_slice_tail <- function(.data, n, by = NULL) {
+  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
+
+  if (!is.numeric(n) | length(n) > 1) stop("n must be a single number")
+
+  by <- enexpr(by)
+
+  eval_tidy(expr(
+    .data[, tail(.SD, n), !!by]
+  ))
+}
+
+#' @export
+#' @rdname dt_slice
+dt_slice_max <- function(.data, order_by, n, by = NULL) {
+  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
+
+  if (missing(order_by)) stop("order_by must be supplied")
+
+  if (!is.numeric(n) | length(n) > 1) stop("n must be a single number")
+
+  order_by <- enexpr(order_by)
+  by <- enexpr(by)
+
+  .data %>%
+    dt_arrange(-!!order_by) %>%
+    new_slice_head(n, by = !!by)
+}
+
+#' @export
+#' @rdname dt_slice
+dt_slice_min <- function(.data, order_by, n, by = NULL) {
+  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
+
+  if (missing(order_by)) stop("order_by must be supplied")
+
+  if (!is.numeric(n) | length(n) > 1) stop("n must be a single number")
+
+  order_by <- enexpr(order_by)
+  by <- enexpr(by)
+
+  .data %>%
+    dt_arrange(!!order_by) %>%
+    new_slice_head(n, by = !!by)
 }

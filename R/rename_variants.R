@@ -22,10 +22,11 @@
 #' @export
 #'
 #' @examples
-#' example_dt <- data.table::data.table(x = 1,
-#'                          y = 2,
-#'                          double_x = 2,
-#'                          double_y = 4)
+#' example_dt <- data.table::data.table(
+#'   x = 1,
+#'   y = 2,
+#'   double_x = 2,
+#'   double_y = 4)
 #'
 #' as_dt(example_dt) %>% dt_rename_all(~ sub("x", "stuff", .x))
 #'

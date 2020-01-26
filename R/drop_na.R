@@ -12,7 +12,10 @@
 #' @export
 #'
 #' @examples
-#' df <- data.table::data.table(x = c(1, 2, NA), y = c("a", NA, "b"))
+#' df <- data.table::data.table(
+#'   x = c(1,2,NA),
+#'   y = c("a",NA,"b"))
+#'
 #' df %>%
 #'   dt_drop_na()
 #'

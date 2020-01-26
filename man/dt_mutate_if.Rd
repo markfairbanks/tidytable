@@ -39,9 +39,10 @@ There are two variants:
 \examples{
 library(data.table)
 
-example_dt <- data.table::data.table(x = c(1,1,1),
-                         y = c(2,2,2),
-                         z = c("a", "a", "b"))
+example_dt <- data.table::data.table(
+  x = c(1,1,1),
+  y = c(2,2,2),
+  z = c("a", "a", "b"))
 
 example_dt \%>\%
   as_dt() \%>\%
