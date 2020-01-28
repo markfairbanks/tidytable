@@ -58,7 +58,8 @@ here](https://github.com/markfairbanks/tidydt#Enhanced-selection)
   - `dt_distinct()` - **ES**
   - `dt_pull()`
   - `dt_rename()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
-  - `dt_slice()`
+  - `dt_slice()`: `_head()`/`_tail()`/`_max()`/`_min()`
+      - The variants are a bit easier to use than using `dt_top_n()`
   - `dt_top_n()`
   - Joins: `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`,
     `dt_full_join()`, & `dt_anti_join()`
@@ -70,6 +71,7 @@ here](https://github.com/markfairbanks/tidydt#Enhanced-selection)
   - `dt_drop_na()` - **ES**
   - `dt_fill()`: Works on character/factor/logical types
     (`data.table::nafill()` does not) - **ES**
+  - `dt_group_split()` - **ES**
   - `dt_pivot_wider()` - **ES** & `dt_pivot_longer()` - **ES**
   - `dt_replace_na()`
   - `dt_group_nest()` - **ES** & `dt_unnest_legacy()` - **ES**
@@ -84,9 +86,10 @@ here](https://github.com/markfairbanks/tidydt#Enhanced-selection)
 The code chunk below shows the `tidydt` syntax:
 
 ``` r
+library(data.table) # imported for the data.table() function
 library(tidydt)
 
-example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
+example_dt <- data.table::data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt %>%
   as_dt() %>%
@@ -208,12 +211,13 @@ Currently supported:
 `tidydt` functions.
 
 Note that quosures are not compatible with `data.table`, so `enexpr()`
-must be used instead of
-`enquo()`.
+must be used instead of `enquo()`.
 
 ##### Custom function with `dt_mutate()`
 
 ``` r
+library(rlang)
+
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 add_one <- function(.data, new_name, add_col) {
@@ -304,14 +308,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidydt   data.table tidydt_vs_tidyverse
 #>    <chr>           <chr>     <chr>    <chr>      <chr>              
-#>  1 arrange         1470ms    179.2ms  179.04ms   12.2%              
-#>  2 case_when       1190ms    380.22ms 431.43ms   32.0%              
-#>  3 fill            978ms     575ms    397ms      58.8%              
-#>  4 filter          229ms     196ms    192ms      85.6%              
-#>  5 inner_join      64.9ms    81ms     70.6ms     124.8%             
-#>  6 left_join       69.8ms    97.7ms   96.5ms     140.0%             
-#>  7 mutate          37.3ms    97ms     115.6ms    260.1%             
-#>  8 pivot_longer    78ms      19.5ms   14.7ms     25.0%              
-#>  9 pivot_wider     1550ms    249.19ms 256.62ms   16.1%              
-#> 10 summarize       416ms     247ms    231ms      59.4%
+#>  1 arrange         1480ms    176.87ms 173.32ms   12.0%              
+#>  2 case_when       1210ms    405.65ms 510.22ms   33.5%              
+#>  3 fill            897ms     554ms    379ms      61.8%              
+#>  4 filter          229ms     194ms    195ms      84.7%              
+#>  5 inner_join      72.5ms    77.4ms   83.9ms     106.8%             
+#>  6 left_join       69.8ms    94.7ms   95.6ms     135.7%             
+#>  7 mutate          39ms      96.2ms   115.5ms    246.7%             
+#>  8 pivot_longer    81.9ms    18.6ms   11.4ms     22.7%              
+#>  9 pivot_wider     713ms     227ms    222ms      31.8%              
+#> 10 summarize       425ms     222ms    215ms      52.2%
 ```
