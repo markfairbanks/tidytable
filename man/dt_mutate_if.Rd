@@ -9,18 +9,18 @@
 \usage{
 
 
-dt_mutate_at(.data, .cols, .fun, ...)
+dt_mutate_at(.data, .vars, .funs, ...)
 
-dt_mutate_across(.data, .cols, .fun, ...)
+dt_mutate_across(.data, .cols, .funs, ...)
 
 dt_mutate_all(.data, .fun, ...)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{.fun}{Function to pass}
-
 \item{...}{Other arguments for the passed function}
+
+\item{.funs}{Functions to pass}
 
 \item{.cols}{vector \code{c()} of bare column names for \code{dt_mutate_across()} to use}
 }

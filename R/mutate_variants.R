@@ -16,7 +16,7 @@
 #'
 #' @param .data A data.frame or data.table
 #' @param .cols vector `c()` of bare column names for `dt_mutate_across()` to use
-#' @param .fun Function to pass
+#' @param .funs Functions to pass
 #' @param ... Other arguments for the passed function
 #'
 #' @return A data.table
@@ -57,64 +57,64 @@ dt_mutate_if <- function(.data, .predicate, .fun, ...) {
 
 #' @export
 #' @rdname dt_mutate_if
-dt_mutate_at <- function(.data, .cols, .fun, ...) {
+dt_mutate_at <- function(.data, .vars, .funs, ...) {
 
-  .cols <- enexpr(.cols)
+  .cols <- enexpr(.vars)
   .cols <- vec_selector(.data, !!.cols) %>%
     as.character()
 
-  if (!is.list(.fun)) {
+  if (!is.list(.funs)) {
     if (length(.cols) > 0) {
-      .data[, (.cols) := dt_map(.SD, .fun, ...), .SDcols = .cols][]
+      .data[, (.cols) := dt_map(.SD, .funs, ...), .SDcols = .cols][]
     } else {
       .data
     }
   } else {
 
-    if (!is_named(.fun)) abort("functions passed in a list must be named")
-    if (length(.fun) > 1) abort("only one function can be passed in dt_mutate_at()")
+    if (!is_named(.funs)) abort("functions passed in a list must be named")
 
-    new_names <- paste0(.cols, "_", names(.fun))
-    user_function <- anon_x(.fun[[1]])
-
-    for (i in seq_along(new_names)) {
-      new <- new_names[i]
-      old <- .cols[i]
-      .data[, (new) := user_function(.data[[old]])][]
+    new_names <- names(.funs)
+    for (.col in .cols) {
+      for (i in seq_along(new_names)) {
+        new_name <- paste0(.col, "_", new_names[[i]])
+        old <- .col
+        user_function <- anon_x(.funs[[i]])
+        .data[, (new_name) := user_function(.data[[old]])][]
+      }
     }
-    .data
   }
+  .data
 }
 
 #' @export
 #' @rdname dt_mutate_if
-dt_mutate_across <- function(.data, .cols, .fun, ...) {
+dt_mutate_across <- function(.data, .cols, .funs, ...) {
 
   .cols <- enexpr(.cols)
   .cols <- vec_selector(.data, !!.cols) %>%
     as.character()
 
-  if (!is.list(.fun)) {
+  if (!is.list(.funs)) {
     if (length(.cols) > 0) {
-      .data[, (.cols) := dt_map(.SD, .fun, ...), .SDcols = .cols][]
+      .data[, (.cols) := dt_map(.SD, .funs, ...), .SDcols = .cols][]
     } else {
       .data
     }
   } else {
 
-    if (!is_named(.fun)) abort("functions passed in a list must be named")
-    if (length(.fun) > 1) abort("only one function can be passed in dt_mutate_at()")
+    if (!is_named(.funs)) abort("functions passed in a list must be named")
 
-    new_names <- paste0(.cols, "_", names(.fun))
-    user_function <- anon_x(.fun[[1]])
-
-    for (i in seq_along(new_names)) {
-      new <- new_names[i]
-      old <- .cols[i]
-      .data[, (new) := user_function(.data[[old]])][]
+    new_names <- names(.funs)
+    for (.col in .cols) {
+      for (i in seq_along(new_names)) {
+        new_name <- paste0(.col, "_", new_names[[i]])
+        old <- .col
+        user_function <- anon_x(.funs[[i]])
+        .data[, (new_name) := user_function(.data[[old]])][]
+      }
     }
-    .data
   }
+  .data
 }
 
 #' @export
