@@ -23,5 +23,4 @@ dt <- data.table::data.table(x = c(1,2,3), y = c(4,5,6))
 dt \%>\%
   dt_rename(new_x = x,
             new_y = y)
-
 }

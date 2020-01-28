@@ -36,12 +36,6 @@
 #'   dt_filter(double_a > 0, double_b > 0) %>%
 #'   dt_arrange(-double_a) %>%
 #'   dt_summarize(avg_a = mean(a), by = list(c, d))
-#'
-#' @import data.table
-#' @importFrom rlang enexpr
-#' @importFrom rlang enexprs
-#' @importFrom rlang eval_tidy
-#' @importFrom rlang expr
 dt_mutate <- function(.data, ..., by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)

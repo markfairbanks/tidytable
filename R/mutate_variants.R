@@ -20,7 +20,6 @@
 #' @param ... Other arguments for the passed function
 #'
 #' @return A data.table
-#' @import data.table
 #' @export
 #'
 #' @examples
@@ -42,12 +41,6 @@
 #' example_dt %>%
 #'   as_dt() %>%
 #'   dt_mutate_across(c(x, y), list(new = ~ .x * 2))
-#'
-#' @import data.table
-#' @importFrom rlang enexprs
-#' @importFrom rlang eval_tidy
-#' @importFrom rlang expr
-#' @importFrom rlang is_named
 dt_mutate_if <- function(.data, .predicate, .fun, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")

@@ -18,8 +18,6 @@
 #'
 #' example_dt %>%
 #'   dt_mutate(x = dt_replace_na(x, 5))
-#'
-#' @import data.table
 dt_replace_na <- function(.col, replace) {
 
   if (class(replace) %in% c("integer", "double", "numeric")) {

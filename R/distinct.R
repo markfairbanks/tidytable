@@ -23,9 +23,6 @@
 #'
 #' example_dt %>%
 #'   dt_distinct(z)
-#'
-#' @import data.table
-#' @importFrom rlang enexprs
 dt_distinct <- function(.data, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")

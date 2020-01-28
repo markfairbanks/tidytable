@@ -30,5 +30,4 @@ example_dt \%>\%
 
 example_dt \%>\%
   dt_distinct(z)
-
 }

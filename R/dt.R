@@ -22,8 +22,6 @@
 #' @param on See ?data.table:::`[.data.table`
 #'
 #' @export
-#' @import data.table
-#' @importFrom data.table data.table
 #' @examples
 #' example_dt <- data.table::data.table(
 #'   x = c(1,2,3),

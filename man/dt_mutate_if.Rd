@@ -55,5 +55,4 @@ example_dt \%>\%
 example_dt \%>\%
   as_dt() \%>\%
   dt_mutate_across(c(x, y), list(new = ~ .x * 2))
-
 }

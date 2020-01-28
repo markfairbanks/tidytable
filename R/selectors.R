@@ -1,7 +1,3 @@
-#' @import data.table
-#' @importFrom rlang enexprs
-#' @importFrom rlang eval_tidy
-
 vec_selector <- function(.data, select_vars) {
 
   data_names <- colnames(.data)

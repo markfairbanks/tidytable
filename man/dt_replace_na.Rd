@@ -23,5 +23,4 @@ example_dt <- data.table::data.table(
 
 example_dt \%>\%
   dt_mutate(x = dt_replace_na(x, 5))
-
 }

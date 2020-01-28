@@ -32,5 +32,4 @@ test_df \%>\%
 
 test_df \%>\%
   dt_group_nest(is.character)
-
 }

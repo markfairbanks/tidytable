@@ -25,11 +25,6 @@
 #'
 #' test_df %>%
 #'   dt_group_nest(is.character)
-#'
-#' @import data.table
-#' @importFrom rlang enexprs
-#' @importFrom rlang eval_tidy
-#' @importFrom rlang expr
 dt_group_nest <- function(.data, ..., .key = "data") {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)

@@ -21,5 +21,4 @@ Scoped variants of `select()`
 example_dt <- data.table::data.table(x = 1, y = 2, z = "a")
 
 example_dt \%>\% dt_select_if(is.double)
-
 }

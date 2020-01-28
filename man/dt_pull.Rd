@@ -24,5 +24,4 @@ example_dt <- data.table::data.table(
 
 example_dt \%>\%
   dt_pull(y)
-
 }

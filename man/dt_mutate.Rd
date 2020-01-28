@@ -58,5 +58,4 @@ example_dt \%>\%
   dt_filter(double_a > 0, double_b > 0) \%>\%
   dt_arrange(-double_a) \%>\%
   dt_summarize(avg_a = mean(a), by = list(c, d))
-
 }

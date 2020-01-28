@@ -32,5 +32,4 @@ df \%>\%
 
 df \%>\%
   dt_drop_na(is.numeric)
-
 }

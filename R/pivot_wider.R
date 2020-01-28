@@ -26,9 +26,6 @@
 #' dt_pivot_wider(example_dt, names_from = stuff, values_from = things)
 #' dt_pivot_wider(example_dt, names_from = stuff, values_from = things, id_cols = z)
 #'
-#' @importFrom data.table dcast
-#' @importFrom stats as.formula
-#'
 #' @export
 dt_pivot_wider <- function(.data,
                            id_cols = NULL,

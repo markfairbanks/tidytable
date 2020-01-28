@@ -73,5 +73,4 @@ dt_map(c(1,2,3), ~.x + 1)
 dt_map_dbl(c(1,2,3), ~.x + 1)
 
 dt_map_chr(c(1,2,3), as.character)
-
 }

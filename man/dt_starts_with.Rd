@@ -39,5 +39,4 @@ example_dt \%>\%
 
 example_dt \%>\%
 dt_select(dt_ends_with("y"))
-
 }

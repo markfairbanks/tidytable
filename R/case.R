@@ -28,9 +28,6 @@
 #'   as_dt() %>%
 #'   dt_mutate(x = dt_case(c == "a","a",
 #'                         default = d))
-#' @import data.table
-#' @importFrom rlang enexprs
-#' @importFrom rlang abort
 dt_case <- function(..., default = NA) {
   dots <- enexprs(...)
 

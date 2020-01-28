@@ -33,5 +33,4 @@ example_df \%>\%
 
 example_df \%>\%
   dt_count(is.character)
-
 }

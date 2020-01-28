@@ -24,10 +24,7 @@
 #' test_df %>%
 #'   dt_fill(x, y, by = z, .direction = "downup")
 #'
-#' @import data.table
-#' @importFrom rlang enexprs
-#' @importFrom rlang eval_tidy
-#' @importFrom rlang expr
+
 dt_fill <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)

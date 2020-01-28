@@ -23,10 +23,6 @@
 #' dt_map_dbl(c(1,2,3), ~.x + 1)
 #'
 #' dt_map_chr(c(1,2,3), as.character)
-#'
-#' @import data.table
-#' @importFrom rlang is_formula
-#' @importFrom rlang parse_expr
 dt_map <- function(.x, .f, ...) {
   .f <- anon_x(.f)
 

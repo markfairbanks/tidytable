@@ -23,9 +23,6 @@
 #'
 #' example_dt %>%
 #'   dt_top_n(2, wt = y, by = z)
-#'
-#' @import data.table
-#' @importFrom rlang enexpr
 dt_top_n <- function(.data, n = 5, wt = NULL, by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)

@@ -50,5 +50,4 @@ as_dt(example_dt) \%>\% dt_rename_all(~ sub("x", "stuff", .x))
 
 as_dt(example_dt) \%>\%
   dt_rename_across(c(x, double_x), ~ sub("x", "stuff", .x))
-
 }
