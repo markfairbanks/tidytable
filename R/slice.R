@@ -4,6 +4,8 @@
 #'
 #' @param .data A data.frame or data.table
 #' @param rows Integer row values. Provide either positive values to keep, or negative values to drop. The values provided must be either all positive or all negative.
+#' @param order_by Variable to arrange by
+#' @param n Number of rows to grab
 #' @param by A single unquoted column, or a `list()` of columns to group by.
 #'
 #' @return data.table
@@ -22,12 +24,6 @@
 #'
 #' example_dt %>%
 #'   dt_slice(1, by = z)
-#'
-#' @import data.table
-#' @importFrom rlang enexprs
-#' @importFrom rlang eval_tidy
-#' @importFrom rlang expr
-#' @importFrom rlang enexpr
 dt_slice <- function(.data, rows = 1:5, by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
@@ -93,7 +89,7 @@ dt_slice_max <- function(.data, order_by, n, by = NULL) {
 
   .data %>%
     dt_arrange(-!!order_by) %>%
-    new_slice_head(n, by = !!by)
+    dt_slice_head(n, by = !!by)
 }
 
 #' @export
@@ -111,5 +107,5 @@ dt_slice_min <- function(.data, order_by, n, by = NULL) {
 
   .data %>%
     dt_arrange(!!order_by) %>%
-    new_slice_head(n, by = !!by)
+    dt_slice_head(n, by = !!by)
 }

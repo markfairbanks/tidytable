@@ -2,9 +2,21 @@
 % Please edit documentation in R/slice.R
 \name{dt_slice}
 \alias{dt_slice}
+\alias{dt_slice_head}
+\alias{dt_slice_tail}
+\alias{dt_slice_max}
+\alias{dt_slice_min}
 \title{Choose rows by position}
 \usage{
 dt_slice(.data, rows = 1:5, by = NULL)
+
+dt_slice_head(.data, n, by = NULL)
+
+dt_slice_tail(.data, n, by = NULL)
+
+dt_slice_max(.data, order_by, n, by = NULL)
+
+dt_slice_min(.data, order_by, n, by = NULL)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
@@ -12,6 +24,10 @@ dt_slice(.data, rows = 1:5, by = NULL)
 \item{rows}{Integer row values. Provide either positive values to keep, or negative values to drop. The values provided must be either all positive or all negative.}
 
 \item{by}{A single unquoted column, or a \code{list()} of columns to group by.}
+
+\item{n}{Number of rows to grab}
+
+\item{order_by}{Variable to arrange by}
 }
 \value{
 data.table
@@ -23,12 +39,11 @@ Choose rows by their ordinal position in a data.table. Grouped data.tables use t
 example_dt <- data.table::data.table(
   x = c(1,2,3,4),
   y = c(4,5,6,7),
-  z = c("a", "a", "a", "b"))
+  z = c("a","a","a","b"))
 
 example_dt \%>\%
   dt_slice(1:4)
 
 example_dt \%>\%
   dt_slice(1, by = z)
-
 }
