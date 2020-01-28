@@ -57,6 +57,7 @@ here](https://github.com/markfairbanks/tidydt#Enhanced-selection)
   - `dt_count()` - **ES**
   - `dt_distinct()` - **ES**
   - `dt_pull()`
+  - `dt_relocate()`: Move a column to a new position in the data.table
   - `dt_rename()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
   - `dt_slice()`: `_head()`/`_tail()`/`_max()`/`_min()`
       - The variants are a bit easier to use than using `dt_top_n()`
@@ -308,14 +309,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidydt   data.table tidydt_vs_tidyverse
 #>    <chr>           <chr>     <chr>    <chr>      <chr>              
-#>  1 arrange         1480ms    176.87ms 173.32ms   12.0%              
-#>  2 case_when       1210ms    405.65ms 510.22ms   33.5%              
-#>  3 fill            897ms     554ms    379ms      61.8%              
-#>  4 filter          229ms     194ms    195ms      84.7%              
-#>  5 inner_join      72.5ms    77.4ms   83.9ms     106.8%             
-#>  6 left_join       69.8ms    94.7ms   95.6ms     135.7%             
-#>  7 mutate          39ms      96.2ms   115.5ms    246.7%             
-#>  8 pivot_longer    81.9ms    18.6ms   11.4ms     22.7%              
-#>  9 pivot_wider     713ms     227ms    222ms      31.8%              
-#> 10 summarize       425ms     222ms    215ms      52.2%
+#>  1 arrange         1480ms    175.85ms 176.47ms   11.9%              
+#>  2 case_when       1170ms    395.14ms 502.27ms   33.8%              
+#>  3 fill            901ms     547ms    375ms      60.7%              
+#>  4 filter          225ms     197ms    191ms      87.6%              
+#>  5 inner_join      65.5ms    71.8ms   74ms       109.6%             
+#>  6 left_join       70.4ms    90.7ms   87.6ms     128.8%             
+#>  7 mutate          40.2ms    97ms     114.7ms    241.3%             
+#>  8 pivot_longer    80.6ms    18.6ms   11.5ms     23.1%              
+#>  9 pivot_wider     720ms     229ms    232ms      31.8%              
+#> 10 summarize       392ms     232ms    216ms      59.2%
 ```

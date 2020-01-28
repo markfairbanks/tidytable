@@ -63,6 +63,7 @@ devtools::install_github("markfairbanks/tidydt")
 * `dt_count()` - **ES**
 * `dt_distinct()` - **ES**
 * `dt_pull()`
+* `dt_relocate()`: Move a column to a new position in the data.table
 * `dt_rename()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
 * `dt_slice()`: `_head()`/`_tail()`/`_max()`/`_min()`
   + The variants are a bit easier to use than using `dt_top_n()`
