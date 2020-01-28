@@ -12,6 +12,7 @@
 #' @importFrom rlang is_formula
 #' @importFrom rlang is_named
 #' @importFrom rlang parse_expr
+#' @importFrom rlang seq2
 #' @importFrom rlang sym
 #' @importFrom stats as.formula
 #' @importFrom stats na.omit
