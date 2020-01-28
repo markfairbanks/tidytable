@@ -15,9 +15,10 @@
 #'
 #'
 #' @param .data A data.frame or data.table
+#' @param .predicate predicate for `dt_mutate_if()` to use
+#' @param .vars vector `c()` of bare column names for `dt_mutate_at()` to use
 #' @param .cols vector `c()` of bare column names for `dt_mutate_across()` to use
-#' @param .fun Function to pass to `mutate_if()`` or `mutate_all()``
-#' @param .funs Functions to pass to `dt_mutate_across()`
+#' @param .funs Functions to pass. Can pass a list of functions.
 #' @param ... Other arguments for the passed function
 #'
 #' @return A data.table
@@ -42,10 +43,10 @@
 #' example_dt %>%
 #'   as_dt() %>%
 #'   dt_mutate_across(c(x, y), list(new = ~ .x * 2))
-dt_mutate_if <- function(.data, .vars, .funs, ...) {
-  .vars <- enexpr(.vars)
+dt_mutate_if <- function(.data, .predicate, .funs, ...) {
+  .predicate <- enexpr(.predicate)
 
-  dt_mutate_across(.data, !!.vars, .funs, ...)
+  dt_mutate_across(.data, !!.predicate, .funs, ...)
 }
 
 #' @export

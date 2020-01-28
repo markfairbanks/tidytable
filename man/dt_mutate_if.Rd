@@ -13,14 +13,18 @@ dt_mutate_at(.data, .vars, .funs, ...)
 
 dt_mutate_across(.data, .cols, .funs, ...)
 
-dt_mutate_all(.data, .fun, ...)
+dt_mutate_all(.data, .funs, ...)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
 
+\item{.predicate}{predicate for \code{dt_mutate_if()} to use}
+
+\item{.funs}{Functions to pass. Can pass a list of functions.}
+
 \item{...}{Other arguments for the passed function}
 
-\item{.funs}{Functions to pass}
+\item{.vars}{vector \code{c()} of bare column names for \code{dt_mutate_at()} to use}
 
 \item{.cols}{vector \code{c()} of bare column names for \code{dt_mutate_across()} to use}
 }
