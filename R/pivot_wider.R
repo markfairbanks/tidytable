@@ -18,15 +18,13 @@
 #'
 #' library(data.table)
 #'
-#' example_dt <- data.table::data.table(z = rep(c("a", "b", "c"), 2),
-#'                          stuff = c(rep("x", 3), rep("y", 3)),
-#'                          things = 1:6)
+#' example_dt <- data.table::data.table(
+#'   z = rep(c("a", "b", "c"), 2),
+#'   stuff = c(rep("x", 3), rep("y", 3)),
+#'   things = 1:6)
 #'
 #' dt_pivot_wider(example_dt, names_from = stuff, values_from = things)
 #' dt_pivot_wider(example_dt, names_from = stuff, values_from = things, id_cols = z)
-#'
-#' @importFrom data.table dcast
-#' @importFrom stats as.formula
 #'
 #' @export
 dt_pivot_wider <- function(.data,

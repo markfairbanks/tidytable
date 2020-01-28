@@ -1,8 +1,4 @@
-#' @import data.table
-#' @importFrom rlang enexprs
-#' @importFrom rlang eval_tidy
-
-vec_selector <- function(.data, select_vars) {
+vec_selector_i <- function(.data, select_vars) {
 
   data_names <- colnames(.data)
   data_vars <- setNames(as.list(seq_along(.data)), data_names)
@@ -31,6 +27,15 @@ vec_selector <- function(.data, select_vars) {
 
   select_index <- setdiff(keep_index, drop_index)
 
+  select_index
+}
+
+vec_selector <- function(.data, select_vars) {
+  select_vars <- enexpr(select_vars)
+
+  select_index <- vec_selector_i(.data, !!select_vars)
+  data_names <- colnames(.data)
+
   select_vars <- data_names[select_index] %>%
     as.list() %>%
     dt_map(sym)
@@ -38,7 +43,7 @@ vec_selector <- function(.data, select_vars) {
   select_vars
 }
 
-dots_selector <- function(.data, ...) {
+dots_selector_i <- function(.data, ...) {
 
   data_names <- colnames(.data)
   data_vars <- setNames(as.list(seq_along(.data)), data_names)
@@ -66,6 +71,14 @@ dots_selector <- function(.data, ...) {
   drop_index <- unique(abs(select_index[select_index < 0]))
 
   select_index <- setdiff(keep_index, drop_index)
+
+  select_index
+}
+
+dots_selector <- function(.data, ...) {
+
+  select_index <- dots_selector_i(.data, ...)
+  data_names <- colnames(.data)
 
   select_vars <- data_names[select_index] %>%
     as.list() %>%

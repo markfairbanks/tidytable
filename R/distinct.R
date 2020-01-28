@@ -13,18 +13,16 @@
 #' @export
 #'
 #' @examples
-#' example_dt <- data.table::data.table(x = 1:3,
-#'                          y = 4:6,
-#'                          z = c("a", "a", "b"))
+#' example_dt <- data.table::data.table(
+#'   x = 1:3,
+#'   y = 4:6,
+#'   z = c("a", "a", "b"))
 #'
 #' example_dt %>%
 #'   dt_distinct()
 #'
 #' example_dt %>%
 #'   dt_distinct(z)
-#'
-#' @import data.table
-#' @importFrom rlang enexprs
 dt_distinct <- function(.data, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")

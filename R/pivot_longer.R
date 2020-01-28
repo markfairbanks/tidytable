@@ -32,9 +32,6 @@
 #'                 names_to = "stuff",
 #'                 values_to = "things")
 #'
-#' @importFrom data.table melt
-#' @importFrom stats setNames
-#'
 #' @export
 dt_pivot_longer <- function(.data,
                             cols = NULL,

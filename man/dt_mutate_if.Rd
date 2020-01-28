@@ -7,20 +7,24 @@
 \alias{dt_mutate_all}
 \title{Mutate}
 \usage{
+dt_mutate_if(.data, .predicate, .funs, ...)
 
+dt_mutate_at(.data, .vars, .funs, ...)
 
-dt_mutate_at(.data, .cols, .fun, ...)
+dt_mutate_across(.data, .cols, .funs, ...)
 
-dt_mutate_across(.data, .cols, .fun, ...)
-
-dt_mutate_all(.data, .fun, ...)
+dt_mutate_all(.data, .funs, ...)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{.fun}{Function to pass}
+\item{.predicate}{predicate for \code{dt_mutate_if()} to use}
+
+\item{.funs}{Functions to pass. Can pass a list of functions.}
 
 \item{...}{Other arguments for the passed function}
+
+\item{.vars}{vector \code{c()} of bare column names for \code{dt_mutate_at()} to use}
 
 \item{.cols}{vector \code{c()} of bare column names for \code{dt_mutate_across()} to use}
 }
@@ -39,9 +43,10 @@ There are two variants:
 \examples{
 library(data.table)
 
-example_dt <- data.table::data.table(x = c(1,1,1),
-                         y = c(2,2,2),
-                         z = c("a", "a", "b"))
+example_dt <- data.table::data.table(
+  x = c(1,1,1),
+  y = c(2,2,2),
+  z = c("a", "a", "b"))
 
 example_dt \%>\%
   as_dt() \%>\%
@@ -54,5 +59,4 @@ example_dt \%>\%
 example_dt \%>\%
   as_dt() \%>\%
   dt_mutate_across(c(x, y), list(new = ~ .x * 2))
-
 }

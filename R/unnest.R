@@ -25,9 +25,6 @@
 #'
 #' nested_df %>%
 #'   dt_unnest_legacy(data, keep = is.character)
-#'
-#' @import data.table
-#' @importFrom rlang enexpr
 dt_unnest_legacy <- function(.data, col, keep = NULL) {
   col <- enexpr(col)
   keep_cols <- enexpr(keep)

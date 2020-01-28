@@ -17,9 +17,10 @@ A shortcut to replace NAs inside of a \code{dt_mutate()} call.
 Note: This function \emph{does not work} outside of \code{dt_mutate()} like \code{tidyr::replace_na()} does.
 }
 \examples{
-example_dt <- data.table::data.table(x = c(1, 2, NA), y = c(NA, 1, 2))
+example_dt <- data.table::data.table(
+  x = c(1, 2, NA),
+  y = c(NA, 1, 2))
 
 example_dt \%>\%
   dt_mutate(x = dt_replace_na(x, 5))
-
 }

@@ -13,9 +13,9 @@
 #'
 #' @examples
 #' test_df <- data.table::data.table(a = 1:10,
-#'                       b = 11:20,
-#'                       c = c(rep("a", 6), rep("b", 4)),
-#'                       d = c(rep("a", 4), rep("b", 6)))
+#'   b = 11:20,
+#'   c = c(rep("a", 6), rep("b", 4)),
+#'   d = c(rep("a", 4), rep("b", 6)))
 #'
 #' test_df %>%
 #'   dt_group_nest()
@@ -25,11 +25,6 @@
 #'
 #' test_df %>%
 #'   dt_group_nest(is.character)
-#'
-#' @import data.table
-#' @importFrom rlang enexprs
-#' @importFrom rlang eval_tidy
-#' @importFrom rlang expr
 dt_group_nest <- function(.data, ..., .key = "data") {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)

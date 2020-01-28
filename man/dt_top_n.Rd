@@ -32,5 +32,4 @@ example_dt \%>\%
 
 example_dt \%>\%
   dt_top_n(2, wt = y, by = z)
-
 }

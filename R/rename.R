@@ -15,9 +15,6 @@
 #' dt %>%
 #'   dt_rename(new_x = x,
 #'             new_y = y)
-#'
-#' @import data.table
-#' @importFrom rlang enexprs
 dt_rename <- function(.data, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")

@@ -22,18 +22,16 @@
 #' @export
 #'
 #' @examples
-#' example_dt <- data.table::data.table(x = 1,
-#'                          y = 2,
-#'                          double_x = 2,
-#'                          double_y = 4)
+#' example_dt <- data.table::data.table(
+#'   x = 1,
+#'   y = 2,
+#'   double_x = 2,
+#'   double_y = 4)
 #'
 #' as_dt(example_dt) %>% dt_rename_all(~ sub("x", "stuff", .x))
 #'
 #' as_dt(example_dt) %>%
 #'   dt_rename_across(c(x, double_x), ~ sub("x", "stuff", .x))
-#'
-#' @import data.table
-#' @importFrom rlang expr
 dt_rename_all <- function(.data, .fun, ...) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")

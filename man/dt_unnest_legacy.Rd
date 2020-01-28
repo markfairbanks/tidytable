@@ -34,5 +34,4 @@ nested_df \%>\%
 
 nested_df \%>\%
   dt_unnest_legacy(data, keep = is.character)
-
 }
