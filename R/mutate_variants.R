@@ -13,7 +13,6 @@
 #' @md
 #' @usage
 #'
-#'
 #' @param .data A data.frame or data.table
 #' @param .predicate predicate for `dt_mutate_if()` to use
 #' @param .vars vector `c()` of bare column names for `dt_mutate_at()` to use
