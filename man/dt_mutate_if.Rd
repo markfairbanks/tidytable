@@ -7,7 +7,7 @@
 \alias{dt_mutate_all}
 \title{Mutate}
 \usage{
-
+dt_mutate_if(.data, .predicate, .funs, ...)
 
 dt_mutate_at(.data, .vars, .funs, ...)
 
