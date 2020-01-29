@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidytable v0.3.0 <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
+# tidytable v0.3.0 <img src="man/figures/logo.png" align="right" width="20%" height="20%" />
 
 <!-- badges: start -->
 
@@ -310,14 +310,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         1460ms    174.02ms  176.73ms   11.9%                 
-#>  2 case_when       1170ms    418.41ms  502.12ms   35.8%                 
-#>  3 fill            916ms     543ms     372ms      59.3%                 
-#>  4 filter          224ms     198ms     196ms      88.4%                 
-#>  5 inner_join      63.9ms    75.5ms    70.4ms     118.2%                
-#>  6 left_join       74.8ms    96.4ms    92.7ms     128.9%                
-#>  7 mutate          37.9ms    96.3ms    114.4ms    254.1%                
-#>  8 pivot_longer    81.8ms    18.8ms    11.3ms     23.0%                 
-#>  9 pivot_wider     694ms     228ms     230ms      32.9%                 
-#> 10 summarize       418ms     231ms     220ms      55.3%
+#>  1 arrange         1460ms    176.66ms  184.12ms   12.1%                 
+#>  2 case_when       1220ms    437.04ms  528.82ms   35.8%                 
+#>  3 fill            897ms     576ms     370ms      64.2%                 
+#>  4 filter          229ms     189ms     197ms      82.5%                 
+#>  5 inner_join      63.2ms    77.2ms    81ms       122.2%                
+#>  6 left_join       63.9ms    93.5ms    94ms       146.3%                
+#>  7 mutate          38.5ms    97.3ms    116.3ms    252.7%                
+#>  8 pivot_longer    82.2ms    19.5ms    11.3ms     23.7%                 
+#>  9 pivot_wider     706ms     248ms     232ms      35.1%                 
+#> 10 summarize       422ms     234ms     232ms      55.5%
 ```
