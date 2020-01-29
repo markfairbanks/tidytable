@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidydt v0.3.0 <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
+# tidytable v0.3.0 <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
 
 <!-- badges: start -->
 
@@ -9,10 +9,10 @@
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
-The goal of `tidydt` is to be a tidy interface to `data.table`.
+The goal of `tidytable` is to be a tidy interface to `data.table`.
 
-`tidydt` is `rlang` compatible. [See examples
-here](https://github.com/markfairbanks/tidydt#rlang-compatibility)
+`tidytable` is `rlang` compatible. [See examples
+here](https://github.com/markfairbanks/tidytable#rlang-compatibility)
 
 ## Installation
 
@@ -21,15 +21,15 @@ You can install the development version from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("markfairbanks/tidydt")
+devtools::install_github("markfairbanks/tidytable")
 ```
 
-## tidydt functions
+## tidytable functions
 
 **Enhanced selection support denoted by ES** [See examples
-here](https://github.com/markfairbanks/tidydt#Enhanced-selection)
+here](https://github.com/markfairbanks/tidytable#Enhanced-selection)
 
-### tidydt helpers
+### tidytable helpers
 
   - `as_dt()`: Safely operate on data.tables/convert data.frames to
     data.tables
@@ -44,7 +44,7 @@ here](https://github.com/markfairbanks/tidydt#Enhanced-selection)
   - `dt_mutate()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
       - The `_across()` variant is new and can replace both `_if()` and
         `_at()` [See
-        here](https://github.com/markfairbanks/tidydt#Enhanced-selection)
+        here](https://github.com/markfairbanks/tidytable#Enhanced-selection)
   - `dt_select()` - **ES**
   - `dt_summarize()`: Group by specifications called inside. See
     `?dt_summarize`
@@ -84,13 +84,13 @@ here](https://github.com/markfairbanks/tidydt#Enhanced-selection)
 
 ## General syntax
 
-The code chunk below shows the `tidydt` syntax:
+The code chunk below shows the `tidytable` syntax:
 
 ``` r
 library(data.table) # imported for the data.table() function
-library(tidydt)
+library(tidytable)
 
-example_dt <- data.table::data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
+example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt %>%
   as_dt() %>%
@@ -209,7 +209,7 @@ Currently supported:
 ## `rlang` compatibility
 
 `rlang` quoting/unquoting can be used to write custom functions with
-`tidydt` functions.
+`tidytable` functions.
 
 Note that quosures are not compatible with `data.table`, so `enexpr()`
 must be used instead of `enquo()`.
@@ -261,7 +261,7 @@ example_df %>%
 ## `dt()` helper
 
 The `dt()` function makes regular `data.table` syntax pipeable, so you
-can easily mix `tidydt` syntax with `data.table`
+can easily mix `tidytable` syntax with `data.table`
 syntax:
 
 ``` r
@@ -307,16 +307,16 @@ A few notes:
 ``` r
 all_marks
 #> # A tibble: 10 x 5
-#>    function_tested tidyverse tidydt   data.table tidydt_vs_tidyverse
-#>    <chr>           <chr>     <chr>    <chr>      <chr>              
-#>  1 arrange         1480ms    175.85ms 176.47ms   11.9%              
-#>  2 case_when       1170ms    395.14ms 502.27ms   33.8%              
-#>  3 fill            901ms     547ms    375ms      60.7%              
-#>  4 filter          225ms     197ms    191ms      87.6%              
-#>  5 inner_join      65.5ms    71.8ms   74ms       109.6%             
-#>  6 left_join       70.4ms    90.7ms   87.6ms     128.8%             
-#>  7 mutate          40.2ms    97ms     114.7ms    241.3%             
-#>  8 pivot_longer    80.6ms    18.6ms   11.5ms     23.1%              
-#>  9 pivot_wider     720ms     229ms    232ms      31.8%              
-#> 10 summarize       392ms     232ms    216ms      59.2%
+#>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
+#>    <chr>           <chr>     <chr>     <chr>      <chr>                 
+#>  1 arrange         1570ms    176.91ms  179.54ms   11.3%                 
+#>  2 case_when       1240ms    426.39ms  516.79ms   34.4%                 
+#>  3 fill            903ms     549ms     415ms      60.8%                 
+#>  4 filter          227ms     205ms     203ms      90.3%                 
+#>  5 inner_join      78.6ms    78.6ms    80ms       100.0%                
+#>  6 left_join       74.1ms    99.8ms    91.5ms     134.7%                
+#>  7 mutate          38.2ms    96.9ms    113.6ms    253.7%                
+#>  8 pivot_longer    83.2ms    19.7ms    11.2ms     23.7%                 
+#>  9 pivot_wider     811ms     253ms     253ms      31.2%                 
+#> 10 summarize       429ms     244ms     225ms      56.9%
 ```

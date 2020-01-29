@@ -1,7 +1,7 @@
 #' `dplyr` verbs for data.table
 #'
 #' @description
-#' The core dplyr verbs can be used in `tidydt`:
+#' The core dplyr verbs can be used:
 #'
 #' * `dt_mutate()`
 #' * `dt_select()`
@@ -12,7 +12,7 @@
 #' `dt_select()` supports enhanced selection
 #'
 #' @param .data A data.frame or data.table
-#' @param ... Values passed to `tidydt` functions
+#' @param ... dots passed to underlying functions (see examples)
 #' @param by `list()` of bare column names to group by
 #'
 #'
