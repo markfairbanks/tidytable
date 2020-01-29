@@ -66,7 +66,7 @@ devtools::install_github("markfairbanks/tidytable")
 * `dt_relocate()`: Move a column to a new position in the data.table
 * `dt_rename()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
 * `dt_slice()`: `_head()`/`_tail()`/`_max()`/`_min()`
-  + The variants are a bit easier to use than using `dt_top_n()`
+  + The `slice_*()` variants are like `dt_top_n()`, but are slightly easier to use
 * `dt_top_n()`
 * Joins: `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`, `dt_full_join()`, & `dt_anti_join()`
 * Select helpers: `dt_starts_with()`, `dt_ends_with()`, `dt_contains()`, `dt_everything()`

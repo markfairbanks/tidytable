@@ -60,7 +60,8 @@ here](https://github.com/markfairbanks/tidytable#Enhanced-selection)
   - `dt_relocate()`: Move a column to a new position in the data.table
   - `dt_rename()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
   - `dt_slice()`: `_head()`/`_tail()`/`_max()`/`_min()`
-      - The variants are a bit easier to use than using `dt_top_n()`
+      - The `slice_*()` variants are like `dt_top_n()`, but are slightly
+        easier to use
   - `dt_top_n()`
   - Joins: `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`,
     `dt_full_join()`, & `dt_anti_join()`
@@ -309,14 +310,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         1570ms    176.91ms  179.54ms   11.3%                 
-#>  2 case_when       1240ms    426.39ms  516.79ms   34.4%                 
-#>  3 fill            903ms     549ms     415ms      60.8%                 
-#>  4 filter          227ms     205ms     203ms      90.3%                 
-#>  5 inner_join      78.6ms    78.6ms    80ms       100.0%                
-#>  6 left_join       74.1ms    99.8ms    91.5ms     134.7%                
-#>  7 mutate          38.2ms    96.9ms    113.6ms    253.7%                
-#>  8 pivot_longer    83.2ms    19.7ms    11.2ms     23.7%                 
-#>  9 pivot_wider     811ms     253ms     253ms      31.2%                 
-#> 10 summarize       429ms     244ms     225ms      56.9%
+#>  1 arrange         1460ms    174.02ms  176.73ms   11.9%                 
+#>  2 case_when       1170ms    418.41ms  502.12ms   35.8%                 
+#>  3 fill            916ms     543ms     372ms      59.3%                 
+#>  4 filter          224ms     198ms     196ms      88.4%                 
+#>  5 inner_join      63.9ms    75.5ms    70.4ms     118.2%                
+#>  6 left_join       74.8ms    96.4ms    92.7ms     128.9%                
+#>  7 mutate          37.9ms    96.3ms    114.4ms    254.1%                
+#>  8 pivot_longer    81.8ms    18.8ms    11.3ms     23.0%                 
+#>  9 pivot_wider     694ms     228ms     230ms      32.9%                 
+#> 10 summarize       418ms     231ms     220ms      55.3%
 ```
