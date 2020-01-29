@@ -24,7 +24,7 @@ dt_select(.data, ...)
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{...}{Values passed to \code{tidydt} functions}
+\item{...}{dots passed to underlying functions (see examples)}
 
 \item{by}{\code{list()} of bare column names to group by}
 }
@@ -32,7 +32,7 @@ dt_select(.data, ...)
 A data.table
 }
 \description{
-The core dplyr verbs can be used in \code{tidydt}:
+The core dplyr verbs can be used:
 \itemize{
 \item \code{dt_mutate()}
 \item \code{dt_select()}

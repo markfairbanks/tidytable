@@ -1,4 +1,4 @@
-Package: tidydt
+Package: tidytable
 Title: Tidy Interface to 'data.table'
 Version: 0.3.0
 Authors@R: 
@@ -21,7 +21,7 @@ Imports:
     magrittr,
     rlang
 RoxygenNote: 7.0.2
-URL: https://github.com/markfairbanks/tidydt
-BugReports: https://github.com/markfairbanks/tidydt/issues
+URL: https://github.com/markfairbanks/tidytable
+BugReports: https://github.com/markfairbanks/tidytable/issues
 Suggests: 
     testthat (>= 2.1.0)

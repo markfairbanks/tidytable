@@ -14,16 +14,16 @@ knitr::opts_chunk$set(
 )
 ```
 
-# tidydt v`r as.character(packageVersion("tidydt"))`   <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
+# tidytable v`r as.character(packageVersion("tidytable"))`   <img src="man/figures/logo.png" align="right" width="15%" height="15%" />
 
 <!-- badges: start -->
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
-The goal of `tidydt` is to be a tidy interface to `data.table`.
+The goal of `tidytable` is to be a tidy interface to `data.table`.
 
-`tidydt` is `rlang` compatible.
-[See examples here](https://github.com/markfairbanks/tidydt#rlang-compatibility)
+`tidytable` is `rlang` compatible.
+[See examples here](https://github.com/markfairbanks/tidytable#rlang-compatibility)
 
 ## Installation
 
@@ -31,15 +31,15 @@ You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("markfairbanks/tidydt")
+devtools::install_github("markfairbanks/tidytable")
 ```
 
-## tidydt functions
+## tidytable functions
 
 **Enhanced selection support denoted by ES**
-[See examples here](https://github.com/markfairbanks/tidydt#Enhanced-selection)
+[See examples here](https://github.com/markfairbanks/tidytable#Enhanced-selection)
 
-### tidydt helpers
+### tidytable helpers
 
 * `as_dt()`: Safely operate on data.tables/convert data.frames to data.tables
 * `%notin%`
@@ -52,7 +52,7 @@ devtools::install_github("markfairbanks/tidydt")
 * `dt_filter()`
 * `dt_mutate()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
   + The `_across()` variant is new and can replace both `_if()` and `_at()`
-  [See here](https://github.com/markfairbanks/tidydt#Enhanced-selection)
+  [See here](https://github.com/markfairbanks/tidytable#Enhanced-selection)
 * `dt_select()` - **ES**
 * `dt_summarize()`: Group by specifications called inside. See `?dt_summarize`
 
@@ -85,13 +85,13 @@ devtools::install_github("markfairbanks/tidydt")
 
 ## General syntax
 
-The code chunk below shows the `tidydt` syntax:
+The code chunk below shows the `tidytable` syntax:
 
 ```{r message = FALSE}
 library(data.table) # imported for the data.table() function
-library(tidydt)
+library(tidytable)
 
-example_dt <- data.table::data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
+example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt %>%
   as_dt() %>%
@@ -174,7 +174,7 @@ Currently supported: `is.numeric`/`is.integer`/`is.double`/`is.character`/`is.fa
 
 ## `rlang` compatibility
 
-`rlang` quoting/unquoting can be used to write custom functions with `tidydt` functions.
+`rlang` quoting/unquoting can be used to write custom functions with `tidytable` functions.
 
 Note that quosures are not compatible with `data.table`, so `enexpr()` must be used instead of `enquo()`.
 
@@ -217,7 +217,7 @@ example_df %>%
 
 ## `dt()` helper
 
-The `dt()` function makes regular `data.table` syntax pipeable, so you can easily mix `tidydt` syntax with `data.table` syntax:
+The `dt()` function makes regular `data.table` syntax pipeable, so you can easily mix `tidytable` syntax with `data.table` syntax:
 
 ```{r}
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
@@ -246,7 +246,7 @@ A few notes:
 * Lastly I'd like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.
 
 ```{r benchmark_setup, echo=FALSE}
-pacman::p_load(tidydt, tidyverse)
+pacman::p_load(tidytable, tidyverse)
 setDTthreads(1)
 
 iters <- 5
@@ -264,7 +264,7 @@ test_tbl <- as_tibble(test_dt)
 ```{r mutate, echo=FALSE}
 mutate_marks <- bench::mark(
   tidyverse = mutate(test_tbl, double_a = a * 2, a_plus_b = a + b),
-  tidydt = dt_mutate(copy(test_dt), double_a = a * 2, a_plus_b = a + b),
+  tidytable = dt_mutate(copy(test_dt), double_a = a * 2, a_plus_b = a + b),
   data.table = copy(test_dt)[, ':='(double_a = a * 2, a_plus_b = a + b)],
   check = FALSE,
   iterations = iters)
@@ -280,7 +280,7 @@ mutate_marks <- mutate_marks %>%
 ```{r filter, echo=FALSE}
 filter_marks <- bench::mark(
   tidyverse = filter(test_tbl, a <= 7, c == "a"),
-  tidydt = dt_filter(test_dt, a <= 7 & c == "a"),
+  tidytable = dt_filter(test_dt, a <= 7 & c == "a"),
   data.table = test_dt[a <= 7 & c == "a"],
   check = FALSE,
   iterations = iters)
@@ -296,7 +296,7 @@ filter_marks <- filter_marks %>%
 ```{r summarize, echo=FALSE}
 summarize_marks <- bench::mark(
   tidyverse = summarize(group_by(test_tbl, c), avg_a = mean(a)),
-  tidydt = dt_summarize(test_dt, avg_a = mean(a), by = c),
+  tidytable = dt_summarize(test_dt, avg_a = mean(a), by = c),
   data.table = test_dt[, list(avg_a = mean(a)), by = c],
   check = FALSE,
   iterations = iters)
@@ -322,7 +322,7 @@ test_tbl <- as_tibble(test_dt)
 
 arrange_marks <- bench::mark(
   tidyverse = arrange(test_tbl, c, a),
-  tidydt = dt_arrange(test_dt, c, a),
+  tidytable = dt_arrange(test_dt, c, a),
   data.table = test_dt[order(c, a)],
   check = FALSE,
   iterations = iters)
@@ -348,7 +348,7 @@ fill_tbl <- as_tibble(fill_dt)
 
 fill_marks <- bench::mark(
   tidyverse = fill(dplyr::group_by(fill_tbl, id), x, y),
-  tidydt = tidydt::dt_fill(as_dt(fill_dt), x, y, by = id),
+  tidytable = dt_fill(as_dt(fill_dt), x, y, by = id),
   data.table = as_dt(fill_dt)[, ':='(x = nafill(x, type = "locf"),
                                      y = nafill(y, type = "locf")),
                               by = id],
@@ -375,11 +375,11 @@ case_marks <- bench::mark(
                                       x >= median_x ~ "high",
                                       is.na(x) ~ "unknown",
                                       TRUE ~ "other")),
-  tidydt = dt_mutate(copy(case_dt),
-                     test = tidydt::dt_case(x < median_x, "low",
-                                            x >= median_x, "high",
-                                            is.na(x), "unknown",
-                                            default = "other")),
+  tidytable = dt_mutate(copy(case_dt),
+                     test = dt_case(x < median_x, "low",
+                                    x >= median_x, "high",
+                                    is.na(x), "unknown",
+                                    default = "other")),
   data.table = copy(case_dt)[,':='(test = fifelse(x < median_x, "low",
                                                   fifelse(x >= median_x, "high",
                                                           fifelse(is.na(x), "unknown", "other"))))],
@@ -404,7 +404,7 @@ wider_dt <- as.data.table(wider_tbl)
 
 wider_marks <- bench::mark(
   tidyverse = pivot_wider(wider_tbl, names_from = name, values_from = value),
-  tidydt = dt_pivot_wider(wider_dt, names_from = name, values_from = value),
+  tidytable = dt_pivot_wider(wider_dt, names_from = name, values_from = value),
   data.table = data.table::dcast(wider_dt, case + year ~ name),
   check = FALSE,
   iterations = iters
@@ -425,7 +425,7 @@ remove(x, wider_dt, wider_tbl); inv_gc(); inv_gc();
 
 longer_marks <- bench::mark(
   tidyverse = pivot_longer(longer_tbl, cols = c(x:z)),
-  tidydt = dt_pivot_longer(longer_dt, cols = c(x:z)),
+  tidytable = dt_pivot_longer(longer_dt, cols = c(x:z)),
   data.table = data.table::melt(longer_dt, measure.vars = c("x","y","z"), variable.name = "name"),
   check = FALSE,
   iterations = iters
@@ -454,7 +454,7 @@ right_tbl <- as_tibble(right_dt)
 
 left_join_marks <- bench::mark(
   tidyverse = left_join(left_tbl, right_tbl, by = "c"),
-  tidydt = dt_left_join(left_dt, right_dt, by = "c"),
+  tidytable = dt_left_join(left_dt, right_dt, by = "c"),
   data.table = right_dt[left_dt, on = "c", allow.cartesian = TRUE],
   check = FALSE,
   iterations = iters)
@@ -468,7 +468,7 @@ left_join_marks <- left_join_marks %>%
 ```{r inner_join, echo=FALSE}
 inner_join_marks <- bench::mark(
   tidyverse = inner_join(left_tbl, right_tbl, by = "c"),
-  tidydt = dt_inner_join(left_dt, right_dt, by = "c"),
+  tidytable = dt_inner_join(left_dt, right_dt, by = "c"),
   data.table = left_dt[right_dt, on = "c", allow.cartesian = TRUE, nomatch = 0],
   check = FALSE,
   iterations = iters)
@@ -500,8 +500,8 @@ all_marks <- all_marks %>%
                            str_c("ms"), median)) %>%
   mutate(median = median %>% str_replace("ms", "") %>% as.double()) %>%
   pivot_wider(names_from = expression, values_from = median) %>%
-  mutate(tidydt_vs_tidyverse = scales::percent(tidydt/tidyverse, accuracy = .1)) %>%
-  mutate_at(vars(tidyverse, tidydt, data.table), ~str_c(.x, "ms")) %>%
+  mutate(tidytable_vs_tidyverse = scales::percent(tidytable/tidyverse, accuracy = .1)) %>%
+  mutate_at(vars(tidyverse, tidytable, data.table), ~str_c(.x, "ms")) %>%
   arrange(function_tested)
 ```
 
