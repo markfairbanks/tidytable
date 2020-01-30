@@ -310,14 +310,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         1460ms    176.66ms  184.12ms   12.1%                 
-#>  2 case_when       1220ms    437.04ms  528.82ms   35.8%                 
-#>  3 fill            897ms     576ms     370ms      64.2%                 
-#>  4 filter          229ms     189ms     197ms      82.5%                 
-#>  5 inner_join      63.2ms    77.2ms    81ms       122.2%                
-#>  6 left_join       63.9ms    93.5ms    94ms       146.3%                
-#>  7 mutate          38.5ms    97.3ms    116.3ms    252.7%                
-#>  8 pivot_longer    82.2ms    19.5ms    11.3ms     23.7%                 
-#>  9 pivot_wider     706ms     248ms     232ms      35.1%                 
-#> 10 summarize       422ms     234ms     232ms      55.5%
+#>  1 arrange         1460ms    179.77ms  179.41ms   12.3%                 
+#>  2 case_when       1210ms    414.6ms   517.02ms   34.3%                 
+#>  3 fill            924ms     568ms     381ms      61.5%                 
+#>  4 filter          223ms     194ms     196ms      87.0%                 
+#>  5 inner_join      80.4ms    89.8ms    87.6ms     111.7%                
+#>  6 left_join       73.6ms    121.2ms   106.5ms    164.7%                
+#>  7 mutate          39.3ms    98ms      112.5ms    249.4%                
+#>  8 pivot_longer    116.9ms   19.5ms    11.9ms     16.7%                 
+#>  9 pivot_wider     707ms     266ms     274ms      37.6%                 
+#> 10 summarize       431ms     251ms     234ms      58.2%
 ```
