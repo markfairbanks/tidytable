@@ -10,13 +10,13 @@
 \usage{
 dt_slice(.data, rows = 1:5, by = NULL)
 
-dt_slice_head(.data, n, by = NULL)
+dt_slice_head(.data, n = 5, by = NULL)
 
-dt_slice_tail(.data, n, by = NULL)
+dt_slice_tail(.data, n = 5, by = NULL)
 
-dt_slice_max(.data, order_by, n, by = NULL)
+dt_slice_max(.data, order_by, n = 5, by = NULL)
 
-dt_slice_min(.data, order_by, n, by = NULL)
+dt_slice_min(.data, order_by, n = 5, by = NULL)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
