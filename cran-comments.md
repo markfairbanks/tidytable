@@ -5,6 +5,8 @@ This is a resubmission. In this version I have:
 
 * Used single quotes to identify package names in the package description.
 
+* Changed the package name due to a name conflict.
+
 ## Test environments
 * local OS X install, R 3.6.1
 * ubuntu 14.04 (on travis-ci), R 3.6.1
