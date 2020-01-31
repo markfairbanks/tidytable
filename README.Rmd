@@ -479,7 +479,7 @@ inner_join_marks <- inner_join_marks %>%
   mutate_all(~as.character(.x) %>% str_trim())
 ```
 
-```{r echo = FALSE, message = FALSE}
+```{r all_marks, echo = FALSE, message = FALSE}
 library(magrittr)
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
