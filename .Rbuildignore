@@ -1,7 +1,6 @@
-^tidydt\.Rproj$
+^tidytable\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^README\.Rmd$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
-^tidytable.Rproj
