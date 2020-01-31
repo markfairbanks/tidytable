@@ -3,3 +3,5 @@
 ^LICENSE\.md$
 ^README\.Rmd$
 ^cran-comments\.md$
+^CRAN-RELEASE$
+^tidytable.Rproj

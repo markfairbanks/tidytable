@@ -20,3 +20,5 @@
 #' @importFrom utils head
 #' @importFrom utils tail
 NULL
+
+globalVariables(c("data", ".","..select_vars", ".count", "na_index"))
