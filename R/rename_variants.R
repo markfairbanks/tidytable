@@ -34,18 +34,12 @@
 #'   dt_rename_across(c(x, double_x), ~ sub("x", "stuff", .x))
 dt_rename_all <- function(.data, .fun, ...) {
 
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
-
   dt_rename_across(.data, dt_everything(), .fun, ...)
 }
 
 #' @export
 #' @rdname dt_rename_all
 dt_rename_at <- function(.data, .vars, .fun, ...) {
-
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   .vars <- enexpr(.vars)
 
@@ -79,9 +73,6 @@ dt_rename_across <- function(.data, .cols, .fun, ...) {
 #' @export
 #' @rdname dt_rename_all
 dt_rename_if <- function(.data, .predicate, .fun, ...) {
-
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   .predicate <- enexpr(.predicate)
 

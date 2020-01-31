@@ -59,6 +59,9 @@ dt_mutate_at <- function(.data, .vars, .funs, ...) {
 #' @rdname dt_mutate_if
 dt_mutate_across <- function(.data, .cols, .funs, ...) {
 
+  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
+
   .cols <- enexpr(.cols)
   .cols <- vec_selector(.data, !!.cols) %>%
     as.character()
