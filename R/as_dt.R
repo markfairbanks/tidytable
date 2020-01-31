@@ -18,9 +18,7 @@
 as_dt <- function(.data) {
   if (is.data.table(.data)) {
     copy(.data)
-  } else if (is.data.frame(.data)) {
-    as.data.table(.data)
   } else {
-    stop(".data must be a data.frame or data.table")
+    as.data.table(.data)
   }
 }
