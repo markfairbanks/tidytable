@@ -37,14 +37,7 @@ dt_rename_all <- function(.data, .fun, ...) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  .cols <- colnames(.data)
-  .fun <- anon_x(.fun)
-
-  for (old_name in .cols) {
-    new_name <- .fun(old_name, ...)
-    setnames(.data, old_name, new_name)
-  }
-  .data
+  dt_rename_across(.data, dt_everything(), .fun, ...)
 }
 
 #' @export
@@ -55,20 +48,8 @@ dt_rename_at <- function(.data, .vars, .fun, ...) {
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   .vars <- enexpr(.vars)
-  .vars <- vec_selector(.data, !!.vars) %>%
-    as.character()
 
-  .fun <- anon_x(.fun)
-
-  if (length(.vars) > 0) {
-    for (old_name in .vars) {
-      new_name <- .fun(old_name, ...)
-      setnames(.data, old_name, new_name)
-    }
-    .data
-  } else {
-    .data
-  }
+  dt_rename_across(.data, !!.vars, .fun, ...)
 }
 
 #' @export
@@ -102,17 +83,8 @@ dt_rename_if <- function(.data, .predicate, .fun, ...) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
-  .cols <- colnames(.data)[dt_map_lgl(.data, .predicate)]
+  .predicate <- enexpr(.predicate)
 
-  .fun <- anon_x(.fun)
+  dt_rename_across(.data, !!.predicate, .fun, ...)
 
-  if (length(.cols) > 0) {
-    for (old_name in .cols) {
-      new_name <- .fun(old_name, ...)
-      setnames(.data, old_name, new_name)
-    }
-    .data
-  } else {
-    .data
-  }
 }
