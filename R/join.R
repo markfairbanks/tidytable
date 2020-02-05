@@ -29,7 +29,8 @@ dt_left_join <- function(x, y, by = NULL) {
   on_vec <- by_x
   names(on_vec) <- by_y
 
-  y[x, on = on_vec, allow.cartesian = TRUE]
+  y[x, on = on_vec, allow.cartesian = TRUE] %>%
+    dt_select(!!!syms(names(x)), dt_everything())
 }
 
 #' @export
