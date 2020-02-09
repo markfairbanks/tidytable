@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidytable v0.3.0 <img src="man/figures/logo.png" align="right" width="20%" height="20%" />
+# tidytable v0.3.0 <img src="man/figures/logo.png" align="right" width="18%" height="18%" />
 
 <!-- badges: start -->
 
@@ -14,6 +14,15 @@ The goal of `tidytable` is to be a tidy interface to `data.table`.
 `tidytable` is `rlang` compatible. [See examples
 here](https://github.com/markfairbanks/tidytable#rlang-compatibility)
 
+#### Why `tidytable`?
+
+`tidytable` started as a complement to the great
+[dtplyr](https://github.com/markfairbanks/tidytable#rlang-compatibility)
+package, since `dtplyr` is missing some of `dplyr`’s functionality and
+doesn’t cover any `tidyr` functions. However `dplyr`’s core verbs
+(mutate, arrange, etc.) are now included in `tidytable` to allow the
+user access to all functions in one place.
+
 ## Installation
 
 You can install the development version from
@@ -23,6 +32,9 @@ You can install the development version from
 # install.packages("devtools")
 devtools::install_github("markfairbanks/tidytable")
 ```
+
+Note: `tidytable` is not currently on CRAN, but will be by the end of
+February 2020.
 
 ## tidytable functions
 
@@ -88,13 +100,13 @@ here](https://github.com/markfairbanks/tidytable#Enhanced-selection)
 The code chunk below shows the `tidytable` syntax:
 
 ``` r
-library(data.table) # imported for the data.table() function
+library(data.table)
 library(tidytable)
 
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt %>%
-  as_dt() %>%
+  copy() %>% # To prevent data.table's modify by reference
   dt_select(x, y, z) %>%
   dt_filter(x < 4, y > 1) %>%
   dt_arrange(x, y) %>%
@@ -156,7 +168,7 @@ example_dt %>%
 #> 3: b c
 ```
 
-##### New variant: `dt_mutate_across()`
+#### New variant: `dt_mutate_across()`
 
 This format works to replace `dt_mutate_if()` & `dt_mutate_at()` with
 one helper,
@@ -269,7 +281,7 @@ syntax:
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt %>%
-  as_dt() %>%
+  copy() %>%
   dt(, list(x, y, z)) %>%
   dt(x < 4 & y > 1) %>%
   dt(order(x, y)) %>%
@@ -288,6 +300,11 @@ will get added to the speed comps over time.
 
 A few notes:
 
+  - The main metric of interest is the time comparison of a tidyverse
+    function vs. its equivalent tidytable function. For example, the
+    `summarize()` tests were performed on different dataset from the
+    `case_when()`, so comparing times between separate functions won’t
+    be very useful.
   - `setDTthreads(1)` was used to ensure a fair comparison to the
     `tidyverse`.
   - `copy(dt)` was used when testing `dt_mutate()` to ensure a fair
@@ -310,14 +327,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         1500ms    182.9ms   185.1ms    12.2%                 
-#>  2 case_when       1250ms    439.97ms  497.36ms   35.2%                 
-#>  3 fill            921ms     610ms     395ms      66.2%                 
-#>  4 filter          239ms     194ms     194ms      81.2%                 
-#>  5 inner_join      65.2ms    79.9ms    74.3ms     122.5%                
-#>  6 left_join       70.9ms    94.8ms    92.9ms     133.7%                
-#>  7 mutate          39.8ms    102.4ms   119.1ms    257.3%                
-#>  8 pivot_longer    85.5ms    19.6ms    11.9ms     22.9%                 
-#>  9 pivot_wider     734ms     242ms     234ms      33.0%                 
-#> 10 summarize       419ms     251ms     255ms      59.9%
+#>  1 arrange         1520ms    182.89ms  183.98ms   12.0%                 
+#>  2 case_when       1150ms    394.4ms   494.31ms   34.3%                 
+#>  3 fill            944ms     631ms     406ms      66.8%                 
+#>  4 filter          227ms     192ms     192ms      84.6%                 
+#>  5 inner_join      65.2ms    77.2ms    72ms       118.4%                
+#>  6 left_join       66.4ms    94.1ms    90.5ms     141.7%                
+#>  7 mutate          39ms      95.4ms    121ms      244.6%                
+#>  8 pivot_longer    99.4ms    18.5ms    17.4ms     18.6%                 
+#>  9 pivot_wider     765ms     239ms     250ms      31.2%                 
+#> 10 summarize       441ms     236ms     229ms      53.5%
 ```
