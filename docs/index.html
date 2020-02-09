@@ -87,7 +87,7 @@
 <div id="why-tidytable" class="section level4">
 <h4 class="hasAnchor">
 <a href="#why-tidytable" class="anchor"></a>Why <code>tidytable</code>?</h4>
-<p><code>tidytable</code> started as a complement to the great <a href="https://github.com/markfairbanks/tidytable#rlang-compatibility">dtplyr</a> package, since <code>dtplyr</code> is missing some of <code>dplyr</code>’s functionality and doesn’t cover any <code>tidyr</code> functions. However <code>dplyr</code>’s core verbs (mutate, arrange, etc.) are now included in <code>tidytable</code> to allow the user access to all functions in one place.</p>
+<p><code>tidytable</code> started as a complement to the <a href="https://github.com/tidyverse/dtplyr">dtplyr</a> package, since <code>dtplyr</code> is missing some of <code>dplyr</code>’s functionality and doesn’t cover any <code>tidyr</code> functions. However <code>dplyr</code>’s core verbs (mutate, arrange, etc.) are now included in <code>tidytable</code> to allow the user access to all functions in one place.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -382,16 +382,16 @@
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; # A tibble: 10 x 5</span></a>
 <a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt;    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse</span></a>
 <a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;                 </span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt;  1 arrange         1530ms    184.73ms  187.07ms   12.1%                 </span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt;  2 case_when       1190ms    407.64ms  504.01ms   34.3%                 </span></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt;  3 fill            913ms     635ms     429ms      69.6%                 </span></a>
-<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt;  4 filter          238ms     195ms     199ms      81.9%                 </span></a>
-<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt;  5 inner_join      71.3ms    70.2ms    74.8ms     98.5%                 </span></a>
-<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt;  6 left_join       70.6ms    159.3ms   111.2ms    225.6%                </span></a>
-<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt;  7 mutate          38.6ms    103.4ms   125.5ms    267.9%                </span></a>
-<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt;  8 pivot_longer    99.2ms    19.2ms    17.3ms     19.4%                 </span></a>
-<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt;  9 pivot_wider     838ms     240ms     259ms      28.6%                 </span></a>
-<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt; 10 summarize       442ms     248ms     233ms      56.1%</span></a></code></pre></div>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt;  1 arrange         1500ms    182.9ms   184.8ms    12.2%                 </span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt;  2 case_when       1180ms    397.95ms  493.51ms   33.7%                 </span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt;  3 fill            888ms     591ms     408ms      66.6%                 </span></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt;  4 filter          230ms     196ms     194ms      85.2%                 </span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt;  5 inner_join      74.6ms    72.4ms    74.1ms     97.1%                 </span></a>
+<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt;  6 left_join       65.8ms    168.1ms   106.4ms    255.5%                </span></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt;  7 mutate          38.2ms    92.1ms    119.8ms    241.1%                </span></a>
+<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt;  8 pivot_longer    95.6ms    19.6ms    17.3ms     20.5%                 </span></a>
+<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt;  9 pivot_wider     762ms     255ms     255ms      33.5%                 </span></a>
+<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt; 10 summarize       410ms     239ms     233ms      58.3%</span></a></code></pre></div>
 </div>
 </div>
 </div>

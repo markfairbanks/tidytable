@@ -16,12 +16,12 @@ here](https://github.com/markfairbanks/tidytable#rlang-compatibility)
 
 #### Why `tidytable`?
 
-`tidytable` started as a complement to the great
-[dtplyr](https://github.com/markfairbanks/tidytable#rlang-compatibility)
-package, since `dtplyr` is missing some of `dplyr`’s functionality and
-doesn’t cover any `tidyr` functions. However `dplyr`’s core verbs
-(mutate, arrange, etc.) are now included in `tidytable` to allow the
-user access to all functions in one place.
+`tidytable` started as a complement to the
+[dtplyr](https://github.com/tidyverse/dtplyr) package, since `dtplyr` is
+missing some of `dplyr`’s functionality and doesn’t cover any `tidyr`
+functions. However `dplyr`’s core verbs (mutate, arrange, etc.) are now
+included in `tidytable` to allow the user access to all functions in one
+place.
 
 ## Installation
 
@@ -327,14 +327,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         1530ms    184.73ms  187.07ms   12.1%                 
-#>  2 case_when       1190ms    407.64ms  504.01ms   34.3%                 
-#>  3 fill            913ms     635ms     429ms      69.6%                 
-#>  4 filter          238ms     195ms     199ms      81.9%                 
-#>  5 inner_join      71.3ms    70.2ms    74.8ms     98.5%                 
-#>  6 left_join       70.6ms    159.3ms   111.2ms    225.6%                
-#>  7 mutate          38.6ms    103.4ms   125.5ms    267.9%                
-#>  8 pivot_longer    99.2ms    19.2ms    17.3ms     19.4%                 
-#>  9 pivot_wider     838ms     240ms     259ms      28.6%                 
-#> 10 summarize       442ms     248ms     233ms      56.1%
+#>  1 arrange         1500ms    182.9ms   184.8ms    12.2%                 
+#>  2 case_when       1180ms    397.95ms  493.51ms   33.7%                 
+#>  3 fill            888ms     591ms     408ms      66.6%                 
+#>  4 filter          230ms     196ms     194ms      85.2%                 
+#>  5 inner_join      74.6ms    72.4ms    74.1ms     97.1%                 
+#>  6 left_join       65.8ms    168.1ms   106.4ms    255.5%                
+#>  7 mutate          38.2ms    92.1ms    119.8ms    241.1%                
+#>  8 pivot_longer    95.6ms    19.6ms    17.3ms     20.5%                 
+#>  9 pivot_wider     762ms     255ms     255ms      33.5%                 
+#> 10 summarize       410ms     239ms     233ms      58.3%
 ```
