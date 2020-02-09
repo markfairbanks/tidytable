@@ -78,18 +78,24 @@
   <div class="contents col-md-9">
 <div id="tidytable-v0-3-0" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#tidytable-v0-3-0" class="anchor"></a>tidytable v0.3.0 <img src="reference/figures/logo.png" align="right" width="20%" height="20%">
+<a href="#tidytable-v0-3-0" class="anchor"></a>tidytable v0.3.0 <img src="reference/figures/logo.png" align="right" width="18%" height="18%">
 </h1></div>
 <!-- badges: start -->
 
 <p>The goal of <code>tidytable</code> is to be a tidy interface to <code>data.table</code>.</p>
 <p><code>tidytable</code> is <code>rlang</code> compatible. <a href="https://github.com/markfairbanks/tidytable#rlang-compatibility">See examples here</a></p>
+<div id="why-tidytable" class="section level4">
+<h4 class="hasAnchor">
+<a href="#why-tidytable" class="anchor"></a>Why <code>tidytable</code>?</h4>
+<p><code>tidytable</code> started as a complement to the great <a href="https://github.com/markfairbanks/tidytable#rlang-compatibility">dtplyr</a> package, since <code>dtplyr</code> is missing some of <code>dplyr</code>’s functionality and doesn’t cover any <code>tidyr</code> functions. However <code>dplyr</code>’s core verbs (mutate, arrange, etc.) are now included in <code>tidytable</code> to allow the user access to all functions in one place.</p>
+</div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"markfairbanks/tidytable"</span>)</a></code></pre></div>
+<p>Note: <code>tidytable</code> is not currently on CRAN, but will be by the end of February 2020.</p>
 </div>
 <div id="tidytable-functions" class="section level2">
 <h2 class="hasAnchor">
@@ -198,13 +204,13 @@
 <h2 class="hasAnchor">
 <a href="#general-syntax" class="anchor"></a>General syntax</h2>
 <p>The code chunk below shows the <code>tidytable</code> syntax:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(data.table) <span class="co"># imported for the data.table() function</span></a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(data.table)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidytable)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">example_dt &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="dt">z =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>))</a>
 <a class="sourceLine" id="cb2-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb2-6" data-line-number="6">example_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="reference/as_dt.html">as_dt</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># To prevent data.table's modify by reference</span></a>
 <a class="sourceLine" id="cb2-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate.html">dt_select</a></span>(x, y, z) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate.html">dt_filter</a></span>(x <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>, y <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate.html">dt_arrange</a></span>(x, y) <span class="op">%&gt;%</span></a>
@@ -248,10 +254,10 @@
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; 1: a a</span></a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; 2: a b</span></a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 3: b c</span></a></code></pre></div>
-<div id="new-variant-dt_mutate_across" class="section level5">
-<h5 class="hasAnchor">
+<div id="new-variant-dt_mutate_across" class="section level4">
+<h4 class="hasAnchor">
 <a href="#new-variant-dt_mutate_across" class="anchor"></a>New variant: <code>dt_mutate_across()</code>
-</h5>
+</h4>
 <p>This format works to replace <code><a href="reference/dt_mutate_if.html">dt_mutate_if()</a></code> &amp; <code><a href="reference/dt_mutate_if.html">dt_mutate_at()</a></code> with one helper, <code><a href="reference/dt_mutate_if.html">dt_mutate_across()</a></code>:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">example_dt &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>), <span class="dt">d =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"></a>
@@ -345,7 +351,7 @@
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">example_dt &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="dt">z =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>))</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb11-3" data-line-number="3">example_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/as_dt.html">as_dt</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="reference/dt.html">dt</a></span>(, <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(x, y, z)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="reference/dt.html">dt</a></span>(x <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span> <span class="op">&amp;</span><span class="st"> </span>y <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="reference/dt.html">dt</a></span>(<span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">order</a></span>(x, y)) <span class="op">%&gt;%</span></a>
@@ -361,6 +367,7 @@
 <p>Below are some speed comparisons of various functions. More functions will get added to the speed comps over time.</p>
 <p>A few notes:</p>
 <ul>
+<li>The main metric of interest is the time comparison of a tidyverse function vs. its equivalent tidytable function. For example, the <code>summarize()</code> tests were performed on different dataset from the <code>case_when()</code>, so comparing times between separate functions won’t be very useful.</li>
 <li>
 <code><a href="https://Rdatatable.gitlab.io/data.table/reference/openmp-utils.html">setDTthreads(1)</a></code> was used to ensure a fair comparison to the <code>tidyverse</code>.</li>
 <li>
@@ -375,16 +382,16 @@
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; # A tibble: 10 x 5</span></a>
 <a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt;    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse</span></a>
 <a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;                 </span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt;  1 arrange         1500ms    182.9ms   185.1ms    12.2%                 </span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt;  2 case_when       1250ms    439.97ms  497.36ms   35.2%                 </span></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt;  3 fill            921ms     610ms     395ms      66.2%                 </span></a>
-<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt;  4 filter          239ms     194ms     194ms      81.2%                 </span></a>
-<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt;  5 inner_join      65.2ms    79.9ms    74.3ms     122.5%                </span></a>
-<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt;  6 left_join       70.9ms    94.8ms    92.9ms     133.7%                </span></a>
-<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt;  7 mutate          39.8ms    102.4ms   119.1ms    257.3%                </span></a>
-<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt;  8 pivot_longer    85.5ms    19.6ms    11.9ms     22.9%                 </span></a>
-<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt;  9 pivot_wider     734ms     242ms     234ms      33.0%                 </span></a>
-<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt; 10 summarize       419ms     251ms     255ms      59.9%</span></a></code></pre></div>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt;  1 arrange         1520ms    182.89ms  183.98ms   12.0%                 </span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt;  2 case_when       1150ms    394.4ms   494.31ms   34.3%                 </span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt;  3 fill            944ms     631ms     406ms      66.8%                 </span></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt;  4 filter          227ms     192ms     192ms      84.6%                 </span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt;  5 inner_join      65.2ms    77.2ms    72ms       118.4%                </span></a>
+<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt;  6 left_join       66.4ms    94.1ms    90.5ms     141.7%                </span></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt;  7 mutate          39ms      95.4ms    121ms      244.6%                </span></a>
+<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt;  8 pivot_longer    99.4ms    18.5ms    17.4ms     18.6%                 </span></a>
+<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt;  9 pivot_wider     765ms     239ms     250ms      31.2%                 </span></a>
+<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt; 10 summarize       441ms     236ms     229ms      53.5%</span></a></code></pre></div>
 </div>
 </div>
 </div>
