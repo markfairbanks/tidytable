@@ -302,7 +302,7 @@ A few notes:
 
   - The main metric of interest is the time comparison of a tidyverse
     function vs. its equivalent tidytable function. For example, the
-    `summarize()` tests were performed on different dataset from the
+    `summarize()` tests were performed on different dataset from
     `case_when()`, so comparing times between separate functions won’t
     be very useful.
   - `setDTthreads(1)` was used to ensure a fair comparison to the
@@ -327,14 +327,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         1520ms    182.89ms  183.98ms   12.0%                 
-#>  2 case_when       1150ms    394.4ms   494.31ms   34.3%                 
-#>  3 fill            944ms     631ms     406ms      66.8%                 
-#>  4 filter          227ms     192ms     192ms      84.6%                 
-#>  5 inner_join      65.2ms    77.2ms    72ms       118.4%                
-#>  6 left_join       66.4ms    94.1ms    90.5ms     141.7%                
-#>  7 mutate          39ms      95.4ms    121ms      244.6%                
-#>  8 pivot_longer    99.4ms    18.5ms    17.4ms     18.6%                 
-#>  9 pivot_wider     765ms     239ms     250ms      31.2%                 
-#> 10 summarize       441ms     236ms     229ms      53.5%
+#>  1 arrange         1530ms    184.73ms  187.07ms   12.1%                 
+#>  2 case_when       1190ms    407.64ms  504.01ms   34.3%                 
+#>  3 fill            913ms     635ms     429ms      69.6%                 
+#>  4 filter          238ms     195ms     199ms      81.9%                 
+#>  5 inner_join      71.3ms    70.2ms    74.8ms     98.5%                 
+#>  6 left_join       70.6ms    159.3ms   111.2ms    225.6%                
+#>  7 mutate          38.6ms    103.4ms   125.5ms    267.9%                
+#>  8 pivot_longer    99.2ms    19.2ms    17.3ms     19.4%                 
+#>  9 pivot_wider     838ms     240ms     259ms      28.6%                 
+#> 10 summarize       442ms     248ms     233ms      56.1%
 ```

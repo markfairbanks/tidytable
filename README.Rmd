@@ -244,7 +244,7 @@ Below are some speed comparisons of various functions. More functions will get a
 
 A few notes:
 
-* The main metric of interest is the time comparison of a tidyverse function vs. its equivalent tidytable function. For example, the `summarize()` tests were performed on different dataset from the `case_when()`, so comparing times between separate functions won't be very useful.
+* The main metric of interest is the time comparison of a tidyverse function vs. its equivalent tidytable function. For example, the `summarize()` tests were performed on different dataset from `case_when()`, so comparing times between separate functions won't be very useful.
 * `setDTthreads(1)` was used to ensure a fair comparison to the `tidyverse`.
 * `copy(dt)` was used when testing `dt_mutate()` to ensure a fair comparison to `dplyr::mutate()`.
 * `dt_fill()` & `tidyr::fill()` both work with character/factor/logical columns, whereas `data.table::nafill()` does not. Testing only included numeric columns due to this constraint.
