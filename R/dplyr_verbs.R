@@ -46,7 +46,9 @@ dt_mutate <- function(.data, ..., by = NULL) {
   all_names <- names(dots)
 
   for (i in seq_along(dots)) {
-    eval_tidy(expr(.data[, ':='(all_names[[i]], !!dots[[i]]), !!by][]))
+    eval_tidy(expr(
+      .data[, ':='(all_names[[i]], !!dots[[i]]), !!by][]
+      ))
   }
   .data
 }
