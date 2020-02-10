@@ -161,7 +161,7 @@ example_dt %>%
   dt_mutate_across(is.numeric, as.character)
 ```
 
-Using `_across()` instead of `_at()`
+Using `_across()` instead of `_at()`:
 
 ```{r}
 example_dt <- data.table(a = c(1,1,1), b = c(1,1,1), c = c("a", "a", "b"), d = c("a", "b", "c"))

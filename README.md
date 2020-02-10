@@ -195,7 +195,7 @@ example_dt %>%
 ```
 
 Using `_across()` instead of
-`_at()`
+`_at()`:
 
 ``` r
 example_dt <- data.table(a = c(1,1,1), b = c(1,1,1), c = c("a", "a", "b"), d = c("a", "b", "c"))
@@ -338,14 +338,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         1390ms    170.12ms  319.23ms   12.2%                 
-#>  2 case_when       1170ms    396.87ms  487.63ms   33.9%                 
-#>  3 fill            936ms     643ms     408ms      68.7%                 
-#>  4 filter          224ms     203ms     195ms      90.6%                 
-#>  5 inner_join      64.3ms    74.8ms    74.1ms     116.3%                
-#>  6 left_join       72.7ms    100.3ms   95.2ms     138.0%                
-#>  7 mutate          40.7ms    97.6ms    110.5ms    239.8%                
-#>  8 pivot_longer    95.1ms    17.6ms    15.5ms     18.5%                 
-#>  9 pivot_wider     714ms     241ms     238ms      33.8%                 
-#> 10 summarize       451ms     243ms     228ms      53.9%
+#>  1 arrange         1340ms    167.07ms  166.02ms   12.5%                 
+#>  2 case_when       1180ms    402.35ms  496ms      34.1%                 
+#>  3 fill            921ms     583ms     404ms      63.3%                 
+#>  4 filter          228ms     200ms     199ms      87.7%                 
+#>  5 inner_join      66.2ms    74.4ms    80ms       112.4%                
+#>  6 left_join       67.4ms    97.2ms    99.1ms     144.2%                
+#>  7 mutate          40.1ms    90.6ms    112.4ms    225.9%                
+#>  8 pivot_longer    98.2ms    17.5ms    15.5ms     17.8%                 
+#>  9 pivot_wider     708ms     239ms     252ms      33.8%                 
+#> 10 summarize       444ms     252ms     242ms      56.8%
 ```
