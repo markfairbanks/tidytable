@@ -1,10 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidytable v0.3.0 <img src="man/figures/logo.png" align="right" width="18%" height="18%" />
+# tidytable v3.1 <img src="man/figures/logo.png" align="right" width="17%" height="17%" />
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
+[![](https://img.shields.io/badge/devel%20version-0.3.1-blue.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
@@ -17,24 +20,28 @@ here](https://github.com/markfairbanks/tidytable#rlang-compatibility)
 #### Why `tidytable`?
 
 `tidytable` started as a complement to the
-[dtplyr](https://github.com/tidyverse/dtplyr) package, since `dtplyr` is
-missing some of `dplyr`’s functionality and doesn’t cover any `tidyr`
-functions. However `dplyr`’s core verbs (mutate, arrange, etc.) are now
-included in `tidytable` to allow the user access to all functions in one
-place.
+[`dtplyr`](https://github.com/tidyverse/dtplyr) package since `dtplyr`
+is missing some of `dplyr`’s functionality and doesn’t cover any `tidyr`
+functions. However translations of `dplyr`’s core verbs (mutate,
+arrange, etc.) are now included in `tidytable` to allow the user access
+to all functions in one place.
 
 ## Installation
 
-You can install the development version from
-[GitHub](https://github.com/) with:
+Install the released version from [CRAN](https://CRAN.R-project.org)
+with:
+
+``` r
+install.packages("tidytable")
+```
+
+Or install the development version from [GitHub](https://github.com/)
+with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("markfairbanks/tidytable")
 ```
-
-Note: `tidytable` is not currently on CRAN, but will be by the end of
-February 2020.
 
 ## tidytable functions
 
@@ -43,7 +50,7 @@ here](https://github.com/markfairbanks/tidytable#Enhanced-selection)
 
 ### tidytable helpers
 
-  - `as_dt()`: Safely operate on data.tables/convert data.frames to
+  - `as_dt()`: Prevent modify-by-reference/convert data.frames to
     data.tables
   - `%notin%`
 
@@ -69,7 +76,6 @@ here](https://github.com/markfairbanks/tidytable#Enhanced-selection)
   - `dt_count()` - **ES**
   - `dt_distinct()` - **ES**
   - `dt_pull()`
-  - `dt_relocate()`: Move a column to a new position in the data.table
   - `dt_rename()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
   - `dt_slice()`: `_head()`/`_tail()`/`_max()`/`_min()`
       - The `slice_*()` variants are like `dt_top_n()`, but are slightly
@@ -171,8 +177,10 @@ example_dt %>%
 #### New variant: `dt_mutate_across()`
 
 This format works to replace `dt_mutate_if()` & `dt_mutate_at()` with
-one helper,
-`dt_mutate_across()`:
+one helper, `dt_mutate_across()`.
+
+Using `_across()` instead of
+`_if()`:
 
 ``` r
 example_dt <- data.table(a = c(1,1,1), b = c(1,1,1), c = c("a", "a", "b"), d = c("a", "b", "c"))
@@ -185,6 +193,9 @@ example_dt %>%
 #> 2: 1 1 a b
 #> 3: 1 1 b c
 ```
+
+Using `_across()` instead of
+`_at()`
 
 ``` r
 example_dt <- data.table(a = c(1,1,1), b = c(1,1,1), c = c("a", "a", "b"), d = c("a", "b", "c"))
@@ -301,10 +312,10 @@ will get added to the speed comps over time.
 A few notes:
 
   - The main metric of interest is the time comparison of a tidyverse
-    function vs. its equivalent tidytable function. For example, the
-    `summarize()` tests were performed on different dataset from
-    `case_when()`, so comparing times between separate functions won’t
-    be very useful.
+    function vs. its equivalent tidytable function.
+      - Comparing times from separate functions won’t be very useful.
+        For example - the `summarize()` tests were performed on
+        different dataset from `case_when()`.
   - `setDTthreads(1)` was used to ensure a fair comparison to the
     `tidyverse`.
   - `copy(dt)` was used when testing `dt_mutate()` to ensure a fair
@@ -327,14 +338,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         1500ms    182.9ms   184.8ms    12.2%                 
-#>  2 case_when       1180ms    397.95ms  493.51ms   33.7%                 
-#>  3 fill            888ms     591ms     408ms      66.6%                 
-#>  4 filter          230ms     196ms     194ms      85.2%                 
-#>  5 inner_join      74.6ms    72.4ms    74.1ms     97.1%                 
-#>  6 left_join       65.8ms    168.1ms   106.4ms    255.5%                
-#>  7 mutate          38.2ms    92.1ms    119.8ms    241.1%                
-#>  8 pivot_longer    95.6ms    19.6ms    17.3ms     20.5%                 
-#>  9 pivot_wider     762ms     255ms     255ms      33.5%                 
-#> 10 summarize       410ms     239ms     233ms      58.3%
+#>  1 arrange         1600ms    173.1ms   172.8ms    10.8%                 
+#>  2 case_when       1200ms    412.6ms   498ms      34.4%                 
+#>  3 fill            925ms     597ms     405ms      64.5%                 
+#>  4 filter          219ms     189ms     192ms      86.3%                 
+#>  5 inner_join      68.9ms    79.7ms    81.3ms     115.7%                
+#>  6 left_join       74ms      101ms     102ms      136.5%                
+#>  7 mutate          39.6ms    90.5ms    114.3ms    228.5%                
+#>  8 pivot_longer    96.7ms    17.5ms    15.9ms     18.1%                 
+#>  9 pivot_wider     744ms     263ms     256ms      35.3%                 
+#> 10 summarize       423ms     239ms     237ms      56.5%
 ```
