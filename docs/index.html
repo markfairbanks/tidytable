@@ -83,7 +83,7 @@
 <!-- badges: start -->
 
 <p>The goal of <code>tidytable</code> is to be a tidy interface to <code>data.table</code>.</p>
-<p><code>tidytable</code> is <code>rlang</code> compatible. <a href="https://github.com/markfairbanks/tidytable#rlang-compatibility">See examples here</a></p>
+<p><code>tidytable</code> is <code>rlang</code> compatible. <a href="https://markfairbanks.github.io/tidytable/#rlang-compatibility">See examples here</a></p>
 <div id="why-tidytable" class="section level4">
 <h4 class="hasAnchor">
 <a href="#why-tidytable" class="anchor"></a>Why <code>tidytable</code>?</h4>
@@ -101,13 +101,16 @@
 <div id="tidytable-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tidytable-functions" class="anchor"></a>tidytable functions</h2>
-<p><strong>Enhanced selection support denoted by ES</strong> <a href="https://github.com/markfairbanks/tidytable#Enhanced-selection">See examples here</a></p>
+<p><strong>Enhanced selection support denoted by ES</strong> <a href="https://markfairbanks.github.io/tidytable/#enhanced-selection">See examples here</a></p>
 <div id="tidytable-helpers" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tidytable-helpers" class="anchor"></a>tidytable helpers</h3>
 <ul>
 <li>
 <code><a href="reference/as_dt.html">as_dt()</a></code>: Prevent modify-by-reference/convert data.frames to data.tables</li>
+<li>
+<code><a href="reference/dt.html">dt()</a></code>: Pipeable <code>data.table</code> syntax. <a href="https://markfairbanks.github.io/tidytable/#dt-helper">See here</a>
+</li>
 <li><code><a href="reference/grapes-notin-grapes.html">%notin%</a></code></li>
 </ul>
 </div>
@@ -123,7 +126,7 @@
 <li>
 <code><a href="reference/dt_mutate.html">dt_mutate()</a></code>: <code>_if()</code>/<code>_at()</code>/<code>_all()</code>/<code>_across()</code> - <strong>ES</strong>
 <ul>
-<li>The <code>_across()</code> variant is new and can replace both <code>_if()</code> and <code>_at()</code> <a href="https://github.com/markfairbanks/tidytable#Enhanced-selection">See here</a>
+<li>The <code>_across()</code> variant is new and can replace both <code>_if()</code> and <code>_at()</code> <a href="https://markfairbanks.github.io/tidytable/#new-variant-dt_mutate_across">See here</a>
 </li>
 </ul>
 </li>
@@ -387,16 +390,16 @@
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; # A tibble: 10 x 5</span></a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt;    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse</span></a>
 <a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;                 </span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;  1 arrange         1460ms    180.53ms  181.16ms   12.4%                 </span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;  2 case_when       1120ms    378.66ms  484.93ms   33.8%                 </span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt;  3 fill            863ms     585ms     392ms      67.8%                 </span></a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt;  4 filter          224ms     186ms     192ms      83.0%                 </span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt;  5 inner_join      60.5ms    73.2ms    69.6ms     121.0%                </span></a>
-<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt;  6 left_join       65.5ms    91.1ms    89.8ms     139.1%                </span></a>
-<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt;  7 mutate          37.9ms    96.5ms    114.5ms    254.6%                </span></a>
-<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt;  8 pivot_longer    92.9ms    18.8ms    16.7ms     20.2%                 </span></a>
-<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="co">#&gt;  9 pivot_wider     743ms     231ms     227ms      31.1%                 </span></a>
-<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="co">#&gt; 10 summarize       497ms     234ms     223ms      47.1%</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;  1 arrange         1490ms    182.97ms  181.7ms    12.3%                 </span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;  2 case_when       1240ms    423.27ms  538.96ms   34.1%                 </span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt;  3 fill            945ms     622ms     393ms      65.8%                 </span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt;  4 filter          228ms     195ms     191ms      85.5%                 </span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt;  5 inner_join      67.8ms    85.9ms    77.3ms     126.7%                </span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt;  6 left_join       80.5ms    102.8ms   101ms      127.7%                </span></a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt;  7 mutate          44.8ms    101ms     118.7ms    225.4%                </span></a>
+<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt;  8 pivot_longer    99.8ms    17.5ms    15.6ms     17.5%                 </span></a>
+<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="co">#&gt;  9 pivot_wider     844ms     279ms     263ms      33.1%                 </span></a>
+<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="co">#&gt; 10 summarize       445ms     237ms     229ms      53.3%</span></a></code></pre></div>
 </div>
 </div>
 </div>
