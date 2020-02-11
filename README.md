@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidytable v0.3.1 <img src="man/figures/logo.png" align="right" width="17%" height="17%" />
+# tidytable <img src="man/figures/logo.png" align="right" width="18%" height="18%" />
 
 <!-- badges: start -->
 
@@ -314,7 +314,7 @@ A few notes:
   - The main metric of interest is the time comparison of a tidyverse
     function vs. its equivalent tidytable function.
       - Comparing times from separate functions won’t be very useful.
-        For example - the `summarize()` tests were performed on
+        For example - the `summarize()` tests were performed on a
         different dataset from `case_when()`.
   - `setDTthreads(1)` was used to ensure a fair comparison to the
     `tidyverse`.
@@ -338,14 +338,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         1340ms    167.07ms  166.02ms   12.5%                 
-#>  2 case_when       1180ms    402.35ms  496ms      34.1%                 
-#>  3 fill            921ms     583ms     404ms      63.3%                 
-#>  4 filter          228ms     200ms     199ms      87.7%                 
-#>  5 inner_join      66.2ms    74.4ms    80ms       112.4%                
-#>  6 left_join       67.4ms    97.2ms    99.1ms     144.2%                
-#>  7 mutate          40.1ms    90.6ms    112.4ms    225.9%                
-#>  8 pivot_longer    98.2ms    17.5ms    15.5ms     17.8%                 
-#>  9 pivot_wider     708ms     239ms     252ms      33.8%                 
-#> 10 summarize       444ms     252ms     242ms      56.8%
+#>  1 arrange         1460ms    180.53ms  181.16ms   12.4%                 
+#>  2 case_when       1120ms    378.66ms  484.93ms   33.8%                 
+#>  3 fill            863ms     585ms     392ms      67.8%                 
+#>  4 filter          224ms     186ms     192ms      83.0%                 
+#>  5 inner_join      60.5ms    73.2ms    69.6ms     121.0%                
+#>  6 left_join       65.5ms    91.1ms    89.8ms     139.1%                
+#>  7 mutate          37.9ms    96.5ms    114.5ms    254.6%                
+#>  8 pivot_longer    92.9ms    18.8ms    16.7ms     20.2%                 
+#>  9 pivot_wider     743ms     231ms     227ms      31.1%                 
+#> 10 summarize       497ms     234ms     223ms      47.1%
 ```
