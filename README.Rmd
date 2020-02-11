@@ -330,7 +330,7 @@ summarize_marks <- summarize_marks %>%
 ```{r arrange, echo=FALSE}
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-data_size <- 3000000
+data_size <- 1000000
 test_dt <- data.table(a = sample(1:20, data_size, TRUE),
                       b = sample(1:20, data_size, TRUE),
                       c = sample(c("a","a","b","c","d"), data_size, TRUE),
@@ -382,7 +382,7 @@ fill_marks <- fill_marks %>%
 ```{r case, echo=FALSE}
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-case_dt <- data.table(x = rnorm(1e7)) %>%
+case_dt <- data.table(x = rnorm(4000000)) %>%
   dt_mutate(median_x = median(x))
 
 case_tbl <- as_tibble(case_dt)
