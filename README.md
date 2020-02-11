@@ -15,7 +15,7 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 The goal of `tidytable` is to be a tidy interface to `data.table`.
 
 `tidytable` is `rlang` compatible. [See examples
-here](https://github.com/markfairbanks/tidytable#rlang-compatibility)
+here](https://markfairbanks.github.io/tidytable/#rlang-compatibility)
 
 #### Why `tidytable`?
 
@@ -46,12 +46,14 @@ devtools::install_github("markfairbanks/tidytable")
 ## tidytable functions
 
 **Enhanced selection support denoted by ES** [See examples
-here](https://github.com/markfairbanks/tidytable#Enhanced-selection)
+here](https://markfairbanks.github.io/tidytable/#enhanced-selection)
 
 ### tidytable helpers
 
   - `as_dt()`: Prevent modify-by-reference/convert data.frames to
     data.tables
+  - `dt()`: Pipeable `data.table` syntax. [See
+    here](https://markfairbanks.github.io/tidytable/#dt-helper)
   - `%notin%`
 
 ### dplyr
@@ -63,7 +65,7 @@ here](https://github.com/markfairbanks/tidytable#Enhanced-selection)
   - `dt_mutate()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
       - The `_across()` variant is new and can replace both `_if()` and
         `_at()` [See
-        here](https://github.com/markfairbanks/tidytable#Enhanced-selection)
+        here](https://markfairbanks.github.io/tidytable/#new-variant-dt_mutate_across)
   - `dt_select()` - **ES**
   - `dt_summarize()`: Group by specifications called inside. See
     `?dt_summarize`
@@ -338,14 +340,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         1460ms    180.53ms  181.16ms   12.4%                 
-#>  2 case_when       1120ms    378.66ms  484.93ms   33.8%                 
-#>  3 fill            863ms     585ms     392ms      67.8%                 
-#>  4 filter          224ms     186ms     192ms      83.0%                 
-#>  5 inner_join      60.5ms    73.2ms    69.6ms     121.0%                
-#>  6 left_join       65.5ms    91.1ms    89.8ms     139.1%                
-#>  7 mutate          37.9ms    96.5ms    114.5ms    254.6%                
-#>  8 pivot_longer    92.9ms    18.8ms    16.7ms     20.2%                 
-#>  9 pivot_wider     743ms     231ms     227ms      31.1%                 
-#> 10 summarize       497ms     234ms     223ms      47.1%
+#>  1 arrange         1490ms    182.97ms  181.7ms    12.3%                 
+#>  2 case_when       1240ms    423.27ms  538.96ms   34.1%                 
+#>  3 fill            945ms     622ms     393ms      65.8%                 
+#>  4 filter          228ms     195ms     191ms      85.5%                 
+#>  5 inner_join      67.8ms    85.9ms    77.3ms     126.7%                
+#>  6 left_join       80.5ms    102.8ms   101ms      127.7%                
+#>  7 mutate          44.8ms    101ms     118.7ms    225.4%                
+#>  8 pivot_longer    99.8ms    17.5ms    15.6ms     17.5%                 
+#>  9 pivot_wider     844ms     279ms     263ms      33.1%                 
+#> 10 summarize       445ms     237ms     229ms      53.3%
 ```

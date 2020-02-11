@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 The goal of `tidytable` is to be a tidy interface to `data.table`.
 
 `tidytable` is `rlang` compatible.
-[See examples here](https://github.com/markfairbanks/tidytable#rlang-compatibility)
+[See examples here](https://markfairbanks.github.io/tidytable/#rlang-compatibility)
 
 #### Why `tidytable`?
 
@@ -49,11 +49,12 @@ devtools::install_github("markfairbanks/tidytable")
 ## tidytable functions
 
 **Enhanced selection support denoted by ES**
-[See examples here](https://github.com/markfairbanks/tidytable#Enhanced-selection)
+[See examples here](https://markfairbanks.github.io/tidytable/#enhanced-selection)
 
 ### tidytable helpers
 
 * `as_dt()`: Prevent modify-by-reference/convert data.frames to data.tables
+* `dt()`: Pipeable `data.table` syntax. [See here](https://markfairbanks.github.io/tidytable/#dt-helper)
 * `%notin%`
 
 ### dplyr
@@ -64,7 +65,7 @@ devtools::install_github("markfairbanks/tidytable")
 * `dt_filter()`
 * `dt_mutate()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
   + The `_across()` variant is new and can replace both `_if()` and `_at()`
-  [See here](https://github.com/markfairbanks/tidytable#Enhanced-selection)
+  [See here](https://markfairbanks.github.io/tidytable/#new-variant-dt_mutate_across)
 * `dt_select()` - **ES**
 * `dt_summarize()`: Group by specifications called inside. See `?dt_summarize`
 
@@ -92,7 +93,7 @@ devtools::install_github("markfairbanks/tidytable")
 * `dt_group_nest()` - **ES** & `dt_unnest_legacy()` - **ES**
 
 ### purrr
-* `dt_map()`, `dt_map2()`, `dt_map_*()` variants, & `dt_map2_*()` variants 
+* `dt_map()`, `dt_map2()`, `dt_map_*()` variants, & `dt_map2_*()` variants
 
 ## General syntax
 
