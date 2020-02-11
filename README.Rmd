@@ -31,6 +31,8 @@ The goal of `tidytable` is to be a tidy interface to `data.table`.
 
 `tidytable` started as a complement to the [`dtplyr`](https://github.com/tidyverse/dtplyr) package since `dtplyr` is missing some of `dplyr`'s functionality and doesn't cover any `tidyr` functions. However translations of `dplyr`'s core verbs (mutate, arrange, etc.) are now included in `tidytable` to allow the user access to all functions in one place.
 
+As such you can use this as a one stop shop for `data.table` translations, or you can use it to complement your current `dtplyr` workflow.
+
 ## Installation
 
 Install the released version from [CRAN](https://CRAN.R-project.org) with:

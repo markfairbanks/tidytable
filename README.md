@@ -26,6 +26,10 @@ functions. However translations of `dplyr`’s core verbs (mutate,
 arrange, etc.) are now included in `tidytable` to allow the user access
 to all functions in one place.
 
+As such you can use this as a one stop shop for `data.table`
+translations, or you can use it to complement your current `dtplyr`
+workflow.
+
 ## Installation
 
 Install the released version from [CRAN](https://CRAN.R-project.org)
@@ -340,14 +344,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         348.3ms   48.2ms    45.1ms     13.8%                 
-#>  2 case_when       427ms     163ms     130ms      38.2%                 
-#>  3 fill            895ms     631ms     422ms      70.5%                 
-#>  4 filter          221ms     190ms     192ms      86.0%                 
-#>  5 inner_join      73.3ms    78.3ms    69.2ms     106.8%                
-#>  6 left_join       76.6ms    97.6ms    110.3ms    127.4%                
-#>  7 mutate          39ms      90.8ms    118ms      232.8%                
-#>  8 pivot_longer    97.1ms    19.4ms    12.1ms     20.0%                 
-#>  9 pivot_wider     726ms     249ms     230ms      34.3%                 
-#> 10 summarize       403ms     229ms     228ms      56.8%
+#>  1 arrange         316ms     47.3ms    43.7ms     15.0%                 
+#>  2 case_when       479ms     172ms     131ms      35.9%                 
+#>  3 fill            902ms     618ms     433ms      68.5%                 
+#>  4 filter          227ms     194ms     193ms      85.5%                 
+#>  5 inner_join      77.1ms    77ms      75ms       99.9%                 
+#>  6 left_join       80.3ms    117.7ms   122.6ms    146.6%                
+#>  7 mutate          38.9ms    96.9ms    123ms      249.1%                
+#>  8 pivot_longer    96.1ms    19.2ms    11.7ms     20.0%                 
+#>  9 pivot_wider     728ms     231ms     232ms      31.7%                 
+#> 10 summarize       421ms     238ms     230ms      56.5%
 ```
