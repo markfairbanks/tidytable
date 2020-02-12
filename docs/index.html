@@ -261,27 +261,25 @@
 <h4 class="hasAnchor">
 <a href="#new-variant-dt_mutate_across" class="anchor"></a>New variant: <code>dt_mutate_across()</code>
 </h4>
-<p>This format works to replace <code><a href="reference/dt_mutate_if.html">dt_mutate_if()</a></code> &amp; <code><a href="reference/dt_mutate_if.html">dt_mutate_at()</a></code> with one helper, <code><a href="reference/dt_mutate_if.html">dt_mutate_across()</a></code>.</p>
+<p>Enhanced selection allows the user to replace <code><a href="reference/dt_mutate_if.html">dt_mutate_if()</a></code> &amp; <code><a href="reference/dt_mutate_if.html">dt_mutate_at()</a></code> with one helper - <code><a href="reference/dt_mutate_if.html">dt_mutate_across()</a></code>.</p>
 <p>Using <code>_across()</code> instead of <code>_if()</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">example_dt &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>), <span class="dt">d =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co"># Using dt_mutate_across() instead of dt_mutate_if()</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">example_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate_if.html">dt_mutate_across</a></span>(is.numeric, as.character)</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;    a b c d</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 1: 1 1 a a</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 2: 1 1 a b</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 3: 1 1 b c</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-3" data-line-number="3">example_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate_if.html">dt_mutate_across</a></span>(is.numeric, as.character)</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;    a b c d</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; 1: 1 1 a a</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 2: 1 1 a b</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 3: 1 1 b c</span></a></code></pre></div>
 <p>Using <code>_across()</code> instead of <code>_at()</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">example_dt &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>), <span class="dt">d =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co"># Using dt_mutate_across() instead of dt_mutate_at()</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">example_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate_if.html">dt_mutate_across</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(a, b), <span class="op">~</span><span class="st"> </span>.x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;    a b c d</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; 1: 2 2 a a</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; 2: 2 2 a b</span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; 3: 2 2 b c</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-3" data-line-number="3">example_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate_if.html">dt_mutate_across</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(a, b), <span class="op">~</span><span class="st"> </span>.x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;    a b c d</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; 1: 2 2 a a</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; 2: 2 2 a b</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; 3: 2 2 b c</span></a></code></pre></div>
 <p>These two approaches can be combined in one call:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">example_dt &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">dbl_col1 =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>),</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">                         <span class="dt">dbl_col2 =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>),</a>
@@ -391,16 +389,16 @@
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; # A tibble: 10 x 5</span></a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt;    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse</span></a>
 <a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;                 </span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;  1 arrange         316ms     47.3ms    43.7ms     15.0%                 </span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;  2 case_when       479ms     172ms     131ms      35.9%                 </span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt;  3 fill            902ms     618ms     433ms      68.5%                 </span></a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt;  4 filter          227ms     194ms     193ms      85.5%                 </span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt;  5 inner_join      77.1ms    77ms      75ms       99.9%                 </span></a>
-<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt;  6 left_join       80.3ms    117.7ms   122.6ms    146.6%                </span></a>
-<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt;  7 mutate          38.9ms    96.9ms    123ms      249.1%                </span></a>
-<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt;  8 pivot_longer    96.1ms    19.2ms    11.7ms     20.0%                 </span></a>
-<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="co">#&gt;  9 pivot_wider     728ms     231ms     232ms      31.7%                 </span></a>
-<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="co">#&gt; 10 summarize       421ms     238ms     230ms      56.5%</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;  1 arrange         319.5ms   47ms      41.4ms     14.7%                 </span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;  2 case_when       454ms     170ms     137ms      37.4%                 </span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt;  3 fill            925ms     673ms     452ms      72.8%                 </span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt;  4 filter          236ms     193ms     196ms      81.8%                 </span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt;  5 inner_join      76.2ms    82.6ms    78ms       108.4%                </span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt;  6 left_join       77.9ms    119.1ms   117.6ms    152.9%                </span></a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt;  7 mutate          39ms      106ms     122ms      271.8%                </span></a>
+<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt;  8 pivot_longer    99.9ms    20.6ms    12.7ms     20.6%                 </span></a>
+<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="co">#&gt;  9 pivot_wider     729ms     254ms     236ms      34.8%                 </span></a>
+<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="co">#&gt; 10 summarize       425ms     261ms     247ms      61.4%</span></a></code></pre></div>
 </div>
 </div>
 </div>
