@@ -182,8 +182,8 @@ example_dt %>%
 
 #### New variant: `dt_mutate_across()`
 
-This format works to replace `dt_mutate_if()` & `dt_mutate_at()` with
-one helper, `dt_mutate_across()`.
+Enhanced selection allows the user to replace `dt_mutate_if()` &
+`dt_mutate_at()` with one helper - `dt_mutate_across()`.
 
 Using `_across()` instead of
 `_if()`:
@@ -191,7 +191,6 @@ Using `_across()` instead of
 ``` r
 example_dt <- data.table(a = c(1,1,1), b = c(1,1,1), c = c("a", "a", "b"), d = c("a", "b", "c"))
 
-# Using dt_mutate_across() instead of dt_mutate_if()
 example_dt %>%
   dt_mutate_across(is.numeric, as.character)
 #>    a b c d
@@ -206,7 +205,6 @@ Using `_across()` instead of
 ``` r
 example_dt <- data.table(a = c(1,1,1), b = c(1,1,1), c = c("a", "a", "b"), d = c("a", "b", "c"))
 
-# Using dt_mutate_across() instead of dt_mutate_at()
 example_dt %>%
   dt_mutate_across(c(a, b), ~ .x + 1)
 #>    a b c d
@@ -344,14 +342,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         316ms     47.3ms    43.7ms     15.0%                 
-#>  2 case_when       479ms     172ms     131ms      35.9%                 
-#>  3 fill            902ms     618ms     433ms      68.5%                 
-#>  4 filter          227ms     194ms     193ms      85.5%                 
-#>  5 inner_join      77.1ms    77ms      75ms       99.9%                 
-#>  6 left_join       80.3ms    117.7ms   122.6ms    146.6%                
-#>  7 mutate          38.9ms    96.9ms    123ms      249.1%                
-#>  8 pivot_longer    96.1ms    19.2ms    11.7ms     20.0%                 
-#>  9 pivot_wider     728ms     231ms     232ms      31.7%                 
-#> 10 summarize       421ms     238ms     230ms      56.5%
+#>  1 arrange         319.5ms   47ms      41.4ms     14.7%                 
+#>  2 case_when       454ms     170ms     137ms      37.4%                 
+#>  3 fill            925ms     673ms     452ms      72.8%                 
+#>  4 filter          236ms     193ms     196ms      81.8%                 
+#>  5 inner_join      76.2ms    82.6ms    78ms       108.4%                
+#>  6 left_join       77.9ms    119.1ms   117.6ms    152.9%                
+#>  7 mutate          39ms      106ms     122ms      271.8%                
+#>  8 pivot_longer    99.9ms    20.6ms    12.7ms     20.6%                 
+#>  9 pivot_wider     729ms     254ms     236ms      34.8%                 
+#> 10 summarize       425ms     261ms     247ms      61.4%
 ```
