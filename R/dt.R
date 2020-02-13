@@ -3,7 +3,6 @@
 #' @description
 #' Pipeable data.table call
 #'
-#' @param ... See ?data.table:::`[.data.table`
 #' @param x See ?data.table:::`[.data.table`
 #' @param i See ?data.table:::`[.data.table`
 #' @param j See ?data.table:::`[.data.table`

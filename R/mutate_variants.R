@@ -1,4 +1,4 @@
-#' Mutate
+#' Mutate variants
 #'
 #' @description
 #'

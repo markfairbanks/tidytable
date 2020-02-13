@@ -6,7 +6,7 @@
 #' Supports enhanced selection
 #'
 #' @param .data A data.frame or data.table
-#' @param ... A selection of columns. If empty, all variables are selected.
+#' @param ... Optional: A selection of columns. If empty, all variables are selected.
 #'
 #' @return A data.table
 #' @export

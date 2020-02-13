@@ -56,8 +56,6 @@ dt(
 \item{drop}{See ?data.table:::`[.data.table`}
 
 \item{on}{See ?data.table:::`[.data.table`}
-
-\item{...}{See ?data.table:::`[.data.table`}
 }
 \description{
 Pipeable data.table call

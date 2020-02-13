@@ -1,11 +1,9 @@
-#' Safely work with data.tables
+#' as_dt() helper
 #'
 #' @description
-#' Copies a data.table so you can "safely" work on it or converts a data.frame to a data.table.
+#' Prevents modify-by-reference/converts a data.frame to a data.table.
 #'
 #' @param .data A data.frame or data.table
-#'
-#' @return A data.table
 #' @export
 #'
 #' @import data.table

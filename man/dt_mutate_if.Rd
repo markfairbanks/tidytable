@@ -5,7 +5,7 @@
 \alias{dt_mutate_at}
 \alias{dt_mutate_across}
 \alias{dt_mutate_all}
-\title{Mutate}
+\title{Mutate variants}
 \usage{
 dt_mutate_if(.data, .predicate, .funs, ...)
 

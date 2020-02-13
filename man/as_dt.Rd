@@ -2,18 +2,15 @@
 % Please edit documentation in R/as_dt.R
 \name{as_dt}
 \alias{as_dt}
-\title{Safely work with data.tables}
+\title{as_dt() helper}
 \usage{
 as_dt(.data)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
 }
-\value{
-A data.table
-}
 \description{
-Copies a data.table so you can "safely" work on it or converts a data.frame to a data.table.
+Prevents modify-by-reference/converts a data.frame to a data.table.
 }
 \examples{
 example_df <- data.frame(x = 1:10)
