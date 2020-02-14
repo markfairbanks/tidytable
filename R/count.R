@@ -8,7 +8,6 @@
 #' @param .data A data.frame or data.table
 #' @param ... Optional: Bare column names to group by
 #'
-#' @return A data.table
 #' @export
 #' @md
 #'

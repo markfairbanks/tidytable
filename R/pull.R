@@ -6,8 +6,6 @@
 #' @param .data A data.frame or data.table
 #' @param var The column to pull from the data.table
 #'
-#' @return A vector
-#' @import data.table
 #' @export
 #'
 #' @examples

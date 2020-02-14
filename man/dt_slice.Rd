@@ -14,9 +14,9 @@ dt_slice_head(.data, n = 5, by = NULL)
 
 dt_slice_tail(.data, n = 5, by = NULL)
 
-dt_slice_max(.data, order_by, n = 5, by = NULL)
+dt_slice_max(.data, order_by, n = 1, by = NULL)
 
-dt_slice_min(.data, order_by, n = 5, by = NULL)
+dt_slice_min(.data, order_by, n = 1, by = NULL)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
@@ -46,4 +46,16 @@ example_dt \%>\%
 
 example_dt \%>\%
   dt_slice(1, by = z)
+
+example_dt \%>\%
+  dt_slice_head(1, by = z)
+
+example_dt \%>\%
+  dt_slice_tail(1, by = z)
+
+example_dt \%>\%
+  dt_slice_max(order_by = x, by = z)
+
+example_dt \%>\%
+  dt_slice_min(order_by = y, by = z)
 }

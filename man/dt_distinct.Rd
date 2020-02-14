@@ -11,9 +11,6 @@ dt_distinct(.data, ...)
 
 \item{...}{Columns to select before determining uniqueness. If omitted, will use all columns}
 }
-\value{
-A data.table
-}
 \description{
 Retain only unique/distinct rows from an input df.
 

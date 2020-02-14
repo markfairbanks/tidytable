@@ -11,9 +11,6 @@ dt_case(..., default = NA)
 
 \item{default}{Default value. Set to NA. Argument must be named.}
 }
-\value{
-A vector
-}
 \description{
 This function allows you to use multiple if/else statements in one call.
 Note that this function is called differently than `dplyr::case_when`! See examples

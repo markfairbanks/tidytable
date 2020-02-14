@@ -5,7 +5,7 @@
 \title{Pipeable data.table call}
 \usage{
 dt(
-  x,
+  .data,
   i,
   j,
   by,
@@ -25,7 +25,7 @@ dt(
 )
 }
 \arguments{
-\item{x}{See ?data.table:::`[.data.table`}
+\item{.data}{A data.frame or data.table}
 
 \item{i}{See ?data.table:::`[.data.table`}
 

@@ -6,8 +6,6 @@
 #' * `_lgl()`, `_int()`, `_dbl()` and `_chr()` variants return their specified type
 #' * `_dfr()` & `_dfc()` Return data frame results binded together
 #'
-#' @usage
-#'
 #' @param .x A list or vector
 #' @param .y A list or vector
 #' @param .f A function

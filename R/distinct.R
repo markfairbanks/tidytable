@@ -8,8 +8,6 @@
 #' @param .data A data.frame or data.table
 #' @param ... Columns to select before determining uniqueness. If omitted, will use all columns
 #'
-#' @import data.table
-#' @return A data.table
 #' @export
 #'
 #' @examples

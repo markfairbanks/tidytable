@@ -11,9 +11,6 @@ dt_count(.data, ...)
 
 \item{...}{Optional: Bare column names to group by}
 }
-\value{
-A data.table
-}
 \description{
 Returns row counts of the dataset. If bare column names are provided, \code{dt_count()} returns counts by group.
 

@@ -7,8 +7,6 @@
 #' @param ... A selection of bare columns
 #' @param .direction Direction in which to fill missing values. Currently "down" (the default), "up", "downup" (first down then up), or "updown" (first up and then down)
 #' @param by Whether the filling should be done by group. Passed in a `list()`
-#'
-#' @return A data.table
 #' @export
 #' @md
 #'
@@ -23,8 +21,6 @@
 #'
 #' test_df %>%
 #'   dt_fill(x, y, by = z, .direction = "downup")
-#'
-
 dt_fill <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)

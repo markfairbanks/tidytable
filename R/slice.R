@@ -24,6 +24,18 @@
 #'
 #' example_dt %>%
 #'   dt_slice(1, by = z)
+#'
+#' example_dt %>%
+#'   dt_slice_head(1, by = z)
+#'
+#' example_dt %>%
+#'   dt_slice_tail(1, by = z)
+#'
+#' example_dt %>%
+#'   dt_slice_max(order_by = x, by = z)
+#'
+#' example_dt %>%
+#'   dt_slice_min(order_by = y, by = z)
 dt_slice <- function(.data, rows = 1:5, by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
@@ -76,7 +88,7 @@ dt_slice_tail <- function(.data, n = 5, by = NULL) {
 
 #' @export
 #' @rdname dt_slice
-dt_slice_max <- function(.data, order_by, n = 5, by = NULL) {
+dt_slice_max <- function(.data, order_by, n = 1, by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
@@ -94,7 +106,7 @@ dt_slice_max <- function(.data, order_by, n = 5, by = NULL) {
 
 #' @export
 #' @rdname dt_slice
-dt_slice_min <- function(.data, order_by, n = 5, by = NULL) {
+dt_slice_min <- function(.data, order_by, n = 1, by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 

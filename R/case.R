@@ -7,7 +7,6 @@
 #' @param ... Sequence of condition/value designations
 #' @param default Default value. Set to NA. Argument must be named.
 #'
-#' @return A vector
 #' @export
 #'
 #' @examples

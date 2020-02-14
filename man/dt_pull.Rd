@@ -11,9 +11,6 @@ dt_pull(.data, var = NULL)
 
 \item{var}{The column to pull from the data.table}
 }
-\value{
-A vector
-}
 \description{
 Pull a single variable from a data.table as a vector.
 }

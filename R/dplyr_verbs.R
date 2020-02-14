@@ -15,10 +15,7 @@
 #' @param ... dots passed to underlying functions (see examples)
 #' @param by `list()` of bare column names to group by
 #'
-#'
-#' @import data.table
 #' @md
-#' @return A data.table
 #' @export
 #'
 #' @examples

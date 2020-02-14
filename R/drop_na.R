@@ -8,7 +8,6 @@
 #' @param .data A data.frame or data.table
 #' @param ... Optional: A selection of columns. If empty, all variables are selected.
 #'
-#' @return A data.table
 #' @export
 #'
 #' @examples

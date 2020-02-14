@@ -38,5 +38,5 @@ example_dt \%>\%
   dt_select(dt_starts_with("x"))
 
 example_dt \%>\%
-dt_select(dt_ends_with("y"))
+  dt_select(dt_ends_with("y"))
 }

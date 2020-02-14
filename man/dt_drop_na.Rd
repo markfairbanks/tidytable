@@ -11,9 +11,6 @@ dt_drop_na(.data, ...)
 
 \item{...}{Optional: A selection of columns. If empty, all variables are selected.}
 }
-\value{
-A data.table
-}
 \description{
 Drop rows containing missing values
 

@@ -6,7 +6,6 @@
 #' @param .data A data.frame or data.table
 #' @export
 #'
-#' @import data.table
 #' @examples
 #' example_df <- data.frame(x = 1:10)
 #'

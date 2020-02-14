@@ -1,7 +1,6 @@
 #' Mutate variants
 #'
 #' @description
-#'
 #' Edit existing columns. Supports enhanced selection.
 #'
 #' There are two variants:
@@ -9,7 +8,6 @@
 #' * `dt_mutate_all()`
 #' * `dt_mutate_across()`: Replaces both `mutate_if()` & `mutate_at()`
 #'
-#' @import data.table
 #' @md
 #'
 #' @param .data A data.frame or data.table
@@ -18,8 +16,8 @@
 #' @param .cols vector `c()` of bare column names for `dt_mutate_across()` to use
 #' @param .funs Functions to pass. Can pass a list of functions.
 #' @param ... Other arguments for the passed function
+#' @param by A single unquoted column or a `list()` of columns to group by.
 #'
-#' @return A data.table
 #' @export
 #'
 #' @examples
@@ -41,23 +39,25 @@
 #' example_dt %>%
 #'   as_dt() %>%
 #'   dt_mutate_across(c(x, y), list(new = ~ .x * 2))
-dt_mutate_if <- function(.data, .predicate, .funs, ...) {
+dt_mutate_if <- function(.data, .predicate, .funs, ..., by = NULL) {
   .predicate <- enexpr(.predicate)
+  by <- enexpr(by)
 
-  dt_mutate_across(.data, !!.predicate, .funs, ...)
+  dt_mutate_across(.data, !!.predicate, .funs, ..., by = !!by)
 }
 
 #' @export
 #' @rdname dt_mutate_if
-dt_mutate_at <- function(.data, .vars, .funs, ...) {
+dt_mutate_at <- function(.data, .vars, .funs, ..., by = NULL) {
   .vars <- enexpr(.vars)
+  by <- enexpr(by)
 
-  dt_mutate_across(.data, !!.vars, .funs, ...)
+  dt_mutate_across(.data, !!.vars, .funs, ..., by = !!by)
 }
 
 #' @export
 #' @rdname dt_mutate_if
-dt_mutate_across <- function(.data, .cols, .funs, ...) {
+dt_mutate_across <- function(.data, .cols, .funs, ..., by = NULL) {
 
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
@@ -66,9 +66,13 @@ dt_mutate_across <- function(.data, .cols, .funs, ...) {
   .cols <- vec_selector(.data, !!.cols) %>%
     as.character()
 
+  by <- enexpr(by)
+
   if (!is.list(.funs)) {
     if (length(.cols) > 0) {
-      .data[, (.cols) := dt_map(.SD, .funs, ...), .SDcols = .cols][]
+      eval_tidy(expr(
+        .data[, (.cols) := dt_map(.SD, .funs, ...), .SDcols = .cols, by = !!by][]
+      ))
     } else {
       .data
     }
@@ -82,7 +86,9 @@ dt_mutate_across <- function(.data, .cols, .funs, ...) {
         new_name <- paste0(.col, "_", new_names[[i]])
         old <- .col
         user_function <- anon_x(.funs[[i]])
-        .data[, (new_name) := user_function(.data[[old]])][]
+        eval_tidy(expr(
+          .data[, (new_name) := user_function(.data[[old]]), by = !!by][]
+        ))
       }
     }
   }
@@ -91,8 +97,10 @@ dt_mutate_across <- function(.data, .cols, .funs, ...) {
 
 #' @export
 #' @rdname dt_mutate_if
-dt_mutate_all <- function(.data, .funs, ...) {
+dt_mutate_all <- function(.data, .funs, ..., by = NULL) {
 
-  dt_mutate_across(.data, dt_everything(), .funs, ...)
+  by <- enexpr(by)
+
+  dt_mutate_across(.data, dt_everything(), .funs, ..., by = !!by)
 
 }

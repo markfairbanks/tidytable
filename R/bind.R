@@ -9,8 +9,6 @@
 #' @param ... Data frames to bind
 #' @param .id If TRUE, an integer column is made as a group id
 #'
-#'
-#' @import data.table
 #' @export
 #' @md
 #'

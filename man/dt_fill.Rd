@@ -20,9 +20,6 @@ dt_fill(
 
 \item{by}{Whether the filling should be done by group. Passed in a \code{list()}}
 }
-\value{
-A data.table
-}
 \description{
 Fills missing values in the selected columns using the next or previous entry. Can be done by group.
 }
@@ -37,5 +34,4 @@ test_df \%>\%
 
 test_df \%>\%
   dt_fill(x, y, by = z, .direction = "downup")
-
 }

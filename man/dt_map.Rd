@@ -18,7 +18,7 @@
 \alias{dt_map2_dfr}
 \title{Apply a function to each element of a vector}
 \usage{
-
+dt_map(.x, .f, ...)
 
 dt_map_lgl(.x, .f, ...)
 

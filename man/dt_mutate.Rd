@@ -28,9 +28,6 @@ dt_select(.data, ...)
 
 \item{by}{\code{list()} of bare column names to group by}
 }
-\value{
-A data.table
-}
 \description{
 The core dplyr verbs can be used:
 \itemize{
