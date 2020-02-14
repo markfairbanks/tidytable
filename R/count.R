@@ -33,7 +33,7 @@ dt_count <- function(.data, ...) {
   dots <- enexprs(...)
 
   if (length(dots) == 0) {
-    .data[, list(N = .N), .N]
+    .data[, list(N = .N)]
   } else {
     by_vec <- dots_selector(.data, ...) %>%
       as.character()
