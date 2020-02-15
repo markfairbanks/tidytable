@@ -28,17 +28,17 @@ dt_unnest_legacy <- function(.data, col) {
 
   keep <- syms(colnames(.data)[!dt_map_lgl(.data, is.list)])
 
-  is_vec <- is.vector(.data[[col]][[1]])
+  is_datatable <- is.data.table(.data[[col]][[1]])
 
-  if (is_vec) {
+  if (is_datatable) {
+    .data <- eval_tidy(expr(
+      .data[, unlist(!!col, recursive = FALSE), by = list(!!!keep)]
+    ))
+  } else {
     .data <- eval_tidy(expr(
       .data[, list(.new_col = unlist(!!col, recursive = FALSE)), by = list(!!!keep)]
     )) %>%
       dt_rename(!!col := .new_col)
-  } else {
-    .data <- eval_tidy(expr(
-      .data[, unlist(!!col, recursive = FALSE), by = list(!!!keep)]
-    ))
   }
   .data
 }
