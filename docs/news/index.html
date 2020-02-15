@@ -124,9 +124,26 @@
 <a href="#tidytable-0-3-1-in-development" class="anchor"></a>tidytable 0.3.1 (in development)<small> Unreleased </small>
 </h1>
 <ul>
+<li>CRAN maintenance update with a couple small changes added on</li>
 <li>
 <code><a href="../reference/dt_left_join.html">dt_left_join()</a></code> fix so columns are ordered correctly</li>
+<li>Add group by ability to <code><a href="../reference/dt_mutate_if.html">dt_mutate_across()</a></code>
+</li>
+<li>
+<code><a href="../reference/dt.html">dt()</a></code> now automatically converts data.frame input to a data.table</li>
 </ul>
+<div id="breaking-changes" class="section level4">
+<h4 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h4>
+<ul>
+<li>
+<code><a href="../reference/dt_unnest_legacy.html">dt_unnest_legacy()</a></code> drops “keep” argument, but automatically keeps all non-nested columns.
+<ul>
+<li>New translation is ~10x than before.</li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
     <div id="tidytable-0-3-0" class="section level1">
 <h1 class="page-header">

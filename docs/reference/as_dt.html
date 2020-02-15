@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Safely work with data.tables — as_dt • tidytable</title>
+<title>as_dt() helper — as_dt • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,8 @@
 
 
 
-<meta property="og:title" content="Safely work with data.tables — as_dt" />
-<meta property="og:description" content="Copies a data.table so you can &quot;safely&quot; work on it or converts a data.frame to a data.table." />
+<meta property="og:title" content="as_dt() helper — as_dt" />
+<meta property="og:description" content="Prevents modify-by-reference/converts a data.frame to a data.table." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -116,13 +116,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Safely work with data.tables</h1>
+    <h1>as_dt() helper</h1>
     <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/as_dt.R'><code>R/as_dt.R</code></a></small>
     <div class="hidden name"><code>as_dt.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Copies a data.table so you can "safely" work on it or converts a data.frame to a data.table.</p>
+    <p>Prevents modify-by-reference/converts a data.frame to a data.table.</p>
     </div>
 
     <pre class="usage"><span class='fu'>as_dt</span>(<span class='no'>.data</span>)</pre>
@@ -136,9 +136,6 @@
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A data.table</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>example_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>)
@@ -161,7 +158,6 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

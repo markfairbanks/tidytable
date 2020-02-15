@@ -191,7 +191,7 @@
 </li>
 <li><code><a href="reference/dt_replace_na.html">dt_replace_na()</a></code></li>
 <li>
-<code><a href="reference/dt_group_nest.html">dt_group_nest()</a></code> - <strong>ES</strong> &amp; <code><a href="reference/dt_unnest_legacy.html">dt_unnest_legacy()</a></code> - <strong>ES</strong>
+<code><a href="reference/dt_group_nest.html">dt_group_nest()</a></code> - <strong>ES</strong> &amp; <code><a href="reference/dt_unnest_legacy.html">dt_unnest_legacy()</a></code>
 </li>
 </ul>
 </div>
@@ -387,19 +387,21 @@
 <li>Lastly I’d like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.</li>
 </ul>
 <!-- end list --><div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">all_marks</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; # A tibble: 10 x 5</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; # A tibble: 12 x 5</span></a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt;    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse</span></a>
 <a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;                 </span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;  1 arrange         350.1ms   48.6ms    44.1ms     13.9%                 </span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;  2 case_when       473ms     173ms     143ms      36.6%                 </span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt;  3 fill            946ms     668ms     459ms      70.6%                 </span></a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt;  4 filter          224ms     195ms     194ms      87.1%                 </span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt;  5 inner_join      74.5ms    83.8ms    83.9ms     112.5%                </span></a>
-<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt;  6 left_join       82ms      112ms     121ms      136.6%                </span></a>
-<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt;  7 mutate          40.4ms    103.1ms   128.5ms    255.2%                </span></a>
-<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt;  8 pivot_longer    98.2ms    19.7ms    12.2ms     20.1%                 </span></a>
-<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="co">#&gt;  9 pivot_wider     748ms     256ms     259ms      34.2%                 </span></a>
-<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="co">#&gt; 10 summarize       461ms     261ms     248ms      56.6%</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;  1 arrange         318.8ms   46.9ms    43.8ms     14.7%                 </span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;  2 case_when       480ms     174ms     136ms      36.2%                 </span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt;  3 fill            975ms     665ms     470ms      68.2%                 </span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt;  4 filter          230ms     199ms     201ms      86.5%                 </span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt;  5 inner_join      74.9ms    78.7ms    75.6ms     105.1%                </span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt;  6 left_join       71.5ms    107.2ms   101.5ms    149.9%                </span></a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt;  7 mutate          38.8ms    100.7ms   121.2ms    259.5%                </span></a>
+<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt;  8 nest            7.48ms    3.6ms     2.41ms     48.1%                 </span></a>
+<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="co">#&gt;  9 pivot_longer    85.4ms    19.9ms    12.3ms     23.3%                 </span></a>
+<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="co">#&gt; 10 pivot_wider     751ms     261ms     260ms      34.8%                 </span></a>
+<a class="sourceLine" id="cb13-15" data-line-number="15"><span class="co">#&gt; 11 summarize       544ms     258ms     251ms      47.4%                 </span></a>
+<a class="sourceLine" id="cb13-16" data-line-number="16"><span class="co">#&gt; 12 unnest          173.64ms  9.82ms    6.74ms     5.7%</span></a></code></pre></div>
 </div>
 </div>
 </div>

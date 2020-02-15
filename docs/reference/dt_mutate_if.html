@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mutate — dt_mutate_if • tidytable</title>
+<title>Mutate variants — dt_mutate_if • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,7 +42,7 @@
 
 
 
-<meta property="og:title" content="Mutate — dt_mutate_if" />
+<meta property="og:title" content="Mutate variants — dt_mutate_if" />
 <meta property="og:description" content="Edit existing columns. Supports enhanced selection.
 There are two variants:
 dt_mutate_all()
@@ -121,7 +121,7 @@ dt_mutate_across(): Replaces both mutate_if() &amp;amp; mutate_at()
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Mutate</h1>
+    <h1>Mutate variants</h1>
     <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/mutate_variants.R'><code>R/mutate_variants.R</code></a></small>
     <div class="hidden name"><code>dt_mutate_if.Rd</code></div>
     </div>
@@ -135,13 +135,13 @@ dt_mutate_across(): Replaces both mutate_if() &amp;amp; mutate_at()
 
     </div>
 
-    <pre class="usage"><span class='fu'>dt_mutate_if</span>(<span class='no'>.data</span>, <span class='no'>.predicate</span>, <span class='no'>.funs</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>dt_mutate_if</span>(<span class='no'>.data</span>, <span class='no'>.predicate</span>, <span class='no'>.funs</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>dt_mutate_at</span>(<span class='no'>.data</span>, <span class='no'>.vars</span>, <span class='no'>.funs</span>, <span class='no'>...</span>)
+<span class='fu'>dt_mutate_at</span>(<span class='no'>.data</span>, <span class='no'>.vars</span>, <span class='no'>.funs</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>dt_mutate_across</span>(<span class='no'>.data</span>, <span class='no'>.cols</span>, <span class='no'>.funs</span>, <span class='no'>...</span>)
+<span class='fu'>dt_mutate_across</span>(<span class='no'>.data</span>, <span class='no'>.cols</span>, <span class='no'>.funs</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>dt_mutate_all</span>(<span class='no'>.data</span>, <span class='no'>.funs</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>dt_mutate_all</span>(<span class='no'>.data</span>, <span class='no'>.funs</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,6 +163,10 @@ dt_mutate_across(): Replaces both mutate_if() &amp;amp; mutate_at()
       <td><p>Other arguments for the passed function</p></td>
     </tr>
     <tr>
+      <th>by</th>
+      <td><p>A single unquoted column or a <code><a href='https://rdrr.io/r/base/list.html'>list()</a></code> of columns to group by.</p></td>
+    </tr>
+    <tr>
       <th>.vars</th>
       <td><p>vector <code><a href='https://rdrr.io/r/base/c.html'>c()</a></code> of bare column names for <code>dt_mutate_at()</code> to use</p></td>
     </tr>
@@ -172,9 +176,6 @@ dt_mutate_across(): Replaces both mutate_if() &amp;amp; mutate_at()
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A data.table</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>data.table</span>)
@@ -207,7 +208,6 @@ dt_mutate_across(): Replaces both mutate_if() &amp;amp; mutate_at()
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

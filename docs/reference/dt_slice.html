@@ -131,9 +131,9 @@
 
 <span class='fu'>dt_slice_tail</span>(<span class='no'>.data</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>dt_slice_max</span>(<span class='no'>.data</span>, <span class='no'>order_by</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>dt_slice_max</span>(<span class='no'>.data</span>, <span class='no'>order_by</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>dt_slice_min</span>(<span class='no'>.data</span>, <span class='no'>order_by</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>dt_slice_min</span>(<span class='no'>.data</span>, <span class='no'>order_by</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -178,6 +178,22 @@
 #&gt; 4: 4 7 b</div><div class='input'>
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>dt_slice</span>(<span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
+#&gt; 1: a 1 4
+#&gt; 2: b 4 7</div><div class='input'>
+<span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>dt_slice_head</span>(<span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
+#&gt; 1: a 1 4
+#&gt; 2: b 4 7</div><div class='input'>
+<span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>dt_slice_tail</span>(<span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
+#&gt; 1: a 3 6
+#&gt; 2: b 4 7</div><div class='input'>
+<span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>dt_slice_max</span>(<span class='kw'>order_by</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
+#&gt; 1: b 4 7
+#&gt; 2: a 3 6</div><div class='input'>
+<span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>dt_slice_min</span>(<span class='kw'>order_by</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
 #&gt; 1: a 1 4
 #&gt; 2: b 4 7</div></pre>
   </div>
