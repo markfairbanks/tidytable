@@ -94,7 +94,7 @@ devtools::install_github("markfairbanks/tidytable")
 * `dt_group_split()` - **ES**
 * `dt_pivot_wider()` - **ES** & `dt_pivot_longer()` - **ES**
 * `dt_replace_na()`
-* `dt_group_nest()` - **ES** & `dt_unnest_legacy()` - **ES**
+* `dt_group_nest()` - **ES** & `dt_unnest_legacy()`
 
 ### purrr
 * `dt_map()`, `dt_map2()`, `dt_map_*()` variants, & `dt_map2_*()` variants

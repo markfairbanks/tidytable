@@ -103,7 +103,7 @@ here](https://markfairbanks.github.io/tidytable/#enhanced-selection)
   - `dt_group_split()` - **ES**
   - `dt_pivot_wider()` - **ES** & `dt_pivot_longer()` - **ES**
   - `dt_replace_na()`
-  - `dt_group_nest()` - **ES** & `dt_unnest_legacy()` - **ES**
+  - `dt_group_nest()` - **ES** & `dt_unnest_legacy()`
 
 ### purrr
 
@@ -345,14 +345,14 @@ all_marks
 #> # A tibble: 10 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         350.1ms   48.6ms    44.1ms     13.9%                 
-#>  2 case_when       473ms     173ms     143ms      36.6%                 
-#>  3 fill            946ms     668ms     459ms      70.6%                 
-#>  4 filter          224ms     195ms     194ms      87.1%                 
-#>  5 inner_join      74.5ms    83.8ms    83.9ms     112.5%                
-#>  6 left_join       82ms      112ms     121ms      136.6%                
-#>  7 mutate          40.4ms    103.1ms   128.5ms    255.2%                
-#>  8 pivot_longer    98.2ms    19.7ms    12.2ms     20.1%                 
-#>  9 pivot_wider     748ms     256ms     259ms      34.2%                 
-#> 10 summarize       461ms     261ms     248ms      56.6%
+#>  1 arrange         323.3ms   47.5ms    46.8ms     14.7%                 
+#>  2 case_when       465ms     174ms     132ms      37.4%                 
+#>  3 fill            952ms     666ms     453ms      70.0%                 
+#>  4 filter          235ms     194ms     196ms      82.6%                 
+#>  5 inner_join      74ms      88.6ms    82ms       119.7%                
+#>  6 left_join       71.5ms    101.7ms   110.1ms    142.2%                
+#>  7 mutate          38.8ms    102.8ms   121.7ms    264.9%                
+#>  8 pivot_longer    87.5ms    20.3ms    12.3ms     23.2%                 
+#>  9 pivot_wider     715ms     247ms     251ms      34.5%                 
+#> 10 summarize       456ms     260ms     249ms      57.0%
 ```

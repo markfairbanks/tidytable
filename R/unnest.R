@@ -3,13 +3,9 @@
 #' @description
 #' Unnest a nested data.table.
 #'
-#' Supports enhanced selection
-#'
 #' @param .data A nested data.table
 #' @param col The column to unnest
-#' @param keep Vector `c()` of bare column names to keep
 #'
-#' @return A data.table
 #' @export
 #'
 #' @examples
@@ -21,62 +17,28 @@
 #'   dt_group_nest(c, d)
 #'
 #' nested_df %>%
-#'   dt_unnest_legacy(data, keep = c(c, d))
+#'   dt_unnest_legacy(data)
 #'
 #' nested_df %>%
-#'   dt_unnest_legacy(data, keep = is.character)
-dt_unnest_legacy <- function(.data, col, keep = NULL) {
+#'   dt_unnest_legacy(data)
+dt_unnest_legacy <- function(.data, col) {
+  if (!is.data.table(.data)) .data <- as.data.table(.data)
+
   col <- enexpr(col)
-  keep_cols <- enexpr(keep)
 
-  if (!is.null(keep_cols)) {
-    keep_cols <- vec_selector(.data, !!keep_cols)
+  keep <- syms(colnames(.data)[!dt_map_lgl(.data, is.list)])
 
-    .data <- .data %>%
-      as_dt() %>%
-      dt_mutate(.count = dt_map(!!col, get_length))
+  is_vec <- is.vector(.data[[col]][[1]])
 
-    result_list <- dt_map(
-      keep_cols,
-      function(keep_col) {
-        data.table(.unnamed_col = dt_map2(dt_pull(.data, !!keep_col),
-                                          dt_pull(.data, .count),
-                                          function(.x, .y) rep(.x, .y)) %>%
-                     unname() %>%
-                     unlist())})
-
-    keep_df <- as_dt(do.call(cbind, result_list))
-
-    names(keep_df) <- as.character(keep_cols)
-
-    unnest_list <- .data %>%
-      dt_pull(!!col)
-
-    if ("data.frame" %in% class(unnest_list[[1]])) {
-      # If data.frame rbindlist() & cbind() to keep_df
-      unnest_list <- rbindlist(unnest_list)
-
-      return(cbind(keep_df, unnest_list))
-    } else {
-      # If vec add as a new column to keep_df
-      keep_df[[as.character(col)]] <- unlist(unnest_list)
-
-      return(keep_df)
-    }
+  if (is_vec) {
+    .data <- eval_tidy(expr(
+      .data[, list(.new_col = unlist(!!col, recursive = FALSE)), by = list(!!!keep)]
+    )) %>%
+      dt_rename(!!col := .new_col)
   } else {
-    # If keep_cols is empty, do a simple unnest
-    unnest_df <- .data %>%
-      dt_pull(!!col) %>%
-      rbindlist()
-
-    return(unnest_df)
+    .data <- eval_tidy(expr(
+      .data[, unlist(!!col, recursive = FALSE), by = list(!!!keep)]
+    ))
   }
-}
-
-get_length <- function(x) {
-  if ("data.frame" %in% class(x)) {
-    nrow(x)
-  } else {
-    length(x)
-  }
+  .data
 }
