@@ -7,7 +7,7 @@
 
 ### Breaking changes
 * `dt_unnest_legacy()` drops "keep" argument, but automatically keeps all non-nested columns.
-  + New translation is ~10x than before.
+  + New translation is ~10x faster than before
 
 # tidytable 0.3.0
 

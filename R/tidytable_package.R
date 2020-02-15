@@ -7,4 +7,4 @@
 #' @importFrom utils head tail
 NULL
 
-globalVariables(c("data", ".","..select_vars", ".count", "na_index"))
+globalVariables(c("data", ".","..select_vars", ".count", "na_index", ".new_col", "..all_names"))
