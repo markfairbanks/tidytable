@@ -269,7 +269,7 @@ A few notes:
 pacman::p_load(tidytable, tidyverse)
 setDTthreads(1)
 
-iters <- 5
+iters <- 3
 
 set.seed(123)
 data_size <- 10000000
@@ -495,6 +495,49 @@ inner_join_marks <- bench::mark(
 
 inner_join_marks <- inner_join_marks %>%
   mutate(function_tested = "inner_join") %>%
+  select(function_tested, expression, median, mem_alloc) %>%
+  mutate_all(~as.character(.x) %>% str_trim())
+```
+
+```{r unnest, echo = FALSE}
+unnest_dt <- tibble(
+  a = LETTERS[1:5],
+  b = LETTERS[6:10],
+  list_column = list(c(LETTERS[1:5]), "F", "G", "H", "I")
+) %>%
+  dplyr::sample_frac(10000, replace = TRUE) %>%
+  as.data.table()
+
+unnest_tbl <- as_tibble(unnest_dt)
+
+unnest_marks <- bench::mark(
+  tidyverse = unnest_legacy(unnest_dt, list_column),
+  tidytable = dt_unnest_legacy(unnest_tbl, list_column),
+  data.table = unnest_dt[, unlist(list_column, recursive = FALSE), by = list(a, b)],
+  check = FALSE,
+  iterations = iters)
+
+unnest_marks <- unnest_marks %>%
+  mutate(function_tested = "unnest") %>%
+  select(function_tested, expression, median, mem_alloc) %>%
+  mutate_all(~as.character(.x) %>% str_trim())
+```
+
+```{r nest, echo = FALSE}
+nest_dt <- unnest_dt %>% dt_unnest_legacy(list_column)
+nest_tbl <- as_tibble(nest_dt)
+
+remove(unnest_dt, unnest_tbl); inv_gc(); inv_gc();
+
+nest_marks <- bench::mark(
+  tidyverse = group_nest(nest_dt, a, b),
+  tidytable = dt_group_nest(nest_tbl, a, b),
+  data.table = nest_dt[, list(data = list(.SD)), by = list(a, b)],
+  check = FALSE,
+  iterations = iters)
+
+nest_marks <- nest_marks %>%
+  mutate(function_tested = "nest") %>%
   select(function_tested, expression, median, mem_alloc) %>%
   mutate_all(~as.character(.x) %>% str_trim())
 ```

@@ -342,17 +342,19 @@ A few notes:
 
 ``` r
 all_marks
-#> # A tibble: 10 x 5
+#> # A tibble: 12 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         323.3ms   47.5ms    46.8ms     14.7%                 
-#>  2 case_when       465ms     174ms     132ms      37.4%                 
-#>  3 fill            952ms     666ms     453ms      70.0%                 
-#>  4 filter          235ms     194ms     196ms      82.6%                 
-#>  5 inner_join      74ms      88.6ms    82ms       119.7%                
-#>  6 left_join       71.5ms    101.7ms   110.1ms    142.2%                
-#>  7 mutate          38.8ms    102.8ms   121.7ms    264.9%                
-#>  8 pivot_longer    87.5ms    20.3ms    12.3ms     23.2%                 
-#>  9 pivot_wider     715ms     247ms     251ms      34.5%                 
-#> 10 summarize       456ms     260ms     249ms      57.0%
+#>  1 arrange         332.4ms   44ms      48.4ms     13.2%                 
+#>  2 case_when       474ms     184ms     159ms      38.8%                 
+#>  3 fill            977ms     752ms     536ms      77.0%                 
+#>  4 filter          236ms     200ms     197ms      84.7%                 
+#>  5 inner_join      87.3ms    100.9ms   89.9ms     115.6%                
+#>  6 left_join       71.8ms    186.9ms   110.8ms    260.3%                
+#>  7 mutate          42.6ms    161.7ms   213.3ms    379.6%                
+#>  8 nest            7.79ms    3.85ms    2.52ms     49.4%                 
+#>  9 pivot_longer    89.3ms    19.4ms    12.4ms     21.7%                 
+#> 10 pivot_wider     799ms     260ms     263ms      32.5%                 
+#> 11 summarize       447ms     251ms     289ms      56.2%                 
+#> 12 unnest          149.86ms  12.48ms   6.98ms     8.3%
 ```
