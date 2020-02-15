@@ -269,7 +269,7 @@ A few notes:
 pacman::p_load(tidytable, tidyverse)
 setDTthreads(1)
 
-iters <- 3
+iters <- 5
 
 set.seed(123)
 data_size <- 10000000
