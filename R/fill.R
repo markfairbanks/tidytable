@@ -45,8 +45,6 @@ dt_fill <- function(.data, ..., .direction = c("down", "up", "downup", "updown")
 }
 
 filldown <- function(.data, ..., by = NULL) {
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   dots <- dots_selector(.data, ...)
   by <- enexpr(by)
@@ -72,8 +70,6 @@ filldown <- function(.data, ..., by = NULL) {
 }
 
 fillup <- function(.data, ..., by = NULL) {
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   dots <- dots_selector(.data, ...)
   by <- enexpr(by)
