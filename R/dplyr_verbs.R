@@ -39,13 +39,14 @@ dt_mutate <- function(.data, ..., by = NULL) {
 
   dots <- enexprs(...)
   by <- enexpr(by)
+  .data <- data.table:::shallow(.data)
 
   all_names <- names(dots)
 
   for (i in seq_along(dots)) {
     eval_tidy(expr(
       .data[, ':='(all_names[[i]], !!dots[[i]]), !!by][]
-      ))
+    ))
   }
   .data
 }
@@ -59,7 +60,9 @@ dt_filter <- function(.data, ...) {
   dots <- enexprs(...)
 
   for (dot in dots) {
-    .data <- eval_tidy(expr(.data[!!dot]))
+    .data <- eval_tidy(expr(
+      .data[!!dot]
+      ))
   }
   .data
 }

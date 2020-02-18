@@ -67,6 +67,7 @@ dt_mutate_across <- function(.data, .cols, .funs, ..., by = NULL) {
     as.character()
 
   by <- enexpr(by)
+  .data <- data.table:::shallow(.data)
 
   if (!is.list(.funs)) {
     if (length(.cols) > 0) {

@@ -22,6 +22,9 @@ here](https://markfairbanks.github.io/tidytable/#rlang-compatibility)
 `tidytable` gives the user `tidyverse`-like syntax with `data.table`
 speed.
 
+Note that `tidytable` functions do not use `data.table`’s
+modify-by-reference functionality.
+
 `tidytable` started as a complement to the
 [`dtplyr`](https://github.com/tidyverse/dtplyr) package - since `dtplyr`
 is missing some of `dplyr`’s functionality and doesn’t cover any `tidyr`
@@ -121,7 +124,6 @@ library(tidytable)
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt %>%
-  copy() %>% # To prevent data.table's modify by reference
   dt_select(x, y, z) %>%
   dt_filter(x < 4, y > 1) %>%
   dt_arrange(x, y) %>%
@@ -140,12 +142,9 @@ Group by calls are done from inside any function that has group by
 functionality (e.g. `dt_summarize()` & `dt_mutate()`)
 
 A single bare column can be passed with `by = z`. Multiple columns can
-be passed with `by = list(y,
-z)`.
+be passed with `by = list(y, z)`.
 
 ``` r
-example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
-
 example_dt %>%
   dt_summarize(avg_x = mean(x),
                count = .N,
@@ -158,11 +157,13 @@ example_dt %>%
 ## Enhanced selection
 
 Enhanced selection allows you to mix predicates like `is.double` with
-normal selection. Some
-examples:
+normal selection. Some examples:
 
 ``` r
-example_dt <- data.table(a = c(1,2,3), b = c(4,5,6), c = c("a", "a", "b"), d = c("a", "b", "c"))
+example_dt <- data.table(a = c(1,2,3),
+                         b = c(4,5,6),
+                         c = c("a","a","b"),
+                         d = c("a","b","c"))
 
 example_dt %>%
   dt_select(is.numeric, d)
@@ -188,11 +189,13 @@ example_dt %>%
 Enhanced selection allows the user to replace `dt_mutate_if()` &
 `dt_mutate_at()` with one helper - `dt_mutate_across()`.
 
-Using `_across()` instead of
-`_if()`:
+Using `_across()` instead of `_if()`:
 
 ``` r
-example_dt <- data.table(a = c(1,1,1), b = c(1,1,1), c = c("a", "a", "b"), d = c("a", "b", "c"))
+example_dt <- data.table(a = c(1,1,1),
+                         b = c(1,1,1),
+                         c = c("a","a","b"),
+                         d = c("a","b","c"))
 
 example_dt %>%
   dt_mutate_across(is.numeric, as.character)
@@ -202,12 +205,9 @@ example_dt %>%
 #> 3: 1 1 b c
 ```
 
-Using `_across()` instead of
-`_at()`:
+Using `_across()` instead of `_at()`:
 
 ``` r
-example_dt <- data.table(a = c(1,1,1), b = c(1,1,1), c = c("a", "a", "b"), d = c("a", "b", "c"))
-
 example_dt %>%
   dt_mutate_across(c(a, b), ~ .x + 1)
 #>    a b c d
@@ -250,7 +250,7 @@ must be used instead of `enquo()`.
 ``` r
 library(rlang)
 
-example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
+example_dt <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
 
 add_one <- function(.data, new_name, add_col) {
   new_name <- enexpr(new_name)
@@ -263,9 +263,9 @@ add_one <- function(.data, new_name, add_col) {
 example_dt %>%
   add_one(x_plus_one, x)
 #>    x y z x_plus_one
-#> 1: 1 4 a          2
-#> 2: 2 5 a          3
-#> 3: 3 6 b          4
+#> 1: 1 1 a          2
+#> 2: 1 1 a          2
+#> 3: 1 1 b          2
 ```
 
 ##### Custom function with `dt_summarize()`
@@ -299,7 +299,6 @@ syntax:
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt %>%
-  copy() %>%
   dt(, list(x, y, z)) %>%
   dt(x < 4 & y > 1) %>%
   dt(order(x, y)) %>%
@@ -325,8 +324,8 @@ A few notes:
         different dataset from `case_when()`.
   - `setDTthreads(1)` was used to ensure a fair comparison to the
     `tidyverse`.
-  - `copy(dt)` was used when testing `dt_mutate()` to ensure a fair
-    comparison to `dplyr::mutate()`.
+  - `copy(dt)` was used when in the adding columns tests in `data.table`
+    to ensure a fair comparison to `dplyr::mutate()`.
   - `dt_fill()` & `tidyr::fill()` both work with
     character/factor/logical columns, whereas `data.table::nafill()`
     does not. Testing only included numeric columns due to this
@@ -345,16 +344,16 @@ all_marks
 #> # A tibble: 12 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         318.8ms   46.9ms    43.8ms     14.7%                 
-#>  2 case_when       480ms     174ms     136ms      36.2%                 
-#>  3 fill            975ms     665ms     470ms      68.2%                 
-#>  4 filter          230ms     199ms     201ms      86.5%                 
-#>  5 inner_join      74.9ms    78.7ms    75.6ms     105.1%                
-#>  6 left_join       71.5ms    107.2ms   101.5ms    149.9%                
-#>  7 mutate          38.8ms    100.7ms   121.2ms    259.5%                
-#>  8 nest            7.48ms    3.6ms     2.41ms     48.1%                 
-#>  9 pivot_longer    85.4ms    19.9ms    12.3ms     23.3%                 
-#> 10 pivot_wider     751ms     261ms     260ms      34.8%                 
-#> 11 summarize       544ms     258ms     251ms      47.4%                 
-#> 12 unnest          173.64ms  9.82ms    6.74ms     5.7%
+#>  1 arrange         317.6ms   48.4ms    42.6ms     15.2%                 
+#>  2 case_when       418ms     126ms     125ms      30.1%                 
+#>  3 fill            1120ms    808.54ms  480.22ms   72.2%                 
+#>  4 filter          252ms     226ms     226ms      89.7%                 
+#>  5 inner_join      80.5ms    83.8ms    81.9ms     104.1%                
+#>  6 left_join       82.1ms    119.9ms   106.8ms    146.0%                
+#>  7 mutate          60.4ms    62.1ms    215.5ms    102.8%                
+#>  8 nest            7.81ms    3.74ms    2.67ms     47.9%                 
+#>  9 pivot_longer    88.3ms    21ms      12.6ms     23.8%                 
+#> 10 pivot_wider     765ms     276ms     300ms      36.1%                 
+#> 11 summarize       502ms     279ms     265ms      55.6%                 
+#> 12 unnest          158.52ms  10.4ms    7.52ms     6.6%
 ```
