@@ -39,7 +39,7 @@ dt_mutate <- function(.data, ..., by = NULL) {
 
   dots <- enexprs(...)
   by <- enexpr(by)
-  .data <- data.table:::shallow(.data)
+  .data <- shallow(.data)
 
   all_names <- names(dots)
 
