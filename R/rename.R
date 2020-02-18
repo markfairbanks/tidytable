@@ -21,6 +21,7 @@ dt_rename <- function(.data, ...) {
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   dots <- enexprs(...)
+  .data <- data.table:::shallow(.data)
 
   new_names <- names(dots)
   old_names <- as.character(dots)
