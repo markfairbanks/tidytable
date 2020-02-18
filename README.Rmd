@@ -31,6 +31,8 @@ The goal of `tidytable` is to be a tidy interface to `data.table`.
 
 `tidytable` gives the user `tidyverse`-like syntax with `data.table` speed.
 
+Note that `tidytable` functions do not use `data.table`'s modify-by-reference functionality.
+
 `tidytable` started as a complement to the [`dtplyr`](https://github.com/tidyverse/dtplyr) package - since `dtplyr` is missing some of `dplyr`'s functionality and doesn't cover any `tidyr` functions. However translations of `dplyr`'s core verbs (mutate, arrange, etc.) are now included in `tidytable` to allow the user access to all functions in one place.
 
 As such you can use this as a one stop shop for `data.table` translations, or you can use it to complement your current `dtplyr` workflow.
@@ -110,7 +112,6 @@ library(tidytable)
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt %>%
-  copy() %>% # To prevent data.table's modify by reference
   dt_select(x, y, z) %>%
   dt_filter(x < 4, y > 1) %>%
   dt_arrange(x, y) %>%
@@ -126,8 +127,6 @@ Group by calls are done from inside any function that has group by functionality
 A single bare column can be passed with `by = z`. Multiple columns can be passed with `by = list(y, z)`.
 
 ```{r}
-example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
-
 example_dt %>%
   dt_summarize(avg_x = mean(x),
                count = .N,
@@ -139,7 +138,10 @@ example_dt %>%
 Enhanced selection allows you to mix predicates like `is.double` with normal selection. Some examples:
 
 ```{r}
-example_dt <- data.table(a = c(1,2,3), b = c(4,5,6), c = c("a", "a", "b"), d = c("a", "b", "c"))
+example_dt <- data.table(a = c(1,2,3),
+                         b = c(4,5,6),
+                         c = c("a","a","b"),
+                         d = c("a","b","c"))
 
 example_dt %>%
   dt_select(is.numeric, d)
@@ -159,7 +161,10 @@ Enhanced selection allows the user to replace `dt_mutate_if()` & `dt_mutate_at()
 Using `_across()` instead of `_if()`:
 
 ```{r}
-example_dt <- data.table(a = c(1,1,1), b = c(1,1,1), c = c("a", "a", "b"), d = c("a", "b", "c"))
+example_dt <- data.table(a = c(1,1,1),
+                         b = c(1,1,1),
+                         c = c("a","a","b"),
+                         d = c("a","b","c"))
 
 example_dt %>%
   dt_mutate_across(is.numeric, as.character)
@@ -168,8 +173,6 @@ example_dt %>%
 Using `_across()` instead of `_at()`:
 
 ```{r}
-example_dt <- data.table(a = c(1,1,1), b = c(1,1,1), c = c("a", "a", "b"), d = c("a", "b", "c"))
-
 example_dt %>%
   dt_mutate_across(c(a, b), ~ .x + 1)
 ```
@@ -201,7 +204,7 @@ Note that quosures are not compatible with `data.table`, so `enexpr()` must be u
 ```{r message = FALSE}
 library(rlang)
 
-example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
+example_dt <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
 
 add_one <- function(.data, new_name, add_col) {
   new_name <- enexpr(new_name)
@@ -241,7 +244,6 @@ The `dt()` function makes regular `data.table` syntax pipeable, so you can easil
 example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
 example_dt %>%
-  copy() %>%
   dt(, list(x, y, z)) %>%
   dt(x < 4 & y > 1) %>%
   dt(order(x, y)) %>%
@@ -259,7 +261,7 @@ A few notes:
 * The main metric of interest is the time comparison of a tidyverse function vs. its equivalent tidytable function.
   + Comparing times from separate functions won't be very useful. For example - the `summarize()` tests were performed on a different dataset from `case_when()`.
 * `setDTthreads(1)` was used to ensure a fair comparison to the `tidyverse`.
-* `copy(dt)` was used when testing `dt_mutate()` to ensure a fair comparison to `dplyr::mutate()`.
+* `copy(dt)` was used when in the adding columns tests in `data.table` to ensure a fair comparison to `dplyr::mutate()`.
 * `dt_fill()` & `tidyr::fill()` both work with character/factor/logical columns, whereas `data.table::nafill()` does not. Testing only included numeric columns due to this constraint.
 * Currently `data.table` doesn't have its own `case_when()` translation, so a multiple nested `fifelse()` was used.
 * All tests can be found in the source code of the README.
@@ -284,8 +286,8 @@ test_tbl <- as_tibble(test_dt)
 ```{r mutate, echo=FALSE}
 mutate_marks <- bench::mark(
   tidyverse = mutate(test_tbl, double_a = a * 2, a_plus_b = a + b),
-  tidytable = dt_mutate(copy(test_dt), double_a = a * 2, a_plus_b = a + b),
-  data.table = copy(test_dt)[, ':='(double_a = a * 2, a_plus_b = a + b)],
+  tidytable = dt_mutate(test_dt, double_a = a * 2, a_plus_b = a + b),
+  data.table = data.table:::shallow(test_dt)[, ':='(double_a = a * 2, a_plus_b = a + b)],
   check = FALSE,
   iterations = iters)
 
@@ -395,12 +397,12 @@ case_marks <- bench::mark(
                                       x >= median_x ~ "high",
                                       is.na(x) ~ "unknown",
                                       TRUE ~ "other")),
-  tidytable = dt_mutate(copy(case_dt),
+  tidytable = dt_mutate(case_dt,
                      test = dt_case(x < median_x, "low",
                                     x >= median_x, "high",
                                     is.na(x), "unknown",
                                     default = "other")),
-  data.table = copy(case_dt)[,':='(test = fifelse(x < median_x, "low",
+  data.table = data.table:::shallow(case_dt)[,':='(test = fifelse(x < median_x, "low",
                                                   fifelse(x >= median_x, "high",
                                                           fifelse(is.na(x), "unknown", "other"))))],
   check = FALSE,
