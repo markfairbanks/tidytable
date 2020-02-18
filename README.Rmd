@@ -286,7 +286,7 @@ test_tbl <- as_tibble(test_dt)
 mutate_marks <- bench::mark(
   tidyverse = mutate(test_tbl, double_a = a * 2, a_plus_b = a + b),
   tidytable = dt_mutate(test_dt, double_a = a * 2, a_plus_b = a + b),
-  data.table = data.table:::shallow(test_dt)[, ':='(double_a = a * 2, a_plus_b = a + b)],
+  data.table = tidytable:::shallow(test_dt)[, double_a := a * 2][, a_plus_b := a + b],
   check = FALSE,
   iterations = iters)
 
@@ -401,7 +401,7 @@ case_marks <- bench::mark(
                                     x >= median_x, "high",
                                     is.na(x), "unknown",
                                     default = "other")),
-  data.table = data.table:::shallow(case_dt)[,':='(test = fifelse(x < median_x, "low",
+  data.table = tidytable:::shallow(case_dt)[,':='(test = fifelse(x < median_x, "low",
                                                   fifelse(x >= median_x, "high",
                                                           fifelse(is.na(x), "unknown", "other"))))],
   check = FALSE,
@@ -468,7 +468,7 @@ left_dt <- data.table(a = sample(1:20, data_size, TRUE),
                       d = sample(c("a","a","b","c","d"), data_size, TRUE))
 
 right_dt <- data.table(c = c("a","b","c","d"),
-                       e = c(1,2,3,4,5))
+                       e = c(1,2,3,4))
 
 left_tbl <- as_tibble(left_dt)
 right_tbl <- as_tibble(right_dt)
