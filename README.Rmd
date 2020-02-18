@@ -59,7 +59,6 @@ devtools::install_github("markfairbanks/tidytable")
 
 ### tidytable helpers
 
-* `as_dt()`: Prevent modify-by-reference/convert data.frames to data.tables
 * `dt()`: Pipeable `data.table` syntax. [See here](https://markfairbanks.github.io/tidytable/#dt-helper)
 * `%notin%`
 
