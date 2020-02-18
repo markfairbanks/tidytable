@@ -88,6 +88,7 @@
 <h4 class="hasAnchor">
 <a href="#why-tidytable" class="anchor"></a>Why <code>tidytable</code>?</h4>
 <p><code>tidytable</code> gives the user <code>tidyverse</code>-like syntax with <code>data.table</code> speed.</p>
+<p>Note that <code>tidytable</code> functions do not use <code>data.table</code>’s modify-by-reference functionality.</p>
 <p><code>tidytable</code> started as a complement to the <a href="https://github.com/tidyverse/dtplyr"><code>dtplyr</code></a> package - since <code>dtplyr</code> is missing some of <code>dplyr</code>’s functionality and doesn’t cover any <code>tidyr</code> functions. However translations of <code>dplyr</code>’s core verbs (mutate, arrange, etc.) are now included in <code>tidytable</code> to allow the user access to all functions in one place.</p>
 <p>As such you can use this as a one stop shop for <code>data.table</code> translations, or you can use it to complement your current <code>dtplyr</code> workflow.</p>
 </div>
@@ -108,8 +109,6 @@
 <h3 class="hasAnchor">
 <a href="#tidytable-helpers" class="anchor"></a>tidytable helpers</h3>
 <ul>
-<li>
-<code><a href="reference/as_dt.html">as_dt()</a></code>: Prevent modify-by-reference/convert data.frames to data.tables</li>
 <li>
 <code><a href="reference/dt.html">dt()</a></code>: Pipeable <code>data.table</code> syntax. <a href="https://markfairbanks.github.io/tidytable/#dt-helper">See here</a>
 </li>
@@ -214,43 +213,43 @@
 <a class="sourceLine" id="cb3-4" data-line-number="4">example_dt &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="dt">z =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>))</a>
 <a class="sourceLine" id="cb3-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb3-6" data-line-number="6">example_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># To prevent data.table's modify by reference</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate.html">dt_select</a></span>(x, y, z) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate.html">dt_filter</a></span>(x <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>, y <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate.html">dt_arrange</a></span>(x, y) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate.html">dt_mutate</a></span>(<span class="dt">double_x =</span> x <span class="op">*</span><span class="st"> </span><span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb3-12" data-line-number="12">            <span class="dt">double_y =</span> y <span class="op">*</span><span class="st"> </span><span class="dv">2</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate_if.html">dt_mutate_across</a></span>(is.character, as.factor) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="reference/dt_rename.html">dt_rename</a></span>(<span class="dt">new_x =</span> x,</a>
-<a class="sourceLine" id="cb3-15" data-line-number="15">            <span class="dt">new_y =</span> y)</a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt;    new_x new_y z double_x double_y</span></a>
-<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; 1:     1     4 a        2        8</span></a>
-<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; 2:     2     5 a        4       10</span></a>
-<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt; 3:     3     6 b        6       12</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate.html">dt_select</a></span>(x, y, z) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate.html">dt_filter</a></span>(x <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>, y <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate.html">dt_arrange</a></span>(x, y) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate.html">dt_mutate</a></span>(<span class="dt">double_x =</span> x <span class="op">*</span><span class="st"> </span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">            <span class="dt">double_y =</span> y <span class="op">*</span><span class="st"> </span><span class="dv">2</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate_if.html">dt_mutate_across</a></span>(is.character, as.factor) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="reference/dt_rename.html">dt_rename</a></span>(<span class="dt">new_x =</span> x,</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">            <span class="dt">new_y =</span> y)</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt;    new_x new_y z double_x double_y</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; 1:     1     4 a        2        8</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; 2:     2     5 a        4       10</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; 3:     3     6 b        6       12</span></a></code></pre></div>
 <p>Group by calls are done from inside any function that has group by functionality (e.g. <code><a href="reference/dt_mutate.html">dt_summarize()</a></code> &amp; <code><a href="reference/dt_mutate.html">dt_mutate()</a></code>)</p>
 <p>A single bare column can be passed with <code>by = z</code>. Multiple columns can be passed with <code>by = list(y, z)</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">example_dt &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="dt">z =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>))</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">example_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate.html">dt_summarize</a></span>(<span class="dt">avg_x =</span> <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(x),</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">               <span class="dt">count =</span> .N,</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">               <span class="dt">by =</span> z)</a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt;    z avg_x count</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; 1: a   1.5     2</span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; 2: b   3.0     1</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">example_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate.html">dt_summarize</a></span>(<span class="dt">avg_x =</span> <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(x),</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">               <span class="dt">count =</span> .N,</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">               <span class="dt">by =</span> z)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt;    z avg_x count</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; 1: a   1.5     2</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; 2: b   3.0     1</span></a></code></pre></div>
 </div>
 <div id="enhanced-selection" class="section level2">
 <h2 class="hasAnchor">
 <a href="#enhanced-selection" class="anchor"></a>Enhanced selection</h2>
 <p>Enhanced selection allows you to mix predicates like <code>is.double</code> with normal selection. Some examples:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">example_dt &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>), <span class="dt">d =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">example_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate.html">dt_select</a></span>(is.numeric, d)</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;    a b d</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 1: 1 4 a</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; 2: 2 5 b</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 3: 3 6 c</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">example_dt &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">                         <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>),</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">                         <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span>),</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">                         <span class="dt">d =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>))</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">example_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate.html">dt_select</a></span>(is.numeric, d)</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;    a b d</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; 1: 1 4 a</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 2: 2 5 b</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; 3: 3 6 c</span></a></code></pre></div>
 <p>You can also use this format to drop columns:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">example_dt <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate.html">dt_select</a></span>(<span class="op">-</span>is.numeric)</a>
@@ -264,23 +263,24 @@
 </h4>
 <p>Enhanced selection allows the user to replace <code><a href="reference/dt_mutate_if.html">dt_mutate_if()</a></code> &amp; <code><a href="reference/dt_mutate_if.html">dt_mutate_at()</a></code> with one helper - <code><a href="reference/dt_mutate_if.html">dt_mutate_across()</a></code>.</p>
 <p>Using <code>_across()</code> instead of <code>_if()</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">example_dt &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>), <span class="dt">d =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">example_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate_if.html">dt_mutate_across</a></span>(is.numeric, as.character)</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;    a b c d</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; 1: 1 1 a a</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 2: 1 1 a b</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 3: 1 1 b c</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">example_dt &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">                         <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">                         <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span>),</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">                         <span class="dt">d =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>))</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">example_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate_if.html">dt_mutate_across</a></span>(is.numeric, as.character)</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt;    a b c d</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 1: 1 1 a a</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 2: 1 1 a b</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; 3: 1 1 b c</span></a></code></pre></div>
 <p>Using <code>_across()</code> instead of <code>_at()</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">example_dt &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>), <span class="dt">d =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">example_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate_if.html">dt_mutate_across</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(a, b), <span class="op">~</span><span class="st"> </span>.x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;    a b c d</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; 1: 2 2 a a</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; 2: 2 2 a b</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; 3: 2 2 b c</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">example_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate_if.html">dt_mutate_across</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(a, b), <span class="op">~</span><span class="st"> </span>.x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;    a b c d</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; 1: 2 2 a a</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; 2: 2 2 a b</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; 3: 2 2 b c</span></a></code></pre></div>
 <p>These two approaches can be combined in one call:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">example_dt &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">dbl_col1 =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>),</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">                         <span class="dt">dbl_col2 =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>),</a>
@@ -309,7 +309,7 @@
 </h5>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(rlang)</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">example_dt &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="dt">z =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>))</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">example_dt &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">z =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span>))</a>
 <a class="sourceLine" id="cb10-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb10-5" data-line-number="5">add_one &lt;-<span class="st"> </span><span class="cf">function</span>(.data, new_name, add_col) {</a>
 <a class="sourceLine" id="cb10-6" data-line-number="6">  new_name &lt;-<span class="st"> </span><span class="kw"><a href="https://rlang.r-lib.org/reference/nse-defuse.html">enexpr</a></span>(new_name)</a>
@@ -322,9 +322,9 @@
 <a class="sourceLine" id="cb10-13" data-line-number="13">example_dt <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb10-14" data-line-number="14"><span class="st">  </span><span class="kw">add_one</span>(x_plus_one, x)</a>
 <a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt;    x y z x_plus_one</span></a>
-<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; 1: 1 4 a          2</span></a>
-<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt; 2: 2 5 a          3</span></a>
-<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; 3: 3 6 b          4</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; 1: 1 1 a          2</span></a>
+<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt; 2: 1 1 a          2</span></a>
+<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; 3: 1 1 b          2</span></a></code></pre></div>
 </div>
 <div id="custom-function-with-dt_summarize" class="section level5">
 <h5 class="hasAnchor">
@@ -355,16 +355,15 @@
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">example_dt &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="dt">z =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>))</a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb12-3" data-line-number="3">example_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="reference/dt.html">dt</a></span>(, <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(x, y, z)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="reference/dt.html">dt</a></span>(x <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span> <span class="op">&amp;</span><span class="st"> </span>y <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="reference/dt.html">dt</a></span>(<span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">order</a></span>(x, y)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="reference/dt.html">dt</a></span>(, <span class="st">':='</span>(<span class="dt">double_x =</span> x <span class="op">*</span><span class="st"> </span><span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb12-9" data-line-number="9">            <span class="dt">double_y =</span> y <span class="op">*</span><span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="reference/dt.html">dt</a></span>(, <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">avg_x =</span> <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(x)), <span class="dt">by =</span> z)</a>
-<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt;    z avg_x</span></a>
-<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt; 1: a   1.5</span></a>
-<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt; 2: b   3.0</span></a></code></pre></div>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/dt.html">dt</a></span>(, <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(x, y, z)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="reference/dt.html">dt</a></span>(x <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span> <span class="op">&amp;</span><span class="st"> </span>y <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="reference/dt.html">dt</a></span>(<span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">order</a></span>(x, y)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="reference/dt.html">dt</a></span>(, <span class="st">':='</span>(<span class="dt">double_x =</span> x <span class="op">*</span><span class="st"> </span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb12-8" data-line-number="8">            <span class="dt">double_y =</span> y <span class="op">*</span><span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="reference/dt.html">dt</a></span>(, <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">avg_x =</span> <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(x)), <span class="dt">by =</span> z)</a>
+<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt;    z avg_x</span></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt; 1: a   1.5</span></a>
+<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt; 2: b   3.0</span></a></code></pre></div>
 <div id="speed-comparisons" class="section level3">
 <h3 class="hasAnchor">
 <a href="#speed-comparisons" class="anchor"></a>Speed Comparisons</h3>
@@ -379,7 +378,7 @@
 <li>
 <code><a href="https://Rdatatable.gitlab.io/data.table/reference/openmp-utils.html">setDTthreads(1)</a></code> was used to ensure a fair comparison to the <code>tidyverse</code>.</li>
 <li>
-<code><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy(dt)</a></code> was used when testing <code><a href="reference/dt_mutate.html">dt_mutate()</a></code> to ensure a fair comparison to <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code>.</li>
+<code><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy(dt)</a></code> was used when in the adding columns tests in <code>data.table</code> to ensure a fair comparison to <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code>.</li>
 <li>
 <code><a href="reference/dt_fill.html">dt_fill()</a></code> &amp; <code><a href="https://tidyr.tidyverse.org/reference/fill.html">tidyr::fill()</a></code> both work with character/factor/logical columns, whereas <code><a href="https://Rdatatable.gitlab.io/data.table/reference/nafill.html">data.table::nafill()</a></code> does not. Testing only included numeric columns due to this constraint.</li>
 <li>Currently <code>data.table</code> doesn’t have its own <code>case_when()</code> translation, so a multiple nested <code><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">fifelse()</a></code> was used.</li>
@@ -390,18 +389,18 @@
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; # A tibble: 12 x 5</span></a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt;    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse</span></a>
 <a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;                 </span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;  1 arrange         318.8ms   46.9ms    43.8ms     14.7%                 </span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;  2 case_when       480ms     174ms     136ms      36.2%                 </span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt;  3 fill            975ms     665ms     470ms      68.2%                 </span></a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt;  4 filter          230ms     199ms     201ms      86.5%                 </span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt;  5 inner_join      74.9ms    78.7ms    75.6ms     105.1%                </span></a>
-<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt;  6 left_join       71.5ms    107.2ms   101.5ms    149.9%                </span></a>
-<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt;  7 mutate          38.8ms    100.7ms   121.2ms    259.5%                </span></a>
-<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt;  8 nest            7.48ms    3.6ms     2.41ms     48.1%                 </span></a>
-<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="co">#&gt;  9 pivot_longer    85.4ms    19.9ms    12.3ms     23.3%                 </span></a>
-<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="co">#&gt; 10 pivot_wider     751ms     261ms     260ms      34.8%                 </span></a>
-<a class="sourceLine" id="cb13-15" data-line-number="15"><span class="co">#&gt; 11 summarize       544ms     258ms     251ms      47.4%                 </span></a>
-<a class="sourceLine" id="cb13-16" data-line-number="16"><span class="co">#&gt; 12 unnest          173.64ms  9.82ms    6.74ms     5.7%</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;  1 arrange         330.7ms   56.9ms    48.3ms     17.2%                 </span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;  2 case_when       421ms     122ms     118ms      29.0%                 </span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt;  3 fill            1120ms    777.78ms  489.75ms   69.4%                 </span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt;  4 filter          252ms     223ms     220ms      88.5%                 </span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt;  5 inner_join      75.6ms    85.8ms    81.2ms     113.5%                </span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt;  6 left_join       75.1ms    122.9ms   101.9ms    163.6%                </span></a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt;  7 mutate          55.8ms    57ms      203.7ms    102.2%                </span></a>
+<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt;  8 nest            7.71ms    3.96ms    2.57ms     51.4%                 </span></a>
+<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="co">#&gt;  9 pivot_longer    81.3ms    19.8ms    11.9ms     24.4%                 </span></a>
+<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="co">#&gt; 10 pivot_wider     696ms     283ms     269ms      40.7%                 </span></a>
+<a class="sourceLine" id="cb13-15" data-line-number="15"><span class="co">#&gt; 11 summarize       463ms     271ms     266ms      58.5%                 </span></a>
+<a class="sourceLine" id="cb13-16" data-line-number="16"><span class="co">#&gt; 12 unnest          160.74ms  10.33ms   7.05ms     6.4%</span></a></code></pre></div>
 </div>
 </div>
 </div>
