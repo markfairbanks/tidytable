@@ -67,7 +67,6 @@ example_dt <- data.table::data.table(
   z = c("a", "a", "b"))
 
 example_dt \%>\%
-  as_dt() \%>\%
   dt(, ':='(double_x = x * 2)) \%>\%
   dt(order(-double_x))
 }

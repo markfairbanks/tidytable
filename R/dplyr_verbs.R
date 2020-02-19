@@ -26,13 +26,13 @@
 #'   d = c("a","a","b"))
 #'
 #' example_dt %>%
-#'   as_dt() %>%
 #'   dt_select(a, b, c, d) %>%
 #'   dt_mutate(double_a = a * 2,
 #'             double_b = b * 2) %>%
 #'   dt_filter(double_a > 0, double_b > 0) %>%
 #'   dt_arrange(-double_a) %>%
-#'   dt_summarize(avg_a = mean(a), by = list(c, d))
+#'   dt_summarize(avg_a = mean(a),
+#'                by = list(c, d))
 dt_mutate <- function(.data, ..., by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)
