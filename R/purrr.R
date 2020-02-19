@@ -149,7 +149,7 @@ anon_x <- function(fn) {
   if (is_formula(fn)) {
     fn %>%
       deparse() %>%
-      dt_str_replace("^~", "function(.x)") %>%
+      str_replace("^~", "function(.x)") %>%
       parse_expr() %>%
       eval()
   } else {
@@ -161,7 +161,7 @@ anon_xy <- function(fn) {
   if (is_formula(fn)) {
     fn %>%
       deparse() %>%
-      dt_str_replace("^~", "function(.x,.y)") %>%
+      str_replace("^~", "function(.x,.y)") %>%
       parse_expr() %>%
       eval()
   } else {

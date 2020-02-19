@@ -1,3 +1,4 @@
+# Creates a shallow copy to prevent modify-by-reference
 shallow <- function(x, cols = names(x), reset_class = FALSE) {
   stopifnot(is.data.table(x), all(cols %in% names(x)))
   ans = vector("list", length(cols))

@@ -1,3 +1,19 @@
+# vec_selector & dots_selector return a list of bare column names
+# vec_selector_i & dots_selector_i return column positions/index as an integer vector
+
+### User inputs a vector of bare column names
+
+vec_selector <- function(.data, select_vars) {
+  select_vars <- enexpr(select_vars)
+
+  select_index <- vec_selector_i(.data, !!select_vars)
+  data_names <- colnames(.data)
+
+  select_vars <- syms(data_names[select_index])
+
+  select_vars
+}
+
 vec_selector_i <- function(.data, select_vars) {
 
   data_names <- colnames(.data)
@@ -30,10 +46,11 @@ vec_selector_i <- function(.data, select_vars) {
   select_index
 }
 
-vec_selector <- function(.data, select_vars) {
-  select_vars <- enexpr(select_vars)
+### User inputs bare column names using ellipsis
 
-  select_index <- vec_selector_i(.data, !!select_vars)
+dots_selector <- function(.data, ...) {
+
+  select_index <- dots_selector_i(.data, ...)
   data_names <- colnames(.data)
 
   select_vars <- syms(data_names[select_index])
@@ -71,14 +88,4 @@ dots_selector_i <- function(.data, ...) {
   select_index <- setdiff(keep_index, drop_index)
 
   select_index
-}
-
-dots_selector <- function(.data, ...) {
-
-  select_index <- dots_selector_i(.data, ...)
-  data_names <- colnames(.data)
-
-  select_vars <- syms(data_names[select_index])
-
-  select_vars
 }
