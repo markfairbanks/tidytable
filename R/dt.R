@@ -28,7 +28,6 @@
 #'   z = c("a", "a", "b"))
 #'
 #' example_dt %>%
-#'   as_dt() %>%
 #'   dt(, ':='(double_x = x * 2)) %>%
 #'   dt(order(-double_x))
 dt <- function(.data, i, j, by, keyby, with = TRUE,

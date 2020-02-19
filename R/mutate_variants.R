@@ -29,15 +29,12 @@
 #'   z = c("a", "a", "b"))
 #'
 #' example_dt %>%
-#'   as_dt() %>%
 #'   dt_mutate_across(is.numeric, as.character)
 #'
 #' example_dt %>%
-#'   as_dt() %>%
 #'   dt_mutate_across(c(x, y), ~ .x * 2)
 #'
 #' example_dt %>%
-#'   as_dt() %>%
 #'   dt_mutate_across(c(x, y), list(new = ~ .x * 2))
 dt_mutate_if <- function(.data, .predicate, .funs, ..., by = NULL) {
   .predicate <- enexpr(.predicate)

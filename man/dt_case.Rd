@@ -25,12 +25,10 @@ test_df <- data.table::data.table(
   d = c(rep("a", 4), rep("b", 6)))
 
 test_df \%>\%
-  as_dt() \%>\%
   dt_mutate(x = dt_case(b < 13, 3,
                         a > 4, 2,
                         default = 10))
 test_df \%>\%
-  as_dt() \%>\%
   dt_mutate(x = dt_case(c == "a","a",
                         default = d))
 }

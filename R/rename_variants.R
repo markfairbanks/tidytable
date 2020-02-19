@@ -57,6 +57,8 @@ dt_rename_across <- function(.data, .cols, .fun, ...) {
   .vars <- vec_selector(.data, !!.vars) %>%
     as.character()
 
+  .data <- shallow(.data)
+
   .fun <- anon_x(.fun)
 
   if (length(.vars) > 0) {
