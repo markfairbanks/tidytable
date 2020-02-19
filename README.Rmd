@@ -35,7 +35,7 @@ The goal of `tidytable` is to be a tidy interface to `data.table`.
 
 As such you can use this as a one stop shop for `data.table` translations, or you can use it to complement your current `dtplyr` workflow.
 
-Note: `tidytable` functions do not use `data.table`'s modify-by-reference functionality.
+Note: `tidytable` functions do not use `data.table`'s modify-by-reference, and instead use the copy-on-modify principles followed by the `tidyverse` and base R.
 
 ## Installation
 
@@ -260,7 +260,7 @@ A few notes:
 * The main metric of interest is the time comparison of a tidyverse function vs. its equivalent tidytable function.
   + Comparing times from separate functions won't be very useful. For example - the `summarize()` tests were performed on a different dataset from `case_when()`.
 * `setDTthreads(1)` was used to ensure a fair comparison to the `tidyverse`.
-* `copy(dt)` was used when in the adding columns tests in `data.table` to ensure a fair comparison to `dplyr::mutate()`.
+* `copy(dt)` was used when adding columns in `data.table` to ensure a fair comparison to `dplyr::mutate()`.
 * `dt_fill()` & `tidyr::fill()` both work with character/factor/logical columns, whereas `data.table::nafill()` does not. Testing only included numeric columns due to this constraint.
 * Currently `data.table` doesn't have its own `case_when()` translation, so a multiple nested `fifelse()` was used.
 * All tests can be found in the source code of the README.
