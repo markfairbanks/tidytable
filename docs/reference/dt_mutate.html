@@ -179,13 +179,13 @@ dt_select() supports enhanced selection" />
   <span class='kw'>d</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
 
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='as_dt.html'>as_dt</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>dt_select</span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>dt_mutate</span>(<span class='kw'>double_a</span> <span class='kw'>=</span> <span class='no'>a</span> * <span class='fl'>2</span>,
             <span class='kw'>double_b</span> <span class='kw'>=</span> <span class='no'>b</span> * <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>dt_filter</span>(<span class='no'>double_a</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>, <span class='no'>double_b</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>dt_arrange</span>(-<span class='no'>double_a</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_summarize</span>(<span class='kw'>avg_a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>a</span>), <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>c</span>, <span class='no'>d</span>))</div><div class='output co'>#&gt;    c d avg_a
+  <span class='fu'>dt_summarize</span>(<span class='kw'>avg_a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>a</span>),
+               <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>c</span>, <span class='no'>d</span>))</div><div class='output co'>#&gt;    c d avg_a
 #&gt; 1: b b   3.0
 #&gt; 2: a a   1.5</div></pre>
   </div>

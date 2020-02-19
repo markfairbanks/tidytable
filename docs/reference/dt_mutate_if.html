@@ -186,19 +186,16 @@ dt_mutate_across(): Replaces both mutate_if() &amp;amp; mutate_at()
   <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span>))
 
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='as_dt.html'>as_dt</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>dt_mutate_across</span>(<span class='no'>is.numeric</span>, <span class='no'>as.character</span>)</div><div class='output co'>#&gt;    x y z
 #&gt; 1: 1 2 a
 #&gt; 2: 1 2 a
 #&gt; 3: 1 2 b</div><div class='input'>
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='as_dt.html'>as_dt</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>dt_mutate_across</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>, <span class='no'>y</span>), ~ <span class='no'>.x</span> * <span class='fl'>2</span>)</div><div class='output co'>#&gt;    x y z
 #&gt; 1: 2 4 a
 #&gt; 2: 2 4 a
 #&gt; 3: 2 4 b</div><div class='input'>
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='as_dt.html'>as_dt</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>dt_mutate_across</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>, <span class='no'>y</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>new</span> <span class='kw'>=</span> ~ <span class='no'>.x</span> * <span class='fl'>2</span>))</div><div class='output co'>#&gt;    x y z x_new y_new
 #&gt; 1: 1 2 a     2     4
 #&gt; 2: 1 2 a     2     4
