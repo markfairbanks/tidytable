@@ -31,7 +31,7 @@ The goal of `tidytable` is to be a tidy interface to `data.table`.
 
 `tidytable` gives the user `tidyverse`-like syntax with `data.table` speed.
 
-`tidytable` started as a complement to the [`dtplyr`](https://github.com/tidyverse/dtplyr) package - since `dtplyr` is missing some of `dplyr`'s functionality and doesn't cover any `tidyr` functions. However translations of `dplyr`'s core verbs (mutate, arrange, etc.) are now included in `tidytable` to allow the user access to all functions in one place.
+`tidytable` started as a complement to the [`dtplyr`](https://github.com/tidyverse/dtplyr) package, since `dtplyr` is missing some of `dplyr`'s functionality and doesn't cover any `tidyr` functions. However translations of `dplyr`'s core verbs (mutate, arrange, etc.) are now included in `tidytable` to allow the user access to all functions in one place.
 
 As such you can use this as a one stop shop for `data.table` translations, or you can use it to complement your current `dtplyr` workflow.
 
@@ -121,9 +121,12 @@ example_dt %>%
             new_y = y)
 ```
 
+#### Using "group by"
+
 Group by calls are done from inside any function that has group by functionality (e.g. `dt_summarize()` & `dt_mutate()`) 
 
-A single bare column can be passed with `by = z`. Multiple columns can be passed with `by = list(y, z)` or `by = .(y, z)`.
+* A single bare column can be passed with `by = z`
+* Multiple columns can be passed with `by = list(y, z)` or `by = .(y, z)`
 
 ```{r}
 example_dt %>%
@@ -152,6 +155,8 @@ You can also use this format to drop columns:
 example_dt %>%
   dt_select(-is.numeric)
 ```
+
+Currently supported: `is.numeric`/`is.integer`/`is.double`/`is.character`/`is.factor`
 
 #### New variant: `dt_mutate_across()`
 
@@ -189,8 +194,6 @@ example_dt <- data.table(dbl_col1 = c(1.0,1.0,1.0),
 example_dt %>%
   dt_mutate_across(c(is.double, int_col1), ~ .x + 1)
 ```
-
-Currently supported: `is.numeric`/`is.integer`/`is.double`/`is.character`/`is.factor`
 
 ## `rlang` compatibility
 

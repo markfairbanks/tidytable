@@ -23,7 +23,7 @@ here](https://markfairbanks.github.io/tidytable/#rlang-compatibility)
 speed.
 
 `tidytable` started as a complement to the
-[`dtplyr`](https://github.com/tidyverse/dtplyr) package - since `dtplyr`
+[`dtplyr`](https://github.com/tidyverse/dtplyr) package, since `dtplyr`
 is missing some of `dplyr`’s functionality and doesn’t cover any `tidyr`
 functions. However translations of `dplyr`’s core verbs (mutate,
 arrange, etc.) are now included in `tidytable` to allow the user access
@@ -137,11 +137,16 @@ example_dt %>%
 #> 3:     3     6 b        6       12
 ```
 
+#### Using “group by”
+
 Group by calls are done from inside any function that has group by
 functionality (e.g. `dt_summarize()` & `dt_mutate()`)
 
-A single bare column can be passed with `by = z`. Multiple columns can
-be passed with `by = list(y, z)` or `by = .(y, z)`.
+  - A single bare column can be passed with `by = z`
+  - Multiple columns can be passed with `by = list(y, z)` or `by = .(y,
+    z)`
+
+<!-- end list -->
 
 ``` r
 example_dt %>%
@@ -182,6 +187,9 @@ example_dt %>%
 #> 2: a b
 #> 3: b c
 ```
+
+Currently supported:
+`is.numeric`/`is.integer`/`is.double`/`is.character`/`is.factor`
 
 #### New variant: `dt_mutate_across()`
 
@@ -232,9 +240,6 @@ example_dt %>%
 #> 2:        2        2        2        1         a         b
 #> 3:        2        2        2        1         a         b
 ```
-
-Currently supported:
-`is.numeric`/`is.integer`/`is.double`/`is.character`/`is.factor`
 
 ## `rlang` compatibility
 
@@ -343,16 +348,16 @@ all_marks
 #> # A tibble: 12 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         333.3ms   49.6ms    44.8ms     14.9%                 
-#>  2 case_when       393ms     131ms     123ms      33.3%                 
-#>  3 fill            982ms     577ms     505ms      58.8%                 
-#>  4 filter          223ms     195ms     194ms      87.4%                 
-#>  5 inner_join      63.7ms    82.7ms    74.2ms     129.8%                
-#>  6 left_join       67.2ms    114.6ms   100.2ms    170.5%                
-#>  7 mutate          54.9ms    46.3ms    44.9ms     84.3%                 
-#>  8 nest            7.48ms    4.2ms     2.58ms     56.1%                 
-#>  9 pivot_longer    82ms      19.5ms    12.1ms     23.8%                 
-#> 10 pivot_wider     694ms     257ms     249ms      37.0%                 
-#> 11 summarize       443ms     254ms     251ms      57.3%                 
-#> 12 unnest          150.85ms  10.21ms   7.27ms     6.8%
+#>  1 arrange         322.3ms   49.3ms    41.2ms     15.3%                 
+#>  2 case_when       434ms     147ms     129ms      33.9%                 
+#>  3 fill            1030ms    596.61ms  548.41ms   57.9%                 
+#>  4 filter          229ms     199ms     214ms      86.9%                 
+#>  5 inner_join      65.6ms    82.4ms    74.7ms     125.6%                
+#>  6 left_join       74.9ms    109ms     107.1ms    145.5%                
+#>  7 mutate          55.2ms    45.8ms    45.8ms     83.0%                 
+#>  8 nest            7.07ms    3.65ms    2.81ms     51.6%                 
+#>  9 pivot_longer    87.2ms    20.7ms    12.9ms     23.7%                 
+#> 10 pivot_wider     715ms     271ms     273ms      37.9%                 
+#> 11 summarize       488ms     258ms     253ms      52.9%                 
+#> 12 unnest          170.9ms   9.76ms    6.62ms     5.7%
 ```
