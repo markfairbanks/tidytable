@@ -88,9 +88,9 @@
 <h4 class="hasAnchor">
 <a href="#why-tidytable" class="anchor"></a>Why <code>tidytable</code>?</h4>
 <p><code>tidytable</code> gives the user <code>tidyverse</code>-like syntax with <code>data.table</code> speed.</p>
-<p><code>tidytable</code> started as a complement to the <a href="https://github.com/tidyverse/dtplyr"><code>dtplyr</code></a> package - since <code>dtplyr</code> is missing some of <code>dplyr</code>’s functionality and doesn’t cover any <code>tidyr</code> functions. However translations of <code>dplyr</code>’s core verbs (mutate, arrange, etc.) are now included in <code>tidytable</code> to allow the user access to all functions in one place.</p>
+<p><code>tidytable</code> started as a complement to the <a href="https://github.com/tidyverse/dtplyr"><code>dtplyr</code></a> package, since <code>dtplyr</code> is missing some of <code>dplyr</code>’s functionality and doesn’t cover any <code>tidyr</code> functions. However translations of <code>dplyr</code>’s core verbs (mutate, arrange, etc.) are now included in <code>tidytable</code> to allow the user access to all functions in one place.</p>
 <p>As such you can use this as a one stop shop for <code>data.table</code> translations, or you can use it to complement your current <code>dtplyr</code> workflow.</p>
-<p>Note: <code>tidytable</code> functions do not use <code>data.table</code>’s modify-by-reference functionality.</p>
+<p>Note: <code>tidytable</code> functions do not use <code>data.table</code>’s modify-by-reference, and instead use the copy-on-modify principles followed by the <code>tidyverse</code> and base R.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -225,15 +225,24 @@
 <a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; 1:     1     4 a        2        8</span></a>
 <a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; 2:     2     5 a        4       10</span></a>
 <a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; 3:     3     6 b        6       12</span></a></code></pre></div>
+<div id="using-group-by" class="section level4">
+<h4 class="hasAnchor">
+<a href="#using-group-by" class="anchor"></a>Using “group by”</h4>
 <p>Group by calls are done from inside any function that has group by functionality (e.g. <code><a href="reference/dt_mutate.html">dt_summarize()</a></code> &amp; <code><a href="reference/dt_mutate.html">dt_mutate()</a></code>)</p>
-<p>A single bare column can be passed with <code>by = z</code>. Multiple columns can be passed with <code>by = list(y, z)</code> or <code>by = .(y, z)</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">example_dt <span class="op">%&gt;%</span></a>
+<ul>
+<li>A single bare column can be passed with <code>by = z</code>
+</li>
+<li>Multiple columns can be passed with <code>by = list(y, z)</code> or <code>by = .(y, z)</code>
+</li>
+</ul>
+<!-- end list --><div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">example_dt <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate.html">dt_summarize</a></span>(<span class="dt">avg_x =</span> <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(x),</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">               <span class="dt">count =</span> .N,</a>
 <a class="sourceLine" id="cb4-4" data-line-number="4">               <span class="dt">by =</span> z)</a>
 <a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt;    z avg_x count</span></a>
 <a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; 1: a   1.5     2</span></a>
 <a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; 2: b   3.0     1</span></a></code></pre></div>
+</div>
 </div>
 <div id="enhanced-selection" class="section level2">
 <h2 class="hasAnchor">
@@ -257,6 +266,7 @@
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; 1: a a</span></a>
 <a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 2: a b</span></a>
 <a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 3: b c</span></a></code></pre></div>
+<p>Currently supported: <code>is.numeric</code>/<code>is.integer</code>/<code>is.double</code>/<code>is.character</code>/<code>is.factor</code></p>
 <div id="new-variant-dt_mutate_across" class="section level4">
 <h4 class="hasAnchor">
 <a href="#new-variant-dt_mutate_across" class="anchor"></a>New variant: <code>dt_mutate_across()</code>
@@ -295,7 +305,6 @@
 <a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; 1:        2        2        2        1         a         b</span></a>
 <a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; 2:        2        2        2        1         a         b</span></a>
 <a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; 3:        2        2        2        1         a         b</span></a></code></pre></div>
-<p>Currently supported: <code>is.numeric</code>/<code>is.integer</code>/<code>is.double</code>/<code>is.character</code>/<code>is.factor</code></p>
 </div>
 </div>
 <div id="rlang-compatibility" class="section level2">
@@ -378,7 +387,7 @@
 <li>
 <code><a href="https://Rdatatable.gitlab.io/data.table/reference/openmp-utils.html">setDTthreads(1)</a></code> was used to ensure a fair comparison to the <code>tidyverse</code>.</li>
 <li>
-<code><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy(dt)</a></code> was used when in the adding columns tests in <code>data.table</code> to ensure a fair comparison to <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code>.</li>
+<code><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy(dt)</a></code> was used when adding columns in <code>data.table</code> to ensure a fair comparison to <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code>.</li>
 <li>
 <code><a href="reference/dt_fill.html">dt_fill()</a></code> &amp; <code><a href="https://tidyr.tidyverse.org/reference/fill.html">tidyr::fill()</a></code> both work with character/factor/logical columns, whereas <code><a href="https://Rdatatable.gitlab.io/data.table/reference/nafill.html">data.table::nafill()</a></code> does not. Testing only included numeric columns due to this constraint.</li>
 <li>Currently <code>data.table</code> doesn’t have its own <code>case_when()</code> translation, so a multiple nested <code><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">fifelse()</a></code> was used.</li>
@@ -389,18 +398,18 @@
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; # A tibble: 12 x 5</span></a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt;    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse</span></a>
 <a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;                 </span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;  1 arrange         323.1ms   49ms      44.2ms     15.2%                 </span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;  2 case_when       383ms     140ms     120ms      36.6%                 </span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt;  3 fill            1010ms    587.08ms  515.64ms   58.1%                 </span></a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt;  4 filter          227ms     197ms     193ms      86.8%                 </span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt;  5 inner_join      65.6ms    79.5ms    76.1ms     121.2%                </span></a>
-<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt;  6 left_join       72.2ms    104.2ms   98.3ms     144.3%                </span></a>
-<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt;  7 mutate          54.5ms    44.6ms    44.7ms     81.8%                 </span></a>
-<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt;  8 nest            7.19ms    4.18ms    2.41ms     58.1%                 </span></a>
-<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="co">#&gt;  9 pivot_longer    84.6ms    19.3ms    12.2ms     22.8%                 </span></a>
-<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="co">#&gt; 10 pivot_wider     691ms     248ms     245ms      35.9%                 </span></a>
-<a class="sourceLine" id="cb13-15" data-line-number="15"><span class="co">#&gt; 11 summarize       442ms     258ms     253ms      58.4%                 </span></a>
-<a class="sourceLine" id="cb13-16" data-line-number="16"><span class="co">#&gt; 12 unnest          154.57ms  10.36ms   6.95ms     6.7%</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;  1 arrange         322.3ms   49.3ms    41.2ms     15.3%                 </span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;  2 case_when       434ms     147ms     129ms      33.9%                 </span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt;  3 fill            1030ms    596.61ms  548.41ms   57.9%                 </span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt;  4 filter          229ms     199ms     214ms      86.9%                 </span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt;  5 inner_join      65.6ms    82.4ms    74.7ms     125.6%                </span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt;  6 left_join       74.9ms    109ms     107.1ms    145.5%                </span></a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt;  7 mutate          55.2ms    45.8ms    45.8ms     83.0%                 </span></a>
+<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt;  8 nest            7.07ms    3.65ms    2.81ms     51.6%                 </span></a>
+<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="co">#&gt;  9 pivot_longer    87.2ms    20.7ms    12.9ms     23.7%                 </span></a>
+<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="co">#&gt; 10 pivot_wider     715ms     271ms     273ms      37.9%                 </span></a>
+<a class="sourceLine" id="cb13-15" data-line-number="15"><span class="co">#&gt; 11 summarize       488ms     258ms     253ms      52.9%                 </span></a>
+<a class="sourceLine" id="cb13-16" data-line-number="16"><span class="co">#&gt; 12 unnest          170.9ms   9.76ms    6.62ms     5.7%</span></a></code></pre></div>
 </div>
 </div>
 </div>
