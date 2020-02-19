@@ -1,4 +1,4 @@
-# tidytable 0.3.1 (in development)
+# tidytable 0.3.1
 
 * Updated `dt()` docs per CRAN instructions
 * `dt()` now automatically converts data.frame input to a data.table
@@ -8,7 +8,7 @@
 
 ### Breaking changes
 * `dt_unnest_legacy()` drops "keep" argument, but automatically keeps all non-nested columns.
-  + New translation is ~10x faster than before
+  + New translation is ~5-10x faster than before
 
 # tidytable 0.3.0
 
