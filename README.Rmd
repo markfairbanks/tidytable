@@ -31,11 +31,11 @@ The goal of `tidytable` is to be a tidy interface to `data.table`.
 
 `tidytable` gives the user `tidyverse`-like syntax with `data.table` speed.
 
-Note that `tidytable` functions do not use `data.table`'s modify-by-reference functionality.
-
 `tidytable` started as a complement to the [`dtplyr`](https://github.com/tidyverse/dtplyr) package - since `dtplyr` is missing some of `dplyr`'s functionality and doesn't cover any `tidyr` functions. However translations of `dplyr`'s core verbs (mutate, arrange, etc.) are now included in `tidytable` to allow the user access to all functions in one place.
 
 As such you can use this as a one stop shop for `data.table` translations, or you can use it to complement your current `dtplyr` workflow.
+
+Note: `tidytable` functions do not use `data.table`'s modify-by-reference functionality.
 
 ## Installation
 
@@ -123,7 +123,7 @@ example_dt %>%
 
 Group by calls are done from inside any function that has group by functionality (e.g. `dt_summarize()` & `dt_mutate()`) 
 
-A single bare column can be passed with `by = z`. Multiple columns can be passed with `by = list(y, z)`.
+A single bare column can be passed with `by = z`. Multiple columns can be passed with `by = list(y, z)` or `by = .(y, z)`.
 
 ```{r}
 example_dt %>%
@@ -369,10 +369,10 @@ fill_tbl <- as_tibble(fill_dt)
 
 fill_marks <- bench::mark(
   tidyverse = fill(dplyr::group_by(fill_tbl, id), x, y),
-  tidytable = dt_fill(as_dt(fill_dt), x, y, by = id),
-  data.table = as_dt(fill_dt)[, ':='(x = nafill(x, type = "locf"),
-                                     y = nafill(y, type = "locf")),
-                              by = id],
+  tidytable = dt_fill(fill_dt, x, y, by = id),
+  data.table = copy(fill_dt)[, ':='(x = nafill(x, type = "locf"),
+                                    y = nafill(y, type = "locf")),
+                             by = id],
   check = FALSE,
   iterations = iters)
 
@@ -468,7 +468,7 @@ left_dt <- data.table(a = sample(1:20, data_size, TRUE),
                       d = sample(c("a","a","b","c","d"), data_size, TRUE))
 
 right_dt <- data.table(c = c("a","b","c","d"),
-                       e = c(1,2,3,4))
+                       e = c(1,2,3,4,5))
 
 left_tbl <- as_tibble(left_dt)
 right_tbl <- as_tibble(right_dt)
