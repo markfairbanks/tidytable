@@ -24,35 +24,36 @@
 #'
 #' test_df %>%
 #'   dt_relocate(is.numeric, .after = c)
+#'
+#' test_df %>%
+#'   dt_relocate(a, .after = is.character)
 dt_relocate <- function(.data, ..., .before = NULL, .after = NULL) {
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
-
   .before <- enexpr(.before)
   .after <- enexpr(.after)
 
   if  (!is.null(.before) && !is.null(.after))
     stop("Must supply only one of `.before` and `.after`")
 
-  to_move <- dots_selector_i(.data, ...)
+  if (is.null(.before) && is.null(.after))
+    stop("Must supply either `.before` or `.after` to move columns")
+
+  all_cols_i <- seq_along(names(.data))
+  selected_cols_i <- dots_selector_i(.data, ...)
 
   if (!is.null(.before)) {
-    where <- vec_selector_i(.data, !!.before)
-    to_move <- c(setdiff(to_move, where), where)
-  } else if (!is.null(.after)) {
-    where <- vec_selector_i(.data, !!.after)
-    to_move <- c(where, setdiff(to_move, where))
+
+    before_i <- vec_selector_i(.data, !!.before)
+    start_cols_i <- all_cols_i[all_cols_i < before_i]
+
   } else {
-    where <- 1L
-    to_move <- union(to_move, where)
+
+    after_i <- vec_selector_i(.data, !!.after)
+    start_cols_i <- all_cols_i[all_cols_i <= after_i]
+
   }
 
-  lhs <- setdiff(seq2(1, min(where) - 1), to_move)
-  rhs <- setdiff(seq2(max(where) + 1, ncol(.data)), to_move)
+  start_cols_i <- start_cols_i[start_cols_i %notin% selected_cols_i]
+  final_order_i <- unique(c(start_cols_i, selected_cols_i, all_cols_i))
 
-  select_index <- unique(c(lhs, to_move, rhs))
-
-  select_vars <- names(.data)[select_index]
-
-  .data[, ..select_vars]
+  .data[, ..final_order_i]
 }
