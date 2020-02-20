@@ -20,11 +20,11 @@ test_that("can add multiple columns", {
 test_that("can use by", {
   df <- data.table(x = 1:5, y = c(rep("a", 4), "b"))
 
-  tidyfast_df <- copy(df) %>%
+  tidytable_df <- df %>%
     dt_mutate(z = mean(x), by = y)
 
   datatable_df <- copy(df)[, ':='(z = mean(x)), by = y]
 
-  expect_equal(tidyfast_df, datatable_df)
+  expect_equal(tidytable_df, datatable_df)
 
 })
