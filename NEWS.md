@@ -1,3 +1,7 @@
+# tidytable 0.3.2 (in development)
+
+* `dt_pivot_longer()` "cols" arg now defaults to `dt_everything()` instead of `NULL`. The result is the same, but is more consistent with other enhanced selection functions
+
 # tidytable 0.3.1
 
 * Updated `dt()` docs per CRAN instructions
