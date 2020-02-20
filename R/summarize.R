@@ -16,12 +16,14 @@
 #'   c = c("a","a","b"),
 #'   d = c("a","a","b"))
 #'
-#' dt_summarize(avg_a = mean(a),
-#'              max_b = max(b),
-#'              by = c)
+#' example_dt %>%
+#'   dt_summarize(avg_a = mean(a),
+#'                max_b = max(b),
+#'                by = c)
 #'
-#' dt_summarize(avg_a = mean(a),
-#'              by = list(c, d))
+#' example_dt %>%
+#'   dt_summarize(avg_a = mean(a),
+#'                by = list(c, d))
 dt_summarize <- function(.data, ..., by = NULL) {
   if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
   if (!is.data.table(.data)) .data <- as.data.table(.data)

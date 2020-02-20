@@ -26,10 +26,12 @@ example_dt <- data.table::data.table(
   c = c("a","a","b"),
   d = c("a","a","b"))
 
-dt_summarize(avg_a = mean(a),
-             max_b = max(b),
-             by = c)
+example_dt \%>\%
+  dt_summarize(avg_a = mean(a),
+               max_b = max(b),
+               by = c)
 
-dt_summarize(avg_a = mean(a),
-             by = list(c, d))
+example_dt \%>\%
+  dt_summarize(avg_a = mean(a),
+               by = list(c, d))
 }

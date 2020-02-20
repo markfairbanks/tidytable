@@ -24,17 +24,17 @@ example_dt <- data.table::data.table(
   z = c("a","a","b"))
 
 example_dt \%>\%
-  select(x, y)
+  dt_select(x, y)
 
 example_dt \%>\%
-  select(x:z)
+  dt_select(x:z)
 
 example_dt \%>\%
-  select(-y, -z)
+  dt_select(-y, -z)
 
 example_dt \%>\%
-  select(dt_starts_with("x"), z)
+  dt_select(dt_starts_with("x"), z)
 
 example_dt \%>\%
-  select(is.character, x)
+  dt_select(is.character, x)
 }

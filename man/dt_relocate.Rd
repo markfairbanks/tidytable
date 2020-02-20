@@ -9,7 +9,7 @@ dt_relocate(.data, ..., .before = NULL, .after = NULL)
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{...}{A selection of columns}
+\item{...}{A selection of columns to move}
 
 \item{.before}{Column to move selection before}
 

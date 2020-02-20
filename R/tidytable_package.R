@@ -8,4 +8,5 @@
 #' @importFrom utils head tail
 NULL
 
-globalVariables(c("data", ".","..select_vars", ".count", "na_index", ".new_col", "..all_names"))
+globalVariables(c("data", ".","..select_vars", ".count", "na_index", ".new_col",
+                  "..all_names", "..final_order_i"))
