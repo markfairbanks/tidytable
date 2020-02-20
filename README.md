@@ -7,7 +7,7 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/devel%20version-0.3.1-blue.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/devel%20version-0.3.2-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
@@ -120,21 +120,18 @@ The code chunk below shows the `tidytable` syntax:
 library(data.table)
 library(tidytable)
 
-example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
+example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a","a","b"))
 
 example_dt %>%
   dt_select(x, y, z) %>%
   dt_filter(x < 4, y > 1) %>%
   dt_arrange(x, y) %>%
   dt_mutate(double_x = x * 2,
-            double_y = y * 2) %>%
-  dt_mutate_across(is.character, as.factor) %>%
-  dt_rename(new_x = x,
-            new_y = y)
-#>    new_x new_y z double_x double_y
-#> 1:     1     4 a        2        8
-#> 2:     2     5 a        4       10
-#> 3:     3     6 b        6       12
+            double_y = y * 2)
+#>    x y z double_x double_y
+#> 1: 1 4 a        2        8
+#> 2: 2 5 a        4       10
+#> 3: 3 6 b        6       12
 ```
 
 #### Using “group by”
@@ -345,19 +342,20 @@ A few notes:
 
 ``` r
 all_marks
-#> # A tibble: 12 x 5
+#> # A tibble: 13 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         322.3ms   49.3ms    41.2ms     15.3%                 
-#>  2 case_when       434ms     147ms     129ms      33.9%                 
-#>  3 fill            1030ms    596.61ms  548.41ms   57.9%                 
-#>  4 filter          229ms     199ms     214ms      86.9%                 
-#>  5 inner_join      65.6ms    82.4ms    74.7ms     125.6%                
-#>  6 left_join       74.9ms    109ms     107.1ms    145.5%                
-#>  7 mutate          55.2ms    45.8ms    45.8ms     83.0%                 
-#>  8 nest            7.07ms    3.65ms    2.81ms     51.6%                 
-#>  9 pivot_longer    87.2ms    20.7ms    12.9ms     23.7%                 
-#> 10 pivot_wider     715ms     271ms     273ms      37.9%                 
-#> 11 summarize       488ms     258ms     253ms      52.9%                 
-#> 12 unnest          170.9ms   9.76ms    6.62ms     5.7%
+#>  1 arrange         361.2ms   47.6ms    42.3ms     13.2%                 
+#>  2 case_when       392ms     131ms     118ms      33.4%                 
+#>  3 distinct        820ms     429ms     412ms      52.3%                 
+#>  4 fill            1030ms    582.17ms  523.92ms   56.5%                 
+#>  5 filter          224ms     197ms     194ms      87.9%                 
+#>  6 inner_join      59.9ms    78ms      69.9ms     130.2%                
+#>  7 left_join       57.5ms    69.7ms    49.5ms     121.2%                
+#>  8 mutate          56.4ms    47.6ms    46.5ms     84.4%                 
+#>  9 nest            7.35ms    3.92ms    2.42ms     53.3%                 
+#> 10 pivot_longer    83.1ms    20.4ms    12.5ms     24.5%                 
+#> 11 pivot_wider     721ms     266ms     266ms      36.9%                 
+#> 12 summarize       489ms     262ms     255ms      53.6%                 
+#> 13 unnest          149.21ms  10.57ms   6.67ms     7.1%
 ```

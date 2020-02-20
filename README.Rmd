@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/devel%20version-0.3.1-blue.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/devel%20version-0.3.2-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
@@ -108,17 +108,14 @@ The code chunk below shows the `tidytable` syntax:
 library(data.table)
 library(tidytable)
 
-example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
+example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a","a","b"))
 
 example_dt %>%
   dt_select(x, y, z) %>%
   dt_filter(x < 4, y > 1) %>%
   dt_arrange(x, y) %>%
   dt_mutate(double_x = x * 2,
-            double_y = y * 2) %>%
-  dt_mutate_across(is.character, as.factor) %>%
-  dt_rename(new_x = x,
-            new_y = y)
+            double_y = y * 2)
 ```
 
 #### Using "group by"
@@ -333,6 +330,22 @@ summarize_marks <- summarize_marks %>%
   mutate_all(~as.character(.x) %>% str_trim())
 ```
 
+```{r distinct, echo=FALSE}
+distinct_marks <- bench::mark(
+  tidyverse = distinct(test_tbl),
+  tidytable = dt_distinct(test_dt),
+  data.table = unique(test_dt),
+  check = FALSE,
+  iterations = iters)
+
+inv_gc(); inv_gc();
+
+distinct_marks <- distinct_marks %>%
+  mutate(function_tested = "distinct") %>%
+  select(function_tested, expression, median, mem_alloc) %>%
+  mutate_all(~as.character(.x) %>% str_trim())
+```
+
 ```{r arrange, echo=FALSE}
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
@@ -471,7 +484,7 @@ left_dt <- data.table(a = sample(1:20, data_size, TRUE),
                       d = sample(c("a","a","b","c","d"), data_size, TRUE))
 
 right_dt <- data.table(c = c("a","b","c","d"),
-                       e = c(1,2,3,4,5))
+                       e = c(1,2,3,4))
 
 left_tbl <- as_tibble(left_dt)
 right_tbl <- as_tibble(right_dt)
