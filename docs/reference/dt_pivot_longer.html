@@ -80,7 +80,7 @@ Supports enhanced selection" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@ decreasing the number of rows. The inverse transformation is
 
     <pre class="usage"><span class='fu'>dt_pivot_longer</span>(
   <span class='no'>.data</span>,
-  <span class='kw'>cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fu'><a href='dt_starts_with.html'>dt_everything</a></span>(),
   <span class='kw'>names_to</span> <span class='kw'>=</span> <span class='st'>"name"</span>,
   <span class='kw'>values_to</span> <span class='kw'>=</span> <span class='st'>"value"</span>,
   <span class='kw'>values_drop_na</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
@@ -149,7 +149,7 @@ decreasing the number of rows. The inverse transformation is
     </tr>
     <tr>
       <th>cols</th>
-      <td><p>Column selection. If empty, uses all columns. Can use -colname to unselect column(s)</p></td>
+      <td><p>Vector of bare column names. Can add/drop columns.</p></td>
     </tr>
     <tr>
       <th>names_to</th>
