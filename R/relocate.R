@@ -6,7 +6,7 @@
 #' Supports enhanced selection
 #'
 #' @param .data A data.frame or data.table
-#' @param ... A selection of columns
+#' @param ... A selection of columns to move
 #' @param .before Column to move selection before
 #' @param .after Column to move selection after
 #'
@@ -21,6 +21,9 @@
 #'
 #' test_df %>%
 #'   dt_relocate(c, .before = b)
+#'
+#' test_df %>%
+#'   dt_relocate(a, b, .after = c)
 #'
 #' test_df %>%
 #'   dt_relocate(is.numeric, .after = c)

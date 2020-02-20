@@ -31,6 +31,9 @@ test_df \%>\%
   dt_relocate(c, .before = b)
 
 test_df \%>\%
+  dt_relocate(a, b, .after = c)
+
+test_df \%>\%
   dt_relocate(is.numeric, .after = c)
 
 test_df \%>\%
