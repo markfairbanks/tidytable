@@ -330,22 +330,6 @@ summarize_marks <- summarize_marks %>%
   mutate_all(~as.character(.x) %>% str_trim())
 ```
 
-```{r distinct, echo=FALSE}
-distinct_marks <- bench::mark(
-  tidyverse = distinct(test_tbl),
-  tidytable = dt_distinct(test_dt),
-  data.table = unique(test_dt),
-  check = FALSE,
-  iterations = iters)
-
-inv_gc(); inv_gc();
-
-distinct_marks <- distinct_marks %>%
-  mutate(function_tested = "distinct") %>%
-  select(function_tested, expression, median, mem_alloc) %>%
-  mutate_all(~as.character(.x) %>% str_trim())
-```
-
 ```{r arrange, echo=FALSE}
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
@@ -366,6 +350,22 @@ arrange_marks <- bench::mark(
 
 arrange_marks <- arrange_marks %>%
   mutate(function_tested = "arrange") %>%
+  select(function_tested, expression, median, mem_alloc) %>%
+  mutate_all(~as.character(.x) %>% str_trim())
+```
+
+```{r distinct, echo=FALSE}
+distinct_marks <- bench::mark(
+  tidyverse = distinct(test_tbl),
+  tidytable = dt_distinct(test_dt),
+  data.table = unique(test_dt),
+  check = FALSE,
+  iterations = iters)
+
+inv_gc(); inv_gc();
+
+distinct_marks <- distinct_marks %>%
+  mutate(function_tested = "distinct") %>%
   select(function_tested, expression, median, mem_alloc) %>%
   mutate_all(~as.character(.x) %>% str_trim())
 ```
@@ -401,7 +401,7 @@ fill_marks <- fill_marks %>%
 ```{r case, echo=FALSE}
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-case_dt <- data.table(x = rnorm(4000000)) %>%
+case_dt <- data.table(x = rnorm(3000000)) %>%
   dt_mutate(median_x = median(x))
 
 case_tbl <- as_tibble(case_dt)
