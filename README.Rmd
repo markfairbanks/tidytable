@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/devel%20version-0.3.2-green.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/dev%20-0.3.2-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
@@ -373,7 +373,7 @@ arrange_marks <- arrange_marks %>%
 ```{r fill, echo = FALSE}
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-x <- 1:2e7
+x <- 1:2e6
 fill_dt <- data.table(
   x = x,
   y = shift(x, 10L),
