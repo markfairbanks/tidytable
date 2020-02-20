@@ -9,7 +9,7 @@
 #' Supports enhanced selection
 #'
 #' @param .data The data table to pivot longer
-#' @param cols Column selection. If empty, uses all columns. Can use -colname to unselect column(s)
+#' @param cols Vector of bare column names. Can add/drop columns.
 #' @param names_to Name of the new "names" column. Must be a string.
 #' @param values_to Name of the new "values" column. Must be a string.
 #' @param values_drop_na If TRUE, rows will be dropped that contain NAs.
@@ -34,7 +34,7 @@
 #'
 #' @export
 dt_pivot_longer <- function(.data,
-                            cols = NULL,
+                            cols = dt_everything(),
                             names_to = "name",
                             values_to = "value",
                             values_drop_na = FALSE,
@@ -46,13 +46,8 @@ dt_pivot_longer <- function(.data,
   names <- colnames(.data)
   cols <- enexpr(cols)
 
-  if (is.null(cols)) {
-    # All columns if cols = NULL
-    cols <- names
-  } else {
-    cols <- vec_selector(.data, !!cols) %>%
-      as.character()
-  }
+  cols <- vec_selector(.data, !!cols) %>%
+    as.character()
 
   if (length(cols) == 0) warning("No columns remaining after removing")
 

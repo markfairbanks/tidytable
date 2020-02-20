@@ -6,7 +6,7 @@
 \usage{
 dt_pivot_longer(
   .data,
-  cols = NULL,
+  cols = dt_everything(),
   names_to = "name",
   values_to = "value",
   values_drop_na = FALSE,
@@ -16,7 +16,7 @@ dt_pivot_longer(
 \arguments{
 \item{.data}{The data table to pivot longer}
 
-\item{cols}{Column selection. If empty, uses all columns. Can use -colname to unselect column(s)}
+\item{cols}{Vector of bare column names. Can add/drop columns.}
 
 \item{names_to}{Name of the new "names" column. Must be a string.}
 
