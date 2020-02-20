@@ -4,10 +4,10 @@
 \alias{inv_gc}
 \title{Run invisible garbage collection}
 \usage{
-inv_gc(.data = NULL)
+inv_gc(.data)
 }
 \arguments{
-\item{.data}{Optional. If null runs `gc()` silently. Else returns the same object unaltered.}
+\item{.data}{Optional. If missing runs `gc()` silently. Else returns the same object unaltered.}
 }
 \description{
 Run garbage collection without the `gc()` output. Can also be run in the middle of a long pipe chain. Useful for large datasets.

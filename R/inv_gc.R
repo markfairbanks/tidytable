@@ -3,7 +3,7 @@
 #' @description
 #' Run garbage collection without the `gc()` output. Can also be run in the middle of a long pipe chain. Useful for large datasets.
 #'
-#' @param .data Optional. If null runs `gc()` silently. Else returns the same object unaltered.
+#' @param .data Optional. If missing runs `gc()` silently. Else returns the same object unaltered.
 #' @export
 #'
 #' @examples
@@ -14,7 +14,7 @@
 #' df %>%
 #'   inv_gc() %>%
 #'   dt_select(col1, col2)
-inv_gc <- function(.data = NULL) {
+inv_gc <- function(.data) {
   if(missing(.data)) {
     invisible(gc())
   } else {
