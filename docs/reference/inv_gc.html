@@ -125,14 +125,14 @@
     <p>Run garbage collection without the `gc()` output. Can also be run in the middle of a long pipe chain. Useful for large datasets.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>inv_gc</span>(<span class='kw'>.data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>inv_gc</span>(<span class='no'>.data</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.data</th>
-      <td><p>Optional. If null runs `gc()` silently. Else returns the same object unaltered.</p></td>
+      <td><p>Optional. If missing runs `gc()` silently. Else returns the same object unaltered.</p></td>
     </tr>
     </table>
 
@@ -144,7 +144,7 @@
 
 <span class='no'>df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>inv_gc</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='dt_mutate.html'>dt_select</a></span>(<span class='no'>col1</span>, <span class='no'>col2</span>)</div><div class='output co'>#&gt;    col1 col2
+  <span class='fu'><a href='dt_select.html'>dt_select</a></span>(<span class='no'>col1</span>, <span class='no'>col2</span>)</div><div class='output co'>#&gt;    col1 col2
 #&gt; 1:    1    2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

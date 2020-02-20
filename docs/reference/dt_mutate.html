@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><code>dplyr</code> verbs for data.table — dt_mutate • tidytable</title>
+<title>Mutate — dt_mutate • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,16 +42,8 @@
 
 
 
-<meta property="og:title" content="<code>dplyr</code> verbs for data.table — dt_mutate" />
-<meta property="og:description" content="The core dplyr verbs can be used:
-dt_mutate()
-dt_select()
-dt_arrange()
-dt_filter()
-dt_summarize()
-
-
-dt_select() supports enhanced selection" />
+<meta property="og:title" content="Mutate — dt_mutate" />
+<meta property="og:description" content="Add new columns or modify existing ones" />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -124,34 +116,16 @@ dt_select() supports enhanced selection" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code>dplyr</code> verbs for data.table</h1>
-    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/dplyr_verbs.R'><code>R/dplyr_verbs.R</code></a></small>
+    <h1>Mutate</h1>
+    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/mutate.R'><code>R/mutate.R</code></a></small>
     <div class="hidden name"><code>dt_mutate.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The core dplyr verbs can be used:</p><ul>
-<li><p><code>dt_mutate()</code></p></li>
-<li><p><code>dt_select()</code></p></li>
-<li><p><code>dt_arrange()</code></p></li>
-<li><p><code>dt_filter()</code></p></li>
-<li><p><code>dt_summarize()</code></p></li>
-</ul>
-
-<p><code>dt_select()</code> supports enhanced selection</p>
+    <p>Add new columns or modify existing ones</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dt_mutate</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>dt_filter</span>(<span class='no'>.data</span>, <span class='no'>...</span>)
-
-<span class='fu'>dt_arrange</span>(<span class='no'>.data</span>, <span class='no'>...</span>)
-
-<span class='fu'>dt_summarize</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>dt_summarise</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>dt_select</span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>dt_mutate</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,11 +136,11 @@ dt_select() supports enhanced selection" />
     </tr>
     <tr>
       <th>...</th>
-      <td><p>dots passed to underlying functions (see examples)</p></td>
+      <td><p>Columns to add/modify</p></td>
     </tr>
     <tr>
       <th>by</th>
-      <td><p><code><a href='https://rdrr.io/r/base/list.html'>list()</a></code> of bare column names to group by</p></td>
+      <td><p>Optional: <code><a href='https://rdrr.io/r/base/list.html'>list()</a></code> of bare column names to group by</p></td>
     </tr>
     </table>
 
@@ -175,19 +149,21 @@ dt_select() supports enhanced selection" />
     <pre class="examples"><div class='input'><span class='no'>example_dt</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>data.table</span><span class='kw ns'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
   <span class='kw'>a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>),
   <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>),
-  <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>),
-  <span class='kw'>d</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
+  <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
 
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_select</span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='no'>d</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>dt_mutate</span>(<span class='kw'>double_a</span> <span class='kw'>=</span> <span class='no'>a</span> * <span class='fl'>2</span>,
-            <span class='kw'>double_b</span> <span class='kw'>=</span> <span class='no'>b</span> * <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_filter</span>(<span class='no'>double_a</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>, <span class='no'>double_b</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_arrange</span>(-<span class='no'>double_a</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_summarize</span>(<span class='kw'>avg_a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>a</span>),
-               <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>c</span>, <span class='no'>d</span>))</div><div class='output co'>#&gt;    c d avg_a
-#&gt; 1: b b   3.0
-#&gt; 2: a a   1.5</div></pre>
+            <span class='kw'>a_plus_b</span> <span class='kw'>=</span> <span class='no'>a</span> + <span class='no'>b</span>)</div><div class='output co'>#&gt;    a b c double_a a_plus_b
+#&gt; 1: 1 4 a        2        5
+#&gt; 2: 2 5 a        4        7
+#&gt; 3: 3 6 b        6        9</div><div class='input'>
+<span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>dt_mutate</span>(<span class='kw'>double_a</span> <span class='kw'>=</span> <span class='no'>a</span> * <span class='fl'>2</span>,
+            <span class='kw'>avg_a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>a</span>),
+            <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>c</span>)</div><div class='output co'>#&gt;    a b c double_a avg_a
+#&gt; 1: 1 4 a        2   1.5
+#&gt; 2: 2 5 a        4   1.5
+#&gt; 3: 3 6 b        6   3.0</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
