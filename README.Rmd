@@ -260,7 +260,7 @@ A few notes:
 * The main metric of interest is the time comparison of a tidyverse function vs. its equivalent tidytable function.
   + Comparing times from separate functions won't be very useful. For example - the `summarize()` tests were performed on a different dataset from `case_when()`.
 * `setDTthreads(1)` was used to ensure a fair comparison to the `tidyverse`.
-* `copy(dt)` was used when adding columns in `data.table` to ensure a fair comparison to `dplyr::mutate()`.
+* Modify-by-reference was used in `data.table` when being compared to `dt_mutate()` & `dplyr::mutate()`
 * `dt_fill()` & `tidyr::fill()` both work with character/factor/logical columns, whereas `data.table::nafill()` does not. Testing only included numeric columns due to this constraint.
 * Currently `data.table` doesn't have its own `case_when()` translation, so a multiple nested `fifelse()` was used.
 * All tests can be found in the source code of the README.
@@ -280,22 +280,6 @@ test_dt <- data.table(a = sample(1:20, data_size, TRUE),
                       d = sample(c("a","a","b","c","d"), data_size, TRUE))
 
 test_tbl <- as_tibble(test_dt)
-```
-
-```{r mutate, echo=FALSE}
-mutate_marks <- bench::mark(
-  tidyverse = mutate(test_tbl, double_a = a * 2, a_plus_b = a + b),
-  tidytable = dt_mutate(test_dt, double_a = a * 2, a_plus_b = a + b),
-  data.table = tidytable:::shallow(test_dt)[, double_a := a * 2][, a_plus_b := a + b],
-  check = FALSE,
-  iterations = iters)
-
-inv_gc(); inv_gc();
-
-mutate_marks <- mutate_marks %>%
-  mutate(function_tested = "mutate") %>%
-  select(function_tested, expression, median, mem_alloc) %>%
-  mutate_all(~as.character(.x) %>% str_trim())
 ```
 
 ```{r filter, echo=FALSE}
@@ -326,6 +310,24 @@ inv_gc(); inv_gc();
 
 summarize_marks <- summarize_marks %>%
   mutate(function_tested = "summarize") %>%
+  select(function_tested, expression, median, mem_alloc) %>%
+  mutate_all(~as.character(.x) %>% str_trim())
+```
+
+```{r mutate, echo=FALSE}
+mut_dt <- copy(test_dt)
+
+mutate_marks <- bench::mark(
+  tidyverse = mutate(test_tbl, double_a = a * 2, a_plus_b = a + b),
+  tidytable = dt_mutate(test_dt, double_a = a * 2, a_plus_b = a + b),
+  data.table = mut_dt[, ':='(double_a = a * 2, a_b = a + b)][],
+  check = FALSE,
+  iterations = iters)
+
+inv_gc(); inv_gc();
+
+mutate_marks <- mutate_marks %>%
+  mutate(function_tested = "mutate") %>%
   select(function_tested, expression, median, mem_alloc) %>%
   mutate_all(~as.character(.x) %>% str_trim())
 ```

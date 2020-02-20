@@ -325,8 +325,8 @@ A few notes:
         different dataset from `case_when()`.
   - `setDTthreads(1)` was used to ensure a fair comparison to the
     `tidyverse`.
-  - `copy(dt)` was used when adding columns in `data.table` to ensure a
-    fair comparison to `dplyr::mutate()`.
+  - Modify-by-reference was used in `data.table` when being compared to
+    `dt_mutate()` & `dplyr::mutate()`
   - `dt_fill()` & `tidyr::fill()` both work with
     character/factor/logical columns, whereas `data.table::nafill()`
     does not. Testing only included numeric columns due to this
@@ -345,17 +345,17 @@ all_marks
 #> # A tibble: 13 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         348.4ms   47.2ms    42.6ms     13.5%                 
-#>  2 case_when       469ms     115ms     137ms      24.5%                 
-#>  3 distinct        82.1ms    36.3ms    40.3ms     44.2%                 
-#>  4 fill            118.8ms   84ms      55.1ms     70.7%                 
-#>  5 filter          230ms     198ms     193ms      86.1%                 
-#>  6 inner_join      51.7ms    62.9ms    71.9ms     121.7%                
-#>  7 left_join       59.6ms    59.8ms    48.9ms     100.3%                
-#>  8 mutate          55.5ms    45.9ms    45.7ms     82.7%                 
-#>  9 nest            7.54ms    4.05ms    2.58ms     53.7%                 
-#> 10 pivot_longer    189.2ms   21.7ms    22.5ms     11.5%                 
-#> 11 pivot_wider     776ms     308ms     263ms      39.7%                 
-#> 12 summarize       438ms     259ms     255ms      59.1%                 
-#> 13 unnest          161ms     10.74ms   7.52ms     6.7%
+#>  1 arrange         308.8ms   49.6ms    49.2ms     16.1%                 
+#>  2 case_when       512ms     133ms     134ms      26.0%                 
+#>  3 distinct        79.6ms    37.9ms    35.8ms     47.6%                 
+#>  4 fill            104.4ms   61.4ms    47.8ms     58.8%                 
+#>  5 filter          240ms     212ms     210ms      88.3%                 
+#>  6 inner_join      59.1ms    76.2ms    66.5ms     128.9%                
+#>  7 left_join       60.7ms    65.1ms    53.7ms     107.2%                
+#>  8 mutate          58.9ms    56.4ms    88.9ms     95.8%                 
+#>  9 nest            7.51ms    3.99ms    2.59ms     53.1%                 
+#> 10 pivot_longer    168.4ms   35.6ms    12.3ms     21.1%                 
+#> 11 pivot_wider     717ms     276ms     257ms      38.5%                 
+#> 12 summarize       453ms     262ms     260ms      57.8%                 
+#> 13 unnest          152.75ms  11.03ms   7.21ms     7.2%
 ```
