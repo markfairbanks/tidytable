@@ -25,8 +25,11 @@
 #'             avg_a = mean(a),
 #'             by = c)
 dt_mutate <- function(.data, ..., by = NULL) {
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+  UseMethod("dt_mutate", .data)
+}
+
+#' @export
+dt_mutate.data.table <- function(.data, ..., by = NULL) {
 
   dots <- enexprs(...)
   by <- enexpr(by)
@@ -48,4 +51,18 @@ dt_mutate <- function(.data, ..., by = NULL) {
     ))
   }
   .data
+}
+
+#' @export
+#' @rdname dt_mutate
+dt_mutate.data.frame <- function(.data, ..., by = NULL) {
+  .data <- as.data.table(.data)
+
+  dt_mutate(.data, ..., by = NULL)
+}
+
+#' @export
+#' @rdname dt_mutate
+dt_mutate.default <- function(.data, ..., by = NULL) {
+  abort(".data must be a data.frame or data.table")
 }
