@@ -35,7 +35,4 @@ test_df \%>\%
 
 test_df \%>\%
   dt_relocate(is.numeric, .after = c)
-
-test_df \%>\%
-  dt_relocate(a, .after = is.character)
 }

@@ -27,9 +27,6 @@
 #'
 #' test_df %>%
 #'   dt_relocate(is.numeric, .after = c)
-#'
-#' test_df %>%
-#'   dt_relocate(a, .after = is.character)
 dt_relocate <- function(.data, ..., .before = NULL, .after = NULL) {
   .before <- enexpr(.before)
   .after <- enexpr(.after)
