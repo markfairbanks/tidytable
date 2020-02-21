@@ -45,7 +45,7 @@ dt_mutate.data.table <- function(.data, ..., by = NULL) {
       ))
     }
   } else {
-    # Faster with "by", since you aren't looping the "by" call multiple times for each column added
+    # Faster with "by", since the "by" call isn't looped multiple times for each column added
     eval_tidy(expr(
       .data[, ':='(!!!dots), by = !!by][]
     ))
@@ -57,8 +57,9 @@ dt_mutate.data.table <- function(.data, ..., by = NULL) {
 #' @rdname dt_mutate
 dt_mutate.data.frame <- function(.data, ..., by = NULL) {
   .data <- as.data.table(.data)
+  by <- enexpr(by)
 
-  dt_mutate(.data, ..., by = NULL)
+  dt_mutate(.data, ..., by = !!by)
 }
 
 #' @export
