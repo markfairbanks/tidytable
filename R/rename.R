@@ -16,9 +16,11 @@
 #'   dt_rename(new_x = x,
 #'             new_y = y)
 dt_rename <- function(.data, ...) {
+  UseMethod("dt_rename")
+}
 
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+#' @export
+dt_rename.data.table <- function(.data, ...) {
 
   dots <- enexprs(...)
   .data <- shallow(.data)
@@ -29,4 +31,11 @@ dt_rename <- function(.data, ...) {
   setnames(.data, old_names, new_names)
 
   .data
+}
+
+#' @export
+dt_rename.data.frame <- function(.data, ...) {
+  .data <- as.data.table(.data)
+
+  dt_rename(.data, ...)
 }

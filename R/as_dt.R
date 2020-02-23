@@ -13,6 +13,11 @@
 #'   as_dt() %>%
 #'   dt_mutate(double_x = x * 2)
 as_dt <- function(.data) {
+  UseMethod("as_dt")
+}
+
+#' @export
+as_dt.default <- function(.data) {
   if (is.data.table(.data)) {
     shallow(.data)
   } else {

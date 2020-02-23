@@ -26,8 +26,11 @@
 #' test_df %>%
 #'   dt_group_nest(is.character)
 dt_group_nest <- function(.data, ..., .key = "data") {
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+  UseMethod("dt_group_nest")
+}
+
+#' @export
+dt_group_nest.data.table <- function(.data, ..., .key = "data") {
 
   dots <- enexprs(...)
 
@@ -47,3 +50,9 @@ dt_group_nest <- function(.data, ..., .key = "data") {
   .data
 }
 
+#' @export
+dt_group_nest.data.frame <- function(.data, ..., .key = "data") {
+  .data <- as.data.table(.data)
+
+  dt_group_nest(.data, ..., .key)
+}

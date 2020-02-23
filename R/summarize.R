@@ -25,8 +25,11 @@
 #'   dt_summarize(avg_a = mean(a),
 #'                by = list(c, d))
 dt_summarize <- function(.data, ..., by = NULL) {
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+  UseMethod("dt_summarize")
+}
+
+#' @export
+dt_summarize.data.table <- function(.data, ..., by = NULL) {
 
   dots <- enexprs(...)
   by <- enexpr(by)
@@ -34,6 +37,14 @@ dt_summarize <- function(.data, ..., by = NULL) {
   eval_tidy(expr(
     .data[, list(!!!dots), !!by]
   ))
+}
+
+#' @export
+dt_summarize.data.frame <- function(.data, ..., by = NULL) {
+  .data <- as.data.table(.data)
+  by <- enexpr(by)
+
+  dt_summarize(.data, ..., by = !!by)
 }
 
 #' @export

@@ -29,9 +29,6 @@ dt_slice_min(.data, order_by, n = 1, by = NULL)
 
 \item{order_by}{Variable to arrange by}
 }
-\value{
-data.table
-}
 \description{
 Choose rows by their ordinal position in a data.table. Grouped data.tables use the ordinal position within the group.
 }

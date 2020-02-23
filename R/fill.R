@@ -22,9 +22,11 @@
 #' test_df %>%
 #'   dt_fill(x, y, by = z, .direction = "downup")
 dt_fill <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+  UseMethod("dt_fill")
+}
 
+#' @export
+dt_fill.data.table <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
   by <- enexpr(by)
 
   if (length(.direction) > 1) .direction <- "down"
@@ -42,6 +44,15 @@ dt_fill <- function(.data, ..., .direction = c("down", "up", "downup", "updown")
       fillup(..., by = !!by) %>%
       filldown(..., by = !!by)
   }
+}
+
+#' @export
+dt_fill.data.frame <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
+  .data <- as.data.table(.data)
+  by <- enexpr(by)
+
+  dt_fill(.data, ..., .direction = .direction, by = !!by)
+
 }
 
 filldown <- function(.data, ..., by = NULL) {

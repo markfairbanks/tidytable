@@ -2,15 +2,9 @@
 % Please edit documentation in R/mutate.R
 \name{dt_mutate}
 \alias{dt_mutate}
-\alias{dt_mutate.data.frame}
-\alias{dt_mutate.default}
 \title{Mutate}
 \usage{
 dt_mutate(.data, ..., by = NULL)
-
-\method{dt_mutate}{data.frame}(.data, ..., by = NULL)
-
-\method{dt_mutate}{default}(.data, ..., by = NULL)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}

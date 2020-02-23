@@ -17,8 +17,11 @@
 #' test_df %>%
 #'   dt_group_split(c, d)
 dt_group_split <- function(.data, ...) {
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+  UseMethod("dt_group_split")
+}
+
+#' @export
+dt_group_split.data.table <- function(.data, ...) {
 
   dots <- enexprs(...)
 
@@ -30,4 +33,11 @@ dt_group_split <- function(.data, ...) {
 
     unname(split(.data, by = dots))
   }
+}
+
+#' @export
+dt_group_split.data.frame <- function(.data, ...) {
+  .data <- as.data.table(.data)
+
+  dt_group_split(.data, ...)
 }

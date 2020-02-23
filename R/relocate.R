@@ -28,6 +28,11 @@
 #' test_df %>%
 #'   dt_relocate(is.numeric, .after = c)
 dt_relocate <- function(.data, ..., .before = NULL, .after = NULL) {
+  UseMethod("dt_relocate")
+}
+
+#' @export
+dt_relocate.data.table <- function(.data, ..., .before = NULL, .after = NULL) {
   .before <- enexpr(.before)
   .after <- enexpr(.after)
 
@@ -56,4 +61,13 @@ dt_relocate <- function(.data, ..., .before = NULL, .after = NULL) {
   final_order_i <- unique(c(start_cols_i, selected_cols_i, all_cols_i))
 
   .data[, ..final_order_i]
+}
+
+#' @export
+dt_relocate.data.frame <- function(.data, ..., .before = NULL, .after = NULL) {
+  .data <- as.data.table(.data)
+  .before <- enexpr(.before)
+  .after <- enexpr(.after)
+
+  dt_relocate(.data, ..., .before = !!.before, .after = !!.after)
 }

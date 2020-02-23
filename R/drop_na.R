@@ -24,9 +24,11 @@
 #' df %>%
 #'   dt_drop_na(is.numeric)
 dt_drop_na <- function(.data, ...) {
+  UseMethod("dt_drop_na")
+}
 
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+#' @export
+dt_drop_na.data.table <- function(.data, ...) {
 
   dots <- enexprs(...)
 
@@ -42,4 +44,11 @@ dt_drop_na <- function(.data, ...) {
     }
     .data
   }
+}
+
+#' @export
+dt_drop_na.data.frame <- function(.data, ...) {
+  .data <- as.data.table(.data)
+
+  dt_drop_na(.data, ...)
 }

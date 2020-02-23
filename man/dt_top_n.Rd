@@ -15,9 +15,6 @@ dt_top_n(.data, n = 5, wt = NULL, by = NULL)
 
 \item{by}{\code{list()} of bare column names to group by}
 }
-\value{
-A data.table
-}
 \description{
 This is a wrapper that uses \code{dt[order()]} to select the top or bottom entries in each group, ordered by \code{wt}.
 }

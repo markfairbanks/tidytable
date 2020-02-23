@@ -16,8 +16,11 @@
 #' example_dt %>%
 #'   dt_filter(a >= 2, b >= 4)
 dt_filter <- function(.data, ...) {
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+  UseMethod("dt_filter")
+}
+
+#' @export
+dt_filter.data.table <- function(.data, ...) {
 
   dots <- enexprs(...)
 
@@ -27,4 +30,11 @@ dt_filter <- function(.data, ...) {
     ))
   }
   .data
+}
+
+#' @export
+dt_filter.data.frame <- function(.data, ...) {
+  .data <- as.data.table(.data)
+
+  dt_filter(.data, ...)
 }

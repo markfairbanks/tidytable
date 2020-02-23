@@ -25,7 +25,7 @@
 #'             avg_a = mean(a),
 #'             by = c)
 dt_mutate <- function(.data, ..., by = NULL) {
-  UseMethod("dt_mutate", .data)
+  UseMethod("dt_mutate")
 }
 
 #' @export
@@ -54,16 +54,9 @@ dt_mutate.data.table <- function(.data, ..., by = NULL) {
 }
 
 #' @export
-#' @rdname dt_mutate
 dt_mutate.data.frame <- function(.data, ..., by = NULL) {
   .data <- as.data.table(.data)
   by <- enexpr(by)
 
   dt_mutate(.data, ..., by = !!by)
-}
-
-#' @export
-#' @rdname dt_mutate
-dt_mutate.default <- function(.data, ..., by = NULL) {
-  abort(".data must be a data.frame or data.table")
 }

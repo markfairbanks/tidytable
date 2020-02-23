@@ -26,8 +26,11 @@
 #' example_df %>%
 #'   dt_count(is.character)
 dt_count <- function(.data, ...) {
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+  UseMethod("dt_count")
+}
+
+#' @export
+dt_count.data.table <- function(.data, ...) {
 
   dots <- enexprs(...)
 
@@ -41,4 +44,11 @@ dt_count <- function(.data, ...) {
       .data[, .N, by = by_vec]
     ))
   }
+}
+
+#' @export
+dt_count.data.frame <- function(.data, ...) {
+  .data <- as.data.table(.data)
+
+  dt_count(.data, ...)
 }
