@@ -24,7 +24,4 @@ nested_df <- data.table::data.table(
 
 nested_df \%>\%
   dt_unnest_legacy(data)
-
-nested_df \%>\%
-  dt_unnest_legacy(data)
 }

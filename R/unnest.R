@@ -18,9 +18,6 @@
 #'
 #' nested_df %>%
 #'   dt_unnest_legacy(data)
-#'
-#' nested_df %>%
-#'   dt_unnest_legacy(data)
 dt_unnest_legacy <- function(.data, col = NULL) {
   UseMethod("dt_unnest_legacy")
 }
