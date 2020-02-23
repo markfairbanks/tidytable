@@ -138,7 +138,7 @@ Supports enhanced selection" />
     </tr>
     <tr>
       <th>...</th>
-      <td><p>A selection of columns</p></td>
+      <td><p>A selection of columns to move</p></td>
     </tr>
     <tr>
       <th>.before</th>
@@ -165,6 +165,13 @@ Supports enhanced selection" />
 #&gt; 3: 3 a 3 a
 #&gt; 4: 4 b 4 b
 #&gt; 5: 5 b 5 b</div><div class='input'>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>dt_relocate</span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='no'>c</span>)</div><div class='output co'>#&gt;    c a b d
+#&gt; 1: a 1 1 a
+#&gt; 2: a 2 2 a
+#&gt; 3: a 3 3 a
+#&gt; 4: b 4 4 b
+#&gt; 5: b 5 5 b</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>dt_relocate</span>(<span class='no'>is.numeric</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='no'>c</span>)</div><div class='output co'>#&gt;    c a b d
 #&gt; 1: a 1 1 a
