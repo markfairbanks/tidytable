@@ -139,9 +139,8 @@ example_dt %>%
 Group by calls are done from inside any function that has group by
 functionality (e.g. `dt_summarize()` & `dt_mutate()`)
 
-  - A single bare column can be passed with `by = z`
-  - Multiple columns can be passed with `by = list(y, z)` or `by = .(y,
-    z)`
+  - A single column can be passed with `by = z`
+  - Multiple columns can be passed with `by = list(y, z)`
 
 <!-- end list -->
 
@@ -345,17 +344,17 @@ all_marks
 #> # A tibble: 13 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         308.8ms   49.6ms    49.2ms     16.1%                 
-#>  2 case_when       512ms     133ms     134ms      26.0%                 
-#>  3 distinct        79.6ms    37.9ms    35.8ms     47.6%                 
-#>  4 fill            104.4ms   61.4ms    47.8ms     58.8%                 
-#>  5 filter          240ms     212ms     210ms      88.3%                 
-#>  6 inner_join      59.1ms    76.2ms    66.5ms     128.9%                
-#>  7 left_join       60.7ms    65.1ms    53.7ms     107.2%                
-#>  8 mutate          58.9ms    56.4ms    88.9ms     95.8%                 
-#>  9 nest            7.51ms    3.99ms    2.59ms     53.1%                 
-#> 10 pivot_longer    168.4ms   35.6ms    12.3ms     21.1%                 
-#> 11 pivot_wider     717ms     276ms     257ms      38.5%                 
-#> 12 summarize       453ms     262ms     260ms      57.8%                 
-#> 13 unnest          152.75ms  11.03ms   7.21ms     7.2%
+#>  1 arrange         360.3ms   48.5ms    49.8ms     13.5%                 
+#>  2 case_when       513ms     136ms     135ms      26.5%                 
+#>  3 distinct        85.9ms    40ms      40.2ms     46.6%                 
+#>  4 fill            103.9ms   65.5ms    48.3ms     63.0%                 
+#>  5 filter          247ms     218ms     224ms      88.3%                 
+#>  6 inner_join      61.1ms    77.3ms    74.5ms     126.5%                
+#>  7 left_join       66.4ms    59.5ms    51.7ms     89.6%                 
+#>  8 mutate          58.3ms    57.8ms    86.6ms     99.1%                 
+#>  9 nest            7.72ms    3.85ms    2.54ms     49.9%                 
+#> 10 pivot_longer    165.5ms   36.9ms    12.7ms     22.3%                 
+#> 11 pivot_wider     764ms     287ms     275ms      37.6%                 
+#> 12 summarize       475ms     266ms     261ms      56.0%                 
+#> 13 unnest          151.52ms  10.32ms   7.51ms     6.8%
 ```

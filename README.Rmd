@@ -122,8 +122,8 @@ example_dt %>%
 
 Group by calls are done from inside any function that has group by functionality (e.g. `dt_summarize()` & `dt_mutate()`) 
 
-* A single bare column can be passed with `by = z`
-* Multiple columns can be passed with `by = list(y, z)` or `by = .(y, z)`
+* A single column can be passed with `by = z`
+* Multiple columns can be passed with `by = list(y, z)`
 
 ```{r}
 example_dt %>%
