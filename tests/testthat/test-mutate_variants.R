@@ -71,8 +71,26 @@ test_that("mutate_all() works for all variables - bare function", {
   expect_equal(df$y, c("2","2","2"))
 })
 
+test_that("mutate_all() works with data.frame", {
+  df <- data.frame(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
+  df <- df %>%
+    dt_mutate_all(as.character)
+
+  expect_equal(df$x, c("1","1","1"))
+  expect_equal(df$y, c("2","2","2"))
+})
+
 test_that("mutate_across(): .cols works with is.numeric", {
   df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
+  df <- df %>%
+    dt_mutate_across(is.numeric, function(.x) .x + 1)
+
+  expect_equal(df$x_start, c(2,2,2))
+  expect_equal(df$end_x, c(3,3,3))
+})
+
+test_that("mutate_across(): .cols works with is.numeric with data.frame", {
+  df <- data.frame(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
     dt_mutate_across(is.numeric, function(.x) .x + 1)
 

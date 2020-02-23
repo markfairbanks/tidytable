@@ -1,8 +1,16 @@
 # tests from tidyr regarding pivot_longer
 
-
 test_that("can pivot all cols (unspecified) to long", {
   df <- data.table(x = 1:2, y = 3:4)
+  pivot_df <- dt_pivot_longer(df)[order(name, value)]
+
+  expect_named(pivot_df, c("name", "value"))
+  expect_equal(pivot_df$name, c("x","x","y","y"))
+  expect_equal(pivot_df$value, c(1,2,3,4))
+})
+
+test_that("can pivot all cols (unspecified) to long with data.frame", {
+  df <- data.frame(x = 1:2, y = 3:4)
   pivot_df <- dt_pivot_longer(df)[order(name, value)]
 
   expect_named(pivot_df, c("name", "value"))
