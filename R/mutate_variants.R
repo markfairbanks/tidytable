@@ -37,6 +37,11 @@
 #' example_dt %>%
 #'   dt_mutate_across(c(x, y), list(new = ~ .x * 2))
 dt_mutate_if <- function(.data, .predicate, .funs, ..., by = NULL) {
+  UseMethod("dt_mutate_if")
+}
+
+#' @export
+dt_mutate_if.default <- function(.data, .predicate, .funs, ..., by = NULL) {
   .predicate <- enexpr(.predicate)
   by <- enexpr(by)
 
@@ -46,6 +51,11 @@ dt_mutate_if <- function(.data, .predicate, .funs, ..., by = NULL) {
 #' @export
 #' @rdname dt_mutate_if
 dt_mutate_at <- function(.data, .vars, .funs, ..., by = NULL) {
+  UseMethod("dt_mutate_at")
+}
+
+#' @export
+dt_mutate_at.default <- function(.data, .vars, .funs, ..., by = NULL) {
   .vars <- enexpr(.vars)
   by <- enexpr(by)
 
@@ -55,9 +65,11 @@ dt_mutate_at <- function(.data, .vars, .funs, ..., by = NULL) {
 #' @export
 #' @rdname dt_mutate_if
 dt_mutate_across <- function(.data, .cols, .funs, ..., by = NULL) {
+  UseMethod("dt_mutate_across")
+}
 
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+#' @export
+dt_mutate_across.data.table <- function(.data, .cols, .funs, ..., by = NULL) {
 
   .cols <- enexpr(.cols)
   .cols <- vec_selector(.data, !!.cols) %>%
@@ -94,8 +106,22 @@ dt_mutate_across <- function(.data, .cols, .funs, ..., by = NULL) {
 }
 
 #' @export
+dt_mutate_across.data.frame <- function(.data, .cols, .funs, ..., by = NULL) {
+  .data <- as.data.table(.data)
+  .cols <- enexpr(.cols)
+  by <- enexpr(by)
+
+  dt_mutate_across(.data, !!.cols, .funs, ..., by = !!by)
+}
+
+#' @export
 #' @rdname dt_mutate_if
 dt_mutate_all <- function(.data, .funs, ..., by = NULL) {
+  UseMethod("dt_mutate_all")
+}
+
+#' @export
+dt_mutate_all.default <- function(.data, .funs, ..., by = NULL) {
 
   by <- enexpr(by)
 

@@ -39,9 +39,16 @@ dt_pivot_longer <- function(.data,
                             values_to = "value",
                             values_drop_na = FALSE,
                             ...) {
+  UseMethod("dt_pivot_longer")
+}
 
-  if (!is.data.frame(.data)) stop("dt_ must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+#' @export
+dt_pivot_longer.data.table <- function(.data,
+                                       cols = dt_everything(),
+                                       names_to = "name",
+                                       values_to = "value",
+                                       values_drop_na = FALSE,
+                                       ...) {
 
   names <- colnames(.data)
   cols <- enexpr(cols)
@@ -62,4 +69,20 @@ dt_pivot_longer <- function(.data,
        na.rm = values_drop_na,
        variable.factor = FALSE,
        value.factor = FALSE)
+}
+
+#' @export
+dt_pivot_longer.data.frame <- function(.data,
+                                       cols = dt_everything(),
+                                       names_to = "name",
+                                       values_to = "value",
+                                       values_drop_na = FALSE,
+                                       ...) {
+  .data <- as.data.table(.data)
+  cols <- enexpr(cols)
+
+  dt_pivot_longer(.data, !!cols,
+                  names_to = names_to, values_to = values_to,
+                  values_drop_na = values_drop_na,
+                  ...)
 }

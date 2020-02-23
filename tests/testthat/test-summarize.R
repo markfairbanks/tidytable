@@ -1,10 +1,34 @@
 test_that("can do group aggregation with by", {
   df <- data.table(x = 1:4, y = c("a","a","a","b"))
 
-  tidyfast_df <- df %>%
+  tidytable_df <- df %>%
     dt_summarize(avg_x = mean(x), by = y)
 
   datatable_df <- df[, list(avg_x = mean(x)), by = y]
 
-  expect_equal(tidyfast_df, datatable_df)
+  expect_equal(tidytable_df, datatable_df)
+})
+
+test_that("can do group aggregation with by w/ data.frame", {
+  df <- data.frame(x = 1:4, y = c("a","a","a","b"),
+                   stringsAsFactors = FALSE)
+
+  tidytable_df <- df %>%
+    dt_summarize(avg_x = mean(x), by = y)
+
+  datatable_df <- as.data.table(df)[, list(avg_x = mean(x)), by = y]
+
+  expect_equal(tidytable_df, datatable_df)
+})
+
+test_that("can do group aggregation without by with data.frame", {
+  df <- data.frame(x = 1:4, y = c("a","a","a","b"),
+                   stringsAsFactors = FALSE)
+
+  tidytable_df <- df %>%
+    dt_summarize(avg_x = mean(x))
+
+  datatable_df <- as.data.table(df)[, list(avg_x = mean(x))]
+
+  expect_equal(tidytable_df, datatable_df)
 })

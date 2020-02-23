@@ -7,6 +7,15 @@ test_that("empty dt_count() returns number of rows", {
   expect_equal(summary_df$N, nrow(test_df))
 })
 
+test_that("dt_count() works on data.frame", {
+  test_df <- data.frame(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
+  summary_df <- test_df %>%
+    dt_count()
+
+  expect_named(summary_df, c("N"))
+  expect_equal(summary_df$N, nrow(test_df))
+})
+
 test_that("dt_count(val) returns group results", {
   test_df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
   summary_df <- test_df %>%

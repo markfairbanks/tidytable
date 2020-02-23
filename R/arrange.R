@@ -16,12 +16,22 @@
 #' example_dt %>%
 #'   dt_arrange(a, -c)
 dt_arrange <- function(.data, ...) {
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+  UseMethod("dt_arrange")
+}
+
+#' @export
+dt_arrange.data.table <- function(.data, ...) {
 
   dots <- enexprs(...)
 
   eval_tidy(expr(
     .data[order(!!!dots)]
   ))
+}
+
+#' @export
+dt_arrange.data.frame <- function(.data, ...) {
+  .data <- as.data.table(.data)
+
+  dt_arrange(.data, ...)
 }

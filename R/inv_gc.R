@@ -15,6 +15,11 @@
 #'   inv_gc() %>%
 #'   dt_select(col1, col2)
 inv_gc <- function(.data) {
+  UseMethod("inv_gc")
+}
+
+#' @export
+inv_gc.default <- function(.data) {
   if(missing(.data)) {
     invisible(gc())
   } else {

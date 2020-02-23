@@ -33,9 +33,16 @@ dt_pivot_wider <- function(.data,
                            names_sep = "_",
                            values_from,
                            drop = TRUE) {
+  UseMethod("dt_pivot_wider")
+}
 
-  if (!is.data.frame(.data)) stop("dt_ must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+#' @export
+dt_pivot_wider.data.table <- function(.data,
+                                      id_cols = NULL,
+                                      names_from,
+                                      names_sep = "_",
+                                      values_from,
+                                      drop = TRUE) {
 
   id_cols <- enexpr(id_cols)
   names_from <- enexpr(names_from)
@@ -64,7 +71,7 @@ dt_pivot_wider <- function(.data,
   }
 
   if (length(id_cols) == 0) {
-    dcast.data.table(
+    dcast(
       .data,
       formula = dcast_form,
       value.var = values_from,
@@ -72,7 +79,7 @@ dt_pivot_wider <- function(.data,
       sep = names_sep,
       drop = drop)[, . := NULL][]
   } else {
-    dcast.data.table(
+    dcast(
       .data,
       formula = dcast_form,
       value.var = values_from,
@@ -81,3 +88,25 @@ dt_pivot_wider <- function(.data,
       drop = drop)
   }
 }
+
+#' @export
+dt_pivot_wider.data.frame <- function(.data,
+                                      id_cols = NULL,
+                                      names_from,
+                                      names_sep = "_",
+                                      values_from,
+                                      drop = TRUE) {
+  .data <- as.data.table(.data)
+  id_cols <- enexpr(id_cols)
+  names_from <- enexpr(names_from)
+  values_from <- enexpr(values_from)
+
+  dt_pivot_wider(.data, id_cols = !!id_cols,
+                 names_from = !!names_from,
+                 names_sep = names_sep,
+                 values_from = !!values_from,
+                 drop = drop)
+}
+
+
+

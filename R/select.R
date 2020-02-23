@@ -32,8 +32,11 @@
 #' example_dt %>%
 #'   dt_select(is.character, x)
 dt_select <- function(.data, ...) {
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+  UseMethod("dt_select")
+}
+
+#' @export
+dt_select.data.table <- function(.data, ...) {
 
   dots <- dots_selector(.data, ...)
 
@@ -41,3 +44,12 @@ dt_select <- function(.data, ...) {
     .data[, list(!!!dots)]
   ))
 }
+
+#' @export
+dt_select.data.frame <- function(.data, ...) {
+  .data <- as.data.table(.data)
+
+  dt_select(.data, ...)
+}
+
+

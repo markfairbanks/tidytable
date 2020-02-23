@@ -8,6 +8,13 @@ test_that("can pivot all cols to wide", {
   expect_equal(nrow(pivot_df), 1)
 })
 
+test_that("can pivot all cols to wide with data.frame", {
+  df <- data.frame(label = c("x", "y", "z"), val = 1:3)
+  pivot_df <- dt_pivot_wider(df, names_from = label, values_from = val)
+
+  expect_named(pivot_df, c("x", "y", "z"))
+  expect_equal(nrow(pivot_df), 1)
+})
 
 test_that("non-pivoted cols are preserved", {
   df <- data.table(a = 1, label = c("x", "y"), val = 1:2)

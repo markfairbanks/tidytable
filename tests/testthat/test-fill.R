@@ -20,11 +20,26 @@ test_that("missings filled down for each atomic vector", {
     lgl = c(T, NA),
     int = c(1L, NA),
     dbl = c(1, NA),
-    chr = c("a", NA),
-    lst = list(1:5, NULL)
+    chr = c("a", NA)
   )
 
-  out <- dt_fill(df, lgl, int, dbl, chr, lst)
+  out <- dt_fill(df, lgl, int, dbl, chr)
+  expect_equal(out$lgl, c(TRUE, TRUE))
+  expect_equal(out$int, c(1, 1))
+  expect_equal(out$dbl, c(1, 1))
+  expect_equal(out$chr, c("a", "a"))
+})
+
+test_that("works with data.frame", {
+  df <- data.frame(
+    lgl = c(T, NA),
+    int = c(1L, NA),
+    dbl = c(1, NA),
+    chr = c("a", NA),
+    stringsAsFactors = FALSE
+  )
+
+  out <- dt_fill(df, lgl, int, dbl, chr)
   expect_equal(out$lgl, c(TRUE, TRUE))
   expect_equal(out$int, c(1, 1))
   expect_equal(out$dbl, c(1, 1))

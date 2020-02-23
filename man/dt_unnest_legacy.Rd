@@ -4,7 +4,7 @@
 \alias{dt_unnest_legacy}
 \title{Unnest a nested data.table}
 \usage{
-dt_unnest_legacy(.data, col)
+dt_unnest_legacy(.data, col = NULL)
 }
 \arguments{
 \item{.data}{A nested data.table}

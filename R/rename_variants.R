@@ -33,6 +33,11 @@
 #' as_dt(example_dt) %>%
 #'   dt_rename_across(c(x, double_x), ~ sub("x", "stuff", .x))
 dt_rename_all <- function(.data, .fun, ...) {
+  UseMethod("dt_rename_all")
+}
+
+#' @export
+dt_rename_all.default <- function(.data, .fun, ...) {
 
   dt_rename_across(.data, dt_everything(), .fun, ...)
 }
@@ -40,6 +45,11 @@ dt_rename_all <- function(.data, .fun, ...) {
 #' @export
 #' @rdname dt_rename_all
 dt_rename_at <- function(.data, .vars, .fun, ...) {
+  UseMethod("dt_rename_at")
+}
+
+#' @export
+dt_rename_at.default <- function(.data, .vars, .fun, ...) {
 
   .vars <- enexpr(.vars)
 
@@ -49,20 +59,22 @@ dt_rename_at <- function(.data, .vars, .fun, ...) {
 #' @export
 #' @rdname dt_rename_all
 dt_rename_across <- function(.data, .cols, .fun, ...) {
+  UseMethod("dt_rename_across")
+}
 
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+#' @export
+dt_rename_across.data.table <- function(.data, .cols, .fun, ...) {
 
-  .vars <- enexpr(.cols)
-  .vars <- vec_selector(.data, !!.vars) %>%
+  .cols <- enexpr(.cols)
+  .cols <- vec_selector(.data, !!.cols) %>%
     as.character()
 
   .data <- shallow(.data)
 
   .fun <- anon_x(.fun)
 
-  if (length(.vars) > 0) {
-    for (old_name in .vars) {
+  if (length(.cols) > 0) {
+    for (old_name in .cols) {
       new_name <- .fun(old_name, ...)
       setnames(.data, old_name, new_name)
     }
@@ -73,8 +85,21 @@ dt_rename_across <- function(.data, .cols, .fun, ...) {
 }
 
 #' @export
+dt_rename_across.data.frame <- function(.data, .cols, .fun, ...) {
+  .data <- as.data.table(.data)
+  .cols <- enexpr(.cols)
+
+  dt_rename_across(.data, .cols = !!.cols, .fun = .fun, ...)
+}
+
+#' @export
 #' @rdname dt_rename_all
 dt_rename_if <- function(.data, .predicate, .fun, ...) {
+  UseMethod("dt_rename_if")
+}
+
+#' @export
+dt_rename_if.default <- function(.data, .predicate, .fun, ...) {
 
   .predicate <- enexpr(.predicate)
 

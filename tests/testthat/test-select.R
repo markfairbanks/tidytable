@@ -6,6 +6,14 @@ test_that("can add and drop columns", {
   expect_named(df, c("x"))
 })
 
+test_that("can add and drop columns w/ data.frame", {
+  df <- data.frame(x = 1, y = 2, z = 3)
+  df <- df %>%
+    dt_select(x, y, -y)
+
+  expect_named(df, c("x"))
+})
+
 test_that("can select a range of columns", {
   df <- data.table(x = 1, y = 2, z = 3)
   df <- df %>%

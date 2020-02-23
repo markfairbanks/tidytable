@@ -22,9 +22,11 @@
 #' example_dt %>%
 #'   dt_distinct(z)
 dt_distinct <- function(.data, ...) {
+  UseMethod("dt_distinct")
+}
 
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+#' @export
+dt_distinct.data.table <- function(.data, ...) {
 
   dots <- enexprs(...)
 
@@ -37,4 +39,11 @@ dt_distinct <- function(.data, ...) {
       dt_select(!!!dots) %>%
       unique()
   }
+}
+
+#' @export
+dt_distinct.data.frame <- function(.data, ...) {
+  .data <- as.data.table(.data)
+
+  dt_distinct(.data, ...)
 }

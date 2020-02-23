@@ -16,9 +16,11 @@
 #' example_dt %>%
 #'   dt_pull(y)
 dt_pull <- function(.data, var = NULL) {
+  UseMethod("dt_pull")
+}
 
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+#' @export
+dt_pull.data.table <- function(.data, var = NULL) {
 
   var <- enexpr(var)
   if (is.null(var)) stop("var must be supplied")
@@ -26,4 +28,12 @@ dt_pull <- function(.data, var = NULL) {
   eval_tidy(expr(
     .data[, !!var]
   ))
+}
+
+#' @export
+dt_pull.data.frame <- function(.data, var = NULL) {
+  .data <- as.data.table(.data)
+  var <- enexpr(var)
+
+  dt_pull(.data, !!var)
 }

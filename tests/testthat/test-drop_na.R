@@ -8,6 +8,18 @@ test_that("dt_drop_na() works with no dots", {
   expect_equal(drop_df$y, "a")
 })
 
+test_that("dt_drop_na() works on a data.frame", {
+  test_df <- data.frame(x = c(1, 2, NA), y = c("a", NA, "b"),
+                        stringsAsFactors = FALSE)
+
+  drop_df <- test_df %>%
+    dt_drop_na()
+
+  expect_named(drop_df, c("x", "y"))
+  expect_equal(drop_df$x, 1)
+  expect_equal(drop_df$y, "a")
+})
+
 test_that("dt_drop_na() works with one dot", {
   test_df <- data.table(x = c(1, 2, NA), y = c("a", NA, "b"))
   drop_df <- test_df %>%

@@ -25,8 +25,11 @@
 #'             avg_a = mean(a),
 #'             by = c)
 dt_mutate <- function(.data, ..., by = NULL) {
-  if (!is.data.frame(.data)) stop(".data must be a data.frame or data.table")
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+  UseMethod("dt_mutate")
+}
+
+#' @export
+dt_mutate.data.table <- function(.data, ..., by = NULL) {
 
   dots <- enexprs(...)
   by <- enexpr(by)
@@ -42,10 +45,18 @@ dt_mutate <- function(.data, ..., by = NULL) {
       ))
     }
   } else {
-    # Faster with "by", since you aren't looping the "by" call multiple times for each column added
+    # Faster with "by", since the "by" call isn't looped multiple times for each column added
     eval_tidy(expr(
       .data[, ':='(!!!dots), by = !!by][]
     ))
   }
   .data
+}
+
+#' @export
+dt_mutate.data.frame <- function(.data, ..., by = NULL) {
+  .data <- as.data.table(.data)
+  by <- enexpr(by)
+
+  dt_mutate(.data, ..., by = !!by)
 }

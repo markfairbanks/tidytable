@@ -21,10 +21,17 @@
 #'
 #' nested_df %>%
 #'   dt_unnest_legacy(data)
-dt_unnest_legacy <- function(.data, col) {
+dt_unnest_legacy <- function(.data, col = NULL) {
+  UseMethod("dt_unnest_legacy")
+}
+
+#' @export
+dt_unnest_legacy.data.frame <- function(.data, col = NULL) {
   if (!is.data.table(.data)) .data <- as.data.table(.data)
 
   col <- enexpr(col)
+
+  if (is.null(col)) abort("col must be supplied")
 
   keep <- syms(colnames(.data)[!dt_map_lgl(.data, is.list)])
 
