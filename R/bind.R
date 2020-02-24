@@ -30,14 +30,10 @@ dt_bind_rows <- function(.data, ..., .id = NULL) {
 }
 
 #' @export
-dt_bind_rows.default <- function(.data, ..., .id = NULL) {
-  # check if input .data is already a list; if not, transform to list
-  if (class(.data)[1] != "list") {
-    .data <- list(.data)
-  }
-
+dt_bind_rows.default <- function(..., .id = NULL) {
   dots <- list(...)
-  dots <- append(.data, dots)
+
+  dots <- flatten(dots)
 
   if (!all(dt_map_lgl(dots, is.data.frame)))
     stop("All inputs must be a data.frame or data.table")
@@ -55,14 +51,10 @@ dt_bind_cols <- function(.data, ...) {
 }
 
 #' @export
-dt_bind_cols.default <- function(.data, ...) {
-  # check if input .data is already a list; if not, transform to list
-  if (class(.data)[1] != "list") {
-    .data <- list(.data)
-  }
+dt_bind_cols.default <- function(...) {
 
   dots <- list(...)
-  dots <- append(.data, dots)
+  dots <- flatten(dots)
 
   if (!all(dt_map_lgl(dots, is.data.frame)))
     stop("All inputs must be a data.frame or data.table")
