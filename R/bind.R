@@ -31,8 +31,8 @@ dt_bind_rows <- function(.data, ..., .id = NULL) {
 
 #' @export
 dt_bind_rows.default <- function(..., .id = NULL) {
-  dots <- list(...)
 
+  dots <- list(...)
   dots <- flatten(dots)
 
   if (!all(dt_map_lgl(dots, is.data.frame)))
