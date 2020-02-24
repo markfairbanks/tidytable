@@ -3,7 +3,7 @@
 #' @description
 #' The dt_map functions transform their input by applying a function to each element and returning a vector the same length as the input.
 #' * `dt_map()` returns a list
-#' * `_lgl()`, `_int()`, `_dbl()` and `_chr()` variants return their specified type
+#' * `_lgl()`, `_int()`, `_dbl()`,`_chr()`, `_df()` variants return their specified type
 #' * `_dfr()` & `_dfc()` Return data frame results binded together
 #'
 #' @param .x A list or vector
@@ -72,10 +72,14 @@ dt_map_dfc <- function(.x, .f, ...) {
 dt_map_dfr <- function(.x, .f, ..., .id = NULL) {
   .f <- anon_x(.f)
 
-  result_list<- dt_map(.x, .f, ...)
+  result_list <- dt_map(.x, .f, ...)
 
   dt_bind_rows(result_list, .id = .id)
 }
+
+#' @export
+#' @rdname dt_map
+dt_map_df <- dt_map_dfr
 
 #' @export
 #' @rdname dt_map
@@ -144,6 +148,10 @@ dt_map2_dfr <- function(.x, .y, .f, ..., .id = NULL) {
   result_list <- dt_map2(.x, .y, .f, ...)
   dt_bind_rows(result_list, .id = .id)
 }
+
+#' @export
+#' @rdname dt_map
+dt_map2_df <- dt_map2_dfr
 
 anon_x <- function(fn) {
   if (is_formula(fn)) {

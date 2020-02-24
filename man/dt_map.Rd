@@ -8,6 +8,7 @@
 \alias{dt_map_chr}
 \alias{dt_map_dfc}
 \alias{dt_map_dfr}
+\alias{dt_map_df}
 \alias{dt_walk}
 \alias{dt_map2}
 \alias{dt_map2_lgl}
@@ -16,6 +17,7 @@
 \alias{dt_map2_chr}
 \alias{dt_map2_dfc}
 \alias{dt_map2_dfr}
+\alias{dt_map2_df}
 \title{Apply a function to each element of a vector}
 \usage{
 dt_map(.x, .f, ...)
@@ -32,6 +34,8 @@ dt_map_dfc(.x, .f, ...)
 
 dt_map_dfr(.x, .f, ..., .id = NULL)
 
+dt_map_df(.x, .f, ..., .id = NULL)
+
 dt_walk(.x, .f, ...)
 
 dt_map2(.x, .y, .f, ...)
@@ -47,6 +51,8 @@ dt_map2_chr(.x, .y, .f, ...)
 dt_map2_dfc(.x, .y, .f, ...)
 
 dt_map2_dfr(.x, .y, .f, ..., .id = NULL)
+
+dt_map2_df(.x, .y, .f, ..., .id = NULL)
 }
 \arguments{
 \item{.x}{A list or vector}
@@ -63,7 +69,7 @@ dt_map2_dfr(.x, .y, .f, ..., .id = NULL)
 The dt_map functions transform their input by applying a function to each element and returning a vector the same length as the input.
 \itemize{
 \item \code{dt_map()} returns a list
-\item \verb{_lgl()}, \verb{_int()}, \verb{_dbl()} and \verb{_chr()} variants return their specified type
+\item \verb{_lgl()}, \verb{_int()}, \verb{_dbl()},\verb{_chr()}, \verb{_df()} variants return their specified type
 \item \verb{_dfr()} & \verb{_dfc()} Return data frame results binded together
 }
 }
