@@ -8,7 +8,7 @@ test_that("unnesting works with nested data.table", {
   nest_df <- start_df %>%
     dt_group_nest(c, d)
 
-  unnest_df <- nested_df %>%
+  unnest_df <- nest_df %>%
     dt_unnest_legacy(data)
 
   expect_named(unnest_df, c("c","d","a","b"))
