@@ -1,12 +1,9 @@
 #' Bind data.tables by row and column
 #'
 #' @description
-#'
 #' Bind rows or columns together.
 #'
-#'
-#' @param .data A data.table to bind, or a list of data.tables
-#' @param ... Data frames to bind
+#' @param ... data.tables or data.frames to bind
 #' @param .id If TRUE, an integer column is made as a group id
 #'
 #' @export
