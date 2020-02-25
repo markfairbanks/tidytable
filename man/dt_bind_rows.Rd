@@ -5,9 +5,9 @@
 \alias{dt_bind_cols}
 \title{Bind data.tables by row and column}
 \usage{
-dt_bind_rows(.data, ..., .id = NULL)
+dt_bind_rows(..., .id = NULL)
 
-dt_bind_cols(.data, ...)
+dt_bind_cols(...)
 }
 \arguments{
 \item{...}{data.tables or data.frames to bind}

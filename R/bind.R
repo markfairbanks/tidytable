@@ -22,7 +22,7 @@
 #'   dt_bind_cols(df2)
 #'
 #' dt_bind_cols(list(df1, df2))
-dt_bind_rows <- function(.data, ..., .id = NULL) {
+dt_bind_rows <- function(..., .id = NULL) {
   UseMethod("dt_bind_rows")
 }
 
@@ -43,8 +43,8 @@ dt_bind_rows.default <- function(..., .id = NULL) {
 
 #' @export
 #' @rdname dt_bind_rows
-dt_bind_cols <- function(.data, ...) {
-  UseMethod("dt_bind_cols", .data)
+dt_bind_cols <- function(...) {
+  UseMethod("dt_bind_cols")
 }
 
 #' @export
