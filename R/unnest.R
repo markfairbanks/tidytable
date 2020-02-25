@@ -30,17 +30,17 @@ dt_unnest_legacy.data.frame <- function(.data, col = NULL) {
 
   if (is.null(col)) abort("col must be supplied")
 
-  keep <- syms(colnames(.data)[!dt_map_lgl(.data, is.list)])
+  keep_cols <- colnames(.data)[!dt_map_lgl(.data, is.list)]
 
   is_datatable <- is.data.table(.data[[col]][[1]])
 
   if (is_datatable) {
     .data <- eval_tidy(expr(
-      .data[, unlist(!!col, recursive = FALSE), by = list(!!!keep)]
+      .data[, unlist(!!col, recursive = FALSE), by = keep_cols]
     ))
   } else {
     .data <- eval_tidy(expr(
-      .data[, list(.new_col = unlist(!!col, recursive = FALSE)), by = list(!!!keep)]
+      .data[, list(.new_col = unlist(!!col, recursive = FALSE)), by = keep_cols]
     )) %>%
       dt_rename(!!col := .new_col)
   }
