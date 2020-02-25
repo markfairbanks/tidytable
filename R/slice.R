@@ -43,16 +43,16 @@ dt_slice.data.table <- function(.data, rows = 1:5, by = NULL) {
 
   if (!is.numeric(rows)) stop("rows must be a numeric vector")
 
-  rows <- enexpr(rows)
+  rows <- rows
   by <- enexpr(by)
 
   if (is.null(by)) {
     eval_tidy(expr(
-      .data[!!rows]
+      .data[rows]
     ))
   } else {
     eval_tidy(expr(
-      .data[, .SD[!!rows], !!by]
+      .data[, .SD[..rows], !!by]
     ))
   }
 }
