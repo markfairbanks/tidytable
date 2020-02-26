@@ -30,7 +30,7 @@ dt_bind_rows <- function(..., .id = NULL) {
 dt_bind_rows.default <- function(..., .id = NULL) {
 
   dots <- list(...)
-  dots <- flatten(dots)
+  dots <- squash(dots)
 
   if (!all(dt_map_lgl(dots, is.data.frame)))
     stop("All inputs must be a data.frame or data.table")
@@ -51,7 +51,7 @@ dt_bind_cols <- function(...) {
 dt_bind_cols.default <- function(...) {
 
   dots <- list(...)
-  dots <- flatten(dots)
+  dots <- squash(dots)
 
   if (!all(dt_map_lgl(dots, is.data.frame)))
     stop("All inputs must be a data.frame or data.table")
