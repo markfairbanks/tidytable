@@ -81,7 +81,9 @@ devtools::install_github("markfairbanks/tidytable")
 * `dt_count()` - **ES**
 * `dt_distinct()` - **ES**
 * `dt_pull()`
+* `dt_relocate()`
 * `dt_rename()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
+* `dt_separate()`
 * `dt_slice()`: `_head()`/`_tail()`/`_max()`/`_min()`
   + The `slice_*()` variants are like `dt_top_n()`, but are slightly easier to use
 * `dt_top_n()`
