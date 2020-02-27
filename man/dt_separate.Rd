@@ -22,3 +22,14 @@ dt_separate(.data, col, into, sep = "[^[:alnum:]]+", remove = TRUE, ...)
 \description{
 Separates a single column into multiple columns using either regex or a user supplied separator.
 }
+\examples{
+test_df <- data.table::data.table(x = c("a", "a.b", "a.b", NA))
+
+# "sep" can be automatically detected (slower)
+test_df \%>\%
+  dt_separate(x, into = c("c1", "c2"))
+
+# Faster if "sep" is provided
+test_df \%>\%
+  dt_separate(x, into = c("c1", "c2"), sep = ".")
+}
