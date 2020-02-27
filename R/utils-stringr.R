@@ -24,4 +24,7 @@ str_starts <- function(string, pattern) {
   startsWith(string, pattern)
 }
 
+str_extract <- function(x, pattern) {
+  regmatches(x, regexpr(pattern, x))
+}
 
