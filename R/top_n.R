@@ -29,27 +29,27 @@ dt_top_n <- function(.data, n = 5, wt = NULL, by = NULL) {
 #' @export
 dt_top_n.data.table <- function(.data, n = 5, wt = NULL, by = NULL) {
 
-  if (!is.numeric(n) | length(n) > 1) stop("n must be a single number")
-
+  n <- enexpr(n)
   wt <- enexpr(wt)
   by <- enexpr(by)
 
   if (is.null(wt)) {
     .data %>%
-      dt_slice(1:n, !!by)
+      dt_slice_head(!!n, !!by)
   } else {
     .data %>%
-      dt_arrange(-!!wt) %>%
-      dt_slice(1:n, !!by)
+      dt_slice_max(order_by = !!wt, n = !!n, by = !!by)
   }
 }
 
 #' @export
 dt_top_n.data.frame <- function(.data, n = 5, wt = NULL, by = NULL) {
+
   .data <- as.data.table(.data)
+  n < enexpr(n)
   wt <- enexpr(wt)
   by <- enexpr(by)
 
-  dt_top_n(.data, n, wt = !!wt, by = !!by)
+  dt_top_n(.data, !!n, wt = !!wt, by = !!by)
 }
 

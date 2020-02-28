@@ -41,28 +41,28 @@ dt_slice <- function(.data, rows = 1:5, by = NULL) {
 #' @export
 dt_slice.data.table <- function(.data, rows = 1:5, by = NULL) {
 
-  if (!is.numeric(rows)) stop("rows must be a numeric vector")
-
-  rows <- rows
+  rows <- enexpr(rows) # Needed so 1:.N works
   by <- enexpr(by)
 
   if (is.null(by)) {
     eval_tidy(expr(
-      .data[rows]
+      .data[!!rows]
     ))
   } else {
     eval_tidy(expr(
-      .data[, .SD[..rows], !!by]
+      .data[, .SD[!!rows], !!by]
     ))
   }
 }
 
 #' @export
 dt_slice.data.frame <- function(.data, rows = 1:5, by = NULL) {
+
   .data <- as.data.table(.data)
+  rows <- enexpr(rows)
   by <- enexpr(by)
 
-  dt_slice(.data, rows = rows, by = !!by)
+  dt_slice(.data, rows = !!rows, by = !!by)
 }
 
 #' @export
@@ -74,21 +74,22 @@ dt_slice_head <- function(.data, n = 5, by = NULL) {
 #' @export
 dt_slice_head.data.table <- function(.data, n = 5, by = NULL) {
 
-  if (!is.numeric(n) | length(n) > 1) stop("n must be a single number")
-
+  n <- enexpr(n)
   by <- enexpr(by)
 
   eval_tidy(expr(
-    .data[, head(.SD, n), !!by]
+    .data[, head(.SD, !!n), !!by]
   ))
 }
 
 #' @export
 dt_slice_head.data.frame <- function(.data, n = 5, by = NULL) {
+
   .data <- as.data.table(.data)
+  n <- enexpr(n)
   by <- enexpr(by)
 
-  dt_slice_head(.data, n = n, by = !!by)
+  dt_slice_head(.data, n = !!n, by = !!by)
 }
 
 #' @export
@@ -100,21 +101,22 @@ dt_slice_tail <- function(.data, n = 5, by = NULL) {
 #' @export
 dt_slice_tail.data.table <- function(.data, n = 5, by = NULL) {
 
-  if (!is.numeric(n) | length(n) > 1) stop("n must be a single number")
-
+  n <- enexpr(n)
   by <- enexpr(by)
 
   eval_tidy(expr(
-    .data[, tail(.SD, n), !!by]
+    .data[, tail(.SD, !!n), !!by]
   ))
 }
 
 #' @export
 dt_slice_tail.data.frame <- function(.data, n = 5, by = NULL) {
+
   .data <- as.data.table(.data)
+  n <- enexpr(n)
   by <- enexpr(by)
 
-  dt_slice_tail(.data, n = n, by = !!by)
+  dt_slice_tail(.data, n = !!n, by = !!by)
 }
 
 #' @export
@@ -129,14 +131,13 @@ dt_slice_max.data.frame <- function(.data, order_by, n = 1, by = NULL) {
 
   if (missing(order_by)) stop("order_by must be supplied")
 
-  if (!is.numeric(n) | length(n) > 1) stop("n must be a single number")
-
   order_by <- enexpr(order_by)
+  n <- enexpr(n)
   by <- enexpr(by)
 
   .data %>%
     dt_arrange(-!!order_by) %>%
-    dt_slice_head(n, by = !!by)
+    dt_slice_head(!!n, by = !!by)
 }
 
 #' @export
@@ -151,12 +152,11 @@ dt_slice_min.data.frame <- function(.data, order_by, n = 1, by = NULL) {
 
   if (missing(order_by)) stop("order_by must be supplied")
 
-  if (!is.numeric(n) | length(n) > 1) stop("n must be a single number")
-
   order_by <- enexpr(order_by)
+  n <- enexpr(n)
   by <- enexpr(by)
 
   .data %>%
     dt_arrange(!!order_by) %>%
-    dt_slice_head(n, by = !!by)
+    dt_slice_head(!!n, by = !!by)
 }
