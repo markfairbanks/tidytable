@@ -156,7 +156,7 @@ dt_map2_df <- dt_map2_dfr
 anon_x <- function(fn) {
   if (is_formula(fn)) {
     fn %>%
-      deparse() %>%
+      deparse(200L) %>%
       str_replace("^~", "function(.x)") %>%
       parse_expr() %>%
       eval()
@@ -168,7 +168,7 @@ anon_x <- function(fn) {
 anon_xy <- function(fn) {
   if (is_formula(fn)) {
     fn %>%
-      deparse() %>%
+      deparse(200L) %>%
       str_replace("^~", "function(.x,.y)") %>%
       parse_expr() %>%
       eval()
