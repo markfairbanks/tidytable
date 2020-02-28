@@ -13,14 +13,18 @@ dt_separate(.data, col, into, sep = "[^[:alnum:]]+", remove = TRUE, ...)
 
 \item{into}{New column names to split into. A character vector.}
 
-\item{sep}{Separator to split on. Can be}
+\item{sep}{Separator to split on. Can be specified or detected automatically}
 
 \item{remove}{If TRUE, remove the input column from the output data.table}
 
 \item{...}{Further argument to pass to data.table::tstrsplit}
 }
 \description{
-Separates a single column into multiple columns using either regex or a user supplied separator.
+Separates a single column into multiple columns using a user supplied separator or regex.
+
+If a separator is not supplied one will be automatically detected.
+
+Note: Using automatic detection or regex will be slower than simple separators such as "," or ".".
 }
 \examples{
 test_df <- data.table::data.table(x = c("a", "a.b", "a.b", NA))

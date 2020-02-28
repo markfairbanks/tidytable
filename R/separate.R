@@ -1,12 +1,16 @@
 #' Separate a character column into multiple columns
 #'
 #' @description
-#' Separates a single column into multiple columns using either regex or a user supplied separator.
+#' Separates a single column into multiple columns using a user supplied separator or regex.
+#'
+#' If a separator is not supplied one will be automatically detected.
+#'
+#' Note: Using automatic detection or regex will be slower than simple separators such as "," or ".".
 #'
 #' @param .data A data.frame or data.table
 #' @param col The column to split into multiple columns
 #' @param into New column names to split into. A character vector.
-#' @param sep Separator to split on. Can be
+#' @param sep Separator to split on. Can be specified or detected automatically
 #' @param remove If TRUE, remove the input column from the output data.table
 #' @param ... Further argument to pass to data.table::tstrsplit
 #'
@@ -56,7 +60,6 @@ dt_separate.data.table <- function(.data, col, into,
   if (missing(into)) abort("into is missing and must be supplied")
 
   col <- enexpr(col)
-
 
   if (nchar(sep) > 1) {
     # Works automatically, but is slower
