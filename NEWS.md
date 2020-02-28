@@ -3,6 +3,7 @@
 * `dt_pivot_longer()` "cols" arg now defaults to `dt_everything()` instead of `NULL`. The result is the same, but is more consistent with other enhanced selection functions
 * Added `dt_separate()`
 * .N now works when using `dt_slice()` & variants
+* Function length limit bug no longer occurs when using `~` in `dt_map()`
 
 # tidytable 0.3.1
 
