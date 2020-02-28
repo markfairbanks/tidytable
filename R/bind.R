@@ -32,9 +32,6 @@ dt_bind_rows.default <- function(..., .id = NULL) {
   dots <- list(...)
   dots <- squash(dots)
 
-  if (!all(dt_map_lgl(dots, is.data.frame)))
-    stop("All inputs must be a data.frame or data.table")
-
   if (!all(dt_map_lgl(dots, is.data.table)))
     dots <- dt_map(dots, as.data.table)
 
@@ -53,15 +50,11 @@ dt_bind_cols.default <- function(...) {
   dots <- list(...)
   dots <- squash(dots)
 
-  if (!all(dt_map_lgl(dots, is.data.frame)))
-    stop("All inputs must be a data.frame or data.table")
-
   if (!all(dt_map_lgl(dots, is.data.table)))
     dots <- dt_map(dots, as.data.table)
 
-  result_df <- name_fix(do.call(cbind, dots))
+  name_fix(setDT(unlist(dots, recursive = FALSE), check.names = FALSE)[])
 
-  result_df
 }
 
 name_fix <- function(.data) {
