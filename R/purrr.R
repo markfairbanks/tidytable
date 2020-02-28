@@ -157,6 +157,7 @@ anon_x <- function(fn) {
   if (is_formula(fn)) {
     fn %>%
       deparse(200L) %>%
+      str_c(collapse = "") %>%
       str_replace("^~", "function(.x)") %>%
       parse_expr() %>%
       eval()
@@ -169,6 +170,7 @@ anon_xy <- function(fn) {
   if (is_formula(fn)) {
     fn %>%
       deparse(200L) %>%
+      str_c(collapse = "") %>%
       str_replace("^~", "function(.x,.y)") %>%
       parse_expr() %>%
       eval()
