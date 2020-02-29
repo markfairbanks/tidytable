@@ -54,5 +54,5 @@ dt_group_nest.data.table <- function(.data, ..., .key = "data") {
 dt_group_nest.data.frame <- function(.data, ..., .key = "data") {
   .data <- as.data.table(.data)
 
-  dt_group_nest(.data, ..., .key)
+  dt_group_nest(.data, ..., .key = .key)
 }
