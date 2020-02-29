@@ -533,7 +533,7 @@ unnest_tbl <- as_tibble(unnest_dt)
 
 unnest_marks <- bench::mark(
   tidyverse = unnest_legacy(unnest_dt, list_column),
-  tidytable = dt_unnest_legacy(unnest_tbl, list_column),
+  tidytable = dt_unnest_legacy(unnest_dt, list_column),
   data.table = unnest_dt[, unlist(list_column, recursive = FALSE), by = list(a, b)],
   check = FALSE,
   iterations = iters)
@@ -552,7 +552,7 @@ remove(unnest_dt, unnest_tbl); inv_gc(); inv_gc();
 
 nest_marks <- bench::mark(
   tidyverse = group_nest(nest_dt, a, b),
-  tidytable = dt_group_nest(nest_tbl, a, b),
+  tidytable = dt_group_nest(nest_dt, a, b),
   data.table = nest_dt[, list(data = list(.SD)), by = list(a, b)],
   check = FALSE,
   iterations = iters)
