@@ -4,6 +4,7 @@
 * Added `dt_separate()`
 * .N now works when using `dt_slice()` & variants
 * Function length limit bug no longer occurs when using `~` in `dt_map()`
+* `print.data.table()` shows character classes and truncates extra columns by default
 
 # tidytable 0.3.1
 
