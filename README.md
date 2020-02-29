@@ -130,10 +130,11 @@ example_dt %>%
   dt_arrange(x, y) %>%
   dt_mutate(double_x = x * 2,
             double_y = y * 2)
-#>    x y z double_x double_y
-#> 1: 1 4 a        2        8
-#> 2: 2 5 a        4       10
-#> 3: 3 6 b        6       12
+#>        x     y     z double_x double_y
+#>    <dbl> <dbl> <chr>    <dbl>    <dbl>
+#> 1:     1     4     a        2        8
+#> 2:     2     5     a        4       10
+#> 3:     3     6     b        6       12
 ```
 
 #### Using “group by”
@@ -151,9 +152,10 @@ example_dt %>%
   dt_summarize(avg_x = mean(x),
                count = .N,
                by = z)
-#>    z avg_x count
-#> 1: a   1.5     2
-#> 2: b   3.0     1
+#>        z avg_x count
+#>    <chr> <dbl> <int>
+#> 1:     a   1.5     2
+#> 2:     b   3.0     1
 ```
 
 ## Enhanced selection
@@ -169,10 +171,11 @@ example_dt <- data.table(a = c(1,2,3),
 
 example_dt %>%
   dt_select(is.numeric, d)
-#>    a b d
-#> 1: 1 4 a
-#> 2: 2 5 b
-#> 3: 3 6 c
+#>        a     b     d
+#>    <dbl> <dbl> <chr>
+#> 1:     1     4     a
+#> 2:     2     5     b
+#> 3:     3     6     c
 ```
 
 You can also use this format to drop columns:
@@ -180,10 +183,11 @@ You can also use this format to drop columns:
 ``` r
 example_dt %>%
   dt_select(-is.numeric)
-#>    c d
-#> 1: a a
-#> 2: a b
-#> 3: b c
+#>        c     d
+#>    <chr> <chr>
+#> 1:     a     a
+#> 2:     a     b
+#> 3:     b     c
 ```
 
 Currently supported:
@@ -204,10 +208,11 @@ example_dt <- data.table(a = c(1,1,1),
 
 example_dt %>%
   dt_mutate_across(is.numeric, as.character)
-#>    a b c d
-#> 1: 1 1 a a
-#> 2: 1 1 a b
-#> 3: 1 1 b c
+#>        a     b     c     d
+#>    <chr> <chr> <chr> <chr>
+#> 1:     1     1     a     a
+#> 2:     1     1     a     b
+#> 3:     1     1     b     c
 ```
 
 Using `_across()` instead of `_at()`:
@@ -215,10 +220,11 @@ Using `_across()` instead of `_at()`:
 ``` r
 example_dt %>%
   dt_mutate_across(c(a, b), ~ .x + 1)
-#>    a b c d
-#> 1: 2 2 a a
-#> 2: 2 2 a b
-#> 3: 2 2 b c
+#>        a     b     c     d
+#>    <dbl> <dbl> <chr> <chr>
+#> 1:     2     2     a     a
+#> 2:     2     2     a     b
+#> 3:     2     2     b     c
 ```
 
 These two approaches can be combined in one call:
@@ -234,6 +240,7 @@ example_dt <- data.table(dbl_col1 = c(1.0,1.0,1.0),
 example_dt %>%
   dt_mutate_across(c(is.double, int_col1), ~ .x + 1)
 #>    dbl_col1 dbl_col2 int_col1 int_col2 char_col1 char_col2
+#>       <dbl>    <dbl>    <dbl>    <int>     <chr>     <chr>
 #> 1:        2        2        2        1         a         b
 #> 2:        2        2        2        1         a         b
 #> 3:        2        2        2        1         a         b
@@ -264,10 +271,11 @@ add_one <- function(.data, new_name, add_col) {
 
 example_dt %>%
   add_one(x_plus_one, x)
-#>    x y z x_plus_one
-#> 1: 1 1 a          2
-#> 2: 1 1 a          2
-#> 3: 1 1 b          2
+#>        x     y     z x_plus_one
+#>    <dbl> <dbl> <chr>      <dbl>
+#> 1:     1     1     a          2
+#> 2:     1     1     a          2
+#> 3:     1     1     b          2
 ```
 
 ##### Custom function with `dt_summarize()`
@@ -286,9 +294,10 @@ find_mean <- function(.data, grouping_cols, col) {
 
 example_df %>%
   find_mean(grouping_cols = list(y, z), col = x)
-#>    y z avg
-#> 1: a a 3.5
-#> 2: b b 8.5
+#>        y     z   avg
+#>    <chr> <chr> <dbl>
+#> 1:     a     a   3.5
+#> 2:     b     b   8.5
 ```
 
 ## `dt()` helper
@@ -307,9 +316,10 @@ example_dt %>%
   dt(, ':='(double_x = x * 2,
             double_y = y * 2)) %>%
   dt(, list(avg_x = mean(x)), by = z)
-#>    z avg_x
-#> 1: a   1.5
-#> 2: b   3.0
+#>        z avg_x
+#>    <chr> <dbl>
+#> 1:     a   1.5
+#> 2:     b   3.0
 ```
 
 ### Speed Comparisons
@@ -346,17 +356,17 @@ all_marks
 #> # A tibble: 13 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         370ms     50.2ms    47.7ms     13.6%                 
-#>  2 case_when       535ms     147ms     148ms      27.5%                 
-#>  3 distinct        84.9ms    42.1ms    37.7ms     49.6%                 
-#>  4 fill            110.2ms   68.4ms    53.1ms     62.1%                 
-#>  5 filter          250ms     218ms     216ms      87.2%                 
-#>  6 inner_join      66.8ms    83.9ms    84.3ms     125.6%                
-#>  7 left_join       67.1ms    71.9ms    62.8ms     107.2%                
-#>  8 mutate          58.8ms    59.9ms    90.6ms     101.9%                
-#>  9 nest            8.03ms    4.35ms    2.75ms     54.2%                 
-#> 10 pivot_longer    166.3ms   38ms      13.8ms     22.9%                 
-#> 11 pivot_wider     813ms     299ms     298ms      36.8%                 
-#> 12 summarize       469ms     284ms     278ms      60.6%                 
-#> 13 unnest          160.16ms  10.73ms   7.36ms     6.7%
+#>  1 arrange         411.4ms   59.6ms    59.9ms     14.5%                 
+#>  2 case_when       499ms     121ms     133ms      24.2%                 
+#>  3 distinct        97.9ms    51.3ms    42.1ms     52.4%                 
+#>  4 fill            127.6ms   68.1ms    49.4ms     53.4%                 
+#>  5 filter          263ms     221ms     221ms      84.0%                 
+#>  6 inner_join      73.2ms    75.2ms    84ms       102.7%                
+#>  7 left_join       94.3ms    86.1ms    62.2ms     91.3%                 
+#>  8 mutate          69.7ms    51.6ms    75.2ms     74.0%                 
+#>  9 nest            8.55ms    4ms       2.73ms     46.8%                 
+#> 10 pivot_longer    98.5ms    21.2ms    14.5ms     21.5%                 
+#> 11 pivot_wider     818ms     307ms     305ms      37.5%                 
+#> 12 summarize       486ms     284ms     281ms      58.4%                 
+#> 13 unnest          200.1ms   16.1ms    17.6ms     8.0%
 ```

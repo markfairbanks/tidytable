@@ -3,7 +3,7 @@
 #' @importFrom rlang abort caller_env enexpr enexprs expr eval_tidy
 #' @importFrom rlang is_formula is_named missing_arg parse_expr seq2 squash sym syms
 #' @importFrom stats as.formula na.omit setNames
-#' @importFrom utils head tail
+#' @importFrom utils capture.output head tail
 NULL
 
 globalVariables(c("data", ".","..select_vars", ".count", "na_index", ".new_col",
