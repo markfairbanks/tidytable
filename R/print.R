@@ -257,5 +257,5 @@ brackify = function(x, quote=FALSE) {
   # keep one more than needed to trigger dots if needed
   if (quote && is.character(x)) x = paste0("'",head(x,CUTOFF+1L),"'")
   if (length(x) > CUTOFF) x = c(x[1:CUTOFF], '...')
-  sprintf('[%s]', paste(x, collapse = ', '))
+  sprintf('%s', paste(x, collapse = ', '))
 }
