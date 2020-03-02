@@ -41,7 +41,8 @@ test_that("can select a single column", {
 })
 
 test_that("preserves original keys", {
-  df <- data.table(x = 1:2, y = 2, z = 1:2)
+  df <- data.table(x = 1:2, y = 2, z = 1:2) %>%
+    dt_mutate_all(as.double)
   pivot_df <- dt_pivot_longer(df, cols = c(y, z))[order(name, value)]
 
   expect_named(pivot_df, c("x", "name", "value"))
@@ -75,7 +76,8 @@ test_that("stops if given vector", {
 })
 
 test_that("works with select helpers", {
-  df <- data.table(x = 1:2, y = 2, z = 1:2)
+  df <- data.table(x = 1:2, y = 2, z = 1:2) %>%
+    dt_mutate_all(as.double)
   pivot_df <- dt_pivot_longer(df, cols = c(dt_starts_with("y"), dt_contains("z")))[order(name, value)]
 
   expect_named(pivot_df, c("x", "name", "value"))
