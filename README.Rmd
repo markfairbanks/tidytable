@@ -60,6 +60,7 @@ devtools::install_github("markfairbanks/tidytable")
 ### tidytable helpers
 
 * `dt()`: Pipeable `data.table` syntax. [See here](https://markfairbanks.github.io/tidytable/#dt-helper)
+* `dt_get_dummies()`
 * `%notin%`
 
 ### dplyr
@@ -76,28 +77,28 @@ devtools::install_github("markfairbanks/tidytable")
 
 ##### Other dplyr functions
 
-* `dt_bind_rows()` & `dt_bind_cols()`
+*  `dt_bind_cols()` & `dt_bind_rows()`
 * `dt_case()`: Similar to `dplyr::case_when()`. See `?dt_case()` for syntax
 * `dt_count()` - **ES**
 * `dt_distinct()` - **ES**
+* Joins: `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`, `dt_full_join()`, & `dt_anti_join()`
 * `dt_pull()`
 * `dt_relocate()`
 * `dt_rename()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
+* Select helpers: `dt_starts_with()`, `dt_ends_with()`, `dt_contains()`, `dt_everything()`
 * `dt_separate()`
 * `dt_slice()`: `_head()`/`_tail()`/`_max()`/`_min()`
   + The `slice_*()` variants are like `dt_top_n()`, but are slightly easier to use
 * `dt_top_n()`
-* Joins: `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`, `dt_full_join()`, & `dt_anti_join()`
-* Select helpers: `dt_starts_with()`, `dt_ends_with()`, `dt_contains()`, `dt_everything()`
 
 ### tidyr
 
 * `dt_drop_na()` - **ES**
 * `dt_fill()`: Works on character/factor/logical types (`data.table::nafill()` does not) - **ES**
 * `dt_group_split()` - **ES**
-* `dt_pivot_wider()` - **ES** & `dt_pivot_longer()` - **ES**
+* Nesting: `dt_group_nest()` - **ES** & `dt_unnest_legacy()`
+* `dt_pivot_longer()` - **ES** & `dt_pivot_wider()` - **ES**
 * `dt_replace_na()`
-* `dt_group_nest()` - **ES** & `dt_unnest_legacy()`
 
 ### purrr
 * `dt_map()`, `dt_map2()`, `dt_map_*()` variants, & `dt_map2_*()` variants
@@ -261,7 +262,7 @@ A few notes:
 
 * The main metric of interest is the time comparison of a tidyverse function vs. its equivalent tidytable function.
   + Comparing times from separate functions won't be very useful. For example - the `summarize()` tests were performed on a different dataset from `case_when()`.
-* `setDTthreads(1)` was used to ensure a fair comparison to the `tidyverse`.
+* `setDTthreads(4)` was used for `data.table` & `tidytable` timings.
 * Modify-by-reference was used in `data.table` when being compared to `dt_mutate()` & `dplyr::mutate()`
 * `dt_fill()` & `tidyr::fill()` both work with character/factor/logical columns, whereas `data.table::nafill()` does not. Testing only included numeric columns due to this constraint.
 * Currently `data.table` doesn't have its own `case_when()` translation, so a multiple nested `fifelse()` was used.
@@ -270,7 +271,7 @@ A few notes:
 
 ```{r benchmark_setup, echo=FALSE}
 pacman::p_load(tidytable, tidyverse)
-setDTthreads(1)
+setDTthreads(4)
 
 iters <- 5
 

@@ -63,6 +63,7 @@ here](https://markfairbanks.github.io/tidytable/#enhanced-selection)
 
   - `dt()`: Pipeable `data.table` syntax. [See
     here](https://markfairbanks.github.io/tidytable/#dt-helper)
+  - `dt_get_dummies()`
   - `%notin%`
 
 ### dplyr
@@ -81,23 +82,23 @@ here](https://markfairbanks.github.io/tidytable/#enhanced-selection)
 
 ##### Other dplyr functions
 
-  - `dt_bind_rows()` & `dt_bind_cols()`
+  - `dt_bind_cols()` & `dt_bind_rows()`
   - `dt_case()`: Similar to `dplyr::case_when()`. See `?dt_case()` for
     syntax
   - `dt_count()` - **ES**
   - `dt_distinct()` - **ES**
+  - Joins: `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`,
+    `dt_full_join()`, & `dt_anti_join()`
   - `dt_pull()`
   - `dt_relocate()`
   - `dt_rename()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
+  - Select helpers: `dt_starts_with()`, `dt_ends_with()`,
+    `dt_contains()`, `dt_everything()`
   - `dt_separate()`
   - `dt_slice()`: `_head()`/`_tail()`/`_max()`/`_min()`
       - The `slice_*()` variants are like `dt_top_n()`, but are slightly
         easier to use
   - `dt_top_n()`
-  - Joins: `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`,
-    `dt_full_join()`, & `dt_anti_join()`
-  - Select helpers: `dt_starts_with()`, `dt_ends_with()`,
-    `dt_contains()`, `dt_everything()`
 
 ### tidyr
 
@@ -105,9 +106,9 @@ here](https://markfairbanks.github.io/tidytable/#enhanced-selection)
   - `dt_fill()`: Works on character/factor/logical types
     (`data.table::nafill()` does not) - **ES**
   - `dt_group_split()` - **ES**
-  - `dt_pivot_wider()` - **ES** & `dt_pivot_longer()` - **ES**
+  - Nesting: `dt_group_nest()` - **ES** & `dt_unnest_legacy()`
+  - `dt_pivot_longer()` - **ES** & `dt_pivot_wider()` - **ES**
   - `dt_replace_na()`
-  - `dt_group_nest()` - **ES** & `dt_unnest_legacy()`
 
 ### purrr
 
@@ -334,8 +335,7 @@ A few notes:
       - Comparing times from separate functions won’t be very useful.
         For example - the `summarize()` tests were performed on a
         different dataset from `case_when()`.
-  - `setDTthreads(1)` was used to ensure a fair comparison to the
-    `tidyverse`.
+  - `setDTthreads(4)` was used for `data.table` & `tidytable` timings.
   - Modify-by-reference was used in `data.table` when being compared to
     `dt_mutate()` & `dplyr::mutate()`
   - `dt_fill()` & `tidyr::fill()` both work with
@@ -356,17 +356,17 @@ all_marks
 #> # A tibble: 13 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         411.4ms   59.6ms    59.9ms     14.5%                 
-#>  2 case_when       499ms     121ms     133ms      24.2%                 
-#>  3 distinct        97.9ms    51.3ms    42.1ms     52.4%                 
-#>  4 fill            127.6ms   68.1ms    49.4ms     53.4%                 
-#>  5 filter          263ms     221ms     221ms      84.0%                 
-#>  6 inner_join      73.2ms    75.2ms    84ms       102.7%                
-#>  7 left_join       94.3ms    86.1ms    62.2ms     91.3%                 
-#>  8 mutate          69.7ms    51.6ms    75.2ms     74.0%                 
-#>  9 nest            8.55ms    4ms       2.73ms     46.8%                 
-#> 10 pivot_longer    98.5ms    21.2ms    14.5ms     21.5%                 
-#> 11 pivot_wider     818ms     307ms     305ms      37.5%                 
-#> 12 summarize       486ms     284ms     281ms      58.4%                 
-#> 13 unnest          200.1ms   16.1ms    17.6ms     8.0%
+#>  1 arrange         393.5ms   35.1ms    33.9ms     8.9%                  
+#>  2 case_when       504ms     132ms     140ms      26.2%                 
+#>  3 distinct        87.4ms    19.9ms    18.6ms     22.8%                 
+#>  4 fill            115.9ms   47.6ms    37.2ms     41.1%                 
+#>  5 filter          274ms     232ms     231ms      84.7%                 
+#>  6 inner_join      65ms      67.2ms    59.8ms     103.4%                
+#>  7 left_join       65.5ms    64.3ms    43.2ms     98.2%                 
+#>  8 mutate          65.6ms    50.9ms    76.4ms     77.6%                 
+#>  9 nest            7.17ms    1.98ms    1.33ms     27.6%                 
+#> 10 pivot_longer    120.2ms   28.2ms    14.1ms     23.5%                 
+#> 11 pivot_wider     861ms     188ms     191ms      21.8%                 
+#> 12 summarize       502ms     188ms     186ms      37.5%                 
+#> 13 unnest          155.26ms  7.27ms    5.47ms     4.7%
 ```
