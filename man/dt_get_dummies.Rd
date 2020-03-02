@@ -16,7 +16,7 @@ dt_get_dummies(
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{cols}{If NULL does all character & factor columns. User can input a single column or a vector of columns to dummify}
+\item{cols}{If NULL makes dummy variables for all character & factor columns. Or user can input a single column or a vector of unquoted columns to dummify}
 
 \item{prefix}{TRUE/FALSE - If TRUE, a prefix will be added to new column names}
 
@@ -37,12 +37,15 @@ test_df2 <- data.table(
   "col2" = as.factor(c(letters[3:1], NA)),
   "var1"= rnorm(7,0,1))
 
+# Automatically does all character/factor columns
 test_df \%>\%
   dt_get_dummies()
 
+# Can select one column
 test_df \%>\%
   dt_get_dummies(col1)
 
+# Can select one or multiple columns in a vector of unquoted column names
 test_df \%>\%
   dt_get_dummies(c(col1, col2))
 
@@ -50,5 +53,5 @@ test_df \%>\%
   dt_get_dummies(prefix_sep = ".", drop_first = TRUE)
 
 test_df \%>\%
-  dt_get_dummies(dummify_na = FALSE)
+  dt_get_dummies(c(col1, col2), dummify_na = FALSE)
 }
