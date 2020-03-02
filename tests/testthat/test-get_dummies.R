@@ -16,6 +16,16 @@ test_that("cols = NULL uses all cols - no NAs", {
                            "col2_c", "col2_b", "col2_a"))
 })
 
+test_that("works with data.frame input", {
+  df <- as.data.frame(test_df)
+
+  dummy_df <- dt_get_dummies(df)
+
+  expect_named(dummy_df, c("col1", "col2", "var1",
+                           "col1_a", "col1_b", "col1_c",
+                           "col2_c", "col2_b", "col2_a"))
+})
+
 test_that("cols = NULL uses all cols - with NAs", {
   dummy_df <- dt_get_dummies(test_df2)
 
