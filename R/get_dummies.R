@@ -7,10 +7,10 @@
 #'
 #' @param .data A data.frame or data.table
 #' @param cols If NULL does all character & factor columns. User can input a single column or a vector of columns to dummify
-#' @param prefix logical TRUE/FALSE - If TRUE, a prefix will be added to new column names
-#' @param prefix_sep string Separator for new column names
-#' @param drop_first logical TRUE/FALSE - If TRUE, the first dummy column will be dropped
-#' @param dummify_na logical TRUE/FALSE - If TRUE, NAs will also get dummy columns
+#' @param prefix TRUE/FALSE - If TRUE, a prefix will be added to new column names
+#' @param prefix_sep Separator for new column names
+#' @param drop_first TRUE/FALSE - If TRUE, the first dummy column will be dropped
+#' @param dummify_na TRUE/FALSE - If TRUE, NAs will also get dummy columns
 #'
 #' @export
 #'
