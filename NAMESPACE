@@ -2,6 +2,7 @@
 
 S3method(as_dt,default)
 S3method(dt,data.frame)
+S3method(dt,data.table)
 S3method(dt_anti_join,default)
 S3method(dt_arrange,data.frame)
 S3method(dt_arrange,data.table)

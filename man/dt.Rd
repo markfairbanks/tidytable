@@ -4,58 +4,12 @@
 \alias{dt}
 \title{Pipeable data.table call}
 \usage{
-dt(
-  .data,
-  i,
-  j,
-  by,
-  keyby,
-  with = TRUE,
-  nomatch = getOption("datatable.nomatch", NA),
-  mult = "all",
-  roll = FALSE,
-  rollends = if (roll == "nearest") c(TRUE, TRUE) else if (roll >= 0) c(FALSE, TRUE)
-    else c(TRUE, FALSE),
-  which = FALSE,
-  .SDcols,
-  verbose = getOption("datatable.verbose"),
-  allow.cartesian = getOption("datatable.allow.cartesian"),
-  drop = NULL,
-  on = NULL
-)
+dt(.data, ...)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{i}{See ?data.table:::`[.data.table`}
-
-\item{j}{See ?data.table:::`[.data.table`}
-
-\item{by}{See ?data.table:::`[.data.table`}
-
-\item{keyby}{See ?data.table:::`[.data.table`}
-
-\item{with}{See ?data.table:::`[.data.table`}
-
-\item{nomatch}{See ?data.table:::`[.data.table`}
-
-\item{mult}{See ?data.table:::`[.data.table`}
-
-\item{roll}{See ?data.table:::`[.data.table`}
-
-\item{rollends}{See ?data.table:::`[.data.table`}
-
-\item{which}{See ?data.table:::`[.data.table`}
-
-\item{.SDcols}{See ?data.table:::`[.data.table`}
-
-\item{verbose}{See ?data.table:::`[.data.table`}
-
-\item{allow.cartesian}{See ?data.table:::`[.data.table`}
-
-\item{drop}{See ?data.table:::`[.data.table`}
-
-\item{on}{See ?data.table:::`[.data.table`}
+\item{...}{Arguments passed to data.table call. See ?data.table:::`[.data.table`}
 }
 \description{
 Pipeable data.table call
