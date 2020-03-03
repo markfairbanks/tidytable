@@ -22,11 +22,11 @@ dt <- function(.data, ...) {
 
 #' @export
 dt.data.frame <- function(.data, ...) {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
   dt(.data, ...)
 }
 
 #' @export
-dt.data.table <- function(.data, ...) {
+dt.tidytable <- function(.data, ...) {
   .data[...]
 }

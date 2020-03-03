@@ -29,7 +29,7 @@ dt_summarize <- function(.data, ..., by = NULL) {
 }
 
 #' @export
-dt_summarize.data.table <- function(.data, ..., by = NULL) {
+dt_summarize.tidytable <- function(.data, ..., by = NULL) {
 
   dots <- enexprs(...)
   by <- enexpr(by)
@@ -41,7 +41,7 @@ dt_summarize.data.table <- function(.data, ..., by = NULL) {
 
 #' @export
 dt_summarize.data.frame <- function(.data, ..., by = NULL) {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
   by <- enexpr(by)
 
   dt_summarize(.data, ..., by = !!by)

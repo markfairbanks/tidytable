@@ -36,7 +36,7 @@ dt_select <- function(.data, ...) {
 }
 
 #' @export
-dt_select.data.table <- function(.data, ...) {
+dt_select.tidytable <- function(.data, ...) {
 
   dots <- dots_selector(.data, ...)
 
@@ -47,7 +47,7 @@ dt_select.data.table <- function(.data, ...) {
 
 #' @export
 dt_select.data.frame <- function(.data, ...) {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
 
   dt_select(.data, ...)
 }

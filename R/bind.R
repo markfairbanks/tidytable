@@ -35,7 +35,9 @@ dt_bind_rows.default <- function(..., .id = NULL) {
   if (!all(dt_map_lgl(dots, is.data.table)))
     dots <- dt_map(dots, as.data.table)
 
-  rbindlist(dots, idcol = .id)
+  dots <- rbindlist(dots, idcol = .id)
+
+  as_tidytable(dots)
 }
 
 #' @export
@@ -53,7 +55,7 @@ dt_bind_cols.default <- function(...) {
   if (!all(dt_map_lgl(dots, is.data.table)))
     dots <- dt_map(dots, as.data.table)
 
-  name_fix(setDT(unlist(dots, recursive = FALSE), check.names = FALSE)[])
+  as_tidytable(name_fix(setDT(unlist(dots, recursive = FALSE), check.names = FALSE)[]))
 
 }
 

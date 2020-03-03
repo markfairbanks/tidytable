@@ -63,7 +63,7 @@ dt_rename_across <- function(.data, .cols, .fun, ...) {
 }
 
 #' @export
-dt_rename_across.data.table <- function(.data, .cols, .fun, ...) {
+dt_rename_across.tidytable <- function(.data, .cols, .fun, ...) {
 
   .cols <- enexpr(.cols)
   .cols <- vec_selector(.data, !!.cols) %>%
@@ -86,7 +86,7 @@ dt_rename_across.data.table <- function(.data, .cols, .fun, ...) {
 
 #' @export
 dt_rename_across.data.frame <- function(.data, .cols, .fun, ...) {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
   .cols <- enexpr(.cols)
 
   dt_rename_across(.data, .cols = !!.cols, .fun = .fun, ...)

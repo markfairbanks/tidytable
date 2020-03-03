@@ -32,7 +32,7 @@ dt_relocate <- function(.data, ..., .before = NULL, .after = NULL) {
 }
 
 #' @export
-dt_relocate.data.table <- function(.data, ..., .before = NULL, .after = NULL) {
+dt_relocate.tidytable <- function(.data, ..., .before = NULL, .after = NULL) {
   .before <- enexpr(.before)
   .after <- enexpr(.after)
 
@@ -65,7 +65,7 @@ dt_relocate.data.table <- function(.data, ..., .before = NULL, .after = NULL) {
 
 #' @export
 dt_relocate.data.frame <- function(.data, ..., .before = NULL, .after = NULL) {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
   .before <- enexpr(.before)
   .after <- enexpr(.after)
 

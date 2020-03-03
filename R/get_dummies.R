@@ -54,7 +54,7 @@ dt_get_dummies.data.frame <- function(.data,
                                       drop_first = FALSE,
                                       dummify_na = TRUE) {
 
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
   cols <- enexpr(cols)
 
   dt_get_dummies(.data, cols = !!cols,
@@ -63,7 +63,7 @@ dt_get_dummies.data.frame <- function(.data,
 }
 
 #' @export
-dt_get_dummies.data.table <- function(.data,
+dt_get_dummies.tidytable <- function(.data,
                                       cols = NULL,
                                       prefix = TRUE,
                                       prefix_sep = "_",

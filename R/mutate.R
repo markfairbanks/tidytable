@@ -29,7 +29,7 @@ dt_mutate <- function(.data, ..., by = NULL) {
 }
 
 #' @export
-dt_mutate.data.table <- function(.data, ..., by = NULL) {
+dt_mutate.tidytable <- function(.data, ..., by = NULL) {
 
   dots <- enexprs(...)
   by <- enexpr(by)
@@ -55,7 +55,7 @@ dt_mutate.data.table <- function(.data, ..., by = NULL) {
 
 #' @export
 dt_mutate.data.frame <- function(.data, ..., by = NULL) {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
   by <- enexpr(by)
 
   dt_mutate(.data, ..., by = !!by)

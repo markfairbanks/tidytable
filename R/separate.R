@@ -42,14 +42,14 @@ dt_separate.data.frame <- function(.data, col, into,
   if (missing(col)) abort("col is missing and must be supplied")
   if (missing(into)) abort("into is missing and must be supplied")
 
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
   col <- enexpr(col)
 
   dt_separate(.data, col = !!col, into = into, sep = sep, remove = remove, ...)
 }
 
 #' @export
-dt_separate.data.table <- function(.data, col, into,
+dt_separate.tidytable <- function(.data, col, into,
                                    sep = "[^[:alnum:]]+",
                                    remove = TRUE,
                                    ...) {

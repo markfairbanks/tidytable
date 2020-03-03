@@ -2,7 +2,7 @@
 % Please edit documentation in R/as_dt.R
 \name{as_dt}
 \alias{as_dt}
-\title{as_dt() helper}
+\title{Deprecated for as_tidytable()}
 \usage{
 as_dt(.data)
 }
@@ -10,12 +10,14 @@ as_dt(.data)
 \item{.data}{A data.frame or data.table}
 }
 \description{
-Prevents modify-by-reference/converts a data.frame to a data.table.
+Lifecycle: soft-deprecated
+
+Please use as_tidytable() instead
 }
 \examples{
 example_df <- data.frame(x = 1:10)
 
 example_df \%>\%
-  as_dt() \%>\%
+  as_tidytable() \%>\%
   dt_mutate(double_x = x * 2)
 }

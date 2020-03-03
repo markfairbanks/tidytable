@@ -37,7 +37,7 @@ dt_pivot_wider <- function(.data,
 }
 
 #' @export
-dt_pivot_wider.data.table <- function(.data,
+dt_pivot_wider.tidytable <- function(.data,
                                       id_cols = NULL,
                                       names_from,
                                       names_sep = "_",
@@ -71,21 +71,22 @@ dt_pivot_wider.data.table <- function(.data,
   }
 
   if (length(id_cols) == 0) {
-    dcast(
-      .data,
-      formula = dcast_form,
-      value.var = values_from,
-      fun.aggregate = NULL,
-      sep = names_sep,
-      drop = drop)[, . := NULL][]
+    as_tidytable(
+      dcast(.data,
+            formula = dcast_form,
+            value.var = values_from,
+            fun.aggregate = NULL,
+            sep = names_sep,
+            drop = drop)[, . := NULL][]
+    )
   } else {
-    dcast(
-      .data,
-      formula = dcast_form,
-      value.var = values_from,
-      fun.aggregate = NULL,
-      sep = names_sep,
-      drop = drop)
+    as_tidytable(
+      dcast(.data,
+            formula = dcast_form,
+            value.var = values_from,
+            fun.aggregate = NULL,
+            sep = names_sep,
+            drop = drop))
   }
 }
 
@@ -96,7 +97,7 @@ dt_pivot_wider.data.frame <- function(.data,
                                       names_sep = "_",
                                       values_from,
                                       drop = TRUE) {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
   id_cols <- enexpr(id_cols)
   names_from <- enexpr(names_from)
   values_from <- enexpr(values_from)

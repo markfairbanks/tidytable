@@ -1,5 +1,5 @@
 test_that("dt_distinct() works on all rows", {
-  test_df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "b"))
+  test_df <- tidytable(a = 1:3, b = 4:6, c = c("a", "a", "b"))
   distinct_df <- test_df %>%
     dt_distinct()
 
@@ -13,7 +13,7 @@ test_that("dt_distinct() works on a data.frame", {
     dt_distinct()
 
   expect_equal(names(test_df), names(distinct_df))
-  expect_equal(as.data.table(test_df), distinct_df)
+  expect_equal(as_tidytable(test_df), distinct_df)
 })
 
 test_that("dt_distinct() works on 1 column", {

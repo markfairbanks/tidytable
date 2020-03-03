@@ -28,7 +28,7 @@ dt_drop_na <- function(.data, ...) {
 }
 
 #' @export
-dt_drop_na.data.table <- function(.data, ...) {
+dt_drop_na.tidytable <- function(.data, ...) {
 
   dots <- enexprs(...)
 
@@ -48,7 +48,7 @@ dt_drop_na.data.table <- function(.data, ...) {
 
 #' @export
 dt_drop_na.data.frame <- function(.data, ...) {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
 
   dt_drop_na(.data, ...)
 }

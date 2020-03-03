@@ -43,7 +43,7 @@ dt_pivot_longer <- function(.data,
 }
 
 #' @export
-dt_pivot_longer.data.table <- function(.data,
+dt_pivot_longer.tidytable <- function(.data,
                                        cols = dt_everything(),
                                        names_to = "name",
                                        values_to = "value",
@@ -60,7 +60,8 @@ dt_pivot_longer.data.table <- function(.data,
 
   id_vars <- names[!names %in% cols]
 
-  melt(data = .data,
+  as_tidytable(
+    melt(data = .data,
        id.vars = id_vars,
        measure.vars = cols,
        variable.name = names_to,
@@ -68,7 +69,7 @@ dt_pivot_longer.data.table <- function(.data,
        ...,
        na.rm = values_drop_na,
        variable.factor = FALSE,
-       value.factor = FALSE)
+       value.factor = FALSE))
 }
 
 #' @export
@@ -78,11 +79,13 @@ dt_pivot_longer.data.frame <- function(.data,
                                        values_to = "value",
                                        values_drop_na = FALSE,
                                        ...) {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
   cols <- enexpr(cols)
 
-  dt_pivot_longer(.data, !!cols,
-                  names_to = names_to, values_to = values_to,
-                  values_drop_na = values_drop_na,
-                  ...)
+  .data <- dt_pivot_longer(
+    .data, !!cols,
+    names_to = names_to, values_to = values_to,
+    values_drop_na = values_drop_na, ...)
+
+  .data
 }

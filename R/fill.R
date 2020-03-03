@@ -26,7 +26,7 @@ dt_fill <- function(.data, ..., .direction = c("down", "up", "downup", "updown")
 }
 
 #' @export
-dt_fill.data.table <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
+dt_fill.tidytable <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
   by <- enexpr(by)
 
   if (length(.direction) > 1) .direction <- "down"
@@ -48,7 +48,7 @@ dt_fill.data.table <- function(.data, ..., .direction = c("down", "up", "downup"
 
 #' @export
 dt_fill.data.frame <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
   by <- enexpr(by)
 
   dt_fill(.data, ..., .direction = .direction, by = !!by)

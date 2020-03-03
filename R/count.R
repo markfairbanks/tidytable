@@ -30,25 +30,26 @@ dt_count <- function(.data, ...) {
 }
 
 #' @export
-dt_count.data.table <- function(.data, ...) {
+dt_count.tidytable <- function(.data, ...) {
 
   dots <- enexprs(...)
 
   if (length(dots) == 0) {
-    .data[, list(N = .N)]
+    .data <- .data[, list(N = .N)]
   } else {
     by_vec <- dots_selector(.data, ...) %>%
       as.character()
 
-    eval_tidy(expr(
-      .data[, .N, by = by_vec]
+  .data <- eval_tidy(expr(
+    .data[, .N, by = by_vec]
     ))
   }
+  .data
 }
 
 #' @export
 dt_count.data.frame <- function(.data, ...) {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
 
   dt_count(.data, ...)
 }

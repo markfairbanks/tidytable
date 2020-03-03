@@ -26,7 +26,7 @@ dt_distinct <- function(.data, ...) {
 }
 
 #' @export
-dt_distinct.data.table <- function(.data, ...) {
+dt_distinct.tidytable <- function(.data, ...) {
 
   dots <- enexprs(...)
 
@@ -43,7 +43,7 @@ dt_distinct.data.table <- function(.data, ...) {
 
 #' @export
 dt_distinct.data.frame <- function(.data, ...) {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
 
   dt_distinct(.data, ...)
 }

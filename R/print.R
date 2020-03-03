@@ -1,11 +1,11 @@
 #' @export
-print.data.table = function(x, topn=getOption("datatable.print.topn"),
-                            nrows=getOption("datatable.print.nrows"),
-                            class=getOption("datatable.print.class"),
+print.tidytable <- function(x, topn=getOption("datatable.print.topn"),
+                            nrows=15,
+                            class=TRUE,
                             row.names=getOption("datatable.print.rownames"),
                             col.names=getOption("datatable.print.colnames"),
                             print.keys=getOption("datatable.print.keys"),
-                            trunc.cols=getOption("datatable.print.trunc.cols"),
+                            trunc.cols=TRUE,
                             quote=FALSE,
                             timezone=FALSE, ...) {
   # topn  - print the top topn and bottom topn rows with '---' inbetween (5)
@@ -177,12 +177,12 @@ format.data.table = function (x, ..., justify="none", timezone = FALSE) {
 mimicsAutoPrint = c("knit_print.default")
 # add maybe repr_text.default.  See https://github.com/Rdatatable/data.table/issues/933#issuecomment-220237965
 
-shouldPrint <- function(x) {
-  ret = (.global$print=="" ||   # to save address() calls and adding lots of address strings to R's global cache
-           address(x)!=.global$print)
-  .global$print = ""
-  ret
-}
+# shouldPrint <- function(x) {
+#   ret = (.global$print=="" ||   # to save address() calls and adding lots of address strings to R's global cache
+#            address(x)!=.global$print)
+#   .global$print = ""
+#   ret
+# }
 
 # for removing the head (column names) of matrix output entirely,
 #   as opposed to printing a blank line, for excluding col.names per PR #1483

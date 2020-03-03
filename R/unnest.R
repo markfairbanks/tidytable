@@ -24,7 +24,7 @@ dt_unnest_legacy <- function(.data, col = NULL) {
 
 #' @export
 dt_unnest_legacy.data.frame <- function(.data, col = NULL) {
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+  if (!is_tidytable(.data)) .data <- as_tidytable(.data)
 
   col <- enexpr(col)
 

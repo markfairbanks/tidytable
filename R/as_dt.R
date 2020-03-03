@@ -1,7 +1,10 @@
-#' as_dt() helper
+#' Deprecated for as_tidytable()
 #'
 #' @description
-#' Prevents modify-by-reference/converts a data.frame to a data.table.
+#' Lifecycle: soft-deprecated
+#'
+#' Please use as_tidytable() instead
+#'
 #'
 #' @param .data A data.frame or data.table
 #' @export
@@ -10,7 +13,7 @@
 #' example_df <- data.frame(x = 1:10)
 #'
 #' example_df %>%
-#'   as_dt() %>%
+#'   as_tidytable() %>%
 #'   dt_mutate(double_x = x * 2)
 as_dt <- function(.data) {
   UseMethod("as_dt")
@@ -18,9 +21,7 @@ as_dt <- function(.data) {
 
 #' @export
 as_dt.default <- function(.data) {
-  if (is.data.table(.data)) {
-    shallow(.data)
-  } else {
-    as.data.table(.data)
-  }
+  warning("as_dt() is deprecated, please use `as_tidytable()")
+
+  as_tidytable(.data)
 }
