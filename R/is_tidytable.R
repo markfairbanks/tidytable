@@ -8,11 +8,12 @@
 #' @export
 #'
 #' @examples
-#' dt <- data.tabledata.table(x = 1)
+#' dt <- data.table::data.table(x = 1)
 #'
 #' is_tidytable(dt)
 #'
 #' df <- tidytable(x = 1)
+#'
 #' is_tidytable(df)
 is_tidytable <- function(x) {
   inherits(x, "tidytable")

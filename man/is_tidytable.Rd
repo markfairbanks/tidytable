@@ -13,10 +13,11 @@ is_tidytable(x)
 This function returns TRUE for tidytables or subclasses of tidytables, and FALSE for all other objects.
 }
 \examples{
-dt <- data.tabledata.table(x = 1)
+dt <- data.table::data.table(x = 1)
 
 is_tidytable(dt)
 
 df <- tidytable(x = 1)
+
 is_tidytable(df)
 }
