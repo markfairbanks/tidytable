@@ -5,7 +5,7 @@
   + Class operates like a data.table in all other cases.
   + All tidytable functions automatically convert to `tidytable` class in the background.
 * New functions:
-  + `dt_get_dummies()`: Get dummy vairables
+  + `dt_get_dummies()`: Get dummy variables
   + `dt_separate()`
   + `as_tidytable()`: Convert to data.table/tidytable
   + `is_tidytable()`: Test if an object is a data.table/tidytable
