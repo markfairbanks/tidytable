@@ -1,4 +1,4 @@
-#' Build a data.table
+#' Build a data.table/tidytable
 #'
 #' @description
 #' `tidytable()` constructs a data.table, but one with nice printing features.
@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples
-#' `tidytable(x = c(1,2,3), y = c(4,5,6))`
+#' tidytable(x = c(1,2,3), y = c(4,5,6))
 tidytable <- function(...) {
   as_tidytable(data.table(...))
 }

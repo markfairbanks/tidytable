@@ -2,7 +2,7 @@
 % Please edit documentation in R/tidytable.R
 \name{tidytable}
 \alias{tidytable}
-\title{Build a data.table}
+\title{Build a data.table/tidytable}
 \usage{
 tidytable(...)
 }
@@ -14,5 +14,5 @@ tidytable(...)
 As such it can be effectively used as a data.table would be used.
 }
 \examples{
-`tidytable(x = c(1,2,3), y = c(4,5,6))`
+tidytable(x = c(1,2,3), y = c(4,5,6))
 }

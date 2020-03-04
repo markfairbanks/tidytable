@@ -3,6 +3,8 @@
 #' @description
 #' Pipeable data.table call
 #'
+#' Note: This function does not use data.table's modify-by-reference
+#'
 #' @param .data A data.frame or data.table
 #' @param ... Arguments passed to data.table call. See ?data.table:::`[.data.table`
 #'

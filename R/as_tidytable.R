@@ -1,4 +1,4 @@
-#' Coerce to tidytable
+#' Coerce an object to a data.table/tidytable
 #'
 #' @description
 #' A tidytable object is simply a data.table with nice printing features.
@@ -13,19 +13,31 @@
 #' @examples
 #' data.frame(x = 1:3) %>%
 #'   as_tidytable()
+#'
+#' data.frame(x = 1:3) %>%
+#'   as_dt()
 as_tidytable <- function(x) {
   UseMethod("as_tidytable")
 }
+
+#' @export
+as_tidytable.tidytable <- function(x) {
+    x
+}
+
+#' @export
+as_tidytable.data.table <- function(x) {
+  add_class(x)
+}
+
 #' @export
 as_tidytable.default <- function(x) {
-  if (is_tidytable(x)) {
-    x
-  } else if (is.data.table(x)) {
-    add_class(x)
-  } else {
-    add_class(as.data.table(x))
-  }
+  add_class(as.data.table(x))
 }
+
+#' @export
+#' @rdname as_tidytable
+as_dt <- as_tidytable
 
 # Add dt class to an object
 add_class <- function(.data) {

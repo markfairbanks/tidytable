@@ -2,9 +2,12 @@
 % Please edit documentation in R/as_tidytable.R
 \name{as_tidytable}
 \alias{as_tidytable}
-\title{Coerce to tidytable}
+\alias{as_dt}
+\title{Coerce an object to a data.table/tidytable}
 \usage{
 as_tidytable(x)
+
+as_dt(x)
 }
 \arguments{
 \item{x}{An R object}
@@ -18,4 +21,7 @@ As such this function will rarely need to be used by the user.
 \examples{
 data.frame(x = 1:3) \%>\%
   as_tidytable()
+
+data.frame(x = 1:3) \%>\%
+  as_dt()
 }

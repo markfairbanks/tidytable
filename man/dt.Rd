@@ -13,6 +13,8 @@ dt(.data, ...)
 }
 \description{
 Pipeable data.table call
+
+Note: This function does not use data.table's modify-by-reference
 }
 \examples{
 example_dt <- data.table::data.table(
