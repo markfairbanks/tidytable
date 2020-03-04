@@ -20,7 +20,7 @@ dt_filter <- function(.data, ...) {
 }
 
 #' @export
-dt_filter.data.table <- function(.data, ...) {
+dt_filter.tidytable <- function(.data, ...) {
 
   dots <- enexprs(...)
 
@@ -34,7 +34,7 @@ dt_filter.data.table <- function(.data, ...) {
 
 #' @export
 dt_filter.data.frame <- function(.data, ...) {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
 
   dt_filter(.data, ...)
 }

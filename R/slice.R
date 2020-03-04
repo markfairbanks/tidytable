@@ -39,7 +39,7 @@ dt_slice <- function(.data, rows = 1:5, by = NULL) {
 }
 
 #' @export
-dt_slice.data.table <- function(.data, rows = 1:5, by = NULL) {
+dt_slice.tidytable <- function(.data, rows = 1:5, by = NULL) {
 
   rows <- enexpr(rows) # Needed so 1:.N works
   by <- enexpr(by)
@@ -58,7 +58,7 @@ dt_slice.data.table <- function(.data, rows = 1:5, by = NULL) {
 #' @export
 dt_slice.data.frame <- function(.data, rows = 1:5, by = NULL) {
 
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
   rows <- enexpr(rows)
   by <- enexpr(by)
 
@@ -72,7 +72,7 @@ dt_slice_head <- function(.data, n = 5, by = NULL) {
 }
 
 #' @export
-dt_slice_head.data.table <- function(.data, n = 5, by = NULL) {
+dt_slice_head.tidytable <- function(.data, n = 5, by = NULL) {
 
   n <- enexpr(n)
   by <- enexpr(by)
@@ -85,7 +85,7 @@ dt_slice_head.data.table <- function(.data, n = 5, by = NULL) {
 #' @export
 dt_slice_head.data.frame <- function(.data, n = 5, by = NULL) {
 
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
   n <- enexpr(n)
   by <- enexpr(by)
 
@@ -99,7 +99,7 @@ dt_slice_tail <- function(.data, n = 5, by = NULL) {
 }
 
 #' @export
-dt_slice_tail.data.table <- function(.data, n = 5, by = NULL) {
+dt_slice_tail.tidytable <- function(.data, n = 5, by = NULL) {
 
   n <- enexpr(n)
   by <- enexpr(by)
@@ -112,7 +112,7 @@ dt_slice_tail.data.table <- function(.data, n = 5, by = NULL) {
 #' @export
 dt_slice_tail.data.frame <- function(.data, n = 5, by = NULL) {
 
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
   n <- enexpr(n)
   by <- enexpr(by)
 
@@ -127,7 +127,7 @@ dt_slice_max <- function(.data, order_by, n = 1, by = NULL) {
 
 #' @export
 dt_slice_max.data.frame <- function(.data, order_by, n = 1, by = NULL) {
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+  if (!is_tidytable(.data)) .data <- as_tidytable(.data)
 
   if (missing(order_by)) stop("order_by must be supplied")
 
@@ -148,7 +148,7 @@ dt_slice_min <- function(.data, order_by, n = 1, by = NULL) {
 
 #' @export
 dt_slice_min.data.frame <- function(.data, order_by, n = 1, by = NULL) {
-  if (!is.data.table(.data)) .data <- as.data.table(.data)
+  if (!is_tidytable(.data)) .data <- as_tidytable(.data)
 
   if (missing(order_by)) stop("order_by must be supplied")
 

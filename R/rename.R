@@ -20,7 +20,7 @@ dt_rename <- function(.data, ...) {
 }
 
 #' @export
-dt_rename.data.table <- function(.data, ...) {
+dt_rename.tidytable <- function(.data, ...) {
 
   dots <- enexprs(...)
   .data <- shallow(.data)
@@ -35,7 +35,7 @@ dt_rename.data.table <- function(.data, ...) {
 
 #' @export
 dt_rename.data.frame <- function(.data, ...) {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
 
   dt_rename(.data, ...)
 }

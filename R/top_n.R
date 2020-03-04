@@ -27,7 +27,7 @@ dt_top_n <- function(.data, n = 5, wt = NULL, by = NULL) {
 }
 
 #' @export
-dt_top_n.data.table <- function(.data, n = 5, wt = NULL, by = NULL) {
+dt_top_n.tidytable <- function(.data, n = 5, wt = NULL, by = NULL) {
 
   n <- enexpr(n)
   wt <- enexpr(wt)
@@ -45,7 +45,7 @@ dt_top_n.data.table <- function(.data, n = 5, wt = NULL, by = NULL) {
 #' @export
 dt_top_n.data.frame <- function(.data, n = 5, wt = NULL, by = NULL) {
 
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
   n < enexpr(n)
   wt <- enexpr(wt)
   by <- enexpr(by)

@@ -30,7 +30,7 @@ dt_group_nest <- function(.data, ..., .key = "data") {
 }
 
 #' @export
-dt_group_nest.data.table <- function(.data, ..., .key = "data") {
+dt_group_nest.tidytable <- function(.data, ..., .key = "data") {
 
   dots <- enexprs(...)
 
@@ -52,7 +52,7 @@ dt_group_nest.data.table <- function(.data, ..., .key = "data") {
 
 #' @export
 dt_group_nest.data.frame <- function(.data, ..., .key = "data") {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
 
   dt_group_nest(.data, ..., .key = .key)
 }

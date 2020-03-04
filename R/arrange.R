@@ -20,18 +20,20 @@ dt_arrange <- function(.data, ...) {
 }
 
 #' @export
-dt_arrange.data.table <- function(.data, ...) {
+dt_arrange.tidytable <- function(.data, ...) {
 
   dots <- enexprs(...)
 
-  eval_tidy(expr(
+  .data <- eval_tidy(expr(
     .data[order(!!!dots)]
-  ))
+    ))
+
+  .data
 }
 
 #' @export
 dt_arrange.data.frame <- function(.data, ...) {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
 
   dt_arrange(.data, ...)
 }

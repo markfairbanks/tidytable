@@ -69,7 +69,7 @@ dt_mutate_across <- function(.data, .cols, .funs, ..., by = NULL) {
 }
 
 #' @export
-dt_mutate_across.data.table <- function(.data, .cols, .funs, ..., by = NULL) {
+dt_mutate_across.tidytable <- function(.data, .cols, .funs, ..., by = NULL) {
 
   .cols <- enexpr(.cols)
   .cols <- vec_selector(.data, !!.cols) %>%
@@ -107,7 +107,7 @@ dt_mutate_across.data.table <- function(.data, .cols, .funs, ..., by = NULL) {
 
 #' @export
 dt_mutate_across.data.frame <- function(.data, .cols, .funs, ..., by = NULL) {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
   .cols <- enexpr(.cols)
   by <- enexpr(by)
 

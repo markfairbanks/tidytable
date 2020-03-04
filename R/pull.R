@@ -20,7 +20,7 @@ dt_pull <- function(.data, var = NULL) {
 }
 
 #' @export
-dt_pull.data.table <- function(.data, var = NULL) {
+dt_pull.tidytable <- function(.data, var = NULL) {
 
   var <- enexpr(var)
   if (is.null(var)) stop("var must be supplied")
@@ -32,7 +32,7 @@ dt_pull.data.table <- function(.data, var = NULL) {
 
 #' @export
 dt_pull.data.frame <- function(.data, var = NULL) {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
   var <- enexpr(var)
 
   dt_pull(.data, !!var)

@@ -11,3 +11,4 @@ shallow <- function(x, cols = names(x), reset_class = FALSE) {
   setattr(ans, 'class', class)
   ans[]
 }
+

@@ -26,8 +26,8 @@ dt_left_join <- function(x, y, by = NULL) {
 #' @export
 dt_left_join.default <- function(x, y, by = NULL) {
   if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-  if (!is.data.table(x)) x <- as.data.table(x)
-  if (!is.data.table(y)) y <- as.data.table(y)
+  if (!is.data.table(x)) x <- as_tidytable(x)
+  if (!is.data.table(y)) y <- as_tidytable(y)
 
   by_x_y <- get_bys(x, y, by)
 
@@ -51,8 +51,8 @@ dt_inner_join <- function(x, y, by = NULL) {
 #' @export
 dt_inner_join.default <- function(x, y, by = NULL) {
   if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-  if (!is.data.table(x)) x <- as.data.table(x)
-  if (!is.data.table(y)) y <- as.data.table(y)
+  if (!is.data.table(x)) x <- as_tidytable(x)
+  if (!is.data.table(y)) y <- as_tidytable(y)
 
   by_x_y <- get_bys(x, y, by)
 
@@ -74,8 +74,8 @@ dt_right_join <- function(x, y, by = NULL) {
 #' @export
 dt_right_join.default <- function(x, y, by = NULL) {
   if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-  if (!is.data.table(x)) x <- as.data.table(x)
-  if (!is.data.table(y)) y <- as.data.table(y)
+  if (!is.data.table(x)) x <- as_tidytable(x)
+  if (!is.data.table(y)) y <- as_tidytable(y)
 
   by_x_y <- get_bys(x, y, by)
 
@@ -109,8 +109,8 @@ dt_anti_join <- function(x, y, by = NULL) {
 #' @export
 dt_anti_join.default <- function(x, y, by = NULL) {
   if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-  if (!is.data.table(x)) x <- as.data.table(x)
-  if (!is.data.table(y)) y <- as.data.table(y)
+  if (!is.data.table(x)) x <- as_tidytable(x)
+  if (!is.data.table(y)) y <- as_tidytable(y)
 
   by_x_y <- get_bys(x, y, by)
 
@@ -143,8 +143,8 @@ get_bys <- function(x, y, by) {
 
 join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
   if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-  if (!is.data.table(x)) x <- as.data.table(x)
-  if (!is.data.table(y)) y <- as.data.table(y)
+  if (!is.data.table(x)) x <- as_tidytable(x)
+  if (!is.data.table(y)) y <- as_tidytable(y)
 
   by_x_y <- get_bys(x, y, by)
 

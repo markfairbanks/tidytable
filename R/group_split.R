@@ -21,7 +21,7 @@ dt_group_split <- function(.data, ...) {
 }
 
 #' @export
-dt_group_split.data.table <- function(.data, ...) {
+dt_group_split.tidytable <- function(.data, ...) {
 
   dots <- enexprs(...)
 
@@ -37,7 +37,7 @@ dt_group_split.data.table <- function(.data, ...) {
 
 #' @export
 dt_group_split.data.frame <- function(.data, ...) {
-  .data <- as.data.table(.data)
+  .data <- as_tidytable(.data)
 
   dt_group_split(.data, ...)
 }

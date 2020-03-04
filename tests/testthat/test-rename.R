@@ -67,10 +67,10 @@ test_that("rename_all() works for all variables w/ data.frame", {
 test_that("rename_if() works with twiddle", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   anon_df <- df %>%
-    as_dt() %>%
+    as_tidytable() %>%
     dt_rename_if(is.character, function(.x) paste0(.x, "_character"))
   twiddle_df <- df %>%
-    as_dt() %>%
+    as_tidytable() %>%
     dt_rename_if(is.character, ~ paste0(.x, "_character"))
 
   expect_named(twiddle_df, c("x","y","z_character"))
@@ -80,10 +80,10 @@ test_that("rename_if() works with twiddle", {
 test_that("rename_at() works with twiddle", {
   df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   anon_df <- df %>%
-    as_dt() %>%
+    as_tidytable() %>%
     dt_rename_at(c(dt_starts_with("x")), ~ paste0(.x, "_append"))
   twiddle_df <- df %>%
-    as_dt() %>%
+    as_tidytable() %>%
     dt_rename_at(c(dt_starts_with("x")), ~ paste0(.x, "_append"))
 
   expect_named(twiddle_df, c("x_start_append", "end_x", "z"))
@@ -93,10 +93,10 @@ test_that("rename_at() works with twiddle", {
 test_that("rename_across() works with twiddle", {
   df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   anon_df <- df %>%
-    as_dt() %>%
+    as_tidytable() %>%
     dt_rename_across(c(dt_starts_with("x")), ~ paste0(.x, "_append"))
   twiddle_df <- df %>%
-    as_dt() %>%
+    as_tidytable() %>%
     dt_rename_across(c(dt_starts_with("x")), ~ paste0(.x, "_append"))
 
   expect_equal(anon_df, twiddle_df)
@@ -105,11 +105,11 @@ test_that("rename_across() works with twiddle", {
 test_that("rename_all() works with twiddle", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2))
   anon_df <- df %>%
-    as_dt() %>%
+    as_tidytable() %>%
     dt_rename_all(function(.x) paste0(.x, "_append"))
 
   twiddle_df <- df %>%
-    as_dt() %>%
+    as_tidytable() %>%
     dt_rename_all(~ paste0(.x, "_append"))
 
   expect_named(twiddle_df, c("x_append", "y_append"))
