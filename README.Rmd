@@ -260,8 +260,7 @@ Below are some speed comparisons of various functions. More functions will get a
 
 A few notes:
 
-* The main metric of interest is the time comparison of a tidyverse function vs. its equivalent tidytable function.
-  + Comparing times from separate functions won't be very useful. For example - the `summarize()` tests were performed on a different dataset from `case_when()`.
+* Comparing times from separate functions won't be very useful. For example - the `summarize()` tests were performed on a different dataset from `case_when()`.
 * `setDTthreads(4)` was used for `data.table` & `tidytable` timings.
 * Modify-by-reference was used in `data.table` when being compared to `dt_mutate()` & `dplyr::mutate()`
 * `dt_fill()` & `tidyr::fill()` both work with character/factor/logical columns, whereas `data.table::nafill()` does not. Testing only included numeric columns due to this constraint.
@@ -277,10 +276,10 @@ iters <- 5
 
 set.seed(123)
 data_size <- 10000000
-test_dt <- data.table(a = sample(1:20, data_size, TRUE),
-                      b = sample(1:20, data_size, TRUE),
-                      c = sample(c("a","a","b","c","d"), data_size, TRUE),
-                      d = sample(c("a","a","b","c","d"), data_size, TRUE))
+test_dt <- tidytable(a = sample(1:20, data_size, TRUE),
+                     b = sample(1:20, data_size, TRUE),
+                     c = sample(c("a","a","b","c","d"), data_size, TRUE),
+                     d = sample(c("a","a","b","c","d"), data_size, TRUE))
 
 test_tbl <- as_tibble(test_dt)
 ```
@@ -339,10 +338,10 @@ mutate_marks <- mutate_marks %>%
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
 data_size <- 1000000
-test_dt <- data.table(a = sample(1:20, data_size, TRUE),
-                      b = sample(1:20, data_size, TRUE),
-                      c = sample(c("a","a","b","c","d"), data_size, TRUE),
-                      d = sample(c("a","a","b","c","d"), data_size, TRUE))
+test_dt <- tidytable(a = sample(1:20, data_size, TRUE),
+                     b = sample(1:20, data_size, TRUE),
+                     c = sample(c("a","a","b","c","d"), data_size, TRUE),
+                     d = sample(c("a","a","b","c","d"), data_size, TRUE))
 
 test_tbl <- as_tibble(test_dt)
 
@@ -379,7 +378,7 @@ distinct_marks <- distinct_marks %>%
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
 x <- 1:2e6
-fill_dt <- data.table(
+fill_dt <- tidytable(
   x = x,
   y = shift(x, 10L),
   z = shift(x, -10L),
@@ -406,7 +405,7 @@ fill_marks <- fill_marks %>%
 ```{r case, echo=FALSE}
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-case_dt <- data.table(x = rnorm(3000000)) %>%
+case_dt <- tidytable(x = rnorm(3000000)) %>%
   dt_mutate(median_x = median(x))
 
 case_tbl <- as_tibble(case_dt)
@@ -418,10 +417,10 @@ case_marks <- bench::mark(
                                       is.na(x) ~ "unknown",
                                       TRUE ~ "other")),
   tidytable = dt_mutate(case_dt,
-                     test = dt_case(x < median_x, "low",
-                                    x >= median_x, "high",
-                                    is.na(x), "unknown",
-                                    default = "other")),
+                       test = dt_case(x < median_x, "low",
+                                      x >= median_x, "high",
+                                      is.na(x), "unknown",
+                                      default = "other")),
   data.table = tidytable:::shallow(case_dt)[,':='(test = fifelse(x < median_x, "low",
                                                   fifelse(x >= median_x, "high",
                                                           fifelse(is.na(x), "unknown", "other"))))],
@@ -442,7 +441,7 @@ wider_tbl <- expand_grid(case = sprintf("%03d", seq(1, 5000)),
                         name = c("x", "y", "z")) %>%
   mutate(value = rnorm(nrow(.)))
 
-wider_dt <- as.data.table(wider_tbl)
+wider_dt <- as_tidytable(wider_tbl)
 
 wider_marks <- bench::mark(
   tidyverse = pivot_wider(wider_tbl, names_from = name, values_from = value),
@@ -488,8 +487,8 @@ left_dt <- data.table(a = sample(1:20, data_size, TRUE),
                       c = sample(c("a","a","b","c","d"), data_size, TRUE),
                       d = sample(c("a","a","b","c","d"), data_size, TRUE))
 
-right_dt <- data.table(c = c("a","b","c","d"),
-                       e = c(1,2,3,4))
+right_dt <- tidytable(c = c("a","b","c","d"),
+                      e = c(1,2,3,4))
 
 left_tbl <- as_tibble(left_dt)
 right_tbl <- as_tibble(right_dt)
@@ -528,7 +527,7 @@ unnest_dt <- tibble(
   list_column = list(c(LETTERS[1:5]), "F", "G", "H", "I")
 ) %>%
   dplyr::sample_frac(10000, replace = TRUE) %>%
-  as.data.table()
+  as_tidytable()
 
 unnest_tbl <- as_tibble(unnest_dt)
 
