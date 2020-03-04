@@ -11,7 +11,7 @@ tidytable(...)
 }
 \description{
 \code{tidytable()} constructs a data.table, but one with nice printing features.
-As such it can be effectively used as a data.table would be used.
+As such it can be used exactly like a data.table would be used.
 }
 \examples{
 tidytable(x = c(1,2,3), y = c(4,5,6))
