@@ -24,16 +24,11 @@ knitr::opts_chunk$set(
 
 The goal of `tidytable` is to be a tidy interface to `data.table`.
 
-`tidytable` is `rlang` compatible.
-[See examples here](https://markfairbanks.github.io/tidytable/#rlang-compatibility)
-
 #### Why `tidytable`?
 
-`tidytable` gives the user `tidyverse`-like syntax with `data.table` speed.
-
-`tidytable` started as a complement to the [`dtplyr`](https://github.com/tidyverse/dtplyr) package, since `dtplyr` is missing some of `dplyr`'s functionality and doesn't cover any `tidyr` functions. However translations of `dplyr`'s core verbs (mutate, arrange, etc.) are now included in `tidytable` to allow the user access to all functions in one place.
-
-As such you can use this as a one stop shop for `data.table` translations, or you can use it to complement your current `dtplyr` workflow.
+* `tidyverse`-like syntax with `data.table` speed
+* `rlang` compatibility - [See here](https://markfairbanks.github.io/tidytable/#rlang-compatibility)
+* Includes functions that [`dtplyr`](https://github.com/tidyverse/dtplyr) is missing, including many `tidyr` functions
 
 Note: `tidytable` functions do not use `data.table`'s modify-by-reference, and instead use the copy-on-modify principles followed by the `tidyverse` and base R.
 

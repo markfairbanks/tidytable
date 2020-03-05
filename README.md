@@ -14,24 +14,14 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 
 The goal of `tidytable` is to be a tidy interface to `data.table`.
 
-`tidytable` is `rlang` compatible. [See examples
-here](https://markfairbanks.github.io/tidytable/#rlang-compatibility)
-
 #### Why `tidytable`?
 
-`tidytable` gives the user `tidyverse`-like syntax with `data.table`
-speed.
-
-`tidytable` started as a complement to the
-[`dtplyr`](https://github.com/tidyverse/dtplyr) package, since `dtplyr`
-is missing some of `dplyr`’s functionality and doesn’t cover any `tidyr`
-functions. However translations of `dplyr`’s core verbs (mutate,
-arrange, etc.) are now included in `tidytable` to allow the user access
-to all functions in one place.
-
-As such you can use this as a one stop shop for `data.table`
-translations, or you can use it to complement your current `dtplyr`
-workflow.
+  - `tidyverse`-like syntax with `data.table` speed
+  - `rlang` compatibility - [See
+    here](https://markfairbanks.github.io/tidytable/#rlang-compatibility)
+  - Includes functions that
+    [`dtplyr`](https://github.com/tidyverse/dtplyr) is missing,
+    including many `tidyr` functions
 
 Note: `tidytable` functions do not use `data.table`’s
 modify-by-reference, and instead use the copy-on-modify principles
@@ -354,17 +344,17 @@ all_marks
 #> # A tibble: 13 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         392ms     39.5ms    32.5ms     10.1%                 
-#>  2 case_when       483ms     121ms     139ms      25.1%                 
-#>  3 distinct        88.9ms    21.1ms    19.7ms     23.7%                 
-#>  4 fill            113.4ms   46.5ms    37.2ms     41.0%                 
-#>  5 filter          256ms     215ms     204ms      84.0%                 
-#>  6 inner_join      58.3ms    68.2ms    54.6ms     117.0%                
-#>  7 left_join       63.9ms    58.7ms    38.5ms     91.9%                 
-#>  8 mutate          68.8ms    48.1ms    72.8ms     69.9%                 
-#>  9 nest            6.36ms    2.06ms    1.26ms     32.4%                 
-#> 10 pivot_longer    149ms     26.7ms    13.7ms     17.9%                 
-#> 11 pivot_wider     843ms     180ms     183ms      21.4%                 
-#> 12 summarize       436ms     155ms     170ms      35.6%                 
-#> 13 unnest          165.41ms  7.76ms    5.58ms     4.7%
+#>  1 arrange         417.3ms   33.2ms    37.5ms     8.0%                  
+#>  2 case_when       477ms     128ms     152ms      26.8%                 
+#>  3 distinct        96.7ms    22.1ms    15.2ms     22.9%                 
+#>  4 fill            126ms     50.4ms    44ms       40.0%                 
+#>  5 filter          291ms     219ms     211ms      75.3%                 
+#>  6 inner_join      56.4ms    63.7ms    63.2ms     112.9%                
+#>  7 left_join       68.6ms    61.1ms    39.3ms     89.1%                 
+#>  8 mutate          73.4ms    61.7ms    74.7ms     84.1%                 
+#>  9 nest            6.2ms     2.88ms    1.66ms     46.5%                 
+#> 10 pivot_longer    135.9ms   27.1ms    13.4ms     19.9%                 
+#> 11 pivot_wider     892ms     210ms     218ms      23.5%                 
+#> 12 summarize       511ms     176ms     177ms      34.4%                 
+#> 13 unnest          164.67ms  7.55ms    6.8ms      4.6%
 ```
