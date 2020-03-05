@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidytable <img src="man/figures/logo.png" align="right" width="18%" height="18%" />
+# tidytable <img src="man/figures/logo.png" align="right" width="16%" height="16%" />
 
 <!-- badges: start -->
 
@@ -354,17 +354,17 @@ all_marks
 #> # A tibble: 13 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         391.2ms   40.1ms    48.2ms     10.3%                 
-#>  2 case_when       486ms     136ms     156ms      28.0%                 
-#>  3 distinct        122.3ms   23.3ms    21.6ms     19.1%                 
-#>  4 fill            124.9ms   48.8ms    49.9ms     39.1%                 
-#>  5 filter          262ms     210ms     208ms      80.2%                 
-#>  6 inner_join      63.2ms    66.5ms    64.8ms     105.2%                
-#>  7 left_join       69.9ms    69.5ms    50.4ms     99.4%                 
-#>  8 mutate          66ms      53.3ms    68.9ms     80.8%                 
-#>  9 nest            7.22ms    2.12ms    2.13ms     29.4%                 
-#> 10 pivot_longer    160.7ms   33.6ms    15.7ms     20.9%                 
-#> 11 pivot_wider     968ms     235ms     243ms      24.3%                 
-#> 12 summarize       481ms     145ms     162ms      30.1%                 
-#> 13 unnest          174.42ms  7.61ms    5.82ms     4.4%
+#>  1 arrange         392ms     39.5ms    32.5ms     10.1%                 
+#>  2 case_when       483ms     121ms     139ms      25.1%                 
+#>  3 distinct        88.9ms    21.1ms    19.7ms     23.7%                 
+#>  4 fill            113.4ms   46.5ms    37.2ms     41.0%                 
+#>  5 filter          256ms     215ms     204ms      84.0%                 
+#>  6 inner_join      58.3ms    68.2ms    54.6ms     117.0%                
+#>  7 left_join       63.9ms    58.7ms    38.5ms     91.9%                 
+#>  8 mutate          68.8ms    48.1ms    72.8ms     69.9%                 
+#>  9 nest            6.36ms    2.06ms    1.26ms     32.4%                 
+#> 10 pivot_longer    149ms     26.7ms    13.7ms     17.9%                 
+#> 11 pivot_wider     843ms     180ms     183ms      21.4%                 
+#> 12 summarize       436ms     155ms     170ms      35.6%                 
+#> 13 unnest          165.41ms  7.76ms    5.58ms     4.7%
 ```
