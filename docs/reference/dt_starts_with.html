@@ -163,11 +163,13 @@ dt_everything(): Matches all variables
   <span class='kw'>double_y</span> <span class='kw'>=</span> <span class='fl'>4</span>)
 
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='dt_select.html'>dt_select</a></span>(<span class='fu'>dt_starts_with</span>(<span class='st'>"x"</span>))</div><div class='output co'>#&gt;    x
-#&gt; 1: 1</div><div class='input'>
+  <span class='fu'><a href='dt_select.html'>dt_select</a></span>(<span class='fu'>dt_starts_with</span>(<span class='st'>"x"</span>))</div><div class='output co'>#&gt;        x
+#&gt;    &lt;dbl&gt;
+#&gt; 1:     1</div><div class='input'>
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='dt_select.html'>dt_select</a></span>(<span class='fu'>dt_ends_with</span>(<span class='st'>"y"</span>))</div><div class='output co'>#&gt;    y double_y
-#&gt; 1: 2        4</div></pre>
+  <span class='fu'><a href='dt_select.html'>dt_select</a></span>(<span class='fu'>dt_ends_with</span>(<span class='st'>"y"</span>))</div><div class='output co'>#&gt;        y double_y
+#&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1:     2        4</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

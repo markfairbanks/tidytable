@@ -78,18 +78,22 @@
   <div class="contents col-md-9">
 <div id="tidytable" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#tidytable" class="anchor"></a>tidytable <img src="reference/figures/logo.png" align="right" width="18%" height="18%">
+<a href="#tidytable" class="anchor"></a>tidytable <img src="reference/figures/logo.png" align="right" width="16%" height="16%">
 </h1></div>
 <!-- badges: start -->
 
 <p>The goal of <code>tidytable</code> is to be a tidy interface to <code>data.table</code>.</p>
-<p><code>tidytable</code> is <code>rlang</code> compatible. <a href="https://markfairbanks.github.io/tidytable/#rlang-compatibility">See examples here</a></p>
 <div id="why-tidytable" class="section level4">
 <h4 class="hasAnchor">
 <a href="#why-tidytable" class="anchor"></a>Why <code>tidytable</code>?</h4>
-<p><code>tidytable</code> gives the user <code>tidyverse</code>-like syntax with <code>data.table</code> speed.</p>
-<p><code>tidytable</code> started as a complement to the <a href="https://github.com/tidyverse/dtplyr"><code>dtplyr</code></a> package, since <code>dtplyr</code> is missing some of <code>dplyr</code>’s functionality and doesn’t cover any <code>tidyr</code> functions. However translations of <code>dplyr</code>’s core verbs (mutate, arrange, etc.) are now included in <code>tidytable</code> to allow the user access to all functions in one place.</p>
-<p>As such you can use this as a one stop shop for <code>data.table</code> translations, or you can use it to complement your current <code>dtplyr</code> workflow.</p>
+<ul>
+<li>
+<code>tidyverse</code>-like syntax with <code>data.table</code> speed</li>
+<li>
+<code>rlang</code> compatibility - <a href="https://markfairbanks.github.io/tidytable/#rlang-compatibility">See here</a>
+</li>
+<li>Includes functions that <a href="https://github.com/tidyverse/dtplyr"><code>dtplyr</code></a> is missing, including many <code>tidyr</code> functions</li>
+</ul>
 <p>Note: <code>tidytable</code> functions do not use <code>data.table</code>’s modify-by-reference, and instead use the copy-on-modify principles followed by the <code>tidyverse</code> and base R.</p>
 </div>
 <div id="installation" class="section level2">
@@ -99,7 +103,7 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"tidytable"</span>)</a></code></pre></div>
 <p>Or install the development version from <a href="https://github.com/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"markfairbanks/tidytable"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"markfairbanks/tidytable"</span>)</a></code></pre></div>
 </div>
 <div id="tidytable-functions" class="section level2">
 <h2 class="hasAnchor">
@@ -112,6 +116,7 @@
 <li>
 <code><a href="reference/dt.html">dt()</a></code>: Pipeable <code>data.table</code> syntax. <a href="https://markfairbanks.github.io/tidytable/#dt-helper">See here</a>
 </li>
+<li><code><a href="reference/dt_get_dummies.html">dt_get_dummies()</a></code></li>
 <li><code><a href="reference/grapes-notin-grapes.html">%notin%</a></code></li>
 </ul>
 </div>
@@ -144,7 +149,7 @@
 <a href="#other-dplyr-functions" class="anchor"></a>Other dplyr functions</h5>
 <ul>
 <li>
-<code><a href="reference/dt_bind_rows.html">dt_bind_rows()</a></code> &amp; <code><a href="reference/dt_bind_rows.html">dt_bind_cols()</a></code>
+<code><a href="reference/dt_bind_rows.html">dt_bind_cols()</a></code> &amp; <code><a href="reference/dt_bind_rows.html">dt_bind_rows()</a></code>
 </li>
 <li>
 <code><a href="reference/dt_case.html">dt_case()</a></code>: Similar to <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">dplyr::case_when()</a></code>. See <code>?dt_case()</code> for syntax</li>
@@ -154,10 +159,16 @@
 <li>
 <code><a href="reference/dt_distinct.html">dt_distinct()</a></code> - <strong>ES</strong>
 </li>
+<li>Joins: <code><a href="reference/dt_left_join.html">dt_left_join()</a></code>, <code><a href="reference/dt_left_join.html">dt_inner_join()</a></code>, <code><a href="reference/dt_left_join.html">dt_right_join()</a></code>, <code><a href="reference/dt_left_join.html">dt_full_join()</a></code>, &amp; <code><a href="reference/dt_left_join.html">dt_anti_join()</a></code>
+</li>
 <li><code><a href="reference/dt_pull.html">dt_pull()</a></code></li>
+<li><code><a href="reference/dt_relocate.html">dt_relocate()</a></code></li>
 <li>
 <code><a href="reference/dt_rename.html">dt_rename()</a></code>: <code>_if()</code>/<code>_at()</code>/<code>_all()</code>/<code>_across()</code> - <strong>ES</strong>
 </li>
+<li>Select helpers: <code><a href="reference/dt_starts_with.html">dt_starts_with()</a></code>, <code><a href="reference/dt_starts_with.html">dt_ends_with()</a></code>, <code><a href="reference/dt_starts_with.html">dt_contains()</a></code>, <code><a href="reference/dt_starts_with.html">dt_everything()</a></code>
+</li>
+<li><code><a href="reference/dt_separate.html">dt_separate()</a></code></li>
 <li>
 <code><a href="reference/dt_slice.html">dt_slice()</a></code>: <code>_head()</code>/<code>_tail()</code>/<code>_max()</code>/<code>_min()</code>
 <ul>
@@ -165,10 +176,6 @@
 </ul>
 </li>
 <li><code><a href="reference/dt_top_n.html">dt_top_n()</a></code></li>
-<li>Joins: <code><a href="reference/dt_left_join.html">dt_left_join()</a></code>, <code><a href="reference/dt_left_join.html">dt_inner_join()</a></code>, <code><a href="reference/dt_left_join.html">dt_right_join()</a></code>, <code><a href="reference/dt_left_join.html">dt_full_join()</a></code>, &amp; <code><a href="reference/dt_left_join.html">dt_anti_join()</a></code>
-</li>
-<li>Select helpers: <code><a href="reference/dt_starts_with.html">dt_starts_with()</a></code>, <code><a href="reference/dt_starts_with.html">dt_ends_with()</a></code>, <code><a href="reference/dt_starts_with.html">dt_contains()</a></code>, <code><a href="reference/dt_starts_with.html">dt_everything()</a></code>
-</li>
 </ul>
 </div>
 </div>
@@ -185,13 +192,12 @@
 <li>
 <code><a href="reference/dt_group_split.html">dt_group_split()</a></code> - <strong>ES</strong>
 </li>
+<li>Nesting: <code><a href="reference/dt_group_nest.html">dt_group_nest()</a></code> - <strong>ES</strong> &amp; <code><a href="reference/dt_unnest_legacy.html">dt_unnest_legacy()</a></code>
+</li>
 <li>
-<code><a href="reference/dt_pivot_wider.html">dt_pivot_wider()</a></code> - <strong>ES</strong> &amp; <code><a href="reference/dt_pivot_longer.html">dt_pivot_longer()</a></code> - <strong>ES</strong>
+<code><a href="reference/dt_pivot_longer.html">dt_pivot_longer()</a></code> - <strong>ES</strong> &amp; <code><a href="reference/dt_pivot_wider.html">dt_pivot_wider()</a></code> - <strong>ES</strong>
 </li>
 <li><code><a href="reference/dt_replace_na.html">dt_replace_na()</a></code></li>
-<li>
-<code><a href="reference/dt_group_nest.html">dt_group_nest()</a></code> - <strong>ES</strong> &amp; <code><a href="reference/dt_unnest_legacy.html">dt_unnest_legacy()</a></code>
-</li>
 </ul>
 </div>
 <div id="purrr" class="section level3">
@@ -218,10 +224,11 @@
 <a class="sourceLine" id="cb3-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="reference/dt_arrange.html">dt_arrange</a></span>(x, y) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb3-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate.html">dt_mutate</a></span>(<span class="dt">double_x =</span> x <span class="op">*</span><span class="st"> </span><span class="dv">2</span>,</a>
 <a class="sourceLine" id="cb3-11" data-line-number="11">            <span class="dt">double_y =</span> y <span class="op">*</span><span class="st"> </span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;    x y z double_x double_y</span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt; 1: 1 4 a        2        8</span></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; 2: 2 5 a        4       10</span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; 3: 3 6 b        6       12</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;        x     y     z double_x double_y</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; 1:     1     4     a        2        8</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; 2:     2     5     a        4       10</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; 3:     3     6     b        6       12</span></a></code></pre></div>
 <div id="using-group-by" class="section level4">
 <h4 class="hasAnchor">
 <a href="#using-group-by" class="anchor"></a>Using “group by”</h4>
@@ -236,9 +243,10 @@
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/dt_summarize.html">dt_summarize</a></span>(<span class="dt">avg_x =</span> <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(x),</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">               <span class="dt">count =</span> .N,</a>
 <a class="sourceLine" id="cb4-4" data-line-number="4">               <span class="dt">by =</span> z)</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt;    z avg_x count</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; 1: a   1.5     2</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; 2: b   3.0     1</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt;        z avg_x count</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; 1:     a   1.5     2</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; 2:     b   3.0     1</span></a></code></pre></div>
 </div>
 </div>
 <div id="enhanced-selection" class="section level2">
@@ -252,17 +260,19 @@
 <a class="sourceLine" id="cb5-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb5-6" data-line-number="6">example_dt <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="reference/dt_select.html">dt_select</a></span>(is.numeric, d)</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;    a b d</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; 1: 1 4 a</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 2: 2 5 b</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; 3: 3 6 c</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;        a     b     d</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 1:     1     4     a</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; 2:     2     5     b</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; 3:     3     6     c</span></a></code></pre></div>
 <p>You can also use this format to drop columns:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">example_dt <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/dt_select.html">dt_select</a></span>(<span class="op">-</span>is.numeric)</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt;    c d</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; 1: a a</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 2: a b</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 3: b c</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt;        c     d</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 1:     a     a</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 2:     a     b</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 3:     b     c</span></a></code></pre></div>
 <p>Currently supported: <code>is.numeric</code>/<code>is.integer</code>/<code>is.double</code>/<code>is.character</code>/<code>is.factor</code></p>
 <div id="new-variant-dt_mutate_across" class="section level4">
 <h4 class="hasAnchor">
@@ -277,17 +287,19 @@
 <a class="sourceLine" id="cb7-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb7-6" data-line-number="6">example_dt <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate_if.html">dt_mutate_across</a></span>(is.numeric, as.character)</a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt;    a b c d</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 1: 1 1 a a</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 2: 1 1 a b</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; 3: 1 1 b c</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt;        a     b     c     d</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 1:     1     1     a     a</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; 2:     1     1     a     b</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; 3:     1     1     b     c</span></a></code></pre></div>
 <p>Using <code>_across()</code> instead of <code>_at()</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">example_dt <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate_if.html">dt_mutate_across</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(a, b), <span class="op">~</span><span class="st"> </span>.x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;    a b c d</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; 1: 2 2 a a</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; 2: 2 2 a b</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; 3: 2 2 b c</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;        a     b     c     d</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; 1:     2     2     a     a</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; 2:     2     2     a     b</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; 3:     2     2     b     c</span></a></code></pre></div>
 <p>These two approaches can be combined in one call:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">example_dt &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">dbl_col1 =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>),</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">                         <span class="dt">dbl_col2 =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">1.0</span>),</a>
@@ -299,9 +311,10 @@
 <a class="sourceLine" id="cb9-8" data-line-number="8">example_dt <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb9-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="reference/dt_mutate_if.html">dt_mutate_across</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(is.double, int_col1), <span class="op">~</span><span class="st"> </span>.x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt;    dbl_col1 dbl_col2 int_col1 int_col2 char_col1 char_col2</span></a>
-<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; 1:        2        2        2        1         a         b</span></a>
-<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; 2:        2        2        2        1         a         b</span></a>
-<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; 3:        2        2        2        1         a         b</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt;       &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;     &lt;chr&gt;     &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; 1:        2        2        2        1         a         b</span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; 2:        2        2        2        1         a         b</span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; 3:        2        2        2        1         a         b</span></a></code></pre></div>
 </div>
 </div>
 <div id="rlang-compatibility" class="section level2">
@@ -327,10 +340,11 @@
 <a class="sourceLine" id="cb10-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb10-13" data-line-number="13">example_dt <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb10-14" data-line-number="14"><span class="st">  </span><span class="kw">add_one</span>(x_plus_one, x)</a>
-<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt;    x y z x_plus_one</span></a>
-<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; 1: 1 1 a          2</span></a>
-<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt; 2: 1 1 a          2</span></a>
-<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; 3: 1 1 b          2</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt;        x     y     z x_plus_one</span></a>
+<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt; 1:     1     1     a          2</span></a>
+<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; 2:     1     1     a          2</span></a>
+<a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co">#&gt; 3:     1     1     b          2</span></a></code></pre></div>
 </div>
 <div id="custom-function-with-dt_summarize" class="section level5">
 <h5 class="hasAnchor">
@@ -349,9 +363,10 @@
 <a class="sourceLine" id="cb11-11" data-line-number="11"></a>
 <a class="sourceLine" id="cb11-12" data-line-number="12">example_df <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-13" data-line-number="13"><span class="st">  </span><span class="kw">find_mean</span>(<span class="dt">grouping_cols =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(y, z), <span class="dt">col =</span> x)</a>
-<a class="sourceLine" id="cb11-14" data-line-number="14"><span class="co">#&gt;    y z avg</span></a>
-<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="co">#&gt; 1: a a 3.5</span></a>
-<a class="sourceLine" id="cb11-16" data-line-number="16"><span class="co">#&gt; 2: b b 8.5</span></a></code></pre></div>
+<a class="sourceLine" id="cb11-14" data-line-number="14"><span class="co">#&gt;        y     z   avg</span></a>
+<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb11-16" data-line-number="16"><span class="co">#&gt; 1:     a     a   3.5</span></a>
+<a class="sourceLine" id="cb11-17" data-line-number="17"><span class="co">#&gt; 2:     b     b   8.5</span></a></code></pre></div>
 </div>
 </div>
 <div id="dt-helper" class="section level2">
@@ -367,22 +382,19 @@
 <a class="sourceLine" id="cb12-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="reference/dt.html">dt</a></span>(, <span class="st">':='</span>(<span class="dt">double_x =</span> x <span class="op">*</span><span class="st"> </span><span class="dv">2</span>,</a>
 <a class="sourceLine" id="cb12-8" data-line-number="8">            <span class="dt">double_y =</span> y <span class="op">*</span><span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb12-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="reference/dt.html">dt</a></span>(, <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">avg_x =</span> <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(x)), <span class="dt">by =</span> z)</a>
-<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt;    z avg_x</span></a>
-<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt; 1: a   1.5</span></a>
-<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt; 2: b   3.0</span></a></code></pre></div>
+<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt;        z avg_x</span></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt; 1:     a   1.5</span></a>
+<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt; 2:     b   3.0</span></a></code></pre></div>
 <div id="speed-comparisons" class="section level3">
 <h3 class="hasAnchor">
 <a href="#speed-comparisons" class="anchor"></a>Speed Comparisons</h3>
 <p>Below are some speed comparisons of various functions. More functions will get added to the speed comps over time.</p>
 <p>A few notes:</p>
 <ul>
-<li>The main metric of interest is the time comparison of a tidyverse function vs. its equivalent tidytable function.
-<ul>
 <li>Comparing times from separate functions won’t be very useful. For example - the <code>summarize()</code> tests were performed on a different dataset from <code>case_when()</code>.</li>
-</ul>
-</li>
 <li>
-<code><a href="https://Rdatatable.gitlab.io/data.table/reference/openmp-utils.html">setDTthreads(1)</a></code> was used to ensure a fair comparison to the <code>tidyverse</code>.</li>
+<code><a href="https://Rdatatable.gitlab.io/data.table/reference/openmp-utils.html">setDTthreads(4)</a></code> was used for <code>data.table</code> &amp; <code>tidytable</code> timings.</li>
 <li>Modify-by-reference was used in <code>data.table</code> when being compared to <code><a href="reference/dt_mutate.html">dt_mutate()</a></code> &amp; <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code>
 </li>
 <li>
@@ -395,19 +407,19 @@
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; # A tibble: 13 x 5</span></a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt;    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse</span></a>
 <a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;                 </span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;  1 arrange         360.3ms   48.5ms    49.8ms     13.5%                 </span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;  2 case_when       513ms     136ms     135ms      26.5%                 </span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt;  3 distinct        85.9ms    40ms      40.2ms     46.6%                 </span></a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt;  4 fill            103.9ms   65.5ms    48.3ms     63.0%                 </span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt;  5 filter          247ms     218ms     224ms      88.3%                 </span></a>
-<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt;  6 inner_join      61.1ms    77.3ms    74.5ms     126.5%                </span></a>
-<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt;  7 left_join       66.4ms    59.5ms    51.7ms     89.6%                 </span></a>
-<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt;  8 mutate          58.3ms    57.8ms    86.6ms     99.1%                 </span></a>
-<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="co">#&gt;  9 nest            7.72ms    3.85ms    2.54ms     49.9%                 </span></a>
-<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="co">#&gt; 10 pivot_longer    165.5ms   36.9ms    12.7ms     22.3%                 </span></a>
-<a class="sourceLine" id="cb13-15" data-line-number="15"><span class="co">#&gt; 11 pivot_wider     764ms     287ms     275ms      37.6%                 </span></a>
-<a class="sourceLine" id="cb13-16" data-line-number="16"><span class="co">#&gt; 12 summarize       475ms     266ms     261ms      56.0%                 </span></a>
-<a class="sourceLine" id="cb13-17" data-line-number="17"><span class="co">#&gt; 13 unnest          151.52ms  10.32ms   7.51ms     6.8%</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;  1 arrange         417.3ms   33.2ms    37.5ms     8.0%                  </span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;  2 case_when       477ms     128ms     152ms      26.8%                 </span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt;  3 distinct        96.7ms    22.1ms    15.2ms     22.9%                 </span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt;  4 fill            126ms     50.4ms    44ms       40.0%                 </span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt;  5 filter          291ms     219ms     211ms      75.3%                 </span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt;  6 inner_join      56.4ms    63.7ms    63.2ms     112.9%                </span></a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt;  7 left_join       68.6ms    61.1ms    39.3ms     89.1%                 </span></a>
+<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt;  8 mutate          73.4ms    61.7ms    74.7ms     84.1%                 </span></a>
+<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="co">#&gt;  9 nest            6.2ms     2.88ms    1.66ms     46.5%                 </span></a>
+<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="co">#&gt; 10 pivot_longer    135.9ms   27.1ms    13.4ms     19.9%                 </span></a>
+<a class="sourceLine" id="cb13-15" data-line-number="15"><span class="co">#&gt; 11 pivot_wider     892ms     210ms     218ms      23.5%                 </span></a>
+<a class="sourceLine" id="cb13-16" data-line-number="16"><span class="co">#&gt; 12 summarize       511ms     176ms     177ms      34.4%                 </span></a>
+<a class="sourceLine" id="cb13-17" data-line-number="17"><span class="co">#&gt; 13 unnest          164.67ms  7.55ms    6.8ms      4.6%</span></a></code></pre></div>
 </div>
 </div>
 </div>

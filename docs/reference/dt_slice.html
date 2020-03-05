@@ -168,31 +168,37 @@
   <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
 
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_slice</span>(<span class='fl'>1</span>:<span class='fl'>4</span>)</div><div class='output co'>#&gt;    x y z
-#&gt; 1: 1 4 a
-#&gt; 2: 2 5 a
-#&gt; 3: 3 6 a
-#&gt; 4: 4 7 b</div><div class='input'>
+  <span class='fu'>dt_slice</span>(<span class='fl'>1</span>:<span class='fl'>4</span>)</div><div class='output co'>#&gt;        x     y     z
+#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+#&gt; 1:     1     4     a
+#&gt; 2:     2     5     a
+#&gt; 3:     3     6     a
+#&gt; 4:     4     7     b</div><div class='input'>
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_slice</span>(<span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
-#&gt; 1: a 1 4
-#&gt; 2: b 4 7</div><div class='input'>
+  <span class='fu'>dt_slice</span>(<span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;        z     x     y
+#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1:     a     1     4
+#&gt; 2:     b     4     7</div><div class='input'>
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_slice_head</span>(<span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
-#&gt; 1: a 1 4
-#&gt; 2: b 4 7</div><div class='input'>
+  <span class='fu'>dt_slice_head</span>(<span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;        z     x     y
+#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1:     a     1     4
+#&gt; 2:     b     4     7</div><div class='input'>
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_slice_tail</span>(<span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
-#&gt; 1: a 3 6
-#&gt; 2: b 4 7</div><div class='input'>
+  <span class='fu'>dt_slice_tail</span>(<span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;        z     x     y
+#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1:     a     3     6
+#&gt; 2:     b     4     7</div><div class='input'>
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_slice_max</span>(<span class='kw'>order_by</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
-#&gt; 1: b 4 7
-#&gt; 2: a 3 6</div><div class='input'>
+  <span class='fu'>dt_slice_max</span>(<span class='kw'>order_by</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;        z     x     y
+#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1:     b     4     7
+#&gt; 2:     a     3     6</div><div class='input'>
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_slice_min</span>(<span class='kw'>order_by</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
-#&gt; 1: a 1 4
-#&gt; 2: b 4 7</div></pre>
+  <span class='fu'>dt_slice_min</span>(<span class='kw'>order_by</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;        z     x     y
+#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1:     a     1     4
+#&gt; 2:     b     4     7</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -124,9 +124,32 @@
 <a href="#tidytable-0-3-2-in-development" class="anchor"></a>tidytable 0.3.2 (in development)<small> Unreleased </small>
 </h1>
 <ul>
+<li>New class:
+<ul>
+<li>New <code>tidytable</code> class is a data.table with cleaner printing.</li>
+<li>Class operates like a data.table in all other cases.</li>
+<li>All tidytable functions automatically convert to <code>tidytable</code> class in the background.</li>
+</ul>
+</li>
+<li>New functions:
+<ul>
+<li>
+<code><a href="../reference/dt_get_dummies.html">dt_get_dummies()</a></code>: Get dummy variables</li>
+<li><code><a href="../reference/dt_separate.html">dt_separate()</a></code></li>
+<li>
+<code><a href="../reference/as_tidytable.html">as_tidytable()</a></code>: Convert to data.table/tidytable</li>
+<li>
+<code><a href="../reference/is_tidytable.html">is_tidytable()</a></code>: Test if an object is a data.table/tidytable</li>
+<li>
+<code><a href="../reference/tidytable.html">tidytable()</a></code>: Construct a data.table/tidytable</li>
+</ul>
+</li>
 <li>
 <code><a href="../reference/dt_pivot_longer.html">dt_pivot_longer()</a></code> “cols” arg now defaults to <code><a href="../reference/dt_starts_with.html">dt_everything()</a></code> instead of <code>NULL</code>. The result is the same, but is more consistent with other enhanced selection functions</li>
-<li>Implement S3 methods for all functions</li>
+<li>
+<code>.N</code> now works when using <code><a href="../reference/dt_slice.html">dt_slice()</a></code> &amp; variants</li>
+<li>Function length limit bug no longer occurs when using <code>~</code> in <code><a href="../reference/dt_map.html">dt_map()</a></code>
+</li>
 </ul>
 </div>
     <div id="tidytable-0-3-1" class="section level1">

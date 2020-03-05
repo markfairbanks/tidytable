@@ -151,30 +151,35 @@ Supports enhanced selection" />
   <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
 
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_select</span>(<span class='no'>x</span>, <span class='no'>y</span>)</div><div class='output co'>#&gt;    x y
-#&gt; 1: 1 4
-#&gt; 2: 1 5
-#&gt; 3: 1 6</div><div class='input'>
+  <span class='fu'>dt_select</span>(<span class='no'>x</span>, <span class='no'>y</span>)</div><div class='output co'>#&gt;        x     y
+#&gt;    &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1:     1     4
+#&gt; 2:     1     5
+#&gt; 3:     1     6</div><div class='input'>
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_select</span>(<span class='no'>x</span>:<span class='no'>z</span>)</div><div class='output co'>#&gt;    x y double_x z
-#&gt; 1: 1 4        2 a
-#&gt; 2: 1 5        2 a
-#&gt; 3: 1 6        2 b</div><div class='input'>
+  <span class='fu'>dt_select</span>(<span class='no'>x</span>:<span class='no'>z</span>)</div><div class='output co'>#&gt;        x     y double_x     z
+#&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;
+#&gt; 1:     1     4        2     a
+#&gt; 2:     1     5        2     a
+#&gt; 3:     1     6        2     b</div><div class='input'>
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_select</span>(-<span class='no'>y</span>, -<span class='no'>z</span>)</div><div class='output co'>#&gt;    x double_x
-#&gt; 1: 1        2
-#&gt; 2: 1        2
-#&gt; 3: 1        2</div><div class='input'>
+  <span class='fu'>dt_select</span>(-<span class='no'>y</span>, -<span class='no'>z</span>)</div><div class='output co'>#&gt;        x double_x
+#&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1:     1        2
+#&gt; 2:     1        2
+#&gt; 3:     1        2</div><div class='input'>
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_select</span>(<span class='fu'><a href='dt_starts_with.html'>dt_starts_with</a></span>(<span class='st'>"x"</span>), <span class='no'>z</span>)</div><div class='output co'>#&gt;    x z
-#&gt; 1: 1 a
-#&gt; 2: 1 a
-#&gt; 3: 1 b</div><div class='input'>
+  <span class='fu'>dt_select</span>(<span class='fu'><a href='dt_starts_with.html'>dt_starts_with</a></span>(<span class='st'>"x"</span>), <span class='no'>z</span>)</div><div class='output co'>#&gt;        x     z
+#&gt;    &lt;dbl&gt; &lt;chr&gt;
+#&gt; 1:     1     a
+#&gt; 2:     1     a
+#&gt; 3:     1     b</div><div class='input'>
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_select</span>(<span class='no'>is.character</span>, <span class='no'>x</span>)</div><div class='output co'>#&gt;    z x
-#&gt; 1: a 1
-#&gt; 2: a 1
-#&gt; 3: b 1</div></pre>
+  <span class='fu'>dt_select</span>(<span class='no'>is.character</span>, <span class='no'>x</span>)</div><div class='output co'>#&gt;        z     x
+#&gt;    &lt;chr&gt; &lt;dbl&gt;
+#&gt; 1:     a     1
+#&gt; 2:     a     1
+#&gt; 3:     b     1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

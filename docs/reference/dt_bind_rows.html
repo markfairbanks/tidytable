@@ -125,20 +125,16 @@
     <p>Bind rows or columns together.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dt_bind_rows</span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>dt_bind_rows</span>(<span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>dt_bind_cols</span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>dt_bind_cols</span>(<span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.data</th>
-      <td><p>A data.table to bind, or a list of data.tables</p></td>
-    </tr>
-    <tr>
       <th>...</th>
-      <td><p>Data frames to bind</p></td>
+      <td><p>data.tables or data.frames to bind</p></td>
     </tr>
     <tr>
       <th>.id</th>
@@ -152,29 +148,33 @@
 <span class='no'>df2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>data.table</span><span class='kw ns'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>4</span>,<span class='fl'>5</span>))
 
 <span class='no'>df1</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_bind_rows</span>(<span class='no'>df2</span>)</div><div class='output co'>#&gt;    x y
-#&gt; 1: 1 3
-#&gt; 2: 2 4
-#&gt; 3: 3 5
-#&gt; 4: 1 3
-#&gt; 5: 2 4
-#&gt; 6: 3 5</div><div class='input'>
-<span class='fu'>dt_bind_rows</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>df1</span>, <span class='no'>df2</span>))</div><div class='output co'>#&gt;    x y
-#&gt; 1: 1 3
-#&gt; 2: 2 4
-#&gt; 3: 3 5
-#&gt; 4: 1 3
-#&gt; 5: 2 4
-#&gt; 6: 3 5</div><div class='input'>
+  <span class='fu'>dt_bind_rows</span>(<span class='no'>df2</span>)</div><div class='output co'>#&gt;        x     y
+#&gt;    &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1:     1     3
+#&gt; 2:     2     4
+#&gt; 3:     3     5
+#&gt; 4:     1     3
+#&gt; 5:     2     4
+#&gt; 6:     3     5</div><div class='input'>
+<span class='fu'>dt_bind_rows</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>df1</span>, <span class='no'>df2</span>))</div><div class='output co'>#&gt;        x     y
+#&gt;    &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1:     1     3
+#&gt; 2:     2     4
+#&gt; 3:     3     5
+#&gt; 4:     1     3
+#&gt; 5:     2     4
+#&gt; 6:     3     5</div><div class='input'>
 <span class='no'>df1</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_bind_cols</span>(<span class='no'>df2</span>)</div><div class='output co'>#&gt;    x y x1 y1
-#&gt; 1: 1 3  1  3
-#&gt; 2: 2 4  2  4
-#&gt; 3: 3 5  3  5</div><div class='input'>
-<span class='fu'>dt_bind_cols</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>df1</span>, <span class='no'>df2</span>))</div><div class='output co'>#&gt;    x y x1 y1
-#&gt; 1: 1 3  1  3
-#&gt; 2: 2 4  2  4
-#&gt; 3: 3 5  3  5</div></pre>
+  <span class='fu'>dt_bind_cols</span>(<span class='no'>df2</span>)</div><div class='output co'>#&gt;        x     y    x1    y1
+#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1:     1     3     1     3
+#&gt; 2:     2     4     2     4
+#&gt; 3:     3     5     3     5</div><div class='input'>
+<span class='fu'>dt_bind_cols</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>df1</span>, <span class='no'>df2</span>))</div><div class='output co'>#&gt;        x     y    x1    y1
+#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1:     1     3     1     3
+#&gt; 2:     2     4     2     4
+#&gt; 3:     3     5     3     5</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

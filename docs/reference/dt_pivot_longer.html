@@ -179,23 +179,25 @@ decreasing the number of rows. The inverse transformation is
 <span class='fu'>dt_pivot_longer</span>(<span class='no'>example_dt</span>,
                 <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>, <span class='no'>y</span>),
                 <span class='kw'>names_to</span> <span class='kw'>=</span> <span class='st'>"stuff"</span>,
-                <span class='kw'>values_to</span> <span class='kw'>=</span> <span class='st'>"things"</span>)</div><div class='output co'>#&gt;    z stuff things
-#&gt; 1: a     x      1
-#&gt; 2: b     x      2
-#&gt; 3: c     x      3
-#&gt; 4: a     y      4
-#&gt; 5: b     y      5
-#&gt; 6: c     y      6</div><div class='input'>
+                <span class='kw'>values_to</span> <span class='kw'>=</span> <span class='st'>"things"</span>)</div><div class='output co'>#&gt;        z stuff things
+#&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;
+#&gt; 1:     a     x      1
+#&gt; 2:     b     x      2
+#&gt; 3:     c     x      3
+#&gt; 4:     a     y      4
+#&gt; 5:     b     y      5
+#&gt; 6:     c     y      6</div><div class='input'>
 <span class='fu'>dt_pivot_longer</span>(<span class='no'>example_dt</span>,
                 <span class='kw'>cols</span> <span class='kw'>=</span> -<span class='no'>z</span>,
                 <span class='kw'>names_to</span> <span class='kw'>=</span> <span class='st'>"stuff"</span>,
-                <span class='kw'>values_to</span> <span class='kw'>=</span> <span class='st'>"things"</span>)</div><div class='output co'>#&gt;    z stuff things
-#&gt; 1: a     x      1
-#&gt; 2: b     x      2
-#&gt; 3: c     x      3
-#&gt; 4: a     y      4
-#&gt; 5: b     y      5
-#&gt; 6: c     y      6</div><div class='input'>
+                <span class='kw'>values_to</span> <span class='kw'>=</span> <span class='st'>"things"</span>)</div><div class='output co'>#&gt;        z stuff things
+#&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;
+#&gt; 1:     a     x      1
+#&gt; 2:     b     x      2
+#&gt; 3:     c     x      3
+#&gt; 4:     a     y      4
+#&gt; 5:     b     y      5
+#&gt; 6:     c     y      6</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -157,14 +157,16 @@
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>dt_summarize</span>(<span class='kw'>avg_a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>a</span>),
                <span class='kw'>max_b</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='no'>b</span>),
-               <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>c</span>)</div><div class='output co'>#&gt;    c avg_a max_b
-#&gt; 1: a   1.5     5
-#&gt; 2: b   3.0     6</div><div class='input'>
+               <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>c</span>)</div><div class='output co'>#&gt;        c avg_a max_b
+#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1:     a   1.5     5
+#&gt; 2:     b   3.0     6</div><div class='input'>
 <span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>dt_summarize</span>(<span class='kw'>avg_a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>a</span>),
-               <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>c</span>, <span class='no'>d</span>))</div><div class='output co'>#&gt;    c d avg_a
-#&gt; 1: a a   1.5
-#&gt; 2: b b   3.0</div></pre>
+               <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>c</span>, <span class='no'>d</span>))</div><div class='output co'>#&gt;        c     d avg_a
+#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+#&gt; 1:     a     a   1.5
+#&gt; 2:     b     b   3.0</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

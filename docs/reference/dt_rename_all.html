@@ -182,11 +182,13 @@ Supports enhanced selection" />
   <span class='kw'>double_x</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='kw'>double_y</span> <span class='kw'>=</span> <span class='fl'>4</span>)
 
-<span class='fu'><a href='as_dt.html'>as_dt</a></span>(<span class='no'>example_dt</span>) <span class='kw'>%&gt;%</span> <span class='fu'>dt_rename_all</span>(~ <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span>(<span class='st'>"x"</span>, <span class='st'>"stuff"</span>, <span class='no'>.x</span>))</div><div class='output co'>#&gt;    stuff y double_stuff double_y
-#&gt; 1:     1 2            2        4</div><div class='input'>
-<span class='fu'><a href='as_dt.html'>as_dt</a></span>(<span class='no'>example_dt</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt_rename_across</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>, <span class='no'>double_x</span>), ~ <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span>(<span class='st'>"x"</span>, <span class='st'>"stuff"</span>, <span class='no'>.x</span>))</div><div class='output co'>#&gt;    stuff y double_stuff double_y
-#&gt; 1:     1 2            2        4</div></pre>
+<span class='fu'><a href='as_tidytable.html'>as_dt</a></span>(<span class='no'>example_dt</span>) <span class='kw'>%&gt;%</span> <span class='fu'>dt_rename_all</span>(~ <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span>(<span class='st'>"x"</span>, <span class='st'>"stuff"</span>, <span class='no'>.x</span>))</div><div class='output co'>#&gt;    stuff     y double_stuff double_y
+#&gt;    &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1:     1     2            2        4</div><div class='input'>
+<span class='fu'><a href='as_tidytable.html'>as_dt</a></span>(<span class='no'>example_dt</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>dt_rename_across</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>, <span class='no'>double_x</span>), ~ <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span>(<span class='st'>"x"</span>, <span class='st'>"stuff"</span>, <span class='no'>.x</span>))</div><div class='output co'>#&gt;    stuff     y double_stuff double_y
+#&gt;    &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1:     1     2            2        4</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
