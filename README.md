@@ -344,17 +344,17 @@ all_marks
 #> # A tibble: 13 x 5
 #>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         377.6ms   36.2ms    35.5ms     9.6%                  
-#>  2 case_when       494ms     123ms     134ms      24.9%                 
-#>  3 distinct        88.7ms    18.2ms    18.3ms     20.5%                 
-#>  4 fill            127.8ms   49.4ms    37.4ms     38.7%                 
-#>  5 filter          265ms     216ms     207ms      81.5%                 
-#>  6 inner_join      65.9ms    65.7ms    67.6ms     99.7%                 
-#>  7 left_join       63.2ms    67.3ms    55ms       106.5%                
-#>  8 mutate          67.9ms    49.4ms    72.8ms     72.8%                 
-#>  9 nest            6.05ms    1.98ms    1.3ms      32.7%                 
-#> 10 pivot_longer    159.9ms   30.4ms    12.5ms     19.0%                 
-#> 11 pivot_wider     861ms     204ms     208ms      23.7%                 
-#> 12 summarize       484ms     162ms     160ms      33.5%                 
-#> 13 unnest          164.08ms  7.23ms    5.55ms     4.4%
+#>  1 arrange         445.1ms   38.5ms    38.4ms     8.6%                  
+#>  2 case_when       497ms     148ms     152ms      29.8%                 
+#>  3 distinct        105.4ms   20.9ms    16.3ms     19.8%                 
+#>  4 fill            132.8ms   50.8ms    48.7ms     38.3%                 
+#>  5 filter          295ms     228ms     226ms      77.3%                 
+#>  6 inner_join      61.4ms    73.6ms    64.8ms     119.9%                
+#>  7 left_join       72.7ms    63ms      43.5ms     86.7%                 
+#>  8 mutate          68.3ms    51.7ms    77.8ms     75.7%                 
+#>  9 nest            6.11ms    2.14ms    1.35ms     35.0%                 
+#> 10 pivot_longer    152.3ms   30.9ms    17.5ms     20.3%                 
+#> 11 pivot_wider     822ms     198ms     189ms      24.1%                 
+#> 12 summarize       485ms     160ms     174ms      33.0%                 
+#> 13 unnest          163.36ms  7.62ms    5.63ms     4.7%
 ```
