@@ -1,8 +1,8 @@
 # tidytable 0.3.2 (in development)
 
 * New class:
-  + New `tidytable` class is a data.table with cleaner printing.
-  + Class operates like a data.table in all other cases.
+  + New `tidytable` class is a data.table subclass with cleaner printing.
+  + Operates like a data.table in all other cases.
   + All tidytable functions automatically convert to `tidytable` class in the background.
 * New functions:
   + `dt_get_dummies()`: Get dummy variables
