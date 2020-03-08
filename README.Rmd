@@ -262,6 +262,7 @@ A few notes:
 * Currently `data.table` doesn't have its own `case_when()` translation, so a multiple nested `fifelse()` was used.
 * All tests can be found in the source code of the README.
 * Lastly I'd like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.
+* `pandas` comparisons are in the process of being added - more will be added soon.
 
 ```{r benchmark_setup, echo=FALSE}
 pacman::p_load(tidytable, tidyverse)
@@ -558,6 +559,48 @@ nest_marks <- nest_marks %>%
   mutate_all(~as.character(.x) %>% str_trim())
 ```
 
+```{r echo = FALSE}
+# # pandas code
+# import pandas as pd
+# import numpy as np
+# import gc
+# data_size = 10000000
+# 
+# test_df = pd.DataFrame(
+#     {'a': np.random.choice(np.arange(20), data_size),
+#      'b': np.random.choice(np.arange(20), data_size),
+#      'c': np.random.choice(['a','a','b','c','d'], data_size),
+#      'd': np.random.choice(['a','a','b','c','d'], data_size)}).convert_dtypes()
+# 
+# print('filter')
+# %timeit test_df.loc[(test_df.a <= 7) & (test_df.c == 'a')]
+# print('summarize')
+# %timeit test_df.groupby('c')['a'].mean()
+# print('mutate pt1')
+# %timeit test_df['double_a'] = test_df.a * 2
+# print('mutate pt2')
+# %timeit test_df['a_plus_b'] = test_df.a + test_df.b
+# print('mutate pt2')
+# %timeit test_df['a_plus_b'] = test_df.a + test_df.b
+# print('distinct')
+# %timeit test_df.drop_duplicates()
+# 
+# del test_df
+# gc.collect()
+# 
+# arrange_size = 1000000
+# 
+# arrange_df = pd.DataFrame(
+#     {'a': np.random.choice(np.arange(20), arrange_size),
+#      'b': np.random.choice(np.arange(20), arrange_size),
+#      'c': np.random.choice(['a','a','b','c','d'], arrange_size),
+#      'd': np.random.choice(['a','a','b','c','d'], arrange_size)}).convert_dtypes()
+# 
+# print('arrange')
+# %timeit arrange_df.sort_values(['c', 'a'])
+```
+
+
 ```{r all_marks, echo = FALSE, message = FALSE}
 library(magrittr)
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
@@ -582,6 +625,19 @@ all_marks <- all_marks %>%
   mutate(tidytable_vs_tidyverse = scales::percent(tidytable/tidyverse, accuracy = .1)) %>%
   mutate_at(vars(tidyverse, tidytable, data.table), ~str_c(.x, "ms")) %>%
   arrange(function_tested)
+```
+
+```{r pandas, echo = FALSE, message = FALSE}
+pandas_marks <- tibble(filter = "656ms",
+                       summarize = "780ms",
+                       mutate = "85.2ms",
+                       arrange = "297ms",
+                       distinct = "45.2ms") %>%
+  pivot_longer(everything(), names_to = "function_tested", values_to = "pandas")
+
+all_marks <- all_marks %>%
+  left_join(pandas_marks) %>%
+  select(function_tested, tidyverse, tidytable, data.table, pandas, tidytable_vs_tidyverse)
 ```
 
 ```{r}

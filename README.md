@@ -336,25 +336,27 @@ A few notes:
   - Lastly I’d like to mention that these tests were not rigorously
     created to cover all angles equally. They are just meant to be used
     as general insight into the performance of these packages.
+  - `pandas` comparisons are in the process of being added - more will
+    be added soon.
 
 <!-- end list -->
 
 ``` r
 all_marks
-#> # A tibble: 13 x 5
-#>    function_tested tidyverse tidytable data.table tidytable_vs_tidyverse
-#>    <chr>           <chr>     <chr>     <chr>      <chr>                 
-#>  1 arrange         445.1ms   38.5ms    38.4ms     8.6%                  
-#>  2 case_when       497ms     148ms     152ms      29.8%                 
-#>  3 distinct        105.4ms   20.9ms    16.3ms     19.8%                 
-#>  4 fill            132.8ms   50.8ms    48.7ms     38.3%                 
-#>  5 filter          295ms     228ms     226ms      77.3%                 
-#>  6 inner_join      61.4ms    73.6ms    64.8ms     119.9%                
-#>  7 left_join       72.7ms    63ms      43.5ms     86.7%                 
-#>  8 mutate          68.3ms    51.7ms    77.8ms     75.7%                 
-#>  9 nest            6.11ms    2.14ms    1.35ms     35.0%                 
-#> 10 pivot_longer    152.3ms   30.9ms    17.5ms     20.3%                 
-#> 11 pivot_wider     822ms     198ms     189ms      24.1%                 
-#> 12 summarize       485ms     160ms     174ms      33.0%                 
-#> 13 unnest          163.36ms  7.62ms    5.63ms     4.7%
+#> # A tibble: 13 x 6
+#>    function_tested tidyverse tidytable data.table pandas tidytable_vs_tidyverse
+#>    <chr>           <chr>     <chr>     <chr>      <chr>  <chr>                 
+#>  1 arrange         450.9ms   37.4ms    38.5ms     297ms  8.3%                  
+#>  2 case_when       481ms     123ms     135ms      <NA>   25.6%                 
+#>  3 distinct        93.8ms    21.3ms    21ms       45.2ms 22.7%                 
+#>  4 fill            133.8ms   63ms      39.4ms     <NA>   47.1%                 
+#>  5 filter          279ms     227ms     212ms      656ms  81.4%                 
+#>  6 inner_join      57.4ms    63ms      64ms       <NA>   109.8%                
+#>  7 left_join       65.7ms    68ms      42.6ms     <NA>   103.5%                
+#>  8 mutate          70.6ms    56.2ms    74ms       85.2ms 79.6%                 
+#>  9 nest            8.67ms    2.21ms    1.31ms     <NA>   25.5%                 
+#> 10 pivot_longer    142.9ms   27.6ms    14.3ms     <NA>   19.3%                 
+#> 11 pivot_wider     888ms     194ms     209ms      <NA>   21.8%                 
+#> 12 summarize       477ms     167ms     167ms      780ms  35.0%                 
+#> 13 unnest          182.14ms  9.17ms    11.47ms    <NA>   5.0%
 ```
