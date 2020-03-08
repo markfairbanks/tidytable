@@ -7,7 +7,7 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/dev%20-0.3.2-green.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/dev%20-0.3.2.9-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
@@ -333,11 +333,11 @@ A few notes:
   - Currently `data.table` doesn’t have its own `case_when()`
     translation, so a multiple nested `fifelse()` was used.
   - All tests can be found in the source code of the README.
+  - `pandas` comparisons are in the process of being added - more will
+    be added soon.
   - Lastly I’d like to mention that these tests were not rigorously
     created to cover all angles equally. They are just meant to be used
     as general insight into the performance of these packages.
-  - `pandas` comparisons are in the process of being added - more will
-    be added soon.
 
 <!-- end list -->
 
@@ -346,17 +346,17 @@ all_marks
 #> # A tibble: 13 x 6
 #>    function_tested tidyverse tidytable data.table pandas tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>  <chr>                 
-#>  1 arrange         450.9ms   37.4ms    38.5ms     297ms  8.3%                  
-#>  2 case_when       481ms     123ms     135ms      <NA>   25.6%                 
-#>  3 distinct        93.8ms    21.3ms    21ms       45.2ms 22.7%                 
-#>  4 fill            133.8ms   63ms      39.4ms     <NA>   47.1%                 
-#>  5 filter          279ms     227ms     212ms      656ms  81.4%                 
-#>  6 inner_join      57.4ms    63ms      64ms       <NA>   109.8%                
-#>  7 left_join       65.7ms    68ms      42.6ms     <NA>   103.5%                
-#>  8 mutate          70.6ms    56.2ms    74ms       85.2ms 79.6%                 
-#>  9 nest            8.67ms    2.21ms    1.31ms     <NA>   25.5%                 
-#> 10 pivot_longer    142.9ms   27.6ms    14.3ms     <NA>   19.3%                 
-#> 11 pivot_wider     888ms     194ms     209ms      <NA>   21.8%                 
-#> 12 summarize       477ms     167ms     167ms      780ms  35.0%                 
-#> 13 unnest          182.14ms  9.17ms    11.47ms    <NA>   5.0%
+#>  1 arrange         403.3ms   42ms      33.6ms     297ms  10.4%                 
+#>  2 case_when       498ms     129ms     135ms      307ms  25.9%                 
+#>  3 distinct        90.1ms    22ms      20.8ms     287ms  24.4%                 
+#>  4 fill            119.5ms   53.2ms    46.2ms     806ms  44.5%                 
+#>  5 filter          265ms     219ms     227ms      656ms  82.6%                 
+#>  6 inner_join      61ms      68.5ms    62.9ms     <NA>   112.3%                
+#>  7 left_join       68.4ms    68.8ms    51.3ms     <NA>   100.6%                
+#>  8 mutate          71.8ms    48.6ms    71.8ms     85.2ms 67.7%                 
+#>  9 nest            8.3ms     1.96ms    1.25ms     <NA>   23.6%                 
+#> 10 pivot_longer    154.9ms   28.5ms    13.7ms     <NA>   18.4%                 
+#> 11 pivot_wider     842ms     198ms     201ms      <NA>   23.5%                 
+#> 12 summarize       472ms     181ms     166ms      780ms  38.3%                 
+#> 13 unnest          165.23ms  7.66ms    6.6ms      <NA>   4.6%
 ```

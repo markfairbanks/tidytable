@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/dev%20-0.3.2-green.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/dev%20-0.3.2.9-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
@@ -261,8 +261,8 @@ A few notes:
 * `dt_fill()` & `tidyr::fill()` both work with character/factor/logical columns, whereas `data.table::nafill()` does not. Testing only included numeric columns due to this constraint.
 * Currently `data.table` doesn't have its own `case_when()` translation, so a multiple nested `fifelse()` was used.
 * All tests can be found in the source code of the README.
-* Lastly I'd like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.
 * `pandas` comparisons are in the process of being added - more will be added soon.
+* Lastly I'd like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.
 
 ```{r benchmark_setup, echo=FALSE}
 pacman::p_load(tidytable, tidyverse)
@@ -432,7 +432,7 @@ case_marks <- case_marks %>%
 ```{r pivot_wider, echo=FALSE}
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-wider_tbl <- expand_grid(case = sprintf("%03d", seq(1, 5000)),
+wider_tbl <- expand_grid(case = as.character(seq(1, 5000)),
                         year = seq(1900, 2000),
                         name = c("x", "y", "z")) %>%
   mutate(value = rnorm(nrow(.)))
@@ -582,8 +582,6 @@ nest_marks <- nest_marks %>%
 # %timeit test_df['a_plus_b'] = test_df.a + test_df.b
 # print('mutate pt2')
 # %timeit test_df['a_plus_b'] = test_df.a + test_df.b
-# print('distinct')
-# %timeit test_df.drop_duplicates()
 # 
 # del test_df
 # gc.collect()
@@ -598,8 +596,26 @@ nest_marks <- nest_marks %>%
 # 
 # print('arrange')
 # %timeit arrange_df.sort_values(['c', 'a'])
+# print('distinct')
+# %timeit test_df.drop_duplicates()
+# del arrange_df
+# gc.collect()
+# 
+# case_df = pd.DataFrame({'x': np.random.normal(size = 3000000)})
+# 
+# case_df['median_x'] = case_df['x'].median()
+# 
+# print('case_when')
+# %timeit case_df['test'] = np.where(case_df.x < case_df.median_x, 'low', np.where(case_df.x >= case_df.median_x, 'high', np.where(case_df.x.isna(), 'unknown', 'other')))
+# fill_size = 2000000
+# fill_df = pd.DataFrame({'x': np.arange(fill_size),
+#                         'id': np.random.choice(np.arange(3), fill_size)})
+# 
+# fill_df = fill_df.assign(y = fill_df.x.shift(10), z = fill_df.x.shift(-10)).convert_dtypes()
+# 
+# print('fill')
+# %timeit fill_df.groupby('id')[['x','y']].fillna(method = 'backfill')
 ```
-
 
 ```{r all_marks, echo = FALSE, message = FALSE}
 library(magrittr)
@@ -628,11 +644,13 @@ all_marks <- all_marks %>%
 ```
 
 ```{r pandas, echo = FALSE, message = FALSE}
-pandas_marks <- tibble(filter = "656ms",
-                       summarize = "780ms",
+pandas_marks <- tibble(arrange = "297ms",
+                       case_when = "307ms",
+                       distinct = "287ms",
+                       filter = "656ms",
+                       fill = "806ms",
                        mutate = "85.2ms",
-                       arrange = "297ms",
-                       distinct = "45.2ms") %>%
+                       summarize = "780ms") %>%
   pivot_longer(everything(), names_to = "function_tested", values_to = "pandas")
 
 all_marks <- all_marks %>%
