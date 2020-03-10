@@ -34,9 +34,9 @@ dt_summarize.tidytable <- function(.data, ..., by = NULL) {
   dots <- enexprs(...)
   by <- enexpr(by)
 
-  eval_tidy(expr(
+  eval_expr(
     .data[, list(!!!dots), !!by]
-  ))
+  )
 }
 
 #' @export
