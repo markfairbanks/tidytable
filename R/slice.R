@@ -45,13 +45,13 @@ dt_slice.tidytable <- function(.data, rows = 1:5, by = NULL) {
   by <- enexpr(by)
 
   if (is.null(by)) {
-    eval_tidy(expr(
+    eval_expr(
       .data[!!rows]
-    ))
+    )
   } else {
-    eval_tidy(expr(
+    eval_expr(
       .data[, .SD[!!rows], !!by]
-    ))
+    )
   }
 }
 
@@ -77,9 +77,9 @@ dt_slice_head.tidytable <- function(.data, n = 5, by = NULL) {
   n <- enexpr(n)
   by <- enexpr(by)
 
-  eval_tidy(expr(
+  eval_expr(
     .data[, head(.SD, !!n), !!by]
-  ))
+  )
 }
 
 #' @export
@@ -104,9 +104,9 @@ dt_slice_tail.tidytable <- function(.data, n = 5, by = NULL) {
   n <- enexpr(n)
   by <- enexpr(by)
 
-  eval_tidy(expr(
+  eval_expr(
     .data[, tail(.SD, !!n), !!by]
-  ))
+  )
 }
 
 #' @export

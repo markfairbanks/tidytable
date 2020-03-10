@@ -40,15 +40,15 @@ dt_mutate.tidytable <- function(.data, ..., by = NULL) {
   if (is.null(by)) {
     # Faster version if there is no "by" provided
     for (i in seq_along(dots)) {
-      eval_tidy(expr(
+      eval_expr(
         .data[, ':='(all_names[[i]], !!dots[[i]])][]
-      ))
+      )
     }
   } else {
     # Faster with "by", since the "by" call isn't looped multiple times for each column added
-    eval_tidy(expr(
+    eval_expr(
       .data[, ':='(!!!dots), by = !!by][]
-    ))
+    )
   }
   .data
 }

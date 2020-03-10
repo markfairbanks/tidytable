@@ -24,9 +24,9 @@ dt_arrange.tidytable <- function(.data, ...) {
 
   dots <- enexprs(...)
 
-  .data <- eval_tidy(expr(
+  .data <- eval_expr(
     .data[order(!!!dots)]
-    ))
+    )
 
   .data
 }

@@ -25,9 +25,9 @@ dt_filter.tidytable <- function(.data, ...) {
   dots <- enexprs(...)
 
   for (dot in dots) {
-    .data <- eval_tidy(expr(
+    .data <- eval_expr(
       .data[!!dot]
-    ))
+    )
   }
   .data
 }

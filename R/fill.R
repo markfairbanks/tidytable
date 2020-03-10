@@ -61,12 +61,14 @@ filldown <- function(.data, ..., by = NULL) {
   by <- enexpr(by)
 
   for (dot in dots) {
-    dot_type <- eval_tidy(expr(class('$'(.data, !!dot))))
+    dot_type <- eval_expr(
+      class('$'(.data, !!dot))
+      )
 
     if (dot_type %in% c("integer", "double", "numeric")) {
       .data <- dt_mutate(.data, !!dot := nafill(!!dot, type = "locf"), by = !!by)
     } else if (dot_type %in% c("character", "logical", "factor")) {
-      .data <- eval_tidy(expr(
+      .data <- eval_expr(
         .data %>%
           dt_mutate(na_index = 1:.N, by = !!by) %>%
           dt_mutate(na_index = fifelse(is.na(!!dot), NA_integer_, na_index)) %>%
@@ -74,7 +76,7 @@ filldown <- function(.data, ..., by = NULL) {
           dt(, !!dot := .SD[, !!dot][na_index], by = !!by) %>%
           dt(, na_index := NULL) %>%
           dt()
-      ))
+      )
     }
   }
   .data
@@ -86,12 +88,14 @@ fillup <- function(.data, ..., by = NULL) {
   by <- enexpr(by)
 
   for (dot in dots) {
-    dot_type <- eval_tidy(expr(class('$'(.data, !!dot))))
+    dot_type <- eval_expr(
+      class('$'(.data, !!dot))
+      )
 
     if (dot_type %in% c("integer", "double", "numeric")) {
       .data <- dt_mutate(.data, !!dot := nafill(!!dot, type = "nocb"), by = !!by)
     } else if (dot_type %in% c("character", "logical", "factor")) {
-      .data <- eval_tidy(expr(
+      .data <- eval_expr(
         .data %>%
           dt_mutate(na_index = 1:.N, by = !!by) %>%
           dt_mutate(na_index = fifelse(is.na(!!dot), NA_integer_, na_index)) %>%
@@ -99,7 +103,7 @@ fillup <- function(.data, ..., by = NULL) {
           dt(, !!dot := .SD[, !!dot][na_index], by = !!by) %>%
           dt(, na_index := NULL) %>%
           dt()
-      ))
+      )
     }
   }
   .data

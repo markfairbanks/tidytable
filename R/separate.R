@@ -63,17 +63,17 @@ dt_separate.tidytable <- function(.data, col, into,
 
   if (nchar(sep) > 1) {
     # Works automatically, but is slower
-    eval_tidy(expr(
+    eval_expr(
       .data[, (into) := tstrsplit(!!col, split = str_extract(!!col, sep), fixed=TRUE, ...)][]
-    ))
+    )
   } else {
     # Faster, but sep must be supplied
-    eval_tidy(expr(
+    eval_expr(
       .data[, (into) := tstrsplit(!!col, split = sep, fixed=TRUE, ...)][]
-    ))
+    )
   }
 
-  if (remove) eval_tidy(expr(.data[, !!col := NULL][]))
+  if (remove) eval_expr(.data[, !!col := NULL][])
 
   .data
 }

@@ -33,17 +33,17 @@ dt_unnest_legacy.data.frame <- function(.data, col = NULL) {
   keep_cols <- colnames(.data)[!dt_map_lgl(.data, is.list)]
 
   is_datatable <- is.data.table(
-    eval_tidy(expr('$'(.data, !!col)))[[1]]
+    eval_expr('$'(.data, !!col))[[1]]
     )
 
   if (is_datatable) {
-    .data <- eval_tidy(expr(
+    .data <- eval_expr(
       .data[, unlist(!!col, recursive = FALSE), by = keep_cols]
-    ))
+    )
   } else {
-    .data <- eval_tidy(expr(
+    .data <- eval_expr(
       .data[, list(.new_col = unlist(!!col, recursive = FALSE)), by = keep_cols]
-    )) %>%
+    ) %>%
       dt_rename(!!col := .new_col)
   }
   .data

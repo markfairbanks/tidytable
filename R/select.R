@@ -40,9 +40,9 @@ dt_select.tidytable <- function(.data, ...) {
 
   dots <- dots_selector(.data, ...)
 
-  eval_tidy(expr(
+  eval_expr(
     .data[, list(!!!dots)]
-  ))
+  )
 }
 
 #' @export

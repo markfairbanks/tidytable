@@ -80,9 +80,9 @@ dt_mutate_across.tidytable <- function(.data, .cols, .funs, ..., by = NULL) {
 
   if (!is.list(.funs)) {
     if (length(.cols) > 0) {
-      eval_tidy(expr(
+      eval_expr(
         .data[, (.cols) := dt_map(.SD, .funs, ...), .SDcols = .cols, by = !!by][]
-      ))
+      )
     } else {
       .data
     }
@@ -91,14 +91,15 @@ dt_mutate_across.tidytable <- function(.data, .cols, .funs, ..., by = NULL) {
     if (!is_named(.funs)) abort("functions passed in a list must be named")
 
     new_names <- names(.funs)
+
     for (.col in .cols) {
       for (i in seq_along(new_names)) {
         new_name <- paste0(.col, "_", new_names[[i]])
         old <- .col
         user_function <- anon_x(.funs[[i]])
-        eval_tidy(expr(
+        eval_expr(
           .data[, (new_name) := user_function(.data[[old]]), by = !!by][]
-        ))
+        )
       }
     }
   }
