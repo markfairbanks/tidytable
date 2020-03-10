@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# tidytable   <img src="man/figures/logo.png" align="right" width="16%" height="16%" />
+# tidytable  <img src="man/figures/logo.png" align="right" width="16%" height="16%" />
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
@@ -478,7 +478,7 @@ longer_marks <- longer_marks %>%
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
 data_size <- 1000000
-left_dt <- data.table(a = sample(1:20, data_size, TRUE),
+left_dt <- tidytable(a = sample(1:20, data_size, TRUE),
                       b = sample(1:20, data_size, TRUE),
                       c = sample(c("a","a","b","c","d"), data_size, TRUE),
                       d = sample(c("a","a","b","c","d"), data_size, TRUE))
