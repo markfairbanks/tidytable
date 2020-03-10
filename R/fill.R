@@ -57,25 +57,31 @@ dt_fill.data.frame <- function(.data, ..., .direction = c("down", "up", "downup"
 
 filldown <- function(.data, ..., by = NULL) {
 
-  dots <- dots_selector(.data, ...)
+  dots <- tidytable:::dots_selector(.data, ...)
   by <- enexpr(by)
 
-  for (dot in dots) {
-    dot_type <- eval_expr(
-      class('$'(.data, !!dot))
-      )
+  all_cols <- as.character(dots)
 
-    if (dot_type %in% c("integer", "double", "numeric")) {
-      .data <- dt_mutate(.data, !!dot := nafill(!!dot, type = "locf"), by = !!by)
-    } else if (dot_type %in% c("character", "logical", "factor")) {
-      .data <- eval_expr(
+  subset_data <- .data[, ..all_cols]
+
+  numeric_cols <- all_cols[dt_map_lgl(subset_data, is.numeric)]
+  other_cols <- all_cols[!all_cols %in% numeric_cols]
+
+  if (length(numeric_cols) > 0)
+    .data <- tidytable:::eval_expr(
+      .data %>%
+        dt( , !!numeric_cols := lapply(.SD, nafill, "locf"), .SDcols = !!numeric_cols, by = !!by)
+    )
+  if (length(other_cols) > 0) {
+    other_cols <- syms(other_cols)
+
+    for (col in other_cols) {
+      .data <- tidytable:::eval_expr(
         .data %>%
-          dt_mutate(na_index = 1:.N, by = !!by) %>%
-          dt_mutate(na_index = fifelse(is.na(!!dot), NA_integer_, na_index)) %>%
-          dt_mutate(na_index = nafill(na_index, type = "locf"), by = !!by) %>%
-          dt(, !!dot := .SD[, !!dot][na_index], by = !!by) %>%
-          dt(, na_index := NULL) %>%
-          dt()
+          dt_mutate(na_index = nafill(fifelse(is.na(!!col), NA_integer_, 1:.N), type = "locf"),
+                    by = !!by) %>%
+          dt(, !!col := .SD[, !!col][na_index], by = !!by) %>%
+          dt(, na_index := NULL)
       )
     }
   }
@@ -84,25 +90,29 @@ filldown <- function(.data, ..., by = NULL) {
 
 fillup <- function(.data, ..., by = NULL) {
 
-  dots <- dots_selector(.data, ...)
+  all_cols <- as.character(dots_selector(.data, ...))
   by <- enexpr(by)
 
-  for (dot in dots) {
-    dot_type <- eval_expr(
-      class('$'(.data, !!dot))
-      )
+  subset_data <- .data[, ..all_cols]
 
-    if (dot_type %in% c("integer", "double", "numeric")) {
-      .data <- dt_mutate(.data, !!dot := nafill(!!dot, type = "nocb"), by = !!by)
-    } else if (dot_type %in% c("character", "logical", "factor")) {
+  numeric_cols <- all_cols[dt_map_lgl(subset_data, is.numeric)]
+  other_cols <- all_cols[!all_cols %in% numeric_cols]
+
+  if (length(numeric_cols) > 0)
+    .data <- eval_expr(
+      .data %>%
+        dt( , !!numeric_cols := lapply(.SD, nafill, "nocb"), .SDcols = !!numeric_cols, by = !!by)
+    )
+  if (length(other_cols) > 0) {
+    other_cols <- syms(other_cols)
+
+    for (col in other_cols) {
       .data <- eval_expr(
         .data %>%
-          dt_mutate(na_index = 1:.N, by = !!by) %>%
-          dt_mutate(na_index = fifelse(is.na(!!dot), NA_integer_, na_index)) %>%
-          dt_mutate(na_index = nafill(na_index, type = "nocb"), by = !!by) %>%
-          dt(, !!dot := .SD[, !!dot][na_index], by = !!by) %>%
-          dt(, na_index := NULL) %>%
-          dt()
+          dt_mutate(na_index = nafill(fifelse(is.na(!!col), NA_integer_, 1:.N), type = "nocb"),
+                    by = !!by) %>%
+          dt(, !!col := .SD[, !!col][na_index], by = !!by) %>%
+          dt(, na_index := NULL)
       )
     }
   }
