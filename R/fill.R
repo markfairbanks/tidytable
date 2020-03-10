@@ -57,10 +57,8 @@ dt_fill.data.frame <- function(.data, ..., .direction = c("down", "up", "downup"
 
 filldown <- function(.data, ..., by = NULL) {
 
-  dots <- tidytable:::dots_selector(.data, ...)
+  all_cols <- as.character(dots_selector(.data, ...))
   by <- enexpr(by)
-
-  all_cols <- as.character(dots)
 
   subset_data <- .data[, ..all_cols]
 
@@ -68,7 +66,7 @@ filldown <- function(.data, ..., by = NULL) {
   other_cols <- all_cols[!all_cols %in% numeric_cols]
 
   if (length(numeric_cols) > 0)
-    .data <- tidytable:::eval_expr(
+    .data <- eval_expr(
       .data %>%
         dt( , !!numeric_cols := lapply(.SD, nafill, "locf"), .SDcols = !!numeric_cols, by = !!by)
     )
@@ -76,7 +74,7 @@ filldown <- function(.data, ..., by = NULL) {
     other_cols <- syms(other_cols)
 
     for (col in other_cols) {
-      .data <- tidytable:::eval_expr(
+      .data <- eval_expr(
         .data %>%
           dt_mutate(na_index = nafill(fifelse(is.na(!!col), NA_integer_, 1:.N), type = "locf"),
                     by = !!by) %>%
