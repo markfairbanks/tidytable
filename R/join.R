@@ -125,7 +125,7 @@ dt_anti_join.default <- function(x, y, by = NULL) {
   as_tidytable(x[!y, on = on_vec, allow.cartesian = TRUE])
 }
 
-get_bys <- function(x, y, by) {
+get_bys <- function(x, y, by = NULL) {
 
   if (is.null(by)) {
     by_x <- by_y <- intersect(colnames(x), colnames(y))
