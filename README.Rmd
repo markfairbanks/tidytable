@@ -541,7 +541,15 @@ unnest_marks <- unnest_marks %>%
 ```
 
 ```{r nest, echo = FALSE}
-nest_dt <- unnest_dt %>% dt_unnest_legacy(list_column)
+nest_dt <- tibble::tibble(
+  a = LETTERS[1:5],
+  b = LETTERS[6:10],
+  list_column = list(c(LETTERS[1:5]), "F", "G", "H", "I")
+) %>%
+  dplyr::sample_frac(100000, replace = TRUE) %>%
+  as_tidytable() %>%
+  dt_unnest_legacy(list_column)
+
 nest_tbl <- as_tibble(nest_dt)
 
 remove(unnest_dt, unnest_tbl); inv_gc(); inv_gc();
