@@ -34,11 +34,9 @@ dt_top_n.tidytable <- function(.data, n = 5, wt = NULL, by = NULL) {
   by <- enexpr(by)
 
   if (is.null(wt)) {
-    .data %>%
-      dt_slice_head(!!n, !!by)
+    dt_slice_head(.data, !!n, !!by)
   } else {
-    .data %>%
-      dt_slice_max(order_by = !!wt, n = !!n, by = !!by)
+    dt_slice_max(.data, order_by = !!wt, n = !!n, by = !!by)
   }
 }
 

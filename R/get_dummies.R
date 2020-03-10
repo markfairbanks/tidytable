@@ -101,6 +101,8 @@ dt_get_dummies.tidytable <- function(.data,
 
     .data[, (new_names) := 0]
 
+    #TODO Stop unnecessary loop over NA col, since that is done later
+
     for (i in seq_along(unique_vals)) {
       eval_tidy(expr(
         .data[!!col == unique_vals[i], new_names[i] := 1L][]

@@ -4,20 +4,24 @@
 \alias{inv_gc}
 \title{Run invisible garbage collection}
 \usage{
-inv_gc(.data)
+inv_gc(x)
 }
 \arguments{
-\item{.data}{Optional. If missing runs `gc()` silently. Else returns the same object unaltered.}
+\item{x}{Optional. If missing runs `gc()` silently. Else returns the same object unaltered.}
 }
 \description{
-Run garbage collection without the `gc()` output. Can also be run in the middle of a long pipe chain. Useful for large datasets.
+Run garbage collection without the `gc()` output. Can also be run in the middle of a long pipe chain.
+Useful for large datasets or when using parallel processing.
 }
 \examples{
+# Can be run with no input
 inv_gc()
 
 df <- data.table::data.table(col1 = 1, col2 = 2)
 
+# Or can be run in the middle of a pipe chain (object is unaltered)
 df \%>\%
+  dt_filter(col1 < 2, col2 < 4) \%>\%
   inv_gc() \%>\%
-  dt_select(col1, col2)
+  dt_select(col1)
 }
