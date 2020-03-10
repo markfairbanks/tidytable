@@ -36,14 +36,14 @@ dt_group_nest.tidytable <- function(.data, ..., .key = "data") {
 
   if (length(dots) == 0) {
 
-    .data <- eval_tidy(expr(.data[, list(data = list(.SD))]))
+    .data <- eval_expr(.data[, list(data = list(.SD))])
 
   } else {
     dots <- dots_selector(.data, ...)
 
-    .data <- eval_tidy(expr(
+    .data <- eval_expr(
       .data[, list(data = list(.SD)), by = list(!!!dots)]
-      ))
+      )
   }
 
   if (.key != "data") .data <- dt_rename(.data, !!.key := data)

@@ -38,9 +38,9 @@ dt_drop_na.tidytable <- function(.data, ...) {
     dots <- dots_selector(.data, ...)
 
     for (dot in dots) {
-      .data <- eval_tidy(expr(
+      .data <- eval_expr(
         .data[!is.na(!!dot)]
-      ))
+      )
     }
     .data
   }

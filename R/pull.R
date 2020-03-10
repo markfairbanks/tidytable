@@ -26,9 +26,9 @@ dt_pull.tidytable <- function(.data, var = NULL) {
   if (is.null(var)) stop("var must be supplied")
 
   # Base R translation is faster than data.table
-  eval_tidy(expr(
+  eval_expr(
     '$'(.data, !!var)
-  ))
+  )
 }
 
 #' @export

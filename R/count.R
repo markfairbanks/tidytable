@@ -40,9 +40,9 @@ dt_count.tidytable <- function(.data, ...) {
     by_vec <- dots_selector(.data, ...) %>%
       as.character()
 
-  .data <- eval_tidy(expr(
+  .data <- eval_expr(
     .data[, .N, by = by_vec]
-    ))
+    )
   }
   .data
 }
