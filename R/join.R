@@ -37,9 +37,10 @@ dt_left_join.default <- function(x, y, by = NULL) {
   on_vec <- by_x
   names(on_vec) <- by_y
 
-  all_names <- c(names(x), setdiff(names(y), names(x)))
+  y_names <- names(y)
+  all_names <- c(names(x), y_names[!y_names %in% names(x)])
 
-  as_tidytable(y[x, on = on_vec, allow.cartesian = TRUE][, ..all_names])
+  as_tidytable(setcolorder(y[x, on = on_vec, allow.cartesian = TRUE], all_names))
 }
 
 #' @export
