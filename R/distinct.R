@@ -33,11 +33,7 @@ dt_distinct.tidytable <- function(.data, ...) {
   if (length(dots) == 0) {
     unique(.data)
   } else {
-    dots <- dots_selector(.data, ...)
-
-    .data %>%
-      dt_select(!!!dots) %>%
-      unique()
+    unique(dt_select(.data, ...))
   }
 }
 

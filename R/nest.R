@@ -35,18 +35,19 @@ dt_group_nest.tidytable <- function(.data, ..., .key = "data") {
   dots <- enexprs(...)
 
   if (length(dots) == 0) {
+
     .data <- eval_tidy(expr(.data[, list(data = list(.SD))]))
 
-    .data <- .data %>%
-      dt_rename(!!.key := data)
   } else {
     dots <- dots_selector(.data, ...)
 
-    .data <- eval_tidy(expr(.data[, list(data = list(.SD)), by = list(!!!dots)]))
-
-    .data <- .data %>%
-      dt_rename(!!.key := data)
+    .data <- eval_tidy(expr(
+      .data[, list(data = list(.SD)), by = list(!!!dots)]
+      ))
   }
+
+  if (.key != "data") .data <- dt_rename(.data, !!.key := data)
+
   .data
 }
 

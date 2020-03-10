@@ -32,7 +32,9 @@ dt_unnest_legacy.data.frame <- function(.data, col = NULL) {
 
   keep_cols <- colnames(.data)[!dt_map_lgl(.data, is.list)]
 
-  is_datatable <- is.data.table(.data[[col]][[1]])
+  is_datatable <- is.data.table(
+    eval_tidy(expr('$'(.data, !!col)))[[1]]
+    )
 
   if (is_datatable) {
     .data <- eval_tidy(expr(
