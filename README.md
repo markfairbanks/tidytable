@@ -10,6 +10,8 @@ status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.
 [![](https://img.shields.io/badge/dev%20-0.3.2.9-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![CRAN RStudio mirror
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/tidytable?color=grey)](https://r-pkg.org/pkg/tidytable)
 <!-- badges: end -->
 
 The goal of `tidytable` is to be a tidy interface to `data.table`.
@@ -346,17 +348,17 @@ all_marks
 #> # A tibble: 13 x 6
 #>    function_tested tidyverse tidytable data.table pandas tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>  <chr>                 
-#>  1 arrange         321.5ms   29.6ms    27.9ms     297ms  9.2%                  
-#>  2 case_when       490ms     127ms     123ms      307ms  25.9%                 
-#>  3 distinct        82.5ms    15.3ms    15ms       287ms  18.5%                 
-#>  4 fill            101ms     31ms      35ms       806ms  30.7%                 
-#>  5 filter          260ms     211ms     207ms      656ms  81.2%                 
-#>  6 inner_join      56.1ms    52.9ms    45.2ms     <NA>   94.3%                 
-#>  7 left_join       77ms      69ms      48.2ms     <NA>   89.6%                 
-#>  8 mutate          62.2ms    46ms      69.7ms     85.2ms 74.0%                 
-#>  9 nest            51.9ms    12.2ms    10.6ms     <NA>   23.5%                 
-#> 10 pivot_longer    189ms     23.1ms    22.9ms     <NA>   12.2%                 
-#> 11 pivot_wider     811ms     178ms     179ms      <NA>   21.9%                 
-#> 12 summarize       446ms     153ms     152ms      780ms  34.3%                 
-#> 13 unnest          153.28ms  6.94ms    5.92ms     <NA>   4.5%
+#>  1 arrange         451.9ms   41.1ms    39.6ms     297ms  9.1%                  
+#>  2 case_when       522ms     139ms     136ms      307ms  26.6%                 
+#>  3 distinct        94.6ms    19.2ms    20.7ms     287ms  20.3%                 
+#>  4 fill            116.5ms   40.4ms    42.7ms     806ms  34.7%                 
+#>  5 filter          324ms     233ms     216ms      656ms  71.9%                 
+#>  6 inner_join      58ms      56.4ms    51.7ms     <NA>   97.2%                 
+#>  7 left_join       84.7ms    76.1ms    51.3ms     <NA>   89.8%                 
+#>  8 mutate          66.2ms    51.6ms    74.1ms     85.2ms 77.9%                 
+#>  9 nest            53.5ms    14.7ms    11.7ms     <NA>   27.5%                 
+#> 10 pivot_longer    209ms     23.4ms    23.4ms     <NA>   11.2%                 
+#> 11 pivot_wider     839ms     204ms     213ms      <NA>   24.3%                 
+#> 12 summarize       567ms     168ms     224ms      780ms  29.6%                 
+#> 13 unnest          166.82ms  8.17ms    6.39ms     <NA>   4.9%
 ```

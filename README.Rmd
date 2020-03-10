@@ -20,6 +20,7 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
 [![](https://img.shields.io/badge/dev%20-0.3.2.9-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/tidytable?color=grey)](https://r-pkg.org/pkg/tidytable)
 <!-- badges: end -->
 
 The goal of `tidytable` is to be a tidy interface to `data.table`.
@@ -573,13 +574,13 @@ nest_marks <- nest_marks %>%
 # import numpy as np
 # import gc
 # data_size = 10000000
-# 
+#
 # test_df = pd.DataFrame(
 #     {'a': np.random.choice(np.arange(20), data_size),
 #      'b': np.random.choice(np.arange(20), data_size),
 #      'c': np.random.choice(['a','a','b','c','d'], data_size),
 #      'd': np.random.choice(['a','a','b','c','d'], data_size)}).convert_dtypes()
-# 
+#
 # print('filter')
 # %timeit test_df.loc[(test_df.a <= 7) & (test_df.c == 'a')]
 # print('summarize')
@@ -590,37 +591,37 @@ nest_marks <- nest_marks %>%
 # %timeit test_df['a_plus_b'] = test_df.a + test_df.b
 # print('mutate pt2')
 # %timeit test_df['a_plus_b'] = test_df.a + test_df.b
-# 
+#
 # del test_df
 # gc.collect()
-# 
+#
 # arrange_size = 1000000
-# 
+#
 # arrange_df = pd.DataFrame(
 #     {'a': np.random.choice(np.arange(20), arrange_size),
 #      'b': np.random.choice(np.arange(20), arrange_size),
 #      'c': np.random.choice(['a','a','b','c','d'], arrange_size),
 #      'd': np.random.choice(['a','a','b','c','d'], arrange_size)}).convert_dtypes()
-# 
+#
 # print('arrange')
 # %timeit arrange_df.sort_values(['c', 'a'])
 # print('distinct')
 # %timeit test_df.drop_duplicates()
 # del arrange_df
 # gc.collect()
-# 
+#
 # case_df = pd.DataFrame({'x': np.random.normal(size = 3000000)})
-# 
+#
 # case_df['median_x'] = case_df['x'].median()
-# 
+#
 # print('case_when')
 # %timeit case_df['test'] = np.where(case_df.x < case_df.median_x, 'low', np.where(case_df.x >= case_df.median_x, 'high', np.where(case_df.x.isna(), 'unknown', 'other')))
 # fill_size = 2000000
 # fill_df = pd.DataFrame({'x': np.arange(fill_size),
 #                         'id': np.random.choice(np.arange(3), fill_size)})
-# 
+#
 # fill_df = fill_df.assign(y = fill_df.x.shift(10), z = fill_df.x.shift(-10)).convert_dtypes()
-# 
+#
 # print('fill')
 # %timeit fill_df.groupby('id')[['x','y']].fillna(method = 'backfill')
 ```
