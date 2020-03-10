@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# tidytable  <img src="man/figures/logo.png" align="right" width="16%" height="16%" />
+# tidytable   <img src="man/figures/logo.png" align="right" width="16%" height="16%" />
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
@@ -491,7 +491,7 @@ right_tbl <- as_tibble(right_dt)
 
 left_join_marks <- bench::mark(
   tidyverse = left_join(left_tbl, right_tbl, by = "c"),
-  tidytable = dt_left_join(left_dt, right_dt, by = "c"),
+  tidytable = dt_left_join(left_dt, right_dt),
   data.table = right_dt[left_dt, on = "c", allow.cartesian = TRUE],
   check = FALSE,
   iterations = iters)
@@ -505,7 +505,7 @@ left_join_marks <- left_join_marks %>%
 ```{r inner_join, echo=FALSE}
 inner_join_marks <- bench::mark(
   tidyverse = inner_join(left_tbl, right_tbl, by = "c"),
-  tidytable = dt_inner_join(left_dt, right_dt, by = "c"),
+  tidytable = dt_inner_join(left_dt, right_dt),
   data.table = left_dt[right_dt, on = "c", allow.cartesian = TRUE, nomatch = 0],
   check = FALSE,
   iterations = iters)
