@@ -374,21 +374,20 @@ distinct_marks <- distinct_marks %>%
 ```{r fill, echo = FALSE}
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-x <- 1:2e6
+size <- 1e6
 fill_dt <- tidytable(
-  x = x,
-  y = shift(x, 10L),
-  z = shift(x, -10L),
-  a = sample(c(rep(NA, 10), x), 10),
-  id = sample(1:3, 10, replace = TRUE))
+  id = sample(1:3, size, replace = TRUE),
+  # chr = sample(c("a","a","a","b","b",NA), size, replace = TRUE),
+  int1 = sample(c(1:5,NA), size, replace = TRUE),
+  int2 = sample(c(1:5,NA), size, replace = TRUE))
 
 fill_tbl <- as_tibble(fill_dt)
 
 fill_marks <- bench::mark(
-  tidyverse = fill(dplyr::group_by(fill_tbl, id), x, y),
-  tidytable = dt_fill(fill_dt, x, y, by = id),
-  data.table = copy(fill_dt)[, ':='(x = nafill(x, type = "locf"),
-                                    y = nafill(y, type = "locf")),
+  tidyverse = fill(dplyr::group_by(fill_tbl, id), int1, int2),
+  tidytable = dt_fill(fill_dt, int1, int2, by = id),
+  data.table = copy(fill_dt)[, ':='(int1 = nafill(int1, type = "locf"),
+                                    int2 = nafill(int2, type = "locf")),
                              by = id],
   check = FALSE,
   iterations = iters)
@@ -462,8 +461,8 @@ longer_tbl <- as_tibble(longer_dt)
 remove(x, wider_dt, wider_tbl); inv_gc(); inv_gc();
 
 longer_marks <- bench::mark(
-  tidyverse = pivot_longer(longer_tbl, cols = c(x:z)),
-  tidytable = dt_pivot_longer(longer_dt, cols = c(x:z)),
+  tidyverse = pivot_longer(longer_tbl, cols = c(x, y, z)),
+  tidytable = dt_pivot_longer(longer_dt, cols = c(x, y, z)),
   data.table = data.table::melt(longer_dt, measure.vars = c("x","y","z"), variable.name = "name"),
   check = FALSE,
   iterations = iters
@@ -616,14 +615,13 @@ nest_marks <- nest_marks %>%
 #
 # print('case_when')
 # %timeit case_df['test'] = np.where(case_df.x < case_df.median_x, 'low', np.where(case_df.x >= case_df.median_x, 'high', np.where(case_df.x.isna(), 'unknown', 'other')))
-# fill_size = 2000000
-# fill_df = pd.DataFrame({'x': np.arange(fill_size),
-#                         'id': np.random.choice(np.arange(3), fill_size)})
-#
-# fill_df = fill_df.assign(y = fill_df.x.shift(10), z = fill_df.x.shift(-10)).convert_dtypes()
-#
+# fill_size = 1000000
+# fill_df = pd.DataFrame({'id': np.random.choice(np.arange(3), fill_size),
+#                         'int1': np.random.choice(np.array([1,2,3, np.nan]), fill_size),
+#                         'int2': np.random.choice(np.array([1,2,3, np.nan]), fill_size)})
+# 
 # print('fill')
-# %timeit fill_df.groupby('id')[['x','y']].fillna(method = 'backfill')
+# %timeit fill_df.groupby('id')[['int1', 'int2']].fillna(method = 'backfill')
 ```
 
 ```{r all_marks, echo = FALSE, message = FALSE}
@@ -657,7 +655,7 @@ pandas_marks <- tibble(arrange = "297ms",
                        case_when = "307ms",
                        distinct = "287ms",
                        filter = "656ms",
-                       fill = "806ms",
+                       fill = "146ms",
                        mutate = "85.2ms",
                        summarize = "780ms") %>%
   pivot_longer(everything(), names_to = "function_tested", values_to = "pandas")
