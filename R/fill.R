@@ -32,17 +32,17 @@ dt_fill.tidytable <- function(.data, ..., .direction = c("down", "up", "downup",
   if (length(.direction) > 1) .direction <- "down"
 
   if (.direction == "down") {
-    filldown(.data, ..., by = !!by)
+    filler(.data, ..., type = "locf", by = !!by)
   } else if (.direction == "up") {
-    fillup(.data, ..., by = !!by)
+    filler(.data, ..., type = "nocb", by = !!by)
   } else if (.direction == "downup") {
     .data %>%
-      filldown(..., by = !!by) %>%
-      fillup(..., by = !!by)
+      filler(..., type = "locf", by = !!by) %>%
+      filler(..., type = "nocb", by = !!by)
   } else {
     .data %>%
-      fillup(..., by = !!by) %>%
-      filldown(..., by = !!by)
+      filler(..., type = "nocb", by = !!by) %>%
+      filler(..., type = "locf", by = !!by)
   }
 }
 
@@ -55,7 +55,7 @@ dt_fill.data.frame <- function(.data, ..., .direction = c("down", "up", "downup"
 
 }
 
-filldown <- function(.data, ..., by = NULL) {
+filler <- function(.data, ..., type = "locf", by = NULL) {
 
   all_cols <- as.character(dots_selector(.data, ...))
   by <- enexpr(by)
@@ -68,7 +68,7 @@ filldown <- function(.data, ..., by = NULL) {
   if (length(numeric_cols) > 0)
     .data <- eval_expr(
       .data %>%
-        dt( , !!numeric_cols := lapply(.SD, nafill, "locf"), .SDcols = !!numeric_cols, by = !!by)
+        dt( , !!numeric_cols := lapply(.SD, nafill, !!type), .SDcols = !!numeric_cols, by = !!by)
     )
   if (length(other_cols) > 0) {
     other_cols <- syms(other_cols)
@@ -76,41 +76,8 @@ filldown <- function(.data, ..., by = NULL) {
     for (col in other_cols) {
       .data <- eval_expr(
         .data %>%
-          dt_mutate(na_index = nafill(fifelse(is.na(!!col), NA_integer_, 1:.N), type = "locf"),
-                    by = !!by) %>%
-          dt(, !!col := .SD[, !!col][na_index], by = !!by) %>%
-          dt(, na_index := NULL)
-      )
-    }
-  }
-  .data
-}
-
-fillup <- function(.data, ..., by = NULL) {
-
-  all_cols <- as.character(dots_selector(.data, ...))
-  by <- enexpr(by)
-
-  subset_data <- .data[, ..all_cols]
-
-  numeric_cols <- all_cols[dt_map_lgl(subset_data, is.numeric)]
-  other_cols <- all_cols[!all_cols %in% numeric_cols]
-
-  if (length(numeric_cols) > 0)
-    .data <- eval_expr(
-      .data %>%
-        dt( , !!numeric_cols := lapply(.SD, nafill, "nocb"), .SDcols = !!numeric_cols, by = !!by)
-    )
-  if (length(other_cols) > 0) {
-    other_cols <- syms(other_cols)
-
-    for (col in other_cols) {
-      .data <- eval_expr(
-        .data %>%
-          dt_mutate(na_index = nafill(fifelse(is.na(!!col), NA_integer_, 1:.N), type = "nocb"),
-                    by = !!by) %>%
-          dt(, !!col := .SD[, !!col][na_index], by = !!by) %>%
-          dt(, na_index := NULL)
+          dt(, !!col := .SD[, !!col][nafill(fifelse(is.na(!!col), NA_integer_, 1:.N), type = !!type)],
+             by = !!by)
       )
     }
   }
