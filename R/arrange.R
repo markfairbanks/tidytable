@@ -24,11 +24,9 @@ dt_arrange.tidytable <- function(.data, ...) {
 
   dots <- enexprs(...)
 
-  .data <- eval_expr(
+  eval_expr(
     .data[order(!!!dots)]
     )
-
-  .data
 }
 
 #' @export
