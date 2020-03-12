@@ -1,9 +1,9 @@
-#' Mutate variants
+#' Mutate helpers
 #'
 #' @description
 #' Edit existing columns. Supports enhanced selection.
 #'
-#' There are two variants:
+#' There are two helpers:
 #'
 #' * `dt_mutate_all()`
 #' * `dt_mutate_across()`: Replaces both `mutate_if()` & `mutate_at()`

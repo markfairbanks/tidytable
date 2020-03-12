@@ -65,7 +65,7 @@ here](https://markfairbanks.github.io/tidytable/#enhanced-selection)
   - `dt_arrange()`
   - `dt_filter()`
   - `dt_mutate()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
-      - The `_across()` variant is new and can replace both `_if()` and
+      - The `_across()` helper is new and can replace both `_if()` and
         `_at()` [See
         here](https://markfairbanks.github.io/tidytable/#new-variant-dt_mutate_across)
   - `dt_select()` - **ES**
@@ -86,9 +86,8 @@ here](https://markfairbanks.github.io/tidytable/#enhanced-selection)
   - `dt_rename()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
   - Select helpers: `dt_starts_with()`, `dt_ends_with()`,
     `dt_contains()`, `dt_everything()`
-  - `dt_separate()`
   - `dt_slice()`: `_head()`/`_tail()`/`_max()`/`_min()`
-      - The `slice_*()` variants are like `dt_top_n()`, but are slightly
+      - The `slice_*()` helpers are like `dt_top_n()`, but are slightly
         easier to use
   - `dt_top_n()`
 
@@ -101,6 +100,7 @@ here](https://markfairbanks.github.io/tidytable/#enhanced-selection)
   - Nesting: `dt_group_nest()` - **ES** & `dt_unnest_legacy()`
   - `dt_pivot_longer()` - **ES** & `dt_pivot_wider()` - **ES**
   - `dt_replace_na()`
+  - `dt_separate()`
 
 ### purrr
 
@@ -186,7 +186,7 @@ example_dt %>%
 Currently supported:
 `is.numeric`/`is.integer`/`is.double`/`is.character`/`is.factor`
 
-#### New variant: `dt_mutate_across()`
+#### New helper: `dt_mutate_across()`
 
 Enhanced selection allows the user to replace `dt_mutate_if()` &
 `dt_mutate_at()` with one helper - `dt_mutate_across()`.
@@ -348,17 +348,17 @@ all_marks
 #> # A tibble: 13 x 6
 #>    function_tested tidyverse tidytable data.table pandas tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>  <chr>                 
-#>  1 arrange         336.1ms   31.5ms    32ms       297ms  9.4%                  
-#>  2 case_when       486ms     138ms     133ms      307ms  28.4%                 
-#>  3 distinct        84ms      15.8ms    18.6ms     287ms  18.8%                 
-#>  4 fill            50ms      20.7ms    14.5ms     146ms  41.4%                 
-#>  5 filter          262ms     221ms     217ms      656ms  84.4%                 
-#>  6 inner_join      58.5ms    57ms      55.8ms     <NA>   97.4%                 
-#>  7 left_join       62.3ms    37.4ms    39ms       <NA>   60.0%                 
-#>  8 mutate          68.2ms    51.3ms    67.4ms     85.2ms 75.2%                 
-#>  9 nest            51.2ms    12.6ms    10.6ms     <NA>   24.6%                 
-#> 10 pivot_longer    198.5ms   38.4ms    24.4ms     <NA>   19.3%                 
-#> 11 pivot_wider     856ms     214ms     220ms      <NA>   25.0%                 
-#> 12 summarize       475ms     169ms     162ms      780ms  35.6%                 
-#> 13 unnest          151.76ms  6.84ms    8.18ms     <NA>   4.5%
+#>  1 arrange         393.5ms   34.2ms    38.7ms     297ms  8.7%                  
+#>  2 case_when       517ms     179ms     163ms      307ms  34.6%                 
+#>  3 distinct        86.4ms    18.4ms    16.3ms     287ms  21.3%                 
+#>  4 fill            127.9ms   36.3ms    32.5ms     146ms  28.4%                 
+#>  5 filter          283ms     222ms     222ms      656ms  78.4%                 
+#>  6 inner_join      70.9ms    60.2ms    59.7ms     <NA>   84.9%                 
+#>  7 left_join       66.8ms    46.2ms    48.8ms     <NA>   69.2%                 
+#>  8 mutate          69.3ms    53.9ms    74.4ms     85.2ms 77.8%                 
+#>  9 nest            59ms      14.7ms    11.3ms     <NA>   24.9%                 
+#> 10 pivot_longer    186.6ms   37ms      30.7ms     <NA>   19.8%                 
+#> 11 pivot_wider     904ms     219ms     219ms      <NA>   24.2%                 
+#> 12 summarize       483ms     176ms     160ms      780ms  36.4%                 
+#> 13 unnest          181.01ms  8.18ms    7.88ms     <NA>   4.5%
 ```

@@ -5,7 +5,7 @@
 \alias{dt_mutate_at}
 \alias{dt_mutate_across}
 \alias{dt_mutate_all}
-\title{Mutate variants}
+\title{Mutate helpers}
 \usage{
 dt_mutate_if(.data, .predicate, .funs, ..., by = NULL)
 
@@ -33,7 +33,7 @@ dt_mutate_all(.data, .funs, ..., by = NULL)
 \description{
 Edit existing columns. Supports enhanced selection.
 
-There are two variants:
+There are two helpers:
 \itemize{
 \item \code{dt_mutate_all()}
 \item \code{dt_mutate_across()}: Replaces both \code{mutate_if()} & \code{mutate_at()}

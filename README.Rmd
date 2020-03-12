@@ -66,7 +66,7 @@ devtools::install_github("markfairbanks/tidytable")
 * `dt_arrange()`
 * `dt_filter()`
 * `dt_mutate()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
-  + The `_across()` variant is new and can replace both `_if()` and `_at()`
+  + The `_across()` helper is new and can replace both `_if()` and `_at()`
   [See here](https://markfairbanks.github.io/tidytable/#new-variant-dt_mutate_across)
 * `dt_select()` - **ES**
 * `dt_summarize()`: Group by specifications called inside. See `?dt_summarize`
@@ -82,9 +82,8 @@ devtools::install_github("markfairbanks/tidytable")
 * `dt_relocate()`
 * `dt_rename()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
 * Select helpers: `dt_starts_with()`, `dt_ends_with()`, `dt_contains()`, `dt_everything()`
-* `dt_separate()`
 * `dt_slice()`: `_head()`/`_tail()`/`_max()`/`_min()`
-  + The `slice_*()` variants are like `dt_top_n()`, but are slightly easier to use
+  + The `slice_*()` helpers are like `dt_top_n()`, but are slightly easier to use
 * `dt_top_n()`
 
 ### tidyr
@@ -95,6 +94,7 @@ devtools::install_github("markfairbanks/tidytable")
 * Nesting: `dt_group_nest()` - **ES** & `dt_unnest_legacy()`
 * `dt_pivot_longer()` - **ES** & `dt_pivot_wider()` - **ES**
 * `dt_replace_na()`
+* `dt_separate()`
 
 ### purrr
 * `dt_map()`, `dt_map2()`, `dt_map_*()` variants, & `dt_map2_*()` variants
@@ -154,7 +154,7 @@ example_dt %>%
 
 Currently supported: `is.numeric`/`is.integer`/`is.double`/`is.character`/`is.factor`
 
-#### New variant: `dt_mutate_across()`
+#### New helper: `dt_mutate_across()`
 
 Enhanced selection allows the user to replace `dt_mutate_if()` & `dt_mutate_at()` with one helper - `dt_mutate_across()`.
 
@@ -374,7 +374,7 @@ distinct_marks <- distinct_marks %>%
 ```{r fill, echo = FALSE}
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-size <- 1e6
+size <- 2e6
 fill_dt <- tidytable(
   id = sample(1:3, size, replace = TRUE),
   # chr = sample(c("a","a","a","b","b",NA), size, replace = TRUE),
@@ -386,6 +386,7 @@ fill_tbl <- as_tibble(fill_dt)
 fill_marks <- bench::mark(
   tidyverse = fill(dplyr::group_by(fill_tbl, id), int1, int2),
   tidytable = dt_fill(fill_dt, int1, int2, by = id),
+  # needs shallow copy or subsequent runs won't have NAs to fill
   data.table = tidytable:::shallow(fill_dt)[, ':='(int1 = nafill(int1, type = "locf"),
                                                    int2 = nafill(int2, type = "locf")),
                                             by = id],
