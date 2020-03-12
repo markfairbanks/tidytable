@@ -35,10 +35,10 @@ dt_mutate.tidytable <- function(.data, ..., by = NULL) {
   by <- enexpr(by)
   .data <- shallow(.data)
 
-  all_names <- names(dots)
-
   if (is.null(by)) {
     # Faster version if there is no "by" provided
+    all_names <- names(dots)
+
     for (i in seq_along(dots)) {
       eval_expr(
         .data[, ':='(all_names[[i]], !!dots[[i]])][]
