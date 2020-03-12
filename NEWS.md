@@ -2,8 +2,6 @@
 
 * Functions with notable speed improvements:
   + `dt_fill()`
-    - Now as fast as `data.table::nafill()` on numeric columns
-    - ~50% faster on all other types (Note: `data.table::nafill()` does not work in these cases)
   + `dt_pivot_longer()`
   + `dt_unnest_legacy()`
 

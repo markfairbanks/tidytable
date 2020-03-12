@@ -386,9 +386,9 @@ fill_tbl <- as_tibble(fill_dt)
 fill_marks <- bench::mark(
   tidyverse = fill(dplyr::group_by(fill_tbl, id), int1, int2),
   tidytable = dt_fill(fill_dt, int1, int2, by = id),
-  data.table = copy(fill_dt)[, ':='(int1 = nafill(int1, type = "locf"),
-                                    int2 = nafill(int2, type = "locf")),
-                             by = id],
+  data.table = tidytable:::shallow(fill_dt)[, ':='(int1 = nafill(int1, type = "locf"),
+                                                   int2 = nafill(int2, type = "locf")),
+                                            by = id],
   check = FALSE,
   iterations = iters)
 
@@ -406,6 +406,8 @@ case_dt <- tidytable(x = rnorm(3000000)) %>%
 
 case_tbl <- as_tibble(case_dt)
 
+case2_dt <- copy(case_dt)
+
 case_marks <- bench::mark(
   tidyverse = mutate(case_tbl,
                      test = case_when(x < median_x ~ "low",
@@ -417,9 +419,9 @@ case_marks <- bench::mark(
                                       x >= median_x, "high",
                                       is.na(x), "unknown",
                                       default = "other")),
-  data.table = tidytable:::shallow(case_dt)[,':='(test = fifelse(x < median_x, "low",
-                                                  fifelse(x >= median_x, "high",
-                                                          fifelse(is.na(x), "unknown", "other"))))],
+  data.table = case2_dt[,':='(test = fifelse(x < median_x, "low",
+                                            fifelse(x >= median_x, "high",
+                                                    fifelse(is.na(x), "unknown", "other"))))][],
   check = FALSE,
   iterations = iters)
 
