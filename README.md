@@ -348,17 +348,17 @@ all_marks
 #> # A tibble: 13 x 6
 #>    function_tested tidyverse tidytable data.table pandas tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>  <chr>                 
-#>  1 arrange         381.8ms   35.2ms    33.5ms     297ms  9.2%                  
-#>  2 case_when       470ms     137ms     144ms      307ms  29.1%                 
-#>  3 distinct        91.7ms    21.1ms    22.9ms     287ms  23.0%                 
-#>  4 fill            129.3ms   37.2ms    30.2ms     146ms  28.8%                 
-#>  5 filter          269ms     205ms     210ms      656ms  76.2%                 
-#>  6 inner_join      69.7ms    53.4ms    63.5ms     <NA>   76.6%                 
-#>  7 left_join       67.7ms    45ms      53.8ms     <NA>   66.5%                 
-#>  8 mutate          71.7ms    53.3ms    89.1ms     85.2ms 74.3%                 
-#>  9 nest            56.1ms    17.3ms    11.4ms     <NA>   30.8%                 
-#> 10 pivot_longer    192ms     39.2ms    13.3ms     <NA>   20.4%                 
-#> 11 pivot_wider     944ms     200ms     196ms      <NA>   21.2%                 
-#> 12 summarize       440ms     186ms     176ms      780ms  42.3%                 
-#> 13 unnest          154.88ms  7.73ms    7.14ms     <NA>   5.0%
+#>  1 arrange         398.7ms   33.2ms    34.1ms     297ms  8.3%                  
+#>  2 case_when       512ms     231ms     187ms      307ms  45.1%                 
+#>  3 distinct        90.1ms    19.2ms    20.8ms     287ms  21.3%                 
+#>  4 fill            139.7ms   44.8ms    32.2ms     146ms  32.1%                 
+#>  5 filter          273ms     209ms     216ms      656ms  76.6%                 
+#>  6 inner_join      57.5ms    57.6ms    54.9ms     <NA>   100.2%                
+#>  7 left_join       71.2ms    47.8ms    45.4ms     <NA>   67.1%                 
+#>  8 mutate          67.6ms    53.6ms    90.2ms     85.2ms 79.3%                 
+#>  9 nest            55.4ms    17.2ms    10.8ms     <NA>   31.0%                 
+#> 10 pivot_longer    198.6ms   24.8ms    40ms       <NA>   12.5%                 
+#> 11 pivot_wider     1100ms    279.1ms   218.3ms    <NA>   25.4%                 
+#> 12 summarize       505ms     234ms     278ms      780ms  46.3%                 
+#> 13 unnest          156.62ms  9.06ms    7.33ms     <NA>   5.8%
 ```

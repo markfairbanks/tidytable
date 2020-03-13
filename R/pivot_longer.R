@@ -53,8 +53,7 @@ dt_pivot_longer.tidytable <- function(.data,
   names <- colnames(.data)
   cols <- enexpr(cols)
 
-  cols <- vec_selector(.data, !!cols) %>%
-    as.character()
+  cols <- as.character(vec_selector(.data, !!cols))
 
   if (length(cols) == 0) warning("No columns remaining after removing")
 

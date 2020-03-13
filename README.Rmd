@@ -443,7 +443,8 @@ remove(wider_dt, wider_tbl); inv_gc(); inv_gc();
 longer_marks <- bench::mark(
   tidyverse = pivot_longer(longer_tbl, cols = c(x, y, z)),
   tidytable = dt_pivot_longer(longer_dt, cols = c(x, y, z)),
-  data.table = data.table::melt(longer_dt, measure.vars = c("x","y","z"), variable.name = "name"),
+  data.table = data.table::melt(longer_dt, measure.vars = c("x","y","z"),
+                                variable.name = "name", variable.factor = FALSE),
   check = FALSE,
   iterations = iters) %>%
   mutate(expression = as.character(expression),
