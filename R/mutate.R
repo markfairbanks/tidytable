@@ -41,16 +41,16 @@ dt_mutate.tidytable <- function(.data, ..., by = NULL) {
 
     for (i in seq_along(dots)) {
       eval_expr(
-        .data[, ':='(all_names[[i]], !!dots[[i]])][]
+        .data[, ':='(all_names[[i]], !!dots[[i]])]
       )
     }
   } else {
     # Faster with "by", since the "by" call isn't looped multiple times for each column added
     eval_expr(
-      .data[, ':='(!!!dots), by = !!by][]
+      .data[, ':='(!!!dots), by = !!by]
     )
   }
-  .data
+  .data[]
 }
 
 #' @export

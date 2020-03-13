@@ -37,8 +37,7 @@ dt_count.tidytable <- function(.data, ...) {
   if (length(dots) == 0) {
     .data <- .data[, list(N = .N)]
   } else {
-    by_vec <- dots_selector(.data, ...) %>%
-      as.character()
+    by_vec <- as.character(dots_selector(.data, ...))
 
   .data <- eval_expr(
     .data[, .N, by = by_vec]

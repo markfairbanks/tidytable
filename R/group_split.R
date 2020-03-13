@@ -28,8 +28,7 @@ dt_group_split.tidytable <- function(.data, ...) {
   if (length(dots) == 0) {
     list(.data)
   } else {
-    dots <- dots_selector(.data, ...) %>%
-      as.character()
+    dots <- as.character(dots_selector(.data, ...))
 
     unname(split(.data, by = dots))
   }

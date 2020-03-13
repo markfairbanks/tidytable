@@ -72,8 +72,7 @@ dt_mutate_across <- function(.data, .cols, .funs, ..., by = NULL) {
 dt_mutate_across.tidytable <- function(.data, .cols, .funs, ..., by = NULL) {
 
   .cols <- enexpr(.cols)
-  .cols <- vec_selector(.data, !!.cols) %>%
-    as.character()
+  .cols <- as.character(vec_selector(.data, !!.cols))
 
   by <- enexpr(by)
   .data <- shallow(.data)
@@ -81,7 +80,7 @@ dt_mutate_across.tidytable <- function(.data, .cols, .funs, ..., by = NULL) {
   if (!is.list(.funs)) {
     if (length(.cols) > 0) {
       eval_expr(
-        .data[, (.cols) := dt_map(.SD, .funs, ...), .SDcols = .cols, by = !!by][]
+        .data[, (.cols) := dt_map(.SD, .funs, ...), .SDcols = .cols, by = !!by]
       )
     } else {
       .data
@@ -98,12 +97,12 @@ dt_mutate_across.tidytable <- function(.data, .cols, .funs, ..., by = NULL) {
         old <- .col
         user_function <- anon_x(.funs[[i]])
         eval_expr(
-          .data[, (new_name) := user_function(.data[[old]]), by = !!by][]
+          .data[, (new_name) := user_function(.data[[old]]), by = !!by]
         )
       }
     }
   }
-  .data
+  .data[]
 }
 
 #' @export

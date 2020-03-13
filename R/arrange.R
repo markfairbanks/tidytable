@@ -26,7 +26,7 @@ dt_arrange.tidytable <- function(.data, ...) {
 
   eval_expr(
     .data[order(!!!dots)]
-    )
+  )
 }
 
 #' @export
