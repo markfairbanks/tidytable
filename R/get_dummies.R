@@ -75,7 +75,7 @@ dt_get_dummies.tidytable <- function(.data,
 
   if (is.null(cols)) {
     # If NULL, select all character & factor cols
-    data_names <- colnames(.data)
+    data_names <- names(.data)
 
     chr_cols <- data_names[dt_map_lgl(.data, is.character)]
     fct_cols <- data_names[dt_map_lgl(.data, is.factor)]
@@ -101,11 +101,12 @@ dt_get_dummies.tidytable <- function(.data,
 
     .data[, (new_names) := 0]
 
-    #TODO Stop unnecessary loop over NA col, since that is done later
+    # Remove "NA" from unique vals after new_names columns are made
+    unique_vals <- unique_vals[unique_vals != "NA"]
 
     for (i in seq_along(unique_vals)) {
       eval_expr(
-        .data[!!col == unique_vals[i], new_names[i] := 1L][]
+        .data[!!col == unique_vals[i], new_names[i] := 1L]
       )
     }
 
@@ -116,9 +117,9 @@ dt_get_dummies.tidytable <- function(.data,
       na_col <- new_names[str_detect(new_names, "NA")]
 
       eval_expr(
-        .data[is.na(!!col), (na_col) := 1][]
+        .data[is.na(!!col), (na_col) := 1]
       )
     }
   }
-  .data
+  .data[]
 }
