@@ -102,11 +102,12 @@ dt_get_dummies.tidytable <- function(.data,
     .data[, (new_names) := 0]
 
     # Remove "NA" from unique vals after new_names columns are made
+    not_na_cols <- new_names[unique_vals != "NA"]
     unique_vals <- unique_vals[unique_vals != "NA"]
 
     for (i in seq_along(unique_vals)) {
       eval_expr(
-        .data[!!col == unique_vals[i], new_names[i] := 1L]
+        .data[!!col == unique_vals[i], not_na_cols[i] := 1L]
       )
     }
 
@@ -114,7 +115,7 @@ dt_get_dummies.tidytable <- function(.data,
     # an extra step is needed to flag NA vals
     if (dummify_na) {
 
-      na_col <- new_names[str_detect(new_names, "NA")]
+      na_col <- new_names[!new_names %in% not_na_cols]
 
       eval_expr(
         .data[is.na(!!col), (na_col) := 1]
