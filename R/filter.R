@@ -20,13 +20,20 @@ dt_filter <- function(.data, ...) {
 }
 
 #' @export
-dt_filter.tidytable <- function(.data, ...) {
+dt_filter.tidytable <- function(.data, ..., by = NULL) {
 
   dots <- enexprs(...)
+  by <- enexpr(by)
 
-  for (dot in dots) {
+  if (is.null(by)) {
+    for (dot in dots) {
+      .data <- eval_expr(
+        .data[!!dot]
+      )
+    }
+  } else {
     .data <- eval_expr(
-      .data[!!dot]
+      .data[, .SD[Reduce(f = '&', list(!!!dots))], by = !!by]
     )
   }
   .data
