@@ -38,10 +38,11 @@ dt_select <- function(.data, ...) {
 #' @export
 dt_select.tidytable <- function(.data, ...) {
 
-  dots <- dots_selector(.data, ...)
+  select_cols <- as.character(dots_selector(.data, ...))
 
+  # Using a character vector is faster for select
   eval_expr(
-    .data[, list(!!!dots)]
+    .data[, !!select_cols]
   )
 }
 
