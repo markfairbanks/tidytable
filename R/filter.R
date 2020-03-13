@@ -33,7 +33,7 @@ dt_filter.tidytable <- function(.data, ..., by = NULL) {
     }
   } else {
     .data <- eval_expr(
-      .data[, .SD[Reduce(f = '&', list(!!!dots))], by = !!by]
+      .data[, .SD[reduce(list(!!!dots), .f = '&')], by = !!by]
     )
   }
   .data
