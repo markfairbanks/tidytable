@@ -282,19 +282,18 @@ test_tbl <- as_tibble(test_dt)
 ```
 
 ```{r filter, echo=FALSE}
-filter_marks <- bench::mark(
-  tidyverse = filter(test_tbl, a <= 7, c == "a"),
-  tidytable = dt_filter(test_dt, a <= 7 & c == "a"),
-  data.table = test_dt[a <= 7 & c == "a"],
-  check = FALSE,
-  iterations = iters)
-
 inv_gc(); inv_gc();
 
-filter_marks <- filter_marks %>%
-  mutate(function_tested = "filter") %>%
-  select(function_tested, expression, median, mem_alloc) %>%
-  mutate_all(~as.character(.x) %>% str_trim())
+filter_marks <- bench::mark(
+  tidyverse = filter(test_tbl, a <= 7, c == "a"),
+  tidytable = dt_filter(test_dt, a <= 7, c == "a"),
+  data.table = test_dt[a <= 7 & c == "a"],
+  check = FALSE,
+  iterations = iters) %>%
+  mutate(expression = as.character(expression),
+         function_tested = "filter")
+
+inv_gc(); inv_gc();
 ```
 
 ```{r summarize, echo=FALSE}
@@ -303,14 +302,11 @@ summarize_marks <- bench::mark(
   tidytable = dt_summarize(test_dt, avg_a = mean(a), by = c),
   data.table = test_dt[, list(avg_a = mean(a)), by = c],
   check = FALSE,
-  iterations = iters)
+  iterations = iters) %>%
+  mutate(expression = as.character(expression),
+         function_tested = "summarize")
 
 inv_gc(); inv_gc();
-
-summarize_marks <- summarize_marks %>%
-  mutate(function_tested = "summarize") %>%
-  select(function_tested, expression, median, mem_alloc) %>%
-  mutate_all(~as.character(.x) %>% str_trim())
 ```
 
 ```{r mutate, echo=FALSE}
@@ -321,14 +317,11 @@ mutate_marks <- bench::mark(
   tidytable = dt_mutate(test_dt, double_a = a * 2, a_plus_b = a + b),
   data.table = mut_dt[, ':='(double_a = a * 2, a_b = a + b)][],
   check = FALSE,
-  iterations = iters)
+  iterations = iters) %>%
+  mutate(expression = as.character(expression),
+         function_tested = "mutate")
 
 inv_gc(); inv_gc();
-
-mutate_marks <- mutate_marks %>%
-  mutate(function_tested = "mutate") %>%
-  select(function_tested, expression, median, mem_alloc) %>%
-  mutate_all(~as.character(.x) %>% str_trim())
 ```
 
 ```{r arrange, echo=FALSE}
@@ -347,12 +340,9 @@ arrange_marks <- bench::mark(
   tidytable = dt_arrange(test_dt, c, a),
   data.table = test_dt[order(c, a)],
   check = FALSE,
-  iterations = iters)
-
-arrange_marks <- arrange_marks %>%
-  mutate(function_tested = "arrange") %>%
-  select(function_tested, expression, median, mem_alloc) %>%
-  mutate_all(~as.character(.x) %>% str_trim())
+  iterations = iters) %>%
+  mutate(expression = as.character(expression),
+         function_tested = "arrange")
 ```
 
 ```{r distinct, echo=FALSE}
@@ -361,14 +351,11 @@ distinct_marks <- bench::mark(
   tidytable = dt_distinct(test_dt),
   data.table = unique(test_dt),
   check = FALSE,
-  iterations = iters)
+  iterations = iters) %>%
+  mutate(expression = as.character(expression),
+         function_tested = "distinct")
 
 inv_gc(); inv_gc();
-
-distinct_marks <- distinct_marks %>%
-  mutate(function_tested = "distinct") %>%
-  select(function_tested, expression, median, mem_alloc) %>%
-  mutate_all(~as.character(.x) %>% str_trim())
 ```
 
 ```{r fill, echo = FALSE}
@@ -391,12 +378,9 @@ fill_marks <- bench::mark(
                                                    int2 = nafill(int2, type = "locf")),
                                             by = id],
   check = FALSE,
-  iterations = iters)
-
-fill_marks <- fill_marks %>%
-  mutate(function_tested = "fill") %>%
-  select(function_tested, expression, median, mem_alloc) %>%
-  mutate_all(~as.character(.x) %>% str_trim())
+  iterations = iters) %>%
+  mutate(expression = as.character(expression),
+         function_tested = "fill")
 ```
 
 ```{r case, echo=FALSE}
@@ -424,12 +408,9 @@ case_marks <- bench::mark(
                                             fifelse(x >= median_x, "high",
                                                     fifelse(is.na(x), "unknown", "other"))))][],
   check = FALSE,
-  iterations = iters)
-
-case_marks <- case_marks %>%
-  mutate(function_tested = "case_when") %>%
-  select(function_tested, expression, median, mem_alloc) %>%
-  mutate_all(~as.character(.x) %>% str_trim())
+  iterations = iters) %>%
+  mutate(expression = as.character(expression),
+         function_tested = "case_when")
 ```
 
 ```{r pivot_wider, echo=FALSE}
@@ -447,13 +428,9 @@ wider_marks <- bench::mark(
   tidytable = dt_pivot_wider(wider_dt, names_from = name, values_from = value),
   data.table = data.table::dcast(wider_dt, case + year ~ name),
   check = FALSE,
-  iterations = iters
-)
-
-wider_marks <- wider_marks %>%
-  mutate(function_tested = "pivot_wider") %>%
-  select(function_tested, expression, median, mem_alloc) %>%
-  mutate_all(~as.character(.x) %>% str_trim())
+  iterations = iters) %>%
+  mutate(expression = as.character(expression),
+         function_tested = "pivot_wider")
 ```
 
 ```{r pivot_longer, echo=FALSE}
@@ -461,20 +438,16 @@ longer_dt <- dt_pivot_wider(wider_dt, names_from = name, values_from = value)
 
 longer_tbl <- as_tibble(longer_dt)
 
-remove(x, wider_dt, wider_tbl); inv_gc(); inv_gc();
+remove(wider_dt, wider_tbl); inv_gc(); inv_gc();
 
 longer_marks <- bench::mark(
   tidyverse = pivot_longer(longer_tbl, cols = c(x, y, z)),
   tidytable = dt_pivot_longer(longer_dt, cols = c(x, y, z)),
   data.table = data.table::melt(longer_dt, measure.vars = c("x","y","z"), variable.name = "name"),
   check = FALSE,
-  iterations = iters
-)
-
-longer_marks <- longer_marks %>%
-  mutate(function_tested = "pivot_longer") %>%
-  select(function_tested, expression, median, mem_alloc) %>%
-  mutate_all(~as.character(.x) %>% str_trim())
+  iterations = iters) %>%
+  mutate(expression = as.character(expression),
+         function_tested = "pivot_longer")
 ```
 
 ```{r left_join, echo=FALSE}
@@ -497,12 +470,9 @@ left_join_marks <- bench::mark(
   tidytable = dt_left_join(left_dt, right_dt),
   data.table = right_dt[left_dt, on = "c", allow.cartesian = TRUE],
   check = FALSE,
-  iterations = iters)
-
-left_join_marks <- left_join_marks %>%
-  mutate(function_tested = "left_join") %>%
-  select(function_tested, expression, median, mem_alloc) %>%
-  mutate_all(~as.character(.x) %>% str_trim())
+  iterations = iters) %>%
+  mutate(expression = as.character(expression),
+         function_tested = "left_join")
 ```
 
 ```{r inner_join, echo=FALSE}
@@ -511,15 +481,14 @@ inner_join_marks <- bench::mark(
   tidytable = dt_inner_join(left_dt, right_dt),
   data.table = left_dt[right_dt, on = "c", allow.cartesian = TRUE, nomatch = 0],
   check = FALSE,
-  iterations = iters)
-
-inner_join_marks <- inner_join_marks %>%
-  mutate(function_tested = "inner_join") %>%
-  select(function_tested, expression, median, mem_alloc) %>%
-  mutate_all(~as.character(.x) %>% str_trim())
+  iterations = iters) %>%
+  mutate(expression = as.character(expression),
+         function_tested = "inner_join")
 ```
 
 ```{r unnest, echo = FALSE}
+remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
+
 unnest_dt <- tibble(
   a = LETTERS[1:5],
   b = LETTERS[6:10],
@@ -535,39 +504,32 @@ unnest_marks <- bench::mark(
   tidytable = dt_unnest_legacy(unnest_dt, list_column),
   data.table = unnest_dt[, unlist(list_column, recursive = FALSE), by = list(a, b)],
   check = FALSE,
-  iterations = iters)
-
-unnest_marks <- unnest_marks %>%
-  mutate(function_tested = "unnest") %>%
-  select(function_tested, expression, median, mem_alloc) %>%
-  mutate_all(~as.character(.x) %>% str_trim())
+  iterations = iters) %>%
+  mutate(expression = as.character(expression),
+         function_tested = "unnest")
 ```
 
 ```{r nest, echo = FALSE}
+remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
+
 nest_dt <- tibble::tibble(
   a = LETTERS[1:5],
   b = LETTERS[6:10],
-  list_column = list(c(LETTERS[1:5]), "F", "G", "H", "I")
-) %>%
+  list_column = list(c(LETTERS[1:5]), "F", "G", "H", "I")) %>%
   dplyr::sample_frac(100000, replace = TRUE) %>%
   as_tidytable() %>%
   dt_unnest_legacy(list_column)
 
 nest_tbl <- as_tibble(nest_dt)
 
-remove(unnest_dt, unnest_tbl); inv_gc(); inv_gc();
-
 nest_marks <- bench::mark(
   tidyverse = group_nest(nest_dt, a, b),
   tidytable = dt_group_nest(nest_dt, a, b),
   data.table = nest_dt[, list(data = list(.SD)), by = list(a, b)],
   check = FALSE,
-  iterations = iters)
-
-nest_marks <- nest_marks %>%
-  mutate(function_tested = "nest") %>%
-  select(function_tested, expression, median, mem_alloc) %>%
-  mutate_all(~as.character(.x) %>% str_trim())
+  iterations = iters) %>%
+  mutate(expression = as.character(expression),
+         function_tested = "nest")
 ```
 
 ```{r echo = FALSE}
@@ -627,16 +589,18 @@ nest_marks <- nest_marks %>%
 # %timeit fill_df.groupby('id')[['int1', 'int2']].fillna(method = 'backfill')
 ```
 
-```{r all_marks, echo = FALSE, message = FALSE}
+```{r all_marks, echo = FALSE, message = FALSE, paged.print = FALSE}
 library(magrittr)
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
 all_marks <- ls(pattern="marks$") %>%
   lapply(get) %>%
+  map(~.x %>%
+        select(function_tested, expression, median) %>%
+        mutate_all(~as.character(.x) %>% str_trim())) %>%
   bind_rows()
 
 all_marks <- all_marks %>%
-  select(function_tested, expression, median) %>%
   mutate_if(negate(is.character), as.character) %>%
   mutate_if(is.character, str_trim) %>%
   mutate(median = ifelse(str_detect(median, "[:number:]s$"),
