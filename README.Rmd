@@ -416,7 +416,7 @@ case_marks <- bench::mark(
 ```{r pivot_wider, echo=FALSE}
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-wider_tbl <- expand_grid(case = as.character(seq(1, 5000)),
+wider_tbl <- expand_grid(case = as.character(seq(1, 2000)),
                         year = seq(1900, 2000),
                         name = c("x", "y", "z")) %>%
   mutate(value = rnorm(nrow(.)))
