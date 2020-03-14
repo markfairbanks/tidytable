@@ -91,15 +91,12 @@ dt_mutate_across.tidytable <- function(.data, .cols, .funs, ..., by = NULL) {
 
     new_names <- names(.funs)
 
-    for (.col in .cols) {
-      for (i in seq_along(new_names)) {
-        new_name <- paste0(.col, "_", new_names[[i]])
-        old <- .col
-        user_function <- anon_x(.funs[[i]])
-        eval_expr(
-          .data[, (new_name) := user_function(.data[[old]]), by = !!by]
-        )
-      }
+    for (i in seq_along(new_names)) {
+      new_cols <-  paste0(.cols, "_", new_names[[i]])
+
+      eval_expr(
+        .data[, (new_cols) := dt_map(.SD, .funs[[i]]), .SDcols = .cols, by = !!by]
+      )
     }
   }
   .data[]
