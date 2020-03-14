@@ -1,5 +1,7 @@
 # tidytable 0.3.3 (in development)
 
+* `dt_mutate_across()` & `dt_filter()` now work with "by"
+* An aggregation function can be specified in `dt_pivot_wider()`
 * Functions with notable speed improvements:
   + `dt_fill()`
   + `dt_pivot_longer()`

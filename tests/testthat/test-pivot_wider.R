@@ -84,3 +84,15 @@ test_that("works with is.numeric helper", {
   expect_equal(pv$a_x, 1)
   expect_equal(pv$b_y, 4)
 })
+
+# using values_fn ----------------------------------------------------------
+df <- data.table(a = c(1, 1, 2), stuff = c("x", "x", "x"), val = c(1, 10, 100))
+
+test_that("works with is.numeric helper", {
+  df <- data.table(a = c(1, 1, 2), stuff = c("x", "x", "x"), val = c(1, 10, 100))
+
+  pivot_df <- dt_pivot_wider(df, names_from = stuff, values_from = val, values_fn = sum)
+
+  expect_equal(pivot_df$a, c(1, 2))
+  expect_equal(pivot_df$x, c(11, 100))
+})

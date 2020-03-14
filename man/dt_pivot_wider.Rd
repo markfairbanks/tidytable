@@ -6,25 +6,25 @@
 \usage{
 dt_pivot_wider(
   .data,
+  names_from = name,
+  values_from = value,
   id_cols = NULL,
-  names_from,
   names_sep = "_",
-  values_from,
-  drop = TRUE
+  values_fn = NULL
 )
 }
 \arguments{
 \item{.data}{the data table to widen}
 
-\item{id_cols}{A set of columns that uniquely identifies each observation. Defaults to all columns in the data table except for the columns specified in \code{names_from} and \code{values_from}. Typically used when you have additional variables that is directly related.}
-
 \item{names_from}{A pair of arguments describing which column (or columns) to get the name of the output column (\code{name_from}), and which column (or columns) to get the cell values from (\code{values_from}).}
-
-\item{names_sep}{the separator between the names of the columns}
 
 \item{values_from}{A pair of arguments describing which column (or columns) to get the name of the output column (\code{name_from}), and which column (or columns) to get the cell values from (\code{values_from}).}
 
-\item{drop}{When \code{FALSE}, will cast by including all missing combinations. When \code{TRUE}, it is drop missing combination. \code{c(FALSE, TRUE)} will only include all missing combinations of formula LHS; \code{c(TRUE, FALSE)} will only include all missing combinations of formula RHS.}
+\item{id_cols}{A set of columns that uniquely identifies each observation. Defaults to all columns in the data table except for the columns specified in \code{names_from} and \code{values_from}. Typically used when you have additional variables that is directly related.}
+
+\item{names_sep}{the separator between the names of the columns}
+
+\item{values_fn}{hould the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.}
 }
 \description{
 \code{dt_pivot_wider()} "widens" data, increasing the number of columns and

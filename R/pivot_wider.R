@@ -10,9 +10,9 @@
 #' @param .data the data table to widen
 #' @param id_cols A set of columns that uniquely identifies each observation. Defaults to all columns in the data table except for the columns specified in \code{names_from} and \code{values_from}. Typically used when you have additional variables that is directly related.
 #' @param names_from A pair of arguments describing which column (or columns) to get the name of the output column (\code{name_from}), and which column (or columns) to get the cell values from (\code{values_from}).
-#' @param names_sep the separator between the names of the columns
 #' @param values_from A pair of arguments describing which column (or columns) to get the name of the output column (\code{name_from}), and which column (or columns) to get the cell values from (\code{values_from}).
-#' @param drop When \code{FALSE}, will cast by including all missing combinations. When \code{TRUE}, it is drop missing combination. \code{c(FALSE, TRUE)} will only include all missing combinations of formula LHS; \code{c(TRUE, FALSE)} will only include all missing combinations of formula RHS.
+#' @param names_sep the separator between the names of the columns
+#' @param values_fn hould the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.
 #'
 #' @examples
 #'
@@ -28,36 +28,35 @@
 #'
 #' @export
 dt_pivot_wider <- function(.data,
+                           names_from = name,
+                           values_from = value,
                            id_cols = NULL,
-                           names_from,
                            names_sep = "_",
-                           values_from,
-                           drop = TRUE) {
+                           values_fn = NULL) {
   UseMethod("dt_pivot_wider")
 }
 
 #' @export
 dt_pivot_wider.tidytable <- function(.data,
-                                      id_cols = NULL,
-                                      names_from,
-                                      names_sep = "_",
-                                      values_from,
-                                      drop = TRUE) {
+                                     names_from = name,
+                                     values_from = value,
+                                     id_cols = NULL,
+                                     names_sep = "_",
+                                     values_fn = NULL) {
 
   id_cols <- enexpr(id_cols)
   names_from <- enexpr(names_from)
   values_from <- enexpr(values_from)
+  values_fn = enexpr(values_fn)
 
-  names_from <- vec_selector(.data, !!names_from) %>%
-    as.character()
-  values_from <- vec_selector(.data, !!values_from) %>%
-    as.character()
+  names_from <- as.character(vec_selector(.data, !!names_from))
+  values_from <- as.character(vec_selector(.data, !!values_from))
 
   if (is.null(id_cols)) {
-    id_cols <- colnames(.data)[!colnames(.data) %in% c(names_from, values_from)]
+    data_names <- names(.data)
+    id_cols <- data_names[!data_names %in% c(names_from, values_from)]
   } else {
-    id_cols <- vec_selector(.data, !!id_cols) %>%
-      as.character()
+    id_cols <- as.character(vec_selector(.data, !!id_cols))
   }
 
   if (length(id_cols) == 0) {
@@ -70,43 +69,41 @@ dt_pivot_wider.tidytable <- function(.data,
                                    sep=" ~ "))
   }
 
-  if (length(id_cols) == 0) {
-    as_tidytable(
+  .data <- as_tidytable(
+    eval_expr(
       dcast(.data,
             formula = dcast_form,
             value.var = values_from,
-            fun.aggregate = NULL,
+            fun.aggregate = !!values_fn,
             sep = names_sep,
-            drop = drop)[, . := NULL][]
+            drop = TRUE)
     )
-  } else {
-    as_tidytable(
-      dcast(.data,
-            formula = dcast_form,
-            value.var = values_from,
-            fun.aggregate = NULL,
-            sep = names_sep,
-            drop = drop))
-  }
+  )
+
+  if (length(id_cols) == 0) .data <- .data[, . := NULL][]
+
+  .data
 }
 
 #' @export
 dt_pivot_wider.data.frame <- function(.data,
+                                      names_from = name,
+                                      values_from = value,
                                       id_cols = NULL,
-                                      names_from,
                                       names_sep = "_",
-                                      values_from,
-                                      drop = TRUE) {
+                                      values_fn = NULL) {
   .data <- as_tidytable(.data)
   id_cols <- enexpr(id_cols)
   names_from <- enexpr(names_from)
   values_from <- enexpr(values_from)
+  values_fn <- enexpr(values_fn)
 
-  dt_pivot_wider(.data, id_cols = !!id_cols,
+  dt_pivot_wider(.data,
                  names_from = !!names_from,
-                 names_sep = names_sep,
                  values_from = !!values_from,
-                 drop = drop)
+                 id_cols = !!id_cols,
+                 names_sep = names_sep,
+                 values_fn = !!values_fn)
 }
 
 
