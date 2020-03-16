@@ -11,14 +11,14 @@ dt_transmute(.data, ..., by = NULL)
 
 \item{...}{Columns to create/modify}
 
-\item{by}{Optional: `list()` of bare column names to group by}
+\item{by}{Optional: \code{list()} of bare column names to group by}
 }
 \description{
-Add new variables and drop all others
+Unlike \code{dt_mutate()}, \code{dt_transmute()} keeps only the variables that you create
 }
 \examples{
 # transmute keeps only the variables you create
-
 mtcars \%>\%
   dt_transmute(displ_l = disp / 61.0237)
+
 }
