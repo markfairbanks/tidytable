@@ -79,13 +79,15 @@ here](https://markfairbanks.github.io/tidytable/#enhanced-selection)
     syntax
   - `dt_count()` - **ES**
   - `dt_distinct()` - **ES**
-  - Joins: `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`,
-    `dt_full_join()`, & `dt_anti_join()`
+  - Joins:
+      - `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`,
+        `dt_full_join()`, & `dt_anti_join()`
   - `dt_pull()`
   - `dt_relocate()`
   - `dt_rename()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
-  - Select helpers: `dt_starts_with()`, `dt_ends_with()`,
-    `dt_contains()`, `dt_everything()`
+  - Select helpers:
+      - `dt_any_of()`, `dt_contains()`, `dt_everything()`
+        `dt_starts_with()`, `dt_ends_with()`
   - `dt_slice()`: `_head()`/`_tail()`/`_max()`/`_min()`
       - The `slice_*()` helpers are like `dt_top_n()`, but are slightly
         easier to use
@@ -348,17 +350,17 @@ all_marks
 #> # A tibble: 13 x 6
 #>    function_tested tidyverse tidytable data.table pandas tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>  <chr>                 
-#>  1 arrange         427.6ms   38.1ms    46.1ms     297ms  8.9%                  
-#>  2 case_when       475ms     136ms     152ms      307ms  28.6%                 
-#>  3 distinct        89.7ms    28ms      25.6ms     287ms  31.2%                 
-#>  4 fill            115.5ms   41.5ms    33.9ms     146ms  35.9%                 
-#>  5 filter          280ms     223ms     220ms      656ms  79.6%                 
-#>  6 inner_join      56.7ms    55.7ms    44.9ms     <NA>   98.2%                 
-#>  7 left_join       68.3ms    44ms      50.4ms     <NA>   64.4%                 
-#>  8 mutate          75.5ms    55.8ms    88.4ms     85.2ms 73.9%                 
-#>  9 nest            51.4ms    11.7ms    15.5ms     <NA>   22.8%                 
-#> 10 pivot_longer    45.59ms   11.77ms   9.21ms     <NA>   25.8%                 
-#> 11 pivot_wider     289.2ms   72.1ms    67.4ms     <NA>   24.9%                 
-#> 12 summarize       484ms     186ms     175ms      780ms  38.4%                 
-#> 13 unnest          164ms     8.31ms    9.29ms     <NA>   5.1%
+#>  1 arrange         443.7ms   43.3ms    34ms       297ms  9.8%                  
+#>  2 case_when       439ms     123ms     125ms      307ms  28.0%                 
+#>  3 distinct        98.9ms    25ms      16.7ms     287ms  25.3%                 
+#>  4 fill            115.9ms   31.3ms    24.7ms     146ms  27.0%                 
+#>  5 filter          259ms     195ms     211ms      656ms  75.3%                 
+#>  6 inner_join      51.1ms    53.5ms    46.6ms     <NA>   104.7%                
+#>  7 left_join       68.6ms    39.3ms    42.2ms     <NA>   57.3%                 
+#>  8 mutate          72.8ms    53.4ms    87.6ms     85.2ms 73.4%                 
+#>  9 nest            55.2ms    11.7ms    11.1ms     <NA>   21.2%                 
+#> 10 pivot_longer    38.09ms   8.32ms    9.51ms     <NA>   21.8%                 
+#> 11 pivot_wider     239.3ms   67.7ms    66.3ms     <NA>   28.3%                 
+#> 12 summarize       450ms     185ms     172ms      780ms  41.1%                 
+#> 13 unnest          154.89ms  8.11ms    6.16ms     <NA>   5.2%
 ```

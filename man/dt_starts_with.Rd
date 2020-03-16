@@ -5,6 +5,7 @@
 \alias{dt_contains}
 \alias{dt_ends_with}
 \alias{dt_everything}
+\alias{dt_any_of}
 \title{Select helpers}
 \usage{
 dt_starts_with(match)
@@ -14,17 +15,22 @@ dt_contains(match)
 dt_ends_with(match)
 
 dt_everything()
+
+dt_any_of(x)
 }
 \arguments{
 \item{match}{The match for the helper function to use}
+
+\item{x}{Character vector of columns to select}
 }
 \description{
 These functions allow you to select variables based on their names.
 \itemize{
-\item \code{dt_starts_with()}: Starts with a prefix
-\item \code{dt_starts_with()}: Ends with a suffix
+\item \code{dt_any_of()}: Select using a character vector
 \item \code{dt_contains()}: Contains a literal string
 \item \code{dt_everything()}: Matches all variables
+\item \code{dt_starts_with()}: Starts with a prefix
+\item \code{dt_ends_with()}: Ends with a suffix
 }
 }
 \examples{

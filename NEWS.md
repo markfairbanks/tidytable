@@ -1,7 +1,8 @@
 # tidytable 0.3.3 (in development)
 
-* `dt_mutate_across()` & `dt_filter()` now work with "by"
-* An aggregation function can be specified in `dt_pivot_wider()`
+* New select helper `dt_any_of()`: Use a character vector to select columns
+* `dt_filter()` now works with "by"
+* `dt_pivot_wider()` can now be used with an aggregation function
 * Functions with notable speed improvements:
   + `dt_fill()`
   + `dt_pivot_longer()`

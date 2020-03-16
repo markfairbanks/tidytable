@@ -47,7 +47,7 @@ dt_pivot_wider.tidytable <- function(.data,
   id_cols <- enexpr(id_cols)
   names_from <- enexpr(names_from)
   values_from <- enexpr(values_from)
-  values_fn = enexpr(values_fn)
+  values_fn <- enexpr(values_fn)
 
   names_from <- as.character(vec_selector(.data, !!names_from))
   values_from <- as.character(vec_selector(.data, !!values_from))

@@ -77,11 +77,13 @@ devtools::install_github("markfairbanks/tidytable")
 * `dt_case()`: Similar to `dplyr::case_when()`. See `?dt_case()` for syntax
 * `dt_count()` - **ES**
 * `dt_distinct()` - **ES**
-* Joins: `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`, `dt_full_join()`, & `dt_anti_join()`
+* Joins:
+  + `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`, `dt_full_join()`, & `dt_anti_join()`
 * `dt_pull()`
 * `dt_relocate()`
 * `dt_rename()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
-* Select helpers: `dt_starts_with()`, `dt_ends_with()`, `dt_contains()`, `dt_everything()`
+* Select helpers:
+  + `dt_any_of()`, `dt_contains()`, `dt_everything()` `dt_starts_with()`, `dt_ends_with()`
 * `dt_slice()`: `_head()`/`_tail()`/`_max()`/`_min()`
   + The `slice_*()` helpers are like `dt_top_n()`, but are slightly easier to use
 * `dt_top_n()`
