@@ -35,5 +35,5 @@ dt_transmute.data.frame <- function(.data, ..., by = NULL) {
   .data <- as_tidytable(.data)
   by <- enexpr(by)
 
-  dt_transmute(.data, ..., !!by)
+  dt_transmute(.data, ..., by = !!by)
 }
