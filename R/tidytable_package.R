@@ -7,4 +7,5 @@
 NULL
 
 globalVariables(c("data", ".","..select_vars", ".count", "na_index", ".new_col",
-                  "..all_names", "..final_order_i", "..rows"))
+                  "..all_names", "..final_order_i", "..rows", "name", "value",
+                  "..all_cols"))

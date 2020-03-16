@@ -1,6 +1,7 @@
 # tidytable 0.3.3 (in development)
 
 * New select helper `dt_any_of()`: Use a character vector to select columns
+* Added `dt_transmute()`
 * `dt_filter()` now works with "by"
 * `dt_pivot_wider()` can now be used with an aggregation function
 * Functions with notable speed improvements:
