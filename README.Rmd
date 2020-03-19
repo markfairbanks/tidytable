@@ -73,10 +73,11 @@ devtools::install_github("markfairbanks/tidytable")
 
 ##### Other dplyr functions
 
-*  `dt_bind_cols()` & `dt_bind_rows()`
+* `dt_bind_cols()` & `dt_bind_rows()`
 * `dt_case()`: Similar to `dplyr::case_when()`. See `?dt_case()` for syntax
 * `dt_count()` - **ES**
 * `dt_distinct()` - **ES**
+* `dt_ifelse()`
 * Joins:
   + `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`, `dt_full_join()`, & `dt_anti_join()`
 * `dt_pull()`
@@ -85,8 +86,9 @@ devtools::install_github("markfairbanks/tidytable")
 * Select helpers:
   + `dt_any_of()`, `dt_contains()`, `dt_everything()` `dt_starts_with()`, `dt_ends_with()`
 * `dt_slice()`: `_head()`/`_tail()`/`_max()`/`_min()`
-  + The `slice_*()` helpers are like `dt_top_n()`, but are slightly easier to use
+  + The `slice_*()` helpers are like `dt_top_n()`, but are a bit easier to use
 * `dt_top_n()`
+* `dt_transmute()`
 
 ### tidyr
 
@@ -556,8 +558,6 @@ nest_marks <- bench::mark(
 # %timeit test_df['double_a'] = test_df.a * 2
 # print('mutate pt2')
 # %timeit test_df['a_plus_b'] = test_df.a + test_df.b
-# print('mutate pt2')
-# %timeit test_df['a_plus_b'] = test_df.a + test_df.b
 #
 # del test_df
 # gc.collect()
@@ -589,7 +589,7 @@ nest_marks <- bench::mark(
 #                         'int2': np.random.choice(np.array([1,2,3, np.nan]), fill_size)})
 # 
 # print('fill')
-# %timeit fill_df.groupby('id')[['int1', 'int2']].fillna(method = 'backfill')
+# %timeit fill_df.groupby('id')[['int1', 'int2']].fillna(method = 'ffill')
 ```
 
 ```{r all_marks, echo = FALSE, message = FALSE, paged.print = FALSE}
