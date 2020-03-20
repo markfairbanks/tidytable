@@ -75,6 +75,8 @@ dt_mutate_across.tidytable <- function(.data, .cols, .funs, ..., by = NULL) {
   .cols <- as.character(vec_selector(.data, !!.cols))
 
   by <- enexpr(by)
+  by <- vec_selector_by(.data, !!by)
+
   .data <- shallow(.data)
 
   if (!is.list(.funs)) {

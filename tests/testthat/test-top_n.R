@@ -77,3 +77,16 @@ test_that("works with wt/with by", {
   expect_equal(top_df$y, c(10, 9, 8, 7))
   expect_equal(top_df$z, c("b","b","a","a"))
 })
+
+test_that("works with wt/with enhanced selection", {
+  test_df <- data.table(x = 1:5,
+                        y = 6:10,
+                        z = c(rep("a", 3), rep("b", 2)))
+
+  top_df <- test_df %>%
+    dt_top_n(2, wt = y, by = is.character)
+
+  expect_equal(top_df$x, c(5,4,3,2))
+  expect_equal(top_df$y, c(10, 9, 8, 7))
+  expect_equal(top_df$z, c("b","b","a","a"))
+})

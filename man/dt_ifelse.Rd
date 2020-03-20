@@ -14,7 +14,7 @@ dt_ifelse(conditions, true, false)
 \item{false}{Values to return if conditions evaluate to FALSE}
 }
 \description{
-\code{dt_ifelse()} utilizes \code{data.table}'s \code{fifelse()} in the background, but automatically
+\code{dt_ifelse()} utilizes \code{data.table::fifelse()} in the background, but automatically
 converts NAs to their proper type
 }
 \examples{

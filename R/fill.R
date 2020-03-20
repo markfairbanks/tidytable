@@ -58,7 +58,9 @@ dt_fill.data.frame <- function(.data, ..., .direction = c("down", "up", "downup"
 filler <- function(.data, ..., type = "locf", by = NULL) {
 
   all_cols <- as.character(dots_selector(.data, ...))
+
   by <- enexpr(by)
+  by <- vec_selector_by(.data, !!by)
 
   subset_data <- .data[, ..all_cols]
 

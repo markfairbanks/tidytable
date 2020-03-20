@@ -30,11 +30,46 @@ test_that("can take data.frame input", {
 })
 
 test_that("can use by", {
-  df <- data.table(x = 1:5, y = c(rep("a", 4), "b")) %>%
-    as_tidytable()
+  df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
 
   tidytable_df <- df %>%
     dt_mutate(z = mean(x), by = y)
+
+  datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y]
+
+  expect_equal(tidytable_df, datatable_df)
+
+})
+
+test_that("can use by", {
+  df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
+
+  tidytable_df <- df %>%
+    dt_mutate(z = mean(x), by = is.character)
+
+  datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y]
+
+  expect_equal(tidytable_df, datatable_df)
+
+})
+
+test_that("can use by with vector", {
+  df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
+
+  tidytable_df <- df %>%
+    dt_mutate(z = mean(x), by = c(is.character))
+
+  datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y]
+
+  expect_equal(tidytable_df, datatable_df)
+
+})
+
+test_that("can use by with list", {
+  df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
+
+  tidytable_df <- df %>%
+    dt_mutate(z = mean(x), by = list(is.character))
 
   datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y]
 

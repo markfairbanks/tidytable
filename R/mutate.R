@@ -46,6 +46,8 @@ dt_mutate.tidytable <- function(.data, ..., by = NULL) {
     }
   } else {
     # Faster with "by", since the "by" call isn't looped multiple times for each column added
+    by <- vec_selector_by(.data, !!by)
+
     eval_expr(
       .data[, ':='(!!!dots), by = !!by]
     )

@@ -32,18 +32,11 @@ dt_count <- function(.data, ...) {
 #' @export
 dt_count.tidytable <- function(.data, ...) {
 
-  dots <- enexprs(...)
+  by <- dots_selector_by(.data, ...)
 
-  if (length(dots) == 0) {
-    .data <- .data[, list(N = .N)]
-  } else {
-    by_vec <- as.character(dots_selector(.data, ...))
-
-  .data <- eval_expr(
-    .data[, .N, by = by_vec]
-    )
-  }
-  .data
+  eval_expr(
+    .data[, list(N = .N), by = !!by]
+  )
 }
 
 #' @export

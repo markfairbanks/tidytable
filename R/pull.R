@@ -4,7 +4,7 @@
 #' Pull a single variable from a data.table as a vector.
 #'
 #' @param .data A data.frame or data.table
-#' @param var The column to pull from the data.table
+#' @param var The column to pull from the data.table. If NULL, pulls the last column.
 #'
 #' @export
 #'
@@ -23,7 +23,7 @@ dt_pull <- function(.data, var = NULL) {
 dt_pull.tidytable <- function(.data, var = NULL) {
 
   var <- enexpr(var)
-  if (is.null(var)) stop("var must be supplied")
+  if (is.null(var)) var <- sym(names(.data)[ncol(.data)])
 
   # Base R translation is faster than data.table
   eval_expr(

@@ -33,6 +33,7 @@ dt_summarize.tidytable <- function(.data, ..., by = NULL) {
 
   dots <- enexprs(...)
   by <- enexpr(by)
+  by <- vec_selector_by(.data, !!by)
 
   eval_expr(
     .data[, list(!!!dots), !!by]

@@ -30,7 +30,7 @@ dt_unnest_legacy.data.frame <- function(.data, col = NULL) {
 
   if (is.null(col)) abort("col must be supplied")
 
-  keep_cols <- colnames(.data)[!dt_map_lgl(.data, is.list)]
+  keep_cols <- names(.data)[!dt_map_lgl(.data, is.list)]
 
   is_datatable <- is.data.table(
     eval_expr('$'(.data, !!col))[[1]]
