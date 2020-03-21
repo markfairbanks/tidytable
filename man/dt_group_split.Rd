@@ -13,6 +13,8 @@ dt_group_split(.data, ...)
 }
 \description{
 Split data frame by groups. Returns a list
+
+Supports enhanced selection
 }
 \examples{
 test_df <- data.table::data.table(

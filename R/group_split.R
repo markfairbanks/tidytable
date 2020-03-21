@@ -3,6 +3,8 @@
 #' @description
 #' Split data frame by groups. Returns a list
 #'
+#' Supports enhanced selection
+#'
 #' @param .data A data.frame or data.table
 #' @param ... Groups to split by
 #' @export

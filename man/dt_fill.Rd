@@ -22,6 +22,8 @@ dt_fill(
 }
 \description{
 Fills missing values in the selected columns using the next or previous entry. Can be done by group.
+
+Supports enhanced selection
 }
 \examples{
 test_df <- data.table::data.table(
