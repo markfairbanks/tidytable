@@ -19,6 +19,24 @@ test_that("can add multiple columns", {
   expect_equal(df$x * 2, df$double_x)
 })
 
+test_that("modify-by-reference doesn't occur", {
+  df <- data.table(x = 1:3, y = 1:3)
+  df %>%
+    dt_mutate(double_x = x * 2,
+              double_y = y * 2)
+
+  expect_named(df, c("x", "y"))
+})
+
+test_that("modify-by-reference doesn't occur with single val", {
+  df <- data.table(x = 1:3, y = 1:3)
+  df %>%
+    dt_mutate(x = 1)
+
+  expect_named(df, c("x", "y"))
+  expect_equal(df$x, c(1,2,3))
+})
+
 test_that("can take data.frame input", {
   df <- data.frame(x = 1:3, y = 1:3)
   df <- df %>%

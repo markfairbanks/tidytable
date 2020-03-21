@@ -9,6 +9,28 @@ test_that("can do group aggregation with by", {
   expect_equal(tidytable_df, datatable_df)
 })
 
+test_that("can do group aggregation with by list()", {
+  df <- tidytable(x = 1:4, y = c("a","a","a","b"))
+
+  tidytable_df <- df %>%
+    dt_summarize(avg_x = mean(x), by = list(y))
+
+  datatable_df <- df[, list(avg_x = mean(x)), by = y]
+
+  expect_equal(tidytable_df, datatable_df)
+})
+
+test_that("can do group aggregation with by c()", {
+  df <- tidytable(x = 1:4, y = c("a","a","a","b"))
+
+  tidytable_df <- df %>%
+    dt_summarize(avg_x = mean(x), by = c(y))
+
+  datatable_df <- df[, list(avg_x = mean(x)), by = y]
+
+  expect_equal(tidytable_df, datatable_df)
+})
+
 test_that("can do group aggregation with by enhanced selection", {
   df <- tidytable(x = 1:4, y = c("a","a","a","b"))
 
