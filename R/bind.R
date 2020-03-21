@@ -33,7 +33,7 @@ dt_bind_rows.default <- function(..., .id = NULL) {
   dots <- squash(dots)
 
   if (!all(dt_map_lgl(dots, is.data.table)))
-    dots <- dt_map(dots, as.data.table)
+    dots <- dt_map(dots, as_tidytable)
 
   dots <- rbindlist(dots, idcol = .id)
 
@@ -53,7 +53,7 @@ dt_bind_cols.default <- function(...) {
   dots <- squash(dots)
 
   if (!all(dt_map_lgl(dots, is.data.table)))
-    dots <- dt_map(dots, as.data.table)
+    dots <- dt_map(dots, as_tidytable)
 
   as_tidytable(name_fix(setDT(unlist(dots, recursive = FALSE), check.names = FALSE)[]))
 

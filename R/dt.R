@@ -30,5 +30,5 @@ dt.data.frame <- function(.data, ...) {
 
 #' @export
 dt.tidytable <- function(.data, ...) {
-  .data[...]
+  shallow(.data)[...]
 }
