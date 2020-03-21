@@ -69,13 +69,13 @@ here](https://markfairbanks.github.io/tidytable/#enhanced-selection)
         `_at()` [See
         here](https://markfairbanks.github.io/tidytable/#new-variant-dt_mutate_across)
   - `dt_select()` - **ES**
-  - `dt_summarize()`: Group by specifications called inside. See
-    `?dt_summarize`
+  - `dt_summarize()`: Group by specifications called inside. [See
+    here](https://markfairbanks.github.io/tidytable/#using-group-by)
 
 ##### Other dplyr functions
 
   - `dt_bind_cols()` & `dt_bind_rows()`
-  - `dt_case()`: Similar to `dplyr::case_when()`. See `?dt_case()` for
+  - `dt_case()`: Similar to `dplyr::case_when()`. See `?dt_case` for
     syntax
   - `dt_count()` - **ES**
   - `dt_distinct()` - **ES**
@@ -134,13 +134,21 @@ example_dt %>%
 #> 3:     3     6     b        6       12
 ```
 
-#### Using “group by”
+### Using “group by”
 
 Group by calls are done from inside any function that has group by
-functionality (e.g. `dt_summarize()` & `dt_mutate()`)
+functionality (such as `dt_summarize()` & `dt_mutate()`)
 
   - A single column can be passed with `by = z`
-  - Multiple columns can be passed with `by = list(y, z)`
+  - Multiple columns can be passed with `by = c(y, z)` or `by = list(y,
+    z)`
+  - [Enhanced
+    selection](https://markfairbanks.github.io/tidytable/#enhanced-selection)
+    can also be used:
+      - Single predicate: `by = is.character`
+      - Multiple predicates: `by = c(is.character, is.factor)`
+      - A combination of predicates and column names: `by =
+        c(is.character, y)`
 
 <!-- end list -->
 
@@ -157,8 +165,8 @@ example_dt %>%
 
 ## Enhanced selection
 
-Enhanced selection allows you to mix predicates like `is.double` with
-normal selection. Some examples:
+Enhanced selection allows you to mix predicates like `is.numeric` with
+normal selection.
 
 ``` r
 example_dt <- data.table(a = c(1,2,3),
@@ -187,8 +195,11 @@ example_dt %>%
 #> 3:     b     c
 ```
 
-Currently supported:
-`is.numeric`/`is.integer`/`is.double`/`is.character`/`is.factor`
+Currently supported predicates:
+`is.numeric`/`is.integer`/`is.double`/`is.character`/`is.factor`/`is.list`
+
+Functions that support enhanced selection will be noted in their
+documentation.
 
 #### New helper: `dt_mutate_across()`
 
@@ -258,21 +269,20 @@ library(rlang)
 
 example_dt <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
 
-add_one <- function(.data, new_name, add_col) {
-  new_name <- enexpr(new_name)
+add_one <- function(.data, add_col) {
   add_col <- enexpr(add_col)
   
   .data %>%
-    dt_mutate(!!new_name := !!add_col + 1)
+    dt_mutate(new_col = !!add_col + 1)
 }
 
 example_dt %>%
-  add_one(x_plus_one, x)
-#>        x     y     z x_plus_one
-#>    <dbl> <dbl> <chr>      <dbl>
-#> 1:     1     1     a          2
-#> 2:     1     1     a          2
-#> 3:     1     1     b          2
+  add_one(x)
+#>        x     y     z new_col
+#>    <dbl> <dbl> <chr>   <dbl>
+#> 1:     1     1     a       2
+#> 2:     1     1     a       2
+#> 3:     1     1     b       2
 ```
 
 ##### Custom function with `dt_summarize()`
@@ -290,7 +300,7 @@ find_mean <- function(.data, grouping_cols, col) {
 }
 
 example_df %>%
-  find_mean(grouping_cols = list(y, z), col = x)
+  find_mean(grouping_cols = c(y, z), col = x)
 #>        y     z   avg
 #>    <chr> <chr> <dbl>
 #> 1:     a     a   3.5
@@ -352,17 +362,17 @@ all_marks
 #> # A tibble: 13 x 6
 #>    function_tested tidyverse tidytable data.table pandas tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>  <chr>                 
-#>  1 arrange         421.5ms   45.3ms    44.3ms     297ms  10.7%                 
-#>  2 case_when       480ms     159ms     164ms      307ms  33.1%                 
-#>  3 distinct        96ms      22.7ms    21ms       287ms  23.6%                 
-#>  4 fill            120ms     39.4ms    31.7ms     146ms  32.8%                 
-#>  5 filter          274ms     224ms     218ms      656ms  81.8%                 
-#>  6 inner_join      60.8ms    55.3ms    49.5ms     <NA>   91.0%                 
-#>  7 left_join       64.4ms    39.1ms    44.6ms     <NA>   60.7%                 
-#>  8 mutate          69.1ms    53.9ms    89.4ms     85.2ms 78.0%                 
-#>  9 nest            62.7ms    11.5ms    11.5ms     <NA>   18.3%                 
-#> 10 pivot_longer    38.7ms    10.7ms    10.5ms     <NA>   27.6%                 
-#> 11 pivot_wider     297ms     66.3ms    71.1ms     <NA>   22.3%                 
-#> 12 summarize       528ms     188ms     169ms      780ms  35.6%                 
-#> 13 unnest          164.32ms  8.7ms     7.73ms     <NA>   5.3%
+#>  1 arrange         398.9ms   36.8ms    45.2ms     297ms  9.2%                  
+#>  2 case_when       481ms     142ms     137ms      307ms  29.5%                 
+#>  3 distinct        85.1ms    20.5ms    22.3ms     287ms  24.1%                 
+#>  4 fill            123.4ms   41.1ms    35.1ms     146ms  33.3%                 
+#>  5 filter          328ms     262ms     236ms      656ms  79.9%                 
+#>  6 inner_join      70.5ms    59.2ms    56.6ms     <NA>   84.0%                 
+#>  7 left_join       69.7ms    44.1ms    42.5ms     <NA>   63.3%                 
+#>  8 mutate          71.8ms    55.5ms    93.3ms     85.2ms 77.3%                 
+#>  9 nest            26.73ms   5.62ms    5.92ms     <NA>   21.0%                 
+#> 10 pivot_longer    39.3ms    10.3ms    11ms       <NA>   26.2%                 
+#> 11 pivot_wider     240.9ms   73.7ms    65.3ms     <NA>   30.6%                 
+#> 12 summarize       515ms     201ms     185ms      780ms  39.0%                 
+#> 13 unnest          163.07ms  7.84ms    8.12ms     <NA>   4.8%
 ```
