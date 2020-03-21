@@ -49,6 +49,8 @@ dt_slice.tidytable <- function(.data, rows = 1:5, by = NULL) {
       .data[!!rows]
     )
   } else {
+    by <- vec_selector_by(.data, !!by)
+
     eval_expr(
       .data[, .SD[!!rows], !!by]
     )
@@ -76,6 +78,7 @@ dt_slice_head.tidytable <- function(.data, n = 5, by = NULL) {
 
   n <- enexpr(n)
   by <- enexpr(by)
+  by <- vec_selector_by(.data, !!by)
 
   eval_expr(
     .data[, head(.SD, !!n), !!by]
@@ -103,6 +106,7 @@ dt_slice_tail.tidytable <- function(.data, n = 5, by = NULL) {
 
   n <- enexpr(n)
   by <- enexpr(by)
+  by <- vec_selector_by(.data, !!by)
 
   eval_expr(
     .data[, tail(.SD, !!n), !!by]

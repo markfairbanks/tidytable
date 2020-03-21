@@ -9,7 +9,7 @@ dt_pull(.data, var = NULL)
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{var}{The column to pull from the data.table}
+\item{var}{The column to pull from the data.table. If NULL, pulls the last column.}
 }
 \description{
 Pull a single variable from a data.table as a vector.

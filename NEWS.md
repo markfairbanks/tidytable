@@ -1,12 +1,14 @@
 # tidytable 0.3.3 (in development)
 
+* Functionality improvements:
+  + Enhanced selection now works in "by"" calls
+  + `dt_filter()` now works with "by"
+  + `dt_pivot_wider()` can now be used with an aggregation function
+  + `dt_pull()` defaults to last column in a data.table
 * New functions:
   + `dt_ifelse()`
   + `dt_transmute()`
   + Select helper `dt_any_of()`
-* Functionality improvements:
-  + `dt_filter()` now works with "by"
-  + `dt_pivot_wider()` can now be used with an aggregation function
 * Functions with notable speed improvements:
   + `dt_fill()`
   + `dt_pivot_longer()`

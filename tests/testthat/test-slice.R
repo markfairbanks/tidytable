@@ -25,6 +25,16 @@ test_that("works with by", {
   expect_equal(sliced_df$y, c(4, 7))
 })
 
+test_that("works with by enhanced selection", {
+  test_df <- tidytable(x = c(1,2,3,4), y = c(4,5,6,7), z = c("a", "a", "a", "b"))
+  sliced_df <- test_df %>%
+    dt_slice(1, by = is.character)
+
+  expect_equal(sliced_df$z, c("a", "b"))
+  expect_equal(sliced_df$x, c(1, 4))
+  expect_equal(sliced_df$y, c(4, 7))
+})
+
 test_that("works with by w/ data.frame", {
   test_df <- data.frame(x = c(1,2,3,4), y = c(4,5,6,7), z = c("a", "a", "a", "b"),
                         stringsAsFactors = FALSE)
@@ -119,6 +129,15 @@ test_that("_min() works with by", {
   test_df <- tidytable(x = 1:10, y = 20:11, z = c(rep("a", 6), rep("b", 4)))
   sliced_df <- test_df %>%
     dt_slice_min(order_by = x, n = 3, by = z)
+
+  expect_equal(sliced_df$z, c("a", "a", "a", "b", "b", "b"))
+  expect_equal(sliced_df$y, c(20,19,18,14,13,12))
+})
+
+test_that("_min() works with by enhanced selection", {
+  test_df <- tidytable(x = 1:10, y = 20:11, z = c(rep("a", 6), rep("b", 4)))
+  sliced_df <- test_df %>%
+    dt_slice_min(order_by = x, n = 3, by = is.character)
 
   expect_equal(sliced_df$z, c("a", "a", "a", "b", "b", "b"))
   expect_equal(sliced_df$y, c(20,19,18,14,13,12))

@@ -35,3 +35,13 @@ test_that("can filter with |", {
   expect_equal(df$x, 1:4)
   expect_equal(df$y, 1:4)
 })
+
+test_that("filter works with 'by'", {
+  df <- data.table(x = c(1, 1, 2, 2), y = c("a", "a", "a", "b"))
+
+  df <- df %>%
+    dt_filter(x == mean(x), by = y)
+
+  expect_equal(df$x, 2)
+  expect_equal(df$y, "b")
+})

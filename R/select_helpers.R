@@ -71,4 +71,4 @@ dt_any_of <- function(x) {
 }
 
 predicate_names <- c("is.integer", "is.double", "is.numeric",
-                     "is.character", "is.factor", "is.logical")
+                     "is.character", "is.factor", "is.logical", "is.list")

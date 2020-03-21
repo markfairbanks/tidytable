@@ -3,6 +3,8 @@
 #' @description
 #' Fills missing values in the selected columns using the next or previous entry. Can be done by group.
 #'
+#' Supports enhanced selection
+#'
 #' @param .data A data.frame or data.table
 #' @param ... A selection of bare columns
 #' @param .direction Direction in which to fill missing values. Currently "down" (the default), "up", "downup" (first down then up), or "updown" (first up and then down)
@@ -58,7 +60,9 @@ dt_fill.data.frame <- function(.data, ..., .direction = c("down", "up", "downup"
 filler <- function(.data, ..., type = "locf", by = NULL) {
 
   all_cols <- as.character(dots_selector(.data, ...))
+
   by <- enexpr(by)
+  by <- vec_selector_by(.data, !!by)
 
   subset_data <- .data[, ..all_cols]
 

@@ -76,3 +76,35 @@ test_that("fill respects grouping", {
   out <- dt_fill(df, y, by = x)
   expect_equal(out$y, c(1, 1, NA))
 })
+
+#### Enhanced election
+
+test_that("enhanced selection works is.numeric", {
+  df <- data.table::data.table(
+    lgl = c(T, NA),
+    int = c(1L, NA),
+    dbl = c(1, NA),
+    chr = c("a", NA)
+  )
+
+  out <- dt_fill(df, is.numeric)
+  expect_equal(out$lgl, c(TRUE, NA))
+  expect_equal(out$int, c(1, 1))
+  expect_equal(out$dbl, c(1, 1))
+  expect_equal(out$chr, c("a", NA))
+})
+
+test_that("enhanced selection works", {
+  df <- data.table::data.table(
+    lgl = c(T, NA),
+    int = c(1L, NA),
+    dbl = c(1, NA),
+    chr = c("a", NA)
+  )
+
+  out <- dt_fill(df, is.logical)
+  expect_equal(out$lgl, c(TRUE, TRUE))
+  expect_equal(out$int, c(1, NA))
+  expect_equal(out$dbl, c(1, NA))
+  expect_equal(out$chr, c("a", NA))
+})

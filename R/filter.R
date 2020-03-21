@@ -23,6 +23,7 @@ dt_filter <- function(.data, ...) {
 dt_filter.tidytable <- function(.data, ..., by = NULL) {
 
   dots <- enexprs(...)
+
   by <- enexpr(by)
 
   if (is.null(by)) {
@@ -32,6 +33,8 @@ dt_filter.tidytable <- function(.data, ..., by = NULL) {
       )
     }
   } else {
+    by <- vec_selector_by(.data, !!by)
+
     .data <- eval_expr(
       .data[, .SD[reduce(list(!!!dots), .f = '&')], by = !!by]
     )
