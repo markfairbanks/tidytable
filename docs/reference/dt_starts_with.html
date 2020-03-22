@@ -44,10 +44,11 @@
 
 <meta property="og:title" content="Select helpers — dt_starts_with" />
 <meta property="og:description" content="These functions allow you to select variables based on their names.
-dt_starts_with(): Starts with a prefix
-dt_starts_with(): Ends with a suffix
+dt_any_of(): Select using a character vector
 dt_contains(): Contains a literal string
 dt_everything(): Matches all variables
+dt_starts_with(): Starts with a prefix
+dt_ends_with(): Ends with a suffix
 
 " />
 <meta property="og:image" content="/logo.png" />
@@ -83,7 +84,7 @@ dt_everything(): Matches all variables
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.9</span>
       </span>
     </div>
 
@@ -129,10 +130,11 @@ dt_everything(): Matches all variables
 
     <div class="ref-description">
     <p>These functions allow you to select variables based on their names.</p><ul>
-<li><p><code>dt_starts_with()</code>: Starts with a prefix</p></li>
-<li><p><code>dt_starts_with()</code>: Ends with a suffix</p></li>
+<li><p><code>dt_any_of()</code>: Select using a character vector</p></li>
 <li><p><code>dt_contains()</code>: Contains a literal string</p></li>
 <li><p><code>dt_everything()</code>: Matches all variables</p></li>
+<li><p><code>dt_starts_with()</code>: Starts with a prefix</p></li>
+<li><p><code>dt_ends_with()</code>: Ends with a suffix</p></li>
 </ul>
 
     </div>
@@ -143,7 +145,9 @@ dt_everything(): Matches all variables
 
 <span class='fu'>dt_ends_with</span>(<span class='no'>match</span>)
 
-<span class='fu'>dt_everything</span>()</pre>
+<span class='fu'>dt_everything</span>()
+
+<span class='fu'>dt_any_of</span>(<span class='no'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,6 +155,10 @@ dt_everything(): Matches all variables
     <tr>
       <th>match</th>
       <td><p>The match for the helper function to use</p></td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td><p>Character vector of columns to select</p></td>
     </tr>
     </table>
 

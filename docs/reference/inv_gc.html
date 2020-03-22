@@ -43,7 +43,8 @@
 
 
 <meta property="og:title" content="Run invisible garbage collection — inv_gc" />
-<meta property="og:description" content="Run garbage collection without the `gc()` output. Can also be run in the middle of a long pipe chain. Useful for large datasets." />
+<meta property="og:description" content="Run garbage collection without the `gc()` output. Can also be run in the middle of a long pipe chain.
+Useful for large datasets or when using parallel processing." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -77,7 +78,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.9</span>
       </span>
     </div>
 
@@ -122,31 +123,35 @@
     </div>
 
     <div class="ref-description">
-    <p>Run garbage collection without the `gc()` output. Can also be run in the middle of a long pipe chain. Useful for large datasets.</p>
+    <p>Run garbage collection without the `gc()` output. Can also be run in the middle of a long pipe chain.
+Useful for large datasets or when using parallel processing.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>inv_gc</span>(<span class='no'>.data</span>)</pre>
+    <pre class="usage"><span class='fu'>inv_gc</span>(<span class='no'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.data</th>
+      <th>x</th>
       <td><p>Optional. If missing runs `gc()` silently. Else returns the same object unaltered.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>inv_gc</span>()
+    <pre class="examples"><div class='input'><span class='co'># Can be run with no input</span>
+<span class='fu'>inv_gc</span>()
 
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>data.table</span><span class='kw ns'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(<span class='kw'>col1</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>col2</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 
+<span class='co'># Or can be run in the middle of a pipe chain (object is unaltered)</span>
 <span class='no'>df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='dt_filter.html'>dt_filter</a></span>(<span class='no'>col1</span> <span class='kw'>&lt;</span> <span class='fl'>2</span>, <span class='no'>col2</span> <span class='kw'>&lt;</span> <span class='fl'>4</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>inv_gc</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='dt_select.html'>dt_select</a></span>(<span class='no'>col1</span>, <span class='no'>col2</span>)</div><div class='output co'>#&gt;     col1  col2
-#&gt;    &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1:     1     2</div></pre>
+  <span class='fu'><a href='dt_select.html'>dt_select</a></span>(<span class='no'>col1</span>)</div><div class='output co'>#&gt;     col1
+#&gt;    &lt;dbl&gt;
+#&gt; 1:     1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

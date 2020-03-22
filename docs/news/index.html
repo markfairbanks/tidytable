@@ -76,7 +76,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.9</span>
       </span>
     </div>
 
@@ -119,15 +119,48 @@
       <small>Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="tidytable-0-3-2-in-development" class="section level1">
+    <div id="tidytable-0-3-3-in-development" class="section level1">
 <h1 class="page-header">
-<a href="#tidytable-0-3-2-in-development" class="anchor"></a>tidytable 0.3.2 (in development)<small> Unreleased </small>
+<a href="#tidytable-0-3-3-in-development" class="anchor"></a>tidytable 0.3.3 (in development)<small> Unreleased </small>
+</h1>
+<ul>
+<li>Functionality improvements:
+<ul>
+<li>Enhanced selection now works in “by”" calls</li>
+<li>
+<code><a href="../reference/dt_filter.html">dt_filter()</a></code> now works with “by”</li>
+<li>
+<code><a href="../reference/dt_pivot_wider.html">dt_pivot_wider()</a></code> can now be used with an aggregation function</li>
+<li>
+<code><a href="../reference/dt_pull.html">dt_pull()</a></code> defaults to last column in a data.table</li>
+</ul>
+</li>
+<li>New functions:
+<ul>
+<li><code><a href="../reference/dt_ifelse.html">dt_ifelse()</a></code></li>
+<li><code><a href="../reference/dt_transmute.html">dt_transmute()</a></code></li>
+<li>Select helper <code><a href="../reference/dt_starts_with.html">dt_any_of()</a></code>
+</li>
+</ul>
+</li>
+<li>Functions with notable speed improvements:
+<ul>
+<li><code><a href="../reference/dt_fill.html">dt_fill()</a></code></li>
+<li><code><a href="../reference/dt_pivot_longer.html">dt_pivot_longer()</a></code></li>
+<li><code><a href="../reference/dt_unnest_legacy.html">dt_unnest_legacy()</a></code></li>
+</ul>
+</li>
+</ul>
+</div>
+    <div id="tidytable-0-3-2" class="section level1">
+<h1 class="page-header">
+<a href="#tidytable-0-3-2" class="anchor"></a>tidytable 0.3.2<small> 2020-03-08 </small>
 </h1>
 <ul>
 <li>New class:
 <ul>
-<li>New <code>tidytable</code> class is a data.table with cleaner printing.</li>
-<li>Class operates like a data.table in all other cases.</li>
+<li>New <code>tidytable</code> class is a data.table subclass with cleaner printing.</li>
+<li>Operates like a data.table in all other cases.</li>
 <li>All tidytable functions automatically convert to <code>tidytable</code> class in the background.</li>
 </ul>
 </li>
@@ -195,7 +228,8 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#tidytable-0-3-2-in-development">0.3.2</a></li>
+        <li><a href="#tidytable-0-3-3-in-development">0.3.3</a></li>
+        <li><a href="#tidytable-0-3-2">0.3.2</a></li>
         <li><a href="#tidytable-0-3-1">0.3.1</a></li>
         <li><a href="#tidytable-0-3-0">0.3.0</a></li>
       </ul>

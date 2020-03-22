@@ -80,7 +80,7 @@ Supports enhanced selection" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.9</span>
       </span>
     </div>
 
@@ -133,11 +133,11 @@ decreasing the number of rows. The inverse transformation is
 
     <pre class="usage"><span class='fu'>dt_pivot_wider</span>(
   <span class='no'>.data</span>,
+  <span class='kw'>names_from</span> <span class='kw'>=</span> <span class='no'>name</span>,
+  <span class='kw'>values_from</span> <span class='kw'>=</span> <span class='no'>value</span>,
   <span class='kw'>id_cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>names_from</span>,
   <span class='kw'>names_sep</span> <span class='kw'>=</span> <span class='st'>"_"</span>,
-  <span class='no'>values_from</span>,
-  <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>values_fn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -148,24 +148,24 @@ decreasing the number of rows. The inverse transformation is
       <td><p>the data table to widen</p></td>
     </tr>
     <tr>
-      <th>id_cols</th>
-      <td><p>A set of columns that uniquely identifies each observation. Defaults to all columns in the data table except for the columns specified in <code>names_from</code> and <code>values_from</code>. Typically used when you have additional variables that is directly related.</p></td>
-    </tr>
-    <tr>
       <th>names_from</th>
       <td><p>A pair of arguments describing which column (or columns) to get the name of the output column (<code>name_from</code>), and which column (or columns) to get the cell values from (<code>values_from</code>).</p></td>
-    </tr>
-    <tr>
-      <th>names_sep</th>
-      <td><p>the separator between the names of the columns</p></td>
     </tr>
     <tr>
       <th>values_from</th>
       <td><p>A pair of arguments describing which column (or columns) to get the name of the output column (<code>name_from</code>), and which column (or columns) to get the cell values from (<code>values_from</code>).</p></td>
     </tr>
     <tr>
-      <th>drop</th>
-      <td><p>When <code>FALSE</code>, will cast by including all missing combinations. When <code>TRUE</code>, it is drop missing combination. <code><a href='https://rdrr.io/r/base/c.html'>c(FALSE, TRUE)</a></code> will only include all missing combinations of formula LHS; <code><a href='https://rdrr.io/r/base/c.html'>c(TRUE, FALSE)</a></code> will only include all missing combinations of formula RHS.</p></td>
+      <th>id_cols</th>
+      <td><p>A set of columns that uniquely identifies each observation. Defaults to all columns in the data table except for the columns specified in <code>names_from</code> and <code>values_from</code>. Typically used when you have additional variables that is directly related.</p></td>
+    </tr>
+    <tr>
+      <th>names_sep</th>
+      <td><p>the separator between the names of the columns</p></td>
+    </tr>
+    <tr>
+      <th>values_fn</th>
+      <td><p>hould the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.</p></td>
     </tr>
     </table>
 
