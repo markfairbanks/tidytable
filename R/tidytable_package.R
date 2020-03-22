@@ -1,7 +1,7 @@
 # Suppress R CMD check note
 #' @import data.table
 #' @importFrom methods as
-#' @importFrom rlang abort caller_env enexpr enexprs expr eval_tidy
+#' @importFrom rlang abort as_function caller_env enexpr enexprs expr eval_tidy
 #' @importFrom rlang is_formula is_named missing_arg parse_expr seq2 squash sym syms
 #' @importFrom stats as.formula na.omit setNames
 #' @importFrom utils capture.output head tail
