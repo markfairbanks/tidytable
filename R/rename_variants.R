@@ -71,15 +71,13 @@ dt_rename_across.tidytable <- function(.data, .cols, .fun, ...) {
 
   .data <- shallow(.data)
 
-  .fun <- anon_x(.fun)
-
-  #TODO Make this work without a loop
+  .fun <- as_function(.fun)
 
   if (length(.cols) > 0) {
-    for (old_name in .cols) {
-      new_name <- .fun(old_name, ...)
-      setnames(.data, old_name, new_name)
-    }
+
+    new_names <- .fun(.cols, ...)
+    setnames(.data, .cols, new_names)
+
     .data
   } else {
     .data

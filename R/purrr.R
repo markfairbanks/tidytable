@@ -22,7 +22,7 @@
 #'
 #' dt_map_chr(c(1,2,3), as.character)
 dt_map <- function(.x, .f, ...) {
-  .f <- anon_x(.f)
+  .f <- as_function(.f)
 
   lapply(.x, .f, ...)
 }
@@ -30,7 +30,7 @@ dt_map <- function(.x, .f, ...) {
 #' @export
 #' @rdname dt_map
 dt_map_lgl <- function(.x, .f, ...) {
-  .f <- anon_x(.f)
+  .f <- as_function(.f)
 
   vapply(.x, .f, logical(1), ...)
 }
@@ -38,7 +38,7 @@ dt_map_lgl <- function(.x, .f, ...) {
 #' @export
 #' @rdname dt_map
 dt_map_int <- function(.x, .f, ...) {
-  .f <- anon_x(.f)
+  .f <- as_function(.f)
 
   vapply(.x, .f, integer(1), ...)
 }
@@ -46,7 +46,7 @@ dt_map_int <- function(.x, .f, ...) {
 #' @export
 #' @rdname dt_map
 dt_map_dbl <- function(.x, .f, ...) {
-  .f <- anon_x(.f)
+  .f <- as_function(.f)
 
   vapply(.x, .f, double(1), ...)
 }
@@ -54,7 +54,7 @@ dt_map_dbl <- function(.x, .f, ...) {
 #' @export
 #' @rdname dt_map
 dt_map_chr <- function(.x, .f, ...) {
-  .f <- anon_x(.f)
+  .f <- as_function(.f)
 
   vapply(.x, .f, character(1), ...)
 }
@@ -62,7 +62,7 @@ dt_map_chr <- function(.x, .f, ...) {
 #' @export
 #' @rdname dt_map
 dt_map_dfc <- function(.x, .f, ...) {
-  .f <- anon_x(.f)
+  .f <- as_function(.f)
   result_list <- dt_map(.x, .f, ...)
   dt_bind_cols(result_list)
 }
@@ -70,7 +70,7 @@ dt_map_dfc <- function(.x, .f, ...) {
 #' @export
 #' @rdname dt_map
 dt_map_dfr <- function(.x, .f, ..., .id = NULL) {
-  .f <- anon_x(.f)
+  .f <- as_function(.f)
 
   result_list <- dt_map(.x, .f, ...)
 
@@ -84,7 +84,7 @@ dt_map_df <- dt_map_dfr
 #' @export
 #' @rdname dt_map
 dt_walk <- function(.x, .f, ...) {
-  .f <- anon_x(.f)
+  .f <- as_function(.f)
 
   dt_map(.x, .f, ...)
 
@@ -94,7 +94,7 @@ dt_walk <- function(.x, .f, ...) {
 #' @export
 #' @rdname dt_map
 dt_map2 <- function(.x, .y, .f, ...) {
-  .f <- anon_xy(.f)
+  .f <- as_function(.f)
 
   mapply(.f, .x, .y, MoreArgs = list(...), SIMPLIFY = FALSE)
 }
@@ -102,7 +102,7 @@ dt_map2 <- function(.x, .y, .f, ...) {
 #' @export
 #' @rdname dt_map
 dt_map2_lgl <- function(.x, .y, .f, ...) {
-  .f <- anon_xy(.f)
+  .f <- as_function(.f)
 
   as.logical(dt_map2(.x, .y, .f, ...))
 }
@@ -110,7 +110,7 @@ dt_map2_lgl <- function(.x, .y, .f, ...) {
 #' @export
 #' @rdname dt_map
 dt_map2_int <- function(.x, .y, .f, ...) {
-  .f <- anon_xy(.f)
+  .f <- as_function(.f)
 
   as.integer(dt_map2(.x, .y, .f, ...))
 }
@@ -118,7 +118,7 @@ dt_map2_int <- function(.x, .y, .f, ...) {
 #' @export
 #' @rdname dt_map
 dt_map2_dbl <- function(.x, .y, .f, ...) {
-  .f <- anon_xy(.f)
+  .f <- as_function(.f)
 
   as.double(dt_map2(.x, .y, .f, ...))
 }
@@ -126,7 +126,7 @@ dt_map2_dbl <- function(.x, .y, .f, ...) {
 #' @export
 #' @rdname dt_map
 dt_map2_chr <- function(.x, .y, .f, ...) {
-  .f <- anon_xy(.f)
+  .f <- as_function(.f)
 
   as.character(dt_map2(.x, .y, .f, ...))
 }
@@ -134,7 +134,7 @@ dt_map2_chr <- function(.x, .y, .f, ...) {
 #' @export
 #' @rdname dt_map
 dt_map2_dfc <- function(.x, .y, .f, ...) {
-  .f <- anon_xy(.f)
+  .f <- as_function(.f)
 
   result_list <- dt_map2(.x, .y, .f, ...)
   dt_bind_cols(result_list)
@@ -143,7 +143,7 @@ dt_map2_dfc <- function(.x, .y, .f, ...) {
 #' @export
 #' @rdname dt_map
 dt_map2_dfr <- function(.x, .y, .f, ..., .id = NULL) {
-  .f <- anon_xy(.f)
+  .f <- as_function(.f)
 
   result_list <- dt_map2(.x, .y, .f, ...)
   dt_bind_rows(result_list, .id = .id)
@@ -152,29 +152,3 @@ dt_map2_dfr <- function(.x, .y, .f, ..., .id = NULL) {
 #' @export
 #' @rdname dt_map
 dt_map2_df <- dt_map2_dfr
-
-anon_x <- function(fn) {
-  if (is_formula(fn)) {
-    fn %>%
-      deparse(200L) %>%
-      str_c(collapse = "") %>%
-      str_replace("^~", "function(.x)") %>%
-      parse_expr() %>%
-      eval()
-  } else {
-    fn
-  }
-}
-
-anon_xy <- function(fn) {
-  if (is_formula(fn)) {
-    fn %>%
-      deparse(200L) %>%
-      str_c(collapse = "") %>%
-      str_replace("^~", "function(.x,.y)") %>%
-      parse_expr() %>%
-      eval()
-  } else {
-    fn
-  }
-}
