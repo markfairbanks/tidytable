@@ -61,6 +61,21 @@ test_that("missings filled up for each vector", {
   expect_equal(out$chr, c("a", "a"))
 })
 
+test_that("doesn't modify-by-reference", {
+  df <- data.table::data.table(
+    lgl = c(NA, T),
+    int = c(NA, 1L),
+    dbl = c(NA, 1),
+    chr = c(NA, "a")
+  )
+
+  dt_fill(df, lgl, int, dbl, chr, .direction = "up")
+  expect_equal(df$lgl, c(NA, T))
+  expect_equal(df$int, c(NA, 1L))
+  expect_equal(df$dbl, c(NA, 1))
+  expect_equal(df$chr, c(NA, "a"))
+})
+
 # test_that("fill preserves attributes", {
 #   df <- data.table::data.table(x = factor(c(NA, "a", NA)))
 #
