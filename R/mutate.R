@@ -42,7 +42,7 @@ dt_mutate.tidytable <- function(.data, ..., by = NULL) {
     for (i in seq_along(dots)) {
       val <- dots[i][[1]]
 
-      if (is.numeric(val) | is.character(val)) {
+      if (is.numeric(val) | is.character(val) | is.logical(val)) {
         # Prevents modify-by-reference if a single value is supplied
         val <- rep(val, nrow(.data))
       }
