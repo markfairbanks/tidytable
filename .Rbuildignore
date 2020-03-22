@@ -6,3 +6,4 @@
 ^CRAN-RELEASE$
 ^docs$
 ^pkgdown$
+^revdep$
