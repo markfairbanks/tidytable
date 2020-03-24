@@ -19,16 +19,16 @@
 #'   z = c(rep("a", 8), rep("b", 2)))
 #'
 #' test_df %>%
-#'   dt_fill(x, y, by = z)
+#'   fill.(x, y, by = z)
 #'
 #' test_df %>%
-#'   dt_fill(x, y, by = z, .direction = "downup")
-dt_fill <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
-  UseMethod("dt_fill")
+#'   fill.(x, y, by = z, .direction = "downup")
+fill. <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
+  UseMethod("fill.")
 }
 
 #' @export
-dt_fill.tidytable <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
+fill..tidytable <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
   by <- enexpr(by)
 
   if (length(.direction) > 1) .direction <- "down"
@@ -49,13 +49,17 @@ dt_fill.tidytable <- function(.data, ..., .direction = c("down", "up", "downup",
 }
 
 #' @export
-dt_fill.data.frame <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
+fill..data.frame <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
   .data <- as_tidytable(.data)
   by <- enexpr(by)
 
-  dt_fill(.data, ..., .direction = .direction, by = !!by)
+  fill.(.data, ..., .direction = .direction, by = !!by)
 
 }
+
+#' @export
+#' @rdname fill.
+dt_fill <- fill.
 
 filler <- function(.data, ..., type = "locf", by = NULL) {
 

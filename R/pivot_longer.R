@@ -2,9 +2,9 @@
 #'
 #'
 #' @description
-#' \code{dt_pivot_wider()} "widens" data, increasing the number of columns and
+#' \code{pivot_wider.()} "widens" data, increasing the number of columns and
 #' decreasing the number of rows. The inverse transformation is
-#' \code{dt_pivot_longer()}. Syntax based on the \code{tidyr} equivalents.
+#' \code{pivot_longer.()}. Syntax based on the \code{tidyr} equivalents.
 #'
 #' Supports enhanced selection
 #'
@@ -22,33 +22,29 @@
 #'   y = c(4,5,6),
 #'   z = c("a", "b", "c"))
 #'
-#' dt_pivot_longer(example_dt,
-#'                 cols = c(x, y),
-#'                 names_to = "stuff",
-#'                 values_to = "things")
+#' example_dt %>%
+#'   pivot_longer.(c(x, y))
 #'
-#' dt_pivot_longer(example_dt,
-#'                 cols = -z,
-#'                 names_to = "stuff",
-#'                 values_to = "things")
+#' example_dt %>%
+#'   pivot_longer.(cols = -z, names_to = "stuff", values_to = "things")
 #'
 #' @export
-dt_pivot_longer <- function(.data,
-                            cols = dt_everything(),
-                            names_to = "name",
-                            values_to = "value",
-                            values_drop_na = FALSE,
-                            ...) {
-  UseMethod("dt_pivot_longer")
+pivot_longer. <- function(.data,
+                          cols = everything.(),
+                          names_to = "name",
+                          values_to = "value",
+                          values_drop_na = FALSE,
+                          ...) {
+  UseMethod("pivot_longer.")
 }
 
 #' @export
-dt_pivot_longer.tidytable <- function(.data,
-                                       cols = dt_everything(),
-                                       names_to = "name",
-                                       values_to = "value",
-                                       values_drop_na = FALSE,
-                                       ...) {
+pivot_longer..tidytable <- function(.data,
+                                    cols = everything.(),
+                                    names_to = "name",
+                                    values_to = "value",
+                                    values_drop_na = FALSE,
+                                    ...) {
 
   names <- colnames(.data)
   cols <- enexpr(cols)
@@ -72,8 +68,8 @@ dt_pivot_longer.tidytable <- function(.data,
 }
 
 #' @export
-dt_pivot_longer.data.frame <- function(.data,
-                                       cols = dt_everything(),
+pivot_longer..data.frame <- function(.data,
+                                       cols = everything.(),
                                        names_to = "name",
                                        values_to = "value",
                                        values_drop_na = FALSE,
@@ -81,10 +77,14 @@ dt_pivot_longer.data.frame <- function(.data,
   .data <- as_tidytable(.data)
   cols <- enexpr(cols)
 
-  .data <- dt_pivot_longer(
+  .data <- pivot_longer.(
     .data, !!cols,
     names_to = names_to, values_to = values_to,
     values_drop_na = values_drop_na, ...)
 
   .data
 }
+
+#' @export
+#' @rdname pivot_longer.
+dt_pivot_longer <- pivot_longer.

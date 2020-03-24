@@ -18,19 +18,19 @@
 #'   d = c(rep("a", 4), rep("b", 6)))
 #'
 #' test_df %>%
-#'   dt_group_nest()
+#'   group_nest.()
 #'
 #' test_df %>%
-#'   dt_group_nest(c, d)
+#'   group_nest.(c, d)
 #'
 #' test_df %>%
-#'   dt_group_nest(is.character)
-dt_group_nest <- function(.data, ..., .key = "data") {
-  UseMethod("dt_group_nest")
+#'   group_nest.(is.character)
+group_nest. <- function(.data, ..., .key = "data") {
+  UseMethod("group_nest.")
 }
 
 #' @export
-dt_group_nest.tidytable <- function(.data, ..., .key = "data") {
+group_nest..tidytable <- function(.data, ..., .key = "data") {
 
   dots <- enexprs(...)
 
@@ -46,14 +46,18 @@ dt_group_nest.tidytable <- function(.data, ..., .key = "data") {
       )
   }
 
-  if (.key != "data") .data <- dt_rename(.data, !!.key := data)
+  if (.key != "data") .data <- rename.(.data, !!.key := data)
 
   .data
 }
 
 #' @export
-dt_group_nest.data.frame <- function(.data, ..., .key = "data") {
+group_nest..data.frame <- function(.data, ..., .key = "data") {
   .data <- as_tidytable(.data)
 
-  dt_group_nest(.data, ..., .key = .key)
+  group_nest.(.data, ..., .key = .key)
 }
+
+#' @export
+#' @rdname group_nest.
+dt_group_nest <- group_nest.

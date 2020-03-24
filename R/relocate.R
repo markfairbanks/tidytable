@@ -20,19 +20,19 @@
 #'   d = c("a","a","a","b","b"))
 #'
 #' test_df %>%
-#'   dt_relocate(c, .before = b)
+#'   relocate.(c, .before = b)
 #'
 #' test_df %>%
-#'   dt_relocate(a, b, .after = c)
+#'   relocate.(a, b, .after = c)
 #'
 #' test_df %>%
-#'   dt_relocate(is.numeric, .after = c)
-dt_relocate <- function(.data, ..., .before = NULL, .after = NULL) {
-  UseMethod("dt_relocate")
+#'   relocate.(is.numeric, .after = c)
+relocate. <- function(.data, ..., .before = NULL, .after = NULL) {
+  UseMethod("relocate.")
 }
 
 #' @export
-dt_relocate.tidytable <- function(.data, ..., .before = NULL, .after = NULL) {
+relocate..tidytable <- function(.data, ..., .before = NULL, .after = NULL) {
   .before <- enexpr(.before)
   .after <- enexpr(.after)
 
@@ -64,10 +64,14 @@ dt_relocate.tidytable <- function(.data, ..., .before = NULL, .after = NULL) {
 }
 
 #' @export
-dt_relocate.data.frame <- function(.data, ..., .before = NULL, .after = NULL) {
+relocate..data.frame <- function(.data, ..., .before = NULL, .after = NULL) {
   .data <- as_tidytable(.data)
   .before <- enexpr(.before)
   .after <- enexpr(.after)
 
-  dt_relocate(.data, ..., .before = !!.before, .after = !!.after)
+  relocate.(.data, ..., .before = !!.before, .after = !!.after)
 }
+
+#' @export
+#' @rdname relocate.
+dt_relocate <- relocate.

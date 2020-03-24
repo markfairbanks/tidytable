@@ -22,32 +22,32 @@
 #'
 #' # Automatically does all character/factor columns
 #' test_df %>%
-#'   dt_get_dummies()
+#'   get_dummies.()
 #'
 #' # Can select one column
 #' test_df %>%
-#'   dt_get_dummies(col1)
+#'   get_dummies.(col1)
 #'
 #' # Can select one or multiple columns in a vector of unquoted column names
 #' test_df %>%
-#'   dt_get_dummies(c(col1, col2))
+#'   get_dummies.(c(col1, col2))
 #'
 #' test_df %>%
-#'   dt_get_dummies(prefix_sep = ".", drop_first = TRUE)
+#'   get_dummies.(prefix_sep = ".", drop_first = TRUE)
 #'
 #' test_df %>%
-#'   dt_get_dummies(c(col1, col2), dummify_na = FALSE)
-dt_get_dummies <- function(.data,
+#'   get_dummies.(c(col1, col2), dummify_na = FALSE)
+get_dummies. <- function(.data,
                            cols = NULL,
                            prefix = TRUE,
                            prefix_sep = "_",
                            drop_first = FALSE,
                            dummify_na = TRUE) {
-  UseMethod("dt_get_dummies")
+  UseMethod("get_dummies.")
 }
 
 #' @export
-dt_get_dummies.data.frame <- function(.data,
+get_dummies..data.frame <- function(.data,
                                       cols = NULL,
                                       prefix = TRUE,
                                       prefix_sep = "_",
@@ -57,13 +57,13 @@ dt_get_dummies.data.frame <- function(.data,
   .data <- as_tidytable(.data)
   cols <- enexpr(cols)
 
-  dt_get_dummies(.data, cols = !!cols,
+  get_dummies.(.data, cols = !!cols,
                  prefix = prefix, prefix_sep = prefix_sep,
                  drop_first = drop_first, dummify_na = dummify_na)
 }
 
 #' @export
-dt_get_dummies.tidytable <- function(.data,
+get_dummies..tidytable <- function(.data,
                                       cols = NULL,
                                       prefix = TRUE,
                                       prefix_sep = "_",
@@ -124,3 +124,7 @@ dt_get_dummies.tidytable <- function(.data,
   }
   .data[]
 }
+
+#' @export
+#' @rdname get_dummies.
+dt_get_dummies <- get_dummies.

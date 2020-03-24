@@ -1,9 +1,9 @@
 #' Pivot data from long to wide
 #'
 #' @description
-#' \code{dt_pivot_wider()} "widens" data, increasing the number of columns and
+#' \code{pivot_wider.()} "widens" data, increasing the number of columns and
 #' decreasing the number of rows. The inverse transformation is
-#' \code{dt_pivot_longer()}. Syntax based on the \code{tidyr} equivalents.
+#' \code{pivot_longer.()}. Syntax based on the \code{tidyr} equivalents.
 #'
 #' Supports enhanced selection
 #'
@@ -15,34 +15,34 @@
 #' @param values_fn hould the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.
 #'
 #' @examples
-#'
-#' library(data.table)
-#'
 #' example_dt <- data.table::data.table(
 #'   z = rep(c("a", "b", "c"), 2),
 #'   stuff = c(rep("x", 3), rep("y", 3)),
 #'   things = 1:6)
 #'
-#' dt_pivot_wider(example_dt, names_from = stuff, values_from = things)
-#' dt_pivot_wider(example_dt, names_from = stuff, values_from = things, id_cols = z)
+#' example_dt %>%
+#'   pivot_wider.(names_from = stuff, values_from = things)
+#'
+#' example_dt %>%
+#'   pivot_wider.(names_from = stuff, values_from = things, id_cols = z)
 #'
 #' @export
-dt_pivot_wider <- function(.data,
-                           names_from = name,
-                           values_from = value,
-                           id_cols = NULL,
-                           names_sep = "_",
-                           values_fn = NULL) {
-  UseMethod("dt_pivot_wider")
+pivot_wider. <- function(.data,
+                         names_from = name,
+                         values_from = value,
+                         id_cols = NULL,
+                         names_sep = "_",
+                         values_fn = NULL) {
+  UseMethod("pivot_wider.")
 }
 
 #' @export
-dt_pivot_wider.tidytable <- function(.data,
-                                     names_from = name,
-                                     values_from = value,
-                                     id_cols = NULL,
-                                     names_sep = "_",
-                                     values_fn = NULL) {
+pivot_wider..tidytable <- function(.data,
+                                   names_from = name,
+                                   values_from = value,
+                                   id_cols = NULL,
+                                   names_sep = "_",
+                                   values_fn = NULL) {
 
   id_cols <- enexpr(id_cols)
   names_from <- enexpr(names_from)
@@ -86,7 +86,7 @@ dt_pivot_wider.tidytable <- function(.data,
 }
 
 #' @export
-dt_pivot_wider.data.frame <- function(.data,
+pivot_wider..data.frame <- function(.data,
                                       names_from = name,
                                       values_from = value,
                                       id_cols = NULL,
@@ -98,7 +98,7 @@ dt_pivot_wider.data.frame <- function(.data,
   values_from <- enexpr(values_from)
   values_fn <- enexpr(values_fn)
 
-  dt_pivot_wider(.data,
+  pivot_wider.(.data,
                  names_from = !!names_from,
                  values_from = !!values_from,
                  id_cols = !!id_cols,
@@ -106,5 +106,7 @@ dt_pivot_wider.data.frame <- function(.data,
                  values_fn = !!values_fn)
 }
 
-
+#' @export
+#' @rdname pivot_wider.
+dt_pivot_wider <- pivot_wider.
 
