@@ -20,6 +20,17 @@ test_that("can do group aggregation with by", {
   expect_equal(tidytable_df, datatable_df)
 })
 
+test_that("n.() works", {
+  df <- tidytable(x = 1:4, y = c("a","a","a","b"))
+
+  tidytable_df <- df %>%
+    summarize.(count = n.(), by = y)
+
+  datatable_df <- df[, list(count = .N), by = y]
+
+  expect_equal(tidytable_df, datatable_df)
+})
+
 test_that("can do group aggregation with no by", {
   df <- tidytable(x = 1:4, y = c("a","a","a","b"))
 

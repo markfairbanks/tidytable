@@ -19,6 +19,15 @@ test_that("can add multiple columns", {
   expect_equal(df$x * 2, df$double_x)
 })
 
+test_that("row_number.() works", {
+  df <- data.table(x = 1:3, y = 1:3)
+  df <- df %>%
+    mutate.(row = row_number.(),
+            row_check = 1:.N)
+
+  expect_equal(df$row, df$row_check)
+})
+
 test_that("dt_ can add multiple columns", {
   df <- data.table(x = 1:3, y = 1:3)
   df <- df %>%
