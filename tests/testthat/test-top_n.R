@@ -1,10 +1,23 @@
-test_that("works with no wt/no by", {
+test_that("dt_ works with no wt/no by", {
   test_df <- data.table(x = 1:5,
                         y = 6:10,
                         z = c(rep("a", 3), rep("b", 2)))
 
   top_df <- test_df %>%
     dt_top_n(3)
+
+  expect_equal(top_df$x, 1:3)
+  expect_equal(top_df$y, 6:8)
+  expect_equal(top_df$z, rep("a", 3))
+})
+
+test_that("works with no wt/no by", {
+  test_df <- data.table(x = 1:5,
+                        y = 6:10,
+                        z = c(rep("a", 3), rep("b", 2)))
+
+  top_df <- test_df %>%
+    top_n.(3)
 
   expect_equal(top_df$x, 1:3)
   expect_equal(top_df$y, 6:8)
@@ -18,7 +31,7 @@ test_that("works with no wt/no by with data.frame", {
                         stringsAsFactors = FALSE)
 
   top_df <- test_df %>%
-    dt_top_n(3)
+    top_n.(3)
 
   expect_equal(top_df$x, 1:3)
   expect_equal(top_df$y, 6:8)
@@ -31,7 +44,7 @@ test_that("works with wt/no by", {
                         z = c(rep("a", 3), rep("b", 2)))
 
   top_df <- test_df %>%
-    dt_top_n(3, wt = y)
+    top_n.(3, wt = y)
 
   expect_equal(top_df$x, c(5,4,3))
   expect_equal(top_df$y, c(10,9,8))
@@ -45,7 +58,7 @@ test_that("works with wt/no by with data.frame", {
                         stringsAsFactors = FALSE)
 
   top_df <- test_df %>%
-    dt_top_n(3, wt = y)
+    top_n.(3, wt = y)
 
   expect_equal(top_df$x, c(5,4,3))
   expect_equal(top_df$y, c(10,9,8))
@@ -58,7 +71,7 @@ test_that("works with no wt/with by", {
                         z = c(rep("a", 3), rep("b", 2)))
 
   top_df <- test_df %>%
-    dt_top_n(2, by = z)
+    top_n.(2, by = z)
 
   expect_equal(top_df$x, c(1,2,4,5))
   expect_equal(top_df$y, c(6,7,9,10))
@@ -71,7 +84,7 @@ test_that("works with wt/with by", {
                         z = c(rep("a", 3), rep("b", 2)))
 
   top_df <- test_df %>%
-    dt_top_n(2, wt = y, by = z)
+    top_n.(2, wt = y, by = z)
 
   expect_equal(top_df$x, c(5,4,3,2))
   expect_equal(top_df$y, c(10, 9, 8, 7))
@@ -84,7 +97,7 @@ test_that("works with wt/with enhanced selection", {
                         z = c(rep("a", 3), rep("b", 2)))
 
   top_df <- test_df %>%
-    dt_top_n(2, wt = y, by = is.character)
+    top_n.(2, wt = y, by = is.character)
 
   expect_equal(top_df$x, c(5,4,3,2))
   expect_equal(top_df$y, c(10, 9, 8, 7))
