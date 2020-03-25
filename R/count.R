@@ -18,13 +18,13 @@
 #'   z = c("a", "a", "b"))
 #'
 #' example_df %>%
-#'   dt_count()
+#'   count.()
 #'
 #' example_df %>%
-#'   dt_count(z)
+#'   count.(z)
 #'
 #' example_df %>%
-#'   dt_count(is.character)
+#'   count.(is.character)
 count. <- function(.data, ...) {
   UseMethod("count.")
 }

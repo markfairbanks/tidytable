@@ -28,5 +28,5 @@ ifelse.(x > 2L, x, x - 1L)
 test_df <- data.table::data.table(x = x)
 
 test_df \%>\%
-  dt_mutate(new_col = ifelse.(x > 2L, NA, x - 1L))
+  mutate.(new_col = ifelse.(x > 2L, NA, x - 1L))
 }

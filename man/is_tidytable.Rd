@@ -15,9 +15,9 @@ This function returns TRUE for tidytables or subclasses of tidytables, and FALSE
 \examples{
 dt <- data.table::data.table(x = 1)
 
-is_tidytable(dt)
+is_tidytable(dt) # Returns FALSE
 
 df <- tidytable(x = 1)
 
-is_tidytable(df)
+is_tidytable(df) # Returns TRUE
 }

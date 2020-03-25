@@ -40,7 +40,7 @@ relocate..tidytable <- function(.data, ..., .before = NULL, .after = NULL) {
     stop("Must supply only one of `.before` and `.after`")
 
   if (is.null(.before) && is.null(.after))
-    stop("Must supply either `.before` or `.after` to move columns")
+    .before <- 1
 
   all_cols_i <- seq_along(names(.data))
   selected_cols_i <- dots_selector_i(.data, ...)

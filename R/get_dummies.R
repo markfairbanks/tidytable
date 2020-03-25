@@ -77,8 +77,8 @@ get_dummies..tidytable <- function(.data,
     # If NULL, select all character & factor cols
     data_names <- names(.data)
 
-    chr_cols <- data_names[dt_map_lgl(.data, is.character)]
-    fct_cols <- data_names[dt_map_lgl(.data, is.factor)]
+    chr_cols <- data_names[map_lgl.(.data, is.character)]
+    fct_cols <- data_names[map_lgl.(.data, is.factor)]
 
     cols <- syms(c(chr_cols, fct_cols))
   } else {

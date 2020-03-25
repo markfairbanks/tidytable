@@ -19,12 +19,12 @@
 #' test_df <- data.table::data.table(x = x)
 #'
 #' test_df %>%
-#'   dt_mutate(new_col = ifelse.(x > 2L, NA, x - 1L))
+#'   mutate.(new_col = ifelse.(x > 2L, NA, x - 1L))
 ifelse. <- function(conditions, true, false) {
 
   if (is.na(true)) true <- as(true, class(false))
 
-  dt_case(conditions, true, default = false)
+  case.(conditions, true, default = false)
 }
 
 #' @export

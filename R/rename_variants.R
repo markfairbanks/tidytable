@@ -3,7 +3,6 @@
 #' @description
 #' These helpers have been deprecated. Please use `rename_with.()`
 #'
-#'
 #' @param .data A data.frame or data.table
 #' @param .cols vector `c()` of bare column names for `rename_across.()` to use
 #' @param .vars vector `c()` of bare column names for `rename_at.()` to use
@@ -33,7 +32,7 @@ rename_all. <- function(.data, .fun, ...) {
 #' @export
 rename_all..default <- function(.data, .fun, ...) {
 
-  rename_across.(.data, dt_everything(), .fun, ...)
+  rename_across.(.data, everything.(), .fun, ...)
 }
 
 #' @export

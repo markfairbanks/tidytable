@@ -17,10 +17,10 @@
 #'   z = c("a", "a", "b"))
 #'
 #' example_dt %>%
-#'   dt_distinct()
+#'   distinct.()
 #'
 #' example_dt %>%
-#'   dt_distinct(z)
+#'   distinct.(z)
 distinct. <- function(.data, ...) {
   UseMethod("distinct.")
 }

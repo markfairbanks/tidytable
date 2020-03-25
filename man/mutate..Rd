@@ -27,10 +27,10 @@ example_dt <- data.table::data.table(
 
 example_dt \%>\%
   mutate.(double_a = a * 2,
-            a_plus_b = a + b)
+          a_plus_b = a + b)
 
 example_dt \%>\%
   mutate.(double_a = a * 2,
-            avg_a = mean(a),
-            by = c)
+          avg_a = mean(a),
+          by = c)
 }

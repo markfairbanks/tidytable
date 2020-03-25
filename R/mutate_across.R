@@ -16,8 +16,6 @@
 #' @export
 #'
 #' @examples
-#' library(data.table)
-#'
 #' example_dt <- data.table::data.table(
 #'   x = c(1,1,1),
 #'   y = c(2,2,2),
@@ -33,7 +31,8 @@
 #'   mutate_across.(everything.(), as.character)
 #'
 #' example_dt %>%
-#'   mutate_across.(c(x, y), list(new = ~ .x * 2))
+#'   mutate_across.(c(x, y), list(new = ~ .x * 2,
+#'                                another = ~ .x + 7))
 mutate_across. <- function(.data, .cols = everything.(), .funs, ..., by = NULL) {
   UseMethod("mutate_across.")
 }

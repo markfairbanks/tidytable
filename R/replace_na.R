@@ -17,7 +17,7 @@
 #'   y = c(NA, 1, 2))
 #'
 #' example_dt %>%
-#'   dt_mutate(x = replace_na.(x, 5))
+#'   mutate.(x = replace_na.(x, 5))
 replace_na. <- function(.col, replace) {
 
   if (class(replace) %in% c("integer", "double", "numeric")) {

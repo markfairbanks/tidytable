@@ -26,8 +26,6 @@ Mutate multiple columns simultaneously.
 Supports enhanced selection.
 }
 \examples{
-library(data.table)
-
 example_dt <- data.table::data.table(
   x = c(1,1,1),
   y = c(2,2,2),
@@ -43,5 +41,6 @@ example_dt \%>\%
   mutate_across.(everything.(), as.character)
 
 example_dt \%>\%
-  mutate_across.(c(x, y), list(new = ~ .x * 2))
+  mutate_across.(c(x, y), list(new = ~ .x * 2,
+                               another = ~ .x + 7))
 }
