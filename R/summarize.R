@@ -35,8 +35,12 @@ summarize..tidytable <- function(.data, ..., by = NULL) {
   by <- enexpr(by)
   by <- vec_selector_by(.data, !!by)
 
+  # Needed so n.() works
+  # Puts () around each summary function
+  dots <- map.(dots, ~ parse_expr(str_c("(", deparse(.x), ")")))
+
   eval_expr(
-    .data[, list(!!!dots), !!by]
+    .data[, list(!!!dots), by = !!by]
   )
 }
 
