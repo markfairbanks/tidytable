@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
 [![](https://img.shields.io/badge/dev%20-0.3.2.9-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/tidytable?color=grey)](https://r-pkg.org/pkg/tidytable)
+[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey)](https://r-pkg.org/pkg/tidytable)
 <!-- badges: end -->
 
 The goal of `tidytable` is to be a tidy interface to `data.table`.
@@ -84,6 +84,7 @@ devtools::install_github("markfairbanks/tidytable")
 * `pull.()`
 * `relocate.()`
 * `rename.()` & `rename_with.()` - **ES**
+* `row_number.()`
 * Select helpers:
   + `any_of.()`, `contains.()`, `everything.()` `starts_with.()`, `ends_with.()`
 * `slice.()`: `_head.()`/`_tail.()`/`_max.()`/`_min.()`
@@ -96,7 +97,7 @@ devtools::install_github("markfairbanks/tidytable")
 * `drop_na.()` - **ES**
 * `fill.()`: Works on character/factor/logical types (`data.table::nafill()` does not) - **ES**
 * `group_split.()` - **ES**
-* Nesting: `group_nest.()` - **ES** & `unnest_legacy.()`
+* Nesting: `nest_by.()` - **ES** & `unnest.()`
 * `pivot_longer.()` - **ES** & `pivot_wider.()` - **ES**
 * `replace_na.()`
 * `separate.()`
@@ -106,15 +107,15 @@ devtools::install_github("markfairbanks/tidytable")
 
 ## General syntax
 
-The code chunk below shows the `tidytable` syntax:
+`tidytable` uses `verb.()` syntax to replicate `tidyverse` functions:
 
 ```{r message = FALSE}
 library(data.table)
 library(tidytable)
 
-example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a","a","b"))
+test_df <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a","a","b"))
 
-example_dt %>%
+test_df %>%
   select.(x, y, z) %>%
   filter.(x < 4, y > 1) %>%
   arrange.(x, y) %>%
@@ -135,9 +136,9 @@ also be used:
   + A combination of predicates and column names: `by = c(is.character, y)`
 
 ```{r}
-example_dt %>%
+test_df %>%
   summarize.(avg_x = mean(x),
-             count = .N,
+             count = n.(),
              by = z)
 ```
 
@@ -146,19 +147,19 @@ example_dt %>%
 Enhanced selection allows you to mix predicates like `is.numeric` with normal selection.
 
 ```{r}
-example_dt <- data.table(a = c(1,2,3),
-                         b = c(4,5,6),
-                         c = c("a","a","b"),
-                         d = c("a","b","c"))
+test_df <- data.table(a = c(1,2,3),
+                      b = c(4,5,6),
+                      c = c("a","a","b"),
+                      d = c("a","b","c"))
 
-example_dt %>%
+test_df %>%
   select.(is.numeric, d)
 ```
 
 You can also use this format to drop columns:
 
 ```{r}
-example_dt %>%
+test_df %>%
   select.(-is.numeric)
 ```
 
@@ -173,26 +174,26 @@ Enhanced selection allows the user to replace `mutate_if.()`, `mutate_at.()`, an
 Using `_across.()` instead of `_if.()`:
 
 ```{r}
-example_dt <- data.table(a = c(1,1,1),
-                         b = c(1,1,1),
-                         c = c("a","a","b"),
-                         d = c("a","b","c"))
+test_df <- data.table(a = c(1,1,1),
+                      b = c(1,1,1),
+                      c = c("a","a","b"),
+                      d = c("a","b","c"))
 
-example_dt %>%
+test_df %>%
   mutate_across.(is.numeric, as.character)
 ```
 
 Using `_across.()` instead of `_at.()`:
 
 ```{r}
-example_dt %>%
+test_df %>%
   mutate_across.(c(a, b), ~ .x + 1)
 ```
 
 Using `_across.()` instead of `_all.()`:
 
 ```{r}
-example_dt %>%
+test_df %>%
   mutate_across.(everything.(), as.factor)
 ```
 
@@ -207,7 +208,7 @@ Note that quosures are not compatible with `data.table`, so `enexpr()` must be u
 ```{r message = FALSE}
 library(rlang)
 
-example_dt <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
+df <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
 
 add_one <- function(.data, add_col) {
   add_col <- enexpr(add_col)
@@ -216,14 +217,14 @@ add_one <- function(.data, add_col) {
     mutate.(new_col = !!add_col + 1)
 }
 
-example_dt %>%
+df %>%
   add_one(x)
 ```
 
 ##### Custom function with `summarize.()`
 
 ```{r}
-example_df <- data.table(x = 1:10, y = c(rep("a", 6), rep("b", 4)), z = c(rep("a", 6), rep("b", 4)))
+df <- data.table(x = 1:10, y = c(rep("a", 6), rep("b", 4)), z = c(rep("a", 6), rep("b", 4)))
 
 find_mean <- function(.data, grouping_cols, col) {
   grouping_cols <- enexpr(grouping_cols)
@@ -234,7 +235,7 @@ find_mean <- function(.data, grouping_cols, col) {
                by = !!grouping_cols)
 }
 
-example_df %>%
+df %>%
   find_mean(grouping_cols = c(y, z), col = x)
 ```
 
@@ -243,9 +244,9 @@ example_df %>%
 The `dt()` function makes regular `data.table` syntax pipeable, so you can easily mix `tidytable` syntax with `data.table` syntax:
 
 ```{r}
-example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
+df <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
-example_dt %>%
+df %>%
   dt(, list(x, y, z)) %>%
   dt(x < 4 & y > 1) %>%
   dt(order(x, y)) %>%
@@ -506,7 +507,7 @@ unnest_tbl <- as_tibble(unnest_dt)
 
 unnest_marks <- bench::mark(
   tidyverse = unnest_legacy(unnest_dt, list_column),
-  tidytable = unnest_legacy.(unnest_dt, list_column),
+  tidytable = unnest.(unnest_dt, list_column),
   data.table = unnest_dt[, unlist(list_column, recursive = FALSE), by = list(a, b)],
   check = FALSE,
   iterations = iters) %>%
@@ -523,13 +524,13 @@ nest_dt <- tibble::tibble(
   list_column = list(c(LETTERS[1:5]), "F", "G", "H", "I")) %>%
   dplyr::sample_frac(50000, replace = TRUE) %>%
   as_tidytable() %>%
-  unnest_legacy.(list_column)
+  unnest.(list_column)
 
 nest_tbl <- as_tibble(nest_dt)
 
 nest_marks <- bench::mark(
   tidyverse = group_nest(nest_dt, a, b),
-  tidytable = group_nest.(nest_dt, a, b),
+  tidytable = nest_by.(nest_dt, a, b),
   data.table = nest_dt[, list(data = list(.SD)), by = list(a, b)],
   check = FALSE,
   iterations = iters) %>%
