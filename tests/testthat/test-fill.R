@@ -1,4 +1,4 @@
-test_that("missings are filled correctly", {
+test_that("dt_fill() missings are filled correctly", {
   # filled down from last non-missing
   df <- data.table::data.table(x = c(NA, 1, NA, 2, NA, NA))
 
@@ -15,6 +15,23 @@ test_that("missings are filled correctly", {
   expect_equal(out$x, c(1, 1, 2, 2, 2, 2))
 })
 
+test_that("missings are filled correctly", {
+  # filled down from last non-missing
+  df <- data.table::data.table(x = c(NA, 1, NA, 2, NA, NA))
+
+  out <- as_tidytable(df) %>% fill.(x)
+  expect_equal(out$x, c(NA, 1, 1, 2, 2, 2))
+
+  out <- as_tidytable(df) %>% fill.(x, .direction = "up")
+  expect_equal(out$x, c(1, 1, 2, 2, NA, NA))
+
+  out <- as_tidytable(df) %>% fill.(x, .direction = 'downup')
+  expect_equal(out$x, c(1, 1, 1, 2, 2, 2))
+
+  out <- as_tidytable(df) %>% fill.(x, .direction = 'updown')
+  expect_equal(out$x, c(1, 1, 2, 2, 2, 2))
+})
+
 test_that("missings filled down for each atomic vector", {
   df <- data.table::data.table(
     lgl = c(T, NA),
@@ -23,7 +40,7 @@ test_that("missings filled down for each atomic vector", {
     chr = c("a", NA)
   )
 
-  out <- dt_fill(df, lgl, int, dbl, chr)
+  out <- fill.(df, lgl, int, dbl, chr)
   expect_equal(out$lgl, c(TRUE, TRUE))
   expect_equal(out$int, c(1, 1))
   expect_equal(out$dbl, c(1, 1))
@@ -39,7 +56,7 @@ test_that("works with data.frame", {
     stringsAsFactors = FALSE
   )
 
-  out <- dt_fill(df, lgl, int, dbl, chr)
+  out <- fill.(df, lgl, int, dbl, chr)
   expect_equal(out$lgl, c(TRUE, TRUE))
   expect_equal(out$int, c(1, 1))
   expect_equal(out$dbl, c(1, 1))
@@ -54,7 +71,7 @@ test_that("missings filled up for each vector", {
     chr = c(NA, "a")
   )
 
-  out <- dt_fill(df, lgl, int, dbl, chr, .direction = "up")
+  out <- fill.(df, lgl, int, dbl, chr, .direction = "up")
   expect_equal(out$lgl, c(TRUE, TRUE))
   expect_equal(out$int, c(1L, 1L))
   expect_equal(out$dbl, c(1, 1))
@@ -69,7 +86,7 @@ test_that("doesn't modify-by-reference", {
     chr = c(NA, "a")
   )
 
-  dt_fill(df, lgl, int, dbl, chr, .direction = "up")
+  fill.(df, lgl, int, dbl, chr, .direction = "up")
   expect_equal(df$lgl, c(NA, T))
   expect_equal(df$int, c(NA, 1L))
   expect_equal(df$dbl, c(NA, 1))
@@ -88,7 +105,7 @@ test_that("doesn't modify-by-reference", {
 
 test_that("fill respects grouping", {
   df <- data.table::data.table(x = c(1, 1, 2), y = c(1, NA, NA))
-  out <- dt_fill(df, y, by = x)
+  out <- fill.(df, y, by = x)
   expect_equal(out$y, c(1, 1, NA))
 })
 
@@ -102,7 +119,7 @@ test_that("enhanced selection works is.numeric", {
     chr = c("a", NA)
   )
 
-  out <- dt_fill(df, is.numeric)
+  out <- fill.(df, is.numeric)
   expect_equal(out$lgl, c(TRUE, NA))
   expect_equal(out$int, c(1, 1))
   expect_equal(out$dbl, c(1, 1))
@@ -117,7 +134,7 @@ test_that("enhanced selection works", {
     chr = c("a", NA)
   )
 
-  out <- dt_fill(df, is.logical)
+  out <- fill.(df, is.logical)
   expect_equal(out$lgl, c(TRUE, TRUE))
   expect_equal(out$int, c(1, NA))
   expect_equal(out$dbl, c(1, NA))

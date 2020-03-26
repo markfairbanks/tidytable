@@ -17,19 +17,19 @@
 #'   c = c("a","a","b"))
 #'
 #' example_dt %>%
-#'   dt_mutate(double_a = a * 2,
-#'             a_plus_b = a + b)
+#'   mutate.(double_a = a * 2,
+#'           a_plus_b = a + b)
 #'
 #' example_dt %>%
-#'   dt_mutate(double_a = a * 2,
-#'             avg_a = mean(a),
-#'             by = c)
-dt_mutate <- function(.data, ..., by = NULL) {
-  UseMethod("dt_mutate")
+#'   mutate.(double_a = a * 2,
+#'           avg_a = mean(a),
+#'           by = c)
+mutate. <- function(.data, ..., by = NULL) {
+  UseMethod("mutate.")
 }
 
 #' @export
-dt_mutate.tidytable <- function(.data, ..., by = NULL) {
+mutate..tidytable <- function(.data, ..., by = NULL) {
 
   dots <- enexprs(...)
   by <- enexpr(by)
@@ -63,9 +63,14 @@ dt_mutate.tidytable <- function(.data, ..., by = NULL) {
 }
 
 #' @export
-dt_mutate.data.frame <- function(.data, ..., by = NULL) {
+mutate..data.frame <- function(.data, ..., by = NULL) {
   .data <- as_tidytable(.data)
   by <- enexpr(by)
 
-  dt_mutate(.data, ..., by = !!by)
+  mutate.(.data, ..., by = !!by)
 }
+
+
+#' @export
+#' @rdname mutate.
+dt_mutate <- mutate.

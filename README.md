@@ -11,7 +11,7 @@ status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN RStudio mirror
-downloads](https://cranlogs.r-pkg.org/badges/grand-total/tidytable?color=grey)](https://r-pkg.org/pkg/tidytable)
+downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey)](https://r-pkg.org/pkg/tidytable)
 <!-- badges: end -->
 
 The goal of `tidytable` is to be a tidy interface to `data.table`.
@@ -55,78 +55,77 @@ here](https://markfairbanks.github.io/tidytable/#enhanced-selection)
 
   - `dt()`: Pipeable `data.table` syntax. [See
     here](https://markfairbanks.github.io/tidytable/#dt-helper)
-  - `dt_get_dummies()`
+  - `get_dummies.()`
   - `%notin%`
 
 ### dplyr
 
 ##### Core verbs
 
-  - `dt_arrange()`
-  - `dt_filter()`
-  - `dt_mutate()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
-      - The `_across()` helper is new and can replace both `_if()` and
-        `_at()` [See
+  - `arrange.()`
+  - `filter.()`
+  - `mutate.()` & `mutate_across.()` - **ES**
+      - The `_across.()` helper is new and can replace the
+        `_if.()`/`_at.()`/`_all.()` helpers [See
         here](https://markfairbanks.github.io/tidytable/#new-variant-dt_mutate_across)
-  - `dt_select()` - **ES**
-  - `dt_summarize()`: Group by specifications called inside. [See
+  - `select.()` - **ES**
+  - `summarize.()`: Group by specifications called inside. [See
     here](https://markfairbanks.github.io/tidytable/#using-group-by)
 
 ##### Other dplyr functions
 
-  - `dt_bind_cols()` & `dt_bind_rows()`
-  - `dt_case()`: Similar to `dplyr::case_when()`. See `?dt_case` for
-    syntax
-  - `dt_count()` - **ES**
-  - `dt_distinct()` - **ES**
-  - `dt_ifelse()`
+  - `bind_cols.()` & `bind_rows.()`
+  - `case.()`: Similar to `dplyr::case_when()`. See `?case.` for syntax
+  - `count.()` - **ES**
+  - `distinct.()` - **ES**
+  - `ifelse.()`
   - Joins:
-      - `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`,
-        `dt_full_join()`, & `dt_anti_join()`
-  - `dt_pull()`
-  - `dt_relocate()`
-  - `dt_rename()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
+      - `left_join.()`, `inner_join.()`, `right_join.()`,
+        `full_join.()`, & `anti_join.()`
+  - `pull.()`
+  - `relocate.()`
+  - `rename.()` & `rename_with.()` - **ES**
+  - `row_number.()`
   - Select helpers:
-      - `dt_any_of()`, `dt_contains()`, `dt_everything()`
-        `dt_starts_with()`, `dt_ends_with()`
-  - `dt_slice()`: `_head()`/`_tail()`/`_max()`/`_min()`
-      - The `slice_*()` helpers are like `dt_top_n()`, but are a bit
+      - `any_of.()`, `contains.()`, `everything.()` `starts_with.()`,
+        `ends_with.()`
+  - `slice.()`: `_head.()`/`_tail.()`/`_max.()`/`_min.()`
+      - The `slice_*()` helpers are like `top_n.()`, but are a bit
         easier to use
-  - `dt_top_n()`
-  - `dt_transmute()`
+  - `top_n.()`
+  - `transmute.()`
 
 ### tidyr
 
-  - `dt_drop_na()` - **ES**
-  - `dt_fill()`: Works on character/factor/logical types
+  - `drop_na.()` - **ES**
+  - `fill.()`: Works on character/factor/logical types
     (`data.table::nafill()` does not) - **ES**
-  - `dt_group_split()` - **ES**
-  - Nesting: `dt_group_nest()` - **ES** & `dt_unnest_legacy()`
-  - `dt_pivot_longer()` - **ES** & `dt_pivot_wider()` - **ES**
-  - `dt_replace_na()`
-  - `dt_separate()`
+  - `group_split.()` - **ES**
+  - Nesting: `nest_by.()` - **ES** & `unnest.()`
+  - `pivot_longer.()` - **ES** & `pivot_wider.()` - **ES**
+  - `replace_na.()`
+  - `separate.()`
 
 ### purrr
 
-  - `dt_map()`, `dt_map2()`, `dt_map_*()` variants, & `dt_map2_*()`
-    variants
+  - `map.()`, `map2.()`, `map_*.()` variants, & `map2_*.()` variants
 
 ## General syntax
 
-The code chunk below shows the `tidytable` syntax:
+`tidytable` uses `verb.()` syntax to replicate `tidyverse` functions:
 
 ``` r
 library(data.table)
 library(tidytable)
 
-example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a","a","b"))
+test_df <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a","a","b"))
 
-example_dt %>%
-  dt_select(x, y, z) %>%
-  dt_filter(x < 4, y > 1) %>%
-  dt_arrange(x, y) %>%
-  dt_mutate(double_x = x * 2,
-            double_y = y * 2)
+test_df %>%
+  select.(x, y, z) %>%
+  filter.(x < 4, y > 1) %>%
+  arrange.(x, y) %>%
+  mutate.(double_x = x * 2,
+          double_y = y * 2)
 #>        x     y     z double_x double_y
 #>    <dbl> <dbl> <chr>    <dbl>    <dbl>
 #> 1:     1     4     a        2        8
@@ -137,7 +136,7 @@ example_dt %>%
 ### Using “group by”
 
 Group by calls are done from inside any function that has group by
-functionality (such as `dt_summarize()` & `dt_mutate()`)
+functionality (such as `summarize.()` & `mutate.()`)
 
   - A single column can be passed with `by = z`
   - Multiple columns can be passed with `by = c(y, z)` or `by = list(y,
@@ -153,10 +152,10 @@ functionality (such as `dt_summarize()` & `dt_mutate()`)
 <!-- end list -->
 
 ``` r
-example_dt %>%
-  dt_summarize(avg_x = mean(x),
-               count = .N,
-               by = z)
+test_df %>%
+  summarize.(avg_x = mean(x),
+             count = n.(),
+             by = z)
 #>        z avg_x count
 #>    <chr> <dbl> <int>
 #> 1:     a   1.5     2
@@ -169,13 +168,13 @@ Enhanced selection allows you to mix predicates like `is.numeric` with
 normal selection.
 
 ``` r
-example_dt <- data.table(a = c(1,2,3),
-                         b = c(4,5,6),
-                         c = c("a","a","b"),
-                         d = c("a","b","c"))
+test_df <- data.table(a = c(1,2,3),
+                      b = c(4,5,6),
+                      c = c("a","a","b"),
+                      d = c("a","b","c"))
 
-example_dt %>%
-  dt_select(is.numeric, d)
+test_df %>%
+  select.(is.numeric, d)
 #>        a     b     d
 #>    <dbl> <dbl> <chr>
 #> 1:     1     4     a
@@ -186,8 +185,8 @@ example_dt %>%
 You can also use this format to drop columns:
 
 ``` r
-example_dt %>%
-  dt_select(-is.numeric)
+test_df %>%
+  select.(-is.numeric)
 #>        c     d
 #>    <chr> <chr>
 #> 1:     a     a
@@ -201,21 +200,22 @@ Currently supported predicates:
 Functions that support enhanced selection will be noted in their
 documentation.
 
-#### New helper: `dt_mutate_across()`
+#### New helper: `mutate_across.()`
 
-Enhanced selection allows the user to replace `dt_mutate_if()` &
-`dt_mutate_at()` with one helper - `dt_mutate_across()`.
+Enhanced selection allows the user to replace `mutate_if.()`,
+`mutate_at.()`, and `mutate_all.()` with one helper -
+`mutate_across.()`.
 
-Using `_across()` instead of `_if()`:
+Using `_across.()` instead of `_if.()`:
 
 ``` r
-example_dt <- data.table(a = c(1,1,1),
-                         b = c(1,1,1),
-                         c = c("a","a","b"),
-                         d = c("a","b","c"))
+test_df <- data.table(a = c(1,1,1),
+                      b = c(1,1,1),
+                      c = c("a","a","b"),
+                      d = c("a","b","c"))
 
-example_dt %>%
-  dt_mutate_across(is.numeric, as.character)
+test_df %>%
+  mutate_across.(is.numeric, as.character)
 #>        a     b     c     d
 #>    <chr> <chr> <chr> <chr>
 #> 1:     1     1     a     a
@@ -223,11 +223,11 @@ example_dt %>%
 #> 3:     1     1     b     c
 ```
 
-Using `_across()` instead of `_at()`:
+Using `_across.()` instead of `_at.()`:
 
 ``` r
-example_dt %>%
-  dt_mutate_across(c(a, b), ~ .x + 1)
+test_df %>%
+  mutate_across.(c(a, b), ~ .x + 1)
 #>        a     b     c     d
 #>    <dbl> <dbl> <chr> <chr>
 #> 1:     2     2     a     a
@@ -235,23 +235,16 @@ example_dt %>%
 #> 3:     2     2     b     c
 ```
 
-These two approaches can be combined in one call:
+Using `_across.()` instead of `_all.()`:
 
 ``` r
-example_dt <- data.table(dbl_col1 = c(1.0,1.0,1.0),
-                         dbl_col2 = c(1.0,1.0,1.0),
-                         int_col1 = c(1L,1L,1L),
-                         int_col2 = c(1L,1L,1L),
-                         char_col1 = c("a","a","a"),
-                         char_col2 = c("b","b","b"))
-
-example_dt %>%
-  dt_mutate_across(c(is.double, int_col1), ~ .x + 1)
-#>    dbl_col1 dbl_col2 int_col1 int_col2 char_col1 char_col2
-#>       <dbl>    <dbl>    <dbl>    <int>     <chr>     <chr>
-#> 1:        2        2        2        1         a         b
-#> 2:        2        2        2        1         a         b
-#> 3:        2        2        2        1         a         b
+test_df %>%
+  mutate_across.(everything.(), as.factor)
+#>        a     b     c     d
+#>    <fct> <fct> <fct> <fct>
+#> 1:     1     1     a     a
+#> 2:     1     1     a     b
+#> 3:     1     1     b     c
 ```
 
 ## `rlang` compatibility
@@ -262,21 +255,21 @@ example_dt %>%
 Note that quosures are not compatible with `data.table`, so `enexpr()`
 must be used instead of `enquo()`.
 
-##### Custom function with `dt_mutate()`
+##### Custom function with `mutate.()`
 
 ``` r
 library(rlang)
 
-example_dt <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
+df <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
 
 add_one <- function(.data, add_col) {
   add_col <- enexpr(add_col)
   
   .data %>%
-    dt_mutate(new_col = !!add_col + 1)
+    mutate.(new_col = !!add_col + 1)
 }
 
-example_dt %>%
+df %>%
   add_one(x)
 #>        x     y     z new_col
 #>    <dbl> <dbl> <chr>   <dbl>
@@ -285,21 +278,21 @@ example_dt %>%
 #> 3:     1     1     b       2
 ```
 
-##### Custom function with `dt_summarize()`
+##### Custom function with `summarize.()`
 
 ``` r
-example_df <- data.table(x = 1:10, y = c(rep("a", 6), rep("b", 4)), z = c(rep("a", 6), rep("b", 4)))
+df <- data.table(x = 1:10, y = c(rep("a", 6), rep("b", 4)), z = c(rep("a", 6), rep("b", 4)))
 
 find_mean <- function(.data, grouping_cols, col) {
   grouping_cols <- enexpr(grouping_cols)
   col <- enexpr(col)
   
   .data %>%
-    dt_summarize(avg = mean(!!col),
-                 by = !!grouping_cols)
+    summarize.(avg = mean(!!col),
+               by = !!grouping_cols)
 }
 
-example_df %>%
+df %>%
   find_mean(grouping_cols = c(y, z), col = x)
 #>        y     z   avg
 #>    <chr> <chr> <dbl>
@@ -310,13 +303,12 @@ example_df %>%
 ## `dt()` helper
 
 The `dt()` function makes regular `data.table` syntax pipeable, so you
-can easily mix `tidytable` syntax with `data.table`
-syntax:
+can easily mix `tidytable` syntax with `data.table` syntax:
 
 ``` r
-example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
+df <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
-example_dt %>%
+df %>%
   dt(, list(x, y, z)) %>%
   dt(x < 4 & y > 1) %>%
   dt(order(x, y)) %>%
@@ -341,11 +333,10 @@ A few notes:
     dataset from `case_when()`.
   - `setDTthreads(4)` was used for `data.table` & `tidytable` timings.
   - Modify-by-reference was used in `data.table` when being compared to
-    `dt_mutate()` & `dplyr::mutate()`
-  - `dt_fill()` & `tidyr::fill()` both work with
-    character/factor/logical columns, whereas `data.table::nafill()`
-    does not. Testing only included numeric columns due to this
-    constraint.
+    `mutate.()` & `dplyr::mutate()`
+  - `fill.()` & `tidyr::fill()` both work with character/factor/logical
+    columns, whereas `data.table::nafill()` does not. Testing only
+    included numeric columns due to this constraint.
   - Currently `data.table` doesn’t have its own `case_when()`
     translation, so a multiple nested `fifelse()` was used.
   - All tests can be found in the source code of the README.
@@ -362,17 +353,17 @@ all_marks
 #> # A tibble: 13 x 6
 #>    function_tested tidyverse tidytable data.table pandas tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>  <chr>                 
-#>  1 arrange         398.9ms   36.8ms    45.2ms     297ms  9.2%                  
-#>  2 case_when       481ms     142ms     137ms      307ms  29.5%                 
-#>  3 distinct        85.1ms    20.5ms    22.3ms     287ms  24.1%                 
-#>  4 fill            123.4ms   41.1ms    35.1ms     146ms  33.3%                 
-#>  5 filter          328ms     262ms     236ms      656ms  79.9%                 
-#>  6 inner_join      70.5ms    59.2ms    56.6ms     <NA>   84.0%                 
-#>  7 left_join       69.7ms    44.1ms    42.5ms     <NA>   63.3%                 
-#>  8 mutate          71.8ms    55.5ms    93.3ms     85.2ms 77.3%                 
-#>  9 nest            26.73ms   5.62ms    5.92ms     <NA>   21.0%                 
-#> 10 pivot_longer    39.3ms    10.3ms    11ms       <NA>   26.2%                 
-#> 11 pivot_wider     240.9ms   73.7ms    65.3ms     <NA>   30.6%                 
-#> 12 summarize       515ms     201ms     185ms      780ms  39.0%                 
-#> 13 unnest          163.07ms  7.84ms    8.12ms     <NA>   4.8%
+#>  1 arrange         377ms     30ms      34.4ms     297ms  8.0%                  
+#>  2 case_when       487ms     165ms     146ms      307ms  33.9%                 
+#>  3 distinct        87.1ms    20.7ms    21.5ms     287ms  23.8%                 
+#>  4 fill            110.7ms   36ms      25.7ms     146ms  32.5%                 
+#>  5 filter          309ms     204ms     210ms      656ms  66.0%                 
+#>  6 inner_join      66.7ms    53.9ms    57.3ms     <NA>   80.8%                 
+#>  7 left_join       67.8ms    45.1ms    39ms       <NA>   66.5%                 
+#>  8 mutate          67.4ms    47.6ms    73.5ms     85.2ms 70.6%                 
+#>  9 nest            25.75ms   5.7ms     5.41ms     <NA>   22.1%                 
+#> 10 pivot_longer    41.52ms   10.46ms   9.99ms     <NA>   25.2%                 
+#> 11 pivot_wider     85.7ms    74.1ms    66.4ms     <NA>   86.5%                 
+#> 12 summarize       481.9ms   95.8ms    171.8ms    780ms  19.9%                 
+#> 13 unnest          151.79ms  7.07ms    6.18ms     <NA>   4.7%
 ```

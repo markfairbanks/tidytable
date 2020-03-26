@@ -17,16 +17,16 @@
 #'   z = c("a", "a", "b"))
 #'
 #' example_dt %>%
-#'   dt_distinct()
+#'   distinct.()
 #'
 #' example_dt %>%
-#'   dt_distinct(z)
-dt_distinct <- function(.data, ...) {
-  UseMethod("dt_distinct")
+#'   distinct.(z)
+distinct. <- function(.data, ...) {
+  UseMethod("distinct.")
 }
 
 #' @export
-dt_distinct.tidytable <- function(.data, ...) {
+distinct..tidytable <- function(.data, ...) {
 
   dots <- enexprs(...)
 
@@ -38,8 +38,12 @@ dt_distinct.tidytable <- function(.data, ...) {
 }
 
 #' @export
-dt_distinct.data.frame <- function(.data, ...) {
+distinct..data.frame <- function(.data, ...) {
   .data <- as_tidytable(.data)
 
-  dt_distinct(.data, ...)
+  distinct.(.data, ...)
 }
+
+#' @export
+#' @rdname distinct.
+dt_distinct <- distinct.

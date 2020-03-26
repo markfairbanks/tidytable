@@ -21,20 +21,20 @@
 #'
 #' # "sep" can be automatically detected (slower)
 #' test_df %>%
-#'   dt_separate(x, into = c("c1", "c2"))
+#'   separate.(x, into = c("c1", "c2"))
 #'
 #' # Faster if "sep" is provided
 #' test_df %>%
-#'   dt_separate(x, into = c("c1", "c2"), sep = ".")
-dt_separate <- function(.data, col, into,
+#'   separate.(x, into = c("c1", "c2"), sep = ".")
+separate. <- function(.data, col, into,
                         sep = "[^[:alnum:]]+",
                         remove = TRUE,
                         ...) {
-  UseMethod("dt_separate")
+  UseMethod("separate.")
 }
 
 #' @export
-dt_separate.data.frame <- function(.data, col, into,
+separate..data.frame <- function(.data, col, into,
                                    sep = "[^[:alnum:]]+",
                                    remove = TRUE,
                                    ...) {
@@ -45,11 +45,11 @@ dt_separate.data.frame <- function(.data, col, into,
   .data <- as_tidytable(.data)
   col <- enexpr(col)
 
-  dt_separate(.data, col = !!col, into = into, sep = sep, remove = remove, ...)
+  separate.(.data, col = !!col, into = into, sep = sep, remove = remove, ...)
 }
 
 #' @export
-dt_separate.tidytable <- function(.data, col, into,
+separate..tidytable <- function(.data, col, into,
                                    sep = "[^[:alnum:]]+",
                                    remove = TRUE,
                                    ...) {
@@ -77,3 +77,7 @@ dt_separate.tidytable <- function(.data, col, into,
 
   .data[]
 }
+
+#' @export
+#' @rdname separate.
+dt_separate <- separate.

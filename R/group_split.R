@@ -17,13 +17,13 @@
 #'   d = c("a","a","a","b","b"))
 #'
 #' test_df %>%
-#'   dt_group_split(c, d)
-dt_group_split <- function(.data, ...) {
-  UseMethod("dt_group_split")
+#'   group_split.(c, d)
+group_split. <- function(.data, ...) {
+  UseMethod("group_split.")
 }
 
 #' @export
-dt_group_split.tidytable <- function(.data, ...) {
+group_split..tidytable <- function(.data, ...) {
 
   dots <- enexprs(...)
 
@@ -37,8 +37,14 @@ dt_group_split.tidytable <- function(.data, ...) {
 }
 
 #' @export
-dt_group_split.data.frame <- function(.data, ...) {
+group_split..data.frame <- function(.data, ...) {
   .data <- as_tidytable(.data)
 
-  dt_group_split(.data, ...)
+  group_split.(.data, ...)
 }
+
+#' @export
+#' @rdname group_split.
+dt_group_split <- group_split.
+
+

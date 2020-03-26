@@ -18,25 +18,25 @@
 #'   z = c("a","a","b"))
 #'
 #' example_dt %>%
-#'   dt_select(x, y)
+#'   select.(x, y)
 #'
 #' example_dt %>%
-#'   dt_select(x:z)
+#'   select.(x:z)
 #'
 #' example_dt %>%
-#'   dt_select(-y, -z)
+#'   select.(-y, -z)
 #'
 #' example_dt %>%
-#'   dt_select(dt_starts_with("x"), z)
+#'   select.(starts_with.("x"), z)
 #'
 #' example_dt %>%
-#'   dt_select(is.character, x)
-dt_select <- function(.data, ...) {
-  UseMethod("dt_select")
+#'   select.(is.character, x)
+select. <- function(.data, ...) {
+  UseMethod("select.")
 }
 
 #' @export
-dt_select.tidytable <- function(.data, ...) {
+select..tidytable <- function(.data, ...) {
 
   select_cols <- as.character(dots_selector(.data, ...))
 
@@ -47,10 +47,12 @@ dt_select.tidytable <- function(.data, ...) {
 }
 
 #' @export
-dt_select.data.frame <- function(.data, ...) {
+select..data.frame <- function(.data, ...) {
   .data <- as_tidytable(.data)
 
-  dt_select(.data, ...)
+  select.(.data, ...)
 }
 
-
+#' @export
+#' @rdname select.
+dt_select <- select.

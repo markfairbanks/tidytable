@@ -1,7 +1,7 @@
 test_that("mutate_if() works for numeric columns", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
-    dt_mutate_if(is.numeric, function(.x) .x + 1)
+    mutate_if.(is.numeric, ~ .x + 1)
 
   expect_equal(df$x, c(2,2,2))
   expect_equal(df$y, c(3,3,3))
@@ -10,7 +10,7 @@ test_that("mutate_if() works for numeric columns", {
 test_that("mutate_at(): .vars works with select helpers in c()", {
   df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
-    dt_mutate_at(c(dt_starts_with("x")), function(.x) .x + 1)
+    mutate_at.(c(dt_starts_with("x")), ~ .x + 1)
 
   expect_equal(df$x_start, c(2,2,2))
   expect_equal(df$end_x, c(2,2,2))
@@ -19,7 +19,7 @@ test_that("mutate_at(): .vars works with select helpers in c()", {
 test_that("mutate_at() works for range selection", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
-    dt_mutate_at(c(x:y), function(.x) .x + 1)
+    mutate_at.(c(x:y), ~ .x + 1)
 
   expect_equal(df$x, c(2,2,2))
   expect_equal(df$y, c(3,3,3))
@@ -28,7 +28,7 @@ test_that("mutate_at() works for range selection", {
 test_that("mutate_at(): .vars works with is.numeric", {
   df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
-    dt_mutate_at(is.numeric, function(.x) .x + 1)
+    mutate_at.(is.numeric, function(.x) .x + 1)
 
   expect_equal(df$x_start, c(2,2,2))
   expect_equal(df$end_x, c(3,3,3))
@@ -37,7 +37,7 @@ test_that("mutate_at(): .vars works with is.numeric", {
 test_that("mutate_at(): .vars works with is.character", {
   df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
-    dt_mutate_at(is.character, function(.x) paste0(.x, "_append"))
+    mutate_at.(is.character, function(.x) paste0(.x, "_append"))
 
   expect_equal(df$x_start, c(1,1,1))
   expect_equal(df$z, c("a_append", "a_append", "b_append"))
@@ -46,7 +46,7 @@ test_that("mutate_at(): .vars works with is.character", {
 test_that("mutate_at() works with newly named columns", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
-    dt_mutate_at(c(x:y), list(new = function(.x) .x + 1))
+    mutate_at.(c(x:y), list(new = function(.x) .x + 1))
 
   expect_named(df, c("x","y","z","x_new","y_new"))
   expect_equal(df$x_new, c(2,2,2))
@@ -56,7 +56,7 @@ test_that("mutate_at() works with newly named columns", {
 test_that("mutate_all() works for all variables", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2))
   df <- df %>%
-    dt_mutate_all(function(.x) .x + 1)
+    mutate_all.(function(.x) .x + 1)
 
   expect_equal(df$x, c(2,2,2))
   expect_equal(df$y, c(3,3,3))
@@ -65,7 +65,7 @@ test_that("mutate_all() works for all variables", {
 test_that("mutate_all() works for all variables - bare function", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
-    dt_mutate_all(as.character)
+    mutate_all.(as.character)
 
   expect_equal(df$x, c("1","1","1"))
   expect_equal(df$y, c("2","2","2"))
@@ -74,13 +74,13 @@ test_that("mutate_all() works for all variables - bare function", {
 test_that("mutate_all() works with data.frame", {
   df <- data.frame(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
-    dt_mutate_all(as.character)
+    mutate_all.(as.character)
 
   expect_equal(df$x, c("1","1","1"))
   expect_equal(df$y, c("2","2","2"))
 })
 
-test_that("mutate_across(): .cols works with is.numeric", {
+test_that("dt_mutate_across(): .cols works with is.numeric", {
   df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
     dt_mutate_across(is.numeric, function(.x) .x + 1)
@@ -89,10 +89,19 @@ test_that("mutate_across(): .cols works with is.numeric", {
   expect_equal(df$end_x, c(3,3,3))
 })
 
-test_that("mutate_across(): modify-by-reference doesn't occur", {
+test_that("mutate_across.(): .cols works with is.numeric", {
+  df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
+  df <- df %>%
+    mutate_across.(is.numeric, function(.x) .x + 1)
+
+  expect_equal(df$x_start, c(2,2,2))
+  expect_equal(df$end_x, c(3,3,3))
+})
+
+test_that("mutate_across.(): modify-by-reference doesn't occur", {
   df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   df %>%
-    dt_mutate_across(is.numeric, function(.x) .x + 1)
+    mutate_across.(is.numeric, ~ .x + 1)
 
   expect_equal(df$x_start, c(1,1,1))
   expect_equal(df$end_x, c(2,2,2))
@@ -101,7 +110,7 @@ test_that("mutate_across(): modify-by-reference doesn't occur", {
 test_that("mutate_across(): .cols works with is.numeric with data.frame", {
   df <- data.frame(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
-    dt_mutate_across(is.numeric, function(.x) .x + 1)
+    mutate_across.(is.numeric, function(.x) .x + 1)
 
   expect_equal(df$x_start, c(2,2,2))
   expect_equal(df$end_x, c(3,3,3))
@@ -110,7 +119,7 @@ test_that("mutate_across(): .cols works with is.numeric with data.frame", {
 test_that("mutate_across(): .cols works with is.character", {
   df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
-    dt_mutate_across(is.character, function(.x) paste0(.x, "_append"))
+    mutate_across.(is.character, function(.x) paste0(.x, "_append"))
 
   expect_equal(df$x_start, c(1,1,1))
   expect_equal(df$z, c("a_append", "a_append", "b_append"))
@@ -119,7 +128,7 @@ test_that("mutate_across(): .cols works with is.character", {
 test_that("mutate_across() works with newly named columns", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
-    dt_mutate_across(c(x:y), list(new = function(.x) .x + 1))
+    mutate_across.(c(x:y), list(new = function(.x) .x + 1))
 
   expect_named(df, c("x","y","z","x_new","y_new"))
   expect_equal(df$x_new, c(2,2,2))
@@ -127,32 +136,32 @@ test_that("mutate_across() works with newly named columns", {
 })
 
 # twiddle testing ----------------------------
-test_that("mutate_if() works with twiddle", {
+test_that("mutate_if.() works with twiddle", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   anon_df <- df %>%
-    dt_mutate_if(is.numeric, function(.x) .x + 1)
+    mutate_if.(is.numeric, function(.x) .x + 1)
 
   twiddle_df <- df %>%
-    dt_mutate_if(is.numeric, ~ .x + 1)
+    mutate_if.(is.numeric, ~ .x + 1)
 
   expect_equal(anon_df, twiddle_df)
 })
 
-test_that("mutate_at() works with twiddle", {
+test_that("mutate_at.() works with twiddle", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   anon_df <- df %>%
-    dt_mutate_at(c(x:y), function(.x) .x + 1)
+    mutate_at.(c(x:y), function(.x) .x + 1)
 
   twiddle_df <- df %>%
-    dt_mutate_at(c(x:y), ~ .x + 1)
+    mutate_at.(c(x:y), ~ .x + 1)
 
   expect_equal(anon_df, twiddle_df)
 })
 
-test_that("mutate_across() works with twiddle", {
+test_that("mutate_across.() works with twiddle", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   anon_df <- df %>%
-    dt_mutate_across(c(x:y), function(.x) .x + 1)
+    mutate_across.(c(x:y), function(.x) .x + 1)
 
   twiddle_df <- df %>%
     dt_mutate_across(c(x:y), ~ .x + 1)
@@ -167,21 +176,21 @@ test_that("mutate_across() works with by", {
     z = c("a","a","b"))
 
   results_df <- test_df %>%
-    dt_mutate_across(c(x, y), ~ mean(.x), by = z)
+    mutate_across.(c(x, y), ~ mean(.x), by = z)
 
   expect_named(results_df, c("x", "y", "z"))
   expect_equal(results_df$x, c(1.5, 1.5, 3))
   expect_equal(results_df$y, c(4.5, 4.5, 6))
 })
 
-test_that("mutate_across() works with by enhanced selection", {
+test_that("mutate_across.() works with by enhanced selection", {
   test_df <- data.table::data.table(
     x = c(1,2,3),
     y = c(4,5,6),
     z = c("a","a","b"))
 
   results_df <- test_df %>%
-    dt_mutate_across(c(x, y), ~ mean(.x), by = is.character)
+    mutate_across.(c(x, y), ~ mean(.x), by = is.character)
 
   expect_named(results_df, c("x", "y", "z"))
   expect_equal(results_df$x, c(1.5, 1.5, 3))

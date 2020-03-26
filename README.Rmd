@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
 [![](https://img.shields.io/badge/dev%20-0.3.2.9-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/tidytable?color=grey)](https://r-pkg.org/pkg/tidytable)
+[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey)](https://r-pkg.org/pkg/tidytable)
 <!-- badges: end -->
 
 The goal of `tidytable` is to be a tidy interface to `data.table`.
@@ -56,75 +56,76 @@ devtools::install_github("markfairbanks/tidytable")
 ### tidytable helpers
 
 * `dt()`: Pipeable `data.table` syntax. [See here](https://markfairbanks.github.io/tidytable/#dt-helper)
-* `dt_get_dummies()`
+* `get_dummies.()`
 * `%notin%`
 
 ### dplyr
 
 ##### Core verbs
 
-* `dt_arrange()`
-* `dt_filter()`
-* `dt_mutate()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
-  + The `_across()` helper is new and can replace both `_if()` and `_at()`
+* `arrange.()`
+* `filter.()`
+* `mutate.()` & `mutate_across.()` - **ES**
+  + The `_across.()` helper is new and can replace the `_if.()`/`_at.()`/`_all.()` helpers
   [See here](https://markfairbanks.github.io/tidytable/#new-variant-dt_mutate_across)
-* `dt_select()` - **ES**
-* `dt_summarize()`: Group by specifications called inside.
+* `select.()` - **ES**
+* `summarize.()`: Group by specifications called inside.
 [See here](https://markfairbanks.github.io/tidytable/#using-group-by)
 
 ##### Other dplyr functions
 
-* `dt_bind_cols()` & `dt_bind_rows()`
-* `dt_case()`: Similar to `dplyr::case_when()`. See `?dt_case` for syntax
-* `dt_count()` - **ES**
-* `dt_distinct()` - **ES**
-* `dt_ifelse()`
+* `bind_cols.()` & `bind_rows.()`
+* `case.()`: Similar to `dplyr::case_when()`. See `?case.` for syntax
+* `count.()` - **ES**
+* `distinct.()` - **ES**
+* `ifelse.()`
 * Joins:
-  + `dt_left_join()`, `dt_inner_join()`, `dt_right_join()`, `dt_full_join()`, & `dt_anti_join()`
-* `dt_pull()`
-* `dt_relocate()`
-* `dt_rename()`: `_if()`/`_at()`/`_all()`/`_across()` - **ES**
+  + `left_join.()`, `inner_join.()`, `right_join.()`, `full_join.()`, & `anti_join.()`
+* `pull.()`
+* `relocate.()`
+* `rename.()` & `rename_with.()` - **ES**
+* `row_number.()`
 * Select helpers:
-  + `dt_any_of()`, `dt_contains()`, `dt_everything()` `dt_starts_with()`, `dt_ends_with()`
-* `dt_slice()`: `_head()`/`_tail()`/`_max()`/`_min()`
-  + The `slice_*()` helpers are like `dt_top_n()`, but are a bit easier to use
-* `dt_top_n()`
-* `dt_transmute()`
+  + `any_of.()`, `contains.()`, `everything.()` `starts_with.()`, `ends_with.()`
+* `slice.()`: `_head.()`/`_tail.()`/`_max.()`/`_min.()`
+  + The `slice_*()` helpers are like `top_n.()`, but are a bit easier to use
+* `top_n.()`
+* `transmute.()`
 
 ### tidyr
 
-* `dt_drop_na()` - **ES**
-* `dt_fill()`: Works on character/factor/logical types (`data.table::nafill()` does not) - **ES**
-* `dt_group_split()` - **ES**
-* Nesting: `dt_group_nest()` - **ES** & `dt_unnest_legacy()`
-* `dt_pivot_longer()` - **ES** & `dt_pivot_wider()` - **ES**
-* `dt_replace_na()`
-* `dt_separate()`
+* `drop_na.()` - **ES**
+* `fill.()`: Works on character/factor/logical types (`data.table::nafill()` does not) - **ES**
+* `group_split.()` - **ES**
+* Nesting: `nest_by.()` - **ES** & `unnest.()`
+* `pivot_longer.()` - **ES** & `pivot_wider.()` - **ES**
+* `replace_na.()`
+* `separate.()`
 
 ### purrr
-* `dt_map()`, `dt_map2()`, `dt_map_*()` variants, & `dt_map2_*()` variants
+* `map.()`, `map2.()`, `map_*.()` variants, & `map2_*.()` variants
 
 ## General syntax
 
-The code chunk below shows the `tidytable` syntax:
+`tidytable` uses `verb.()` syntax to replicate `tidyverse` functions:
 
 ```{r message = FALSE}
 library(data.table)
 library(tidytable)
 
-example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a","a","b"))
+test_df <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a","a","b"))
 
-example_dt %>%
-  dt_select(x, y, z) %>%
-  dt_filter(x < 4, y > 1) %>%
-  dt_arrange(x, y) %>%
-  dt_mutate(double_x = x * 2,
-            double_y = y * 2)
+test_df %>%
+  select.(x, y, z) %>%
+  filter.(x < 4, y > 1) %>%
+  arrange.(x, y) %>%
+  mutate.(double_x = x * 2,
+          double_y = y * 2)
 ```
 
 ### Using "group by"
 
-Group by calls are done from inside any function that has group by functionality (such as `dt_summarize()` & `dt_mutate()`) 
+Group by calls are done from inside any function that has group by functionality (such as `summarize.()` & `mutate.()`) 
 
 * A single column can be passed with `by = z`
 * Multiple columns can be passed with `by = c(y, z)` or `by = list(y, z)`
@@ -135,10 +136,10 @@ also be used:
   + A combination of predicates and column names: `by = c(is.character, y)`
 
 ```{r}
-example_dt %>%
-  dt_summarize(avg_x = mean(x),
-               count = .N,
-               by = z)
+test_df %>%
+  summarize.(avg_x = mean(x),
+             count = n.(),
+             by = z)
 ```
 
 ## Enhanced selection
@@ -146,61 +147,54 @@ example_dt %>%
 Enhanced selection allows you to mix predicates like `is.numeric` with normal selection.
 
 ```{r}
-example_dt <- data.table(a = c(1,2,3),
-                         b = c(4,5,6),
-                         c = c("a","a","b"),
-                         d = c("a","b","c"))
+test_df <- data.table(a = c(1,2,3),
+                      b = c(4,5,6),
+                      c = c("a","a","b"),
+                      d = c("a","b","c"))
 
-example_dt %>%
-  dt_select(is.numeric, d)
+test_df %>%
+  select.(is.numeric, d)
 ```
 
 You can also use this format to drop columns:
 
 ```{r}
-example_dt %>%
-  dt_select(-is.numeric)
+test_df %>%
+  select.(-is.numeric)
 ```
 
 Currently supported predicates: `is.numeric`/`is.integer`/`is.double`/`is.character`/`is.factor`/`is.list`
 
 Functions that support enhanced selection will be noted in their documentation.
 
-#### New helper: `dt_mutate_across()`
+#### New helper: `mutate_across.()`
 
-Enhanced selection allows the user to replace `dt_mutate_if()` & `dt_mutate_at()` with one helper - `dt_mutate_across()`.
+Enhanced selection allows the user to replace `mutate_if.()`, `mutate_at.()`, and `mutate_all.()` with one helper - `mutate_across.()`.
 
-Using `_across()` instead of `_if()`:
+Using `_across.()` instead of `_if.()`:
 
 ```{r}
-example_dt <- data.table(a = c(1,1,1),
-                         b = c(1,1,1),
-                         c = c("a","a","b"),
-                         d = c("a","b","c"))
+test_df <- data.table(a = c(1,1,1),
+                      b = c(1,1,1),
+                      c = c("a","a","b"),
+                      d = c("a","b","c"))
 
-example_dt %>%
-  dt_mutate_across(is.numeric, as.character)
+test_df %>%
+  mutate_across.(is.numeric, as.character)
 ```
 
-Using `_across()` instead of `_at()`:
+Using `_across.()` instead of `_at.()`:
 
 ```{r}
-example_dt %>%
-  dt_mutate_across(c(a, b), ~ .x + 1)
+test_df %>%
+  mutate_across.(c(a, b), ~ .x + 1)
 ```
 
-These two approaches can be combined in one call:
+Using `_across.()` instead of `_all.()`:
 
 ```{r}
-example_dt <- data.table(dbl_col1 = c(1.0,1.0,1.0),
-                         dbl_col2 = c(1.0,1.0,1.0),
-                         int_col1 = c(1L,1L,1L),
-                         int_col2 = c(1L,1L,1L),
-                         char_col1 = c("a","a","a"),
-                         char_col2 = c("b","b","b"))
-
-example_dt %>%
-  dt_mutate_across(c(is.double, int_col1), ~ .x + 1)
+test_df %>%
+  mutate_across.(everything.(), as.factor)
 ```
 
 ## `rlang` compatibility
@@ -209,39 +203,39 @@ example_dt %>%
 
 Note that quosures are not compatible with `data.table`, so `enexpr()` must be used instead of `enquo()`.
 
-##### Custom function with `dt_mutate()`
+##### Custom function with `mutate.()`
 
 ```{r message = FALSE}
 library(rlang)
 
-example_dt <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
+df <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
 
 add_one <- function(.data, add_col) {
   add_col <- enexpr(add_col)
   
   .data %>%
-    dt_mutate(new_col = !!add_col + 1)
+    mutate.(new_col = !!add_col + 1)
 }
 
-example_dt %>%
+df %>%
   add_one(x)
 ```
 
-##### Custom function with `dt_summarize()`
+##### Custom function with `summarize.()`
 
 ```{r}
-example_df <- data.table(x = 1:10, y = c(rep("a", 6), rep("b", 4)), z = c(rep("a", 6), rep("b", 4)))
+df <- data.table(x = 1:10, y = c(rep("a", 6), rep("b", 4)), z = c(rep("a", 6), rep("b", 4)))
 
 find_mean <- function(.data, grouping_cols, col) {
   grouping_cols <- enexpr(grouping_cols)
   col <- enexpr(col)
   
   .data %>%
-    dt_summarize(avg = mean(!!col),
-                 by = !!grouping_cols)
+    summarize.(avg = mean(!!col),
+               by = !!grouping_cols)
 }
 
-example_df %>%
+df %>%
   find_mean(grouping_cols = c(y, z), col = x)
 ```
 
@@ -250,9 +244,9 @@ example_df %>%
 The `dt()` function makes regular `data.table` syntax pipeable, so you can easily mix `tidytable` syntax with `data.table` syntax:
 
 ```{r}
-example_dt <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
+df <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
 
-example_dt %>%
+df %>%
   dt(, list(x, y, z)) %>%
   dt(x < 4 & y > 1) %>%
   dt(order(x, y)) %>%
@@ -269,8 +263,8 @@ A few notes:
 
 * Comparing times from separate functions won't be very useful. For example - the `summarize()` tests were performed on a different dataset from `case_when()`.
 * `setDTthreads(4)` was used for `data.table` & `tidytable` timings.
-* Modify-by-reference was used in `data.table` when being compared to `dt_mutate()` & `dplyr::mutate()`
-* `dt_fill()` & `tidyr::fill()` both work with character/factor/logical columns, whereas `data.table::nafill()` does not. Testing only included numeric columns due to this constraint.
+* Modify-by-reference was used in `data.table` when being compared to `mutate.()` & `dplyr::mutate()`
+* `fill.()` & `tidyr::fill()` both work with character/factor/logical columns, whereas `data.table::nafill()` does not. Testing only included numeric columns due to this constraint.
 * Currently `data.table` doesn't have its own `case_when()` translation, so a multiple nested `fifelse()` was used.
 * All tests can be found in the source code of the README.
 * `pandas` comparisons are in the process of being added - more will be added soon.
@@ -297,7 +291,7 @@ inv_gc(); inv_gc();
 
 filter_marks <- bench::mark(
   tidyverse = filter(test_tbl, a <= 7, c == "a"),
-  tidytable = dt_filter(test_dt, a <= 7, c == "a"),
+  tidytable = filter.(test_dt, a <= 7, c == "a"),
   data.table = test_dt[a <= 7 & c == "a"],
   check = FALSE,
   iterations = iters) %>%
@@ -310,7 +304,7 @@ inv_gc(); inv_gc();
 ```{r summarize, echo=FALSE}
 summarize_marks <- bench::mark(
   tidyverse = summarize(group_by(test_tbl, c), avg_a = mean(a)),
-  tidytable = dt_summarize(test_dt, avg_a = mean(a), by = c),
+  tidytable = summarize.(test_dt, avg_a = mean(a), by = c),
   data.table = test_dt[, list(avg_a = mean(a)), by = c],
   check = FALSE,
   iterations = iters) %>%
@@ -325,7 +319,7 @@ mut_dt <- copy(test_dt)
 
 mutate_marks <- bench::mark(
   tidyverse = mutate(test_tbl, double_a = a * 2, a_plus_b = a + b),
-  tidytable = dt_mutate(test_dt, double_a = a * 2, a_plus_b = a + b),
+  tidytable = mutate.(test_dt, double_a = a * 2, a_plus_b = a + b),
   data.table = mut_dt[, ':='(double_a = a * 2, a_b = a + b)][],
   check = FALSE,
   iterations = iters) %>%
@@ -348,7 +342,7 @@ test_tbl <- as_tibble(test_dt)
 
 arrange_marks <- bench::mark(
   tidyverse = arrange(test_tbl, c, a),
-  tidytable = dt_arrange(test_dt, c, a),
+  tidytable = arrange.(test_dt, c, a),
   data.table = test_dt[order(c, a)],
   check = FALSE,
   iterations = iters) %>%
@@ -359,7 +353,7 @@ arrange_marks <- bench::mark(
 ```{r distinct, echo=FALSE}
 distinct_marks <- bench::mark(
   tidyverse = distinct(test_tbl),
-  tidytable = dt_distinct(test_dt),
+  tidytable = distinct.(test_dt),
   data.table = unique(test_dt),
   check = FALSE,
   iterations = iters) %>%
@@ -382,8 +376,8 @@ fill_dt <- tidytable(
 fill_tbl <- as_tibble(fill_dt)
 
 fill_marks <- bench::mark(
-  tidyverse = fill(dplyr::group_by(fill_tbl, id), int1, int2),
-  tidytable = dt_fill(fill_dt, int1, int2, by = id),
+  tidyverse = fill(group_by(fill_tbl, id), int1, int2),
+  tidytable = fill.(fill_dt, int1, int2, by = id),
   # needs shallow copy or subsequent runs won't have NAs to fill
   data.table = tidytable:::shallow(fill_dt)[, ':='(int1 = nafill(int1, type = "locf"),
                                                    int2 = nafill(int2, type = "locf")),
@@ -398,7 +392,7 @@ fill_marks <- bench::mark(
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
 case_dt <- tidytable(x = rnorm(3000000)) %>%
-  dt_mutate(median_x = median(x))
+  mutate.(median_x = median(x))
 
 case_tbl <- as_tibble(case_dt)
 
@@ -410,11 +404,11 @@ case_marks <- bench::mark(
                                       x >= median_x ~ "high",
                                       is.na(x) ~ "unknown",
                                       TRUE ~ "other")),
-  tidytable = dt_mutate(case_dt,
-                       test = dt_case(x < median_x, "low",
-                                      x >= median_x, "high",
-                                      is.na(x), "unknown",
-                                      default = "other")),
+  tidytable = mutate.(case_dt,
+                      test = case.(x < median_x, "low",
+                                   x >= median_x, "high",
+                                   is.na(x), "unknown",
+                                   default = "other")),
   data.table = case2_dt[,':='(test = fifelse(x < median_x, "low",
                                             fifelse(x >= median_x, "high",
                                                     fifelse(is.na(x), "unknown", "other"))))][],
@@ -428,15 +422,15 @@ case_marks <- bench::mark(
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
 wider_tbl <- expand_grid(case = as.character(seq(1, 2000)),
-                        year = seq(1900, 2000),
-                        name = c("x", "y", "z")) %>%
+                         year = seq(1900, 2000),
+                         name = c("x", "y", "z")) %>%
   mutate(value = rnorm(nrow(.)))
 
 wider_dt <- as_tidytable(wider_tbl)
 
 wider_marks <- bench::mark(
   tidyverse = pivot_wider(wider_tbl, names_from = name, values_from = value),
-  tidytable = dt_pivot_wider(wider_dt, names_from = name, values_from = value),
+  tidytable = pivot_wider.(wider_dt, names_from = name, values_from = value),
   data.table = data.table::dcast(wider_dt, case + year ~ name),
   check = FALSE,
   iterations = iters) %>%
@@ -445,7 +439,7 @@ wider_marks <- bench::mark(
 ```
 
 ```{r pivot_longer, echo=FALSE}
-longer_dt <- dt_pivot_wider(wider_dt, names_from = name, values_from = value)
+longer_dt <- pivot_wider.(wider_dt, names_from = name, values_from = value)
 
 longer_tbl <- as_tibble(longer_dt)
 
@@ -453,7 +447,7 @@ remove(wider_dt, wider_tbl); inv_gc(); inv_gc();
 
 longer_marks <- bench::mark(
   tidyverse = pivot_longer(longer_tbl, cols = c(x, y, z)),
-  tidytable = dt_pivot_longer(longer_dt, cols = c(x, y, z)),
+  tidytable = pivot_longer.(longer_dt, cols = c(x, y, z)),
   data.table = data.table::melt(longer_dt, measure.vars = c("x","y","z"),
                                 variable.name = "name", variable.factor = FALSE),
   check = FALSE,
@@ -479,7 +473,7 @@ right_tbl <- as_tibble(right_dt)
 
 left_join_marks <- bench::mark(
   tidyverse = left_join(left_tbl, right_tbl, by = "c"),
-  tidytable = dt_left_join(left_dt, right_dt),
+  tidytable = left_join.(left_dt, right_dt),
   data.table = right_dt[left_dt, on = "c", allow.cartesian = TRUE],
   check = FALSE,
   iterations = iters) %>%
@@ -490,7 +484,7 @@ left_join_marks <- bench::mark(
 ```{r inner_join, echo=FALSE}
 inner_join_marks <- bench::mark(
   tidyverse = inner_join(left_tbl, right_tbl, by = "c"),
-  tidytable = dt_inner_join(left_dt, right_dt),
+  tidytable = inner_join.(left_dt, right_dt),
   data.table = left_dt[right_dt, on = "c", allow.cartesian = TRUE, nomatch = 0],
   check = FALSE,
   iterations = iters) %>%
@@ -513,7 +507,7 @@ unnest_tbl <- as_tibble(unnest_dt)
 
 unnest_marks <- bench::mark(
   tidyverse = unnest_legacy(unnest_dt, list_column),
-  tidytable = dt_unnest_legacy(unnest_dt, list_column),
+  tidytable = unnest.(unnest_dt, list_column),
   data.table = unnest_dt[, unlist(list_column, recursive = FALSE), by = list(a, b)],
   check = FALSE,
   iterations = iters) %>%
@@ -530,13 +524,13 @@ nest_dt <- tibble::tibble(
   list_column = list(c(LETTERS[1:5]), "F", "G", "H", "I")) %>%
   dplyr::sample_frac(50000, replace = TRUE) %>%
   as_tidytable() %>%
-  dt_unnest_legacy(list_column)
+  unnest.(list_column)
 
 nest_tbl <- as_tibble(nest_dt)
 
 nest_marks <- bench::mark(
   tidyverse = group_nest(nest_dt, a, b),
-  tidytable = dt_group_nest(nest_dt, a, b),
+  tidytable = nest_by.(nest_dt, a, b),
   data.table = nest_dt[, list(data = list(.SD)), by = list(a, b)],
   check = FALSE,
   iterations = iters) %>%

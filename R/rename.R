@@ -6,21 +6,20 @@
 #' @param .data A data.frame or data.table
 #' @param ... Rename expression like dplyr::rename()
 #'
-#' @return A data.table
 #' @export
 #'
 #' @examples
 #' dt <- data.table::data.table(x = c(1,2,3), y = c(4,5,6))
 #'
 #' dt %>%
-#'   dt_rename(new_x = x,
-#'             new_y = y)
-dt_rename <- function(.data, ...) {
-  UseMethod("dt_rename")
+#'   rename.(new_x = x,
+#'           new_y = y)
+rename. <- function(.data, ...) {
+  UseMethod("rename.")
 }
 
 #' @export
-dt_rename.tidytable <- function(.data, ...) {
+rename..tidytable <- function(.data, ...) {
 
   dots <- enexprs(...)
   .data <- shallow(.data)
@@ -34,8 +33,12 @@ dt_rename.tidytable <- function(.data, ...) {
 }
 
 #' @export
-dt_rename.data.frame <- function(.data, ...) {
+rename..data.frame <- function(.data, ...) {
   .data <- as_tidytable(.data)
 
-  dt_rename(.data, ...)
+  rename.(.data, ...)
 }
+
+#' @export
+#' @rdname rename.
+dt_rename <- rename.

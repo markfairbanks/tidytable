@@ -14,13 +14,13 @@
 #'   b = c(4,5,6))
 #'
 #' example_dt %>%
-#'   dt_filter(a >= 2, b >= 4)
-dt_filter <- function(.data, ...) {
-  UseMethod("dt_filter")
+#'   filter.(a >= 2, b >= 4)
+filter. <- function(.data, ...) {
+  UseMethod("filter.")
 }
 
 #' @export
-dt_filter.tidytable <- function(.data, ..., by = NULL) {
+filter..tidytable <- function(.data, ..., by = NULL) {
 
   dots <- enexprs(...)
 
@@ -43,8 +43,12 @@ dt_filter.tidytable <- function(.data, ..., by = NULL) {
 }
 
 #' @export
-dt_filter.data.frame <- function(.data, ...) {
+filter..data.frame <- function(.data, ...) {
   .data <- as_tidytable(.data)
 
-  dt_filter(.data, ...)
+  filter.(.data, ...)
 }
+
+#' @export
+#' @rdname filter.
+dt_filter <- filter.

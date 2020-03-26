@@ -25,7 +25,7 @@
 #' test_df %>%
 #'   dt_mutate(x = dt_case(c == "a","a",
 #'                         default = d))
-dt_case <- function(..., default = NA) {
+case. <- function(..., default = NA) {
   dots <- enexprs(...)
 
   index <- '+'(1, 1:length(dots)) %% 2
@@ -64,3 +64,7 @@ dt_case <- function(..., default = NA) {
 
   vals
 }
+
+#' @export
+#' @rdname case.
+dt_case <- case.

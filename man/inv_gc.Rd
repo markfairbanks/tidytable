@@ -19,9 +19,9 @@ inv_gc()
 
 df <- data.table::data.table(col1 = 1, col2 = 2)
 
-# Or can be run in the middle of a pipe chain (object is unaltered)
+# Or can be used in the middle of a pipe chain (object is unaltered)
 df \%>\%
-  dt_filter(col1 < 2, col2 < 4) \%>\%
+  filter.(col1 < 2, col2 < 4) \%>\%
   inv_gc() \%>\%
-  dt_select(col1)
+  select.(col1)
 }

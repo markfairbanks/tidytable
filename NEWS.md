@@ -1,18 +1,25 @@
-# tidytable 0.3.3 (in development)
+# tidytable 0.4.0 (in development)
 
+* Function rewrite:
+  + All functions are now written as `verb.()` to reduce typing
+  + The `dt_` functions are now soft deprecated, and will be completely removed in a later release
 * Functionality improvements:
   + Enhanced selection now works in "by"" calls
-  + `dt_filter()` now works with "by"
-  + `dt_pivot_wider()` can now be used with an aggregation function
-  + `dt_pull()` defaults to last column in a data.table
+  + `filter.()` now works with "by"
+  + `pivot_wider.()` can now be used with an aggregation function
+  + `pull.()` defaults to last column in a data.table
 * New functions:
-  + `dt_ifelse()`
-  + `dt_transmute()`
-  + Select helper `dt_any_of()`
+  + `ifelse.()`
+  + `n.()`
+  + `nest_by()` replaces `dt_group_nest()`
+  + `row_number.()`
+  + `transmute.()`
+  + `unnest.()` replaces `dt_unnest_legacy()`
+  + Select helper `any_of.()`
 * Functions with notable speed improvements:
-  + `dt_fill()`
-  + `dt_pivot_longer()`
-  + `dt_unnest_legacy()`
+  + `fill.()`
+  + `pivot_longer.()`
+  + `unnest_legacy.()`
 
 # tidytable 0.3.2
 

@@ -1,9 +1,9 @@
 #' Replace missing values
 #'
 #' @description
-#' A shortcut to replace NAs inside of a `dt_mutate()` call.
+#' A shortcut to replace NAs inside of a `mutate.()` call.
 #'
-#' Note: This function *does not work* outside of `dt_mutate()` like `tidyr::replace_na()` does.
+#' Note: This function *does not work* outside of `mutate.()` like `tidyr::replace_na()` does.
 #'
 #' @param .col A vector
 #' @param replace A single value used for replacement
@@ -17,8 +17,8 @@
 #'   y = c(NA, 1, 2))
 #'
 #' example_dt %>%
-#'   dt_mutate(x = dt_replace_na(x, 5))
-dt_replace_na <- function(.col, replace) {
+#'   mutate.(x = replace_na.(x, 5))
+replace_na. <- function(.col, replace) {
 
   if (class(replace) %in% c("integer", "double", "numeric")) {
     nafill(.col, "const", fill = replace)
@@ -26,3 +26,7 @@ dt_replace_na <- function(.col, replace) {
     fifelse(is.na(.col), replace, .col)
   }
 }
+
+#' @export
+#' @rdname replace_na.
+dt_replace_na <- replace_na.

@@ -14,16 +14,16 @@
 #'   b = 11:20,
 #'   c = c(rep("a", 6), rep("b", 4)),
 #'   d = c(rep("a", 4), rep("b", 6))) %>%
-#'   dt_group_nest(c, d)
+#'   nest_by.(c, d)
 #'
 #' nested_df %>%
-#'   dt_unnest_legacy(data)
-dt_unnest_legacy <- function(.data, col = NULL) {
-  UseMethod("dt_unnest_legacy")
+#'   unnest.(data)
+unnest. <- function(.data, col = NULL) {
+  UseMethod("unnest.")
 }
 
 #' @export
-dt_unnest_legacy.data.frame <- function(.data, col = NULL) {
+unnest..data.frame <- function(.data, col = NULL) {
   if (!is_tidytable(.data)) .data <- as_tidytable(.data)
 
   col <- enexpr(col)
@@ -48,3 +48,8 @@ dt_unnest_legacy.data.frame <- function(.data, col = NULL) {
   }
   .data
 }
+
+#' @export
+#' @rdname unnest.
+dt_unnest_legacy <- unnest.
+

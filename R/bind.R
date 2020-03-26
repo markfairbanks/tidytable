@@ -14,20 +14,20 @@
 #' df2 <- data.table::data.table(x = c(1,2,3), y = c(3,4,5))
 #'
 #' df1 %>%
-#'   dt_bind_rows(df2)
+#'   bind_rows.(df2)
 #'
-#' dt_bind_rows(list(df1, df2))
+#' bind_rows.(list(df1, df2))
 #'
 #' df1 %>%
-#'   dt_bind_cols(df2)
+#'   bind_cols.(df2)
 #'
-#' dt_bind_cols(list(df1, df2))
-dt_bind_rows <- function(..., .id = NULL) {
-  UseMethod("dt_bind_rows")
+#' bind_cols.(list(df1, df2))
+bind_rows. <- function(..., .id = NULL) {
+  UseMethod("bind_rows.")
 }
 
 #' @export
-dt_bind_rows.default <- function(..., .id = NULL) {
+bind_rows..default <- function(..., .id = NULL) {
 
   dots <- list(...)
   dots <- squash(dots)
@@ -41,13 +41,17 @@ dt_bind_rows.default <- function(..., .id = NULL) {
 }
 
 #' @export
-#' @rdname dt_bind_rows
-dt_bind_cols <- function(...) {
-  UseMethod("dt_bind_cols")
+#' @rdname bind_rows.
+dt_bind_rows <- bind_rows.
+
+#' @export
+#' @rdname bind_rows.
+bind_cols. <- function(...) {
+  UseMethod("bind_cols.")
 }
 
 #' @export
-dt_bind_cols.default <- function(...) {
+bind_cols..default <- function(...) {
 
   dots <- list(...)
   dots <- squash(dots)
@@ -58,6 +62,10 @@ dt_bind_cols.default <- function(...) {
   as_tidytable(name_fix(setDT(unlist(dots, recursive = FALSE), check.names = FALSE)[]))
 
 }
+
+#' @export
+#' @rdname bind_rows.
+dt_bind_cols <- bind_cols.
 
 name_fix <- function(.data) {
 

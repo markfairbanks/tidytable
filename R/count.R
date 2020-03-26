@@ -18,19 +18,19 @@
 #'   z = c("a", "a", "b"))
 #'
 #' example_df %>%
-#'   dt_count()
+#'   count.()
 #'
 #' example_df %>%
-#'   dt_count(z)
+#'   count.(z)
 #'
 #' example_df %>%
-#'   dt_count(is.character)
-dt_count <- function(.data, ...) {
-  UseMethod("dt_count")
+#'   count.(is.character)
+count. <- function(.data, ...) {
+  UseMethod("count.")
 }
 
 #' @export
-dt_count.tidytable <- function(.data, ...) {
+count..tidytable <- function(.data, ...) {
 
   by <- dots_selector_by(.data, ...)
 
@@ -40,8 +40,13 @@ dt_count.tidytable <- function(.data, ...) {
 }
 
 #' @export
-dt_count.data.frame <- function(.data, ...) {
+count..data.frame <- function(.data, ...) {
   .data <- as_tidytable(.data)
 
-  dt_count(.data, ...)
+  count.(.data, ...)
 }
+
+#' @export
+#' @rdname count.
+dt_count <- count.
+

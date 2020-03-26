@@ -1,20 +1,12 @@
-#' Rename a selection of variables
+#' Deprecated rename helpers
 #'
 #' @description
-#' These scoped variants of `rename()` operate on a selection of variables
-#'
-#' There are two variants:
-#'
-#' * `dt_rename_all()`
-#' * `dt_rename_across()`: Replaces both `dt_rename_if()` & `dt_rename_at()`
-#'
-#' Supports enhanced selection
-#'
+#' These helpers have been deprecated. Please use `rename_with.()`
 #'
 #' @param .data A data.frame or data.table
-#' @param .cols vector `c()` of bare column names for `dt_rename_across()` to use
-#' @param .vars vector `c()` of bare column names for `dt_rename_at()` to use
-#' @param .predicate Predicate to pass to `dt_rename_if()`
+#' @param .cols vector `c()` of bare column names for `rename_across.()` to use
+#' @param .vars vector `c()` of bare column names for `rename_at.()` to use
+#' @param .predicate Predicate to pass to `rename_if.()`
 #' @param .fun Function to pass
 #' @param ... Other arguments for the passed function
 #'
@@ -28,42 +20,43 @@
 #'   double_x = 2,
 #'   double_y = 4)
 #'
-#' as_dt(example_dt) %>% dt_rename_all(~ sub("x", "stuff", .x))
+#' example_dt %>%
+#'   rename_with.(~ sub("x", "stuff", .x))
 #'
-#' as_dt(example_dt) %>%
-#'   dt_rename_across(c(x, double_x), ~ sub("x", "stuff", .x))
-dt_rename_all <- function(.data, .fun, ...) {
-  UseMethod("dt_rename_all")
+#' example_dt %>%
+#'   rename_with.(~ sub("x", "stuff", .x), .cols = c(x, double_x))
+rename_all. <- function(.data, .fun, ...) {
+  UseMethod("rename_all.")
 }
 
 #' @export
-dt_rename_all.default <- function(.data, .fun, ...) {
+rename_all..default <- function(.data, .fun, ...) {
 
-  dt_rename_across(.data, dt_everything(), .fun, ...)
+  rename_across.(.data, everything.(), .fun, ...)
 }
 
 #' @export
-#' @rdname dt_rename_all
-dt_rename_at <- function(.data, .vars, .fun, ...) {
-  UseMethod("dt_rename_at")
+#' @rdname rename_all.
+rename_at. <- function(.data, .vars, .fun, ...) {
+  UseMethod("rename_at.")
 }
 
 #' @export
-dt_rename_at.default <- function(.data, .vars, .fun, ...) {
+rename_at..default <- function(.data, .vars, .fun, ...) {
 
   .vars <- enexpr(.vars)
 
-  dt_rename_across(.data, !!.vars, .fun, ...)
+  rename_across.(.data, !!.vars, .fun, ...)
 }
 
 #' @export
-#' @rdname dt_rename_all
-dt_rename_across <- function(.data, .cols, .fun, ...) {
-  UseMethod("dt_rename_across")
+#' @rdname rename_all.
+rename_across. <- function(.data, .cols, .fun, ...) {
+  UseMethod("rename_across.")
 }
 
 #' @export
-dt_rename_across.tidytable <- function(.data, .cols, .fun, ...) {
+rename_across..tidytable <- function(.data, .cols, .fun, ...) {
 
   .cols <- enexpr(.cols)
   .cols <- vec_selector(.data, !!.cols) %>%
@@ -85,24 +78,39 @@ dt_rename_across.tidytable <- function(.data, .cols, .fun, ...) {
 }
 
 #' @export
-dt_rename_across.data.frame <- function(.data, .cols, .fun, ...) {
+rename_across..data.frame <- function(.data, .cols, .fun, ...) {
   .data <- as_tidytable(.data)
   .cols <- enexpr(.cols)
 
-  dt_rename_across(.data, .cols = !!.cols, .fun = .fun, ...)
+  rename_across.(.data, .cols = !!.cols, .fun = .fun, ...)
 }
 
 #' @export
-#' @rdname dt_rename_all
-dt_rename_if <- function(.data, .predicate, .fun, ...) {
-  UseMethod("dt_rename_if")
+#' @rdname rename_all.
+rename_if. <- function(.data, .predicate, .fun, ...) {
+  UseMethod("rename_if.")
 }
 
 #' @export
-dt_rename_if.default <- function(.data, .predicate, .fun, ...) {
+rename_if..default <- function(.data, .predicate, .fun, ...) {
 
   .predicate <- enexpr(.predicate)
 
-  dt_rename_across(.data, !!.predicate, .fun, ...)
-
+  rename_across.(.data, !!.predicate, .fun, ...)
 }
+
+#' @export
+#' @rdname rename_all.
+dt_rename_across <- rename_across.
+
+#' @export
+#' @rdname rename_all.
+dt_rename_all <- rename_all.
+
+#' @export
+#' @rdname rename_all.
+dt_rename_if <- rename_if.
+
+#' @export
+#' @rdname rename_all.
+dt_rename_at <- rename_at.

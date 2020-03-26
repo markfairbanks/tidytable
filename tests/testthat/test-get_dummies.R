@@ -8,8 +8,24 @@ test_df2 <- data.table(
   "col2" = as.factor(c(letters[3:1], NA)),
   "var1"= rnorm(7,0,1))
 
-test_that("cols = NULL uses all cols - no NAs", {
+test_that("dt_ cols = NULL uses all cols - no NAs", {
   dummy_df <- dt_get_dummies(test_df)
+
+  expect_named(dummy_df, c("col1", "col2", "var1",
+                           "col1_a", "col1_b", "col1_c",
+                           "col2_c", "col2_b", "col2_a"))
+
+  expect_equal(dummy_df$col1_a, c(1, 0, 0, 1, 0, 0))
+  expect_equal(dummy_df$col1_b, c(0, 1, 0, 0, 1, 0))
+  expect_equal(dummy_df$col1_c, c(0, 0, 1, 0, 0, 1))
+
+  expect_equal(dummy_df$col2_a, c(0, 0, 1, 0, 0, 1))
+  expect_equal(dummy_df$col2_b, c(0, 1, 0, 0, 1, 0))
+  expect_equal(dummy_df$col2_c, c(1, 0, 0, 1, 0, 0))
+})
+
+test_that("cols = NULL uses all cols - no NAs", {
+  dummy_df <- get_dummies.(test_df)
 
   expect_named(dummy_df, c("col1", "col2", "var1",
                            "col1_a", "col1_b", "col1_c",
@@ -27,7 +43,7 @@ test_that("cols = NULL uses all cols - no NAs", {
 test_that("works with data.frame input", {
   df <- as.data.frame(test_df)
 
-  dummy_df <- dt_get_dummies(df)
+  dummy_df <- get_dummies.(df)
 
   expect_named(dummy_df, c("col1", "col2", "var1",
                            "col1_a", "col1_b", "col1_c",
@@ -44,7 +60,7 @@ test_that("works with data.frame input", {
 })
 
 test_that("cols = NULL uses all cols - with NAs", {
-  dummy_df <- dt_get_dummies(test_df2)
+  dummy_df <- get_dummies.(test_df2)
 
   expect_named(dummy_df, c("col1", "col2", "var1",
                            "col1_a", "col1_b", "col1_c", "col1_NA",
@@ -62,7 +78,7 @@ test_that("cols = NULL uses all cols - with NAs", {
 })
 
 test_that("no prefix works", {
-  dummy_df <- dt_get_dummies(test_df, cols = col1, prefix = FALSE)
+  dummy_df <- get_dummies.(test_df, cols = col1, prefix = FALSE)
 
   expect_named(dummy_df, c("col1", "col2", "var1",
                            "a", "b", "c"))
@@ -73,7 +89,7 @@ test_that("no prefix works", {
 })
 
 test_that("prefix_sep works", {
-  dummy_df <- dt_get_dummies(test_df, prefix_sep = ".")
+  dummy_df <- get_dummies.(test_df, prefix_sep = ".")
 
   expect_named(dummy_df, c("col1", "col2", "var1",
                            "col1.a", "col1.b", "col1.c",
@@ -90,7 +106,7 @@ test_that("prefix_sep works", {
 })
 
 test_that("drop_first works", {
-  dummy_df <- dt_get_dummies(test_df, drop_first = TRUE)
+  dummy_df <- get_dummies.(test_df, drop_first = TRUE)
 
   expect_named(dummy_df, c("col1", "col2", "var1",
                            "col1_b", "col1_c",
@@ -104,7 +120,7 @@ test_that("drop_first works", {
 })
 
 test_that("dummify_na = FALSE works", {
-  dummy_df <- dt_get_dummies(test_df2, dummify_na = FALSE)
+  dummy_df <- get_dummies.(test_df2, dummify_na = FALSE)
 
   expect_named(dummy_df, c("col1", "col2", "var1",
                            "col1_a", "col1_b", "col1_c",
