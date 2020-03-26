@@ -11,8 +11,10 @@
 * New functions:
   + `ifelse.()`
   + `n.()`
+  + `nest_by()` replaces `dt_group_nest()`
   + `row_number.()`
   + `transmute.()`
+  + `unnest.()` replaces `dt_unnest_legacy()`
   + Select helper `any_of.()`
 * Functions with notable speed improvements:
   + `fill.()`

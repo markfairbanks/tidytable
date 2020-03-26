@@ -18,19 +18,19 @@
 #'   d = c(rep("a", 4), rep("b", 6)))
 #'
 #' test_df %>%
-#'   group_nest.()
+#'   nest_by.()
 #'
 #' test_df %>%
-#'   group_nest.(c, d)
+#'   nest_by.(c, d)
 #'
 #' test_df %>%
-#'   group_nest.(is.character)
-group_nest. <- function(.data, ..., .key = "data") {
-  UseMethod("group_nest.")
+#'   nest_by.(is.character)
+nest_by. <- function(.data, ..., .key = "data") {
+  UseMethod("nest_by.")
 }
 
 #' @export
-group_nest..tidytable <- function(.data, ..., .key = "data") {
+nest_by..tidytable <- function(.data, ..., .key = "data") {
 
   dots <- enexprs(...)
 
@@ -52,12 +52,12 @@ group_nest..tidytable <- function(.data, ..., .key = "data") {
 }
 
 #' @export
-group_nest..data.frame <- function(.data, ..., .key = "data") {
+nest_by..data.frame <- function(.data, ..., .key = "data") {
   .data <- as_tidytable(.data)
 
-  group_nest.(.data, ..., .key = .key)
+  nest_by.(.data, ..., .key = .key)
 }
 
 #' @export
-#' @rdname group_nest.
-dt_group_nest <- group_nest.
+#' @rdname nest_by.
+dt_group_nest <- nest_by.
