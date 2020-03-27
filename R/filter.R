@@ -15,7 +15,7 @@
 #'
 #' example_dt %>%
 #'   filter.(a >= 2, b >= 4)
-filter. <- function(.data, ...) {
+filter. <- function(.data, ..., by = NULL) {
   UseMethod("filter.")
 }
 
@@ -43,7 +43,7 @@ filter..tidytable <- function(.data, ..., by = NULL) {
 }
 
 #' @export
-filter..data.frame <- function(.data, ...) {
+filter..data.frame <- function(.data, ..., by = NULL) {
   .data <- as_tidytable(.data)
 
   filter.(.data, ...)

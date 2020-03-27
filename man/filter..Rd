@@ -5,9 +5,9 @@
 \alias{dt_filter}
 \title{Filter rows on one or more conditions}
 \usage{
-filter.(.data, ...)
+filter.(.data, ..., by = NULL)
 
-dt_filter(.data, ...)
+dt_filter(.data, ..., by = NULL)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
