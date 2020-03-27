@@ -94,7 +94,7 @@ get_data_vars <- function(.data) {
   data_names <- names(.data)
   data_index <- seq_along(data_names)
   data_vars <- setNames(as.list(data_index), data_names)
-  data_class <- dt_map_chr(.data, class)
+  data_class <- map_chr.(.data, class)
 
   integer_cols <- list(is.integer = data_index[data_class == "integer"])
   double_cols <- list(is.double = data_index[data_class == "numeric"])
