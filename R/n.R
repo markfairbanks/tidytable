@@ -22,3 +22,7 @@
 n. <- function() {
   eval_tidy(expr(.N), env = caller_env())
 }
+
+#' @export
+#' @rdname n.
+dt_n <- n.
