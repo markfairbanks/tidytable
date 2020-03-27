@@ -35,9 +35,13 @@ filter..tidytable <- function(.data, ..., by = NULL) {
   } else {
     by <- vec_selector_by(.data, !!by)
 
+    col_order <- names(.data)
+
     .data <- eval_expr(
-      .data[, .SD[reduce(list(!!!dots), .f = '&')], by = !!by]
+      .data[, .SD[reduce(list(!!!dots), '&')], by = !!by]
     )
+
+    setcolorder(.data, col_order)
   }
   .data
 }
@@ -45,8 +49,9 @@ filter..tidytable <- function(.data, ..., by = NULL) {
 #' @export
 filter..data.frame <- function(.data, ..., by = NULL) {
   .data <- as_tidytable(.data)
+  by <- enexpr(by)
 
-  filter.(.data, ...)
+  filter.(.data, ..., by = !!by)
 }
 
 #' @export
