@@ -5,6 +5,7 @@
 #'
 #' @param .data A data.frame or data.table
 #' @param ... Conditions to filter by
+#' @param by Groups to use if filtering by summary functions
 #'
 #' @export
 #'

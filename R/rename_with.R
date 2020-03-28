@@ -27,7 +27,7 @@ rename_with. <- function(.data, .fn, .cols = everything.(), ...) {
 }
 
 #' @export
-rename_with..tidytable <- function(.data, .cols, .fn, ...) {
+rename_with..tidytable <- function(.data, .fn, .cols = everything.(), ...) {
 
   .cols <- enexpr(.cols)
   .cols <- as.character(vec_selector(.data, !!.cols))

@@ -13,6 +13,8 @@ dt_filter(.data, ..., by = NULL)
 \item{.data}{A data.frame or data.table}
 
 \item{...}{Conditions to filter by}
+
+\item{by}{Groups to use if filtering by summary functions}
 }
 \description{
 Filters a dataset to choose rows where conditions are true.
