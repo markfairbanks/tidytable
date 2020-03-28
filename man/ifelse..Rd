@@ -24,7 +24,7 @@ converts NAs to their proper type
 x <- c(1:4, 3:2, 1:4)
 ifelse.(x > 2L, x, x - 1L)
 
-# Can also be used inside of dt_mutate()
+# Can also be used inside of mutate.()
 test_df <- data.table::data.table(x = x)
 
 test_df \%>\%

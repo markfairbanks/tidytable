@@ -1,8 +1,8 @@
-# tidytable 0.4.0 (in development)
+# tidytable 0.4.0
 
 * Function rewrite:
   + All functions are now written as `verb.()`
-  + All functions with `dt_verb()` syntax will be slowly deprecated in future releases
+  + `dt_verb()` functions still work, but may be slowly deprecated in future releases
 * Functionality improvements:
   + Enhanced selection now works in "by"" calls
   + `filter.()` now works with "by"
@@ -11,7 +11,7 @@
 * New functions:
   + `ifelse.()`
   + `n.()`
-  + `nest_by()` replaces `dt_group_nest()`
+  + `nest_by.()` replaces `dt_group_nest()`
   + `row_number.()`
   + `transmute.()`
   + `unnest.()` replaces `dt_unnest_legacy()`
@@ -19,7 +19,7 @@
 * Functions with notable speed improvements:
   + `fill.()`
   + `pivot_longer.()`
-  + `unnest_legacy.()`
+  + `unnest.()`
 
 # tidytable 0.3.2
 
