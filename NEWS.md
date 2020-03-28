@@ -1,8 +1,8 @@
 # tidytable 0.4.0 (in development)
 
 * Function rewrite:
-  + All functions are now written as `verb.()` to reduce typing
-  + The `dt_` functions are now soft deprecated, and will be completely removed in a later release
+  + All functions are now written as `verb.()`
+  + All functions with `dt_verb()` syntax will be slowly deprecated in future releases
 * Functionality improvements:
   + Enhanced selection now works in "by"" calls
   + `filter.()` now works with "by"

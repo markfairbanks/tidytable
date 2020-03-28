@@ -26,6 +26,7 @@ rename_with. <- function(.data, .fn, .cols = everything.(), ...) {
   UseMethod("rename_with.")
 }
 
+#' @export
 rename_with..tidytable <- function(.data, .cols, .fn, ...) {
 
   .cols <- enexpr(.cols)
@@ -53,3 +54,7 @@ rename_with..data.frame <- function(.data, .fn, .cols = everything.(), ...) {
 
   rename_with.(.data, .fn = .fn, .cols = !!.cols, ...)
 }
+
+#' @export
+#' @rdname rename_with.
+dt_rename_with <- rename_with.
