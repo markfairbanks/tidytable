@@ -38,18 +38,31 @@ mutate..tidytable <- function(.data, ..., by = NULL) {
   if (is.null(by)) {
     # Faster version if there is no "by" provided
     all_names <- names(dots)
+    data_names <- names(.data)
 
     for (i in seq_along(dots)) {
+
+      .col_name <- all_names[[i]]
       val <- dots[i][[1]]
 
-      if (is.numeric(val) | is.character(val) | is.logical(val)) {
-        # Prevents modify-by-reference if a single value is supplied
-        val <- rep(val, nrow(.data))
-      }
+      # Prevent modify-by-reference if the column already exists in the data.table
+      # Steps: Create new col with random name, delete original col, rename random back to original, reorder
+      # Fixes cases when user supplies a single value ex. 1, -1, "a"
+      # !is.null(val) allows for columns to be deleted using mutate.(.data, col = NULL)
+      if (.col_name %in% data_names && !is.null(val)) {
+        col_order <- unique(c(data_names, .col_name))
 
-      eval_expr(
-        .data[, ':='(all_names[i], !!val)]
-      )
+        eval_expr(
+          .data[, ':='(.new_col, !!val)][, !!.col_name := NULL]
+        )
+
+        setnames(.data, ".new_col", .col_name)
+        setcolorder(.data, col_order)
+      } else {
+        eval_expr(
+          .data[, ':='(!!.col_name, !!val)]
+        )
+      }
     }
   } else {
     # Faster with "by", since the "by" call isn't looped multiple times for each column added
