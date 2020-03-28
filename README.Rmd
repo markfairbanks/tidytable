@@ -14,11 +14,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-# tidytable <img src="man/figures/logo.png" align="right" width="16%" height="16%" />
+# tidytable <img src="man/figures/logo.png" align="right" width="18%" height="18%" />
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/dev%20-0.3.2.9-green.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/dev%20-0.4.0-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey)](https://r-pkg.org/pkg/tidytable)
 <!-- badges: end -->
@@ -123,7 +123,7 @@ test_df %>%
           double_y = y * 2)
 ```
 
-### Using "group by"
+## Using "group by"
 
 Group by calls are done from inside any function that has group by functionality (such as `summarize.()` & `mutate.()`) 
 
