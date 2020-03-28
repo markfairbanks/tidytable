@@ -5,7 +5,7 @@
 #'
 #' @param .data A data.frame or data.table
 #' @param ... Columns to create/modify
-#' @param by Optional: `list()` of bare column names to group by
+#' @param by Columns to group by
 #'
 #' @md
 #' @examples

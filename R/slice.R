@@ -6,7 +6,7 @@
 #' @param rows Integer row values. Provide either positive values to keep, or negative values to drop. The values provided must be either all positive or all negative.
 #' @param order_by Variable to arrange by
 #' @param n Number of rows to grab
-#' @param by A single unquoted column, or a `list()` of columns to group by.
+#' @param by Columns to group by
 #'
 #' @export
 #' @md

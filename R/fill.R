@@ -6,9 +6,9 @@
 #' Supports enhanced selection
 #'
 #' @param .data A data.frame or data.table
-#' @param ... A selection of bare columns
+#' @param ... A selection of columns
 #' @param .direction Direction in which to fill missing values. Currently "down" (the default), "up", "downup" (first down then up), or "updown" (first up and then down)
-#' @param by Whether the filling should be done by group. Passed in a `list()`
+#' @param by Columns to group by when filling should be done by group
 #' @export
 #' @md
 #'

@@ -17,11 +17,11 @@ dt_fill(
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{...}{A selection of bare columns}
+\item{...}{A selection of columns}
 
 \item{.direction}{Direction in which to fill missing values. Currently "down" (the default), "up", "downup" (first down then up), or "updown" (first up and then down)}
 
-\item{by}{Whether the filling should be done by group. Passed in a \code{list()}}
+\item{by}{Columns to group by when filling should be done by group}
 }
 \description{
 Fills missing values in the selected columns using the next or previous entry. Can be done by group.

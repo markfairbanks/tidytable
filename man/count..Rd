@@ -12,7 +12,7 @@ dt_count(.data, ...)
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{...}{Optional: Bare column names to group by}
+\item{...}{Columns to group by}
 }
 \description{
 Returns row counts of the dataset. If bare column names are provided, \code{dt_count()} returns counts by group.

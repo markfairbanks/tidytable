@@ -56,6 +56,15 @@ test_that("modify-by-reference doesn't occur with single val", {
   expect_equal(df$x, c(1,2,3))
 })
 
+test_that("column order is correct", {
+  df <- data.table(x = 1:3, y = 1:3)
+  df <- df %>%
+    mutate.(double_x = x * 2,
+            x = 1)
+
+  expect_named(df, c("x", "y", "double_x"))
+})
+
 test_that("can take data.frame input", {
   df <- data.frame(x = 1:3, y = 1:3)
   df <- df %>%
@@ -78,7 +87,7 @@ test_that("can use by", {
 
 })
 
-test_that("can use by", {
+test_that("can use by with enhanced selection", {
   df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
 
   tidytable_df <- df %>%

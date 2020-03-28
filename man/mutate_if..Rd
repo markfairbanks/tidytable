@@ -30,7 +30,7 @@ dt_mutate_all(.data, .funs, ..., by = NULL)
 
 \item{...}{Other arguments for the passed function}
 
-\item{by}{A single unquoted column or a \code{list()} of columns to group by.}
+\item{by}{Columns to group by}
 
 \item{.vars}{vector \code{c()} of bare column names for \code{mutate_at.()} to use}
 }

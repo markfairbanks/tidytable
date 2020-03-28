@@ -5,7 +5,7 @@
 #'
 #' @param .data A data.frame or data.table
 #' @param ... Columns to add/modify
-#' @param by Optional: `list()` of bare column names to group by
+#' @param by Columns to group by
 #'
 #' @md
 #' @export
@@ -38,7 +38,6 @@ mutate..tidytable <- function(.data, ..., by = NULL) {
   if (is.null(by)) {
     # Faster version if there is no "by" provided
     all_names <- names(dots)
-    data_names <- names(.data)
 
     for (i in seq_along(dots)) {
 
@@ -49,8 +48,8 @@ mutate..tidytable <- function(.data, ..., by = NULL) {
       # Steps: Create new col with random name, delete original col, rename random back to original, reorder
       # Fixes cases when user supplies a single value ex. 1, -1, "a"
       # !is.null(val) allows for columns to be deleted using mutate.(.data, col = NULL)
-      if (.col_name %in% data_names && !is.null(val)) {
-        col_order <- unique(c(data_names, .col_name))
+      if (.col_name %in% names(.data) && !is.null(val)) {
+        col_order <- unique(c(names(.data), .col_name))
 
         eval_expr(
           .data[, ':='(.new_col, !!val)][, !!.col_name := NULL]

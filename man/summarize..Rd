@@ -20,7 +20,17 @@ dt_summarize(.data, ..., by = NULL)
 
 \item{...}{Aggregations to perform}
 
-\item{by}{Optional: `list()` of bare column names to group by}
+\item{by}{Columns to group by.
+\itemize{
+\item A single column can be passed with \code{by = d}.
+\item Multiple columns can be passed with \code{by = c(c, d)} or \code{by = list(c, d)}
+\item Enhanced selection can be used:
+\itemize{
+\item Single predicate: \code{by = is.character}
+\item Multiple predicates: \code{by = c(is.character, is.factor)}
+\item A combination of predicates and column names: \code{by = c(is.character, b)}
+}
+}}
 }
 \description{
 Aggregate data using summary statistics such as mean or median. Can be calculated by group.
@@ -34,10 +44,10 @@ example_dt <- data.table::data.table(
 
 example_dt \%>\%
   summarize.(avg_a = mean(a),
-               max_b = max(b),
-               by = c)
+             max_b = max(b),
+             by = c)
 
 example_dt \%>\%
   summarize.(avg_a = mean(a),
-               by = list(c, d))
+               by = c(c, d))
 }

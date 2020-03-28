@@ -14,7 +14,7 @@ dt_mutate(.data, ..., by = NULL)
 
 \item{...}{Columns to add/modify}
 
-\item{by}{Optional: \code{list()} of bare column names to group by}
+\item{by}{Columns to group by}
 }
 \description{
 Add new columns or modify existing ones

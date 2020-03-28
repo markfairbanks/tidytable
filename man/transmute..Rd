@@ -14,7 +14,7 @@ dt_transmute(.data, ..., by = NULL)
 
 \item{...}{Columns to create/modify}
 
-\item{by}{Optional: \code{list()} of bare column names to group by}
+\item{by}{Columns to group by}
 }
 \description{
 Unlike \code{dt_mutate()}, \code{transmute.()} keeps only the variables that you create

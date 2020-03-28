@@ -38,7 +38,7 @@ dt_slice_max(.data, order_by, n = 1, by = NULL)
 
 \item{rows}{Integer row values. Provide either positive values to keep, or negative values to drop. The values provided must be either all positive or all negative.}
 
-\item{by}{A single unquoted column, or a \code{list()} of columns to group by.}
+\item{by}{Columns to group by}
 
 \item{n}{Number of rows to grab}
 

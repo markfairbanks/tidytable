@@ -6,7 +6,7 @@
 #' Supports enhanced selection
 #'
 #' @param .data A data.frame or data.table
-#' @param ... Optional: Bare column names to group by
+#' @param ... Columns to group by
 #'
 #' @export
 #' @md

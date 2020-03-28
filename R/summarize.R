@@ -5,10 +5,16 @@
 #'
 #' @param .data A data.frame or data.table
 #' @param ... Aggregations to perform
-#' @param by Optional: `list()` of bare column names to group by
+#' @param by Columns to group by.
+#' * A single column can be passed with `by = d`.
+#' * Multiple columns can be passed with `by = c(c, d)` or `by = list(c, d)`
+#' * Enhanced selection can be used:
+#'   + Single predicate: `by = is.character`
+#'   + Multiple predicates: `by = c(is.character, is.factor)`
+#'   + A combination of predicates and column names: `by = c(is.character, b)`
 #'
 #' @export
-#'
+#' @md
 #' @examples
 #' example_dt <- data.table::data.table(
 #'   a = c(1,2,3),
@@ -18,12 +24,12 @@
 #'
 #' example_dt %>%
 #'   summarize.(avg_a = mean(a),
-#'                max_b = max(b),
-#'                by = c)
+#'              max_b = max(b),
+#'              by = c)
 #'
 #' example_dt %>%
 #'   summarize.(avg_a = mean(a),
-#'                by = list(c, d))
+#'                by = c(c, d))
 summarize. <- function(.data, ..., by = NULL) {
   UseMethod("summarize.")
 }

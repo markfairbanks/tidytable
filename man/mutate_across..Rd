@@ -18,7 +18,7 @@ dt_mutate_across(.data, .cols = everything.(), .funs, ..., by = NULL)
 
 \item{...}{Other arguments for the passed function}
 
-\item{by}{A single unquoted column or a \code{list()} of columns to group by.}
+\item{by}{Columns to group by}
 }
 \description{
 Mutate multiple columns simultaneously.

@@ -5,17 +5,21 @@
 #'
 #' @param .data A data.frame or data.table
 #' @param ... Conditions to filter by
-#' @param by Groups to use if filtering by summary functions
+#' @param by Columns to group by if filtering with a summary function
 #'
 #' @export
 #'
 #' @examples
 #' example_dt <- data.table::data.table(
 #'   a = c(1,2,3),
-#'   b = c(4,5,6))
+#'   b = c(4,5,6),
+#'   c = c("a","a","b"))
 #'
 #' example_dt %>%
 #'   filter.(a >= 2, b >= 4)
+#'
+#' example_dt %>%
+#'   filter.(b <= mean(b), by = c)
 filter. <- function(.data, ..., by = NULL) {
   UseMethod("filter.")
 }

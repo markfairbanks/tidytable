@@ -6,7 +6,7 @@
 #' Supports enhanced selection
 #'
 #' @param .data A data.frame or data.table
-#' @param ... bare column names to group by. If empty nests the entire data.table
+#' @param ... Columns to group by. If empty nests the entire data.table
 #' @param .key Name of the new column created by nesting
 #'
 #' @export

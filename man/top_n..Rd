@@ -16,7 +16,7 @@ dt_top_n(.data, n = 5, wt = NULL, by = NULL)
 
 \item{wt}{Optional. The variable to use for ordering. If NULL uses the last column in the data.table.}
 
-\item{by}{\code{list()} of bare column names to group by}
+\item{by}{Columns to group by}
 }
 \description{
 Select the top or bottom entries in each group, ordered by \code{wt}.

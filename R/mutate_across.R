@@ -11,7 +11,7 @@
 #' @param .cols vector `c()` of bare column names for `mutate_across.()` to use. Supports enhanced selection.
 #' @param .funs Functions to pass. Can pass a list of functions.
 #' @param ... Other arguments for the passed function
-#' @param by A single unquoted column or a `list()` of columns to group by.
+#' @param by Columns to group by
 #'
 #' @export
 #'

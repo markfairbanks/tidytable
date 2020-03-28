@@ -14,7 +14,7 @@ dt_filter(.data, ..., by = NULL)
 
 \item{...}{Conditions to filter by}
 
-\item{by}{Groups to use if filtering by summary functions}
+\item{by}{Columns to group by if filtering with a summary function}
 }
 \description{
 Filters a dataset to choose rows where conditions are true.
@@ -22,8 +22,12 @@ Filters a dataset to choose rows where conditions are true.
 \examples{
 example_dt <- data.table::data.table(
   a = c(1,2,3),
-  b = c(4,5,6))
+  b = c(4,5,6),
+  c = c("a","a","b"))
 
 example_dt \%>\%
   filter.(a >= 2, b >= 4)
+
+example_dt \%>\%
+  filter.(b <= mean(b), by = c)
 }
