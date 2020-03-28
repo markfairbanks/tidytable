@@ -27,10 +27,10 @@ Suggests: testthat (>= 2.1.0), bit64
 RemoteType: local
 RemoteUrl: /Users/xmxf129/Desktop/NU/R/R_Packages/tidytable
 NeedsCompilation: no
-Packaged: 2020-03-22 17:25:39 UTC; xmxf129
+Packaged: 2020-03-28 15:27:47 UTC; xmxf129
 Author: Mark Fairbanks [aut, cre],
   Tyson Barrett [ctb],
   Ivan Leung [ctb],
   Ross Kennedy [ctb]
 Maintainer: Mark Fairbanks <mark.t.fairbanks@gmail.com>
-Built: R 3.6.2; ; 2020-03-22 17:25:39 UTC; unix
+Built: R 3.6.2; ; 2020-03-28 15:27:48 UTC; unix
