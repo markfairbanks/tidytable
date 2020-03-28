@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipeable data.table call — dt • tidytable</title>
+<title>Nest data.tables — nest_by. • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,9 +42,9 @@
 
 
 
-<meta property="og:title" content="Pipeable data.table call — dt" />
-<meta property="og:description" content="Pipeable data.table call
-Note: This function does not use data.table's modify-by-reference" />
+<meta property="og:title" content="Nest data.tables — nest_by." />
+<meta property="og:description" content="Nest data.tables by group
+Supports enhanced selection" />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -117,17 +117,19 @@ Note: This function does not use data.table's modify-by-reference" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pipeable data.table call</h1>
-    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/dt.R'><code>R/dt.R</code></a></small>
-    <div class="hidden name"><code>dt.Rd</code></div>
+    <h1>Nest data.tables</h1>
+    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/nest.R'><code>R/nest.R</code></a></small>
+    <div class="hidden name"><code>nest_by..Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Pipeable data.table call</p>
-<p>Note: This function does not use data.table's modify-by-reference</p>
+    <p>Nest data.tables by group</p>
+<p>Supports enhanced selection</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dt</span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='nest_by..html'>nest_by.</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>.key</span> <span class='kw'>=</span> <span class='st'>"data"</span>)
+
+<span class='fu'><a href='nest_by..html'>dt_group_nest</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>.key</span> <span class='kw'>=</span> <span class='st'>"data"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,24 +140,37 @@ Note: This function does not use data.table's modify-by-reference" />
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments passed to data.table call. See ?data.table:::`[.data.table`</p></td>
+      <td><p>Columns to group by. If empty nests the entire data.table</p></td>
+    </tr>
+    <tr>
+      <th>.key</th>
+      <td><p>Name of the new column created by nesting</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>example_dt</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>data.table</span><span class='kw ns'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>),
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>),
-  <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span>))
+    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>data.table</span><span class='kw ns'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>,
+  <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>11</span>:<span class='fl'>20</span>,
+  <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>6</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>4</span>)),
+  <span class='kw'>d</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>4</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>6</span>)))
 
-<span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt</span>(, <span class='st'>':='</span>(<span class='kw'>double_x</span> <span class='kw'>=</span> <span class='no'>x</span> * <span class='fl'>2</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt</span>(<span class='fu'><a href='https://rdrr.io/r/base/order.html'>order</a></span>(-<span class='no'>double_x</span>))</div><div class='output co'>#&gt;        x     y     z double_x
-#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
-#&gt; 1:     3     6     b        6
-#&gt; 2:     2     5     a        4
-#&gt; 3:     1     4     a        2</div></pre>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='nest_by..html'>nest_by.</a></span>()</div><div class='output co'>#&gt;                 data
+#&gt;               &lt;list&gt;
+#&gt; 1: &lt;tidytable[10x4]&gt;</div><div class='input'>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='nest_by..html'>nest_by.</a></span>(<span class='no'>c</span>, <span class='no'>d</span>)</div><div class='output co'>#&gt;        c     d             data
+#&gt;    &lt;chr&gt; &lt;chr&gt;           &lt;list&gt;
+#&gt; 1:     a     a &lt;tidytable[4x2]&gt;
+#&gt; 2:     a     b &lt;tidytable[2x2]&gt;
+#&gt; 3:     b     b &lt;tidytable[4x2]&gt;</div><div class='input'>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='nest_by..html'>nest_by.</a></span>(<span class='no'>is.character</span>)</div><div class='output co'>#&gt;        c     d             data
+#&gt;    &lt;chr&gt; &lt;chr&gt;           &lt;list&gt;
+#&gt; 1:     a     a &lt;tidytable[4x2]&gt;
+#&gt; 2:     a     b &lt;tidytable[2x2]&gt;
+#&gt; 3:     b     b &lt;tidytable[4x2]&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipeable data.table call — dt • tidytable</title>
+<title>Add new variables and drop all others — transmute. • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,9 +42,8 @@
 
 
 
-<meta property="og:title" content="Pipeable data.table call — dt" />
-<meta property="og:description" content="Pipeable data.table call
-Note: This function does not use data.table's modify-by-reference" />
+<meta property="og:title" content="Add new variables and drop all others — transmute." />
+<meta property="og:description" content="Unlike dt_mutate(), transmute.() keeps only the variables that you create" />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -117,17 +116,18 @@ Note: This function does not use data.table's modify-by-reference" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pipeable data.table call</h1>
-    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/dt.R'><code>R/dt.R</code></a></small>
-    <div class="hidden name"><code>dt.Rd</code></div>
+    <h1>Add new variables and drop all others</h1>
+    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/transmute.R'><code>R/transmute.R</code></a></small>
+    <div class="hidden name"><code>transmute..Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Pipeable data.table call</p>
-<p>Note: This function does not use data.table's modify-by-reference</p>
+    <p>Unlike <code><a href='mutate..html'>dt_mutate()</a></code>, <code><a href='transmute..html'>transmute.()</a></code> keeps only the variables that you create</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dt</span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='transmute..html'>transmute.</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'><a href='transmute..html'>dt_transmute</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,24 +138,32 @@ Note: This function does not use data.table's modify-by-reference" />
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments passed to data.table call. See ?data.table:::`[.data.table`</p></td>
+      <td><p>Columns to create/modify</p></td>
+    </tr>
+    <tr>
+      <th>by</th>
+      <td><p>Columns to group by</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>example_dt</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>data.table</span><span class='kw ns'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>),
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>),
-  <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span>))
-
-<span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt</span>(, <span class='st'>':='</span>(<span class='kw'>double_x</span> <span class='kw'>=</span> <span class='no'>x</span> * <span class='fl'>2</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt</span>(<span class='fu'><a href='https://rdrr.io/r/base/order.html'>order</a></span>(-<span class='no'>double_x</span>))</div><div class='output co'>#&gt;        x     y     z double_x
-#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
-#&gt; 1:     3     6     b        6
-#&gt; 2:     2     5     a        4
-#&gt; 3:     1     4     a        2</div></pre>
+    <pre class="examples"><div class='input'><span class='co'># transmute keeps only the variables you create</span>
+<span class='no'>mtcars</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='transmute..html'>transmute.</a></span>(<span class='kw'>displ_l</span> <span class='kw'>=</span> <span class='no'>disp</span> / <span class='fl'>61.0237</span>)</div><div class='output co'>#&gt;      displ_l
+#&gt;        &lt;dbl&gt;
+#&gt;  1: 2.621932
+#&gt;  2: 2.621932
+#&gt;  3: 1.769804
+#&gt;  4: 4.227866
+#&gt;  5: 5.899347
+#&gt; ---         
+#&gt; 28: 1.558411
+#&gt; 29: 5.751864
+#&gt; 30: 2.376126
+#&gt; 31: 4.932510
+#&gt; 32: 1.982836</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipeable data.table call — dt • tidytable</title>
+<title>Separate a character column into multiple columns — separate. • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,9 +42,10 @@
 
 
 
-<meta property="og:title" content="Pipeable data.table call — dt" />
-<meta property="og:description" content="Pipeable data.table call
-Note: This function does not use data.table's modify-by-reference" />
+<meta property="og:title" content="Separate a character column into multiple columns — separate." />
+<meta property="og:description" content="Separates a single column into multiple columns using a user supplied separator or regex.
+If a separator is not supplied one will be automatically detected.
+Note: Using automatic detection or regex will be slower than simple separators such as &quot;,&quot; or &quot;.&quot;." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -117,17 +118,20 @@ Note: This function does not use data.table's modify-by-reference" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pipeable data.table call</h1>
-    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/dt.R'><code>R/dt.R</code></a></small>
-    <div class="hidden name"><code>dt.Rd</code></div>
+    <h1>Separate a character column into multiple columns</h1>
+    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/separate.R'><code>R/separate.R</code></a></small>
+    <div class="hidden name"><code>separate..Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Pipeable data.table call</p>
-<p>Note: This function does not use data.table's modify-by-reference</p>
+    <p>Separates a single column into multiple columns using a user supplied separator or regex.</p>
+<p>If a separator is not supplied one will be automatically detected.</p>
+<p>Note: Using automatic detection or regex will be slower than simple separators such as "," or ".".</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dt</span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='separate..html'>separate.</a></span>(<span class='no'>.data</span>, <span class='no'>col</span>, <span class='no'>into</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"[^[:alnum:]]+"</span>, <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+
+<span class='fu'><a href='separate..html'>dt_separate</a></span>(<span class='no'>.data</span>, <span class='no'>col</span>, <span class='no'>into</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"[^[:alnum:]]+"</span>, <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -137,25 +141,47 @@ Note: This function does not use data.table's modify-by-reference" />
       <td><p>A data.frame or data.table</p></td>
     </tr>
     <tr>
+      <th>col</th>
+      <td><p>The column to split into multiple columns</p></td>
+    </tr>
+    <tr>
+      <th>into</th>
+      <td><p>New column names to split into. A character vector.</p></td>
+    </tr>
+    <tr>
+      <th>sep</th>
+      <td><p>Separator to split on. Can be specified or detected automatically</p></td>
+    </tr>
+    <tr>
+      <th>remove</th>
+      <td><p>If TRUE, remove the input column from the output data.table</p></td>
+    </tr>
+    <tr>
       <th>...</th>
-      <td><p>Arguments passed to data.table call. See ?data.table:::`[.data.table`</p></td>
+      <td><p>Further argument to pass to data.table::tstrsplit</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>example_dt</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>data.table</span><span class='kw ns'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>),
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>),
-  <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span>))
+    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>data.table</span><span class='kw ns'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"a.b"</span>, <span class='st'>"a.b"</span>, <span class='fl'>NA</span>))
 
-<span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt</span>(, <span class='st'>':='</span>(<span class='kw'>double_x</span> <span class='kw'>=</span> <span class='no'>x</span> * <span class='fl'>2</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'>dt</span>(<span class='fu'><a href='https://rdrr.io/r/base/order.html'>order</a></span>(-<span class='no'>double_x</span>))</div><div class='output co'>#&gt;        x     y     z double_x
-#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
-#&gt; 1:     3     6     b        6
-#&gt; 2:     2     5     a        4
-#&gt; 3:     1     4     a        2</div></pre>
+<span class='co'># "sep" can be automatically detected (slower)</span>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='separate..html'>separate.</a></span>(<span class='no'>x</span>, <span class='kw'>into</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"c1"</span>, <span class='st'>"c2"</span>))</div><div class='output co'>#&gt;       c1    c2
+#&gt;    &lt;chr&gt; &lt;chr&gt;
+#&gt; 1:     a  &lt;NA&gt;
+#&gt; 2:     a     b
+#&gt; 3:     a     b
+#&gt; 4:  &lt;NA&gt;  &lt;NA&gt;</div><div class='input'>
+<span class='co'># Faster if "sep" is provided</span>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='separate..html'>separate.</a></span>(<span class='no'>x</span>, <span class='kw'>into</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"c1"</span>, <span class='st'>"c2"</span>), <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"."</span>)</div><div class='output co'>#&gt;       c1    c2
+#&gt;    &lt;chr&gt; &lt;chr&gt;
+#&gt; 1:     a  &lt;NA&gt;
+#&gt; 2:     a     b
+#&gt; 3:     a     b
+#&gt; 4:  &lt;NA&gt;  &lt;NA&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

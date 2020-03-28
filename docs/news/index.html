@@ -76,7 +76,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -119,35 +119,51 @@
       <small>Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="tidytable-0-3-3-in-development" class="section level1">
+    <div id="tidytable-0-4-0" class="section level1">
 <h1 class="page-header">
-<a href="#tidytable-0-3-3-in-development" class="anchor"></a>tidytable 0.3.3 (in development)<small> Unreleased </small>
+<a href="#tidytable-0-4-0" class="anchor"></a>tidytable 0.4.0<small> Unreleased </small>
 </h1>
 <ul>
+<li>Function rewrite:
+<ul>
+<li>All functions are now written as <code>verb.()</code>
+</li>
+<li>
+<code>dt_verb()</code> functions still work, but may be slowly deprecated in future releases</li>
+</ul>
+</li>
 <li>Functionality improvements:
 <ul>
 <li>Enhanced selection now works in “by”" calls</li>
 <li>
-<code><a href="../reference/dt_filter.html">dt_filter()</a></code> now works with “by”</li>
+<code><a href="../reference/filter..html">filter.()</a></code> now works with “by”</li>
 <li>
-<code><a href="../reference/dt_pivot_wider.html">dt_pivot_wider()</a></code> can now be used with an aggregation function</li>
+<code><a href="../reference/pivot_wider..html">pivot_wider.()</a></code> can now be used with an aggregation function</li>
 <li>
-<code><a href="../reference/dt_pull.html">dt_pull()</a></code> defaults to last column in a data.table</li>
+<code><a href="../reference/pull..html">pull.()</a></code> defaults to last column in a data.table</li>
 </ul>
 </li>
 <li>New functions:
 <ul>
-<li><code><a href="../reference/dt_ifelse.html">dt_ifelse()</a></code></li>
-<li><code><a href="../reference/dt_transmute.html">dt_transmute()</a></code></li>
-<li>Select helper <code><a href="../reference/dt_starts_with.html">dt_any_of()</a></code>
+<li><code><a href="../reference/ifelse..html">ifelse.()</a></code></li>
+<li><code><a href="../reference/n..html">n.()</a></code></li>
+<li>
+<code><a href="../reference/nest_by..html">nest_by.()</a></code> replaces <code><a href="../reference/nest_by..html">dt_group_nest()</a></code>
+</li>
+<li><code><a href="../reference/row_number..html">row_number.()</a></code></li>
+<li><code><a href="../reference/transmute..html">transmute.()</a></code></li>
+<li>
+<code><a href="../reference/unnest..html">unnest.()</a></code> replaces <code><a href="../reference/unnest..html">dt_unnest_legacy()</a></code>
+</li>
+<li>Select helper <code><a href="../reference/starts_with..html">any_of.()</a></code>
 </li>
 </ul>
 </li>
 <li>Functions with notable speed improvements:
 <ul>
-<li><code><a href="../reference/dt_fill.html">dt_fill()</a></code></li>
-<li><code><a href="../reference/dt_pivot_longer.html">dt_pivot_longer()</a></code></li>
-<li><code><a href="../reference/dt_unnest_legacy.html">dt_unnest_legacy()</a></code></li>
+<li><code><a href="../reference/fill..html">fill.()</a></code></li>
+<li><code><a href="../reference/pivot_longer..html">pivot_longer.()</a></code></li>
+<li><code><a href="../reference/unnest..html">unnest.()</a></code></li>
 </ul>
 </li>
 </ul>
@@ -167,8 +183,8 @@
 <li>New functions:
 <ul>
 <li>
-<code><a href="../reference/dt_get_dummies.html">dt_get_dummies()</a></code>: Get dummy variables</li>
-<li><code><a href="../reference/dt_separate.html">dt_separate()</a></code></li>
+<code><a href="../reference/get_dummies..html">dt_get_dummies()</a></code>: Get dummy variables</li>
+<li><code><a href="../reference/separate..html">dt_separate()</a></code></li>
 <li>
 <code><a href="../reference/as_tidytable.html">as_tidytable()</a></code>: Convert to data.table/tidytable</li>
 <li>
@@ -178,10 +194,10 @@
 </ul>
 </li>
 <li>
-<code><a href="../reference/dt_pivot_longer.html">dt_pivot_longer()</a></code> “cols” arg now defaults to <code><a href="../reference/dt_starts_with.html">dt_everything()</a></code> instead of <code>NULL</code>. The result is the same, but is more consistent with other enhanced selection functions</li>
+<code><a href="../reference/pivot_longer..html">dt_pivot_longer()</a></code> “cols” arg now defaults to <code><a href="../reference/starts_with..html">dt_everything()</a></code> instead of <code>NULL</code>. The result is the same, but is more consistent with other enhanced selection functions</li>
 <li>
-<code>.N</code> now works when using <code><a href="../reference/dt_slice.html">dt_slice()</a></code> &amp; variants</li>
-<li>Function length limit bug no longer occurs when using <code>~</code> in <code><a href="../reference/dt_map.html">dt_map()</a></code>
+<code>.N</code> now works when using <code><a href="../reference/slice..html">dt_slice()</a></code> &amp; variants</li>
+<li>Function length limit bug no longer occurs when using <code>~</code> in <code><a href="../reference/map..html">dt_map()</a></code>
 </li>
 </ul>
 </div>
@@ -194,18 +210,18 @@
 <li>
 <code><a href="../reference/dt.html">dt()</a></code> now automatically converts data.frame input to a data.table</li>
 <li>
-<code><a href="../reference/dt_left_join.html">dt_left_join()</a></code> fix so columns are ordered correctly</li>
-<li>Add group by ability to <code><a href="../reference/dt_mutate_if.html">dt_mutate_across()</a></code>
+<code><a href="../reference/left_join..html">dt_left_join()</a></code> fix so columns are ordered correctly</li>
+<li>Add group by ability to <code><a href="../reference/mutate_across..html">dt_mutate_across()</a></code>
 </li>
 <li>
-<code><a href="../reference/dt_mutate.html">dt_mutate()</a></code> &amp; <code><a href="../reference/dt_rename.html">dt_rename()</a></code> no longer modify by reference</li>
+<code><a href="../reference/mutate..html">dt_mutate()</a></code> &amp; <code><a href="../reference/rename..html">dt_rename()</a></code> no longer modify by reference</li>
 </ul>
 <div id="breaking-changes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h3>
 <ul>
 <li>
-<code><a href="../reference/dt_unnest_legacy.html">dt_unnest_legacy()</a></code> drops “keep” argument, but automatically keeps all non-nested columns.
+<code><a href="../reference/unnest..html">dt_unnest_legacy()</a></code> drops “keep” argument, but automatically keeps all non-nested columns.
 <ul>
 <li>New translation is ~5-10x faster than before</li>
 </ul>
@@ -228,7 +244,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#tidytable-0-3-3-in-development">0.3.3</a></li>
+        <li><a href="#tidytable-0-4-0">0.4.0</a></li>
         <li><a href="#tidytable-0-3-2">0.3.2</a></li>
         <li><a href="#tidytable-0-3-1">0.3.1</a></li>
         <li><a href="#tidytable-0-3-0">0.3.0</a></li>
