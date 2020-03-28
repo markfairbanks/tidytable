@@ -43,15 +43,15 @@ case. <- function(..., default = NA) {
     if (is.na(default[1])) {
       na_class <- class(values[[1]])
       if (na_class == "logical") {
-        default <- NA
+        default[1] <- NA
       } else if (na_class == "complex") {
-        default <- NA_complex_
+        default[1] <- NA_complex_
       } else if (na_class == "integer") {
-        default <- NA_integer_
+        default[1] <- NA_integer_
       } else if (na_class == "character") {
-        default <- NA_character_
+        default[1] <- NA_character_
       } else {
-        default <- NA_real_
+        default[1] <- NA_real_
       }
     }
   }
