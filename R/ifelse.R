@@ -22,7 +22,8 @@
 #'   mutate.(new_col = ifelse.(x > 2L, NA, x - 1L))
 ifelse. <- function(conditions, true, false) {
 
-  if (is.na(true)) true <- as(true, class(false))
+  if (length(true) == 1)
+    if(is.na(true)) true <- as(true, class(false))
 
   case.(conditions, true, default = false)
 }

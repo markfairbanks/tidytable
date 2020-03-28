@@ -40,18 +40,18 @@ case. <- function(..., default = NA) {
     abort("The length of conditions does not equal the length values")
 
   if (length(default) == 1) {
-    if (is.na(default[1])) {
+    if (is.na(default)) {
       na_class <- class(values[[1]])
       if (na_class == "logical") {
-        default[1] <- NA
+        default <- NA
       } else if (na_class == "complex") {
-        default[1] <- NA_complex_
+        default <- NA_complex_
       } else if (na_class == "integer") {
-        default[1] <- NA_integer_
+        default <- NA_integer_
       } else if (na_class == "character") {
-        default[1] <- NA_character_
+        default <- NA_character_
       } else {
-        default[1] <- NA_real_
+        default <- NA_real_
       }
     }
   }
