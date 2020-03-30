@@ -1,3 +1,10 @@
+# tidytable 0.4.1 (in development)
+
+* Functionality improvements:
+  + Summary functions (`mean`/`max`/etc.) can now be used in `transmute.()`
+* Functions with notable speed improvments:
+  + `relocate.()`
+
 # tidytable 0.4.0
 
 * Function rewrite:

@@ -23,11 +23,11 @@ transmute..tidytable <- function(.data, ..., by = NULL) {
 
   dots <- enexprs(...)
   by <- enexpr(by)
-  by <- vec_selector_by(.data, !!by)
+  keep_names <- names(dots)
 
-  eval_expr(
-    .data[, list(!!!dots), by = !!by]
-  )
+  .data <- mutate.(.data, ..., by = !!by)
+
+  .data[, ..keep_names]
 }
 
 #' @export

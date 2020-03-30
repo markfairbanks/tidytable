@@ -24,3 +24,9 @@ test_that("can only supply one of .before and .after", {
   df <- data.table(x = 1)
   expect_error(relocate.(df, .before = 1, .after = 1))
 })
+
+test_that("doesn't modify-by-reference", {
+  df <- data.table(x = 1, y = 2)
+  relocate.(df, x, .after = y)
+  expect_named(df, c("x", "y"))
+})

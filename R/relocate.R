@@ -35,6 +35,7 @@ relocate. <- function(.data, ..., .before = NULL, .after = NULL) {
 relocate..tidytable <- function(.data, ..., .before = NULL, .after = NULL) {
   .before <- enexpr(.before)
   .after <- enexpr(.after)
+  .data <- shallow(.data)
 
   if  (!is.null(.before) && !is.null(.after))
     stop("Must supply only one of `.before` and `.after`")
@@ -42,7 +43,8 @@ relocate..tidytable <- function(.data, ..., .before = NULL, .after = NULL) {
   if (is.null(.before) && is.null(.after))
     .before <- 1
 
-  all_cols_i <- seq_along(names(.data))
+  data_names <- names(.data)
+  all_cols_i <- seq_along(data_names)
   selected_cols_i <- dots_selector_i(.data, ...)
 
   if (!is.null(.before)) {
@@ -60,7 +62,9 @@ relocate..tidytable <- function(.data, ..., .before = NULL, .after = NULL) {
   start_cols_i <- start_cols_i[start_cols_i %notin% selected_cols_i]
   final_order_i <- unique(c(start_cols_i, selected_cols_i, all_cols_i))
 
-  .data[, ..final_order_i]
+  final_order <- data_names[final_order_i]
+
+  setcolorder(.data, final_order)[]
 }
 
 #' @export
