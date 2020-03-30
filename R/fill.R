@@ -31,7 +31,7 @@ fill. <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), 
 fill..tidytable <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
   by <- enexpr(by)
 
-  if (length(.direction) > 1) .direction <- "down"
+  if (length(.direction) > 1) .direction <- .direction[1]
 
   if (.direction == "down") {
     filler(.data, ..., type = "locf", by = !!by)
@@ -70,13 +70,18 @@ filler <- function(.data, ..., type = "locf", by = NULL) {
 
   subset_data <- .data[, ..all_cols]
 
-  numeric_cols <- all_cols[dt_map_lgl(subset_data, is.numeric)]
+  numeric_cols <- all_cols[map_lgl.(subset_data, is.numeric)]
   other_cols <- all_cols[!all_cols %in% numeric_cols]
+
+  with_by <- !is.null(by)
+
+  if (with_by) col_order <- names(.data)
 
   if (length(numeric_cols) > 0)
     .data <- eval_expr(
       dt(.data, , !!numeric_cols := lapply(.SD, nafill, !!type), .SDcols = !!numeric_cols, by = !!by)
     )
+
   if (length(other_cols) > 0) {
     other_cols <- syms(other_cols)
 
@@ -87,5 +92,8 @@ filler <- function(.data, ..., type = "locf", by = NULL) {
       )
     }
   }
+
+  if (with_by) setcolorder(.data, col_order)
+
   .data
 }

@@ -1,7 +1,8 @@
 # tidytable 0.4.1 (in development)
 
 * Functionality improvements:
-  + Summary functions (`mean`/`max`/etc.) can now be used in `transmute.()`
+  + `fill.()`: Preserves column order when using "by"
+  + `transmute.()`: Summary functions (`mean`/`max`/etc.) can now be used
 * Functions with notable speed improvments:
   + `relocate.()`
 
