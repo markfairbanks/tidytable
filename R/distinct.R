@@ -33,7 +33,7 @@ distinct..tidytable <- function(.data, ...) {
   if (length(dots) == 0) {
     unique(.data)
   } else {
-    unique(dt_select(.data, ...))
+    unique(select.(.data, ...))
   }
 }
 
