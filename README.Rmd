@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# tidytable  <img src="man/figures/logo.png" align="right" width="18%" height="18%" />
+# tidytable <img src="man/figures/logo.png" align="right" width="18%" height="18%" />
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
