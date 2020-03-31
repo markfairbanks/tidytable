@@ -1,9 +1,11 @@
 # tidytable 0.4.1 (in development)
 
 * Functionality improvements:
+  + `distinct.()`: Added `.keep_all` argument
   + `fill.()`: Preserves column order when using "by"
   + `transmute.()`: Summary functions (`mean`/`max`/etc.) can now be used
-* Functions with notable speed improvments:
+* Functions with notable speed improvements:
+  + `distinct.()`
   + `drop_na.()`
   + `relocate.()`
 

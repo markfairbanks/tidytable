@@ -5,14 +5,16 @@
 \alias{dt_distinct}
 \title{Select distinct/unique rows}
 \usage{
-distinct.(.data, ...)
+distinct.(.data, ..., .keep_all = FALSE)
 
-dt_distinct(.data, ...)
+dt_distinct(.data, ..., .keep_all = FALSE)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
 
 \item{...}{Columns to select before determining uniqueness. If omitted, will use all columns}
+
+\item{.keep_all}{If TRUE and if a combination of ... is not distinct, this keeps the first row of values.}
 }
 \description{
 Retain only unique/distinct rows from an input df.

@@ -7,6 +7,7 @@
 #'
 #' @param .data A data.frame or data.table
 #' @param ... Columns to select before determining uniqueness. If omitted, will use all columns
+#' @param .keep_all If TRUE and if a combination of ... is not distinct, this keeps the first row of values.
 #'
 #' @export
 #'
@@ -21,24 +22,30 @@
 #'
 #' example_dt %>%
 #'   distinct.(z)
-distinct. <- function(.data, ...) {
+distinct. <- function(.data, ..., .keep_all = FALSE) {
   UseMethod("distinct.")
 }
 
 #' @export
-distinct..tidytable <- function(.data, ...) {
+distinct..tidytable <- function(.data, ..., .keep_all = FALSE) {
 
   dots <- enexprs(...)
 
   if (length(dots) == 0) {
     unique(.data)
+  } else if (!.keep_all) {
+    select_cols <- dots_selector_i(.data, ...)
+
+    unique(.data, by = select_cols)[, ..select_cols]
   } else {
-    unique(select.(.data, ...))
+    select_cols <- dots_selector_i(.data, ...)
+
+    unique(.data, by = select_cols)
   }
 }
 
 #' @export
-distinct..data.frame <- function(.data, ...) {
+distinct..data.frame <- function(.data, ..., .keep_all = FALSE) {
   .data <- as_tidytable(.data)
 
   distinct.(.data, ...)
