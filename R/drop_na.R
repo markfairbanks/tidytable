@@ -35,14 +35,9 @@ drop_na..tidytable <- function(.data, ...) {
   if (length(dots) == 0) {
     na.omit(.data)
   } else {
-    dots <- dots_selector(.data, ...)
+    drop_cols <- dots_selector_i(.data, ...)
 
-    for (dot in dots) {
-      .data <- eval_expr(
-        .data[!is.na(!!dot)]
-      )
-    }
-    .data
+    na.omit(.data, cols = drop_cols)
   }
 }
 

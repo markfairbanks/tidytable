@@ -4,6 +4,7 @@
   + `fill.()`: Preserves column order when using "by"
   + `transmute.()`: Summary functions (`mean`/`max`/etc.) can now be used
 * Functions with notable speed improvments:
+  + `drop_na.()`
   + `relocate.()`
 
 # tidytable 0.4.0
