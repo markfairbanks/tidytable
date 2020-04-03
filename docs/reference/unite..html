@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Select distinct/unique rows — distinct. • tidytable</title>
+<title>Unite multiple columns by pasting strings together — unite. • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,9 @@
 
 
 
-<meta property="og:title" content="Select distinct/unique rows — distinct." />
-<meta property="og:description" content="Retain only unique/distinct rows from an input df.
-Supports enhanced selection if dots are used" />
+<meta property="og:title" content="Unite multiple columns by pasting strings together — unite." />
+<meta property="og:description" content="Convenience function to paste together multiple columns into one.
+Supports enhanced selection" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -120,19 +120,19 @@ Supports enhanced selection if dots are used" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Select distinct/unique rows</h1>
-    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/distinct.R'><code>R/distinct.R</code></a></small>
-    <div class="hidden name"><code>distinct..Rd</code></div>
+    <h1>Unite multiple columns by pasting strings together</h1>
+    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/unite.R'><code>R/unite.R</code></a></small>
+    <div class="hidden name"><code>unite..Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Retain only unique/distinct rows from an input df.</p>
-<p>Supports enhanced selection if dots are used</p>
+    <p>Convenience function to paste together multiple columns into one.</p>
+<p>Supports enhanced selection</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='distinct..html'>distinct.</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>.keep_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'><a href='unite..html'>unite.</a></span>(<span class='no'>.data</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"new_col"</span>, <span class='no'>...</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"_"</span>, <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'><a href='distinct..html'>dt_distinct</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>.keep_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+<span class='fu'><a href='unite..html'>dt_unite</a></span>(<span class='no'>.data</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"new_col"</span>, <span class='no'>...</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"_"</span>, <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,33 +142,63 @@ Supports enhanced selection if dots are used" />
       <td><p>A data.frame or data.table</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Columns to select before determining uniqueness. If omitted, will use all columns</p></td>
+      <th>col</th>
+      <td><p>Name of the new column, as a string.</p></td>
     </tr>
     <tr>
-      <th>.keep_all</th>
-      <td><p>If TRUE and if a combination of ... is not distinct, this keeps the first row of values.</p></td>
+      <th>...</th>
+      <td><p>Selection of columns. If empty all variables are selected.</p></td>
+    </tr>
+    <tr>
+      <th>sep</th>
+      <td><p>Separator to use between values</p></td>
+    </tr>
+    <tr>
+      <th>remove</th>
+      <td><p>If TRUE, removes input columns from the data.table.</p></td>
+    </tr>
+    <tr>
+      <th>na.rm</th>
+      <td><p>If TRUE, NA values will be not be part of the concatenation</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>example_dt</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>data.table</span><span class='kw ns'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>,
-  <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span>))
+    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"a"</span>),
+                     <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"b"</span>, <span class='st'>"b"</span>, <span class='st'>"b"</span>),
+                     <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"c"</span>, <span class='st'>"c"</span>, <span class='fl'>NA</span>))
 
-<span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='distinct..html'>distinct.</a></span>()</div><div class='output co'>#&gt;        x     y     z
-#&gt;    &lt;int&gt; &lt;int&gt; &lt;chr&gt;
-#&gt; 1:     1     4     a
-#&gt; 2:     2     5     a
-#&gt; 3:     3     6     b</div><div class='input'>
-<span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='distinct..html'>distinct.</a></span>(<span class='no'>z</span>)</div><div class='output co'>#&gt;        z
-#&gt;    &lt;chr&gt;
-#&gt; 1:     a
-#&gt; 2:     b</div></pre>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='unite..html'>unite.</a></span>(<span class='st'>"new_col"</span>, <span class='no'>b</span>, <span class='no'>c</span>)</div><div class='output co'>#&gt;        a new_col
+#&gt;    &lt;chr&gt;   &lt;chr&gt;
+#&gt; 1:     a     b_c
+#&gt; 2:     a     b_c
+#&gt; 3:     a    b_NA</div><div class='input'>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='unite..html'>unite.</a></span>(<span class='st'>"new_col"</span>, <span class='no'>is.character</span>)</div><div class='output co'>#&gt;    new_col
+#&gt;      &lt;chr&gt;
+#&gt; 1:   a_b_c
+#&gt; 2:   a_b_c
+#&gt; 3:  a_b_NA</div><div class='input'>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='unite..html'>unite.</a></span>(<span class='st'>"new_col"</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;        a     b     c new_col
+#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;
+#&gt; 1:     a     b     c     b_c
+#&gt; 2:     a     b     c     b_c
+#&gt; 3:     a     b  &lt;NA&gt;    b_NA</div><div class='input'>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='unite..html'>unite.</a></span>(<span class='st'>"new_col"</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;        a new_col
+#&gt;    &lt;chr&gt;   &lt;chr&gt;
+#&gt; 1:     a     b_c
+#&gt; 2:     a     b_c
+#&gt; 3:     a       b</div><div class='input'>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='unite..html'>unite.</a></span>()</div><div class='output co'>#&gt;    new_col
+#&gt;      &lt;chr&gt;
+#&gt; 1:   a_b_c
+#&gt; 2:   a_b_c
+#&gt; 3:  a_b_NA</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

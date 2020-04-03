@@ -78,7 +78,7 @@
   <div class="contents col-md-9">
 <div id="tidytable" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#tidytable" class="anchor"></a>tidytable <img src="reference/figures/logo.png" align="right" width="18%" height="18%">
+<a href="#tidytable" class="anchor"></a>tidytable <img src="reference/figures/logo.png" align="right" width="16%" height="16%">
 </h1></div>
 <!-- badges: start -->
 
@@ -211,6 +211,7 @@
 </li>
 <li><code><a href="reference/replace_na..html">replace_na.()</a></code></li>
 <li><code><a href="reference/separate..html">separate.()</a></code></li>
+<li><code><a href="reference/unite..html">unite.()</a></code></li>
 </ul>
 </div>
 <div id="purrr" class="section level3">
@@ -426,19 +427,19 @@
 <span class="co">#&gt; # A tibble: 13 x 6</span>
 <span class="co">#&gt;    function_tested tidyverse tidytable data.table pandas tidytable_vs_tidyverse</span>
 <span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;                 </span>
-<span class="co">#&gt;  1 arrange         376.8ms   40.2ms    33.6ms     297ms  10.7%                 </span>
-<span class="co">#&gt;  2 case_when       497ms     155ms     140ms      307ms  31.2%                 </span>
-<span class="co">#&gt;  3 distinct        88.2ms    18.6ms    18.2ms     287ms  21.1%                 </span>
-<span class="co">#&gt;  4 fill            118.3ms   35.7ms    31.2ms     146ms  30.2%                 </span>
-<span class="co">#&gt;  5 filter          283ms     246ms     228ms      656ms  86.9%                 </span>
-<span class="co">#&gt;  6 inner_join      64.2ms    56.7ms    49.2ms     &lt;NA&gt;   88.3%                 </span>
-<span class="co">#&gt;  7 left_join       70.9ms    44.3ms    45.5ms     &lt;NA&gt;   62.5%                 </span>
-<span class="co">#&gt;  8 mutate          67.6ms    50.4ms    72.6ms     85.2ms 74.6%                 </span>
-<span class="co">#&gt;  9 nest            25.69ms   5.5ms     8.18ms     &lt;NA&gt;   21.4%                 </span>
-<span class="co">#&gt; 10 pivot_longer    43ms      10.7ms    11.8ms     &lt;NA&gt;   24.9%                 </span>
-<span class="co">#&gt; 11 pivot_wider     85.6ms    67.2ms    63.9ms     &lt;NA&gt;   78.5%                 </span>
-<span class="co">#&gt; 12 summarize       528.9ms   95.1ms    194.2ms    780ms  18.0%                 </span>
-<span class="co">#&gt; 13 unnest          158.47ms  8.13ms    6.6ms      &lt;NA&gt;   5.1%</span></pre></div>
+<span class="co">#&gt;  1 arrange         433.6ms   38.6ms    38.3ms     297ms  8.9%                  </span>
+<span class="co">#&gt;  2 case_when       494ms     154ms     146ms      307ms  31.2%                 </span>
+<span class="co">#&gt;  3 distinct        91.9ms    18.3ms    18.4ms     287ms  19.9%                 </span>
+<span class="co">#&gt;  4 fill            112.2ms   34.7ms    29.5ms     146ms  30.9%                 </span>
+<span class="co">#&gt;  5 filter          262ms     214ms     214ms      656ms  81.7%                 </span>
+<span class="co">#&gt;  6 inner_join      63.1ms    53ms      43.6ms     &lt;NA&gt;   84.0%                 </span>
+<span class="co">#&gt;  7 left_join       67ms      38.5ms    39.9ms     &lt;NA&gt;   57.5%                 </span>
+<span class="co">#&gt;  8 mutate          69.6ms    55ms      78.3ms     85.2ms 79.0%                 </span>
+<span class="co">#&gt;  9 nest            27.41ms   5.94ms    6.57ms     &lt;NA&gt;   21.7%                 </span>
+<span class="co">#&gt; 10 pivot_longer    46.34ms   9.42ms    9.3ms      &lt;NA&gt;   20.3%                 </span>
+<span class="co">#&gt; 11 pivot_wider     97.5ms    74.8ms    67.4ms     &lt;NA&gt;   76.7%                 </span>
+<span class="co">#&gt; 12 summarize       439.9ms   97.4ms    170ms      780ms  22.1%                 </span>
+<span class="co">#&gt; 13 unnest          161.42ms  7.95ms    7.15ms     &lt;NA&gt;   4.9%</span></pre></div>
 </div>
 </div>
 </div>

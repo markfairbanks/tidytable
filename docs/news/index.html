@@ -127,14 +127,25 @@
 <a href="#tidytable-0-4-1-in-development" class="anchor"></a>tidytable 0.4.1 (in development)<small> Unreleased </small>
 </h1>
 <ul>
-<li>Functionality improvements:
+<li>New functions:
 <ul>
-<li>Summary functions (<code>mean</code>/<code>max</code>/etc.) can now be used in <code><a href="../reference/transmute..html">transmute.()</a></code>
-</li>
+<li><code><a href="../reference/unite..html">unite.()</a></code></li>
 </ul>
 </li>
-<li>Functions with notable speed improvments:
+<li>Functionality improvements:
 <ul>
+<li>
+<code><a href="../reference/distinct..html">distinct.()</a></code>: Added <code>.keep_all</code> argument</li>
+<li>
+<code><a href="../reference/fill..html">fill.()</a></code>: Preserves column order when using “by”</li>
+<li>
+<code><a href="../reference/transmute..html">transmute.()</a></code>: Summary functions (<code>mean</code>/<code>max</code>/etc.) can now be used</li>
+</ul>
+</li>
+<li>Functions with notable speed improvements:
+<ul>
+<li><code><a href="../reference/distinct..html">distinct.()</a></code></li>
+<li><code><a href="../reference/drop_na..html">drop_na.()</a></code></li>
 <li><code><a href="../reference/relocate..html">relocate.()</a></code></li>
 </ul>
 </li>
