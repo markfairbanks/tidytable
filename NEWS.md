@@ -1,5 +1,7 @@
 # tidytable 0.4.1 (in development)
 
+* New functions:
+  + `unite.()`
 * Functionality improvements:
   + `distinct.()`: Added `.keep_all` argument
   + `fill.()`: Preserves column order when using "by"

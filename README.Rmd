@@ -101,6 +101,7 @@ devtools::install_github("markfairbanks/tidytable")
 * `pivot_longer.()` - **ES** & `pivot_wider.()` - **ES**
 * `replace_na.()`
 * `separate.()`
+* `unite.()`
 
 ### purrr
 * `map.()`, `map2.()`, `map_*.()` variants, & `map2_*.()` variants
