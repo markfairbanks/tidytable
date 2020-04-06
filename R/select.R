@@ -6,7 +6,7 @@
 #' Supports enhanced selection
 #'
 #' @param .data A data.frame or data.table
-#' @param ... Columns to select or drop
+#' @param ... Columns to select or drop. Use named arguments, e.g. new_name = old_name, to rename selected variables.
 #'
 #' @export
 #'
@@ -31,6 +31,9 @@
 #'
 #' example_dt %>%
 #'   select.(is.character, x)
+#'
+#' example_dt %>%
+#'   select.(stuff = x, y)
 select. <- function(.data, ...) {
   UseMethod("select.")
 }
@@ -41,9 +44,19 @@ select..tidytable <- function(.data, ...) {
   select_cols <- as.character(dots_selector(.data, ...))
 
   # Using a character vector is faster for select
-  eval_expr(
-    .data[, !!select_cols]
-  )
+  .data <- eval_expr(.data[, !!select_cols])
+
+  dots <- enexprs(...)
+  need_rename <- have_name(dots)
+
+  if (any(need_rename)) {
+
+    new_names <- names(dots)[need_rename]
+    old_names <- as.character(dots[need_rename])
+
+    setnames(.data, old_names, new_names)
+  }
+  .data
 }
 
 #' @export

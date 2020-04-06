@@ -12,7 +12,7 @@ dt_select(.data, ...)
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{...}{Columns to select or drop}
+\item{...}{Columns to select or drop. Use named arguments, e.g. new_name = old_name, to rename selected variables.}
 }
 \description{
 Select or drop columns from a data.table
@@ -40,4 +40,7 @@ example_dt \%>\%
 
 example_dt \%>\%
   select.(is.character, x)
+
+example_dt \%>\%
+  select.(stuff = x, y)
 }

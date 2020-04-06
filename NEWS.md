@@ -5,6 +5,7 @@
 * Functionality improvements:
   + `distinct.()`: Added `.keep_all` argument
   + `fill.()`: Preserves column order when using "by"
+  + `select.()`: Now allows column renaming
   + `transmute.()`: Summary functions (`mean`/`max`/etc.) can now be used
 * Functions with notable speed improvements:
   + `distinct.()`
