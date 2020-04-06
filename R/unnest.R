@@ -30,21 +30,26 @@ unnest..data.frame <- function(.data, col = NULL) {
 
   if (is.null(col)) abort("col must be supplied")
 
-  keep_cols <- names(.data)[!dt_map_lgl(.data, is.list)]
+  keep_cols <- names(.data)[!map_lgl.(.data, is.list)]
 
-  is_datatable <- is.data.table(
-    eval_expr('$'(.data, !!col))[[1]]
-    )
+  nested_data <- pull.(.data, !!col)[[1]]
 
-  if (is_datatable) {
+  is_datatable <- is.data.table(nested_data)
+  is_dataframe <- is.data.frame(nested_data)
+
+  if (is_dataframe) {
+
+    if (!is_datatable) eval_expr(shallow(.data)[, !!col := map.(!!col, as_tidytable)])
+
     .data <- eval_expr(
       .data[, unlist(!!col, recursive = FALSE), by = keep_cols]
     )
   } else {
+    # Unnests a vector
     .data <- eval_expr(
       .data[, list(.new_col = unlist(!!col, recursive = FALSE)), by = keep_cols]
     ) %>%
-      dt_rename(!!col := .new_col)
+      rename.(!!col := .new_col)
   }
   .data
 }

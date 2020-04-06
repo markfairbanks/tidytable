@@ -50,3 +50,21 @@ test_that("unnesting works with nested vector", {
   expect_named(unnest_df, c("c","d","vec_col"))
   expect_equal(unnest_df$vec_col, c(1,2,3,4,5))
 })
+
+test_that("unnesting works with nested data.frames", {
+  start_df <- data.table::data.table(
+    a = 1:5,
+    b = 11:15,
+    c = c(rep("a", 3), rep("b", 2)),
+    d = c(rep("a", 2), rep("b", 3)))
+
+  nest_df <- start_df %>%
+    nest_by.(c, d) %>%
+    mutate.(data = map.(data, as.data.frame))
+
+  unnest_df <- nest_df %>%
+    unnest.(data)
+
+  expect_named(unnest_df, c("c","d","a","b"))
+  expect_equal(unnest_df$a, start_df$a)
+})
