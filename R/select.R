@@ -51,8 +51,9 @@ select..tidytable <- function(.data, ...) {
 
   if (any(need_rename)) {
 
-    new_names <- names(dots)[need_rename]
-    old_names <- as.character(dots[need_rename])
+    rename_dots <- dots[need_rename]
+    new_names <- names(rename_dots)
+    old_names <- as.character(rename_dots)
 
     setnames(.data, old_names, new_names)
   }
