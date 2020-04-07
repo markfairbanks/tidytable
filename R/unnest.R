@@ -39,7 +39,12 @@ unnest..data.frame <- function(.data, col = NULL) {
 
   if (is_dataframe) {
 
-    if (!is_datatable) eval_expr(shallow(.data)[, !!col := map.(!!col, as_tidytable)])
+    if (!is_datatable) {
+
+      .data <- shallow(.data)
+
+      eval_expr(.data[, !!col := map.(!!col, as_tidytable)])
+    }
 
     .data <- eval_expr(
       .data[, unlist(!!col, recursive = FALSE), by = keep_cols]
