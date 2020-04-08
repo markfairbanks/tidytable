@@ -30,6 +30,18 @@ test_that("can arrange the dataset descending", {
   expect_equal(df$x, c(9,7,4,3))
 })
 
+test_that("can arrange the dataset with desc.()", {
+  df <- data.table(x = c(4,3,9,7), y = 1:4)
+
+  desc_df <- df %>%
+    arrange.(desc.(x))
+
+  check_df <- df %>%
+    arrange.(-x)
+
+  expect_equal(desc_df, check_df)
+})
+
 test_that("can arrange with multiple conditions", {
   df <- data.table(x = c(4,3,2,1), y = c("a","a","b","b"))
   df <- df %>%

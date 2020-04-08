@@ -1,6 +1,7 @@
 # tidytable 0.4.1 (in development)
 
 * New functions:
+  + `desc.()`
   + `unite.()`
 * Functionality improvements:
   + `distinct.()`: Added `.keep_all` argument

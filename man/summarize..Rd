@@ -49,5 +49,5 @@ example_dt \%>\%
 
 example_dt \%>\%
   summarize.(avg_a = mean(a),
-               by = c(c, d))
+             by = c(c, d))
 }

@@ -29,7 +29,7 @@
 #'
 #' example_dt %>%
 #'   summarize.(avg_a = mean(a),
-#'                by = c(c, d))
+#'              by = c(c, d))
 summarize. <- function(.data, ..., by = NULL) {
   UseMethod("summarize.")
 }
