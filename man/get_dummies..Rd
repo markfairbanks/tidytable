@@ -7,7 +7,7 @@
 \usage{
 get_dummies.(
   .data,
-  cols = NULL,
+  cols = c(is.character, is.factor),
   prefix = TRUE,
   prefix_sep = "_",
   drop_first = FALSE,
@@ -16,7 +16,7 @@ get_dummies.(
 
 dt_get_dummies(
   .data,
-  cols = NULL,
+  cols = c(is.character, is.factor),
   prefix = TRUE,
   prefix_sep = "_",
   drop_first = FALSE,
@@ -26,7 +26,8 @@ dt_get_dummies(
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{cols}{If NULL makes dummy variables for all character & factor columns. Or user can input a single column or a vector of unquoted columns to dummify}
+\item{cols}{A single column or a vector of unquoted columns to dummify.
+Defaults to all character & factor columns using \code{c(is.character, is.factor)}.}
 
 \item{prefix}{TRUE/FALSE - If TRUE, a prefix will be added to new column names}
 
@@ -58,6 +59,10 @@ test_df \%>\%
 # Can select one or multiple columns in a vector of unquoted column names
 test_df \%>\%
   get_dummies.(c(col1, col2))
+
+# Can drop certain columns using
+test_df \%>\%
+  get_dummies.(c(is.character, -col2))
 
 test_df \%>\%
   get_dummies.(prefix_sep = ".", drop_first = TRUE)

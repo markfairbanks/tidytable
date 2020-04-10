@@ -6,12 +6,14 @@
 #' Supports enhanced selection
 #'
 #' @param .data A data.frame or data.table
-#' @param cols If NULL makes dummy variables for all character & factor columns. Or user can input a single column or a vector of unquoted columns to dummify
+#' @param cols A single column or a vector of unquoted columns to dummify.
+#' Defaults to all character & factor columns using `c(is.character, is.factor)`.
 #' @param prefix TRUE/FALSE - If TRUE, a prefix will be added to new column names
 #' @param prefix_sep Separator for new column names
 #' @param drop_first TRUE/FALSE - If TRUE, the first dummy column will be dropped
 #' @param dummify_na TRUE/FALSE - If TRUE, NAs will also get dummy columns
 #'
+#' @md
 #' @export
 #'
 #' @examples
@@ -32,27 +34,31 @@
 #' test_df %>%
 #'   get_dummies.(c(col1, col2))
 #'
+#' # Can drop certain columns using
+#' test_df %>%
+#'   get_dummies.(c(is.character, -col2))
+#'
 #' test_df %>%
 #'   get_dummies.(prefix_sep = ".", drop_first = TRUE)
 #'
 #' test_df %>%
 #'   get_dummies.(c(col1, col2), dummify_na = FALSE)
 get_dummies. <- function(.data,
-                           cols = NULL,
-                           prefix = TRUE,
-                           prefix_sep = "_",
-                           drop_first = FALSE,
-                           dummify_na = TRUE) {
+                         cols = c(is.character, is.factor),
+                         prefix = TRUE,
+                         prefix_sep = "_",
+                         drop_first = FALSE,
+                         dummify_na = TRUE) {
   UseMethod("get_dummies.")
 }
 
 #' @export
 get_dummies..data.frame <- function(.data,
-                                      cols = NULL,
-                                      prefix = TRUE,
-                                      prefix_sep = "_",
-                                      drop_first = FALSE,
-                                      dummify_na = TRUE) {
+                                    cols = c(is.character, is.factor),
+                                    prefix = TRUE,
+                                    prefix_sep = "_",
+                                    drop_first = FALSE,
+                                    dummify_na = TRUE) {
 
   .data <- as_tidytable(.data)
   cols <- enexpr(cols)
@@ -64,26 +70,16 @@ get_dummies..data.frame <- function(.data,
 
 #' @export
 get_dummies..tidytable <- function(.data,
-                                      cols = NULL,
-                                      prefix = TRUE,
-                                      prefix_sep = "_",
-                                      drop_first = FALSE,
-                                      dummify_na = TRUE) {
+                                   cols = c(is.character, is.factor),
+                                   prefix = TRUE,
+                                   prefix_sep = "_",
+                                   drop_first = FALSE,
+                                   dummify_na = TRUE) {
 
   .data <- shallow(.data)
   cols <- enexpr(cols)
 
-  if (is.null(cols)) {
-    # If NULL, select all character & factor cols
-    data_names <- names(.data)
-
-    chr_cols <- data_names[map_lgl.(.data, is.character)]
-    fct_cols <- data_names[map_lgl.(.data, is.factor)]
-
-    cols <- syms(c(chr_cols, fct_cols))
-  } else {
-    cols <- vec_selector(.data, !!cols)
-  }
+  cols <- vec_selector(.data, !!cols)
 
   for (col in cols) {
 
