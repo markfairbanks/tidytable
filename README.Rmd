@@ -380,8 +380,10 @@ fill_marks <- bench::mark(
   tidyverse = fill(group_by(fill_tbl, id), int1, int2),
   tidytable = fill.(fill_dt, int1, int2, by = id),
   # needs shallow copy or subsequent runs won't have NAs to fill
-  data.table = tidytable:::shallow(fill_dt)[, ':='(int1 = nafill(int1, type = "locf"),
-                                                   int2 = nafill(int2, type = "locf")),
+  # data.table = tidytable:::shallow(fill_dt)[, ':='(int1 = nafill(int1, type = "locf"),
+  #                                                  int2 = nafill(int2, type = "locf")),
+  #                                           by = id],
+  data.table = tidytable:::shallow(fill_dt)[, c("int1", "int2") := lapply(.SD, nafill, type = "locf"),
                                             by = id],
   check = FALSE,
   iterations = iters) %>%
@@ -494,45 +496,42 @@ inner_join_marks <- bench::mark(
 ```
 
 ```{r unnest, echo = FALSE}
-remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
+data_size <- 300000
+list_df <- data.table(x = sample(1:20, data_size, TRUE))
 
-unnest_dt <- tibble(
-  a = LETTERS[1:5],
-  b = LETTERS[6:10],
-  list_column = list(c(LETTERS[1:5]), "F", "G", "H", "I")
-) %>%
-  dplyr::sample_frac(10000, replace = TRUE) %>%
-  as_tidytable()
+unnest_dt <- data.table(id = 1:5,
+                        list_column = list(list_df, list_df, list_df, list_df, list_df))
 
-unnest_tbl <- as_tibble(unnest_dt)
+unnest_tbl <- unnest_dt %>%
+  mutate(list_column = map(list_column, as_tibble))
 
 unnest_marks <- bench::mark(
-  tidyverse = unnest_legacy(unnest_dt, list_column),
+  tidyfast = tidyfast::dt_unnest(unnest_dt, list_column),
+  tidyverse = tidyr::unnest_legacy(unnest_dt, list_column),
   tidytable = unnest.(unnest_dt, list_column),
-  data.table = unnest_dt[, unlist(list_column, recursive = FALSE), by = list(a, b)],
+  data.table = unnest_dt[, unlist(list_column, recursive = FALSE), by = id],
   check = FALSE,
   iterations = iters) %>%
-  mutate(expression = as.character(expression),
-         function_tested = "unnest")
+  dplyr::mutate(expression = as.character(expression),
+                function_tested = "unnest")
 ```
 
 ```{r nest, echo = FALSE}
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-nest_dt <- tibble::tibble(
-  a = LETTERS[1:5],
-  b = LETTERS[6:10],
-  list_column = list(c(LETTERS[1:5]), "F", "G", "H", "I")) %>%
-  dplyr::sample_frac(50000, replace = TRUE) %>%
-  as_tidytable() %>%
+data_size <- 300000
+list_df <- data.table(x = sample(1:20, data_size, TRUE))
+
+nest_dt <- data.table(id = 1:5,
+                      list_column = list(list_df, list_df, list_df, list_df, list_df)) %>%
   unnest.(list_column)
 
 nest_tbl <- as_tibble(nest_dt)
 
 nest_marks <- bench::mark(
-  tidyverse = group_nest(nest_dt, a, b),
-  tidytable = nest_by.(nest_dt, a, b),
-  data.table = nest_dt[, list(data = list(.SD)), by = list(a, b)],
+  tidyverse = group_nest(nest_dt, id),
+  tidytable = nest_by.(nest_dt, id),
+  data.table = nest_dt[, list(data = list(.SD)), by = id],
   check = FALSE,
   iterations = iters) %>%
   mutate(expression = as.character(expression),
