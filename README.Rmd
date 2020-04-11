@@ -506,8 +506,7 @@ unnest_tbl <- unnest_dt %>%
   mutate(list_column = map(list_column, as_tibble))
 
 unnest_marks <- bench::mark(
-  tidyfast = tidyfast::dt_unnest(unnest_dt, list_column),
-  tidyverse = tidyr::unnest_legacy(unnest_dt, list_column),
+  tidyverse = tidyr::unnest_legacy(unnest_tbl, list_column),
   tidytable = unnest.(unnest_dt, list_column),
   data.table = unnest_dt[, unlist(list_column, recursive = FALSE), by = id],
   check = FALSE,
