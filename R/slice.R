@@ -43,6 +43,7 @@ slice..tidytable <- function(.data, rows = 1:5, by = NULL) {
 
   rows <- enexpr(rows) # Needed so 1:.N works
   by <- enexpr(by)
+  by <- vec_selector_by(.data, !!by)
 
   if (is.null(by)) {
     eval_expr(
