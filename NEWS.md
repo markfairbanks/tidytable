@@ -6,6 +6,7 @@
   + `desc.()`
   + `unite.()`
 * Functionality improvements:
+  + `bind_rows.()`: Does name checking and fills missing
   + `distinct.()`: Added `.keep_all` argument
   + `fill.()`: Preserves column order when using "by"
   + `select.()`: Now allows column renaming
