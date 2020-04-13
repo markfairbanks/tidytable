@@ -127,17 +127,28 @@
 <a href="#tidytable-0-4-1-in-development" class="anchor"></a>tidytable 0.4.1 (in development)<small> Unreleased </small>
 </h1>
 <ul>
+<li>Breaking changes:
+<ul>
+<li>
+<code><a href="../reference/get_dummies..html">get_dummies.()</a></code>: “cols” arg defaults to <code><a href="https://rdrr.io/r/base/c.html">c(is.character, is.factor)</a></code>. The result is the same, but is more consistent with other enhanced selection functions</li>
+</ul>
+</li>
 <li>New functions:
 <ul>
+<li><code><a href="../reference/desc..html">desc.()</a></code></li>
 <li><code><a href="../reference/unite..html">unite.()</a></code></li>
 </ul>
 </li>
 <li>Functionality improvements:
 <ul>
 <li>
+<code><a href="../reference/bind_rows..html">bind_rows.()</a></code>: Does name checking and fills missing</li>
+<li>
 <code><a href="../reference/distinct..html">distinct.()</a></code>: Added <code>.keep_all</code> argument</li>
 <li>
 <code><a href="../reference/fill..html">fill.()</a></code>: Preserves column order when using “by”</li>
+<li>
+<code><a href="../reference/select..html">select.()</a></code>: Now allows column renaming</li>
 <li>
 <code><a href="../reference/transmute..html">transmute.()</a></code>: Summary functions (<code>mean</code>/<code>max</code>/etc.) can now be used</li>
 </ul>

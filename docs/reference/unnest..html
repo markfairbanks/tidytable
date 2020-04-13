@@ -128,9 +128,9 @@
     <p>Unnest a nested data.table.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='unnest..html'>unnest.</a></span>(<span class='no'>.data</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'><a href='unnest..html'>unnest.</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>)
 
-<span class='fu'><a href='unnest..html'>dt_unnest_legacy</a></span>(<span class='no'>.data</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'><a href='unnest..html'>dt_unnest_legacy</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,8 +140,8 @@
       <td><p>A nested data.table</p></td>
     </tr>
     <tr>
-      <th>col</th>
-      <td><p>The column to unnest</p></td>
+      <th>...</th>
+      <td><p>Columns to unnest. If empty, unnests all list columns.</p></td>
     </tr>
     </table>
 
@@ -152,7 +152,8 @@
   <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>11</span>:<span class='fl'>20</span>,
   <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>6</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>4</span>)),
   <span class='kw'>d</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>4</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>6</span>))) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='nest_by..html'>nest_by.</a></span>(<span class='no'>c</span>, <span class='no'>d</span>)
+  <span class='fu'><a href='nest_by..html'>nest_by.</a></span>(<span class='no'>c</span>, <span class='no'>d</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>pulled_vec</span> <span class='kw'>=</span> <span class='fu'><a href='map..html'>map.</a></span>(<span class='no'>data</span>, ~ <span class='fu'><a href='pull..html'>pull.</a></span>(<span class='no'>.x</span>, <span class='no'>a</span>)))
 
 <span class='no'>nested_df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='unnest..html'>unnest.</a></span>(<span class='no'>data</span>)</div><div class='output co'>#&gt;         c     d     a     b
@@ -166,7 +167,20 @@
 #&gt;  7:     b     b     7    17
 #&gt;  8:     b     b     8    18
 #&gt;  9:     b     b     9    19
-#&gt; 10:     b     b    10    20</div></pre>
+#&gt; 10:     b     b    10    20</div><div class='input'>
+<span class='no'>nested_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='unnest..html'>unnest.</a></span>(<span class='no'>data</span>, <span class='no'>pulled_vec</span>)</div><div class='output co'>#&gt;         c     d     a     b pulled_vec
+#&gt;     &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt;      &lt;int&gt;
+#&gt;  1:     a     a     1    11          1
+#&gt;  2:     a     a     2    12          2
+#&gt;  3:     a     a     3    13          3
+#&gt;  4:     a     a     4    14          4
+#&gt;  5:     a     b     5    15          5
+#&gt;  6:     a     b     6    16          6
+#&gt;  7:     b     b     7    17          7
+#&gt;  8:     b     b     8    18          8
+#&gt;  9:     b     b     9    19          9
+#&gt; 10:     b     b    10    20         10</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

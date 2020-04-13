@@ -143,7 +143,7 @@ Note that this function is called differently than `dplyr::case_when`! See examp
     </tr>
     <tr>
       <th>default</th>
-      <td><p>Default value. Set to NA. Argument must be named.</p></td>
+      <td><p>Default value. Set to NA by default.</p></td>
     </tr>
     </table>
 
@@ -158,9 +158,9 @@ Note that this function is called differently than `dplyr::case_when`! See examp
   <span class='kw'>d</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>4</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>6</span>)))
 
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>dt_mutate</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='case..html'>dt_case</a></span>(<span class='no'>b</span> <span class='kw'>&lt;</span> <span class='fl'>13</span>, <span class='fl'>3</span>,
-                        <span class='no'>a</span> <span class='kw'>&gt;</span> <span class='fl'>4</span>, <span class='fl'>2</span>,
-                        <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>10</span>))</div><div class='output co'>#&gt;         a     b     c     d     x
+  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='case..html'>case.</a></span>(<span class='no'>b</span> <span class='kw'>&lt;</span> <span class='fl'>13</span>, <span class='fl'>3</span>,
+                    <span class='no'>a</span> <span class='kw'>&gt;</span> <span class='fl'>4</span>, <span class='fl'>2</span>,
+                    <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>10</span>))</div><div class='output co'>#&gt;         a     b     c     d     x
 #&gt;     &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
 #&gt;  1:     1    11     a     a     3
 #&gt;  2:     2    12     a     a     3
@@ -172,8 +172,8 @@ Note that this function is called differently than `dplyr::case_when`! See examp
 #&gt;  8:     8    18     b     b     2
 #&gt;  9:     9    19     b     b     2
 #&gt; 10:    10    20     b     b     2</div><div class='input'><span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>dt_mutate</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='case..html'>dt_case</a></span>(<span class='no'>c</span> <span class='kw'>==</span> <span class='st'>"a"</span>,<span class='st'>"a"</span>,
-                        <span class='kw'>default</span> <span class='kw'>=</span> <span class='no'>d</span>))</div><div class='output co'>#&gt;         a     b     c     d     x
+  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='case..html'>case.</a></span>(<span class='no'>c</span> <span class='kw'>==</span> <span class='st'>"a"</span>, <span class='st'>"a"</span>,
+                    <span class='kw'>default</span> <span class='kw'>=</span> <span class='no'>d</span>))</div><div class='output co'>#&gt;         a     b     c     d     x
 #&gt;     &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
 #&gt;  1:     1    11     a     a     a
 #&gt;  2:     2    12     a     a     a
