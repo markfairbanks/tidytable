@@ -59,9 +59,14 @@ case. <- function(..., default = NA) {
   vals <- default
 
   for (i in seq_along(conditions)) {
-    vals <- fifelse(eval(conditions[[i]], parent.frame()), eval(values[[i]], parent.frame()), vals)
-  }
 
+    change_flag <- fifelse(eval(conditions[[i]], parent.frame()), TRUE, FALSE, FALSE)
+
+    vals <- fifelse(change_flag,
+                    eval(values[[i]], parent.frame()),
+                    vals
+    )
+  }
   vals
 }
 

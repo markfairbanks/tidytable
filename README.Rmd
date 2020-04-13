@@ -413,8 +413,9 @@ case_marks <- bench::mark(
                                    is.na(x), "unknown",
                                    default = "other")),
   data.table = case2_dt[,':='(test = fifelse(x < median_x, "low",
-                                            fifelse(x >= median_x, "high",
-                                                    fifelse(is.na(x), "unknown", "other"))))][],
+                                             fifelse(x >= median_x, "high",
+                                                    fifelse(is.na(x), "unknown", "other", "other"),
+                                                    "other"), "other"))][],
   check = FALSE,
   iterations = iters) %>%
   mutate(expression = as.character(expression),
