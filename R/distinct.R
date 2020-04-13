@@ -48,7 +48,7 @@ distinct..tidytable <- function(.data, ..., .keep_all = FALSE) {
 distinct..data.frame <- function(.data, ..., .keep_all = FALSE) {
   .data <- as_tidytable(.data)
 
-  distinct.(.data, ...)
+  distinct.(.data, ..., .keep_all = .keep_all)
 }
 
 #' @export
