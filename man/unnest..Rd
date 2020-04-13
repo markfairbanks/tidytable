@@ -5,14 +5,14 @@
 \alias{dt_unnest_legacy}
 \title{Unnest a nested data.table}
 \usage{
-unnest.(.data, col = NULL)
+unnest.(.data, ...)
 
-dt_unnest_legacy(.data, col = NULL)
+dt_unnest_legacy(.data, ...)
 }
 \arguments{
 \item{.data}{A nested data.table}
 
-\item{col}{The column to unnest}
+\item{...}{Columns to unnest. If empty, unnests all list columns.}
 }
 \description{
 Unnest a nested data.table.
@@ -23,8 +23,12 @@ nested_df <- data.table::data.table(
   b = 11:20,
   c = c(rep("a", 6), rep("b", 4)),
   d = c(rep("a", 4), rep("b", 6))) \%>\%
-  nest_by.(c, d)
+  nest_by.(c, d) \%>\%
+  mutate.(pulled_vec = map.(data, ~ pull.(.x, a)))
 
 nested_df \%>\%
   unnest.(data)
+
+nested_df \%>\%
+  unnest.(data, pulled_vec)
 }
