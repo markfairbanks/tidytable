@@ -5,7 +5,7 @@
 #' Note that this function is called differently than `dplyr::case_when`! See examples
 #'
 #' @param ... Sequence of condition/value designations
-#' @param default Default value. Set to NA. Argument must be named.
+#' @param default Default value. Set to NA by default.
 #'
 #' @export
 #'
@@ -19,12 +19,12 @@
 #'   d = c(rep("a", 4), rep("b", 6)))
 #'
 #' test_df %>%
-#'   dt_mutate(x = dt_case(b < 13, 3,
-#'                         a > 4, 2,
-#'                         default = 10))
+#'   mutate.(x = case.(b < 13, 3,
+#'                     a > 4, 2,
+#'                     default = 10))
 #' test_df %>%
-#'   dt_mutate(x = dt_case(c == "a","a",
-#'                         default = d))
+#'   mutate.(x = case.(c == "a", "a",
+#'                     default = d))
 case. <- function(..., default = NA) {
   dots <- enexprs(...)
 
@@ -64,8 +64,7 @@ case. <- function(..., default = NA) {
 
     vals <- fifelse(change_flag,
                     eval(values[[i]], parent.frame()),
-                    vals
-    )
+                    vals)
   }
   vals
 }

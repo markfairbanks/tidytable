@@ -12,7 +12,7 @@ dt_case(..., default = NA)
 \arguments{
 \item{...}{Sequence of condition/value designations}
 
-\item{default}{Default value. Set to NA. Argument must be named.}
+\item{default}{Default value. Set to NA by default.}
 }
 \description{
 This function allows you to use multiple if/else statements in one call.
@@ -28,10 +28,10 @@ test_df <- data.table::data.table(
   d = c(rep("a", 4), rep("b", 6)))
 
 test_df \%>\%
-  dt_mutate(x = dt_case(b < 13, 3,
-                        a > 4, 2,
-                        default = 10))
+  mutate.(x = case.(b < 13, 3,
+                    a > 4, 2,
+                    default = 10))
 test_df \%>\%
-  dt_mutate(x = dt_case(c == "a","a",
-                        default = d))
+  mutate.(x = case.(c == "a", "a",
+                    default = d))
 }
