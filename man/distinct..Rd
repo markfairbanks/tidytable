@@ -14,7 +14,9 @@ dt_distinct(.data, ..., .keep_all = FALSE)
 
 \item{...}{Columns to select before determining uniqueness. If omitted, will use all columns}
 
-\item{.keep_all}{If TRUE and if a combination of ... is not distinct, this keeps the first row of values.}
+\item{.keep_all}{Only relevant if columns are provided to ... arg.
+This keeps all columns, but only keeps the first row of each distinct
+values of columns provided to ... arg.}
 }
 \description{
 Retain only unique/distinct rows from an input df.

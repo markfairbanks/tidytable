@@ -7,6 +7,7 @@
 #'
 #' @param .data A data.frame or data.table
 #' @param ... Groups to split by
+#' @param keep Should the grouping columns be kept
 #' @export
 #'
 #' @examples
@@ -18,12 +19,15 @@
 #'
 #' test_df %>%
 #'   group_split.(c, d)
-group_split. <- function(.data, ...) {
+#'
+#' test_df %>%
+#'   group_split.(c, d, .keep = FALSE)
+group_split. <- function(.data, ..., .keep = TRUE) {
   UseMethod("group_split.")
 }
 
 #' @export
-group_split..tidytable <- function(.data, ...) {
+group_split..tidytable <- function(.data, ..., .keep = TRUE) {
 
   dots <- enexprs(...)
 
@@ -32,15 +36,15 @@ group_split..tidytable <- function(.data, ...) {
   } else {
     dots <- as.character(dots_selector(.data, ...))
 
-    unname(split(.data, by = dots))
+    unname(split(.data, by = dots, keep.by = .keep))
   }
 }
 
 #' @export
-group_split..data.frame <- function(.data, ...) {
+group_split..data.frame <- function(.data, ..., .keep = TRUE) {
   .data <- as_tidytable(.data)
 
-  group_split.(.data, ...)
+  group_split.(.data, ..., .keep = .keep)
 }
 
 #' @export

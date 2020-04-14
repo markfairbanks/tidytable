@@ -7,7 +7,9 @@
 #'
 #' @param .data A data.frame or data.table
 #' @param ... Columns to select before determining uniqueness. If omitted, will use all columns
-#' @param .keep_all If TRUE and if a combination of ... is not distinct, this keeps the first row of values.
+#' @param .keep_all Only relevant if columns are provided to ... arg.
+#' This keeps all columns, but only keeps the first row of each distinct
+#' values of columns provided to ... arg.
 #'
 #' @export
 #'

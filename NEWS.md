@@ -1,7 +1,9 @@
 # tidytable 0.4.1 (in development)
 
 * Breaking changes:
-  + `get_dummies.()`: "cols" arg defaults to `c(is.character, is.factor)`. The result is the same, but is more consistent with other enhanced selection functions
+  + `get_dummies.()`: `cols` arg defaults to `c(is.character, is.factor)`.
+  The result is the same, but is more consistent with other enhanced selection functions
+  + `mutate_across.()`: `.funs` argument renamed to `.fns` to match dplyr 1.0
 * New functions:
   + `desc.()`
   + `unite.()`
@@ -9,6 +11,11 @@
   + `bind_rows.()`: Does name checking and fills missing
   + `distinct.()`: Added `.keep_all` argument
   + `fill.()`: Preserves column order when using "by"
+  + `group_split.()`: Added `.keep` arg
+  + `nest.()`
+    - Can now unnest multiple columns in one call
+    - data.tables in a list column can now have different ncols
+    and different column order
   + `select.()`: Now allows column renaming
   + `transmute.()`: Summary functions (`mean`/`max`/etc.) can now be used
 * Functions with notable speed improvements:
