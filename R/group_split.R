@@ -7,7 +7,7 @@
 #'
 #' @param .data A data.frame or data.table
 #' @param ... Groups to split by
-#' @param keep Should the grouping columns be kept
+#' @param .keep Should the grouping columns be kept
 #' @export
 #'
 #' @examples

@@ -18,9 +18,9 @@
 #'
 #' @examples
 #' test_df <- data.table::data.table(
-#'   col1 = c(letters[1:3], NA),
-#'   col2 = as.factor(c(letters[3:1], NA)),
-#'   var1 = rnorm(7,0,1))
+#'   col1 = c("a", "b", "c", NA),
+#'   col2 = as.factor(c("a", "b", NA, "d")),
+#'   var1 = rnorm(4,0,1))
 #'
 #' # Automatically does all character/factor columns
 #' test_df %>%

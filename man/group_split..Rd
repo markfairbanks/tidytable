@@ -14,7 +14,7 @@ dt_group_split(.data, ..., .keep = TRUE)
 
 \item{...}{Groups to split by}
 
-\item{keep}{Should the grouping columns be kept}
+\item{.keep}{Should the grouping columns be kept}
 }
 \description{
 Split data frame by groups. Returns a list
