@@ -5,16 +5,16 @@
 \alias{dt_mutate_across}
 \title{Mutate multiple columns simultaneously}
 \usage{
-mutate_across.(.data, .cols = everything.(), .funs, ..., by = NULL)
+mutate_across.(.data, .cols = everything.(), .fns, ..., by = NULL)
 
-dt_mutate_across(.data, .cols = everything.(), .funs, ..., by = NULL)
+dt_mutate_across(.data, .cols = everything.(), .fns, ..., by = NULL)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
 
 \item{.cols}{vector \code{c()} of bare column names for \code{mutate_across.()} to use. Supports enhanced selection.}
 
-\item{.funs}{Functions to pass. Can pass a list of functions.}
+\item{.fns}{Functions to pass. Can pass a list of functions.}
 
 \item{...}{Other arguments for the passed function}
 

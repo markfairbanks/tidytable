@@ -9,7 +9,7 @@
 #'
 #' @param .data A data.frame or data.table
 #' @param .cols vector `c()` of bare column names for `mutate_across.()` to use. Supports enhanced selection.
-#' @param .funs Functions to pass. Can pass a list of functions.
+#' @param .fns Functions to pass. Can pass a list of functions.
 #' @param ... Other arguments for the passed function
 #' @param by Columns to group by
 #'
@@ -33,12 +33,12 @@
 #' example_dt %>%
 #'   mutate_across.(c(x, y), list(new = ~ .x * 2,
 #'                                another = ~ .x + 7))
-mutate_across. <- function(.data, .cols = everything.(), .funs, ..., by = NULL) {
+mutate_across. <- function(.data, .cols = everything.(), .fns, ..., by = NULL) {
   UseMethod("mutate_across.")
 }
 
 #' @export
-mutate_across..tidytable <- function(.data, .cols = everything.(), .funs, ..., by = NULL) {
+mutate_across..tidytable <- function(.data, .cols = everything.(), .fns, ..., by = NULL) {
 
   .cols <- enexpr(.cols)
   .cols <- as.character(vec_selector(.data, !!.cols))
@@ -48,25 +48,25 @@ mutate_across..tidytable <- function(.data, .cols = everything.(), .funs, ..., b
 
   .data <- shallow(.data)
 
-  if (!is.list(.funs)) {
+  if (!is.list(.fns)) {
     if (length(.cols) > 0) {
       eval_expr(
-        .data[, (.cols) := map.(.SD, .funs, ...), .SDcols = .cols, by = !!by]
+        .data[, (.cols) := map.(.SD, .fns, ...), .SDcols = .cols, by = !!by]
       )
     } else {
       .data
     }
   } else {
 
-    if (!is_named(.funs)) abort("functions passed in a list must be named")
+    if (!is_named(.fns)) abort("functions passed in a list must be named")
 
-    new_names <- names(.funs)
+    new_names <- names(.fns)
 
     for (i in seq_along(new_names)) {
       new_cols <-  paste0(.cols, "_", new_names[[i]])
 
       eval_expr(
-        .data[, (new_cols) := map.(.SD, .funs[[i]]), .SDcols = .cols, by = !!by]
+        .data[, (new_cols) := map.(.SD, .fns[[i]]), .SDcols = .cols, by = !!by]
       )
     }
   }
@@ -74,12 +74,12 @@ mutate_across..tidytable <- function(.data, .cols = everything.(), .funs, ..., b
 }
 
 #' @export
-mutate_across..data.frame <- function(.data, .cols = everything.(), .funs, ..., by = NULL) {
+mutate_across..data.frame <- function(.data, .cols = everything.(), .fns, ..., by = NULL) {
   .data <- as_tidytable(.data)
   .cols <- enexpr(.cols)
   by <- enexpr(by)
 
-  mutate_across.(.data, !!.cols, .funs, ..., by = !!by)
+  mutate_across.(.data, !!.cols, .fns, ..., by = !!by)
 }
 
 #' @export

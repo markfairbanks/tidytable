@@ -60,7 +60,8 @@ case. <- function(..., default = NA) {
 
   for (i in seq_along(conditions)) {
 
-    change_flag <- fifelse(eval(conditions[[i]], parent.frame()), TRUE, FALSE, FALSE)
+    change_flag <- fifelse(eval(conditions[[i]], parent.frame()),
+                           TRUE, FALSE, FALSE)
 
     vals <- fifelse(change_flag,
                     eval(values[[i]], parent.frame()),
