@@ -77,18 +77,21 @@ filler <- function(.data, ..., type = "locf", by = NULL) {
 
   if (with_by) col_order <- names(.data)
 
-  if (length(numeric_cols) > 0)
-    .data <- eval_expr(
-      dt(.data, , !!numeric_cols := lapply(.SD, nafill, !!type), .SDcols = !!numeric_cols, by = !!by)
-    )
+  if (length(numeric_cols) > 0) {
+    .data <- shallow(.data)
 
+    eval_expr(
+      .data[, !!numeric_cols := lapply(.SD, nafill, !!type), .SDcols = !!numeric_cols, by = !!by]
+    )
+  }
   if (length(other_cols) > 0) {
     other_cols <- syms(other_cols)
+    .data <- shallow(.data)
 
     for (col in other_cols) {
-      .data <- eval_expr(
-        dt(.data, , !!col := .SD[, !!col][nafill(fifelse(is.na(!!col), NA_integer_, 1:.N), type = !!type)],
-             by = !!by)
+      eval_expr(
+        .data[, !!col := .SD[, !!col][nafill(fifelse(is.na(!!col), NA_integer_, 1:.N), type = !!type)],
+              by = !!by]
       )
     }
   }
