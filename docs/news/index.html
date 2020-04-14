@@ -130,7 +130,9 @@
 <li>Breaking changes:
 <ul>
 <li>
-<code><a href="../reference/get_dummies..html">get_dummies.()</a></code>: “cols” arg defaults to <code><a href="https://rdrr.io/r/base/c.html">c(is.character, is.factor)</a></code>. The result is the same, but is more consistent with other enhanced selection functions</li>
+<code><a href="../reference/get_dummies..html">get_dummies.()</a></code>: <code>cols</code> arg defaults to <code><a href="https://rdrr.io/r/base/c.html">c(is.character, is.factor)</a></code>. The result is the same, but is more consistent with other enhanced selection functions</li>
+<li>
+<code><a href="../reference/mutate_across..html">mutate_across.()</a></code>: <code>.funs</code> argument renamed to <code>.fns</code> to match dplyr 1.0</li>
 </ul>
 </li>
 <li>New functions:
@@ -147,6 +149,15 @@
 <code><a href="../reference/distinct..html">distinct.()</a></code>: Added <code>.keep_all</code> argument</li>
 <li>
 <code><a href="../reference/fill..html">fill.()</a></code>: Preserves column order when using “by”</li>
+<li>
+<code><a href="../reference/group_split..html">group_split.()</a></code>: Added <code>.keep</code> arg</li>
+<li>
+<code>nest.()</code>
+<ul>
+<li>Can now unnest multiple columns in one call</li>
+<li>data.tables in a list column can now have different ncols and different column order</li>
+</ul>
+</li>
 <li>
 <code><a href="../reference/select..html">select.()</a></code>: Now allows column renaming</li>
 <li>

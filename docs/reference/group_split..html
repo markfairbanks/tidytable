@@ -130,9 +130,9 @@ Supports enhanced selection" />
 <p>Supports enhanced selection</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='group_split..html'>group_split.</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'><a href='group_split..html'>group_split.</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>.keep</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'><a href='group_split..html'>dt_group_split</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='group_split..html'>dt_group_split</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>.keep</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -144,6 +144,10 @@ Supports enhanced selection" />
     <tr>
       <th>...</th>
       <td><p>Groups to split by</p></td>
+    </tr>
+    <tr>
+      <th>keep</th>
+      <td><p>Should the grouping columns be kept</p></td>
     </tr>
     </table>
 
@@ -166,6 +170,18 @@ Supports enhanced selection" />
 #&gt;    a b c d
 #&gt; 1: 4 4 b b
 #&gt; 2: 5 5 b b
+#&gt; </div><div class='input'>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='group_split..html'>group_split.</a></span>(<span class='no'>c</span>, <span class='no'>d</span>, <span class='kw'>.keep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [[1]]
+#&gt;    a b
+#&gt; 1: 1 1
+#&gt; 2: 2 2
+#&gt; 3: 3 3
+#&gt; 
+#&gt; [[2]]
+#&gt;    a b
+#&gt; 1: 4 4
+#&gt; 2: 5 5
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
