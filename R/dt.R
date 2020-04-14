@@ -30,5 +30,12 @@ dt.data.frame <- function(.data, ...) {
 
 #' @export
 dt.tidytable <- function(.data, ...) {
-  shallow(.data)[...]
+  dots <- substitute(list(...))
+
+  needs_copy <- str_detect(expr_text(dots), ":=")
+
+  if (needs_copy) .data <- copy(.data)
+  else .data <- shallow(.data)
+
+  .data[...]
 }
