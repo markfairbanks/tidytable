@@ -35,7 +35,6 @@ dt.tidytable <- function(.data, ...) {
   needs_copy <- str_detect(expr_text(dots), ":=")
 
   if (needs_copy) .data <- copy(.data)
-  else .data <- shallow(.data)
 
   .data[...]
 }

@@ -17,10 +17,9 @@ dt_transmute(.data, ..., by = NULL)
 \item{by}{Columns to group by}
 }
 \description{
-Unlike \code{dt_mutate()}, \code{transmute.()} keeps only the variables that you create
+Unlike \code{mutate.()}, \code{transmute.()} keeps only the variables that you create
 }
 \examples{
-# transmute keeps only the variables you create
 mtcars \%>\%
   transmute.(displ_l = disp / 61.0237)
 

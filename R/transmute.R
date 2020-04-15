@@ -1,7 +1,7 @@
 #' Add new variables and drop all others
 #'
 #' @description
-#' Unlike `dt_mutate()`, `transmute.()` keeps only the variables that you create
+#' Unlike `mutate.()`, `transmute.()` keeps only the variables that you create
 #'
 #' @param .data A data.frame or data.table
 #' @param ... Columns to create/modify
@@ -9,7 +9,6 @@
 #'
 #' @md
 #' @examples
-#' # transmute keeps only the variables you create
 #' mtcars %>%
 #'   transmute.(displ_l = disp / 61.0237)
 #'
