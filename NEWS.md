@@ -8,6 +8,7 @@
   + `desc.()`
   + `unite.()`
 * Functionality improvements:
+  + Paged printing now works in Rmarkdown
   + `bind_rows.()`: Does name checking and fills missing
   + `distinct.()`: Added `.keep_all` argument
   + `fill.()`: Preserves column order when using "by"
