@@ -41,23 +41,12 @@ case. <- function(..., default = NA) {
 
   vals <- default
 
-  if (length(vals) == 1) {
-    if (is.na(vals)) {
-      na_class <- class(values[[1]])
-      if (na_class == "logical") vals <- NA
-      else if (na_class == "complex") vals <- NA_complex_
-      else if (na_class == "integer") vals <- NA_integer_
-      else if (na_class == "character") vals <- NA_character_
-      else vals <- NA_real_
-    }
-  }
-
   for (i in seq_along(conditions)) {
 
     change_flag <- fifelse(eval(conditions[[i]], parent.frame()),
                            TRUE, FALSE, FALSE)
 
-    vals <- fifelse(change_flag,
+    vals <- ifelse.(change_flag,
                     eval(values[[i]], parent.frame()),
                     vals)
   }

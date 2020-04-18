@@ -23,8 +23,8 @@
 #'   mutate.(new_col = ifelse.(x > 2L, NA, x - 1L))
 ifelse. <- function(conditions, true, false, na = NA) {
 
-  false <- false
   true <- true
+  false <- false
 
   if (length(false) == 1)
     if (is.na(false)) false <- as(false, class(true))
