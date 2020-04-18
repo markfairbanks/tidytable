@@ -7,6 +7,7 @@
 #' @param conditions Conditions to test on
 #' @param true Values to return if conditions evaluate to TRUE
 #' @param false Values to return if conditions evaluate to FALSE
+#' @param na Value to return if an element of test is NA.
 #'
 #' @md
 #' @export
@@ -20,12 +21,18 @@
 #'
 #' test_df %>%
 #'   mutate.(new_col = ifelse.(x > 2L, NA, x - 1L))
-ifelse. <- function(conditions, true, false) {
+ifelse. <- function(conditions, true, false, na = NA) {
+
+  false <- false
+  true <- true
+
+  if (length(false) == 1)
+    if (is.na(false)) false <- as(false, class(true))
 
   if (length(true) == 1)
     if(is.na(true)) true <- as(true, class(false))
 
-  case.(conditions, true, default = false)
+  fifelse(conditions, true, false, na = na)
 }
 
 #' @export
