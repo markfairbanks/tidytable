@@ -25,6 +25,7 @@
   + `relocate.()`
 * Bug fixes:
   + `group_split.()`: Now returns a list of tidytables instead of data.tables
+  + `left_join.()`: Now works with "by" columns of different names
 
 # tidytable 0.4.0
 

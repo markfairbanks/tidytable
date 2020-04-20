@@ -36,11 +36,20 @@ left_join..default <- function(x, y, by = NULL) {
 
   on_vec <- by_x
   names(on_vec) <- by_y
+  on_vec[on_vec == ""] <- names(on_vec)[on_vec == ""]
 
+  # Get y names
   y_names <- names(y)
-  all_names <- c(names(x), y_names[!y_names %in% names(x)])
+  y_names <- y_names[!y_names %in% names(x)] # Names not in x
+  y_names <- y_names[!y_names %in% by_y] # Remove old names
+  all_names <- c(names(x), y_names)
 
-  as_tidytable(setcolorder(y[x, on = on_vec, allow.cartesian = TRUE], all_names))
+  return_df <- y[x, on = on_vec, allow.cartesian = TRUE]
+
+  setnames(return_df, names(on_vec), on_vec)
+  setcolorder(return_df, all_names)
+
+  as_tidytable(return_df)
 }
 
 #' @export
@@ -126,9 +135,11 @@ anti_join..default <- function(x, y, by = NULL) {
 }
 
 get_bys <- function(x, y, by = NULL) {
+  names_x <- names(x)
+  names_y <- names(y)
 
   if (is.null(by)) {
-    by_x <- by_y <- intersect(colnames(x), colnames(y))
+    by_x <- by_y <- intersect(names_x, names_y)
   } else {
     by_x <- names(by)
     by_y <- unname(by)
@@ -137,8 +148,8 @@ get_bys <- function(x, y, by = NULL) {
     }
   }
 
-  if (by_x %notin% colnames(x)) stop("by.x columns not in x")
-  if (by_y %notin% colnames(y)) stop("by.y columns not in y")
+  if (any(by_x[by_x != ""] %notin% names_x)) stop("by.x columns not in x")
+  if (any(by_y[by_y != ""] %notin% names_y)) stop("by.y columns not in y")
 
   list(by_x, by_y)
 }
