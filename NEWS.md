@@ -23,6 +23,8 @@
   + `distinct.()`
   + `drop_na.()`
   + `relocate.()`
+* Bug fixes:
+  + `group_split.()`: Now returns a list of tidytables instead of data.tables
 
 # tidytable 0.4.0
 
