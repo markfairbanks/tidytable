@@ -36,7 +36,9 @@ group_split..tidytable <- function(.data, ..., .keep = TRUE) {
   } else {
     dots <- as.character(dots_selector(.data, ...))
 
-    unname(split(.data, by = dots, keep.by = .keep))
+    dots <- unname(split(.data, by = dots, keep.by = .keep))
+
+    map.(dots, as_tidytable)
   }
 }
 
