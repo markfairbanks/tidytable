@@ -12,7 +12,7 @@
   + `bind_rows.()`: Does name checking and fills missing
   + `distinct.()`: Added `.keep_all` argument
   + `fill.()`: Preserves column order when using "by"
-  + `group_split.()`: Added `.keep` arg
+  + `group_split.()`: Added `keep` arg
   + `nest.()`
     - Can now unnest multiple columns in one call
     - data.tables in a list column can now have different ncols
