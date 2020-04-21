@@ -5,9 +5,9 @@
 \alias{dt_ifelse}
 \title{Vectorized if}
 \usage{
-ifelse.(conditions, true, false)
+ifelse.(conditions, true, false, na = NA)
 
-dt_ifelse(conditions, true, false)
+dt_ifelse(conditions, true, false, na = NA)
 }
 \arguments{
 \item{conditions}{Conditions to test on}
@@ -15,6 +15,8 @@ dt_ifelse(conditions, true, false)
 \item{true}{Values to return if conditions evaluate to TRUE}
 
 \item{false}{Values to return if conditions evaluate to FALSE}
+
+\item{na}{Value to return if an element of test is NA.}
 }
 \description{
 \code{ifelse.()} utilizes \code{data.table::fifelse()} in the background, but automatically

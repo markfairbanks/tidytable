@@ -16,7 +16,11 @@ dt_case(..., default = NA)
 }
 \description{
 This function allows you to use multiple if/else statements in one call.
-Note that this function is called differently than `dplyr::case_when`! See examples
+
+You can consider this as a loop through each if/else provided.
+As such, be careful with overlapping conditions.
+
+Note that this function is called differently than `dplyr::case_when`. See examples.
 }
 \examples{
 library(data.table)

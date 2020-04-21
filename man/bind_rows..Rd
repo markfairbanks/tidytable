@@ -25,7 +25,7 @@ dt_bind_cols(...)
 \item{fill}{If TRUE, fills missing columns with NA}
 }
 \description{
-Bind rows or columns together.
+Bind multiple data.tables into one row-wise or col-wise.
 }
 \examples{
 df1 <- data.table::data.table(x = c(1,2,3), y = c(3,4,5))

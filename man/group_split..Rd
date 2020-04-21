@@ -5,16 +5,16 @@
 \alias{dt_group_split}
 \title{Split data frame by groups}
 \usage{
-group_split.(.data, ..., .keep = TRUE)
+group_split.(.data, ..., keep = TRUE)
 
-dt_group_split(.data, ..., .keep = TRUE)
+dt_group_split(.data, ..., keep = TRUE)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
 
 \item{...}{Groups to split by}
 
-\item{.keep}{Should the grouping columns be kept}
+\item{keep}{Should the grouping columns be kept}
 }
 \description{
 Split data frame by groups. Returns a list
@@ -32,5 +32,5 @@ test_df \%>\%
   group_split.(c, d)
 
 test_df \%>\%
-  group_split.(c, d, .keep = FALSE)
+  group_split.(c, d, keep = FALSE)
 }
