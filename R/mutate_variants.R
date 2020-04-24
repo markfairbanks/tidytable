@@ -1,4 +1,4 @@
-#' Depcrecated mutate helpers
+#' Deprecated mutate helpers
 #'
 #' @description
 #' These helpers have been deprecated. Please use `mutate_across.()`

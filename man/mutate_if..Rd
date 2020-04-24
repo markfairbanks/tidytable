@@ -7,7 +7,7 @@
 \alias{dt_mutate_if}
 \alias{dt_mutate_at}
 \alias{dt_mutate_all}
-\title{Depcrecated mutate helpers}
+\title{Deprecated mutate helpers}
 \usage{
 mutate_if.(.data, .predicate, .funs, ..., by = NULL)
 
