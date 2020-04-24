@@ -23,7 +23,8 @@ Imports:
     data.table,
     magrittr,
     rlang,
-    methods
+    methods,
+    tidyselect
 RoxygenNote: 7.1.0
 URL: https://github.com/markfairbanks/tidytable
 BugReports: https://github.com/markfairbanks/tidytable/issues

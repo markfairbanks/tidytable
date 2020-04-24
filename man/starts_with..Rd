@@ -13,25 +13,25 @@
 \alias{dt_any_of}
 \title{Select helpers}
 \usage{
-starts_with.(match)
+starts_with.(match, ignore.case = TRUE, vars = peek_vars(fn = "starts_with"))
 
-dt_starts_with(match)
+dt_starts_with(match, ignore.case = TRUE, vars = peek_vars(fn = "starts_with"))
 
-contains.(match)
+contains.(match, ignore.case = TRUE, vars = peek_vars(fn = "contains"))
 
-dt_contains(match)
+dt_contains(match, ignore.case = TRUE, vars = peek_vars(fn = "contains"))
 
-ends_with.(match)
+ends_with.(match, ignore.case = TRUE, vars = peek_vars(fn = "ends_with"))
 
-dt_ends_with(match)
+dt_ends_with(match, ignore.case = TRUE, vars = peek_vars(fn = "ends_with"))
 
-everything.()
+everything.(vars = peek_vars(fn = "everything"))
 
-dt_everything()
+dt_everything(vars = peek_vars(fn = "everything"))
 
-any_of.(x)
+any_of.(x, ..., vars = peek_vars(fn = "any_of"))
 
-dt_any_of(x)
+dt_any_of(x, ..., vars = peek_vars(fn = "any_of"))
 }
 \arguments{
 \item{match}{The match for the helper function to use}

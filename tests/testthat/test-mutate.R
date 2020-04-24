@@ -111,14 +111,14 @@ test_that("can use by with vector", {
 
 })
 
-test_that("can use by with list", {
-  df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
-
-  tidytable_df <- df %>%
-    mutate.(z = mean(x), by = list(is.character))
-
-  datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y]
-
-  expect_equal(tidytable_df, datatable_df)
-
-})
+# test_that("can use by with list", {
+#   df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
+#
+#   tidytable_df <- df %>%
+#     mutate.(z = mean(x), by = list(is.character))
+#
+#   datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y]
+#
+#   expect_equal(tidytable_df, datatable_df)
+#
+# })

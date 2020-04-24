@@ -50,8 +50,6 @@ slice..tidytable <- function(.data, rows = 1:5, by = NULL) {
       .data[!!rows]
     )
   } else {
-    by <- vec_selector_by(.data, !!by)
-
     eval_expr(
       .data[, .SD[!!rows], !!by]
     )
