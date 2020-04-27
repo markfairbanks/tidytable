@@ -60,3 +60,14 @@ test_that("case. isn't tripped up by NA results v2", {
 
   expect_equal(case_df$check, c(2,1,2,0))
 })
+
+test_that("lower conditions don't overwrite prior conditions", {
+
+  x <- 1:10
+
+  new_x <- case.(x < 5, 1,
+                 x < 9, 2,
+                 default = 3)
+
+  expect_equal(new_x, c(1,1,1,1,2,2,2,2,3,3))
+})

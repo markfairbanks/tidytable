@@ -3,9 +3,6 @@
 #' @description
 #' This function allows you to use multiple if/else statements in one call.
 #'
-#' You can consider this as a loop through each if/else provided.
-#' As such, be careful with overlapping conditions.
-#'
 #' Note that this function is called differently than `dplyr::case_when`. See examples.
 #'
 #' @param ... Sequence of condition/value designations
@@ -31,8 +28,9 @@
 #'                     default = d))
 case. <- function(..., default = NA) {
   dots <- enexprs(...)
+  dots_length <- length(dots)
 
-  index <- '+'(1, 1:length(dots)) %% 2
+  index <- '+'(1, 1:dots_length) %% 2
 
   conditions <- dots[index == 0]
   values <- dots[index == 1]
@@ -43,18 +41,16 @@ case. <- function(..., default = NA) {
   if (length(conditions) != length(values))
     abort("The length of conditions does not equal the length values")
 
-  vals <- default
+  calls <- default
 
-  for (i in seq_along(conditions)) {
-
+  for (i in rev(seq_along(conditions))) {
     change_flag <- fifelse(eval(conditions[[i]], parent.frame()),
                            TRUE, FALSE, FALSE)
 
-    vals <- ifelse.(change_flag,
-                    eval(values[[i]], parent.frame()),
-                    vals)
+    calls <- call("ifelse.", change_flag, values[[i]], calls)
   }
-  vals
+
+  eval(calls, envir = parent.frame())
 }
 
 #' @export
