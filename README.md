@@ -7,7 +7,7 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/dev%20-0.4.0.9-green.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/dev%20-0.4.1-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN RStudio mirror
@@ -140,8 +140,7 @@ Group by calls are done from inside any function that has group by
 functionality (such as `summarize.()` & `mutate.()`)
 
   - A single column can be passed with `by = z`
-  - Multiple columns can be passed with `by = c(y, z)` or `by = list(y,
-    z)`
+  - Multiple columns can be passed with `by = c(y, z)`
   - [Enhanced
     selection](https://markfairbanks.github.io/tidytable/#enhanced-selection)
     can also be used:
@@ -354,17 +353,17 @@ all_marks
 #> # A tibble: 13 x 6
 #>    function_tested tidyverse tidytable data.table pandas tidytable_vs_tidyverse
 #>    <chr>           <chr>     <chr>     <chr>      <chr>  <chr>                 
-#>  1 arrange         456.2ms   39.6ms    35.2ms     297ms  8.7%                  
-#>  2 case_when       528ms     154ms     135ms      307ms  29.2%                 
-#>  3 distinct        87.2ms    20.1ms    17.9ms     287ms  23.1%                 
-#>  4 fill            116.1ms   37.7ms    29.6ms     146ms  32.5%                 
-#>  5 filter          288ms     242ms     233ms      656ms  84.0%                 
-#>  6 inner_join      65.5ms    47.8ms    49.9ms     <NA>   73.0%                 
-#>  7 left_join       60.8ms    44.2ms    39.8ms     <NA>   72.7%                 
-#>  8 mutate          75.2ms    59ms      86.4ms     85.2ms 78.5%                 
-#>  9 nest            25.92ms   9.7ms     9.31ms     <NA>   37.4%                 
-#> 10 pivot_longer    40.3ms    11.1ms    10.7ms     <NA>   27.5%                 
-#> 11 pivot_wider     94.3ms    68.4ms    64.6ms     <NA>   72.5%                 
-#> 12 summarize       499.4ms   94.8ms    170.9ms    780ms  19.0%                 
-#> 13 unnest          741ms     17.5ms    26.2ms     <NA>   2.4%
+#>  1 arrange         404.3ms   36.3ms    32.3ms     297ms  9.0%                  
+#>  2 case_when       400.3ms   53.1ms    58.6ms     307ms  13.3%                 
+#>  3 distinct        89.4ms    21.2ms    17ms       287ms  23.7%                 
+#>  4 fill            111.1ms   34.7ms    30.5ms     146ms  31.2%                 
+#>  5 filter          268ms     205ms     212ms      656ms  76.5%                 
+#>  6 inner_join      98.6ms    60.8ms    54.4ms     <NA>   61.7%                 
+#>  7 left_join       107.7ms   69.3ms    44ms       <NA>   64.3%                 
+#>  8 mutate          68.9ms    52.6ms    70.6ms     85.2ms 76.3%                 
+#>  9 nest            29.26ms   6.81ms    11.15ms    <NA>   23.3%                 
+#> 10 pivot_longer    45.3ms    11ms      10.8ms     <NA>   24.3%                 
+#> 11 pivot_wider     92.7ms    67.6ms    64.8ms     <NA>   72.9%                 
+#> 12 summarize       462ms     94ms      181ms      780ms  20.3%                 
+#> 13 unnest          783.27ms  17.43ms   4.37ms     <NA>   2.2%
 ```
