@@ -81,7 +81,7 @@ Supports enhanced selection" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -164,29 +164,26 @@ Supports enhanced selection" />
   <span class='kw'>d</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>,<span class='st'>"b"</span>))
 
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='relocate..html'>relocate.</a></span>(<span class='no'>c</span>, <span class='kw'>.before</span> <span class='kw'>=</span> <span class='no'>b</span>)</div><div class='output co'>#&gt;        a     c     b     d
-#&gt;    &lt;int&gt; &lt;chr&gt; &lt;int&gt; &lt;chr&gt;
-#&gt; 1:     1     a     1     a
-#&gt; 2:     2     a     2     a
-#&gt; 3:     3     a     3     a
-#&gt; 4:     4     b     4     b
-#&gt; 5:     5     b     5     b</div><div class='input'>
+  <span class='fu'><a href='relocate..html'>relocate.</a></span>(<span class='no'>c</span>, <span class='kw'>.before</span> <span class='kw'>=</span> <span class='no'>b</span>)</div><div class='output co'>#&gt;    a c b d
+#&gt; 1: 1 a 1 a
+#&gt; 2: 2 a 2 a
+#&gt; 3: 3 a 3 a
+#&gt; 4: 4 b 4 b
+#&gt; 5: 5 b 5 b</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='relocate..html'>relocate.</a></span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='no'>c</span>)</div><div class='output co'>#&gt;        c     a     b     d
-#&gt;    &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;
-#&gt; 1:     a     1     1     a
-#&gt; 2:     a     2     2     a
-#&gt; 3:     a     3     3     a
-#&gt; 4:     b     4     4     b
-#&gt; 5:     b     5     5     b</div><div class='input'>
+  <span class='fu'><a href='relocate..html'>relocate.</a></span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='no'>c</span>)</div><div class='output co'>#&gt;    c a b d
+#&gt; 1: a 1 1 a
+#&gt; 2: a 2 2 a
+#&gt; 3: a 3 3 a
+#&gt; 4: b 4 4 b
+#&gt; 5: b 5 5 b</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='relocate..html'>relocate.</a></span>(<span class='no'>is.numeric</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='no'>c</span>)</div><div class='output co'>#&gt;        c     a     b     d
-#&gt;    &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;
-#&gt; 1:     a     1     1     a
-#&gt; 2:     a     2     2     a
-#&gt; 3:     a     3     3     a
-#&gt; 4:     b     4     4     b
-#&gt; 5:     b     5     5     b</div></pre>
+  <span class='fu'><a href='relocate..html'>relocate.</a></span>(<span class='no'>is.numeric</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='no'>c</span>)</div><div class='output co'>#&gt;    c a b d
+#&gt; 1: a 1 1 a
+#&gt; 2: a 2 2 a
+#&gt; 3: a 3 3 a
+#&gt; 4: b 4 4 b
+#&gt; 5: b 5 5 b</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -202,7 +199,7 @@ Supports enhanced selection" />
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

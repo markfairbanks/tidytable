@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -122,9 +122,9 @@
       <small>Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="tidytable-0-4-1-in-development" class="section level1">
+    <div id="tidytable-0-4-1" class="section level1">
 <h1 class="page-header" data-toc-text="0.4.1">
-<a href="#tidytable-0-4-1-in-development" class="anchor"></a>tidytable 0.4.1 (in development)<small> Unreleased </small>
+<a href="#tidytable-0-4-1" class="anchor"></a>tidytable 0.4.1<small> Unreleased </small>
 </h1>
 <ul>
 <li>Breaking changes:
@@ -143,6 +143,7 @@
 </li>
 <li>Functionality improvements:
 <ul>
+<li>Paged printing now works in Rmarkdown</li>
 <li>
 <code><a href="../reference/bind_rows..html">bind_rows.()</a></code>: Does name checking and fills missing</li>
 <li>
@@ -150,7 +151,7 @@
 <li>
 <code><a href="../reference/fill..html">fill.()</a></code>: Preserves column order when using “by”</li>
 <li>
-<code><a href="../reference/group_split..html">group_split.()</a></code>: Added <code>.keep</code> arg</li>
+<code><a href="../reference/group_split..html">group_split.()</a></code>: Added <code>keep</code> arg</li>
 <li>
 <code>nest.()</code>
 <ul>
@@ -169,6 +170,14 @@
 <li><code><a href="../reference/distinct..html">distinct.()</a></code></li>
 <li><code><a href="../reference/drop_na..html">drop_na.()</a></code></li>
 <li><code><a href="../reference/relocate..html">relocate.()</a></code></li>
+</ul>
+</li>
+<li>Bug fixes:
+<ul>
+<li>
+<code><a href="../reference/group_split..html">group_split.()</a></code>: Now returns a list of tidytables instead of data.tables</li>
+<li>
+<code><a href="../reference/left_join..html">left_join.()</a></code>: Now works with “by” columns of different names</li>
 </ul>
 </li>
 </ul>
@@ -309,7 +318,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

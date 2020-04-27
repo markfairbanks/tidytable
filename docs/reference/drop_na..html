@@ -81,7 +81,7 @@ Supports enhanced selection" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -154,19 +154,16 @@ Supports enhanced selection" />
   <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='fl'>NA</span>,<span class='st'>"b"</span>))
 
 <span class='no'>df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='drop_na..html'>drop_na.</a></span>()</div><div class='output co'>#&gt;        x     y
-#&gt;    &lt;dbl&gt; &lt;chr&gt;
-#&gt; 1:     1     a</div><div class='input'>
+  <span class='fu'><a href='drop_na..html'>drop_na.</a></span>()</div><div class='output co'>#&gt;    x y
+#&gt; 1: 1 a</div><div class='input'>
 <span class='no'>df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='drop_na..html'>drop_na.</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;        x     y
-#&gt;    &lt;dbl&gt; &lt;chr&gt;
-#&gt; 1:     1     a
-#&gt; 2:     2  &lt;NA&gt;</div><div class='input'>
+  <span class='fu'><a href='drop_na..html'>drop_na.</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt;    x    y
+#&gt; 1: 1    a
+#&gt; 2: 2 &lt;NA&gt;</div><div class='input'>
 <span class='no'>df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='drop_na..html'>drop_na.</a></span>(<span class='no'>is.numeric</span>)</div><div class='output co'>#&gt;        x     y
-#&gt;    &lt;dbl&gt; &lt;chr&gt;
-#&gt; 1:     1     a
-#&gt; 2:     2  &lt;NA&gt;</div></pre>
+  <span class='fu'><a href='drop_na..html'>drop_na.</a></span>(<span class='no'>is.numeric</span>)</div><div class='output co'>#&gt;    x    y
+#&gt; 1: 1    a
+#&gt; 2: 2 &lt;NA&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -182,7 +179,7 @@ Supports enhanced selection" />
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
