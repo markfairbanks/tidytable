@@ -1,4 +1,4 @@
-# tidytable 0.4.1 (in development)
+# tidytable 0.4.1
 
 * Breaking changes:
   + `get_dummies.()`: `cols` arg defaults to `c(is.character, is.factor)`.

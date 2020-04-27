@@ -10,7 +10,8 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%",
-  warning = FALSE
+  warning = FALSE,
+  paged.print = FALSE
 )
 ```
 
@@ -18,7 +19,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/dev%20-0.4.0.9-green.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/dev%20-0.4.1-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey)](https://r-pkg.org/pkg/tidytable)
 <!-- badges: end -->
@@ -129,7 +130,7 @@ test_df %>%
 Group by calls are done from inside any function that has group by functionality (such as `summarize.()` & `mutate.()`) 
 
 * A single column can be passed with `by = z`
-* Multiple columns can be passed with `by = c(y, z)` or `by = list(y, z)`
+* Multiple columns can be passed with `by = c(y, z)`
 * [Enhanced selection](https://markfairbanks.github.io/tidytable/#enhanced-selection) can 
 also be used:
   + Single predicate: `by = is.character`
@@ -403,19 +404,15 @@ case2_dt <- copy(case_dt)
 
 case_marks <- bench::mark(
   tidyverse = mutate(case_tbl,
-                     test = case_when(x < median_x ~ "low",
-                                      x >= median_x ~ "high",
-                                      is.na(x) ~ "unknown",
-                                      TRUE ~ "other")),
+                     test = case_when(x < median_x ~ x * 2,
+                                      x >= median_x ~ x * 3,
+                                      TRUE ~ x * 4)),
   tidytable = mutate.(case_dt,
-                      test = case.(x < median_x, "low",
-                                   x >= median_x, "high",
-                                   is.na(x), "unknown",
-                                   default = "other")),
-  data.table = case2_dt[,':='(test = fifelse(x < median_x, "low",
-                                             fifelse(x >= median_x, "high",
-                                                    fifelse(is.na(x), "unknown", "other", "other"),
-                                                    "other"), "other"))][],
+                      test = case.(x < median_x, x * 2,
+                                   x >= median_x, x * 3,
+                                   default = x * 4)),
+  data.table = case2_dt[,':='(test = fifelse(x < median_x, x * 2,
+                                             fifelse(x >= median_x, x * 3, x * 4)))][],
   check = FALSE,
   iterations = iters) %>%
   mutate(expression = as.character(expression),
