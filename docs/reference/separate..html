@@ -82,7 +82,7 @@ Note: Using automatic detection or regex will be slower than simple separators s
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -171,20 +171,18 @@ Note: Using automatic detection or regex will be slower than simple separators s
 
 <span class='co'># "sep" can be automatically detected (slower)</span>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='separate..html'>separate.</a></span>(<span class='no'>x</span>, <span class='kw'>into</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"c1"</span>, <span class='st'>"c2"</span>))</div><div class='output co'>#&gt;       c1    c2
-#&gt;    &lt;chr&gt; &lt;chr&gt;
-#&gt; 1:     a  &lt;NA&gt;
-#&gt; 2:     a     b
-#&gt; 3:     a     b
-#&gt; 4:  &lt;NA&gt;  &lt;NA&gt;</div><div class='input'>
+  <span class='fu'><a href='separate..html'>separate.</a></span>(<span class='no'>x</span>, <span class='kw'>into</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"c1"</span>, <span class='st'>"c2"</span>))</div><div class='output co'>#&gt;      c1   c2
+#&gt; 1:    a &lt;NA&gt;
+#&gt; 2:    a    b
+#&gt; 3:    a    b
+#&gt; 4: &lt;NA&gt; &lt;NA&gt;</div><div class='input'>
 <span class='co'># Faster if "sep" is provided</span>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='separate..html'>separate.</a></span>(<span class='no'>x</span>, <span class='kw'>into</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"c1"</span>, <span class='st'>"c2"</span>), <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"."</span>)</div><div class='output co'>#&gt;       c1    c2
-#&gt;    &lt;chr&gt; &lt;chr&gt;
-#&gt; 1:     a  &lt;NA&gt;
-#&gt; 2:     a     b
-#&gt; 3:     a     b
-#&gt; 4:  &lt;NA&gt;  &lt;NA&gt;</div></pre>
+  <span class='fu'><a href='separate..html'>separate.</a></span>(<span class='no'>x</span>, <span class='kw'>into</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"c1"</span>, <span class='st'>"c2"</span>), <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"."</span>)</div><div class='output co'>#&gt;      c1   c2
+#&gt; 1:    a &lt;NA&gt;
+#&gt; 2:    a    b
+#&gt; 3:    a    b
+#&gt; 4: &lt;NA&gt; &lt;NA&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -200,7 +198,7 @@ Note: Using automatic detection or regex will be slower than simple separators s
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

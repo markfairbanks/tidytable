@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -251,7 +251,7 @@
 <ul>
 <li>A single column can be passed with <code>by = z</code>
 </li>
-<li>Multiple columns can be passed with <code>by = c(y, z)</code> or <code>by = list(y, z)</code>
+<li>Multiple columns can be passed with <code>by = c(y, z)</code>
 </li>
 <li>
 <a href="https://markfairbanks.github.io/tidytable/#enhanced-selection">Enhanced selection</a> can also be used:
@@ -427,19 +427,19 @@
 <span class="co">#&gt; # A tibble: 13 x 6</span>
 <span class="co">#&gt;    function_tested tidyverse tidytable data.table pandas tidytable_vs_tidyverse</span>
 <span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;                 </span>
-<span class="co">#&gt;  1 arrange         456.2ms   39.6ms    35.2ms     297ms  8.7%                  </span>
-<span class="co">#&gt;  2 case_when       528ms     154ms     135ms      307ms  29.2%                 </span>
-<span class="co">#&gt;  3 distinct        87.2ms    20.1ms    17.9ms     287ms  23.1%                 </span>
-<span class="co">#&gt;  4 fill            116.1ms   37.7ms    29.6ms     146ms  32.5%                 </span>
-<span class="co">#&gt;  5 filter          288ms     242ms     233ms      656ms  84.0%                 </span>
-<span class="co">#&gt;  6 inner_join      65.5ms    47.8ms    49.9ms     &lt;NA&gt;   73.0%                 </span>
-<span class="co">#&gt;  7 left_join       60.8ms    44.2ms    39.8ms     &lt;NA&gt;   72.7%                 </span>
-<span class="co">#&gt;  8 mutate          75.2ms    59ms      86.4ms     85.2ms 78.5%                 </span>
-<span class="co">#&gt;  9 nest            25.92ms   9.7ms     9.31ms     &lt;NA&gt;   37.4%                 </span>
-<span class="co">#&gt; 10 pivot_longer    40.3ms    11.1ms    10.7ms     &lt;NA&gt;   27.5%                 </span>
-<span class="co">#&gt; 11 pivot_wider     94.3ms    68.4ms    64.6ms     &lt;NA&gt;   72.5%                 </span>
-<span class="co">#&gt; 12 summarize       499.4ms   94.8ms    170.9ms    780ms  19.0%                 </span>
-<span class="co">#&gt; 13 unnest          741ms     17.5ms    26.2ms     &lt;NA&gt;   2.4%</span></pre></div>
+<span class="co">#&gt;  1 arrange         404.3ms   36.3ms    32.3ms     297ms  9.0%                  </span>
+<span class="co">#&gt;  2 case_when       400.3ms   53.1ms    58.6ms     307ms  13.3%                 </span>
+<span class="co">#&gt;  3 distinct        89.4ms    21.2ms    17ms       287ms  23.7%                 </span>
+<span class="co">#&gt;  4 fill            111.1ms   34.7ms    30.5ms     146ms  31.2%                 </span>
+<span class="co">#&gt;  5 filter          268ms     205ms     212ms      656ms  76.5%                 </span>
+<span class="co">#&gt;  6 inner_join      98.6ms    60.8ms    54.4ms     &lt;NA&gt;   61.7%                 </span>
+<span class="co">#&gt;  7 left_join       107.7ms   69.3ms    44ms       &lt;NA&gt;   64.3%                 </span>
+<span class="co">#&gt;  8 mutate          68.9ms    52.6ms    70.6ms     85.2ms 76.3%                 </span>
+<span class="co">#&gt;  9 nest            29.26ms   6.81ms    11.15ms    &lt;NA&gt;   23.3%                 </span>
+<span class="co">#&gt; 10 pivot_longer    45.3ms    11ms      10.8ms     &lt;NA&gt;   24.3%                 </span>
+<span class="co">#&gt; 11 pivot_wider     92.7ms    67.6ms    64.8ms     &lt;NA&gt;   72.9%                 </span>
+<span class="co">#&gt; 12 summarize       462ms     94ms      181ms      780ms  20.3%                 </span>
+<span class="co">#&gt; 13 unnest          783.27ms  17.43ms   4.37ms     &lt;NA&gt;   2.2%</span></pre></div>
 </div>
 </div>
 </div>
@@ -476,7 +476,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=tidytable"><img src="https://www.r-pkg.org/badges/version/tidytable" alt="CRAN status"></a></li>
-<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.4.0.9-green.svg"></a></li>
+<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.4.1-green.svg"></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 <li><a href="https://r-pkg.org/pkg/tidytable"><img src="https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey" alt="CRAN RStudio mirror downloads"></a></li>
 </ul>
@@ -490,7 +490,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

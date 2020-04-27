@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="Add new variables and drop all others — transmute." />
-<meta property="og:description" content="Unlike dt_mutate(), transmute.() keeps only the variables that you create" />
+<meta property="og:description" content="Unlike mutate.(), transmute.() keeps only the variables that you create" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -125,7 +125,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Unlike <code><a href='mutate..html'>dt_mutate()</a></code>, <code><a href='transmute..html'>transmute.()</a></code> keeps only the variables that you create</p>
+    <p>Unlike <code><a href='mutate..html'>mutate.()</a></code>, <code><a href='transmute..html'>transmute.()</a></code> keeps only the variables that you create</p>
     </div>
 
     <pre class="usage"><span class='fu'><a href='transmute..html'>transmute.</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
@@ -151,21 +151,41 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># transmute keeps only the variables you create</span>
-<span class='no'>mtcars</span> <span class='kw'>%&gt;%</span>
+    <pre class="examples"><div class='input'><span class='no'>mtcars</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='transmute..html'>transmute.</a></span>(<span class='kw'>displ_l</span> <span class='kw'>=</span> <span class='no'>disp</span> / <span class='fl'>61.0237</span>)</div><div class='output co'>#&gt;      displ_l
-#&gt;        &lt;dbl&gt;
 #&gt;  1: 2.621932
 #&gt;  2: 2.621932
 #&gt;  3: 1.769804
 #&gt;  4: 4.227866
 #&gt;  5: 5.899347
-#&gt; ---         
+#&gt;  6: 3.687092
+#&gt;  7: 5.899347
+#&gt;  8: 2.403984
+#&gt;  9: 2.307300
+#&gt; 10: 2.746474
+#&gt; 11: 2.746474
+#&gt; 12: 4.519556
+#&gt; 13: 4.519556
+#&gt; 14: 4.519556
+#&gt; 15: 7.734700
+#&gt; 16: 7.538055
+#&gt; 17: 7.210313
+#&gt; 18: 1.289663
+#&gt; 19: 1.240502
+#&gt; 20: 1.165121
+#&gt; 21: 1.968088
+#&gt; 22: 5.211090
+#&gt; 23: 4.981671
+#&gt; 24: 5.735477
+#&gt; 25: 6.554830
+#&gt; 26: 1.294579
+#&gt; 27: 1.971365
 #&gt; 28: 1.558411
 #&gt; 29: 5.751864
 #&gt; 30: 2.376126
 #&gt; 31: 4.932510
-#&gt; 32: 1.982836</div><div class='input'>
+#&gt; 32: 1.982836
+#&gt;      displ_l</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -182,7 +202,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
