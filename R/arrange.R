@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-#' example_dt <- data.table::data.table(
+#' example_dt <- tidytable(
 #'   a = c(1,2,3),
 #'   b = c(4,5,6),
 #'   c = c("a","a","b"))
@@ -23,20 +23,15 @@ arrange. <- function(.data, ...) {
 }
 
 #' @export
-arrange..tidytable <- function(.data, ...) {
+arrange..data.frame <- function(.data, ...) {
+
+  .data <- as_tidytable(.data)
 
   dots <- enexprs(...)
 
   eval_expr(
     .data[order(!!!dots)]
   )
-}
-
-#' @export
-arrange..data.frame <- function(.data, ...) {
-  .data <- as_tidytable(.data)
-
-  arrange.(.data, ...)
 }
 
 #' @export

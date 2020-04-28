@@ -20,7 +20,7 @@ dt_filter(.data, ..., by = NULL)
 Filters a dataset to choose rows where conditions are true.
 }
 \examples{
-example_dt <- data.table::data.table(
+example_dt <- tidytable(
   a = c(1,2,3),
   b = c(4,5,6),
   c = c("a","a","b"))

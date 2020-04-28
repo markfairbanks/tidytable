@@ -37,12 +37,14 @@ pivot_wider. <- function(.data,
 }
 
 #' @export
-pivot_wider..tidytable <- function(.data,
-                                   names_from = name,
-                                   values_from = value,
-                                   id_cols = NULL,
-                                   names_sep = "_",
-                                   values_fn = NULL) {
+pivot_wider..data.frame <- function(.data,
+                                    names_from = name,
+                                    values_from = value,
+                                    id_cols = NULL,
+                                    names_sep = "_",
+                                    values_fn = NULL) {
+
+  .data <- as_tidytable(.data)
 
   id_cols <- enexpr(id_cols)
   names_from <- enexpr(names_from)
@@ -83,27 +85,6 @@ pivot_wider..tidytable <- function(.data,
   if (length(id_cols) == 0) .data <- .data[, . := NULL][]
 
   .data
-}
-
-#' @export
-pivot_wider..data.frame <- function(.data,
-                                      names_from = name,
-                                      values_from = value,
-                                      id_cols = NULL,
-                                      names_sep = "_",
-                                      values_fn = NULL) {
-  .data <- as_tidytable(.data)
-  id_cols <- enexpr(id_cols)
-  names_from <- enexpr(names_from)
-  values_from <- enexpr(values_from)
-  values_fn <- enexpr(values_fn)
-
-  pivot_wider.(.data,
-                 names_from = !!names_from,
-                 values_from = !!values_from,
-                 id_cols = !!id_cols,
-                 names_sep = names_sep,
-                 values_fn = !!values_fn)
 }
 
 #' @export

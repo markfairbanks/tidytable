@@ -17,7 +17,7 @@
 #' @export
 #'
 #' @examples
-#' test_df <- data.table::data.table(
+#' test_df <- tidytable(
 #'   col1 = c("a", "b", "c", NA),
 #'   col2 = as.factor(c("a", "b", NA, "d")),
 #'   var1 = rnorm(4,0,1))
@@ -61,22 +61,8 @@ get_dummies..data.frame <- function(.data,
                                     dummify_na = TRUE) {
 
   .data <- as_tidytable(.data)
-  cols <- enexpr(cols)
-
-  get_dummies.(.data, cols = !!cols,
-                 prefix = prefix, prefix_sep = prefix_sep,
-                 drop_first = drop_first, dummify_na = dummify_na)
-}
-
-#' @export
-get_dummies..tidytable <- function(.data,
-                                   cols = c(is.character, is.factor),
-                                   prefix = TRUE,
-                                   prefix_sep = "_",
-                                   drop_first = FALSE,
-                                   dummify_na = TRUE) {
-
   .data <- shallow(.data)
+
   cols <- enexpr(cols)
 
   cols <- vec_selector(.data, !!cols)

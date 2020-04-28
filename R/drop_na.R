@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-#' df <- data.table::data.table(
+#' df <- tidytable(
 #'   x = c(1,2,NA),
 #'   y = c("a",NA,"b"))
 #'
@@ -28,7 +28,9 @@ drop_na. <- function(.data, ...) {
 }
 
 #' @export
-drop_na..tidytable <- function(.data, ...) {
+drop_na..data.frame <- function(.data, ...) {
+
+  .data <- as_tidytable(.data)
 
   dots <- enexprs(...)
 
@@ -39,13 +41,6 @@ drop_na..tidytable <- function(.data, ...) {
 
     na.omit(.data, cols = drop_cols)
   }
-}
-
-#' @export
-drop_na..data.frame <- function(.data, ...) {
-  .data <- as_tidytable(.data)
-
-  drop_na.(.data, ...)
 }
 
 #' @export

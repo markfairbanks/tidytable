@@ -32,7 +32,10 @@ relocate. <- function(.data, ..., .before = NULL, .after = NULL) {
 }
 
 #' @export
-relocate..tidytable <- function(.data, ..., .before = NULL, .after = NULL) {
+relocate..data.frame <- function(.data, ..., .before = NULL, .after = NULL) {
+
+  .data <- as_tidytable(.data)
+
   .before <- enexpr(.before)
   .after <- enexpr(.after)
   .data <- shallow(.data)
@@ -65,15 +68,6 @@ relocate..tidytable <- function(.data, ..., .before = NULL, .after = NULL) {
   final_order <- data_names[final_order_i]
 
   setcolorder(.data, final_order)[]
-}
-
-#' @export
-relocate..data.frame <- function(.data, ..., .before = NULL, .after = NULL) {
-  .data <- as_tidytable(.data)
-  .before <- enexpr(.before)
-  .after <- enexpr(.after)
-
-  relocate.(.data, ..., .before = !!.before, .after = !!.after)
 }
 
 #' @export

@@ -35,7 +35,9 @@ summarize. <- function(.data, ..., by = NULL) {
 }
 
 #' @export
-summarize..tidytable <- function(.data, ..., by = NULL) {
+summarize..data.frame <- function(.data, ..., by = NULL) {
+
+  .data <- as_tidytable(.data)
 
   dots <- enexprs(...)
   by <- enexpr(by)
@@ -48,14 +50,6 @@ summarize..tidytable <- function(.data, ..., by = NULL) {
   eval_expr(
     .data[, list(!!!dots), by = !!by]
   )
-}
-
-#' @export
-summarize..data.frame <- function(.data, ..., by = NULL) {
-  .data <- as_tidytable(.data)
-  by <- enexpr(by)
-
-  summarize.(.data, ..., by = !!by)
 }
 
 #' @export

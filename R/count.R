@@ -12,7 +12,7 @@
 #' @md
 #'
 #' @examples
-#' example_df <- data.table::data.table(
+#' example_df <- tidytable(
 #'   x = 1:3,
 #'   y = 4:6,
 #'   z = c("a", "a", "b"))
@@ -30,20 +30,15 @@ count. <- function(.data, ...) {
 }
 
 #' @export
-count..tidytable <- function(.data, ...) {
+count..data.frame <- function(.data, ...) {
+
+  .data <- as_tidytable(.data)
 
   by <- dots_selector_by(.data, ...)
 
   eval_expr(
     .data[, list(N = .N), by = !!by]
   )
-}
-
-#' @export
-count..data.frame <- function(.data, ...) {
-  .data <- as_tidytable(.data)
-
-  count.(.data, ...)
 }
 
 #' @export

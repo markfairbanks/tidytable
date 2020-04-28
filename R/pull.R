@@ -20,7 +20,9 @@ pull. <- function(.data, var = NULL) {
 }
 
 #' @export
-pull..tidytable <- function(.data, var = NULL) {
+pull..data.frame <- function(.data, var = NULL) {
+
+  .data <- as_tidytable(.data)
 
   var <- enexpr(var)
   if (is.null(var)) var <- sym(names(.data)[ncol(.data)])
@@ -31,13 +33,6 @@ pull..tidytable <- function(.data, var = NULL) {
   )
 }
 
-#' @export
-pull..data.frame <- function(.data, var = NULL) {
-  .data <- as_tidytable(.data)
-  var <- enexpr(var)
-
-  pull.(.data, !!var)
-}
 #' @export
 #' @rdname pull.
 dt_pull <- pull.

@@ -38,7 +38,9 @@ unite. <- function(.data, col = "new_col", ..., sep = "_", remove = TRUE, na.rm 
 }
 
 #' @export
-unite..tidytable <- function(.data, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
+unite..data.frame <- function(.data, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
+
+  .data <- as_tidytable(.data)
 
   dots <- enexprs(...)
 
@@ -72,14 +74,6 @@ unite..tidytable <- function(.data, col = "new_col", ..., sep = "_", remove = TR
   if (remove) .data <- .data[, -..unite_cols]
 
   .data
-}
-
-#' @export
-unite..data.frame <- function(.data, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
-  .data <- as_tidytable(.data)
-  col <- enexpr(col)
-
-  unite.(.data, col = !!col, ..., sep = sep, remove = remove)
 }
 
 #' @export

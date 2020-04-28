@@ -35,25 +35,11 @@ separate. <- function(.data, col, into,
 
 #' @export
 separate..data.frame <- function(.data, col, into,
-                                   sep = "[^[:alnum:]]+",
-                                   remove = TRUE,
-                                   ...) {
-
-  if (missing(col)) abort("col is missing and must be supplied")
-  if (missing(into)) abort("into is missing and must be supplied")
+                                 sep = "[^[:alnum:]]+",
+                                 remove = TRUE,
+                                 ...) {
 
   .data <- as_tidytable(.data)
-  col <- enexpr(col)
-
-  separate.(.data, col = !!col, into = into, sep = sep, remove = remove, ...)
-}
-
-#' @export
-separate..tidytable <- function(.data, col, into,
-                                   sep = "[^[:alnum:]]+",
-                                   remove = TRUE,
-                                   ...) {
-
   .data <- shallow(.data)
 
   if (missing(col)) abort("col is missing and must be supplied")

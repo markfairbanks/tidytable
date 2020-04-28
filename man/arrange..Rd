@@ -18,7 +18,7 @@ dt_arrange(.data, ...)
 Order rows in ascending or descending order
 }
 \examples{
-example_dt <- data.table::data.table(
+example_dt <- tidytable(
   a = c(1,2,3),
   b = c(4,5,6),
   c = c("a","a","b"))

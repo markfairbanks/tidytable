@@ -39,7 +39,9 @@ slice. <- function(.data, rows = 1:5, by = NULL) {
 }
 
 #' @export
-slice..tidytable <- function(.data, rows = 1:5, by = NULL) {
+slice..data.frame <- function(.data, rows = 1:5, by = NULL) {
+
+  .data <- as_tidytable(.data)
 
   rows <- enexpr(rows) # Needed so 1:.N works
   by <- enexpr(by)
@@ -57,23 +59,15 @@ slice..tidytable <- function(.data, rows = 1:5, by = NULL) {
 }
 
 #' @export
-slice..data.frame <- function(.data, rows = 1:5, by = NULL) {
-
-  .data <- as_tidytable(.data)
-  rows <- enexpr(rows)
-  by <- enexpr(by)
-
-  slice.(.data, rows = !!rows, by = !!by)
-}
-
-#' @export
 #' @rdname slice.
 slice_head. <- function(.data, n = 5, by = NULL) {
   UseMethod("slice_head.")
 }
 
 #' @export
-slice_head..tidytable <- function(.data, n = 5, by = NULL) {
+slice_head..data.frame <- function(.data, n = 5, by = NULL) {
+
+  .data <- as_tidytable(.data)
 
   n <- enexpr(n)
   by <- enexpr(by)
@@ -85,23 +79,15 @@ slice_head..tidytable <- function(.data, n = 5, by = NULL) {
 }
 
 #' @export
-slice_head..data.frame <- function(.data, n = 5, by = NULL) {
-
-  .data <- as_tidytable(.data)
-  n <- enexpr(n)
-  by <- enexpr(by)
-
-  slice_head.(.data, n = !!n, by = !!by)
-}
-
-#' @export
 #' @rdname slice.
 slice_tail. <- function(.data, n = 5, by = NULL) {
   UseMethod("slice_tail.")
 }
 
 #' @export
-slice_tail..tidytable <- function(.data, n = 5, by = NULL) {
+slice_tail..data.frame <- function(.data, n = 5, by = NULL) {
+
+  .data <- as_tidytable(.data)
 
   n <- enexpr(n)
   by <- enexpr(by)
@@ -113,16 +99,6 @@ slice_tail..tidytable <- function(.data, n = 5, by = NULL) {
 }
 
 #' @export
-slice_tail..data.frame <- function(.data, n = 5, by = NULL) {
-
-  .data <- as_tidytable(.data)
-  n <- enexpr(n)
-  by <- enexpr(by)
-
-  slice_tail.(.data, n = !!n, by = !!by)
-}
-
-#' @export
 #' @rdname slice.
 slice_max. <- function(.data, order_by, n = 1, by = NULL) {
   UseMethod("slice_max.")
@@ -130,7 +106,8 @@ slice_max. <- function(.data, order_by, n = 1, by = NULL) {
 
 #' @export
 slice_max..data.frame <- function(.data, order_by, n = 1, by = NULL) {
-  if (!is_tidytable(.data)) .data <- as_tidytable(.data)
+
+  .data <- as_tidytable(.data)
 
   if (missing(order_by)) stop("order_by must be supplied")
 
@@ -151,7 +128,8 @@ slice_min. <- function(.data, order_by, n = 1, by = NULL) {
 
 #' @export
 slice_min..data.frame <- function(.data, order_by, n = 1, by = NULL) {
-  if (!is_tidytable(.data)) .data <- as_tidytable(.data)
+
+  .data <- as_tidytable(.data)
 
   if (missing(order_by)) stop("order_by must be supplied")
 

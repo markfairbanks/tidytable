@@ -27,7 +27,9 @@ group_split. <- function(.data, ..., keep = TRUE) {
 }
 
 #' @export
-group_split..tidytable <- function(.data, ..., keep = TRUE) {
+group_split..data.frame <- function(.data, ..., keep = TRUE) {
+
+  .data <- as_tidytable(.data)
 
   dots <- enexprs(...)
 
@@ -40,13 +42,6 @@ group_split..tidytable <- function(.data, ..., keep = TRUE) {
 
     map.(dots, as_tidytable)
   }
-}
-
-#' @export
-group_split..data.frame <- function(.data, ..., keep = TRUE) {
-  .data <- as_tidytable(.data)
-
-  group_split.(.data, ..., keep = keep)
 }
 
 #' @export
