@@ -34,9 +34,19 @@ any_of.(x, ..., vars = peek_vars(fn = "any_of"))
 dt_any_of(x, ..., vars = peek_vars(fn = "any_of"))
 }
 \arguments{
-\item{match}{The match for the helper function to use}
+\item{match}{A character vector. If length > 1, the union of the
+matches is taken.}
 
-\item{x}{Character vector of columns to select}
+\item{ignore.case}{If \code{TRUE}, the default, ignores case when matching
+names.}
+
+\item{vars}{A character vector of variable names. When called
+from inside selecting functions like \code{\link[dplyr:select]{dplyr::select()}} these are
+automatically set to the names of the table.}
+
+\item{x}{An index vector of names or locations.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \description{
 These functions allow you to select variables based on their names.
@@ -49,7 +59,7 @@ These functions allow you to select variables based on their names.
 }
 }
 \examples{
-example_dt <- data.table::data.table(
+example_dt <- tidytable(
   x = 1,
   y = 2,
   double_x = 2,
