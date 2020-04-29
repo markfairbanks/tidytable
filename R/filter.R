@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples
-#' example_dt <- data.table::data.table(
+#' example_dt <- tidytable(
 #'   a = c(1,2,3),
 #'   b = c(4,5,6),
 #'   c = c("a","a","b"))
@@ -25,7 +25,9 @@ filter. <- function(.data, ..., by = NULL) {
 }
 
 #' @export
-filter..tidytable <- function(.data, ..., by = NULL) {
+filter..data.frame <- function(.data, ..., by = NULL) {
+
+  .data <- as_tidytable(.data)
 
   dots <- enexprs(...)
 
@@ -49,14 +51,6 @@ filter..tidytable <- function(.data, ..., by = NULL) {
     setcolorder(.data, col_order)
   }
   .data
-}
-
-#' @export
-filter..data.frame <- function(.data, ..., by = NULL) {
-  .data <- as_tidytable(.data)
-  by <- enexpr(by)
-
-  filter.(.data, ..., by = !!by)
 }
 
 #' @export

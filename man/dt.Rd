@@ -17,7 +17,7 @@ Pipeable data.table call
 Note: This function does not use data.table's modify-by-reference
 }
 \examples{
-example_dt <- data.table::data.table(
+example_dt <- tidytable(
   x = c(1,2,3),
   y = c(4,5,6),
   z = c("a", "a", "b"))

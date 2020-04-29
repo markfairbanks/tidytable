@@ -18,7 +18,9 @@ transmute. <- function(.data, ..., by = NULL) {
 }
 
 #' @export
-transmute..tidytable <- function(.data, ..., by = NULL) {
+transmute..data.frame <- function(.data, ..., by = NULL) {
+
+  .data <- as_tidytable(.data)
 
   dots <- enexprs(...)
   by <- enexpr(by)
@@ -27,15 +29,6 @@ transmute..tidytable <- function(.data, ..., by = NULL) {
   .data <- mutate.(.data, ..., by = !!by)
 
   .data[, ..keep_names]
-}
-
-#' @export
-transmute..data.frame <- function(.data, ..., by = NULL) {
-
-  .data <- as_tidytable(.data)
-  by <- enexpr(by)
-
-  transmute.(.data, ..., by = !!by)
 }
 
 #' @export

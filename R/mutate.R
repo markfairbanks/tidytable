@@ -29,11 +29,13 @@ mutate. <- function(.data, ..., by = NULL) {
 }
 
 #' @export
-mutate..tidytable <- function(.data, ..., by = NULL) {
+mutate..data.frame <- function(.data, ..., by = NULL) {
+
+  .data <- as_tidytable(.data)
+  .data <- shallow(.data)
 
   dots <- enexprs(...)
   by <- enexpr(by)
-  .data <- shallow(.data)
 
   if (is.null(by)) {
     # Faster version if there is no "by" provided
@@ -73,15 +75,6 @@ mutate..tidytable <- function(.data, ..., by = NULL) {
   }
   .data[]
 }
-
-#' @export
-mutate..data.frame <- function(.data, ..., by = NULL) {
-  .data <- as_tidytable(.data)
-  by <- enexpr(by)
-
-  mutate.(.data, ..., by = !!by)
-}
-
 
 #' @export
 #' @rdname mutate.

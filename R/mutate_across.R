@@ -38,7 +38,9 @@ mutate_across. <- function(.data, .cols = everything.(), .fns, ..., by = NULL) {
 }
 
 #' @export
-mutate_across..tidytable <- function(.data, .cols = everything.(), .fns, ..., by = NULL) {
+mutate_across..data.frame <- function(.data, .cols = everything.(), .fns, ..., by = NULL) {
+
+  .data <- as_tidytable(.data)
 
   .cols <- enexpr(.cols)
   .cols <- as.character(vec_selector(.data, !!.cols))
@@ -71,15 +73,6 @@ mutate_across..tidytable <- function(.data, .cols = everything.(), .fns, ..., by
     }
   }
   .data[]
-}
-
-#' @export
-mutate_across..data.frame <- function(.data, .cols = everything.(), .fns, ..., by = NULL) {
-  .data <- as_tidytable(.data)
-  .cols <- enexpr(.cols)
-  by <- enexpr(by)
-
-  mutate_across.(.data, !!.cols, .fns, ..., by = !!by)
 }
 
 #' @export

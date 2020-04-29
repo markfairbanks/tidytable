@@ -9,14 +9,21 @@
 #' * `starts_with.()`: Starts with a prefix
 #' * `ends_with.()`: Ends with a suffix
 #'
-#' @param match The match for the helper function to use
-#' @param x Character vector of columns to select
+#' @param match A character vector. If length > 1, the union of the
+#'   matches is taken.
+#' @param ignore.case If `TRUE`, the default, ignores case when matching
+#'   names.
+#' @param vars A character vector of variable names. When called
+#'   from inside selecting functions like [dplyr::select()] these are
+#'   automatically set to the names of the table.
+#' @param x An index vector of names or locations.
+#' @param ... These dots are for future extensions and must be empty.
 #'
 #' @md
 #' @export
 #'
 #' @examples
-#' example_dt <- data.table::data.table(
+#' example_dt <- tidytable(
 #'   x = 1,
 #'   y = 2,
 #'   double_x = 2,
@@ -27,12 +34,7 @@
 #'
 #' example_dt %>%
 #'   select.(ends_with.("y"))
-starts_with. <- function(match) {
-  .names <- names(caller_env())
-  .names <- .names[!.names %in% predicate_names]
-
-  seq_along(.names)[str_starts(.names, match)]
-}
+starts_with. <- tidyselect::starts_with
 
 #' @export
 #' @rdname starts_with.
@@ -40,12 +42,7 @@ dt_starts_with <- starts_with.
 
 #' @export
 #' @rdname starts_with.
-contains. <- function(match) {
-  .names <- names(caller_env())
-  .names <- .names[!.names %in% predicate_names]
-
-  seq_along(.names)[str_detect(.names, match)]
-}
+contains. <- tidyselect::contains
 
 #' @export
 #' @rdname starts_with.
@@ -53,12 +50,7 @@ dt_contains <- contains.
 
 #' @export
 #' @rdname starts_with.
-ends_with. <- function(match) {
-  .names <- names(caller_env())
-  .names <- .names[!.names %in% predicate_names]
-
-  seq_along(.names)[str_ends(.names, match)]
-}
+ends_with. <- tidyselect::ends_with
 
 #' @export
 #' @rdname starts_with.
@@ -66,12 +58,7 @@ dt_ends_with <- ends_with.
 
 #' @export
 #' @rdname starts_with.
-everything. <- function() {
-  .names <- names(caller_env())
-  .names <- .names[!.names %in% predicate_names]
-
-  seq_along(.names)
-}
+everything. <- tidyselect::everything
 
 #' @export
 #' @rdname starts_with.
@@ -79,16 +66,8 @@ dt_everything <- everything.
 
 #' @export
 #' @rdname starts_with.
-any_of. <- function(x) {
-  .names <- names(caller_env())
-  .names <- .names[!.names %in% predicate_names]
-
-  seq_along(.names)[.names %in% x]
-}
+any_of. <- tidyselect::any_of
 
 #' @export
 #' @rdname starts_with.
 dt_any_of <- any_of.
-
-predicate_names <- c("is.integer", "is.double", "is.numeric",
-                     "is.character", "is.factor", "is.logical", "is.list")

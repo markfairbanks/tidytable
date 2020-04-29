@@ -13,7 +13,7 @@
 #' @md
 #'
 #' @examples
-#' test_df <- data.table::data.table(
+#' test_df <- tidytable(
 #'   x = c(NA, NA, NA, 4:10),
 #'   y = c(1:6, NA, 8, NA, 10),
 #'   z = c(rep("a", 8), rep("b", 2)))
@@ -28,7 +28,10 @@ fill. <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), 
 }
 
 #' @export
-fill..tidytable <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
+fill..data.frame <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
+
+  .data <- as_tidytable(.data)
+
   by <- enexpr(by)
 
   if (length(.direction) > 1) .direction <- .direction[1]
@@ -46,15 +49,6 @@ fill..tidytable <- function(.data, ..., .direction = c("down", "up", "downup", "
       filler(..., type = "nocb", by = !!by) %>%
       filler(..., type = "locf", by = !!by)
   }
-}
-
-#' @export
-fill..data.frame <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
-  .data <- as_tidytable(.data)
-  by <- enexpr(by)
-
-  fill.(.data, ..., .direction = .direction, by = !!by)
-
 }
 
 #' @export

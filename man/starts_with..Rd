@@ -13,30 +13,40 @@
 \alias{dt_any_of}
 \title{Select helpers}
 \usage{
-starts_with.(match)
+starts_with.(match, ignore.case = TRUE, vars = peek_vars(fn = "starts_with"))
 
-dt_starts_with(match)
+dt_starts_with(match, ignore.case = TRUE, vars = peek_vars(fn = "starts_with"))
 
-contains.(match)
+contains.(match, ignore.case = TRUE, vars = peek_vars(fn = "contains"))
 
-dt_contains(match)
+dt_contains(match, ignore.case = TRUE, vars = peek_vars(fn = "contains"))
 
-ends_with.(match)
+ends_with.(match, ignore.case = TRUE, vars = peek_vars(fn = "ends_with"))
 
-dt_ends_with(match)
+dt_ends_with(match, ignore.case = TRUE, vars = peek_vars(fn = "ends_with"))
 
-everything.()
+everything.(vars = peek_vars(fn = "everything"))
 
-dt_everything()
+dt_everything(vars = peek_vars(fn = "everything"))
 
-any_of.(x)
+any_of.(x, ..., vars = peek_vars(fn = "any_of"))
 
-dt_any_of(x)
+dt_any_of(x, ..., vars = peek_vars(fn = "any_of"))
 }
 \arguments{
-\item{match}{The match for the helper function to use}
+\item{match}{A character vector. If length > 1, the union of the
+matches is taken.}
 
-\item{x}{Character vector of columns to select}
+\item{ignore.case}{If \code{TRUE}, the default, ignores case when matching
+names.}
+
+\item{vars}{A character vector of variable names. When called
+from inside selecting functions like \code{\link[dplyr:select]{dplyr::select()}} these are
+automatically set to the names of the table.}
+
+\item{x}{An index vector of names or locations.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \description{
 These functions allow you to select variables based on their names.
@@ -49,7 +59,7 @@ These functions allow you to select variables based on their names.
 }
 }
 \examples{
-example_dt <- data.table::data.table(
+example_dt <- tidytable(
   x = 1,
   y = 2,
   double_x = 2,

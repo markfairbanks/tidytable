@@ -27,7 +27,9 @@ unnest. <- function(.data, ...) {
 }
 
 #' @export
-unnest..tidytable <- function(.data, ...) {
+unnest..data.frame <- function(.data, ...) {
+
+  .data <- as_tidytable(.data)
 
   dots <- enexprs(...)
 
@@ -56,13 +58,6 @@ unnest..tidytable <- function(.data, ...) {
   results_df <- bind_cols.(keep_df, unnest_data)
 
   results_df
-}
-
-#' @export
-unnest..data.frame <- function(.data, ...) {
-  .data <- as_tidytable(.data)
-
-  unnest.(.data, ...)
 }
 
 #' @export

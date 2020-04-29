@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @examples
-#' example_dt <- data.table::data.table(
+#' example_dt <- tidytable(
 #'   x = 1:3,
 #'   y = 4:6,
 #'   z = c("a", "a", "b"))
@@ -29,7 +29,9 @@ distinct. <- function(.data, ..., .keep_all = FALSE) {
 }
 
 #' @export
-distinct..tidytable <- function(.data, ..., .keep_all = FALSE) {
+distinct..data.frame <- function(.data, ..., .keep_all = FALSE) {
+
+  .data <- as_tidytable(.data)
 
   dots <- enexprs(...)
 
@@ -44,13 +46,6 @@ distinct..tidytable <- function(.data, ..., .keep_all = FALSE) {
 
     unique(.data, by = select_cols)
   }
-}
-
-#' @export
-distinct..data.frame <- function(.data, ..., .keep_all = FALSE) {
-  .data <- as_tidytable(.data)
-
-  distinct.(.data, ..., .keep_all = .keep_all)
 }
 
 #' @export

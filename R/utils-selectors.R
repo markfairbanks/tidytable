@@ -4,7 +4,6 @@
 
 
 ### Get group by cols
-
 vec_selector_by <- function(.data, by_vars) {
   by_vars <- enexpr(by_vars)
 
@@ -32,86 +31,28 @@ dots_selector_by <- function(.data, ...) {
 }
 
 ### User inputs a vector of bare column names
-
 vec_selector <- function(.data, select_vars) {
   select_vars <- enexpr(select_vars)
 
-  select_index <- vec_selector_i(.data, !!select_vars)
-  data_names <- names(.data)
-
-  select_vars <- syms(data_names[select_index])
-
-  select_vars
+  syms(names(vec_selector_i(.data, !!select_vars)))
 }
 
 vec_selector_i <- function(.data, select_vars) {
-
-  data_vars <- get_data_vars(.data)
-
   select_vars <- enexpr(select_vars)
-  select_index <- unlist(eval(expr(c(!!select_vars)), data_vars))
 
-  keep_index <- unique(select_index[select_index > 0])
-  if (length(keep_index) == 0) keep_index <- seq_along(.data)
-  drop_index <- unique(abs(select_index[select_index < 0]))
+  expr_char <- as.character(select_vars)
 
-  select_index <- keep_index[!keep_index %in% drop_index]
+  if (length(expr_char) > 1 && expr_char[[1]] == "list")
+    abort("Using by = list(col1, col2) is deprecated. Please use by = c(col1, col2)")
 
-  select_index
+  eval_select(select_vars, .data)
 }
 
-### User inputs bare column names using ellipsis
-
+### User inputs bare column names using ...
 dots_selector <- function(.data, ...) {
-
-  select_index <- dots_selector_i(.data, ...)
-  data_names <- names(.data)
-
-  select_vars <- syms(data_names[select_index])
-
-  select_vars
+  syms(names(dots_selector_i(.data, ...)))
 }
 
 dots_selector_i <- function(.data, ...) {
-
-  data_vars <- get_data_vars(.data)
-
-  select_vars <- enexprs(...)
-  select_index <- unlist(eval(expr(c(!!!select_vars)), data_vars))
-
-  keep_index <- unique(select_index[select_index > 0])
-  if (length(keep_index) == 0) keep_index <- seq_along(.data)
-  drop_index <- unique(abs(select_index[select_index < 0]))
-
-  select_index <- keep_index[!keep_index %in% drop_index]
-
-  select_index
-}
-
-#### Get data variables
-get_data_vars <- function(.data) {
-
-  data_names <- names(.data)
-  data_index <- seq_along(data_names)
-  data_vars <- setNames(as.list(data_index), data_names)
-  data_class <- map_chr.(.data, class)
-
-  integer_cols <- list(is.integer = data_index[data_class == "integer"])
-  double_cols <- list(is.double = data_index[data_class == "numeric"])
-  numeric_cols <- list(is.numeric = data_index[data_class %in% c("integer", "numeric")])
-  character_cols <- list(is.character = data_index[data_class == "character"])
-  factor_cols <- list(is.factor = data_index[data_class == "factor"])
-  logical_cols <- list(is.logical = data_index[data_class == "logical"])
-  list_cols <- list(is.list = data_index[data_class == "list"])
-
-  data_vars <- data_vars %>%
-    append(integer_cols) %>%
-    append(double_cols) %>%
-    append(numeric_cols) %>%
-    append(character_cols) %>%
-    append(factor_cols) %>%
-    append(logical_cols) %>%
-    append(list_cols)
-
-  data_vars
+  eval_select(expr(c(...)), .data)
 }

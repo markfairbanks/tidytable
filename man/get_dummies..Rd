@@ -43,7 +43,7 @@ Convert character and factor columns to dummy variables
 Supports enhanced selection
 }
 \examples{
-test_df <- data.table::data.table(
+test_df <- tidytable(
   col1 = c("a", "b", "c", NA),
   col2 = as.factor(c("a", "b", NA, "d")),
   var1 = rnorm(4,0,1))

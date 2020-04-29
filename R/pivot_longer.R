@@ -39,12 +39,14 @@ pivot_longer. <- function(.data,
 }
 
 #' @export
-pivot_longer..tidytable <- function(.data,
-                                    cols = everything.(),
-                                    names_to = "name",
-                                    values_to = "value",
-                                    values_drop_na = FALSE,
-                                    ...) {
+pivot_longer..data.frame <- function(.data,
+                                     cols = everything.(),
+                                     names_to = "name",
+                                     values_to = "value",
+                                     values_drop_na = FALSE,
+                                     ...) {
+
+  .data <- as_tidytable(.data)
 
   names <- colnames(.data)
   cols <- enexpr(cols)
@@ -67,23 +69,6 @@ pivot_longer..tidytable <- function(.data,
        value.factor = FALSE))
 }
 
-#' @export
-pivot_longer..data.frame <- function(.data,
-                                       cols = everything.(),
-                                       names_to = "name",
-                                       values_to = "value",
-                                       values_drop_na = FALSE,
-                                       ...) {
-  .data <- as_tidytable(.data)
-  cols <- enexpr(cols)
-
-  .data <- pivot_longer.(
-    .data, !!cols,
-    names_to = names_to, values_to = values_to,
-    values_drop_na = values_drop_na, ...)
-
-  .data
-}
 
 #' @export
 #' @rdname pivot_longer.

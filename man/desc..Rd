@@ -13,7 +13,7 @@ desc.(x)
 Arrange in descending order. Can be used inside of \code{arrange.()}
 }
 \examples{
-example_dt <- data.table::data.table(
+example_dt <- tidytable(
   a = c(1,2,3),
   b = c(4,5,6),
   c = c("a","a","b"))

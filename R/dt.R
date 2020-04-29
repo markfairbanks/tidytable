@@ -9,7 +9,7 @@
 #' @param ... Arguments passed to data.table call. See ?data.table:::`[.data.table`
 #'
 #' @examples
-#' example_dt <- data.table::data.table(
+#' example_dt <- tidytable(
 #'   x = c(1,2,3),
 #'   y = c(4,5,6),
 #'   z = c("a", "a", "b"))
@@ -24,12 +24,9 @@ dt <- function(.data, ...) {
 
 #' @export
 dt.data.frame <- function(.data, ...) {
-  .data <- as_tidytable(.data)
-  dt(.data, ...)
-}
 
-#' @export
-dt.tidytable <- function(.data, ...) {
+  .data <- as_tidytable(.data)
+
   dots <- substitute(list(...))
 
   needs_copy <- str_detect(expr_text(dots), ":=")

@@ -39,32 +39,17 @@ select. <- function(.data, ...) {
 }
 
 #' @export
-select..tidytable <- function(.data, ...) {
-
-  select_cols <- as.character(dots_selector(.data, ...))
-
-  # Using a character vector is faster for select
-  .data <- eval_expr(.data[, !!select_cols])
-
-  dots <- enexprs(...)
-  need_rename <- have_name(dots)
-
-  if (any(need_rename)) {
-
-    rename_dots <- dots[need_rename]
-    new_names <- names(rename_dots)
-    old_names <- as.character(rename_dots)
-
-    setnames(.data, old_names, new_names)
-  }
-  .data
-}
-
-#' @export
 select..data.frame <- function(.data, ...) {
+
   .data <- as_tidytable(.data)
 
-  select.(.data, ...)
+  select_cols <- dots_selector_i(.data, ...)
+
+  .data <- eval_expr(.data[, !!select_cols])
+
+  .data <- set_names(.data, names(select_cols))
+
+  .data
 }
 
 #' @export
