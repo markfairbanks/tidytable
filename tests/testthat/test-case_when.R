@@ -71,3 +71,15 @@ test_that("lower conditions don't overwrite prior conditions", {
 
   expect_equal(new_x, c(1,1,1,1,2,2,2,2,3,3))
 })
+
+test_that("multiple NAs can be used as inputs", {
+
+  x <- 1:10
+
+  new_x <- case.(x < 3, 1,
+                 x < 6, 2,
+                 x < 10, NA,
+                 default = NA)
+
+  expect_equal(new_x, c(1,1,2,2,2,NA,NA,NA,NA,NA))
+})
