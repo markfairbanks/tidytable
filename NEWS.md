@@ -1,5 +1,6 @@
 # tidytable 0.4.1
 
+* `tidytable` now utilizes `tidyselect` & `vctrs`
 * Breaking changes:
   + `get_dummies.()`: `cols` arg defaults to `c(is.character, is.factor)`.
   The result is the same, but is more consistent with other enhanced selection functions

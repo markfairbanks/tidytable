@@ -25,12 +25,14 @@ ifelse. <- function(conditions, true, false, na = NA) {
 
   true <- true
   false <- false
+  na <- na
 
-  if (length(false) == 1)
-    if (is.na(false)) false <- as(false, class(true))
+  vec_assert(conditions, logical())
+  ptype <- vec_ptype_common(true, false, na)
 
-  if (length(true) == 1)
-    if(is.na(true)) true <- as(true, class(false))
+  true <- vec_cast(true, ptype)
+  false <- vec_cast(false, ptype)
+  na <- vec_cast(na, ptype)
 
   fifelse(conditions, true, false, na = na)
 }
