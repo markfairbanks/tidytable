@@ -3,12 +3,13 @@
 #' @description
 #' Select or drop columns from a data.table
 #'
-#' Supports enhanced selection
-#'
 #' @param .data A data.frame or data.table
-#' @param ... Columns to select or drop. Use named arguments, e.g. new_name = old_name, to rename selected variables.
+#' @param ... Columns to select or drop.
+#' Use named arguments, e.g. new_name = old_name, to rename selected variables.
+#' `tidyselect` compatible.
 #'
 #' @export
+#' @md
 #'
 #' @examples
 #' example_dt <- data.table::data.table(

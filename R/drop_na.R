@@ -3,12 +3,12 @@
 #' @description
 #' Drop rows containing missing values
 #'
-#' Supports enhanced selection
-#'
 #' @param .data A data.frame or data.table
 #' @param ... Optional: A selection of columns. If empty, all variables are selected.
+#' `tidyselect` compatible.
 #'
 #' @export
+#' @md
 #'
 #' @examples
 #' df <- tidytable(

@@ -24,7 +24,7 @@ dt_summarize(.data, ..., by = NULL)
 \itemize{
 \item A single column can be passed with \code{by = d}.
 \item Multiple columns can be passed with \code{by = c(c, d)} or \code{by = list(c, d)}
-\item Enhanced selection can be used:
+\item \code{tidyselect} can be used:
 \itemize{
 \item Single predicate: \code{by = is.character}
 \item Multiple predicates: \code{by = c(is.character, is.factor)}

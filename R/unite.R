@@ -3,16 +3,16 @@
 #' @description
 #' Convenience function to paste together multiple columns into one.
 #'
-#' Supports enhanced selection
-#'
 #' @param .data A data.frame or data.table
 #' @param col Name of the new column, as a string.
 #' @param ... Selection of columns. If empty all variables are selected.
+#' `tidyselect` compatible.
 #' @param sep Separator to use between values
 #' @param remove If TRUE, removes input columns from the data.table.
 #' @param na.rm If TRUE, NA values will be not be part of the concatenation
 #'
 #' @export
+#' @md
 #'
 #' @examples
 #' test_df <- tidytable(a = c("a", "a", "a"),

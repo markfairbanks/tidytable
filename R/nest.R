@@ -3,13 +3,13 @@
 #' @description
 #' Nest data.tables by group
 #'
-#' Supports enhanced selection
-#'
 #' @param .data A data.frame or data.table
-#' @param ... Columns to group by. If empty nests the entire data.table
+#' @param ... Columns to group by. If empty nests the entire data.table.
+#' `tidyselect` compatible.
 #' @param .key Name of the new column created by nesting
 #'
 #' @export
+#' @md
 #'
 #' @examples
 #' test_df <- data.table::data.table(a = 1:10,

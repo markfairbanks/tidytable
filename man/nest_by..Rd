@@ -12,14 +12,13 @@ dt_group_nest(.data, ..., .key = "data")
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{...}{Columns to group by. If empty nests the entire data.table}
+\item{...}{Columns to group by. If empty nests the entire data.table.
+\code{tidyselect} compatible.}
 
 \item{.key}{Name of the new column created by nesting}
 }
 \description{
 Nest data.tables by group
-
-Supports enhanced selection
 }
 \examples{
 test_df <- data.table::data.table(a = 1:10,

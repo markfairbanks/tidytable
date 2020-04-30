@@ -12,12 +12,11 @@ dt_drop_na(.data, ...)
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{...}{Optional: A selection of columns. If empty, all variables are selected.}
+\item{...}{Optional: A selection of columns. If empty, all variables are selected.
+\code{tidyselect} compatible.}
 }
 \description{
 Drop rows containing missing values
-
-Supports enhanced selection
 }
 \examples{
 df <- tidytable(

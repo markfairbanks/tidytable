@@ -12,14 +12,12 @@ dt_group_split(.data, ..., keep = TRUE)
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{...}{Groups to split by}
+\item{...}{Columns to group and split by. \code{tidyselect} compatible.}
 
 \item{keep}{Should the grouping columns be kept}
 }
 \description{
-Split data frame by groups. Returns a list
-
-Supports enhanced selection
+Split data frame by groups. Returns a list.
 }
 \examples{
 test_df <- data.table::data.table(

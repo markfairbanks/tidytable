@@ -12,7 +12,7 @@ dt_unnest_legacy(.data, ...)
 \arguments{
 \item{.data}{A nested data.table}
 
-\item{...}{Columns to unnest. If empty, unnests all list columns.}
+\item{...}{Columns to unnest. If empty, unnests all list columns. \code{tidyselect} compatible.}
 }
 \description{
 Unnest a nested data.table.

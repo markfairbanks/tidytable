@@ -14,7 +14,7 @@ dt_rename_with(.data, .fn, .cols = everything.(), ...)
 
 \item{.fn}{Function to transform the names with.}
 
-\item{.cols}{Columns to rename. Defaults to all columns.}
+\item{.cols}{Columns to rename. Defaults to all columns. \code{tidyselect} compatible.}
 
 \item{...}{Other parameters to pass to the function}
 }

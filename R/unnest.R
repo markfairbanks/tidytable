@@ -4,9 +4,10 @@
 #' Unnest a nested data.table.
 #'
 #' @param .data A nested data.table
-#' @param ... Columns to unnest. If empty, unnests all list columns.
+#' @param ... Columns to unnest. If empty, unnests all list columns. `tidyselect` compatible.
 #'
 #' @export
+#' @md
 #'
 #' @examples
 #' nested_df <- data.table::data.table(

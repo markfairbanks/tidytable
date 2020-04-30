@@ -3,15 +3,15 @@
 #' @description
 #' Retain only unique/distinct rows from an input df.
 #'
-#' Supports enhanced selection if dots are used
-#'
 #' @param .data A data.frame or data.table
-#' @param ... Columns to select before determining uniqueness. If omitted, will use all columns
+#' @param ... Columns to select before determining uniqueness. If omitted, will use all columns.
+#' `tidyselect` compatible.
 #' @param .keep_all Only relevant if columns are provided to ... arg.
 #' This keeps all columns, but only keeps the first row of each distinct
 #' values of columns provided to ... arg.
 #'
 #' @export
+#' @md
 #'
 #' @examples
 #' example_dt <- tidytable(

@@ -12,7 +12,7 @@ dt_relocate(.data, ..., .before = NULL, .after = NULL)
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{...}{A selection of columns to move}
+\item{...}{A selection of columns to move. `tidyselect` compatible.}
 
 \item{.before}{Column to move selection before}
 
@@ -20,8 +20,6 @@ dt_relocate(.data, ..., .before = NULL, .after = NULL)
 }
 \description{
 Move a column or columns to a new position
-
-Supports enhanced selection
 }
 \examples{
 test_df <- data.table::data.table(

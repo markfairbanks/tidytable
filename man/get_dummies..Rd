@@ -27,7 +27,8 @@ dt_get_dummies(
 \item{.data}{A data.frame or data.table}
 
 \item{cols}{A single column or a vector of unquoted columns to dummify.
-Defaults to all character & factor columns using \code{c(is.character, is.factor)}.}
+Defaults to all character & factor columns using \code{c(is.character, is.factor)}.
+\code{tidyselect} compatible.}
 
 \item{prefix}{TRUE/FALSE - If TRUE, a prefix will be added to new column names}
 
@@ -39,8 +40,6 @@ Defaults to all character & factor columns using \code{c(is.character, is.factor
 }
 \description{
 Convert character and factor columns to dummy variables
-
-Supports enhanced selection
 }
 \examples{
 test_df <- tidytable(

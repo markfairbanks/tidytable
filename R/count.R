@@ -1,12 +1,10 @@
 #' Count observations by group
 #'
 #' @description
-#' Returns row counts of the dataset. If bare column names are provided, `dt_count()` returns counts by group.
-#'
-#' Supports enhanced selection
+#' Returns row counts of the dataset. If bare column names are provided, `count.()` returns counts by group.
 #'
 #' @param .data A data.frame or data.table
-#' @param ... Columns to group by
+#' @param ... Columns to group by. `tidyselect` compatible.
 #'
 #' @export
 #' @md

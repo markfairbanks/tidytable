@@ -5,10 +5,11 @@
 #'
 #' @param .data A data.table or data.frame
 #' @param .fn Function to transform the names with.
-#' @param .cols Columns to rename. Defaults to all columns.
+#' @param .cols Columns to rename. Defaults to all columns. `tidyselect` compatible.
 #' @param ... Other parameters to pass to the function
 #'
 #' @export
+#' @md
 #'
 #' @examples
 #' example_dt <- data.table::data.table(

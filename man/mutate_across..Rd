@@ -12,7 +12,8 @@ dt_mutate_across(.data, .cols = everything.(), .fns, ..., by = NULL)
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{.cols}{vector \code{c()} of bare column names for \code{mutate_across.()} to use. Supports enhanced selection.}
+\item{.cols}{vector \code{c()} of bare column names for \code{mutate_across.()} to use.
+\code{tidyselect} compatible.}
 
 \item{.fns}{Functions to pass. Can pass a list of functions.}
 
@@ -22,8 +23,6 @@ dt_mutate_across(.data, .cols = everything.(), .fns, ..., by = NULL)
 }
 \description{
 Mutate multiple columns simultaneously.
-
-Supports enhanced selection.
 }
 \examples{
 example_dt <- data.table::data.table(

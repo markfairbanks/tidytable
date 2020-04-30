@@ -1,14 +1,14 @@
 #' Split data frame by groups
 #'
 #' @description
-#' Split data frame by groups. Returns a list
-#'
-#' Supports enhanced selection
+#' Split data frame by groups. Returns a list.
 #'
 #' @param .data A data.frame or data.table
-#' @param ... Groups to split by
+#' @param ... Columns to group and split by. `tidyselect` compatible.
 #' @param keep Should the grouping columns be kept
+#'
 #' @export
+#' @md
 #'
 #' @examples
 #' test_df <- data.table::data.table(

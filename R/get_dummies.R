@@ -3,11 +3,10 @@
 #' @description
 #' Convert character and factor columns to dummy variables
 #'
-#' Supports enhanced selection
-#'
 #' @param .data A data.frame or data.table
 #' @param cols A single column or a vector of unquoted columns to dummify.
 #' Defaults to all character & factor columns using `c(is.character, is.factor)`.
+#' `tidyselect` compatible.
 #' @param prefix TRUE/FALSE - If TRUE, a prefix will be added to new column names
 #' @param prefix_sep Separator for new column names
 #' @param drop_first TRUE/FALSE - If TRUE, the first dummy column will be dropped

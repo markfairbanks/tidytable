@@ -3,10 +3,8 @@
 #' @description
 #' Move a column or columns to a new position
 #'
-#' Supports enhanced selection
-#'
 #' @param .data A data.frame or data.table
-#' @param ... A selection of columns to move
+#' @param ... A selection of columns to move. `tidyselect` compatible.
 #' @param .before Column to move selection before
 #' @param .after Column to move selection after
 #'

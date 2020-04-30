@@ -8,7 +8,7 @@
 #' @param by Columns to group by.
 #' * A single column can be passed with `by = d`.
 #' * Multiple columns can be passed with `by = c(c, d)` or `by = list(c, d)`
-#' * Enhanced selection can be used:
+#' * `tidyselect` can be used:
 #'   + Single predicate: `by = is.character`
 #'   + Multiple predicates: `by = c(is.character, is.factor)`
 #'   + A combination of predicates and column names: `by = c(is.character, b)`

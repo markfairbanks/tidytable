@@ -3,17 +3,15 @@
 #' @description
 #' Mutate multiple columns simultaneously.
 #'
-#' Supports enhanced selection.
-#'
-#' @md
-#'
 #' @param .data A data.frame or data.table
-#' @param .cols vector `c()` of bare column names for `mutate_across.()` to use. Supports enhanced selection.
+#' @param .cols vector `c()` of bare column names for `mutate_across.()` to use.
+#' `tidyselect` compatible.
 #' @param .fns Functions to pass. Can pass a list of functions.
 #' @param ... Other arguments for the passed function
 #' @param by Columns to group by
 #'
 #' @export
+#' @md
 #'
 #' @examples
 #' example_dt <- data.table::data.table(

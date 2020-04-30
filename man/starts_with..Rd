@@ -41,7 +41,7 @@ matches is taken.}
 names.}
 
 \item{vars}{A character vector of variable names. When called
-from inside selecting functions like \code{\link[dplyr:select]{dplyr::select()}} these are
+from inside selecting functions like \code{\link[=select.]{select.()}} these are
 automatically set to the names of the table.}
 
 \item{x}{An index vector of names or locations.}
@@ -49,6 +49,9 @@ automatically set to the names of the table.}
 \item{...}{These dots are for future extensions and must be empty.}
 }
 \description{
+Please note these functions are leftover from before \code{tidytable} used \code{tidyselect}.
+You can use these or the normal \code{tidyselect} helpers.
+
 These functions allow you to select variables based on their names.
 \itemize{
 \item \code{any_of.()}: Select using a character vector

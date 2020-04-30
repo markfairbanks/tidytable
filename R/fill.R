@@ -3,10 +3,10 @@
 #' @description
 #' Fills missing values in the selected columns using the next or previous entry. Can be done by group.
 #'
-#' Supports enhanced selection
+#' Supports tidyselect
 #'
 #' @param .data A data.frame or data.table
-#' @param ... A selection of columns
+#' @param ... A selection of columns. `tidyselect` compatible.
 #' @param .direction Direction in which to fill missing values. Currently "down" (the default), "up", "downup" (first down then up), or "updown" (first up and then down)
 #' @param by Columns to group by when filling should be done by group
 #' @export

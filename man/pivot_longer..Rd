@@ -26,7 +26,7 @@ dt_pivot_longer(
 \arguments{
 \item{.data}{The data table to pivot longer}
 
-\item{cols}{Vector of bare column names. Can add/drop columns.}
+\item{cols}{Vector of bare column names. Can add/drop columns. \code{tidyselect} compatible.}
 
 \item{names_to}{Name of the new "names" column. Must be a string.}
 
@@ -34,14 +34,12 @@ dt_pivot_longer(
 
 \item{values_drop_na}{If TRUE, rows will be dropped that contain NAs.}
 
-\item{...}{Additional arguments to pass to `melt.data.table()`}
+\item{...}{Additional arguments to pass to \code{melt.data.table()}}
 }
 \description{
 \code{pivot_wider.()} "widens" data, increasing the number of columns and
 decreasing the number of rows. The inverse transformation is
 \code{pivot_longer.()}. Syntax based on the \code{tidyr} equivalents.
-
-Supports enhanced selection
 }
 \examples{
 example_dt <- data.table::data.table(
@@ -54,5 +52,4 @@ example_dt \%>\%
 
 example_dt \%>\%
   pivot_longer.(cols = -z, names_to = "stuff", values_to = "things")
-
 }

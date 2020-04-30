@@ -12,12 +12,10 @@ dt_count(.data, ...)
 \arguments{
 \item{.data}{A data.frame or data.table}
 
-\item{...}{Columns to group by}
+\item{...}{Columns to group by. \code{tidyselect} compatible.}
 }
 \description{
-Returns row counts of the dataset. If bare column names are provided, \code{dt_count()} returns counts by group.
-
-Supports enhanced selection
+Returns row counts of the dataset. If bare column names are provided, \code{count.()} returns counts by group.
 }
 \examples{
 example_df <- tidytable(

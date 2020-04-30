@@ -14,7 +14,8 @@ dt_unite(.data, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE)
 
 \item{col}{Name of the new column, as a string.}
 
-\item{...}{Selection of columns. If empty all variables are selected.}
+\item{...}{Selection of columns. If empty all variables are selected.
+\code{tidyselect} compatible.}
 
 \item{sep}{Separator to use between values}
 
@@ -24,8 +25,6 @@ dt_unite(.data, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE)
 }
 \description{
 Convenience function to paste together multiple columns into one.
-
-Supports enhanced selection
 }
 \examples{
 test_df <- tidytable(a = c("a", "a", "a"),

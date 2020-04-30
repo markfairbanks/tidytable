@@ -1,6 +1,9 @@
 #' Select helpers
 #'
 #' @description
+#' Please note these functions are leftover from before `tidytable` used `tidyselect`.
+#' You can use these or the normal `tidyselect` helpers.
+#'
 #' These functions allow you to select variables based on their names.
 #'
 #' * `any_of.()`: Select using a character vector
@@ -14,7 +17,7 @@
 #' @param ignore.case If `TRUE`, the default, ignores case when matching
 #'   names.
 #' @param vars A character vector of variable names. When called
-#'   from inside selecting functions like [dplyr::select()] these are
+#'   from inside selecting functions like [select.()] these are
 #'   automatically set to the names of the table.
 #' @param x An index vector of names or locations.
 #' @param ... These dots are for future extensions and must be empty.
