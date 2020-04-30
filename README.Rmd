@@ -139,7 +139,7 @@ test_df %>%
              by = z)
 ```
 
-## tidyselect support
+## `tidyselect` support
 
 `tidyselect` allows you to mix predicates like `is.numeric` with normal selection. This includes the ability to use `tidyselect` helpers: `everything()`, `starts_with()`, `ends_with()`, `contains()`, `any_of()`, etc.
 
@@ -160,7 +160,7 @@ test_df %>%
   select.(-is.numeric)
 ```
 
-These same ideas can be used whenever selecting columns in `tidytable` functions - for example when using `count.()`, `drop_na.()`, `pivot_longer.()`, etc.
+These same ideas can be used whenever selecting columns in `tidytable` functions - for example when using `count.()`, `drop_na.()`, `pivot_longer.()`, `pivot_wider()`, etc.
 
 #### New helper: `mutate_across.()`
 
