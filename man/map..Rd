@@ -118,7 +118,7 @@ The dt_map functions transform their input by applying a function to each elemen
 \itemize{
 \item \code{map.()} returns a list
 \item \verb{_lgl.()}, \verb{_int.()}, \verb{_dbl.()},\verb{_chr.()}, \verb{_df.()} variants return their specified type
-\item \verb{_dfr.()} & \verb{_dfc.()} Return data frame results binded together
+\item \verb{_dfr.()} & \verb{_dfc.()} Return all data frame results utilizing row or column binding
 }
 }
 \examples{

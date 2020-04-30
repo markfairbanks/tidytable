@@ -17,7 +17,7 @@
 #' and which column (or columns) to get the cell values from (\code{values_from}).
 #' `tidyselect` compatible.
 #' @param names_sep the separator between the names of the columns
-#' @param values_fn hould the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.
+#' @param values_fn Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.
 #'
 #' @examples
 #' example_dt <- data.table::data.table(

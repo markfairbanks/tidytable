@@ -4,7 +4,7 @@
 #' The dt_map functions transform their input by applying a function to each element and returning a vector the same length as the input.
 #' * `map.()` returns a list
 #' * `_lgl.()`, `_int.()`, `_dbl.()`,`_chr.()`, `_df.()` variants return their specified type
-#' * `_dfr.()` & `_dfc.()` Return data frame results binded together
+#' * `_dfr.()` & `_dfc.()` Return all data frame results utilizing row or column binding
 #'
 #' @param .x A list or vector
 #' @param .y A list or vector
