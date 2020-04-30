@@ -47,7 +47,9 @@
 
 
 <meta property="og:title" content="Select helpers — starts_with." />
-<meta property="og:description" content="These functions allow you to select variables based on their names.
+<meta property="og:description" content="Please note these functions are leftover from before tidytable used tidyselect.
+You can use these or the normal tidyselect helpers.
+These functions allow you to select variables based on their names.
 any_of.(): Select using a character vector
 contains.(): Contains a literal string or regex match
 everything.(): Matches all variables
@@ -132,7 +134,9 @@ ends_with.(): Ends with a suffix
     </div>
 
     <div class="ref-description">
-    <p>These functions allow you to select variables based on their names.</p><ul>
+    <p>Please note these functions are leftover from before <code>tidytable</code> used <code>tidyselect</code>.
+You can use these or the normal <code>tidyselect</code> helpers.</p>
+<p>These functions allow you to select variables based on their names.</p><ul>
 <li><p><code><a href='starts_with..html'>any_of.()</a></code>: Select using a character vector</p></li>
 <li><p><code><a href='starts_with..html'>contains.()</a></code>: Contains a literal string or regex match</p></li>
 <li><p><code><a href='starts_with..html'>everything.()</a></code>: Matches all variables</p></li>
@@ -142,42 +146,58 @@ ends_with.(): Ends with a suffix
 
     </div>
 
-    <pre class="usage"><span class='fu'><a href='starts_with..html'>starts_with.</a></span>(<span class='no'>match</span>)
+    <pre class="usage"><span class='fu'><a href='starts_with..html'>starts_with.</a></span>(<span class='no'>match</span>, <span class='kw'>ignore.case</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'>peek_vars</span>(<span class='kw'>fn</span> <span class='kw'>=</span> <span class='st'>"starts_with"</span>))
 
-<span class='fu'><a href='starts_with..html'>dt_starts_with</a></span>(<span class='no'>match</span>)
+<span class='fu'><a href='starts_with..html'>dt_starts_with</a></span>(<span class='no'>match</span>, <span class='kw'>ignore.case</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'>peek_vars</span>(<span class='kw'>fn</span> <span class='kw'>=</span> <span class='st'>"starts_with"</span>))
 
-<span class='fu'><a href='starts_with..html'>contains.</a></span>(<span class='no'>match</span>)
+<span class='fu'><a href='starts_with..html'>contains.</a></span>(<span class='no'>match</span>, <span class='kw'>ignore.case</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'>peek_vars</span>(<span class='kw'>fn</span> <span class='kw'>=</span> <span class='st'>"contains"</span>))
 
-<span class='fu'><a href='starts_with..html'>dt_contains</a></span>(<span class='no'>match</span>)
+<span class='fu'><a href='starts_with..html'>dt_contains</a></span>(<span class='no'>match</span>, <span class='kw'>ignore.case</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'>peek_vars</span>(<span class='kw'>fn</span> <span class='kw'>=</span> <span class='st'>"contains"</span>))
 
-<span class='fu'><a href='starts_with..html'>ends_with.</a></span>(<span class='no'>match</span>)
+<span class='fu'><a href='starts_with..html'>ends_with.</a></span>(<span class='no'>match</span>, <span class='kw'>ignore.case</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'>peek_vars</span>(<span class='kw'>fn</span> <span class='kw'>=</span> <span class='st'>"ends_with"</span>))
 
-<span class='fu'><a href='starts_with..html'>dt_ends_with</a></span>(<span class='no'>match</span>)
+<span class='fu'><a href='starts_with..html'>dt_ends_with</a></span>(<span class='no'>match</span>, <span class='kw'>ignore.case</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'>peek_vars</span>(<span class='kw'>fn</span> <span class='kw'>=</span> <span class='st'>"ends_with"</span>))
 
-<span class='fu'><a href='starts_with..html'>everything.</a></span>()
+<span class='fu'><a href='starts_with..html'>everything.</a></span>(<span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'>peek_vars</span>(<span class='kw'>fn</span> <span class='kw'>=</span> <span class='st'>"everything"</span>))
 
-<span class='fu'><a href='starts_with..html'>dt_everything</a></span>()
+<span class='fu'><a href='starts_with..html'>dt_everything</a></span>(<span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'>peek_vars</span>(<span class='kw'>fn</span> <span class='kw'>=</span> <span class='st'>"everything"</span>))
 
-<span class='fu'><a href='starts_with..html'>any_of.</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='starts_with..html'>any_of.</a></span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'>peek_vars</span>(<span class='kw'>fn</span> <span class='kw'>=</span> <span class='st'>"any_of"</span>))
 
-<span class='fu'><a href='starts_with..html'>dt_any_of</a></span>(<span class='no'>x</span>)</pre>
+<span class='fu'><a href='starts_with..html'>dt_any_of</a></span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'>peek_vars</span>(<span class='kw'>fn</span> <span class='kw'>=</span> <span class='st'>"any_of"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>match</th>
-      <td><p>The match for the helper function to use</p></td>
+      <td><p>A character vector. If length &gt; 1, the union of the
+matches is taken.</p></td>
+    </tr>
+    <tr>
+      <th>ignore.case</th>
+      <td><p>If <code>TRUE</code>, the default, ignores case when matching
+names.</p></td>
+    </tr>
+    <tr>
+      <th>vars</th>
+      <td><p>A character vector of variable names. When called
+from inside selecting functions like <code><a href='select..html'>select.()</a></code> these are
+automatically set to the names of the table.</p></td>
     </tr>
     <tr>
       <th>x</th>
-      <td><p>Character vector of columns to select</p></td>
+      <td><p>An index vector of names or locations.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>These dots are for future extensions and must be empty.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>example_dt</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>data.table</span><span class='kw ns'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
+    <pre class="examples"><div class='input'><span class='no'>example_dt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(
   <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='kw'>double_x</span> <span class='kw'>=</span> <span class='fl'>2</span>,

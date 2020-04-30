@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Unite multiple columns by pasting strings together — unite. • tidytable</title>
+<title>Objects exported from other packages — reexports • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,13 @@
 
 
 
-<meta property="og:title" content="Unite multiple columns by pasting strings together — unite." />
-<meta property="og:description" content="Convenience function to paste together multiple columns into one." />
+<meta property="og:title" content="Objects exported from other packages — reexports" />
+<meta property="og:description" content="These objects are imported from other packages. Follow the links
+below to see their documentation.
+
+  tidyselectall_of, any_of, contains, ends_with, everything, matches, starts_with
+
+" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,80 +124,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Unite multiple columns by pasting strings together</h1>
-    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/unite.R'><code>R/unite.R</code></a></small>
-    <div class="hidden name"><code>unite..Rd</code></div>
+    <h1>Objects exported from other packages</h1>
+    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/tidytable_package.R'><code>R/tidytable_package.R</code></a></small>
+    <div class="hidden name"><code>reexports.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Convenience function to paste together multiple columns into one.</p>
+    <p>These objects are imported from other packages. Follow the links
+below to see their documentation.</p>
+<dl'>
+  <dt>tidyselect</dt><dd><p><code><a href='https://tidyselect.r-lib.org/reference/select_helpers.html'>all_of</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/select_helpers.html'>any_of</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/select_helpers.html'>contains</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/select_helpers.html'>ends_with</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/select_helpers.html'>everything</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/select_helpers.html'>matches</a></code>, <code><a href='https://tidyselect.r-lib.org/reference/select_helpers.html'>starts_with</a></code></p></dd>
+
+</dl>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='unite..html'>unite.</a></span>(<span class='no'>.data</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"new_col"</span>, <span class='no'>...</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"_"</span>, <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
-<span class='fu'><a href='unite..html'>dt_unite</a></span>(<span class='no'>.data</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"new_col"</span>, <span class='no'>...</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"_"</span>, <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>.data</th>
-      <td><p>A data.frame or data.table</p></td>
-    </tr>
-    <tr>
-      <th>col</th>
-      <td><p>Name of the new column, as a string.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Selection of columns. If empty all variables are selected.
-<code>tidyselect</code> compatible.</p></td>
-    </tr>
-    <tr>
-      <th>sep</th>
-      <td><p>Separator to use between values</p></td>
-    </tr>
-    <tr>
-      <th>remove</th>
-      <td><p>If TRUE, removes input columns from the data.table.</p></td>
-    </tr>
-    <tr>
-      <th>na.rm</th>
-      <td><p>If TRUE, NA values will be not be part of the concatenation</p></td>
-    </tr>
-    </table>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"a"</span>),
-                     <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"b"</span>, <span class='st'>"b"</span>, <span class='st'>"b"</span>),
-                     <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"c"</span>, <span class='st'>"c"</span>, <span class='fl'>NA</span>))
 
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='unite..html'>unite.</a></span>(<span class='st'>"new_col"</span>, <span class='no'>b</span>, <span class='no'>c</span>)</div><div class='output co'>#&gt;    a new_col
-#&gt; 1: a     b_c
-#&gt; 2: a     b_c
-#&gt; 3: a    b_NA</div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='unite..html'>unite.</a></span>(<span class='st'>"new_col"</span>, <span class='no'>is.character</span>)</div><div class='output co'>#&gt;    new_col
-#&gt; 1:   a_b_c
-#&gt; 2:   a_b_c
-#&gt; 3:  a_b_NA</div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='unite..html'>unite.</a></span>(<span class='st'>"new_col"</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;    a b    c new_col
-#&gt; 1: a b    c     b_c
-#&gt; 2: a b    c     b_c
-#&gt; 3: a b &lt;NA&gt;    b_NA</div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='unite..html'>unite.</a></span>(<span class='st'>"new_col"</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;    a new_col
-#&gt; 1: a     b_c
-#&gt; 2: a     b_c
-#&gt; 3: a       b</div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='unite..html'>unite.</a></span>()</div><div class='output co'>#&gt;    new_col
-#&gt; 1:   a_b_c
-#&gt; 2:   a_b_c
-#&gt; 3:  a_b_NA</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

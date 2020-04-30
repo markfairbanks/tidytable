@@ -49,8 +49,7 @@
 <meta property="og:title" content="Pivot data from wide to long — pivot_longer." />
 <meta property="og:description" content="pivot_wider.() &quot;widens&quot; data, increasing the number of columns and
 decreasing the number of rows. The inverse transformation is
-pivot_longer.(). Syntax based on the tidyr equivalents.
-Supports enhanced selection" />
+pivot_longer.(). Syntax based on the tidyr equivalents." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -131,7 +130,6 @@ Supports enhanced selection" />
     <p><code><a href='pivot_wider..html'>pivot_wider.()</a></code> "widens" data, increasing the number of columns and
 decreasing the number of rows. The inverse transformation is
 <code><a href='pivot_longer..html'>pivot_longer.()</a></code>. Syntax based on the <code>tidyr</code> equivalents.</p>
-<p>Supports enhanced selection</p>
     </div>
 
     <pre class="usage"><span class='fu'><a href='pivot_longer..html'>pivot_longer.</a></span>(
@@ -161,7 +159,7 @@ decreasing the number of rows. The inverse transformation is
     </tr>
     <tr>
       <th>cols</th>
-      <td><p>Vector of bare column names. Can add/drop columns.</p></td>
+      <td><p>Vector of bare column names. Can add/drop columns. <code>tidyselect</code> compatible.</p></td>
     </tr>
     <tr>
       <th>names_to</th>
@@ -177,7 +175,7 @@ decreasing the number of rows. The inverse transformation is
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments to pass to `melt.data.table()`</p></td>
+      <td><p>Additional arguments to pass to <code>melt.data.table()</code></p></td>
     </tr>
     </table>
 
@@ -203,8 +201,7 @@ decreasing the number of rows. The inverse transformation is
 #&gt; 3: c     x      3
 #&gt; 4: a     y      4
 #&gt; 5: b     y      5
-#&gt; 6: c     y      6</div><div class='input'>
-</div></pre>
+#&gt; 6: c     y      6</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

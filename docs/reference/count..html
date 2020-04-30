@@ -47,8 +47,7 @@
 
 
 <meta property="og:title" content="Count observations by group — count." />
-<meta property="og:description" content="Returns row counts of the dataset. If bare column names are provided, dt_count() returns counts by group.
-Supports enhanced selection" />
+<meta property="og:description" content="Returns row counts of the dataset. If bare column names are provided, count.() returns counts by group." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -126,8 +125,7 @@ Supports enhanced selection" />
     </div>
 
     <div class="ref-description">
-    <p>Returns row counts of the dataset. If bare column names are provided, <code><a href='count..html'>dt_count()</a></code> returns counts by group.</p>
-<p>Supports enhanced selection</p>
+    <p>Returns row counts of the dataset. If bare column names are provided, <code><a href='count..html'>count.()</a></code> returns counts by group.</p>
     </div>
 
     <pre class="usage"><span class='fu'><a href='count..html'>count.</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>)
@@ -143,13 +141,13 @@ Supports enhanced selection" />
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Columns to group by</p></td>
+      <td><p>Columns to group by. <code>tidyselect</code> compatible.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>example_df</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>data.table</span><span class='kw ns'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
+    <pre class="examples"><div class='input'><span class='no'>example_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(
   <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
   <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>,
   <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span>))

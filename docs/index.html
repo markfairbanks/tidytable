@@ -108,7 +108,6 @@
 <div id="tidytable-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tidytable-functions" class="anchor"></a>tidytable functions</h2>
-<p><strong>Enhanced selection support denoted by ES</strong> <a href="https://markfairbanks.github.io/tidytable/#enhanced-selection">See examples here</a></p>
 <div id="tidytable-helpers" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tidytable-helpers" class="anchor"></a>tidytable helpers</h3>
@@ -130,15 +129,13 @@
 <li><code><a href="reference/arrange..html">arrange.()</a></code></li>
 <li><code><a href="reference/filter..html">filter.()</a></code></li>
 <li>
-<code><a href="reference/mutate..html">mutate.()</a></code> &amp; <code><a href="reference/mutate_across..html">mutate_across.()</a></code> - <strong>ES</strong>
+<code><a href="reference/mutate..html">mutate.()</a></code> &amp; <code><a href="reference/mutate_across..html">mutate_across.()</a></code>
 <ul>
 <li>The <code>_across.()</code> helper is new and can replace the <code>_if.()</code>/<code>_at.()</code>/<code>_all.()</code> helpers <a href="https://markfairbanks.github.io/tidytable/#new-variant-dt_mutate_across">See here</a>
 </li>
 </ul>
 </li>
-<li>
-<code><a href="reference/select..html">select.()</a></code> - <strong>ES</strong>
-</li>
+<li><code><a href="reference/select..html">select.()</a></code></li>
 <li>
 <code><a href="reference/summarize..html">summarize.()</a></code>: Group by specifications called inside. <a href="https://markfairbanks.github.io/tidytable/#using-group-by">See here</a>
 </li>
@@ -153,12 +150,8 @@
 </li>
 <li>
 <code><a href="reference/case..html">case.()</a></code>: Similar to <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">dplyr::case_when()</a></code>. See <code><a href="reference/case..html">?case.</a></code> for syntax</li>
-<li>
-<code><a href="reference/count..html">count.()</a></code> - <strong>ES</strong>
-</li>
-<li>
-<code><a href="reference/distinct..html">distinct.()</a></code> - <strong>ES</strong>
-</li>
+<li><code><a href="reference/count..html">count.()</a></code></li>
+<li><code><a href="reference/distinct..html">distinct.()</a></code></li>
 <li><code><a href="reference/ifelse..html">ifelse.()</a></code></li>
 <li>Joins:
 <ul>
@@ -170,16 +163,9 @@
 <li><code><a href="reference/pull..html">pull.()</a></code></li>
 <li><code><a href="reference/relocate..html">relocate.()</a></code></li>
 <li>
-<code><a href="reference/rename..html">rename.()</a></code> &amp; <code><a href="reference/rename_with..html">rename_with.()</a></code> - <strong>ES</strong>
+<code><a href="reference/rename..html">rename.()</a></code> &amp; <code><a href="reference/rename_with..html">rename_with.()</a></code>
 </li>
 <li><code><a href="reference/row_number..html">row_number.()</a></code></li>
-<li>Select helpers:
-<ul>
-<li>
-<code><a href="reference/starts_with..html">any_of.()</a></code>, <code><a href="reference/starts_with..html">contains.()</a></code>, <code><a href="reference/starts_with..html">everything.()</a></code> <code><a href="reference/starts_with..html">starts_with.()</a></code>, <code><a href="reference/starts_with..html">ends_with.()</a></code>
-</li>
-</ul>
-</li>
 <li>
 <code><a href="reference/slice..html">slice.()</a></code>: <code>_head.()</code>/<code>_tail.()</code>/<code>_max.()</code>/<code>_min.()</code>
 <ul>
@@ -195,19 +181,14 @@
 <h3 class="hasAnchor">
 <a href="#tidyr" class="anchor"></a>tidyr</h3>
 <ul>
+<li><code><a href="reference/drop_na..html">drop_na.()</a></code></li>
 <li>
-<code><a href="reference/drop_na..html">drop_na.()</a></code> - <strong>ES</strong>
+<code><a href="reference/fill..html">fill.()</a></code>: Works on character/factor/logical types (<code><a href="https://Rdatatable.gitlab.io/data.table/reference/nafill.html">data.table::nafill()</a></code> does not)</li>
+<li><code><a href="reference/group_split..html">group_split.()</a></code></li>
+<li>Nesting: <code><a href="reference/nest_by..html">nest_by.()</a></code> &amp; <code><a href="reference/unnest..html">unnest.()</a></code>
 </li>
 <li>
-<code><a href="reference/fill..html">fill.()</a></code>: Works on character/factor/logical types (<code><a href="https://Rdatatable.gitlab.io/data.table/reference/nafill.html">data.table::nafill()</a></code> does not) - <strong>ES</strong>
-</li>
-<li>
-<code><a href="reference/group_split..html">group_split.()</a></code> - <strong>ES</strong>
-</li>
-<li>Nesting: <code><a href="reference/nest_by..html">nest_by.()</a></code> - <strong>ES</strong> &amp; <code><a href="reference/unnest..html">unnest.()</a></code>
-</li>
-<li>
-<code><a href="reference/pivot_longer..html">pivot_longer.()</a></code> - <strong>ES</strong> &amp; <code><a href="reference/pivot_wider..html">pivot_wider.()</a></code> - <strong>ES</strong>
+<code><a href="reference/pivot_longer..html">pivot_longer.()</a></code> &amp; <code><a href="reference/pivot_wider..html">pivot_wider.()</a></code>
 </li>
 <li><code><a href="reference/replace_na..html">replace_na.()</a></code></li>
 <li><code><a href="reference/separate..html">separate.()</a></code></li>
@@ -254,7 +235,7 @@
 <li>Multiple columns can be passed with <code>by = c(y, z)</code>
 </li>
 <li>
-<a href="https://markfairbanks.github.io/tidytable/#enhanced-selection">Enhanced selection</a> can also be used:
+<a href="https://tidyselect.r-lib.org"><code>tidyselect</code></a> can also be used, including using predicates:
 <ul>
 <li>Single predicate: <code>by = is.character</code>
 </li>
@@ -274,10 +255,10 @@
 <span class="co">#&gt; 1:     a   1.5     2</span>
 <span class="co">#&gt; 2:     b   3.0     1</span></pre></div>
 </div>
-<div id="enhanced-selection" class="section level2">
+<div id="tidyselect-support" class="section level2">
 <h2 class="hasAnchor">
-<a href="#enhanced-selection" class="anchor"></a>Enhanced selection</h2>
-<p>Enhanced selection allows you to mix predicates like <code>is.numeric</code> with normal selection.</p>
+<a href="#tidyselect-support" class="anchor"></a>tidyselect support</h2>
+<p><code>tidyselect</code> allows you to mix predicates like <code>is.numeric</code> with normal selection. This includes the ability to use <code>tidyselect</code> helpers: <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">everything()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">starts_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">ends_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">contains()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">any_of()</a></code>, etc.</p>
 <div class="sourceCode" id="cb5"><pre class="r"><span class="no">test_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="kw">a</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>),
                       <span class="kw">b</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>),
                       <span class="kw">c</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span>),
@@ -298,13 +279,12 @@
 <span class="co">#&gt; 1:     a     a</span>
 <span class="co">#&gt; 2:     a     b</span>
 <span class="co">#&gt; 3:     b     c</span></pre></div>
-<p>Currently supported predicates: <code>is.numeric</code>/<code>is.integer</code>/<code>is.double</code>/<code>is.character</code>/<code>is.factor</code>/<code>is.list</code></p>
-<p>Functions that support enhanced selection will be noted in their documentation.</p>
+<p>These same ideas can be used whenever selecting columns in <code>tidytable</code> functions - for example when using <code><a href="reference/count..html">count.()</a></code>, <code><a href="reference/drop_na..html">drop_na.()</a></code>, <code><a href="reference/pivot_longer..html">pivot_longer.()</a></code>, etc.</p>
 <div id="new-helper-mutate_across-" class="section level4">
 <h4 class="hasAnchor">
 <a href="#new-helper-mutate_across-" class="anchor"></a>New helper: <code>mutate_across.()</code>
 </h4>
-<p>Enhanced selection allows the user to replace <code><a href="reference/mutate_if..html">mutate_if.()</a></code>, <code><a href="reference/mutate_if..html">mutate_at.()</a></code>, and <code><a href="reference/mutate_if..html">mutate_all.()</a></code> with one helper - <code><a href="reference/mutate_across..html">mutate_across.()</a></code>.</p>
+<p><code>tidyselect</code> allows the user to replace <code><a href="reference/mutate_if..html">mutate_if.()</a></code>, <code><a href="reference/mutate_if..html">mutate_at.()</a></code>, and <code><a href="reference/mutate_if..html">mutate_all.()</a></code> with one helper - <code><a href="reference/mutate_across..html">mutate_across.()</a></code>.</p>
 <p>Using <code>_across.()</code> instead of <code>_if.()</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="r"><span class="no">test_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="kw">a</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>),
                       <span class="kw">b</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>),
@@ -328,7 +308,7 @@
 <span class="co">#&gt; 3:     2     2     b     c</span></pre></div>
 <p>Using <code>_across.()</code> instead of <code>_all.()</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="r"><span class="no">test_df</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/mutate_across..html">mutate_across.</a></span>(<span class="fu"><a href="reference/starts_with..html">everything.</a></span>(), <span class="no">as.factor</span>)
+  <span class="fu"><a href="reference/mutate_across..html">mutate_across.</a></span>(<span class="fu"><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">everything</a></span>(), <span class="no">as.factor</span>)
 <span class="co">#&gt;        a     b     c     d</span>
 <span class="co">#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;</span>
 <span class="co">#&gt; 1:     1     1     a     a</span>
@@ -427,19 +407,19 @@
 <span class="co">#&gt; # A tibble: 13 x 6</span>
 <span class="co">#&gt;    function_tested tidyverse tidytable data.table pandas tidytable_vs_tidyverse</span>
 <span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;                 </span>
-<span class="co">#&gt;  1 arrange         404.3ms   36.3ms    32.3ms     297ms  9.0%                  </span>
-<span class="co">#&gt;  2 case_when       400.3ms   53.1ms    58.6ms     307ms  13.3%                 </span>
-<span class="co">#&gt;  3 distinct        89.4ms    21.2ms    17ms       287ms  23.7%                 </span>
-<span class="co">#&gt;  4 fill            111.1ms   34.7ms    30.5ms     146ms  31.2%                 </span>
-<span class="co">#&gt;  5 filter          268ms     205ms     212ms      656ms  76.5%                 </span>
-<span class="co">#&gt;  6 inner_join      98.6ms    60.8ms    54.4ms     &lt;NA&gt;   61.7%                 </span>
-<span class="co">#&gt;  7 left_join       107.7ms   69.3ms    44ms       &lt;NA&gt;   64.3%                 </span>
-<span class="co">#&gt;  8 mutate          68.9ms    52.6ms    70.6ms     85.2ms 76.3%                 </span>
-<span class="co">#&gt;  9 nest            29.26ms   6.81ms    11.15ms    &lt;NA&gt;   23.3%                 </span>
-<span class="co">#&gt; 10 pivot_longer    45.3ms    11ms      10.8ms     &lt;NA&gt;   24.3%                 </span>
-<span class="co">#&gt; 11 pivot_wider     92.7ms    67.6ms    64.8ms     &lt;NA&gt;   72.9%                 </span>
-<span class="co">#&gt; 12 summarize       462ms     94ms      181ms      780ms  20.3%                 </span>
-<span class="co">#&gt; 13 unnest          783.27ms  17.43ms   4.37ms     &lt;NA&gt;   2.2%</span></pre></div>
+<span class="co">#&gt;  1 arrange         447.4ms   57.5ms    72.8ms     297ms  12.9%                 </span>
+<span class="co">#&gt;  2 case_when       406.5ms   105.8ms   75.4ms     307ms  26.0%                 </span>
+<span class="co">#&gt;  3 distinct        104.5ms   46.5ms    38.7ms     287ms  44.5%                 </span>
+<span class="co">#&gt;  4 fill            113.6ms   44.8ms    39.4ms     146ms  39.4%                 </span>
+<span class="co">#&gt;  5 filter          289ms     296ms     251ms      656ms  102.4%                </span>
+<span class="co">#&gt;  6 inner_join      66.1ms    76.7ms    81.9ms     &lt;NA&gt;   116.0%                </span>
+<span class="co">#&gt;  7 left_join       89.5ms    70.1ms    68.6ms     &lt;NA&gt;   78.3%                 </span>
+<span class="co">#&gt;  8 mutate          61.8ms    52.3ms    50.5ms     85.2ms 84.6%                 </span>
+<span class="co">#&gt;  9 nest            32ms      16.2ms    14.9ms     &lt;NA&gt;   50.6%                 </span>
+<span class="co">#&gt; 10 pivot_longer    43.4ms    14.8ms    11.9ms     &lt;NA&gt;   34.1%                 </span>
+<span class="co">#&gt; 11 pivot_wider     95.7ms    112.2ms   111.7ms    &lt;NA&gt;   117.2%                </span>
+<span class="co">#&gt; 12 summarize       536ms     180ms     283ms      780ms  33.6%                 </span>
+<span class="co">#&gt; 13 unnest          836.85ms  21.69ms   5.12ms     &lt;NA&gt;   2.6%</span></pre></div>
 </div>
 </div>
 </div>
@@ -478,7 +458,7 @@
 <li><a href="https://cran.r-project.org/package=tidytable"><img src="https://www.r-pkg.org/badges/version/tidytable" alt="CRAN status"></a></li>
 <li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.4.1-green.svg"></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
-<li><a href="https://r-pkg.org/pkg/tidytable"><img src="https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey" alt="CRAN RStudio mirror downloads"></a></li>
+<li><a href="https://markfairbanks.github.io/tidytable/"><img src="https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey" alt="CRAN RStudio mirror downloads"></a></li>
 </ul>
 </div>
 </div>

@@ -47,8 +47,7 @@
 
 
 <meta property="og:title" content="Convert character and factor columns to dummy variables — get_dummies." />
-<meta property="og:description" content="Convert character and factor columns to dummy variables
-Supports enhanced selection" />
+<meta property="og:description" content="Convert character and factor columns to dummy variables" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -127,7 +126,6 @@ Supports enhanced selection" />
 
     <div class="ref-description">
     <p>Convert character and factor columns to dummy variables</p>
-<p>Supports enhanced selection</p>
     </div>
 
     <pre class="usage"><span class='fu'><a href='get_dummies..html'>get_dummies.</a></span>(
@@ -158,7 +156,8 @@ Supports enhanced selection" />
     <tr>
       <th>cols</th>
       <td><p>A single column or a vector of unquoted columns to dummify.
-Defaults to all character &amp; factor columns using <code><a href='https://rdrr.io/r/base/c.html'>c(is.character, is.factor)</a></code>.</p></td>
+Defaults to all character &amp; factor columns using <code><a href='https://rdrr.io/r/base/c.html'>c(is.character, is.factor)</a></code>.
+<code>tidyselect</code> compatible.</p></td>
     </tr>
     <tr>
       <th>prefix</th>
@@ -180,7 +179,7 @@ Defaults to all character &amp; factor columns using <code><a href='https://rdrr
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>data.table</span><span class='kw ns'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
+    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(
   <span class='kw'>col1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='fl'>NA</span>),
   <span class='kw'>col2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='fl'>NA</span>, <span class='st'>"d"</span>)),
   <span class='kw'>var1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>4</span>,<span class='fl'>0</span>,<span class='fl'>1</span>))

@@ -49,8 +49,7 @@
 <meta property="og:title" content="Pivot data from long to wide — pivot_wider." />
 <meta property="og:description" content="pivot_wider.() &quot;widens&quot; data, increasing the number of columns and
 decreasing the number of rows. The inverse transformation is
-pivot_longer.(). Syntax based on the tidyr equivalents.
-Supports enhanced selection" />
+pivot_longer.(). Syntax based on the tidyr equivalents." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -131,7 +130,6 @@ Supports enhanced selection" />
     <p><code><a href='pivot_wider..html'>pivot_wider.()</a></code> "widens" data, increasing the number of columns and
 decreasing the number of rows. The inverse transformation is
 <code><a href='pivot_longer..html'>pivot_longer.()</a></code>. Syntax based on the <code>tidyr</code> equivalents.</p>
-<p>Supports enhanced selection</p>
     </div>
 
     <pre class="usage"><span class='fu'><a href='pivot_wider..html'>pivot_wider.</a></span>(
@@ -161,15 +159,22 @@ decreasing the number of rows. The inverse transformation is
     </tr>
     <tr>
       <th>names_from</th>
-      <td><p>A pair of arguments describing which column (or columns) to get the name of the output column (<code>name_from</code>), and which column (or columns) to get the cell values from (<code>values_from</code>).</p></td>
+      <td><p>A pair of arguments describing which column (or columns) to get the name of the output column (<code>name_from</code>),
+and which column (or columns) to get the cell values from (<code>values_from</code>).
+<code>tidyselect</code> compatible.</p></td>
     </tr>
     <tr>
       <th>values_from</th>
-      <td><p>A pair of arguments describing which column (or columns) to get the name of the output column (<code>name_from</code>), and which column (or columns) to get the cell values from (<code>values_from</code>).</p></td>
+      <td><p>A pair of arguments describing which column (or columns) to get the name of the output column (<code>name_from</code>),
+and which column (or columns) to get the cell values from (<code>values_from</code>).
+<code>tidyselect</code> compatible.</p></td>
     </tr>
     <tr>
       <th>id_cols</th>
-      <td><p>A set of columns that uniquely identifies each observation. Defaults to all columns in the data table except for the columns specified in <code>names_from</code> and <code>values_from</code>. Typically used when you have additional variables that is directly related.</p></td>
+      <td><p>A set of columns that uniquely identifies each observation.
+Defaults to all columns in the data table except for the columns specified in <code>names_from</code> and <code>values_from</code>.
+Typically used when you have additional variables that is directly related.
+<code>tidyselect</code> compatible.</p></td>
     </tr>
     <tr>
       <th>names_sep</th>
