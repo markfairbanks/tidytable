@@ -257,7 +257,7 @@
 </div>
 <div id="tidyselect-support" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyselect-support" class="anchor"></a>tidyselect support</h2>
+<a href="#tidyselect-support" class="anchor"></a><code>tidyselect</code> support</h2>
 <p><code>tidyselect</code> allows you to mix predicates like <code>is.numeric</code> with normal selection. This includes the ability to use <code>tidyselect</code> helpers: <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">everything()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">starts_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">ends_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">contains()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">any_of()</a></code>, etc.</p>
 <div class="sourceCode" id="cb5"><pre class="r"><span class="no">test_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="kw">a</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>),
                       <span class="kw">b</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>),
@@ -279,7 +279,7 @@
 <span class="co">#&gt; 1:     a     a</span>
 <span class="co">#&gt; 2:     a     b</span>
 <span class="co">#&gt; 3:     b     c</span></pre></div>
-<p>These same ideas can be used whenever selecting columns in <code>tidytable</code> functions - for example when using <code><a href="reference/count..html">count.()</a></code>, <code><a href="reference/drop_na..html">drop_na.()</a></code>, <code><a href="reference/pivot_longer..html">pivot_longer.()</a></code>, etc.</p>
+<p>These same ideas can be used whenever selecting columns in <code>tidytable</code> functions - for example when using <code><a href="reference/count..html">count.()</a></code>, <code><a href="reference/drop_na..html">drop_na.()</a></code>, <code><a href="reference/pivot_longer..html">pivot_longer.()</a></code>, <code>pivot_wider()</code>, etc.</p>
 <div id="new-helper-mutate_across-" class="section level4">
 <h4 class="hasAnchor">
 <a href="#new-helper-mutate_across-" class="anchor"></a>New helper: <code>mutate_across.()</code>
@@ -407,19 +407,19 @@
 <span class="co">#&gt; # A tibble: 13 x 6</span>
 <span class="co">#&gt;    function_tested tidyverse tidytable data.table pandas tidytable_vs_tidyverse</span>
 <span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;                 </span>
-<span class="co">#&gt;  1 arrange         447.4ms   57.5ms    72.8ms     297ms  12.9%                 </span>
-<span class="co">#&gt;  2 case_when       406.5ms   105.8ms   75.4ms     307ms  26.0%                 </span>
-<span class="co">#&gt;  3 distinct        104.5ms   46.5ms    38.7ms     287ms  44.5%                 </span>
-<span class="co">#&gt;  4 fill            113.6ms   44.8ms    39.4ms     146ms  39.4%                 </span>
-<span class="co">#&gt;  5 filter          289ms     296ms     251ms      656ms  102.4%                </span>
-<span class="co">#&gt;  6 inner_join      66.1ms    76.7ms    81.9ms     &lt;NA&gt;   116.0%                </span>
-<span class="co">#&gt;  7 left_join       89.5ms    70.1ms    68.6ms     &lt;NA&gt;   78.3%                 </span>
-<span class="co">#&gt;  8 mutate          61.8ms    52.3ms    50.5ms     85.2ms 84.6%                 </span>
-<span class="co">#&gt;  9 nest            32ms      16.2ms    14.9ms     &lt;NA&gt;   50.6%                 </span>
-<span class="co">#&gt; 10 pivot_longer    43.4ms    14.8ms    11.9ms     &lt;NA&gt;   34.1%                 </span>
-<span class="co">#&gt; 11 pivot_wider     95.7ms    112.2ms   111.7ms    &lt;NA&gt;   117.2%                </span>
-<span class="co">#&gt; 12 summarize       536ms     180ms     283ms      780ms  33.6%                 </span>
-<span class="co">#&gt; 13 unnest          836.85ms  21.69ms   5.12ms     &lt;NA&gt;   2.6%</span></pre></div>
+<span class="co">#&gt;  1 arrange         430.4ms   62.7ms    58.4ms     297ms  14.6%                 </span>
+<span class="co">#&gt;  2 case_when       400.8ms   103.6ms   72.2ms     307ms  25.8%                 </span>
+<span class="co">#&gt;  3 distinct        95ms      42.8ms    41.2ms     287ms  45.1%                 </span>
+<span class="co">#&gt;  4 fill            111.1ms   50.1ms    34.9ms     146ms  45.1%                 </span>
+<span class="co">#&gt;  5 filter          270ms     266ms     241ms      656ms  98.5%                 </span>
+<span class="co">#&gt;  6 inner_join      63.6ms    76.7ms    69.7ms     &lt;NA&gt;   120.6%                </span>
+<span class="co">#&gt;  7 left_join       87.5ms    67.9ms    72.2ms     &lt;NA&gt;   77.6%                 </span>
+<span class="co">#&gt;  8 mutate          63.6ms    51.1ms    47.3ms     85.2ms 80.3%                 </span>
+<span class="co">#&gt;  9 nest            29.6ms    18.4ms    16.4ms     &lt;NA&gt;   62.2%                 </span>
+<span class="co">#&gt; 10 pivot_longer    44.4ms    15.6ms    13.1ms     &lt;NA&gt;   35.1%                 </span>
+<span class="co">#&gt; 11 pivot_wider     105ms     132ms     118ms      &lt;NA&gt;   125.7%                </span>
+<span class="co">#&gt; 12 summarize       461ms     168ms     271ms      780ms  36.4%                 </span>
+<span class="co">#&gt; 13 unnest          816.16ms  21.94ms   6.23ms     &lt;NA&gt;   2.7%</span></pre></div>
 </div>
 </div>
 </div>
