@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
 [![](https://img.shields.io/badge/dev%20-0.4.1-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey)](https://r-pkg.org/pkg/tidytable)
+[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey)](https://markfairbanks.github.io/tidytable/)
 <!-- badges: end -->
 
 The goal of `tidytable` is to be a tidy interface to `data.table`.
@@ -51,9 +51,6 @@ devtools::install_github("markfairbanks/tidytable")
 
 ## tidytable functions
 
-**Enhanced selection support denoted by ES**
-[See examples here](https://markfairbanks.github.io/tidytable/#enhanced-selection)
-
 ### tidytable helpers
 
 * `dt()`: Pipeable `data.table` syntax. [See here](https://markfairbanks.github.io/tidytable/#dt-helper)
@@ -66,10 +63,10 @@ devtools::install_github("markfairbanks/tidytable")
 
 * `arrange.()`
 * `filter.()`
-* `mutate.()` & `mutate_across.()` - **ES**
+* `mutate.()` & `mutate_across.()`
   + The `_across.()` helper is new and can replace the `_if.()`/`_at.()`/`_all.()` helpers
   [See here](https://markfairbanks.github.io/tidytable/#new-variant-dt_mutate_across)
-* `select.()` - **ES**
+* `select.()`
 * `summarize.()`: Group by specifications called inside.
 [See here](https://markfairbanks.github.io/tidytable/#using-group-by)
 
@@ -77,17 +74,15 @@ devtools::install_github("markfairbanks/tidytable")
 
 * `bind_cols.()` & `bind_rows.()`
 * `case.()`: Similar to `dplyr::case_when()`. See `?case.` for syntax
-* `count.()` - **ES**
-* `distinct.()` - **ES**
+* `count.()`
+* `distinct.()`
 * `ifelse.()`
 * Joins:
   + `left_join.()`, `inner_join.()`, `right_join.()`, `full_join.()`, & `anti_join.()`
 * `pull.()`
 * `relocate.()`
-* `rename.()` & `rename_with.()` - **ES**
+* `rename.()` & `rename_with.()`
 * `row_number.()`
-* Select helpers:
-  + `any_of.()`, `contains.()`, `everything.()` `starts_with.()`, `ends_with.()`
 * `slice.()`: `_head.()`/`_tail.()`/`_max.()`/`_min.()`
   + The `slice_*()` helpers are like `top_n.()`, but are a bit easier to use
 * `top_n.()`
@@ -95,11 +90,11 @@ devtools::install_github("markfairbanks/tidytable")
 
 ### tidyr
 
-* `drop_na.()` - **ES**
-* `fill.()`: Works on character/factor/logical types (`data.table::nafill()` does not) - **ES**
-* `group_split.()` - **ES**
-* Nesting: `nest_by.()` - **ES** & `unnest.()`
-* `pivot_longer.()` - **ES** & `pivot_wider.()` - **ES**
+* `drop_na.()`
+* `fill.()`: Works on character/factor/logical types (`data.table::nafill()` does not)
+* `group_split.()`
+* Nesting: `nest_by.()` & `unnest.()`
+* `pivot_longer.()` & `pivot_wider.()`
 * `replace_na.()`
 * `separate.()`
 * `unite.()`
@@ -131,8 +126,8 @@ Group by calls are done from inside any function that has group by functionality
 
 * A single column can be passed with `by = z`
 * Multiple columns can be passed with `by = c(y, z)`
-* [Enhanced selection](https://markfairbanks.github.io/tidytable/#enhanced-selection) can 
-also be used:
+* [`tidyselect`](https://tidyselect.r-lib.org) can 
+also be used, including using predicates:
   + Single predicate: `by = is.character`
   + Multiple predicates: `by = c(is.character, is.factor)`
   + A combination of predicates and column names: `by = c(is.character, y)`
@@ -144,9 +139,9 @@ test_df %>%
              by = z)
 ```
 
-## Enhanced selection
+## tidyselect support
 
-Enhanced selection allows you to mix predicates like `is.numeric` with normal selection.
+`tidyselect` allows you to mix predicates like `is.numeric` with normal selection. This includes the ability to use `tidyselect` helpers: `everything()`, `starts_with()`, `ends_with()`, `contains()`, `any_of()`, etc.
 
 ```{r}
 test_df <- data.table(a = c(1,2,3),
@@ -165,13 +160,11 @@ test_df %>%
   select.(-is.numeric)
 ```
 
-Currently supported predicates: `is.numeric`/`is.integer`/`is.double`/`is.character`/`is.factor`/`is.list`
-
-Functions that support enhanced selection will be noted in their documentation.
+These same ideas can be used whenever selecting columns in `tidytable` functions - for example when using `count.()`, `drop_na.()`, `pivot_longer.()`, etc.
 
 #### New helper: `mutate_across.()`
 
-Enhanced selection allows the user to replace `mutate_if.()`, `mutate_at.()`, and `mutate_all.()` with one helper - `mutate_across.()`.
+`tidyselect` allows the user to replace `mutate_if.()`, `mutate_at.()`, and `mutate_all.()` with one helper - `mutate_across.()`.
 
 Using `_across.()` instead of `_if.()`:
 
@@ -196,7 +189,7 @@ Using `_across.()` instead of `_all.()`:
 
 ```{r}
 test_df %>%
-  mutate_across.(everything.(), as.factor)
+  mutate_across.(everything(), as.factor)
 ```
 
 ## `rlang` compatibility
