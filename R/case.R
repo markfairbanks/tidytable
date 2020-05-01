@@ -44,10 +44,10 @@ case. <- function(..., default = NA) {
   calls <- default
 
   for (i in rev(seq_along(conditions))) {
-    change_flag <- fifelse(eval(conditions[[i]], parent.frame()),
-                           TRUE, FALSE, FALSE)
-
-    calls <- call("ifelse.", change_flag, values[[i]], calls)
+    calls <- call("ifelse.",
+                  expr(!!conditions[[i]] %|% FALSE),
+                  values[[i]],
+                  calls)
   }
 
   eval(calls, envir = parent.frame())
