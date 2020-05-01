@@ -7,7 +7,7 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/dev%20-0.4.1-green.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/dev%20-0.4.1.9-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN RStudio mirror
@@ -157,10 +157,16 @@ test_df %>%
 
 ## `tidyselect` support
 
-`tidyselect` allows you to mix predicates like `is.numeric` with normal
-selection. This includes the ability to use `tidyselect` helpers:
-`everything()`, `starts_with()`, `ends_with()`, `contains()`,
-`any_of()`, etc.
+`tidyselect` allows you to select columns just like you would in the
+tidyverse.
+
+Normal selection can be mixed with:
+
+  - Predicates: `is.numeric`, `is.character`, etc.
+  - Select helpers: `everything()`, `starts_with()`, `ends_with()`,
+    `contains()`, `any_of()`, etc.
+
+<!-- end list -->
 
 ``` r
 test_df <- data.table(a = c(1,2,3),
@@ -343,19 +349,19 @@ A few notes:
 ``` r
 all_marks
 #> # A tibble: 13 x 6
-#>    function_tested tidyverse tidytable data.table pandas tidytable_vs_tidyverse
-#>    <chr>           <chr>     <chr>     <chr>      <chr>  <chr>                 
-#>  1 arrange         430.4ms   62.7ms    58.4ms     297ms  14.6%                 
-#>  2 case_when       400.8ms   103.6ms   72.2ms     307ms  25.8%                 
-#>  3 distinct        95ms      42.8ms    41.2ms     287ms  45.1%                 
-#>  4 fill            111.1ms   50.1ms    34.9ms     146ms  45.1%                 
-#>  5 filter          270ms     266ms     241ms      656ms  98.5%                 
-#>  6 inner_join      63.6ms    76.7ms    69.7ms     <NA>   120.6%                
-#>  7 left_join       87.5ms    67.9ms    72.2ms     <NA>   77.6%                 
-#>  8 mutate          63.6ms    51.1ms    47.3ms     85.2ms 80.3%                 
-#>  9 nest            29.6ms    18.4ms    16.4ms     <NA>   62.2%                 
-#> 10 pivot_longer    44.4ms    15.6ms    13.1ms     <NA>   35.1%                 
-#> 11 pivot_wider     105ms     132ms     118ms      <NA>   125.7%                
-#> 12 summarize       461ms     168ms     271ms      780ms  36.4%                 
-#> 13 unnest          816.16ms  21.94ms   6.23ms     <NA>   2.7%
+#>    function_tested data.table tidytable tidyverse pandas tidytable_vs_tidyverse
+#>    <chr>           <chr>      <chr>     <chr>     <chr>  <chr>                 
+#>  1 arrange         75.3ms     75.81ms   549.93ms  297ms  13.8%                 
+#>  2 case_when       71.76ms    93.47ms   442.74ms  307ms  21.1%                 
+#>  3 distinct        41.64ms    48.98ms   109.64ms  287ms  44.7%                 
+#>  4 fill            44.42ms    49ms      119.1ms   146ms  41.1%                 
+#>  5 filter          260ms      295.16ms  344.72ms  656ms  85.6%                 
+#>  6 inner_join      97.19ms    103.07ms  90.94ms   <NA>   113.3%                
+#>  7 left_join       62.49ms    91.95ms   98.82ms   <NA>   93.0%                 
+#>  8 mutate          55.43ms    79.5ms    61.02ms   85.2ms 130.3%                
+#>  9 nest            18.24ms    18.1ms    38.04ms   <NA>   47.6%                 
+#> 10 pivot_longer    13.61ms    15.65ms   51.23ms   <NA>   30.5%                 
+#> 11 pivot_wider     121.61ms   113.36ms  148ms     <NA>   76.6%                 
+#> 12 summarize       291.33ms   185.92ms  524.59ms  780ms  35.4%                 
+#> 13 unnest          5.35ms     22.09ms   965.43ms  <NA>   2.3%
 ```
