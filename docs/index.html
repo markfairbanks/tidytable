@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9</span>
       </span>
     </div>
 
@@ -258,8 +258,13 @@
 <div id="tidyselect-support" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tidyselect-support" class="anchor"></a><code>tidyselect</code> support</h2>
-<p><code>tidyselect</code> allows you to mix predicates like <code>is.numeric</code> with normal selection. This includes the ability to use <code>tidyselect</code> helpers: <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">everything()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">starts_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">ends_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">contains()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">any_of()</a></code>, etc.</p>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="no">test_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="kw">a</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>),
+<p><code>tidyselect</code> allows you to select columns just like you would in the tidyverse.</p>
+<p>Normal selection can be mixed with:</p>
+<ul>
+<li>Predicates: <code>is.numeric</code>, <code>is.character</code>, etc.</li>
+<li>Select helpers: <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">everything()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">starts_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">ends_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">contains()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">any_of()</a></code>, etc.</li>
+</ul>
+<!-- end list --><div class="sourceCode" id="cb5"><pre class="r"><span class="no">test_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="kw">a</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>),
                       <span class="kw">b</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>),
                       <span class="kw">c</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span>),
                       <span class="kw">d</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>))
@@ -405,21 +410,21 @@
 </ul>
 <!-- end list --><div class="sourceCode" id="cb13"><pre class="r"><span class="no">all_marks</span>
 <span class="co">#&gt; # A tibble: 13 x 6</span>
-<span class="co">#&gt;    function_tested tidyverse tidytable data.table pandas tidytable_vs_tidyverse</span>
-<span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;                 </span>
-<span class="co">#&gt;  1 arrange         430.4ms   62.7ms    58.4ms     297ms  14.6%                 </span>
-<span class="co">#&gt;  2 case_when       400.8ms   103.6ms   72.2ms     307ms  25.8%                 </span>
-<span class="co">#&gt;  3 distinct        95ms      42.8ms    41.2ms     287ms  45.1%                 </span>
-<span class="co">#&gt;  4 fill            111.1ms   50.1ms    34.9ms     146ms  45.1%                 </span>
-<span class="co">#&gt;  5 filter          270ms     266ms     241ms      656ms  98.5%                 </span>
-<span class="co">#&gt;  6 inner_join      63.6ms    76.7ms    69.7ms     &lt;NA&gt;   120.6%                </span>
-<span class="co">#&gt;  7 left_join       87.5ms    67.9ms    72.2ms     &lt;NA&gt;   77.6%                 </span>
-<span class="co">#&gt;  8 mutate          63.6ms    51.1ms    47.3ms     85.2ms 80.3%                 </span>
-<span class="co">#&gt;  9 nest            29.6ms    18.4ms    16.4ms     &lt;NA&gt;   62.2%                 </span>
-<span class="co">#&gt; 10 pivot_longer    44.4ms    15.6ms    13.1ms     &lt;NA&gt;   35.1%                 </span>
-<span class="co">#&gt; 11 pivot_wider     105ms     132ms     118ms      &lt;NA&gt;   125.7%                </span>
-<span class="co">#&gt; 12 summarize       461ms     168ms     271ms      780ms  36.4%                 </span>
-<span class="co">#&gt; 13 unnest          816.16ms  21.94ms   6.23ms     &lt;NA&gt;   2.7%</span></pre></div>
+<span class="co">#&gt;    function_tested data.table tidytable tidyverse pandas tidytable_vs_tidyverse</span>
+<span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;                 </span>
+<span class="co">#&gt;  1 arrange         75.3ms     75.81ms   549.93ms  297ms  13.8%                 </span>
+<span class="co">#&gt;  2 case_when       71.76ms    93.47ms   442.74ms  307ms  21.1%                 </span>
+<span class="co">#&gt;  3 distinct        41.64ms    48.98ms   109.64ms  287ms  44.7%                 </span>
+<span class="co">#&gt;  4 fill            44.42ms    49ms      119.1ms   146ms  41.1%                 </span>
+<span class="co">#&gt;  5 filter          260ms      295.16ms  344.72ms  656ms  85.6%                 </span>
+<span class="co">#&gt;  6 inner_join      97.19ms    103.07ms  90.94ms   &lt;NA&gt;   113.3%                </span>
+<span class="co">#&gt;  7 left_join       62.49ms    91.95ms   98.82ms   &lt;NA&gt;   93.0%                 </span>
+<span class="co">#&gt;  8 mutate          55.43ms    79.5ms    61.02ms   85.2ms 130.3%                </span>
+<span class="co">#&gt;  9 nest            18.24ms    18.1ms    38.04ms   &lt;NA&gt;   47.6%                 </span>
+<span class="co">#&gt; 10 pivot_longer    13.61ms    15.65ms   51.23ms   &lt;NA&gt;   30.5%                 </span>
+<span class="co">#&gt; 11 pivot_wider     121.61ms   113.36ms  148ms     &lt;NA&gt;   76.6%                 </span>
+<span class="co">#&gt; 12 summarize       291.33ms   185.92ms  524.59ms  780ms  35.4%                 </span>
+<span class="co">#&gt; 13 unnest          5.35ms     22.09ms   965.43ms  &lt;NA&gt;   2.3%</span></pre></div>
 </div>
 </div>
 </div>
@@ -456,7 +461,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=tidytable"><img src="https://www.r-pkg.org/badges/version/tidytable" alt="CRAN status"></a></li>
-<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.4.1-green.svg"></a></li>
+<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.4.1.9-green.svg"></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 <li><a href="https://markfairbanks.github.io/tidytable/"><img src="https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey" alt="CRAN RStudio mirror downloads"></a></li>
 </ul>
