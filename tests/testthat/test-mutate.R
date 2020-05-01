@@ -56,6 +56,18 @@ test_that("modify-by-reference doesn't occur with single val", {
   expect_equal(df$x, c(1,2,3))
 })
 
+test_that("modify-by-reference doesn't occur with single val variable", {
+  df <- data.table(x = 1:3, y = 1:3)
+
+  new_val <- 1
+
+  df %>%
+    mutate.(x = !!new_val)
+
+  expect_named(df, c("x", "y"))
+  expect_equal(df$x, c(1,2,3))
+})
+
 test_that("column order is correct", {
   df <- data.table(x = 1:3, y = 1:3)
   df <- df %>%

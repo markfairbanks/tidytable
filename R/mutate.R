@@ -40,6 +40,7 @@ mutate..data.frame <- function(.data, ..., by = NULL) {
   if (is.null(by)) {
     # Faster version if there is no "by" provided
     all_names <- names(dots)
+    data_size <- nrow(.data)
 
     for (i in seq_along(dots)) {
 
@@ -47,18 +48,12 @@ mutate..data.frame <- function(.data, ..., by = NULL) {
       val <- dots[i][[1]]
 
       # Prevent modify-by-reference if the column already exists in the data.table
-      # Steps: Create new col with random name, delete original col, rename random back to original, reorder
       # Fixes cases when user supplies a single value ex. 1, -1, "a"
       # !is.null(val) allows for columns to be deleted using mutate.(.data, col = NULL)
       if (.col_name %in% names(.data) && !is.null(val)) {
-        col_order <- unique(c(names(.data), .col_name))
-
         eval_expr(
-          .data[, ':='(.new_col, !!val)][, !!.col_name := NULL]
+          .data[, ':='(!!.col_name, vec_recycle(!!val, data_size))]
         )
-
-        setnames(.data, ".new_col", .col_name)
-        setcolorder(.data, col_order)
       } else {
         eval_expr(
           .data[, ':='(!!.col_name, !!val)]

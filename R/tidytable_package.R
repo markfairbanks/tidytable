@@ -7,7 +7,7 @@
 #' @importFrom rlang `%|%` `%||%`
 #' @importFrom stats as.formula na.omit setNames
 #' @importFrom utils capture.output head tail getFromNamespace
-#' @importFrom vctrs vec_assert vec_cast vec_ptype_common
+#' @importFrom vctrs vec_assert vec_cast vec_ptype_common vec_recycle
 NULL
 
 globalVariables(c("data", ".","..select_vars", ".count", "na_index", ".new_col",
