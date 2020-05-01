@@ -79,12 +79,12 @@ pivot_wider..data.frame <- function(.data,
 
   .data <- as_tidytable(
     eval_expr(
-      dcast(.data,
-            formula = dcast_form,
-            value.var = values_from,
-            fun.aggregate = !!values_fn,
-            sep = names_sep,
-            drop = TRUE)
+      dcast.data.table(.data,
+                       formula = dcast_form,
+                       value.var = values_from,
+                       fun.aggregate = !!values_fn,
+                       sep = !!names_sep,
+                       drop = TRUE)
     )
   )
 
