@@ -1,3 +1,10 @@
+# tidytable 0.4.2 (in development)
+
+* Breaking changes:
+  + `group_split.()`: `keep` arg renamed to `.keep`
+* Functions with notable speed improvements:
+  + `case.()`
+
 # tidytable 0.4.1
 
 * `tidytable` now utilizes `tidyselect` & `vctrs`
