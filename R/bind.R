@@ -24,12 +24,8 @@
 #'   bind_cols.(df2)
 #'
 #' bind_cols.(list(df1, df2))
-bind_rows. <- function(..., .id = NULL, use.names = TRUE, fill = TRUE) {
-  UseMethod("bind_rows.")
-}
-
 #' @export
-bind_rows..default <- function(..., .id = NULL, use.names = TRUE, fill = TRUE) {
+bind_rows. <- function(..., .id = NULL, use.names = TRUE, fill = TRUE) {
 
   dots <- list(...)
   dots <- squash(dots)
@@ -47,13 +43,7 @@ bind_rows..default <- function(..., .id = NULL, use.names = TRUE, fill = TRUE) {
 dt_bind_rows <- bind_rows.
 
 #' @export
-#' @rdname bind_rows.
 bind_cols. <- function(...) {
-  UseMethod("bind_cols.")
-}
-
-#' @export
-bind_cols..default <- function(...) {
 
   dots <- list(...)
   dots <- squash(dots)

@@ -3,15 +3,12 @@
 \name{bind_rows.}
 \alias{bind_rows.}
 \alias{dt_bind_rows}
-\alias{bind_cols.}
 \alias{dt_bind_cols}
 \title{Bind data.tables by row and column}
 \usage{
 bind_rows.(..., .id = NULL, use.names = TRUE, fill = TRUE)
 
 dt_bind_rows(..., .id = NULL, use.names = TRUE, fill = TRUE)
-
-bind_cols.(...)
 
 dt_bind_cols(...)
 }
