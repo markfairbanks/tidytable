@@ -45,7 +45,7 @@ case. <- function(..., default = NA) {
 
   for (i in rev(seq_along(conditions))) {
     calls <- call("ifelse.",
-                  expr(!!conditions[[i]] %|% FALSE),
+                  expr(rlang::'%|%'(!!conditions[[i]], FALSE)),
                   values[[i]],
                   calls)
   }
