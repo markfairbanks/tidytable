@@ -5,9 +5,9 @@
 \alias{dt_group_nest}
 \title{Nest data.tables}
 \usage{
-nest_by.(.data, ..., .key = "data")
+nest_by.(.data, ..., .key = "data", .keep = FALSE)
 
-dt_group_nest(.data, ..., .key = "data")
+dt_group_nest(.data, ..., .key = "data", .keep = FALSE)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}
@@ -15,7 +15,9 @@ dt_group_nest(.data, ..., .key = "data")
 \item{...}{Columns to group by. If empty nests the entire data.table.
 \code{tidyselect} compatible.}
 
-\item{.key}{Name of the new column created by nesting}
+\item{.key}{Name of the new column created by nesting.}
+
+\item{.keep}{Should the grouping columns be kept in the list column.}
 }
 \description{
 Nest data.tables by group
@@ -34,4 +36,7 @@ test_df \%>\%
 
 test_df \%>\%
   nest_by.(is.character)
+
+test_df \%>\%
+  nest_by.(c, d, .keep = TRUE)
 }
