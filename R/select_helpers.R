@@ -37,7 +37,9 @@
 #'
 #' example_dt %>%
 #'   select.(ends_with.("y"))
-starts_with. <- tidyselect::starts_with
+starts_with. <- function(match, ignore.case = TRUE, vars = NULL) {
+  tidyselect::starts_with(match, ignore.case = ignore.case, vars = vars)
+}
 
 #' @export
 #' @rdname starts_with.
@@ -45,7 +47,9 @@ dt_starts_with <- starts_with.
 
 #' @export
 #' @rdname starts_with.
-contains. <- tidyselect::contains
+contains. <- function(match, ignore.case = TRUE, vars = NULL) {
+  tidyselect::contains(match, ignore.case = ignore.case, vars = vars)
+}
 
 #' @export
 #' @rdname starts_with.
@@ -53,7 +57,9 @@ dt_contains <- contains.
 
 #' @export
 #' @rdname starts_with.
-ends_with. <- tidyselect::ends_with
+ends_with. <- function(match, ignore.case = TRUE, vars = NULL) {
+  tidyselect::ends_with(match, ignore.case = ignore.case, vars = vars)
+}
 
 #' @export
 #' @rdname starts_with.
@@ -61,7 +67,9 @@ dt_ends_with <- ends_with.
 
 #' @export
 #' @rdname starts_with.
-everything. <- tidyselect::everything
+everything. <- function(vars = NULL) {
+  tidyselect::everything(vars)
+}
 
 #' @export
 #' @rdname starts_with.
@@ -69,7 +77,9 @@ dt_everything <- everything.
 
 #' @export
 #' @rdname starts_with.
-any_of. <- tidyselect::any_of
+any_of. <- function(x, ..., vars = NULL) {
+  tidyselect::any_of(x, ..., vars = vars)
+}
 
 #' @export
 #' @rdname starts_with.
