@@ -165,7 +165,7 @@ test_df %>%
   select.(-is.numeric)
 ```
 
-These same ideas can be used whenever selecting columns in `tidytable` functions - for example when using `count.()`, `drop_na.()`, `pivot_longer.()`, `pivot_wider()`, etc.
+These same ideas can be used whenever selecting columns in `tidytable` functions - for example when using `count.()`, `drop_na.()`, `pivot_longer.()`, `pivot_wider.()`, etc.
 
 #### New helper: `mutate_across.()`
 
