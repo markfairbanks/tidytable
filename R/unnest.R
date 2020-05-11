@@ -48,12 +48,12 @@ unnest..data.frame <- function(.data, ...) {
   if (!length(unique(unnest_nrow)) == 1)
     abort("unnested data contains different row counts")
 
-  # Get cols to keep
+  # Get cols to keep (all non-list cols)
   keep_cols <- data_names[!list_flag]
 
   # Get number of repeats for keep cols
-  rep_vec <- map_dbl.(pull.(.data, !!dots[[1]]),
-                      ~ fifelse(is.data.frame(.x), nrow(.x) %||% 1, length(.x)))
+  rep_vec <- map_dbl.(pull.(.data, !!dots[[1]]), vec_size)
+
   keep_df <- .data[, ..keep_cols][rep(1:.N, rep_vec)]
 
   results_df <- bind_cols.(keep_df, unnest_data)
@@ -86,8 +86,9 @@ unnest_col <- function(.data, col = NULL) {
     # Unnests a vector
     .data <- eval_expr(
       .data[, list(.new_col = unlist(!!col, recursive = FALSE))]
-    ) %>%
-      rename.(!!col := .new_col)
+    )
+
+    .data <- rename.(.data, !!col := .new_col)
   }
   .data
 }
