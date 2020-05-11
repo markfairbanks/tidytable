@@ -43,6 +43,7 @@ bind_rows. <- function(..., .id = NULL, use.names = TRUE, fill = TRUE) {
 dt_bind_rows <- bind_rows.
 
 #' @export
+#' @rdname bind_rows.
 bind_cols. <- function(...) {
 
   dots <- list(...)
