@@ -37,7 +37,7 @@
 #'
 #' example_dt %>%
 #'   select.(ends_with.("y"))
-starts_with. <- function(match, ignore.case = TRUE, vars = NULL) {
+starts_with. <- function(match, ignore.case = TRUE, vars = peek_vars(fn = "starts_with")) {
   tidyselect::starts_with(match, ignore.case = ignore.case, vars = vars)
 }
 
@@ -47,7 +47,7 @@ dt_starts_with <- starts_with.
 
 #' @export
 #' @rdname starts_with.
-contains. <- function(match, ignore.case = TRUE, vars = NULL) {
+contains. <- function(match, ignore.case = TRUE, vars = peek_vars(fn = "contains")) {
   tidyselect::contains(match, ignore.case = ignore.case, vars = vars)
 }
 
@@ -57,7 +57,7 @@ dt_contains <- contains.
 
 #' @export
 #' @rdname starts_with.
-ends_with. <- function(match, ignore.case = TRUE, vars = NULL) {
+ends_with. <- function(match, ignore.case = TRUE, vars = peek_vars(fn = "ends_with")) {
   tidyselect::ends_with(match, ignore.case = ignore.case, vars = vars)
 }
 
@@ -67,7 +67,7 @@ dt_ends_with <- ends_with.
 
 #' @export
 #' @rdname starts_with.
-everything. <- function(vars = NULL) {
+everything. <- function(vars = peek_vars(fn = "everything")) {
   tidyselect::everything(vars)
 }
 
@@ -77,7 +77,7 @@ dt_everything <- everything.
 
 #' @export
 #' @rdname starts_with.
-any_of. <- function(x, ..., vars = NULL) {
+any_of. <- function(x, ..., vars = peek_vars(fn = "any_of")) {
   tidyselect::any_of(x, ..., vars = vars)
 }
 

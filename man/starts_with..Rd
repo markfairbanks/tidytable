@@ -13,25 +13,25 @@
 \alias{dt_any_of}
 \title{Select helpers}
 \usage{
-starts_with.(match, ignore.case = TRUE, vars = NULL)
+starts_with.(match, ignore.case = TRUE, vars = peek_vars(fn = "starts_with"))
 
-dt_starts_with(match, ignore.case = TRUE, vars = NULL)
+dt_starts_with(match, ignore.case = TRUE, vars = peek_vars(fn = "starts_with"))
 
-contains.(match, ignore.case = TRUE, vars = NULL)
+contains.(match, ignore.case = TRUE, vars = peek_vars(fn = "contains"))
 
-dt_contains(match, ignore.case = TRUE, vars = NULL)
+dt_contains(match, ignore.case = TRUE, vars = peek_vars(fn = "contains"))
 
-ends_with.(match, ignore.case = TRUE, vars = NULL)
+ends_with.(match, ignore.case = TRUE, vars = peek_vars(fn = "ends_with"))
 
-dt_ends_with(match, ignore.case = TRUE, vars = NULL)
+dt_ends_with(match, ignore.case = TRUE, vars = peek_vars(fn = "ends_with"))
 
-everything.(vars = NULL)
+everything.(vars = peek_vars(fn = "everything"))
 
-dt_everything(vars = NULL)
+dt_everything(vars = peek_vars(fn = "everything"))
 
-any_of.(x, ..., vars = NULL)
+any_of.(x, ..., vars = peek_vars(fn = "any_of"))
 
-dt_any_of(x, ..., vars = NULL)
+dt_any_of(x, ..., vars = peek_vars(fn = "any_of"))
 }
 \arguments{
 \item{match}{A character vector. If length > 1, the union of the
