@@ -36,3 +36,9 @@ tidyselect::all_of
 
 #' @export
 tidyselect::matches
+
+#' @export
+tidyselect::num_range
+
+#' @export
+tidyselect::last_col
