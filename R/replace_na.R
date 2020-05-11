@@ -23,7 +23,7 @@ replace_na. <- function(.col, replace) {
   if (class(replace) %in% c("integer", "double", "numeric")) {
     nafill(.col, "const", fill = replace)
   } else {
-    fifelse(is.na(.col), replace, .col)
+    ifelse.(is.na(.col), replace, .col)
   }
 }
 

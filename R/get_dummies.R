@@ -70,8 +70,8 @@ get_dummies..data.frame <- function(.data,
 
     col_name <- as.character(col)
 
-    if (drop_first) unique_vals <- unique(as.character(.data[[col_name]]))[-1]
-    else unique_vals <- unique(as.character(.data[[col_name]]))
+    if (drop_first) unique_vals <- vec_unique(as.character(.data[[col_name]]))[-1]
+    else unique_vals <- vec_unique(as.character(.data[[col_name]]))
 
     # If NAs need dummies, convert to character string "NA" for col name creation
     if (dummify_na) unique_vals <- fifelse(is.na(unique_vals), "NA", unique_vals)

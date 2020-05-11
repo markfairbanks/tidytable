@@ -45,7 +45,7 @@ unnest..data.frame <- function(.data, ...) {
 
   unnest_nrow <- map_dbl.(unnest_data, nrow)
 
-  if (!length(unique(unnest_nrow)) == 1)
+  if (!length(vec_unique(unnest_nrow)) == 1)
     abort("unnested data contains different row counts")
 
   # Get cols to keep (all non-list cols)

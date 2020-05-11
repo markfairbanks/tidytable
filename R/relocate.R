@@ -61,7 +61,7 @@ relocate..data.frame <- function(.data, ..., .before = NULL, .after = NULL) {
   }
 
   start_cols_i <- start_cols_i[start_cols_i %notin% selected_cols_i]
-  final_order_i <- unique(c(start_cols_i, selected_cols_i, all_cols_i))
+  final_order_i <- vec_unique(c(start_cols_i, selected_cols_i, all_cols_i))
 
   final_order <- data_names[final_order_i]
 
