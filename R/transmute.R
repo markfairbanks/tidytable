@@ -22,8 +22,10 @@ transmute..data.frame <- function(.data, ..., by = NULL) {
 
   .data <- as_tidytable(.data)
 
-  dots <- enexprs(...)
+  # Don't need vec_selector_by() since this is done inside mutate.()
   by <- enexpr(by)
+
+  dots <- enexprs(...)
   keep_names <- names(dots)
 
   .data <- mutate.(.data, ..., by = !!by)
