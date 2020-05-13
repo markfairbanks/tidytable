@@ -54,3 +54,13 @@ test_that("filter works with 'by'", {
   expect_equal(df$x, 2)
   expect_equal(df$y, "b")
 })
+
+test_that("filter works with 'by' & multiple conditions", {
+  df <- tidytable(x = 1:3, y = c("a", "a", "b"))
+
+  result_df <- df %>%
+    filter.(x <= mean(x), x < .N + 3, by = y)
+
+  expect_equal(result_df$x, c(1, 3))
+  expect_equal(result_df$y, c("a", "b"))
+})

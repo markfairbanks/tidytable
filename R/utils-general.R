@@ -16,8 +16,3 @@ shallow <- function(x, cols = names(x), reset_class = FALSE) {
   setattr(ans, 'class', class)
   ans[]
 }
-
-reduce <- function(.x, .f, ..., .init) {
-  f <- function(x, y) .f(x, y, ...)
-  Reduce(f, .x, init = .init)
-}

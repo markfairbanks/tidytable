@@ -45,7 +45,7 @@ filter..data.frame <- function(.data, ..., by = NULL) {
     col_order <- names(.data)
 
     .data <- eval_expr(
-      .data[, .SD[reduce(list(!!!dots), '&')], by = !!by]
+      .data[, .SD[Reduce('&', list(!!!dots))], by = !!by]
     )
 
     setcolorder(.data, col_order)
