@@ -6,6 +6,7 @@
 #' @param n a positive integer of length 1, giving the number of positions to lead or lag by
 #' @param default value used for non-existent rows. Defaults to NA.
 #' @param ... Needed for compatibility with lag generic.
+#' @importFrom stats lag
 #'
 #' @examples
 #' x <- 1:5
@@ -18,17 +19,12 @@
 #'   mutate.(lag_x = lag.(x))
 #'
 #' @export
-lag. <- function(x, n = 1L, default = NA) {
-  UseMethod('lag.')
-}
-
-lag..default <- function(x, n = 1L, default = NA) {
-  shift(x = x, n = n, fill = default, type = "lag", give.names = FALSE)
-}
-
-#' @rdname lag.
-#' @export
-
 lead. <- function(x, n = 1L, default = NA, ...) {
   shift(x = x, n = n, fill = default, type = "lead", give.names = FALSE)
+}
+
+#' @export
+#' @rdname lead.
+lag. <- function(x, n = 1L, default = NA) {
+  shift(x = x, n = n, fill = default, type = "lag", give.names = FALSE)
 }
