@@ -8,7 +8,7 @@
 #' @param ... Needed for compatibility with lag generic.
 #'
 #' @examples
-#' #' x <- 1:5
+#' x <- 1:5
 #'
 #' lag.(x, 1)
 #' lead.(x, 1)
@@ -18,16 +18,23 @@
 #'   mutate.(lag_x = lag.(x))
 #'
 #' @export
+lag. <- function(x, n = 1L, default = NA) {
+  UseMethod('lag.')
+}
+
+#' @export
+lag..default <- function(x, n = 1L, default = NA) {
+  shift(x = x, n = n, fill = default, type = "lag", give.names = FALSE)
+}
+
+#' @export
+lag..numeric <- function(x, n = 1L, default = NA) {
+  shift(x = x, n = n, fill = default, type = "lag", give.names = FALSE)
+}
+
+#' @rdname lag.
+#' @export
 
 lead. <- function(x, n = 1L, default = NA, ...) {
   shift(x = x, n = n, fill = default, type = "lead", give.names = FALSE)
-}
-#' @rdname lead.
-#' @export
-lag. <- function(x, n = 1L, default = NA) {
-  UseMethod("lag.")
-}
-#' @export
-lag..default <- function(x, n = 1L, default = NA, ...) {
-  shift(x = x, n = n, fill = default, type = "lag", give.names = FALSE)
 }
