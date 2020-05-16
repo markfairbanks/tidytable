@@ -22,13 +22,7 @@ lag. <- function(x, n = 1L, default = NA) {
   UseMethod('lag.')
 }
 
-#' @export
 lag..default <- function(x, n = 1L, default = NA) {
-  shift(x = x, n = n, fill = default, type = "lag", give.names = FALSE)
-}
-
-#' @export
-lag..numeric <- function(x, n = 1L, default = NA) {
   shift(x = x, n = n, fill = default, type = "lag", give.names = FALSE)
 }
 
