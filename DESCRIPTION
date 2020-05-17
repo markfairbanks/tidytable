@@ -18,7 +18,10 @@ Authors@R:
       person(given = "Lionel",
              family = "Henry",
              role = "ctb",
-             email = "lionel@rstudio.com"))
+             email = "lionel@rstudio.com"),
+      person(given = "Matt",
+             family = "Carlson",
+             role = "ctb"))
 Description: Tidy interface to 'data.table'. 'rlang' compatible, which allows the user to build custom functions much like they would in the tidyverse.
 License: MIT + file LICENSE
 Encoding: UTF-8
