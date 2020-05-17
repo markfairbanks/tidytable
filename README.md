@@ -79,6 +79,7 @@ devtools::install_github("markfairbanks/tidytable")
   - Joins:
       - `left_join.()`, `inner_join.()`, `right_join.()`,
         `full_join.()`, & `anti_join.()`
+  - `lag.()` & `lead.()`
   - `pull.()`
   - `relocate.()`
   - `rename.()` & `rename_with.()`
@@ -351,17 +352,17 @@ all_marks
 #> # A tibble: 13 x 6
 #>    function_tested data.table tidytable tidyverse pandas tidytable_vs_tidyverse
 #>    <chr>           <chr>      <chr>     <chr>     <chr>  <chr>                 
-#>  1 arrange         62.24ms    58.4ms    486.48ms  297ms  12.0%                 
-#>  2 case_when       68.77ms    86.46ms   426.69ms  307ms  20.3%                 
-#>  3 distinct        43.01ms    44.08ms   106.93ms  287ms  41.2%                 
-#>  4 fill            34.59ms    41.09ms   111.03ms  146ms  37.0%                 
-#>  5 filter          229.56ms   284.92ms  313.58ms  656ms  90.9%                 
-#>  6 inner_join      89.34ms    83.74ms   77.91ms   <NA>   107.5%                
-#>  7 left_join       59.03ms    78.06ms   75.81ms   <NA>   103.0%                
-#>  8 mutate          56.02ms    73.56ms   69.05ms   85.2ms 106.5%                
-#>  9 nest            21ms       18.94ms   36.66ms   <NA>   51.7%                 
-#> 10 pivot_longer    12.68ms    11.79ms   41.75ms   <NA>   28.2%                 
-#> 11 pivot_wider     108.12ms   106.46ms  109.97ms  <NA>   96.8%                 
-#> 12 summarize       325.07ms   211.67ms  539.39ms  780ms  39.2%                 
-#> 13 unnest          4.93ms     21.34ms   884.98ms  <NA>   2.4%
+#>  1 arrange         63.54ms    60.97ms   486.02ms  297ms  12.5%                 
+#>  2 case_when       70.69ms    84.86ms   418.49ms  307ms  20.3%                 
+#>  3 distinct        43.91ms    41.66ms   99.73ms   287ms  41.8%                 
+#>  4 fill            41.63ms    45.23ms   124.84ms  146ms  36.2%                 
+#>  5 filter          244.96ms   287.37ms  309.18ms  656ms  92.9%                 
+#>  6 inner_join      91.5ms     91.02ms   87.1ms    <NA>   104.5%                
+#>  7 left_join       65.23ms    73.13ms   91.41ms   <NA>   80.0%                 
+#>  8 mutate          52.96ms    82.23ms   59.14ms   85.2ms 139.0%                
+#>  9 nest            19.99ms    16.7ms    30.13ms   <NA>   55.4%                 
+#> 10 pivot_longer    12.65ms    12.18ms   44.04ms   <NA>   27.7%                 
+#> 11 pivot_wider     112.06ms   114.99ms  122.28ms  <NA>   94.0%                 
+#> 12 summarize       287.15ms   190.49ms  512.87ms  780ms  37.1%                 
+#> 13 unnest          6.23ms     20.43ms   936.62ms  <NA>   2.2%
 ```
