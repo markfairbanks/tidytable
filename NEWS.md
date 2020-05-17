@@ -2,6 +2,8 @@
 
 * Breaking changes:
   + `group_split.()`: `keep` arg renamed to `.keep`
+* New functions:
+  + `lag.()` & `lead.()`
 * Functionality improvements:
   + `nest_by.()`: Added `.keep` arg
 * Functions with notable speed improvements:

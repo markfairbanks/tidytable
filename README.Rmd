@@ -79,6 +79,7 @@ devtools::install_github("markfairbanks/tidytable")
 * `ifelse.()`
 * Joins:
   + `left_join.()`, `inner_join.()`, `right_join.()`, `full_join.()`, & `anti_join.()`
+* `lag.()` & `lead.()`
 * `pull.()`
 * `relocate.()`
 * `rename.()` & `rename_with.()`
