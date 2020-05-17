@@ -93,16 +93,6 @@ test_that("doesn't modify-by-reference", {
   expect_equal(df$chr, c(NA, "a"))
 })
 
-# test_that("fill preserves attributes", {
-#   df <- data.table::data.table(x = factor(c(NA, "a", NA)))
-#
-#   out_d <- as_tidytable(df) %>% dt_fill(x)
-#   out_u <- as_tidytable(df) %>% dt_fill(x, .direction = "up")
-#
-#   expect_equal(attributes(out_d$x), attributes(df$x))
-#   expect_equal(attributes(out_u$x), attributes(df$x))
-# })
-
 test_that("fill respects grouping & is correct order", {
   df <- data.table::data.table(x = c(1, NA, NA), y = c(1, 1, 2))
   out <- fill.(df, x, by = y)

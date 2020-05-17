@@ -60,7 +60,6 @@ filler <- function(.data, ..., type = "locf", by = NULL) {
   all_cols <- as.character(dots_selector(.data, ...))
 
   by <- enexpr(by)
-  by <- vec_selector_by(.data, !!by)
 
   subset_data <- .data[, ..all_cols]
 
@@ -72,15 +71,22 @@ filler <- function(.data, ..., type = "locf", by = NULL) {
   if (with_by) col_order <- names(.data)
 
   if (length(numeric_cols) > 0) {
-    .data <- shallow(.data)
 
-    eval_expr(
-      .data[, !!numeric_cols := lapply(.SD, nafill, !!type), .SDcols = !!numeric_cols, by = !!by]
-    )
+    numeric_cols <- syms(numeric_cols)
+
+    .data <- mutate_across.(.data,
+                            c(!!!numeric_cols),
+                            nafill, type,
+                            by = !!by)
+
   }
+
   if (length(other_cols) > 0) {
+
     other_cols <- syms(other_cols)
     .data <- shallow(.data)
+
+    by <- vec_selector_by(.data, !!by)
 
     for (col in other_cols) {
       eval_expr(
