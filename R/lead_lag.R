@@ -23,8 +23,8 @@ lead. <- function(x, n = 1L, default = NA, ...) {
   shift(x = x, n = n, fill = default, type = "lead", give.names = FALSE)
 }
 
-#' @export
 #' @rdname lead.
-lag. <- function(x, n = 1L, default = NA) {
+#' @export lag.
+lag. <- function(x, n = 1L, default = NA, ...) {
   shift(x = x, n = n, fill = default, type = "lag", give.names = FALSE)
 }

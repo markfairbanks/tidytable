@@ -7,7 +7,7 @@
 \usage{
 lead.(x, n = 1L, default = NA, ...)
 
-\method{lag}{``}(x, n = 1L, default = NA)
+\method{lag}{``}(x, n = 1L, default = NA, ...)
 }
 \arguments{
 \item{x}{a vector of values}
