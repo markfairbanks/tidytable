@@ -43,7 +43,7 @@ test_that("can use select helpers", {
 test_that("works with predicates", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
-    select.(is.numeric)
+    select.(where(is.numeric))
 
   expect_named(df, c("x", "y"))
 })

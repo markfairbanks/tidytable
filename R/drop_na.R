@@ -22,7 +22,7 @@
 #'   drop_na.(x)
 #'
 #' df %>%
-#'   drop_na.(is.numeric)
+#'   drop_na.(where(is.numeric))
 drop_na. <- function(.data, ...) {
   UseMethod("drop_na.")
 }

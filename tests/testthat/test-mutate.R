@@ -103,7 +103,7 @@ test_that("can use by with enhanced selection", {
   df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
 
   tidytable_df <- df %>%
-    mutate.(z = mean(x), by = is.character)
+    mutate.(z = mean(x), by = where(is.character))
 
   datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y]
 
@@ -115,7 +115,7 @@ test_that("can use by with vector", {
   df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
 
   tidytable_df <- df %>%
-    mutate.(z = mean(x), by = c(is.character))
+    mutate.(z = mean(x), by = c(where(is.character)))
 
   datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y]
 

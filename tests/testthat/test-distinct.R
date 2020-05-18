@@ -37,7 +37,7 @@ test_that("distinct.() works on 1 column", {
 test_that("distinct.() works with enhanced selection", {
   test_df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "b"), d = c("a", "a", "b"))
   distinct_df <- test_df %>%
-    distinct.(is.character)
+    distinct.(where(is.character))
 
   expect_named(distinct_df, c("c", "d"))
   expect_equal(distinct_df$c, c("a", "b"))

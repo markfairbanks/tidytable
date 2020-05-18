@@ -30,5 +30,5 @@ df \%>\%
   drop_na.(x)
 
 df \%>\%
-  drop_na.(is.numeric)
+  drop_na.(where(is.numeric))
 }

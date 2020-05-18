@@ -98,7 +98,7 @@ test_that("rename_with() works for all variables w/ data.frame", {
 test_that("rename_if() works with predicate", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
-    rename_with.(~ paste0(.x, "_character"), is.character)
+    rename_with.(~ paste0(.x, "_character"), where(is.character))
 
   expect_named(df, c("x","y","z_character"))
 })

@@ -32,7 +32,7 @@ rename_all. <- function(.data, .fun, ...) {
 #' @export
 rename_all..default <- function(.data, .fun, ...) {
 
-  rename_across.(.data, everything.(), .fun, ...)
+  rename_across.(.data, everything(), .fun, ...)
 }
 
 #' @export
@@ -61,8 +61,7 @@ rename_across..data.frame <- function(.data, .cols, .fun, ...) {
   .data <- as_tidytable(.data)
 
   .cols <- enexpr(.cols)
-  .cols <- vec_selector(.data, !!.cols) %>%
-    as.character()
+  .cols <- as.character(vec_selector(.data, !!.cols))
 
   .data <- shallow(.data)
 
@@ -90,7 +89,7 @@ rename_if..default <- function(.data, .predicate, .fun, ...) {
 
   .predicate <- enexpr(.predicate)
 
-  rename_across.(.data, !!.predicate, .fun, ...)
+  rename_across.(.data, where(!!.predicate), .fun, ...)
 }
 
 #' @export

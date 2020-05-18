@@ -85,7 +85,7 @@ test_that("can do group aggregation with by enhanced selection", {
   df <- tidytable(x = 1:4, y = c("a","a","a","b"))
 
   tidytable_df <- df %>%
-    summarize.(avg_x = mean(x), by = is.character)
+    summarize.(avg_x = mean(x), by = where(is.character))
 
   datatable_df <- df[, list(avg_x = mean(x)), by = y]
 

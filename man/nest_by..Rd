@@ -35,7 +35,7 @@ test_df \%>\%
   nest_by.(c, d)
 
 test_df \%>\%
-  nest_by.(is.character)
+  nest_by.(where(is.character))
 
 test_df \%>\%
   nest_by.(c, d, .keep = TRUE)

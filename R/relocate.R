@@ -24,7 +24,7 @@
 #'   relocate.(a, b, .after = c)
 #'
 #' test_df %>%
-#'   relocate.(is.numeric, .after = c)
+#'   relocate.(where(is.numeric), .after = c)
 relocate. <- function(.data, ..., .before = NULL, .after = NULL) {
   UseMethod("relocate.")
 }

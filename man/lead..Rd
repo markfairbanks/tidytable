@@ -2,12 +2,12 @@
 % Please edit documentation in R/lead_lag.R
 \name{lead.}
 \alias{lead.}
-\alias{lag.}
+\alias{lagg.}
 \title{Lead and Lag}
 \usage{
-lead.(x, n = 1L, default = NA, ...)
+lead.(x, n = 1L, default = NA)
 
-\method{lag}{``}(x, n = 1L, default = NA, ...)
+lagg.(x, n = 1L, default = NA)
 }
 \arguments{
 \item{x}{a vector of values}
@@ -15,8 +15,6 @@ lead.(x, n = 1L, default = NA, ...)
 \item{n}{a positive integer of length 1, giving the number of positions to lead or lag by}
 
 \item{default}{value used for non-existent rows. Defaults to NA.}
-
-\item{...}{Needed for compatibility with lag generic.}
 }
 \description{
 Find the "next" or "previous" values in a vector. Useful for comparing values ahead of or behind the current values.
@@ -24,11 +22,12 @@ Find the "next" or "previous" values in a vector. Useful for comparing values ah
 \examples{
 x <- 1:5
 
-lag.(x, 1)
 lead.(x, 1)
+lagg.(x, 1)
 
 test_df <- tidytable(x = 1:5)
+
 test_df \%>\%
-  mutate.(lag_x = lag.(x))
+  mutate.(lead_x = lead.(x))
 
 }

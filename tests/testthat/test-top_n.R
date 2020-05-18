@@ -97,7 +97,7 @@ test_that("works with wt/with enhanced selection", {
                         z = c(rep("a", 3), rep("b", 2)))
 
   top_df <- test_df %>%
-    top_n.(2, wt = y, by = is.character)
+    top_n.(2, wt = y, by = where(is.character))
 
   expect_equal(top_df$x, c(5,4,3,2))
   expect_equal(top_df$y, c(10, 9, 8, 7))

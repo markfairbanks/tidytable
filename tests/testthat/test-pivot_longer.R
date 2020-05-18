@@ -106,7 +106,7 @@ test_that("a single helper works outside of c() call", {
 
 test_that("can pivot all cols (specified) to long", {
   df <- data.table(x = 1:2, y = 3:4)
-  pivot_df <- pivot_longer.(df, cols = is.numeric)[order(name, value)]
+  pivot_df <- pivot_longer.(df, cols = where(is.numeric))[order(name, value)]
 
   expect_named(pivot_df, c("name", "value"))
   expect_equal(pivot_df$name, c("x","x","y","y"))

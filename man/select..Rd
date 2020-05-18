@@ -36,10 +36,10 @@ example_dt \%>\%
   select.(-y, -z)
 
 example_dt \%>\%
-  select.(starts_with.("x"), z)
+  select.(starts_with("x"), z)
 
 example_dt \%>\%
-  select.(is.character, x)
+  select.(where(is.character), x)
 
 example_dt \%>\%
   select.(stuff = x, y)

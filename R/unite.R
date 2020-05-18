@@ -23,7 +23,7 @@
 #'   unite.("new_col", b, c)
 #'
 #' test_df %>%
-#'   unite.("new_col", is.character)
+#'   unite.("new_col", where(is.character))
 #'
 #' test_df %>%
 #'   unite.("new_col", b, c, remove = FALSE)

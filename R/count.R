@@ -22,7 +22,7 @@
 #'   count.(z)
 #'
 #' example_df %>%
-#'   count.(is.character)
+#'   count.(where(is.character))
 count. <- function(.data, ...) {
   UseMethod("count.")
 }

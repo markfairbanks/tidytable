@@ -35,5 +35,5 @@ test_df \%>\%
   relocate.(a, b, .after = c)
 
 test_df \%>\%
-  relocate.(is.numeric, .after = c)
+  relocate.(where(is.numeric), .after = c)
 }

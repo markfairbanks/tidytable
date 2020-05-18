@@ -23,12 +23,12 @@ dt_summarize(.data, ..., by = NULL)
 \item{by}{Columns to group by.
 \itemize{
 \item A single column can be passed with \code{by = d}.
-\item Multiple columns can be passed with \code{by = c(c, d)} or \code{by = list(c, d)}
+\item Multiple columns can be passed with \code{by = c(c, d)}
 \item \code{tidyselect} can be used:
 \itemize{
-\item Single predicate: \code{by = is.character}
-\item Multiple predicates: \code{by = c(is.character, is.factor)}
-\item A combination of predicates and column names: \code{by = c(is.character, b)}
+\item Single predicate: \code{by = where(is.character)}
+\item Multiple predicates: \code{by = c(where(is.character), where(is.factor))}
+\item A combination of predicates and column names: \code{by = c(where(is.character), b)}
 }
 }}
 }

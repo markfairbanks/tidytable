@@ -7,7 +7,7 @@
 \usage{
 get_dummies.(
   .data,
-  cols = c(is.character, is.factor),
+  cols = c(where(is.character), where(is.factor)),
   prefix = TRUE,
   prefix_sep = "_",
   drop_first = FALSE,
@@ -16,7 +16,7 @@ get_dummies.(
 
 dt_get_dummies(
   .data,
-  cols = c(is.character, is.factor),
+  cols = c(where(is.character), where(is.factor)),
   prefix = TRUE,
   prefix_sep = "_",
   drop_first = FALSE,
@@ -61,7 +61,7 @@ test_df \%>\%
 
 # Can drop certain columns using
 test_df \%>\%
-  get_dummies.(c(is.character, -col2))
+  get_dummies.(c(where(is.character), -col2))
 
 test_df \%>\%
   get_dummies.(prefix_sep = ".", drop_first = TRUE)

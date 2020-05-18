@@ -28,7 +28,7 @@
 #' example_dt %>%
 #'   pivot_longer.(cols = -z, names_to = "stuff", values_to = "things")
 pivot_longer. <- function(.data,
-                          cols = everything.(),
+                          cols = everything(),
                           names_to = "name",
                           values_to = "value",
                           values_drop_na = FALSE,
@@ -38,7 +38,7 @@ pivot_longer. <- function(.data,
 
 #' @export
 pivot_longer..data.frame <- function(.data,
-                                     cols = everything.(),
+                                     cols = everything(),
                                      names_to = "name",
                                      values_to = "value",
                                      values_drop_na = FALSE,

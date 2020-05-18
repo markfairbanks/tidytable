@@ -30,5 +30,5 @@ example_df \%>\%
   count.(z)
 
 example_df \%>\%
-  count.(is.character)
+  count.(where(is.character))
 }

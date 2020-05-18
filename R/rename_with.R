@@ -28,7 +28,7 @@ rename_with. <- function(.data, .fn, .cols = everything.(), ...) {
 }
 
 #' @export
-rename_with..data.frame <- function(.data, .fn, .cols = everything.(), ...) {
+rename_with..data.frame <- function(.data, .fn, .cols = everything(), ...) {
 
   .data <- as_tidytable(.data)
 

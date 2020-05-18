@@ -35,7 +35,7 @@
 #'
 #' # Can drop certain columns using
 #' test_df %>%
-#'   get_dummies.(c(is.character, -col2))
+#'   get_dummies.(c(where(is.character), -col2))
 #'
 #' test_df %>%
 #'   get_dummies.(prefix_sep = ".", drop_first = TRUE)
@@ -43,7 +43,7 @@
 #' test_df %>%
 #'   get_dummies.(c(col1, col2), dummify_na = FALSE)
 get_dummies. <- function(.data,
-                         cols = c(is.character, is.factor),
+                         cols = c(where(is.character), where(is.factor)),
                          prefix = TRUE,
                          prefix_sep = "_",
                          drop_first = FALSE,
@@ -53,7 +53,7 @@ get_dummies. <- function(.data,
 
 #' @export
 get_dummies..data.frame <- function(.data,
-                                    cols = c(is.character, is.factor),
+                                    cols = c(where(is.character), where(is.factor)),
                                     prefix = TRUE,
                                     prefix_sep = "_",
                                     drop_first = FALSE,

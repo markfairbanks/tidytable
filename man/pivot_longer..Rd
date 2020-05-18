@@ -7,7 +7,7 @@
 \usage{
 pivot_longer.(
   .data,
-  cols = everything.(),
+  cols = everything(),
   names_to = "name",
   values_to = "value",
   values_drop_na = FALSE,
@@ -16,7 +16,7 @@ pivot_longer.(
 
 dt_pivot_longer(
   .data,
-  cols = everything.(),
+  cols = everything(),
   names_to = "name",
   values_to = "value",
   values_drop_na = FALSE,
