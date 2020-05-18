@@ -79,7 +79,7 @@ devtools::install_github("markfairbanks/tidytable")
   - Joins:
       - `left_join.()`, `inner_join.()`, `right_join.()`,
         `full_join.()`, & `anti_join.()`
-  - `lag.()` & `lead.()`
+  - `lagg.()` & `lead.()`
   - `pull.()`
   - `relocate.()`
   - `rename.()` & `rename_with.()`
@@ -136,12 +136,13 @@ functionality (such as `summarize.()` & `mutate.()`)
 
   - A single column can be passed with `by = z`
   - Multiple columns can be passed with `by = c(y, z)`
-  - [`tidyselect`](https://tidyselect.r-lib.org) can also be used,
-    including using predicates:
-      - Single predicate: `by = is.character`
-      - Multiple predicates: `by = c(is.character, is.factor)`
+  - [`tidyselect`](https://tidyselect.r-lib.org/reference/language.html)
+    can also be used, including using predicates:
+      - Single predicate: `by = where(is.character)`
+      - Multiple predicates: `by = c(where(is.character),
+        where(is.factor))`
       - A combination of predicates and column names: `by =
-        c(is.character, y)`
+        c(where(is.character), y)`
 
 <!-- end list -->
 
@@ -163,7 +164,7 @@ tidyverse.
 
 Normal selection can be mixed with:
 
-  - Predicates: `is.numeric`, `is.character`, etc.
+  - Predicates: `where(is.numeric)`, `where(is.character)`, etc.
   - Select helpers: `everything()`, `starts_with()`, `ends_with()`,
     `contains()`, `any_of()`, etc.
 
@@ -176,7 +177,7 @@ test_df <- data.table(a = c(1,2,3),
                       d = c("a","b","c"))
 
 test_df %>%
-  select.(is.numeric, d)
+  select.(where(is.numeric), d)
 #>        a     b     d
 #>    <dbl> <dbl> <chr>
 #> 1:     1     4     a
@@ -188,7 +189,7 @@ You can also use this format to drop columns:
 
 ``` r
 test_df %>%
-  select.(-is.numeric)
+  select.(-where(is.numeric))
 #>        c     d
 #>    <chr> <chr>
 #> 1:     a     a
@@ -214,7 +215,7 @@ test_df <- data.table(a = c(1,1,1),
                       d = c("a","b","c"))
 
 test_df %>%
-  mutate_across.(is.numeric, as.character)
+  mutate_across.(where(is.numeric), as.character)
 #>        a     b     c     d
 #>    <chr> <chr> <chr> <chr>
 #> 1:     1     1     a     a
@@ -352,17 +353,17 @@ all_marks
 #> # A tibble: 13 x 6
 #>    function_tested data.table tidytable tidyverse pandas tidytable_vs_tidyverse
 #>    <chr>           <chr>      <chr>     <chr>     <chr>  <chr>                 
-#>  1 arrange         63.54ms    60.97ms   486.02ms  297ms  12.5%                 
-#>  2 case_when       70.69ms    84.86ms   418.49ms  307ms  20.3%                 
-#>  3 distinct        43.91ms    41.66ms   99.73ms   287ms  41.8%                 
-#>  4 fill            41.63ms    45.23ms   124.84ms  146ms  36.2%                 
-#>  5 filter          244.96ms   287.37ms  309.18ms  656ms  92.9%                 
-#>  6 inner_join      91.5ms     91.02ms   87.1ms    <NA>   104.5%                
-#>  7 left_join       65.23ms    73.13ms   91.41ms   <NA>   80.0%                 
-#>  8 mutate          52.96ms    82.23ms   59.14ms   85.2ms 139.0%                
-#>  9 nest            19.99ms    16.7ms    30.13ms   <NA>   55.4%                 
-#> 10 pivot_longer    12.65ms    12.18ms   44.04ms   <NA>   27.7%                 
-#> 11 pivot_wider     112.06ms   114.99ms  122.28ms  <NA>   94.0%                 
-#> 12 summarize       287.15ms   190.49ms  512.87ms  780ms  37.1%                 
-#> 13 unnest          6.23ms     20.43ms   936.62ms  <NA>   2.2%
+#>  1 arrange         64.34ms    66.72ms   464.63ms  297ms  14.4%                 
+#>  2 case_when       65.34ms    84.31ms   430.42ms  307ms  19.6%                 
+#>  3 distinct        39.67ms    38.59ms   104.43ms  287ms  37.0%                 
+#>  4 fill            38.92ms    48ms      110.29ms  146ms  43.5%                 
+#>  5 filter          240.92ms   305.02ms  360.62ms  656ms  84.6%                 
+#>  6 inner_join      85.21ms    83.26ms   93.57ms   <NA>   89.0%                 
+#>  7 left_join       69.14ms    94.46ms   105.37ms  <NA>   89.6%                 
+#>  8 mutate          54.17ms    75.39ms   59.18ms   85.2ms 127.4%                
+#>  9 nest            12.38ms    14.9ms    28.68ms   <NA>   52.0%                 
+#> 10 pivot_longer    12.6ms     17.98ms   51.56ms   <NA>   34.9%                 
+#> 11 pivot_wider     116.28ms   137.57ms  102.86ms  <NA>   133.7%                
+#> 12 summarize       283.93ms   180.75ms  584.45ms  780ms  30.9%                 
+#> 13 unnest          6.08ms     24.65ms   910.75ms  <NA>   2.7%
 ```

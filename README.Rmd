@@ -79,7 +79,7 @@ devtools::install_github("markfairbanks/tidytable")
 * `ifelse.()`
 * Joins:
   + `left_join.()`, `inner_join.()`, `right_join.()`, `full_join.()`, & `anti_join.()`
-* `lag.()` & `lead.()`
+* `lagg.()` & `lead.()`
 * `pull.()`
 * `relocate.()`
 * `rename.()` & `rename_with.()`
@@ -127,11 +127,11 @@ Group by calls are done from inside any function that has group by functionality
 
 * A single column can be passed with `by = z`
 * Multiple columns can be passed with `by = c(y, z)`
-* [`tidyselect`](https://tidyselect.r-lib.org) can 
+* [`tidyselect`](https://tidyselect.r-lib.org/reference/language.html) can 
 also be used, including using predicates:
-  + Single predicate: `by = is.character`
-  + Multiple predicates: `by = c(is.character, is.factor)`
-  + A combination of predicates and column names: `by = c(is.character, y)`
+  + Single predicate: `by = where(is.character)`
+  + Multiple predicates: `by = c(where(is.character), where(is.factor))`
+  + A combination of predicates and column names: `by = c(where(is.character), y)`
 
 ```{r}
 test_df %>%
@@ -146,7 +146,7 @@ test_df %>%
 
 Normal selection can be mixed with:
 
-* Predicates: `is.numeric`, `is.character`, etc.
+* Predicates: `where(is.numeric)`, `where(is.character)`, etc.
 * Select helpers: `everything()`, `starts_with()`, `ends_with()`, `contains()`, `any_of()`, etc.
 
 ```{r}
@@ -156,14 +156,14 @@ test_df <- data.table(a = c(1,2,3),
                       d = c("a","b","c"))
 
 test_df %>%
-  select.(is.numeric, d)
+  select.(where(is.numeric), d)
 ```
 
 You can also use this format to drop columns:
 
 ```{r}
 test_df %>%
-  select.(-is.numeric)
+  select.(-where(is.numeric))
 ```
 
 These same ideas can be used whenever selecting columns in `tidytable` functions - for example when using `count.()`, `drop_na.()`, `pivot_longer.()`, `pivot_wider.()`, etc.
@@ -181,7 +181,7 @@ test_df <- data.table(a = c(1,1,1),
                       d = c("a","b","c"))
 
 test_df %>%
-  mutate_across.(is.numeric, as.character)
+  mutate_across.(where(is.numeric), as.character)
 ```
 
 Using `_across.()` instead of `_at.()`:

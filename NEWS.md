@@ -1,9 +1,10 @@
 # tidytable 0.4.2 (in development)
 
+* `tidyselect v0.1.1` compatibility: Updated functions to use `where()`
 * Breaking changes:
   + `group_split.()`: `keep` arg renamed to `.keep`
 * New functions:
-  + `lag.()` & `lead.()`
+  + `lagg.()` & `lead.()`
 * Functionality improvements:
   + `nest_by.()`: Added `.keep` arg
 * Functions with notable speed improvements:

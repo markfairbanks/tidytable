@@ -1,7 +1,7 @@
 test_that("lag. works on a vector", {
 
   x <- c(1:5)
-  vec <- lag.(x,1)
+  vec <- lagg.(x,1)
 
   expect_equal(vec, c(NaN, 1,2,3,4))
 })
@@ -18,7 +18,7 @@ test_that("lag. works with mutate. on df", {
 
   df <- data.table(x = c(4,3,9,7), y = 1:4)
   df <- df %>%
-    mutate.(x_lag = lag.(x,1))
+    mutate.(x_lag = lagg.(x,1))
 
   expect_equal(df$x_lag, c(NA, 4,3,9))
 
