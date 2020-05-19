@@ -5,12 +5,12 @@
 \alias{dt_pull}
 \title{Pull out a single variable}
 \usage{
-pull.(.data, var = NULL)
+pull.(.df, var = NULL)
 
-dt_pull(.data, var = NULL)
+dt_pull(.df, var = NULL)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{var}{The column to pull from the data.table. If NULL, pulls the last column.}
 }
