@@ -3,7 +3,7 @@
 #' @description
 #' Rename variables from a data.table.
 #'
-#' @param .data A data.frame or data.table
+#' @param .df A data.frame or data.table
 #' @param ... Rename expression like dplyr::rename()
 #'
 #' @export
@@ -14,24 +14,24 @@
 #' dt %>%
 #'   rename.(new_x = x,
 #'           new_y = y)
-rename. <- function(.data, ...) {
+rename. <- function(.df, ...) {
   UseMethod("rename.")
 }
 
 #' @export
-rename..data.frame <- function(.data, ...) {
+rename..data.frame <- function(.df, ...) {
 
-  .data <- as_tidytable(.data)
+  .df <- as_tidytable(.df)
 
-  dots <- enexprs(...)
-  .data <- shallow(.data)
+  dots <- enquos(...)
+  .df <- shallow(.df)
 
   new_names <- names(dots)
-  old_names <- as.character(dots)
+  old_names <- map_chr.(dots, quo_text)
 
-  setnames(.data, old_names, new_names)
+  setnames(.df, old_names, new_names)
 
-  .data
+  .df
 }
 
 #' @export

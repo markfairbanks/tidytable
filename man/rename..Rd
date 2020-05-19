@@ -5,12 +5,12 @@
 \alias{dt_rename}
 \title{Rename variables by name}
 \usage{
-rename.(.data, ...)
+rename.(.df, ...)
 
-dt_rename(.data, ...)
+dt_rename(.df, ...)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Rename expression like dplyr::rename()}
 }
