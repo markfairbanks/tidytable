@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/dev%20-0.4.1.9-green.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/dev%20-0.5.0-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey)](https://markfairbanks.github.io/tidytable/)
 <!-- badges: end -->
@@ -79,7 +79,7 @@ devtools::install_github("markfairbanks/tidytable")
 * `ifelse.()`
 * Joins:
   + `left_join.()`, `inner_join.()`, `right_join.()`, `full_join.()`, & `anti_join.()`
-* `lagg.()` & `lead.()`
+* `lags.()` & `leads.()`
 * `pull.()`
 * `relocate.()`
 * `rename.()` & `rename_with.()`
@@ -200,9 +200,7 @@ test_df %>%
 
 ## `rlang` compatibility
 
-`rlang` quoting/unquoting can be used to write custom functions with `tidytable` functions.
-
-Note that quosures are not compatible with `data.table`, so `enexpr()` must be used instead of `enquo()`.
+`rlang` quosures can be used to write custom functions with `tidytable` functions.
 
 ##### Custom function with `mutate.()`
 
@@ -211,11 +209,19 @@ library(rlang)
 
 df <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
 
-add_one <- function(.data, add_col) {
-  add_col <- enexpr(add_col)
+# Using enquo() with !!
+add_one <- function(data, add_col) {
   
-  .data %>%
+  add_col <- enquo(add_col)
+  
+  data %>%
     mutate.(new_col = !!add_col + 1)
+}
+
+# Using the {{ }} shortcut
+add_one <- function(data, add_col) {
+  data %>%
+    mutate.(new_col = {{add_col}} + 1)
 }
 
 df %>%
@@ -227,13 +233,10 @@ df %>%
 ```{r}
 df <- data.table(x = 1:10, y = c(rep("a", 6), rep("b", 4)), z = c(rep("a", 6), rep("b", 4)))
 
-find_mean <- function(.data, grouping_cols, col) {
-  grouping_cols <- enexpr(grouping_cols)
-  col <- enexpr(col)
-  
-  .data %>%
-    summarize.(avg = mean(!!col),
-               by = !!grouping_cols)
+find_mean <- function(data, grouping_cols, col) {
+  data %>%
+    summarize.(avg = mean({{col}}),
+               by = {{grouping_cols}})
 }
 
 df %>%

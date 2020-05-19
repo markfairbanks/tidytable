@@ -7,7 +7,7 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/dev%20-0.4.1.9-green.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/dev%20-0.5.0-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN RStudio mirror
@@ -79,7 +79,7 @@ devtools::install_github("markfairbanks/tidytable")
   - Joins:
       - `left_join.()`, `inner_join.()`, `right_join.()`,
         `full_join.()`, & `anti_join.()`
-  - `lagg.()` & `lead.()`
+  - `lags.()` & `leads.()`
   - `pull.()`
   - `relocate.()`
   - `rename.()` & `rename_with.()`
@@ -249,11 +249,8 @@ test_df %>%
 
 ## `rlang` compatibility
 
-`rlang` quoting/unquoting can be used to write custom functions with
-`tidytable` functions.
-
-Note that quosures are not compatible with `data.table`, so `enexpr()`
-must be used instead of `enquo()`.
+`rlang` quosures can be used to write custom functions with `tidytable`
+functions.
 
 ##### Custom function with `mutate.()`
 
@@ -262,11 +259,19 @@ library(rlang)
 
 df <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
 
-add_one <- function(.data, add_col) {
-  add_col <- enexpr(add_col)
+# Using enquo() with !!
+add_one <- function(data, add_col) {
   
-  .data %>%
+  add_col <- enquo(add_col)
+  
+  data %>%
     mutate.(new_col = !!add_col + 1)
+}
+
+# Using the {{ }} shortcut
+add_one <- function(data, add_col) {
+  data %>%
+    mutate.(new_col = {{add_col}} + 1)
 }
 
 df %>%
@@ -283,13 +288,10 @@ df %>%
 ``` r
 df <- data.table(x = 1:10, y = c(rep("a", 6), rep("b", 4)), z = c(rep("a", 6), rep("b", 4)))
 
-find_mean <- function(.data, grouping_cols, col) {
-  grouping_cols <- enexpr(grouping_cols)
-  col <- enexpr(col)
-  
-  .data %>%
-    summarize.(avg = mean(!!col),
-               by = !!grouping_cols)
+find_mean <- function(data, grouping_cols, col) {
+  data %>%
+    summarize.(avg = mean({{col}}),
+               by = {{grouping_cols}})
 }
 
 df %>%
@@ -353,17 +355,17 @@ all_marks
 #> # A tibble: 13 x 6
 #>    function_tested data.table tidytable tidyverse pandas tidytable_vs_tidyverse
 #>    <chr>           <chr>      <chr>     <chr>     <chr>  <chr>                 
-#>  1 arrange         64.34ms    66.72ms   464.63ms  297ms  14.4%                 
-#>  2 case_when       65.34ms    84.31ms   430.42ms  307ms  19.6%                 
-#>  3 distinct        39.67ms    38.59ms   104.43ms  287ms  37.0%                 
-#>  4 fill            38.92ms    48ms      110.29ms  146ms  43.5%                 
-#>  5 filter          240.92ms   305.02ms  360.62ms  656ms  84.6%                 
-#>  6 inner_join      85.21ms    83.26ms   93.57ms   <NA>   89.0%                 
-#>  7 left_join       69.14ms    94.46ms   105.37ms  <NA>   89.6%                 
-#>  8 mutate          54.17ms    75.39ms   59.18ms   85.2ms 127.4%                
-#>  9 nest            12.38ms    14.9ms    28.68ms   <NA>   52.0%                 
-#> 10 pivot_longer    12.6ms     17.98ms   51.56ms   <NA>   34.9%                 
-#> 11 pivot_wider     116.28ms   137.57ms  102.86ms  <NA>   133.7%                
-#> 12 summarize       283.93ms   180.75ms  584.45ms  780ms  30.9%                 
-#> 13 unnest          6.08ms     24.65ms   910.75ms  <NA>   2.7%
+#>  1 arrange         67.3ms     53.16ms   423.37ms  297ms  12.6%                 
+#>  2 case_when       71.49ms    89.42ms   424.23ms  307ms  21.1%                 
+#>  3 distinct        38.92ms    42.16ms   104.52ms  287ms  40.3%                 
+#>  4 fill            43.03ms    53.8ms    118.87ms  146ms  45.3%                 
+#>  5 filter          242.96ms   258.31ms  300.31ms  656ms  86.0%                 
+#>  6 inner_join      95.05ms    105.89ms  85ms      <NA>   124.6%                
+#>  7 left_join       78.22ms    87.77ms   90.77ms   <NA>   96.7%                 
+#>  8 mutate          51.53ms    83.2ms    103.7ms   85.2ms 80.2%                 
+#>  9 nest            14.63ms    17.47ms   38.87ms   <NA>   44.9%                 
+#> 10 pivot_longer    11.58ms    12.56ms   43.14ms   <NA>   29.1%                 
+#> 11 pivot_wider     123.68ms   112.17ms  98.75ms   <NA>   113.6%                
+#> 12 summarize       289.65ms   272.05ms  519.64ms  780ms  52.4%                 
+#> 13 unnest          5.93ms     20.87ms   822.16ms  <NA>   2.5%
 ```
