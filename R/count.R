@@ -3,7 +3,7 @@
 #' @description
 #' Returns row counts of the dataset. If bare column names are provided, `count.()` returns counts by group.
 #'
-#' @param .data A data.frame or data.table
+#' @param .df A data.frame or data.table
 #' @param ... Columns to group by. `tidyselect` compatible.
 #'
 #' @export
@@ -23,20 +23,19 @@
 #'
 #' example_df %>%
 #'   count.(where(is.character))
-count. <- function(.data, ...) {
+count. <- function(.df, ...) {
   UseMethod("count.")
 }
 
 #' @export
-count..data.frame <- function(.data, ...) {
+count..data.frame <- function(.df, ...) {
 
-  .data <- as_tidytable(.data)
+  .df <- as_tidytable(.df)
 
-  by <- dots_selector_by(.data, ...)
+  by <- enquos(...)
 
-  eval_expr(
-    .data[, list(N = .N), by = !!by]
-  )
+  summarize.(.df, N = .N, by = c(!!!by))
+
 }
 
 #' @export
