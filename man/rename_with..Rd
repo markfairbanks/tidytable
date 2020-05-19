@@ -5,12 +5,12 @@
 \alias{dt_rename_with}
 \title{Rename multiple columns}
 \usage{
-rename_with.(.data, .fn, .cols = everything.(), ...)
+rename_with.(.df, .fn, .cols = everything(), ...)
 
-dt_rename_with(.data, .fn, .cols = everything.(), ...)
+dt_rename_with(.df, .fn, .cols = everything(), ...)
 }
 \arguments{
-\item{.data}{A data.table or data.frame}
+\item{.df}{A data.table or data.frame}
 
 \item{.fn}{Function to transform the names with.}
 
