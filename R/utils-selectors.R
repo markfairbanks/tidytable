@@ -32,7 +32,7 @@ dots_selector_by <- function(.data, ...) {
 
 ### User inputs a vector of bare column names
 vec_selector <- function(.data, select_vars) {
-  select_vars <- enexpr(select_vars)
+  select_vars <- enquo(select_vars)
 
   syms(names(vec_selector_i(.data, !!select_vars)))
 }

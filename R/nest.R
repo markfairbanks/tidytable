@@ -39,13 +39,7 @@ nest_by..data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
 
   .df <- as_tidytable(.df)
 
-  dots <- enquos(...)
-
-  if (length(dots) == 0) {
-
-    .df <- summarize(.df, data = list(.SD))
-
-  } else if (.keep) {
+  if (.keep) {
 
     split_vars <- dots_selector(.df, ...)
 
@@ -59,10 +53,8 @@ nest_by..data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
 
     by <- enquos(...)
 
-    .df <- summarize.(.df, data = list(.SD), by = c(!!!by))
+    .df <- summarize.(.df, {{.key}} := list(.SD), by = c(!!!by))
   }
-
-  if (.key != "data") .df <- rename.(.df, !!.key := data)
 
   .df
 
