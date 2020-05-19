@@ -1,10 +1,11 @@
-# tidytable 0.4.2 (in development)
+# tidytable 0.5.0 (in development)
 
+* `tidytable` now works with quosures
 * `tidyselect v0.1.1` compatibility: Updated functions to use `where()`
 * Breaking changes:
   + `group_split.()`: `keep` arg renamed to `.keep`
 * New functions:
-  + `lagg.()` & `lead.()`
+  + `lags.()` & `leads.()`
 * Functionality improvements:
   + `nest_by.()`: Added `.keep` arg
 * Functions with notable speed improvements:
