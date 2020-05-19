@@ -40,14 +40,13 @@ summarize..data.frame <- function(.df, ..., by = NULL) {
   .df <- as_tidytable(.df)
 
   dots <- enquos(...)
-  by <- enquo(by)
-  by <- vec_selector_by(.df, !!by)
+  by <- vec_selector_by(.df, {{ by }})
 
-  eval_tidy(quo(
-    .df[, eval_tidy(quo(
+  eval_quo(
+    .df[, eval_quo(
       {.N = .env$.N; .SD = .env$.SD; .I = .env$.I; .GRP = .env$.GRP;
-      list(!!!dots)}), .SD), by = !!by]
-  ), .df)
+      list(!!!dots)}, .SD), by = !!by],
+    .df)
 
 }
 

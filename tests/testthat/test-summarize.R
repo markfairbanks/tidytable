@@ -31,6 +31,17 @@ test_that("n.() works", {
   expect_equal(tidytable_df, datatable_df)
 })
 
+test_that(".GRP works", {
+  df <- tidytable(x = 1:4, y = c("a","a","a","b"))
+
+  tidytable_df <- df %>%
+    summarize.(count = .GRP, by = y)
+
+  datatable_df <- df[, list(count = .GRP), by = y]
+
+  expect_equal(tidytable_df, datatable_df)
+})
+
 test_that("can do group aggregation with no by", {
   df <- tidytable(x = 1:4, y = c("a","a","a","b"))
 
