@@ -83,6 +83,22 @@ test_that("works with by with data.frame", {
   expect_equal(sliced_df$y, c(4, 7))
 })
 
+test_that("works in custom function", {
+  test_df <- tidytable(x = c(1,2,3,4), y = c(4,5,6,7), z = c("a", "a", "a", "b"))
+
+  slice_fn <- function(.df, val) {
+    .df %>%
+      slice.(val, by = z)
+  }
+
+  sliced_df <- test_df %>%
+    slice_fn(1)
+
+  expect_equal(sliced_df$z, c("a", "b"))
+  expect_equal(sliced_df$x, c(1, 4))
+  expect_equal(sliced_df$y, c(4, 7))
+})
+
 # slice_head.() ----------------------------------------------------
 
 test_that("dt_slice_head() works when empty", {

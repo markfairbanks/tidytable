@@ -5,12 +5,12 @@
 \alias{dt_separate}
 \title{Separate a character column into multiple columns}
 \usage{
-separate.(.data, col, into, sep = "[^[:alnum:]]+", remove = TRUE, ...)
+separate.(.df, col, into, sep = "[^[:alnum:]]+", remove = TRUE, ...)
 
-dt_separate(.data, col, into, sep = "[^[:alnum:]]+", remove = TRUE, ...)
+dt_separate(.df, col, into, sep = "[^[:alnum:]]+", remove = TRUE, ...)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{col}{The column to split into multiple columns}
 
