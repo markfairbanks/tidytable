@@ -62,12 +62,11 @@ slice_head..data.frame <- function(.df, n = 5, by = NULL) {
 
   .df <- as_tidytable(.df)
 
-  n <- enexpr(n)
-  by <- enexpr(by)
-  by <- vec_selector_by(.df, !!by)
+  n <- enquo(n)
+  by <- vec_selector_by(.df, {{ by }})
 
-  eval_expr(
-    .df[, head(.SD, !!n), !!by]
+  eval_quo(
+    .df[, eval_quo(head(.SD, !!n), .SD), !!by]
   )
 }
 
@@ -82,12 +81,11 @@ slice_tail..data.frame <- function(.df, n = 5, by = NULL) {
 
   .df <- as_tidytable(.df)
 
-  n <- enexpr(n)
-  by <- enexpr(by)
-  by <- vec_selector_by(.df, !!by)
+  n <- enquo(n)
+  by <- vec_selector_by(.df, {{ by }})
 
-  eval_expr(
-    .df[, tail(.SD, !!n), !!by]
+  eval_quo(
+    .df[, eval_quo(tail(.SD, !!n), .SD), !!by]
   )
 }
 
@@ -104,13 +102,9 @@ slice_max..data.frame <- function(.df, order_by, n = 1, by = NULL) {
 
   if (missing(order_by)) stop("order_by must be supplied")
 
-  order_by <- enexpr(order_by)
-  n <- enexpr(n)
-  by <- enexpr(by)
-
   .df %>%
-    arrange.(-!!order_by) %>%
-    slice_head.(!!n, by = !!by)
+    arrange.(-{{ order_by }}) %>%
+    slice_head.({{ n }}, by = {{ by }})
 }
 
 #' @export
@@ -126,13 +120,9 @@ slice_min..data.frame <- function(.df, order_by, n = 1, by = NULL) {
 
   if (missing(order_by)) stop("order_by must be supplied")
 
-  order_by <- enexpr(order_by)
-  n <- enexpr(n)
-  by <- enexpr(by)
-
   .df %>%
-    arrange.(!!order_by) %>%
-    slice_head.(!!n, by = !!by)
+    arrange.({{ order_by }}) %>%
+    slice_head.({{ n }}, by = {{ by }})
 }
 
 #' @export

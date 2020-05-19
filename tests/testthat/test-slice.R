@@ -210,3 +210,18 @@ test_that("_min.() works with by enhanced selection", {
   expect_equal(sliced_df$z, c("a", "a", "a", "b", "b", "b"))
   expect_equal(sliced_df$y, c(20,19,18,14,13,12))
 })
+
+test_that("_max.() works with custom function with quosures", {
+  test_df <- data.table(a = 1:3, b = 4:6)
+
+  slice_fn <- function(.df, col, num) {
+    .df %>%
+      slice_max.({{ col }}, num)
+  }
+
+  sliced_df <- test_df %>%
+    slice_fn(a, 1)
+
+  expect_equal(sliced_df$a, 3)
+  expect_equal(sliced_df$b, 6)
+})
