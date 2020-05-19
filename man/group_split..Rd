@@ -5,12 +5,12 @@
 \alias{dt_group_split}
 \title{Split data frame by groups}
 \usage{
-group_split.(.data, ..., .keep = TRUE)
+group_split.(.df, ..., .keep = TRUE)
 
-dt_group_split(.data, ..., .keep = TRUE)
+dt_group_split(.df, ..., .keep = TRUE)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Columns to group and split by. \code{tidyselect} compatible.}
 
