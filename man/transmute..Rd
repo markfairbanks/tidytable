@@ -5,12 +5,12 @@
 \alias{dt_transmute}
 \title{Add new variables and drop all others}
 \usage{
-transmute.(.data, ..., by = NULL)
+transmute.(.df, ..., by = NULL)
 
-dt_transmute(.data, ..., by = NULL)
+dt_transmute(.df, ..., by = NULL)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Columns to create/modify}
 
