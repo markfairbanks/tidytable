@@ -2,7 +2,7 @@
 #'
 #' @description Order rows in ascending or descending order
 #'
-#' @param .data A data.frame or data.table
+#' @param .df A data.frame or data.table
 #' @param ... Variables to arrange by
 #'
 #' @export
@@ -18,20 +18,20 @@
 #'
 #' example_dt %>%
 #'   arrange.(c, desc.(a))
-arrange. <- function(.data, ...) {
+arrange. <- function(.df, ...) {
   UseMethod("arrange.")
 }
 
 #' @export
-arrange..data.frame <- function(.data, ...) {
+arrange..data.frame <- function(.df, ...) {
 
-  .data <- as_tidytable(.data)
+  .df <- as_tidytable(.df)
 
-  dots <- enexprs(...)
+  dots <- enquos(...)
 
-  eval_expr(
-    .data[order(!!!dots)]
-  )
+  eval_tidy(quo_squash(quo(
+    .df[order(!!!dots)]
+  )), .df)
 }
 
 #' @export

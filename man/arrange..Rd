@@ -5,12 +5,12 @@
 \alias{dt_arrange}
 \title{Arrange/reorder rows by variables}
 \usage{
-arrange.(.data, ...)
+arrange.(.df, ...)
 
-dt_arrange(.data, ...)
+dt_arrange(.df, ...)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Variables to arrange by}
 }
