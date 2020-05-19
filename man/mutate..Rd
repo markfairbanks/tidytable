@@ -5,12 +5,12 @@
 \alias{dt_mutate}
 \title{Mutate}
 \usage{
-mutate.(.data, ..., by = NULL)
+mutate.(.df, ..., by = NULL)
 
-dt_mutate(.data, ..., by = NULL)
+dt_mutate(.df, ..., by = NULL)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Columns to add/modify}
 

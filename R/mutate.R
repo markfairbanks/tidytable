@@ -3,7 +3,7 @@
 #' @description
 #' Add new columns or modify existing ones
 #'
-#' @param .data A data.frame or data.table
+#' @param .df A data.frame or data.table
 #' @param ... Columns to add/modify
 #' @param by Columns to group by
 #'
@@ -24,23 +24,23 @@
 #'   mutate.(double_a = a * 2,
 #'           avg_a = mean(a),
 #'           by = c)
-mutate. <- function(.data, ..., by = NULL) {
+mutate. <- function(.df, ..., by = NULL) {
   UseMethod("mutate.")
 }
 
 #' @export
-mutate..data.frame <- function(.data, ..., by = NULL) {
+mutate..data.frame <- function(.df, ..., by = NULL) {
 
-  .data <- as_tidytable(.data)
-  .data <- shallow(.data)
+  .df <- as_tidytable(.df)
+  .df <- shallow(.df)
 
-  dots <- enexprs(...)
-  by <- enexpr(by)
+  dots <- enquos(...)
+  by <- enquo(by)
 
-  if (is.null(by)) {
+  if (quo_is_null(by)) {
     # Faster version if there is no "by" provided
     all_names <- names(dots)
-    data_size <- nrow(.data)
+    data_size <- nrow(.df)
 
     for (i in seq_along(dots)) {
 
@@ -49,26 +49,37 @@ mutate..data.frame <- function(.data, ..., by = NULL) {
 
       # Prevent modify-by-reference if the column already exists in the data.table
       # Fixes cases when user supplies a single value ex. 1, -1, "a"
-      # !is.null(val) allows for columns to be deleted using mutate.(.data, col = NULL)
-      if (.col_name %in% names(.data) && !is.null(val)) {
-        eval_expr(
-          .data[, ':='(!!.col_name, vec_recycle(!!val, data_size))]
+      # !is.null(val) allows for columns to be deleted using mutate.(.df, col = NULL)
+      if (.col_name %in% names(.df) && !quo_is_null(val)) {
+
+        eval_quo(
+          .df[, !!.col_name := eval_quo(
+            {.N = .env$.N; .SD = .env$.SD; .I = .env$.I; .GRP = .env$.GRP;
+            vec_recycle(!!val, data_size)}, .SD)]
         )
+
       } else {
-        eval_expr(
-          .data[, ':='(!!.col_name, !!val)]
-        )
+
+        eval_quo(
+          .df[, !!.col_name := eval_quo(
+            {.SD = .env$.SD; .N = .env$.N; .I = .env$.I; .GRP = .env$.GRP; !!val},
+            .SD)]
+        , .df)
       }
     }
   } else {
     # Faster with "by", since the "by" call isn't looped multiple times for each column added
-    by <- vec_selector_by(.data, !!by)
+    by <- vec_selector_by(.df, !!by)
 
-    eval_expr(
-      .data[, ':='(!!!dots), by = !!by]
-    )
+    dot_names <- names(dots)
+    dots <- unname(dots)
+
+    eval_quo(
+      .df[ , !!dot_names := eval_quo({.N = .env$.N; list(!!!dots)}, .SD), by = !!by],
+      .df)
+
   }
-  .data[]
+  .df[]
 }
 
 #' @export

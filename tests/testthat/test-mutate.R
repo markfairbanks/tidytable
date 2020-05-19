@@ -123,14 +123,69 @@ test_that("can use by with vector", {
 
 })
 
-# test_that("can use by with list", {
-#   df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
-#
-#   tidytable_df <- df %>%
-#     mutate.(z = mean(x), by = list(is.character))
-#
-#   datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y]
-#
-#   expect_equal(tidytable_df, datatable_df)
-#
-# })
+test_that("can use .N", {
+  df <- data.table(x = 1:3, y = 1:3)
+  df <- df %>%
+    mutate.(z = .N)
+
+  expect_named(df, c("x","y","z"))
+  expect_equal(df$z, c(3,3,3))
+})
+
+test_that("can use .N with by", {
+  df <- data.table(x = 1:3, y = c("a","a","b"))
+  df <- df %>%
+    mutate.(z = .N, by = y)
+
+  expect_named(df, c("x","y","z"))
+  expect_equal(df$z, c(2,2,1))
+})
+
+test_that("can use .N in existing col", {
+  df <- data.table(x = 1:3, y = 1:3)
+  df <- df %>%
+    mutate.(x = .N)
+
+  expect_named(df, c("x", "y"))
+  expect_equal(df$x, c(3,3,3))
+})
+
+test_that("can use .y in map2.() in nested data.tables", {
+  test_df <- data.table(
+    id = seq(1, 3),
+    val_1 = seq(1, 3, 1),
+    val_2 = seq(4, 6, 1)
+  )
+
+  result_df1 <- test_df %>%
+    nest_by.(id) %>%
+    mutate.(example_1 = map2.(data, id,
+                              ~ mutate.(.x, id = .y))) %>%
+    unnest.(example_1)
+
+  expect_named(result_df1, c("id","val_1", "val_2", "id1"))
+  expect_equal(result_df1$id1, c(1,2,3))
+
+  result_df2 <- test_df %>%
+    nest_by.(id) %>%
+    mutate.(example_1 = map2.(data, id,
+                              ~ .x %>% mutate.(id = .y))) %>%
+    unnest.(example_1)
+
+  expect_named(result_df2, c("id","val_1", "val_2", "id1"))
+  expect_equal(result_df2$id1, c(1,2,3))
+})
+
+test_that("can make custom functions with quosures", {
+  df <- data.table(x = c(1,2,3), y = c(1,1,1), z = c("a","a","b"))
+
+  add_one <- function(.data, add_col, new_name, val, by) {
+    .data %>%
+      mutate.({{ new_name }} := {{ add_col }} + val, by = {{ by }})
+  }
+
+  result_df <- df %>%
+    add_one(x, stuff, 1, z)
+
+  expect_equal(result_df$stuff, c(2,3,4))
+})
