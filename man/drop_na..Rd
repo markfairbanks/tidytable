@@ -5,12 +5,12 @@
 \alias{dt_drop_na}
 \title{Drop rows containing missing values}
 \usage{
-drop_na.(.data, ...)
+drop_na.(.df, ...)
 
-dt_drop_na(.data, ...)
+dt_drop_na(.df, ...)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Optional: A selection of columns. If empty, all variables are selected.
 \code{tidyselect} compatible.}

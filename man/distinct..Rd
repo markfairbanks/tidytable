@@ -5,12 +5,12 @@
 \alias{dt_distinct}
 \title{Select distinct/unique rows}
 \usage{
-distinct.(.data, ..., .keep_all = FALSE)
+distinct.(.df, ..., .keep_all = FALSE)
 
-dt_distinct(.data, ..., .keep_all = FALSE)
+dt_distinct(.df, ..., .keep_all = FALSE)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Columns to select before determining uniqueness. If omitted, will use all columns.
 \code{tidyselect} compatible.}
