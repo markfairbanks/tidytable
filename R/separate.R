@@ -49,14 +49,14 @@ separate..data.frame <- function(.df, col, into,
 
   if (nchar(sep) > 1) {
     # Works automatically, but is slower
-    eval_tidy(quo_squash(quo(
-      .df[, (into) := tstrsplit(!!col, split = str_extract(!!col, sep), fixed=TRUE, ...)]
-    )))
+    eval_quo(
+      .df[, (into) := eval_quo(tstrsplit(!!col, split = str_extract(!!col, sep), fixed=TRUE, ...), .df)]
+    )
   } else {
     # Faster, but sep must be supplied
-    eval_tidy(quo_squash(quo(
-      .df[, (into) := tstrsplit(!!col, split = sep, fixed=TRUE, ...)]
-    )))
+    eval_quo(
+      .df[, (into) := eval_quo(tstrsplit(!!col, split = sep, fixed=TRUE, ...), .df)]
+    )
   }
 
   if (remove) eval_tidy(quo_squash(quo(.df[, !!col := NULL])))
