@@ -6,7 +6,7 @@
 \title{Pivot data from long to wide}
 \usage{
 pivot_wider.(
-  .data,
+  .df,
   names_from = name,
   values_from = value,
   id_cols = NULL,
@@ -15,7 +15,7 @@ pivot_wider.(
 )
 
 dt_pivot_wider(
-  .data,
+  .df,
   names_from = name,
   values_from = value,
   id_cols = NULL,
@@ -24,7 +24,7 @@ dt_pivot_wider(
 )
 }
 \arguments{
-\item{.data}{the data table to widen}
+\item{.df}{the data table to widen}
 
 \item{names_from}{A pair of arguments describing which column (or columns) to get the name of the output column (\code{name_from}),
 and which column (or columns) to get the cell values from (\code{values_from}).

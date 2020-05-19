@@ -6,7 +6,7 @@
 \title{Pivot data from wide to long}
 \usage{
 pivot_longer.(
-  .data,
+  .df,
   cols = everything(),
   names_to = "name",
   values_to = "value",
@@ -15,7 +15,7 @@ pivot_longer.(
 )
 
 dt_pivot_longer(
-  .data,
+  .df,
   cols = everything(),
   names_to = "name",
   values_to = "value",
@@ -24,7 +24,7 @@ dt_pivot_longer(
 )
 }
 \arguments{
-\item{.data}{The data table to pivot longer}
+\item{.df}{The data table to pivot longer}
 
 \item{cols}{Vector of bare column names. Can add/drop columns. \code{tidyselect} compatible.}
 
@@ -34,7 +34,7 @@ dt_pivot_longer(
 
 \item{values_drop_na}{If TRUE, rows will be dropped that contain NAs.}
 
-\item{...}{Additional arguments to pass to \code{melt.data.table()}}
+\item{...}{Additional arguments to pass to \code{melt.df.table()}}
 }
 \description{
 \code{pivot_wider.()} "widens" data, increasing the number of columns and
