@@ -5,12 +5,12 @@
 \alias{dt_count}
 \title{Count observations by group}
 \usage{
-count.(.data, ...)
+count.(.df, ...)
 
-dt_count(.data, ...)
+dt_count(.df, ...)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Columns to group by. \code{tidyselect} compatible.}
 }

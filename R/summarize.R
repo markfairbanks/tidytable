@@ -3,7 +3,7 @@
 #' @description
 #' Aggregate data using summary statistics such as mean or median. Can be calculated by group.
 #'
-#' @param .data A data.frame or data.table
+#' @param .df A data.frame or data.table
 #' @param ... Aggregations to perform
 #' @param by Columns to group by.
 #' * A single column can be passed with `by = d`.
@@ -30,26 +30,25 @@
 #' example_dt %>%
 #'   summarize.(avg_a = mean(a),
 #'              by = c(c, d))
-summarize. <- function(.data, ..., by = NULL) {
+summarize. <- function(.df, ..., by = NULL) {
   UseMethod("summarize.")
 }
 
 #' @export
-summarize..data.frame <- function(.data, ..., by = NULL) {
+summarize..data.frame <- function(.df, ..., by = NULL) {
 
-  .data <- as_tidytable(.data)
+  .df <- as_tidytable(.df)
 
-  dots <- enexprs(...)
-  by <- enexpr(by)
-  by <- vec_selector_by(.data, !!by)
+  dots <- enquos(...)
+  by <- enquo(by)
+  by <- vec_selector_by(.df, !!by)
 
-  # Needed so n.() works
-  # Puts () around each summary function
-  dots <- map.(dots, ~ parse_expr(str_c("(", deparse(.x), ")")))
+  eval_tidy(quo(
+    .df[, eval_tidy(quo(
+      {.N = .env$.N; .SD = .env$.SD; .I = .env$.I; .GRP = .env$.GRP;
+      list(!!!dots)}), .SD), by = !!by]
+  ), .df)
 
-  eval_expr(
-    .data[, list(!!!dots), by = !!by]
-  )
 }
 
 #' @export

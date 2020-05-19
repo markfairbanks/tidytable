@@ -115,3 +115,19 @@ test_that("can do group aggregation without by with data.frame", {
 
   expect_equal(tidytable_df, datatable_df)
 })
+
+test_that("can make a function with quosures", {
+  df <- tidytable(x = 1:4, y = c("a","a","a","b"))
+
+  summarize_fn <- function(.df, col) {
+    .df %>%
+      summarize.(avg_x = mean({{col}}), by = y)
+  }
+
+  tidytable_df <- df %>%
+    summarize_fn(x)
+
+  datatable_df <- df[, list(avg_x = mean(x)), by = y]
+
+  expect_equal(tidytable_df, datatable_df)
+})
