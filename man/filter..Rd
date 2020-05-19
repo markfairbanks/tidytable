@@ -5,12 +5,12 @@
 \alias{dt_filter}
 \title{Filter rows on one or more conditions}
 \usage{
-filter.(.data, ..., by = NULL)
+filter.(.df, ..., by = NULL)
 
-dt_filter(.data, ..., by = NULL)
+dt_filter(.df, ..., by = NULL)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Conditions to filter by}
 

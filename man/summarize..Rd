@@ -7,16 +7,16 @@
 \alias{dt_summarize}
 \title{Aggregate data using summary statistics}
 \usage{
-summarize.(.data, ..., by = NULL)
+summarize.(.df, ..., by = NULL)
 
-summarise.(.data, ..., by = NULL)
+summarise.(.df, ..., by = NULL)
 
-dt_summarise(.data, ..., by = NULL)
+dt_summarise(.df, ..., by = NULL)
 
-dt_summarize(.data, ..., by = NULL)
+dt_summarize(.df, ..., by = NULL)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Aggregations to perform}
 
