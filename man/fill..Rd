@@ -5,17 +5,12 @@
 \alias{dt_fill}
 \title{Fill in missing values with previous or next value}
 \usage{
-fill.(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL)
+fill.(.df, ..., .direction = c("down", "up", "downup", "updown"), by = NULL)
 
-dt_fill(
-  .data,
-  ...,
-  .direction = c("down", "up", "downup", "updown"),
-  by = NULL
-)
+dt_fill(.df, ..., .direction = c("down", "up", "downup", "updown"), by = NULL)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{A selection of columns. \code{tidyselect} compatible.}
 

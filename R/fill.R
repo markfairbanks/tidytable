@@ -5,7 +5,7 @@
 #'
 #' Supports tidyselect
 #'
-#' @param .data A data.frame or data.table
+#' @param .df A data.frame or data.table
 #' @param ... A selection of columns. `tidyselect` compatible.
 #' @param .direction Direction in which to fill missing values. Currently "down" (the default), "up", "downup" (first down then up), or "updown" (first up and then down)
 #' @param by Columns to group by when filling should be done by group
@@ -23,29 +23,29 @@
 #'
 #' test_df %>%
 #'   fill.(x, y, by = z, .direction = "downup")
-fill. <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
+fill. <- function(.df, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
   UseMethod("fill.")
 }
 
 #' @export
-fill..data.frame <- function(.data, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
+fill..data.frame <- function(.df, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
 
-  .data <- as_tidytable(.data)
+  .df <- as_tidytable(.df)
 
-  by <- enexpr(by)
+  by <- enquo(by)
 
   if (length(.direction) > 1) .direction <- .direction[1]
 
   if (.direction == "down") {
-    filler(.data, ..., type = "locf", by = !!by)
+    filler(.df, ..., type = "locf", by = !!by)
   } else if (.direction == "up") {
-    filler(.data, ..., type = "nocb", by = !!by)
+    filler(.df, ..., type = "nocb", by = !!by)
   } else if (.direction == "downup") {
-    .data %>%
+    .df %>%
       filler(..., type = "locf", by = !!by) %>%
       filler(..., type = "nocb", by = !!by)
   } else {
-    .data %>%
+    .df %>%
       filler(..., type = "nocb", by = !!by) %>%
       filler(..., type = "locf", by = !!by)
   }
@@ -55,26 +55,26 @@ fill..data.frame <- function(.data, ..., .direction = c("down", "up", "downup", 
 #' @rdname fill.
 dt_fill <- fill.
 
-filler <- function(.data, ..., type = "locf", by = NULL) {
+filler <- function(.df, ..., type = "locf", by = NULL) {
 
-  all_cols <- as.character(dots_selector(.data, ...))
+  all_cols <- as.character(dots_selector(.df, ...))
 
-  by <- enexpr(by)
+  by <- enquo(by)
 
-  subset_data <- .data[, ..all_cols]
+  subset_data <- .df[, ..all_cols]
 
   numeric_cols <- all_cols[map_lgl.(subset_data, is.numeric)]
   other_cols <- all_cols[!all_cols %in% numeric_cols]
 
   with_by <- !is.null(by)
 
-  if (with_by) col_order <- names(.data)
+  if (with_by) col_order <- names(.df)
 
   if (length(numeric_cols) > 0) {
 
     numeric_cols <- syms(numeric_cols)
 
-    .data <- mutate_across.(.data,
+    .df <- mutate_across.(.df,
                             c(!!!numeric_cols),
                             nafill, type,
                             by = !!by)
@@ -84,19 +84,20 @@ filler <- function(.data, ..., type = "locf", by = NULL) {
   if (length(other_cols) > 0) {
 
     other_cols <- syms(other_cols)
-    .data <- shallow(.data)
+    .df <- shallow(.df)
 
-    by <- vec_selector_by(.data, !!by)
+    by <- vec_selector_by(.df, !!by)
 
     for (col in other_cols) {
-      eval_expr(
-        .data[, !!col := .SD[, !!col][nafill(fifelse(is.na(!!col), NA_integer_, 1:.N), type = !!type)],
-              by = !!by]
+      eval_quo(
+        .df[, !!col := eval_quo(
+          .SD[, !!col][nafill(fifelse(is.na(!!col), NA_integer_, 1:.N), type = !!type)], .SD),
+          by = !!by]
       )
     }
   }
 
-  if (with_by) setcolorder(.data, col_order)
+  if (with_by) setcolorder(.df, col_order)
 
-  .data
+  .df
 }
