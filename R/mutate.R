@@ -75,7 +75,10 @@ mutate..data.frame <- function(.df, ..., by = NULL) {
     dots <- unname(dots)
 
     eval_quo(
-      .df[ , !!dot_names := eval_quo({.N = .env$.N; list(!!!dots)}, .SD), by = !!by],
+      .df[ , !!dot_names := eval_quo(
+        {.N = .env$.N; .SD = .env$.SD; .I = .env$.I; .GRP = .env$.GRP; list(!!!dots)},
+        .SD),
+        by = !!by],
       .df)
 
   }
