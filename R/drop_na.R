@@ -32,7 +32,7 @@ drop_na..data.frame <- function(.data, ...) {
 
   .data <- as_tidytable(.data)
 
-  dots <- enexprs(...)
+  dots <- enquos(...)
 
   if (length(dots) == 0) {
     na.omit(.data)
