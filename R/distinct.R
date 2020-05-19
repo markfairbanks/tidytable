@@ -14,15 +14,15 @@
 #' @md
 #'
 #' @examples
-#' example_dt <- tidytable(
+#' test_df <- tidytable(
 #'   x = 1:3,
 #'   y = 4:6,
 #'   z = c("a", "a", "b"))
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   distinct.()
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   distinct.(z)
 distinct. <- function(.df, ..., .keep_all = FALSE) {
   UseMethod("distinct.")

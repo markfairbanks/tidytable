@@ -10,18 +10,18 @@
 #' @md
 #'
 #' @examples
-#' example_df <- tidytable(
+#' test_df <- data.table(
 #'   x = 1:3,
 #'   y = 4:6,
 #'   z = c("a", "a", "b"))
 #'
-#' example_df %>%
+#' test_df %>%
 #'   count.()
 #'
-#' example_df %>%
+#' test_df %>%
 #'   count.(z)
 #'
-#' example_df %>%
+#' test_df %>%
 #'   count.(where(is.character))
 count. <- function(.df, ...) {
   UseMethod("count.")

@@ -20,15 +20,15 @@
 #' @param values_fn Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.
 #'
 #' @examples
-#' example_dt <- data.table::data.table(
+#' test_df <- data.table(
 #'   z = rep(c("a", "b", "c"), 2),
 #'   stuff = c(rep("x", 3), rep("y", 3)),
 #'   things = 1:6)
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   pivot_wider.(names_from = stuff, values_from = things)
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   pivot_wider.(names_from = stuff, values_from = things, id_cols = z)
 #'
 #' @export

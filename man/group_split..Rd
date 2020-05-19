@@ -20,7 +20,7 @@ dt_group_split(.df, ..., .keep = TRUE)
 Split data frame by groups. Returns a list.
 }
 \examples{
-test_df <- data.table::data.table(
+test_df <- tidytable(
   a = 1:5,
   b = 1:5,
   c = c("a","a","a","b","b"),

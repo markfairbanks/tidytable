@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-#' dt <- data.table::data.table(x = c(1,2,3), y = c(4,5,6))
+#' dt <- data.table(x = c(1,2,3), y = c(4,5,6))
 #'
 #' dt %>%
 #'   rename.(new_x = x,

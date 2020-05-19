@@ -62,15 +62,15 @@ These functions allow you to select variables based on their names.
 }
 }
 \examples{
-example_dt <- tidytable(
+test_df <- tidytable(
   x = 1,
   y = 2,
   double_x = 2,
   double_y = 4)
 
-example_dt \%>\%
+test_df \%>\%
   select.(starts_with.("x"))
 
-example_dt \%>\%
+test_df \%>\%
   select.(ends_with.("y"))
 }

@@ -13,7 +13,7 @@ dt_row_number()
 This function is designed to work inside of \code{mutate.()}
 }
 \examples{
-test_df <- data.table::data.table(x = c(1,1,1))
+test_df <- data.table(x = c(1,1,1))
 
 test_df \%>\%
   mutate.(row = row_number.())

@@ -11,7 +11,7 @@
 #' @md
 #'
 #' @examples
-#' test_df <- data.table::data.table(
+#' test_df <- tidytable(
 #'   a = 1:5,
 #'   b = 1:5,
 #'   c = c("a","a","a","b","b"),

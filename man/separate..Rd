@@ -30,7 +30,7 @@ If a separator is not supplied one will be automatically detected.
 Note: Using automatic detection or regex will be slower than simple separators such as "," or ".".
 }
 \examples{
-test_df <- data.table::data.table(x = c("a", "a.b", "a.b", NA))
+test_df <- data.table(x = c("a", "a.b", "a.b", NA))
 
 # "sep" can be automatically detected (slower)
 test_df \%>\%

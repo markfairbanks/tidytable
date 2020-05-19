@@ -49,8 +49,8 @@ A data.table
 Join two data.tables together
 }
 \examples{
-df1 <- data.table::data.table(x = c("a","a","a","b","b"), y = 1:5)
-df2 <- data.table::data.table(x = c("a","b"), z = 1:2)
+df1 <- data.table(x = c("a","a","a","b","b"), y = 1:5)
+df2 <- data.table(x = c("a","b"), z = 1:2)
 
 df1 \%>\% left_join.(df2)
 df1 \%>\% inner_join.(df2)

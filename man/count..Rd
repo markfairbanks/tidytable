@@ -18,17 +18,17 @@ dt_count(.df, ...)
 Returns row counts of the dataset. If bare column names are provided, \code{count.()} returns counts by group.
 }
 \examples{
-example_df <- tidytable(
+test_df <- data.table(
   x = 1:3,
   y = 4:6,
   z = c("a", "a", "b"))
 
-example_df \%>\%
+test_df \%>\%
   count.()
 
-example_df \%>\%
+test_df \%>\%
   count.(z)
 
-example_df \%>\%
+test_df \%>\%
   count.(where(is.character))
 }

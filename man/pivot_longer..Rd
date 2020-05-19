@@ -42,14 +42,14 @@ decreasing the number of rows. The inverse transformation is
 \code{pivot_longer.()}. Syntax based on the \code{tidyr} equivalents.
 }
 \examples{
-example_dt <- data.table::data.table(
+test_df <- data.table(
   x = c(1,2,3),
   y = c(4,5,6),
   z = c("a", "b", "c"))
 
-example_dt \%>\%
+test_df \%>\%
   pivot_longer.(c(x, y))
 
-example_dt \%>\%
+test_df \%>\%
   pivot_longer.(cols = -z, names_to = "stuff", values_to = "things")
 }

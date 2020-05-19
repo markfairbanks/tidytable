@@ -12,8 +12,8 @@
 #' @md
 #'
 #' @examples
-#' df1 <- data.table::data.table(x = c(1,2,3), y = c(3,4,5))
-#' df2 <- data.table::data.table(x = c(1,2,3), y = c(3,4,5))
+#' df1 <- data.table(x = c(1,2,3), y = c(3,4,5))
+#' df2 <- data.table(x = c(1,2,3), y = c(3,4,5))
 #'
 #' df1 %>%
 #'   bind_rows.(df2)

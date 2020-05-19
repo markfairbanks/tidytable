@@ -12,16 +12,16 @@
 #' @md
 #'
 #' @examples
-#' example_dt <- data.table::data.table(
+#' test_df <- data.table(
 #'   x = 1,
 #'   y = 2,
 #'   double_x = 2,
 #'   double_y = 4)
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   rename_with.(~ sub("x", "stuff", .x))
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   rename_with.(~ sub("x", "stuff", .x), .cols = c(x, double_x))
 rename_with. <- function(.data, .fn, .cols = everything.(), ...) {
   UseMethod("rename_with.")

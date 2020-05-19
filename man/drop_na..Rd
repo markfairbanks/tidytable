@@ -19,7 +19,7 @@ dt_drop_na(.df, ...)
 Drop rows containing missing values
 }
 \examples{
-df <- tidytable(
+df <- data.table(
   x = c(1,2,NA),
   y = c("a",NA,"b"))
 

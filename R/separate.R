@@ -17,7 +17,7 @@
 #' @export
 #'
 #' @examples
-#' test_df <- data.table::data.table(x = c("a", "a.b", "a.b", NA))
+#' test_df <- data.table(x = c("a", "a.b", "a.b", NA))
 #'
 #' # "sep" can be automatically detected (slower)
 #' test_df %>%

@@ -22,7 +22,7 @@ dt_relocate(.data, ..., .before = NULL, .after = NULL)
 Move a column or columns to a new position
 }
 \examples{
-test_df <- data.table::data.table(
+test_df <- data.table(
   a = 1:5,
   b = 1:5,
   c = c("a","a","a","b","b"),

@@ -48,26 +48,26 @@ dt_slice_max(.data, order_by, n = 1, by = NULL)
 Choose rows by their ordinal position in a data.table. Grouped data.tables use the ordinal position within the group.
 }
 \examples{
-example_dt <- data.table::data.table(
+test_df <- data.table(
   x = c(1,2,3,4),
   y = c(4,5,6,7),
   z = c("a","a","a","b"))
 
-example_dt \%>\%
+test_df \%>\%
   slice.(1:4)
 
-example_dt \%>\%
+test_df \%>\%
   slice.(1, by = z)
 
-example_dt \%>\%
+test_df \%>\%
   slice_head.(1, by = z)
 
-example_dt \%>\%
+test_df \%>\%
   slice_tail.(1, by = z)
 
-example_dt \%>\%
+test_df \%>\%
   slice_max.(order_by = x, by = z)
 
-example_dt \%>\%
+test_df \%>\%
   slice_min.(order_by = y, by = z)
 }

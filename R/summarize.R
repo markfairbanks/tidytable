@@ -16,18 +16,18 @@
 #' @export
 #' @md
 #' @examples
-#' example_dt <- data.table::data.table(
+#' test_df <- data.table(
 #'   a = c(1,2,3),
 #'   b = c(4,5,6),
 #'   c = c("a","a","b"),
 #'   d = c("a","a","b"))
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   summarize.(avg_a = mean(a),
 #'              max_b = max(b),
 #'              by = c)
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   summarize.(avg_a = mean(a),
 #'              by = c(c, d))
 summarize. <- function(.df, ..., by = NULL) {

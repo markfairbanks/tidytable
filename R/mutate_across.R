@@ -14,7 +14,7 @@
 #' @md
 #'
 #' @examples
-#' test_df <- data.table::data.table(
+#' test_df <- data.table(
 #'   x = c(1,1,1),
 #'   y = c(2,2,2),
 #'   z = c("a", "a", "b"))

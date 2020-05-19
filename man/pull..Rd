@@ -18,10 +18,10 @@ dt_pull(.data, var = NULL)
 Pull a single variable from a data.table as a vector.
 }
 \examples{
-example_dt <- data.table::data.table(
+test_df <- data.table(
   x = c(1,2,3),
   y = c(4,5,6))
 
-example_dt \%>\%
+test_df \%>\%
   pull.(y)
 }

@@ -2,9 +2,12 @@
 % Please edit documentation in R/lead_lag.R
 \name{leads.}
 \alias{leads.}
+\alias{lags.}
 \title{Lead and Lag}
 \usage{
 leads.(x, n = 1L, default = NA)
+
+lags.(x, n = 1L, default = NA)
 }
 \arguments{
 \item{x}{a vector of values}

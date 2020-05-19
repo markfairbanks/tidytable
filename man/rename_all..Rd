@@ -44,15 +44,15 @@ dt_rename_at(.data, .vars, .fun, ...)
 These helpers have been deprecated. Please use \code{rename_with.()}
 }
 \examples{
-example_dt <- data.table::data.table(
+test_df <- data.table(
   x = 1,
   y = 2,
   double_x = 2,
   double_y = 4)
 
-example_dt \%>\%
+test_df \%>\%
   rename_with.(~ sub("x", "stuff", .x))
 
-example_dt \%>\%
+test_df \%>\%
   rename_with.(~ sub("x", "stuff", .x), .cols = c(x, double_x))
 }

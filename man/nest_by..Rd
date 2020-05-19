@@ -23,7 +23,8 @@ dt_group_nest(.data, ..., .key = "data", .keep = FALSE)
 Nest data.tables by group
 }
 \examples{
-test_df <- data.table::data.table(a = 1:10,
+test_df <- data.table(
+  a = 1:10,
   b = 11:20,
   c = c(rep("a", 6), rep("b", 4)),
   d = c(rep("a", 4), rep("b", 6)))

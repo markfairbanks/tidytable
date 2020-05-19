@@ -20,10 +20,10 @@ A shortcut to replace NAs inside of a \code{mutate.()} call.
 Note: This function \emph{does not work} outside of \code{mutate.()} like \code{tidyr::replace_na()} does.
 }
 \examples{
-example_dt <- data.table::data.table(
+test_df <- data.table(
   x = c(1, 2, NA),
   y = c(NA, 1, 2))
 
-example_dt \%>\%
+test_df \%>\%
   mutate.(x = replace_na.(x, 5))
 }

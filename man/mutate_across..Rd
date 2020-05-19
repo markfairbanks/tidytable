@@ -25,7 +25,7 @@ dt_mutate_across(.df, .cols = everything(), .fns, ..., by = NULL)
 Mutate multiple columns simultaneously.
 }
 \examples{
-test_df <- data.table::data.table(
+test_df <- data.table(
   x = c(1,1,1),
   y = c(2,2,2),
   z = c("a", "a", "b"))

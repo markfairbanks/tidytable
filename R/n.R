@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-#' test_df <- data.table::data.table(
+#' test_df <- data.table(
 #'   x = c(1,2,3),
 #'   y = c(4,5,6),
 #'   z = c("a","a","b"))
