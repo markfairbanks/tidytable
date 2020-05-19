@@ -5,12 +5,12 @@
 \alias{dt_relocate}
 \title{Relocate a column to a new position}
 \usage{
-relocate.(.data, ..., .before = NULL, .after = NULL)
+relocate.(.df, ..., .before = NULL, .after = NULL)
 
-dt_relocate(.data, ..., .before = NULL, .after = NULL)
+dt_relocate(.df, ..., .before = NULL, .after = NULL)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{A selection of columns to move. `tidyselect` compatible.}
 

@@ -3,7 +3,7 @@
 #' @description
 #' Move a column or columns to a new position
 #'
-#' @param .data A data.frame or data.table
+#' @param .df A data.frame or data.table
 #' @param ... A selection of columns to move. `tidyselect` compatible.
 #' @param .before Column to move selection before
 #' @param .after Column to move selection after
@@ -25,37 +25,37 @@
 #'
 #' test_df %>%
 #'   relocate.(where(is.numeric), .after = c)
-relocate. <- function(.data, ..., .before = NULL, .after = NULL) {
+relocate. <- function(.df, ..., .before = NULL, .after = NULL) {
   UseMethod("relocate.")
 }
 
 #' @export
-relocate..data.frame <- function(.data, ..., .before = NULL, .after = NULL) {
+relocate..data.frame <- function(.df, ..., .before = NULL, .after = NULL) {
 
-  .data <- as_tidytable(.data)
+  .df <- as_tidytable(.df)
 
-  .before <- enexpr(.before)
-  .after <- enexpr(.after)
-  .data <- shallow(.data)
+  .before <- enquo(.before)
+  .after <- enquo(.after)
+  .df <- shallow(.df)
 
-  if  (!is.null(.before) && !is.null(.after))
+  if  (!quo_is_null(.before) && !quo_is_null(.after))
     stop("Must supply only one of `.before` and `.after`")
 
-  if (is.null(.before) && is.null(.after))
-    .before <- 1
+  if (quo_is_null(.before) && quo_is_null(.after))
+    .before <- quo(1)
 
-  data_names <- names(.data)
+  data_names <- names(.df)
   all_cols_i <- seq_along(data_names)
-  selected_cols_i <- dots_selector_i(.data, ...)
+  selected_cols_i <- dots_selector_i(.df, ...)
 
-  if (!is.null(.before)) {
+  if (!quo_is_null(.before)) {
 
-    before_i <- vec_selector_i(.data, !!.before)
+    before_i <- vec_selector_i(.df, !!.before)
     start_cols_i <- all_cols_i[all_cols_i < before_i]
 
   } else {
 
-    after_i <- vec_selector_i(.data, !!.after)
+    after_i <- vec_selector_i(.df, !!.after)
     start_cols_i <- all_cols_i[all_cols_i <= after_i]
 
   }
@@ -65,7 +65,7 @@ relocate..data.frame <- function(.data, ..., .before = NULL, .after = NULL) {
 
   final_order <- data_names[final_order_i]
 
-  setcolorder(.data, final_order)[]
+  setcolorder(.df, final_order)[]
 }
 
 #' @export
