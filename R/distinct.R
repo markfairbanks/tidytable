@@ -33,7 +33,7 @@ distinct..data.frame <- function(.data, ..., .keep_all = FALSE) {
 
   .data <- as_tidytable(.data)
 
-  dots <- enexprs(...)
+  dots <- enquos(...)
 
   if (length(dots) == 0) {
     unique(.data)
