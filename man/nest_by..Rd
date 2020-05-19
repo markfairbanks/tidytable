@@ -5,12 +5,12 @@
 \alias{dt_group_nest}
 \title{Nest data.tables}
 \usage{
-nest_by.(.data, ..., .key = "data", .keep = FALSE)
+nest_by.(.df, ..., .key = "data", .keep = FALSE)
 
-dt_group_nest(.data, ..., .key = "data", .keep = FALSE)
+dt_group_nest(.df, ..., .key = "data", .keep = FALSE)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Columns to group by. If empty nests the entire data.table.
 \code{tidyselect} compatible.}

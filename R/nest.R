@@ -3,7 +3,7 @@
 #' @description
 #' Nest data.tables by group
 #'
-#' @param .data A data.frame or data.table
+#' @param .df A data.frame or data.table
 #' @param ... Columns to group by. If empty nests the entire data.table.
 #' `tidyselect` compatible.
 #' @param .key Name of the new column created by nesting.
@@ -30,44 +30,41 @@
 #'
 #' test_df %>%
 #'   nest_by.(c, d, .keep = TRUE)
-nest_by. <- function(.data, ..., .key = "data", .keep = FALSE) {
+nest_by. <- function(.df, ..., .key = "data", .keep = FALSE) {
   UseMethod("nest_by.")
 }
 
 #' @export
-nest_by..data.frame <- function(.data, ..., .key = "data", .keep = FALSE) {
+nest_by..data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
 
-  .data <- as_tidytable(.data)
-  .keep <- .keep
+  .df <- as_tidytable(.df)
 
-  dots <- enexprs(...)
+  dots <- enquos(...)
 
   if (length(dots) == 0) {
 
-    .data <- eval_expr(.data[, list(data = list(.SD))])
+    .df <- summarize(.df, data = list(.SD))
 
   } else if (.keep) {
 
-    split_vars <- dots_selector(.data, ...)
+    split_vars <- dots_selector(.df, ...)
 
-    split_list <- group_split.(.data, !!!split_vars, .keep = .keep)
+    split_list <- group_split.(.df, !!!split_vars, .keep = .keep)
 
-    .data <- distinct.(.data, !!!split_vars)
+    .df <- distinct.(.df, !!!split_vars)
 
-    .data <- mutate.(.data, data = !!split_list)
+    .df <- mutate.(.df, data = !!split_list)
 
   } else {
 
-    by <- dots_selector_by(.data, ...)
+    by <- enquos(...)
 
-    .data <- eval_expr(
-      .data[, list(data = list(.SD)), by = !!by]
-    )
+    .df <- summarize.(.df, data = list(.SD), by = c(!!!by))
   }
 
-  if (.key != "data") .data <- rename.(.data, !!.key := data)
+  if (.key != "data") .df <- rename.(.df, !!.key := data)
 
-  .data
+  .df
 
 }
 
