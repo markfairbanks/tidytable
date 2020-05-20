@@ -35,9 +35,7 @@ filter..data.frame <- function(.df, ..., by = NULL) {
 
   if (quo_is_null(by)) {
     for (dot in dots) {
-      .df <- eval_tidy(quo(
-        .df[!!dot]
-      ), .df)
+      .df <- eval_quo(.df[!!dot], .df)
     }
   } else {
     by <- vec_selector_by(.df, !!by)
