@@ -150,6 +150,33 @@ test_that("can use .N in existing col", {
   expect_equal(df$x, c(3,3,3))
 })
 
+test_that("can use n.()", {
+  df <- data.table(x = 1:3, y = 1:3)
+  df <- df %>%
+    mutate.(z = n.())
+
+  expect_named(df, c("x","y","z"))
+  expect_equal(df$z, c(3,3,3))
+})
+
+test_that("can use n.() with by", {
+  df <- data.table(x = 1:3, y = c("a","a","b"))
+  df <- df %>%
+    mutate.(z = n.(), by = y)
+
+  expect_named(df, c("x","y","z"))
+  expect_equal(df$z, c(2,2,1))
+})
+
+test_that("can use .GRP", {
+  df <- data.table(x = 1:3, y = c("a","a","b"))
+  df <- df %>%
+    mutate.(z = .GRP, by = y)
+
+  expect_named(df, c("x","y","z"))
+  expect_equal(df$z, c(1,1,2))
+})
+
 test_that("can use .y in map2.() in nested data.tables", {
   test_df <- data.table(
     id = seq(1, 3),
