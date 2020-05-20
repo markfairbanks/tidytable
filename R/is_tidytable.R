@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-#' dt <- data.table::data.table(x = 1)
+#' dt <- data.table(x = 1)
 #'
 #' is_tidytable(dt) # Returns FALSE
 #'

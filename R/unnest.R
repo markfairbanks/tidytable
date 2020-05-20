@@ -10,7 +10,7 @@
 #' @md
 #'
 #' @examples
-#' nested_df <- data.table::data.table(
+#' nested_df <- data.table(
 #'   a = 1:10,
 #'   b = 11:20,
 #'   c = c(rep("a", 6), rep("b", 4)),

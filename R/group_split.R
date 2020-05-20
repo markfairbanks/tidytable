@@ -3,7 +3,7 @@
 #' @description
 #' Split data frame by groups. Returns a list.
 #'
-#' @param .data A data.frame or data.table
+#' @param .df A data.frame or data.table
 #' @param ... Columns to group and split by. `tidyselect` compatible.
 #' @param .keep Should the grouping columns be kept
 #'
@@ -11,7 +11,7 @@
 #' @md
 #'
 #' @examples
-#' test_df <- data.table::data.table(
+#' test_df <- tidytable(
 #'   a = 1:5,
 #'   b = 1:5,
 #'   c = c("a","a","a","b","b"),
@@ -22,23 +22,23 @@
 #'
 #' test_df %>%
 #'   group_split.(c, d, .keep = FALSE)
-group_split. <- function(.data, ..., .keep = TRUE) {
+group_split. <- function(.df, ..., .keep = TRUE) {
   UseMethod("group_split.")
 }
 
 #' @export
-group_split..data.frame <- function(.data, ..., .keep = TRUE) {
+group_split..data.frame <- function(.df, ..., .keep = TRUE) {
 
-  .data <- as_tidytable(.data)
+  .df <- as_tidytable(.df)
 
-  dots <- enexprs(...)
+  dots <- enquos(...)
 
   if (length(dots) == 0) {
-    list(.data)
+    list(.df)
   } else {
-    dots <- as.character(dots_selector(.data, ...))
+    dots <- as.character(dots_selector(.df, ...))
 
-    dots <- unname(split(.data, by = dots, keep.by = .keep))
+    dots <- unname(split(.df, by = dots, keep.by = .keep))
 
     map.(dots, as_tidytable)
   }

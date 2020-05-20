@@ -5,12 +5,12 @@
 \alias{dt_arrange}
 \title{Arrange/reorder rows by variables}
 \usage{
-arrange.(.data, ...)
+arrange.(.df, ...)
 
-dt_arrange(.data, ...)
+dt_arrange(.df, ...)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Variables to arrange by}
 }
@@ -18,14 +18,14 @@ dt_arrange(.data, ...)
 Order rows in ascending or descending order
 }
 \examples{
-example_dt <- tidytable(
+test_df <- data.table(
   a = c(1,2,3),
   b = c(4,5,6),
   c = c("a","a","b"))
 
-example_dt \%>\%
+test_df \%>\%
   arrange.(c, -a)
 
-example_dt \%>\%
+test_df \%>\%
   arrange.(c, desc.(a))
 }

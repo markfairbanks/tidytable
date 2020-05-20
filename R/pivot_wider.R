@@ -5,7 +5,7 @@
 #' decreasing the number of rows. The inverse transformation is
 #' \code{pivot_longer.()}. Syntax based on the \code{tidyr} equivalents.
 #'
-#' @param .data the data table to widen
+#' @param .df the data table to widen
 #' @param id_cols A set of columns that uniquely identifies each observation.
 #' Defaults to all columns in the data table except for the columns specified in \code{names_from} and \code{values_from}.
 #' Typically used when you have additional variables that is directly related.
@@ -20,20 +20,20 @@
 #' @param values_fn Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.
 #'
 #' @examples
-#' example_dt <- data.table::data.table(
+#' test_df <- data.table(
 #'   z = rep(c("a", "b", "c"), 2),
 #'   stuff = c(rep("x", 3), rep("y", 3)),
 #'   things = 1:6)
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   pivot_wider.(names_from = stuff, values_from = things)
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   pivot_wider.(names_from = stuff, values_from = things, id_cols = z)
 #'
 #' @export
 #' @md
-pivot_wider. <- function(.data,
+pivot_wider. <- function(.df,
                          names_from = name,
                          values_from = value,
                          id_cols = NULL,
@@ -43,28 +43,26 @@ pivot_wider. <- function(.data,
 }
 
 #' @export
-pivot_wider..data.frame <- function(.data,
-                                    names_from = name,
-                                    values_from = value,
-                                    id_cols = NULL,
-                                    names_sep = "_",
-                                    values_fn = NULL) {
+pivot_wider..data.frame <- function(.df,
+                                  names_from = name,
+                                  values_from = value,
+                                  id_cols = NULL,
+                                  names_sep = "_",
+                                  values_fn = NULL) {
 
-  .data <- as_tidytable(.data)
+  .df <- as_tidytable(.df)
 
-  id_cols <- enexpr(id_cols)
-  names_from <- enexpr(names_from)
-  values_from <- enexpr(values_from)
+  id_cols <- enquo(id_cols)
   values_fn <- enexpr(values_fn)
 
-  names_from <- as.character(vec_selector(.data, !!names_from))
-  values_from <- as.character(vec_selector(.data, !!values_from))
+  names_from <- names(vec_selector_i(.df, {{ names_from }}))
+  values_from <- names(vec_selector_i(.df, {{ values_from }}))
 
-  if (is.null(id_cols)) {
-    data_names <- names(.data)
+  if (quo_is_null(id_cols)) {
+    data_names <- names(.df)
     id_cols <- data_names[!data_names %in% c(names_from, values_from)]
   } else {
-    id_cols <- as.character(vec_selector(.data, !!id_cols))
+    id_cols <- as.character(vec_selector(.df, !!id_cols))
   }
 
   if (length(id_cols) == 0) {
@@ -77,20 +75,20 @@ pivot_wider..data.frame <- function(.data,
                                    sep=" ~ "))
   }
 
-  .data <- as_tidytable(
-    eval_expr(
-      dcast.data.table(.data,
+  .df <- as_tidytable(
+    eval_quo(
+      dcast.data.table(.df,
                        formula = dcast_form,
                        value.var = values_from,
                        fun.aggregate = !!values_fn,
-                       sep = !!names_sep,
+                       sep = names_sep,
                        drop = TRUE)
     )
   )
 
-  if (length(id_cols) == 0) .data <- .data[, . := NULL][]
+  if (length(id_cols) == 0) .df <- .df[, . := NULL][]
 
-  .data
+  .df
 }
 
 #' @export

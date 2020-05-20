@@ -129,3 +129,17 @@ test_that("rename_all() works with twiddle", {
   expect_named(twiddle_df, c("x_append", "y_append"))
   expect_equal(anon_df, twiddle_df)
 })
+
+test_that("can make a custom function with quosures", {
+  df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
+
+  rename_fn <- function(data, new_name, old_name) {
+    data %>%
+      rename.({{new_name}} := {{old_name}})
+  }
+
+  df <- df %>%
+    rename_fn(new_x, x)
+
+  expect_named(df, c("new_x", "y", "z"))
+})

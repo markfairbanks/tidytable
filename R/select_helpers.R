@@ -26,16 +26,16 @@
 #' @export
 #'
 #' @examples
-#' example_dt <- tidytable(
+#' test_df <- tidytable(
 #'   x = 1,
 #'   y = 2,
 #'   double_x = 2,
 #'   double_y = 4)
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   select.(starts_with.("x"))
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   select.(ends_with.("y"))
 starts_with. <- function(match, ignore.case = TRUE, vars = peek_vars(fn = "starts_with")) {
   tidyselect::starts_with(match, ignore.case = ignore.case, vars = vars)

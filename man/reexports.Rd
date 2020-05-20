@@ -12,6 +12,7 @@
 \alias{matches}
 \alias{num_range}
 \alias{last_col}
+\alias{data.table}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -19,6 +20,8 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
+  \item{data.table}{\code{\link[data.table]{data.table}}}
+
   \item{tidyselect}{\code{\link[tidyselect]{all_of}}, \code{\link[tidyselect]{any_of}}, \code{\link[tidyselect]{contains}}, \code{\link[tidyselect]{ends_with}}, \code{\link[tidyselect]{everything}}, \code{\link[tidyselect]{last_col}}, \code{\link[tidyselect]{matches}}, \code{\link[tidyselect]{num_range}}, \code{\link[tidyselect]{starts_with}}}
 }}
 

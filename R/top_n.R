@@ -12,15 +12,15 @@
 #' @export
 #'
 #' @examples
-#' example_dt <- data.table::data.table(
+#' test_df <- data.table(
 #'   x = 1:5,
 #'   y = 6:10,
 #'   z = c(rep("a", 3), rep("b", 2)))
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   top_n.(2, wt = y)
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   top_n.(2, wt = y, by = z)
 top_n. <- function(.data, n = 5, wt = NULL, by = NULL) {
   UseMethod("top_n.")

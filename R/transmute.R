@@ -3,7 +3,7 @@
 #' @description
 #' Unlike `mutate.()`, `transmute.()` keeps only the variables that you create
 #'
-#' @param .data A data.frame or data.table
+#' @param .df A data.frame or data.table
 #' @param ... Columns to create/modify
 #' @param by Columns to group by
 #'
@@ -13,24 +13,21 @@
 #'   transmute.(displ_l = disp / 61.0237)
 #'
 #' @export
-transmute. <- function(.data, ..., by = NULL) {
+transmute. <- function(.df, ..., by = NULL) {
   UseMethod("transmute.")
 }
 
 #' @export
-transmute..data.frame <- function(.data, ..., by = NULL) {
+transmute..data.frame <- function(.df, ..., by = NULL) {
 
-  .data <- as_tidytable(.data)
+  .df <- as_tidytable(.df)
 
-  # Don't need vec_selector_by() since this is done inside mutate.()
-  by <- enexpr(by)
-
-  dots <- enexprs(...)
+  dots <- enquos(...)
   keep_names <- names(dots)
 
-  .data <- mutate.(.data, ..., by = !!by)
+  .df <- mutate.(.df, ..., by = {{ by }})
 
-  .data[, ..keep_names]
+  .df[, ..keep_names]
 }
 
 #' @export

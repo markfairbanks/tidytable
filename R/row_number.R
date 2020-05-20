@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-#' test_df <- data.table::data.table(x = c(1,1,1))
+#' test_df <- data.table(x = c(1,1,1))
 #'
 #' test_df %>%
 #'   mutate.(row = row_number.())

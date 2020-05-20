@@ -3,7 +3,7 @@
 #' @description
 #' Convert character and factor columns to dummy variables
 #'
-#' @param .data A data.frame or data.table
+#' @param .df A data.frame or data.table
 #' @param cols A single column or a vector of unquoted columns to dummify.
 #' Defaults to all character & factor columns using `c(is.character, is.factor)`.
 #' `tidyselect` compatible.
@@ -42,7 +42,7 @@
 #'
 #' test_df %>%
 #'   get_dummies.(c(col1, col2), dummify_na = FALSE)
-get_dummies. <- function(.data,
+get_dummies. <- function(.df,
                          cols = c(where(is.character), where(is.factor)),
                          prefix = TRUE,
                          prefix_sep = "_",
@@ -52,26 +52,24 @@ get_dummies. <- function(.data,
 }
 
 #' @export
-get_dummies..data.frame <- function(.data,
+get_dummies..data.frame <- function(.df,
                                     cols = c(where(is.character), where(is.factor)),
                                     prefix = TRUE,
                                     prefix_sep = "_",
                                     drop_first = FALSE,
                                     dummify_na = TRUE) {
 
-  .data <- as_tidytable(.data)
-  .data <- shallow(.data)
+  .df <- as_tidytable(.df)
+  .df <- shallow(.df)
 
-  cols <- enexpr(cols)
-
-  cols <- vec_selector(.data, !!cols)
+  cols <- vec_selector(.df, {{ cols }})
 
   for (col in cols) {
 
     col_name <- as.character(col)
 
-    if (drop_first) unique_vals <- vec_unique(as.character(.data[[col_name]]))[-1]
-    else unique_vals <- vec_unique(as.character(.data[[col_name]]))
+    if (drop_first) unique_vals <- vec_unique(as.character(.df[[col_name]]))[-1]
+    else unique_vals <- vec_unique(as.character(.df[[col_name]]))
 
     # If NAs need dummies, convert to character string "NA" for col name creation
     if (dummify_na) unique_vals <- fifelse(is.na(unique_vals), "NA", unique_vals)
@@ -80,15 +78,15 @@ get_dummies..data.frame <- function(.data,
     if (prefix) new_names <- str_c(col_name, unique_vals, sep = prefix_sep)
     else new_names <- unique_vals
 
-    .data[, (new_names) := 0]
+    .df[, (new_names) := 0]
 
     # Remove "NA" from unique vals after new_names columns are made
     not_na_cols <- new_names[unique_vals != "NA"]
     unique_vals <- unique_vals[unique_vals != "NA"]
 
     for (i in seq_along(unique_vals)) {
-      eval_expr(
-        .data[!!col == unique_vals[i], not_na_cols[i] := 1L]
+      eval_quo(
+        .df[!!col == unique_vals[i], not_na_cols[i] := 1L]
       )
     }
 
@@ -98,12 +96,12 @@ get_dummies..data.frame <- function(.data,
 
       na_col <- new_names[!new_names %in% not_na_cols]
 
-      eval_expr(
-        .data[is.na(!!col), (na_col) := 1]
+      eval_quo(
+        .df[is.na(!!col), (na_col) := 1]
       )
     }
   }
-  .data[]
+  .df[]
 }
 
 #' @export

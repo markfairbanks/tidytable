@@ -5,12 +5,12 @@
 \alias{dt_mutate}
 \title{Mutate}
 \usage{
-mutate.(.data, ..., by = NULL)
+mutate.(.df, ..., by = NULL)
 
-dt_mutate(.data, ..., by = NULL)
+dt_mutate(.df, ..., by = NULL)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Columns to add/modify}
 
@@ -20,16 +20,16 @@ dt_mutate(.data, ..., by = NULL)
 Add new columns or modify existing ones
 }
 \examples{
-example_dt <- data.table::data.table(
+test_df <- data.table(
   a = c(1,2,3),
   b = c(4,5,6),
   c = c("a","a","b"))
 
-example_dt \%>\%
+test_df \%>\%
   mutate.(double_a = a * 2,
           a_plus_b = a + b)
 
-example_dt \%>\%
+test_df \%>\%
   mutate.(double_a = a * 2,
           avg_a = mean(a),
           by = c)

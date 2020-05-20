@@ -83,6 +83,22 @@ test_that("works with by with data.frame", {
   expect_equal(sliced_df$y, c(4, 7))
 })
 
+test_that("works in custom function", {
+  test_df <- tidytable(x = c(1,2,3,4), y = c(4,5,6,7), z = c("a", "a", "a", "b"))
+
+  slice_fn <- function(.df, val) {
+    .df %>%
+      slice.(val, by = z)
+  }
+
+  sliced_df <- test_df %>%
+    slice_fn(1)
+
+  expect_equal(sliced_df$z, c("a", "b"))
+  expect_equal(sliced_df$x, c(1, 4))
+  expect_equal(sliced_df$y, c(4, 7))
+})
+
 # slice_head.() ----------------------------------------------------
 
 test_that("dt_slice_head() works when empty", {
@@ -193,4 +209,19 @@ test_that("_min.() works with by enhanced selection", {
 
   expect_equal(sliced_df$z, c("a", "a", "a", "b", "b", "b"))
   expect_equal(sliced_df$y, c(20,19,18,14,13,12))
+})
+
+test_that("_max.() works with custom function with quosures", {
+  test_df <- data.table(a = 1:3, b = 4:6)
+
+  slice_fn <- function(.df, col, num) {
+    .df %>%
+      slice_max.({{ col }}, num)
+  }
+
+  sliced_df <- test_df %>%
+    slice_fn(a, 1)
+
+  expect_equal(sliced_df$a, 3)
+  expect_equal(sliced_df$b, 6)
 })

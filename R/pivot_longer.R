@@ -6,28 +6,28 @@
 #' decreasing the number of rows. The inverse transformation is
 #' \code{pivot_longer.()}. Syntax based on the \code{tidyr} equivalents.
 #'
-#' @param .data The data table to pivot longer
+#' @param .df The data table to pivot longer
 #' @param cols Vector of bare column names. Can add/drop columns. `tidyselect` compatible.
 #' @param names_to Name of the new "names" column. Must be a string.
 #' @param values_to Name of the new "values" column. Must be a string.
 #' @param values_drop_na If TRUE, rows will be dropped that contain NAs.
-#' @param ... Additional arguments to pass to `melt.data.table()`
+#' @param ... Additional arguments to pass to `melt.df.table()`
 #'
 #' @export
 #' @md
 #'
 #' @examples
-#' example_dt <- data.table::data.table(
+#' test_df <- data.table(
 #'   x = c(1,2,3),
 #'   y = c(4,5,6),
 #'   z = c("a", "b", "c"))
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   pivot_longer.(c(x, y))
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   pivot_longer.(cols = -z, names_to = "stuff", values_to = "things")
-pivot_longer. <- function(.data,
+pivot_longer. <- function(.df,
                           cols = everything(),
                           names_to = "name",
                           values_to = "value",
@@ -37,26 +37,25 @@ pivot_longer. <- function(.data,
 }
 
 #' @export
-pivot_longer..data.frame <- function(.data,
+pivot_longer..data.frame <- function(.df,
                                      cols = everything(),
                                      names_to = "name",
                                      values_to = "value",
                                      values_drop_na = FALSE,
                                      ...) {
 
-  .data <- as_tidytable(.data)
+  .df <- as_tidytable(.df)
 
-  names <- colnames(.data)
-  cols <- enexpr(cols)
+  names <- names(.df)
 
-  cols <- as.character(vec_selector(.data, !!cols))
+  cols <- names(vec_selector_i(.df, {{ cols }}))
 
   if (length(cols) == 0) warning("No columns remaining after removing")
 
   id_vars <- names[!names %in% cols]
 
   as_tidytable(
-    melt(data = .data,
+    melt(data = .df,
        id.vars = id_vars,
        measure.vars = cols,
        variable.name = names_to,

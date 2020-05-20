@@ -49,3 +49,18 @@ test_that("can arrange with multiple conditions", {
 
   expect_equal(df$x, c(3,4,1,2))
 })
+
+test_that("can make function with quosures", {
+  df <- tidytable(x = 1:3, y = c("a", "a", "b"))
+
+  arrange_fn <- function(.df, col) {
+    .df %>%
+      arrange.({{col}})
+  }
+
+  df <- df %>%
+    arrange_fn(-x)
+
+  expect_equal(df$x, c(3,2,1))
+  expect_equal(df$y, c("b", "a", "a"))
+})

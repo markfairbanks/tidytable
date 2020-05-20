@@ -45,3 +45,18 @@ test_that("count.() works with enhanced selection", {
   expect_equal(summary_df$d, c("a", "b"))
   expect_equal(summary_df$N, c(2, 1))
 })
+
+test_that("can make a function with quosures", {
+  test_df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
+
+  count_fn <- function(.df, col) {
+    count.(.df, {{col}})
+  }
+
+  summary_df <- test_df %>%
+    count_fn(d)
+
+  expect_named(summary_df, c("d", "N"))
+  expect_equal(summary_df$d, c("a", "b"))
+  expect_equal(summary_df$N, c(2, 1))
+})

@@ -5,12 +5,12 @@
 \alias{dt_unite}
 \title{Unite multiple columns by pasting strings together}
 \usage{
-unite.(.data, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE)
+unite.(.df, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE)
 
-dt_unite(.data, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE)
+dt_unite(.df, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{col}{Name of the new column, as a string.}
 
