@@ -163,7 +163,7 @@ test_that("_tail.() works with n specified", {
   expect_equal(sliced_df, tail(test_df, 3))
 })
 
-test_that("_tail() works with n specified", {
+test_that("_tail() works with n specified with by", {
   test_df <- tidytable(x = 1:10, y = 20:11, z = c(rep("a", 6), rep("b", 4)))
 
   datatable_df <- test_df[, tail(.SD, 3), by = z]

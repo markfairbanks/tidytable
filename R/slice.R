@@ -62,11 +62,10 @@ slice_head..data.frame <- function(.df, n = 5, by = NULL) {
 
   .df <- as_tidytable(.df)
 
-  n <- enquo(n)
   by <- vec_selector_by(.df, {{ by }})
 
   eval_quo(
-    .df[, eval_quo(head(.SD, !!n), .SD), !!by]
+    .df[, head(.SD, n), !!by]
   )
 }
 
@@ -81,11 +80,10 @@ slice_tail..data.frame <- function(.df, n = 5, by = NULL) {
 
   .df <- as_tidytable(.df)
 
-  n <- enquo(n)
   by <- vec_selector_by(.df, {{ by }})
 
   eval_quo(
-    .df[, eval_quo(tail(.SD, !!n), .SD), !!by]
+    .df[, tail(.SD, n), !!by]
   )
 }
 
@@ -104,7 +102,7 @@ slice_max..data.frame <- function(.df, order_by, n = 1, by = NULL) {
 
   .df %>%
     arrange.(-{{ order_by }}) %>%
-    slice_head.({{ n }}, by = {{ by }})
+    slice_head.(n, by = {{ by }})
 }
 
 #' @export
@@ -122,7 +120,7 @@ slice_min..data.frame <- function(.df, order_by, n = 1, by = NULL) {
 
   .df %>%
     arrange.({{ order_by }}) %>%
-    slice_head.({{ n }}, by = {{ by }})
+    slice_head.(n, by = {{ by }})
 }
 
 #' @export
