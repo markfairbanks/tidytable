@@ -34,9 +34,11 @@ filter..data.frame <- function(.df, ..., by = NULL) {
   by <- enquo(by)
 
   if (quo_is_null(by)) {
-    for (dot in dots) {
-      .df <- eval_quo(.df[!!dot], .df)
-    }
+
+    .df <- eval_quo(
+      .df[Reduce('&', list(!!!dots))],
+      .df)
+
   } else {
     by <- vec_selector_by(.df, !!by)
 
