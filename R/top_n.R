@@ -34,9 +34,9 @@ top_n..data.frame <- function(.df, n = 5, wt = NULL, by = NULL) {
   wt <- enquo(wt)
 
   if (quo_is_null(wt)) {
-    slice_head.(.df, n, {{ by }})
+    slice_head.(.df, {{ n }}, {{ by }})
   } else {
-    slice_max.(.df, order_by = !!wt, n = n, by = {{ by }})
+    slice_max.(.df, order_by = !!wt, n = {{ n }}, by = {{ by }})
   }
 }
 

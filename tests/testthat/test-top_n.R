@@ -24,16 +24,16 @@ test_that("works with no wt/no by", {
   expect_equal(top_df$z, rep("a", 3))
 })
 
-# test_that("works with no wt, no by, and .N", {
-#   test_df <- tidytable(x = 1:5,
-#                         y = 6:10,
-#                         z = c(rep("a", 3), rep("b", 2)))
-#
-#   top_df <- test_df %>%
-#     top_n.(n.())
-#
-#   expect_equal(top_df, test_df)
-# })
+test_that("works with no wt, no by, and .N", {
+  test_df <- tidytable(x = 1:5,
+                        y = 6:10,
+                        z = c(rep("a", 3), rep("b", 2)))
+
+  top_df <- test_df %>%
+    top_n.(n.())
+
+  expect_equal(top_df, test_df)
+})
 
 test_that("works with no wt/no by with data.frame", {
   test_df <- data.frame(x = 1:5,
