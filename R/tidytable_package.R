@@ -17,6 +17,10 @@ globalVariables(c("data", ".","..select_vars", ".count", "na_index", ".new_col",
                   "..keep_cols", ".env"))
 
 #' @docType import
+
+## Reexports ------------------------
+
+## tidyselect ------------------------
 #' @export
 tidyselect::starts_with
 
@@ -44,5 +48,13 @@ tidyselect::num_range
 #' @export
 tidyselect::last_col
 
+## data.table ------------------------
 #' @export
 data.table::data.table
+
+## rlang ------------------------
+#' @export
+rlang::enquo
+
+#' @export
+rlang::enquos
