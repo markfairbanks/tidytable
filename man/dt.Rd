@@ -4,12 +4,12 @@
 \alias{dt}
 \title{Pipeable data.table call}
 \usage{
-dt(.data, ...)
+dt(.df, ...)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
-\item{...}{Arguments passed to data.table call. See ?data.table:::`[.data.table`}
+\item{...}{Arguments passed to data.table call. See ?data.table:::`[.df.table`}
 }
 \description{
 Pipeable data.table call
@@ -17,12 +17,12 @@ Pipeable data.table call
 Note: This function does not use data.table's modify-by-reference
 }
 \examples{
-example_dt <- tidytable(
+test_df <- tidytable(
   x = c(1,2,3),
   y = c(4,5,6),
   z = c("a", "a", "b"))
 
-example_dt \%>\%
+test_df \%>\%
   dt(, ':='(double_x = x * 2)) \%>\%
   dt(order(-double_x))
 }
