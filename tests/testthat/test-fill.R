@@ -132,3 +132,15 @@ test_that("enhanced selection works", {
   expect_equal(out$dbl, c(1, NA))
   expect_equal(out$chr, c("a", NA))
 })
+
+test_that("custom function works with quosure", {
+  # filled down from last non-missing
+  df <- data.table::data.table(x = c(NA, 1, NA, 2, NA, NA))
+
+  fill_fn <- function(.df, col) {
+    fill.(.df, {{ col }})
+  }
+
+  out <- as_tidytable(df) %>% fill_fn(x)
+  expect_equal(out$x, c(NA, 1, 1, 2, 2, 2))
+})

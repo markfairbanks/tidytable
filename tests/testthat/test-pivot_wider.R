@@ -105,3 +105,16 @@ test_that("works with is.numeric helper", {
   expect_equal(pivot_df$a, c(1, 2))
   expect_equal(pivot_df$x, c(11, 100))
 })
+
+test_that("can pivot all cols to wide with quosure function", {
+  df <- data.table(label = c("x", "y", "z"), val = 1:3)
+
+  pivot_wider_fn <- function(.df, names, values) {
+    pivot_wider.(df, names_from = {{ names }}, values_from = {{ values }})
+  }
+
+  pivot_df <- pivot_wider_fn(df, names = label, values = val)
+
+  expect_named(pivot_df, c("x", "y", "z"))
+  expect_equal(nrow(pivot_df), 1)
+})

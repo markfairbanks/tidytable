@@ -69,3 +69,18 @@ test_that("drop_na.() works with enhanced selection", {
   expect_equal(drop_df$x, c(1, 2))
   expect_equal(drop_df$y, c("a", NA))
 })
+
+test_that("drop_na.() works with quosures", {
+  test_df <- data.table(x = c(1, 2, NA), y = c("a", NA, "b"))
+
+  drop_na_fn <- function(.df, col) {
+    drop_na.(.df, {{ col }})
+  }
+
+  drop_df <- test_df %>%
+    drop_na_fn(x)
+
+  expect_named(drop_df, c("x", "y"))
+  expect_equal(drop_df$x, c(1, 2))
+  expect_equal(drop_df$y, c("a", NA))
+})

@@ -57,3 +57,20 @@ test_that("doesn't modify-by-reference", {
 
   expect_named(test_df, c("a", "b", "c"))
 })
+
+test_that("works with selected cols with quosure function", {
+
+  test_df <- tidytable(a = c("a", "a", "a"),
+                       b = c("b", "b", "b"),
+                       c = c("c", NA, "c"))
+
+  unite_fn <- function(.df, col1, col2) {
+    unite.(.df, "new_col", {{ col1 }}, {{ col2 }})
+  }
+
+  unite_df <- test_df %>%
+    unite_fn(a, b)
+
+  expect_named(unite_df, c("c", "new_col"))
+  expect_equal(unite_df$new_col, c("a_b", "a_b", "a_b"))
+})
