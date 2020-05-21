@@ -3,7 +3,7 @@
 #' @description
 #' Select the top or bottom entries in each group, ordered by `wt`.
 #'
-#' @param .data A data.frame or data.table
+#' @param .df A data.frame or data.table
 #' @param n Number of rows to return
 #' @param wt Optional. The variable to use for ordering. If NULL uses the last column in the data.table.
 #' @param by Columns to group by
@@ -22,22 +22,21 @@
 #'
 #' test_df %>%
 #'   top_n.(2, wt = y, by = z)
-top_n. <- function(.data, n = 5, wt = NULL, by = NULL) {
+top_n. <- function(.df, n = 5, wt = NULL, by = NULL) {
   UseMethod("top_n.")
 }
 
 #' @export
-top_n..data.frame <- function(.data, n = 5, wt = NULL, by = NULL) {
+top_n..data.frame <- function(.df, n = 5, wt = NULL, by = NULL) {
 
-  .data <- as_tidytable(.data)
-  n <- enexpr(n)
-  wt <- enexpr(wt)
-  by <- enexpr(by)
+  .df <- as_tidytable(.df)
 
-  if (is.null(wt)) {
-    slice_head.(.data, !!n, !!by)
+  wt <- enquo(wt)
+
+  if (quo_is_null(wt)) {
+    slice_head.(.df, n, {{ by }})
   } else {
-    slice_max.(.data, order_by = !!wt, n = !!n, by = !!by)
+    slice_max.(.df, order_by = !!wt, n = n, by = {{ by }})
   }
 }
 
