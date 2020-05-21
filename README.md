@@ -111,7 +111,6 @@ devtools::install_github("markfairbanks/tidytable")
 `tidytable` uses `verb.()` syntax to replicate `tidyverse` functions:
 
 ``` r
-library(data.table)
 library(tidytable)
 
 test_df <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a","a","b"))
@@ -159,7 +158,7 @@ test_df %>%
 
 ## `tidyselect` support
 
-`tidyselect` allows you to select columns just like you would in the
+`tidytable` allows you to select/drop columns just like you would in the
 tidyverse.
 
 Normal selection can be mixed with:
@@ -249,14 +248,12 @@ test_df %>%
 
 ## `rlang` compatibility
 
-`rlang` quosures can be used to write custom functions with `tidytable`
+`rlang` can be used to write custom functions with `tidytable`
 functions.
 
 ##### Custom function with `mutate.()`
 
 ``` r
-library(rlang)
-
 df <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
 
 # Using enquo() with !!
@@ -355,17 +352,17 @@ all_marks
 #> # A tibble: 13 x 6
 #>    function_tested data.table tidytable tidyverse pandas tidytable_vs_tidyverse
 #>    <chr>           <chr>      <chr>     <chr>     <chr>  <chr>                 
-#>  1 arrange         67.3ms     53.16ms   423.37ms  297ms  12.6%                 
-#>  2 case_when       71.49ms    89.42ms   424.23ms  307ms  21.1%                 
-#>  3 distinct        38.92ms    42.16ms   104.52ms  287ms  40.3%                 
-#>  4 fill            43.03ms    53.8ms    118.87ms  146ms  45.3%                 
-#>  5 filter          242.96ms   258.31ms  300.31ms  656ms  86.0%                 
-#>  6 inner_join      95.05ms    105.89ms  85ms      <NA>   124.6%                
-#>  7 left_join       78.22ms    87.77ms   90.77ms   <NA>   96.7%                 
-#>  8 mutate          51.53ms    83.2ms    103.7ms   85.2ms 80.2%                 
-#>  9 nest            14.63ms    17.47ms   38.87ms   <NA>   44.9%                 
-#> 10 pivot_longer    11.58ms    12.56ms   43.14ms   <NA>   29.1%                 
-#> 11 pivot_wider     123.68ms   112.17ms  98.75ms   <NA>   113.6%                
-#> 12 summarize       289.65ms   272.05ms  519.64ms  780ms  52.4%                 
-#> 13 unnest          5.93ms     20.87ms   822.16ms  <NA>   2.5%
+#>  1 arrange         56.45ms    66.68ms   443.81ms  355ms  15.0%                 
+#>  2 case_when       68.16ms    64.88ms   405.16ms  59.2ms 16.0%                 
+#>  3 distinct        44.5ms     46.12ms   107.78ms  309ms  42.8%                 
+#>  4 fill            37.99ms    48.29ms   115.85ms  846ms  41.7%                 
+#>  5 filter          241.95ms   240.62ms  289.54ms  707ms  83.1%                 
+#>  6 inner_join      90.52ms    101.95ms  86.36ms   <NA>   118.1%                
+#>  7 left_join       68.99ms    68.05ms   90.63ms   <NA>   75.1%                 
+#>  8 mutate          62.73ms    77.3ms    60.19ms   86.4ms 128.4%                
+#>  9 nest            13.93ms    18.31ms   31ms      <NA>   59.1%                 
+#> 10 pivot_longer    12.99ms    13.56ms   46.72ms   <NA>   29.0%                 
+#> 11 pivot_wider     108.29ms   122.48ms  83.3ms    <NA>   147.0%                
+#> 12 summarize       280.86ms   268.43ms  503.71ms  834ms  53.3%                 
+#> 13 unnest          29.8ms     21.22ms   945.33ms  <NA>   2.2%
 ```
