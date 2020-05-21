@@ -52,6 +52,9 @@ tidyselect::last_col
 #' @export
 data.table::data.table
 
+#' @export
+data.table::setDTthreads
+
 ## rlang ------------------------
 #' @export
 rlang::enquo

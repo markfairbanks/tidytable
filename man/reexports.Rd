@@ -13,6 +13,7 @@
 \alias{num_range}
 \alias{last_col}
 \alias{data.table}
+\alias{setDTthreads}
 \alias{enquo}
 \alias{enquos}
 \title{Objects exported from other packages}
@@ -22,7 +23,7 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{data.table}{\code{\link[data.table]{data.table}}}
+  \item{data.table}{\code{\link[data.table]{data.table}}, \code{\link[data.table]{setDTthreads}}}
 
   \item{rlang}{\code{\link[rlang]{enquo}}, \code{\link[rlang]{enquos}}}
 

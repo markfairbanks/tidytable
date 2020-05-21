@@ -11,6 +11,11 @@
 #'
 #' @examples
 #' tidytable(x = c(1,2,3), y = c(4,5,6))
-tidytable <- function(...) {
-  as_tidytable(data.table(...))
+tidytable <-function(...) {
+
+  dots <- enquos(...)
+
+  .df <- eval_quo(data.table(!!!dots))
+
+  as_tidytable(.df)
 }
