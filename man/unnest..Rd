@@ -5,12 +5,12 @@
 \alias{dt_unnest_legacy}
 \title{Unnest a nested data.table}
 \usage{
-unnest.(.data, ...)
+unnest.(.df, ...)
 
-dt_unnest_legacy(.data, ...)
+dt_unnest_legacy(.df, ...)
 }
 \arguments{
-\item{.data}{A nested data.table}
+\item{.df}{A nested data.table}
 
 \item{...}{Columns to unnest. If empty, unnests all list columns. \code{tidyselect} compatible.}
 }

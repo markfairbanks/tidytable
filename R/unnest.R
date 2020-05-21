@@ -3,7 +3,7 @@
 #' @description
 #' Unnest a nested data.table.
 #'
-#' @param .data A nested data.table
+#' @param .df A nested data.table
 #' @param ... Columns to unnest. If empty, unnests all list columns. `tidyselect` compatible.
 #'
 #' @export
@@ -23,25 +23,25 @@
 #'
 #' nested_df %>%
 #'   unnest.(data, pulled_vec)
-unnest. <- function(.data, ...) {
+unnest. <- function(.df, ...) {
   UseMethod("unnest.")
 }
 
 #' @export
-unnest..data.frame <- function(.data, ...) {
+unnest..data.frame <- function(.df, ...) {
 
-  .data <- as_tidytable(.data)
+  .df <- as_tidytable(.df)
 
-  dots <- enexprs(...)
+  dots <- enquos(...)
 
-  data_names <- names(.data)
+  data_names <- names(.df)
 
-  list_flag <- map_lgl.(.data, is.list)
+  list_flag <- map_lgl.(.df, is.list)
 
   if (length(dots) == 0) dots <- syms(data_names[list_flag])
-  else dots <- dots_selector(.data, ...)
+  else dots <- dots_selector(.df, ...)
 
-  unnest_data <- map.(dots, ~ unnest_col(.data, .x))
+  unnest_data <- map.(dots, ~ unnest_col(.df, .x))
 
   unnest_nrow <- map_dbl.(unnest_data, nrow)
 
@@ -52,9 +52,9 @@ unnest..data.frame <- function(.data, ...) {
   keep_cols <- data_names[!list_flag]
 
   # Get number of repeats for keep cols
-  rep_vec <- map_dbl.(pull.(.data, !!dots[[1]]), vec_size)
+  rep_vec <- map_dbl.(pull.(.df, !!dots[[1]]), vec_size)
 
-  keep_df <- .data[, ..keep_cols][rep(1:.N, rep_vec)]
+  keep_df <- .df[, ..keep_cols][rep(1:.N, rep_vec)]
 
   results_df <- bind_cols.(keep_df, unnest_data)
 
@@ -65,31 +65,23 @@ unnest..data.frame <- function(.data, ...) {
 #' @rdname unnest.
 dt_unnest_legacy <- unnest.
 
-unnest_col <- function(.data, col = NULL) {
-  # col <- enexpr(col)
+unnest_col <- function(.df, col = NULL) {
 
   # Check if nested data is a data.frame, data.table, or vector
-  nested_data <- pull.(.data, !!col)[[1]]
+  nested_data <- pull.(.df, !!col)[[1]]
   is_datatable <- is.data.table(nested_data)
   is_dataframe <- is.data.frame(nested_data)
 
   if (is_dataframe) {
-    if (!is_datatable) {
-      .data <- shallow(.data)
 
-      eval_expr(.data[, !!col := map.(!!col, as_tidytable)])
-    }
+    if (!is_datatable) .df <- mutate.(.df, !!col := map.(!!col, as_tidytable))
 
-    .data <- bind_rows.(pull.(.data, !!col))
+    .df <- bind_rows.(pull.(.df, !!col))
 
   } else {
     # Unnests a vector
-    .data <- eval_expr(
-      .data[, list(.new_col = unlist(!!col, recursive = FALSE))]
-    )
-
-    .data <- rename.(.data, !!col := .new_col)
+    .df <- summarize.(.df, !!col := unlist(!!col, recursive = FALSE))
   }
-  .data
+  .df
 }
 

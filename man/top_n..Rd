@@ -5,12 +5,12 @@
 \alias{dt_top_n}
 \title{Select top (or bottom) n rows (by value)}
 \usage{
-top_n.(.data, n = 5, wt = NULL, by = NULL)
+top_n.(.df, n = 5, wt = NULL, by = NULL)
 
-dt_top_n(.data, n = 5, wt = NULL, by = NULL)
+dt_top_n(.df, n = 5, wt = NULL, by = NULL)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{n}{Number of rows to return}
 
