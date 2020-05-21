@@ -37,9 +37,10 @@ test_that(".keep works", {
   test_df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "b"), d = c("a", "a", "b"))
 
   result_df <- test_df %>%
-    nest_by.(c, d, .keep = TRUE) %>%
-    mutate.(num_cols = map_dbl.(data, ncol))
+    nest_by.(c, d, .keep = TRUE, .key = "stuff") %>%
+    mutate.(num_cols = map_dbl.(stuff, ncol))
 
+  expect_named(result_df, c("c", "d", "stuff", "num_cols"))
   expect_equal(result_df$num_cols, c(4, 4))
   expect_equal(nrow(result_df), 2)
 })

@@ -214,5 +214,6 @@ test_that("can make custom functions with quosures", {
   result_df <- df %>%
     add_one(x, stuff, 1, z)
 
+  expect_named(result_df, c("x", "y", "z", "stuff"))
   expect_equal(result_df$stuff, c(2,3,4))
 })
