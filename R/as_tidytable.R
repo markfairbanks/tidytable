@@ -36,10 +36,6 @@ as_tidytable.default <- function(x) {
 #' @rdname as_tidytable
 as_dt <- as_tidytable
 
-# as_tidytable.data.table <- function(x) {
-#   add_class(x)
-# }
-
 # Add tidytable class to an object
 add_class <- function(.data) {
   if (knitr_installed) {
@@ -51,16 +47,5 @@ add_class <- function(.data) {
   }
   .data
 }
-
-# add_class <- function(.data) {
-#   if (knitr_installed) {
-#     if (knitr::opts_chunk$get()$paged.print %||% FALSE) {
-#       class(.data) <- c("data.table", "tidytable", "data.frame")
-#     } else {
-#       class(.data) <- c("tidytable", "data.table", "data.frame")
-#     }
-#   }
-#   .data
-# }
 
 knitr_installed <- rlang::is_installed("knitr")
