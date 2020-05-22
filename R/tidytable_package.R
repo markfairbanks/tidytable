@@ -1,6 +1,7 @@
 # Suppress R CMD check note
 #' @import data.table
 #' @import tidyselect
+#' @importFrom lifecycle deprecate_soft
 #' @importFrom methods as
 #' @importFrom rlang abort as_function caller_env enexpr enexprs enquo enquos expr
 #' @importFrom rlang expr_text eval_tidy have_name is_formula is_named is_null missing_arg

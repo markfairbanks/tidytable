@@ -29,6 +29,9 @@ test_df <- data.table(
   double_y = 4)
 
 test_df \%>\%
+  rename_with.(toupper)
+
+test_df \%>\%
   rename_with.(~ sub("x", "stuff", .x))
 
 test_df \%>\%

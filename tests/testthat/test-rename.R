@@ -1,3 +1,5 @@
+setup(options(lifecycle_verbosity = "quiet"))
+
 test_that("dt_() works for one column", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%

@@ -1,7 +1,10 @@
-# tidytable 0.5.0 (in development)
+# tidytable 0.5.0
 
 * `tidytable` now works with quosures
 * `tidyselect v0.1.1` compatibility: Updated functions to use `where()`
+* Deprecations:
+  + Old select helpers like `everything.()` are now replaced by normal helpers like `everything()`
+  + `rename_across/_if/_at/_all` have been superseded by `rename_with.()`
 * Breaking changes:
   + `group_split.()`: `keep` arg renamed to `.keep`
 * New functions:
