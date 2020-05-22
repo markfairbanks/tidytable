@@ -53,7 +53,7 @@ test_that("drop_na.() works with multiple dots", {
 test_that("drop_na.() works with select helpers", {
   test_df <- data.table(x = c(1, 2, NA), y = c("a", NA, "b"))
   drop_df <- test_df %>%
-    drop_na.(starts_with.("x"))
+    drop_na.(starts_with("x"))
 
   expect_named(drop_df, c("x", "y"))
   expect_equal(drop_df$x, c(1, 2))

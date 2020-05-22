@@ -86,8 +86,8 @@ test_that("stops if given vector", {
 
 test_that("works with select helpers", {
   df <- data.table(x = 1:2, y = 2, z = 1:2) %>%
-    mutate_across.(everything.(), as.double)
-  pivot_df <- dt_pivot_longer(df, cols = c(dt_starts_with("y"), dt_contains("z")))[order(name, value)]
+    mutate_across.(everything(), as.double)
+  pivot_df <- dt_pivot_longer(df, cols = c(starts_with("y"), contains("z")))[order(name, value)]
 
   expect_named(pivot_df, c("x", "name", "value"))
   expect_equal(pivot_df$x, c(1,2,1,2))
@@ -97,7 +97,7 @@ test_that("works with select helpers", {
 
 test_that("a single helper works outside of c() call", {
   df <- data.table(x = 1:2, y = 3:4)
-  pivot_df <- pivot_longer.(df, cols = everything.())[order(name, value)]
+  pivot_df <- pivot_longer.(df, cols = everything())[order(name, value)]
 
   expect_named(pivot_df, c("name", "value"))
   expect_equal(pivot_df$name, c("x","x","y","y"))

@@ -78,7 +78,7 @@ test_that("can pivot from multiple measure cols using helpers", {
   df <- data.table(row = 1, var = c("x", "y"), a = 1:2, b = 3:4)
   pv <- pivot_wider.(df,
                      names_from = var,
-                     values_from = c(starts_with.("a"), ends_with.("b")))
+                     values_from = c(starts_with("a"), ends_with("b")))
 
   expect_named(pv, c("row", "a_x", "a_y", "b_x", "b_y"))
   expect_equal(pv$a_x, 1)
