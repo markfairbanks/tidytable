@@ -3,7 +3,7 @@
 #' @description
 #' Rename multiple columns with the same transformation
 #'
-#' @param .data A data.table or data.frame
+#' @param .df A data.table or data.frame
 #' @param .fn Function to transform the names with.
 #' @param .cols Columns to rename. Defaults to all columns. `tidyselect` compatible.
 #' @param ... Other parameters to pass to the function
@@ -12,41 +12,43 @@
 #' @md
 #'
 #' @examples
-#' example_dt <- data.table::data.table(
+#' test_df <- data.table(
 #'   x = 1,
 #'   y = 2,
 #'   double_x = 2,
 #'   double_y = 4)
 #'
-#' example_dt %>%
+#' test_df %>%
+#'   rename_with.(toupper)
+#'
+#' test_df %>%
 #'   rename_with.(~ sub("x", "stuff", .x))
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   rename_with.(~ sub("x", "stuff", .x), .cols = c(x, double_x))
-rename_with. <- function(.data, .fn, .cols = everything.(), ...) {
+rename_with. <- function(.df, .fn, .cols = everything(), ...) {
   UseMethod("rename_with.")
 }
 
 #' @export
-rename_with..data.frame <- function(.data, .fn, .cols = everything.(), ...) {
+rename_with..data.frame <- function(.df, .fn, .cols = everything(), ...) {
 
-  .data <- as_tidytable(.data)
+  .df <- as_tidytable(.df)
 
-  .cols <- enexpr(.cols)
-  .cols <- as.character(vec_selector(.data, !!.cols))
+  .cols <- as.character(vec_selector(.df, {{ .cols }}))
 
-  .data <- shallow(.data)
+  .df <- shallow(.df)
 
   .fn <- as_function(.fn)
 
   if (length(.cols) > 0) {
 
     new_names <- .fn(.cols, ...)
-    setnames(.data, .cols, new_names)
+    setnames(.df, .cols, new_names)
 
-    .data
+    .df
   } else {
-    .data
+    .df
   }
 }
 

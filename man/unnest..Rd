@@ -5,12 +5,12 @@
 \alias{dt_unnest_legacy}
 \title{Unnest a nested data.table}
 \usage{
-unnest.(.data, ...)
+unnest.(.df, ...)
 
-dt_unnest_legacy(.data, ...)
+dt_unnest_legacy(.df, ...)
 }
 \arguments{
-\item{.data}{A nested data.table}
+\item{.df}{A nested data.table}
 
 \item{...}{Columns to unnest. If empty, unnests all list columns. \code{tidyselect} compatible.}
 }
@@ -18,7 +18,7 @@ dt_unnest_legacy(.data, ...)
 Unnest a nested data.table.
 }
 \examples{
-nested_df <- data.table::data.table(
+nested_df <- data.table(
   a = 1:10,
   b = 11:20,
   c = c(rep("a", 6), rep("b", 4)),

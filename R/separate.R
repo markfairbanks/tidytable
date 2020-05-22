@@ -7,7 +7,7 @@
 #'
 #' Note: Using automatic detection or regex will be slower than simple separators such as "," or ".".
 #'
-#' @param .data A data.frame or data.table
+#' @param .df A data.frame or data.table
 #' @param col The column to split into multiple columns
 #' @param into New column names to split into. A character vector.
 #' @param sep Separator to split on. Can be specified or detected automatically
@@ -17,7 +17,7 @@
 #' @export
 #'
 #' @examples
-#' test_df <- data.table::data.table(x = c("a", "a.b", "a.b", NA))
+#' test_df <- data.table(x = c("a", "a.b", "a.b", NA))
 #'
 #' # "sep" can be automatically detected (slower)
 #' test_df %>%
@@ -26,42 +26,42 @@
 #' # Faster if "sep" is provided
 #' test_df %>%
 #'   separate.(x, into = c("c1", "c2"), sep = ".")
-separate. <- function(.data, col, into,
-                        sep = "[^[:alnum:]]+",
-                        remove = TRUE,
-                        ...) {
+separate. <- function(.df, col, into,
+                      sep = "[^[:alnum:]]+",
+                      remove = TRUE,
+                      ...) {
   UseMethod("separate.")
 }
 
 #' @export
-separate..data.frame <- function(.data, col, into,
+separate..data.frame <- function(.df, col, into,
                                  sep = "[^[:alnum:]]+",
                                  remove = TRUE,
                                  ...) {
 
-  .data <- as_tidytable(.data)
-  .data <- shallow(.data)
+  .df <- as_tidytable(.df)
+  .df <- shallow(.df)
 
   if (missing(col)) abort("col is missing and must be supplied")
   if (missing(into)) abort("into is missing and must be supplied")
 
-  col <- enexpr(col)
+  col <- enquo(col)
 
   if (nchar(sep) > 1) {
     # Works automatically, but is slower
-    eval_expr(
-      .data[, (into) := tstrsplit(!!col, split = str_extract(!!col, sep), fixed=TRUE, ...)]
+    eval_quo(
+      .df[, (into) := eval_quo(tstrsplit(!!col, split = str_extract(!!col, sep), fixed=TRUE, ...), .df)]
     )
   } else {
     # Faster, but sep must be supplied
-    eval_expr(
-      .data[, (into) := tstrsplit(!!col, split = sep, fixed=TRUE, ...)]
+    eval_quo(
+      .df[, (into) := eval_quo(tstrsplit(!!col, split = sep, fixed=TRUE, ...), .df)]
     )
   }
 
-  if (remove) eval_expr(.data[, !!col := NULL])
+  if (remove) eval_tidy(quo_squash(quo(.df[, !!col := NULL])))
 
-  .data[]
+  .df[]
 }
 
 #' @export

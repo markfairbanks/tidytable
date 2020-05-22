@@ -5,9 +5,9 @@
 
 ### Get group by cols
 vec_selector_by <- function(.data, by_vars) {
-  by_vars <- enexpr(by_vars)
+  by_vars <- enquo(by_vars)
 
-  if(is.null(by_vars)) {
+  if(quo_is_null(by_vars)) {
     by_vars <- NULL
   } else {
     by_vars <- vec_selector(.data, !!by_vars)
@@ -32,7 +32,7 @@ dots_selector_by <- function(.data, ...) {
 
 ### User inputs a vector of bare column names
 vec_selector <- function(.data, select_vars) {
-  select_vars <- enexpr(select_vars)
+  select_vars <- enquo(select_vars)
 
   syms(names(vec_selector_i(.data, !!select_vars)))
 }
@@ -40,9 +40,9 @@ vec_selector <- function(.data, select_vars) {
 vec_selector_i <- function(.data, select_vars) {
   select_vars <- enexpr(select_vars)
 
-  expr_char <- as.character(select_vars)
+  expr_char <- quo_text(select_vars)
 
-  if (length(expr_char) > 1 && expr_char[[1]] == "list")
+  if (str_detect(expr_char, "list\\("))
     abort("Using by = list(col1, col2) is deprecated. Please use by = c(col1, col2)")
 
   eval_select(select_vars, .data)

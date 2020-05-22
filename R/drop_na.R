@@ -3,7 +3,7 @@
 #' @description
 #' Drop rows containing missing values
 #'
-#' @param .data A data.frame or data.table
+#' @param .df A data.frame or data.table
 #' @param ... Optional: A selection of columns. If empty, all variables are selected.
 #' `tidyselect` compatible.
 #'
@@ -11,7 +11,7 @@
 #' @md
 #'
 #' @examples
-#' df <- tidytable(
+#' df <- data.table(
 #'   x = c(1,2,NA),
 #'   y = c("a",NA,"b"))
 #'
@@ -22,24 +22,24 @@
 #'   drop_na.(x)
 #'
 #' df %>%
-#'   drop_na.(is.numeric)
-drop_na. <- function(.data, ...) {
+#'   drop_na.(where(is.numeric))
+drop_na. <- function(.df, ...) {
   UseMethod("drop_na.")
 }
 
 #' @export
-drop_na..data.frame <- function(.data, ...) {
+drop_na..data.frame <- function(.df, ...) {
 
-  .data <- as_tidytable(.data)
+  .df <- as_tidytable(.df)
 
-  dots <- enexprs(...)
+  dots <- enquos(...)
 
   if (length(dots) == 0) {
-    na.omit(.data)
+    na.omit(.df)
   } else {
-    drop_cols <- dots_selector_i(.data, ...)
+    drop_cols <- dots_selector_i(.df, ...)
 
-    na.omit(.data, cols = drop_cols)
+    na.omit(.df, cols = drop_cols)
   }
 }
 

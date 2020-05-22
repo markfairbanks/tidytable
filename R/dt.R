@@ -5,33 +5,33 @@
 #'
 #' Note: This function does not use data.table's modify-by-reference
 #'
-#' @param .data A data.frame or data.table
-#' @param ... Arguments passed to data.table call. See ?data.table:::`[.data.table`
+#' @param .df A data.frame or data.table
+#' @param ... Arguments passed to data.table call. See ?data.table:::`[.df.table`
 #'
 #' @examples
-#' example_dt <- tidytable(
+#' test_df <- tidytable(
 #'   x = c(1,2,3),
 #'   y = c(4,5,6),
 #'   z = c("a", "a", "b"))
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   dt(, ':='(double_x = x * 2)) %>%
 #'   dt(order(-double_x))
 #' @export
-dt <- function(.data, ...) {
+dt <- function(.df, ...) {
   UseMethod("dt")
 }
 
 #' @export
-dt.data.frame <- function(.data, ...) {
+dt.data.frame <- function(.df, ...) {
 
-  .data <- as_tidytable(.data)
+  .df <- as_tidytable(.df)
 
   dots <- substitute(list(...))
 
   needs_copy <- str_detect(expr_text(dots), ":=")
 
-  if (needs_copy) .data <- copy(.data)
+  if (needs_copy) .df <- copy(.df)
 
-  .data[...]
+  .df[...]
 }

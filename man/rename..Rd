@@ -5,12 +5,12 @@
 \alias{dt_rename}
 \title{Rename variables by name}
 \usage{
-rename.(.data, ...)
+rename.(.df, ...)
 
-dt_rename(.data, ...)
+dt_rename(.df, ...)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Rename expression like dplyr::rename()}
 }
@@ -18,7 +18,7 @@ dt_rename(.data, ...)
 Rename variables from a data.table.
 }
 \examples{
-dt <- data.table::data.table(x = c(1,2,3), y = c(4,5,6))
+dt <- data.table(x = c(1,2,3), y = c(4,5,6))
 
 dt \%>\%
   rename.(new_x = x,

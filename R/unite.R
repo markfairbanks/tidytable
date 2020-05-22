@@ -3,7 +3,7 @@
 #' @description
 #' Convenience function to paste together multiple columns into one.
 #'
-#' @param .data A data.frame or data.table
+#' @param .df A data.frame or data.table
 #' @param col Name of the new column, as a string.
 #' @param ... Selection of columns. If empty all variables are selected.
 #' `tidyselect` compatible.
@@ -23,7 +23,7 @@
 #'   unite.("new_col", b, c)
 #'
 #' test_df %>%
-#'   unite.("new_col", is.character)
+#'   unite.("new_col", where(is.character))
 #'
 #' test_df %>%
 #'   unite.("new_col", b, c, remove = FALSE)
@@ -33,24 +33,24 @@
 #'
 #' test_df %>%
 #'   unite.()
-unite. <- function(.data, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
+unite. <- function(.df, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
   UseMethod("unite.")
 }
 
 #' @export
-unite..data.frame <- function(.data, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
+unite..data.frame <- function(.df, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
 
-  .data <- as_tidytable(.data)
+  .df <- as_tidytable(.df)
 
-  dots <- enexprs(...)
+  dots <- enquos(...)
 
   if (length(dots) == 0) {
-    unite_cols <- names(.data)
+    unite_cols <- names(.df)
   } else {
-    unite_cols <- as.character(dots_selector(.data, ...))
+    unite_cols <- names(dots_selector_i(.df, ...))
   }
 
-  col <- enexpr(col)
+  col <- enquo(col)
 
   if (na.rm) {
     unite_syms <- syms(unite_cols)
@@ -59,21 +59,21 @@ unite..data.frame <- function(.data, col = "new_col", ..., sep = "_", remove = T
     start_na <- paste0("^NA", sep)
     end_na <- paste0(sep, "NA$")
 
-    .data <- mutate.(.data, !!col := paste(!!!unite_syms, sep = !!sep) %>%
+    .df <- mutate.(.df, !!col := paste(!!!unite_syms, sep = !!sep) %>%
                        str_replace_all(!!middle_na, !!sep) %>%
                        str_replace_all(!!start_na, "") %>%
                        str_replace_all(!!end_na, ""))
   } else {
-    .data <- shallow(.data)
+    .df <- shallow(.df)
 
-    eval_expr(
-      .data[, !!col := do.call(paste, c(.SD, sep = !!sep)), .SDcols = !!unite_cols]
+    eval_quo(
+      .df[, !!col := do.call(paste, c(.SD, sep = !!sep)), .SDcols = !!unite_cols]
     )
   }
 
-  if (remove) .data <- .data[, -..unite_cols]
+  if (remove) .df <- .df[, -..unite_cols]
 
-  .data
+  .df
 }
 
 #' @export

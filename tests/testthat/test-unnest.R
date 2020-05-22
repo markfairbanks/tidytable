@@ -122,3 +122,24 @@ test_that("unnesting works with different ordered/different # of columns", {
   expect_named(unnest_df, c("id","a","b","c"))
   expect_equal(unnest_df$b, c(1, 1:3))
 })
+
+test_that("unnesting works with nested data.table with quosure function", {
+  start_df <- data.table::data.table(
+    a = 1:5,
+    b = 11:15,
+    c = c(rep("a", 3), rep("b", 2)),
+    d = c(rep("a", 2), rep("b", 3)))
+
+  nest_df <- start_df %>%
+    nest_by.(c, d)
+
+  unnest_fn <- function(.df, col) {
+    unnest.(.df, {{ col }})
+  }
+
+  unnest_df <- nest_df %>%
+    unnest_fn(data)
+
+  expect_named(unnest_df, c("c","d","a","b"))
+  expect_equal(unnest_df$a, start_df$a)
+})

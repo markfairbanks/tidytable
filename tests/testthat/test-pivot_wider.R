@@ -87,7 +87,7 @@ test_that("can pivot from multiple measure cols using helpers", {
 
 test_that("works with is.numeric helper", {
   df <- data.table(row = 1, var = c("x", "y"), a = 1:2, b = 3:4)
-  pv <- pivot_wider.(df, names_from = var, values_from = c(is.numeric, -row))
+  pv <- pivot_wider.(df, names_from = var, values_from = c(where(is.numeric), -row))
 
   expect_named(pv, c("row", "a_x", "a_y", "b_x", "b_y"))
   expect_equal(pv$a_x, 1)
@@ -104,4 +104,17 @@ test_that("works with is.numeric helper", {
 
   expect_equal(pivot_df$a, c(1, 2))
   expect_equal(pivot_df$x, c(11, 100))
+})
+
+test_that("can pivot all cols to wide with quosure function", {
+  df <- data.table(label = c("x", "y", "z"), val = 1:3)
+
+  pivot_wider_fn <- function(.df, names, values) {
+    pivot_wider.(df, names_from = {{ names }}, values_from = {{ values }})
+  }
+
+  pivot_df <- pivot_wider_fn(df, names = label, values = val)
+
+  expect_named(pivot_df, c("x", "y", "z"))
+  expect_equal(nrow(pivot_df), 1)
 })

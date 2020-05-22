@@ -6,8 +6,8 @@
 \title{Pivot data from wide to long}
 \usage{
 pivot_longer.(
-  .data,
-  cols = everything.(),
+  .df,
+  cols = everything(),
   names_to = "name",
   values_to = "value",
   values_drop_na = FALSE,
@@ -15,8 +15,8 @@ pivot_longer.(
 )
 
 dt_pivot_longer(
-  .data,
-  cols = everything.(),
+  .df,
+  cols = everything(),
   names_to = "name",
   values_to = "value",
   values_drop_na = FALSE,
@@ -24,7 +24,7 @@ dt_pivot_longer(
 )
 }
 \arguments{
-\item{.data}{The data table to pivot longer}
+\item{.df}{The data table to pivot longer}
 
 \item{cols}{Vector of bare column names. Can add/drop columns. \code{tidyselect} compatible.}
 
@@ -34,7 +34,7 @@ dt_pivot_longer(
 
 \item{values_drop_na}{If TRUE, rows will be dropped that contain NAs.}
 
-\item{...}{Additional arguments to pass to \code{melt.data.table()}}
+\item{...}{Additional arguments to pass to \code{melt.df.table()}}
 }
 \description{
 \code{pivot_wider.()} "widens" data, increasing the number of columns and
@@ -42,14 +42,14 @@ decreasing the number of rows. The inverse transformation is
 \code{pivot_longer.()}. Syntax based on the \code{tidyr} equivalents.
 }
 \examples{
-example_dt <- data.table::data.table(
+test_df <- data.table(
   x = c(1,2,3),
   y = c(4,5,6),
   z = c("a", "b", "c"))
 
-example_dt \%>\%
+test_df \%>\%
   pivot_longer.(c(x, y))
 
-example_dt \%>\%
+test_df \%>\%
   pivot_longer.(cols = -z, names_to = "stuff", values_to = "things")
 }

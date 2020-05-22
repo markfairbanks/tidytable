@@ -3,6 +3,10 @@ eval_expr <- function(express) {
   eval_tidy(enexpr(express), env = caller_env())
 }
 
+eval_quo <- function(express, data = NULL, env = caller_env()) {
+  eval_tidy(enquo(express), data = data, env = env)
+}
+
 # Creates a shallow copy to prevent modify-by-reference
 shallow <- function(x, cols = names(x), reset_class = FALSE) {
   stopifnot(is.data.table(x), all(cols %in% names(x)))

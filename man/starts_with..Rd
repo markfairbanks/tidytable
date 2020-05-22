@@ -50,7 +50,7 @@ automatically set to the names of the table.}
 }
 \description{
 Please note these functions are leftover from before \code{tidytable} used \code{tidyselect}.
-You can use these or the normal \code{tidyselect} helpers.
+You can/should use the normal \code{tidyselect} helpers.
 
 These functions allow you to select variables based on their names.
 \itemize{
@@ -62,15 +62,15 @@ These functions allow you to select variables based on their names.
 }
 }
 \examples{
-example_dt <- tidytable(
+test_df <- tidytable(
   x = 1,
   y = 2,
   double_x = 2,
   double_y = 4)
 
-example_dt \%>\%
-  select.(starts_with.("x"))
+test_df \%>\%
+  select.(starts_with("x"))
 
-example_dt \%>\%
-  select.(ends_with.("y"))
+test_df \%>\%
+  select.(ends_with("y"))
 }

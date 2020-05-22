@@ -26,3 +26,16 @@ test_that("returns a vec with data.frame input", {
 
   expect_equal(test_df$y, result_vec)
 })
+
+test_that("can use custom function with quosures", {
+  test_df <- data.table(x = c(1,2,3), y = c(4,5,6))
+
+  pull_fn <- function(data, col) {
+    pull.(data, {{ col }})
+  }
+
+  result_vec <- test_df %>%
+    pull_fn(y)
+
+  expect_equal(test_df$y, result_vec)
+})

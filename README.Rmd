@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/dev%20-0.4.1.9-green.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/dev%20-0.5.0-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey)](https://markfairbanks.github.io/tidytable/)
 <!-- badges: end -->
@@ -79,7 +79,7 @@ devtools::install_github("markfairbanks/tidytable")
 * `ifelse.()`
 * Joins:
   + `left_join.()`, `inner_join.()`, `right_join.()`, `full_join.()`, & `anti_join.()`
-* `lag.()` & `lead.()`
+* `lags.()` & `leads.()`
 * `pull.()`
 * `relocate.()`
 * `rename.()` & `rename_with.()`
@@ -108,7 +108,6 @@ devtools::install_github("markfairbanks/tidytable")
 `tidytable` uses `verb.()` syntax to replicate `tidyverse` functions:
 
 ```{r message = FALSE}
-library(data.table)
 library(tidytable)
 
 test_df <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a","a","b"))
@@ -127,11 +126,11 @@ Group by calls are done from inside any function that has group by functionality
 
 * A single column can be passed with `by = z`
 * Multiple columns can be passed with `by = c(y, z)`
-* [`tidyselect`](https://tidyselect.r-lib.org) can 
+* [`tidyselect`](https://tidyselect.r-lib.org/reference/language.html) can 
 also be used, including using predicates:
-  + Single predicate: `by = is.character`
-  + Multiple predicates: `by = c(is.character, is.factor)`
-  + A combination of predicates and column names: `by = c(is.character, y)`
+  + Single predicate: `by = where(is.character)`
+  + Multiple predicates: `by = c(where(is.character), where(is.factor))`
+  + A combination of predicates and column names: `by = c(where(is.character), y)`
 
 ```{r}
 test_df %>%
@@ -142,11 +141,11 @@ test_df %>%
 
 ## `tidyselect` support
 
-`tidyselect` allows you to select columns just like you would in the tidyverse.
+`tidytable` allows you to select/drop columns just like you would in the tidyverse.
 
 Normal selection can be mixed with:
 
-* Predicates: `is.numeric`, `is.character`, etc.
+* Predicates: `where(is.numeric)`, `where(is.character)`, etc.
 * Select helpers: `everything()`, `starts_with()`, `ends_with()`, `contains()`, `any_of()`, etc.
 
 ```{r}
@@ -156,14 +155,14 @@ test_df <- data.table(a = c(1,2,3),
                       d = c("a","b","c"))
 
 test_df %>%
-  select.(is.numeric, d)
+  select.(where(is.numeric), d)
 ```
 
 You can also use this format to drop columns:
 
 ```{r}
 test_df %>%
-  select.(-is.numeric)
+  select.(-where(is.numeric))
 ```
 
 These same ideas can be used whenever selecting columns in `tidytable` functions - for example when using `count.()`, `drop_na.()`, `pivot_longer.()`, `pivot_wider.()`, etc.
@@ -181,7 +180,7 @@ test_df <- data.table(a = c(1,1,1),
                       d = c("a","b","c"))
 
 test_df %>%
-  mutate_across.(is.numeric, as.character)
+  mutate_across.(where(is.numeric), as.character)
 ```
 
 Using `_across.()` instead of `_at.()`:
@@ -200,22 +199,26 @@ test_df %>%
 
 ## `rlang` compatibility
 
-`rlang` quoting/unquoting can be used to write custom functions with `tidytable` functions.
-
-Note that quosures are not compatible with `data.table`, so `enexpr()` must be used instead of `enquo()`.
+`rlang` can be used to write custom functions with `tidytable` functions.
 
 ##### Custom function with `mutate.()`
 
 ```{r message = FALSE}
-library(rlang)
-
 df <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
 
-add_one <- function(.data, add_col) {
-  add_col <- enexpr(add_col)
+# Using enquo() with !!
+add_one <- function(data, add_col) {
   
-  .data %>%
+  add_col <- enquo(add_col)
+  
+  data %>%
     mutate.(new_col = !!add_col + 1)
+}
+
+# Using the {{ }} shortcut
+add_one <- function(data, add_col) {
+  data %>%
+    mutate.(new_col = {{add_col}} + 1)
 }
 
 df %>%
@@ -227,13 +230,10 @@ df %>%
 ```{r}
 df <- data.table(x = 1:10, y = c(rep("a", 6), rep("b", 4)), z = c(rep("a", 6), rep("b", 4)))
 
-find_mean <- function(.data, grouping_cols, col) {
-  grouping_cols <- enexpr(grouping_cols)
-  col <- enexpr(col)
-  
-  .data %>%
-    summarize.(avg = mean(!!col),
-               by = !!grouping_cols)
+find_mean <- function(data, grouping_cols, col) {
+  data %>%
+    summarize.(avg = mean({{col}}),
+               by = {{grouping_cols}})
 }
 
 df %>%
@@ -399,13 +399,15 @@ case_marks <- bench::mark(
   tidyverse = mutate(case_tbl,
                      test = case_when(x < median_x ~ x * 2,
                                       x >= median_x ~ x * 3,
-                                      TRUE ~ x * 4)),
+                                      TRUE ~ NA_real_)),
   tidytable = mutate.(case_dt,
                       test = case.(x < median_x, x * 2,
                                    x >= median_x, x * 3,
-                                   default = x * 4)),
+                                   default = NA)),
   data.table = case2_dt[,':='(test = fifelse(x < median_x, x * 2,
-                                             fifelse(x >= median_x, x * 3, x * 4)))][],
+                                             fifelse(x >= median_x, x * 3, NA_real_,
+                                                     NA_real_),
+                                             NA_real_))][],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
          function_tested = "case_when")
@@ -527,13 +529,13 @@ nest_marks <- bench::mark(
 # import numpy as np
 # import gc
 # data_size = 10000000
-#
+# 
 # test_df = pd.DataFrame(
 #     {'a': np.random.choice(np.arange(20), data_size),
 #      'b': np.random.choice(np.arange(20), data_size),
 #      'c': np.random.choice(['a','a','b','c','d'], data_size),
 #      'd': np.random.choice(['a','a','b','c','d'], data_size)}).convert_dtypes()
-#
+# 
 # print('filter')
 # %timeit test_df.loc[(test_df.a <= 7) & (test_df.c == 'a')]
 # print('summarize')
@@ -542,38 +544,43 @@ nest_marks <- bench::mark(
 # %timeit test_df['double_a'] = test_df.a * 2
 # print('mutate pt2')
 # %timeit test_df['a_plus_b'] = test_df.a + test_df.b
-#
+# 
 # del test_df
 # gc.collect()
-#
+# 
 # arrange_size = 1000000
-#
+# 
 # arrange_df = pd.DataFrame(
 #     {'a': np.random.choice(np.arange(20), arrange_size),
 #      'b': np.random.choice(np.arange(20), arrange_size),
 #      'c': np.random.choice(['a','a','b','c','d'], arrange_size),
 #      'd': np.random.choice(['a','a','b','c','d'], arrange_size)}).convert_dtypes()
-#
+# 
 # print('arrange')
 # %timeit arrange_df.sort_values(['c', 'a'])
 # print('distinct')
-# %timeit test_df.drop_duplicates()
+# %timeit arrange_df.drop_duplicates()
 # del arrange_df
 # gc.collect()
-#
+# 
 # case_df = pd.DataFrame({'x': np.random.normal(size = 3000000)})
-#
+# 
 # case_df['median_x'] = case_df['x'].median()
-#
+# 
 # print('case_when')
-# %timeit case_df['test'] = np.where(case_df.x < case_df.median_x, 'low', np.where(case_df.x >= case_df.median_x, 'high', np.where(case_df.x.isna(), 'unknown', 'other')))
-# fill_size = 1000000
-# fill_df = pd.DataFrame({'id': np.random.choice(np.arange(3), fill_size),
-#                         'int1': np.random.choice(np.array([1,2,3, np.nan]), fill_size),
-#                         'int2': np.random.choice(np.array([1,2,3, np.nan]), fill_size)})
-#
+# %timeit case_df['test'] = np.where(case_df.x < case_df.median_x, case_df.x * 2, np.where(case_df.x >= case_df.median_x, case_df.x * 3, case_df.x))
+# 
+# del case_df
+# gc.collect()
+# 
+# fill_size = 2000000
+# fill_df = pd.DataFrame({'x': np.arange(fill_size),
+#                         'id': np.random.choice(np.arange(3), fill_size)})
+# 
+# fill_df = fill_df.assign(y = fill_df.x.shift(10), z = fill_df.x.shift(-10)).convert_dtypes()
+# 
 # print('fill')
-# %timeit fill_df.groupby('id')[['int1', 'int2']].fillna(method = 'ffill')
+# %timeit fill_df.groupby('id')[['x','y']].fillna(method = 'ffill')
 ```
 
 ```{r all_marks, echo = FALSE, message = FALSE, paged.print = FALSE}
@@ -598,13 +605,13 @@ all_marks <- all_marks %>%
 ```
 
 ```{r pandas, echo = FALSE, message = FALSE}
-pandas_marks <- tibble(arrange = "297ms",
-                       case_when = "307ms",
-                       distinct = "287ms",
-                       filter = "656ms",
-                       fill = "146ms",
-                       mutate = "85.2ms",
-                       summarize = "780ms") %>%
+pandas_marks <- tibble(arrange = "355ms",
+                       case_when = "59.2ms",
+                       distinct = "309ms",
+                       filter = "707ms",
+                       fill = "846ms",
+                       mutate = "86.4ms",
+                       summarize = "834ms") %>%
   pivot_longer(everything(), names_to = "function_tested", values_to = "pandas")
 
 all_marks <- all_marks %>%

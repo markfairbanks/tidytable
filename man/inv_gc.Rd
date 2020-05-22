@@ -17,7 +17,7 @@ Useful for large datasets or when using parallel processing.
 # Can be run with no input
 inv_gc()
 
-df <- data.table::data.table(col1 = 1, col2 = 2)
+df <- tidytable(col1 = 1, col2 = 2)
 
 # Or can be used in the middle of a pipe chain (object is unaltered)
 df \%>\%

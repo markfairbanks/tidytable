@@ -3,34 +3,34 @@
 #' @description
 #' Pull a single variable from a data.table as a vector.
 #'
-#' @param .data A data.frame or data.table
+#' @param .df A data.frame or data.table
 #' @param var The column to pull from the data.table. If NULL, pulls the last column.
 #'
 #' @export
 #'
 #' @examples
-#' example_dt <- data.table::data.table(
+#' test_df <- data.table(
 #'   x = c(1,2,3),
 #'   y = c(4,5,6))
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   pull.(y)
-pull. <- function(.data, var = NULL) {
+pull. <- function(.df, var = NULL) {
   UseMethod("pull.")
 }
 
 #' @export
-pull..data.frame <- function(.data, var = NULL) {
+pull..data.frame <- function(.df, var = NULL) {
 
-  .data <- as_tidytable(.data)
+  .df <- as_tidytable(.df)
 
-  var <- enexpr(var)
-  if (is.null(var)) var <- sym(names(.data)[ncol(.data)])
+  var <- enquo(var)
+  if (quo_is_null(var)) var <- sym(names(.df)[ncol(.df)])
 
   # Base R translation is faster than data.table
-  eval_expr(
-    '$'(.data, !!var)
-  )
+  eval_tidy(quo_squash(quo(
+    '$'(.df, !!var)
+  )))
 }
 
 #' @export

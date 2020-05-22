@@ -5,12 +5,12 @@
 \alias{dt_top_n}
 \title{Select top (or bottom) n rows (by value)}
 \usage{
-top_n.(.data, n = 5, wt = NULL, by = NULL)
+top_n.(.df, n = 5, wt = NULL, by = NULL)
 
-dt_top_n(.data, n = 5, wt = NULL, by = NULL)
+dt_top_n(.df, n = 5, wt = NULL, by = NULL)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{n}{Number of rows to return}
 
@@ -22,14 +22,14 @@ dt_top_n(.data, n = 5, wt = NULL, by = NULL)
 Select the top or bottom entries in each group, ordered by \code{wt}.
 }
 \examples{
-example_dt <- data.table::data.table(
+test_df <- data.table(
   x = 1:5,
   y = 6:10,
   z = c(rep("a", 3), rep("b", 2)))
 
-example_dt \%>\%
+test_df \%>\%
   top_n.(2, wt = y)
 
-example_dt \%>\%
+test_df \%>\%
   top_n.(2, wt = y, by = z)
 }

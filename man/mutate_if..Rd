@@ -38,20 +38,21 @@ dt_mutate_all(.data, .funs, ..., by = NULL)
 These helpers have been deprecated. Please use \code{mutate_across.()}
 }
 \examples{
-example_dt <- data.table::data.table(
+test_df <- data.table(
   x = c(1,1,1),
   y = c(2,2,2),
   z = c("a", "a", "b"))
 
-example_dt \%>\%
-  mutate_across.(is.numeric, as.character)
+test_df \%>\%
+  mutate_across.(where(is.numeric), as.character)
 
-example_dt \%>\%
+test_df \%>\%
   mutate_across.(c(x, y), ~ .x * 2)
 
-example_dt \%>\%
-  mutate_across.(everything.(), as.character)
+test_df \%>\%
+  mutate_across.(everything(), as.character)
 
-example_dt \%>\%
-  mutate_across.(c(x, y), list(new = ~ .x * 2))
+test_df \%>\%
+  mutate_across.(c(x, y), list(new = ~ .x * 2,
+                               another = ~ .x + 7))
 }

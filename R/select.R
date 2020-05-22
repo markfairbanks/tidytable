@@ -12,28 +12,28 @@
 #' @md
 #'
 #' @examples
-#' example_dt <- data.table::data.table(
+#' test_df <- data.table(
 #'   x = c(1,1,1),
 #'   y = c(4,5,6),
 #'   double_x = c(2,2,2),
 #'   z = c("a","a","b"))
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   select.(x, y)
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   select.(x:z)
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   select.(-y, -z)
 #'
-#' example_dt %>%
-#'   select.(starts_with.("x"), z)
+#' test_df %>%
+#'   select.(starts_with("x"), z)
 #'
-#' example_dt %>%
-#'   select.(is.character, x)
+#' test_df %>%
+#'   select.(where(is.character), x)
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   select.(stuff = x, y)
 select. <- function(.data, ...) {
   UseMethod("select.")

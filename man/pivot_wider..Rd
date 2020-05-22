@@ -6,7 +6,7 @@
 \title{Pivot data from long to wide}
 \usage{
 pivot_wider.(
-  .data,
+  .df,
   names_from = name,
   values_from = value,
   id_cols = NULL,
@@ -15,7 +15,7 @@ pivot_wider.(
 )
 
 dt_pivot_wider(
-  .data,
+  .df,
   names_from = name,
   values_from = value,
   id_cols = NULL,
@@ -24,7 +24,7 @@ dt_pivot_wider(
 )
 }
 \arguments{
-\item{.data}{the data table to widen}
+\item{.df}{the data table to widen}
 
 \item{names_from}{A pair of arguments describing which column (or columns) to get the name of the output column (\code{name_from}),
 and which column (or columns) to get the cell values from (\code{values_from}).
@@ -49,15 +49,15 @@ decreasing the number of rows. The inverse transformation is
 \code{pivot_longer.()}. Syntax based on the \code{tidyr} equivalents.
 }
 \examples{
-example_dt <- data.table::data.table(
+test_df <- data.table(
   z = rep(c("a", "b", "c"), 2),
   stuff = c(rep("x", 3), rep("y", 3)),
   things = 1:6)
 
-example_dt \%>\%
+test_df \%>\%
   pivot_wider.(names_from = stuff, values_from = things)
 
-example_dt \%>\%
+test_df \%>\%
   pivot_wider.(names_from = stuff, values_from = things, id_cols = z)
 
 }

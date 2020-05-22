@@ -27,7 +27,7 @@
 #'   mutate.(x = case.(c == "a", "a",
 #'                     default = d))
 case. <- function(..., default = NA) {
-  dots <- enexprs(...)
+  dots <- enquos(...)
   dots_length <- length(dots)
 
   index <- '+'(1, 1:dots_length) %% 2
@@ -45,12 +45,12 @@ case. <- function(..., default = NA) {
 
   for (i in rev(seq_along(conditions))) {
     calls <- call("ifelse.",
-                  expr(rlang::'%|%'(!!conditions[[i]], FALSE)),
+                  quo(rlang::'%|%'(!!conditions[[i]], FALSE)),
                   values[[i]],
                   calls)
   }
 
-  eval(calls, envir = parent.frame())
+  eval_tidy(calls)
 }
 
 #' @export

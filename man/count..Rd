@@ -5,12 +5,12 @@
 \alias{dt_count}
 \title{Count observations by group}
 \usage{
-count.(.data, ...)
+count.(.df, ...)
 
-dt_count(.data, ...)
+dt_count(.df, ...)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Columns to group by. \code{tidyselect} compatible.}
 }
@@ -18,17 +18,17 @@ dt_count(.data, ...)
 Returns row counts of the dataset. If bare column names are provided, \code{count.()} returns counts by group.
 }
 \examples{
-example_df <- tidytable(
+test_df <- data.table(
   x = 1:3,
   y = 4:6,
   z = c("a", "a", "b"))
 
-example_df \%>\%
+test_df \%>\%
   count.()
 
-example_df \%>\%
+test_df \%>\%
   count.(z)
 
-example_df \%>\%
-  count.(is.character)
+test_df \%>\%
+  count.(where(is.character))
 }

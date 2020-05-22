@@ -15,22 +15,23 @@
 #' @export
 #'
 #' @examples
-#' example_dt <- data.table::data.table(
+#' test_df <- data.table(
 #'   x = c(1,1,1),
 #'   y = c(2,2,2),
 #'   z = c("a", "a", "b"))
 #'
-#' example_dt %>%
-#'   mutate_across.(is.numeric, as.character)
+#' test_df %>%
+#'   mutate_across.(where(is.numeric), as.character)
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   mutate_across.(c(x, y), ~ .x * 2)
 #'
-#' example_dt %>%
-#'   mutate_across.(everything.(), as.character)
+#' test_df %>%
+#'   mutate_across.(everything(), as.character)
 #'
-#' example_dt %>%
-#'   mutate_across.(c(x, y), list(new = ~ .x * 2))
+#' test_df %>%
+#'   mutate_across.(c(x, y), list(new = ~ .x * 2,
+#'                                another = ~ .x + 7))
 mutate_if. <- function(.data, .predicate, .funs, ..., by = NULL) {
   UseMethod("mutate_if.")
 }
@@ -40,7 +41,7 @@ mutate_if..default <- function(.data, .predicate, .funs, ..., by = NULL) {
   .predicate <- enexpr(.predicate)
   by <- enexpr(by)
 
-  mutate_across.(.data, !!.predicate, .funs, ..., by = !!by)
+  mutate_across.(.data, where(!!.predicate), .funs, ..., by = !!by)
 }
 
 #' @export
@@ -68,7 +69,7 @@ mutate_all..default <- function(.data, .funs, ..., by = NULL) {
 
   by <- enexpr(by)
 
-  mutate_across.(.data, everything.(), .funs, ..., by = !!by)
+  mutate_across.(.data, everything(), .funs, ..., by = !!by)
 }
 
 #' @export

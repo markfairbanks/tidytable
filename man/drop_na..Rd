@@ -5,12 +5,12 @@
 \alias{dt_drop_na}
 \title{Drop rows containing missing values}
 \usage{
-drop_na.(.data, ...)
+drop_na.(.df, ...)
 
-dt_drop_na(.data, ...)
+dt_drop_na(.df, ...)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Optional: A selection of columns. If empty, all variables are selected.
 \code{tidyselect} compatible.}
@@ -19,7 +19,7 @@ dt_drop_na(.data, ...)
 Drop rows containing missing values
 }
 \examples{
-df <- tidytable(
+df <- data.table(
   x = c(1,2,NA),
   y = c("a",NA,"b"))
 
@@ -30,5 +30,5 @@ df \%>\%
   drop_na.(x)
 
 df \%>\%
-  drop_na.(is.numeric)
+  drop_na.(where(is.numeric))
 }

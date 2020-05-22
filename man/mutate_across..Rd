@@ -5,12 +5,12 @@
 \alias{dt_mutate_across}
 \title{Mutate multiple columns simultaneously}
 \usage{
-mutate_across.(.data, .cols = everything.(), .fns, ..., by = NULL)
+mutate_across.(.df, .cols = everything(), .fns, ..., by = NULL)
 
-dt_mutate_across(.data, .cols = everything.(), .fns, ..., by = NULL)
+dt_mutate_across(.df, .cols = everything(), .fns, ..., by = NULL)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{.cols}{vector \code{c()} of bare column names for \code{mutate_across.()} to use.
 \code{tidyselect} compatible.}
@@ -25,21 +25,21 @@ dt_mutate_across(.data, .cols = everything.(), .fns, ..., by = NULL)
 Mutate multiple columns simultaneously.
 }
 \examples{
-example_dt <- data.table::data.table(
+test_df <- data.table(
   x = c(1,1,1),
   y = c(2,2,2),
   z = c("a", "a", "b"))
 
-example_dt \%>\%
-  mutate_across.(is.numeric, as.character)
+test_df \%>\%
+  mutate_across.(where(is.numeric), as.character)
 
-example_dt \%>\%
+test_df \%>\%
   mutate_across.(c(x, y), ~ .x * 2)
 
-example_dt \%>\%
-  mutate_across.(everything.(), as.character)
+test_df \%>\%
+  mutate_across.(everything(), as.character)
 
-example_dt \%>\%
+test_df \%>\%
   mutate_across.(c(x, y), list(new = ~ .x * 2,
                                another = ~ .x + 7))
 }

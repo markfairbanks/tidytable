@@ -5,12 +5,12 @@
 \alias{dt_relocate}
 \title{Relocate a column to a new position}
 \usage{
-relocate.(.data, ..., .before = NULL, .after = NULL)
+relocate.(.df, ..., .before = NULL, .after = NULL)
 
-dt_relocate(.data, ..., .before = NULL, .after = NULL)
+dt_relocate(.df, ..., .before = NULL, .after = NULL)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{A selection of columns to move. `tidyselect` compatible.}
 
@@ -22,7 +22,7 @@ dt_relocate(.data, ..., .before = NULL, .after = NULL)
 Move a column or columns to a new position
 }
 \examples{
-test_df <- data.table::data.table(
+test_df <- data.table(
   a = 1:5,
   b = 1:5,
   c = c("a","a","a","b","b"),
@@ -35,5 +35,5 @@ test_df \%>\%
   relocate.(a, b, .after = c)
 
 test_df \%>\%
-  relocate.(is.numeric, .after = c)
+  relocate.(where(is.numeric), .after = c)
 }

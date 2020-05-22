@@ -14,16 +14,16 @@
 #' @export
 #'
 #' @examples
-#' example_dt <- data.table::data.table(
+#' test_df <- data.table(
 #'   x = 1,
 #'   y = 2,
 #'   double_x = 2,
 #'   double_y = 4)
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   rename_with.(~ sub("x", "stuff", .x))
 #'
-#' example_dt %>%
+#' test_df %>%
 #'   rename_with.(~ sub("x", "stuff", .x), .cols = c(x, double_x))
 rename_all. <- function(.data, .fun, ...) {
   UseMethod("rename_all.")
@@ -32,7 +32,9 @@ rename_all. <- function(.data, .fun, ...) {
 #' @export
 rename_all..default <- function(.data, .fun, ...) {
 
-  rename_across.(.data, everything.(), .fun, ...)
+  deprecate_soft("0.5.0", "tidytable::rename_all.()", "rename_with.()")
+
+  rename_across.(.data, everything(), .fun, ...)
 }
 
 #' @export
@@ -43,6 +45,8 @@ rename_at. <- function(.data, .vars, .fun, ...) {
 
 #' @export
 rename_at..default <- function(.data, .vars, .fun, ...) {
+
+  deprecate_soft("0.5.0", "tidytable::rename_at.()", "rename_with.()")
 
   .vars <- enexpr(.vars)
 
@@ -58,11 +62,12 @@ rename_across. <- function(.data, .cols, .fun, ...) {
 #' @export
 rename_across..data.frame <- function(.data, .cols, .fun, ...) {
 
+  deprecate_soft("0.5.0", "tidytable::rename_across.()", "rename_with.()")
+
   .data <- as_tidytable(.data)
 
   .cols <- enexpr(.cols)
-  .cols <- vec_selector(.data, !!.cols) %>%
-    as.character()
+  .cols <- as.character(vec_selector(.data, !!.cols))
 
   .data <- shallow(.data)
 
@@ -88,9 +93,11 @@ rename_if. <- function(.data, .predicate, .fun, ...) {
 #' @export
 rename_if..default <- function(.data, .predicate, .fun, ...) {
 
+  deprecate_soft("0.5.0", "tidytable::rename_if.()", "rename_with.()")
+
   .predicate <- enexpr(.predicate)
 
-  rename_across.(.data, !!.predicate, .fun, ...)
+  rename_across.(.data, where(!!.predicate), .fun, ...)
 }
 
 #' @export

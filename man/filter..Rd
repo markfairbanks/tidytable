@@ -5,12 +5,12 @@
 \alias{dt_filter}
 \title{Filter rows on one or more conditions}
 \usage{
-filter.(.data, ..., by = NULL)
+filter.(.df, ..., by = NULL)
 
-dt_filter(.data, ..., by = NULL)
+dt_filter(.df, ..., by = NULL)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Conditions to filter by}
 
@@ -20,14 +20,14 @@ dt_filter(.data, ..., by = NULL)
 Filters a dataset to choose rows where conditions are true.
 }
 \examples{
-example_dt <- tidytable(
+test_df <- tidytable(
   a = c(1,2,3),
   b = c(4,5,6),
   c = c("a","a","b"))
 
-example_dt \%>\%
+test_df \%>\%
   filter.(a >= 2, b >= 4)
 
-example_dt \%>\%
+test_df \%>\%
   filter.(b <= mean(b), by = c)
 }

@@ -93,16 +93,6 @@ test_that("doesn't modify-by-reference", {
   expect_equal(df$chr, c(NA, "a"))
 })
 
-# test_that("fill preserves attributes", {
-#   df <- data.table::data.table(x = factor(c(NA, "a", NA)))
-#
-#   out_d <- as_tidytable(df) %>% dt_fill(x)
-#   out_u <- as_tidytable(df) %>% dt_fill(x, .direction = "up")
-#
-#   expect_equal(attributes(out_d$x), attributes(df$x))
-#   expect_equal(attributes(out_u$x), attributes(df$x))
-# })
-
 test_that("fill respects grouping & is correct order", {
   df <- data.table::data.table(x = c(1, NA, NA), y = c(1, 1, 2))
   out <- fill.(df, x, by = y)
@@ -121,7 +111,7 @@ test_that("enhanced selection works is.numeric", {
     chr = c("a", NA)
   )
 
-  out <- fill.(df, is.numeric)
+  out <- fill.(df, where(is.numeric))
   expect_equal(out$lgl, c(TRUE, NA))
   expect_equal(out$int, c(1, 1))
   expect_equal(out$dbl, c(1, 1))
@@ -136,9 +126,21 @@ test_that("enhanced selection works", {
     chr = c("a", NA)
   )
 
-  out <- fill.(df, is.logical)
+  out <- fill.(df, where(is.logical))
   expect_equal(out$lgl, c(TRUE, TRUE))
   expect_equal(out$int, c(1, NA))
   expect_equal(out$dbl, c(1, NA))
   expect_equal(out$chr, c("a", NA))
+})
+
+test_that("custom function works with quosure", {
+  # filled down from last non-missing
+  df <- data.table::data.table(x = c(NA, 1, NA, 2, NA, NA))
+
+  fill_fn <- function(.df, col) {
+    fill.(.df, {{ col }})
+  }
+
+  out <- as_tidytable(df) %>% fill_fn(x)
+  expect_equal(out$x, c(NA, 1, 1, 2, 2, 2))
 })

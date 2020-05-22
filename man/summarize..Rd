@@ -7,28 +7,28 @@
 \alias{dt_summarize}
 \title{Aggregate data using summary statistics}
 \usage{
-summarize.(.data, ..., by = NULL)
+summarize.(.df, ..., by = NULL)
 
-summarise.(.data, ..., by = NULL)
+summarise.(.df, ..., by = NULL)
 
-dt_summarise(.data, ..., by = NULL)
+dt_summarise(.df, ..., by = NULL)
 
-dt_summarize(.data, ..., by = NULL)
+dt_summarize(.df, ..., by = NULL)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Aggregations to perform}
 
 \item{by}{Columns to group by.
 \itemize{
 \item A single column can be passed with \code{by = d}.
-\item Multiple columns can be passed with \code{by = c(c, d)} or \code{by = list(c, d)}
+\item Multiple columns can be passed with \code{by = c(c, d)}
 \item \code{tidyselect} can be used:
 \itemize{
-\item Single predicate: \code{by = is.character}
-\item Multiple predicates: \code{by = c(is.character, is.factor)}
-\item A combination of predicates and column names: \code{by = c(is.character, b)}
+\item Single predicate: \code{by = where(is.character)}
+\item Multiple predicates: \code{by = c(where(is.character), where(is.factor))}
+\item A combination of predicates and column names: \code{by = c(where(is.character), b)}
 }
 }}
 }
@@ -36,18 +36,18 @@ dt_summarize(.data, ..., by = NULL)
 Aggregate data using summary statistics such as mean or median. Can be calculated by group.
 }
 \examples{
-example_dt <- data.table::data.table(
+test_df <- data.table(
   a = c(1,2,3),
   b = c(4,5,6),
   c = c("a","a","b"),
   d = c("a","a","b"))
 
-example_dt \%>\%
+test_df \%>\%
   summarize.(avg_a = mean(a),
              max_b = max(b),
              by = c)
 
-example_dt \%>\%
+test_df \%>\%
   summarize.(avg_a = mean(a),
              by = c(c, d))
 }

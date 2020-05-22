@@ -6,8 +6,8 @@
 \title{Convert character and factor columns to dummy variables}
 \usage{
 get_dummies.(
-  .data,
-  cols = c(is.character, is.factor),
+  .df,
+  cols = c(where(is.character), where(is.factor)),
   prefix = TRUE,
   prefix_sep = "_",
   drop_first = FALSE,
@@ -15,8 +15,8 @@ get_dummies.(
 )
 
 dt_get_dummies(
-  .data,
-  cols = c(is.character, is.factor),
+  .df,
+  cols = c(where(is.character), where(is.factor)),
   prefix = TRUE,
   prefix_sep = "_",
   drop_first = FALSE,
@@ -24,7 +24,7 @@ dt_get_dummies(
 )
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{cols}{A single column or a vector of unquoted columns to dummify.
 Defaults to all character & factor columns using \code{c(is.character, is.factor)}.
@@ -61,7 +61,7 @@ test_df \%>\%
 
 # Can drop certain columns using
 test_df \%>\%
-  get_dummies.(c(is.character, -col2))
+  get_dummies.(c(where(is.character), -col2))
 
 test_df \%>\%
   get_dummies.(prefix_sep = ".", drop_first = TRUE)
