@@ -4,7 +4,7 @@
 #' Mutate multiple columns simultaneously.
 #'
 #' @param .df A data.frame or data.table
-#' @param .cols vector `c()` of bare column names for `mutate_across.()` to use.
+#' @param .cols vector `c()` of unquoted column names
 #' `tidyselect` compatible.
 #' @param .fns Functions to pass. Can pass a list of functions.
 #' @param ... Other arguments for the passed function
