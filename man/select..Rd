@@ -5,12 +5,12 @@
 \alias{dt_select}
 \title{Select or drop columns}
 \usage{
-select.(.data, ...)
+select.(.df, ...)
 
-dt_select(.data, ...)
+dt_select(.df, ...)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{...}{Columns to select or drop.
 Use named arguments, e.g. new_name = old_name, to rename selected variables.
