@@ -46,7 +46,7 @@ select..data.frame <- function(.df, ...) {
 
   select_cols <- select_dots_i(.df, ...)
 
-  .df <- eval_expr(.df[, !!select_cols])
+  .df <- eval_quo(.df[, !!select_cols])
 
   .df <- set_names(.df, names(select_cols))
 
