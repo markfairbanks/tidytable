@@ -240,6 +240,21 @@ df %>%
   find_mean(grouping_cols = c(y, z), col = x)
 ```
 
+## Auto-conversion
+
+All `tidytable` functions automatically convert `data.frame` and `tibble` inputs to a `data.table`:
+
+```{r message = FALSE}
+library(dplyr)
+library(data.table)
+
+test_df <- tibble(x = c(1,2,3), y = c(4,5,6), z = c("a","a","b"))
+
+test_df %>%
+  mutate.(double_x = x * 2) %>%
+  is.data.table()
+```
+
 ## `dt()` helper
 
 The `dt()` function makes regular `data.table` syntax pipeable, so you can easily mix `tidytable` syntax with `data.table` syntax:
@@ -529,13 +544,13 @@ nest_marks <- bench::mark(
 # import numpy as np
 # import gc
 # data_size = 10000000
-# 
+#
 # test_df = pd.DataFrame(
 #     {'a': np.random.choice(np.arange(20), data_size),
 #      'b': np.random.choice(np.arange(20), data_size),
 #      'c': np.random.choice(['a','a','b','c','d'], data_size),
 #      'd': np.random.choice(['a','a','b','c','d'], data_size)}).convert_dtypes()
-# 
+#
 # print('filter')
 # %timeit test_df.loc[(test_df.a <= 7) & (test_df.c == 'a')]
 # print('summarize')
@@ -544,41 +559,41 @@ nest_marks <- bench::mark(
 # %timeit test_df['double_a'] = test_df.a * 2
 # print('mutate pt2')
 # %timeit test_df['a_plus_b'] = test_df.a + test_df.b
-# 
+#
 # del test_df
 # gc.collect()
-# 
+#
 # arrange_size = 1000000
-# 
+#
 # arrange_df = pd.DataFrame(
 #     {'a': np.random.choice(np.arange(20), arrange_size),
 #      'b': np.random.choice(np.arange(20), arrange_size),
 #      'c': np.random.choice(['a','a','b','c','d'], arrange_size),
 #      'd': np.random.choice(['a','a','b','c','d'], arrange_size)}).convert_dtypes()
-# 
+#
 # print('arrange')
 # %timeit arrange_df.sort_values(['c', 'a'])
 # print('distinct')
 # %timeit arrange_df.drop_duplicates()
 # del arrange_df
 # gc.collect()
-# 
+#
 # case_df = pd.DataFrame({'x': np.random.normal(size = 3000000)})
-# 
+#
 # case_df['median_x'] = case_df['x'].median()
-# 
+#
 # print('case_when')
 # %timeit case_df['test'] = np.where(case_df.x < case_df.median_x, case_df.x * 2, np.where(case_df.x >= case_df.median_x, case_df.x * 3, case_df.x))
-# 
+#
 # del case_df
 # gc.collect()
-# 
+#
 # fill_size = 2000000
 # fill_df = pd.DataFrame({'x': np.arange(fill_size),
 #                         'id': np.random.choice(np.arange(3), fill_size)})
-# 
+#
 # fill_df = fill_df.assign(y = fill_df.x.shift(10), z = fill_df.x.shift(-10)).convert_dtypes()
-# 
+#
 # print('fill')
 # %timeit fill_df.groupby('id')[['x','y']].fillna(method = 'ffill')
 ```

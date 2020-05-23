@@ -299,6 +299,23 @@ df %>%
 #> 2:     b     b   8.5
 ```
 
+## Auto-conversion
+
+All `tidytable` functions automatically convert `data.frame` and
+`tibble` inputs to a `data.table`:
+
+``` r
+library(dplyr)
+library(data.table)
+
+test_df <- tibble(x = c(1,2,3), y = c(4,5,6), z = c("a","a","b"))
+
+test_df %>%
+  mutate.(double_x = x * 2) %>%
+  is.data.table()
+#> [1] TRUE
+```
+
 ## `dt()` helper
 
 The `dt()` function makes regular `data.table` syntax pipeable, so you
@@ -352,17 +369,17 @@ all_marks
 #> # A tibble: 13 x 6
 #>    function_tested data.table tidytable tidyverse pandas tidytable_vs_tidyverse
 #>    <chr>           <chr>      <chr>     <chr>     <chr>  <chr>                 
-#>  1 arrange         56.45ms    66.68ms   443.81ms  355ms  15.0%                 
-#>  2 case_when       68.16ms    64.88ms   405.16ms  59.2ms 16.0%                 
-#>  3 distinct        44.5ms     46.12ms   107.78ms  309ms  42.8%                 
-#>  4 fill            37.99ms    48.29ms   115.85ms  846ms  41.7%                 
-#>  5 filter          241.95ms   240.62ms  289.54ms  707ms  83.1%                 
-#>  6 inner_join      90.52ms    101.95ms  86.36ms   <NA>   118.1%                
-#>  7 left_join       68.99ms    68.05ms   90.63ms   <NA>   75.1%                 
-#>  8 mutate          62.73ms    77.3ms    60.19ms   86.4ms 128.4%                
-#>  9 nest            13.93ms    18.31ms   31ms      <NA>   59.1%                 
-#> 10 pivot_longer    12.99ms    13.56ms   46.72ms   <NA>   29.0%                 
-#> 11 pivot_wider     108.29ms   122.48ms  83.3ms    <NA>   147.0%                
-#> 12 summarize       280.86ms   268.43ms  503.71ms  834ms  53.3%                 
-#> 13 unnest          29.8ms     21.22ms   945.33ms  <NA>   2.2%
+#>  1 arrange         59.58ms    64.61ms   451.53ms  355ms  14.3%                 
+#>  2 case_when       74.13ms    67.33ms   419.69ms  59.2ms 16.0%                 
+#>  3 distinct        42.08ms    42.55ms   106.55ms  309ms  39.9%                 
+#>  4 fill            43.03ms    46.88ms   136.04ms  846ms  34.5%                 
+#>  5 filter          236.47ms   231.46ms  296.91ms  707ms  78.0%                 
+#>  6 inner_join      89.06ms    107.27ms  79.85ms   <NA>   134.3%                
+#>  7 left_join       66.25ms    73.97ms   86.29ms   <NA>   85.7%                 
+#>  8 mutate          63.37ms    70.61ms   60.67ms   86.4ms 116.4%                
+#>  9 nest            14.98ms    16.28ms   36.14ms   <NA>   45.0%                 
+#> 10 pivot_longer    13.73ms    14.89ms   53.92ms   <NA>   27.6%                 
+#> 11 pivot_wider     111ms      120.63ms  81.77ms   <NA>   147.5%                
+#> 12 summarize       292.95ms   273.02ms  505.77ms  834ms  54.0%                 
+#> 13 unnest          26.67ms    21.53ms   939.83ms  <NA>   2.3%
 ```
