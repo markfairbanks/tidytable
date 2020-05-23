@@ -39,7 +39,7 @@ unnest..data.frame <- function(.df, ...) {
   list_flag <- map_lgl.(.df, is.list)
 
   if (length(dots) == 0) dots <- syms(data_names[list_flag])
-  else dots <- dots_selector(.df, ...)
+  else dots <- select_dots_sym(.df, ...)
 
   unnest_data <- map.(dots, ~ unnest_col(.df, .x))
 

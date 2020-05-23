@@ -44,7 +44,7 @@ slice..data.frame <- function(.df, rows = 1:5, by = NULL) {
   .df <- as_tidytable(.df)
 
   rows <- enquo(rows) # Needed so 1:.N works
-  by <- vec_selector_by(.df, {{ by }})
+  by <- select_vec_by(.df, {{ by }})
 
   eval_quo(
     .df[, eval_quo(.SD[!!rows], .SD), !!by]
@@ -62,7 +62,7 @@ slice_head..data.frame <- function(.df, n = 5, by = NULL) {
 
   .df <- as_tidytable(.df)
 
-  by <- vec_selector_by(.df, {{ by }})
+  by <- select_vec_by(.df, {{ by }})
   n <- enquo(n)
 
   eval_quo(
@@ -81,7 +81,7 @@ slice_tail..data.frame <- function(.df, n = 5, by = NULL) {
 
   .df <- as_tidytable(.df)
 
-  by <- vec_selector_by(.df, {{ by }})
+  by <- select_vec_by(.df, {{ by }})
 
   eval_quo(
     .df[, eval_quo({.N = .env$.N; tail(.SD, !!n)}, .SD), !!by]

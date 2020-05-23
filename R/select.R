@@ -44,7 +44,7 @@ select..data.frame <- function(.df, ...) {
 
   .df <- as_tidytable(.df)
 
-  select_cols <- dots_selector_i(.df, ...)
+  select_cols <- select_dots_i(.df, ...)
 
   .df <- eval_expr(.df[, !!select_cols])
 

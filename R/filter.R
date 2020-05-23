@@ -40,7 +40,7 @@ filter..data.frame <- function(.df, ..., by = NULL) {
       .df)
 
   } else {
-    by <- vec_selector_by(.df, !!by)
+    by <- select_vec_by(.df, !!by)
 
     col_order <- names(.df)
 

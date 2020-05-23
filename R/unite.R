@@ -47,7 +47,7 @@ unite..data.frame <- function(.df, col = "new_col", ..., sep = "_", remove = TRU
   if (length(dots) == 0) {
     unite_cols <- names(.df)
   } else {
-    unite_cols <- names(dots_selector_i(.df, ...))
+    unite_cols <- select_dots_chr(.df, ...)
   }
 
   col <- enquo(col)

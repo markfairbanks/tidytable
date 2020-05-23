@@ -57,7 +57,7 @@ dt_fill <- fill.
 
 filler <- function(.df, ..., type = "locf", by = NULL) {
 
-  all_cols <- as.character(dots_selector(.df, ...))
+  all_cols <- select_dots_chr(.df, ...)
 
   by <- enquo(by)
 
@@ -86,7 +86,7 @@ filler <- function(.df, ..., type = "locf", by = NULL) {
     other_cols <- syms(other_cols)
     .df <- shallow(.df)
 
-    by <- vec_selector_by(.df, !!by)
+    by <- select_vec_by(.df, !!by)
 
     for (col in other_cols) {
       eval_quo(

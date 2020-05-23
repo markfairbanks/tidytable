@@ -38,7 +38,7 @@ distinct..data.frame <- function(.df, ..., .keep_all = FALSE) {
   if (length(dots) == 0) {
     unique(.df)
   } else {
-    select_cols <- dots_selector_i(.df, ...)
+    select_cols <- select_dots_i(.df, ...)
 
     .df <- unique(.df, by = select_cols)
 

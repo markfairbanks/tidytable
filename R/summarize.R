@@ -40,7 +40,7 @@ summarize..data.frame <- function(.df, ..., by = NULL) {
   .df <- as_tidytable(.df)
 
   dots <- enquos(...)
-  by <- vec_selector_by(.df, {{ by }})
+  by <- select_vec_by(.df, {{ by }})
 
   eval_quo(
     .df[, eval_quo(

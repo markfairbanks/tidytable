@@ -55,14 +55,14 @@ pivot_wider..data.frame <- function(.df,
   id_cols <- enquo(id_cols)
   values_fn <- enexpr(values_fn)
 
-  names_from <- names(vec_selector_i(.df, {{ names_from }}))
-  values_from <- names(vec_selector_i(.df, {{ values_from }}))
+  names_from <- select_vec_chr(.df, {{ names_from }})
+  values_from <- select_vec_chr(.df, {{ values_from }})
 
   if (quo_is_null(id_cols)) {
     data_names <- names(.df)
     id_cols <- data_names[!data_names %in% c(names_from, values_from)]
   } else {
-    id_cols <- as.character(vec_selector(.df, !!id_cols))
+    id_cols <- select_vec_chr(.df, !!id_cols)
   }
 
   if (length(id_cols) == 0) {

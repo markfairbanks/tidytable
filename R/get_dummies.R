@@ -62,7 +62,7 @@ get_dummies..data.frame <- function(.df,
   .df <- as_tidytable(.df)
   .df <- shallow(.df)
 
-  cols <- vec_selector(.df, {{ cols }})
+  cols <- select_vec_sym(.df, {{ cols }})
 
   for (col in cols) {
 

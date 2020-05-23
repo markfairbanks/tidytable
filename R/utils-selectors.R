@@ -1,58 +1,65 @@
-# vec_selector & dots_selector return a list of bare column names
-# vec_selector_i & dots_selector_i return column positions/index as an integer vector
-# vec_selector_by & dots_selector_by return a list() that can be unquoted in a data.table call
+# Use select_vec_*() functions when user inputs column names using c()
+# Use select_dots_*() functions when user inputs column names in ...
+# _i returns the index positions
+# _chr returns a character vector
+# _sym returns a list of symbols/expressions
 
 
-### Get group by cols
-vec_selector_by <- function(.data, by_vars) {
-  by_vars <- enquo(by_vars)
-
-  if(quo_is_null(by_vars)) {
-    by_vars <- NULL
-  } else {
-    by_vars <- vec_selector(.data, !!by_vars)
-
-    by_vars <- expr(list(!!!by_vars))
-  }
-  by_vars
-}
-
-dots_selector_by <- function(.data, ...) {
-  dots <- enexprs(...)
-
-  if(length(dots) == 0) {
-    by_vars <- NULL
-  } else {
-    by_vars <- dots_selector(.data, ...)
-
-    by_vars <- expr(list(!!!by_vars))
-  }
-  by_vars
-}
-
-### User inputs a vector of bare column names
-vec_selector <- function(.data, select_vars) {
+## vec -----------------------------------
+select_vec_i <- function(.df, select_vars) {
   select_vars <- enquo(select_vars)
-
-  syms(names(vec_selector_i(.data, !!select_vars)))
-}
-
-vec_selector_i <- function(.data, select_vars) {
-  select_vars <- enexpr(select_vars)
 
   expr_char <- quo_text(select_vars)
 
   if (str_detect(expr_char, "list\\("))
     abort("Using by = list(col1, col2) is deprecated. Please use by = c(col1, col2)")
 
-  eval_select(select_vars, .data)
+  eval_select(select_vars, .df)
 }
 
-### User inputs bare column names using ...
-dots_selector <- function(.data, ...) {
-  syms(names(dots_selector_i(.data, ...)))
+select_vec_chr <- function(.df, select_vars) {
+  names(select_vec_i(.df, {{ select_vars }}))
 }
 
-dots_selector_i <- function(.data, ...) {
-  eval_select(expr(c(...)), .data)
+select_vec_sym <- function(.df, select_vars) {
+  syms(select_vec_chr(.df, {{ select_vars }}))
+}
+
+select_vec_by <- function(.df, by_vars) {
+  by_vars <- enquo(by_vars)
+
+  if(quo_is_null(by_vars)) {
+    by_vars <- NULL
+  } else {
+    by_vars <- select_vec_sym(.df, !!by_vars)
+
+    by_vars <- expr(list(!!!by_vars))
+  }
+  by_vars
+}
+
+## dots -----------------------------------
+select_dots_i <- function(.df, ...) {
+  eval_select(expr(c(...)), .df)
+}
+
+select_dots_chr <- function(.df, ...) {
+  names(select_dots_i(.df, ...))
+}
+
+select_dots_sym <- function(.df, ...) {
+  syms(select_dots_chr(.df, ...))
+}
+
+select_dots_by <- function(.df, ...) {
+  dots <- enquos(...)
+
+  if(length(dots) == 0) {
+    by_vars <- NULL
+  } else {
+    by_vars <- select_dots_sym(.df, ...)
+
+    by_vars <- expr(list(!!!by_vars))
+  }
+  by_vars
 }

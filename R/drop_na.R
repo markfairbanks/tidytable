@@ -37,7 +37,7 @@ drop_na..data.frame <- function(.df, ...) {
   if (length(dots) == 0) {
     na.omit(.df)
   } else {
-    drop_cols <- dots_selector_i(.df, ...)
+    drop_cols <- select_dots_i(.df, ...)
 
     na.omit(.df, cols = drop_cols)
   }
