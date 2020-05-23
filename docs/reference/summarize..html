@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -128,19 +128,19 @@
     <p>Aggregate data using summary statistics such as mean or median. Can be calculated by group.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='summarize..html'>summarize.</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'><a href='summarize..html'>summarize.</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='summarize..html'>summarise.</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'><a href='summarize..html'>summarise.</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='summarize..html'>dt_summarise</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'><a href='summarize..html'>dt_summarise</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='summarize..html'>dt_summarize</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'><a href='summarize..html'>dt_summarize</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.data</th>
+      <th>.df</th>
       <td><p>A data.frame or data.table</p></td>
     </tr>
     <tr>
@@ -151,11 +151,11 @@
       <th>by</th>
       <td><p>Columns to group by.</p><ul>
 <li><p>A single column can be passed with <code>by = d</code>.</p></li>
-<li><p>Multiple columns can be passed with <code>by = c(c, d)</code> or <code>by = list(c, d)</code></p></li>
+<li><p>Multiple columns can be passed with <code>by = c(c, d)</code></p></li>
 <li><p><code>tidyselect</code> can be used:</p><ul>
-<li><p>Single predicate: <code>by = is.character</code></p></li>
-<li><p>Multiple predicates: <code>by = c(is.character, is.factor)</code></p></li>
-<li><p>A combination of predicates and column names: <code>by = c(is.character, b)</code></p></li>
+<li><p>Single predicate: <code>by = where(is.character)</code></p></li>
+<li><p>Multiple predicates: <code>by = c(where(is.character), where(is.factor))</code></p></li>
+<li><p>A combination of predicates and column names: <code>by = c(where(is.character), b)</code></p></li>
 </ul></li>
 </ul></td>
     </tr>
@@ -163,19 +163,19 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>example_dt</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>data.table</span><span class='kw ns'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
+    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
   <span class='kw'>a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>),
   <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>),
   <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>),
   <span class='kw'>d</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
 
-<span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='summarize..html'>summarize.</a></span>(<span class='kw'>avg_a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>a</span>),
              <span class='kw'>max_b</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='no'>b</span>),
              <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>c</span>)</div><div class='output co'>#&gt;    c avg_a max_b
 #&gt; 1: a   1.5     5
 #&gt; 2: b   3.0     6</div><div class='input'>
-<span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='summarize..html'>summarize.</a></span>(<span class='kw'>avg_a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>a</span>),
              <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>c</span>, <span class='no'>d</span>))</div><div class='output co'>#&gt;    c d avg_a
 #&gt; 1: a a   1.5

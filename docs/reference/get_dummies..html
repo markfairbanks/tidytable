@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -129,8 +129,8 @@
     </div>
 
     <pre class="usage"><span class='fu'><a href='get_dummies..html'>get_dummies.</a></span>(
-  <span class='no'>.data</span>,
-  <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>is.character</span>, <span class='no'>is.factor</span>),
+  <span class='no'>.df</span>,
+  <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='where.html'>where</a></span>(<span class='no'>is.character</span>), <span class='fu'><a href='where.html'>where</a></span>(<span class='no'>is.factor</span>)),
   <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>prefix_sep</span> <span class='kw'>=</span> <span class='st'>"_"</span>,
   <span class='kw'>drop_first</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
@@ -138,8 +138,8 @@
 )
 
 <span class='fu'><a href='get_dummies..html'>dt_get_dummies</a></span>(
-  <span class='no'>.data</span>,
-  <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>is.character</span>, <span class='no'>is.factor</span>),
+  <span class='no'>.df</span>,
+  <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='where.html'>where</a></span>(<span class='no'>is.character</span>), <span class='fu'><a href='where.html'>where</a></span>(<span class='no'>is.factor</span>)),
   <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>prefix_sep</span> <span class='kw'>=</span> <span class='st'>"_"</span>,
   <span class='kw'>drop_first</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
@@ -150,7 +150,7 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.data</th>
+      <th>.df</th>
       <td><p>A data.frame or data.table</p></td>
     </tr>
     <tr>
@@ -217,7 +217,7 @@ Defaults to all character &amp; factor columns using <code><a href='https://rdrr
 #&gt; 4:      1</div><div class='input'>
 <span class='co'># Can drop certain columns using</span>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='get_dummies..html'>get_dummies.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>is.character</span>, -<span class='no'>col2</span>))</div><div class='output co'>#&gt;    col1 col2         var1 col1_a col1_b col1_c col1_NA
+  <span class='fu'><a href='get_dummies..html'>get_dummies.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='where.html'>where</a></span>(<span class='no'>is.character</span>), -<span class='no'>col2</span>))</div><div class='output co'>#&gt;    col1 col2         var1 col1_a col1_b col1_c col1_NA
 #&gt; 1:    a    a -1.400043517      1      0      0       0
 #&gt; 2:    b    b  0.255317055      0      1      0       0
 #&gt; 3:    c &lt;NA&gt; -2.437263611      0      0      1       0

@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -122,6 +122,52 @@
       <small>Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="tidytable-0-5-0" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.0">
+<a href="#tidytable-0-5-0" class="anchor"></a>tidytable 0.5.0<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code>tidytable</code> now works with quosures</li>
+<li>
+<code>tidyselect v0.1.1</code> compatibility: Updated functions to use <code><a href="../reference/where.html">where()</a></code>
+</li>
+<li>Deprecations:
+<ul>
+<li>Old select helpers like <code><a href="../reference/starts_with..html">everything.()</a></code> are now replaced by normal helpers like <code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code>
+</li>
+<li>
+<code>rename_across/_if/_at/_all</code> have been superseded by <code><a href="../reference/rename_with..html">rename_with.()</a></code>
+</li>
+</ul>
+</li>
+<li>Breaking changes:
+<ul>
+<li>
+<code><a href="../reference/group_split..html">group_split.()</a></code>: <code>keep</code> arg renamed to <code>.keep</code>
+</li>
+</ul>
+</li>
+<li>New functions:
+<ul>
+<li>
+<code><a href="../reference/leads..html">lags.()</a></code> &amp; <code><a href="../reference/leads..html">leads.()</a></code>
+</li>
+</ul>
+</li>
+<li>Functionality improvements:
+<ul>
+<li>
+<code><a href="../reference/nest_by..html">nest_by.()</a></code>: Added <code>.keep</code> arg</li>
+</ul>
+</li>
+<li>Functions with notable speed improvements:
+<ul>
+<li><code><a href="../reference/case..html">case.()</a></code></li>
+</ul>
+</li>
+</ul>
+</div>
     <div id="tidytable-0-4-1" class="section level1">
 <h1 class="page-header" data-toc-text="0.4.1">
 <a href="#tidytable-0-4-1" class="anchor"></a>tidytable 0.4.1<small> 2020-04-30 </small>

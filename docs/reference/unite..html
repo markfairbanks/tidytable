@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -128,15 +128,15 @@
     <p>Convenience function to paste together multiple columns into one.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='unite..html'>unite.</a></span>(<span class='no'>.data</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"new_col"</span>, <span class='no'>...</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"_"</span>, <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'><a href='unite..html'>unite.</a></span>(<span class='no'>.df</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"new_col"</span>, <span class='no'>...</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"_"</span>, <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'><a href='unite..html'>dt_unite</a></span>(<span class='no'>.data</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"new_col"</span>, <span class='no'>...</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"_"</span>, <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+<span class='fu'><a href='unite..html'>dt_unite</a></span>(<span class='no'>.df</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"new_col"</span>, <span class='no'>...</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"_"</span>, <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.data</th>
+      <th>.df</th>
       <td><p>A data.frame or data.table</p></td>
     </tr>
     <tr>
@@ -174,7 +174,7 @@
 #&gt; 2: a     b_c
 #&gt; 3: a    b_NA</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='unite..html'>unite.</a></span>(<span class='st'>"new_col"</span>, <span class='no'>is.character</span>)</div><div class='output co'>#&gt;    new_col
+  <span class='fu'><a href='unite..html'>unite.</a></span>(<span class='st'>"new_col"</span>, <span class='fu'><a href='where.html'>where</a></span>(<span class='no'>is.character</span>))</div><div class='output co'>#&gt;    new_col
 #&gt; 1:   a_b_c
 #&gt; 2:   a_b_c
 #&gt; 3:  a_b_NA</div><div class='input'>

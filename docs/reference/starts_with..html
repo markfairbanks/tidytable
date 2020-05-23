@@ -48,7 +48,7 @@
 
 <meta property="og:title" content="Select helpers — starts_with." />
 <meta property="og:description" content="Please note these functions are leftover from before tidytable used tidyselect.
-You can use these or the normal tidyselect helpers.
+You can/should use the normal tidyselect helpers.
 These functions allow you to select variables based on their names.
 any_of.(): Select using a character vector
 contains.(): Contains a literal string or regex match
@@ -89,7 +89,7 @@ ends_with.(): Ends with a suffix
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -135,7 +135,7 @@ ends_with.(): Ends with a suffix
 
     <div class="ref-description">
     <p>Please note these functions are leftover from before <code>tidytable</code> used <code>tidyselect</code>.
-You can use these or the normal <code>tidyselect</code> helpers.</p>
+You can/should use the normal <code>tidyselect</code> helpers.</p>
 <p>These functions allow you to select variables based on their names.</p><ul>
 <li><p><code><a href='starts_with..html'>any_of.()</a></code>: Select using a character vector</p></li>
 <li><p><code><a href='starts_with..html'>contains.()</a></code>: Contains a literal string or regex match</p></li>
@@ -197,17 +197,17 @@ automatically set to the names of the table.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>example_dt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(
+    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(
   <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='kw'>double_x</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='kw'>double_y</span> <span class='kw'>=</span> <span class='fl'>4</span>)
 
-<span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='select..html'>select.</a></span>(<span class='fu'><a href='starts_with..html'>starts_with.</a></span>(<span class='st'>"x"</span>))</div><div class='output co'>#&gt;    x
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='select..html'>select.</a></span>(<span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></span>(<span class='st'>"x"</span>))</div><div class='output co'>#&gt;    x
 #&gt; 1: 1</div><div class='input'>
-<span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='select..html'>select.</a></span>(<span class='fu'><a href='starts_with..html'>ends_with.</a></span>(<span class='st'>"y"</span>))</div><div class='output co'>#&gt;    y double_y
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='select..html'>select.</a></span>(<span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>ends_with</a></span>(<span class='st'>"y"</span>))</div><div class='output co'>#&gt;    y double_y
 #&gt; 1: 2        4</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

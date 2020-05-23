@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -128,15 +128,15 @@
     <p>Pull a single variable from a data.table as a vector.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='pull..html'>pull.</a></span>(<span class='no'>.data</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'><a href='pull..html'>pull.</a></span>(<span class='no'>.df</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='pull..html'>dt_pull</a></span>(<span class='no'>.data</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'><a href='pull..html'>dt_pull</a></span>(<span class='no'>.df</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.data</th>
+      <th>.df</th>
       <td><p>A data.frame or data.table</p></td>
     </tr>
     <tr>
@@ -147,11 +147,11 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>example_dt</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>data.table</span><span class='kw ns'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
+    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
   <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>),
   <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>))
 
-<span class='no'>example_dt</span> <span class='kw'>%&gt;%</span>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='pull..html'>pull.</a></span>(<span class='no'>y</span>)</div><div class='output co'>#&gt; [1] 4 5 6</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

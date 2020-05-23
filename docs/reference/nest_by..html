@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -128,15 +128,15 @@
     <p>Nest data.tables by group</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='nest_by..html'>nest_by.</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>.key</span> <span class='kw'>=</span> <span class='st'>"data"</span>)
+    <pre class="usage"><span class='fu'><a href='nest_by..html'>nest_by.</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.key</span> <span class='kw'>=</span> <span class='st'>"data"</span>, <span class='kw'>.keep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'><a href='nest_by..html'>dt_group_nest</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>, <span class='kw'>.key</span> <span class='kw'>=</span> <span class='st'>"data"</span>)</pre>
+<span class='fu'><a href='nest_by..html'>dt_group_nest</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.key</span> <span class='kw'>=</span> <span class='st'>"data"</span>, <span class='kw'>.keep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.data</th>
+      <th>.df</th>
       <td><p>A data.frame or data.table</p></td>
     </tr>
     <tr>
@@ -146,13 +146,18 @@
     </tr>
     <tr>
       <th>.key</th>
-      <td><p>Name of the new column created by nesting</p></td>
+      <td><p>Name of the new column created by nesting.</p></td>
+    </tr>
+    <tr>
+      <th>.keep</th>
+      <td><p>Should the grouping columns be kept in the list column.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>data.table</span><span class='kw ns'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>,
+    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
+  <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>,
   <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>11</span>:<span class='fl'>20</span>,
   <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>6</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>4</span>)),
   <span class='kw'>d</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>4</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>6</span>)))
@@ -166,7 +171,12 @@
 #&gt; 2: a b &lt;data.table&gt;
 #&gt; 3: b b &lt;data.table&gt;</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='nest_by..html'>nest_by.</a></span>(<span class='no'>is.character</span>)</div><div class='output co'>#&gt;    c d         data
+  <span class='fu'><a href='nest_by..html'>nest_by.</a></span>(<span class='fu'><a href='where.html'>where</a></span>(<span class='no'>is.character</span>))</div><div class='output co'>#&gt;    c d         data
+#&gt; 1: a a &lt;data.table&gt;
+#&gt; 2: a b &lt;data.table&gt;
+#&gt; 3: b b &lt;data.table&gt;</div><div class='input'>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='nest_by..html'>nest_by.</a></span>(<span class='no'>c</span>, <span class='no'>d</span>, <span class='kw'>.keep</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;    c d         data
 #&gt; 1: a a &lt;data.table&gt;
 #&gt; 2: a b &lt;data.table&gt;
 #&gt; 3: b b &lt;data.table&gt;</div></pre>

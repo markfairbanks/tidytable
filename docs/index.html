@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -160,6 +160,9 @@
 </li>
 </ul>
 </li>
+<li>
+<code><a href="reference/leads..html">lags.()</a></code> &amp; <code><a href="reference/leads..html">leads.()</a></code>
+</li>
 <li><code><a href="reference/pull..html">pull.()</a></code></li>
 <li><code><a href="reference/relocate..html">relocate.()</a></code></li>
 <li>
@@ -208,8 +211,7 @@
 <h2 class="hasAnchor">
 <a href="#general-syntax" class="anchor"></a>General syntax</h2>
 <p><code>tidytable</code> uses <code>verb.()</code> syntax to replicate <code>tidyverse</code> functions:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">data.table</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidytable</span>)
+<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidytable</span>)
 
 <span class="no">test_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>), <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>), <span class="kw">z</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span>))
 
@@ -235,13 +237,13 @@
 <li>Multiple columns can be passed with <code>by = c(y, z)</code>
 </li>
 <li>
-<a href="https://tidyselect.r-lib.org"><code>tidyselect</code></a> can also be used, including using predicates:
+<a href="https://tidyselect.r-lib.org/reference/language.html"><code>tidyselect</code></a> can also be used, including using predicates:
 <ul>
-<li>Single predicate: <code>by = is.character</code>
+<li>Single predicate: <code>by = where(is.character)</code>
 </li>
-<li>Multiple predicates: <code>by = c(is.character, is.factor)</code>
+<li>Multiple predicates: <code>by = c(where(is.character), where(is.factor))</code>
 </li>
-<li>A combination of predicates and column names: <code>by = c(is.character, y)</code>
+<li>A combination of predicates and column names: <code>by = c(where(is.character), y)</code>
 </li>
 </ul>
 </li>
@@ -258,11 +260,11 @@
 <div id="tidyselect-support" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tidyselect-support" class="anchor"></a><code>tidyselect</code> support</h2>
-<p><code>tidyselect</code> allows you to select columns just like you would in the tidyverse.</p>
+<p><code>tidytable</code> allows you to select/drop columns just like you would in the tidyverse.</p>
 <p>Normal selection can be mixed with:</p>
 <ul>
-<li>Predicates: <code>is.numeric</code>, <code>is.character</code>, etc.</li>
-<li>Select helpers: <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">everything()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">starts_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">ends_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">contains()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">any_of()</a></code>, etc.</li>
+<li>Predicates: <code><a href="reference/where.html">where(is.numeric)</a></code>, <code><a href="reference/where.html">where(is.character)</a></code>, etc.</li>
+<li>Select helpers: <code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/all_of.html">any_of()</a></code>, etc.</li>
 </ul>
 <!-- end list --><div class="sourceCode" id="cb5"><pre class="r"><span class="no">test_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="kw">a</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>),
                       <span class="kw">b</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>),
@@ -270,7 +272,7 @@
                       <span class="kw">d</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>))
 
 <span class="no">test_df</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/select..html">select.</a></span>(<span class="no">is.numeric</span>, <span class="no">d</span>)
+  <span class="fu"><a href="reference/select..html">select.</a></span>(<span class="fu"><a href="reference/where.html">where</a></span>(<span class="no">is.numeric</span>), <span class="no">d</span>)
 <span class="co">#&gt;        a     b     d</span>
 <span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;</span>
 <span class="co">#&gt; 1:     1     4     a</span>
@@ -278,13 +280,13 @@
 <span class="co">#&gt; 3:     3     6     c</span></pre></div>
 <p>You can also use this format to drop columns:</p>
 <div class="sourceCode" id="cb6"><pre class="r"><span class="no">test_df</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/select..html">select.</a></span>(-<span class="no">is.numeric</span>)
+  <span class="fu"><a href="reference/select..html">select.</a></span>(-<span class="fu"><a href="reference/where.html">where</a></span>(<span class="no">is.numeric</span>))
 <span class="co">#&gt;        c     d</span>
 <span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;</span>
 <span class="co">#&gt; 1:     a     a</span>
 <span class="co">#&gt; 2:     a     b</span>
 <span class="co">#&gt; 3:     b     c</span></pre></div>
-<p>These same ideas can be used whenever selecting columns in <code>tidytable</code> functions - for example when using <code><a href="reference/count..html">count.()</a></code>, <code><a href="reference/drop_na..html">drop_na.()</a></code>, <code><a href="reference/pivot_longer..html">pivot_longer.()</a></code>, <code>pivot_wider()</code>, etc.</p>
+<p>These same ideas can be used whenever selecting columns in <code>tidytable</code> functions - for example when using <code><a href="reference/count..html">count.()</a></code>, <code><a href="reference/drop_na..html">drop_na.()</a></code>, <code><a href="reference/pivot_longer..html">pivot_longer.()</a></code>, <code><a href="reference/pivot_wider..html">pivot_wider.()</a></code>, etc.</p>
 <div id="new-helper-mutate_across-" class="section level4">
 <h4 class="hasAnchor">
 <a href="#new-helper-mutate_across-" class="anchor"></a>New helper: <code>mutate_across.()</code>
@@ -297,7 +299,7 @@
                       <span class="kw">d</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>))
 
 <span class="no">test_df</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/mutate_across..html">mutate_across.</a></span>(<span class="no">is.numeric</span>, <span class="no">as.character</span>)
+  <span class="fu"><a href="reference/mutate_across..html">mutate_across.</a></span>(<span class="fu"><a href="reference/where.html">where</a></span>(<span class="no">is.numeric</span>), <span class="no">as.character</span>)
 <span class="co">#&gt;        a     b     c     d</span>
 <span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span>
 <span class="co">#&gt; 1:     1     1     a     a</span>
@@ -313,7 +315,7 @@
 <span class="co">#&gt; 3:     2     2     b     c</span></pre></div>
 <p>Using <code>_across.()</code> instead of <code>_all.()</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="r"><span class="no">test_df</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/mutate_across..html">mutate_across.</a></span>(<span class="fu"><a href="https://tidyselect.r-lib.org/reference/select_helpers.html">everything</a></span>(), <span class="no">as.factor</span>)
+  <span class="fu"><a href="reference/mutate_across..html">mutate_across.</a></span>(<span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span>(), <span class="no">as.factor</span>)
 <span class="co">#&gt;        a     b     c     d</span>
 <span class="co">#&gt;    &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;</span>
 <span class="co">#&gt; 1:     1     1     a     a</span>
@@ -324,21 +326,26 @@
 <div id="rlang-compatibility" class="section level2">
 <h2 class="hasAnchor">
 <a href="#rlang-compatibility" class="anchor"></a><code>rlang</code> compatibility</h2>
-<p><code>rlang</code> quoting/unquoting can be used to write custom functions with <code>tidytable</code> functions.</p>
-<p>Note that quosures are not compatible with <code>data.table</code>, so <code><a href="https://rlang.r-lib.org/reference/nse-defuse.html">enexpr()</a></code> must be used instead of <code><a href="https://rlang.r-lib.org/reference/nse-defuse.html">enquo()</a></code>.</p>
+<p><code>rlang</code> can be used to write custom functions with <code>tidytable</code> functions.</p>
 <div id="custom-function-with-mutate-" class="section level5">
 <h5 class="hasAnchor">
 <a href="#custom-function-with-mutate-" class="anchor"></a>Custom function with <code>mutate.()</code>
 </h5>
-<div class="sourceCode" id="cb10"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rlang</span>)
+<div class="sourceCode" id="cb10"><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>), <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>), <span class="kw">z</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span>))
 
-<span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>), <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>), <span class="kw">z</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span>))
+<span class="co"># Using enquo() with !!</span>
+<span class="no">add_one</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">data</span>, <span class="no">add_col</span>) {
 
-<span class="no">add_one</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">.data</span>, <span class="no">add_col</span>) {
-  <span class="no">add_col</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/nse-defuse.html">enexpr</a></span>(<span class="no">add_col</span>)
+  <span class="no">add_col</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/nse-defuse.html">enquo</a></span>(<span class="no">add_col</span>)
 
-  <span class="no">.data</span> <span class="kw">%&gt;%</span>
+  <span class="no">data</span> <span class="kw">%&gt;%</span>
     <span class="fu"><a href="reference/mutate..html">mutate.</a></span>(<span class="kw">new_col</span> <span class="kw">=</span> !!<span class="no">add_col</span> + <span class="fl">1</span>)
+}
+
+<span class="co"># Using the {{ }} shortcut</span>
+<span class="no">add_one</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">data</span>, <span class="no">add_col</span>) {
+  <span class="no">data</span> <span class="kw">%&gt;%</span>
+    <span class="fu"><a href="reference/mutate..html">mutate.</a></span>(<span class="kw">new_col</span> <span class="kw">=</span> {{<span class="no">add_col</span>}} + <span class="fl">1</span>)
 }
 
 <span class="no">df</span> <span class="kw">%&gt;%</span>
@@ -355,13 +362,10 @@
 </h5>
 <div class="sourceCode" id="cb11"><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">10</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"a"</span>, <span class="fl">6</span>), <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"b"</span>, <span class="fl">4</span>)), <span class="kw">z</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"a"</span>, <span class="fl">6</span>), <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"b"</span>, <span class="fl">4</span>)))
 
-<span class="no">find_mean</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">.data</span>, <span class="no">grouping_cols</span>, <span class="no">col</span>) {
-  <span class="no">grouping_cols</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/nse-defuse.html">enexpr</a></span>(<span class="no">grouping_cols</span>)
-  <span class="no">col</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/nse-defuse.html">enexpr</a></span>(<span class="no">col</span>)
-
-  <span class="no">.data</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="reference/summarize..html">summarize.</a></span>(<span class="kw">avg</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(!!<span class="no">col</span>),
-               <span class="kw">by</span> <span class="kw">=</span> !!<span class="no">grouping_cols</span>)
+<span class="no">find_mean</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">data</span>, <span class="no">grouping_cols</span>, <span class="no">col</span>) {
+  <span class="no">data</span> <span class="kw">%&gt;%</span>
+    <span class="fu"><a href="reference/summarize..html">summarize.</a></span>(<span class="kw">avg</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>({{<span class="no">col</span>}}),
+               <span class="kw">by</span> <span class="kw">=</span> {{<span class="no">grouping_cols</span>}})
 }
 
 <span class="no">df</span> <span class="kw">%&gt;%</span>
@@ -372,11 +376,25 @@
 <span class="co">#&gt; 2:     b     b   8.5</span></pre></div>
 </div>
 </div>
+<div id="auto-conversion" class="section level2">
+<h2 class="hasAnchor">
+<a href="#auto-conversion" class="anchor"></a>Auto-conversion</h2>
+<p>All <code>tidytable</code> functions automatically convert <code>data.frame</code> and <code>tibble</code> inputs to a <code>data.table</code>:</p>
+<div class="sourceCode" id="cb12"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">data.table</span>)
+
+<span class="no">test_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">tibble</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>), <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>), <span class="kw">z</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span>))
+
+<span class="no">test_df</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="reference/mutate..html">mutate.</a></span>(<span class="kw">double_x</span> <span class="kw">=</span> <span class="no">x</span> * <span class="fl">2</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html">is.data.table</a></span>()
+<span class="co">#&gt; [1] TRUE</span></pre></div>
+</div>
 <div id="dt-helper" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dt-helper" class="anchor"></a><code>dt()</code> helper</h2>
 <p>The <code><a href="reference/dt.html">dt()</a></code> function makes regular <code>data.table</code> syntax pipeable, so you can easily mix <code>tidytable</code> syntax with <code>data.table</code> syntax:</p>
-<div class="sourceCode" id="cb12"><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>), <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>), <span class="kw">z</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>))
+<div class="sourceCode" id="cb13"><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>), <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>), <span class="kw">z</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>))
 
 <span class="no">df</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/dt.html">dt</a></span>(, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x</span>, <span class="no">y</span>, <span class="no">z</span>)) <span class="kw">%&gt;%</span>
@@ -395,36 +413,36 @@
 <p>Below are some speed comparisons of various functions. More functions will get added to the speed comps over time.</p>
 <p>A few notes:</p>
 <ul>
-<li>Comparing times from separate functions won’t be very useful. For example - the <code>summarize()</code> tests were performed on a different dataset from <code>case_when()</code>.</li>
+<li>Comparing times from separate functions won’t be very useful. For example - the <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> tests were performed on a different dataset from <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code>.</li>
 <li>
 <code><a href="https://Rdatatable.gitlab.io/data.table/reference/openmp-utils.html">setDTthreads(4)</a></code> was used for <code>data.table</code> &amp; <code>tidytable</code> timings.</li>
 <li>Modify-by-reference was used in <code>data.table</code> when being compared to <code><a href="reference/mutate..html">mutate.()</a></code> &amp; <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code>
 </li>
 <li>
 <code><a href="reference/fill..html">fill.()</a></code> &amp; <code><a href="https://tidyr.tidyverse.org/reference/fill.html">tidyr::fill()</a></code> both work with character/factor/logical columns, whereas <code><a href="https://Rdatatable.gitlab.io/data.table/reference/nafill.html">data.table::nafill()</a></code> does not. Testing only included numeric columns due to this constraint.</li>
-<li>Currently <code>data.table</code> doesn’t have its own <code>case_when()</code> translation, so a multiple nested <code><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">fifelse()</a></code> was used.</li>
+<li>Currently <code>data.table</code> doesn’t have its own <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> translation, so a multiple nested <code><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">fifelse()</a></code> was used.</li>
 <li>All tests can be found in the source code of the README.</li>
 <li>
 <code>pandas</code> comparisons are in the process of being added - more will be added soon.</li>
 <li>Lastly I’d like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.</li>
 </ul>
-<!-- end list --><div class="sourceCode" id="cb13"><pre class="r"><span class="no">all_marks</span>
+<!-- end list --><div class="sourceCode" id="cb14"><pre class="r"><span class="no">all_marks</span>
 <span class="co">#&gt; # A tibble: 13 x 6</span>
 <span class="co">#&gt;    function_tested data.table tidytable tidyverse pandas tidytable_vs_tidyverse</span>
 <span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;                 </span>
-<span class="co">#&gt;  1 arrange         75.3ms     75.81ms   549.93ms  297ms  13.8%                 </span>
-<span class="co">#&gt;  2 case_when       71.76ms    93.47ms   442.74ms  307ms  21.1%                 </span>
-<span class="co">#&gt;  3 distinct        41.64ms    48.98ms   109.64ms  287ms  44.7%                 </span>
-<span class="co">#&gt;  4 fill            44.42ms    49ms      119.1ms   146ms  41.1%                 </span>
-<span class="co">#&gt;  5 filter          260ms      295.16ms  344.72ms  656ms  85.6%                 </span>
-<span class="co">#&gt;  6 inner_join      97.19ms    103.07ms  90.94ms   &lt;NA&gt;   113.3%                </span>
-<span class="co">#&gt;  7 left_join       62.49ms    91.95ms   98.82ms   &lt;NA&gt;   93.0%                 </span>
-<span class="co">#&gt;  8 mutate          55.43ms    79.5ms    61.02ms   85.2ms 130.3%                </span>
-<span class="co">#&gt;  9 nest            18.24ms    18.1ms    38.04ms   &lt;NA&gt;   47.6%                 </span>
-<span class="co">#&gt; 10 pivot_longer    13.61ms    15.65ms   51.23ms   &lt;NA&gt;   30.5%                 </span>
-<span class="co">#&gt; 11 pivot_wider     121.61ms   113.36ms  148ms     &lt;NA&gt;   76.6%                 </span>
-<span class="co">#&gt; 12 summarize       291.33ms   185.92ms  524.59ms  780ms  35.4%                 </span>
-<span class="co">#&gt; 13 unnest          5.35ms     22.09ms   965.43ms  &lt;NA&gt;   2.3%</span></pre></div>
+<span class="co">#&gt;  1 arrange         59.58ms    64.61ms   451.53ms  355ms  14.3%                 </span>
+<span class="co">#&gt;  2 case_when       74.13ms    67.33ms   419.69ms  59.2ms 16.0%                 </span>
+<span class="co">#&gt;  3 distinct        42.08ms    42.55ms   106.55ms  309ms  39.9%                 </span>
+<span class="co">#&gt;  4 fill            43.03ms    46.88ms   136.04ms  846ms  34.5%                 </span>
+<span class="co">#&gt;  5 filter          236.47ms   231.46ms  296.91ms  707ms  78.0%                 </span>
+<span class="co">#&gt;  6 inner_join      89.06ms    107.27ms  79.85ms   &lt;NA&gt;   134.3%                </span>
+<span class="co">#&gt;  7 left_join       66.25ms    73.97ms   86.29ms   &lt;NA&gt;   85.7%                 </span>
+<span class="co">#&gt;  8 mutate          63.37ms    70.61ms   60.67ms   86.4ms 116.4%                </span>
+<span class="co">#&gt;  9 nest            14.98ms    16.28ms   36.14ms   &lt;NA&gt;   45.0%                 </span>
+<span class="co">#&gt; 10 pivot_longer    13.73ms    14.89ms   53.92ms   &lt;NA&gt;   27.6%                 </span>
+<span class="co">#&gt; 11 pivot_wider     111ms      120.63ms  81.77ms   &lt;NA&gt;   147.5%                </span>
+<span class="co">#&gt; 12 summarize       292.95ms   273.02ms  505.77ms  834ms  54.0%                 </span>
+<span class="co">#&gt; 13 unnest          26.67ms    21.53ms   939.83ms  &lt;NA&gt;   2.3%</span></pre></div>
 </div>
 </div>
 </div>
@@ -461,7 +479,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=tidytable"><img src="https://www.r-pkg.org/badges/version/tidytable" alt="CRAN status"></a></li>
-<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.4.1.9-green.svg"></a></li>
+<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.5.0-green.svg"></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 <li><a href="https://markfairbanks.github.io/tidytable/"><img src="https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey" alt="CRAN RStudio mirror downloads"></a></li>
 </ul>
