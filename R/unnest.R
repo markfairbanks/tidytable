@@ -76,12 +76,12 @@ unnest_col <- function(.df, col = NULL) {
 
     if (!is_datatable) .df <- mutate.(.df, !!col := map.(!!col, as_tidytable))
 
-    .df <- bind_rows.(pull.(.df, !!col))
+    result_df <- bind_rows.(pull.(.df, !!col))
 
   } else {
     # Unnests a vector
-    .df <- summarize.(.df, !!col := unlist(!!col, recursive = FALSE))
+    result_df <- summarize.(.df, !!col := unlist(!!col, recursive = FALSE))
   }
-  .df
+  result_df
 }
 
