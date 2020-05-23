@@ -47,7 +47,7 @@ slice..data.frame <- function(.df, rows = 1:5, by = NULL) {
   by <- select_vec_by(.df, {{ by }})
 
   eval_quo(
-    .df[, eval_quo(.SD[!!rows], .SD), !!by]
+    .df[, eval_quo({.N = .env$.N; .SD[!!rows]}, .SD), !!by]
   )
 }
 
