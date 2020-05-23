@@ -36,7 +36,7 @@ mutate_across. <- function(.df, .cols = everything(), .fns, ..., by = NULL) {
 }
 
 #' @export
-mutate_across..data.frame <- function(.df, .cols = everything.(), .fns, ..., by = NULL) {
+mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ..., by = NULL) {
 
   .df <- as_tidytable(.df)
 
