@@ -67,7 +67,7 @@ rename_across..data.frame <- function(.data, .cols, .fun, ...) {
   .data <- as_tidytable(.data)
 
   .cols <- enexpr(.cols)
-  .cols <- as.character(vec_selector(.data, !!.cols))
+  .cols <- select_vec_chr(.data, !!.cols)
 
   .data <- shallow(.data)
 

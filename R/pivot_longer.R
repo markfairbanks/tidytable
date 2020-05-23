@@ -48,7 +48,7 @@ pivot_longer..data.frame <- function(.df,
 
   names <- names(.df)
 
-  cols <- names(vec_selector_i(.df, {{ cols }}))
+  cols <- select_vec_chr(.df, {{ cols }})
 
   if (length(cols) == 0) warning("No columns remaining after removing")
 

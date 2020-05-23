@@ -3,7 +3,7 @@
 #' @description
 #' Select or drop columns from a data.table
 #'
-#' @param .data A data.frame or data.table
+#' @param .df A data.frame or data.table
 #' @param ... Columns to select or drop.
 #' Use named arguments, e.g. new_name = old_name, to rename selected variables.
 #' `tidyselect` compatible.
@@ -35,22 +35,22 @@
 #'
 #' test_df %>%
 #'   select.(stuff = x, y)
-select. <- function(.data, ...) {
+select. <- function(.df, ...) {
   UseMethod("select.")
 }
 
 #' @export
-select..data.frame <- function(.data, ...) {
+select..data.frame <- function(.df, ...) {
 
-  .data <- as_tidytable(.data)
+  .df <- as_tidytable(.df)
 
-  select_cols <- dots_selector_i(.data, ...)
+  select_cols <- select_dots_i(.df, ...)
 
-  .data <- eval_expr(.data[, !!select_cols])
+  .df <- eval_expr(.df[, !!select_cols])
 
-  .data <- set_names(.data, names(select_cols))
+  .df <- set_names(.df, names(select_cols))
 
-  .data
+  .df
 }
 
 #' @export

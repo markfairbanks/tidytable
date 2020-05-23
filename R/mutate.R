@@ -69,7 +69,7 @@ mutate..data.frame <- function(.df, ..., by = NULL) {
     }
   } else {
     # Faster with "by", since the "by" call isn't looped multiple times for each column added
-    by <- vec_selector_by(.df, !!by)
+    by <- select_vec_by(.df, !!by)
 
     dot_names <- names(dots)
     dots <- unname(dots)

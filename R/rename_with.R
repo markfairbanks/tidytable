@@ -35,7 +35,7 @@ rename_with..data.frame <- function(.df, .fn, .cols = everything(), ...) {
 
   .df <- as_tidytable(.df)
 
-  .cols <- as.character(vec_selector(.df, {{ .cols }}))
+  .cols <- select_vec_chr(.df, {{ .cols }})
 
   .df <- shallow(.df)
 

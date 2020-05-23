@@ -36,7 +36,7 @@ group_split..data.frame <- function(.df, ..., .keep = TRUE) {
   if (length(dots) == 0) {
     list(.df)
   } else {
-    dots <- as.character(dots_selector(.df, ...))
+    dots <- select_dots_chr(.df, ...)
 
     dots <- unname(split(.df, by = dots, keep.by = .keep))
 

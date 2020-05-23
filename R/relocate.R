@@ -46,16 +46,16 @@ relocate..data.frame <- function(.df, ..., .before = NULL, .after = NULL) {
 
   data_names <- names(.df)
   all_cols_i <- seq_along(data_names)
-  selected_cols_i <- dots_selector_i(.df, ...)
+  selected_cols_i <- select_dots_i(.df, ...)
 
   if (!quo_is_null(.before)) {
 
-    before_i <- vec_selector_i(.df, !!.before)
+    before_i <- select_vec_i(.df, !!.before)
     start_cols_i <- all_cols_i[all_cols_i < before_i]
 
   } else {
 
-    after_i <- vec_selector_i(.df, !!.after)
+    after_i <- select_vec_i(.df, !!.after)
     start_cols_i <- all_cols_i[all_cols_i <= after_i]
 
   }

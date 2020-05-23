@@ -40,9 +40,9 @@ mutate_across..data.frame <- function(.df, .cols = everything.(), .fns, ..., by 
 
   .df <- as_tidytable(.df)
 
-  .cols <- names(vec_selector_i(.df, {{ .cols }}))
+  .cols <- select_vec_chr(.df, {{ .cols }})
 
-  by <- vec_selector_by(.df, {{ by }})
+  by <- select_vec_by(.df, {{ by }})
 
   .df <- shallow(.df)
 
