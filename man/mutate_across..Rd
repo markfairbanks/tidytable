@@ -12,8 +12,7 @@ dt_mutate_across(.df, .cols = everything(), .fns, ..., by = NULL)
 \arguments{
 \item{.df}{A data.frame or data.table}
 
-\item{.cols}{vector \code{c()} of unquoted column names
-\code{tidyselect} compatible.}
+\item{.cols}{vector \code{c()} of unquoted column names. \code{tidyselect} compatible.}
 
 \item{.fns}{Functions to pass. Can pass a list of functions.}
 

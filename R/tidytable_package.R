@@ -3,13 +3,13 @@
 #' @import tidyselect
 #' @importFrom lifecycle deprecate_soft
 #' @importFrom methods as
-#' @importFrom rlang abort as_function caller_env enexpr enexprs enquo enquos expr
+#' @importFrom rlang abort as_function caller_env call2 enexpr enexprs enquo enquos expr
 #' @importFrom rlang expr_text eval_tidy have_name is_formula is_named is_null missing_arg
 #' @importFrom rlang quo quo_is_null quo_squash quo_text seq2 set_names squash sym syms
 #' @importFrom rlang `%|%` `%||%`
 #' @importFrom stats as.formula na.omit setNames
-#' @importFrom utils capture.output head tail getFromNamespace
-#' @importFrom vctrs vec_assert vec_cast vec_ptype_common vec_recycle vec_size vec_unique
+#' @importFrom utils capture.output head tail
+#' @importFrom vctrs vec_assert vec_as_names vec_cast vec_ptype_common vec_recycle vec_size vec_unique
 NULL
 
 globalVariables(c("data", ".","..select_vars", ".count", "na_index", ".new_col",
