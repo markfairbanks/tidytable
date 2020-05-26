@@ -86,3 +86,7 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ..., b
   }
   .df
 }
+
+#' @export
+#' @rdname summarize_across.
+summarise_across. <- summarize_across.

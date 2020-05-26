@@ -2,9 +2,12 @@
 % Please edit documentation in R/summarize_across.R
 \name{summarize_across.}
 \alias{summarize_across.}
+\alias{summarise_across.}
 \title{Summarize multiple columns}
 \usage{
 summarize_across.(.df, .cols = everything(), .fns, ..., by = NULL)
+
+summarise_across.(.df, .cols = everything(), .fns, ..., by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

@@ -9,6 +9,17 @@ test_that("single function works", {
   expect_equal(result_df$b, 5)
 })
 
+test_that("summarise spelling works", {
+  test_df <- tidytable(a = 1:3, b = 4:6, z = c("a", "a", "b"))
+
+  result_df <- test_df %>%
+    summarise_across.(c(a, b), mean, na.rm = TRUE)
+
+  expect_named(result_df, c("a", "b"))
+  expect_equal(result_df$a, 2)
+  expect_equal(result_df$b, 5)
+})
+
 test_that("single function works with by", {
   test_df <- tidytable(a = 1:3, b = 4:6, z = c("a", "a", "b"))
 
