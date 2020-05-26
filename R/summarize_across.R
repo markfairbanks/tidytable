@@ -13,22 +13,28 @@
 #' @export
 #'
 #' @examples
-#' test_df <- tidytable(a = 1:3, b = 4:6, z = c("a", "a", "b"))
+#' test_df <- data.table(a = 1:3,
+#'                       b = 4:6,
+#'                       z = c("a", "a", "b"))
 #'
-#' # Can pass a function and arguments separately
+#' # Single function
 #' test_df %>%
 #'   summarize_across.(c(a, b), mean, na.rm = TRUE)
 #'
-#' # Or can use a purrr style formula
+#' # Single function using purrr style interface
 #' test_df %>%
 #'   summarize_across.(c(a, b), ~ mean(.x, na.rm = TRUE))
 #'
-#' # Multiple functions can be passed in a list
+#' # Passing a list of functions (with by)
 #' test_df %>%
-#'   summarize_across.(c(a, b), list(avg = mean, length), by = z)
+#'   summarize_across.(c(a, b), list(mean, max), by = z)
 #'
+#' # Passing a named list of functions (with by)
 #' test_df %>%
-#'   summarize_across.(where(is.numeric), mean, na.rm = TRUE)
+#'   summarize_across.(c(a, b),
+#'                     list(avg = mean,
+#'                          max_plus_one = ~ max(.x) + 1),
+#'                     by = z)
 summarize_across. <- function(.df, .cols = everything(), .fns, ..., by = NULL) {
   UseMethod("summarize_across.")
 }
