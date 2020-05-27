@@ -13,8 +13,6 @@ dt_map2 <- map2.
 #' @export
 #' @rdname map.
 map2_lgl. <- function(.x, .y, .f, ...) {
-  .f <- as_function(.f)
-
   as.logical(map2.(.x, .y, .f, ...))
 }
 
@@ -25,8 +23,6 @@ dt_map2_lgl <- map2_lgl.
 #' @export
 #' @rdname map.
 map2_int. <- function(.x, .y, .f, ...) {
-  .f <- as_function(.f)
-
   as.integer(map2.(.x, .y, .f, ...))
 }
 
@@ -37,8 +33,6 @@ dt_map2_int <- map2_int.
 #' @export
 #' @rdname map.
 map2_dbl. <- function(.x, .y, .f, ...) {
-  .f <- as_function(.f)
-
   as.double(map2.(.x, .y, .f, ...))
 }
 
@@ -49,8 +43,6 @@ dt_map2_dbl <- map2_dbl.
 #' @export
 #' @rdname map.
 map2_chr. <- function(.x, .y, .f, ...) {
-  .f <- as_function(.f)
-
   as.character(map2.(.x, .y, .f, ...))
 }
 
@@ -61,9 +53,8 @@ dt_map2_chr <- map2_chr.
 #' @export
 #' @rdname map.
 map2_dfc. <- function(.x, .y, .f, ...) {
-  .f <- as_function(.f)
-
   result_list <- map2.(.x, .y, .f, ...)
+
   bind_cols.(result_list)
 }
 
@@ -74,9 +65,8 @@ dt_map2_dfc <- map2_dfc.
 #' @export
 #' @rdname map.
 map2_dfr. <- function(.x, .y, .f, ..., .id = NULL) {
-  .f <- as_function(.f)
-
   result_list <- map2.(.x, .y, .f, ...)
+
   bind_rows.(result_list, .id = .id)
 }
 
