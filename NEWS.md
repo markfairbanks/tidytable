@@ -1,3 +1,8 @@
+# tidytable 0.5.1 (in development)
+
+* New functions:
+  + `summarize_across.()` & `summarise_across.()`
+
 # tidytable 0.5.0
 
 * `tidytable` now works with quosures

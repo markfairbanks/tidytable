@@ -52,7 +52,11 @@ bind_cols. <- function(...) {
   if (!all(map_lgl.(dots, is.data.table)))
     dots <- map.(dots, as_tidytable)
 
-  as_tidytable(name_fix(setDT(unlist(dots, recursive = FALSE), check.names = FALSE)[]))
+  dots <- setDT(unlist(dots, recursive = FALSE), check.names = FALSE)
+
+  names(dots) <- vec_as_names_legacy(names(dots))
+
+  as_tidytable(dots)
 
 }
 
@@ -60,18 +64,3 @@ bind_cols. <- function(...) {
 #' @rdname bind_rows.
 dt_bind_cols <- bind_cols.
 
-name_fix <- function(.data) {
-
-  col_names <- names(.data)
-
-  dupe_count <- map_dbl.(seq_along(col_names), ~ sum(col_names[.x] == col_names[1:.x]))
-
-  col_names[dupe_count > 1] <- paste0(
-    col_names[dupe_count > 1],
-    dupe_count[dupe_count > 1] - 1
-  )
-
-  names(.data) <- col_names
-
-  .data
-}
