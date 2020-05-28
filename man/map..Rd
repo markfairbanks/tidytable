@@ -114,11 +114,12 @@ dt_map2_df(.x, .y, .f, ..., .id = NULL)
 \item{.y}{A list or vector}
 }
 \description{
-The dt_map functions transform their input by applying a function to each element and returning a vector the same length as the input.
+The map functions transform their input by applying a function to each element and returning
+a list/vector/data.table.
 \itemize{
 \item \code{map.()} returns a list
 \item \verb{_lgl.()}, \verb{_int.()}, \verb{_dbl.()},\verb{_chr.()}, \verb{_df.()} variants return their specified type
-\item \verb{_dfr.()} & \verb{_dfc.()} Return all data frame results utilizing row or column binding
+\item \verb{_dfr.()} & \verb{_dfc.()} Return all data frame results combined utilizing row or column binding
 }
 }
 \examples{
