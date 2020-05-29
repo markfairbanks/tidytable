@@ -7,6 +7,7 @@
 
 0 errors | 0 warnings | 0 notes
 
-* No comments, all checks passed
+* All checks passed
+* This is a quick bug fix to a core function.
 
 
