@@ -44,10 +44,10 @@ slice..data.frame <- function(.df, rows = 1:5, by = NULL) {
   .df <- as_tidytable(.df)
 
   rows <- enquo(rows) # Needed so 1:.N works
-  by <- select_vec_by(.df, {{ by }})
+  by <- select_vec_chr(.df, {{ by }})
 
   eval_quo(
-    .df[, eval_quo({.N = .env$.N; .SD[!!rows]}, .SD), !!by]
+    .df[, eval_quo({.N = .env$.N; .SD[!!rows]}, .SD), by]
   )
 }
 
@@ -64,10 +64,10 @@ slice_head..data.frame <- function(.df, n = 5, by = NULL) {
 
   n <- enquo(n)
 
-  by <- select_vec_by(.df, {{ by }})
+  by <- select_vec_chr(.df, {{ by }})
 
   eval_quo(
-    .df[, eval_quo({.N = .env$.N; head(.SD, !!n)}, .SD), !!by]
+    .df[, eval_quo({.N = .env$.N; head(.SD, !!n)}, .SD), by = by]
   )
 }
 
@@ -84,10 +84,10 @@ slice_tail..data.frame <- function(.df, n = 5, by = NULL) {
 
   n <- enquo(n)
 
-  by <- select_vec_by(.df, {{ by }})
+  by <- select_vec_chr(.df, {{ by }})
 
   eval_quo(
-    .df[, eval_quo({.N = .env$.N; tail(.SD, !!n)}, .SD), !!by]
+    .df[, eval_quo({.N = .env$.N; tail(.SD, !!n)}, .SD), by = by]
   )
 }
 

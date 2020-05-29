@@ -41,14 +41,14 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ..., by =
 
   .cols <- select_vec_chr(.df, {{ .cols }})
 
-  by <- select_vec_by(.df, {{ by }})
+  by <- select_vec_chr(.df, {{ by }})
 
   .df <- shallow(.df)
 
   if (!is.list(.fns)) {
     if (length(.cols) > 0) {
       eval_quo(
-        .df[, (.cols) := eval_quo(map.(.SD, .fns, ...), .SD), .SDcols = .cols, by = !!by],
+        .df[, (.cols) := eval_quo(map.(.SD, .fns, ...), .SD), .SDcols = .cols, by = by],
         .df)
     } else {
       .df
@@ -63,7 +63,7 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ..., by =
       new_cols <-  paste0(.cols, "_", new_names[[i]])
 
       eval_quo(
-        .df[, (new_cols) := eval_quo(map.(.SD, .fns[[i]]), .SD), .SDcols = .cols, by = !!by],
+        .df[, (new_cols) := eval_quo(map.(.SD, .fns[[i]]), .SD), .SDcols = .cols, by = by],
         .df)
     }
   }

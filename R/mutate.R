@@ -69,7 +69,7 @@ mutate..data.frame <- function(.df, ..., by = NULL) {
     }
   } else {
     # Faster with "by", since the "by" call isn't looped multiple times for each column added
-    by <- select_vec_by(.df, !!by)
+    by <- select_vec_chr(.df, !!by)
 
     dot_names <- names(dots)
     dots <- unname(dots)
@@ -78,7 +78,7 @@ mutate..data.frame <- function(.df, ..., by = NULL) {
       .df[ , !!dot_names := eval_quo(
         {.N = .env$.N; .SD = .env$.SD; .I = .env$.I; .GRP = .env$.GRP; list(!!!dots)},
         .SD),
-        by = !!by],
+        by = by],
       .df)
 
   }

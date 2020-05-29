@@ -40,12 +40,12 @@ summarize..data.frame <- function(.df, ..., by = NULL) {
   .df <- as_tidytable(.df)
 
   dots <- enquos(...)
-  by <- select_vec_by(.df, {{ by }})
+  by <- select_vec_chr(.df, {{ by }})
 
   eval_quo(
     .df[, eval_quo(
       {.N = .env$.N; .SD = .env$.SD; .I = .env$.I; .GRP = .env$.GRP;
-      list(!!!dots)}, .SD), by = !!by],
+      list(!!!dots)}, .SD), by = by],
     .df)
 
 }

@@ -40,12 +40,12 @@ filter..data.frame <- function(.df, ..., by = NULL) {
       .df)
 
   } else {
-    by <- select_vec_by(.df, !!by)
+    by <- select_vec_chr(.df, !!by)
 
     col_order <- names(.df)
 
     .df <- eval_quo(
-      .df[, eval_quo(.SD[Reduce('&', list(!!!dots))], .SD), by = !!by],
+      .df[, eval_quo(.SD[Reduce('&', list(!!!dots))], .SD), by = by],
       .df)
 
     setcolorder(.df, col_order)

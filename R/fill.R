@@ -86,13 +86,13 @@ filler <- function(.df, ..., type = "locf", by = NULL) {
     other_cols <- syms(other_cols)
     .df <- shallow(.df)
 
-    by <- select_vec_by(.df, !!by)
+    by <- select_vec_chr(.df, !!by)
 
     for (col in other_cols) {
       eval_quo(
         .df[, !!col := eval_quo(
           .SD[, !!col][nafill(fifelse(is.na(!!col), NA_integer_, 1:.N), type = !!type)], .SD),
-          by = !!by]
+          by = by]
       )
     }
   }
