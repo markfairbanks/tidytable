@@ -508,7 +508,7 @@ unnest_tbl <- unnest_dt %>%
   mutate(list_column = map(list_column, as_tibble))
 
 unnest_marks <- bench::mark(
-  tidyverse = tidyr::unnest_legacy(unnest_tbl, list_column),
+  tidyverse = tidyr::unnest(unnest_tbl, list_column),
   tidytable = unnest.(unnest_dt, list_column),
   data.table = unnest_dt[, unlist(list_column, recursive = FALSE), by = id],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
@@ -529,7 +529,7 @@ nest_dt <- data.table(id = 1:5,
 nest_tbl <- as_tibble(nest_dt)
 
 nest_marks <- bench::mark(
-  tidyverse = group_nest(nest_dt, id),
+  tidyverse = group_nest(nest_tbl, id),
   tidytable = nest_by.(nest_dt, id),
   data.table = nest_dt[, list(data = list(.SD)), by = id],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
