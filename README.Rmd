@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/dev%20-0.5.0.9-green.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/dev%20-0.5.1-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey)](https://markfairbanks.github.io/tidytable/)
 <!-- badges: end -->
@@ -65,7 +65,8 @@ devtools::install_github("markfairbanks/tidytable")
   + The `_across.()` helper is new and can replace the `_if.()`/`_at.()`/`_all.()` helpers
   [See here](https://markfairbanks.github.io/tidytable/#new-variant-dt_mutate_across)
 * `select.()`
-* `summarize.()`: Group by specifications called inside.
+* `summarize.()` & `summarize_across.()`
+  + Group by specifications called inside.
 [See here](https://markfairbanks.github.io/tidytable/#using-group-by)
 
 ##### Other dplyr functions
