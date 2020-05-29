@@ -66,7 +66,7 @@ filler <- function(.df, ..., type = "locf", by = NULL) {
   numeric_cols <- all_cols[map_lgl.(subset_data, is.numeric)]
   other_cols <- all_cols[!all_cols %in% numeric_cols]
 
-  with_by <- !is.null(by)
+  with_by <- !quo_is_null(by)
 
   if (with_by) col_order <- names(.df)
 
@@ -75,9 +75,9 @@ filler <- function(.df, ..., type = "locf", by = NULL) {
     numeric_cols <- syms(numeric_cols)
 
     .df <- mutate_across.(.df,
-                            c(!!!numeric_cols),
-                            nafill, type,
-                            by = !!by)
+                          c(!!!numeric_cols),
+                          nafill, type,
+                          by = !!by)
 
   }
 
