@@ -36,8 +36,11 @@ distinct..data.frame <- function(.df, ..., .keep_all = FALSE) {
   dots <- enquos(...)
 
   if (length(dots) == 0) {
-    unique(.df)
+
+    .df <- unique(.df)
+
   } else {
+
     select_cols <- select_dots_i(.df, ...)
 
     .df <- unique(.df, by = select_cols)
