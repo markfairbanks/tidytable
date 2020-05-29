@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Lead and Lag — leads. • tidytable</title>
+<title>Summarize multiple columns — summarize_across. • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Lead and Lag — leads." />
-<meta property="og:description" content="Find the &quot;next&quot; or &quot;previous&quot; values in a vector. Useful for comparing values ahead of or behind the current values." />
+<meta property="og:title" content="Summarize multiple columns — summarize_across." />
+<meta property="og:description" content="Summarize multiple columns simultaneously" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,51 +119,71 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Lead and Lag</h1>
-    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/lead_lag.R'><code>R/lead_lag.R</code></a></small>
-    <div class="hidden name"><code>leads..Rd</code></div>
+    <h1>Summarize multiple columns</h1>
+    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/summarize_across.R'><code>R/summarize_across.R</code></a></small>
+    <div class="hidden name"><code>summarize_across..Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Find the "next" or "previous" values in a vector. Useful for comparing values ahead of or behind the current values.</p>
+    <p>Summarize multiple columns simultaneously</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='leads..html'>leads.</a></span>(<span class='no'>x</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
+    <pre class="usage"><span class='fu'><a href='summarize_across..html'>summarize_across.</a></span>(<span class='no'>.df</span>, <span class='kw'>.cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(), <span class='no'>.fns</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='leads..html'>lags.</a></span>(<span class='no'>x</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>NA</span>)</pre>
+<span class='fu'><a href='summarize_across..html'>summarise_across.</a></span>(<span class='no'>.df</span>, <span class='kw'>.cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(), <span class='no'>.fns</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>a vector of values</p></td>
+      <th>.df</th>
+      <td><p>A data.frame or data.table</p></td>
     </tr>
     <tr>
-      <th>n</th>
-      <td><p>a positive integer of length 1, giving the number of positions to lead or lag by</p></td>
+      <th>.cols</th>
+      <td><p>vector <code><a href='https://rdrr.io/r/base/c.html'>c()</a></code> of unquoted column names. <code>tidyselect</code> compatible.</p></td>
     </tr>
     <tr>
-      <th>default</th>
-      <td><p>value used for non-existent rows. Defaults to NA.</p></td>
+      <th>.fns</th>
+      <td><p>Functions to pass. Can pass a list of functions.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other arguments for the passed function</p></td>
+    </tr>
+    <tr>
+      <th>by</th>
+      <td><p>Columns to group by</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='fl'>5</span>
+    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
+                      <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>,
+                      <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span>))
 
-<span class='fu'><a href='leads..html'>leads.</a></span>(<span class='no'>x</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1]  2  3  4  5 NA</div><div class='input'><span class='fu'><a href='leads..html'>lags.</a></span>(<span class='no'>x</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] NA  1  2  3  4</div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>)
-
+<span class='co'># Single function</span>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>lag_x</span> <span class='kw'>=</span> <span class='fu'><a href='leads..html'>lags.</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt;    x lag_x
-#&gt; 1: 1    NA
-#&gt; 2: 2     1
-#&gt; 3: 3     2
-#&gt; 4: 4     3
-#&gt; 5: 5     4</div><div class='input'>
-</div></pre>
+  <span class='fu'><a href='summarize_across..html'>summarize_across.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>a</span>, <span class='no'>b</span>), <span class='no'>mean</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;    a b
+#&gt; 1: 2 5</div><div class='input'>
+<span class='co'># Single function using purrr style interface</span>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='summarize_across..html'>summarize_across.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>a</span>, <span class='no'>b</span>), ~ <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>.x</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt;    a b
+#&gt; 1: 2 5</div><div class='input'>
+<span class='co'># Passing a list of functions (with by)</span>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='summarize_across..html'>summarize_across.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>a</span>, <span class='no'>b</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>mean</span>, <span class='no'>max</span>), <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z fn1_a fn1_b fn2_a fn2_b
+#&gt; 1: a   1.5   4.5     2     5
+#&gt; 2: b   3.0   6.0     3     6</div><div class='input'>
+<span class='co'># Passing a named list of functions (with by)</span>
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='summarize_across..html'>summarize_across.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>a</span>, <span class='no'>b</span>),
+                    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>avg</span> <span class='kw'>=</span> <span class='no'>mean</span>,
+                         <span class='kw'>max_plus_one</span> <span class='kw'>=</span> ~ <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='no'>.x</span>) + <span class='fl'>1</span>),
+                    <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z avg_a avg_b max_plus_one_a max_plus_one_b
+#&gt; 1: a   1.5   4.5              3              6
+#&gt; 2: b   3.0   6.0              4              7</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
