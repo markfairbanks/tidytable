@@ -29,9 +29,9 @@ arrange..data.frame <- function(.df, ...) {
 
   dots <- enquos(...)
 
-  eval_tidy(quo_squash(quo(
+  eval_quo(
     .df[order(!!!dots)]
-  )), .df)
+  )
 }
 
 #' @export

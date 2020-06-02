@@ -48,8 +48,8 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ..., by =
   if (!is.list(.fns)) {
     if (length(.cols) > 0) {
       eval_quo(
-        .df[, (.cols) := eval_quo(map.(.SD, .fns, ...), .SD), .SDcols = .cols, by = by],
-        .df)
+        .df[, (.cols) := map.(.SD, .fns, ...), .SDcols = !!.cols, by = !!by],
+      )
     } else {
       .df
     }
@@ -63,8 +63,8 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ..., by =
       new_cols <-  paste0(.cols, "_", new_names[[i]])
 
       eval_quo(
-        .df[, (new_cols) := eval_quo(map.(.SD, .fns[[i]]), .SD), .SDcols = .cols, by = by],
-        .df)
+        .df[, (new_cols) := map.(.SD, .fns[[i]]), .SDcols = !!.cols, by = !!by],
+      )
     }
   }
   .df[]

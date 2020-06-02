@@ -43,10 +43,8 @@ summarize..data.frame <- function(.df, ..., by = NULL) {
   by <- select_vec_chr(.df, {{ by }})
 
   eval_quo(
-    .df[, eval_quo(
-      {.N = .env$.N; .SD = .env$.SD; .I = .env$.I; .GRP = .env$.GRP;
-      list(!!!dots)}, .SD), by = by],
-    .df)
+    .df[, list(!!!dots), by = by]
+  )
 
 }
 

@@ -52,7 +52,7 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ..., b
 
   # Needed to ensure summarize_across.() doesn't fail due to
   # integer results in one group but double results in another group
-  .df <- mutate_across.(.df, where(is.numeric), as.double)
+  # .df <- mutate_across.(.df, where(is.numeric), as.double)
 
   if (!is.list(.fns)) {
 
@@ -82,7 +82,7 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ..., b
     .fns <- map.(.fns, ~ call2('map.', quo(.SD), .x))
 
     .df <- eval_quo(
-      .df[, eval_quo({.SD = .env$.SD; c(!!!.fns)}, .SD), .SDcols = .cols, by = by]
+      .df[, c(!!!.fns), .SDcols = .cols, by = by]
     )
 
     old_names <- names(.df)
