@@ -97,7 +97,7 @@ test_that("works in custom function", {
 
   slice_fn <- function(.df, val) {
     .df %>%
-      slice.(val, by = z)
+      slice.({{ val }}, by = z)
   }
 
   sliced_df <- test_df %>%
@@ -233,7 +233,7 @@ test_that("_max.() works with custom function with quosures", {
 
   slice_fn <- function(.df, col, num) {
     .df %>%
-      slice_max.({{ col }}, num)
+      slice_max.({{ col }}, {{ num }})
   }
 
   sliced_df <- test_df %>%

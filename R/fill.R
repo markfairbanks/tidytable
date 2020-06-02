@@ -90,8 +90,7 @@ filler <- function(.df, ..., type = "locf", by = NULL) {
 
     for (col in other_cols) {
       eval_quo(
-        .df[, !!col := eval_quo(
-          .SD[, !!col][nafill(fifelse(is.na(!!col), NA_integer_, 1:.N), type = !!type)], .SD),
+        .df[, !!col := .SD[, !!col][nafill(fifelse(is.na(!!col), NA_integer_, 1:.N), type = !!type)],
           by = by]
       )
     }

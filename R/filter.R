@@ -36,8 +36,8 @@ filter..data.frame <- function(.df, ..., by = NULL) {
   if (quo_is_null(by)) {
 
     .df <- eval_quo(
-      .df[Reduce('&', list(!!!dots))],
-      .df)
+      .df[Reduce('&', list(!!!dots))]
+      )
 
   } else {
     by <- select_vec_chr(.df, !!by)
@@ -45,8 +45,8 @@ filter..data.frame <- function(.df, ..., by = NULL) {
     col_order <- names(.df)
 
     .df <- eval_quo(
-      .df[, eval_quo(.SD[Reduce('&', list(!!!dots))], .SD), by = by],
-      .df)
+      .df[, eval_quo(.SD[Reduce('&', list(!!!dots))], .SD), by = by]
+    )
 
     setcolorder(.df, col_order)
   }

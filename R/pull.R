@@ -28,9 +28,9 @@ pull..data.frame <- function(.df, var = NULL) {
   if (quo_is_null(var)) var <- sym(names(.df)[ncol(.df)])
 
   # Base R translation is faster than data.table
-  eval_tidy(quo_squash(quo(
+  eval_quo(
     '$'(.df, !!var)
-  )))
+  )
 }
 
 #' @export

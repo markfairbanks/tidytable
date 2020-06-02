@@ -47,7 +47,7 @@ nest_by..data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
 
     .df <- distinct.(.df, !!!split_vars)
 
-    .df <- mutate.(.df, {{.key}} := split_list)
+    .df <- mutate.(.df, {{.key}} := !!split_list)
 
   } else {
 

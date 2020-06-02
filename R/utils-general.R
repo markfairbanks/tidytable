@@ -4,7 +4,7 @@ eval_expr <- function(express) {
 }
 
 eval_quo <- function(express, data = NULL, env = caller_env()) {
-  eval_tidy(enquo(express), data = data, env = env)
+  eval_tidy(quo_squash(enquo(express)), data = data, env = env)
 }
 
 # Creates a shallow copy to prevent modify-by-reference
