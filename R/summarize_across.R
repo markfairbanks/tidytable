@@ -56,8 +56,10 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ..., b
 
   if (!is.list(.fns)) {
 
+    .fns <- as_function(.fns)
+
     .df <- eval_quo(
-      .df[, map.(.SD, .fns, ...), .SDcols = .cols, by = by]
+      .df[, lapply(.SD, .fns, ...), .SDcols = .cols, by = by]
     )
 
   } else {
