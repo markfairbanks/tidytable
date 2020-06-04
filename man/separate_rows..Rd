@@ -4,7 +4,7 @@
 \alias{separate_rows.}
 \title{Separate a collapsed column into multiple rows}
 \usage{
-separate_rows.(.df, ..., by = NULL)
+separate_rows.(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -26,7 +26,7 @@ test_df <- data.table(
   z = c("1", "2,3,4", "5,6")
 )
 
-separate_rows.(df, y, z)
+separate_rows.(test_df, y, z)
 
-separate_rows.(df, y, z, convert = TRUE)
+separate_rows.(test_df, y, z, convert = TRUE)
 }

@@ -8,7 +8,7 @@
 #' @importFrom rlang quo quo_is_null quo_squash quo_text seq2 set_names squash sym syms
 #' @importFrom rlang `%|%` `%||%`
 #' @importFrom stats as.formula na.omit setNames
-#' @importFrom utils capture.output head tail
+#' @importFrom utils capture.output head tail type.convert
 #' @importFrom vctrs vec_assert vec_as_names vec_as_names_legacy vec_cast vec_ptype_common
 #' @importFrom vctrs vec_recycle vec_size vec_unique
 NULL
@@ -16,7 +16,7 @@ NULL
 globalVariables(c("data", ".","..select_vars", ".count", "na_index", ".new_col",
                   "..all_names", "..final_order_i", "..rows", "name", "value",
                   "..all_cols", "..select_cols", "..keep_names", "..unite_cols",
-                  "..keep_cols", ".env"))
+                  "..keep_cols", ".env", "id_"))
 
 #' @docType import
 

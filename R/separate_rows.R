@@ -18,15 +18,15 @@
 #'   z = c("1", "2,3,4", "5,6")
 #' )
 #'
-#' separate_rows.(df, y, z)
+#' separate_rows.(test_df, y, z)
 #'
-#' separate_rows.(df, y, z, convert = TRUE)
-separate_rows. <- function(.df, ..., by = NULL) {
+#' separate_rows.(test_df, y, z, convert = TRUE)
+separate_rows. <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
   UseMethod("separate_rows.")
 }
 
 #' @export
-separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE){
+separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
 
   .df <- as_tidytable(.df)
 
