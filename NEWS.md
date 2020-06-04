@@ -1,3 +1,8 @@
+# tidytable 0.5.2 (in development)
+
+* New functions:
+  + `separate_rows.()`
+
 # tidytable 0.5.1
 
 * New functions:
