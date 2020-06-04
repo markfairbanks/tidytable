@@ -31,6 +31,19 @@ test_that("n.() works", {
   expect_equal(tidytable_df, datatable_df)
 })
 
+test_that("n.() works in 2nd spot", {
+  df <- tidytable(x = 1:4, y = c("a","a","a","b"))
+
+  tidytable_df <- df %>%
+    summarize.(avg_x = mean(x),
+               count = n.(),
+               by = y)
+
+  datatable_df <- df[, list(avg_x = mean(x), count = .N), by = y]
+
+  expect_equal(tidytable_df, datatable_df)
+})
+
 test_that(".GRP works", {
   df <- tidytable(x = 1:4, y = c("a","a","a","b"))
 

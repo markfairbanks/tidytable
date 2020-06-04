@@ -40,6 +40,10 @@ summarize..data.frame <- function(.df, ..., by = NULL) {
   .df <- as_tidytable(.df)
 
   dots <- enquos(...)
+
+  # Needed so n.() works
+  dots <- map.(dots, ~ parse_expr(str_c("(", quo_text(.x), ")")))
+
   by <- select_vec_chr(.df, {{ by }})
 
   eval_quo(
