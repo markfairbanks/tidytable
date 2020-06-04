@@ -2,6 +2,8 @@
 
 * New functions:
   + `separate_rows.()`
+* Functionality improvments:
+  + `unnest.()`: Added `.keep_all` arg to keep all list columns that were not unnested
 
 # tidytable 0.5.1
 

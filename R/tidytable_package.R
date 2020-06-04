@@ -4,8 +4,8 @@
 #' @importFrom lifecycle deprecate_soft
 #' @importFrom methods as
 #' @importFrom rlang abort as_function caller_env call2 enexpr enexprs enquo enquos expr
-#' @importFrom rlang expr_text eval_tidy have_name is_formula is_named is_null missing_arg
-#' @importFrom rlang quo quo_is_null quo_squash quo_text seq2 set_names squash sym syms
+#' @importFrom rlang expr_text eval_tidy have_name is_bare_vector is_formula is_named is_null
+#' @importFrom rlang missing_arg quo quo_is_null quo_squash quo_text seq2 set_names squash sym syms
 #' @importFrom rlang `%|%` `%||%`
 #' @importFrom stats as.formula na.omit setNames
 #' @importFrom utils capture.output head tail type.convert
