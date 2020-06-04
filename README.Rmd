@@ -97,6 +97,7 @@ devtools::install_github("markfairbanks/tidytable")
 * `pivot_longer.()` & `pivot_wider.()`
 * `replace_na.()`
 * `separate.()`
+* `separate_rows.()`
 * `unite.()`
 
 ### purrr
