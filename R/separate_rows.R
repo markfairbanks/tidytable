@@ -30,7 +30,8 @@ separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert 
 
   .df <- as_tidytable(.df)
 
-  stopifnot(is.character(sep) && length(sep) == 1L)
+  vec_assert(sep, character(), 1)
+  vec_assert(convert, logical(), 1)
 
   col_order <- names(.df)
 
@@ -38,7 +39,7 @@ separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert 
 
   cols <- select_dots_sym(.df, ...)
 
-  .df[ , id_ := .I]
+  .df[ , .id := .I]
 
   col_names <- as.character(cols)
   other_col_names <- setdiff(names(.df), col_names)
@@ -57,7 +58,7 @@ separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert 
     .df[, c(!!!split_calls), by = other_col_names]
   )
 
-  .df[ , id_ := NULL]
+  .df[ , .id := NULL]
 
   setcolorder(.df, col_order)
 

@@ -32,9 +32,9 @@ fill..data.frame <- function(.df, ..., .direction = c("down", "up", "downup", "u
 
   .df <- as_tidytable(.df)
 
-  by <- enquo(by)
+  .direction <- arg_match(.direction)
 
-  if (length(.direction) > 1) .direction <- .direction[1]
+  by <- enquo(by)
 
   if (.direction == "down") {
     filler(.df, ..., type = "locf", by = !!by)
