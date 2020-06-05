@@ -33,6 +33,8 @@ unnest..data.frame <- function(.df, ..., .keep_all = FALSE) {
 
   .df <- as_tidytable(.df)
 
+  vec_assert(.keep_all, logical(), 1)
+
   dots <- enquos(...)
 
   data_names <- names(.df)

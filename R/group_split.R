@@ -31,6 +31,8 @@ group_split..data.frame <- function(.df, ..., .keep = TRUE) {
 
   .df <- as_tidytable(.df)
 
+  vec_assert(.keep, logical(), 1)
+
   dots <- enquos(...)
 
   if (length(dots) == 0) {

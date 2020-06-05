@@ -42,6 +42,10 @@ unite..data.frame <- function(.df, col = "new_col", ..., sep = "_", remove = TRU
 
   .df <- as_tidytable(.df)
 
+  vec_assert(sep, character(), 1)
+  vec_assert(remove, logical(), 1)
+  vec_assert(na.rm, logical(), 1)
+
   dots <- enquos(...)
 
   if (length(dots) == 0) {
