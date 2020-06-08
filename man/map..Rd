@@ -66,7 +66,7 @@ dt_map_dfr(.x, .f, ..., .id = NULL)
 
 map_df.(.x, .f, ..., .id = NULL)
 
-dt_map_df(.x, .f, ..., .id = NULL)
+dt_map_df(.x, .f, ...)
 
 walk.(.x, .f, ...)
 
@@ -96,7 +96,7 @@ dt_map2_dfc(.x, .y, .f, ...)
 
 map2_dfr.(.x, .y, .f, ..., .id = NULL)
 
-dt_map2_dfr(.x, .y, .f, ...)
+dt_map2_dfr(.x, .y, .f, ..., .id = NULL)
 
 map2_df.(.x, .y, .f, ..., .id = NULL)
 

@@ -1,9 +1,10 @@
 # tests from tidyr regarding pivot_wider
 
-test_that("dt_ can pivot all cols to wide", {
+test_that("dt_ can pivot all cols to wide & is deprecated", {
   df <- data.table(label = c("x", "y", "z"), val = 1:3)
   pivot_df <- dt_pivot_wider(df, names_from = label, values_from = val)
 
+  expect_deprecated(dt_pivot_wider(df, names_from = label, values_from = val))
   expect_named(pivot_df, c("x", "y", "z"))
   expect_equal(nrow(pivot_df), 1)
 })

@@ -39,6 +39,9 @@ nest_by..data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
 
   .df <- as_tidytable(.df)
 
+  vec_assert(.key, character(), 1)
+  vec_assert(.keep, logical(), 1)
+
   if (.keep) {
 
     split_vars <- select_dots_sym(.df, ...)
@@ -47,13 +50,13 @@ nest_by..data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
 
     .df <- distinct.(.df, !!!split_vars)
 
-    .df <- mutate.(.df, {{.key}} := !!split_list)
+    .df <- mutate.(.df, !!.key := !!split_list)
 
   } else {
 
     by <- enquos(...)
 
-    .df <- summarize.(.df, {{.key}} := list(.SD), by = c(!!!by))
+    .df <- summarize.(.df, !!.key := list(.SD), by = c(!!!by))
   }
 
   .df
@@ -62,4 +65,8 @@ nest_by..data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
 
 #' @export
 #' @rdname nest_by.
-dt_group_nest <- nest_by.
+dt_group_nest <- function(.df, ..., .key = "data", .keep = FALSE) {
+  deprecate_soft("0.5.2", "tidytable::dt_group_nest()", "nest_by.()")
+
+  nest_by.(.df, ..., .key = .key, .keep = .keep)
+}

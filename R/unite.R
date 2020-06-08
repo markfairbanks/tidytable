@@ -54,8 +54,6 @@ unite..data.frame <- function(.df, col = "new_col", ..., sep = "_", remove = TRU
     unite_cols <- select_dots_chr(.df, ...)
   }
 
-  col <- enquo(col)
-
   if (na.rm) {
     unite_syms <- syms(unite_cols)
 
@@ -82,4 +80,8 @@ unite..data.frame <- function(.df, col = "new_col", ..., sep = "_", remove = TRU
 
 #' @export
 #' @rdname unite.
-dt_unite <- unite.
+dt_unite <- function(.df, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
+  deprecate_soft("0.5.2", "tidytable::dt_unite()", "unite.()")
+
+  unite.(.df, col = col, ..., sep = sep, remove = remove, na.rm = na.rm)
+}

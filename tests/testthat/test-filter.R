@@ -1,9 +1,10 @@
-test_that("dt_ can filter the data.table", {
+test_that("dt_ can filter the data.table & is deprecated", {
   df <- data.table(x = 1:10)
 
   df <- df %>%
     dt_filter(x <= 4)
 
+  expect_deprecated(dt_filter(df, x <= 4))
   expect_equal(df$x, 1:4)
 })
 

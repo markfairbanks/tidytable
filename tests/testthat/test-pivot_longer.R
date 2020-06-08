@@ -1,9 +1,10 @@
 # tests from tidyr regarding pivot_longer
 
-test_that("dt_ can pivot all cols (unspecified) to long", {
+test_that("dt_ can pivot all cols (unspecified) to long & is deprecated", {
   df <- data.table(x = 1:2, y = 3:4)
   pivot_df <- dt_pivot_longer(df)[order(name, value)]
 
+  expect_deprecated(dt_pivot_longer(df))
   expect_named(pivot_df, c("name", "value"))
   expect_equal(pivot_df$name, c("x","x","y","y"))
   expect_equal(pivot_df$value, c(1,2,3,4))

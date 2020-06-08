@@ -40,5 +40,8 @@ count..data.frame <- function(.df, ...) {
 
 #' @export
 #' @rdname count.
-dt_count <- count.
+dt_count <- function(.df, ...) {
+  deprecate_soft("0.5.2", "tidytable::dt_count()", "count.()")
 
+  count.(.df, ...)
+}

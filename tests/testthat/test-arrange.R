@@ -1,15 +1,18 @@
+setup(options(lifecycle_verbosity = "quiet"))
+
+test_that("dt_ can arrange the dataset & is deprecated", {
+  df <- data.table(x = c(4,3,9,7), y = 1:4)
+  df <- df %>%
+    dt_arrange(x)
+
+  expect_equal(df$x, c(3,4,7,9))
+  expect_deprecated(dt_arrange(df, x))
+})
+
 test_that("can arrange the dataset", {
   df <- data.table(x = c(4,3,9,7), y = 1:4)
   df <- df %>%
     arrange.(x)
-
-  expect_equal(df$x, c(3,4,7,9))
-})
-
-test_that("dt_ can arrange the dataset", {
-  df <- data.table(x = c(4,3,9,7), y = 1:4)
-  df <- df %>%
-    dt_arrange(x)
 
   expect_equal(df$x, c(3,4,7,9))
 })

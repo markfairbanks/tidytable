@@ -1,5 +1,7 @@
-test_that("dt_ .before and .after relocate individual cols", {
+test_that("dt_ .before and .after relocate individual cols & is deprecated", {
   df <- data.table(x = 1, y = 2)
+
+  expect_deprecated(dt_relocate(df, x, .after = y))
   expect_named(dt_relocate(df, x, .after = y), c("y", "x"))
   expect_named(dt_relocate(df, y, .before = x), c("y", "x"))
 })

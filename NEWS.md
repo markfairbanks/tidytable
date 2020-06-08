@@ -1,8 +1,9 @@
 # tidytable 0.5.2 (in development)
 
+* All `dt_verb()` functions are soft deprecated
 * New functions:
   + `separate_rows.()`
-* Functionality improvments:
+* Functionality improvements:
   + `unnest.()`: Added `.keep_all` arg to keep all list columns that were not unnested
 
 # tidytable 0.5.1
@@ -64,7 +65,7 @@
   + All functions are now written as `verb.()`
   + `dt_verb()` functions still work, but may be slowly deprecated in future releases
 * Functionality improvements:
-  + Enhanced selection now works in "by"" calls
+  + Enhanced selection now works in "by" calls
   + `filter.()` now works with "by"
   + `pivot_wider.()` can now be used with an aggregation function
   + `pull.()` defaults to last column in a data.table

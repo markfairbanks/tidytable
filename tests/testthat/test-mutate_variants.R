@@ -1,5 +1,15 @@
 setup(options(lifecycle_verbosity = "quiet"))
 
+test_that("dt_mutate_across(): .cols works with is.numeric & is deprecated", {
+  df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
+  df <- df %>%
+    dt_mutate_across(where(is.numeric), function(.x) .x + 1)
+
+  expect_deprecated(dt_mutate_across(df, where(is.numeric), function(.x) .x + 1))
+  expect_equal(df$x_start, c(2,2,2))
+  expect_equal(df$end_x, c(3,3,3))
+})
+
 test_that("mutate_if() works for numeric columns", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
@@ -80,15 +90,6 @@ test_that("mutate_all() works with data.frame", {
 
   expect_equal(df$x, c("1","1","1"))
   expect_equal(df$y, c("2","2","2"))
-})
-
-test_that("dt_mutate_across(): .cols works with is.numeric", {
-  df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
-  df <- df %>%
-    dt_mutate_across(where(is.numeric), function(.x) .x + 1)
-
-  expect_equal(df$x_start, c(2,2,2))
-  expect_equal(df$end_x, c(3,3,3))
 })
 
 test_that("mutate_across.(): .cols works with is.numeric", {

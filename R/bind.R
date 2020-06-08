@@ -40,7 +40,11 @@ bind_rows. <- function(..., .id = NULL, use.names = TRUE, fill = TRUE) {
 
 #' @export
 #' @rdname bind_rows.
-dt_bind_rows <- bind_rows.
+dt_bind_rows <- function(..., .id = NULL, use.names = TRUE, fill = TRUE) {
+  deprecate_soft("0.5.2", "tidytable::dt_bind_rows()", "bind_rows.()")
+
+  bind_rows.(..., .id = .id, use.names = use.names, fill = fill)
+}
 
 #' @export
 #' @rdname bind_rows.
@@ -62,5 +66,9 @@ bind_cols. <- function(...) {
 
 #' @export
 #' @rdname bind_rows.
-dt_bind_cols <- bind_cols.
+dt_bind_cols <- function(...) {
+  deprecate_soft("0.5.2", "tidytable::dt_bind_cols()", "bind_cols.()")
+
+  bind_cols.(...)
+}
 

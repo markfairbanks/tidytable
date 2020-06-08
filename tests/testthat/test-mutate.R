@@ -1,3 +1,14 @@
+test_that("dt_ can add multiple columns & is deprecated", {
+  df <- data.table(x = 1:3, y = 1:3)
+  df <- df %>%
+    dt_mutate(double_x = x * 2,
+              double_y = y * 2)
+
+  expect_deprecated(dt_mutate(df, double_x = x * 2))
+  expect_named(df, c("x", "y", "double_x", "double_y"))
+  expect_equal(df$x * 2, df$double_x)
+})
+
 test_that("can remove variables with NULL", {
   df <- data.table(x = 1:3, y = 1:3)
   tidytable_df <- df %>% mutate.(y = NULL)
@@ -36,16 +47,6 @@ test_that("row_number.() works v2", {
             row_check = 1:.N)
 
   expect_equal(df$row, df$row_check)
-})
-
-test_that("dt_ can add multiple columns", {
-  df <- data.table(x = 1:3, y = 1:3)
-  df <- df %>%
-    dt_mutate(double_x = x * 2,
-              double_y = y * 2)
-
-  expect_named(df, c("x", "y", "double_x", "double_y"))
-  expect_equal(df$x * 2, df$double_x)
 })
 
 test_that("modify-by-reference doesn't occur", {

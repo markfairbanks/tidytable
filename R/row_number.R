@@ -17,4 +17,8 @@ row_number. <- function() {
 
 #' @export
 #' @rdname row_number.
-dt_row_number <- row_number.
+dt_row_number <- function() {
+  deprecate_soft("0.5.2", "tidytable::dt_row_number()", "row_number.()")
+
+  row_number.()
+}

@@ -6,8 +6,8 @@
 #' @param .df A data.frame or data.table
 #' @param ... Columns to separate across multiple rows. `tidyselect` compatible
 #' @param sep Separator delimiting collapsed values
-#' @param convert If TRUE, runs `type.convert()` on the key column.
-#' Useful if the resulting column should be type integer of separating.
+#' @param convert If TRUE, runs `type.convert()` on the resulting column.
+#' Useful if the resulting column should be type integer/double.
 #'
 #' @export
 #'

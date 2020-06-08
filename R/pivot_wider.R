@@ -93,5 +93,19 @@ pivot_wider..data.frame <- function(.df,
 
 #' @export
 #' @rdname pivot_wider.
-dt_pivot_wider <- pivot_wider.
+dt_pivot_wider <- function(.df,
+                           names_from = name,
+                           values_from = value,
+                           id_cols = NULL,
+                           names_sep = "_",
+                           values_fn = NULL) {
+  deprecate_soft("0.5.2", "tidytable::dt_pivot_wider()", "pivot_wider.()")
+
+  pivot_wider.(.df,
+               names_from = {{ names_from }},
+               values_from = {{ values_from }},
+               id_cols = id_cols,
+               names_sep = names_sep,
+               values_fn = {{ values_fn }})
+}
 

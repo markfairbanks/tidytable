@@ -1,6 +1,8 @@
 test_that("dt_ separate works automatically with space", {
   df <- data.table(x = c("a", "a b", "a b", NA))
 
+  expect_deprecated(dt_separate(df, x, c("c1", "c2")))
+
   df <- df %>%
     dt_separate(x, c("c1", "c2"))
 

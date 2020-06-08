@@ -39,4 +39,8 @@ ifelse. <- function(conditions, true, false, na = NA) {
 
 #' @export
 #' @rdname ifelse.
-dt_ifelse <- ifelse.
+dt_ifelse <- function(conditions, true, false, na = NA) {
+  deprecate_soft("0.5.2", "tidytable::dt_ifelse()", "ifelse.()")
+
+  ifelse.(conditions, true, false, na)
+}

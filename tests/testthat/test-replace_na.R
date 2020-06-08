@@ -1,8 +1,9 @@
-test_that("dt_ works on numeric columns", {
+test_that("dt_ works on numeric columns & is deprecated", {
   test_df <- data.table(x = c(1, 2, NA), y = c("a", NA, "c"))
   replaced_df <- test_df %>%
     mutate.(x = dt_replace_na(x, 5))
 
+  expect_deprecated(mutate.(test_df, x = dt_replace_na(x, 5)))
   expect_equal(replaced_df$x, c(1,2,5))
 })
 

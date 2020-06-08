@@ -76,4 +76,8 @@ mutate..data.frame <- function(.df, ..., by = NULL) {
 
 #' @export
 #' @rdname mutate.
-dt_mutate <- mutate.
+dt_mutate <- function(.df, ..., by = NULL) {
+  deprecate_soft("0.5.2", "tidytable::dt_mutate()", "mutate.()")
+
+  mutate.(.df, ..., by = {{ by }})
+}

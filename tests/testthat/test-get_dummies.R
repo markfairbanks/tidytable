@@ -8,12 +8,14 @@ test_df2 <- data.table(
   "col2" = as.factor(c(letters[3:1], NA)),
   "var1"= rnorm(7,0,1))
 
-test_that("dt_ cols = NULL uses all cols - no NAs", {
+test_that("dt_ cols = NULL uses all cols - no NAs & is deprecated", {
   dummy_df <- dt_get_dummies(test_df)
 
   expect_named(dummy_df, c("col1", "col2", "var1",
                            "col1_a", "col1_b", "col1_c",
                            "col2_c", "col2_b", "col2_a"))
+
+  expect_deprecated(dt_get_dummies(dummy_df))
 
   expect_equal(dummy_df$col1_a, c(1, 0, 0, 1, 0, 0))
   expect_equal(dummy_df$col1_b, c(0, 1, 0, 0, 1, 0))
@@ -59,7 +61,7 @@ test_that("works with data.frame input", {
 
 })
 
-test_that("cols = NULL uses all cols - with NAs", {
+test_that("default uses all cols - with NAs", {
   dummy_df <- get_dummies.(test_df2)
 
   expect_named(dummy_df, c("col1", "col2", "var1",
@@ -90,6 +92,23 @@ test_that("no prefix works", {
 
 test_that("prefix_sep works", {
   dummy_df <- get_dummies.(test_df, prefix_sep = ".")
+
+  expect_named(dummy_df, c("col1", "col2", "var1",
+                           "col1.a", "col1.b", "col1.c",
+                           "col2.c", "col2.b", "col2.a"))
+
+  expect_equal(dummy_df$col1.a, c(1, 0, 0, 1, 0, 0))
+  expect_equal(dummy_df$col1.b, c(0, 1, 0, 0, 1, 0))
+  expect_equal(dummy_df$col1.c, c(0, 0, 1, 0, 0, 1))
+
+  expect_equal(dummy_df$col2.a, c(0, 0, 1, 0, 0, 1))
+  expect_equal(dummy_df$col2.b, c(0, 1, 0, 0, 1, 0))
+  expect_equal(dummy_df$col2.c, c(1, 0, 0, 1, 0, 0))
+
+})
+
+test_that("dt_ prefix_sep works", {
+  dummy_df <- dt_get_dummies(test_df, prefix_sep = ".")
 
   expect_named(dummy_df, c("col1", "col2", "var1",
                            "col1.a", "col1.b", "col1.c",

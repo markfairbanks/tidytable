@@ -29,4 +29,8 @@ replace_na. <- function(.col, replace) {
 
 #' @export
 #' @rdname replace_na.
-dt_replace_na <- replace_na.
+dt_replace_na <- function(.col, replace) {
+  deprecate_soft("0.5.2", "tidytable::dt_replace_na()", "replace_na.()")
+
+  replace_na.(.col, replace)
+}

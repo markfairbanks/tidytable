@@ -32,6 +32,10 @@ transmute..data.frame <- function(.df, ..., by = NULL) {
 
 #' @export
 #' @rdname transmute.
-dt_transmute <- transmute.
+dt_transmute <- function(.df, ..., by = NULL) {
+  deprecate_soft("0.5.2", "tidytable::dt_transmute()", "transmute.()")
+
+  transmute.(.df, ..., by = {{ by }})
+}
 
 

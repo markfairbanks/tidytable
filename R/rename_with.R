@@ -54,4 +54,8 @@ rename_with..data.frame <- function(.df, .fn, .cols = everything(), ...) {
 
 #' @export
 #' @rdname rename_with.
-dt_rename_with <- rename_with.
+dt_rename_with <- function(.df, .fn, .cols = everything(), ...) {
+  deprecate_soft("0.5.2", "tidytable::dt_rename_with()", "rename_with.()")
+
+  rename_with.(.df, .fn, .cols = {{ .cols }}, ...)
+}

@@ -37,7 +37,7 @@ filter..data.frame <- function(.df, ..., by = NULL) {
 
     .df <- eval_quo(
       .df[Reduce('&', list(!!!dots))]
-      )
+    )
 
   } else {
     by <- select_vec_chr(.df, !!by)
@@ -50,9 +50,14 @@ filter..data.frame <- function(.df, ..., by = NULL) {
 
     setcolorder(.df, col_order)
   }
+
   .df
 }
 
 #' @export
 #' @rdname filter.
-dt_filter <- filter.
+dt_filter <- function(.df, ..., by = NULL) {
+  deprecate_soft("0.5.2", "tidytable::dt_filter()", "filter.()")
+
+  filter.(.df, ..., by = {{ by }})
+}

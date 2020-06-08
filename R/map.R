@@ -30,7 +30,11 @@ map. <- function(.x, .f, ...) {
 
 #' @export
 #' @rdname map.
-dt_map <- map.
+dt_map <- function(.x, .f, ...) {
+  deprecate_soft("0.5.2", "tidytable::dt_map()", "map.()")
+
+  map.(.x, .f, ...)
+}
 
 #' @export
 #' @rdname map.
@@ -42,7 +46,11 @@ map_lgl. <- function(.x, .f, ...) {
 
 #' @export
 #' @rdname map.
-dt_map_lgl <- map_lgl.
+dt_map_lgl <- function(.x, .f, ...) {
+  deprecate_soft("0.5.2", "tidytable::dt_map_lgl()", "map_lgl.()")
+
+  map_lgl.(.x, .f, ...)
+}
 
 #' @export
 #' @rdname map.
@@ -54,7 +62,11 @@ map_int. <- function(.x, .f, ...) {
 
 #' @export
 #' @rdname map.
-dt_map_int <- map_int.
+dt_map_int <- function(.x, .f, ...) {
+  deprecate_soft("0.5.2", "tidytable::dt_map_int()", "map_int.()")
+
+  map_int.(.x, .f, ...)
+}
 
 #' @export
 #' @rdname map.
@@ -66,7 +78,11 @@ map_dbl. <- function(.x, .f, ...) {
 
 #' @export
 #' @rdname map.
-dt_map_dbl <- map_dbl.
+dt_map_dbl <- function(.x, .f, ...) {
+  deprecate_soft("0.5.2", "tidytable::dt_map_dbl()", "map_dbl.()")
+
+  map_dbl.(.x, .f, ...)
+}
 
 #' @export
 #' @rdname map.
@@ -78,7 +94,11 @@ map_chr. <- function(.x, .f, ...) {
 
 #' @export
 #' @rdname map.
-dt_map_chr <- map_chr.
+dt_map_chr <- function(.x, .f, ...) {
+  deprecate_soft("0.5.2", "tidytable::dt_map_chr()", "map_chr.()")
+
+  map_chr.(.x, .f, ...)
+}
 
 #' @export
 #' @rdname map.
@@ -90,7 +110,11 @@ map_dfc. <- function(.x, .f, ...) {
 
 #' @export
 #' @rdname map.
-dt_map_dfc <- map_dfc.
+dt_map_dfc <- function(.x, .f, ...) {
+  deprecate_soft("0.5.2", "tidytable::dt_map_dfc()", "map_dfc.()")
+
+  map_dfc.(.x, .f, ...)
+}
 
 #' @export
 #' @rdname map.
@@ -104,7 +128,11 @@ map_dfr. <- function(.x, .f, ..., .id = NULL) {
 
 #' @export
 #' @rdname map.
-dt_map_dfr <- map_dfr.
+dt_map_dfr <- function(.x, .f, ..., .id = NULL) {
+  deprecate_soft("0.5.2", "tidytable::dt_map_dfr()", "map_dfr.()")
+
+  map_dfr.(.x, .f, ..., .id = .id)
+}
 
 #' @export
 #' @rdname map.
@@ -112,7 +140,11 @@ map_df. <- map_dfr.
 
 #' @export
 #' @rdname map.
-dt_map_df <- map_df.
+dt_map_df <- function(.x, .f, ...) {
+  deprecate_soft("0.5.2", "tidytable::dt_map_df()", "map_df.()")
+
+  map_df.(.x, .f, ...)
+}
 
 #' @export
 #' @rdname map.

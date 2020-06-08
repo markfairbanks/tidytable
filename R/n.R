@@ -25,4 +25,8 @@ n. <- function() {
 
 #' @export
 #' @rdname n.
-dt_n <- n.
+dt_n <- function() {
+  deprecate_soft("0.5.2", "tidytable::dt_n()", "n.()")
+
+  n.()
+}

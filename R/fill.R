@@ -53,7 +53,11 @@ fill..data.frame <- function(.df, ..., .direction = c("down", "up", "downup", "u
 
 #' @export
 #' @rdname fill.
-dt_fill <- fill.
+dt_fill <- function(.df, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
+  deprecate_soft("0.5.2", "tidytable::dt_fill()", "fill.()")
+
+  fill.(.df, ..., .direction = .direction, by = {{ by }})
+}
 
 filler <- function(.df, ..., type = "locf", by = NULL) {
 

@@ -66,4 +66,11 @@ separate..data.frame <- function(.df, col, into,
 
 #' @export
 #' @rdname separate.
-dt_separate <- separate.
+dt_separate <- function(.df, col, into,
+                        sep = "[^[:alnum:]]+",
+                        remove = TRUE,
+                        ...) {
+  deprecate_soft("0.5.2", "tidytable::dt_separate()", "separate.()")
+
+  separate.(.df, {{ col }}, into, sep = sep, remove = remove, ...)
+}

@@ -55,4 +55,8 @@ case. <- function(..., default = NA) {
 
 #' @export
 #' @rdname case.
-dt_case <- case.
+dt_case <- function(..., default = NA) {
+  deprecate_soft("0.5.2", "tidytable::dt_case()", "case.()")
+
+  case.(..., default = default)
+}

@@ -2,10 +2,11 @@ setup(options(lifecycle_verbosity = "quiet"))
 
 test_that("dt_() works for one column", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
-  df <- df %>%
+  result_df <- df %>%
     dt_rename(new_x = x)
 
-  expect_named(df, c("new_x", "y", "z"))
+  expect_deprecated(dt_rename(df, new_x = x))
+  expect_named(result_df, c("new_x", "y", "z"))
 })
 
 test_that("rename.() works for one column", {

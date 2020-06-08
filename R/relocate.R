@@ -70,4 +70,8 @@ relocate..data.frame <- function(.df, ..., .before = NULL, .after = NULL) {
 
 #' @export
 #' @rdname relocate.
-dt_relocate <- relocate.
+dt_relocate <- function(.df, ..., .before = NULL, .after = NULL) {
+  deprecate_soft("0.5.2", "tidytable::dt_relocate()", "relocate.()")
+
+  relocate.(.df, ..., .before = {{ .before }}, .after = {{ .after }})
+}

@@ -58,8 +58,16 @@ summarise. <- summarize.
 
 #' @export
 #' @rdname summarize.
-dt_summarise <- summarize.
+dt_summarise <- function(.df, ..., by = NULL) {
+  deprecate_soft("0.5.2", "tidytable::dt_summarise()", "summarise.()")
+
+  summarize.(.df, ..., by = {{ by }})
+}
 
 #' @export
 #' @rdname summarize.
-dt_summarize <- summarize.
+dt_summarize <- function(.df, ..., by = NULL) {
+  deprecate_soft("0.5.2", "tidytable::dt_summarize()", "summarize.()")
+
+  summarize.(.df, ..., by = {{ by }})
+}

@@ -1,6 +1,8 @@
-test_that("dt_fill() missings are filled correctly", {
+test_that("dt_fill() missings are filled correctly & is deprecated", {
   # filled down from last non-missing
   df <- data.table::data.table(x = c(NA, 1, NA, 2, NA, NA))
+
+  expect_deprecated(dt_fill(df, x))
 
   out <- as_tidytable(df) %>% dt_fill(x)
   expect_equal(out$x, c(NA, 1, 1, 2, 2, 2))

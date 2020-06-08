@@ -13,8 +13,8 @@ separate_rows.(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE)
 
 \item{sep}{Separator delimiting collapsed values}
 
-\item{convert}{If TRUE, runs `type.convert()` on the key column.
-Useful if the resulting column should be type integer of separating.}
+\item{convert}{If TRUE, runs `type.convert()` on the resulting column.
+Useful if the resulting column should be type integer/double.}
 }
 \description{
 If a column contains observations with multiple delimited values, separate them each into their own row.

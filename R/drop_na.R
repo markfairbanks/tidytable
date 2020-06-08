@@ -45,4 +45,8 @@ drop_na..data.frame <- function(.df, ...) {
 
 #' @export
 #' @rdname drop_na.
-dt_drop_na <- drop_na.
+dt_drop_na <- function(.df, ...) {
+  deprecate_soft("0.5.2", "tidytable::dt_drop_na()", "drop_na.()")
+
+  drop_na.(.df, ...)
+}
