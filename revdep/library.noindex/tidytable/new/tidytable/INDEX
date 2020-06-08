@@ -4,6 +4,7 @@ as_tidytable            Coerce an object to a data.table/tidytable
 bind_rows.              Bind data.tables by row and column
 case.                   Case when
 count.                  Count observations by group
+desc.                   Descending order
 distinct.               Select distinct/unique rows
 drop_na.                Drop rows containing missing values
 dt                      Pipeable data.table call
@@ -16,11 +17,12 @@ group_split.            Split data frame by groups
 ifelse.                 Vectorized if
 inv_gc                  Run invisible garbage collection
 is_tidytable            Test if the object is a tidytable
+leads.                  Lead and Lag
 left_join.              Join two data.tables together
 map.                    Apply a function to each element of a vector
 mutate.                 Mutate
 mutate_across.          Mutate multiple columns simultaneously
-mutate_if.              Depcrecated mutate helpers
+mutate_if.              Deprecated mutate helpers
 n.                      Number of observations in each group
 nest_by.                Nest data.tables
 pivot_longer.           Pivot data from wide to long
@@ -35,10 +37,15 @@ row_number.             Return row number
 select.                 Select or drop columns
 separate.               Separate a character column into multiple
                         columns
+separate_rows.          Separate a collapsed column into multiple rows
 slice.                  Choose rows by position
 starts_with.            Select helpers
 summarize.              Aggregate data using summary statistics
+summarize_across.       Summarize multiple columns
 tidytable               Build a data.table/tidytable
 top_n.                  Select top (or bottom) n rows (by value)
 transmute.              Add new variables and drop all others
+unite.                  Unite multiple columns by pasting strings
+                        together
 unnest.                 Unnest a nested data.table
+where                   Select variables with a function
