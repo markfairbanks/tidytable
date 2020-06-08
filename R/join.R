@@ -180,7 +180,7 @@ dt_right_join <- function(x, y, by = NULL) {
 
 #' @export
 #' @rdname left_join.
-dt_full_join <- function(x, y, by = NULL) {
+dt_full_join <- function(x, y, by = NULL,suffix =  c(".x", ".y")) {
   deprecate_soft("0.5.2", "tidytable::dt_full_join()", "full_join.()")
 
   full_join.(x, y, by)
