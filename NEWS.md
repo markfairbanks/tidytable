@@ -1,5 +1,7 @@
 # tidytable 0.5.2 (in development)
 
+* This version contains general performance improvements
+* Group by arg `by` has been deprecated for `.by`
 * All `dt_verb()` functions are soft deprecated
 * New functions:
   + `separate_rows.()`

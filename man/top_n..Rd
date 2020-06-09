@@ -33,5 +33,5 @@ test_df \%>\%
   top_n.(2, wt = y)
 
 test_df \%>\%
-  top_n.(2, wt = y, by = z)
+  top_n.(2, wt = y, .by = z)
 }

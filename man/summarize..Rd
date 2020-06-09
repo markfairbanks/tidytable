@@ -47,9 +47,9 @@ test_df <- data.table(
 test_df \%>\%
   summarize.(avg_a = mean(a),
              max_b = max(b),
-             by = c)
+             .by = c)
 
 test_df \%>\%
   summarize.(avg_a = mean(a),
-             by = c(c, d))
+             .by = c(c, d))
 }
