@@ -5,7 +5,8 @@
 #'
 #' @param .df A data.frame or data.table
 #' @param ... Columns to add/modify
-#' @param by Columns to group by
+#' @param .by Columns to group by
+#' @param by This argument has been renamed to .by and is deprecated
 #'
 #' @md
 #' @export
@@ -23,21 +24,21 @@
 #' test_df %>%
 #'   mutate.(double_a = a * 2,
 #'           avg_a = mean(a),
-#'           by = c)
-mutate. <- function(.df, ..., by = NULL) {
+#'           .by = c)
+mutate. <- function(.df, ..., .by = NULL, by = NULL) {
   UseMethod("mutate.")
 }
 
 #' @export
-mutate..data.frame <- function(.df, ..., by = NULL) {
+mutate..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
 
   .df <- as_tidytable(.df)
   .df <- shallow(.df)
 
   dots <- enquos(...)
-  by <- enquo(by)
+  .by <- check_dot_by(enquo(.by), enquo(by), "mutate.")
 
-  if (quo_is_null(by)) {
+  if (quo_is_null(.by)) {
     # Faster version if there is no "by" provided
     all_names <- names(dots)
 
@@ -64,10 +65,10 @@ mutate..data.frame <- function(.df, ..., by = NULL) {
     }
   } else {
     # Faster with "by", since the "by" call isn't looped multiple times for each column added
-    by <- select_vec_chr(.df, !!by)
+    .by <- select_vec_chr(.df, !!.by)
 
     eval_quo(
-      .df[, ':='(!!!dots), by = by]
+      .df[, ':='(!!!dots), by = .by]
     )
 
   }
@@ -76,8 +77,9 @@ mutate..data.frame <- function(.df, ..., by = NULL) {
 
 #' @export
 #' @rdname mutate.
-dt_mutate <- function(.df, ..., by = NULL) {
+dt_mutate <- function(.df, ..., .by = NULL, by = NULL) {
   deprecate_soft("0.5.2", "tidytable::dt_mutate()", "mutate.()")
 
-  mutate.(.df, ..., by = {{ by }})
+  .by <- check_dot_by(enquo(.by), enquo(by))
+  mutate.(.df, ..., .by = {{ .by }})
 }

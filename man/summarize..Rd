@@ -7,20 +7,20 @@
 \alias{dt_summarize}
 \title{Aggregate data using summary statistics}
 \usage{
-summarize.(.df, ..., by = NULL)
+summarize.(.df, ..., .by = NULL, by = NULL)
 
-summarise.(.df, ..., by = NULL)
+summarise.(.df, ..., .by = NULL, by = NULL)
 
-dt_summarise(.df, ..., by = NULL)
+dt_summarise(.df, ..., .by = NULL, by = NULL)
 
-dt_summarize(.df, ..., by = NULL)
+dt_summarize(.df, ..., .by = NULL, by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
 
 \item{...}{Aggregations to perform}
 
-\item{by}{Columns to group by.
+\item{.by}{Columns to group by.
 \itemize{
 \item A single column can be passed with \code{by = d}.
 \item Multiple columns can be passed with \code{by = c(c, d)}
@@ -31,6 +31,8 @@ dt_summarize(.df, ..., by = NULL)
 \item A combination of predicates and column names: \code{by = c(where(is.character), b)}
 }
 }}
+
+\item{by}{This argument has been renamed to .by and is deprecated}
 }
 \description{
 Aggregate data using summary statistics such as mean or median. Can be calculated by group.

@@ -7,7 +7,8 @@
 #' @param .cols vector `c()` of unquoted column names. `tidyselect` compatible.
 #' @param .fns Functions to pass. Can pass a list of functions.
 #' @param ... Other arguments for the passed function
-#' @param by Columns to group by
+#' @param .by Columns to group by
+#' @param by This argument has been renamed to .by and is deprecated
 #'
 #' @md
 #' @export
@@ -25,28 +26,29 @@
 #' test_df %>%
 #'   summarize_across.(c(a, b), ~ mean(.x, na.rm = TRUE))
 #'
-#' # Passing a list of functions (with by)
+#' # Passing a list of functions (with .by)
 #' test_df %>%
-#'   summarize_across.(c(a, b), list(mean, max), by = z)
+#'   summarize_across.(c(a, b), list(mean, max), .by = z)
 #'
-#' # Passing a named list of functions (with by)
+#' # Passing a named list of functions (with .by)
 #' test_df %>%
 #'   summarize_across.(c(a, b),
 #'                     list(avg = mean,
 #'                          max_plus_one = ~ max(.x) + 1),
-#'                     by = z)
-summarize_across. <- function(.df, .cols = everything(), .fns, ..., by = NULL) {
+#'                     .by = z)
+summarize_across. <- function(.df, .cols = everything(), .fns, ..., .by = NULL, by = NULL) {
   UseMethod("summarize_across.")
 }
 
 #' @export
-summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ..., by = NULL) {
+summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ..., .by = NULL, by = NULL) {
 
   .df <- as_tidytable(.df)
 
   .cols <- select_vec_chr(.df, {{ .cols }})
 
-  by <- select_vec_chr(.df, {{ by }})
+  .by <- check_dot_by(enquo(.by), enquo(by), "summarize_across.")
+  .by <- select_vec_chr(.df, !!.by)
 
   if (length(.cols) == 0) abort("No columns have been selected to summarize.()")
 
@@ -59,7 +61,7 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ..., b
     .fns <- as_function(.fns)
 
     .df <- eval_quo(
-      .df[, lapply(.SD, .fns, ...), .SDcols = .cols, by = by]
+      .df[, lapply(.SD, .fns, ...), .SDcols = .cols, by = .by]
     )
 
   } else {
@@ -84,7 +86,7 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ..., b
     .fns <- map.(.fns, ~ call2('map.', quo(.SD), .x))
 
     .df <- eval_quo(
-      .df[, c(!!!.fns), .SDcols = .cols, by = by]
+      .df[, c(!!!.fns), .SDcols = .cols, by = .by]
     )
 
     old_names <- names(.df)

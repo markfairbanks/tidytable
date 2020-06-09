@@ -9,20 +9,20 @@
 \alias{dt_mutate_all}
 \title{Deprecated mutate helpers}
 \usage{
-mutate_if.(.data, .predicate, .funs, ..., by = NULL)
+mutate_if.(.df, .predicate, .funs, ..., .by = NULL, by = NULL)
 
-mutate_at.(.data, .vars, .funs, ..., by = NULL)
+mutate_at.(.df, .vars, .funs, ..., .by = NULL, by = NULL)
 
-mutate_all.(.data, .funs, ..., by = NULL)
+mutate_all.(.df, .funs, ..., .by = NULL, by = NULL)
 
-dt_mutate_if(.data, .predicate, .funs, ..., by = NULL)
+dt_mutate_if(.df, .predicate, .funs, ..., .by = NULL, by = NULL)
 
-dt_mutate_at(.data, .vars, .funs, ..., by = NULL)
+dt_mutate_at(.df, .vars, .funs, ..., .by = NULL, by = NULL)
 
-dt_mutate_all(.data, .funs, ..., by = NULL)
+dt_mutate_all(.df, .funs, ..., .by = NULL, by = NULL)
 }
 \arguments{
-\item{.data}{A data.frame or data.table}
+\item{.df}{A data.frame or data.table}
 
 \item{.predicate}{predicate for \code{mutate_if.()} to use}
 
@@ -30,7 +30,9 @@ dt_mutate_all(.data, .funs, ..., by = NULL)
 
 \item{...}{Other arguments for the passed function}
 
-\item{by}{Columns to group by}
+\item{.by}{Columns to group by}
+
+\item{by}{This argument has been renamed to .by and is deprecated}
 
 \item{.vars}{vector \code{c()} of bare column names for \code{mutate_at.()} to use}
 }

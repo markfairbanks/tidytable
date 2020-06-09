@@ -98,11 +98,11 @@ test_that("can take data.frame input", {
   expect_equal(df$x * 2, df$double_x)
 })
 
-test_that("can use by", {
+test_that("can use .by", {
   df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
 
   tidytable_df <- df %>%
-    mutate.(z = mean(x), by = y)
+    mutate.(z = mean(x), .by = y)
 
   datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y]
 
@@ -110,11 +110,11 @@ test_that("can use by", {
 
 })
 
-test_that("can use by with enhanced selection", {
+test_that("can use .by with enhanced selection", {
   df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
 
   tidytable_df <- df %>%
-    mutate.(z = mean(x), by = where(is.character))
+    mutate.(z = mean(x), .by = where(is.character))
 
   datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y]
 
@@ -122,11 +122,11 @@ test_that("can use by with enhanced selection", {
 
 })
 
-test_that("can use by with vector", {
+test_that("can use .by with vector", {
   df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
 
   tidytable_df <- df %>%
-    mutate.(z = mean(x), by = c(where(is.character)))
+    mutate.(z = mean(x), .by = c(where(is.character)))
 
   datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y]
 
@@ -143,10 +143,10 @@ test_that("can use .N", {
   expect_equal(df$z, c(3,3,3))
 })
 
-test_that("can use .N with by", {
+test_that("can use .N with .by", {
   df <- data.table(x = 1:3, y = c("a","a","b"))
   df <- df %>%
-    mutate.(z = .N, by = y)
+    mutate.(z = .N, .by = y)
 
   expect_named(df, c("x","y","z"))
   expect_equal(df$z, c(2,2,1))
@@ -173,7 +173,7 @@ test_that("can use n.()", {
 test_that("can use n.() with by", {
   df <- data.table(x = 1:3, y = c("a","a","b"))
   df <- df %>%
-    mutate.(z = n.(), by = y)
+    mutate.(z = n.(), .by = y)
 
   expect_named(df, c("x","y","z"))
   expect_equal(df$z, c(2,2,1))
@@ -182,7 +182,7 @@ test_that("can use n.() with by", {
 test_that("can use .GRP", {
   df <- data.table(x = 1:3, y = c("a","a","b"))
   df <- df %>%
-    mutate.(z = .GRP, by = y)
+    mutate.(z = .GRP, .by = y)
 
   expect_named(df, c("x","y","z"))
   expect_equal(df$z, c(1,1,2))
@@ -220,7 +220,7 @@ test_that("can make custom functions with quosures", {
   add_one <- function(.data, add_col, new_name, val, by) {
     val <- val
     .data %>%
-      mutate.({{ new_name }} := {{ add_col }} + {{ val }}, by = {{ by }})
+      mutate.({{ new_name }} := {{ add_col }} + {{ val }}, .by = {{ by }})
   }
 
   result_df <- df %>%

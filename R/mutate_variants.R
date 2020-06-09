@@ -5,12 +5,13 @@
 #'
 #' @md
 #'
-#' @param .data A data.frame or data.table
+#' @param .df A data.frame or data.table
 #' @param .predicate predicate for `mutate_if.()` to use
 #' @param .vars vector `c()` of bare column names for `mutate_at.()` to use
 #' @param .funs Functions to pass. Can pass a list of functions.
 #' @param ... Other arguments for the passed function
-#' @param by Columns to group by
+#' @param .by Columns to group by
+#' @param by This argument has been renamed to .by and is deprecated
 #'
 #' @export
 #'
@@ -32,44 +33,50 @@
 #' test_df %>%
 #'   mutate_across.(c(x, y), list(new = ~ .x * 2,
 #'                                another = ~ .x + 7))
-mutate_if. <- function(.data, .predicate, .funs, ..., by = NULL) {
+mutate_if. <- function(.df, .predicate, .funs, ..., .by = NULL, by = NULL) {
   UseMethod("mutate_if.")
 }
 
 #' @export
-mutate_if..default <- function(.data, .predicate, .funs, ..., by = NULL) {
+mutate_if..data.frame <- function(.df, .predicate, .funs, ..., .by = NULL, by = NULL) {
 
   deprecate_soft("0.5.0", "tidytable::mutate_if.()", "mutate_across.()")
 
-  mutate_across.(.data, where({{.predicate}}), .funs, ..., by = {{by}})
+  .by <- check_dot_by(enquo(.by), enquo(by))
+
+  mutate_across.(.df, where({{.predicate}}), .funs, ..., .by = {{ .by }})
 }
 
 #' @export
 #' @rdname mutate_if.
-mutate_at. <- function(.data, .vars, .funs, ..., by = NULL) {
+mutate_at. <- function(.df, .vars, .funs, ..., .by = NULL, by = NULL) {
   UseMethod("mutate_at.")
 }
 
 #' @export
-mutate_at..default <- function(.data, .vars, .funs, ..., by = NULL) {
+mutate_at..data.frame <- function(.df, .vars, .funs, ..., .by = NULL, by = NULL) {
 
   deprecate_soft("0.5.0", "tidytable::mutate_at.()", "mutate_across.()")
 
-  mutate_across.(.data, {{.vars}}, .funs, ..., by = {{by}})
+  .by <- check_dot_by(enquo(.by), enquo(by))
+
+  mutate_across.(.df, {{.vars}}, .funs, ..., .by = {{ .by }})
 }
 
 #' @export
 #' @rdname mutate_if.
-mutate_all. <- function(.data, .funs, ..., by = NULL) {
+mutate_all. <- function(.df, .funs, ..., .by = NULL, by = NULL) {
   UseMethod("mutate_all.")
 }
 
 #' @export
-mutate_all..default <- function(.data, .funs, ..., by = NULL) {
+mutate_all..data.frame <- function(.df, .funs, ..., .by = NULL, by = NULL) {
 
   deprecate_soft("0.5.0", "tidytable::mutate_all.()", "mutate_across.()")
 
-  mutate_across.(.data, everything(), .funs, ..., by = {{by}})
+  .by <- check_dot_by(enquo(.by), enquo(by))
+
+  mutate_across.(.df, everything(), .funs, ..., .by = {{ .by }})
 }
 
 #' @export

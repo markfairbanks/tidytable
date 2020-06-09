@@ -97,7 +97,7 @@ test_that("doesn't modify-by-reference", {
 
 test_that("fill respects grouping & is correct order", {
   df <- data.table::data.table(x = c(1, NA, NA), y = c(1, 1, 2))
-  out <- fill.(df, x, by = y)
+  out <- fill.(df, x, .by = y)
 
   expect_named(out, c("x", "y"))
   expect_equal(out$x, c(1, 1, NA))

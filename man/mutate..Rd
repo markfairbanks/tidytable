@@ -5,16 +5,18 @@
 \alias{dt_mutate}
 \title{Mutate}
 \usage{
-mutate.(.df, ..., by = NULL)
+mutate.(.df, ..., .by = NULL, by = NULL)
 
-dt_mutate(.df, ..., by = NULL)
+dt_mutate(.df, ..., .by = NULL, by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
 
 \item{...}{Columns to add/modify}
 
-\item{by}{Columns to group by}
+\item{.by}{Columns to group by}
+
+\item{by}{This argument has been renamed to .by and is deprecated}
 }
 \description{
 Add new columns or modify existing ones
@@ -32,5 +34,5 @@ test_df \%>\%
 test_df \%>\%
   mutate.(double_a = a * 2,
           avg_a = mean(a),
-          by = c)
+          .by = c)
 }

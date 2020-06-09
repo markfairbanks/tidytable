@@ -32,9 +32,9 @@ count..data.frame <- function(.df, ...) {
 
   .df <- as_tidytable(.df)
 
-  by <- enquos(...)
+  .by <- enquos(...)
 
-  summarize.(.df, N = .N, by = c(!!!by))
+  summarize.(.df, N = .N, .by = c(!!!.by))
 
 }
 

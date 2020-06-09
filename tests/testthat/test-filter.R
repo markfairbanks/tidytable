@@ -46,21 +46,21 @@ test_that("can filter with |", {
   expect_equal(df$y, 1:4)
 })
 
-test_that("filter works with 'by'", {
+test_that("filter works with '.by'", {
   df <- data.table(x = c(1, 1, 2, 2), y = c("a", "a", "a", "b"))
 
   df <- df %>%
-    filter.(x == mean(x), by = y)
+    filter.(x == mean(x), .by = y)
 
   expect_equal(df$x, 2)
   expect_equal(df$y, "b")
 })
 
-test_that("filter works with 'by' & multiple conditions & .N", {
+test_that("filter works with '.by' & multiple conditions & .N", {
   df <- tidytable(x = 1:3, y = c("a", "a", "b"))
 
   result_df <- df %>%
-    filter.(x <= mean(x), x < .N, by = y)
+    filter.(x <= mean(x), x < .N, .by = y)
 
   expect_equal(result_df$x, c(1))
   expect_equal(result_df$y, c("a"))

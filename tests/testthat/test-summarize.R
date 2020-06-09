@@ -1,19 +1,19 @@
-test_that("dt_ can do group aggregation with by", {
+test_that("dt_ can do group aggregation with .by", {
   df <- tidytable(x = 1:4, y = c("a","a","a","b"))
 
   tidytable_df <- df %>%
-    dt_summarize(avg_x = mean(x), by = y)
+    dt_summarize(avg_x = mean(x), .by = y)
 
   datatable_df <- df[, list(avg_x = mean(x)), by = y]
 
   expect_equal(tidytable_df, datatable_df)
 })
 
-test_that("can do group aggregation with by", {
+test_that("can do group aggregation with .by", {
   df <- tidytable(x = 1:4, y = c("a","a","a","b"))
 
   tidytable_df <- df %>%
-    summarize.(avg_x = mean(x), by = y)
+    summarize.(avg_x = mean(x), .by = y)
 
   datatable_df <- df[, list(avg_x = mean(x)), by = y]
 
@@ -24,7 +24,7 @@ test_that("n.() works", {
   df <- tidytable(x = 1:4, y = c("a","a","a","b"))
 
   tidytable_df <- df %>%
-    summarize.(count = n.(), by = y)
+    summarize.(count = n.(), .by = y)
 
   datatable_df <- df[, list(count = .N), by = y]
 
@@ -37,7 +37,7 @@ test_that("n.() works in 2nd spot", {
   tidytable_df <- df %>%
     summarize.(avg_x = mean(x),
                count = n.(),
-               by = y)
+               .by = y)
 
   datatable_df <- df[, list(avg_x = mean(x), count = .N), by = y]
 
@@ -48,7 +48,7 @@ test_that(".GRP works", {
   df <- tidytable(x = 1:4, y = c("a","a","a","b"))
 
   tidytable_df <- df %>%
-    summarize.(count = .GRP, by = y)
+    summarize.(count = .GRP, .by = y)
 
   datatable_df <- df[, list(count = .GRP), by = y]
 
@@ -80,14 +80,14 @@ test_that("can do group aggregation with no by", {
 test_that("by = list() causes an error", {
   df <- tidytable(x = 1:4, y = c("a","a","a","b"))
 
-  expect_error(summarize.(df, avg_x = mean(x), by = list(y)))
+  expect_error(summarize.(df, avg_x = mean(x), .by = list(y)))
 })
 
 test_that("by = list works for column named list", {
   df <- tidytable(x = 1:4, list = c("a","a","a","b"))
 
   tidytable_df <- df %>%
-    summarize.(avg_x = mean(x), by = list)
+    summarize.(avg_x = mean(x), .by = list)
 
   datatable_df <- df[, list(avg_x = mean(x)), by = list]
 
@@ -98,7 +98,7 @@ test_that("can do group aggregation with by c()", {
   df <- tidytable(x = 1:4, y = c("a","a","a","b"))
 
   tidytable_df <- df %>%
-    summarize.(avg_x = mean(x), by = c(y))
+    summarize.(avg_x = mean(x), .by = c(y))
 
   datatable_df <- df[, list(avg_x = mean(x)), by = y]
 
@@ -109,7 +109,7 @@ test_that("can do group aggregation with by enhanced selection", {
   df <- tidytable(x = 1:4, y = c("a","a","a","b"))
 
   tidytable_df <- df %>%
-    summarize.(avg_x = mean(x), by = where(is.character))
+    summarize.(avg_x = mean(x), .by = where(is.character))
 
   datatable_df <- df[, list(avg_x = mean(x)), by = y]
 
@@ -121,7 +121,7 @@ test_that("can do group aggregation with by w/ data.frame", {
                    stringsAsFactors = FALSE)
 
   tidytable_df <- df %>%
-    summarize.(avg_x = mean(x), by = y)
+    summarize.(avg_x = mean(x), .by = y)
 
   datatable_df <- as_tidytable(df)[, list(avg_x = mean(x)), by = y]
 
@@ -145,7 +145,7 @@ test_that("can make a function with quosures", {
 
   summarize_fn <- function(.df, col) {
     .df %>%
-      summarize.(avg_x = mean({{col}}), by = y)
+      summarize.(avg_x = mean({{col}}), .by = y)
   }
 
   tidytable_df <- df %>%
