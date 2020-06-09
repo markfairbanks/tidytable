@@ -8,7 +8,9 @@
 #' @param .df A data.frame or data.table
 #' @param ... A selection of columns. `tidyselect` compatible.
 #' @param .direction Direction in which to fill missing values. Currently "down" (the default), "up", "downup" (first down then up), or "updown" (first up and then down)
-#' @param by Columns to group by when filling should be done by group
+#' @param .by Columns to group by when filling should be done by group
+#' @param by This argument has been renamed to .by and is deprecated
+#'
 #' @export
 #' @md
 #'
@@ -19,58 +21,70 @@
 #'   z = c(rep("a", 8), rep("b", 2)))
 #'
 #' test_df %>%
-#'   fill.(x, y, by = z)
+#'   fill.(x, y, .by = z)
 #'
 #' test_df %>%
-#'   fill.(x, y, by = z, .direction = "downup")
-fill. <- function(.df, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
+#'   fill.(x, y, .by = z, .direction = "downup")
+fill. <- function(.df, ...,
+                  .direction = c("down", "up", "downup", "updown"),
+                  .by = NULL,
+                  by = NULL) {
   UseMethod("fill.")
 }
 
 #' @export
-fill..data.frame <- function(.df, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
+fill..data.frame <- function(.df, ...,
+                             .direction = c("down", "up", "downup", "updown"),
+                             .by = NULL,
+                             by = NULL) {
 
   .df <- as_tidytable(.df)
 
+  .by <- check_dot_by(enquo(.by), enquo(by), "fill.")
+
   .direction <- arg_match(.direction)
 
-  by <- enquo(by)
-
   if (.direction == "down") {
-    filler(.df, ..., type = "locf", by = !!by)
+    filler(.df, ..., type = "locf", .by = !!.by)
   } else if (.direction == "up") {
-    filler(.df, ..., type = "nocb", by = !!by)
+    filler(.df, ..., type = "nocb", .by = !!.by)
   } else if (.direction == "downup") {
     .df %>%
-      filler(..., type = "locf", by = !!by) %>%
-      filler(..., type = "nocb", by = !!by)
+      filler(..., type = "locf", .by = !!.by) %>%
+      filler(..., type = "nocb", .by = !!.by)
   } else {
     .df %>%
-      filler(..., type = "nocb", by = !!by) %>%
-      filler(..., type = "locf", by = !!by)
+      filler(..., type = "nocb", .by = !!.by) %>%
+      filler(..., type = "locf", .by = !!.by)
   }
 }
 
 #' @export
 #' @rdname fill.
-dt_fill <- function(.df, ..., .direction = c("down", "up", "downup", "updown"), by = NULL) {
+dt_fill <- function(.df, ...,
+                    .direction = c("down", "up", "downup", "updown"),
+                    .by = NULL,
+                    by = NULL) {
+
   deprecate_soft("0.5.2", "tidytable::dt_fill()", "fill.()")
 
-  fill.(.df, ..., .direction = .direction, by = {{ by }})
+  .by <- check_dot_by(enquo(.by), enquo(by))
+
+  fill.(.df, ..., .direction = .direction, .by = {{ .by }})
 }
 
-filler <- function(.df, ..., type = "locf", by = NULL) {
+filler <- function(.df, ..., type = "locf", .by = NULL) {
 
   all_cols <- select_dots_chr(.df, ...)
 
-  by <- enquo(by)
+  .by <- enquo(.by)
 
   subset_data <- .df[, ..all_cols]
 
   numeric_cols <- all_cols[map_lgl.(subset_data, is.numeric)]
   other_cols <- all_cols[!all_cols %in% numeric_cols]
 
-  with_by <- !quo_is_null(by)
+  with_by <- !quo_is_null(.by)
 
   if (with_by) col_order <- names(.df)
 
@@ -81,7 +95,7 @@ filler <- function(.df, ..., type = "locf", by = NULL) {
     .df <- mutate_across.(.df,
                           c(!!!numeric_cols),
                           nafill, type,
-                          by = !!by)
+                          .by = !!.by)
 
   }
 
@@ -90,12 +104,12 @@ filler <- function(.df, ..., type = "locf", by = NULL) {
     other_cols <- syms(other_cols)
     .df <- shallow(.df)
 
-    by <- select_vec_chr(.df, !!by)
+    .by <- select_vec_chr(.df, !!.by)
 
     for (col in other_cols) {
       eval_quo(
         .df[, !!col := .SD[, !!col][nafill(fifelse(is.na(!!col), NA_integer_, 1:.N), type = !!type)],
-          by = by]
+          by = .by]
       )
     }
   }

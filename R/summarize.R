@@ -5,13 +5,14 @@
 #'
 #' @param .df A data.frame or data.table
 #' @param ... Aggregations to perform
-#' @param by Columns to group by.
+#' @param .by Columns to group by.
 #' * A single column can be passed with `by = d`.
 #' * Multiple columns can be passed with `by = c(c, d)`
 #' * `tidyselect` can be used:
 #'   + Single predicate: `by = where(is.character)`
 #'   + Multiple predicates: `by = c(where(is.character), where(is.factor))`
 #'   + A combination of predicates and column names: `by = c(where(is.character), b)`
+#' @param by This argument has been renamed to .by and is deprecated
 #'
 #' @export
 #' @md
@@ -25,17 +26,17 @@
 #' test_df %>%
 #'   summarize.(avg_a = mean(a),
 #'              max_b = max(b),
-#'              by = c)
+#'              .by = c)
 #'
 #' test_df %>%
 #'   summarize.(avg_a = mean(a),
-#'              by = c(c, d))
-summarize. <- function(.df, ..., by = NULL) {
+#'              .by = c(c, d))
+summarize. <- function(.df, ..., .by = NULL, by = NULL) {
   UseMethod("summarize.")
 }
 
 #' @export
-summarize..data.frame <- function(.df, ..., by = NULL) {
+summarize..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
 
   .df <- as_tidytable(.df)
 
@@ -44,10 +45,11 @@ summarize..data.frame <- function(.df, ..., by = NULL) {
   # Needed so n.() works
   dots <- map.(dots, ~ parse_expr(str_c("(", quo_text(.x), ")")))
 
-  by <- select_vec_chr(.df, {{ by }})
+  .by <- check_dot_by(enquo(.by), enquo(by), "summarize.")
+  .by <- select_vec_chr(.df, !!.by)
 
   eval_quo(
-    .df[, list(!!!dots), by = by]
+    .df[, list(!!!dots), by = .by]
   )
 
 }
@@ -58,16 +60,20 @@ summarise. <- summarize.
 
 #' @export
 #' @rdname summarize.
-dt_summarise <- function(.df, ..., by = NULL) {
+dt_summarise <- function(.df, ..., .by = NULL, by = NULL) {
   deprecate_soft("0.5.2", "tidytable::dt_summarise()", "summarise.()")
 
-  summarize.(.df, ..., by = {{ by }})
+  .by <- check_dot_by(enquo(.by), enquo(by))
+
+  summarize.(.df, ..., .by = !!.by )
 }
 
 #' @export
 #' @rdname summarize.
-dt_summarize <- function(.df, ..., by = NULL) {
+dt_summarize <- function(.df, ..., .by = NULL, by = NULL) {
   deprecate_soft("0.5.2", "tidytable::dt_summarize()", "summarize.()")
 
-  summarize.(.df, ..., by = {{ by }})
+  .by <- check_dot_by(enquo(.by), enquo(by))
+
+  summarize.(.df, ..., .by = {{ .by }})
 }

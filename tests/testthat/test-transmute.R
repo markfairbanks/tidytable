@@ -9,11 +9,11 @@ test_that("can add multiple columns", {
   expect_equal(df$double_y, c(2,4,6))
 })
 
-test_that("can use by", {
+test_that("can use .by", {
   df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
 
   tidytable_df <- df %>%
-    transmute.(z = mean(x), by = y)
+    transmute.(z = mean(x), .by = y)
 
   datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y][, list(z)]
 

@@ -13,32 +13,34 @@
 \alias{dt_slice_max}
 \title{Choose rows by position}
 \usage{
-slice.(.df, rows = 1:5, by = NULL)
+slice.(.df, rows = 1:5, .by = NULL, by = NULL)
 
-slice_head.(.df, n = 5, by = NULL)
+slice_head.(.df, n = 5, .by = NULL, by = NULL)
 
-slice_tail.(.df, n = 5, by = NULL)
+slice_tail.(.df, n = 5, .by = NULL, by = NULL)
 
-slice_max.(.df, order_by, n = 1, by = NULL)
+slice_max.(.df, order_by, n = 1, .by = NULL, by = NULL)
 
-slice_min.(.df, order_by, n = 1, by = NULL)
+slice_min.(.df, order_by, n = 1, .by = NULL, by = NULL)
 
-dt_slice(.df, rows = 1:5, by = NULL)
+dt_slice(.df, rows = 1:5, .by = NULL, by = NULL)
 
-dt_slice_head(.df, n = 5, by = NULL)
+dt_slice_head(.df, n = 5, .by = NULL, by = NULL)
 
-dt_slice_tail(.df, n = 5, by = NULL)
+dt_slice_tail(.df, n = 5, .by = NULL, by = NULL)
 
-dt_slice_min(.df, order_by, n = 1, by = NULL)
+dt_slice_min(.df, order_by, n = 1, .by = NULL, by = NULL)
 
-dt_slice_max(.df, order_by, n = 1, by = NULL)
+dt_slice_max(.df, order_by, n = 1, .by = NULL, by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
 
 \item{rows}{Integer row values. Provide either positive values to keep, or negative values to drop. The values provided must be either all positive or all negative.}
 
-\item{by}{Columns to group by}
+\item{.by}{Columns to group by}
+
+\item{by}{This argument has been renamed to .by and is deprecated}
 
 \item{n}{Number of rows to grab}
 
@@ -57,17 +59,17 @@ test_df \%>\%
   slice.(1:4)
 
 test_df \%>\%
-  slice.(1, by = z)
+  slice.(1, .by = z)
 
 test_df \%>\%
-  slice_head.(1, by = z)
+  slice_head.(1, .by = z)
 
 test_df \%>\%
-  slice_tail.(1, by = z)
+  slice_tail.(1, .by = z)
 
 test_df \%>\%
-  slice_max.(order_by = x, by = z)
+  slice_max.(order_by = x, .by = z)
 
 test_df \%>\%
-  slice_min.(order_by = y, by = z)
+  slice_min.(order_by = y, .by = z)
 }

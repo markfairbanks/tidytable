@@ -5,9 +5,9 @@
 \alias{dt_mutate_across}
 \title{Mutate multiple columns simultaneously}
 \usage{
-mutate_across.(.df, .cols = everything(), .fns, ..., by = NULL)
+mutate_across.(.df, .cols = everything(), .fns, ..., .by = NULL, by = NULL)
 
-dt_mutate_across(.df, .cols = everything(), .fns, ..., by = NULL)
+dt_mutate_across(.df, .cols = everything(), .fns, ..., .by = NULL, by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -18,7 +18,9 @@ dt_mutate_across(.df, .cols = everything(), .fns, ..., by = NULL)
 
 \item{...}{Other arguments for the passed function}
 
-\item{by}{Columns to group by}
+\item{.by}{Columns to group by}
+
+\item{by}{This argument has been renamed to .by and is deprecated}
 }
 \description{
 Mutate multiple columns simultaneously.

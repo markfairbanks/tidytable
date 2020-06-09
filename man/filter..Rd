@@ -5,16 +5,18 @@
 \alias{dt_filter}
 \title{Filter rows on one or more conditions}
 \usage{
-filter.(.df, ..., by = NULL)
+filter.(.df, ..., .by = NULL, by = NULL)
 
-dt_filter(.df, ..., by = NULL)
+dt_filter(.df, ..., .by = NULL, by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
 
 \item{...}{Conditions to filter by}
 
-\item{by}{Columns to group by if filtering with a summary function}
+\item{.by}{Columns to group by if filtering with a summary function}
+
+\item{by}{This argument has been renamed to .by and is deprecated}
 }
 \description{
 Filters a dataset to choose rows where conditions are true.
@@ -29,5 +31,5 @@ test_df \%>\%
   filter.(a >= 2, b >= 4)
 
 test_df \%>\%
-  filter.(b <= mean(b), by = c)
+  filter.(b <= mean(b), .by = c)
 }

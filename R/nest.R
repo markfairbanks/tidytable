@@ -54,9 +54,9 @@ nest_by..data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
 
   } else {
 
-    by <- enquos(...)
+    .by <- enquos(...)
 
-    .df <- summarize.(.df, !!.key := list(.SD), by = c(!!!by))
+    .df <- summarize.(.df, !!.key := list(.SD), .by = c(!!!.by))
   }
 
   .df

@@ -1,4 +1,4 @@
-test_that("dt_ works with no wt/no by", {
+test_that("dt_ works with no wt/no .by", {
   test_df <- data.table(x = 1:5,
                         y = 6:10,
                         z = c(rep("a", 3), rep("b", 2)))
@@ -11,7 +11,7 @@ test_that("dt_ works with no wt/no by", {
   expect_equal(top_df$z, rep("a", 3))
 })
 
-test_that("works with no wt/no by", {
+test_that("works with no wt/no .by", {
   test_df <- data.table(x = 1:5,
                         y = 6:10,
                         z = c(rep("a", 3), rep("b", 2)))
@@ -24,7 +24,7 @@ test_that("works with no wt/no by", {
   expect_equal(top_df$z, rep("a", 3))
 })
 
-test_that("works with no wt, no by, and .N", {
+test_that("works with no wt, no .by, and .N", {
   test_df <- tidytable(x = 1:5,
                         y = 6:10,
                         z = c(rep("a", 3), rep("b", 2)))
@@ -35,7 +35,7 @@ test_that("works with no wt, no by, and .N", {
   expect_equal(top_df, test_df)
 })
 
-test_that("works with no wt/no by with data.frame", {
+test_that("works with no wt/no .by with data.frame", {
   test_df <- data.frame(x = 1:5,
                         y = 6:10,
                         z = c(rep("a", 3), rep("b", 2)),
@@ -49,7 +49,7 @@ test_that("works with no wt/no by with data.frame", {
   expect_equal(top_df$z, rep("a", 3))
 })
 
-test_that("works with wt/no by", {
+test_that("works with wt/no .by", {
   test_df <- data.table(x = 1:5,
                         y = 6:10,
                         z = c(rep("a", 3), rep("b", 2)))
@@ -62,7 +62,7 @@ test_that("works with wt/no by", {
   expect_equal(top_df$z, c("b","b","a"))
 })
 
-test_that("works with wt/no by with data.frame", {
+test_that("works with wt/no .by with data.frame", {
   test_df <- data.frame(x = 1:5,
                         y = 6:10,
                         z = c(rep("a", 3), rep("b", 2)),
@@ -76,26 +76,26 @@ test_that("works with wt/no by with data.frame", {
   expect_equal(top_df$z, c("b","b","a"))
 })
 
-test_that("works with no wt/with by", {
+test_that("works with no wt/with .by", {
   test_df <- data.table(x = 1:5,
                         y = 6:10,
                         z = c(rep("a", 3), rep("b", 2)))
 
   top_df <- test_df %>%
-    top_n.(2, by = z)
+    top_n.(2, .by = z)
 
   expect_equal(top_df$x, c(1,2,4,5))
   expect_equal(top_df$y, c(6,7,9,10))
   expect_equal(top_df$z, c("a","a","b","b"))
 })
 
-test_that("works with wt/with by", {
+test_that("works with wt/with .by", {
   test_df <- data.table(x = 1:5,
                         y = 6:10,
                         z = c(rep("a", 3), rep("b", 2)))
 
   top_df <- test_df %>%
-    top_n.(2, wt = y, by = z)
+    top_n.(2, wt = y, .by = z)
 
   expect_equal(top_df$x, c(5,4,3,2))
   expect_equal(top_df$y, c(10, 9, 8, 7))
@@ -108,7 +108,7 @@ test_that("works with wt/with enhanced selection", {
                         z = c(rep("a", 3), rep("b", 2)))
 
   top_df <- test_df %>%
-    top_n.(2, wt = y, by = where(is.character))
+    top_n.(2, wt = y, .by = where(is.character))
 
   expect_equal(top_df$x, c(5,4,3,2))
   expect_equal(top_df$y, c(10, 9, 8, 7))
