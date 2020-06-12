@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
       </span>
     </div>
 
@@ -128,9 +128,9 @@
     <p>Mutate multiple columns simultaneously.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(<span class='no'>.df</span>, <span class='kw'>.cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(), <span class='no'>.fns</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(<span class='no'>.df</span>, <span class='kw'>.cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(), <span class='no'>.fns</span>, <span class='no'>...</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='mutate_across..html'>dt_mutate_across</a></span>(<span class='no'>.df</span>, <span class='kw'>.cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(), <span class='no'>.fns</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'><a href='mutate_across..html'>dt_mutate_across</a></span>(<span class='no'>.df</span>, <span class='kw'>.cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(), <span class='no'>.fns</span>, <span class='no'>...</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -152,8 +152,12 @@
       <td><p>Other arguments for the passed function</p></td>
     </tr>
     <tr>
-      <th>by</th>
+      <th>.by</th>
       <td><p>Columns to group by</p></td>
+    </tr>
+    <tr>
+      <th>by</th>
+      <td><p>This argument has been renamed to .by and is deprecated</p></td>
     </tr>
     </table>
 

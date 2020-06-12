@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
       </span>
     </div>
 
@@ -198,6 +198,7 @@
 </li>
 <li><code><a href="reference/replace_na..html">replace_na.()</a></code></li>
 <li><code><a href="reference/separate..html">separate.()</a></code></li>
+<li><code><a href="reference/separate_rows..html">separate_rows.()</a></code></li>
 <li><code><a href="reference/unite..html">unite.()</a></code></li>
 </ul>
 </div>
@@ -235,18 +236,18 @@
 <a href="#using-group-by" class="anchor"></a>Using “group by”</h2>
 <p>Group by calls are done from inside any function that has group by functionality (such as <code><a href="reference/summarize..html">summarize.()</a></code> &amp; <code><a href="reference/mutate..html">mutate.()</a></code>)</p>
 <ul>
-<li>A single column can be passed with <code>by = z</code>
+<li>A single column can be passed with <code>.by = z</code>
 </li>
-<li>Multiple columns can be passed with <code>by = c(y, z)</code>
+<li>Multiple columns can be passed with <code>.by = c(y, z)</code>
 </li>
 <li>
 <a href="https://tidyselect.r-lib.org/reference/language.html"><code>tidyselect</code></a> can also be used, including using predicates:
 <ul>
-<li>Single predicate: <code>by = where(is.character)</code>
+<li>Single predicate: <code>.by = where(is.character)</code>
 </li>
-<li>Multiple predicates: <code>by = c(where(is.character), where(is.factor))</code>
+<li>Multiple predicates: <code>.by = c(where(is.character), where(is.factor))</code>
 </li>
-<li>A combination of predicates and column names: <code>by = c(where(is.character), y)</code>
+<li>A combination of predicates and column names: <code>.by = c(where(is.character), y)</code>
 </li>
 </ul>
 </li>
@@ -254,7 +255,7 @@
 <!-- end list --><div class="sourceCode" id="cb4"><pre class="r"><span class="no">test_df</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/summarize..html">summarize.</a></span>(<span class="kw">avg_x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">x</span>),
              <span class="kw">count</span> <span class="kw">=</span> <span class="fu"><a href="reference/n..html">n.</a></span>(),
-             <span class="kw">by</span> <span class="kw">=</span> <span class="no">z</span>)
+             <span class="kw">.by</span> <span class="kw">=</span> <span class="no">z</span>)
 <span class="co">#&gt;        z avg_x count</span>
 <span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;int&gt;</span>
 <span class="co">#&gt; 1:     a   1.5     2</span>
@@ -368,7 +369,7 @@
 <span class="no">find_mean</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">data</span>, <span class="no">grouping_cols</span>, <span class="no">col</span>) {
   <span class="no">data</span> <span class="kw">%&gt;%</span>
     <span class="fu"><a href="reference/summarize..html">summarize.</a></span>(<span class="kw">avg</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>({{<span class="no">col</span>}}),
-               <span class="kw">by</span> <span class="kw">=</span> {{<span class="no">grouping_cols</span>}})
+               <span class="kw">.by</span> <span class="kw">=</span> {{<span class="no">grouping_cols</span>}})
 }
 
 <span class="no">df</span> <span class="kw">%&gt;%</span>
@@ -433,19 +434,19 @@
 <span class="co">#&gt; # A tibble: 13 x 6</span>
 <span class="co">#&gt;    function_tested data.table tidytable tidyverse pandas tidytable_vs_tidyverse</span>
 <span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;                 </span>
-<span class="co">#&gt;  1 arrange         58.81ms    58.07ms   422.61ms  355ms  13.7%                 </span>
-<span class="co">#&gt;  2 case_when       69.45ms    69.37ms   448.81ms  59.2ms 15.5%                 </span>
-<span class="co">#&gt;  3 distinct        45.59ms    39.74ms   99.58ms   309ms  39.9%                 </span>
-<span class="co">#&gt;  4 fill            49.86ms    50.49ms   126.32ms  846ms  40.0%                 </span>
-<span class="co">#&gt;  5 filter          244.35ms   232.87ms  308.63ms  707ms  75.5%                 </span>
-<span class="co">#&gt;  6 inner_join      99.18ms    97.69ms   82.47ms   &lt;NA&gt;   118.5%                </span>
-<span class="co">#&gt;  7 left_join       64.18ms    70.53ms   83.69ms   &lt;NA&gt;   84.3%                 </span>
-<span class="co">#&gt;  8 mutate          65.67ms    81ms      64.7ms    86.4ms 125.2%                </span>
-<span class="co">#&gt;  9 nest            16.45ms    17.14ms   33.35ms   &lt;NA&gt;   51.4%                 </span>
-<span class="co">#&gt; 10 pivot_longer    13.06ms    14.43ms   50.31ms   &lt;NA&gt;   28.7%                 </span>
-<span class="co">#&gt; 11 pivot_wider     113.57ms   137.96ms  72.29ms   &lt;NA&gt;   190.8%                </span>
-<span class="co">#&gt; 12 summarize       287.99ms   265.42ms  599.98ms  834ms  44.2%                 </span>
-<span class="co">#&gt; 13 unnest          26.98ms    21.97ms   938.07ms  &lt;NA&gt;   2.3%</span></pre></div>
+<span class="co">#&gt;  1 arrange         85.68ms    59.53ms   2871.73ms 355ms  2.1%                  </span>
+<span class="co">#&gt;  2 case_when       69.57ms    87.03ms   462.8ms   59.2ms 18.8%                 </span>
+<span class="co">#&gt;  3 distinct        69.03ms    51.08ms   66.13ms   309ms  77.2%                 </span>
+<span class="co">#&gt;  4 fill            44.37ms    56.48ms   114.25ms  846ms  49.4%                 </span>
+<span class="co">#&gt;  5 filter          233.07ms   240.51ms  286.36ms  707ms  84.0%                 </span>
+<span class="co">#&gt;  6 inner_join      83.09ms    92.03ms   173.77ms  &lt;NA&gt;   53.0%                 </span>
+<span class="co">#&gt;  7 left_join       151.14ms   148.66ms  108.13ms  &lt;NA&gt;   137.5%                </span>
+<span class="co">#&gt;  8 mutate          56.02ms    91.89ms   361.44ms  86.4ms 25.4%                 </span>
+<span class="co">#&gt;  9 nest            17.22ms    18.46ms   36.02ms   &lt;NA&gt;   51.2%                 </span>
+<span class="co">#&gt; 10 pivot_longer    10.63ms    18.43ms   50.08ms   &lt;NA&gt;   36.8%                 </span>
+<span class="co">#&gt; 11 pivot_wider     119.17ms   121.39ms  114.56ms  &lt;NA&gt;   106.0%                </span>
+<span class="co">#&gt; 12 summarize       385.64ms   188.31ms  241.11ms  834ms  78.1%                 </span>
+<span class="co">#&gt; 13 unnest          15.28ms    19.68ms   49.3ms    &lt;NA&gt;   39.9%</span></pre></div>
 </div>
 </div>
 </div>
@@ -482,7 +483,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=tidytable"><img src="https://www.r-pkg.org/badges/version/tidytable" alt="CRAN status"></a></li>
-<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.5.1-green.svg"></a></li>
+<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.5.2-green.svg"></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 <li><a href="https://markfairbanks.github.io/tidytable/"><img src="https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey" alt="CRAN RStudio mirror downloads"></a></li>
 </ul>

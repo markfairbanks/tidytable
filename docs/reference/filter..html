@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
       </span>
     </div>
 
@@ -128,9 +128,9 @@
     <p>Filters a dataset to choose rows where conditions are true.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='filter..html'>filter.</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'><a href='filter..html'>filter.</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='filter..html'>dt_filter</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'><a href='filter..html'>dt_filter</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -144,8 +144,12 @@
       <td><p>Conditions to filter by</p></td>
     </tr>
     <tr>
-      <th>by</th>
+      <th>.by</th>
       <td><p>Columns to group by if filtering with a summary function</p></td>
+    </tr>
+    <tr>
+      <th>by</th>
+      <td><p>This argument has been renamed to .by and is deprecated</p></td>
     </tr>
     </table>
 
@@ -161,7 +165,7 @@
 #&gt; 1: 2 5 a
 #&gt; 2: 3 6 b</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='filter..html'>filter.</a></span>(<span class='no'>b</span> <span class='kw'>&lt;=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>b</span>), <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>c</span>)</div><div class='output co'>#&gt;    a b c
+  <span class='fu'><a href='filter..html'>filter.</a></span>(<span class='no'>b</span> <span class='kw'>&lt;=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>b</span>), <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>c</span>)</div><div class='output co'>#&gt;    a b c
 #&gt; 1: 1 4 a
 #&gt; 2: 3 6 b</div></pre>
   </div>

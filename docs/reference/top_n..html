@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
       </span>
     </div>
 
@@ -128,9 +128,9 @@
     <p>Select the top or bottom entries in each group, ordered by <code>wt</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='top_n..html'>top_n.</a></span>(<span class='no'>.df</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>wt</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'><a href='top_n..html'>top_n.</a></span>(<span class='no'>.df</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>wt</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='top_n..html'>dt_top_n</a></span>(<span class='no'>.df</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>wt</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'><a href='top_n..html'>dt_top_n</a></span>(<span class='no'>.df</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>wt</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,8 +148,12 @@
       <td><p>Optional. The variable to use for ordering. If NULL uses the last column in the data.table.</p></td>
     </tr>
     <tr>
-      <th>by</th>
+      <th>.by</th>
       <td><p>Columns to group by</p></td>
+    </tr>
+    <tr>
+      <th>by</th>
+      <td><p>This argument has been renamed to .by and is deprecated</p></td>
     </tr>
     </table>
 
@@ -161,15 +165,18 @@
   <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>3</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>2</span>)))
 
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='top_n..html'>top_n.</a></span>(<span class='fl'>2</span>, <span class='kw'>wt</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt;    x  y z
+  <span class='fu'><a href='top_n..html'>top_n.</a></span>(<span class='fl'>2</span>, <span class='kw'>wt</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `top_n.()` is deprecated as of tidytable 0.5.2.</span>
+#&gt; <span class='warning'>Please use `slice_max.()` instead.</span>
+#&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
+#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt;    x  y z
 #&gt; 1: 5 10 b
 #&gt; 2: 4  9 b</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='top_n..html'>top_n.</a></span>(<span class='fl'>2</span>, <span class='kw'>wt</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x  y
+  <span class='fu'><a href='top_n..html'>top_n.</a></span>(<span class='fl'>2</span>, <span class='kw'>wt</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x  y
 #&gt; 1: b 5 10
 #&gt; 2: b 4  9
 #&gt; 3: a 3  8
-#&gt; 4: a 2  7</div></pre>
+#&gt; 4: a 2  7</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

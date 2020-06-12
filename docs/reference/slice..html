@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
       </span>
     </div>
 
@@ -128,25 +128,25 @@
     <p>Choose rows by their ordinal position in a data.table. Grouped data.tables use the ordinal position within the group.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='slice..html'>slice.</a></span>(<span class='no'>.df</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'><a href='slice..html'>slice.</a></span>(<span class='no'>.df</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='slice..html'>slice_head.</a></span>(<span class='no'>.df</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'><a href='slice..html'>slice_head.</a></span>(<span class='no'>.df</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='slice..html'>slice_tail.</a></span>(<span class='no'>.df</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'><a href='slice..html'>slice_tail.</a></span>(<span class='no'>.df</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='slice..html'>slice_max.</a></span>(<span class='no'>.df</span>, <span class='no'>order_by</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'><a href='slice..html'>slice_max.</a></span>(<span class='no'>.df</span>, <span class='no'>order_by</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='slice..html'>slice_min.</a></span>(<span class='no'>.df</span>, <span class='no'>order_by</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'><a href='slice..html'>slice_min.</a></span>(<span class='no'>.df</span>, <span class='no'>order_by</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='slice..html'>dt_slice</a></span>(<span class='no'>.df</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'><a href='slice..html'>dt_slice</a></span>(<span class='no'>.df</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='slice..html'>dt_slice_head</a></span>(<span class='no'>.df</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'><a href='slice..html'>dt_slice_head</a></span>(<span class='no'>.df</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='slice..html'>dt_slice_tail</a></span>(<span class='no'>.df</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'><a href='slice..html'>dt_slice_tail</a></span>(<span class='no'>.df</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='slice..html'>dt_slice_min</a></span>(<span class='no'>.df</span>, <span class='no'>order_by</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'><a href='slice..html'>dt_slice_min</a></span>(<span class='no'>.df</span>, <span class='no'>order_by</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='slice..html'>dt_slice_max</a></span>(<span class='no'>.df</span>, <span class='no'>order_by</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'><a href='slice..html'>dt_slice_max</a></span>(<span class='no'>.df</span>, <span class='no'>order_by</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -160,8 +160,12 @@
       <td><p>Integer row values. Provide either positive values to keep, or negative values to drop. The values provided must be either all positive or all negative.</p></td>
     </tr>
     <tr>
-      <th>by</th>
+      <th>.by</th>
       <td><p>Columns to group by</p></td>
+    </tr>
+    <tr>
+      <th>by</th>
+      <td><p>This argument has been renamed to .by and is deprecated</p></td>
     </tr>
     <tr>
       <th>n</th>
@@ -187,23 +191,23 @@
 #&gt; 3: 3 6 a
 #&gt; 4: 4 7 b</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='slice..html'>slice.</a></span>(<span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
+  <span class='fu'><a href='slice..html'>slice.</a></span>(<span class='fl'>1</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
 #&gt; 1: a 1 4
 #&gt; 2: b 4 7</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='slice..html'>slice_head.</a></span>(<span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
+  <span class='fu'><a href='slice..html'>slice_head.</a></span>(<span class='fl'>1</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
 #&gt; 1: a 1 4
 #&gt; 2: b 4 7</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='slice..html'>slice_tail.</a></span>(<span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
+  <span class='fu'><a href='slice..html'>slice_tail.</a></span>(<span class='fl'>1</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
 #&gt; 1: a 3 6
 #&gt; 2: b 4 7</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='slice..html'>slice_max.</a></span>(<span class='kw'>order_by</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
+  <span class='fu'><a href='slice..html'>slice_max.</a></span>(<span class='kw'>order_by</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
 #&gt; 1: b 4 7
 #&gt; 2: a 3 6</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='slice..html'>slice_min.</a></span>(<span class='kw'>order_by</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
+  <span class='fu'><a href='slice..html'>slice_min.</a></span>(<span class='kw'>order_by</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
 #&gt; 1: a 1 4
 #&gt; 2: b 4 7</div></pre>
   </div>
