@@ -45,17 +45,17 @@ fill..data.frame <- function(.df, ...,
   .direction <- arg_match(.direction)
 
   if (.direction == "down") {
-    filler(.df, ..., type = "locf", .by = !!.by)
+    filler(.df, ..., type = "down", .by = !!.by)
   } else if (.direction == "up") {
-    filler(.df, ..., type = "nocb", .by = !!.by)
+    filler(.df, ..., type = "up", .by = !!.by)
   } else if (.direction == "downup") {
     .df %>%
-      filler(..., type = "locf", .by = !!.by) %>%
-      filler(..., type = "nocb", .by = !!.by)
+      filler(..., type = "down", .by = !!.by) %>%
+      filler(..., type = "up", .by = !!.by)
   } else {
     .df %>%
-      filler(..., type = "nocb", .by = !!.by) %>%
-      filler(..., type = "locf", .by = !!.by)
+      filler(..., type = "up", .by = !!.by) %>%
+      filler(..., type = "down", .by = !!.by)
   }
 }
 
@@ -73,7 +73,9 @@ dt_fill <- function(.df, ...,
   fill.(.df, ..., .direction = .direction, .by = {{ .by }})
 }
 
-filler <- function(.df, ..., type = "locf", .by = NULL) {
+filler <- function(.df, ..., type = "down", .by = NULL) {
+
+  type <- switch(type, "down" = "locf", "up" = "nocb")
 
   all_cols <- select_dots_chr(.df, ...)
 
@@ -81,8 +83,9 @@ filler <- function(.df, ..., type = "locf", .by = NULL) {
 
   subset_data <- .df[, ..all_cols]
 
-  numeric_cols <- all_cols[map_lgl.(subset_data, is.numeric)]
-  other_cols <- all_cols[!all_cols %in% numeric_cols]
+  numeric_flag <- map_lgl.(subset_data, is.numeric)
+  numeric_cols <- all_cols[numeric_flag]
+  other_cols <- all_cols[!numeric_flag]
 
   with_by <- !quo_is_null(.by)
 

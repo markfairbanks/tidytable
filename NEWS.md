@@ -1,8 +1,10 @@
 # tidytable 0.5.2 (in development)
 
 * This version contains general performance improvements
-* Group by arg `by` has been deprecated for `.by`
-* All `dt_verb()` functions are soft deprecated
+* Deprecations:
+  + Group by arg `by` has been deprecated for `.by`.
+  This will allow "by" to be used as a column name in `mutate.()` & `summarize.()` in future releases.
+  + All `dt_verb()` functions are soft deprecated
 * New functions:
   + `separate_rows.()`
 * Functionality improvements:

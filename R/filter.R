@@ -46,7 +46,7 @@ filter..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
     col_order <- names(.df)
 
     .df <- eval_quo(
-      .df[, eval_quo(.SD[Reduce('&', list(!!!dots))], .SD), by = .by]
+      .df[, .SD[Reduce('&', list(!!!dots))], by = .by]
     )
 
     setcolorder(.df, col_order)

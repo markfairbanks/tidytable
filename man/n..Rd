@@ -22,7 +22,7 @@ test_df <- data.table(
 
 test_df \%>\%
   summarize.(count = n.(),
-             by = z)
+             .by = z)
 
 test_df \%>\%
   mutate.(count = n.())
