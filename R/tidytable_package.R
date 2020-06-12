@@ -10,8 +10,8 @@
 #' @importFrom rlang `%|%` `%||%`
 #' @importFrom stats as.formula na.omit
 #' @importFrom utils capture.output head tail type.convert
-#' @importFrom vctrs vec_assert vec_as_names vec_as_names_legacy vec_cast vec_ptype_common
-#' @importFrom vctrs vec_recycle vec_size vec_unique
+#' @importFrom vctrs vec_assert vec_as_names vec_as_names_legacy vec_cast vec_in
+#' @importFrom vctrs vec_ptype_common vec_recycle vec_size vec_unique
 NULL
 
 globalVariables(c(".", "name", "value", "..all_cols", "..select_cols",
