@@ -79,10 +79,9 @@ dt_unnest_legacy <- function(.df, ..., .keep_all = FALSE) {
 
 unnest_col <- function(.df, col = NULL) {
 
-  # Check if nested data is a data.frame, data.table, or vector
+  # Check if nested data is a vector
   nested_data <- pull.(.df, !!col)[[1]]
   is_vec <- is_bare_vector(nested_data) && !is.matrix(nested_data)
-  is_datatable <- is.data.table(nested_data)
 
   if (is_vec) {
 
@@ -90,9 +89,7 @@ unnest_col <- function(.df, col = NULL) {
 
   } else {
 
-    # Convert nested data.frame/tibble/matrix inputs to data.tables
-    if (!is_datatable) .df <- mutate.(.df, !!col := map.(!!col, as_tidytable))
-
+    # bind_rows.() auto-converts lists of data.frames/tibbles/matrices to data.tables
     result_df <- bind_rows.(pull.(.df, !!col))
   }
 

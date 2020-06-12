@@ -1,6 +1,5 @@
 ## Test environments
-* local OS X install, R 3.6.1
-* ubuntu 14.04 (on travis-ci), R 3.6.1
+* local OS Mojave install, R 4.0.0
 * win-builder (devel and release)
 
 ## R CMD check results
@@ -8,6 +7,5 @@
 0 errors | 0 warnings | 0 notes
 
 * All checks passed
-* This is a quick bug fix to a core function.
 
 

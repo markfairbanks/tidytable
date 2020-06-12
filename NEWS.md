@@ -1,4 +1,4 @@
-# tidytable 0.5.2 (in development)
+# tidytable 0.5.2
 
 * This version contains general performance improvements
 * Deprecations:

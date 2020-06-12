@@ -30,6 +30,8 @@ top_n. <- function(.df, n = 5, wt = NULL, .by = NULL, by = NULL) {
 #' @export
 top_n..data.frame <- function(.df, n = 5, wt = NULL, .by = NULL, by = NULL) {
 
+  deprecate_soft("0.5.2", "tidytable::top_n.()", "slice_max.()")
+
   .df <- as_tidytable(.df)
 
   wt <- enquo(wt)
