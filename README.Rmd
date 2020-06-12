@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/dev%20-0.5.1.9-green.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/dev%20-0.5.2-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey)](https://markfairbanks.github.io/tidytable/)
 <!-- badges: end -->
@@ -124,19 +124,19 @@ test_df %>%
 
 Group by calls are done from inside any function that has group by functionality (such as `summarize.()` & `mutate.()`) 
 
-* A single column can be passed with `by = z`
-* Multiple columns can be passed with `by = c(y, z)`
+* A single column can be passed with `.by = z`
+* Multiple columns can be passed with `.by = c(y, z)`
 * [`tidyselect`](https://tidyselect.r-lib.org/reference/language.html) can 
 also be used, including using predicates:
-  + Single predicate: `by = where(is.character)`
-  + Multiple predicates: `by = c(where(is.character), where(is.factor))`
-  + A combination of predicates and column names: `by = c(where(is.character), y)`
+  + Single predicate: `.by = where(is.character)`
+  + Multiple predicates: `.by = c(where(is.character), where(is.factor))`
+  + A combination of predicates and column names: `.by = c(where(is.character), y)`
 
 ```{r}
 test_df %>%
   summarize.(avg_x = mean(x),
              count = n.(),
-             by = z)
+             .by = z)
 ```
 
 ## `tidyselect` support
@@ -233,7 +233,7 @@ df <- data.table(x = 1:10, y = c(rep("a", 6), rep("b", 4)), z = c(rep("a", 6), r
 find_mean <- function(data, grouping_cols, col) {
   data %>%
     summarize.(avg = mean({{col}}),
-               by = {{grouping_cols}})
+               .by = {{grouping_cols}})
 }
 
 df %>%
@@ -319,7 +319,7 @@ inv_gc(); inv_gc();
 ```{r summarize, echo=FALSE}
 summarize_marks <- bench::mark(
   tidyverse = summarize(group_by(test_tbl, c), avg_a = mean(a), .groups = "drop"),
-  tidytable = summarize.(test_dt, avg_a = mean(a), by = c),
+  tidytable = summarize.(test_dt, avg_a = mean(a), .by = c),
   data.table = test_dt[, list(avg_a = mean(a)), by = c],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
@@ -388,7 +388,7 @@ fill_tbl <- as_tibble(fill_dt)
 
 fill_marks <- bench::mark(
   tidyverse = fill(group_by(fill_tbl, id), int1, int2),
-  tidytable = fill.(fill_dt, int1, int2, by = id),
+  tidytable = fill.(fill_dt, int1, int2, .by = id),
   # needs shallow copy or subsequent runs won't have NAs to fill
   # data.table = tidytable:::shallow(fill_dt)[, ':='(int1 = nafill(int1, type = "locf"),
   #                                                  int2 = nafill(int2, type = "locf")),
