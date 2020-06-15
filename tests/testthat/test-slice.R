@@ -12,9 +12,18 @@ test_that("works without .by", {
   test_df <- tidytable(x = c(1,2,3,4), y = c(4,5,6,7), z = c("a", "a", "a", "b"))
 
   sliced_df <- test_df %>%
-    slice.(1:4)
+    slice.(1:3)
 
-  expect_equal(sliced_df, head(test_df, 4))
+  expect_equal(sliced_df, head(test_df, 3))
+})
+
+test_that("doesn't return NAs", {
+  test_df <- tidytable(x = c(1,2,3,4), y = c(4,5,6,7), z = c("a", "a", "a", "b"))
+
+  sliced_df <- test_df %>%
+    slice.(1:5)
+
+  expect_equal(sliced_df, test_df)
 })
 
 test_that("works without .by with .N", {
@@ -125,6 +134,14 @@ test_that("_head.() works when empty", {
     slice_head.()
 
   expect_equal(sliced_df, head(test_df, 5))
+})
+
+test_that("_head.() works when empty, doesn't return NAs", {
+  test_df <- tidytable(x = 1:3, y = 1:3)
+  sliced_df <- test_df %>%
+    slice_head.()
+
+  expect_equal(sliced_df, head(test_df, 3))
 })
 
 

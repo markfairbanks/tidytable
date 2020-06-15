@@ -49,9 +49,15 @@ slice..data.frame <- function(.df, rows = 1:5, .by = NULL, by = NULL) {
   .by <- check_dot_by(enquo(.by), enquo(by), "slice.")
   .by <- select_vec_chr(.df, !!.by)
 
-  eval_quo(
-    .df[, .SD[!!rows], by = .by]
-  )
+  if (length(.by) == 0) {
+    eval_quo(
+      .df[1:.N %between% c(min(!!rows), max(!!rows))]
+    )
+  } else {
+    eval_quo(
+      .df[, .SD[1:.N %between% c(min(!!rows), max(!!rows))], by = .by]
+    )
+  }
 }
 
 #' @export
