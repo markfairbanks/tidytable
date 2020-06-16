@@ -67,6 +67,10 @@ mutate..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
     # Faster with "by", since the "by" call isn't looped multiple times for each column added
     .by <- select_vec_chr(.df, !!.by)
 
+    needs_copy <- any(vec_in(names(dots), names(.df)))
+
+    if (needs_copy) .df <- copy(.df)
+
     eval_quo(
       .df[, ':='(!!!dots), by = .by]
     )

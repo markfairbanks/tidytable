@@ -110,6 +110,15 @@ test_that("can use .by", {
 
 })
 
+test_that("modify-by-reference doesn't occur with single val with .by", {
+  df <- data.table(x = 1:3, y = 1:3)
+  df %>%
+    mutate.(x = 1, .by = y)
+
+  expect_named(df, c("x", "y"))
+  expect_equal(df$x, c(1,2,3))
+})
+
 test_that("can use .by with enhanced selection", {
   df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
 
