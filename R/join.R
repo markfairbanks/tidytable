@@ -204,9 +204,6 @@ join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
   by_x <- by_x_y[[1]]
   by_y <- by_x_y[[2]]
 
-  if (by_x %notin% colnames(x)) stop("by.x columns not in x")
-  if (by_y %notin% colnames(y)) stop("by.y columns not in y")
-
   as_tidytable(
     merge(x = x, y = y, by.x = by_x, by.y = by_y, suffixes = suffix,
           all.x = all_x, all.y = all_y,
