@@ -139,6 +139,8 @@ test_df %>%
              .by = z)
 ```
 
+*Note: The `.by` argument was called `by` in versions of `tidytable` prior to `v0.5.2`.*
+
 ## `tidyselect` support
 
 `tidytable` allows you to select/drop columns just like you would in the tidyverse.

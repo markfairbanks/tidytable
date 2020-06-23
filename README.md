@@ -156,6 +156,9 @@ test_df %>%
 #> 2:     b   3.0     1
 ```
 
+*Note: The `.by` argument was called `by` in versions of `tidytable`
+prior to `v0.5.2`.*
+
 ## `tidyselect` support
 
 `tidytable` allows you to select/drop columns just like you would in the
@@ -369,17 +372,17 @@ all_marks
 #> # A tibble: 13 x 6
 #>    function_tested data.table tidytable tidyverse pandas tidytable_vs_tidyverse
 #>    <chr>           <chr>      <chr>     <chr>     <chr>  <chr>                 
-#>  1 arrange         85.68ms    59.53ms   2871.73ms 355ms  2.1%                  
-#>  2 case_when       69.57ms    87.03ms   462.8ms   59.2ms 18.8%                 
-#>  3 distinct        69.03ms    51.08ms   66.13ms   309ms  77.2%                 
-#>  4 fill            44.37ms    56.48ms   114.25ms  846ms  49.4%                 
-#>  5 filter          233.07ms   240.51ms  286.36ms  707ms  84.0%                 
-#>  6 inner_join      83.09ms    92.03ms   173.77ms  <NA>   53.0%                 
-#>  7 left_join       151.14ms   148.66ms  108.13ms  <NA>   137.5%                
-#>  8 mutate          56.02ms    91.89ms   361.44ms  86.4ms 25.4%                 
-#>  9 nest            17.22ms    18.46ms   36.02ms   <NA>   51.2%                 
-#> 10 pivot_longer    10.63ms    18.43ms   50.08ms   <NA>   36.8%                 
-#> 11 pivot_wider     119.17ms   121.39ms  114.56ms  <NA>   106.0%                
-#> 12 summarize       385.64ms   188.31ms  241.11ms  834ms  78.1%                 
-#> 13 unnest          15.28ms    19.68ms   49.3ms    <NA>   39.9%
+#>  1 arrange         63.23ms    56.57ms   2854.95ms 355ms  2.0%                  
+#>  2 case_when       70.05ms    75.21ms   460.48ms  59.2ms 16.3%                 
+#>  3 distinct        46.06ms    37.87ms   78.99ms   309ms  47.9%                 
+#>  4 fill            44.24ms    75.97ms   81.95ms   846ms  92.7%                 
+#>  5 filter          244.35ms   236.3ms   281.21ms  707ms  84.0%                 
+#>  6 inner_join      62.99ms    86.76ms   92.68ms   <NA>   93.6%                 
+#>  7 left_join       63.46ms    81.48ms   102.2ms   <NA>   79.7%                 
+#>  8 mutate          63.52ms    55.24ms   224.58ms  86.4ms 24.6%                 
+#>  9 nest            19.38ms    23.54ms   38.39ms   <NA>   61.3%                 
+#> 10 pivot_longer    11.84ms    20.31ms   54.41ms   <NA>   37.3%                 
+#> 11 pivot_wider     130.64ms   120.46ms  95.24ms   <NA>   126.5%                
+#> 12 summarize       307.95ms   173.13ms  229.7ms   834ms  75.4%                 
+#> 13 unnest          21.95ms    19.15ms   40.33ms   <NA>   47.5%
 ```
