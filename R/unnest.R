@@ -81,7 +81,7 @@ unnest_col <- function(.df, col = NULL) {
 
   # Check if nested data is a vector
   nested_data <- pull.(.df, !!col)[[1]]
-  is_vec <- is_bare_vector(nested_data) && !is.matrix(nested_data)
+  is_vec <- any(vec_in(class(nested_data), c("character", "factor", "numeric", "integer")))
 
   if (is_vec) {
 
