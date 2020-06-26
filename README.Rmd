@@ -84,8 +84,6 @@ devtools::install_github("markfairbanks/tidytable")
 * `rename.()` & `rename_with.()`
 * `row_number.()`
 * `slice.()`: `_head.()`/`_tail.()`/`_max.()`/`_min.()`
-  + The `slice_*()` helpers are like `top_n.()`, but are a bit easier to use
-* `top_n.()`
 * `transmute.()`
 
 ### tidyr
@@ -405,32 +403,27 @@ fill_marks <- bench::mark(
 ```{r case, echo=FALSE}
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-case_dt <- tidytable(x = rnorm(3000000)) %>%
-  mutate.(median_x = median(x))
-
-case_tbl <- as_tibble(case_dt)
-
-case2_dt <- copy(case_dt)
+x <- rnorm(3000000)
+median_x <-  median(x)
 
 case_marks <- bench::mark(
-  tidyverse = mutate(case_tbl,
-                     test = case_when(x < median_x ~ x * 2,
-                                      x >= median_x ~ x * 3,
-                                      TRUE ~ NA_real_)),
-  tidytable = mutate.(case_dt,
-                      test = case.(x < median_x, x * 2,
-                                   x >= median_x, x * 3,
-                                   default = NA)),
-  data.table = case2_dt[,':='(test = fifelse(x < median_x, x * 2,
-                                             fifelse(x >= median_x, x * 3, NA_real_,
-                                                     NA_real_),
-                                             NA_real_))][],
+  tidyverse = case_when(x < median_x ~ 1,
+                        x >= median_x ~ 2,
+                        TRUE ~ NA_real_),
+  tidytable = case.(x < median_x, 1,
+                    x >= median_x, 2,
+                    default = NA),
+  data.table = fifelse(x < median_x, 1,
+                       fifelse(x >= median_x, 2, NA_real_,
+                               NA_real_), NA_real_),
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
          function_tested = "case_when")
 ```
 
 ```{r pivot_wider, echo=FALSE}
+remove(x, median_x)
+
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
 wider_tbl <- expand_grid(case = as.character(seq(1, 2000)),
