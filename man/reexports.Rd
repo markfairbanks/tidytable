@@ -23,10 +23,10 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{data.table}{\code{\link[data.table]{data.table}}, \code{\link[data.table]{setDTthreads}}}
+  \item{data.table}{\code{\link[data.table]{data.table}}, \code{\link[data.table:openmp-utils]{setDTthreads}}}
 
-  \item{rlang}{\code{\link[rlang]{enquo}}, \code{\link[rlang]{enquos}}}
+  \item{rlang}{\code{\link[rlang:nse-defuse]{enquo}}, \code{\link[rlang:nse-defuse]{enquos}}}
 
-  \item{tidyselect}{\code{\link[tidyselect]{all_of}}, \code{\link[tidyselect]{any_of}}, \code{\link[tidyselect]{contains}}, \code{\link[tidyselect]{ends_with}}, \code{\link[tidyselect]{everything}}, \code{\link[tidyselect]{last_col}}, \code{\link[tidyselect]{matches}}, \code{\link[tidyselect]{num_range}}, \code{\link[tidyselect]{starts_with}}}
+  \item{tidyselect}{\code{\link[tidyselect]{all_of}}, \code{\link[tidyselect:all_of]{any_of}}, \code{\link[tidyselect:starts_with]{contains}}, \code{\link[tidyselect:starts_with]{ends_with}}, \code{\link[tidyselect]{everything}}, \code{\link[tidyselect:everything]{last_col}}, \code{\link[tidyselect:starts_with]{matches}}, \code{\link[tidyselect:starts_with]{num_range}}, \code{\link[tidyselect]{starts_with}}}
 }}
 
