@@ -5,14 +5,15 @@
 \alias{dt_replace_na}
 \title{Replace missing values}
 \usage{
-replace_na.(.col, replace)
+replace_na.(.x, replace = NA)
 
-dt_replace_na(.col, replace)
+dt_replace_na(.x, replace = NA)
 }
 \arguments{
-\item{.col}{A vector}
+\item{.x}{A data.frame/data.table or a vector}
 
-\item{replace}{A single value used for replacement}
+\item{replace}{If \code{.x} is a data frame, a \code{list()} of replacement values for specified columns.
+If \code{.x} is a vector, a single replacement value.}
 }
 \description{
 A shortcut to replace NAs inside of a \code{mutate.()} call.
@@ -24,6 +25,12 @@ test_df <- data.table(
   x = c(1, 2, NA),
   y = c(NA, 1, 2))
 
+# Using replace_na.() inside mutate()
 test_df \%>\%
   mutate.(x = replace_na.(x, 5))
+
+# Using replace_na.() on a data frame
+
+test_df \%>\%
+  replace_na.(list(x = 5, y = 0))
 }

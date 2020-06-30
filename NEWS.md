@@ -1,3 +1,13 @@
+# tidytable 0.5.3 (in development)
+
+* New functions:
+  + `complete.()`
+  + `crossing.()`
+  + `expand.()`
+  + `expand_grid.()`
+* Functionality improvements:
+  + `replace_na.()`: Now works on `data.frame`/`data.table` inputs as well as vectors
+
 # tidytable 0.5.2
 
 * This version contains general performance improvements
