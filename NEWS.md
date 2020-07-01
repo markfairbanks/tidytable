@@ -5,6 +5,7 @@
   + `crossing.()`
   + `expand.()`
   + `expand_grid.()`
+  + `uncount.()`
 * Functionality improvements:
   + `replace_na.()`: Now works on `data.frame`/`data.table` inputs as well as vectors
 
