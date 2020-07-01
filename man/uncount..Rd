@@ -21,7 +21,7 @@ Uncount a data.table
 \examples{
 df <- data.table(x = c("a", "b"), n = c(1, 2))
 
-uncount(df, n)
+uncount.(df, n)
 
-uncount(df, n, .id = "id")
+uncount.(df, n, .id = "id")
 }
