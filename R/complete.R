@@ -24,17 +24,14 @@ complete. <- function(.df, ..., .fill = list()) {
 #' @export
 complete..data.frame <- function(.df, ..., .fill = list()) {
 
-  # No need for as_tidytable() conversion
-  # Step is covered by other functions
+  full_df <- expand.(.df, ...)
 
-  full <- expand.(.df, ...)
-
-  if (is_empty(full)) {
+  if (is_empty(full_df)) {
     return(.df)
   }
 
-  full <- full_join.(full, .df, by = names(full))
-  full <- replace_na.(full, replace = .fill)
+  full_df <- full_join.(full_df, .df, by = names(full_df))
+  full_df <- replace_na.(full_df, replace = .fill)
 
-  as_tidytable(full)
+  full_df
 }
