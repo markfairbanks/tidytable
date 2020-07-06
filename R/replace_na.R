@@ -1,9 +1,7 @@
 #' Replace missing values
 #'
 #' @description
-#' A shortcut to replace NAs inside of a `mutate.()` call.
-#'
-#' Note: This function *does not work* outside of `mutate.()` like `tidyr::replace_na()` does.
+#' Replace NAs with specified values
 #'
 #' @param .x A data.frame/data.table or a vector
 #' @param replace If `.x` is a data frame, a `list()` of replacement values for specified columns.
@@ -22,7 +20,6 @@
 #'   mutate.(x = replace_na.(x, 5))
 #'
 #' # Using replace_na.() on a data frame
-#'
 #' test_df %>%
 #'   replace_na.(list(x = 5, y = 0))
 replace_na. <- function(.x, replace = NA) {
@@ -42,7 +39,7 @@ replace_na..default <- function(.x, replace = NA) {
 }
 
 #' @export
-replace_na..data.frame <- function(.x, replace = list(), ...) {
+replace_na..data.frame <- function(.x, replace = list()) {
 
   .x <- as_tidytable(.x)
 

@@ -16,9 +16,7 @@ dt_replace_na(.x, replace = NA)
 If \code{.x} is a vector, a single replacement value.}
 }
 \description{
-A shortcut to replace NAs inside of a \code{mutate.()} call.
-
-Note: This function \emph{does not work} outside of \code{mutate.()} like \code{tidyr::replace_na()} does.
+Replace NAs with specified values
 }
 \examples{
 test_df <- data.table(
@@ -30,7 +28,6 @@ test_df \%>\%
   mutate.(x = replace_na.(x, 5))
 
 # Using replace_na.() on a data frame
-
 test_df \%>\%
   replace_na.(list(x = 5, y = 0))
 }
