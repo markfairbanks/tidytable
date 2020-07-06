@@ -11,7 +11,7 @@ select_vec_i <- function(.df, select_vars) {
 
   expr_char <- quo_text(select_vars)
 
-  if (str_detect(expr_char, "list\\("))
+  if (str_detect.(expr_char, "list\\("))
     abort("Using by = list(col1, col2) is deprecated. Please use by = c(col1, col2)")
 
   eval_select(select_vars, .df)

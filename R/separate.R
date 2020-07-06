@@ -50,7 +50,7 @@ separate..data.frame <- function(.df, col, into,
   if (nchar(sep) > 1) {
     # Works automatically, but is slower
     eval_quo(
-      .df[, (into) := tstrsplit(!!col, split = str_extract(!!col, sep), fixed=TRUE, ...)]
+      .df[, (into) := tstrsplit(!!col, split = str_extract.(!!col, sep), fixed=TRUE, ...)]
     )
   } else {
     # Faster, but sep must be supplied
