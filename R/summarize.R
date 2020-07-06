@@ -43,7 +43,7 @@ summarize..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
   dots <- enquos(...)
 
   # Needed so n.() works
-  dots <- map.(dots, ~ parse_expr(str_c("(", quo_text(.x), ")")))
+  dots <- map.(dots, ~ parse_expr(str_c.("(", quo_text(.x), ")")))
 
   .by <- check_dot_by(enquo(.by), enquo(by), "summarize.")
   .by <- select_vec_chr(.df, !!.by)

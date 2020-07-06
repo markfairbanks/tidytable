@@ -80,7 +80,7 @@ get_dummies..data.frame <- function(.df,
     if (dummify_na) unique_vals <- fifelse(is.na(unique_vals), "NA", unique_vals)
     else unique_vals <- unique_vals[!is.na(unique_vals)]
 
-    if (prefix) new_names <- str_c(col_name, unique_vals, sep = prefix_sep)
+    if (prefix) new_names <- str_c.(col_name, unique_vals, sep = prefix_sep)
     else new_names <- unique_vals
 
     .df[, (new_names) := 0]

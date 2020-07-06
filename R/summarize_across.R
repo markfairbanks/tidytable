@@ -77,7 +77,7 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ..., .
       names(.fns)[!names_flag] <- "fn"
 
       fixed_names <- vec_as_names(names(.fns), repair = "unique", quiet = TRUE)
-      fixed_names <- str_replace(fixed_names, "\\...", "")
+      fixed_names <- str_replace.(fixed_names, "\\...", "")
 
       names(.fns) <- fixed_names
     }
@@ -90,7 +90,7 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ..., .
     )
 
     old_names <- names(.df)
-    new_names <- str_replace(old_names, "[.]", "_")
+    new_names <- str_replace.(old_names, "[.]", "_")
 
     setnames(.df, old_names, new_names)
   }

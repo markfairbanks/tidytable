@@ -29,7 +29,7 @@ dt.data.frame <- function(.df, ...) {
 
   dots <- substitute(list(...))
 
-  needs_copy <- str_detect(expr_text(dots), ":=")
+  needs_copy <- str_detect.(expr_text(dots), ":=")
 
   if (needs_copy) .df <- copy(.df)
 
