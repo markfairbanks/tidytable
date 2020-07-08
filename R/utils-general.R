@@ -11,7 +11,7 @@ check_dot_by <- function(.by, by, fn) {
   if (!quo_is_null(by)) {
 
     if (!missing(fn))
-      deprecate_warn("0.5.2", str_c.("tidytable::", fn, "(by = )"), str_c(fn, "(.by = )"))
+      deprecate_warn("0.5.2", str_c.("tidytable::", fn, "(by = )"), str_c.(fn, "(.by = )"))
 
     by
 
