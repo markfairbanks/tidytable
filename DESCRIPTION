@@ -40,4 +40,6 @@ BugReports: https://github.com/markfairbanks/tidytable/issues
 Suggests: 
     testthat (>= 2.1.0),
     bit64,
-    knitr
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
