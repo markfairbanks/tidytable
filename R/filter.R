@@ -34,10 +34,13 @@ filter..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
 
   dots <- enquos(...)
 
+  data_env <- env(quo_get_env(dots[[1]]), .df = .df)
+
   if (quo_is_null(.by)) {
 
     .df <- eval_quo(
-      .df[Reduce('&', list(!!!dots))]
+      .df[Reduce('&', list(!!!dots))],
+      new_data_mask(data_env), env = caller_env()
     )
 
   } else {
@@ -46,7 +49,8 @@ filter..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
     col_order <- names(.df)
 
     .df <- eval_quo(
-      .df[, .SD[Reduce('&', list(!!!dots))], by = .by]
+      .df[, .SD[Reduce('&', list(!!!dots))], by = !!.by],
+      new_data_mask(data_env), env = caller_env()
     )
 
     setcolorder(.df, col_order)

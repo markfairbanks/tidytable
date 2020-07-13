@@ -47,19 +47,23 @@ mutate..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
       .col_name <- all_names[[i]]
       val <- dots[i][[1]]
 
+      data_env <- env(quo_get_env(dots[[i]]), .df = .df)
+
       # Prevent modify-by-reference if the column already exists in the data.table
       # Fixes cases when user supplies a single value ex. 1, -1, "a"
       # !quo_is_null(val) allows for columns to be deleted using mutate.(.df, col = NULL)
       if (.col_name %in% names(.df) && !quo_is_null(val)) {
 
         eval_quo(
-          .df[, !!.col_name := vec_recycle(!!val, .N)]
+          .df[, !!.col_name := vctrs::vec_recycle(!!val, .N)],
+          new_data_mask(data_env), caller_env()
         )
 
       } else {
 
         eval_quo(
-          .df[, !!.col_name := !!val]
+          .df[, !!.col_name := !!val],
+          new_data_mask(data_env), caller_env()
         )
       }
     }
@@ -71,8 +75,11 @@ mutate..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
 
     if (needs_copy) .df <- copy(.df)
 
+    data_env <- env(quo_get_env(dots[[1]]), .df = .df, .by = .by)
+
     eval_quo(
-      .df[, ':='(!!!dots), by = .by]
+      .df[, ':='(!!!dots), by = .by],
+      new_data_mask(data_env), env = caller_env()
     )
 
   }

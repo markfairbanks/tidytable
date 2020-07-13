@@ -72,7 +72,7 @@ test_that("recognizes other args in custom functions & works with quosures", {
     filter_col <- enquo(filter_col)
 
     .df %>%
-      filter.(!!filter_col == !!val)
+      filter.(!!filter_col == val)
   }
 
   test_df <- tidytable(x = 1:3, y = c("a", "a", "b"))
@@ -84,23 +84,23 @@ test_that("recognizes other args in custom functions & works with quosures", {
   expect_equal(result_df$y, c("a"))
 })
 
-# test_that("works with map2.() in nested data.tables", {
-#   filter_list <- list(1,2,3)
-#   test_df <- data.table(x = 1:3)
-#   test_list <- list(data.table(x = 1:3),
-#                     data.table(x = 1:5),
-#                     data.table(x = 1:10))
-#
-#   result_list1 <- map2.(test_list, filter_list, ~ filter.(.x, x == .y))
-#
-#   expect_equal(result_list1[[1]]$x, c(1))
-#   expect_equal(result_list1[[2]]$x, c(2))
-#   expect_equal(result_list1[[3]]$x, c(3))
-#
-#   result_list2 <- map2.(test_list, filter_list, ~ .x %>% filter.(x == !!.y))
-#
-#   expect_equal(result_list2[[1]]$x, c(1))
-#   expect_equal(result_list2[[2]]$x, c(2))
-#   expect_equal(result_list2[[3]]$x, c(3))
-# })
+test_that("works with map2.() in nested data.tables", {
+  filter_list <- list(1,2,3)
+  test_df <- data.table(x = 1:3)
+  test_list <- list(data.table(x = 1:3),
+                    data.table(x = 1:5),
+                    data.table(x = 1:10))
+
+  result_list1 <- map2.(test_list, filter_list, ~ filter.(.x, x == .y))
+
+  expect_equal(result_list1[[1]]$x, c(1))
+  expect_equal(result_list1[[2]]$x, c(2))
+  expect_equal(result_list1[[3]]$x, c(3))
+
+  result_list2 <- map2.(test_list, filter_list, ~ .x %>% filter.(x == !!.y))
+
+  expect_equal(result_list2[[1]]$x, c(1))
+  expect_equal(result_list2[[2]]$x, c(2))
+  expect_equal(result_list2[[3]]$x, c(3))
+})
 

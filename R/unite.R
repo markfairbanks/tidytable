@@ -61,10 +61,10 @@ unite..data.frame <- function(.df, col = "new_col", ..., sep = "_", remove = TRU
     start_na <- paste0("^NA", sep)
     end_na <- paste0(sep, "NA$")
 
-    .df <- mutate.(.df, !!col := paste(!!!unite_syms, sep = !!sep) %>%
-                       str_replace_all.(!!middle_na, !!sep) %>%
-                       str_replace_all.(!!start_na, "") %>%
-                       str_replace_all.(!!end_na, ""))
+    .df <- mutate.(.df, !!col := paste(!!!unite_syms, sep = sep) %>%
+                     str_replace_all.(middle_na, sep) %>%
+                     str_replace_all.(start_na, "") %>%
+                     str_replace_all.(end_na, ""))
   } else {
     .df <- shallow(.df)
 
