@@ -7,3 +7,5 @@
 ^docs$
 ^pkgdown$
 ^revdep$
+^doc$
+^Meta$
