@@ -42,14 +42,17 @@ summarize..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
 
   dots <- enquos(...)
 
+  data_env <- env(quo_get_env(dots[[1]]), .df = .df)
+
   # Needed so n.() works
-  dots <- map.(dots, ~ parse_expr(str_c.("(", quo_text(.x), ")")))
+  dots <- map.(dots, wrap_n_dot)
 
   .by <- check_dot_by(enquo(.by), enquo(by), "summarize.")
   .by <- select_vec_chr(.df, !!.by)
 
   eval_quo(
-    .df[, list(!!!dots), by = .by]
+    .df[, list(!!!dots), by = !!.by],
+    new_data_mask(data_env), env = caller_env()
   )
 
 }
@@ -76,4 +79,15 @@ dt_summarize <- function(.df, ..., .by = NULL, by = NULL) {
   .by <- check_dot_by(enquo(.by), enquo(by))
 
   summarize.(.df, ..., .by = {{ .by }})
+}
+
+wrap_n_dot <- function(quosure) {
+  quo_string <- quo_text(quosure)
+
+  if (str_detect.(quo_string, "n.[(]")) {
+    parse_expr(str_c.("(", quo_string, ")"))
+  } else {
+    parse_expr(quo_string)
+  }
+
 }

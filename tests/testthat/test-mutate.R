@@ -28,6 +28,7 @@ test_that("can add multiple columns", {
 
   expect_named(df, c("x", "y", "double_x", "double_y"))
   expect_equal(df$x * 2, df$double_x)
+  expect_equal(df$y * 2, df$double_y)
 })
 
 test_that("row_number.() works", {
@@ -229,7 +230,7 @@ test_that("can make custom functions with quosures", {
   add_one <- function(.data, add_col, new_name, val, by) {
     val <- val
     .data %>%
-      mutate.({{ new_name }} := {{ add_col }} + {{ val }}, .by = {{ by }})
+      mutate.({{ new_name }} := {{ add_col }} + val, .by = {{ by }})
   }
 
   result_df <- df %>%
