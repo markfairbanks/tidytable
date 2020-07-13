@@ -8,6 +8,8 @@
   + `uncount.()`
 * Functionality improvements:
   + `replace_na.()`: Now works on `data.frame`/`data.table` inputs as well as vectors
+* Deprecations:
+  + Using `n.()` has been deprecated due to performance issues.
 
 # tidytable 0.5.2
 
