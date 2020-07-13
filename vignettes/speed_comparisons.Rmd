@@ -1,5 +1,5 @@
 ---
-title: "Speed Comparisons"
+title: "speed_comparisons"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{speed_comparisons}
@@ -11,8 +11,6 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  warning = FALSE,
-  paged.print = FALSE
 )
 ```
 
