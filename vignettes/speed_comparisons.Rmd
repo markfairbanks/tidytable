@@ -31,349 +31,349 @@ A few notes:
 * `pandas` comparisons are in the process of being added - more will be added soon.
 * Lastly I'd like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.
 
-```{r benchmark_setup, echo=FALSE}
-pacman::p_load(tidytable, tidyverse, data.table)
-setDTthreads(4)
+<!-- ```{r benchmark_setup, echo=FALSE} -->
+<!-- pacman::p_load(tidytable, tidyverse, data.table) -->
+<!-- setDTthreads(4) -->
 
-iters <- 5
+<!-- iters <- 5 -->
 
-set.seed(123)
-data_size <- 10000000
-test_dt <- tidytable(a = sample(1:20, data_size, TRUE),
-                     b = sample(1:20, data_size, TRUE),
-                     c = sample(c("a","a","b","c","d"), data_size, TRUE),
-                     d = sample(c("a","a","b","c","d"), data_size, TRUE))
+<!-- set.seed(123) -->
+<!-- data_size <- 10000000 -->
+<!-- test_dt <- tidytable(a = sample(1:20, data_size, TRUE), -->
+<!--                      b = sample(1:20, data_size, TRUE), -->
+<!--                      c = sample(c("a","a","b","c","d"), data_size, TRUE), -->
+<!--                      d = sample(c("a","a","b","c","d"), data_size, TRUE)) -->
 
-test_tbl <- as_tibble(test_dt)
-```
+<!-- test_tbl <- as_tibble(test_dt) -->
+<!-- ``` -->
 
-```{r filter, echo=FALSE}
-inv_gc(); inv_gc();
+<!-- ```{r filter, echo=FALSE} -->
+<!-- inv_gc(); inv_gc(); -->
 
-filter_marks <- bench::mark(
-  tidyverse = filter(test_tbl, a <= 7, c == "a"),
-  tidytable = filter.(test_dt, a <= 7, c == "a"),
-  data.table = test_dt[a <= 7 & c == "a"],
-  check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
-  mutate(expression = as.character(expression),
-         function_tested = "filter")
+<!-- filter_marks <- bench::mark( -->
+<!--   tidyverse = filter(test_tbl, a <= 7, c == "a"), -->
+<!--   tidytable = filter.(test_dt, a <= 7, c == "a"), -->
+<!--   data.table = test_dt[a <= 7 & c == "a"], -->
+<!--   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>% -->
+<!--   mutate(expression = as.character(expression), -->
+<!--          function_tested = "filter") -->
 
-inv_gc(); inv_gc();
-```
+<!-- inv_gc(); inv_gc(); -->
+<!-- ``` -->
 
-```{r summarize, echo=FALSE}
-summarize_marks <- bench::mark(
-  tidyverse = summarize(group_by(test_tbl, c), avg_a = mean(a), .groups = "drop"),
-  tidytable = summarize.(test_dt, avg_a = mean(a), .by = c),
-  data.table = test_dt[, list(avg_a = mean(a)), by = c],
-  check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
-  mutate(expression = as.character(expression),
-         function_tested = "summarize")
+<!-- ```{r summarize, echo=FALSE} -->
+<!-- summarize_marks <- bench::mark( -->
+<!--   tidyverse = summarize(group_by(test_tbl, c), avg_a = mean(a), .groups = "drop"), -->
+<!--   tidytable = summarize.(test_dt, avg_a = mean(a), .by = c), -->
+<!--   data.table = test_dt[, list(avg_a = mean(a)), by = c], -->
+<!--   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>% -->
+<!--   mutate(expression = as.character(expression), -->
+<!--          function_tested = "summarize") -->
 
-inv_gc(); inv_gc();
-```
+<!-- inv_gc(); inv_gc(); -->
+<!-- ``` -->
 
-```{r mutate, echo=FALSE}
-mut_dt <- copy(test_dt)
+<!-- ```{r mutate, echo=FALSE} -->
+<!-- mut_dt <- copy(test_dt) -->
 
-mutate_marks <- bench::mark(
-  tidyverse = mutate(test_tbl, double_a = a * 2, a_plus_b = a + b),
-  tidytable = mutate.(test_dt, double_a = a * 2, a_plus_b = a + b),
-  data.table = mut_dt[, ':='(double_a = a * 2, a_b = a + b)][],
-  check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
-  mutate(expression = as.character(expression),
-         function_tested = "mutate")
+<!-- mutate_marks <- bench::mark( -->
+<!--   tidyverse = mutate(test_tbl, double_a = a * 2, a_plus_b = a + b), -->
+<!--   tidytable = mutate.(test_dt, double_a = a * 2, a_plus_b = a + b), -->
+<!--   data.table = mut_dt[, ':='(double_a = a * 2, a_b = a + b)][], -->
+<!--   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>% -->
+<!--   mutate(expression = as.character(expression), -->
+<!--          function_tested = "mutate") -->
 
-inv_gc(); inv_gc();
-```
+<!-- inv_gc(); inv_gc(); -->
+<!-- ``` -->
 
-```{r arrange, echo=FALSE}
-remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
+<!-- ```{r arrange, echo=FALSE} -->
+<!-- remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc(); -->
 
-data_size <- 1000000
-test_dt <- tidytable(a = sample(1:20, data_size, TRUE),
-                     b = sample(1:20, data_size, TRUE),
-                     c = sample(c("a","a","b","c","d"), data_size, TRUE),
-                     d = sample(c("a","a","b","c","d"), data_size, TRUE))
+<!-- data_size <- 1000000 -->
+<!-- test_dt <- tidytable(a = sample(1:20, data_size, TRUE), -->
+<!--                      b = sample(1:20, data_size, TRUE), -->
+<!--                      c = sample(c("a","a","b","c","d"), data_size, TRUE), -->
+<!--                      d = sample(c("a","a","b","c","d"), data_size, TRUE)) -->
 
-test_tbl <- as_tibble(test_dt)
+<!-- test_tbl <- as_tibble(test_dt) -->
 
-arrange_marks <- bench::mark(
-  tidyverse = arrange(test_tbl, c, a),
-  tidytable = arrange.(test_dt, c, a),
-  data.table = test_dt[order(c, a)],
-  check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
-  mutate(expression = as.character(expression),
-         function_tested = "arrange")
-```
+<!-- arrange_marks <- bench::mark( -->
+<!--   tidyverse = arrange(test_tbl, c, a), -->
+<!--   tidytable = arrange.(test_dt, c, a), -->
+<!--   data.table = test_dt[order(c, a)], -->
+<!--   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>% -->
+<!--   mutate(expression = as.character(expression), -->
+<!--          function_tested = "arrange") -->
+<!-- ``` -->
 
-```{r distinct, echo=FALSE}
-distinct_marks <- bench::mark(
-  tidyverse = distinct(test_tbl),
-  tidytable = distinct.(test_dt),
-  data.table = unique(test_dt),
-  check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
-  mutate(expression = as.character(expression),
-         function_tested = "distinct")
+<!-- ```{r distinct, echo=FALSE} -->
+<!-- distinct_marks <- bench::mark( -->
+<!--   tidyverse = distinct(test_tbl), -->
+<!--   tidytable = distinct.(test_dt), -->
+<!--   data.table = unique(test_dt), -->
+<!--   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>% -->
+<!--   mutate(expression = as.character(expression), -->
+<!--          function_tested = "distinct") -->
 
-inv_gc(); inv_gc();
-```
+<!-- inv_gc(); inv_gc(); -->
+<!-- ``` -->
 
-```{r fill, echo = FALSE}
-remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
+<!-- ```{r fill, echo = FALSE} -->
+<!-- remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc(); -->
 
-size <- 2e6
-fill_dt <- tidytable(
-  id = sample(1:3, size, replace = TRUE),
-  # chr = sample(c("a","a","a","b","b",NA), size, replace = TRUE),
-  int1 = sample(c(1:5,NA), size, replace = TRUE),
-  int2 = sample(c(1:5,NA), size, replace = TRUE))
+<!-- size <- 2e6 -->
+<!-- fill_dt <- tidytable( -->
+<!--   id = sample(1:3, size, replace = TRUE), -->
+<!--   # chr = sample(c("a","a","a","b","b",NA), size, replace = TRUE), -->
+<!--   int1 = sample(c(1:5,NA), size, replace = TRUE), -->
+<!--   int2 = sample(c(1:5,NA), size, replace = TRUE)) -->
 
-fill_tbl <- as_tibble(fill_dt)
+<!-- fill_tbl <- as_tibble(fill_dt) -->
 
-fill_marks <- bench::mark(
-  tidyverse = fill(group_by(fill_tbl, id), int1, int2),
-  tidytable = fill.(fill_dt, int1, int2, .by = id),
-  # needs shallow copy or subsequent runs won't have NAs to fill
-  # data.table = tidytable:::shallow(fill_dt)[, ':='(int1 = nafill(int1, type = "locf"),
-  #                                                  int2 = nafill(int2, type = "locf")),
-  #                                           by = id],
-  data.table = tidytable:::shallow(fill_dt)[, c("int1", "int2") := lapply(.SD, nafill, type = "locf"),
-                                            by = id],
-  check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
-  mutate(expression = as.character(expression),
-         function_tested = "fill")
-```
+<!-- fill_marks <- bench::mark( -->
+<!--   tidyverse = fill(group_by(fill_tbl, id), int1, int2), -->
+<!--   tidytable = fill.(fill_dt, int1, int2, .by = id), -->
+<!--   # needs shallow copy or subsequent runs won't have NAs to fill -->
+<!--   # data.table = tidytable:::shallow(fill_dt)[, ':='(int1 = nafill(int1, type = "locf"), -->
+<!--   #                                                  int2 = nafill(int2, type = "locf")), -->
+<!--   #                                           by = id], -->
+<!--   data.table = tidytable:::shallow(fill_dt)[, c("int1", "int2") := lapply(.SD, nafill, type = "locf"), -->
+<!--                                             by = id], -->
+<!--   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>% -->
+<!--   mutate(expression = as.character(expression), -->
+<!--          function_tested = "fill") -->
+<!-- ``` -->
 
-```{r case, echo=FALSE}
-remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
+<!-- ```{r case, echo=FALSE} -->
+<!-- remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc(); -->
 
-x <- rnorm(3000000)
-median_x <-  median(x)
+<!-- x <- rnorm(3000000) -->
+<!-- median_x <-  median(x) -->
 
-case_marks <- bench::mark(
-  tidyverse = case_when(x < median_x ~ 1,
-                        x >= median_x ~ 2,
-                        TRUE ~ NA_real_),
-  tidytable = case.(x < median_x, 1,
-                    x >= median_x, 2,
-                    default = NA),
-  data.table = fifelse(x < median_x, 1,
-                       fifelse(x >= median_x, 2, NA_real_,
-                               NA_real_), NA_real_),
-  check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
-  mutate(expression = as.character(expression),
-         function_tested = "case_when")
-```
+<!-- case_marks <- bench::mark( -->
+<!--   tidyverse = case_when(x < median_x ~ 1, -->
+<!--                         x >= median_x ~ 2, -->
+<!--                         TRUE ~ NA_real_), -->
+<!--   tidytable = case.(x < median_x, 1, -->
+<!--                     x >= median_x, 2, -->
+<!--                     default = NA), -->
+<!--   data.table = fifelse(x < median_x, 1, -->
+<!--                        fifelse(x >= median_x, 2, NA_real_, -->
+<!--                                NA_real_), NA_real_), -->
+<!--   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>% -->
+<!--   mutate(expression = as.character(expression), -->
+<!--          function_tested = "case_when") -->
+<!-- ``` -->
 
-```{r pivot_wider, echo=FALSE}
-remove(x, median_x)
+<!-- ```{r pivot_wider, echo=FALSE} -->
+<!-- remove(x, median_x) -->
 
-remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
+<!-- remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc(); -->
 
-wider_tbl <- expand_grid(case = as.character(seq(1, 2000)),
-                         year = seq(1900, 2000),
-                         name = c("x", "y", "z")) %>%
-  mutate(value = rnorm(nrow(.)))
+<!-- wider_tbl <- expand_grid(case = as.character(seq(1, 2000)), -->
+<!--                          year = seq(1900, 2000), -->
+<!--                          name = c("x", "y", "z")) %>% -->
+<!--   mutate(value = rnorm(nrow(.))) -->
 
-wider_dt <- as_tidytable(wider_tbl)
+<!-- wider_dt <- as_tidytable(wider_tbl) -->
 
-wider_marks <- bench::mark(
-  tidyverse = pivot_wider(wider_tbl, names_from = name, values_from = value),
-  tidytable = pivot_wider.(wider_dt, names_from = name, values_from = value),
-  data.table = data.table::dcast.data.table(wider_dt, case + year ~ name),
-  check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
-  mutate(expression = as.character(expression),
-         function_tested = "pivot_wider")
-```
+<!-- wider_marks <- bench::mark( -->
+<!--   tidyverse = pivot_wider(wider_tbl, names_from = name, values_from = value), -->
+<!--   tidytable = pivot_wider.(wider_dt, names_from = name, values_from = value), -->
+<!--   data.table = data.table::dcast.data.table(wider_dt, case + year ~ name), -->
+<!--   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>% -->
+<!--   mutate(expression = as.character(expression), -->
+<!--          function_tested = "pivot_wider") -->
+<!-- ``` -->
 
-```{r pivot_longer, echo=FALSE}
-longer_dt <- pivot_wider.(wider_dt, names_from = name, values_from = value)
+<!-- ```{r pivot_longer, echo=FALSE} -->
+<!-- longer_dt <- pivot_wider.(wider_dt, names_from = name, values_from = value) -->
 
-longer_tbl <- as_tibble(longer_dt)
+<!-- longer_tbl <- as_tibble(longer_dt) -->
 
-remove(wider_dt, wider_tbl); inv_gc(); inv_gc();
+<!-- remove(wider_dt, wider_tbl); inv_gc(); inv_gc(); -->
 
-longer_marks <- bench::mark(
-  tidyverse = pivot_longer(longer_tbl, cols = c(x, y, z)),
-  tidytable = pivot_longer.(longer_dt, cols = c(x, y, z)),
-  data.table = data.table::melt(longer_dt, measure.vars = c("x","y","z"),
-                                variable.name = "name", variable.factor = FALSE),
-  check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
-  mutate(expression = as.character(expression),
-         function_tested = "pivot_longer")
-```
+<!-- longer_marks <- bench::mark( -->
+<!--   tidyverse = pivot_longer(longer_tbl, cols = c(x, y, z)), -->
+<!--   tidytable = pivot_longer.(longer_dt, cols = c(x, y, z)), -->
+<!--   data.table = data.table::melt(longer_dt, measure.vars = c("x","y","z"), -->
+<!--                                 variable.name = "name", variable.factor = FALSE), -->
+<!--   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>% -->
+<!--   mutate(expression = as.character(expression), -->
+<!--          function_tested = "pivot_longer") -->
+<!-- ``` -->
 
-```{r left_join, echo=FALSE}
-remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
+<!-- ```{r left_join, echo=FALSE} -->
+<!-- remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc(); -->
 
-data_size <- 1000000
-left_dt <- tidytable(a = sample(1:20, data_size, TRUE),
-                      b = sample(1:20, data_size, TRUE),
-                      c = sample(c("a","a","b","c","d"), data_size, TRUE),
-                      d = sample(c("a","a","b","c","d"), data_size, TRUE))
+<!-- data_size <- 1000000 -->
+<!-- left_dt <- tidytable(a = sample(1:20, data_size, TRUE), -->
+<!--                       b = sample(1:20, data_size, TRUE), -->
+<!--                       c = sample(c("a","a","b","c","d"), data_size, TRUE), -->
+<!--                       d = sample(c("a","a","b","c","d"), data_size, TRUE)) -->
 
-right_dt <- tidytable(c = c("a","b","c","d"),
-                      e = c(1,2,3,4))
+<!-- right_dt <- tidytable(c = c("a","b","c","d"), -->
+<!--                       e = c(1,2,3,4)) -->
 
-left_tbl <- as_tibble(left_dt)
-right_tbl <- as_tibble(right_dt)
+<!-- left_tbl <- as_tibble(left_dt) -->
+<!-- right_tbl <- as_tibble(right_dt) -->
 
-left_join_marks <- bench::mark(
-  tidyverse = left_join(left_tbl, right_tbl, by = "c"),
-  tidytable = left_join.(left_dt, right_dt),
-  data.table = right_dt[left_dt, on = "c", allow.cartesian = TRUE],
-  check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
-  mutate(expression = as.character(expression),
-         function_tested = "left_join")
-```
+<!-- left_join_marks <- bench::mark( -->
+<!--   tidyverse = left_join(left_tbl, right_tbl, by = "c"), -->
+<!--   tidytable = left_join.(left_dt, right_dt), -->
+<!--   data.table = right_dt[left_dt, on = "c", allow.cartesian = TRUE], -->
+<!--   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>% -->
+<!--   mutate(expression = as.character(expression), -->
+<!--          function_tested = "left_join") -->
+<!-- ``` -->
 
-```{r inner_join, echo=FALSE}
-inner_join_marks <- bench::mark(
-  tidyverse = inner_join(left_tbl, right_tbl, by = "c"),
-  tidytable = inner_join.(left_dt, right_dt),
-  data.table = left_dt[right_dt, on = "c", allow.cartesian = TRUE, nomatch = 0],
-  check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
-  mutate(expression = as.character(expression),
-         function_tested = "inner_join")
-```
+<!-- ```{r inner_join, echo=FALSE} -->
+<!-- inner_join_marks <- bench::mark( -->
+<!--   tidyverse = inner_join(left_tbl, right_tbl, by = "c"), -->
+<!--   tidytable = inner_join.(left_dt, right_dt), -->
+<!--   data.table = left_dt[right_dt, on = "c", allow.cartesian = TRUE, nomatch = 0], -->
+<!--   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>% -->
+<!--   mutate(expression = as.character(expression), -->
+<!--          function_tested = "inner_join") -->
+<!-- ``` -->
 
-```{r unnest, echo = FALSE}
-data_size <- 300000
-list_dt <- data.table(x = sample(1:20, data_size, TRUE))
+<!-- ```{r unnest, echo = FALSE} -->
+<!-- data_size <- 300000 -->
+<!-- list_dt <- data.table(x = sample(1:20, data_size, TRUE)) -->
 
-unnest_dt <- data.table(id = 1:5,
-                        list_column = list(list_dt, list_dt, list_dt, list_dt, list_dt))
+<!-- unnest_dt <- data.table(id = 1:5, -->
+<!--                         list_column = list(list_dt, list_dt, list_dt, list_dt, list_dt)) -->
 
-unnest_tbl <- unnest_dt %>%
-  mutate(list_column = map(list_column, as_tibble))
+<!-- unnest_tbl <- unnest_dt %>% -->
+<!--   mutate(list_column = map(list_column, as_tibble)) -->
 
-unnest_marks <- bench::mark(
-  tidyverse = tidyr::unnest(unnest_tbl, list_column),
-  tidytable = unnest.(unnest_dt, list_column),
-  data.table = unnest_dt[, unlist(list_column, recursive = FALSE), by = id],
-  check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
-  dplyr::mutate(expression = as.character(expression),
-                function_tested = "unnest")
-```
+<!-- unnest_marks <- bench::mark( -->
+<!--   tidyverse = tidyr::unnest(unnest_tbl, list_column), -->
+<!--   tidytable = unnest.(unnest_dt, list_column), -->
+<!--   data.table = unnest_dt[, unlist(list_column, recursive = FALSE), by = id], -->
+<!--   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>% -->
+<!--   dplyr::mutate(expression = as.character(expression), -->
+<!--                 function_tested = "unnest") -->
+<!-- ``` -->
 
-```{r nest, echo = FALSE}
-remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
+<!-- ```{r nest, echo = FALSE} -->
+<!-- remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc(); -->
 
-data_size <- 300000
-list_df <- data.table(x = sample(1:20, data_size, TRUE))
+<!-- data_size <- 300000 -->
+<!-- list_df <- data.table(x = sample(1:20, data_size, TRUE)) -->
 
-nest_dt <- data.table(id = 1:5,
-                      list_column = list(list_df, list_df, list_df, list_df, list_df)) %>%
-  unnest.(list_column)
+<!-- nest_dt <- data.table(id = 1:5, -->
+<!--                       list_column = list(list_df, list_df, list_df, list_df, list_df)) %>% -->
+<!--   unnest.(list_column) -->
 
-nest_tbl <- as_tibble(nest_dt)
+<!-- nest_tbl <- as_tibble(nest_dt) -->
 
-nest_marks <- bench::mark(
-  tidyverse = group_nest(nest_tbl, id),
-  tidytable = nest_by.(nest_dt, id),
-  data.table = nest_dt[, list(data = list(.SD)), by = id],
-  check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
-  mutate(expression = as.character(expression),
-         function_tested = "nest")
-```
+<!-- nest_marks <- bench::mark( -->
+<!--   tidyverse = group_nest(nest_tbl, id), -->
+<!--   tidytable = nest_by.(nest_dt, id), -->
+<!--   data.table = nest_dt[, list(data = list(.SD)), by = id], -->
+<!--   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>% -->
+<!--   mutate(expression = as.character(expression), -->
+<!--          function_tested = "nest") -->
+<!-- ``` -->
 
-```{r echo = FALSE}
-# # pandas code
-# import pandas as pd
-# import numpy as np
-# import gc
-# data_size = 10000000
-#
-# test_df = pd.DataFrame(
-#     {'a': np.random.choice(np.arange(20), data_size),
-#      'b': np.random.choice(np.arange(20), data_size),
-#      'c': np.random.choice(['a','a','b','c','d'], data_size),
-#      'd': np.random.choice(['a','a','b','c','d'], data_size)}).convert_dtypes()
-#
-# print('filter')
-# %timeit test_df.loc[(test_df.a <= 7) & (test_df.c == 'a')]
-# print('summarize')
-# %timeit test_df.groupby('c')['a'].mean()
-# print('mutate pt1')
-# %timeit test_df['double_a'] = test_df.a * 2
-# print('mutate pt2')
-# %timeit test_df['a_plus_b'] = test_df.a + test_df.b
-#
-# del test_df
-# gc.collect()
-#
-# arrange_size = 1000000
-#
-# arrange_df = pd.DataFrame(
-#     {'a': np.random.choice(np.arange(20), arrange_size),
-#      'b': np.random.choice(np.arange(20), arrange_size),
-#      'c': np.random.choice(['a','a','b','c','d'], arrange_size),
-#      'd': np.random.choice(['a','a','b','c','d'], arrange_size)}).convert_dtypes()
-#
-# print('arrange')
-# %timeit arrange_df.sort_values(['c', 'a'])
-# print('distinct')
-# %timeit arrange_df.drop_duplicates()
-# del arrange_df
-# gc.collect()
-#
-# case_df = pd.DataFrame({'x': np.random.normal(size = 3000000)})
-#
-# case_df['median_x'] = case_df['x'].median()
-#
-# print('case_when')
-# %timeit case_df['test'] = np.where(case_df.x < case_df.median_x, case_df.x * 2, np.where(case_df.x >= case_df.median_x, case_df.x * 3, case_df.x))
-#
-# del case_df
-# gc.collect()
-#
-# fill_size = 2000000
-# fill_df = pd.DataFrame({'x': np.arange(fill_size),
-#                         'id': np.random.choice(np.arange(3), fill_size)})
-#
-# fill_df = fill_df.assign(y = fill_df.x.shift(10), z = fill_df.x.shift(-10)).convert_dtypes()
-#
-# print('fill')
-# %timeit fill_df.groupby('id')[['x','y']].fillna(method = 'ffill')
-```
+<!-- ```{r echo = FALSE} -->
+<!-- # # pandas code -->
+<!-- # import pandas as pd -->
+<!-- # import numpy as np -->
+<!-- # import gc -->
+<!-- # data_size = 10000000 -->
+<!-- # -->
+<!-- # test_df = pd.DataFrame( -->
+<!-- #     {'a': np.random.choice(np.arange(20), data_size), -->
+<!-- #      'b': np.random.choice(np.arange(20), data_size), -->
+<!-- #      'c': np.random.choice(['a','a','b','c','d'], data_size), -->
+<!-- #      'd': np.random.choice(['a','a','b','c','d'], data_size)}).convert_dtypes() -->
+<!-- # -->
+<!-- # print('filter') -->
+<!-- # %timeit test_df.loc[(test_df.a <= 7) & (test_df.c == 'a')] -->
+<!-- # print('summarize') -->
+<!-- # %timeit test_df.groupby('c')['a'].mean() -->
+<!-- # print('mutate pt1') -->
+<!-- # %timeit test_df['double_a'] = test_df.a * 2 -->
+<!-- # print('mutate pt2') -->
+<!-- # %timeit test_df['a_plus_b'] = test_df.a + test_df.b -->
+<!-- # -->
+<!-- # del test_df -->
+<!-- # gc.collect() -->
+<!-- # -->
+<!-- # arrange_size = 1000000 -->
+<!-- # -->
+<!-- # arrange_df = pd.DataFrame( -->
+<!-- #     {'a': np.random.choice(np.arange(20), arrange_size), -->
+<!-- #      'b': np.random.choice(np.arange(20), arrange_size), -->
+<!-- #      'c': np.random.choice(['a','a','b','c','d'], arrange_size), -->
+<!-- #      'd': np.random.choice(['a','a','b','c','d'], arrange_size)}).convert_dtypes() -->
+<!-- # -->
+<!-- # print('arrange') -->
+<!-- # %timeit arrange_df.sort_values(['c', 'a']) -->
+<!-- # print('distinct') -->
+<!-- # %timeit arrange_df.drop_duplicates() -->
+<!-- # del arrange_df -->
+<!-- # gc.collect() -->
+<!-- # -->
+<!-- # case_df = pd.DataFrame({'x': np.random.normal(size = 3000000)}) -->
+<!-- # -->
+<!-- # case_df['median_x'] = case_df['x'].median() -->
+<!-- # -->
+<!-- # print('case_when') -->
+<!-- # %timeit case_df['test'] = np.where(case_df.x < case_df.median_x, case_df.x * 2, np.where(case_df.x >= case_df.median_x, case_df.x * 3, case_df.x)) -->
+<!-- # -->
+<!-- # del case_df -->
+<!-- # gc.collect() -->
+<!-- # -->
+<!-- # fill_size = 2000000 -->
+<!-- # fill_df = pd.DataFrame({'x': np.arange(fill_size), -->
+<!-- #                         'id': np.random.choice(np.arange(3), fill_size)}) -->
+<!-- # -->
+<!-- # fill_df = fill_df.assign(y = fill_df.x.shift(10), z = fill_df.x.shift(-10)).convert_dtypes() -->
+<!-- # -->
+<!-- # print('fill') -->
+<!-- # %timeit fill_df.groupby('id')[['x','y']].fillna(method = 'ffill') -->
+<!-- ``` -->
 
-```{r all_marks, echo = FALSE, message = FALSE, paged.print = FALSE}
-library(magrittr)
-remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
+<!-- ```{r all_marks, echo = FALSE, message = FALSE, paged.print = FALSE} -->
+<!-- library(magrittr) -->
+<!-- remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc(); -->
 
-all_marks <- ls(pattern="marks$") %>%
-  lapply(get) %>%
-  map(~.x %>%
-        select(function_tested, expression, median)
-      ) %>%
-  bind_rows()
+<!-- all_marks <- ls(pattern="marks$") %>% -->
+<!--   lapply(get) %>% -->
+<!--   map(~.x %>% -->
+<!--         select(function_tested, expression, median) -->
+<!--       ) %>% -->
+<!--   bind_rows() -->
 
-all_marks <- all_marks %>%
-  mutate_if(is.character, str_trim) %>%
-  mutate(median = round(median, 2)) %>%
-  pivot_wider.(names_from = expression, values_from = median) %>%
-  as_tibble() %>%
-  mutate(tidytable_vs_tidyverse = scales::percent(tidytable/tidyverse, accuracy = .1)) %>%
-  mutate_at(vars(tidyverse, tidytable, data.table), ~str_c(.x, "ms")) %>%
-  arrange(function_tested)
-```
+<!-- all_marks <- all_marks %>% -->
+<!--   mutate_if(is.character, str_trim) %>% -->
+<!--   mutate(median = round(median, 2)) %>% -->
+<!--   pivot_wider.(names_from = expression, values_from = median) %>% -->
+<!--   as_tibble() %>% -->
+<!--   mutate(tidytable_vs_tidyverse = scales::percent(tidytable/tidyverse, accuracy = .1)) %>% -->
+<!--   mutate_at(vars(tidyverse, tidytable, data.table), ~str_c(.x, "ms")) %>% -->
+<!--   arrange(function_tested) -->
+<!-- ``` -->
 
-```{r pandas, echo = FALSE, message = FALSE}
-pandas_marks <- tibble(arrange = "355ms",
-                       case_when = "59.2ms",
-                       distinct = "309ms",
-                       filter = "707ms",
-                       fill = "846ms",
-                       mutate = "86.4ms",
-                       summarize = "834ms") %>%
-  pivot_longer(everything(), names_to = "function_tested", values_to = "pandas")
+<!-- ```{r pandas, echo = FALSE, message = FALSE} -->
+<!-- pandas_marks <- tibble(arrange = "355ms", -->
+<!--                        case_when = "59.2ms", -->
+<!--                        distinct = "309ms", -->
+<!--                        filter = "707ms", -->
+<!--                        fill = "846ms", -->
+<!--                        mutate = "86.4ms", -->
+<!--                        summarize = "834ms") %>% -->
+<!--   pivot_longer(everything(), names_to = "function_tested", values_to = "pandas") -->
 
-all_marks <- all_marks %>%
-  left_join(pandas_marks) %>%
-  select(function_tested, data.table, tidytable, tidyverse, pandas, tidytable_vs_tidyverse)
-```
+<!-- all_marks <- all_marks %>% -->
+<!--   left_join(pandas_marks) %>% -->
+<!--   select(function_tested, data.table, tidytable, tidyverse, pandas, tidytable_vs_tidyverse) -->
+<!-- ``` -->
 
-```{r}
-all_marks
-```
+<!-- ```{r} -->
+<!-- all_marks -->
+<!-- ``` -->
