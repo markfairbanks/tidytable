@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9</span>
       </span>
     </div>
 
@@ -93,6 +93,18 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/benchmarks.html">benchmarks</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -122,9 +134,36 @@
       <small>Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="tidytable-053-in-development" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.3">
+<a href="#tidytable-053-in-development" class="anchor"></a>tidytable 0.5.3 (in development)<small> Unreleased </small>
+</h1>
+<ul>
+<li>New functions:
+<ul>
+<li><code><a href="../reference/complete..html">complete.()</a></code></li>
+<li><code><a href="../reference/crossing..html">crossing.()</a></code></li>
+<li><code><a href="../reference/expand..html">expand.()</a></code></li>
+<li><code><a href="../reference/expand_grid..html">expand_grid.()</a></code></li>
+<li><code><a href="../reference/uncount..html">uncount.()</a></code></li>
+</ul>
+</li>
+<li>Functionality improvements:
+<ul>
+<li>
+<code><a href="../reference/replace_na..html">replace_na.()</a></code>: Now works on <code>data.frame</code>/<code>data.table</code> inputs as well as vectors</li>
+</ul>
+</li>
+<li>Deprecations:
+<ul>
+<li>Using <code><a href="../reference/n..html">n.()</a></code> has been deprecated due to performance issues.</li>
+</ul>
+</li>
+</ul>
+</div>
     <div id="tidytable-052" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.2">
-<a href="#tidytable-052" class="anchor"></a>tidytable 0.5.2<small> Unreleased </small>
+<a href="#tidytable-052" class="anchor"></a>tidytable 0.5.2<small> 2020-06-26 </small>
 </h1>
 <ul>
 <li>This version contains general performance improvements</li>

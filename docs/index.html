@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9</span>
       </span>
     </div>
 
@@ -52,6 +52,18 @@
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/benchmarks.html">benchmarks</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="news/index.html">Changelog</a>
@@ -250,7 +262,7 @@
 </ul>
 <!-- end list --><div class="sourceCode" id="cb4"><pre class="r"><span class="no">test_df</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/summarize..html">summarize.</a></span>(<span class="kw">avg_x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">x</span>),
-             <span class="kw">count</span> <span class="kw">=</span> <span class="fu"><a href="reference/n..html">n.</a></span>(),
+             <span class="kw">count</span> <span class="kw">=</span> <span class="no">.N</span>,
              <span class="kw">.by</span> <span class="kw">=</span> <span class="no">z</span>)
 <span class="co">#&gt;        z avg_x count</span>
 <span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;int&gt;</span>
@@ -408,43 +420,6 @@
 <span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1:     a   1.5</span>
 <span class="co">#&gt; 2:     b   3.0</span></pre></div>
-<div id="speed-comparisons" class="section level3">
-<h3 class="hasAnchor">
-<a href="#speed-comparisons" class="anchor"></a>Speed Comparisons</h3>
-<p>Below are some speed comparisons of various functions. More functions will get added to the speed comps over time.</p>
-<p>A few notes:</p>
-<ul>
-<li>Comparing times from separate functions won’t be very useful. For example - the <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> tests were performed on a different dataset from <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code>.</li>
-<li>
-<code><a href="https://Rdatatable.gitlab.io/data.table/reference/openmp-utils.html">setDTthreads(4)</a></code> was used for <code>data.table</code> &amp; <code>tidytable</code> timings.</li>
-<li>Modify-by-reference was used in <code>data.table</code> when being compared to <code><a href="reference/mutate..html">mutate.()</a></code> &amp; <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code>
-</li>
-<li>
-<code><a href="reference/fill..html">fill.()</a></code> &amp; <code><a href="https://tidyr.tidyverse.org/reference/fill.html">tidyr::fill()</a></code> both work with character/factor/logical columns, whereas <code><a href="https://Rdatatable.gitlab.io/data.table/reference/nafill.html">data.table::nafill()</a></code> does not. Testing only included numeric columns due to this constraint.</li>
-<li>Currently <code>data.table</code> doesn’t have its own <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> translation, so a multiple nested <code><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">fifelse()</a></code> was used.</li>
-<li>All tests can be found in the source code of the README.</li>
-<li>
-<code>pandas</code> comparisons are in the process of being added - more will be added soon.</li>
-<li>Lastly I’d like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.</li>
-</ul>
-<!-- end list --><div class="sourceCode" id="cb14"><pre class="r"><span class="no">all_marks</span>
-<span class="co">#&gt; # A tibble: 13 x 6</span>
-<span class="co">#&gt;    function_tested data.table tidytable tidyverse pandas tidytable_vs_tidyverse</span>
-<span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;                 </span>
-<span class="co">#&gt;  1 arrange         59.42ms    51.54ms   2502.24ms 355ms  2.1%                  </span>
-<span class="co">#&gt;  2 case_when       52.28ms    54.23ms   341.08ms  59.2ms 15.9%                 </span>
-<span class="co">#&gt;  3 distinct        35.93ms    35.39ms   50.27ms   309ms  70.4%                 </span>
-<span class="co">#&gt;  4 fill            39.07ms    51.17ms   56.48ms   846ms  90.6%                 </span>
-<span class="co">#&gt;  5 filter          221.87ms   233.45ms  261.65ms  707ms  89.2%                 </span>
-<span class="co">#&gt;  6 inner_join      68.89ms    57.2ms    91.17ms   &lt;NA&gt;   62.7%                 </span>
-<span class="co">#&gt;  7 left_join       60.78ms    140.38ms  146.27ms  &lt;NA&gt;   96.0%                 </span>
-<span class="co">#&gt;  8 mutate          51.1ms     50.41ms   185.6ms   86.4ms 27.2%                 </span>
-<span class="co">#&gt;  9 nest            12.76ms    19.08ms   32.68ms   &lt;NA&gt;   58.4%                 </span>
-<span class="co">#&gt; 10 pivot_longer    19.04ms    12.04ms   54.11ms   &lt;NA&gt;   22.3%                 </span>
-<span class="co">#&gt; 11 pivot_wider     116.13ms   129.11ms  83.56ms   &lt;NA&gt;   154.5%                </span>
-<span class="co">#&gt; 12 summarize       314.8ms    169.73ms  217.25ms  834ms  78.1%                 </span>
-<span class="co">#&gt; 13 unnest          24.4ms     18.5ms    35.13ms   &lt;NA&gt;   52.7%</span></pre></div>
-</div>
 </div>
 </div>
   </div>
@@ -480,7 +455,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=tidytable"><img src="https://www.r-pkg.org/badges/version/tidytable" alt="CRAN status"></a></li>
-<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.5.2-green.svg"></a></li>
+<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.5.2.9-green.svg"></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 <li><a href="https://markfairbanks.github.io/tidytable/"><img src="https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey" alt="CRAN RStudio mirror downloads"></a></li>
 </ul>
