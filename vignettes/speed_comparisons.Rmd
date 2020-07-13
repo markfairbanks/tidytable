@@ -1,8 +1,8 @@
 ---
-title: "benchmarks"
+title: "Speed Comparisons"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{benchmarks}
+  %\VignetteIndexEntry{speed_comparisons}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-### Benchmarks
+### Speed Comparisons
 
 Below are some speed comparisons of various functions. More functions will get added to the speed comps over time.
 
