@@ -1,6 +1,8 @@
-#' Descending order
+#' Deprecated
 #'
 #' @description
+#' This function is deprecated.
+#'
 #' Arrange in descending order. Can be used inside of `arrange.()`
 #'
 #' @param x  Variable to arrange in descending order
@@ -15,7 +17,10 @@
 #'   c = c("a","a","b"))
 #'
 #' test_df %>%
-#'   arrange.(c, desc.(a))
+#'   arrange.(c, -a)
 desc. <- function(x) {
+
+  lifecycle::deprecate_stop("0.5.3", "tidytable::desc.()")
+
   '-'(x)
 }
