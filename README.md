@@ -90,8 +90,7 @@ devtools::install_github("markfairbanks/tidytable")
   - `crossing.()`
   - `expand.()`
   - `expand_grid.()`
-  - `fill.()`: Works on character/factor/logical types
-    (`data.table::nafill()` does not)
+  - `fill.()`
   - `group_split.()`
   - Nesting: `nest_by.()` & `unnest.()`
   - `pivot_longer.()` & `pivot_wider.()`
@@ -154,8 +153,10 @@ test_df %>%
 #> 2:     b   3.0     1
 ```
 
-*Note: The `.by` argument was called `by` in versions of `tidytable`
-prior to `v0.5.2`.*
+Note: For those new to `data.table`, the `.N` helper is a way to get the
+number of rows by group, much like `n()` from `dplyr`. `tidytable`
+contains a helper function `n.()`, but using `.N` is recommended due to
+better performance.
 
 ## `tidyselect` support
 
@@ -223,7 +224,7 @@ add_one <- function(data, add_col) {
 # Using the {{ }} shortcut
 add_one <- function(data, add_col) {
   data %>%
-    mutate.(new_col = {{add_col}} + 1)
+    mutate.(new_col = {{ add_col }} + 1)
 }
 
 df %>%
@@ -242,8 +243,8 @@ df <- data.table(x = 1:10, y = c(rep("a", 6), rep("b", 4)), z = c(rep("a", 6), r
 
 find_mean <- function(data, grouping_cols, col) {
   data %>%
-    summarize.(avg = mean({{col}}),
-               .by = {{grouping_cols}})
+    summarize.(avg = mean({{ col }}),
+               .by = {{ grouping_cols }})
 }
 
 df %>%
@@ -291,3 +292,8 @@ df %>%
 #> 1:     a   1.5
 #> 2:     b   3.0
 ```
+
+## Speed Comparisons
+
+For those interested in performance, speed comparisons can be found
+[here](https://markfairbanks.github.io/tidytable/articles/speed_comparisons.html).

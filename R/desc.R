@@ -20,7 +20,17 @@
 #'   arrange.(c, -a)
 desc. <- function(x) {
 
-  lifecycle::deprecate_stop("0.5.3", "tidytable::desc.()")
+  rlang::warn(
+    paste(
+      c("`desc.()` is deprecated as of tidytable 0.5.3.",
+        "",
+        "  # Good",
+        "  df %>% arrange.(-col1)",
+        "",
+        "  # Bad",
+        "  df %>% arrange.(desc.(col1))"), collapse = "\n"))
+
+  stop(call. = FALSE)
 
   '-'(x)
 }
