@@ -139,6 +139,21 @@
 <a href="#tidytable-053-in-development" class="anchor"></a>tidytable 0.5.3 (in development)<small> Unreleased </small>
 </h1>
 <ul>
+<li>Breaking changes:
+<ul>
+<li>
+<code><a href="../reference/bind_rows..html">bind_rows.()</a></code>
+<ul>
+<li>
+<code>use.names</code> arg renamed to <code>.use_names</code>
+</li>
+<li>
+<code>fill</code> arg renamed to <code>.fill</code>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>New functions:
 <ul>
 <li><code><a href="../reference/complete..html">complete.()</a></code></li>
@@ -156,7 +171,9 @@
 </li>
 <li>Deprecations:
 <ul>
-<li>Using <code><a href="../reference/n..html">n.()</a></code> has been deprecated due to performance issues.</li>
+<li>Using <code><a href="../reference/n..html">n.()</a></code> has been deprecated due to performance issues</li>
+<li>
+<code><a href="../reference/desc..html">desc.()</a></code> has been deprecated due to incompatibility with character columns</li>
 </ul>
 </li>
 </ul>

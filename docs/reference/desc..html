@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Descending order — desc. • tidytable</title>
+<title>Deprecated — desc. • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="Descending order — desc." />
-<meta property="og:description" content="Arrange in descending order. Can be used inside of arrange.()" />
+<meta property="og:title" content="Deprecated — desc." />
+<meta property="og:description" content="This function is deprecated.
+Arrange in descending order. Can be used inside of arrange.()" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -131,13 +132,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Descending order</h1>
+    <h1>Deprecated</h1>
     <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/desc.R'><code>R/desc.R</code></a></small>
     <div class="hidden name"><code>desc..Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Arrange in descending order. Can be used inside of <code><a href='arrange..html'>arrange.()</a></code></p>
+    <p>This function is deprecated.</p>
+<p>Arrange in descending order. Can be used inside of <code><a href='arrange..html'>arrange.()</a></code></p>
     </div>
 
     <pre class="usage"><span class='fu'><a href='desc..html'>desc.</a></span>(<span class='no'>x</span>)</pre>
@@ -159,7 +161,7 @@
   <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
 
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='arrange..html'>arrange.</a></span>(<span class='no'>c</span>, <span class='fu'><a href='desc..html'>desc.</a></span>(<span class='no'>a</span>))</div><div class='output co'>#&gt;    a b c
+  <span class='fu'><a href='arrange..html'>arrange.</a></span>(<span class='no'>c</span>, -<span class='no'>a</span>)</div><div class='output co'>#&gt;    a b c
 #&gt; 1: 2 5 a
 #&gt; 2: 1 4 a
 #&gt; 3: 3 6 b</div></pre>

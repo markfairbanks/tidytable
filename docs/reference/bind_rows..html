@@ -140,9 +140,9 @@
     <p>Bind multiple data.tables into one row-wise or col-wise.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='bind_rows..html'>bind_rows.</a></span>(<span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>use.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'><a href='bind_rows..html'>bind_rows.</a></span>(<span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.use_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>.fill</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'><a href='bind_rows..html'>dt_bind_rows</a></span>(<span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>use.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'><a href='bind_rows..html'>dt_bind_rows</a></span>(<span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.use_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>.fill</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='fu'><a href='bind_rows..html'>bind_cols.</a></span>(<span class='no'>...</span>)
 
@@ -160,11 +160,11 @@
       <td><p>If TRUE, an integer column is made as a group id</p></td>
     </tr>
     <tr>
-      <th>use.names</th>
+      <th>.use_names</th>
       <td><p>If TRUE, makes sure column names align</p></td>
     </tr>
     <tr>
-      <th>fill</th>
+      <th>.fill</th>
       <td><p>If TRUE, fills missing columns with NA</p></td>
     </tr>
     </table>
