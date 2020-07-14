@@ -7,9 +7,9 @@
 \alias{dt_bind_cols}
 \title{Bind data.tables by row and column}
 \usage{
-bind_rows.(..., .id = NULL, use.names = TRUE, fill = TRUE)
+bind_rows.(..., .id = NULL, .use_names = TRUE, .fill = TRUE)
 
-dt_bind_rows(..., .id = NULL, use.names = TRUE, fill = TRUE)
+dt_bind_rows(..., .id = NULL, .use_names = TRUE, .fill = TRUE)
 
 bind_cols.(...)
 
@@ -20,9 +20,9 @@ dt_bind_cols(...)
 
 \item{.id}{If TRUE, an integer column is made as a group id}
 
-\item{use.names}{If TRUE, makes sure column names align}
+\item{.use_names}{If TRUE, makes sure column names align}
 
-\item{fill}{If TRUE, fills missing columns with NA}
+\item{.fill}{If TRUE, fills missing columns with NA}
 }
 \description{
 Bind multiple data.tables into one row-wise or col-wise.

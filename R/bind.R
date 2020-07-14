@@ -5,8 +5,8 @@
 #'
 #' @param ... data.tables or data.frames to bind
 #' @param .id If TRUE, an integer column is made as a group id
-#' @param use.names If TRUE, makes sure column names align
-#' @param fill If TRUE, fills missing columns with NA
+#' @param .use_names If TRUE, makes sure column names align
+#' @param .fill If TRUE, fills missing columns with NA
 #'
 #' @export
 #' @md
@@ -25,7 +25,7 @@
 #'
 #' bind_cols.(list(df1, df2))
 #' @export
-bind_rows. <- function(..., .id = NULL, use.names = TRUE, fill = TRUE) {
+bind_rows. <- function(..., .id = NULL, .use_names = TRUE, .fill = TRUE) {
 
   dots <- list(...)
   dots <- squash(dots)
@@ -33,17 +33,17 @@ bind_rows. <- function(..., .id = NULL, use.names = TRUE, fill = TRUE) {
   if (!all(map_lgl.(dots, is.data.table)))
     dots <- map.(dots, as_tidytable)
 
-  dots <- rbindlist(dots, idcol = .id, use.names = use.names, fill = fill)
+  dots <- rbindlist(dots, idcol = .id, use.names = .use_names, fill = .fill)
 
   as_tidytable(dots)
 }
 
 #' @export
 #' @rdname bind_rows.
-dt_bind_rows <- function(..., .id = NULL, use.names = TRUE, fill = TRUE) {
+dt_bind_rows <- function(..., .id = NULL, .use_names = TRUE, .fill = TRUE) {
   deprecate_soft("0.5.2", "tidytable::dt_bind_rows()", "bind_rows.()")
 
-  bind_rows.(..., .id = .id, use.names = use.names, fill = fill)
+  bind_rows.(..., .id = .id, .use_names = .use_names, .fill = .fill)
 }
 
 #' @export

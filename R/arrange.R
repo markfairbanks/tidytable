@@ -15,9 +15,6 @@
 #'
 #' test_df %>%
 #'   arrange.(c, -a)
-#'
-#' test_df %>%
-#'   arrange.(c, desc.(a))
 arrange. <- function(.df, ...) {
   UseMethod("arrange.")
 }

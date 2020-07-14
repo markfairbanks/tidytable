@@ -60,9 +60,6 @@ devtools::install_github("markfairbanks/tidytable")
   - `arrange.()`
   - `filter.()`
   - `mutate.()` & `mutate_across.()`
-      - The `_across.()` helper is new and can replace the
-        `_if.()`/`_at.()`/`_all.()` helpers [See
-        here](https://markfairbanks.github.io/tidytable/#new-variant-dt_mutate_across)
   - `select.()`
   - `summarize.()` & `summarize_across.()`
       - Group by specifications called inside. [See
@@ -89,6 +86,10 @@ devtools::install_github("markfairbanks/tidytable")
 ### tidyr
 
   - `drop_na.()`
+  - `complete.()`
+  - `crossing.()`
+  - `expand.()`
+  - `expand_grid.()`
   - `fill.()`: Works on character/factor/logical types
     (`data.table::nafill()` does not)
   - `group_split.()`
@@ -97,7 +98,7 @@ devtools::install_github("markfairbanks/tidytable")
   - `replace_na.()`
   - `separate.()`
   - `separate_rows.()`
-  - `unite.()`
+  - `uncount.()`
 
 ### purrr
 
@@ -198,53 +199,7 @@ test_df %>%
 
 These same ideas can be used whenever selecting columns in `tidytable`
 functions - for example when using `count.()`, `drop_na.()`,
-`pivot_longer.()`, `pivot_wider.()`, etc.
-
-#### New helper: `mutate_across.()`
-
-`tidyselect` allows the user to replace `mutate_if.()`, `mutate_at.()`,
-and `mutate_all.()` with one helper - `mutate_across.()`.
-
-Using `_across.()` instead of `_if.()`:
-
-``` r
-test_df <- data.table(a = c(1,1,1),
-                      b = c(1,1,1),
-                      c = c("a","a","b"),
-                      d = c("a","b","c"))
-
-test_df %>%
-  mutate_across.(where(is.numeric), as.character)
-#>        a     b     c     d
-#>    <chr> <chr> <chr> <chr>
-#> 1:     1     1     a     a
-#> 2:     1     1     a     b
-#> 3:     1     1     b     c
-```
-
-Using `_across.()` instead of `_at.()`:
-
-``` r
-test_df %>%
-  mutate_across.(c(a, b), ~ .x + 1)
-#>        a     b     c     d
-#>    <dbl> <dbl> <chr> <chr>
-#> 1:     2     2     a     a
-#> 2:     2     2     a     b
-#> 3:     2     2     b     c
-```
-
-Using `_across.()` instead of `_all.()`:
-
-``` r
-test_df %>%
-  mutate_across.(everything(), as.factor)
-#>        a     b     c     d
-#>    <fct> <fct> <fct> <fct>
-#> 1:     1     1     a     a
-#> 2:     1     1     a     b
-#> 3:     1     1     b     c
-```
+`mutate_across.()`, `pivot_longer.()`, etc.
 
 ## `rlang` compatibility
 

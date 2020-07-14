@@ -45,17 +45,17 @@ fill..data.frame <- function(.df, ...,
   .direction <- arg_match(.direction)
 
   if (.direction == "down") {
-    filler(.df, ..., type = "down", .by = !!.by)
+    filler(.df, ..., .type = "down", .by = !!.by)
   } else if (.direction == "up") {
-    filler(.df, ..., type = "up", .by = !!.by)
+    filler(.df, ..., .type = "up", .by = !!.by)
   } else if (.direction == "downup") {
     .df %>%
-      filler(..., type = "down", .by = !!.by) %>%
-      filler(..., type = "up", .by = !!.by)
+      filler(..., .type = "down", .by = !!.by) %>%
+      filler(..., .type = "up", .by = !!.by)
   } else {
     .df %>%
-      filler(..., type = "up", .by = !!.by) %>%
-      filler(..., type = "down", .by = !!.by)
+      filler(..., .type = "up", .by = !!.by) %>%
+      filler(..., .type = "down", .by = !!.by)
   }
 }
 
@@ -73,9 +73,9 @@ dt_fill <- function(.df, ...,
   fill.(.df, ..., .direction = .direction, .by = {{ .by }})
 }
 
-filler <- function(.df, ..., type = "down", .by = NULL) {
+filler <- function(.df, ..., .type = "down", .by = NULL) {
 
-  type <- switch(type, "down" = "locf", "up" = "nocb")
+  .type <- switch(.type, "down" = "locf", "up" = "nocb")
 
   all_cols <- select_dots_chr(.df, ...)
 
@@ -97,7 +97,7 @@ filler <- function(.df, ..., type = "down", .by = NULL) {
 
     .df <- mutate_across.(.df,
                           c(!!!numeric_cols),
-                          nafill, type,
+                          nafill, .type,
                           .by = !!.by)
 
   }
@@ -111,7 +111,7 @@ filler <- function(.df, ..., type = "down", .by = NULL) {
 
     for (col in other_cols) {
       eval_quo(
-        .df[, !!col := .SD[, !!col][nafill(fifelse(is.na(!!col), NA_integer_, 1:.N), type = !!type)],
+        .df[, !!col := .SD[, !!col][nafill(fifelse(is.na(!!col), NA_integer_, 1:.N), type = !!.type)],
           by = .by]
       )
     }

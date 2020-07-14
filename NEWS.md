@@ -1,5 +1,9 @@
 # tidytable 0.5.3 (in development)
 
+* Breaking changes:
+  + `bind_rows.()`
+    - `use.names` arg renamed to `.use_names`
+    - `fill` arg renamed to `.fill`
 * New functions:
   + `complete.()`
   + `crossing.()`
@@ -9,7 +13,8 @@
 * Functionality improvements:
   + `replace_na.()`: Now works on `data.frame`/`data.table` inputs as well as vectors
 * Deprecations:
-  + Using `n.()` has been deprecated due to performance issues.
+  + Using `n.()` has been deprecated due to performance issues
+  + `desc.()` has been deprecated due to incompatibility with character columns
 
 # tidytable 0.5.2
 

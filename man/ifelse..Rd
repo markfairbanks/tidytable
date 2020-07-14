@@ -23,12 +23,12 @@ dt_ifelse(conditions, true, false, na = NA)
 converts NAs to their proper type
 }
 \examples{
-x <- c(1:4, 3:2, 1:4)
-ifelse.(x > 2L, x, x - 1L)
+x <- 1:5
+ifelse.(x > 2, 2, 0)
 
 # Can also be used inside of mutate.()
-test_df <- data.table::data.table(x = x)
+test_df <- data.table(x = x)
 
 test_df \%>\%
-  mutate.(new_col = ifelse.(x > 2L, NA, x - 1L))
+  mutate.(new_col = ifelse.(x > 2, 2, 1))
 }
