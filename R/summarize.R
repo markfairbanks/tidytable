@@ -87,7 +87,7 @@ wrap_n_dot <- function(quosure) {
   if (str_detect.(quo_string, "n.[(]")) {
     parse_expr(str_c.("(", quo_string, ")"))
   } else {
-    parse_expr(quo_string)
+    quo_squash(quosure)
   }
 
 }
