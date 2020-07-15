@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
       </span>
     </div>
 
@@ -113,7 +113,7 @@
 <li>
 <code><a href="../reference/fill..html">fill.()</a></code> &amp; <code><a href="https://tidyr.tidyverse.org/reference/fill.html">tidyr::fill()</a></code> both work with character/factor/logical columns, whereas <code><a href="https://Rdatatable.gitlab.io/data.table/reference/nafill.html">data.table::nafill()</a></code> does not. Testing only included numeric columns due to this constraint.</li>
 <li>Currently <code>data.table</code> doesn’t have its own <code>case_when()</code> translation, so a multiple nested <code>fifelse()</code> was used.</li>
-<li>All tests can be found in the source code of the README.</li>
+<li>All tests can be found in the source code <a href="https://github.com/markfairbanks/tidytable/blob/master/vignettes/speed_comparisons.Rmd">here</a>.</li>
 <li>
 <code>pandas</code> comparisons are in the process of being added - more will be added soon.</li>
 <li>Lastly I’d like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.</li>
@@ -122,19 +122,19 @@
 <span class="co">#&gt; # A tibble: 13 x 6</span>
 <span class="co">#&gt;    function_tested data.table tidytable tidyverse pandas tidytable_vs_tidyverse</span>
 <span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;                 </span>
-<span class="co">#&gt;  1 arrange         53.5ms     52.55ms   2200.35ms 355ms  2.4%                  </span>
-<span class="co">#&gt;  2 case_when       50.55ms    57.54ms   332.55ms  59.2ms 17.3%                 </span>
-<span class="co">#&gt;  3 distinct        35.67ms    38.36ms   56.66ms   309ms  67.7%                 </span>
-<span class="co">#&gt;  4 fill            45.74ms    54.76ms   70.94ms   846ms  77.2%                 </span>
-<span class="co">#&gt;  5 filter          223ms      233.18ms  258.87ms  707ms  90.1%                 </span>
-<span class="co">#&gt;  6 inner_join      59.67ms    69.42ms   163.92ms  &lt;NA&gt;   42.3%                 </span>
-<span class="co">#&gt;  7 left_join       143.93ms   146.32ms  85.53ms   &lt;NA&gt;   171.1%                </span>
-<span class="co">#&gt;  8 mutate          59.15ms    95.42ms   315.82ms  86.4ms 30.2%                 </span>
-<span class="co">#&gt;  9 nest            16.13ms    14.62ms   30.1ms    &lt;NA&gt;   48.6%                 </span>
-<span class="co">#&gt; 10 pivot_longer    10.04ms    18.51ms   43.02ms   &lt;NA&gt;   43.0%                 </span>
-<span class="co">#&gt; 11 pivot_wider     122.54ms   122.86ms  72.26ms   &lt;NA&gt;   170.0%                </span>
-<span class="co">#&gt; 12 summarize       271.62ms   328.29ms  219.48ms  834ms  149.6%                </span>
-<span class="co">#&gt; 13 unnest          22.91ms    18.72ms   44.03ms   &lt;NA&gt;   42.5%</span></pre></body></html></div>
+<span class="co">#&gt;  1 arrange         49.41ms    50.55ms   2146.97ms 355ms  2.4%                  </span>
+<span class="co">#&gt;  2 case_when       50.39ms    54.24ms   341.93ms  59.2ms 15.9%                 </span>
+<span class="co">#&gt;  3 distinct        38.73ms    36.67ms   48.23ms   309ms  76.0%                 </span>
+<span class="co">#&gt;  4 fill            41.28ms    53.28ms   78.48ms   846ms  67.9%                 </span>
+<span class="co">#&gt;  5 filter          224ms      232.81ms  262.26ms  707ms  88.8%                 </span>
+<span class="co">#&gt;  6 inner_join      57.14ms    60.81ms   174.45ms  &lt;NA&gt;   34.9%                 </span>
+<span class="co">#&gt;  7 left_join       156.92ms   145.43ms  88.77ms   &lt;NA&gt;   163.8%                </span>
+<span class="co">#&gt;  8 mutate          58.74ms    94.48ms   324.72ms  86.4ms 29.1%                 </span>
+<span class="co">#&gt;  9 nest            17.71ms    15.34ms   34.54ms   &lt;NA&gt;   44.4%                 </span>
+<span class="co">#&gt; 10 pivot_longer    10.27ms    19.71ms   43.91ms   &lt;NA&gt;   44.9%                 </span>
+<span class="co">#&gt; 11 pivot_wider     122.8ms    110.7ms   82.96ms   &lt;NA&gt;   133.4%                </span>
+<span class="co">#&gt; 12 summarize       281.9ms    334.44ms  220.42ms  834ms  151.7%                </span>
+<span class="co">#&gt; 13 unnest          20.93ms    19.26ms   44.25ms   &lt;NA&gt;   43.5%</span></pre></body></html></div>
 </div>
   </div>
 
