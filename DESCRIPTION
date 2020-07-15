@@ -1,6 +1,6 @@
 Package: tidytable
 Title: Tidy Interface to 'data.table'
-Version: 0.5.2.9
+Version: 0.5.3
 Authors@R: 
     c(person(given = "Mark",
              family = "Fairbanks",
@@ -29,10 +29,10 @@ LazyData: true
 Imports: 
     data.table,
     magrittr,
-    rlang (>= 0.4.0),
+    rlang (>= 0.4.5),
     methods,
     tidyselect (>= 1.1.0),
-    vctrs (>= 0.3.0),
+    vctrs (>= 0.3.1),
     lifecycle (>= 0.2.0)
 RoxygenNote: 7.1.1
 URL: https://github.com/markfairbanks/tidytable

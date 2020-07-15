@@ -1,4 +1,4 @@
-# tidytable 0.5.3 (in development)
+# tidytable 0.5.3
 
 * Breaking changes:
   + `bind_rows.()`
