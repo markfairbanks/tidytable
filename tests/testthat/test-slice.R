@@ -107,7 +107,7 @@ test_that("works in custom function", {
 
   slice_fn <- function(.df, val) {
     .df %>%
-      slice.({{ val }}, .by = z)
+      slice.(val, .by = z)
   }
 
   sliced_df <- test_df %>%
@@ -163,6 +163,20 @@ test_that("_head.() works with n specified", {
   expect_equal(datatable_df, sliced_df)
 })
 
+test_that("_head.() works in custom function", {
+  test_df <- tidytable(x = 1:10, y = 20:11, z = c(rep("a", 6), rep("b", 4)))
+
+  slice_head_fn <- function(.df, val) {
+    .df %>%
+      slice_head.(3)
+  }
+
+  sliced_df <- test_df %>%
+    slice_head_fn(3)
+
+  expect_equal(sliced_df, head(test_df, 3))
+})
+
 # slice_tail.() ----------------------------------------------------
 
 test_that("dt_slice_tail() works when empty", {
@@ -208,6 +222,20 @@ test_that("_tail() works with n specified with .by", {
   expect_equal(datatable_df, sliced_df)
 })
 
+test_that("_tail.() works with a custom function", {
+  test_df <- tidytable(x = 1:10, y = 20:11, z = c(rep("a", 6), rep("b", 4)))
+
+  slice_tail_fn <- function(.df, val) {
+    .df %>%
+      slice_tail.(val)
+  }
+
+  sliced_df <- test_df %>%
+    slice_tail_fn(3)
+
+  expect_equal(sliced_df, tail(test_df, 3))
+})
+
 # slice_min.() ----------------------------------------------------
 
 test_that("dt_slice_min() works", {
@@ -251,7 +279,7 @@ test_that("_max.() works with custom function with quosures", {
 
   slice_fn <- function(.df, col, num) {
     .df %>%
-      slice_max.({{ col }}, {{ num }})
+      slice_max.({{ col }}, num)
   }
 
   sliced_df <- test_df %>%
