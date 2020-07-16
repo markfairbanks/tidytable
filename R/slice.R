@@ -46,16 +46,20 @@ slice..data.frame <- function(.df, rows = 1:5, .by = NULL, by = NULL) {
 
   rows <- enquo(rows) # Needed so 1:.N works
 
+  data_env <- env(quo_get_env(rows), .df = .df)
+
   .by <- check_dot_by(enquo(.by), enquo(by), "slice.")
   .by <- select_vec_chr(.df, !!.by)
 
   if (length(.by) == 0) {
     eval_quo(
-      .df[1:.N %between% c(min(!!rows), max(!!rows))]
+      .df[data.table::between(1:.N, min(!!rows), max(!!rows))],
+      new_data_mask(data_env), env = caller_env()
     )
   } else {
     eval_quo(
-      .df[, .SD[1:.N %between% c(min(!!rows), max(!!rows))], by = .by]
+      .df[, .SD[data.table::between(1:.N, min(!!rows), max(!!rows))], by = !!.by],
+      new_data_mask(data_env), env = caller_env()
     )
   }
 }
@@ -73,11 +77,14 @@ slice_head..data.frame <- function(.df, n = 5, .by = NULL, by = NULL) {
 
   n <- enquo(n)
 
+  data_env <- env(quo_get_env(n), .df = .df)
+
   .by <- check_dot_by(enquo(.by), enquo(by), "slice_head.")
   .by <- select_vec_chr(.df, !!.by)
 
   eval_quo(
-    .df[, head(.SD, !!n), by = !!.by]
+    .df[, head(.SD, !!n), by = !!.by],
+    new_data_mask(data_env), env = caller_env()
   )
 }
 
@@ -94,11 +101,14 @@ slice_tail..data.frame <- function(.df, n = 5, .by = NULL, by = NULL) {
 
   n <- enquo(n)
 
+  data_env <- env(quo_get_env(n), .df = .df)
+
   .by <- check_dot_by(enquo(.by), enquo(by), "slice_tail.")
   .by <- select_vec_chr(.df, !!.by)
 
   eval_quo(
-    .df[, tail(.SD, !!n), by = .by]
+    .df[, tail(.SD, !!n), by = !!.by],
+    new_data_mask(data_env), env = caller_env()
   )
 }
 
@@ -119,7 +129,7 @@ slice_max..data.frame <- function(.df, order_by, n = 1, .by = NULL, by = NULL) {
 
   .df %>%
     arrange.(-{{ order_by }}) %>%
-    slice_head.({{ n }}, .by = !!.by)
+    slice_head.(n, .by = !!.by)
 }
 
 #' @export
@@ -139,7 +149,7 @@ slice_min..data.frame <- function(.df, order_by, n = 1, .by = NULL, by = NULL) {
 
   .df %>%
     arrange.({{ order_by }}) %>%
-    slice_head.({{ n }}, .by = !!.by)
+    slice_head.(n, .by = !!.by)
 }
 
 #' @export
@@ -159,7 +169,7 @@ dt_slice_head <- function(.df, n = 5, .by = NULL, by = NULL) {
 
   .by <- check_dot_by(enquo(.by), enquo(by))
 
-  slice_head.(.df, {{ n }}, .by = !!.by)
+  slice_head.(.df, n, .by = !!.by)
 }
 
 #' @export
@@ -169,7 +179,7 @@ dt_slice_tail <- function(.df, n = 5, .by = NULL, by = NULL) {
 
   .by <- check_dot_by(enquo(.by), enquo(by))
 
-  slice_tail.(.df, {{ n }}, .by = !!.by)
+  slice_tail.(.df, n, .by = !!.by)
 }
 
 #' @export
@@ -179,7 +189,7 @@ dt_slice_min <- function(.df, order_by, n = 1, .by = NULL, by = NULL) {
 
   .by <- check_dot_by(enquo(.by), enquo(by))
 
-  slice_min.(.df, order_by = {{ order_by }}, n = {{ n }}, .by = !!.by)
+  slice_min.(.df, order_by = {{ order_by }}, n = n, .by = !!.by)
 }
 
 
@@ -190,7 +200,7 @@ dt_slice_max <- function(.df, order_by, n = 1, .by = NULL, by = NULL) {
 
   .by <- check_dot_by(enquo(.by), enquo(by))
 
-  slice_max.(.df, order_by = {{ order_by }}, n = {{ n }}, .by = !!.by)
+  slice_max.(.df, order_by = {{ order_by }}, n = n, .by = !!.by)
 }
 
 
