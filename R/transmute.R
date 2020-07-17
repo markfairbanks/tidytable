@@ -24,11 +24,14 @@ transmute..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
   .df <- as_tidytable(.df)
 
   dots <- enquos(...)
-  keep_names <- names(dots)
 
   .by <- check_dot_by(enquo(.by), enquo(by), "transmute.")
 
   .df <- mutate.(.df, ..., .by = !!.by)
+
+  by_cols <- select_vec_chr(.df, !!.by)
+
+  keep_names <- c(by_cols, names(dots))
 
   .df[, ..keep_names]
 }

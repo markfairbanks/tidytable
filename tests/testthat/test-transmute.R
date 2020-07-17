@@ -15,7 +15,7 @@ test_that("can use .by", {
   tidytable_df <- df %>%
     transmute.(z = mean(x), .by = y)
 
-  datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y][, list(z)]
+  datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y][, list(y, z)]
 
   expect_equal(tidytable_df, datatable_df)
 

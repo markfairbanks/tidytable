@@ -1,5 +1,8 @@
 # tidytable 0.5.4 (in development)
 
+* Bug fixes:
+  + `transmute.()`: Doesn't drop "by" columns (#98)
+
 # tidytable 0.5.3
 
 * Breaking changes:
