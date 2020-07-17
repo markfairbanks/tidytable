@@ -26,13 +26,26 @@ test_that("doesn't return NAs", {
   expect_equal(sliced_df, test_df)
 })
 
+test_that("works with irregular gaps & doesn't return NAs", {
+  test_df <- tidytable(x = c(1,2,3,4), y = c(4,5,6,7), z = c("a", "a", "a", "b"))
+
+  sliced_df <- test_df %>%
+    slice.(c(1,3,5))
+
+  expect_equal(sliced_df$x, c(1,3))
+})
+
 test_that("works without .by with .N", {
   test_df <- tidytable(x = c(1,2,3,4), y = c(4,5,6,7), z = c("a", "a", "a", "b"))
 
   sliced_df <- test_df %>%
-    slice.(1:.N)
+    slice.(2:.N)
 
-  expect_equal(sliced_df, head(test_df, 4))
+  comp_df <- test_df %>%
+    head(4) %>%
+    tail(3)
+
+  expect_equal(sliced_df, comp_df)
 })
 
 test_that("works without .by with n.()", {

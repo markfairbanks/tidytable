@@ -53,12 +53,12 @@ slice..data.frame <- function(.df, rows = 1:5, .by = NULL, by = NULL) {
 
   if (length(.by) == 0) {
     eval_quo(
-      .df[data.table::between(1:.N, min(!!rows), max(!!rows))],
+      .df[1:.N %in% !!rows],
       new_data_mask(data_env), env = caller_env()
     )
   } else {
     eval_quo(
-      .df[, .SD[data.table::between(1:.N, min(!!rows), max(!!rows))], by = !!.by],
+      .df[, .SD[1:.N %in% !!rows], by = !!.by],
       new_data_mask(data_env), env = caller_env()
     )
   }
