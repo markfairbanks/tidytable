@@ -7,9 +7,9 @@
 \alias{dt_summarize}
 \title{Aggregate data using summary statistics}
 \usage{
-summarize.(.df, ..., .by = NULL, by = NULL)
+summarize.(.df, ..., .by = NULL, .sort = FALSE, by = NULL)
 
-summarise.(.df, ..., .by = NULL, by = NULL)
+summarise.(.df, ..., .by = NULL, .sort = FALSE, by = NULL)
 
 dt_summarise(.df, ..., .by = NULL, by = NULL)
 
@@ -31,6 +31,8 @@ dt_summarize(.df, ..., .by = NULL, by = NULL)
 \item A combination of predicates and column names: \code{by = c(where(is.character), b)}
 }
 }}
+
+\item{.sort}{Should the resulting data.table be sorted}
 
 \item{by}{This argument has been renamed to .by and is deprecated}
 }

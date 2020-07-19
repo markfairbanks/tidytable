@@ -27,8 +27,8 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    data.table,
-    magrittr,
+    data.table (>= 1.12.4),
+    magrittr (>= 1.5),
     rlang (>= 0.4.5),
     methods,
     tidyselect (>= 1.1.0),

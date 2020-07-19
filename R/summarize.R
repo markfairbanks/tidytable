@@ -12,6 +12,7 @@
 #'   + Single predicate: `by = where(is.character)`
 #'   + Multiple predicates: `by = c(where(is.character), where(is.factor))`
 #'   + A combination of predicates and column names: `by = c(where(is.character), b)`
+#' @param .sort Should the resulting data.table be sorted
 #' @param by This argument has been renamed to .by and is deprecated
 #'
 #' @export
@@ -31,12 +32,12 @@
 #' test_df %>%
 #'   summarize.(avg_a = mean(a),
 #'              .by = c(c, d))
-summarize. <- function(.df, ..., .by = NULL, by = NULL) {
+summarize. <- function(.df, ..., .by = NULL, .sort = FALSE, by = NULL) {
   UseMethod("summarize.")
 }
 
 #' @export
-summarize..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
+summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE, by = NULL) {
 
   .df <- as_tidytable(.df)
 
@@ -50,10 +51,25 @@ summarize..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
   .by <- check_dot_by(enquo(.by), enquo(by), "summarize.")
   .by <- select_vec_chr(.df, !!.by)
 
-  eval_quo(
-    .df[, list(!!!dots), by = !!.by],
-    new_data_mask(data_env), env = caller_env()
-  )
+  if (.sort) {
+
+    .df <- eval_quo(
+      .df[, list(!!!dots), keyby = !!.by],
+      new_data_mask(data_env), env = caller_env()
+    )
+
+    setkey(.df, NULL)
+
+  } else {
+
+    .df <- eval_quo(
+      .df[, list(!!!dots), by = !!.by],
+      new_data_mask(data_env), env = caller_env()
+    )
+
+  }
+
+  .df
 
 }
 
@@ -68,7 +84,7 @@ dt_summarise <- function(.df, ..., .by = NULL, by = NULL) {
 
   .by <- check_dot_by(enquo(.by), enquo(by))
 
-  summarize.(.df, ..., .by = !!.by )
+  summarize.(.df, ..., .by = !!.by)
 }
 
 #' @export
