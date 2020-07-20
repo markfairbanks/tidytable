@@ -110,7 +110,8 @@ get_dummies..data.frame <- function(.df,
 }
 
 #' @export
-#' @rdname get_dummies.
+#' @rdname dt_verb
+#' @inheritParams get_dummies.
 dt_get_dummies <- function(.df,
                            cols = c(where(is.character), where(is.factor)),
                            prefix = TRUE,

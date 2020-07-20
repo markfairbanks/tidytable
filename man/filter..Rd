@@ -2,12 +2,9 @@
 % Please edit documentation in R/filter.R
 \name{filter.}
 \alias{filter.}
-\alias{dt_filter}
 \title{Filter rows on one or more conditions}
 \usage{
 filter.(.df, ..., .by = NULL, by = NULL)
-
-dt_filter(.df, ..., .by = NULL, by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

@@ -35,7 +35,8 @@ rename..data.frame <- function(.df, ...) {
 }
 
 #' @export
-#' @rdname rename.
+#' @rdname dt_verb
+#' @inheritParams rename.
 dt_rename <- function(.df, ...) {
   deprecate_soft("0.5.2", "tidytable::dt_rename()", "rename.()")
 

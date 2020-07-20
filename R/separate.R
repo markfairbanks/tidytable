@@ -65,7 +65,8 @@ separate..data.frame <- function(.df, col, into,
 }
 
 #' @export
-#' @rdname separate.
+#' @rdname dt_verb
+#' @inheritParams separate.
 dt_separate <- function(.df, col, into,
                         sep = "[^[:alnum:]]+",
                         remove = TRUE,

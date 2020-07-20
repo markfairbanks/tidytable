@@ -2,12 +2,9 @@
 % Please edit documentation in R/distinct.R
 \name{distinct.}
 \alias{distinct.}
-\alias{dt_distinct}
 \title{Select distinct/unique rows}
 \usage{
 distinct.(.df, ..., .keep_all = FALSE)
-
-dt_distinct(.df, ..., .keep_all = FALSE)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

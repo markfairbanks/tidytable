@@ -70,7 +70,8 @@ unnest..data.frame <- function(.df, ..., .keep_all = FALSE) {
 }
 
 #' @export
-#' @rdname unnest.
+#' @rdname dt_verb
+#' @inheritParams unnest.
 dt_unnest_legacy <- function(.df, ..., .keep_all = FALSE) {
   deprecate_soft("0.5.2", "tidytable::dt_unnest_legacy()", "unnest.()")
 

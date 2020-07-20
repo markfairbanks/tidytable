@@ -2,12 +2,9 @@
 % Please edit documentation in R/count.R
 \name{count.}
 \alias{count.}
-\alias{dt_count}
 \title{Count observations by group}
 \usage{
 count.(.df, ...)
-
-dt_count(.df, ...)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

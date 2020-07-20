@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3.9</span>
       </span>
     </div>
 
@@ -144,7 +144,7 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <h2 id="section-tidytable-helpers" class="hasAnchor"><a href="#section-tidytable-helpers" class="anchor"></a>tidytable helpers</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -156,39 +156,192 @@
       <tr>
         
         <td>
-          <p><code><a href="arrange..html">arrange.()</a></code> <code><a href="arrange..html">dt_arrange()</a></code> </p>
+          <p><code><a href="dt.html">dt()</a></code> </p>
         </td>
-        <td><p>Arrange/reorder rows by variables</p></td>
+        <td><p>Pipeable data.table call</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="as_tidytable.html">as_tidytable()</a></code> <code><a href="as_tidytable.html">as_dt()</a></code> </p>
+          <p><code><a href="get_dummies..html">get_dummies.()</a></code> </p>
         </td>
-        <td><p>Coerce an object to a data.table/tidytable</p></td>
+        <td><p>Convert character and factor columns to dummy variables</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="bind_rows..html">bind_rows.()</a></code> <code><a href="bind_rows..html">dt_bind_rows()</a></code> <code><a href="bind_rows..html">bind_cols.()</a></code> <code><a href="bind_rows..html">dt_bind_cols()</a></code> </p>
+          <p><code><a href="grapes-notin-grapes.html">`%notin%`</a></code> </p>
+        </td>
+        <td><p>notin operator</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-dplyr" class="hasAnchor"><a href="#section-dplyr" class="anchor"></a>dplyr</h2>
+          <p class="section-desc"><p>Core dplyr verbs</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="arrange..html">arrange.()</a></code> </p>
+        </td>
+        <td><p>Arrange/reorder rows</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="filter..html">filter.()</a></code> </p>
+        </td>
+        <td><p>Filter rows on one or more conditions</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mutate..html">mutate.()</a></code> </p>
+        </td>
+        <td><p>Mutate</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mutate_across..html">mutate_across.()</a></code> </p>
+        </td>
+        <td><p>Mutate multiple columns simultaneously</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="select..html">select.()</a></code> </p>
+        </td>
+        <td><p>Select or drop columns</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="summarize..html">summarize.()</a></code> <code><a href="summarize..html">summarise.()</a></code> </p>
+        </td>
+        <td><p>Aggregate data using summary statistics</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="summarize_across..html">summarize_across.()</a></code> <code><a href="summarize_across..html">summarise_across.()</a></code> </p>
+        </td>
+        <td><p>Summarize multiple columns</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section--" class="hasAnchor"><a href="#section--" class="anchor"></a>__</h3>
+          <p class="section-desc"><p>Other dplyr functions</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="bind_cols..html">bind_cols.()</a></code> <code><a href="bind_cols..html">bind_rows.()</a></code> </p>
         </td>
         <td><p>Bind data.tables by row and column</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="case..html">case.()</a></code> <code><a href="case..html">dt_case()</a></code> </p>
+          <p><code><a href="case..html">case.()</a></code> </p>
         </td>
         <td><p>Case when</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="complete..html">complete.()</a></code> </p>
+          <p><code><a href="count..html">count.()</a></code> </p>
         </td>
-        <td><p>Complete a data.table with missing combinations of data</p></td>
+        <td><p>Count observations by group</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="count..html">count.()</a></code> <code><a href="count..html">dt_count()</a></code> </p>
+          <p><code><a href="distinct..html">distinct.()</a></code> </p>
         </td>
-        <td><p>Count observations by group</p></td>
+        <td><p>Select distinct/unique rows</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="group_split..html">group_split.()</a></code> </p>
+        </td>
+        <td><p>Split data frame by groups</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ifelse..html">ifelse.()</a></code> </p>
+        </td>
+        <td><p>Vectorized if</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="lags..html">lags.()</a></code> <code><a href="lags..html">leads.()</a></code> </p>
+        </td>
+        <td><p>Lead and Lag</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="left_join..html">left_join.()</a></code> <code><a href="left_join..html">inner_join.()</a></code> <code><a href="left_join..html">right_join.()</a></code> <code><a href="left_join..html">full_join.()</a></code> <code><a href="left_join..html">anti_join.()</a></code> </p>
+        </td>
+        <td><p>Join two data.tables together</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="pull..html">pull.()</a></code> </p>
+        </td>
+        <td><p>Pull out a single variable</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="relocate..html">relocate.()</a></code> </p>
+        </td>
+        <td><p>Relocate a column to a new position</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rename..html">rename.()</a></code> </p>
+        </td>
+        <td><p>Rename variables by name</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rename_with..html">rename_with.()</a></code> </p>
+        </td>
+        <td><p>Rename multiple columns</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="slice..html">slice.()</a></code> <code><a href="slice..html">slice_head.()</a></code> <code><a href="slice..html">slice_tail.()</a></code> <code><a href="slice..html">slice_max.()</a></code> <code><a href="slice..html">slice_min.()</a></code> </p>
+        </td>
+        <td><p>Choose rows by position</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="transmute..html">transmute.()</a></code> </p>
+        </td>
+        <td><p>Add new variables and drop all others</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-tidyr" class="hasAnchor"><a href="#section-tidyr" class="anchor"></a>tidyr</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="complete..html">complete.()</a></code> </p>
+        </td>
+        <td><p>Complete a data.table with missing combinations of data</p></td>
       </tr><tr>
         
         <td>
@@ -198,27 +351,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="desc..html">desc.()</a></code> </p>
-        </td>
-        <td><p>Deprecated</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="distinct..html">distinct.()</a></code> <code><a href="distinct..html">dt_distinct()</a></code> </p>
-        </td>
-        <td><p>Select distinct/unique rows</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="drop_na..html">drop_na.()</a></code> <code><a href="drop_na..html">dt_drop_na()</a></code> </p>
+          <p><code><a href="drop_na..html">drop_na.()</a></code> </p>
         </td>
         <td><p>Drop rows containing missing values</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dt.html">dt()</a></code> </p>
-        </td>
-        <td><p>Pipeable data.table call</p></td>
       </tr><tr>
         
         <td>
@@ -234,163 +369,37 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="fill..html">fill.()</a></code> <code><a href="fill..html">dt_fill()</a></code> </p>
+          <p><code><a href="fill..html">fill.()</a></code> </p>
         </td>
         <td><p>Fill in missing values with previous or next value</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="filter..html">filter.()</a></code> <code><a href="filter..html">dt_filter()</a></code> </p>
-        </td>
-        <td><p>Filter rows on one or more conditions</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_dummies..html">get_dummies.()</a></code> <code><a href="get_dummies..html">dt_get_dummies()</a></code> </p>
-        </td>
-        <td><p>Convert character and factor columns to dummy variables</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="grapes-notin-grapes.html">`%notin%`</a></code> </p>
-        </td>
-        <td><p>notin operator</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="group_split..html">group_split.()</a></code> <code><a href="group_split..html">dt_group_split()</a></code> </p>
-        </td>
-        <td><p>Split data frame by groups</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ifelse..html">ifelse.()</a></code> <code><a href="ifelse..html">dt_ifelse()</a></code> </p>
-        </td>
-        <td><p>Vectorized if</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="inv_gc.html">inv_gc()</a></code> </p>
-        </td>
-        <td><p>Run invisible garbage collection</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_tidytable.html">is_tidytable()</a></code> </p>
-        </td>
-        <td><p>Test if the object is a tidytable</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="leads..html">leads.()</a></code> <code><a href="leads..html">lags.()</a></code> </p>
-        </td>
-        <td><p>Lead and Lag</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="left_join..html">left_join.()</a></code> <code><a href="left_join..html">inner_join.()</a></code> <code><a href="left_join..html">right_join.()</a></code> <code><a href="left_join..html">full_join.()</a></code> <code><a href="left_join..html">anti_join.()</a></code> <code><a href="left_join..html">dt_left_join()</a></code> <code><a href="left_join..html">dt_inner_join()</a></code> <code><a href="left_join..html">dt_right_join()</a></code> <code><a href="left_join..html">dt_full_join()</a></code> <code><a href="left_join..html">dt_anti_join()</a></code> </p>
-        </td>
-        <td><p>Join two data.tables together</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="map..html">map.()</a></code> <code><a href="map..html">dt_map()</a></code> <code><a href="map..html">map_lgl.()</a></code> <code><a href="map..html">dt_map_lgl()</a></code> <code><a href="map..html">map_int.()</a></code> <code><a href="map..html">dt_map_int()</a></code> <code><a href="map..html">map_dbl.()</a></code> <code><a href="map..html">dt_map_dbl()</a></code> <code><a href="map..html">map_chr.()</a></code> <code><a href="map..html">dt_map_chr()</a></code> <code><a href="map..html">map_dfc.()</a></code> <code><a href="map..html">dt_map_dfc()</a></code> <code><a href="map..html">map_dfr.()</a></code> <code><a href="map..html">dt_map_dfr()</a></code> <code><a href="map..html">map_df.()</a></code> <code><a href="map..html">dt_map_df()</a></code> <code><a href="map..html">walk.()</a></code> <code><a href="map..html">map2.()</a></code> <code><a href="map..html">dt_map2()</a></code> <code><a href="map..html">map2_lgl.()</a></code> <code><a href="map..html">dt_map2_lgl()</a></code> <code><a href="map..html">map2_int.()</a></code> <code><a href="map..html">dt_map2_int()</a></code> <code><a href="map..html">map2_dbl.()</a></code> <code><a href="map..html">dt_map2_dbl()</a></code> <code><a href="map..html">map2_chr.()</a></code> <code><a href="map..html">dt_map2_chr()</a></code> <code><a href="map..html">map2_dfc.()</a></code> <code><a href="map..html">dt_map2_dfc()</a></code> <code><a href="map..html">map2_dfr.()</a></code> <code><a href="map..html">dt_map2_dfr()</a></code> <code><a href="map..html">map2_df.()</a></code> <code><a href="map..html">dt_map2_df()</a></code> </p>
-        </td>
-        <td><p>Apply a function to each element of a vector</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="mutate..html">mutate.()</a></code> <code><a href="mutate..html">dt_mutate()</a></code> </p>
-        </td>
-        <td><p>Mutate</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="mutate_across..html">mutate_across.()</a></code> <code><a href="mutate_across..html">dt_mutate_across()</a></code> </p>
-        </td>
-        <td><p>Mutate multiple columns simultaneously</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="mutate_if..html">mutate_if.()</a></code> <code><a href="mutate_if..html">mutate_at.()</a></code> <code><a href="mutate_if..html">mutate_all.()</a></code> <code><a href="mutate_if..html">dt_mutate_if()</a></code> <code><a href="mutate_if..html">dt_mutate_at()</a></code> <code><a href="mutate_if..html">dt_mutate_all()</a></code> </p>
-        </td>
-        <td><p>Deprecated mutate helpers</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="n..html">n.()</a></code> <code><a href="n..html">dt_n()</a></code> </p>
-        </td>
-        <td><p>Number of observations in each group</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="nest_by..html">nest_by.()</a></code> <code><a href="nest_by..html">dt_group_nest()</a></code> </p>
+          <p><code><a href="nest_by..html">nest_by.()</a></code> </p>
         </td>
         <td><p>Nest data.tables</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="pivot_longer..html">pivot_longer.()</a></code> <code><a href="pivot_longer..html">dt_pivot_longer()</a></code> </p>
+          <p><code><a href="pivot_longer..html">pivot_longer.()</a></code> </p>
         </td>
         <td><p>Pivot data from wide to long</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="pivot_wider..html">pivot_wider.()</a></code> <code><a href="pivot_wider..html">dt_pivot_wider()</a></code> </p>
+          <p><code><a href="pivot_wider..html">pivot_wider.()</a></code> </p>
         </td>
         <td><p>Pivot data from long to wide</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="pull..html">pull.()</a></code> <code><a href="pull..html">dt_pull()</a></code> </p>
-        </td>
-        <td><p>Pull out a single variable</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="relocate..html">relocate.()</a></code> <code><a href="relocate..html">dt_relocate()</a></code> </p>
-        </td>
-        <td><p>Relocate a column to a new position</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rename..html">rename.()</a></code> <code><a href="rename..html">dt_rename()</a></code> </p>
-        </td>
-        <td><p>Rename variables by name</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rename_all..html">rename_all.()</a></code> <code><a href="rename_all..html">rename_at.()</a></code> <code><a href="rename_all..html">rename_across.()</a></code> <code><a href="rename_all..html">rename_if.()</a></code> <code><a href="rename_all..html">dt_rename_across()</a></code> <code><a href="rename_all..html">dt_rename_all()</a></code> <code><a href="rename_all..html">dt_rename_if()</a></code> <code><a href="rename_all..html">dt_rename_at()</a></code> </p>
-        </td>
-        <td><p>Deprecated rename helpers</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rename_with..html">rename_with.()</a></code> <code><a href="rename_with..html">dt_rename_with()</a></code> </p>
-        </td>
-        <td><p>Rename multiple columns</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="replace_na..html">replace_na.()</a></code> <code><a href="replace_na..html">dt_replace_na()</a></code> </p>
+          <p><code><a href="replace_na..html">replace_na.()</a></code> </p>
         </td>
         <td><p>Replace missing values</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="row_number..html">row_number.()</a></code> <code><a href="row_number..html">dt_row_number()</a></code> </p>
-        </td>
-        <td><p>Return row number</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="select..html">select.()</a></code> <code><a href="select..html">dt_select()</a></code> </p>
-        </td>
-        <td><p>Select or drop columns</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="separate..html">separate.()</a></code> <code><a href="separate..html">dt_separate()</a></code> </p>
+          <p><code><a href="separate..html">separate.()</a></code> </p>
         </td>
         <td><p>Separate a character column into multiple columns</p></td>
       </tr><tr>
@@ -402,69 +411,74 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="slice..html">slice.()</a></code> <code><a href="slice..html">slice_head.()</a></code> <code><a href="slice..html">slice_tail.()</a></code> <code><a href="slice..html">slice_max.()</a></code> <code><a href="slice..html">slice_min.()</a></code> <code><a href="slice..html">dt_slice()</a></code> <code><a href="slice..html">dt_slice_head()</a></code> <code><a href="slice..html">dt_slice_tail()</a></code> <code><a href="slice..html">dt_slice_min()</a></code> <code><a href="slice..html">dt_slice_max()</a></code> </p>
-        </td>
-        <td><p>Choose rows by position</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="starts_with..html">starts_with.()</a></code> <code><a href="starts_with..html">dt_starts_with()</a></code> <code><a href="starts_with..html">contains.()</a></code> <code><a href="starts_with..html">dt_contains()</a></code> <code><a href="starts_with..html">ends_with.()</a></code> <code><a href="starts_with..html">dt_ends_with()</a></code> <code><a href="starts_with..html">everything.()</a></code> <code><a href="starts_with..html">dt_everything()</a></code> <code><a href="starts_with..html">any_of.()</a></code> <code><a href="starts_with..html">dt_any_of()</a></code> </p>
-        </td>
-        <td><p>Select helpers</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="summarize..html">summarize.()</a></code> <code><a href="summarize..html">summarise.()</a></code> <code><a href="summarize..html">dt_summarise()</a></code> <code><a href="summarize..html">dt_summarize()</a></code> </p>
-        </td>
-        <td><p>Aggregate data using summary statistics</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="summarize_across..html">summarize_across.()</a></code> <code><a href="summarize_across..html">summarise_across.()</a></code> </p>
-        </td>
-        <td><p>Summarize multiple columns</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tidytable.html">tidytable()</a></code> </p>
-        </td>
-        <td><p>Build a data.table/tidytable</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="top_n..html">top_n.()</a></code> <code><a href="top_n..html">dt_top_n()</a></code> </p>
-        </td>
-        <td><p>Select top (or bottom) n rows (by value)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="transmute..html">transmute.()</a></code> <code><a href="transmute..html">dt_transmute()</a></code> </p>
-        </td>
-        <td><p>Add new variables and drop all others</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="uncount..html">uncount.()</a></code> </p>
         </td>
         <td><p>Uncount a data.table</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="unite..html">unite.()</a></code> <code><a href="unite..html">dt_unite()</a></code> </p>
+          <p><code><a href="unite..html">unite.()</a></code> </p>
         </td>
         <td><p>Unite multiple columns by pasting strings together</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="unnest..html">unnest.()</a></code> <code><a href="unnest..html">dt_unnest_legacy()</a></code> </p>
+          <p><code><a href="unnest..html">unnest.()</a></code> </p>
         </td>
         <td><p>Unnest a nested data.table</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-purrr" class="hasAnchor"><a href="#section-purrr" class="anchor"></a>purrr</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="map..html">map.()</a></code> <code><a href="map..html">map_lgl.()</a></code> <code><a href="map..html">map_int.()</a></code> <code><a href="map..html">map_dbl.()</a></code> <code><a href="map..html">map_chr.()</a></code> <code><a href="map..html">map_dfc.()</a></code> <code><a href="map..html">map_dfr.()</a></code> <code><a href="map..html">map_df.()</a></code> <code><a href="map..html">walk.()</a></code> <code><a href="map..html">map2.()</a></code> <code><a href="map..html">map2_lgl.()</a></code> <code><a href="map..html">map2_int.()</a></code> <code><a href="map..html">map2_dbl.()</a></code> <code><a href="map..html">map2_chr.()</a></code> <code><a href="map..html">map2_dfc.()</a></code> <code><a href="map..html">map2_dfr.()</a></code> <code><a href="map..html">map2_df.()</a></code> </p>
+        </td>
+        <td><p>Apply a function to each element of a vector or list</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-tidytable-constructors" class="hasAnchor"><a href="#section-tidytable-constructors" class="anchor"></a>tidytable constructors</h2>
+          <p class="section-desc">
+<p>A tidytable is simply a data.table with nice printing features. As such it can be used exactly like a data.table would be used.</p>
+<p>Note: All tidytable functions automatically convert data.frame/tibble inputs to a data.table/tidytable.</p>
+</p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="as_tidytable.html">as_tidytable()</a></code> <code><a href="as_tidytable.html">as_dt()</a></code> </p>
+        </td>
+        <td><p>Coerce an object to a data.table/tidytable</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="where.html">where()</a></code> </p>
+          <p><code><a href="is_tidytable.html">is_tidytable()</a></code> </p>
         </td>
-        <td><p>Select variables with a function</p></td>
+        <td><p>Test if the object is a tidytable</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="tidytable.html">tidytable()</a></code> </p>
+        </td>
+        <td><p>Build a data.table/tidytable</p></td>
       </tr>
     </tbody>
     </table>

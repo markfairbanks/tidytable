@@ -73,7 +73,8 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ..., .by 
 }
 
 #' @export
-#' @rdname mutate_across.
+#' @rdname dt_verb
+#' @inheritParams mutate_across.
 dt_mutate_across <- function(.df, .cols = everything(), .fns, ..., .by = NULL, by = NULL) {
   deprecate_soft("0.5.2", "tidytable::dt_mutate_across()", "mutate_across.()")
 

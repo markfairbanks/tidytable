@@ -2,12 +2,9 @@
 % Please edit documentation in R/mutate_across.R
 \name{mutate_across.}
 \alias{mutate_across.}
-\alias{dt_mutate_across}
 \title{Mutate multiple columns simultaneously}
 \usage{
 mutate_across.(.df, .cols = everything(), .fns, ..., .by = NULL, by = NULL)
-
-dt_mutate_across(.df, .cols = everything(), .fns, ..., .by = NULL, by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

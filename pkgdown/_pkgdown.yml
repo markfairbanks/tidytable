@@ -1,0 +1,65 @@
+reference:
+- title: tidytable helpers
+- contents:
+  - dt
+  - get_dummies.
+  - '%notin%'
+- title: dplyr
+  desc: Core dplyr verbs
+- contents:
+  - arrange.
+  - filter.
+  - mutate.
+  - mutate_across.
+  - select.
+  - summarize.
+  - summarize_across.
+- subtitle: __
+  desc: Other dplyr functions
+- contents:
+  - starts_with("bind")
+  - case.
+  - count.
+  - distinct.
+  - group_split.
+  - ifelse.
+  - lags.
+  - left_join.
+  - pull.
+  - relocate.
+  - rename.
+  - rename_with.
+  - slice.
+  - transmute.
+- title: tidyr
+- contents:
+  - complete.
+  - crossing.
+  - drop_na.
+  - expand.
+  - expand_grid.
+  - fill.
+  - nest_by.
+  - pivot_longer.
+  - pivot_wider.
+  - replace_na.
+  - separate.
+  - separate_rows.
+  - uncount.
+  - unite.
+  - unnest.
+- title: purrr
+- contents:
+  - map.
+- title: tidytable constructors
+  desc: >
+    A tidytable is simply a data.table with nice printing features.
+    As such it can be used exactly like a data.table would be used.
+
+
+    Note: All tidytable functions automatically convert data.frame/tibble inputs to a data.table/tidytable.
+- contents:
+  - as_tidytable
+  - is_tidytable
+  - tidytable
+

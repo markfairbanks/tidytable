@@ -72,7 +72,8 @@ check_replacement <- function(x) {
 }
 
 #' @export
-#' @rdname replace_na.
+#' @rdname dt_verb
+#' @inheritParams replace_na.
 dt_replace_na <- function(.x, replace = NA) {
   deprecate_soft("0.5.2", "tidytable::dt_replace_na()", "replace_na.()")
 

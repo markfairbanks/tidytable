@@ -3,17 +3,11 @@
 \name{summarize.}
 \alias{summarize.}
 \alias{summarise.}
-\alias{dt_summarise}
-\alias{dt_summarize}
 \title{Aggregate data using summary statistics}
 \usage{
 summarize.(.df, ..., .by = NULL, .sort = FALSE, by = NULL)
 
 summarise.(.df, ..., .by = NULL, .sort = FALSE, by = NULL)
-
-dt_summarise(.df, ..., .by = NULL, by = NULL)
-
-dt_summarize(.df, ..., .by = NULL, by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

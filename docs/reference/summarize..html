@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3.9</span>
       </span>
     </div>
 
@@ -140,13 +140,9 @@
     <p>Aggregate data using summary statistics such as mean or median. Can be calculated by group.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='summarize..html'>summarize.</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'><a href='summarize..html'>summarize.</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.sort</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='summarize..html'>summarise.</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'><a href='summarize..html'>dt_summarise</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'><a href='summarize..html'>dt_summarize</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'><a href='summarize..html'>summarise.</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.sort</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -170,6 +166,10 @@
 <li><p>A combination of predicates and column names: <code>by = c(where(is.character), b)</code></p></li>
 </ul></li>
 </ul></td>
+    </tr>
+    <tr>
+      <th>.sort</th>
+      <td><p>Should the resulting data.table be sorted</p></td>
     </tr>
     <tr>
       <th>by</th>

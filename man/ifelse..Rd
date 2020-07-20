@@ -2,12 +2,9 @@
 % Please edit documentation in R/ifelse.R
 \name{ifelse.}
 \alias{ifelse.}
-\alias{dt_ifelse}
 \title{Vectorized if}
 \usage{
 ifelse.(conditions, true, false, na = NA)
-
-dt_ifelse(conditions, true, false, na = NA)
 }
 \arguments{
 \item{conditions}{Conditions to test on}

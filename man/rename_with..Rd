@@ -2,12 +2,9 @@
 % Please edit documentation in R/rename_with.R
 \name{rename_with.}
 \alias{rename_with.}
-\alias{dt_rename_with}
 \title{Rename multiple columns}
 \usage{
 rename_with.(.df, .fn, .cols = everything(), ...)
-
-dt_rename_with(.df, .fn, .cols = everything(), ...)
 }
 \arguments{
 \item{.df}{A data.table or data.frame}

@@ -153,7 +153,8 @@ slice_min..data.frame <- function(.df, order_by, n = 1, .by = NULL, by = NULL) {
 }
 
 #' @export
-#' @rdname slice.
+#' @rdname dt_verb
+#' @inheritParams slice.
 dt_slice <- function(.df, rows = 1:5, .by = NULL, by = NULL) {
   deprecate_soft("0.5.2", "tidytable::dt_slice()", "slice.()")
 
@@ -163,7 +164,8 @@ dt_slice <- function(.df, rows = 1:5, .by = NULL, by = NULL) {
 }
 
 #' @export
-#' @rdname slice.
+#' @rdname dt_verb
+#' @inheritParams slice_head.
 dt_slice_head <- function(.df, n = 5, .by = NULL, by = NULL) {
   deprecate_soft("0.5.2", "tidytable::dt_slice_head()", "slice_head.()")
 
@@ -173,7 +175,8 @@ dt_slice_head <- function(.df, n = 5, .by = NULL, by = NULL) {
 }
 
 #' @export
-#' @rdname slice.
+#' @rdname dt_verb
+#' @inheritParams slice_tail.
 dt_slice_tail <- function(.df, n = 5, .by = NULL, by = NULL) {
   deprecate_soft("0.5.2", "tidytable::dt_slice_tail()", "slice_tail.()")
 
@@ -183,7 +186,8 @@ dt_slice_tail <- function(.df, n = 5, .by = NULL, by = NULL) {
 }
 
 #' @export
-#' @rdname slice.
+#' @rdname dt_verb
+#' @inheritParams slice_min.
 dt_slice_min <- function(.df, order_by, n = 1, .by = NULL, by = NULL) {
   deprecate_soft("0.5.2", "tidytable::dt_slice_min()", "slice_min.()")
 
@@ -194,7 +198,8 @@ dt_slice_min <- function(.df, order_by, n = 1, .by = NULL, by = NULL) {
 
 
 #' @export
-#' @rdname slice.
+#' @rdname dt_verb
+#' @inheritParams slice_max.
 dt_slice_max <- function(.df, order_by, n = 1, .by = NULL, by = NULL) {
   deprecate_soft("0.5.2", "tidytable::dt_slice_max()", "slice_max.()")
 

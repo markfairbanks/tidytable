@@ -2,12 +2,9 @@
 % Please edit documentation in R/mutate.R
 \name{mutate.}
 \alias{mutate.}
-\alias{dt_mutate}
 \title{Mutate}
 \usage{
 mutate.(.df, ..., .by = NULL, by = NULL)
-
-dt_mutate(.df, ..., .by = NULL, by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

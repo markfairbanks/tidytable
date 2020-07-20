@@ -2,12 +2,9 @@
 % Please edit documentation in R/case.R
 \name{case.}
 \alias{case.}
-\alias{dt_case}
 \title{Case when}
 \usage{
 case.(..., default = NA)
-
-dt_case(..., default = NA)
 }
 \arguments{
 \item{...}{Sequence of condition/value designations}
@@ -17,7 +14,7 @@ dt_case(..., default = NA)
 \description{
 This function allows you to use multiple if/else statements in one call.
 
-Note that this function is called differently than `dplyr::case_when`. See examples.
+Note that this function is called differently than \code{dplyr::case_when}. See examples.
 }
 \examples{
 library(data.table)

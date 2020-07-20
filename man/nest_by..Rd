@@ -2,12 +2,9 @@
 % Please edit documentation in R/nest.R
 \name{nest_by.}
 \alias{nest_by.}
-\alias{dt_group_nest}
 \title{Nest data.tables}
 \usage{
 nest_by.(.df, ..., .key = "data", .keep = FALSE)
-
-dt_group_nest(.df, ..., .key = "data", .keep = FALSE)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

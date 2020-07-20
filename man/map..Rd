@@ -2,105 +2,57 @@
 % Please edit documentation in R/map.R, R/map2.R
 \name{map.}
 \alias{map.}
-\alias{dt_map}
 \alias{map_lgl.}
-\alias{dt_map_lgl}
 \alias{map_int.}
-\alias{dt_map_int}
 \alias{map_dbl.}
-\alias{dt_map_dbl}
 \alias{map_chr.}
-\alias{dt_map_chr}
 \alias{map_dfc.}
-\alias{dt_map_dfc}
 \alias{map_dfr.}
-\alias{dt_map_dfr}
 \alias{map_df.}
-\alias{dt_map_df}
 \alias{walk.}
 \alias{map2.}
-\alias{dt_map2}
 \alias{map2_lgl.}
-\alias{dt_map2_lgl}
 \alias{map2_int.}
-\alias{dt_map2_int}
 \alias{map2_dbl.}
-\alias{dt_map2_dbl}
 \alias{map2_chr.}
-\alias{dt_map2_chr}
 \alias{map2_dfc.}
-\alias{dt_map2_dfc}
 \alias{map2_dfr.}
-\alias{dt_map2_dfr}
 \alias{map2_df.}
-\alias{dt_map2_df}
-\title{Apply a function to each element of a vector}
+\title{Apply a function to each element of a vector or list}
 \usage{
 map.(.x, .f, ...)
 
-dt_map(.x, .f, ...)
-
 map_lgl.(.x, .f, ...)
-
-dt_map_lgl(.x, .f, ...)
 
 map_int.(.x, .f, ...)
 
-dt_map_int(.x, .f, ...)
-
 map_dbl.(.x, .f, ...)
-
-dt_map_dbl(.x, .f, ...)
 
 map_chr.(.x, .f, ...)
 
-dt_map_chr(.x, .f, ...)
-
 map_dfc.(.x, .f, ...)
-
-dt_map_dfc(.x, .f, ...)
 
 map_dfr.(.x, .f, ..., .id = NULL)
 
-dt_map_dfr(.x, .f, ..., .id = NULL)
-
 map_df.(.x, .f, ..., .id = NULL)
-
-dt_map_df(.x, .f, ...)
 
 walk.(.x, .f, ...)
 
 map2.(.x, .y, .f, ...)
 
-dt_map2(.x, .y, .f, ...)
-
 map2_lgl.(.x, .y, .f, ...)
-
-dt_map2_lgl(.x, .y, .f, ...)
 
 map2_int.(.x, .y, .f, ...)
 
-dt_map2_int(.x, .y, .f, ...)
-
 map2_dbl.(.x, .y, .f, ...)
-
-dt_map2_dbl(.x, .y, .f, ...)
 
 map2_chr.(.x, .y, .f, ...)
 
-dt_map2_chr(.x, .y, .f, ...)
-
 map2_dfc.(.x, .y, .f, ...)
-
-dt_map2_dfc(.x, .y, .f, ...)
 
 map2_dfr.(.x, .y, .f, ..., .id = NULL)
 
-dt_map2_dfr(.x, .y, .f, ..., .id = NULL)
-
 map2_df.(.x, .y, .f, ..., .id = NULL)
-
-dt_map2_df(.x, .y, .f, ..., .id = NULL)
 }
 \arguments{
 \item{.x}{A list or vector}

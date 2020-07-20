@@ -2,12 +2,9 @@
 % Please edit documentation in R/pull.R
 \name{pull.}
 \alias{pull.}
-\alias{dt_pull}
 \title{Pull out a single variable}
 \usage{
 pull.(.df, var = NULL)
-
-dt_pull(.df, var = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

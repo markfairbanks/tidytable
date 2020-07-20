@@ -2,12 +2,9 @@
 % Please edit documentation in R/arrange.R
 \name{arrange.}
 \alias{arrange.}
-\alias{dt_arrange}
-\title{Arrange/reorder rows by variables}
+\title{Arrange/reorder rows}
 \usage{
 arrange.(.df, ...)
-
-dt_arrange(.df, ...)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

@@ -2,18 +2,9 @@
 % Please edit documentation in R/fill.R
 \name{fill.}
 \alias{fill.}
-\alias{dt_fill}
 \title{Fill in missing values with previous or next value}
 \usage{
 fill.(
-  .df,
-  ...,
-  .direction = c("down", "up", "downup", "updown"),
-  .by = NULL,
-  by = NULL
-)
-
-dt_fill(
   .df,
   ...,
   .direction = c("down", "up", "downup", "updown"),

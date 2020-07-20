@@ -78,7 +78,8 @@ summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE, by = NULL
 summarise. <- summarize.
 
 #' @export
-#' @rdname summarize.
+#' @rdname dt_verb
+#' @inheritParams summarize.
 dt_summarise <- function(.df, ..., .by = NULL, by = NULL) {
   deprecate_soft("0.5.2", "tidytable::dt_summarise()", "summarise.()")
 
@@ -88,7 +89,8 @@ dt_summarise <- function(.df, ..., .by = NULL, by = NULL) {
 }
 
 #' @export
-#' @rdname summarize.
+#' @rdname dt_verb
+#' @inheritParams summarize.
 dt_summarize <- function(.df, ..., .by = NULL, by = NULL) {
   deprecate_soft("0.5.2", "tidytable::dt_summarize()", "summarize.()")
 

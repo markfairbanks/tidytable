@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3.9</span>
       </span>
     </div>
 
@@ -116,108 +116,6 @@
 <div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages("devtools")</span>
 <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"markfairbanks/tidytable"</span>)</pre></div>
 </div>
-<div id="tidytable-functions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#tidytable-functions" class="anchor"></a>tidytable functions</h2>
-<div id="tidytable-helpers" class="section level3">
-<h3 class="hasAnchor">
-<a href="#tidytable-helpers" class="anchor"></a>tidytable helpers</h3>
-<ul>
-<li>
-<code><a href="reference/dt.html">dt()</a></code>: Pipeable <code>data.table</code> syntax. <a href="https://markfairbanks.github.io/tidytable/#dt-helper">See here</a>
-</li>
-<li><code><a href="reference/get_dummies..html">get_dummies.()</a></code></li>
-<li><code><a href="reference/grapes-notin-grapes.html">%notin%</a></code></li>
-</ul>
-</div>
-<div id="dplyr" class="section level3">
-<h3 class="hasAnchor">
-<a href="#dplyr" class="anchor"></a>dplyr</h3>
-<div id="core-verbs" class="section level5">
-<h5 class="hasAnchor">
-<a href="#core-verbs" class="anchor"></a>Core verbs</h5>
-<ul>
-<li><code><a href="reference/arrange..html">arrange.()</a></code></li>
-<li><code><a href="reference/filter..html">filter.()</a></code></li>
-<li>
-<code><a href="reference/mutate..html">mutate.()</a></code> &amp; <code><a href="reference/mutate_across..html">mutate_across.()</a></code>
-</li>
-<li><code><a href="reference/select..html">select.()</a></code></li>
-<li>
-<code><a href="reference/summarize..html">summarize.()</a></code> &amp; <code><a href="reference/summarize_across..html">summarize_across.()</a></code>
-<ul>
-<li>Group by specifications called inside. <a href="https://markfairbanks.github.io/tidytable/#using-group-by">See here</a>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<div id="other-dplyr-functions" class="section level5">
-<h5 class="hasAnchor">
-<a href="#other-dplyr-functions" class="anchor"></a>Other dplyr functions</h5>
-<ul>
-<li>
-<code><a href="reference/bind_rows..html">bind_cols.()</a></code> &amp; <code><a href="reference/bind_rows..html">bind_rows.()</a></code>
-</li>
-<li>
-<code><a href="reference/case..html">case.()</a></code>: Similar to <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">dplyr::case_when()</a></code>. See <code><a href="reference/case..html">?case.</a></code> for syntax</li>
-<li><code><a href="reference/count..html">count.()</a></code></li>
-<li><code><a href="reference/distinct..html">distinct.()</a></code></li>
-<li><code><a href="reference/ifelse..html">ifelse.()</a></code></li>
-<li>Joins:
-<ul>
-<li>
-<code><a href="reference/left_join..html">left_join.()</a></code>, <code><a href="reference/left_join..html">inner_join.()</a></code>, <code><a href="reference/left_join..html">right_join.()</a></code>, <code><a href="reference/left_join..html">full_join.()</a></code>, &amp; <code><a href="reference/left_join..html">anti_join.()</a></code>
-</li>
-</ul>
-</li>
-<li>
-<code><a href="reference/leads..html">lags.()</a></code> &amp; <code><a href="reference/leads..html">leads.()</a></code>
-</li>
-<li><code><a href="reference/pull..html">pull.()</a></code></li>
-<li><code><a href="reference/relocate..html">relocate.()</a></code></li>
-<li>
-<code><a href="reference/rename..html">rename.()</a></code> &amp; <code><a href="reference/rename_with..html">rename_with.()</a></code>
-</li>
-<li><code><a href="reference/row_number..html">row_number.()</a></code></li>
-<li>
-<code><a href="reference/slice..html">slice.()</a></code>: <code>_head.()</code>/<code>_tail.()</code>/<code>_max.()</code>/<code>_min.()</code>
-</li>
-<li><code><a href="reference/transmute..html">transmute.()</a></code></li>
-</ul>
-</div>
-</div>
-<div id="tidyr" class="section level3">
-<h3 class="hasAnchor">
-<a href="#tidyr" class="anchor"></a>tidyr</h3>
-<ul>
-<li><code><a href="reference/drop_na..html">drop_na.()</a></code></li>
-<li><code><a href="reference/complete..html">complete.()</a></code></li>
-<li><code><a href="reference/crossing..html">crossing.()</a></code></li>
-<li><code><a href="reference/expand..html">expand.()</a></code></li>
-<li><code><a href="reference/expand_grid..html">expand_grid.()</a></code></li>
-<li><code><a href="reference/fill..html">fill.()</a></code></li>
-<li><code><a href="reference/group_split..html">group_split.()</a></code></li>
-<li>Nesting: <code><a href="reference/nest_by..html">nest_by.()</a></code> &amp; <code><a href="reference/unnest..html">unnest.()</a></code>
-</li>
-<li>
-<code><a href="reference/pivot_longer..html">pivot_longer.()</a></code> &amp; <code><a href="reference/pivot_wider..html">pivot_wider.()</a></code>
-</li>
-<li><code><a href="reference/replace_na..html">replace_na.()</a></code></li>
-<li><code><a href="reference/separate..html">separate.()</a></code></li>
-<li><code><a href="reference/separate_rows..html">separate_rows.()</a></code></li>
-<li><code><a href="reference/uncount..html">uncount.()</a></code></li>
-</ul>
-</div>
-<div id="purrr" class="section level3">
-<h3 class="hasAnchor">
-<a href="#purrr" class="anchor"></a>purrr</h3>
-<ul>
-<li>
-<code><a href="reference/map..html">map.()</a></code>, <code><a href="reference/map..html">map2.()</a></code>, <code>map_*.()</code> variants, &amp; <code>map2_*.()</code> variants</li>
-</ul>
-</div>
-</div>
 <div id="general-syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#general-syntax" class="anchor"></a>General syntax</h2>
@@ -237,6 +135,7 @@
 <span class="co">#&gt; 1:     1     4     a        2        8</span>
 <span class="co">#&gt; 2:     2     5     a        4       10</span>
 <span class="co">#&gt; 3:     3     6     b        6       12</span></pre></div>
+<p>A full list of functions can be found <a href="https://markfairbanks.github.io/tidytable/reference/index.html">here</a>.</p>
 </div>
 <div id="using-group-by" class="section level2">
 <h2 class="hasAnchor">
@@ -290,14 +189,14 @@
 <span class="co">#&gt; 1:     1     4     a</span>
 <span class="co">#&gt; 2:     2     5     b</span>
 <span class="co">#&gt; 3:     3     6     c</span></pre></div>
-<p>You can also use this format to drop columns:</p>
+<p>To drop columns use a <code><a href="https://rdrr.io/r/base/Arithmetic.html">-</a></code> sign:</p>
 <div class="sourceCode" id="cb6"><pre class="r"><span class="no">test_df</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/select..html">select.</a></span>(-<span class="fu"><a href="reference/where.html">where</a></span>(<span class="no">is.numeric</span>))
-<span class="co">#&gt;        c     d</span>
-<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;</span>
-<span class="co">#&gt; 1:     a     a</span>
-<span class="co">#&gt; 2:     a     b</span>
-<span class="co">#&gt; 3:     b     c</span></pre></div>
+  <span class="fu"><a href="reference/select..html">select.</a></span>(-<span class="fu"><a href="reference/where.html">where</a></span>(<span class="no">is.numeric</span>), -<span class="no">d</span>)
+<span class="co">#&gt;        c</span>
+<span class="co">#&gt;    &lt;chr&gt;</span>
+<span class="co">#&gt; 1:     a</span>
+<span class="co">#&gt; 2:     a</span>
+<span class="co">#&gt; 3:     b</span></pre></div>
 <p>These same ideas can be used whenever selecting columns in <code>tidytable</code> functions - for example when using <code><a href="reference/count..html">count.()</a></code>, <code><a href="reference/drop_na..html">drop_na.()</a></code>, <code><a href="reference/mutate_across..html">mutate_across.()</a></code>, <code><a href="reference/pivot_longer..html">pivot_longer.()</a></code>, etc.</p>
 </div>
 <div id="rlang-compatibility" class="section level2">
@@ -424,7 +323,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=tidytable"><img src="https://www.r-pkg.org/badges/version/tidytable" alt="CRAN status"></a></li>
-<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.5.3-green.svg"></a></li>
+<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.5.3.9-green.svg"></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 <li><a href="https://markfairbanks.github.io/tidytable/"><img src="https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey" alt="CRAN RStudio mirror downloads"></a></li>
 </ul>

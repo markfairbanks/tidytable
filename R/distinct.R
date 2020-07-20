@@ -55,7 +55,8 @@ distinct..data.frame <- function(.df, ..., .keep_all = FALSE) {
 }
 
 #' @export
-#' @rdname distinct.
+#' @rdname dt_verb
+#' @inheritParams distinct.
 dt_distinct <- function(.df, ..., .keep_all = FALSE) {
   deprecate_soft("0.5.2", "tidytable::dt_distinct()", "distinct.()")
 

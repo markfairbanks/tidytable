@@ -44,65 +44,6 @@ with:
 devtools::install_github("markfairbanks/tidytable")
 ```
 
-## tidytable functions
-
-### tidytable helpers
-
-  - `dt()`: Pipeable `data.table` syntax. [See
-    here](https://markfairbanks.github.io/tidytable/#dt-helper)
-  - `get_dummies.()`
-  - `%notin%`
-
-### dplyr
-
-##### Core verbs
-
-  - `arrange.()`
-  - `filter.()`
-  - `mutate.()` & `mutate_across.()`
-  - `select.()`
-  - `summarize.()` & `summarize_across.()`
-      - Group by specifications called inside. [See
-        here](https://markfairbanks.github.io/tidytable/#using-group-by)
-
-##### Other dplyr functions
-
-  - `bind_cols.()` & `bind_rows.()`
-  - `case.()`: Similar to `dplyr::case_when()`. See `?case.` for syntax
-  - `count.()`
-  - `distinct.()`
-  - `ifelse.()`
-  - Joins:
-      - `left_join.()`, `inner_join.()`, `right_join.()`,
-        `full_join.()`, & `anti_join.()`
-  - `lags.()` & `leads.()`
-  - `pull.()`
-  - `relocate.()`
-  - `rename.()` & `rename_with.()`
-  - `row_number.()`
-  - `slice.()`: `_head.()`/`_tail.()`/`_max.()`/`_min.()`
-  - `transmute.()`
-
-### tidyr
-
-  - `drop_na.()`
-  - `complete.()`
-  - `crossing.()`
-  - `expand.()`
-  - `expand_grid.()`
-  - `fill.()`
-  - `group_split.()`
-  - Nesting: `nest_by.()` & `unnest.()`
-  - `pivot_longer.()` & `pivot_wider.()`
-  - `replace_na.()`
-  - `separate.()`
-  - `separate_rows.()`
-  - `uncount.()`
-
-### purrr
-
-  - `map.()`, `map2.()`, `map_*.()` variants, & `map2_*.()` variants
-
 ## General syntax
 
 `tidytable` uses `verb.()` syntax to replicate `tidyverse` functions:
@@ -124,6 +65,9 @@ test_df %>%
 #> 2:     2     5     a        4       10
 #> 3:     3     6     b        6       12
 ```
+
+A full list of functions can be found
+[here](https://markfairbanks.github.io/tidytable/reference/index.html).
 
 ## Using “group by”
 
@@ -186,16 +130,16 @@ test_df %>%
 #> 3:     3     6     c
 ```
 
-You can also use this format to drop columns:
+To drop columns use a `-` sign:
 
 ``` r
 test_df %>%
-  select.(-where(is.numeric))
-#>        c     d
-#>    <chr> <chr>
-#> 1:     a     a
-#> 2:     a     b
-#> 3:     b     c
+  select.(-where(is.numeric), -d)
+#>        c
+#>    <chr>
+#> 1:     a
+#> 2:     a
+#> 3:     b
 ```
 
 These same ideas can be used whenever selecting columns in `tidytable`

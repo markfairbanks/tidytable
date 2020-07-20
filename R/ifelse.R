@@ -38,7 +38,8 @@ ifelse. <- function(conditions, true, false, na = NA) {
 }
 
 #' @export
-#' @rdname ifelse.
+#' @rdname dt_verb
+#' @inheritParams ifelse.
 dt_ifelse <- function(conditions, true, false, na = NA) {
   deprecate_soft("0.5.2", "tidytable::dt_ifelse()", "ifelse.()")
 

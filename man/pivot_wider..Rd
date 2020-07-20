@@ -2,19 +2,9 @@
 % Please edit documentation in R/pivot_wider.R
 \name{pivot_wider.}
 \alias{pivot_wider.}
-\alias{dt_pivot_wider}
 \title{Pivot data from long to wide}
 \usage{
 pivot_wider.(
-  .df,
-  names_from = name,
-  values_from = value,
-  id_cols = NULL,
-  names_sep = "_",
-  values_fn = NULL
-)
-
-dt_pivot_wider(
   .df,
   names_from = name,
   values_from = value,
