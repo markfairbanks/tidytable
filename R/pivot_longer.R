@@ -68,7 +68,8 @@ pivot_longer..data.frame <- function(.df,
 
 
 #' @export
-#' @rdname pivot_longer.
+#' @rdname dt_verb
+#' @inheritParams pivot_longer.
 dt_pivot_longer <- function(.df,
                             cols = everything(),
                             names_to = "name",

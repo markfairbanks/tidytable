@@ -2,12 +2,9 @@
 % Please edit documentation in R/select.R
 \name{select.}
 \alias{select.}
-\alias{dt_select}
 \title{Select or drop columns}
 \usage{
 select.(.df, ...)
-
-dt_select(.df, ...)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

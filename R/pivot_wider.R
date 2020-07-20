@@ -92,7 +92,8 @@ pivot_wider..data.frame <- function(.df,
 }
 
 #' @export
-#' @rdname pivot_wider.
+#' @rdname dt_verb
+#' @inheritParams pivot_wider.
 dt_pivot_wider <- function(.df,
                            names_from = name,
                            values_from = value,

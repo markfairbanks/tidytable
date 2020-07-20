@@ -8,6 +8,7 @@
 #' @param ... Sequence of condition/value designations
 #' @param default Default value. Set to NA by default.
 #'
+#' @md
 #' @export
 #'
 #' @examples
@@ -39,7 +40,7 @@ case. <- function(..., default = NA) {
   if (length(values) == 0) abort("No values supplied")
 
   if (length(conditions) != length(values))
-    abort("The length of conditions does not equal the length values")
+    abort("The length of conditions does not equal the length of values")
 
   calls <- default
 
@@ -54,7 +55,8 @@ case. <- function(..., default = NA) {
 }
 
 #' @export
-#' @rdname case.
+#' @rdname dt_verb
+#' @inheritParams case.
 dt_case <- function(..., default = NA) {
   deprecate_soft("0.5.2", "tidytable::dt_case()", "case.()")
 

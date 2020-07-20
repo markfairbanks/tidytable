@@ -60,7 +60,8 @@ fill..data.frame <- function(.df, ...,
 }
 
 #' @export
-#' @rdname fill.
+#' @rdname dt_verb
+#' @inheritParams fill.
 dt_fill <- function(.df, ...,
                     .direction = c("down", "up", "downup", "updown"),
                     .by = NULL,

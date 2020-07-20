@@ -39,7 +39,8 @@ count..data.frame <- function(.df, ...) {
 }
 
 #' @export
-#' @rdname count.
+#' @rdname dt_verb
+#' @inheritParams count.
 dt_count <- function(.df, ...) {
   deprecate_soft("0.5.2", "tidytable::dt_count()", "count.()")
 

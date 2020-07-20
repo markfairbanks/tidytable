@@ -2,12 +2,9 @@
 % Please edit documentation in R/unnest.R
 \name{unnest.}
 \alias{unnest.}
-\alias{dt_unnest_legacy}
 \title{Unnest a nested data.table}
 \usage{
 unnest.(.df, ..., .keep_all = FALSE)
-
-dt_unnest_legacy(.df, ..., .keep_all = FALSE)
 }
 \arguments{
 \item{.df}{A nested data.table}

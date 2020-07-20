@@ -7,7 +7,8 @@ map2. <- function(.x, .y, .f, ...) {
 }
 
 #' @export
-#' @rdname map.
+#' @rdname dt_verb
+#' @inheritParams map2.
 dt_map2 <- function(.x, .y, .f, ...) {
   deprecate_soft("0.5.2", "tidytable::dt_map2()", "map2.()")
 
@@ -21,7 +22,8 @@ map2_lgl. <- function(.x, .y, .f, ...) {
 }
 
 #' @export
-#' @rdname map.
+#' @rdname dt_verb
+#' @inheritParams map2_lgl.
 dt_map2_lgl <- function(.x, .y, .f, ...) {
   deprecate_soft("0.5.2", "tidytable::dt_map2_lgl()", "map2_lgl.()")
 
@@ -35,7 +37,8 @@ map2_int. <- function(.x, .y, .f, ...) {
 }
 
 #' @export
-#' @rdname map.
+#' @rdname dt_verb
+#' @inheritParams map2_int.
 dt_map2_int <- function(.x, .y, .f, ...) {
   deprecate_soft("0.5.2", "tidytable::dt_map2_int()", "map2_int.()")
 
@@ -49,7 +52,8 @@ map2_dbl. <- function(.x, .y, .f, ...) {
 }
 
 #' @export
-#' @rdname map.
+#' @rdname dt_verb
+#' @inheritParams map2_dbl.
 dt_map2_dbl <- function(.x, .y, .f, ...) {
   deprecate_soft("0.5.2", "tidytable::dt_map2_dbl()", "map2_dbl.()")
 
@@ -63,7 +67,8 @@ map2_chr. <- function(.x, .y, .f, ...) {
 }
 
 #' @export
-#' @rdname map.
+#' @rdname dt_verb
+#' @inheritParams map2_chr.
 dt_map2_chr <- function(.x, .y, .f, ...) {
   deprecate_soft("0.5.2", "tidytable::dt_map2_chr()", "map2_chr.()")
 
@@ -79,7 +84,8 @@ map2_dfc. <- function(.x, .y, .f, ...) {
 }
 
 #' @export
-#' @rdname map.
+#' @rdname dt_verb
+#' @inheritParams map2_dfc.
 dt_map2_dfc <- function(.x, .y, .f, ...) {
   deprecate_soft("0.5.2", "tidytable::dt_map2_dfc()", "map2_dfc.()")
 
@@ -95,7 +101,8 @@ map2_dfr. <- function(.x, .y, .f, ..., .id = NULL) {
 }
 
 #' @export
-#' @rdname map.
+#' @rdname dt_verb
+#' @inheritParams map2_dfr.
 dt_map2_dfr <- function(.x, .y, .f, ..., .id = NULL) {
   deprecate_soft("0.5.2", "tidytable::dt_map2_dfr()", "map2_dfr.()")
 
@@ -107,7 +114,8 @@ dt_map2_dfr <- function(.x, .y, .f, ..., .id = NULL) {
 map2_df. <- map2_dfr.
 
 #' @export
-#' @rdname map.
+#' @rdname dt_verb
+#' @inheritParams map2_df.
 dt_map2_df <- function(.x, .y, .f, ..., .id = NULL) {
   deprecate_soft("0.5.2", "tidytable::dt_map2_df()", "map2_df.()")
 

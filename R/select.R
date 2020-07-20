@@ -54,7 +54,8 @@ select..data.frame <- function(.df, ...) {
 }
 
 #' @export
-#' @rdname select.
+#' @rdname dt_verb
+#' @inheritParams select.
 dt_select <- function(.df, ...) {
   deprecate_soft("0.5.2", "tidytable::dt_select()", "select.()")
 

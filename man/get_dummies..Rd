@@ -2,19 +2,9 @@
 % Please edit documentation in R/get_dummies.R
 \name{get_dummies.}
 \alias{get_dummies.}
-\alias{dt_get_dummies}
 \title{Convert character and factor columns to dummy variables}
 \usage{
 get_dummies.(
-  .df,
-  cols = c(where(is.character), where(is.factor)),
-  prefix = TRUE,
-  prefix_sep = "_",
-  drop_first = FALSE,
-  dummify_na = TRUE
-)
-
-dt_get_dummies(
   .df,
   cols = c(where(is.character), where(is.factor)),
   prefix = TRUE,

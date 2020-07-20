@@ -2,12 +2,9 @@
 % Please edit documentation in R/replace_na.R
 \name{replace_na.}
 \alias{replace_na.}
-\alias{dt_replace_na}
 \title{Replace missing values}
 \usage{
 replace_na.(.x, replace = NA)
-
-dt_replace_na(.x, replace = NA)
 }
 \arguments{
 \item{.x}{A data.frame/data.table or a vector}

@@ -171,7 +171,7 @@ test_that("_head.() works with n specified", {
 
   datatable_df <- test_df[, head(.SD, 3), by = z]
   sliced_df <- test_df %>%
-    dt_slice_head(n = 3, .by = z)
+    slice_head.(n = 3, .by = z)
 
   expect_equal(datatable_df, sliced_df)
 })
@@ -181,7 +181,7 @@ test_that("_head.() works in custom function", {
 
   slice_head_fn <- function(.df, val) {
     .df %>%
-      slice_head.(3)
+      slice_head.(val)
   }
 
   sliced_df <- test_df %>%

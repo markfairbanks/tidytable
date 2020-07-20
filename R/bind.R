@@ -25,29 +25,6 @@
 #'
 #' bind_cols.(list(df1, df2))
 #' @export
-bind_rows. <- function(..., .id = NULL, .use_names = TRUE, .fill = TRUE) {
-
-  dots <- list(...)
-  dots <- squash(dots)
-
-  if (!all(map_lgl.(dots, is.data.table)))
-    dots <- map.(dots, as_tidytable)
-
-  dots <- rbindlist(dots, idcol = .id, use.names = .use_names, fill = .fill)
-
-  as_tidytable(dots)
-}
-
-#' @export
-#' @rdname bind_rows.
-dt_bind_rows <- function(..., .id = NULL, .use_names = TRUE, .fill = TRUE) {
-  deprecate_soft("0.5.2", "tidytable::dt_bind_rows()", "bind_rows.()")
-
-  bind_rows.(..., .id = .id, .use_names = .use_names, .fill = .fill)
-}
-
-#' @export
-#' @rdname bind_rows.
 bind_cols. <- function(...) {
 
   dots <- list(...)
@@ -65,7 +42,32 @@ bind_cols. <- function(...) {
 }
 
 #' @export
-#' @rdname bind_rows.
+#' @rdname dt_verb
+#' @inheritParams bind_rows.
+dt_bind_rows <- function(..., .id = NULL, .use_names = TRUE, .fill = TRUE) {
+  deprecate_soft("0.5.2", "tidytable::dt_bind_rows()", "bind_rows.()")
+
+  bind_rows.(..., .id = .id, .use_names = .use_names, .fill = .fill)
+}
+
+#' @export
+#' @rdname bind_cols.
+bind_rows. <- function(..., .id = NULL, .use_names = TRUE, .fill = TRUE) {
+
+  dots <- list(...)
+  dots <- squash(dots)
+
+  if (!all(map_lgl.(dots, is.data.table)))
+    dots <- map.(dots, as_tidytable)
+
+  dots <- rbindlist(dots, idcol = .id, use.names = .use_names, fill = .fill)
+
+  as_tidytable(dots)
+}
+
+#' @export
+#' @rdname dt_verb
+#' @inheritParams bind_cols.
 dt_bind_cols <- function(...) {
   deprecate_soft("0.5.2", "tidytable::dt_bind_cols()", "bind_cols.()")
 

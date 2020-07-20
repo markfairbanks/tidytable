@@ -2,19 +2,9 @@
 % Please edit documentation in R/pivot_longer.R
 \name{pivot_longer.}
 \alias{pivot_longer.}
-\alias{dt_pivot_longer}
 \title{Pivot data from wide to long}
 \usage{
 pivot_longer.(
-  .df,
-  cols = everything(),
-  names_to = "name",
-  values_to = "value",
-  values_drop_na = FALSE,
-  ...
-)
-
-dt_pivot_longer(
   .df,
   cols = everything(),
   names_to = "name",

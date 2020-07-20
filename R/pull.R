@@ -34,7 +34,8 @@ pull..data.frame <- function(.df, var = NULL) {
 }
 
 #' @export
-#' @rdname pull.
+#' @rdname dt_verb
+#' @inheritParams pull.
 dt_pull <- function(.df, var = NULL) {
   deprecate_soft("0.5.2", "tidytable::dt_pull()", "pull.()")
 

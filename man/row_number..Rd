@@ -2,12 +2,9 @@
 % Please edit documentation in R/row_number.R
 \name{row_number.}
 \alias{row_number.}
-\alias{dt_row_number}
 \title{Return row number}
 \usage{
 row_number.()
-
-dt_row_number()
 }
 \description{
 This function is designed to work inside of \code{mutate.()}

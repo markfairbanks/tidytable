@@ -2,12 +2,9 @@
 % Please edit documentation in R/transmute.R
 \name{transmute.}
 \alias{transmute.}
-\alias{dt_transmute}
 \title{Add new variables and drop all others}
 \usage{
 transmute.(.df, ..., .by = NULL, by = NULL)
-
-dt_transmute(.df, ..., .by = NULL, by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

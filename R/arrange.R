@@ -1,4 +1,4 @@
-#' Arrange/reorder rows by variables
+#' Arrange/reorder rows
 #'
 #' @description Order rows in ascending or descending order
 #'
@@ -32,7 +32,8 @@ arrange..data.frame <- function(.df, ...) {
 }
 
 #' @export
-#' @rdname arrange.
+#' @rdname dt_verb
+#' @inheritParams arrange.
 dt_arrange <- function(.df, ...) {
   deprecate_soft("0.5.2", "tidytable::dt_arrange()", "arrange.()")
 

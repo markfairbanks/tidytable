@@ -2,12 +2,9 @@
 % Please edit documentation in R/drop_na.R
 \name{drop_na.}
 \alias{drop_na.}
-\alias{dt_drop_na}
 \title{Drop rows containing missing values}
 \usage{
 drop_na.(.df, ...)
-
-dt_drop_na(.df, ...)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

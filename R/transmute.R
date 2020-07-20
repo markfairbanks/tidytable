@@ -37,7 +37,8 @@ transmute..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
 }
 
 #' @export
-#' @rdname transmute.
+#' @rdname dt_verb
+#' @inheritParams transmute.
 dt_transmute <- function(.df, ..., .by = NULL, by = NULL) {
   deprecate_soft("0.5.2", "tidytable::dt_transmute()", "transmute.()")
 

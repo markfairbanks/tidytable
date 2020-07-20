@@ -2,12 +2,9 @@
 % Please edit documentation in R/group_split.R
 \name{group_split.}
 \alias{group_split.}
-\alias{dt_group_split}
 \title{Split data frame by groups}
 \usage{
 group_split.(.df, ..., .keep = TRUE)
-
-dt_group_split(.df, ..., .keep = TRUE)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

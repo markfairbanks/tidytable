@@ -64,7 +64,8 @@ nest_by..data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
 }
 
 #' @export
-#' @rdname nest_by.
+#' @rdname dt_verb
+#' @inheritParams nest_by.
 dt_group_nest <- function(.df, ..., .key = "data", .keep = FALSE) {
   deprecate_soft("0.5.2", "tidytable::dt_group_nest()", "nest_by.()")
 

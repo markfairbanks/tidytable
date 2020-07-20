@@ -2,12 +2,9 @@
 % Please edit documentation in R/rename.R
 \name{rename.}
 \alias{rename.}
-\alias{dt_rename}
 \title{Rename variables by name}
 \usage{
 rename.(.df, ...)
-
-dt_rename(.df, ...)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

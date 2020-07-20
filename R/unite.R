@@ -79,7 +79,8 @@ unite..data.frame <- function(.df, col = "new_col", ..., sep = "_", remove = TRU
 }
 
 #' @export
-#' @rdname unite.
+#' @rdname dt_verb
+#' @inheritParams unite.
 dt_unite <- function(.df, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
   deprecate_soft("0.5.2", "tidytable::dt_unite()", "unite.()")
 
