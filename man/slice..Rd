@@ -6,11 +6,6 @@
 \alias{slice_tail.}
 \alias{slice_max.}
 \alias{slice_min.}
-\alias{dt_slice}
-\alias{dt_slice_head}
-\alias{dt_slice_tail}
-\alias{dt_slice_min}
-\alias{dt_slice_max}
 \title{Choose rows by position}
 \usage{
 slice.(.df, rows = 1:5, .by = NULL, by = NULL)
@@ -22,16 +17,6 @@ slice_tail.(.df, n = 5, .by = NULL, by = NULL)
 slice_max.(.df, order_by, n = 1, .by = NULL, by = NULL)
 
 slice_min.(.df, order_by, n = 1, .by = NULL, by = NULL)
-
-dt_slice(.df, rows = 1:5, .by = NULL, by = NULL)
-
-dt_slice_head(.df, n = 5, .by = NULL, by = NULL)
-
-dt_slice_tail(.df, n = 5, .by = NULL, by = NULL)
-
-dt_slice_min(.df, order_by, n = 1, .by = NULL, by = NULL)
-
-dt_slice_max(.df, order_by, n = 1, .by = NULL, by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

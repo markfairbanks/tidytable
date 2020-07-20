@@ -81,7 +81,7 @@ Can be used inside `summarize.()`, `mutate.()`, &amp;amp; `filter.()`" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3.9</span>
       </span>
     </div>
 
@@ -142,9 +142,7 @@ Can be used inside `summarize.()`, `mutate.()`, &amp;amp; `filter.()`" />
 <p>Can be used inside `summarize.()`, `mutate.()`, &amp; `filter.()`</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='n..html'>n.</a></span>()
-
-<span class='fu'><a href='n..html'>dt_n</a></span>()</pre>
+    <pre class="usage"><span class='fu'><a href='n..html'>n.</a></span>()</pre>
 
 
 
@@ -164,15 +162,15 @@ Can be used inside `summarize.()`, `mutate.()`, &amp;amp; `filter.()`" />
 #&gt; <span class='warning'></span>
 #&gt; <span class='warning'>  # Bad</span>
 #&gt; <span class='warning'>  df %&gt;% summarize.(count = n.())</span>
-#&gt; <span class='warning'>This warning is displayed once every 8 hours.</span>
-#&gt; <span class='warning'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span></div><div class='output co'>#&gt;    z count
+#&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
+#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt;    z count
 #&gt; 1: a     2
 #&gt; 2: b     1</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>count</span> <span class='kw'>=</span> <span class='fu'><a href='n..html'>n.</a></span>())</div><div class='output co'>#&gt;    x y z count
 #&gt; 1: 1 4 a     3
 #&gt; 2: 2 5 a     3
-#&gt; 3: 3 6 b     3</div></pre>
+#&gt; 3: 3 6 b     3</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

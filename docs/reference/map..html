@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Apply a function to each element of a vector — map. • tidytable</title>
+<title>Apply a function to each element of a vector or list — map. • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Apply a function to each element of a vector — map." />
+<meta property="og:title" content="Apply a function to each element of a vector or list — map." />
 <meta property="og:description" content="The map functions transform their input by applying a function to each element and returning
 a list/vector/data.table.
 map.() returns a list
@@ -86,7 +86,7 @@ _dfr.() &amp;amp; _dfc.() Return all data frame results combined utilizing row o
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3.9</span>
       </span>
     </div>
 
@@ -137,7 +137,7 @@ _dfr.() &amp;amp; _dfc.() Return all data frame results combined utilizing row o
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Apply a function to each element of a vector</h1>
+    <h1>Apply a function to each element of a vector or list</h1>
     <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/map.R'><code>R/map.R</code></a>, <a href='https://github.com/markfairbanks/tidytable/blob/master/R/map2.R'><code>R/map2.R</code></a></small>
     <div class="hidden name"><code>map..Rd</code></div>
     </div>
@@ -154,69 +154,37 @@ a list/vector/data.table.</p><ul>
 
     <pre class="usage"><span class='fu'><a href='map..html'>map.</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
 
-<span class='fu'><a href='map..html'>dt_map</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
-
 <span class='fu'><a href='map..html'>map_lgl.</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
-
-<span class='fu'><a href='map..html'>dt_map_lgl</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
 
 <span class='fu'><a href='map..html'>map_int.</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
 
-<span class='fu'><a href='map..html'>dt_map_int</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
-
 <span class='fu'><a href='map..html'>map_dbl.</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
-
-<span class='fu'><a href='map..html'>dt_map_dbl</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
 
 <span class='fu'><a href='map..html'>map_chr.</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
 
-<span class='fu'><a href='map..html'>dt_map_chr</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
-
 <span class='fu'><a href='map..html'>map_dfc.</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
-
-<span class='fu'><a href='map..html'>dt_map_dfc</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
 
 <span class='fu'><a href='map..html'>map_dfr.</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='map..html'>dt_map_dfr</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
 <span class='fu'><a href='map..html'>map_df.</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'><a href='map..html'>dt_map_df</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
 
 <span class='fu'><a href='map..html'>walk.</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
 
 <span class='fu'><a href='map..html'>map2.</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
 
-<span class='fu'><a href='map..html'>dt_map2</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
-
 <span class='fu'><a href='map..html'>map2_lgl.</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
-
-<span class='fu'><a href='map..html'>dt_map2_lgl</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
 
 <span class='fu'><a href='map..html'>map2_int.</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
 
-<span class='fu'><a href='map..html'>dt_map2_int</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
-
 <span class='fu'><a href='map..html'>map2_dbl.</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
-
-<span class='fu'><a href='map..html'>dt_map2_dbl</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
 
 <span class='fu'><a href='map..html'>map2_chr.</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
 
-<span class='fu'><a href='map..html'>dt_map2_chr</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
-
 <span class='fu'><a href='map..html'>map2_dfc.</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
-
-<span class='fu'><a href='map..html'>dt_map2_dfc</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
 
 <span class='fu'><a href='map..html'>map2_dfr.</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='map..html'>dt_map2_dfr</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'><a href='map..html'>map2_df.</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'><a href='map..html'>dt_map2_df</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'><a href='map..html'>map2_df.</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

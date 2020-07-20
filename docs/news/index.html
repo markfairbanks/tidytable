@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3.9</span>
       </span>
     </div>
 
@@ -134,15 +134,36 @@
       <small>Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="tidytable-054-in-development" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.4">
+<a href="#tidytable-054-in-development" class="anchor"></a>tidytable 0.5.4 (in development)<small> Unreleased </small>
+</h1>
+<ul>
+<li>Functionality improvements:
+<ul>
+<li>
+<code><a href="../reference/summarize..html">summarize.()</a></code>: Added <code>.sort</code> arg to optionally sort the resulting data.table</li>
+</ul>
+</li>
+<li>Bug fixes:
+<ul>
+<li>
+<code><a href="../reference/transmute..html">transmute.()</a></code>: Doesn’t drop “by” columns (<a href='https://github.com/markfairbanks/tidytable/issues/98'>#98</a>)</li>
+<li>
+<code><a href="../reference/slice..html">slice.()</a></code>: Allows irregular gaps in <code>rows</code> arg (<a href='https://github.com/markfairbanks/tidytable/issues/99'>#99</a>)</li>
+</ul>
+</li>
+</ul>
+</div>
     <div id="tidytable-053" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.3">
-<a href="#tidytable-053" class="anchor"></a>tidytable 0.5.3<small> Unreleased </small>
+<a href="#tidytable-053" class="anchor"></a>tidytable 0.5.3<small> 2020-07-16 </small>
 </h1>
 <ul>
 <li>Breaking changes:
 <ul>
 <li>
-<code><a href="../reference/bind_rows..html">bind_rows.()</a></code>
+<code><a href="../reference/bind_cols..html">bind_rows.()</a></code>
 <ul>
 <li>
 <code>use.names</code> arg renamed to <code>.use_names</code>
@@ -187,7 +208,7 @@
 <li>Deprecations:
 <ul>
 <li>Group by arg <code>by</code> has been deprecated for <code>.by</code>. This will allow “by” to be used as a column name in <code><a href="../reference/mutate..html">mutate.()</a></code> &amp; <code><a href="../reference/summarize..html">summarize.()</a></code> in future releases.</li>
-<li>All <code>dt_verb()</code> functions are soft deprecated</li>
+<li>All <code><a href="../reference/dt_verb.html">dt_verb()</a></code> functions are soft deprecated</li>
 </ul>
 </li>
 <li>New functions:
@@ -251,7 +272,7 @@
 <li>New functions:
 <ul>
 <li>
-<code><a href="../reference/leads..html">lags.()</a></code> &amp; <code><a href="../reference/leads..html">leads.()</a></code>
+<code><a href="../reference/lags..html">lags.()</a></code> &amp; <code><a href="../reference/lags..html">leads.()</a></code>
 </li>
 </ul>
 </li>
@@ -294,7 +315,7 @@
 <ul>
 <li>Paged printing now works in Rmarkdown</li>
 <li>
-<code><a href="../reference/bind_rows..html">bind_rows.()</a></code>: Does name checking and fills missing</li>
+<code><a href="../reference/bind_cols..html">bind_rows.()</a></code>: Does name checking and fills missing</li>
 <li>
 <code><a href="../reference/distinct..html">distinct.()</a></code>: Added <code>.keep_all</code> argument</li>
 <li>
@@ -341,7 +362,7 @@
 <li>All functions are now written as <code>verb.()</code>
 </li>
 <li>
-<code>dt_verb()</code> functions still work, but may be slowly deprecated in future releases</li>
+<code><a href="../reference/dt_verb.html">dt_verb()</a></code> functions still work, but may be slowly deprecated in future releases</li>
 </ul>
 </li>
 <li>Functionality improvements:
@@ -360,12 +381,12 @@
 <li><code><a href="../reference/ifelse..html">ifelse.()</a></code></li>
 <li><code><a href="../reference/n..html">n.()</a></code></li>
 <li>
-<code><a href="../reference/nest_by..html">nest_by.()</a></code> replaces <code><a href="../reference/nest_by..html">dt_group_nest()</a></code>
+<code><a href="../reference/nest_by..html">nest_by.()</a></code> replaces <code><a href="../reference/dt_verb.html">dt_group_nest()</a></code>
 </li>
 <li><code><a href="../reference/row_number..html">row_number.()</a></code></li>
 <li><code><a href="../reference/transmute..html">transmute.()</a></code></li>
 <li>
-<code><a href="../reference/unnest..html">unnest.()</a></code> replaces <code><a href="../reference/unnest..html">dt_unnest_legacy()</a></code>
+<code><a href="../reference/unnest..html">unnest.()</a></code> replaces <code><a href="../reference/dt_verb.html">dt_unnest_legacy()</a></code>
 </li>
 <li>Select helper <code><a href="../reference/starts_with..html">any_of.()</a></code>
 </li>
@@ -395,8 +416,8 @@
 <li>New functions:
 <ul>
 <li>
-<code><a href="../reference/get_dummies..html">dt_get_dummies()</a></code>: Get dummy variables</li>
-<li><code><a href="../reference/separate..html">dt_separate()</a></code></li>
+<code><a href="../reference/dt_verb.html">dt_get_dummies()</a></code>: Get dummy variables</li>
+<li><code><a href="../reference/dt_verb.html">dt_separate()</a></code></li>
 <li>
 <code><a href="../reference/as_tidytable.html">as_tidytable()</a></code>: Convert to data.table/tidytable</li>
 <li>
@@ -406,10 +427,10 @@
 </ul>
 </li>
 <li>
-<code><a href="../reference/pivot_longer..html">dt_pivot_longer()</a></code> “cols” arg now defaults to <code><a href="../reference/starts_with..html">dt_everything()</a></code> instead of <code>NULL</code>. The result is the same, but is more consistent with other enhanced selection functions</li>
+<code><a href="../reference/dt_verb.html">dt_pivot_longer()</a></code> “cols” arg now defaults to <code><a href="../reference/starts_with..html">dt_everything()</a></code> instead of <code>NULL</code>. The result is the same, but is more consistent with other enhanced selection functions</li>
 <li>
 <code>.N</code> now works when using <code><a href="../reference/slice..html">dt_slice()</a></code> &amp; variants</li>
-<li>Function length limit bug no longer occurs when using <code>~</code> in <code><a href="../reference/map..html">dt_map()</a></code>
+<li>Function length limit bug no longer occurs when using <code>~</code> in <code><a href="../reference/dt_verb.html">dt_map()</a></code>
 </li>
 </ul>
 </div>
@@ -422,18 +443,18 @@
 <li>
 <code><a href="../reference/dt.html">dt()</a></code> now automatically converts data.frame input to a data.table</li>
 <li>
-<code><a href="../reference/left_join..html">dt_left_join()</a></code> fix so columns are ordered correctly</li>
-<li>Add group by ability to <code><a href="../reference/mutate_across..html">dt_mutate_across()</a></code>
+<code><a href="../reference/dt_verb.html">dt_left_join()</a></code> fix so columns are ordered correctly</li>
+<li>Add group by ability to <code><a href="../reference/dt_verb.html">dt_mutate_across()</a></code>
 </li>
 <li>
-<code><a href="../reference/mutate..html">dt_mutate()</a></code> &amp; <code><a href="../reference/rename..html">dt_rename()</a></code> no longer modify by reference</li>
+<code><a href="../reference/dt_verb.html">dt_mutate()</a></code> &amp; <code><a href="../reference/dt_verb.html">dt_rename()</a></code> no longer modify by reference</li>
 </ul>
 <div id="breaking-changes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h3>
 <ul>
 <li>
-<code><a href="../reference/unnest..html">dt_unnest_legacy()</a></code> drops “keep” argument, but automatically keeps all non-nested columns.
+<code><a href="../reference/dt_verb.html">dt_unnest_legacy()</a></code> drops “keep” argument, but automatically keeps all non-nested columns.
 <ul>
 <li>New translation is ~5-10x faster than before</li>
 </ul>

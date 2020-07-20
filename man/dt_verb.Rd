@@ -4,8 +4,8 @@
 %   R/get_dummies.R, R/group_split.R, R/ifelse.R, R/join.R, R/map.R, R/map2.R,
 %   R/mutate.R, R/mutate_across.R, R/n.R, R/nest.R, R/pivot_longer.R,
 %   R/pivot_wider.R, R/pull.R, R/relocate.R, R/rename.R, R/rename_with.R,
-%   R/replace_na.R, R/row_number.R, R/select.R, R/separate.R, R/summarize.R,
-%   R/transmute.R, R/unite.R, R/unnest.R
+%   R/replace_na.R, R/row_number.R, R/select.R, R/separate.R, R/slice.R,
+%   R/summarize.R, R/transmute.R, R/unite.R, R/unnest.R
 \name{dt_arrange}
 \alias{dt_arrange}
 \alias{dt_bind_rows}
@@ -55,6 +55,11 @@
 \alias{dt_row_number}
 \alias{dt_select}
 \alias{dt_separate}
+\alias{dt_slice}
+\alias{dt_slice_head}
+\alias{dt_slice_tail}
+\alias{dt_slice_min}
+\alias{dt_slice_max}
 \alias{dt_summarise}
 \alias{dt_summarize}
 \alias{dt_transmute}
@@ -183,6 +188,16 @@ dt_select(.df, ...)
 
 dt_separate(.df, col, into, sep = "[^[:alnum:]]+", remove = TRUE, ...)
 
+dt_slice(.df, rows = 1:5, .by = NULL, by = NULL)
+
+dt_slice_head(.df, n = 5, .by = NULL, by = NULL)
+
+dt_slice_tail(.df, n = 5, .by = NULL, by = NULL)
+
+dt_slice_min(.df, order_by, n = 1, .by = NULL, by = NULL)
+
+dt_slice_max(.df, order_by, n = 1, .by = NULL, by = NULL)
+
 dt_summarise(.df, ..., .by = NULL, by = NULL)
 
 dt_summarize(.df, ..., .by = NULL, by = NULL)
@@ -299,6 +314,12 @@ If \code{.x} is a vector, a single replacement value.}
 \item{sep}{Separator to split on. Can be specified or detected automatically}
 
 \item{remove}{If TRUE, remove the input column from the output data.table}
+
+\item{rows}{Integer row values. Provide either positive values to keep, or negative values to drop. The values provided must be either all positive or all negative.}
+
+\item{n}{Number of rows to grab}
+
+\item{order_by}{Variable to arrange by}
 
 \item{na.rm}{If TRUE, NA values will be not be part of the concatenation}
 }
