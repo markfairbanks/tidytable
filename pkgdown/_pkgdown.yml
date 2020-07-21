@@ -10,10 +10,8 @@ reference:
   - arrange.
   - filter.
   - mutate.
-  - mutate_across.
   - select.
   - summarize.
-  - summarize_across.
 - subtitle: __
   desc: Other dplyr functions
 - contents:
@@ -25,11 +23,13 @@ reference:
   - ifelse.
   - lags.
   - left_join.
+  - mutate_across.
   - pull.
   - relocate.
   - rename.
   - rename_with.
   - slice.
+  - summarize_across.
   - transmute.
 - title: tidyr
 - contents:
