@@ -5,15 +5,14 @@ reference:
   - get_dummies.
   - '%notin%'
 - title: dplyr
-  desc: Core dplyr verbs
+- subtitle: Core dplyr verbs
 - contents:
   - arrange.
   - filter.
   - mutate.
   - select.
   - summarize.
-- subtitle: __
-  desc: Other dplyr functions
+- subtitle: Other dplyr functions
 - contents:
   - starts_with("bind")
   - case.
