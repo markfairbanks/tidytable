@@ -52,16 +52,24 @@ slice..data.frame <- function(.df, rows = 1:5, .by = NULL, by = NULL) {
   .by <- select_vec_chr(.df, !!.by)
 
   if (length(.by) == 0) {
-    eval_quo(
+    .df <- eval_quo(
       .df[1:.N %in% !!rows],
       new_data_mask(data_env), env = caller_env()
     )
   } else {
-    eval_quo(
+
+    col_order <- names(.df)
+
+    .df <- eval_quo(
       .df[, .SD[1:.N %in% !!rows], by = !!.by],
       new_data_mask(data_env), env = caller_env()
     )
+
+    setcolorder(.df, col_order)
+
   }
+
+  .df
 }
 
 #' @export
@@ -82,10 +90,17 @@ slice_head..data.frame <- function(.df, n = 5, .by = NULL, by = NULL) {
   .by <- check_dot_by(enquo(.by), enquo(by), "slice_head.")
   .by <- select_vec_chr(.df, !!.by)
 
-  eval_quo(
+  if (length(.by) > 0) col_order <- names(.df)
+
+  .df <- eval_quo(
     .df[, head(.SD, !!n), by = !!.by],
     new_data_mask(data_env), env = caller_env()
   )
+
+  if (length(.by) > 0) setcolorder(.df, col_order)
+
+  .df
+
 }
 
 #' @export
@@ -106,10 +121,16 @@ slice_tail..data.frame <- function(.df, n = 5, .by = NULL, by = NULL) {
   .by <- check_dot_by(enquo(.by), enquo(by), "slice_tail.")
   .by <- select_vec_chr(.df, !!.by)
 
-  eval_quo(
+  if (length(.by) > 0) col_order <- names(.df)
+
+  .df <- eval_quo(
     .df[, tail(.SD, !!n), by = !!.by],
     new_data_mask(data_env), env = caller_env()
   )
+
+  if (length(.by) > 0) setcolorder(.df, col_order)
+
+  .df
 }
 
 #' @export

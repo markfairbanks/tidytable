@@ -1,11 +1,12 @@
 # tidytable 0.5.4 (in development)
 
-
 * Functionality improvements:
   + `summarize.()`: Added `.sort` arg to optionally sort the resulting data.table
 * Bug fixes:
   + `transmute.()`: Doesn't drop "by" columns (#98)
-  + `slice.()`: Allows irregular gaps in `rows` arg (#99)
+  + `slice.()`
+    - Allows gaps in `rows` arg (#99)
+    - Doesn't reorder columns when using `.by` (#101)
 
 # tidytable 0.5.3
 
