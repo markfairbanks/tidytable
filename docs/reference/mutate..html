@@ -172,19 +172,17 @@
 
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>double_a</span> <span class='kw'>=</span> <span class='no'>a</span> * <span class='fl'>2</span>,
-          <span class='kw'>a_plus_b</span> <span class='kw'>=</span> <span class='no'>a</span> + <span class='no'>b</span>)</div><div class='output co'>#&gt;        a     b     c double_a a_plus_b
-#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-#&gt; 1:     1     4     a        2        5
-#&gt; 2:     2     5     a        4        7
-#&gt; 3:     3     6     b        6        9</div><div class='input'>
+          <span class='kw'>a_plus_b</span> <span class='kw'>=</span> <span class='no'>a</span> + <span class='no'>b</span>)</div><div class='output co'>#&gt;    a b c double_a a_plus_b
+#&gt; 1: 1 4 a        2        5
+#&gt; 2: 2 5 a        4        7
+#&gt; 3: 3 6 b        6        9</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>double_a</span> <span class='kw'>=</span> <span class='no'>a</span> * <span class='fl'>2</span>,
           <span class='kw'>avg_a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>a</span>),
-          <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>c</span>)</div><div class='output co'>#&gt;        a     b     c double_a avg_a
-#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1:     1     4     a        2   1.5
-#&gt; 2:     2     5     a        4   1.5
-#&gt; 3:     3     6     b        6   3.0</div></pre>
+          <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>c</span>)</div><div class='output co'>#&gt;    a b c double_a avg_a
+#&gt; 1: 1 4 a        2   1.5
+#&gt; 2: 2 5 a        4   1.5
+#&gt; 3: 3 6 b        6   3.0</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -197,17 +197,15 @@ Typically used when you have additional variables that is directly related.
   <span class='kw'>things</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>6</span>)
 
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='pivot_wider..html'>pivot_wider.</a></span>(<span class='kw'>names_from</span> <span class='kw'>=</span> <span class='no'>stuff</span>, <span class='kw'>values_from</span> <span class='kw'>=</span> <span class='no'>things</span>)</div><div class='output co'>#&gt;        z     x     y
-#&gt;    &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-#&gt; 1:     a     1     4
-#&gt; 2:     b     2     5
-#&gt; 3:     c     3     6</div><div class='input'>
+  <span class='fu'><a href='pivot_wider..html'>pivot_wider.</a></span>(<span class='kw'>names_from</span> <span class='kw'>=</span> <span class='no'>stuff</span>, <span class='kw'>values_from</span> <span class='kw'>=</span> <span class='no'>things</span>)</div><div class='output co'>#&gt;    z x y
+#&gt; 1: a 1 4
+#&gt; 2: b 2 5
+#&gt; 3: c 3 6</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='pivot_wider..html'>pivot_wider.</a></span>(<span class='kw'>names_from</span> <span class='kw'>=</span> <span class='no'>stuff</span>, <span class='kw'>values_from</span> <span class='kw'>=</span> <span class='no'>things</span>, <span class='kw'>id_cols</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;        z     x     y
-#&gt;    &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-#&gt; 1:     a     1     4
-#&gt; 2:     b     2     5
-#&gt; 3:     c     3     6</div><div class='input'>
+  <span class='fu'><a href='pivot_wider..html'>pivot_wider.</a></span>(<span class='kw'>names_from</span> <span class='kw'>=</span> <span class='no'>stuff</span>, <span class='kw'>values_from</span> <span class='kw'>=</span> <span class='no'>things</span>, <span class='kw'>id_cols</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z x y
+#&gt; 1: a 1 4
+#&gt; 2: b 2 5
+#&gt; 3: c 3 6</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -172,13 +172,12 @@ Useful for comparing values ahead of or behind the current values.</p>
 <span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>)
 
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>lag_x</span> <span class='kw'>=</span> <span class='fu'><a href='lags..html'>lags.</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt;        x lag_x
-#&gt;    &lt;int&gt; &lt;int&gt;
-#&gt; 1:     1    NA
-#&gt; 2:     2     1
-#&gt; 3:     3     2
-#&gt; 4:     4     3
-#&gt; 5:     5     4</div><div class='input'>
+  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>lag_x</span> <span class='kw'>=</span> <span class='fu'><a href='lags..html'>lags.</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt;    x lag_x
+#&gt; 1: 1    NA
+#&gt; 2: 2     1
+#&gt; 3: 3     2
+#&gt; 4: 4     3
+#&gt; 5: 5     4</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

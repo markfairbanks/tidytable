@@ -154,16 +154,23 @@ Can be used inside `summarize.()`, `mutate.()`, &amp;amp; `filter.()`" />
 
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='summarize..html'>summarize.</a></span>(<span class='kw'>count</span> <span class='kw'>=</span> <span class='fu'><a href='n..html'>n.</a></span>(),
-             <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;        z count
-#&gt;    &lt;chr&gt; &lt;int&gt;
-#&gt; 1:     a     2
-#&gt; 2:     b     1</div><div class='input'>
+             <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `n.()` is deprecated as of tidytable 0.5.3.</span>
+#&gt; <span class='warning'>Using n.() is much slower than the data.table helper .N and should be avoided.</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>  # Good</span>
+#&gt; <span class='warning'>  df %&gt;% summarize.(count = .N)</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>  # Bad</span>
+#&gt; <span class='warning'>  df %&gt;% summarize.(count = n.())</span>
+#&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
+#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt;    z count
+#&gt; 1: a     2
+#&gt; 2: b     1</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>count</span> <span class='kw'>=</span> <span class='fu'><a href='n..html'>n.</a></span>())</div><div class='output co'>#&gt;        x     y     z count
-#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;int&gt;
-#&gt; 1:     1     4     a     3
-#&gt; 2:     2     5     a     3
-#&gt; 3:     3     6     b     3</div></pre>
+  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>count</span> <span class='kw'>=</span> <span class='fu'><a href='n..html'>n.</a></span>())</div><div class='output co'>#&gt;    x y z count
+#&gt; 1: 1 4 a     3
+#&gt; 2: 2 5 a     3
+#&gt; 3: 3 6 b     3</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

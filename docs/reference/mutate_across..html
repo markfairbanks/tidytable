@@ -179,30 +179,26 @@
   <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span>))
 
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(<span class='fu'><a href='where.html'>where</a></span>(<span class='no'>is.numeric</span>), <span class='no'>as.character</span>)</div><div class='output co'>#&gt;        x     y     z
-#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
-#&gt; 1:     1     2     a
-#&gt; 2:     1     2     a
-#&gt; 3:     1     2     b</div><div class='input'>
+  <span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(<span class='fu'><a href='where.html'>where</a></span>(<span class='no'>is.numeric</span>), <span class='no'>as.character</span>)</div><div class='output co'>#&gt;    x y z
+#&gt; 1: 1 2 a
+#&gt; 2: 1 2 a
+#&gt; 3: 1 2 b</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>, <span class='no'>y</span>), ~ <span class='no'>.x</span> * <span class='fl'>2</span>)</div><div class='output co'>#&gt;        x     y     z
-#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
-#&gt; 1:     2     4     a
-#&gt; 2:     2     4     a
-#&gt; 3:     2     4     b</div><div class='input'>
+  <span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>, <span class='no'>y</span>), ~ <span class='no'>.x</span> * <span class='fl'>2</span>)</div><div class='output co'>#&gt;    x y z
+#&gt; 1: 2 4 a
+#&gt; 2: 2 4 a
+#&gt; 3: 2 4 b</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(<span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(), <span class='no'>as.character</span>)</div><div class='output co'>#&gt;        x     y     z
-#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
-#&gt; 1:     1     2     a
-#&gt; 2:     1     2     a
-#&gt; 3:     1     2     b</div><div class='input'>
+  <span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(<span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(), <span class='no'>as.character</span>)</div><div class='output co'>#&gt;    x y z
+#&gt; 1: 1 2 a
+#&gt; 2: 1 2 a
+#&gt; 3: 1 2 b</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>, <span class='no'>y</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>new</span> <span class='kw'>=</span> ~ <span class='no'>.x</span> * <span class='fl'>2</span>,
-                               <span class='kw'>another</span> <span class='kw'>=</span> ~ <span class='no'>.x</span> + <span class='fl'>7</span>))</div><div class='output co'>#&gt;        x     y     z x_new y_new x_another y_another
-#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-#&gt; 1:     1     2     a     2     4         8         9
-#&gt; 2:     1     2     a     2     4         8         9
-#&gt; 3:     1     2     b     2     4         8         9</div></pre>
+                               <span class='kw'>another</span> <span class='kw'>=</span> ~ <span class='no'>.x</span> + <span class='fl'>7</span>))</div><div class='output co'>#&gt;    x y z x_new y_new x_another y_another
+#&gt; 1: 1 2 a     2     4         8         9
+#&gt; 2: 1 2 a     2     4         8         9
+#&gt; 3: 1 2 b     2     4         8         9</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
