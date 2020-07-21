@@ -209,9 +209,13 @@ join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
   by_x <- by_x_y[[1]]
   by_y <- by_x_y[[2]]
 
-  as_tidytable(
+  result_df <- as_tidytable(
     merge(x = x, y = y, by.x = by_x, by.y = by_y, suffixes = suffix,
           all.x = all_x, all.y = all_y,
           allow.cartesian = TRUE)
   )
+
+  setkey(result_df, NULL)
+
+  result_df
 }

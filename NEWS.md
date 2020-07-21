@@ -7,6 +7,7 @@
   + `slice.()`
     - Allows gaps in `rows` arg (#99)
     - Doesn't reorder columns when using `.by` (#101)
+  + `full_join.()`: No longer returns a keyed data.table (#102)
 
 # tidytable 0.5.3
 
