@@ -228,8 +228,7 @@ df %>%
   dt(, list(x, y, z)) %>%
   dt(x < 4 & y > 1) %>%
   dt(order(x, y)) %>%
-  dt(, ':='(double_x = x * 2,
-            double_y = y * 2)) %>%
+  dt(, double_x := x * 2) %>%
   dt(, list(avg_x = mean(x)), by = z)
 #>        z avg_x
 #>    <chr> <dbl>

@@ -23,6 +23,6 @@ test_df <- tidytable(
   z = c("a", "a", "b"))
 
 test_df \%>\%
-  dt(, ':='(double_x = x * 2)) \%>\%
+  dt(, double_x := x * 2)) \%>\%
   dt(order(-double_x))
 }
