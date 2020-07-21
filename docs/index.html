@@ -198,6 +198,7 @@
 <span class="co">#&gt; 2:     a</span>
 <span class="co">#&gt; 3:     b</span></pre></div>
 <p>These same ideas can be used whenever selecting columns in <code>tidytable</code> functions - for example when using <code><a href="reference/count..html">count.()</a></code>, <code><a href="reference/drop_na..html">drop_na.()</a></code>, <code><a href="reference/mutate_across..html">mutate_across.()</a></code>, <code><a href="reference/pivot_longer..html">pivot_longer.()</a></code>, etc.</p>
+<p>A full overview of selection options can be found <a href="https://tidyselect.r-lib.org/reference/language.html">here</a>.</p>
 </div>
 <div id="rlang-compatibility" class="section level2">
 <h2 class="hasAnchor">
@@ -276,8 +277,7 @@
   <span class="fu"><a href="reference/dt.html">dt</a></span>(, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x</span>, <span class="no">y</span>, <span class="no">z</span>)) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/dt.html">dt</a></span>(<span class="no">x</span> <span class="kw">&lt;</span> <span class="fl">4</span> <span class="kw">&amp;</span> <span class="no">y</span> <span class="kw">&gt;</span> <span class="fl">1</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/dt.html">dt</a></span>(<span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">order</a></span>(<span class="no">x</span>, <span class="no">y</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/dt.html">dt</a></span>(, <span class="st">':='</span>(<span class="kw">double_x</span> <span class="kw">=</span> <span class="no">x</span> * <span class="fl">2</span>,
-            <span class="kw">double_y</span> <span class="kw">=</span> <span class="no">y</span> * <span class="fl">2</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="reference/dt.html">dt</a></span>(, <span class="no">double_x</span> <span class="kw">:=</span> <span class="no">x</span> * <span class="fl">2</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/dt.html">dt</a></span>(, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">avg_x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">x</span>)), <span class="kw">by</span> <span class="kw">=</span> <span class="no">z</span>)
 <span class="co">#&gt;        z avg_x</span>
 <span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt;</span>

@@ -146,6 +146,9 @@ These same ideas can be used whenever selecting columns in `tidytable`
 functions - for example when using `count.()`, `drop_na.()`,
 `mutate_across.()`, `pivot_longer.()`, etc.
 
+A full overview of selection options can be found
+[here](https://tidyselect.r-lib.org/reference/language.html).
+
 ## `rlang` compatibility
 
 `rlang` can be used to write custom functions with `tidytable`
