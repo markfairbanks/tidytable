@@ -183,29 +183,31 @@ Supports tidyselect" />
   <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>8</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>2</span>)))
 
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='fill..html'>fill.</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;      x  y z
-#&gt;  1: NA  1 a
-#&gt;  2: NA  2 a
-#&gt;  3: NA  3 a
-#&gt;  4:  4  4 a
-#&gt;  5:  5  5 a
-#&gt;  6:  6  6 a
-#&gt;  7:  7  6 a
-#&gt;  8:  8  8 a
-#&gt;  9:  9 NA b
-#&gt; 10: 10 10 b</div><div class='input'>
+  <span class='fu'><a href='fill..html'>fill.</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;         x     y     z
+#&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;
+#&gt;  1:    NA     1     a
+#&gt;  2:    NA     2     a
+#&gt;  3:    NA     3     a
+#&gt;  4:     4     4     a
+#&gt;  5:     5     5     a
+#&gt;  6:     6     6     a
+#&gt;  7:     7     6     a
+#&gt;  8:     8     8     a
+#&gt;  9:     9    NA     b
+#&gt; 10:    10    10     b</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='fill..html'>fill.</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>, <span class='kw'>.direction</span> <span class='kw'>=</span> <span class='st'>"downup"</span>)</div><div class='output co'>#&gt;      x  y z
-#&gt;  1:  4  1 a
-#&gt;  2:  4  2 a
-#&gt;  3:  4  3 a
-#&gt;  4:  4  4 a
-#&gt;  5:  5  5 a
-#&gt;  6:  6  6 a
-#&gt;  7:  7  6 a
-#&gt;  8:  8  8 a
-#&gt;  9:  9 10 b
-#&gt; 10: 10 10 b</div></pre>
+  <span class='fu'><a href='fill..html'>fill.</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>, <span class='kw'>.direction</span> <span class='kw'>=</span> <span class='st'>"downup"</span>)</div><div class='output co'>#&gt;         x     y     z
+#&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;
+#&gt;  1:     4     1     a
+#&gt;  2:     4     2     a
+#&gt;  3:     4     3     a
+#&gt;  4:     4     4     a
+#&gt;  5:     5     5     a
+#&gt;  6:     6     6     a
+#&gt;  7:     7     6     a
+#&gt;  8:     8     8     a
+#&gt;  9:     9    10     b
+#&gt; 10:    10    10     b</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -164,16 +164,18 @@ If <code>.x</code> is a vector, a single replacement value.</p></td>
 
 <span class='co'># Using replace_na.() inside mutate()</span>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='replace_na..html'>replace_na.</a></span>(<span class='no'>x</span>, <span class='fl'>5</span>))</div><div class='output co'>#&gt;    x  y
-#&gt; 1: 1 NA
-#&gt; 2: 2  1
-#&gt; 3: 5  2</div><div class='input'>
+  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='replace_na..html'>replace_na.</a></span>(<span class='no'>x</span>, <span class='fl'>5</span>))</div><div class='output co'>#&gt;        x     y
+#&gt;    &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1:     1    NA
+#&gt; 2:     2     1
+#&gt; 3:     5     2</div><div class='input'>
 <span class='co'># Using replace_na.() on a data frame</span>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='replace_na..html'>replace_na.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>0</span>))</div><div class='output co'>#&gt;    x y
-#&gt; 1: 1 0
-#&gt; 2: 2 1
-#&gt; 3: 5 2</div></pre>
+  <span class='fu'><a href='replace_na..html'>replace_na.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>0</span>))</div><div class='output co'>#&gt;        x     y
+#&gt;    &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1:     1     0
+#&gt; 2:     2     1
+#&gt; 3:     5     2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

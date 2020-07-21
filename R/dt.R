@@ -6,7 +6,7 @@
 #' Note: This function does not use data.table's modify-by-reference
 #'
 #' @param .df A data.frame or data.table
-#' @param ... Arguments passed to data.table call. See ?data.table:::`[.df.table`
+#' @param ... Arguments passed to data.table call. See ?data.table::`[.data.table`
 #'
 #' @examples
 #' test_df <- tidytable(
