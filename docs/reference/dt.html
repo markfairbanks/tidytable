@@ -159,7 +159,18 @@ Note: This function does not use data.table's modify-by-reference" />
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
+    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>),
+  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>),
+  <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span>))
+
+<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>dt</span>(, <span class='no'>double_x</span> <span class='kw'>:=</span> <span class='no'>x</span> * <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>dt</span>(<span class='fu'><a href='https://rdrr.io/r/base/order.html'>order</a></span>(-<span class='no'>double_x</span>))</div><div class='output co'>#&gt;        x     y     z double_x
+#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
+#&gt; 1:     3     6     b        6
+#&gt; 2:     2     5     a        4
+#&gt; 3:     1     4     a        2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
