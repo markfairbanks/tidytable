@@ -26,7 +26,7 @@ A few notes:
 * `setDTthreads(4)` was used for `data.table` & `tidytable` timings.
 * Modify-by-reference was used in `data.table` when being compared to `mutate.()` & `dplyr::mutate()`
 * `fill.()` & `tidyr::fill()` both work with character/factor/logical columns, whereas `data.table::nafill()` does not. Testing only included numeric columns due to this constraint.
-* Currently `data.table` doesn't have its own `case_when()` translation, so a multiple nested `fifelse()` was used.
+* `case.()` & `dplyr::case_when()` both can have a default value that is a vector, whereas `data.table::fcase()` can not. Testing used a default value of length 1 due to this constraint.
 * All tests can be found in the source code [here](https://github.com/markfairbanks/tidytable/blob/master/vignettes/speed_comparisons.Rmd).
 * `pandas` comparisons are in the process of being added - more will be added soon.
 * Lastly I'd like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.
@@ -158,9 +158,9 @@ case_marks <- bench::mark(
   tidytable = case.(x < median_x, 1,
                     x >= median_x, 2,
                     default = NA),
-  data.table = fifelse(x < median_x, 1,
-                       fifelse(x >= median_x, 2, NA_real_,
-                               NA_real_), NA_real_),
+  data.table = fcase(x < median_x, 1,
+                     x >= median_x, 2,
+                     default = NA),
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
          function_tested = "case_when")
