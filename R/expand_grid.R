@@ -18,7 +18,7 @@
 #' expand_grid.(stuff = x, y)
 expand_grid. <- function(..., .name_repair = "check_unique") {
 
-  result_df <- CJ(..., unique = FALSE)
+  result_df <- CJ(..., unique = FALSE, sorted = FALSE)
 
   setkey(result_df, NULL)
 
