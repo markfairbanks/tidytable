@@ -160,13 +160,12 @@
 </ul>
 <!-- end list --><div class="sourceCode" id="cb4"><pre class="r"><span class="no">test_df</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/summarize..html">summarize.</a></span>(<span class="kw">avg_x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">x</span>),
-             <span class="kw">count</span> <span class="kw">=</span> <span class="no">.N</span>,
+             <span class="kw">count</span> <span class="kw">=</span> <span class="fu"><a href="reference/n..html">n.</a></span>(),
              <span class="kw">.by</span> <span class="kw">=</span> <span class="no">z</span>)
 <span class="co">#&gt;        z avg_x count</span>
 <span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;int&gt;</span>
 <span class="co">#&gt; 1:     a   1.5     2</span>
 <span class="co">#&gt; 2:     b   3.0     1</span></pre></div>
-<p>Note: For those new to <code>data.table</code>, the <code>.N</code> helper is a way to get the number of rows by group, much like <code><a href="https://dplyr.tidyverse.org/reference/context.html">n()</a></code> from <code>dplyr</code>. <code>tidytable</code> contains a helper function <code><a href="reference/n..html">n.()</a></code>, but using <code>.N</code> is recommended due to better performance.</p>
 </div>
 <div id="tidyselect-support" class="section level2">
 <h2 class="hasAnchor">
