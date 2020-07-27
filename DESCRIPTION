@@ -33,7 +33,8 @@ Imports:
     methods,
     tidyselect (>= 1.1.0),
     vctrs (>= 0.3.1),
-    lifecycle (>= 0.2.0)
+    lifecycle (>= 0.2.0),
+    glue (>= 1.4.0)
 RoxygenNote: 7.1.1
 URL: https://github.com/markfairbanks/tidytable
 BugReports: https://github.com/markfairbanks/tidytable/issues
