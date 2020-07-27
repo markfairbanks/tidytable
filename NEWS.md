@@ -2,6 +2,7 @@
 
 * Functionality improvements:
   + `summarize.()`: Added `.sort` arg to optionally sort the resulting data.table
+  + `mutate_across.()`: Added `.names` arg to help with naming newly created columns
 * Bug fixes:
   + `transmute.()`: Doesn't drop "by" columns (#98)
   + `slice.()`
@@ -9,7 +10,7 @@
     - Doesn't reorder columns when using `.by` (#101)
   + `full_join.()`: No longer returns a keyed data.table (#102)
 * Bringing back `n.()`:
-  + No longer deprecated as performance issues were fixed
+  + `n.()` is no longer deprecated as performance issues were fixed
 
 # tidytable 0.5.3
 
