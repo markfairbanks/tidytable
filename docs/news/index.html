@@ -143,6 +143,8 @@
 <ul>
 <li>
 <code><a href="../reference/summarize..html">summarize.()</a></code>: Added <code>.sort</code> arg to optionally sort the resulting data.table</li>
+<li>
+<code><a href="../reference/mutate_across..html">mutate_across.()</a></code>: Added <code>.names</code> arg to help with naming newly created columns</li>
 </ul>
 </li>
 <li>Bug fixes:
@@ -150,7 +152,20 @@
 <li>
 <code><a href="../reference/transmute..html">transmute.()</a></code>: Doesn’t drop “by” columns (<a href='https://github.com/markfairbanks/tidytable/issues/98'>#98</a>)</li>
 <li>
-<code><a href="../reference/slice..html">slice.()</a></code>: Allows irregular gaps in <code>rows</code> arg (<a href='https://github.com/markfairbanks/tidytable/issues/99'>#99</a>)</li>
+<code><a href="../reference/slice..html">slice.()</a></code>
+<ul>
+<li>Allows gaps in <code>rows</code> arg (<a href='https://github.com/markfairbanks/tidytable/issues/99'>#99</a>)</li>
+<li>Doesn’t reorder columns when using <code>.by</code> (<a href='https://github.com/markfairbanks/tidytable/issues/101'>#101</a>)</li>
+</ul>
+</li>
+<li>
+<code><a href="../reference/left_join..html">full_join.()</a></code>: No longer returns a keyed data.table (<a href='https://github.com/markfairbanks/tidytable/issues/102'>#102</a>)</li>
+</ul>
+</li>
+<li>Bringing back <code><a href="../reference/n..html">n.()</a></code>:
+<ul>
+<li>
+<code><a href="../reference/n..html">n.()</a></code> is no longer deprecated as performance issues were fixed</li>
 </ul>
 </li>
 </ul>
@@ -429,7 +444,7 @@
 <li>
 <code><a href="../reference/dt_verb.html">dt_pivot_longer()</a></code> “cols” arg now defaults to <code><a href="../reference/starts_with..html">dt_everything()</a></code> instead of <code>NULL</code>. The result is the same, but is more consistent with other enhanced selection functions</li>
 <li>
-<code>.N</code> now works when using <code><a href="../reference/slice..html">dt_slice()</a></code> &amp; variants</li>
+<code>.N</code> now works when using <code><a href="../reference/dt_verb.html">dt_slice()</a></code> &amp; variants</li>
 <li>Function length limit bug no longer occurs when using <code>~</code> in <code><a href="../reference/dt_verb.html">dt_map()</a></code>
 </li>
 </ul>
