@@ -6,12 +6,12 @@
 #' @param .df A data.frame or data.table
 #' @param ... Aggregations to perform
 #' @param .by Columns to group by.
-#' * A single column can be passed with `by = d`.
-#' * Multiple columns can be passed with `by = c(c, d)`
+#' * A single column can be passed with `.by = d`.
+#' * Multiple columns can be passed with `.by = c(c, d)`
 #' * `tidyselect` can be used:
-#'   + Single predicate: `by = where(is.character)`
-#'   + Multiple predicates: `by = c(where(is.character), where(is.factor))`
-#'   + A combination of predicates and column names: `by = c(where(is.character), b)`
+#'   + Single predicate: `.by = where(is.character)`
+#'   + Multiple predicates: `.by = c(where(is.character), where(is.factor))`
+#'   + A combination of predicates and column names: `.by = c(where(is.character), b)`
 #' @param .sort Should the resulting data.table be sorted
 #' @param by This argument has been renamed to .by and is deprecated
 #'
@@ -103,9 +103,9 @@ wrap_n_dot <- function(quosure) {
   quo_string <- quo_text(quosure)
 
   if (str_detect.(quo_string, "n.[(]")) {
-    parse_expr(str_c.("(", quo_string, ")"))
+    parse_expr(str_replace.(quo_string, "n.\\()", ".N"))
   } else {
-    quo_squash(quosure)
+    quosure
   }
 
 }

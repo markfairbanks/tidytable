@@ -81,11 +81,9 @@ also be used, including using predicates:
 ```{r}
 test_df %>%
   summarize.(avg_x = mean(x),
-             count = .N,
+             count = n.(),
              .by = z)
 ```
-
-Note: For those new to `data.table`, the `.N` helper is a way to get the number of rows by group, much like `n()` from `dplyr`. `tidytable` contains a helper function `n.()`, but using `.N` is recommended due to better performance.
 
 ## `tidyselect` support
 

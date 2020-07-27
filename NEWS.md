@@ -8,6 +8,8 @@
     - Allows gaps in `rows` arg (#99)
     - Doesn't reorder columns when using `.by` (#101)
   + `full_join.()`: No longer returns a keyed data.table (#102)
+* Bringing back `n.()`:
+  + No longer deprecated as performance issues were fixed
 
 # tidytable 0.5.3
 

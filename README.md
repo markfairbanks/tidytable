@@ -89,18 +89,13 @@ functionality (such as `summarize.()` & `mutate.()`)
 ``` r
 test_df %>%
   summarize.(avg_x = mean(x),
-             count = .N,
+             count = n.(),
              .by = z)
 #>        z avg_x count
 #>    <chr> <dbl> <int>
 #> 1:     a   1.5     2
 #> 2:     b   3.0     1
 ```
-
-Note: For those new to `data.table`, the `.N` helper is a way to get the
-number of rows by group, much like `n()` from `dplyr`. `tidytable`
-contains a helper function `n.()`, but using `.N` is recommended due to
-better performance.
 
 ## `tidyselect` support
 
