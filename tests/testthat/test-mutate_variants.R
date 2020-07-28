@@ -163,11 +163,11 @@ test_that("mutate_across() works with newly named columns using .names w/ autona
   df <- df %>%
     mutate_across.(c(x:y), list(new = ~ .x + 1, ~ .x + 2), .names = "{col}_{fn}_stuff")
 
-  expect_named(df, c("x","y","z","x_new_stuff","y_new_stuff", "x_1_stuff", "y_1_stuff"))
+  expect_named(df, c("x","y","z","x_new_stuff","y_new_stuff", "x_2_stuff", "y_2_stuff"))
   expect_equal(df$x_new_stuff, c(2,2,2))
   expect_equal(df$y_new_stuff, c(3,3,3))
-  expect_equal(df$x_1_stuff, c(3,3,3))
-  expect_equal(df$y_1_stuff, c(4,4,4))
+  expect_equal(df$x_2_stuff, c(3,3,3))
+  expect_equal(df$y_2_stuff, c(4,4,4))
 })
 
 # twiddle testing ----------------------------

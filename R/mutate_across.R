@@ -38,48 +38,44 @@
 #'   mutate_across.(c(x, y),
 #'                  .fns = list(new = ~ .x * 2, another = ~ .x + 7),
 #'                  .names = "{col}_stuff_{fn}")
-mutate_across. <- function(.df, .cols = everything(), .fns, ..., .by = NULL, .names = NULL, by = NULL) {
+mutate_across. <- function(.df, .cols = everything(), .fns, ...,
+                           .by = NULL, .names = NULL, by = NULL) {
   UseMethod("mutate_across.")
 }
 
 #' @export
-mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ..., .by = NULL, .names = NULL, by = NULL) {
+mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
+                                      .by = NULL, .names = NULL, by = NULL) {
 
   .df <- as_tidytable(.df)
+  .df <- shallow(.df)
 
   .cols <- select_vec_chr(.df, {{ .cols }})
 
   .by <- check_dot_by(enquo(.by), enquo(by), "mutate_across.")
   .by <- select_vec_chr(.df, !!.by)
 
-  .df <- shallow(.df)
+  .cols <- .cols[.cols %notin% .by]
+
+  if (length(.cols) == 0) return(.df)
 
   if (!is.list(.fns)) {
-    if (length(.cols) > 0) {
 
-      if (is.null(.names)) {
+    if (is.null(.names)) .names <- "{col}"
 
-        .col_names <- .cols
+    .col_names <- vec_as_names(glue(.names, col = .cols, fn = "1"),
+                               repair = "check_unique",
+                               quiet = TRUE)
 
-      } else {
+    eval_quo(
+      .df[, (.col_names) := map.(.SD, .fns, ...), .SDcols = !!.cols, by = !!.by],
+    )
 
-        .col_names <- vec_as_names(glue(.names, col = .cols, fn = "1"),
-                                   repair = "check_unique",
-                                   quiet = TRUE)
-
-      }
-
-      eval_quo(
-        .df[, (.col_names) := map.(.SD, .fns, ...), .SDcols = !!.cols, by = !!.by],
-      )
-    } else {
-      .df
-    }
   } else {
 
     names_flag <- have_name(.fns)
 
-    if (!all(names_flag)) names(.fns)[!names_flag] <- cumsum(!names_flag)[!names_flag]
+    if (!all(names_flag)) names(.fns)[!names_flag] <- seq_len(length(.fns))[!names_flag]
 
     fn_names <- names(.fns)
 
