@@ -140,9 +140,25 @@
     <p>Summarize multiple columns simultaneously</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='summarize_across..html'>summarize_across.</a></span>(<span class='no'>.df</span>, <span class='kw'>.cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(), <span class='no'>.fns</span>, <span class='no'>...</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'><a href='summarize_across..html'>summarize_across.</a></span>(
+  <span class='no'>.df</span>,
+  <span class='kw'>.cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(),
+  <span class='no'>.fns</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>.names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)
 
-<span class='fu'><a href='summarize_across..html'>summarise_across.</a></span>(<span class='no'>.df</span>, <span class='kw'>.cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(), <span class='no'>.fns</span>, <span class='no'>...</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'><a href='summarize_across..html'>summarise_across.</a></span>(
+  <span class='no'>.df</span>,
+  <span class='kw'>.cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(),
+  <span class='no'>.fns</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>.names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -168,6 +184,12 @@
       <td><p>Columns to group by</p></td>
     </tr>
     <tr>
+      <th>.names</th>
+      <td><p>A glue specification that helps with renaming output columns.
+<code>{col}</code> stands for the selected column, and <code>{fn}</code> stands for the name of the function being applied.
+The default (<code>NULL</code>) is equivalent to <code>"{col}"</code> for a single function case and "<code>{col}_{fn}</code>"</p></td>
+    </tr>
+    <tr>
       <th>by</th>
       <td><p>This argument has been renamed to .by and is deprecated</p></td>
     </tr>
@@ -189,15 +211,15 @@
 #&gt; 1: 2 5</div><div class='input'>
 <span class='co'># Passing a list of functions (with .by)</span>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='summarize_across..html'>summarize_across.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>a</span>, <span class='no'>b</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>mean</span>, <span class='no'>max</span>), <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z fn1_a fn1_b fn2_a fn2_b
-#&gt; 1: a   1.5   4.5     2     5
-#&gt; 2: b   3.0   6.0     3     6</div><div class='input'>
+  <span class='fu'><a href='summarize_across..html'>summarize_across.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>a</span>, <span class='no'>b</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>mean</span>, <span class='no'>max</span>), <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z a_1 b_1 a_2 b_2
+#&gt; 1: a 1.5 4.5   2   5
+#&gt; 2: b 3.0 6.0   3   6</div><div class='input'>
 <span class='co'># Passing a named list of functions (with .by)</span>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='summarize_across..html'>summarize_across.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>a</span>, <span class='no'>b</span>),
                     <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>avg</span> <span class='kw'>=</span> <span class='no'>mean</span>,
                          <span class='kw'>max_plus_one</span> <span class='kw'>=</span> ~ <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='no'>.x</span>) + <span class='fl'>1</span>),
-                    <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z avg_a avg_b max_plus_one_a max_plus_one_b
+                    <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z a_avg b_avg a_max_plus_one b_max_plus_one
 #&gt; 1: a   1.5   4.5              3              6
 #&gt; 2: b   3.0   6.0              4              7</div></pre>
   </div>

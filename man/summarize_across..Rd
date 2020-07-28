@@ -5,9 +5,25 @@
 \alias{summarise_across.}
 \title{Summarize multiple columns}
 \usage{
-summarize_across.(.df, .cols = everything(), .fns, ..., .by = NULL, by = NULL)
+summarize_across.(
+  .df,
+  .cols = everything(),
+  .fns,
+  ...,
+  .by = NULL,
+  .names = NULL,
+  by = NULL
+)
 
-summarise_across.(.df, .cols = everything(), .fns, ..., .by = NULL, by = NULL)
+summarise_across.(
+  .df,
+  .cols = everything(),
+  .fns,
+  ...,
+  .by = NULL,
+  .names = NULL,
+  by = NULL
+)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -19,6 +35,10 @@ summarise_across.(.df, .cols = everything(), .fns, ..., .by = NULL, by = NULL)
 \item{...}{Other arguments for the passed function}
 
 \item{.by}{Columns to group by}
+
+\item{.names}{A glue specification that helps with renaming output columns.
+\code{{col}} stands for the selected column, and \code{{fn}} stands for the name of the function being applied.
+The default (\code{NULL}) is equivalent to \code{"{col}"} for a single function case and "\verb{\{col\}_\{fn\}}"}
 
 \item{by}{This argument has been renamed to .by and is deprecated}
 }

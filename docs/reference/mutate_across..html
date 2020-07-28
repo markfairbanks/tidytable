@@ -140,7 +140,15 @@
     <p>Mutate multiple columns simultaneously.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(<span class='no'>.df</span>, <span class='kw'>.cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(), <span class='no'>.fns</span>, <span class='no'>...</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(
+  <span class='no'>.df</span>,
+  <span class='kw'>.cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(),
+  <span class='no'>.fns</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>.names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,6 +172,12 @@
     <tr>
       <th>.by</th>
       <td><p>Columns to group by</p></td>
+    </tr>
+    <tr>
+      <th>.names</th>
+      <td><p>A glue specification that helps with renaming output columns.
+<code>{col}</code> stands for the selected column, and <code>{fn}</code> stands for the name of the function being applied.
+The default (<code>NULL</code>) is equivalent to <code>"{col}"</code> for a single function case and "<code>{col}_{fn}</code>"</p></td>
     </tr>
     <tr>
       <th>by</th>
@@ -198,7 +212,13 @@
                                <span class='kw'>another</span> <span class='kw'>=</span> ~ <span class='no'>.x</span> + <span class='fl'>7</span>))</div><div class='output co'>#&gt;    x y z x_new y_new x_another y_another
 #&gt; 1: 1 2 a     2     4         8         9
 #&gt; 2: 1 2 a     2     4         8         9
-#&gt; 3: 1 2 b     2     4         8         9</div></pre>
+#&gt; 3: 1 2 b     2     4         8         9</div><div class='input'><span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>, <span class='no'>y</span>),
+                 <span class='kw'>.fns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>new</span> <span class='kw'>=</span> ~ <span class='no'>.x</span> * <span class='fl'>2</span>, <span class='kw'>another</span> <span class='kw'>=</span> ~ <span class='no'>.x</span> + <span class='fl'>7</span>),
+                 <span class='kw'>.names</span> <span class='kw'>=</span> <span class='st'>"{col}_stuff_{fn}"</span>)</div><div class='output co'>#&gt;    x y z x_stuff_new y_stuff_new x_stuff_another y_stuff_another
+#&gt; 1: 1 2 a           2           4               8               9
+#&gt; 2: 1 2 a           2           4               8               9
+#&gt; 3: 1 2 b           2           4               8               9</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

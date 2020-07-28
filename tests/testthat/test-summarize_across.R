@@ -37,31 +37,44 @@ test_that("can pass list of named functions", {
   result_df <- test_df %>%
     summarize_across.(c(a, b), list(avg = mean, max = max))
 
-  expect_named(result_df, c("avg_a", "avg_b", "max_a", "max_b"))
-  expect_equal(result_df$avg_a, 2)
-  expect_equal(result_df$avg_b, 5)
-  expect_equal(result_df$max_a, 3)
-  expect_equal(result_df$max_b, 6)
+  expect_named(result_df, c("a_avg", "b_avg", "a_max", "b_max"))
+  expect_equal(result_df$a_avg, 2)
+  expect_equal(result_df$b_avg, 5)
+  expect_equal(result_df$a_max, 3)
+  expect_equal(result_df$b_max, 6)
 })
 
-test_that("can pass unnamed list of functions", {
+test_that("can pass list of functions with no names", {
+  test_df <- tidytable(a = 1:3, b = 4:6, z = c("a", "a", "b"))
+
+  result_df <- test_df %>%
+    summarize_across.(c(a, b), list(mean, max))
+
+  expect_named(result_df, c("a_1", "b_1", "a_2", "b_2"))
+  expect_equal(result_df$a_1, 2)
+  expect_equal(result_df$b_1, 5)
+  expect_equal(result_df$a_2, 3)
+  expect_equal(result_df$b_2, 6)
+})
+
+test_that("can pass list of functions with some names", {
   test_df <- tidytable(a = 1:3, b = 4:6, z = c("a", "a", "b"))
 
   result_df <- test_df %>%
     summarize_across.(c(a, b), list(avg = mean, max))
 
-  expect_named(result_df, c("avg_a", "avg_b", "fn_a", "fn_b"))
-  expect_equal(result_df$avg_a, 2)
-  expect_equal(result_df$avg_b, 5)
-  expect_equal(result_df$fn_a, 3)
-  expect_equal(result_df$fn_b, 6)
+  expect_named(result_df, c("a_avg", "b_avg", "a_2", "b_2"))
+  expect_equal(result_df$a_avg, 2)
+  expect_equal(result_df$b_avg, 5)
+  expect_equal(result_df$a_2, 3)
+  expect_equal(result_df$b_2, 6)
 })
 
-test_that("can pass list of named functions with .by", {
+test_that("can pass list of named functions with .by and .names", {
   test_df <- tidytable(a = 1:3, b = 4:6, z = c("a", "a", "b"))
 
   result_df <- test_df %>%
-    summarize_across.(c(a, b), list(avg = mean, max = max), .by = z)
+    summarize_across.(c(a, b), list(avg = mean, max = max), .by = z, .names = "{fn}_{col}")
 
   expect_named(result_df, c("z", "avg_a", "avg_b", "max_a", "max_b"))
   expect_equal(result_df$avg_a, c(1.5, 3))

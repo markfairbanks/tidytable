@@ -8,6 +8,9 @@
 #' @param .fns Functions to pass. Can pass a list of functions.
 #' @param ... Other arguments for the passed function
 #' @param .by Columns to group by
+#' @param .names A glue specification that helps with renaming output columns.
+#' `{col}` stands for the selected column, and `{fn}` stands for the name of the function being applied.
+#' The default (`NULL`) is equivalent to `"{col}"` for a single function case and "`{col}_{fn}`"
 #' @param by This argument has been renamed to .by and is deprecated
 #'
 #' @md
@@ -36,12 +39,14 @@
 #'                     list(avg = mean,
 #'                          max_plus_one = ~ max(.x) + 1),
 #'                     .by = z)
-summarize_across. <- function(.df, .cols = everything(), .fns, ..., .by = NULL, by = NULL) {
+summarize_across. <- function(.df, .cols = everything(), .fns, ...,
+                              .by = NULL, .names = NULL, by = NULL) {
   UseMethod("summarize_across.")
 }
 
 #' @export
-summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ..., .by = NULL, by = NULL) {
+summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
+                                         .by = NULL, .names = NULL, by = NULL) {
 
   .df <- as_tidytable(.df)
 
@@ -50,13 +55,19 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ..., .
   .by <- check_dot_by(enquo(.by), enquo(by), "summarize_across.")
   .by <- select_vec_chr(.df, !!.by)
 
+  .cols <- .cols[.cols %notin% .by]
+
   if (length(.cols) == 0) abort("No columns have been selected to summarize.()")
 
-  # Needed to ensure summarize_across.() doesn't fail due to
-  # integer results in one group but double results in another group
-  # .df <- mutate_across.(.df, where(is.numeric), as.double)
-
   if (!is.list(.fns)) {
+
+    if (is.null(.names)) .names <- "{col}"
+
+    .col_names <- vec_as_names(glue(.names, col = .cols, fn = "1"),
+                               repair = "check_unique",
+                               quiet = TRUE)
+
+
 
     .fns <- as_function(.fns)
 
@@ -64,23 +75,20 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ..., .
       .df[, lapply(.SD, .fns, ...), .SDcols = .cols, by = .by]
     )
 
+    names(.df) <- c(.by, .col_names)
+
   } else {
 
+    # Make new names
     names_flag <- have_name(.fns)
 
-    if (!all(names_flag)) {
+    if (!all(names_flag)) names(.fns)[!names_flag] <- seq_len(length(.fns))[!names_flag]
 
-      # If some functions are unnamed, create names
-      # The resulting names are prefixed with "fn" instead of suffixed
-      # Prefixing is the data.table default when providing names,
-      # which is different than dplyr but might not be worth fixing
-      names(.fns)[!names_flag] <- "fn"
+    fn_names <- names(.fns)
 
-      fixed_names <- vec_as_names(names(.fns), repair = "unique", quiet = TRUE)
-      fixed_names <- str_replace.(fixed_names, "\\...", "")
+    if (is.null(.names)) .names <- "{col}_{fn}"
 
-      names(.fns) <- fixed_names
-    }
+    new_names <- unlist(map.(fn_names, ~ glue(.names, col = .cols, fn = .x)))
 
     # Convert .fns to list of map./lapply calls
     .fns <- map.(.fns, ~ call2('map.', quo(.SD), .x))
@@ -89,10 +97,7 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ..., .
       .df[, c(!!!.fns), .SDcols = .cols, by = .by]
     )
 
-    old_names <- names(.df)
-    new_names <- str_replace.(old_names, "[.]", "_")
-
-    setnames(.df, old_names, new_names)
+    names(.df) <- c(.by, new_names)
   }
   .df
 }
