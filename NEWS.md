@@ -1,8 +1,12 @@
 # tidytable 0.5.4 (in development)
 
+* Breaking changes:
+  + Column names auto-created by `mutate_across.()` now work like the tidyverse versions
+  + Column names auto-created by `summarize_across.()` now work like the tidyverse versions
 * Functionality improvements:
   + `summarize.()`: Added `.sort` arg to optionally sort the resulting data.table
   + `mutate_across.()`: Added `.names` arg to help with naming newly created columns
+  + `summarize_across.()`: Added `.names` arg to help with naming newly created columns
 * Bug fixes:
   + `transmute.()`: Doesn't drop "by" columns (#98)
   + `slice.()`
