@@ -139,12 +139,20 @@
 <a href="#tidytable-054-in-development" class="anchor"></a>tidytable 0.5.4 (in development)<small> Unreleased </small>
 </h1>
 <ul>
+<li>Breaking changes:
+<ul>
+<li>Column names auto-created by <code><a href="../reference/mutate_across..html">mutate_across.()</a></code> now work like the tidyverse versions</li>
+<li>Column names auto-created by <code><a href="../reference/summarize_across..html">summarize_across.()</a></code> now work like the tidyverse versions</li>
+</ul>
+</li>
 <li>Functionality improvements:
 <ul>
 <li>
 <code><a href="../reference/summarize..html">summarize.()</a></code>: Added <code>.sort</code> arg to optionally sort the resulting data.table</li>
 <li>
 <code><a href="../reference/mutate_across..html">mutate_across.()</a></code>: Added <code>.names</code> arg to help with naming newly created columns</li>
+<li>
+<code><a href="../reference/summarize_across..html">summarize_across.()</a></code>: Added <code>.names</code> arg to help with naming newly created columns</li>
 </ul>
 </li>
 <li>Bug fixes:
