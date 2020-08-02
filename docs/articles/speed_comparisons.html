@@ -114,28 +114,31 @@
 <code><a href="../reference/fill..html">fill.()</a></code> &amp; <code><a href="https://tidyr.tidyverse.org/reference/fill.html">tidyr::fill()</a></code> both work with character/factor/logical columns, whereas <code><a href="https://Rdatatable.gitlab.io/data.table/reference/nafill.html">data.table::nafill()</a></code> does not. Testing only included numeric columns due to this constraint.</li>
 <li>
 <code><a href="../reference/case..html">case.()</a></code> &amp; <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">dplyr::case_when()</a></code> both can have a default value that is a vector, whereas <code><a href="https://Rdatatable.gitlab.io/data.table/reference/fcase.html">data.table::fcase()</a></code> can not. Testing used a default value of length 1 due to this constraint.</li>
-<li>All tests can be found in the source code <a href="https://github.com/markfairbanks/tidytable/blob/master/vignettes/speed_comparisons.Rmd">here</a>.</li>
+<li>
+<code>dtplyr</code> is missing timings for functions that are not yet implemented in the package; this includes <code>pivot_wider()</code> &amp; <code>unnest()</code>, among others.</li>
 <li>
 <code>pandas</code> comparisons are in the process of being added - more will be added soon.</li>
+<li>All timings are in milliseconds.</li>
+<li>All tests can be found in the source code <a href="https://github.com/markfairbanks/tidytable/blob/master/vignettes/speed_comparisons.Rmd">here</a>.</li>
 <li>Lastly I’d like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.</li>
 </ul>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">all_marks</span>
-<span class="co">#&gt; # A tibble: 13 x 6</span>
-<span class="co">#&gt;    function_tested data.table tidytable tidyverse pandas tidytable_vs_tidyverse</span>
-<span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;                 </span>
-<span class="co">#&gt;  1 arrange         40.89ms    41.24ms   1263.01ms 355ms  3.3%                  </span>
-<span class="co">#&gt;  2 case_when       38.31ms    35.4ms    362.83ms  59.2ms 9.8%                  </span>
-<span class="co">#&gt;  3 distinct        13.35ms    14.94ms   55.57ms   309ms  26.9%                 </span>
-<span class="co">#&gt;  4 fill            28.06ms    45.26ms   59.67ms   846ms  75.9%                 </span>
-<span class="co">#&gt;  5 filter          247.78ms   242.61ms  263.66ms  707ms  92.0%                 </span>
-<span class="co">#&gt;  6 inner_join      54.16ms    63.1ms    182.54ms  &lt;NA&gt;   34.6%                 </span>
-<span class="co">#&gt;  7 left_join       150.09ms   158.86ms  96.71ms   &lt;NA&gt;   164.3%                </span>
-<span class="co">#&gt;  8 mutate          49.47ms    51.66ms   196.92ms  86.4ms 26.2%                 </span>
-<span class="co">#&gt;  9 nest            13.5ms     14.49ms   38.04ms   &lt;NA&gt;   38.1%                 </span>
-<span class="co">#&gt; 10 pivot_longer    10.03ms    21.22ms   46.42ms   &lt;NA&gt;   45.7%                 </span>
-<span class="co">#&gt; 11 pivot_wider     102.27ms   111.9ms   85.47ms   &lt;NA&gt;   130.9%                </span>
-<span class="co">#&gt; 12 summarize       167.27ms   175.68ms  236.81ms  834ms  74.2%                 </span>
-<span class="co">#&gt; 13 unnest          21.78ms    16.38ms   49.96ms   &lt;NA&gt;   32.8%</span></pre></body></html></div>
+<span class="co">#&gt; # A tibble: 13 x 7</span>
+<span class="co">#&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas tidytable_vs_dplyr</span>
+<span class="co">#&gt;    &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             </span>
+<span class="co">#&gt;  1 arrange            38.5      38.7   41.3    1266.   355   3.1%              </span>
+<span class="co">#&gt;  2 case_when          35.5      34     NA       323     59.2 10.5%             </span>
+<span class="co">#&gt;  3 distinct           12.4      14.4   16.3      58.6  309   24.6%             </span>
+<span class="co">#&gt;  4 fill               26.8      35.1   NA        66.2  846   53.0%             </span>
+<span class="co">#&gt;  5 filter            243.      238.   253.      266.   707   89.4%             </span>
+<span class="co">#&gt;  6 inner_join         46.1      54.4  197        85.2   NA   63.8%             </span>
+<span class="co">#&gt;  7 left_join          47        66.9  166.       93.1   NA   71.9%             </span>
+<span class="co">#&gt;  8 mutate             65.2      54.1  504        80.1   86.4 67.5%             </span>
+<span class="co">#&gt;  9 nest                8.2       9.5   NA        31.7   NA   30.0%             </span>
+<span class="co">#&gt; 10 pivot_longer       10.3      13.5   NA        50.4   NA   26.8%             </span>
+<span class="co">#&gt; 11 pivot_wider        97.5      96.4   NA        86.2   NA   111.8%            </span>
+<span class="co">#&gt; 12 summarize         176.      167.   170.      212.   834   78.7%             </span>
+<span class="co">#&gt; 13 unnest             18.5      16.3   NA        42.6   NA   38.3%</span></pre></body></html></div>
 </div>
   </div>
 

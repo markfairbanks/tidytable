@@ -27,9 +27,10 @@ A few notes:
 * Modify-by-reference was used in `data.table` when being compared to `mutate.()` & `dplyr::mutate()`
 * `fill.()` & `tidyr::fill()` both work with character/factor/logical columns, whereas `data.table::nafill()` does not. Testing only included numeric columns due to this constraint.
 * `case.()` & `dplyr::case_when()` both can have a default value that is a vector, whereas `data.table::fcase()` can not. Testing used a default value of length 1 due to this constraint.
-* Where timings are missing for `dtplyr`, this is due to certain verbs not yet being implemented in the package; these includes `pivot_wider()`, `unnest()`, among others.
-* All tests can be found in the source code [here](https://github.com/markfairbanks/tidytable/blob/master/vignettes/speed_comparisons.Rmd).
+* `dtplyr` is missing timings for functions that are not yet implemented in the package; this includes `pivot_wider()` & `unnest()`, among others.
 * `pandas` comparisons are in the process of being added - more will be added soon.
+* All timings are in milliseconds.
+* All tests can be found in the source code [here](https://github.com/markfairbanks/tidytable/blob/master/vignettes/speed_comparisons.Rmd).
 * Lastly I'd like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.
 
 ```{r benchmark_setup, echo=FALSE}
@@ -58,7 +59,7 @@ filter_marks <- bench::mark(
   data.table = test_dt[a <= 7 & c == "a"],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
-         function_tested = "filter")
+         func_tested = "filter")
 
 inv_gc(); inv_gc();
 ```
@@ -71,7 +72,7 @@ summarize_marks <- bench::mark(
   data.table = test_dt[, list(avg_a = mean(a)), by = c],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
-         function_tested = "summarize")
+         func_tested = "summarize")
 
 inv_gc(); inv_gc();
 ```
@@ -86,7 +87,7 @@ mutate_marks <- bench::mark(
   data.table = mut_dt[, ':='(double_a = a * 2, a_b = a + b)][],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
-         function_tested = "mutate")
+         func_tested = "mutate")
 
 inv_gc(); inv_gc();
 ```
@@ -109,7 +110,7 @@ arrange_marks <- bench::mark(
   data.table = test_dt[order(c, a)],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
-         function_tested = "arrange")
+         func_tested = "arrange")
 ```
 
 ```{r distinct, echo=FALSE}
@@ -120,7 +121,7 @@ distinct_marks <- bench::mark(
   data.table = unique(test_dt),
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
-         function_tested = "distinct")
+         func_tested = "distinct")
 
 inv_gc(); inv_gc();
 ```
@@ -148,7 +149,7 @@ fill_marks <- bench::mark(
                                             by = id],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
-         function_tested = "fill")
+         func_tested = "fill")
 ```
 
 ```{r case, echo=FALSE}
@@ -169,7 +170,7 @@ case_marks <- bench::mark(
                      default = NA),
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
-         function_tested = "case_when")
+         func_tested = "case_when")
 ```
 
 ```{r pivot_wider, echo=FALSE}
@@ -190,7 +191,7 @@ wider_marks <- bench::mark(
   data.table = data.table::dcast.data.table(wider_dt, case + year ~ name),
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
-         function_tested = "pivot_wider")
+         func_tested = "pivot_wider")
 ```
 
 ```{r pivot_longer, echo=FALSE}
@@ -207,7 +208,7 @@ longer_marks <- bench::mark(
                                 variable.name = "name", variable.factor = FALSE),
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
-         function_tested = "pivot_longer")
+         func_tested = "pivot_longer")
 ```
 
 ```{r left_join, echo=FALSE}
@@ -232,7 +233,7 @@ left_join_marks <- bench::mark(
   data.table = right_dt[left_dt, on = "c", allow.cartesian = TRUE],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
-         function_tested = "left_join")
+         func_tested = "left_join")
 ```
 
 ```{r inner_join, echo=FALSE}
@@ -243,7 +244,7 @@ inner_join_marks <- bench::mark(
   data.table = left_dt[right_dt, on = "c", allow.cartesian = TRUE, nomatch = 0],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
-         function_tested = "inner_join")
+         func_tested = "inner_join")
 ```
 
 ```{r unnest, echo = FALSE}
@@ -262,7 +263,7 @@ unnest_marks <- bench::mark(
   data.table = unnest_dt[, unlist(list_column, recursive = FALSE), by = id],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   dplyr::mutate(expression = as.character(expression),
-                function_tested = "unnest")
+                func_tested = "unnest")
 ```
 
 ```{r nest, echo = FALSE}
@@ -283,7 +284,7 @@ nest_marks <- bench::mark(
   data.table = nest_dt[, list(data = list(.SD)), by = id],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
-         function_tested = "nest")
+         func_tested = "nest")
 ```
 
 ```{r echo = FALSE}
@@ -353,33 +354,33 @@ remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(
 all_marks <- ls(pattern="marks$") %>%
   lapply(get) %>%
   map(~.x %>%
-        select(function_tested, expression, median)
+        select(func_tested, expression, median)
       ) %>%
   bind_rows()
 
 all_marks <- all_marks %>%
   mutate_if(is.character, str_trim) %>%
-  mutate(median = round(median, 2)) %>%
+  mutate(median = round(median, 1)) %>%
   pivot_wider.(names_from = expression, values_from = median) %>%
   as_tibble() %>%
-  mutate(tidytable_vs_tidyverse = scales::percent(tidytable/tidyverse, accuracy = .1)) %>%
-  mutate_at(vars(tidyverse, tidytable, data.table, dtplyr), ~str_c(.x, "ms")) %>%
-  arrange(function_tested)
+  mutate(tidytable_vs_dplyr = scales::percent(tidytable/tidyverse, accuracy = .1)) %>%
+  # mutate_at(vars(tidyverse, tidytable, data.table, dtplyr), ~str_c(.x, "ms")) %>%
+  arrange(func_tested)
 ```
 
 ```{r pandas, echo = FALSE, message = FALSE}
-pandas_marks <- tibble(arrange = "355ms",
-                       case_when = "59.2ms",
-                       distinct = "309ms",
-                       filter = "707ms",
-                       fill = "846ms",
-                       mutate = "86.4ms",
-                       summarize = "834ms") %>%
-  pivot_longer(everything(), names_to = "function_tested", values_to = "pandas")
+pandas_marks <- tibble(arrange = 355,
+                       case_when = 59.2,
+                       distinct = 309,
+                       filter = 707,
+                       fill = 846,
+                       mutate = 86.4,
+                       summarize = 834) %>%
+  pivot_longer(everything(), names_to = "func_tested", values_to = "pandas")
 
 all_marks <- all_marks %>%
   left_join(pandas_marks) %>%
-  select(function_tested, data.table, dtplyr, tidytable, tidyverse, pandas, tidytable_vs_tidyverse)
+  select(func_tested, data.table, tidytable, dtplyr, tidyverse, pandas, tidytable_vs_dplyr)
 ```
 
 ```{r}
