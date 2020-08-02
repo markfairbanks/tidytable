@@ -17,8 +17,7 @@ downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey)](h
 #### Why `tidytable`?
 
   - `tidyverse`-like syntax with `data.table` speed
-  - `rlang` compatibility - [See
-    here](https://markfairbanks.github.io/tidytable/#rlang-compatibility)
+  - `rlang` compatibility
   - Includes functions that
     [`dtplyr`](https://github.com/tidyverse/dtplyr) is missing,
     including many `tidyr` functions

@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
 #### Why `tidytable`?
 
 * `tidyverse`-like syntax with `data.table` speed
-* `rlang` compatibility - [See here](https://markfairbanks.github.io/tidytable/#rlang-compatibility)
+* `rlang` compatibility
 * Includes functions that [`dtplyr`](https://github.com/tidyverse/dtplyr) is missing, including many `tidyr` functions
 
 Note: `tidytable` functions do not use `data.table`'s modify-by-reference, and instead use the copy-on-modify principles followed by the `tidyverse` and base R.
