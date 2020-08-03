@@ -37,8 +37,16 @@
 #' test_df %>%
 #'   summarize_across.(c(a, b),
 #'                     list(avg = mean,
-#'                          max_plus_one = ~ max(.x) + 1),
+#'                          max = ~ max(.x)),
 #'                     .by = z)
+#'
+#' # Use the `.names` argument for great naming control
+#' test_df %>%
+#'   summarize_across.(c(a, b),
+#'                     list(avg = mean,
+#'                          max = ~ max(.x)),
+#'                     .by = z,
+#'                     .names = "{col}_test_{fn}")
 summarize_across. <- function(.df, .cols = everything(), .fns, ...,
                               .by = NULL, .names = NULL, by = NULL) {
   UseMethod("summarize_across.")

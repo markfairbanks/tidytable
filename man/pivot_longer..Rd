@@ -24,7 +24,7 @@ pivot_longer.(
 
 \item{values_drop_na}{If TRUE, rows will be dropped that contain NAs.}
 
-\item{...}{Additional arguments to pass to \code{melt.df.table()}}
+\item{...}{Additional arguments to pass to \code{melt.data.table()}}
 }
 \description{
 \code{pivot_wider.()} "widens" data, increasing the number of columns and

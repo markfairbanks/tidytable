@@ -11,7 +11,7 @@
 #' @param names_to Name of the new "names" column. Must be a string.
 #' @param values_to Name of the new "values" column. Must be a string.
 #' @param values_drop_na If TRUE, rows will be dropped that contain NAs.
-#' @param ... Additional arguments to pass to `melt.df.table()`
+#' @param ... Additional arguments to pass to `melt.data.table()`
 #'
 #' @export
 #' @md

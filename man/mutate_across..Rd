@@ -55,5 +55,5 @@ test_df \%>\%
 test_df \%>\%
   mutate_across.(c(x, y),
                  .fns = list(new = ~ .x * 2, another = ~ .x + 7),
-                 .names = "{col}_stuff_{fn}")
+                 .names = "{col}_test_{fn}")
 }

@@ -37,7 +37,7 @@
 #' test_df %>%
 #'   mutate_across.(c(x, y),
 #'                  .fns = list(new = ~ .x * 2, another = ~ .x + 7),
-#'                  .names = "{col}_stuff_{fn}")
+#'                  .names = "{col}_test_{fn}")
 mutate_across. <- function(.df, .cols = everything(), .fns, ...,
                            .by = NULL, .names = NULL, by = NULL) {
   UseMethod("mutate_across.")
