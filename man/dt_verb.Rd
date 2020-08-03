@@ -257,7 +257,7 @@ Defaults to all character & factor columns using \code{c(is.character, is.factor
 
 \item{y}{A data.frame or data.table}
 
-\item{suffix}{Append created for duplicated column names when using `full_join.()`}
+\item{suffix}{Append created for duplicated column names when using \code{full_join.()}}
 
 \item{.x}{A data.frame or data.table}
 

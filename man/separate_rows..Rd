@@ -9,11 +9,11 @@ separate_rows.(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE)
 \arguments{
 \item{.df}{A data.frame or data.table}
 
-\item{...}{Columns to separate across multiple rows. `tidyselect` compatible}
+\item{...}{Columns to separate across multiple rows. \code{tidyselect} compatible}
 
 \item{sep}{Separator delimiting collapsed values}
 
-\item{convert}{If TRUE, runs `type.convert()` on the resulting column.
+\item{convert}{If TRUE, runs \code{type.convert()} on the resulting column.
 Useful if the resulting column should be type integer/double.}
 }
 \description{

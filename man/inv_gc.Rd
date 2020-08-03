@@ -7,10 +7,10 @@
 inv_gc(x)
 }
 \arguments{
-\item{x}{Optional. If missing runs `gc()` silently. Else returns the same object unaltered.}
+\item{x}{Optional. If missing runs \code{gc()} silently. Else returns the same object unaltered.}
 }
 \description{
-Run garbage collection without the `gc()` output. Can also be run in the middle of a long pipe chain.
+Run garbage collection without the \code{gc()} output. Can also be run in the middle of a long pipe chain.
 Useful for large datasets or when using parallel processing.
 }
 \examples{

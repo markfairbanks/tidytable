@@ -7,12 +7,12 @@
 where(fn)
 }
 \arguments{
-\item{fn}{A function that returns `TRUE` or `FALSE` (technically, a
-_predicate_ function). Can also be a purrr-like formula.}
+\item{fn}{A function that returns \code{TRUE} or \code{FALSE} (technically, a
+\emph{predicate} function). Can also be a purrr-like formula.}
 }
 \description{
 This selection helper selects the variables for which a
-function returns `TRUE`.
+function returns \code{TRUE}.
 }
 \examples{
 iris \%>\% select.(where(is.factor))

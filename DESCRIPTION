@@ -22,7 +22,7 @@ Authors@R:
       person(given = "Matt",
              family = "Carlson",
              role = "ctb"))
-Description: Tidy interface to 'data.table'. 'rlang' compatible, which allows the user to build custom functions much like they would in the tidyverse.
+Description: A tidy interface to 'data.table' that is 'rlang' compatible, giving users the speed of 'data.table' with the clean syntax of the tidyverse.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -36,6 +36,7 @@ Imports:
     lifecycle (>= 0.2.0),
     glue (>= 1.4.0)
 RoxygenNote: 7.1.1
+Roxygen: list(markdown = TRUE)
 URL: https://github.com/markfairbanks/tidytable
 BugReports: https://github.com/markfairbanks/tidytable/issues
 Suggests: 

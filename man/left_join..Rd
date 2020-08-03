@@ -25,7 +25,7 @@ anti_join.(x, y, by = NULL)
 
 \item{by}{A character vector of variables to join by. If NULL, the default, the join will do a natural join, using all variables with common names across the two tables.}
 
-\item{suffix}{Append created for duplicated column names when using `full_join.()`}
+\item{suffix}{Append created for duplicated column names when using \code{full_join.()}}
 }
 \value{
 A data.table
