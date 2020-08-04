@@ -16,7 +16,7 @@
 NULL
 
 globalVariables(c(".", "name", "value", "..all_cols", "..select_cols",
-                  "..keep_names", "..unite_cols", "..keep_cols", ".env", ".id"))
+                  "..keep_names", "..unite_cols", "..keep_cols", ".env", ".id", "where"))
 
 #' @docType import
 
