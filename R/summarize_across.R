@@ -40,7 +40,7 @@
 #'                          max = ~ max(.x)),
 #'                     .by = z)
 #'
-#' # Use the `.names` argument for great naming control
+#' # Use the `.names` argument for more naming control
 #' test_df %>%
 #'   summarize_across.(c(a, b),
 #'                     list(avg = mean,
