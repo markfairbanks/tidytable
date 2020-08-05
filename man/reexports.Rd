@@ -16,6 +16,7 @@
 \alias{setDTthreads}
 \alias{enquo}
 \alias{enquos}
+\alias{glimpse}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -26,6 +27,8 @@ below to see their documentation.
   \item{data.table}{\code{\link[data.table]{data.table}}, \code{\link[data.table:openmp-utils]{setDTthreads}}}
 
   \item{rlang}{\code{\link[rlang:nse-defuse]{enquo}}, \code{\link[rlang:nse-defuse]{enquos}}}
+
+  \item{tibble}{\code{\link[tibble]{glimpse}}}
 
   \item{tidyselect}{\code{\link[tidyselect]{all_of}}, \code{\link[tidyselect:all_of]{any_of}}, \code{\link[tidyselect:starts_with]{contains}}, \code{\link[tidyselect:starts_with]{ends_with}}, \code{\link[tidyselect]{everything}}, \code{\link[tidyselect:everything]{last_col}}, \code{\link[tidyselect:starts_with]{matches}}, \code{\link[tidyselect:starts_with]{num_range}}, \code{\link[tidyselect]{starts_with}}}
 }}

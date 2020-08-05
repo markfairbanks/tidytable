@@ -172,14 +172,20 @@
   <span class='kw'>double_y</span> <span class='kw'>=</span> <span class='fl'>4</span>)
 
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='rename_with..html'>rename_with.</a></span>(<span class='no'>toupper</span>)</div><div class='output co'>#&gt;    X Y DOUBLE_X DOUBLE_Y
-#&gt; 1: 1 2        2        4</div><div class='input'>
+  <span class='fu'><a href='rename_with..html'>rename_with.</a></span>(<span class='no'>toupper</span>)</div><div class='output co'>#&gt; # tidytable [1 × 4]
+#&gt;       X     Y DOUBLE_X DOUBLE_Y
+#&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1     1     2        2        4</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='rename_with..html'>rename_with.</a></span>(~ <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span>(<span class='st'>"x"</span>, <span class='st'>"stuff"</span>, <span class='no'>.x</span>))</div><div class='output co'>#&gt;    stuff y double_stuff double_y
-#&gt; 1:     1 2            2        4</div><div class='input'>
+  <span class='fu'><a href='rename_with..html'>rename_with.</a></span>(~ <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span>(<span class='st'>"x"</span>, <span class='st'>"stuff"</span>, <span class='no'>.x</span>))</div><div class='output co'>#&gt; # tidytable [1 × 4]
+#&gt;   stuff     y double_stuff double_y
+#&gt;   &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1     1     2            2        4</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='rename_with..html'>rename_with.</a></span>(~ <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span>(<span class='st'>"x"</span>, <span class='st'>"stuff"</span>, <span class='no'>.x</span>), <span class='kw'>.cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>, <span class='no'>double_x</span>))</div><div class='output co'>#&gt;    stuff y double_stuff double_y
-#&gt; 1:     1 2            2        4</div></pre>
+  <span class='fu'><a href='rename_with..html'>rename_with.</a></span>(~ <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span>(<span class='st'>"x"</span>, <span class='st'>"stuff"</span>, <span class='no'>.x</span>), <span class='kw'>.cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>, <span class='no'>double_x</span>))</div><div class='output co'>#&gt; # tidytable [1 × 4]
+#&gt;   stuff     y double_stuff double_y
+#&gt;   &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1     1     2            2        4</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

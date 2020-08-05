@@ -172,7 +172,7 @@ as the <code>dt_verb()</code> functions will be removed by the end of 2020.</p>
 
 <span class='fu'>dt_get_dummies</span>(
   <span class='no'>.df</span>,
-  <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='where.html'>where</a></span>(<span class='no'>is.character</span>), <span class='fu'><a href='where.html'>where</a></span>(<span class='no'>is.factor</span>)),
+  <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'>where</span>(<span class='no'>is.character</span>), <span class='fu'>where</span>(<span class='no'>is.factor</span>)),
   <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>prefix_sep</span> <span class='kw'>=</span> <span class='st'>"_"</span>,
   <span class='kw'>drop_first</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
@@ -384,7 +384,7 @@ Defaults to all character &amp; factor columns using <code><a href='https://rdrr
     </tr>
     <tr>
       <th>suffix</th>
-      <td><p>Append created for duplicated column names when using `full_join.()`</p></td>
+      <td><p>Append created for duplicated column names when using <code><a href='left_join..html'>full_join.()</a></code></p></td>
     </tr>
     <tr>
       <th>.x</th>

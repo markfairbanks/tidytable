@@ -170,29 +170,33 @@ Note that this function is called differently than dplyr::case_when. See example
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='case..html'>case.</a></span>(<span class='no'>b</span> <span class='kw'>&lt;</span> <span class='fl'>13</span>, <span class='fl'>3</span>,
                     <span class='no'>a</span> <span class='kw'>&gt;</span> <span class='fl'>4</span>, <span class='fl'>2</span>,
-                    <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>10</span>))</div><div class='output co'>#&gt;      a  b c d  x
-#&gt;  1:  1 11 a a  3
-#&gt;  2:  2 12 a a  3
-#&gt;  3:  3 13 a a 10
-#&gt;  4:  4 14 a a 10
-#&gt;  5:  5 15 a b  2
-#&gt;  6:  6 16 a b  2
-#&gt;  7:  7 17 b b  2
-#&gt;  8:  8 18 b b  2
-#&gt;  9:  9 19 b b  2
-#&gt; 10: 10 20 b b  2</div><div class='input'><span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
+                    <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>10</span>))</div><div class='output co'>#&gt; # tidytable [10 × 5]
+#&gt;        a     b c     d         x
+#&gt;    &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+#&gt;  1     1    11 a     a         3
+#&gt;  2     2    12 a     a         3
+#&gt;  3     3    13 a     a        10
+#&gt;  4     4    14 a     a        10
+#&gt;  5     5    15 a     b         2
+#&gt;  6     6    16 a     b         2
+#&gt;  7     7    17 b     b         2
+#&gt;  8     8    18 b     b         2
+#&gt;  9     9    19 b     b         2
+#&gt; 10    10    20 b     b         2</div><div class='input'><span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='case..html'>case.</a></span>(<span class='no'>c</span> <span class='kw'>==</span> <span class='st'>"a"</span>, <span class='st'>"a"</span>,
-                    <span class='kw'>default</span> <span class='kw'>=</span> <span class='no'>d</span>))</div><div class='output co'>#&gt;      a  b c d x
-#&gt;  1:  1 11 a a a
-#&gt;  2:  2 12 a a a
-#&gt;  3:  3 13 a a a
-#&gt;  4:  4 14 a a a
-#&gt;  5:  5 15 a b a
-#&gt;  6:  6 16 a b a
-#&gt;  7:  7 17 b b b
-#&gt;  8:  8 18 b b b
-#&gt;  9:  9 19 b b b
-#&gt; 10: 10 20 b b b</div></pre>
+                    <span class='kw'>default</span> <span class='kw'>=</span> <span class='no'>d</span>))</div><div class='output co'>#&gt; # tidytable [10 × 5]
+#&gt;        a     b c     d     x    
+#&gt;    &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+#&gt;  1     1    11 a     a     a    
+#&gt;  2     2    12 a     a     a    
+#&gt;  3     3    13 a     a     a    
+#&gt;  4     4    14 a     a     a    
+#&gt;  5     5    15 a     b     a    
+#&gt;  6     6    16 a     b     a    
+#&gt;  7     7    17 b     b     b    
+#&gt;  8     8    18 b     b     b    
+#&gt;  9     9    19 b     b     b    
+#&gt; 10    10    20 b     b     b    </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="Run invisible garbage collection — inv_gc" />
-<meta property="og:description" content="Run garbage collection without the `gc()` output. Can also be run in the middle of a long pipe chain.
+<meta property="og:description" content="Run garbage collection without the gc() output. Can also be run in the middle of a long pipe chain.
 Useful for large datasets or when using parallel processing." />
 <meta property="og:image" content="/logo.png" />
 
@@ -138,7 +138,7 @@ Useful for large datasets or when using parallel processing." />
     </div>
 
     <div class="ref-description">
-    <p>Run garbage collection without the `gc()` output. Can also be run in the middle of a long pipe chain.
+    <p>Run garbage collection without the <code><a href='https://rdrr.io/r/base/gc.html'>gc()</a></code> output. Can also be run in the middle of a long pipe chain.
 Useful for large datasets or when using parallel processing.</p>
     </div>
 
@@ -149,7 +149,7 @@ Useful for large datasets or when using parallel processing.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>Optional. If missing runs `gc()` silently. Else returns the same object unaltered.</p></td>
+      <td><p>Optional. If missing runs <code><a href='https://rdrr.io/r/base/gc.html'>gc()</a></code> silently. Else returns the same object unaltered.</p></td>
     </tr>
     </table>
 
@@ -164,8 +164,10 @@ Useful for large datasets or when using parallel processing.</p>
 <span class='no'>df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='filter..html'>filter.</a></span>(<span class='no'>col1</span> <span class='kw'>&lt;</span> <span class='fl'>2</span>, <span class='no'>col2</span> <span class='kw'>&lt;</span> <span class='fl'>4</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>inv_gc</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='select..html'>select.</a></span>(<span class='no'>col1</span>)</div><div class='output co'>#&gt;    col1
-#&gt; 1:    1</div></pre>
+  <span class='fu'><a href='select..html'>select.</a></span>(<span class='no'>col1</span>)</div><div class='output co'>#&gt; # tidytable [1 × 1]
+#&gt;    col1
+#&gt;   &lt;dbl&gt;
+#&gt; 1     1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

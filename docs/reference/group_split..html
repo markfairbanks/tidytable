@@ -169,27 +169,35 @@
 
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='group_split..html'>group_split.</a></span>(<span class='no'>c</span>, <span class='no'>d</span>)</div><div class='output co'>#&gt; [[1]]
-#&gt;    a b c d
-#&gt; 1: 1 1 a a
-#&gt; 2: 2 2 a a
-#&gt; 3: 3 3 a a
+#&gt; # tidytable [3 × 4]
+#&gt;       a     b c     d    
+#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+#&gt; 1     1     1 a     a    
+#&gt; 2     2     2 a     a    
+#&gt; 3     3     3 a     a    
 #&gt; 
 #&gt; [[2]]
-#&gt;    a b c d
-#&gt; 1: 4 4 b b
-#&gt; 2: 5 5 b b
+#&gt; # tidytable [2 × 4]
+#&gt;       a     b c     d    
+#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+#&gt; 1     4     4 b     b    
+#&gt; 2     5     5 b     b    
 #&gt; </div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='group_split..html'>group_split.</a></span>(<span class='no'>c</span>, <span class='no'>d</span>, <span class='kw'>.keep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [[1]]
-#&gt;    a b
-#&gt; 1: 1 1
-#&gt; 2: 2 2
-#&gt; 3: 3 3
+#&gt; # tidytable [3 × 2]
+#&gt;       a     b
+#&gt;   &lt;int&gt; &lt;int&gt;
+#&gt; 1     1     1
+#&gt; 2     2     2
+#&gt; 3     3     3
 #&gt; 
 #&gt; [[2]]
-#&gt;    a b
-#&gt; 1: 4 4
-#&gt; 2: 5 5
+#&gt; # tidytable [2 × 2]
+#&gt;       a     b
+#&gt;   &lt;int&gt; &lt;int&gt;
+#&gt; 1     4     4
+#&gt; 2     5     5
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -179,30 +179,40 @@
                      <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"c"</span>, <span class='st'>"c"</span>, <span class='fl'>NA</span>))
 
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='unite..html'>unite.</a></span>(<span class='st'>"new_col"</span>, <span class='no'>b</span>, <span class='no'>c</span>)</div><div class='output co'>#&gt;    a new_col
-#&gt; 1: a     b_c
-#&gt; 2: a     b_c
-#&gt; 3: a    b_NA</div><div class='input'>
+  <span class='fu'><a href='unite..html'>unite.</a></span>(<span class='st'>"new_col"</span>, <span class='no'>b</span>, <span class='no'>c</span>)</div><div class='output co'>#&gt; # tidytable [3 × 2]
+#&gt;   a     new_col
+#&gt;   &lt;chr&gt; &lt;chr&gt;  
+#&gt; 1 a     b_c    
+#&gt; 2 a     b_c    
+#&gt; 3 a     b_NA   </div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='unite..html'>unite.</a></span>(<span class='st'>"new_col"</span>, <span class='fu'><a href='where.html'>where</a></span>(<span class='no'>is.character</span>))</div><div class='output co'>#&gt;    new_col
-#&gt; 1:   a_b_c
-#&gt; 2:   a_b_c
-#&gt; 3:  a_b_NA</div><div class='input'>
+  <span class='fu'><a href='unite..html'>unite.</a></span>(<span class='st'>"new_col"</span>, <span class='fu'>where</span>(<span class='no'>is.character</span>))</div><div class='output co'>#&gt; # tidytable [3 × 1]
+#&gt;   new_col
+#&gt;   &lt;chr&gt;  
+#&gt; 1 a_b_c  
+#&gt; 2 a_b_c  
+#&gt; 3 a_b_NA </div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='unite..html'>unite.</a></span>(<span class='st'>"new_col"</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;    a b    c new_col
-#&gt; 1: a b    c     b_c
-#&gt; 2: a b    c     b_c
-#&gt; 3: a b &lt;NA&gt;    b_NA</div><div class='input'>
+  <span class='fu'><a href='unite..html'>unite.</a></span>(<span class='st'>"new_col"</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # tidytable [3 × 4]
+#&gt;   a     b     c     new_col
+#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  
+#&gt; 1 a     b     c     b_c    
+#&gt; 2 a     b     c     b_c    
+#&gt; 3 a     b     &lt;NA&gt;  b_NA   </div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='unite..html'>unite.</a></span>(<span class='st'>"new_col"</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;    a new_col
-#&gt; 1: a     b_c
-#&gt; 2: a     b_c
-#&gt; 3: a       b</div><div class='input'>
+  <span class='fu'><a href='unite..html'>unite.</a></span>(<span class='st'>"new_col"</span>, <span class='no'>b</span>, <span class='no'>c</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # tidytable [3 × 2]
+#&gt;   a     new_col
+#&gt;   &lt;chr&gt; &lt;chr&gt;  
+#&gt; 1 a     b_c    
+#&gt; 2 a     b_c    
+#&gt; 3 a     b      </div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='unite..html'>unite.</a></span>()</div><div class='output co'>#&gt;    new_col
-#&gt; 1:   a_b_c
-#&gt; 2:   a_b_c
-#&gt; 3:  a_b_NA</div></pre>
+  <span class='fu'><a href='unite..html'>unite.</a></span>()</div><div class='output co'>#&gt; # tidytable [3 × 1]
+#&gt;   new_col
+#&gt;   &lt;chr&gt;  
+#&gt; 1 a_b_c  
+#&gt; 2 a_b_c  
+#&gt; 3 a_b_NA </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

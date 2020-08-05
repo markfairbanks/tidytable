@@ -22,7 +22,7 @@ as_tidytable <- function(x) {
 
 #' @export
 as_tidytable.tidytable <- function(x) {
-    x
+  x
 }
 
 #' @export
@@ -37,15 +37,10 @@ as_tidytable.default <- function(x) {
 as_dt <- as_tidytable
 
 # Add tidytable class to an object
-add_class <- function(.data) {
-  if (knitr_installed) {
-    if (!knitr::opts_chunk$get()$paged.print %||% TRUE) {
-      class(.data) <- c("tidytable", "data.table", "data.frame")
-    } else {
-      class(.data) <- c("data.table", "tidytable", "data.frame")
-    }
-  }
-  .data
-}
+add_class <- function(.df) {
 
-knitr_installed <- rlang::is_installed("knitr")
+  class(.df) <- c("tidytable", "data.table", "data.frame")
+
+  .df
+
+}
