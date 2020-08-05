@@ -174,11 +174,13 @@ use with anti_join.() to find out which combinations are missing
     <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>)
 
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='expand..html'>expand.</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)</div><div class='output co'>#&gt;    x y
-#&gt; 1: 1 1
-#&gt; 2: 1 2
-#&gt; 3: 2 1
-#&gt; 4: 2 2</div></pre>
+  <span class='fu'><a href='expand..html'>expand.</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)</div><div class='output co'>#&gt; # tidytable [4 × 2]
+#&gt;       x     y
+#&gt;   &lt;int&gt; &lt;int&gt;
+#&gt; 1     1     1
+#&gt; 2     1     2
+#&gt; 3     2     1
+#&gt; 4     2     2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

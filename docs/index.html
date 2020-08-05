@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Tidy Interface to data.table">
-<meta property="og:description" content="Tidy interface to data.table. rlang compatible, which allows the user to build custom functions much like they would in the tidyverse.">
+<meta property="og:description" content="A tidy interface to data.table that is rlang compatible, giving users the speed of data.table with the clean syntax of the tidyverse.">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -172,7 +172,7 @@
 <p><code>tidytable</code> allows you to select/drop columns just like you would in the tidyverse.</p>
 <p>Normal selection can be mixed with:</p>
 <ul>
-<li>Predicates: <code><a href="reference/where.html">where(is.numeric)</a></code>, <code><a href="reference/where.html">where(is.character)</a></code>, etc.</li>
+<li>Predicates: <code>where(is.numeric)</code>, <code>where(is.character)</code>, etc.</li>
 <li>Select helpers: <code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/all_of.html">any_of()</a></code>, etc.</li>
 </ul>
 <!-- end list --><div class="sourceCode" id="cb5"><pre class="r"><span class="no">test_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="kw">a</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>),
@@ -181,7 +181,7 @@
                       <span class="kw">d</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>))
 
 <span class="no">test_df</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/select..html">select.</a></span>(<span class="fu"><a href="reference/where.html">where</a></span>(<span class="no">is.numeric</span>), <span class="no">d</span>)
+  <span class="fu"><a href="reference/select..html">select.</a></span>(<span class="fu">where</span>(<span class="no">is.numeric</span>), <span class="no">d</span>)
 <span class="co">#&gt;        a     b     d</span>
 <span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;</span>
 <span class="co">#&gt; 1:     1     4     a</span>
@@ -189,7 +189,7 @@
 <span class="co">#&gt; 3:     3     6     c</span></pre></div>
 <p>To drop columns use a <code><a href="https://rdrr.io/r/base/Arithmetic.html">-</a></code> sign:</p>
 <div class="sourceCode" id="cb6"><pre class="r"><span class="no">test_df</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/select..html">select.</a></span>(-<span class="fu"><a href="reference/where.html">where</a></span>(<span class="no">is.numeric</span>), -<span class="no">d</span>)
+  <span class="fu"><a href="reference/select..html">select.</a></span>(-<span class="fu">where</span>(<span class="no">is.numeric</span>), -<span class="no">d</span>)
 <span class="co">#&gt;        c</span>
 <span class="co">#&gt;    &lt;chr&gt;</span>
 <span class="co">#&gt; 1:     a</span>

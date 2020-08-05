@@ -48,7 +48,7 @@
 
 <meta property="og:title" content="Number of observations in each group — n." />
 <meta property="og:description" content="Helper function that can be used to find counts by group.
-Can be used inside `summarize.()`, `mutate.()`, &amp;amp; `filter.()`" />
+Can be used inside summarize.(), mutate.(), &amp;amp; filter.()" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -139,7 +139,7 @@ Can be used inside `summarize.()`, `mutate.()`, &amp;amp; `filter.()`" />
 
     <div class="ref-description">
     <p>Helper function that can be used to find counts by group.</p>
-<p>Can be used inside `summarize.()`, `mutate.()`, &amp; `filter.()`</p>
+<p>Can be used inside <code><a href='summarize..html'>summarize.()</a></code>, <code><a href='mutate..html'>mutate.()</a></code>, &amp; <code><a href='filter..html'>filter.()</a></code></p>
     </div>
 
     <pre class="usage"><span class='fu'><a href='n..html'>n.</a></span>()</pre>
@@ -154,14 +154,18 @@ Can be used inside `summarize.()`, `mutate.()`, &amp;amp; `filter.()`" />
 
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='summarize..html'>summarize.</a></span>(<span class='kw'>count</span> <span class='kw'>=</span> <span class='fu'><a href='n..html'>n.</a></span>(),
-             <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt;    z count
-#&gt; 1: a     2
-#&gt; 2: b     1</div><div class='input'>
+             <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt; # tidytable [2 × 2]
+#&gt;   z     count
+#&gt;   &lt;chr&gt; &lt;int&gt;
+#&gt; 1 a         2
+#&gt; 2 b         1</div><div class='input'>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>count</span> <span class='kw'>=</span> <span class='fu'><a href='n..html'>n.</a></span>())</div><div class='output co'>#&gt;    x y z count
-#&gt; 1: 1 4 a     3
-#&gt; 2: 2 5 a     3
-#&gt; 3: 3 6 b     3</div></pre>
+  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>count</span> <span class='kw'>=</span> <span class='fu'><a href='n..html'>n.</a></span>())</div><div class='output co'>#&gt; # tidytable [3 × 4]
+#&gt;       x     y z     count
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;int&gt;
+#&gt; 1     1     4 a         3
+#&gt; 2     2     5 a         3
+#&gt; 3     3     6 b         3</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
