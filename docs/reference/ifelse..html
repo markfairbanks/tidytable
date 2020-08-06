@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Vectorized if — ifelse. • tidytable</title>
+<title>Fast ifelse — ifelse. • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,9 @@
 
 
 
-<meta property="og:title" content="Vectorized if — ifelse." />
+<meta property="og:title" content="Fast ifelse — ifelse." />
 <meta property="og:description" content="ifelse.() utilizes data.table::fifelse() in the background, but automatically
-converts NAs to their proper type" />
+converts NAs to their proper type." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -132,14 +132,14 @@ converts NAs to their proper type" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Vectorized if</h1>
+    <h1>Fast ifelse</h1>
     <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/ifelse.R'><code>R/ifelse.R</code></a></small>
     <div class="hidden name"><code>ifelse..Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p><code><a href='ifelse..html'>ifelse.()</a></code> utilizes <code><a href='https://Rdatatable.gitlab.io/data.table/reference/fifelse.html'>data.table::fifelse()</a></code> in the background, but automatically
-converts NAs to their proper type</p>
+converts NAs to their proper type.</p>
     </div>
 
     <pre class="usage"><span class='fu'><a href='ifelse..html'>ifelse.</a></span>(<span class='no'>conditions</span>, <span class='no'>true</span>, <span class='no'>false</span>, <span class='kw'>na</span> <span class='kw'>=</span> <span class='fl'>NA</span>)</pre>
@@ -173,11 +173,11 @@ converts NAs to their proper type</p>
 <span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>)
 
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>new_col</span> <span class='kw'>=</span> <span class='fu'><a href='ifelse..html'>ifelse.</a></span>(<span class='no'>x</span> <span class='kw'>&gt;</span> <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>1</span>))</div><div class='output co'>#&gt; # tidytable [5 × 2]
+  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>new_col</span> <span class='kw'>=</span> <span class='fu'><a href='ifelse..html'>ifelse.</a></span>(<span class='no'>x</span> <span class='kw'>&gt;</span> <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>0</span>))</div><div class='output co'>#&gt; # tidytable [5 × 2]
 #&gt;       x new_col
 #&gt;   &lt;int&gt;   &lt;dbl&gt;
-#&gt; 1     1       1
-#&gt; 2     2       1
+#&gt; 1     1       0
+#&gt; 2     2       0
 #&gt; 3     3       2
 #&gt; 4     4       2
 #&gt; 5     5       2</div></pre>

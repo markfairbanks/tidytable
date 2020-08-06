@@ -186,8 +186,8 @@
     <tr>
       <th>.names</th>
       <td><p>A glue specification that helps with renaming output columns.
-<code>{col}</code> stands for the selected column, and <code>{fn}</code> stands for the name of the function being applied.
-The default (<code>NULL</code>) is equivalent to <code>"{col}"</code> for a single function case and "<code>{col}_{fn}</code>"</p></td>
+<code>{.col}</code> stands for the selected column, and <code>{.fn}</code> stands for the name of the function being applied.
+The default (<code>NULL</code>) is equivalent to <code>"{.col}"</code> for a single function case and "<code>{.col}_{.fn}</code>"</p></td>
     </tr>
     <tr>
       <th>by</th>
@@ -201,7 +201,7 @@ The default (<code>NULL</code>) is equivalent to <code>"{col}"</code> for a sing
                       <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>4</span>:<span class='fl'>6</span>,
                       <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span>))
 
-<span class='co'># Single function</span>
+<span class='co'># Pass a single function</span>
 <span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='summarize_across..html'>summarize_across.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>a</span>, <span class='no'>b</span>), <span class='no'>mean</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # tidytable [1 × 2]
 #&gt;       a     b
@@ -236,7 +236,7 @@ The default (<code>NULL</code>) is equivalent to <code>"{col}"</code> for a sing
                     <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>avg</span> <span class='kw'>=</span> <span class='no'>mean</span>,
                          <span class='kw'>max</span> <span class='kw'>=</span> ~ <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='no'>.x</span>)),
                     <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>,
-                    <span class='kw'>.names</span> <span class='kw'>=</span> <span class='st'>"{col}_test_{fn}"</span>)</div><div class='output co'>#&gt; # tidytable [2 × 5]
+                    <span class='kw'>.names</span> <span class='kw'>=</span> <span class='st'>"{.col}_test_{.fn}"</span>)</div><div class='output co'>#&gt; # tidytable [2 × 5]
 #&gt;   z     a_test_avg b_test_avg a_test_max b_test_max
 #&gt;   &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;int&gt;      &lt;int&gt;
 #&gt; 1 a            1.5        4.5          2          5

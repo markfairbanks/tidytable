@@ -176,8 +176,8 @@
     <tr>
       <th>.names</th>
       <td><p>A glue specification that helps with renaming output columns.
-<code>{col}</code> stands for the selected column, and <code>{fn}</code> stands for the name of the function being applied.
-The default (<code>NULL</code>) is equivalent to <code>"{col}"</code> for a single function case and "<code>{col}_{fn}</code>"</p></td>
+<code>{.col}</code> stands for the selected column, and <code>{.fn}</code> stands for the name of the function being applied.
+The default (<code>NULL</code>) is equivalent to <code>"{.col}"</code> for a single function case and "<code>{.col}_{.fn}</code>"</p></td>
     </tr>
     <tr>
       <th>by</th>
@@ -223,7 +223,7 @@ The default (<code>NULL</code>) is equivalent to <code>"{col}"</code> for a sing
 #&gt; 3     1     2 b         2     4         8         9</div><div class='input'><span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>, <span class='no'>y</span>),
                  <span class='kw'>.fns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>new</span> <span class='kw'>=</span> ~ <span class='no'>.x</span> * <span class='fl'>2</span>, <span class='kw'>another</span> <span class='kw'>=</span> ~ <span class='no'>.x</span> + <span class='fl'>7</span>),
-                 <span class='kw'>.names</span> <span class='kw'>=</span> <span class='st'>"{col}_test_{fn}"</span>)</div><div class='output co'>#&gt; # tidytable [3 × 7]
+                 <span class='kw'>.names</span> <span class='kw'>=</span> <span class='st'>"{.col}_test_{.fn}"</span>)</div><div class='output co'>#&gt; # tidytable [3 × 7]
 #&gt;       x     y z     x_test_new y_test_new x_test_another y_test_another
 #&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;
 #&gt; 1     1     2 a              2          4              8              9
