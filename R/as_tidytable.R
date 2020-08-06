@@ -26,17 +26,20 @@ as_tidytable.tidytable <- function(x) {
 }
 
 #' @export
+as_tidytable.data.table <- function(x) {
+  add_class(x)
+}
+
+#' @export
 as_tidytable.default <- function(x) {
-  if (is.data.table(x)) x <- add_class(x)
-  else x <- add_class(as.data.table(x))
-  x
+  add_class(as.data.table(x))
 }
 
 #' @export
 #' @rdname as_tidytable
 as_dt <- as_tidytable
 
-# Add tidytable class to an object
+# Add tidytable class to a data.table
 add_class <- function(.df) {
 
   class(.df) <- c("tidytable", "data.table", "data.frame")
