@@ -1,8 +1,8 @@
-#' Vectorized if
+#' Fast ifelse
 #'
 #' @description
 #' `ifelse.()` utilizes `data.table::fifelse()` in the background, but automatically
-#' converts NAs to their proper type
+#' converts NAs to their proper type.
 #'
 #' @param conditions Conditions to test on
 #' @param true Values to return if conditions evaluate to TRUE
@@ -20,14 +20,14 @@
 #' test_df <- data.table(x = x)
 #'
 #' test_df %>%
-#'   mutate.(new_col = ifelse.(x > 2, 2, 1))
+#'   mutate.(new_col = ifelse.(x > 2, 2, 0))
 ifelse. <- function(conditions, true, false, na = NA) {
 
+  conditions <- conditions
   true <- true
   false <- false
   na <- na
 
-  vec_assert(conditions, logical())
   ptype <- vec_ptype_common(true, false, na)
 
   true <- vec_cast(true, ptype)
