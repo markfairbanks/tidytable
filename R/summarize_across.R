@@ -9,8 +9,8 @@
 #' @param ... Other arguments for the passed function
 #' @param .by Columns to group by
 #' @param .names A glue specification that helps with renaming output columns.
-#' `{col}` stands for the selected column, and `{fn}` stands for the name of the function being applied.
-#' The default (`NULL`) is equivalent to `"{col}"` for a single function case and "`{col}_{fn}`"
+#' `{.col}` stands for the selected column, and `{.fn}` stands for the name of the function being applied.
+#' The default (`NULL`) is equivalent to `"{.col}"` for a single function case and "`{.col}_{.fn}`"
 #' @param by This argument has been renamed to .by and is deprecated
 #'
 #' @md
@@ -21,7 +21,7 @@
 #'                       b = 4:6,
 #'                       z = c("a", "a", "b"))
 #'
-#' # Single function
+#' # Pass a single function
 #' test_df %>%
 #'   summarize_across.(c(a, b), mean, na.rm = TRUE)
 #'
@@ -46,7 +46,7 @@
 #'                     list(avg = mean,
 #'                          max = ~ max(.x)),
 #'                     .by = z,
-#'                     .names = "{col}_test_{fn}")
+#'                     .names = "{.col}_test_{.fn}")
 summarize_across. <- function(.df, .cols = everything(), .fns, ...,
                               .by = NULL, .names = NULL, by = NULL) {
   UseMethod("summarize_across.")
@@ -69,13 +69,12 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
 
   if (!is.list(.fns)) {
 
-    if (is.null(.names)) .names <- "{col}"
+    .names <- .names %||% "{.col}"
 
-    .col_names <- vec_as_names(glue(.names, col = .cols, fn = "1"),
-                               repair = "check_unique",
-                               quiet = TRUE)
-
-
+    .col_names <- vec_as_names(
+      glue(.names, .col = .cols, .fn = "1", col = .cols, fn = "1"),
+      repair = "check_unique", quiet = TRUE
+    )
 
     .fns <- as_function(.fns)
 
@@ -94,9 +93,9 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
 
     fn_names <- names(.fns)
 
-    if (is.null(.names)) .names <- "{col}_{fn}"
+    .names <- .names %||% "{.col}_{.fn}"
 
-    new_names <- unlist(map.(fn_names, ~ glue(.names, col = .cols, fn = .x)))
+    new_names <- unlist(map.(fn_names, ~ glue(.names, .col = .cols, .fn = .x, col = .cols, fn = .x)))
 
     # Convert .fns to list of map./lapply calls
     .fns <- map.(.fns, ~ call2('map.', quo(.SD), .x))

@@ -141,6 +141,17 @@ test_that("mutate_across() works with newly named columns", {
 test_that("mutate_across() works with newly named columns using .names with single .fn", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
+    mutate_across.(c(x:y), ~ .x + 1, .names = "new_{.col}")
+
+  expect_named(df, c("x","y","z","new_x","new_y"))
+  expect_equal(df$new_x, c(2,2,2))
+  expect_equal(df$new_y, c(3,3,3))
+})
+
+test_that("mutate_across() works with newly named columns using .names with single .fn using col", {
+  # This test will need to be removed when {col} is deprecated
+  df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
+  df <- df %>%
     mutate_across.(c(x:y), ~ .x + 1, .names = "new_{col}")
 
   expect_named(df, c("x","y","z","new_x","new_y"))
@@ -149,6 +160,17 @@ test_that("mutate_across() works with newly named columns using .names with sing
 })
 
 test_that("mutate_across() works with newly named columns using .names", {
+  df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
+  df <- df %>%
+    mutate_across.(c(x:y), list(new = function(.x) .x + 1), .names = "{.fn}_{.col}")
+
+  expect_named(df, c("x","y","z","new_x","new_y"))
+  expect_equal(df$new_x, c(2,2,2))
+  expect_equal(df$new_y, c(3,3,3))
+})
+
+test_that("mutate_across() works with newly named columns using .names with using fn and col", {
+  # This test will need to be removed when {col} and {fn} is deprecated
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
     mutate_across.(c(x:y), list(new = function(.x) .x + 1), .names = "{fn}_{col}")
@@ -161,7 +183,7 @@ test_that("mutate_across() works with newly named columns using .names", {
 test_that("mutate_across() works with newly named columns using .names w/ autonaming", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
-    mutate_across.(c(x:y), list(new = ~ .x + 1, ~ .x + 2), .names = "{col}_{fn}_stuff")
+    mutate_across.(c(x:y), list(new = ~ .x + 1, ~ .x + 2), .names = "{.col}_{.fn}_stuff")
 
   expect_named(df, c("x","y","z","x_new_stuff","y_new_stuff", "x_2_stuff", "y_2_stuff"))
   expect_equal(df$x_new_stuff, c(2,2,2))

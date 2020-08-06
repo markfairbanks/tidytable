@@ -37,8 +37,8 @@ summarise_across.(
 \item{.by}{Columns to group by}
 
 \item{.names}{A glue specification that helps with renaming output columns.
-\code{{col}} stands for the selected column, and \code{{fn}} stands for the name of the function being applied.
-The default (\code{NULL}) is equivalent to \code{"{col}"} for a single function case and "\verb{\{col\}_\{fn\}}"}
+\code{{.col}} stands for the selected column, and \code{{.fn}} stands for the name of the function being applied.
+The default (\code{NULL}) is equivalent to \code{"{.col}"} for a single function case and "\verb{\{.col\}_\{.fn\}}"}
 
 \item{by}{This argument has been renamed to .by and is deprecated}
 }
@@ -50,7 +50,7 @@ test_df <- data.table(a = 1:3,
                       b = 4:6,
                       z = c("a", "a", "b"))
 
-# Single function
+# Pass a single function
 test_df \%>\%
   summarize_across.(c(a, b), mean, na.rm = TRUE)
 
@@ -75,5 +75,5 @@ test_df \%>\%
                     list(avg = mean,
                          max = ~ max(.x)),
                     .by = z,
-                    .names = "{col}_test_{fn}")
+                    .names = "{.col}_test_{.fn}")
 }

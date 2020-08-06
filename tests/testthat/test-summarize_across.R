@@ -74,6 +74,22 @@ test_that("can pass list of named functions with .by and .names", {
   test_df <- tidytable(a = 1:3, b = 4:6, z = c("a", "a", "b"))
 
   result_df <- test_df %>%
+    summarize_across.(c(a, b), list(avg = mean, max = max), .by = z, .names = "{.fn}_{.col}")
+
+  expect_named(result_df, c("z", "avg_a", "avg_b", "max_a", "max_b"))
+  expect_equal(result_df$avg_a, c(1.5, 3))
+  expect_equal(result_df$avg_b, c(4.5, 6))
+  expect_equal(result_df$max_a, c(2, 3))
+  expect_equal(result_df$max_b, c(5, 6))
+})
+
+test_that("can pass list of named functions with .by and .names using fn and col", {
+
+  # This test will need to be removed when {col} and {fn} is deprecated
+
+  test_df <- tidytable(a = 1:3, b = 4:6, z = c("a", "a", "b"))
+
+  result_df <- test_df %>%
     summarize_across.(c(a, b), list(avg = mean, max = max), .by = z, .names = "{fn}_{col}")
 
   expect_named(result_df, c("z", "avg_a", "avg_b", "max_a", "max_b"))

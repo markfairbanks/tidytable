@@ -26,8 +26,8 @@ mutate_across.(
 \item{.by}{Columns to group by}
 
 \item{.names}{A glue specification that helps with renaming output columns.
-\code{{col}} stands for the selected column, and \code{{fn}} stands for the name of the function being applied.
-The default (\code{NULL}) is equivalent to \code{"{col}"} for a single function case and "\verb{\{col\}_\{fn\}}"}
+\code{{.col}} stands for the selected column, and \code{{.fn}} stands for the name of the function being applied.
+The default (\code{NULL}) is equivalent to \code{"{.col}"} for a single function case and "\verb{\{.col\}_\{.fn\}}"}
 
 \item{by}{This argument has been renamed to .by and is deprecated}
 }
@@ -55,5 +55,5 @@ test_df \%>\%
 test_df \%>\%
   mutate_across.(c(x, y),
                  .fns = list(new = ~ .x * 2, another = ~ .x + 7),
-                 .names = "{col}_test_{fn}")
+                 .names = "{.col}_test_{.fn}")
 }

@@ -9,8 +9,8 @@
 #' @param ... Other arguments for the passed function
 #' @param .by Columns to group by
 #' @param .names A glue specification that helps with renaming output columns.
-#' `{col}` stands for the selected column, and `{fn}` stands for the name of the function being applied.
-#' The default (`NULL`) is equivalent to `"{col}"` for a single function case and "`{col}_{fn}`"
+#' `{.col}` stands for the selected column, and `{.fn}` stands for the name of the function being applied.
+#' The default (`NULL`) is equivalent to `"{.col}"` for a single function case and "`{.col}_{.fn}`"
 #' @param by This argument has been renamed to .by and is deprecated
 #'
 #' @export
@@ -37,7 +37,7 @@
 #' test_df %>%
 #'   mutate_across.(c(x, y),
 #'                  .fns = list(new = ~ .x * 2, another = ~ .x + 7),
-#'                  .names = "{col}_test_{fn}")
+#'                  .names = "{.col}_test_{.fn}")
 mutate_across. <- function(.df, .cols = everything(), .fns, ...,
                            .by = NULL, .names = NULL, by = NULL) {
   UseMethod("mutate_across.")
@@ -61,11 +61,12 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
 
   if (!is.list(.fns)) {
 
-    if (is.null(.names)) .names <- "{col}"
+    .names <- .names %||% "{.col}"
 
-    .col_names <- vec_as_names(glue(.names, col = .cols, fn = "1"),
-                               repair = "check_unique",
-                               quiet = TRUE)
+    .col_names <- vec_as_names(
+      glue(.names, .col = .cols, .fn = "1", col = .cols, fn = "1"),
+      repair = "check_unique", quiet = TRUE
+    )
 
     eval_quo(
       .df[, (.col_names) := map.(.SD, .fns, ...), .SDcols = !!.cols, by = !!.by],
@@ -79,13 +80,14 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
 
     fn_names <- names(.fns)
 
-    if (is.null(.names)) .names <- "{col}_{fn}"
+    .names <- .names %||% "{.col}_{.fn}"
 
     for (i in seq_along(fn_names)) {
 
-      .col_names <- vec_as_names(glue(.names, col = .cols, fn = fn_names[[i]]),
-                                 repair = "check_unique",
-                                 quiet = TRUE)
+      .col_names <- vec_as_names(
+        glue(.names, .col = .cols, .fn = fn_names[[i]], col = .cols, fn = fn_names[[i]]),
+        repair = "check_unique", quiet = TRUE
+      )
 
       if (any(.col_names %in% names(.df))) {
         overwrite_cols <- .col_names[.col_names %in% names(.df)]
