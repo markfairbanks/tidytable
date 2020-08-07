@@ -117,7 +117,7 @@ A full overview of selection options can be found [here](https://tidyselect.r-li
 
 ## `rlang` compatibility
 
-`rlang` can be used to write custom functions with `tidytable` functions.
+`rlang` can be used to write custom functions with `tidytable` functions:
 
 ##### Custom function with `mutate.()`
 

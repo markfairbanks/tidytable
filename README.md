@@ -58,11 +58,12 @@ test_df %>%
   arrange.(x, y) %>%
   mutate.(double_x = x * 2,
           double_y = y * 2)
-#>        x     y     z double_x double_y
-#>    <dbl> <dbl> <chr>    <dbl>    <dbl>
-#> 1:     1     4     a        2        8
-#> 2:     2     5     a        4       10
-#> 3:     3     6     b        6       12
+#> # tidytable [3 × 5]
+#>       x     y z     double_x double_y
+#>   <dbl> <dbl> <chr>    <dbl>    <dbl>
+#> 1     1     4 a            2        8
+#> 2     2     5 a            4       10
+#> 3     3     6 b            6       12
 ```
 
 A full list of functions can be found
@@ -90,10 +91,11 @@ test_df %>%
   summarize.(avg_x = mean(x),
              count = n.(),
              .by = z)
-#>        z avg_x count
-#>    <chr> <dbl> <int>
-#> 1:     a   1.5     2
-#> 2:     b   3.0     1
+#> # tidytable [2 × 3]
+#>   z     avg_x count
+#>   <chr> <dbl> <int>
+#> 1 a       1.5     2
+#> 2 b       3       1
 ```
 
 ## `tidyselect` support
@@ -117,11 +119,12 @@ test_df <- data.table(a = c(1,2,3),
 
 test_df %>%
   select.(where(is.numeric), d)
-#>        a     b     d
-#>    <dbl> <dbl> <chr>
-#> 1:     1     4     a
-#> 2:     2     5     b
-#> 3:     3     6     c
+#> # tidytable [3 × 3]
+#>       a     b d    
+#>   <dbl> <dbl> <chr>
+#> 1     1     4 a    
+#> 2     2     5 b    
+#> 3     3     6 c
 ```
 
 To drop columns use a `-` sign:
@@ -129,11 +132,12 @@ To drop columns use a `-` sign:
 ``` r
 test_df %>%
   select.(-where(is.numeric), -d)
-#>        c
-#>    <chr>
-#> 1:     a
-#> 2:     a
-#> 3:     b
+#> # tidytable [3 × 1]
+#>   c    
+#>   <chr>
+#> 1 a    
+#> 2 a    
+#> 3 b
 ```
 
 These same ideas can be used whenever selecting columns in `tidytable`
@@ -146,7 +150,7 @@ A full overview of selection options can be found
 ## `rlang` compatibility
 
 `rlang` can be used to write custom functions with `tidytable`
-functions.
+functions:
 
 ##### Custom function with `mutate.()`
 
@@ -170,11 +174,12 @@ add_one <- function(data, add_col) {
 
 df %>%
   add_one(x)
-#>        x     y     z new_col
-#>    <dbl> <dbl> <chr>   <dbl>
-#> 1:     1     1     a       2
-#> 2:     1     1     a       2
-#> 3:     1     1     b       2
+#> # tidytable [3 × 4]
+#>       x     y z     new_col
+#>   <dbl> <dbl> <chr>   <dbl>
+#> 1     1     1 a           2
+#> 2     1     1 a           2
+#> 3     1     1 b           2
 ```
 
 ##### Custom function with `summarize.()`
@@ -190,10 +195,11 @@ find_mean <- function(data, grouping_cols, col) {
 
 df %>%
   find_mean(grouping_cols = c(y, z), col = x)
-#>        y     z   avg
-#>    <chr> <chr> <dbl>
-#> 1:     a     a   3.5
-#> 2:     b     b   8.5
+#> # tidytable [2 × 3]
+#>   y     z       avg
+#>   <chr> <chr> <dbl>
+#> 1 a     a       3.5
+#> 2 b     b       8.5
 ```
 
 ## Auto-conversion
@@ -227,10 +233,11 @@ df %>%
   dt(order(x, y)) %>%
   dt(, double_x := x * 2) %>%
   dt(, list(avg_x = mean(x)), by = z)
-#>        z avg_x
-#>    <chr> <dbl>
-#> 1:     a   1.5
-#> 2:     b   3.0
+#> # tidytable [2 × 2]
+#>   z     avg_x
+#>   <chr> <dbl>
+#> 1 a       1.5
+#> 2 b       3
 ```
 
 ## Speed Comparisons

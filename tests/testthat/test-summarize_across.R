@@ -1,3 +1,6 @@
+defaultW <- getOption("warn")
+options(warn = -1)
+
 test_that("single function works", {
   test_df <- tidytable(a = 1:3, b = 4:6, z = c("a", "a", "b"))
 
@@ -98,3 +101,5 @@ test_that("can pass list of named functions with .by and .names using fn and col
   expect_equal(result_df$max_a, c(2, 3))
   expect_equal(result_df$max_b, c(5, 6))
 })
+
+options(warn = defaultW)
