@@ -6,7 +6,10 @@
 #' @export
 #'
 #' @examples
-#' c(1,3,11) %notin% 1:10
+#' test_df <- tidytable(x = 1:4, y = 1:4)
+#'
+#' test_df %>%
+#'   filter.(x %notin% c(2, 4))
 '%notin%' <- function(x,y){
   # vctrs is faster than base %in%, even inside data.table filter
   !vec_in(x, y)

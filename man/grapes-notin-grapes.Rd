@@ -15,5 +15,8 @@ x \%notin\% y
 notin operator
 }
 \examples{
-c(1,3,11) \%notin\% 1:10
+test_df <- tidytable(x = 1:4, y = 1:4)
+
+test_df \%>\%
+  filter.(x \%notin\% c(2, 4))
 }

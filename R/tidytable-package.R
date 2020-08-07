@@ -2,13 +2,9 @@
 #' @import data.table
 #' @import tidyselect
 #' @import glue glue
+#' @rawNamespace import(rlang, except = `:=`)
 #' @importFrom lifecycle deprecate_soft deprecate_warn expect_deprecated
 #' @importFrom methods as
-#' @importFrom rlang abort arg_match as_function caller_env call2 enexpr enexprs enquo enquos env
-#' @importFrom rlang expr expr_text eval_tidy have_name is_bare_vector is_empty is_formula is_list is_named
-#' @importFrom rlang new_data_mask parse_expr quo quo_get_env quo_is_null quo_squash quo_text
-#' @importFrom rlang set_names squash sym syms warn
-#' @importFrom rlang `%|%` `%||%`
 #' @importFrom stats as.formula na.omit
 #' @importFrom tibble glimpse trunc_mat
 #' @importFrom utils capture.output head tail type.convert
