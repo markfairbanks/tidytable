@@ -26,7 +26,7 @@ summarise.(.df, ..., .by = NULL, .sort = FALSE, by = NULL)
 }
 }}
 
-\item{.sort}{Should the resulting data.table be sorted}
+\item{.sort}{\emph{experimental}: Should the resulting data.table be sorted by the grouping columns?}
 
 \item{by}{This argument has been renamed to .by and is deprecated}
 }

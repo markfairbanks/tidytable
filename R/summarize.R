@@ -12,7 +12,7 @@
 #'   + Single predicate: `.by = where(is.character)`
 #'   + Multiple predicates: `.by = c(where(is.character), where(is.factor))`
 #'   + A combination of predicates and column names: `.by = c(where(is.character), b)`
-#' @param .sort Should the resulting data.table be sorted
+#' @param .sort _experimental_: Should the resulting data.table be sorted by the grouping columns?
 #' @param by This argument has been renamed to .by and is deprecated
 #'
 #' @export
