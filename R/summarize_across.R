@@ -11,6 +11,7 @@
 #' @param .names A glue specification that helps with renaming output columns.
 #' `{.col}` stands for the selected column, and `{.fn}` stands for the name of the function being applied.
 #' The default (`NULL`) is equivalent to `"{.col}"` for a single function case and "`{.col}_{.fn}`"
+#' when a list is used for `.fns`.
 #' @param by This argument has been renamed to .by and is deprecated
 #'
 #' @md
