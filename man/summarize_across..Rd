@@ -38,7 +38,7 @@ summarise_across.(
 
 \item{.names}{A glue specification that helps with renaming output columns.
 \code{{.col}} stands for the selected column, and \code{{.fn}} stands for the name of the function being applied.
-The default (\code{NULL}) is equivalent to \code{"{.col}"} for a single function case and "\verb{\{.col\}_\{.fn\}}"
+The default (\code{NULL}) is equivalent to \code{"{.col}"} for a single function case and \code{"{.col}_{.fn}"}
 when a list is used for \code{.fns}.}
 
 \item{by}{This argument has been renamed to .by and is deprecated}

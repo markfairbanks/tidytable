@@ -2,7 +2,7 @@
 % Please edit documentation in R/mutate.R
 \name{mutate.}
 \alias{mutate.}
-\title{Mutate}
+\title{Add/modify/delete columns}
 \usage{
 mutate.(.df, ..., .by = NULL, by = NULL)
 }
@@ -16,7 +16,12 @@ mutate.(.df, ..., .by = NULL, by = NULL)
 \item{by}{This argument has been renamed to .by and is deprecated}
 }
 \description{
-Add new columns or modify existing ones
+With \code{mutate.()} you can do 3 things:
+\itemize{
+\item Add new columns
+\item Modify existing columns
+\item Delete columns
+}
 }
 \examples{
 test_df <- data.table(

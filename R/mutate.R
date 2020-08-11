@@ -1,14 +1,16 @@
-#' Mutate
+#' Add/modify/delete columns
 #'
 #' @description
-#' Add new columns or modify existing ones
+#' With `mutate.()` you can do 3 things:
+#' * Add new columns
+#' * Modify existing columns
+#' * Delete columns
 #'
 #' @param .df A data.frame or data.table
 #' @param ... Columns to add/modify
 #' @param .by Columns to group by
 #' @param by This argument has been renamed to .by and is deprecated
 #'
-#' @md
 #' @export
 #'
 #' @examples

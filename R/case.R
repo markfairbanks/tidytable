@@ -8,12 +8,9 @@
 #' @param ... Sequence of condition/value designations
 #' @param default Default value. Set to NA by default.
 #'
-#' @md
 #' @export
 #'
 #' @examples
-#' library(data.table)
-#'
 #' test_df <- tidytable(
 #'   a = 1:10,
 #'   b = 11:20,

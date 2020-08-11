@@ -17,8 +17,6 @@ This function allows you to use multiple if/else statements in one call.
 Note that this function is called differently than \code{dplyr::case_when}. See examples.
 }
 \examples{
-library(data.table)
-
 test_df <- tidytable(
   a = 1:10,
   b = 11:20,
