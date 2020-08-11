@@ -7,7 +7,7 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/dev%20-0.5.4-green.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/dev%20-0.5.4.9-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN RStudio mirror
@@ -118,26 +118,26 @@ test_df <- data.table(a = c(1,2,3),
                       d = c("a","b","c"))
 
 test_df %>%
-  select.(where(is.numeric), d)
+  select.(a, where(is.character))
 #> # tidytable [3 × 3]
-#>       a     b d    
-#>   <dbl> <dbl> <chr>
-#> 1     1     4 a    
-#> 2     2     5 b    
-#> 3     3     6 c
+#>       a c     d    
+#>   <dbl> <chr> <chr>
+#> 1     1 a     a    
+#> 2     2 a     b    
+#> 3     3 b     c
 ```
 
 To drop columns use a `-` sign:
 
 ``` r
 test_df %>%
-  select.(-where(is.numeric), -d)
+  select.(-a, -where(is.character))
 #> # tidytable [3 × 1]
-#>   c    
-#>   <chr>
-#> 1 a    
-#> 2 a    
-#> 3 b
+#>       b
+#>   <dbl>
+#> 1     4
+#> 2     5
+#> 3     6
 ```
 
 These same ideas can be used whenever selecting columns in `tidytable`
