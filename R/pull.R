@@ -27,9 +27,11 @@ pull..data.frame <- function(.df, var = NULL) {
   var <- enquo(var)
   if (quo_is_null(var)) var <- sym(names(.df)[ncol(.df)])
 
+  qu <- quo_name(quo_get_expr(var))
   # Base R translation is faster than data.table
   eval_quo(
-    '[['(.df, !!var)
+    if ((is.name(quo_get_expr(var)) && exists(qu, envir=quo_get_env(var))) || (!is.name(quo_get_expr(var)) && is.numeric(as.numeric(qu))))   '[['(.df, !!var)
+      else '$'(.df, !!var)
   )
 }
 
