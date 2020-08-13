@@ -22,16 +22,17 @@ pull. <- function(.df, var = NULL) {
 #' @export
 pull..data.frame <- function(.df, var = NULL) {
 
-  .df <- as_tidytable(.df)
+  #removed to enhance performance
+  #.df <- as_tidytable(.df)
 
   var <- enquo(var)
   if (quo_is_null(var)) var <- sym(names(.df)[ncol(.df)])
 
-  qu <- quo_name(quo_get_expr(var))
+  
   # Base R translation is faster than data.table
   eval_quo(
-    if ((is.name(quo_get_expr(var)) && exists(qu, envir=quo_get_env(var))) || (!is.name(quo_get_expr(var)) && is.numeric(as.numeric(qu))))   '[['(.df, !!var)
-      else '$'(.df, !!var)
+    if (is.name(quo_get_expr(var)))  '$'(.df, !!var)
+      else '[['(.df, !!var)
   )
 }
 
