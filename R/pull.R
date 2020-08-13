@@ -29,7 +29,7 @@ pull..data.frame <- function(.df, var = NULL) {
 
   # Base R translation is faster than data.table
   eval_quo(
-    '$'(.df, !!var)
+    '[['(.df, !!var)
   )
 }
 
