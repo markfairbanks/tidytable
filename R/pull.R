@@ -23,14 +23,11 @@ pull. <- function(.df, var = NULL) {
 pull..data.frame <- function(.df, var = NULL) {
 
   var<-enquo(var)
-
-  if (quo_is_null(var)) return(.df[[ncol(.df)]])
-
   var <- quo_name(var)
 
-  .df[[if (suppressWarnings(!is.na(as.numeric(var)))) as.numeric(var) else var ]]
-
+  if (var=="NULL") return(.df[[ncol(.df)]])
   
+  .df[[if (suppressWarnings(!is.na(as.numeric(var)))) as.numeric(var) else var ]]
 }
 
 #' @export
