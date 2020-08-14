@@ -1,5 +1,14 @@
 # tidytable 0.5.4.9 (in development)
 
+#### Breaking changes
+* `pull.()`: defaults to `var = -1` instead of `var = NULL`
+
+#### Functionality improvements
+* `pull.()`: Numerical selection now works
+
+#### Bug fixes
+* `rename.()` works when there are spaces in the column names
+
 # tidytable 0.5.4
 
 #### Breaking changes

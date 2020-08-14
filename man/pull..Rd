@@ -4,12 +4,17 @@
 \alias{pull.}
 \title{Pull out a single variable}
 \usage{
-pull.(.df, var = NULL)
+pull.(.df, var = -1)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
 
-\item{var}{The column to pull from the data.table. If NULL, pulls the last column.}
+\item{var}{The column to pull from the data.table as:
+\itemize{
+\item a variable name
+\item a positive integer giving the column position
+\item a negative integer giving the column position counting from the right
+}}
 }
 \description{
 Pull a single variable from a data.table as a vector.
@@ -21,4 +26,10 @@ test_df <- data.table(
 
 test_df \%>\%
   pull.(y)
+
+test_df \%>\%
+  pull.(1)
+
+test_df \%>\%
+  pull.(-1)
 }

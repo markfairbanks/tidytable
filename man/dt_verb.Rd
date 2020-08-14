@@ -172,7 +172,7 @@ dt_pivot_wider(
   values_fn = NULL
 )
 
-dt_pull(.df, var = NULL)
+dt_pull(.df, var = -1)
 
 dt_relocate(.df, ..., .before = NULL, .after = NULL)
 
@@ -296,7 +296,12 @@ Typically used when you have additional variables that is directly related.
 
 \item{values_fn}{Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.}
 
-\item{var}{The column to pull from the data.table. If NULL, pulls the last column.}
+\item{var}{The column to pull from the data.table as:
+\itemize{
+\item a variable name
+\item a positive integer giving the column position
+\item a negative integer giving the column position counting from the right
+}}
 
 \item{.before}{Column to move selection before}
 
