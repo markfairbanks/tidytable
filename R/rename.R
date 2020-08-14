@@ -27,7 +27,7 @@ rename..data.frame <- function(.df, ...) {
   .df <- shallow(.df)
 
   new_names <- names(dots)
-  old_names <- map_chr.(dots, quo_text)
+  old_names <- map_chr.(dots, quo_name)
 
   setnames(.df, old_names, new_names)
 
