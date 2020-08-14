@@ -4,7 +4,10 @@
 #' Pull a single variable from a data.table as a vector.
 #'
 #' @param .df A data.frame or data.table
-#' @param var The column to pull from the data.table. If NULL, pulls the last column.
+#' @param var The column to pull from the data.table as:
+#' * a variable name
+#' * a positive integer giving the column position
+#' * a negative integer giving the column position counting from the right
 #'
 #' @export
 #'
@@ -15,28 +18,34 @@
 #'
 #' test_df %>%
 #'   pull.(y)
-pull. <- function(.df, var = NULL) {
+#'
+#' test_df %>%
+#'   pull.(1)
+#'
+#' test_df %>%
+#'   pull.(-1)
+pull. <- function(.df, var = -1) {
   UseMethod("pull.")
 }
 
 #' @export
-pull..data.frame <- function(.df, var = NULL) {
+pull..data.frame <- function(.df, var = -1) {
 
-  .df <- as_tidytable(.df)
+  var_list <- as.list(seq_along(.df))
 
-  var <- enquo(var)
-  if (quo_is_null(var)) var <- sym(names(.df)[ncol(.df)])
+  names(var_list) <- names(.df)
 
-  # Base R translation is faster than data.table
-  eval_quo(
-    '$'(.df, !!var)
-  )
+  .var <- eval_tidy(enquo(var), var_list)
+
+  if (.var < 0) .var <- length(var_list) + .var + 1
+
+  .df[[.var]]
 }
 
 #' @export
 #' @rdname dt_verb
 #' @inheritParams pull.
-dt_pull <- function(.df, var = NULL) {
+dt_pull <- function(.df, var = -1) {
   deprecate_soft("0.5.2", "tidytable::dt_pull()", "pull.()")
 
   pull.(.df, var = {{ var }})
