@@ -33,6 +33,14 @@ test_that("rename.() works for one column w/ data.frame", {
   expect_named(df, c("new_x", "y", "z"))
 })
 
+test_that("rename.() works for spaced column names", {
+  df <- data.table(`test spaced column` = 1:3, y = c(2,2,2), z = c("a", "a", "b"))
+  df <- df %>%
+    rename.(new_name = `test spaced column`)
+
+  expect_named(df, c("new_name", "y", "z"))
+})
+
 test_that("rename.() works for multiple columns", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
