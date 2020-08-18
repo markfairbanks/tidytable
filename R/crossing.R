@@ -18,7 +18,14 @@
 #' crossing.(stuff = x, y)
 crossing. <- function(..., .name_repair = "check_unique") {
 
-  result_df <- CJ(..., sorted = TRUE, unique = TRUE)
+  dots <- enquos(...)
+
+  data_env <- env(quo_get_env(dots[[1]]))
+
+  result_df <- eval_quo(
+    data.table::CJ(!!!dots, sorted = TRUE, unique = TRUE),
+    new_data_mask(data_env), env = caller_env()
+  )
 
   setkey(result_df, NULL)
 

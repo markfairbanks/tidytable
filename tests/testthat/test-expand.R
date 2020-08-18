@@ -23,7 +23,7 @@ test_that("preserves NAs", {
 })
 
 # test_that("NULL inputs", {
-#   tb <- data.table(x = 1:5)
+#   tb <- tidytable(x = 1:5)
 #   expect_equal(expand.(tb, x, y = NULL), tb)
 #   # expect_equal(nesting(x = tb$x, y = NULL), tb)
 #   expect_equal(crossing.(x = tb$x, y = NULL), tb)

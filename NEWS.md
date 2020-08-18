@@ -2,8 +2,10 @@
 
 #### Breaking changes
 * `pull.()`: defaults to `var = -1` instead of `var = NULL`
+* `complete.()`: `.fill` arg renamed to `fill`
 
 #### Functionality improvements
+* `complete.()`: Can now append extra values (#90)
 * `pull.()`: Numerical selection now works
 
 #### Bug fixes

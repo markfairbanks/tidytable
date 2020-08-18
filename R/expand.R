@@ -28,9 +28,21 @@ expand..data.frame <- function(.df, ..., .name_repair = "check_unique") {
 
   .df <- as_tidytable(.df)
 
-  cols <- select_dots_sym(.df, ...)
+  dots <- enquos(...)
 
-  result_df <- eval_quo(crossing.(!!!cols), .df)
+  # Remove NULL inputs
+  dots <- dots[!map_lgl.(dots, quo_is_null)]
+
+  if (length(dots) == 0) return(.df)
+
+  data_vars <- map.(.df, ~ vec_unique(.x))
+
+  data_env <- env(quo_get_env(dots[[1]]), !!!data_vars)
+
+  result_df <- eval_quo(
+    crossing.(!!!dots),
+    new_data_mask(data_env), env = caller_env()
+  )
 
   setkey(result_df, NULL)
 
