@@ -9,6 +9,9 @@
 #### Bug fixes
 * `rename.()` works when there are spaces in the column names
 
+#### Functions with notable speed improvements
+* `replace_na.()`
+
 # tidytable 0.5.4
 
 #### Breaking changes

@@ -53,6 +53,12 @@ test_that("missing values are replaced", {
   expect_equal(out$x, c(1, 0))
 })
 
+test_that("missing values are replaced with correct type", {
+  df <- tidytable(x = c(1, NA))
+  out <- replace_na.(df, list(x = 0L))
+  expect_equal(out$x, c(1, 0))
+})
+
 test_that("doesn't complain about variables that don't exist", {
   df <- tidytable(a = c(1, NA))
   out <- replace_na.(df, list(a = 100, b = 0))
