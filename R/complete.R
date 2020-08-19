@@ -28,13 +28,20 @@ complete..data.frame <- function(.df, ..., fill = list(), .fill = NULL) {
   if (!is.null(.fill))
     deprecate_stop("0.5.5", "tidytable::complete.(.fill = )", "complete(fill = )")
 
-  dots <- enexprs(...)
+  dots <- enquos(...)
 
-  dots <- dots[!map_lgl.(dots, is.null)]
+  dots <- dots[!map_lgl.(dots, quo_is_null)]
 
   if (length(dots) == 0) return(.df)
 
-  full_df <- expand.(.df, ...)
+  # full_df <- expand.(.df, !!!dots)
+
+  data_env <- env(quo_get_env(dots[[1]]), .df = .df)
+
+  full_df <- eval_quo(
+    expand.(.df, !!!dots),
+    new_data_mask(data_env), env = caller_env()
+  )
 
   if (is_empty(full_df)) return(.df)
 
