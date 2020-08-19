@@ -35,7 +35,7 @@ expand..data.frame <- function(.df, ..., .name_repair = "check_unique") {
 
   if (length(dots) == 0) return(.df)
 
-  data_vars <- map.(.df, ~ vec_unique(.x))
+  data_vars <- unclass(.df)
 
   data_env <- env(quo_get_env(dots[[1]]), !!!data_vars)
 
