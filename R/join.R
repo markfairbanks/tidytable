@@ -106,9 +106,18 @@ full_join. <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
 
 #' @export
 full_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
-    join_mold(x, y, by = by, suffix = suffix,
-              all_x = TRUE, all_y = TRUE)
+    result_df <- join_mold(x, y, by = by, suffix = suffix,
+                           all_x = TRUE, all_y = TRUE)
 
+    start_names <- names(x)
+    end_names <- names(result_df)
+    end_names <- end_names[end_names %notin% start_names]
+
+    col_order <- c(start_names, end_names)
+
+    setcolorder(result_df, col_order)
+
+    result_df
 }
 
 #' @export
@@ -212,7 +221,7 @@ join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
   result_df <- as_tidytable(
     merge(x = x, y = y, by.x = by_x, by.y = by_y, suffixes = suffix,
           all.x = all_x, all.y = all_y,
-          allow.cartesian = TRUE)
+          allow.cartesian = TRUE, sort = FALSE)
   )
 
   setkey(result_df, NULL)
