@@ -54,15 +54,15 @@ unnest..data.frame <- function(.df, ..., .keep_all = FALSE) {
 
   unnest_data <- map.(dots, ~ unnest_col(.df, .x))
 
-  unnest_nrow <- map_dbl.(unnest_data, nrow)
+  unnest_nrow <- list_sizes(unnest_data)
 
   if (!length(vec_unique(unnest_nrow)) == 1)
     abort("unnested data contains different row counts")
 
   # Get number of repeats for keep cols
-  rep_vec <- map_dbl.(pull.(.df, !!dots[[1]]), vec_size)
+  rep_vec <- list_sizes(pull.(.df, !!dots[[1]]))
 
-  keep_df <- .df[, ..keep_cols][rep(1:.N, rep_vec)]
+  keep_df <- .df[, ..keep_cols][vec_rep_each(1:.N, rep_vec)]
 
   results_df <- bind_cols.(keep_df, unnest_data)
 
