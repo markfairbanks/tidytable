@@ -1,15 +1,15 @@
-# tidytable 0.5.4.9 (in development)
+# tidytable 0.5.5 (in development)
 
 #### Breaking changes
-* `pull.()`: defaults to `var = -1` instead of `var = NULL`
 * `complete.()`: `.fill` arg renamed to `fill`
+* `pull.()`: defaults to `var = -1` instead of `var = NULL`
 
 #### Functionality improvements
-* `complete.()`: Can now append extra values (#90)
+* `complete.()`: Can now append extra values
 * `pull.()`: Numerical selection now works
 
 #### Bug fixes
-* `rename.()` works when there are spaces in the column names
+* `rename.()`: Works when there are spaces in the column names (#109)
 
 #### Functions with notable speed improvements
 * `replace_na.()`

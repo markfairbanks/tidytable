@@ -34,8 +34,6 @@ complete..data.frame <- function(.df, ..., fill = list(), .fill = NULL) {
 
   if (length(dots) == 0) return(.df)
 
-  # full_df <- expand.(.df, !!!dots)
-
   data_env <- env(quo_get_env(dots[[1]]), .df = .df)
 
   full_df <- eval_quo(
