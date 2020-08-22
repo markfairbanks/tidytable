@@ -53,7 +53,7 @@ pivot_wider..data.frame <- function(.df,
   .df <- as_tidytable(.df)
 
   id_cols <- enquo(id_cols)
-  values_fn <- enexpr(values_fn)
+  values_fn <- enquo(values_fn)
 
   names_from <- select_vec_chr(.df, {{ names_from }})
   values_from <- select_vec_chr(.df, {{ values_from }})
@@ -71,8 +71,8 @@ pivot_wider..data.frame <- function(.df,
                                    sep = " ~ "))
   } else {
     dcast_form <- as.formula(paste(paste(id_cols, collapse = " + "),
-                                   paste(names_from, collapse=" + "),
-                                   sep=" ~ "))
+                                   paste(names_from, collapse = " + "),
+                                   sep = " ~ "))
   }
 
   .df <- as_tidytable(
@@ -86,7 +86,7 @@ pivot_wider..data.frame <- function(.df,
     )
   )
 
-  if (length(id_cols) == 0) .df <- .df[, . := NULL][]
+  if (length(id_cols) == 0) .df[, . := NULL]
 
   .df
 }
