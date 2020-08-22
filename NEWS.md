@@ -1,6 +1,7 @@
 # tidytable 0.5.5 (in development)
 
 #### Breaking changes
+* `bind_rows.()`: Removed `.use_names` and `.fill` args
 * `complete.()`: `.fill` arg renamed to `fill`
 * `pull.()`: defaults to `var = -1` instead of `var = NULL`
 

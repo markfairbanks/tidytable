@@ -5,8 +5,6 @@
 #'
 #' @param ... data.tables or data.frames to bind
 #' @param .id If TRUE, an integer column is made as a group id
-#' @param .use_names If TRUE, makes sure column names align
-#' @param .fill If TRUE, fills missing columns with NA
 #'
 #' @export
 #' @md
@@ -44,15 +42,15 @@ bind_cols. <- function(...) {
 #' @export
 #' @rdname dt_verb
 #' @inheritParams bind_rows.
-dt_bind_rows <- function(..., .id = NULL, .use_names = TRUE, .fill = TRUE) {
+dt_bind_rows <- function(..., .id = NULL) {
   deprecate_soft("0.5.2", "tidytable::dt_bind_rows()", "bind_rows.()")
 
-  bind_rows.(..., .id = .id, .use_names = .use_names, .fill = .fill)
+  bind_rows.(..., .id = .id)
 }
 
 #' @export
 #' @rdname bind_cols.
-bind_rows. <- function(..., .id = NULL, .use_names = TRUE, .fill = TRUE) {
+bind_rows. <- function(..., .id = NULL) {
 
   dots <- list(...)
   dots <- squash(dots)
@@ -60,7 +58,7 @@ bind_rows. <- function(..., .id = NULL, .use_names = TRUE, .fill = TRUE) {
   if (!all(map_lgl.(dots, is.data.table)))
     dots <- map.(dots, as_tidytable)
 
-  dots <- rbindlist(dots, idcol = .id, use.names = .use_names, fill = .fill)
+  dots <- rbindlist(dots, idcol = .id, use.names = TRUE, fill = TRUE)
 
   as_tidytable(dots)
 }

@@ -7,16 +7,12 @@
 \usage{
 bind_cols.(...)
 
-bind_rows.(..., .id = NULL, .use_names = TRUE, .fill = TRUE)
+bind_rows.(..., .id = NULL)
 }
 \arguments{
 \item{...}{data.tables or data.frames to bind}
 
 \item{.id}{If TRUE, an integer column is made as a group id}
-
-\item{.use_names}{If TRUE, makes sure column names align}
-
-\item{.fill}{If TRUE, fills missing columns with NA}
 }
 \description{
 Bind multiple data.tables into one row-wise or col-wise.

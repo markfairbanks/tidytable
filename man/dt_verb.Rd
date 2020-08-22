@@ -69,7 +69,7 @@
 \usage{
 dt_arrange(.df, ...)
 
-dt_bind_rows(..., .id = NULL, .use_names = TRUE, .fill = TRUE)
+dt_bind_rows(..., .id = NULL)
 
 dt_bind_cols(...)
 
@@ -214,10 +214,6 @@ dt_unnest_legacy(.df, ..., .keep_all = FALSE)
 \item{...}{Variables to arrange by}
 
 \item{.id}{If TRUE, an integer column is made as a group id}
-
-\item{.use_names}{If TRUE, makes sure column names align}
-
-\item{.fill}{If TRUE, fills missing columns with NA}
 
 \item{default}{Default value. Set to NA by default.}
 
