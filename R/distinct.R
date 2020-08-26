@@ -43,7 +43,7 @@ distinct..data.frame <- function(.df, ..., .keep_all = FALSE) {
 
   } else {
 
-    select_cols <- select_dots_i(.df, ...)
+    select_cols <- select_dots_idx(.df, ...)
 
     .df <- unique(.df, by = select_cols)
 

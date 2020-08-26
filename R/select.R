@@ -44,7 +44,7 @@ select..data.frame <- function(.df, ...) {
 
   .df <- as_tidytable(.df)
 
-  select_cols <- select_dots_i(.df, ...)
+  select_cols <- select_dots_idx(.df, ...)
 
   .df <- eval_quo(.df[, !!select_cols])
 
