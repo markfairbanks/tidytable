@@ -43,7 +43,7 @@ bind_cols. <- function(...) {
 #' @rdname dt_verb
 #' @inheritParams bind_rows.
 dt_bind_rows <- function(..., .id = NULL) {
-  deprecate_soft("0.5.2", "tidytable::dt_bind_rows()", "bind_rows.()")
+  deprecate_warn("0.5.2", "tidytable::dt_bind_rows()", "bind_rows.()")
 
   bind_rows.(..., .id = .id)
 }
@@ -67,7 +67,7 @@ bind_rows. <- function(..., .id = NULL) {
 #' @rdname dt_verb
 #' @inheritParams bind_cols.
 dt_bind_cols <- function(...) {
-  deprecate_soft("0.5.2", "tidytable::dt_bind_cols()", "bind_cols.()")
+  deprecate_warn("0.5.2", "tidytable::dt_bind_cols()", "bind_cols.()")
 
   bind_cols.(...)
 }

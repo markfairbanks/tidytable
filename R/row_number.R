@@ -19,7 +19,7 @@ row_number. <- function() {
 #' @rdname dt_verb
 #' @inheritParams row_number.
 dt_row_number <- function() {
-  deprecate_soft("0.5.2", "tidytable::dt_row_number()", "row_number.()")
+  deprecate_warn("0.5.2", "tidytable::dt_row_number()", "row_number.()")
 
   row_number.()
 }

@@ -35,7 +35,7 @@ arrange..data.frame <- function(.df, ...) {
 #' @rdname dt_verb
 #' @inheritParams arrange.
 dt_arrange <- function(.df, ...) {
-  deprecate_soft("0.5.2", "tidytable::dt_arrange()", "arrange.()")
+  deprecate_warn("0.5.2", "tidytable::dt_arrange()", "arrange.()")
 
   arrange.(.df, ...)
 }

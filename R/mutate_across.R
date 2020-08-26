@@ -109,7 +109,7 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
 #' @rdname dt_verb
 #' @inheritParams mutate_across.
 dt_mutate_across <- function(.df, .cols = everything(), .fns, ..., .by = NULL, by = NULL) {
-  deprecate_soft("0.5.2", "tidytable::dt_mutate_across()", "mutate_across.()")
+  deprecate_warn("0.5.2", "tidytable::dt_mutate_across()", "mutate_across.()")
 
   .by <- check_dot_by(enquo(.by), enquo(by))
   mutate_across.(.df, .cols = {{ .cols }}, .fns, ..., .by = {{ .by }})

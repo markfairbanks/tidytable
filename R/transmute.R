@@ -40,7 +40,7 @@ transmute..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
 #' @rdname dt_verb
 #' @inheritParams transmute.
 dt_transmute <- function(.df, ..., .by = NULL, by = NULL) {
-  deprecate_soft("0.5.2", "tidytable::dt_transmute()", "transmute.()")
+  deprecate_warn("0.5.2", "tidytable::dt_transmute()", "transmute.()")
 
   .by <- check_dot_by(enquo(.by), enquo(by))
 

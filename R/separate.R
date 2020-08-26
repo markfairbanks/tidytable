@@ -71,7 +71,7 @@ dt_separate <- function(.df, col, into,
                         sep = "[^[:alnum:]]+",
                         remove = TRUE,
                         ...) {
-  deprecate_soft("0.5.2", "tidytable::dt_separate()", "separate.()")
+  deprecate_warn("0.5.2", "tidytable::dt_separate()", "separate.()")
 
   separate.(.df, {{ col }}, into, sep = sep, remove = remove, ...)
 }

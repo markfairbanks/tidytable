@@ -67,7 +67,7 @@ dt_fill <- function(.df, ...,
                     .by = NULL,
                     by = NULL) {
 
-  deprecate_soft("0.5.2", "tidytable::dt_fill()", "fill.()")
+  deprecate_warn("0.5.2", "tidytable::dt_fill()", "fill.()")
 
   .by <- check_dot_by(enquo(.by), enquo(by))
 

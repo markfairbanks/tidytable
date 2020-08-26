@@ -32,7 +32,7 @@ map. <- function(.x, .f, ...) {
 #' @rdname dt_verb
 #' @inheritParams map.
 dt_map <- function(.x, .f, ...) {
-  deprecate_soft("0.5.2", "tidytable::dt_map()", "map.()")
+  deprecate_warn("0.5.2", "tidytable::dt_map()", "map.()")
 
   map.(.x, .f, ...)
 }
@@ -49,7 +49,7 @@ map_lgl. <- function(.x, .f, ...) {
 #' @rdname dt_verb
 #' @inheritParams map_lgl.
 dt_map_lgl <- function(.x, .f, ...) {
-  deprecate_soft("0.5.2", "tidytable::dt_map_lgl()", "map_lgl.()")
+  deprecate_warn("0.5.2", "tidytable::dt_map_lgl()", "map_lgl.()")
 
   map_lgl.(.x, .f, ...)
 }
@@ -66,7 +66,7 @@ map_int. <- function(.x, .f, ...) {
 #' @rdname dt_verb
 #' @inheritParams map_int.
 dt_map_int <- function(.x, .f, ...) {
-  deprecate_soft("0.5.2", "tidytable::dt_map_int()", "map_int.()")
+  deprecate_warn("0.5.2", "tidytable::dt_map_int()", "map_int.()")
 
   map_int.(.x, .f, ...)
 }
@@ -83,7 +83,7 @@ map_dbl. <- function(.x, .f, ...) {
 #' @rdname dt_verb
 #' @inheritParams map_dbl.
 dt_map_dbl <- function(.x, .f, ...) {
-  deprecate_soft("0.5.2", "tidytable::dt_map_dbl()", "map_dbl.()")
+  deprecate_warn("0.5.2", "tidytable::dt_map_dbl()", "map_dbl.()")
 
   map_dbl.(.x, .f, ...)
 }
@@ -100,7 +100,7 @@ map_chr. <- function(.x, .f, ...) {
 #' @rdname dt_verb
 #' @inheritParams map_chr.
 dt_map_chr <- function(.x, .f, ...) {
-  deprecate_soft("0.5.2", "tidytable::dt_map_chr()", "map_chr.()")
+  deprecate_warn("0.5.2", "tidytable::dt_map_chr()", "map_chr.()")
 
   map_chr.(.x, .f, ...)
 }
@@ -117,7 +117,7 @@ map_dfc. <- function(.x, .f, ...) {
 #' @rdname dt_verb
 #' @inheritParams map_dfc.
 dt_map_dfc <- function(.x, .f, ...) {
-  deprecate_soft("0.5.2", "tidytable::dt_map_dfc()", "map_dfc.()")
+  deprecate_warn("0.5.2", "tidytable::dt_map_dfc()", "map_dfc.()")
 
   map_dfc.(.x, .f, ...)
 }
@@ -136,7 +136,7 @@ map_dfr. <- function(.x, .f, ..., .id = NULL) {
 #' @rdname dt_verb
 #' @inheritParams map_dfr.
 dt_map_dfr <- function(.x, .f, ..., .id = NULL) {
-  deprecate_soft("0.5.2", "tidytable::dt_map_dfr()", "map_dfr.()")
+  deprecate_warn("0.5.2", "tidytable::dt_map_dfr()", "map_dfr.()")
 
   map_dfr.(.x, .f, ..., .id = .id)
 }
@@ -149,7 +149,7 @@ map_df. <- map_dfr.
 #' @rdname dt_verb
 #' @inheritParams map_df.
 dt_map_df <- function(.x, .f, ...) {
-  deprecate_soft("0.5.2", "tidytable::dt_map_df()", "map_df.()")
+  deprecate_warn("0.5.2", "tidytable::dt_map_df()", "map_df.()")
 
   map_df.(.x, .f, ...)
 }

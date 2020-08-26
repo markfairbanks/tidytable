@@ -92,7 +92,7 @@ mutate..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
 #' @rdname dt_verb
 #' @inheritParams mutate.
 dt_mutate <- function(.df, ..., .by = NULL, by = NULL) {
-  deprecate_soft("0.5.2", "tidytable::dt_mutate()", "mutate.()")
+  deprecate_warn("0.5.2", "tidytable::dt_mutate()", "mutate.()")
 
   .by <- check_dot_by(enquo(.by), enquo(by))
   mutate.(.df, ..., .by = {{ .by }})

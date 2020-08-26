@@ -38,9 +38,9 @@
 #' test_df %>%
 #'   select.(ends_with("y"))
 starts_with. <- function(match, ignore.case = TRUE, vars = peek_vars(fn = "starts_with")) {
-  lifecycle::deprecate_soft("0.5.0", "tidytable::starts_with.()", "starts_with()")
+  deprecate_warn("0.5.0", "tidytable::starts_with.()", "starts_with()")
 
-  tidyselect::starts_with(match, ignore.case = ignore.case, vars = vars)
+  starts_with(match, ignore.case = ignore.case, vars = vars)
 }
 
 #' @export
@@ -50,9 +50,9 @@ dt_starts_with <- starts_with.
 #' @export
 #' @rdname starts_with.
 contains. <- function(match, ignore.case = TRUE, vars = peek_vars(fn = "contains")) {
-  lifecycle::deprecate_soft("0.5.0", "tidytable::contains.()", "contains()")
+  deprecate_warn("0.5.0", "tidytable::contains.()", "contains()")
 
-  tidyselect::contains(match, ignore.case = ignore.case, vars = vars)
+  contains(match, ignore.case = ignore.case, vars = vars)
 }
 
 #' @export
@@ -62,9 +62,9 @@ dt_contains <- contains.
 #' @export
 #' @rdname starts_with.
 ends_with. <- function(match, ignore.case = TRUE, vars = peek_vars(fn = "ends_with")) {
-  lifecycle::deprecate_soft("0.5.0", "tidytable::ends_with.()", "ends_with()")
+  deprecate_warn("0.5.0", "tidytable::ends_with.()", "ends_with()")
 
-  tidyselect::ends_with(match, ignore.case = ignore.case, vars = vars)
+  ends_with(match, ignore.case = ignore.case, vars = vars)
 }
 
 #' @export
@@ -74,9 +74,9 @@ dt_ends_with <- ends_with.
 #' @export
 #' @rdname starts_with.
 everything. <- function(vars = peek_vars(fn = "everything")) {
-  lifecycle::deprecate_soft("0.5.0", "tidytable::everything.()", "everything()")
+  deprecate_warn("0.5.0", "tidytable::everything.()", "everything()")
 
-  tidyselect::everything(vars)
+  everything(vars)
 }
 
 #' @export
@@ -86,9 +86,9 @@ dt_everything <- everything.
 #' @export
 #' @rdname starts_with.
 any_of. <- function(x, ..., vars = peek_vars(fn = "any_of")) {
-  lifecycle::deprecate_soft("0.5.0", "tidytable::any_of.()", "any_of()")
+  deprecate_warn("0.5.0", "tidytable::any_of.()", "any_of()")
 
-  tidyselect::any_of(x, ..., vars = vars)
+  any_of(x, ..., vars = vars)
 }
 
 #' @export

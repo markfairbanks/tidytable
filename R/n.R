@@ -28,7 +28,7 @@ n. <- function() {
 #' @rdname dt_verb
 #' @inheritParams n.
 dt_n <- function() {
-  deprecate_soft("0.5.2", "tidytable::dt_n()", "n.()")
+  deprecate_warn("0.5.2", "tidytable::dt_n()", "n.()")
 
   n.()
 }

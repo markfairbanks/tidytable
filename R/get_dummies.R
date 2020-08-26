@@ -118,7 +118,7 @@ dt_get_dummies <- function(.df,
                            prefix_sep = "_",
                            drop_first = FALSE,
                            dummify_na = TRUE) {
-  deprecate_soft("0.5.2", "tidytable::dt_get_dummies()", "get_dummies.()")
+  deprecate_warn("0.5.2", "tidytable::dt_get_dummies()", "get_dummies.()")
 
   get_dummies.(.df, cols = {{ cols }}, prefix = prefix, prefix_sep = prefix_sep,
                drop_first = drop_first, dummify_na = dummify_na)

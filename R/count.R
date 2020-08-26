@@ -42,7 +42,7 @@ count..data.frame <- function(.df, ...) {
 #' @rdname dt_verb
 #' @inheritParams count.
 dt_count <- function(.df, ...) {
-  deprecate_soft("0.5.2", "tidytable::dt_count()", "count.()")
+  deprecate_warn("0.5.2", "tidytable::dt_count()", "count.()")
 
   count.(.df, ...)
 }

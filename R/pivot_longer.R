@@ -76,7 +76,7 @@ dt_pivot_longer <- function(.df,
                             values_to = "value",
                             values_drop_na = FALSE,
                             ...) {
-  deprecate_soft("0.5.2", "tidytable::dt_pivot_longer()", "pivot_longer.()")
+  deprecate_warn("0.5.2", "tidytable::dt_pivot_longer()", "pivot_longer.()")
 
   pivot_longer.(.df, cols = {{ cols }},
                 names_to = names_to,

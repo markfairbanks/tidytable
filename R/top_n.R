@@ -48,7 +48,7 @@ top_n..data.frame <- function(.df, n = 5, wt = NULL, .by = NULL, by = NULL) {
 #' @export
 #' @rdname top_n.
 dt_top_n <- function(.df, n = 5, wt = NULL, .by = NULL, by = NULL) {
-  deprecate_soft("0.5.2", "tidytable::dt_top_n()", "top_n.()")
+  deprecate_warn("0.5.2", "tidytable::dt_top_n()", "top_n.()")
 
   .by <- check_dot_by(enquo(.by), enquo(by))
 

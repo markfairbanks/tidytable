@@ -55,7 +55,7 @@ case. <- function(..., default = NA) {
 #' @rdname dt_verb
 #' @inheritParams case.
 dt_case <- function(..., default = NA) {
-  deprecate_soft("0.5.2", "tidytable::dt_case()", "case.()")
+  deprecate_warn("0.5.2", "tidytable::dt_case()", "case.()")
 
   case.(..., default = default)
 }
