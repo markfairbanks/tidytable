@@ -83,7 +83,7 @@ as the dt_verb() functions will be removed by the end of 2020." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4.9</span>
       </span>
     </div>
 
@@ -148,7 +148,7 @@ as the <code>dt_verb()</code> functions will be removed by the end of 2020.</p>
 
     <pre class="usage"><span class='fu'>dt_arrange</span>(<span class='no'>.df</span>, <span class='no'>...</span>)
 
-<span class='fu'>dt_bind_rows</span>(<span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.use_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>.fill</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>dt_bind_rows</span>(<span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
 <span class='fu'>dt_bind_cols</span>(<span class='no'>...</span>)
 
@@ -251,7 +251,7 @@ as the <code>dt_verb()</code> functions will be removed by the end of 2020.</p>
   <span class='kw'>values_fn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )
 
-<span class='fu'>dt_pull</span>(<span class='no'>.df</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>dt_pull</span>(<span class='no'>.df</span>, <span class='kw'>var</span> <span class='kw'>=</span> -<span class='fl'>1</span>)
 
 <span class='fu'>dt_relocate</span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
@@ -301,14 +301,6 @@ as the <code>dt_verb()</code> functions will be removed by the end of 2020.</p>
     <tr>
       <th>.id</th>
       <td><p>If TRUE, an integer column is made as a group id</p></td>
-    </tr>
-    <tr>
-      <th>.use_names</th>
-      <td><p>If TRUE, makes sure column names align</p></td>
-    </tr>
-    <tr>
-      <th>.fill</th>
-      <td><p>If TRUE, fills missing columns with NA</p></td>
     </tr>
     <tr>
       <th>default</th>
@@ -453,7 +445,11 @@ Typically used when you have additional variables that is directly related.
     </tr>
     <tr>
       <th>var</th>
-      <td><p>The column to pull from the data.table. If NULL, pulls the last column.</p></td>
+      <td><p>The column to pull from the data.table as:</p><ul>
+<li><p>a variable name</p></li>
+<li><p>a positive integer giving the column position</p></li>
+<li><p>a negative integer giving the column position counting from the right</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>.before</th>

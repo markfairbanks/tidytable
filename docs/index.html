@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4.9</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@
   <div class="contents col-md-9">
 <div id="tidytable-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#tidytable-" class="anchor"></a>tidytable <img src="reference/figures/logo.png" align="right" width="16%" height="16%">
+<a href="#tidytable-" class="anchor"></a>tidytable <img src="reference/figures/logo.png" align="right" width="18%" height="18%">
 </h1></div>
 <!-- badges: start -->
 
@@ -102,7 +102,7 @@
 <code>tidyverse</code>-like syntax with <code>data.table</code> speed</li>
 <li>
 <code>rlang</code> compatibility</li>
-<li>Includes functions that <a href="https://github.com/tidyverse/dtplyr"><code>dtplyr</code></a> is missing, including many <code>tidyr</code> functions</li>
+<li>Includes functions that <code>dtplyr</code> is missing, including many <code>tidyr</code> functions</li>
 </ul>
 <p>Note: <code>tidytable</code> functions do not use <code>data.table</code>’s modify-by-reference, and instead use the copy-on-modify principles followed by the <code>tidyverse</code> and base R.</p>
 </div>
@@ -183,22 +183,22 @@
                       <span class="kw">d</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>))
 
 <span class="no">test_df</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/select..html">select.</a></span>(<span class="fu">where</span>(<span class="no">is.numeric</span>), <span class="no">d</span>)
+  <span class="fu"><a href="reference/select..html">select.</a></span>(<span class="no">a</span>, <span class="fu">where</span>(<span class="no">is.character</span>))
 <span class="co">#&gt; # tidytable [3 × 3]</span>
-<span class="co">#&gt;       a     b d    </span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;</span>
-<span class="co">#&gt; 1     1     4 a    </span>
-<span class="co">#&gt; 2     2     5 b    </span>
-<span class="co">#&gt; 3     3     6 c</span></pre></div>
+<span class="co">#&gt;       a c     d    </span>
+<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;</span>
+<span class="co">#&gt; 1     1 a     a    </span>
+<span class="co">#&gt; 2     2 a     b    </span>
+<span class="co">#&gt; 3     3 b     c</span></pre></div>
 <p>To drop columns use a <code><a href="https://rdrr.io/r/base/Arithmetic.html">-</a></code> sign:</p>
 <div class="sourceCode" id="cb6"><pre class="r"><span class="no">test_df</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/select..html">select.</a></span>(-<span class="fu">where</span>(<span class="no">is.numeric</span>), -<span class="no">d</span>)
+  <span class="fu"><a href="reference/select..html">select.</a></span>(-<span class="no">a</span>, -<span class="fu">where</span>(<span class="no">is.character</span>))
 <span class="co">#&gt; # tidytable [3 × 1]</span>
-<span class="co">#&gt;   c    </span>
-<span class="co">#&gt;   &lt;chr&gt;</span>
-<span class="co">#&gt; 1 a    </span>
-<span class="co">#&gt; 2 a    </span>
-<span class="co">#&gt; 3 b</span></pre></div>
+<span class="co">#&gt;       b</span>
+<span class="co">#&gt;   &lt;dbl&gt;</span>
+<span class="co">#&gt; 1     4</span>
+<span class="co">#&gt; 2     5</span>
+<span class="co">#&gt; 3     6</span></pre></div>
 <p>These same ideas can be used whenever selecting columns in <code>tidytable</code> functions - for example when using <code><a href="reference/count..html">count.()</a></code>, <code><a href="reference/drop_na..html">drop_na.()</a></code>, <code><a href="reference/mutate_across..html">mutate_across.()</a></code>, <code><a href="reference/pivot_longer..html">pivot_longer.()</a></code>, etc.</p>
 <p>A full overview of selection options can be found <a href="https://tidyselect.r-lib.org/reference/language.html">here</a>.</p>
 </div>
@@ -328,7 +328,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=tidytable"><img src="https://www.r-pkg.org/badges/version/tidytable" alt="CRAN status"></a></li>
-<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.5.4-green.svg"></a></li>
+<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.5.4.9-green.svg"></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 <li><a href="https://markfairbanks.github.io/tidytable/"><img src="https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey" alt="CRAN RStudio mirror downloads"></a></li>
 </ul>

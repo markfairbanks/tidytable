@@ -2,10 +2,14 @@
 
 #### Breaking changes
 * `bind_rows.()`: Removed `.use_names` and `.fill` args
+  + These are now assumed to be `TRUE`, which matches `dplyr` semantics.
 * `complete.()`: `.fill` arg renamed to `fill`
 * `pull.()`: defaults to `var = -1` instead of `var = NULL`
 
 #### Functionality improvements
+* `tidytable` now integrates better with tidyverse functions through `vctrs`. This means code such as
+`vec_cbind(tibble::tibble(x = 1:3), tidytable(y = "foo"))`
+will bind the results into a tidytable.
 * `complete.()`: Can now append extra values
 * `pull.()`: Numerical selection now works
 

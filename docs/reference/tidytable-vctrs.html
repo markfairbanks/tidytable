@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fill in missing values with previous or next value — fill. • tidytable</title>
+<title>Internal vctrs methods — tidytable-vctrs • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,9 @@
 
 
 
-<meta property="og:title" content="Fill in missing values with previous or next value — fill." />
-<meta property="og:description" content="Fills missing values in the selected columns using the next or previous entry. Can be done by group.
-Supports tidyselect" />
+<meta property="og:title" content="Internal vctrs methods — tidytable-vctrs" />
+<meta property="og:description" content="These methods are the extensions that allow tidytable objects to
+work with vctrs." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -132,84 +132,19 @@ Supports tidyselect" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fill in missing values with previous or next value</h1>
-    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/fill.R'><code>R/fill.R</code></a></small>
-    <div class="hidden name"><code>fill..Rd</code></div>
+    <h1>Internal vctrs methods</h1>
+    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/vctrs-tidytable.R'><code>R/vctrs-tidytable.R</code></a></small>
+    <div class="hidden name"><code>tidytable-vctrs.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Fills missing values in the selected columns using the next or previous entry. Can be done by group.</p>
-<p>Supports tidyselect</p>
+    <p>These methods are the extensions that allow tidytable objects to
+work with vctrs.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='fill..html'>fill.</a></span>(
-  <span class='no'>.df</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>.direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"down"</span>, <span class='st'>"up"</span>, <span class='st'>"downup"</span>, <span class='st'>"updown"</span>),
-  <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>.df</th>
-      <td><p>A data.frame or data.table</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>A selection of columns. <code>tidyselect</code> compatible.</p></td>
-    </tr>
-    <tr>
-      <th>.direction</th>
-      <td><p>Direction in which to fill missing values. Currently "down" (the default), "up", "downup" (first down then up), or "updown" (first up and then down)</p></td>
-    </tr>
-    <tr>
-      <th>.by</th>
-      <td><p>Columns to group by when filling should be done by group</p></td>
-    </tr>
-    <tr>
-      <th>by</th>
-      <td><p>This argument has been renamed to .by and is deprecated</p></td>
-    </tr>
-    </table>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>NA</span>, <span class='fl'>NA</span>, <span class='fl'>4</span>:<span class='fl'>10</span>),
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>6</span>, <span class='fl'>NA</span>, <span class='fl'>8</span>, <span class='fl'>NA</span>, <span class='fl'>10</span>),
-  <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>8</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>2</span>)))
 
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='fill..html'>fill.</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt; # tidytable [10 × 3]
-#&gt;        x     y z    
-#&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;
-#&gt;  1    NA     1 a    
-#&gt;  2    NA     2 a    
-#&gt;  3    NA     3 a    
-#&gt;  4     4     4 a    
-#&gt;  5     5     5 a    
-#&gt;  6     6     6 a    
-#&gt;  7     7     6 a    
-#&gt;  8     8     8 a    
-#&gt;  9     9    NA b    
-#&gt; 10    10    10 b    </div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='fill..html'>fill.</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>, <span class='kw'>.direction</span> <span class='kw'>=</span> <span class='st'>"downup"</span>)</div><div class='output co'>#&gt; # tidytable [10 × 3]
-#&gt;        x     y z    
-#&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;
-#&gt;  1     4     1 a    
-#&gt;  2     4     2 a    
-#&gt;  3     4     3 a    
-#&gt;  4     4     4 a    
-#&gt;  5     5     5 a    
-#&gt;  6     6     6 a    
-#&gt;  7     7     6 a    
-#&gt;  8     8     8 a    
-#&gt;  9     9    10 b    
-#&gt; 10    10    10 b    </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
