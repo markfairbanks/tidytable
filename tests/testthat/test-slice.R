@@ -35,6 +35,15 @@ test_that("works with gaps & doesn't return NAs", {
   expect_equal(sliced_df$x, c(1,3))
 })
 
+test_that("can use dots", {
+  test_df <- tidytable(x = c(1,2,3,4), y = c(4,5,6,7), z = c("a", "a", "a", "b"))
+
+  sliced_df <- test_df %>%
+    slice.(1,3,5)
+
+  expect_equal(sliced_df$x, c(1,3))
+})
+
 test_that("works without .by with .N", {
   test_df <- tidytable(x = c(1,2,3,4), y = c(4,5,6,7), z = c("a", "a", "a", "b"))
 

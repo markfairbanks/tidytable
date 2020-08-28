@@ -1,16 +1,16 @@
-#' Choose rows by position
+#' Choose rows in a data.table
 #'
-#' Choose rows by their ordinal position in a data.table. Grouped data.tables use the ordinal position within the group.
+#' Choose rows in a data.table.
+#' Grouped data.tables grab rows within each group.
 #'
 #' @param .df A data.frame or data.table
-#' @param rows Integer row values. Provide either positive values to keep, or negative values to drop. The values provided must be either all positive or all negative.
+#' @param ... Integer row values
 #' @param order_by Variable to arrange by
 #' @param n Number of rows to grab
 #' @param .by Columns to group by
 #' @param by This argument has been renamed to .by and is deprecated
 #'
 #' @export
-#' @md
 #'
 #' @examples
 #' test_df <- data.table(
@@ -19,7 +19,10 @@
 #'   z = c("a","a","a","b"))
 #'
 #' test_df %>%
-#'   slice.(1:4)
+#'   slice.(1:3)
+#'
+#' test_df %>%
+#'   slice.(1, 3)
 #'
 #' test_df %>%
 #'   slice.(1, .by = z)
@@ -35,33 +38,38 @@
 #'
 #' test_df %>%
 #'   slice_min.(order_by = y, .by = z)
-slice. <- function(.df, rows = 1:5, .by = NULL, by = NULL) {
+slice. <- function(.df, ..., .by = NULL, by = NULL) {
   UseMethod("slice.")
 }
 
 #' @export
-slice..data.frame <- function(.df, rows = 1:5, .by = NULL, by = NULL) {
+slice..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
 
   .df <- as_tidytable(.df)
 
-  rows <- enquo(rows) # Needed so 1:.N works
+  rows <- enquos(...) # Needed so 1:.N works
 
-  data_env <- env(quo_get_env(rows), .df = .df)
+  if (length(rows) == 0) return(.df)
+
+  data_env <- env(quo_get_env(rows[[1]]), .df = .df)
 
   .by <- check_dot_by(enquo(.by), enquo(by), "slice.")
-  .by <- select_vec_chr(.df, !!.by)
 
-  if (length(.by) == 0) {
+  by_is_null <- quo_is_null(.by)
+
+  if (by_is_null) {
     .df <- eval_quo(
-      .df[1:.N %in% !!rows],
+      .df[1:.N %in% c(!!!rows)],
       new_data_mask(data_env), env = caller_env()
     )
   } else {
 
     col_order <- names(.df)
 
+    .by <- select_vec_chr(.df, !!.by)
+
     .df <- eval_quo(
-      .df[, .SD[1:.N %in% !!rows], by = !!.by],
+      .df[, .SD[1:.N %in% c(!!!rows)], by = !!.by],
       new_data_mask(data_env), env = caller_env()
     )
 
@@ -176,12 +184,12 @@ slice_min..data.frame <- function(.df, order_by, n = 1, .by = NULL, by = NULL) {
 #' @export
 #' @rdname dt_verb
 #' @inheritParams slice.
-dt_slice <- function(.df, rows = 1:5, .by = NULL, by = NULL) {
+dt_slice <- function(.df, ..., .by = NULL, by = NULL) {
   deprecate_soft("0.5.2", "tidytable::dt_slice()", "slice.()")
 
   .by <- check_dot_by(enquo(.by), enquo(by))
 
-  slice.(.df, {{ rows }}, .by = !!.by)
+  slice.(.df, ..., .by = !!.by)
 }
 
 #' @export
