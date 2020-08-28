@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidytable <img src="man/figures/logo.png" align="right" width="18%" height="18%" />
+# tidytable <img src="man/figures/logo.png" align="right" width="17%" height="17%" />
 
 <!-- badges: start -->
 

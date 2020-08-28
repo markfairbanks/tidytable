@@ -153,7 +153,12 @@
 </li>
 <li>
 <code><a href="../reference/pull..html">pull.()</a></code>: defaults to <code>var = -1</code> instead of <code>var = NULL</code>
+<ul>
+<li>The result is the same when using the default value, but will break cases where <code>var = NULL</code> was explicitly called.</li>
+</ul>
 </li>
+<li>
+<code><a href="../reference/slice..html">slice.()</a></code>: <code>.by</code> must be named when slicing by group</li>
 </ul>
 </div>
 <div id="functionality-improvements" class="section level4">
@@ -166,6 +171,8 @@
 <code><a href="../reference/complete..html">complete.()</a></code>: Can now append extra values</li>
 <li>
 <code><a href="../reference/pull..html">pull.()</a></code>: Numerical selection now works</li>
+<li>
+<code><a href="../reference/slice..html">slice.()</a></code>: Now uses <code>...</code> to select which rows to slice</li>
 </ul>
 </div>
 <div id="bug-fixes" class="section level4">

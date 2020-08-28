@@ -188,7 +188,7 @@ dt_select(.df, ...)
 
 dt_separate(.df, col, into, sep = "[^[:alnum:]]+", remove = TRUE, ...)
 
-dt_slice(.df, rows = 1:5, .by = NULL, by = NULL)
+dt_slice(.df, ..., .by = NULL, by = NULL)
 
 dt_slice_head(.df, n = 5, .by = NULL, by = NULL)
 
@@ -315,8 +315,6 @@ If \code{.x} is a vector, a single replacement value.}
 \item{sep}{Separator to split on. Can be specified or detected automatically}
 
 \item{remove}{If TRUE, remove the input column from the output data.table}
-
-\item{rows}{Integer row values. Provide either positive values to keep, or negative values to drop. The values provided must be either all positive or all negative.}
 
 \item{n}{Number of rows to grab}
 
