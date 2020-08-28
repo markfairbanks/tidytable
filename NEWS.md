@@ -17,6 +17,9 @@ will bind the results into a tidytable.
 * `pull.()`: Numerical selection now works
 * `slice.()`: Now uses `...` to select which rows to slice
 
+#### New functions
+* `semi_join.()`
+
 #### Bug fixes
 * `rename.()`: Works when there are spaces in the column names (#109)
 

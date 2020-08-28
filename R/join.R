@@ -143,6 +143,31 @@ anti_join..default <- function(x, y, by = NULL) {
   as_tidytable(x[!y, on = on_vec, allow.cartesian = TRUE])
 }
 
+#' @export
+#' @rdname left_join.
+semi_join. <- function(x, y, by = NULL) {
+  UseMethod("semi_join.")
+}
+
+#' @export
+semi_join..default <- function(x, y, by = NULL) {
+  if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
+  if (!is.data.table(x)) x <- as_tidytable(x)
+  if (!is.data.table(y)) y <- as_tidytable(y)
+
+  by_x_y <- get_bys(x, y, by)
+
+  by_x <- by_x_y[[1]]
+  by_y <- by_x_y[[2]]
+
+  on_vec <- by_y
+  names(on_vec) <- by_x
+
+  result_df <- fsetdiff(x, x[!y, on = on_vec], all=TRUE)
+
+  as_tidytable(result_df)
+}
+
 get_bys <- function(x, y, by = NULL) {
   names_x <- names(x)
   names_y <- names(y)
