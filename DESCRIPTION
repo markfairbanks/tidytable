@@ -17,12 +17,16 @@ Authors@R:
              role = "ctb"),
       person(given = "Lionel",
              family = "Henry",
-             role = "ctb",
-             email = "lionel@rstudio.com"),
+             role = "ctb"),
       person(given = "Matt",
              family = "Carlson",
-             role = "ctb"))
-Description: A tidy interface to 'data.table' that is 'rlang' compatible, giving users the speed of 'data.table' with the clean syntax of the tidyverse.
+             role = "ctb"),
+      person(given = "Abdessabour",
+             family = "Moutik",
+             role = "ctb")
+             )
+Description: A tidy interface to 'data.table' that is 'rlang' compatible,
+  giving users the speed of 'data.table' with the clean syntax of the tidyverse.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
