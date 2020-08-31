@@ -2,16 +2,19 @@
 % Please edit documentation in R/as_tidytable.R
 \name{as_tidytable}
 \alias{as_tidytable}
+\alias{as_dt}
 \title{Coerce an object to a data.table/tidytable}
 \usage{
 as_tidytable(x)
+
+as_dt(x)
 }
 \arguments{
 \item{x}{An R object}
 }
 \description{
 A tidytable object is simply a data.table with nice printing features.
-As such it can be used exactly like a data.table would be used
+As such it can be used exactly like a data.table would be used.
 
 Note that all tidytable functions automatically convert data.frames & data.tables to tidytables in the background.
 As such this function will rarely need to be used by the user.

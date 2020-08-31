@@ -2,7 +2,7 @@
 #'
 #' @description
 #' A tidytable object is simply a data.table with nice printing features.
-#' As such it can be used exactly like a data.table would be used
+#' As such it can be used exactly like a data.table would be used.
 #'
 #' Note that all tidytable functions automatically convert data.frames & data.tables to tidytables in the background.
 #' As such this function will rarely need to be used by the user.
@@ -34,8 +34,7 @@ as_tidytable.default <- function(x) {
 }
 
 #' @export
-#' @rdname dt_verb
-#' @inheritParams as_tidytable
+#' @rdname as_tidytable
 as_dt <- function(x) {
   deprecate_soft("0.5.5", "tidytable::as_dt()", "as_tidytable()")
 
