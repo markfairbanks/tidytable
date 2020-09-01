@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
       </span>
     </div>
 
@@ -298,7 +298,7 @@
 <a href="#deprecations" class="anchor"></a>Deprecations</h4>
 <ul>
 <li>
-<code><a href="../reference/desc..html">desc.()</a></code> has been deprecated due to incompatibility with character columns</li>
+<code>desc.()</code> has been deprecated due to incompatibility with character columns</li>
 </ul>
 </div>
 </div>
@@ -377,7 +377,7 @@
 <h4 class="hasAnchor">
 <a href="#deprecations-2" class="anchor"></a>Deprecations</h4>
 <ul>
-<li>Old select helpers like <code><a href="../reference/starts_with..html">everything.()</a></code> are now replaced by normal helpers like <code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code>
+<li>Old select helpers like <code>everything.()</code> are now replaced by normal helpers like <code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code>
 </li>
 <li>
 <code>rename_across/_if/_at/_all</code> have been superseded by <code><a href="../reference/rename_with..html">rename_with.()</a></code>
@@ -433,7 +433,7 @@
 <h4 class="hasAnchor">
 <a href="#new-functions-5" class="anchor"></a>New functions</h4>
 <ul>
-<li><code><a href="../reference/desc..html">desc.()</a></code></li>
+<li><code>desc.()</code></li>
 <li><code><a href="../reference/unite..html">unite.()</a></code></li>
 </ul>
 </div>
@@ -524,7 +524,7 @@
 <li>
 <code><a href="../reference/unnest..html">unnest.()</a></code> replaces <code><a href="../reference/dt_verb.html">dt_unnest_legacy()</a></code>
 </li>
-<li>Select helper <code><a href="../reference/starts_with..html">any_of.()</a></code>
+<li>Select helper <code>any_of.()</code>
 </li>
 </ul>
 </div>
@@ -569,7 +569,7 @@
 <code><a href="../reference/dt_verb.html">dt_get_dummies()</a></code>: Get dummy variables</li>
 <li><code><a href="../reference/dt_verb.html">dt_separate()</a></code></li>
 <li>
-<code><a href="../reference/dt_verb.html">dt_pivot_longer()</a></code> “cols” arg now defaults to <code><a href="../reference/starts_with..html">dt_everything()</a></code> instead of <code>NULL</code>. The result is the same, but is more consistent with other enhanced selection functions</li>
+<code><a href="../reference/dt_verb.html">dt_pivot_longer()</a></code> “cols” arg now defaults to <code>dt_everything()</code> instead of <code>NULL</code>. The result is the same, but is more consistent with other enhanced selection functions</li>
 <li>
 <code>.N</code> now works when using <code><a href="../reference/dt_verb.html">dt_slice()</a></code> &amp; variants</li>
 <li>Function length limit bug no longer occurs when using <code>~</code> in <code><a href="../reference/dt_verb.html">dt_map()</a></code>

@@ -1,4 +1,4 @@
-# tidytable 0.5.5 (in development)
+# tidytable 0.5.5
 
 #### Breaking changes
 * `bind_rows.()`: Removed `.use_names` and `.fill` args
