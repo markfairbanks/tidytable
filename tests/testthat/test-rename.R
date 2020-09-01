@@ -61,7 +61,7 @@ test_that("rename_if() works with predicate", {
 test_that("rename_at(): .vars works with select helpers in c()", {
   df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
-    rename_at.(c(dt_starts_with("x")), function(.x) paste0(.x, "_append"))
+    rename_at.(c(starts_with("x")), function(.x) paste0(.x, "_append"))
 
   expect_named(df, c("x_start_append", "end_x", "z"))
 })
@@ -119,10 +119,10 @@ test_that("rename_across() works with twiddle", {
   df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   anon_df <- df %>%
     as_tidytable() %>%
-    dt_rename_across(c(dt_starts_with("x")), ~ paste0(.x, "_append"))
+    dt_rename_across(c(starts_with("x")), ~ paste0(.x, "_append"))
   twiddle_df <- df %>%
     as_tidytable() %>%
-    dt_rename_across(c(dt_starts_with("x")), ~ paste0(.x, "_append"))
+    dt_rename_across(c(starts_with("x")), ~ paste0(.x, "_append"))
 
   expect_equal(anon_df, twiddle_df)
 })

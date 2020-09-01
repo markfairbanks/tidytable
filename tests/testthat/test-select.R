@@ -38,7 +38,7 @@ test_that("can use select helpers", {
                    y_start = 1, end_y = 1,
                    stuff = 1)
   df <- df %>%
-    select.(starts_with.("x"), ends_with.("y"), contains.("tuf"))
+    select.(starts_with("x"), ends_with("y"), contains("tuf"))
 
   expect_named(df, c("x_start", "end_y", "stuff"))
 })
