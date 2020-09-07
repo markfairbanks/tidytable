@@ -1,3 +1,5 @@
+# tidytable 0.5.6 (in development)
+
 # tidytable 0.5.5
 
 #### Breaking changes
