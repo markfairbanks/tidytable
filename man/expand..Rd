@@ -11,7 +11,7 @@ expand.(.df, ..., .name_repair = "check_unique")
 
 \item{...}{Columns to get combinations of}
 
-\item{.name_repair}{Treatment of problematic names. See \code{?vctrs::vec_as_names} for options/details}
+\item{.name_repair}{Treatment of duplicate names. See \code{?vctrs::vec_as_names} for options/details}
 }
 \description{
 Generates all combinations of variables found in a dataset.
