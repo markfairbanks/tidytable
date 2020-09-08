@@ -36,7 +36,7 @@ unnest. <- function(.df,
                     ...,
                     .keep_all = FALSE,
                     names_sep = NULL,
-                    names_repair = "check_unique") {
+                    names_repair = "unique") {
   UseMethod("unnest.")
 }
 
@@ -45,7 +45,7 @@ unnest..data.frame <- function(.df,
                                ...,
                                .keep_all = FALSE,
                                names_sep = NULL,
-                               names_repair = "check_unique") {
+                               names_repair = "unique") {
 
   .df <- as_tidytable(.df)
 
