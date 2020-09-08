@@ -119,9 +119,9 @@ test_that("duplicate names are fixed", {
 
   bind_df <- bind_cols.(df_list)
 
-  expect_named(bind_df, c("x","y","x1","y1"))
-  expect_equal(bind_df$x, c(1,2,3))
-  expect_equal(bind_df$y, c(3,4,5))
-  expect_equal(bind_df$x1, c(1,2,3))
-  expect_equal(bind_df$y1, c(3,4,5))
+  expect_named(bind_df, c("x...1","y...2","x...3","y...4"))
+  expect_equal(bind_df$x...1, c(1,2,3))
+  expect_equal(bind_df$y...2, c(3,4,5))
+  expect_equal(bind_df$x...3, c(1,2,3))
+  expect_equal(bind_df$y...4, c(3,4,5))
 })
