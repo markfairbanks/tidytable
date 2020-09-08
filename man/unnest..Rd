@@ -4,7 +4,13 @@
 \alias{unnest.}
 \title{Unnest a nested data.table}
 \usage{
-unnest.(.df, ..., .keep_all = FALSE)
+unnest.(
+  .df,
+  ...,
+  .keep_all = FALSE,
+  names_sep = NULL,
+  names_repair = "check_unique"
+)
 }
 \arguments{
 \item{.df}{A nested data.table}
@@ -12,6 +18,13 @@ unnest.(.df, ..., .keep_all = FALSE)
 \item{...}{Columns to unnest. If empty, unnests all list columns. \code{tidyselect} compatible.}
 
 \item{.keep_all}{Should list columns that were not unnested be kept}
+
+\item{names_sep}{If NULL, the default, the inner column names will become the new outer column names.
+
+If a string, the name of the outer column will be appended to the beginning of the inner column names,
+with \code{names_sep} used as a separator.}
+
+\item{names_repair}{Treatment of duplicate names. See \code{?vctrs::vec_as_names} for options/details.}
 }
 \description{
 Unnest a nested data.table.
@@ -27,6 +40,9 @@ nested_df <- data.table(
 
 nested_df \%>\%
   unnest.(data)
+
+nested_df \%>\%
+  unnest.(data, names_sep = "_")
 
 nested_df \%>\%
   unnest.(data, pulled_vec)

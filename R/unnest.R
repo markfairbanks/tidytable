@@ -6,9 +6,14 @@
 #' @param .df A nested data.table
 #' @param ... Columns to unnest. If empty, unnests all list columns. `tidyselect` compatible.
 #' @param .keep_all Should list columns that were not unnested be kept
+#' @param names_sep If NULL, the default, the inner column names will become the new outer column names.
+#'
+#' If a string, the name of the outer column will be appended to the beginning of the inner column names,
+#' with `names_sep` used as a separator.
+#'
+#' @param names_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details.
 #'
 #' @export
-#' @md
 #'
 #' @examples
 #' nested_df <- data.table(
@@ -23,13 +28,24 @@
 #'   unnest.(data)
 #'
 #' nested_df %>%
+#'   unnest.(data, names_sep = "_")
+#'
+#' nested_df %>%
 #'   unnest.(data, pulled_vec)
-unnest. <- function(.df, ..., .keep_all = FALSE) {
+unnest. <- function(.df,
+                    ...,
+                    .keep_all = FALSE,
+                    names_sep = NULL,
+                    names_repair = "unique") {
   UseMethod("unnest.")
 }
 
 #' @export
-unnest..data.frame <- function(.df, ..., .keep_all = FALSE) {
+unnest..data.frame <- function(.df,
+                               ...,
+                               .keep_all = FALSE,
+                               names_sep = NULL,
+                               names_repair = "unique") {
 
   .df <- as_tidytable(.df)
 
@@ -52,7 +68,7 @@ unnest..data.frame <- function(.df, ..., .keep_all = FALSE) {
     keep_cols <- c(keep_cols, list_cols[list_cols %notin% as.character(dots)])
   }
 
-  unnest_data <- map.(dots, ~ unnest_col(.df, .x))
+  unnest_data <- map.(dots, ~ unnest_col(.df, .x, names_sep))
 
   unnest_nrow <- list_sizes(unnest_data)
 
@@ -64,7 +80,7 @@ unnest..data.frame <- function(.df, ..., .keep_all = FALSE) {
 
   keep_df <- .df[, ..keep_cols][vec_rep_each(1:.N, rep_vec)]
 
-  results_df <- bind_cols.(keep_df, unnest_data)
+  results_df <- bind_cols.(keep_df, unnest_data, .name_repair = names_repair)
 
   results_df
 }
@@ -78,7 +94,7 @@ dt_unnest_legacy <- function(.df, ..., .keep_all = FALSE) {
   unnest.(.df, ..., .keep_all = .keep_all)
 }
 
-unnest_col <- function(.df, col = NULL) {
+unnest_col <- function(.df, col = NULL, names_sep = NULL) {
 
   # Check if nested data is a vector
   nested_data <- pull.(.df, !!col)[[1]]
@@ -93,6 +109,9 @@ unnest_col <- function(.df, col = NULL) {
     # bind_rows.() auto-converts lists of data.frames/tibbles/matrices to data.tables
     result_df <- bind_rows.(pull.(.df, !!col))
   }
+
+  if (!is.null(names_sep))
+    names(result_df) <- paste(quo_text(col), names(result_df), sep = names_sep)
 
   result_df
 }

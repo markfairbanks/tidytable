@@ -1,5 +1,12 @@
 # tidytable 0.5.6 (in development)
 
+#### Breaking changes
+* `bind_cols.()`: Name repair uses `vec_as_names()` instead of `vec_as_names_legacy()`
+
+#### Functionality improvements
+* `bind_cols.()`: Added `.name_repair` arg
+* `unnest.()`: Added `names_sep` and `names_repair` args
+
 # tidytable 0.5.5
 
 #### Breaking changes

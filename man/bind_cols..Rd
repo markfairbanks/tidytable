@@ -5,12 +5,14 @@
 \alias{bind_rows.}
 \title{Bind data.tables by row and column}
 \usage{
-bind_cols.(...)
+bind_cols.(..., .name_repair = "unique")
 
 bind_rows.(..., .id = NULL)
 }
 \arguments{
 \item{...}{data.tables or data.frames to bind}
+
+\item{.name_repair}{Treatment of duplicate names. See \code{?vctrs::vec_as_names} for options/details.}
 
 \item{.id}{If TRUE, an integer column is made as a group id}
 }

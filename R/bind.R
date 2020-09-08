@@ -5,6 +5,7 @@
 #'
 #' @param ... data.tables or data.frames to bind
 #' @param .id If TRUE, an integer column is made as a group id
+#' @param .name_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details.
 #'
 #' @export
 #' @md
@@ -23,7 +24,7 @@
 #'
 #' bind_cols.(list(df1, df2))
 #' @export
-bind_cols. <- function(...) {
+bind_cols. <- function(..., .name_repair = "unique") {
 
   dots <- list(...)
   dots <- squash(dots)
@@ -33,7 +34,7 @@ bind_cols. <- function(...) {
 
   dots <- setDT(unlist(dots, recursive = FALSE), check.names = FALSE)
 
-  names(dots) <- vec_as_names_legacy(names(dots))
+  names(dots) <- vec_as_names(names(dots), repair = .name_repair)
 
   as_tidytable(dots)
 

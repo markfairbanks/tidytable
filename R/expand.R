@@ -9,7 +9,7 @@
 #'
 #' @param .df A data.frame or data.table
 #' @param ... Columns to get combinations of
-#' @param .name_repair Treatment of problematic names. See `?vctrs::vec_as_names` for options/details
+#' @param .name_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details
 #'
 #' @md
 #' @export
