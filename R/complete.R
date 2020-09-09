@@ -37,7 +37,7 @@ complete..data.frame <- function(.df, ..., fill = list(), .fill = NULL) {
   data_env <- env(quo_get_env(dots[[1]]), .df = .df)
 
   full_df <- eval_quo(
-    expand.(.df, !!!dots),
+    tidytable::expand.(.df, !!!dots),
     new_data_mask(data_env), env = caller_env()
   )
 
