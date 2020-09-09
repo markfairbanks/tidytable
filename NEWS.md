@@ -6,6 +6,7 @@
 #### Functionality improvements
 * `bind_cols.()`: Added `.name_repair` arg
 * `unnest.()`: Added `names_sep` and `names_repair` args
+* `print()`: Added `n`, `width`, and `n_extra` args
 
 # tidytable 0.5.5
 
