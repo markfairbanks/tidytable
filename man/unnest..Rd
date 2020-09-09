@@ -4,13 +4,7 @@
 \alias{unnest.}
 \title{Unnest a nested data.table}
 \usage{
-unnest.(
-  .df,
-  ...,
-  .keep_all = FALSE,
-  names_sep = NULL,
-  names_repair = "check_unique"
-)
+unnest.(.df, ..., .keep_all = FALSE, names_sep = NULL, names_repair = "unique")
 }
 \arguments{
 \item{.df}{A nested data.table}
