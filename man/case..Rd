@@ -2,7 +2,7 @@
 % Please edit documentation in R/case.R
 \name{case.}
 \alias{case.}
-\title{Case when}
+\title{Improved data.table::fcase()}
 \usage{
 case.(..., default = NA)
 }
@@ -14,20 +14,14 @@ case.(..., default = NA)
 \description{
 This function allows you to use multiple if/else statements in one call.
 
-Note that this function is called differently than \code{dplyr::case_when}. See examples.
+It is called like \code{data.table::fcase()}, but allows the user to use
+a vector as the \code{default} argument.
 }
 \examples{
-test_df <- tidytable(
-  a = 1:10,
-  b = 11:20,
-  c = c(rep("a", 6), rep("b", 4)),
-  d = c(rep("a", 4), rep("b", 6)))
+test_df <- tidytable(x = 1:10)
 
 test_df \%>\%
-  mutate.(x = case.(b < 13, 3,
-                    a > 4, 2,
-                    default = 10))
-test_df \%>\%
-  mutate.(x = case.(c == "a", "a",
-                    default = d))
+  mutate.(case_x = case.(x < 5, 1,
+                         x < 7, 2,
+                         default = 3))
 }
