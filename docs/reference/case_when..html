@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Improved data.table::fcase() — case. • tidytable</title>
+<title>Case when — case_when. • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,10 @@
 
 
 
-<meta property="og:title" content="Improved data.table::fcase() — case." />
+<meta property="og:title" content="Case when — case_when." />
 <meta property="og:description" content="This function allows you to use multiple if/else statements in one call.
-It is called like data.table::fcase(), but allows the user to use
-a vector as the default argument." />
+It is called like dplyr::case_when(), but utilizes data.table::fifelse()
+in the background for improved performance." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -133,29 +133,26 @@ a vector as the default argument." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Improved data.table::fcase()</h1>
-    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/case.R'><code>R/case.R</code></a></small>
-    <div class="hidden name"><code>case..Rd</code></div>
+    <h1>Case when</h1>
+    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/case_when.R'><code>R/case_when.R</code></a></small>
+    <div class="hidden name"><code>case_when..Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>This function allows you to use multiple if/else statements in one call.</p>
-<p>It is called like <code><a href='https://Rdatatable.gitlab.io/data.table/reference/fcase.html'>data.table::fcase()</a></code>, but allows the user to use
-a vector as the <code>default</code> argument.</p>
+<p>It is called like <code><a href='https://dplyr.tidyverse.org/reference/case_when.html'>dplyr::case_when()</a></code>, but utilizes <code><a href='https://Rdatatable.gitlab.io/data.table/reference/fifelse.html'>data.table::fifelse()</a></code>
+in the background for improved performance.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>case.</span>(<span class='kw'>...</span>, default = <span class='fl'>NA</span>)</pre>
+    <pre class="usage"><span class='fu'>case_when.</span>(<span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>Sequence of condition/value designations</p></td>
-    </tr>
-    <tr>
-      <th>default</th>
-      <td><p>Default value. Set to NA by default.</p></td>
+      <td><p>A sequence of two-sided formulas. The left hand side gives the conditions,
+the right hand side gives the values.</p></td>
     </tr>
     </table>
 
@@ -164,9 +161,9 @@ a vector as the <code>default</code> argument.</p>
     <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(x = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>)
 
 <span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>mutate.</a></span>(case_x = <span class='fu'>case.</span>(<span class='kw'>x</span> <span class='op'>&lt;</span> <span class='fl'>5</span>, <span class='fl'>1</span>,
-                         <span class='kw'>x</span> <span class='op'>&lt;</span> <span class='fl'>7</span>, <span class='fl'>2</span>,
-                         default = <span class='fl'>3</span>))
+  <span class='fu'><a href='mutate..html'>mutate.</a></span>(case_x = <span class='fu'>case_when.</span>(<span class='kw'>x</span> <span class='op'>&lt;</span> <span class='fl'>5</span> <span class='op'>~</span> <span class='fl'>1</span>,
+                              <span class='kw'>x</span> <span class='op'>&lt;</span> <span class='fl'>7</span> <span class='op'>~</span> <span class='fl'>2</span>,
+                              <span class='fl'>TRUE</span> <span class='op'>~</span> <span class='fl'>3</span>))
 </div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [10 × 2]</span><span>
 #&gt;        x case_x
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>

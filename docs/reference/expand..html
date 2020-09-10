@@ -85,7 +85,7 @@ use with anti_join.() to find out which combinations are missing
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -143,14 +143,14 @@ use with anti_join.() to find out which combinations are missing
 
     <div class="ref-description">
     <p>Generates all combinations of variables found in a dataset.</p>
-<p><code><a href='expand..html'>expand.()</a></code> is useful in conjunction with joins:</p><ul>
+<p><code>expand.()</code> is useful in conjunction with joins:</p><ul>
 <li><p>use with <code><a href='left_join..html'>right_join.()</a></code> to convert implicit missing values to explicit missing values</p></li>
 <li><p>use with <code><a href='left_join..html'>anti_join.()</a></code> to find out which combinations are missing</p></li>
 </ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'><a href='expand..html'>expand.</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"check_unique"</span>)</pre>
+    <pre class="usage"><span class='fu'>expand.</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .name_repair = <span class='st'>"check_unique"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,16 +165,17 @@ use with anti_join.() to find out which combinations are missing
     </tr>
     <tr>
       <th>.name_repair</th>
-      <td><p>Treatment of problematic names. See <code><a href='https://vctrs.r-lib.org/reference/vec_as_names.html'>?vctrs::vec_as_names</a></code> for options/details</p></td>
+      <td><p>Treatment of duplicate names. See <code><a href='https://vctrs.r-lib.org/reference/vec_as_names.html'>?vctrs::vec_as_names</a></code> for options/details</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>)
+    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(x = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, y = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>)
 
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='expand..html'>expand.</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [4 × 2]</span><span>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>expand.</span>(<span class='kw'>x</span>, <span class='kw'>y</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [4 × 2]</span><span>
 #&gt;       x     y
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     1     1
@@ -196,7 +197,7 @@ use with anti_join.() to find out which combinations are missing
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>
