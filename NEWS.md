@@ -8,6 +8,12 @@
 * `unnest.()`: Added `names_sep` and `names_repair` args
 * `print()`: Added `n`, `width`, and `n_extra` args
 
+#### New functions
+* `case_when.()`
+  + The old "case when" translation `case.()` will remain in the package,
+  as it is called like `data.table::fcase()` but allows for the `default`
+  to be a vector.
+
 # tidytable 0.5.5
 
 #### Breaking changes
