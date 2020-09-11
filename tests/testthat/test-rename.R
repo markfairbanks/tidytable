@@ -1,14 +1,3 @@
-setup(options(lifecycle_verbosity = "quiet"))
-
-test_that("dt_() works for one column", {
-  df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
-  result_df <- df %>%
-    dt_rename(new_x = x)
-
-  expect_deprecated(dt_rename(df, new_x = x))
-  expect_named(result_df, c("new_x", "y", "z"))
-})
-
 test_that("rename.() works for one column", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
@@ -119,10 +108,9 @@ test_that("rename_across() works with twiddle", {
   df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   anon_df <- df %>%
     as_tidytable() %>%
-    dt_rename_across(c(starts_with("x")), ~ paste0(.x, "_append"))
+    rename_across.(c(starts_with("x")), ~ paste0(.x, "_append"))
   twiddle_df <- df %>%
-    as_tidytable() %>%
-    dt_rename_across(c(starts_with("x")), ~ paste0(.x, "_append"))
+    rename_across.(c(starts_with("x")), ~ paste0(.x, "_append"))
 
   expect_equal(anon_df, twiddle_df)
 })
@@ -131,11 +119,11 @@ test_that("rename_all() works with twiddle", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2))
   anon_df <- df %>%
     as_tidytable() %>%
-    dt_rename_all(function(.x) paste0(.x, "_append"))
+    rename_all.(function(.x) paste0(.x, "_append"))
 
   twiddle_df <- df %>%
     as_tidytable() %>%
-    dt_rename_all(~ paste0(.x, "_append"))
+    rename_all.(~ paste0(.x, "_append"))
 
   expect_named(twiddle_df, c("x_append", "y_append"))
   expect_equal(anon_df, twiddle_df)

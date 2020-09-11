@@ -1,16 +1,3 @@
-test_that("dt_ works with selected cols", {
-
-  test_df <- tidytable(a = c("a", "a", "a"),
-                       b = c("b", "b", "b"),
-                       c = c("c", NA, "c"))
-
-  unite_df <- test_df %>%
-    dt_unite("new_col", a:b)
-
-  expect_named(unite_df, c("c", "new_col"))
-  expect_equal(unite_df$new_col, c("a_b", "a_b", "a_b"))
-})
-
 test_that("works with no input & works with NA", {
   test_df <- tidytable(a = c("a", "a", "a"),
                        b = c("b", "b", "b"),

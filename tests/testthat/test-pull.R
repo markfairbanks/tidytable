@@ -1,10 +1,3 @@
-test_that("dt_ pulls last when empty & is deprecated", {
-  test_df <- data.table(x = c(1,2,3), y = c(4,5,6))
-
-  expect_deprecated(dt_pull(test_df))
-  expect_equal(dt_pull(test_df), c(4,5,6))
-})
-
 test_that("pulls last when empty", {
   test_df <- data.table(x = c(1,2,3), y = c(4,5,6))
 

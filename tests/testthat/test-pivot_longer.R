@@ -1,15 +1,5 @@
 # tests from tidyr regarding pivot_longer
 
-test_that("dt_ can pivot all cols (unspecified) to long & is deprecated", {
-  df <- data.table(x = 1:2, y = 3:4)
-  pivot_df <- dt_pivot_longer(df)[order(name, value)]
-
-  expect_deprecated(dt_pivot_longer(df))
-  expect_named(pivot_df, c("name", "value"))
-  expect_equal(pivot_df$name, c("x","x","y","y"))
-  expect_equal(pivot_df$value, c(1,2,3,4))
-})
-
 test_that("can pivot all cols (unspecified) to long", {
   df <- data.table(x = 1:2, y = 3:4)
   pivot_df <- pivot_longer.(df)[order(name, value)]
@@ -82,13 +72,13 @@ test_that("testing removal of multiple columns", {
 
 test_that("stops if given vector", {
   df <- data.table(x = c(1, 2), y = c(2,2))
-  expect_error(dt_pivot_longer(df$x, c(x,-y)))
+  expect_error(pivot_longer.(df$x, c(x,-y)))
 })
 
 test_that("works with select helpers", {
   df <- data.table(x = 1:2, y = 2, z = 1:2) %>%
     mutate_across.(everything(), as.double)
-  pivot_df <- dt_pivot_longer(df, cols = c(starts_with("y"), contains("z")))[order(name, value)]
+  pivot_df <- pivot_longer.(df, cols = c(starts_with("y"), contains("z")))[order(name, value)]
 
   expect_named(pivot_df, c("x", "name", "value"))
   expect_equal(pivot_df$x, c(1,2,1,2))

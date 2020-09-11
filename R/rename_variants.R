@@ -102,16 +102,24 @@ rename_if..default <- function(.data, .predicate, .fun, ...) {
 
 #' @export
 #' @rdname rename_all.
-dt_rename_across <- rename_across.
+dt_rename_across <- function(.data, .cols, .fun, ...) {
+  deprecate_stop("0.5.2", "tidytable::dt_rename_across()", "rename_across.()")
+}
 
 #' @export
 #' @rdname rename_all.
-dt_rename_all <- rename_all.
+dt_rename_all <- function(.data, .fun, ...) {
+  deprecate_stop("0.5.2", "tidytable::dt_rename_all()", "rename_all.()")
+}
 
 #' @export
 #' @rdname rename_all.
-dt_rename_if <- rename_if.
+dt_rename_if <- function(.data, .predicate, .fun, ...) {
+  deprecate_stop("0.5.2", "tidytable::dt_rename_if()", "rename_if.()")
+}
 
 #' @export
 #' @rdname rename_all.
-dt_rename_at <- rename_at.
+dt_rename_at <- function(.data, .fun, ...) {
+  deprecate_stop("0.5.2", "tidytable::dt_rename_at()", "rename_at.()")
+}

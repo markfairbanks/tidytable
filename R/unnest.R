@@ -89,7 +89,7 @@ unnest..data.frame <- function(.df,
 #' @rdname dt_verb
 #' @inheritParams unnest.
 dt_unnest_legacy <- function(.df, ..., .keep_all = FALSE) {
-  deprecate_warn("0.5.2", "tidytable::dt_unnest_legacy()", "unnest.()")
+  deprecate_stop("0.5.2", "tidytable::dt_unnest_legacy()", "unnest.()")
 
   unnest.(.df, ..., .keep_all = .keep_all)
 }

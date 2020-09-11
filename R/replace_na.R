@@ -70,7 +70,7 @@ replace_na..data.frame <- function(.x, replace = list()) {
 #' @rdname dt_verb
 #' @inheritParams replace_na.
 dt_replace_na <- function(.x, replace = NA) {
-  deprecate_warn("0.5.2", "tidytable::dt_replace_na()", "replace_na.()")
+  deprecate_stop("0.5.2", "tidytable::dt_replace_na()", "replace_na.()")
 
   replace_na.(.x, replace)
 }

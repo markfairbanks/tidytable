@@ -47,7 +47,7 @@ drop_na..data.frame <- function(.df, ...) {
 #' @rdname dt_verb
 #' @inheritParams drop_na.
 dt_drop_na <- function(.df, ...) {
-  deprecate_warn("0.5.2", "tidytable::dt_drop_na()", "drop_na.()")
+  deprecate_stop("0.5.2", "tidytable::dt_drop_na()", "drop_na.()")
 
   drop_na.(.df, ...)
 }

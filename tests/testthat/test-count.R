@@ -1,18 +1,7 @@
-setup(options(lifecycle_verbosity = "quiet"))
-
 test_that("empty count.() returns number of rows", {
   test_df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
   summary_df <- test_df %>%
     count.()
-
-  expect_named(summary_df, c("N"))
-  expect_equal(summary_df$N, nrow(test_df))
-})
-
-test_that("empty dt_count() returns number of rows", {
-  test_df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
-  summary_df <- test_df %>%
-    dt_count()
 
   expect_named(summary_df, c("N"))
   expect_equal(summary_df$N, nrow(test_df))

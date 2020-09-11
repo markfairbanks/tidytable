@@ -44,7 +44,7 @@ bind_cols. <- function(..., .name_repair = "unique") {
 #' @rdname dt_verb
 #' @inheritParams bind_rows.
 dt_bind_rows <- function(..., .id = NULL) {
-  deprecate_warn("0.5.2", "tidytable::dt_bind_rows()", "bind_rows.()")
+  deprecate_stop("0.5.2", "tidytable::dt_bind_rows()", "bind_rows.()")
 
   bind_rows.(..., .id = .id)
 }
@@ -68,7 +68,7 @@ bind_rows. <- function(..., .id = NULL) {
 #' @rdname dt_verb
 #' @inheritParams bind_cols.
 dt_bind_cols <- function(...) {
-  deprecate_warn("0.5.2", "tidytable::dt_bind_cols()", "bind_cols.()")
+  deprecate_stop("0.5.2", "tidytable::dt_bind_cols()", "bind_cols.()")
 
   bind_cols.(...)
 }

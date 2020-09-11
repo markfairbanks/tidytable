@@ -192,7 +192,7 @@ get_bys <- function(x, y, by = NULL) {
 #' @rdname dt_verb
 #' @inheritParams left_join.
 dt_left_join <- function(x, y, by = NULL) {
-  deprecate_warn("0.5.2", "tidytable::dt_left_join()", "left_join.()")
+  deprecate_stop("0.5.2", "tidytable::dt_left_join()", "left_join.()")
 
   left_join.(x, y, by)
 }
@@ -201,7 +201,7 @@ dt_left_join <- function(x, y, by = NULL) {
 #' @rdname dt_verb
 #' @inheritParams inner_join.
 dt_inner_join <- function(x, y, by = NULL) {
-  deprecate_warn("0.5.2", "tidytable::dt_inner_join()", "inner_join.()")
+  deprecate_stop("0.5.2", "tidytable::dt_inner_join()", "inner_join.()")
 
   inner_join.(x, y, by)
 }
@@ -210,7 +210,7 @@ dt_inner_join <- function(x, y, by = NULL) {
 #' @rdname dt_verb
 #' @inheritParams right_join.
 dt_right_join <- function(x, y, by = NULL) {
-  deprecate_warn("0.5.2", "tidytable::dt_right_join()", "right_join.()")
+  deprecate_stop("0.5.2", "tidytable::dt_right_join()", "right_join.()")
 
   right_join.(x, y, by)
 }
@@ -219,7 +219,7 @@ dt_right_join <- function(x, y, by = NULL) {
 #' @rdname dt_verb
 #' @inheritParams full_join.
 dt_full_join <- function(x, y, by = NULL,suffix =  c(".x", ".y")) {
-  deprecate_warn("0.5.2", "tidytable::dt_full_join()", "full_join.()")
+  deprecate_stop("0.5.2", "tidytable::dt_full_join()", "full_join.()")
 
   full_join.(x, y, by)
 }
@@ -228,7 +228,7 @@ dt_full_join <- function(x, y, by = NULL,suffix =  c(".x", ".y")) {
 #' @rdname dt_verb
 #' @inheritParams anti_join.
 dt_anti_join <- function(x, y, by = NULL) {
-  deprecate_warn("0.5.2", "tidytable::dt_anti_join()", "anti_join.()")
+  deprecate_stop("0.5.2", "tidytable::dt_anti_join()", "anti_join.()")
 
   anti_join.(x, y, by)
 }
