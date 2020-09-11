@@ -5,7 +5,7 @@
 #'
 #' @param .df A data.frame or data.table
 #' @param cols A single column or a vector of unquoted columns to dummify.
-#' Defaults to all character & factor columns using `c(is.character, is.factor)`.
+#' Defaults to all character & factor columns using `c(where(is.character), where(is.factor))`.
 #' `tidyselect` compatible.
 #' @param prefix TRUE/FALSE - If TRUE, a prefix will be added to new column names
 #' @param prefix_sep Separator for new column names
@@ -118,7 +118,7 @@ dt_get_dummies <- function(.df,
                            prefix_sep = "_",
                            drop_first = FALSE,
                            dummify_na = TRUE) {
-  deprecate_warn("0.5.2", "tidytable::dt_get_dummies()", "get_dummies.()")
+  deprecate_stop("0.5.2", "tidytable::dt_get_dummies()", "get_dummies.()")
 
   get_dummies.(.df, cols = {{ cols }}, prefix = prefix, prefix_sep = prefix_sep,
                drop_first = drop_first, dummify_na = dummify_na)

@@ -57,7 +57,7 @@ select..data.frame <- function(.df, ...) {
 #' @rdname dt_verb
 #' @inheritParams select.
 dt_select <- function(.df, ...) {
-  deprecate_warn("0.5.2", "tidytable::dt_select()", "select.()")
+  deprecate_stop("0.5.2", "tidytable::dt_select()", "select.()")
 
   select.(.df, ...)
 }

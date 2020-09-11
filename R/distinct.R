@@ -58,7 +58,7 @@ distinct..data.frame <- function(.df, ..., .keep_all = FALSE) {
 #' @rdname dt_verb
 #' @inheritParams distinct.
 dt_distinct <- function(.df, ..., .keep_all = FALSE) {
-  deprecate_warn("0.5.2", "tidytable::dt_distinct()", "distinct.()")
+  deprecate_stop("0.5.2", "tidytable::dt_distinct()", "distinct.()")
 
   distinct.(.df, ..., .keep_all = .keep_all)
 }

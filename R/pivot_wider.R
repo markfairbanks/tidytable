@@ -100,7 +100,7 @@ dt_pivot_wider <- function(.df,
                            id_cols = NULL,
                            names_sep = "_",
                            values_fn = NULL) {
-  deprecate_warn("0.5.2", "tidytable::dt_pivot_wider()", "pivot_wider.()")
+  deprecate_stop("0.5.2", "tidytable::dt_pivot_wider()", "pivot_wider.()")
 
   pivot_wider.(.df,
                names_from = {{ names_from }},

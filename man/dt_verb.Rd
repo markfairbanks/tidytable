@@ -221,7 +221,7 @@ Currently "down" (the default), "up", "downup" (first down then up), or "updown"
 \item{.by}{Columns to group by when filling should be done by group}
 
 \item{cols}{A single column or a vector of unquoted columns to dummify.
-Defaults to all character & factor columns using \code{c(is.character, is.factor)}.
+Defaults to all character & factor columns using \code{c(where(is.character), where(is.factor))}.
 \code{tidyselect} compatible.}
 
 \item{prefix}{TRUE/FALSE - If TRUE, a prefix will be added to new column names}
@@ -257,7 +257,7 @@ Defaults to all character & factor columns using \code{c(is.character, is.factor
 \item{.y}{A data.frame or data.table}
 
 \item{.cols}{A single column or a vector of unquoted columns to dummify.
-Defaults to all character & factor columns using \code{c(is.character, is.factor)}.
+Defaults to all character & factor columns using \code{c(where(is.character), where(is.factor))}.
 \code{tidyselect} compatible.}
 
 \item{.fns}{Functions to pass. Can pass a list of functions.}

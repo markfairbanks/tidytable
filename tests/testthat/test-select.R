@@ -1,14 +1,3 @@
-test_that("dt_ can add and drop columns & is deprecated", {
-  df <- data.table(x = 1, y = 2, z = 3)
-
-  expect_deprecated(dt_select(df, x, y, -y))
-
-  df <- df %>%
-    dt_select(x, y, -y)
-
-  expect_named(df, c("x"))
-})
-
 test_that("can add and drop columns", {
   df <- data.table(x = 1, y = 2, z = 3)
   df <- df %>%

@@ -41,7 +41,7 @@ ifelse. <- function(conditions, true, false, na = NA) {
 #' @rdname dt_verb
 #' @inheritParams ifelse.
 dt_ifelse <- function(conditions, true, false, na = NA) {
-  deprecate_warn("0.5.2", "tidytable::dt_ifelse()", "ifelse.()")
+  deprecate_stop("0.5.2", "tidytable::dt_ifelse()", "ifelse.()")
 
   ifelse.(conditions, true, false, na)
 }

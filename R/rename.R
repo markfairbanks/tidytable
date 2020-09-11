@@ -38,7 +38,7 @@ rename..data.frame <- function(.df, ...) {
 #' @rdname dt_verb
 #' @inheritParams rename.
 dt_rename <- function(.df, ...) {
-  deprecate_warn("0.5.2", "tidytable::dt_rename()", "rename.()")
+  deprecate_stop("0.5.2", "tidytable::dt_rename()", "rename.()")
 
   rename.(.df, ...)
 }

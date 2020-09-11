@@ -4,18 +4,6 @@ start_df <- tidytable(
   c = c(rep("a", 3), rep("b", 2)),
   d = c(rep("a", 2), rep("b", 3)))
 
-test_that("dt_ unnesting works with nested data.table", {
-
-  nest_df <- start_df %>%
-    dt_group_nest(c, d)
-
-  unnest_df <- nest_df %>%
-    dt_unnest_legacy(data)
-
-  expect_named(unnest_df, c("c","d","a","b"))
-  expect_equal(unnest_df$a, start_df$a)
-})
-
 test_that("unnesting works with nested data.table", {
 
   nest_df <- start_df %>%

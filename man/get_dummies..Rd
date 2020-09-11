@@ -17,7 +17,7 @@ get_dummies.(
 \item{.df}{A data.frame or data.table}
 
 \item{cols}{A single column or a vector of unquoted columns to dummify.
-Defaults to all character & factor columns using \code{c(is.character, is.factor)}.
+Defaults to all character & factor columns using \code{c(where(is.character), where(is.factor))}.
 \code{tidyselect} compatible.}
 
 \item{prefix}{TRUE/FALSE - If TRUE, a prefix will be added to new column names}
