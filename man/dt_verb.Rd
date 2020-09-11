@@ -81,15 +81,9 @@ dt_distinct(.df, ..., .keep_all = FALSE)
 
 dt_drop_na(.df, ...)
 
-dt_fill(
-  .df,
-  ...,
-  .direction = c("down", "up", "downup", "updown"),
-  .by = NULL,
-  by = NULL
-)
+dt_fill(.df, ..., .direction = c("down", "up", "downup", "updown"), .by = NULL)
 
-dt_filter(.df, ..., .by = NULL, by = NULL)
+dt_filter(.df, ..., .by = NULL)
 
 dt_get_dummies(
   .df,
@@ -146,9 +140,9 @@ dt_map2_dfr(.x, .y, .f, ..., .id = NULL)
 
 dt_map2_df(.x, .y, .f, ..., .id = NULL)
 
-dt_mutate(.df, ..., .by = NULL, by = NULL)
+dt_mutate(.df, ..., .by = NULL)
 
-dt_mutate_across(.df, .cols = everything(), .fns, ..., .by = NULL, by = NULL)
+dt_mutate_across(.df, .cols = everything(), .fns, ..., .by = NULL)
 
 dt_n()
 
@@ -188,21 +182,21 @@ dt_select(.df, ...)
 
 dt_separate(.df, col, into, sep = "[^[:alnum:]]+", remove = TRUE, ...)
 
-dt_slice(.df, ..., .by = NULL, by = NULL)
+dt_slice(.df, ..., .by = NULL)
 
-dt_slice_head(.df, n = 5, .by = NULL, by = NULL)
+dt_slice_head(.df, n = 5, .by = NULL)
 
-dt_slice_tail(.df, n = 5, .by = NULL, by = NULL)
+dt_slice_tail(.df, n = 5, .by = NULL)
 
-dt_slice_min(.df, order_by, n = 1, .by = NULL, by = NULL)
+dt_slice_min(.df, order_by, n = 1, .by = NULL)
 
-dt_slice_max(.df, order_by, n = 1, .by = NULL, by = NULL)
+dt_slice_max(.df, order_by, n = 1, .by = NULL)
 
-dt_summarise(.df, ..., .by = NULL, by = NULL)
+dt_summarise(.df, ..., .by = NULL)
 
-dt_summarize(.df, ..., .by = NULL, by = NULL)
+dt_summarize(.df, ..., .by = NULL)
 
-dt_transmute(.df, ..., .by = NULL, by = NULL)
+dt_transmute(.df, ..., .by = NULL)
 
 dt_unite(.df, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE)
 
@@ -221,11 +215,10 @@ dt_unnest_legacy(.df, ..., .keep_all = FALSE)
 This keeps all columns, but only keeps the first row of each distinct
 values of columns provided to ... arg.}
 
-\item{.direction}{Direction in which to fill missing values. Currently "down" (the default), "up", "downup" (first down then up), or "updown" (first up and then down)}
+\item{.direction}{Direction in which to fill missing values.
+Currently "down" (the default), "up", "downup" (first down then up), or "updown" (first up and then down)}
 
 \item{.by}{Columns to group by when filling should be done by group}
-
-\item{by}{This argument has been renamed to .by and is deprecated}
 
 \item{cols}{A single column or a vector of unquoted columns to dummify.
 Defaults to all character & factor columns using \code{c(is.character, is.factor)}.
@@ -252,6 +245,8 @@ Defaults to all character & factor columns using \code{c(is.character, is.factor
 \item{x}{A data.frame or data.table}
 
 \item{y}{A data.frame or data.table}
+
+\item{by}{Columns to group by when filling should be done by group}
 
 \item{suffix}{Append created for duplicated column names when using \code{full_join.()}}
 

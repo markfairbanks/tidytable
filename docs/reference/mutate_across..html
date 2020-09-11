@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -140,15 +140,7 @@
     <p>Mutate multiple columns simultaneously.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(
-  <span class='no'>.df</span>,
-  <span class='kw'>.cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(),
-  <span class='no'>.fns</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>.names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>mutate_across.</span>(<span class='kw'>.df</span>, .cols = <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(), <span class='kw'>.fns</span>, <span class='kw'>...</span>, .by = <span class='kw'>NULL</span>, .names = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -180,51 +172,52 @@
 The default (<code>NULL</code>) is equivalent to <code>"{.col}"</code> for a single function case and <code>"{.col}_{.fn}"</code>
 when a list is used for <code>.fns</code>.</p></td>
     </tr>
-    <tr>
-      <th>by</th>
-      <td><p>This argument has been renamed to .by and is deprecated</p></td>
-    </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>),
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>2</span>),
-  <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span>))
+    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
+  x = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>),
+  y = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>2</span>),
+  z = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span>))
 
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(<span class='fu'>where</span>(<span class='no'>is.numeric</span>), <span class='no'>as.character</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [3 × 3]</span><span>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate_across.</span>(<span class='fu'>where</span>(<span class='kw'>is.numeric</span>), <span class='kw'>as.character</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [3 × 3]</span><span>
 #&gt;   x     y     z    
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> 1     2     a    
 #&gt; </span><span style='color: #555555;'>2</span><span> 1     2     a    
 #&gt; </span><span style='color: #555555;'>3</span><span> 1     2     b    </div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>, <span class='no'>y</span>), ~ <span class='no'>.x</span> * <span class='fl'>2</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [3 × 3]</span><span>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate_across.</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>x</span>, <span class='kw'>y</span>), <span class='op'>~</span> <span class='kw'>.x</span> <span class='op'>*</span> <span class='fl'>2</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [3 × 3]</span><span>
 #&gt;       x     y z    
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     2     4 a    
 #&gt; </span><span style='color: #555555;'>2</span><span>     2     4 a    
 #&gt; </span><span style='color: #555555;'>3</span><span>     2     4 b    </div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(<span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(), <span class='no'>as.character</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [3 × 3]</span><span>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate_across.</span>(<span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(), <span class='kw'>as.character</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [3 × 3]</span><span>
 #&gt;   x     y     z    
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> 1     2     a    
 #&gt; </span><span style='color: #555555;'>2</span><span> 1     2     a    
 #&gt; </span><span style='color: #555555;'>3</span><span> 1     2     b    </div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>, <span class='no'>y</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>new</span> <span class='kw'>=</span> ~ <span class='no'>.x</span> * <span class='fl'>2</span>,
-                               <span class='kw'>another</span> <span class='kw'>=</span> ~ <span class='no'>.x</span> + <span class='fl'>7</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [3 × 7]</span><span>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate_across.</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>x</span>, <span class='kw'>y</span>), <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(new = <span class='op'>~</span> <span class='kw'>.x</span> <span class='op'>*</span> <span class='fl'>2</span>,
+                               another = <span class='op'>~</span> <span class='kw'>.x</span> <span class='op'>+</span> <span class='fl'>7</span>))
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [3 × 7]</span><span>
 #&gt;       x     y z     x_new y_new x_another y_another
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     1     2 a         2     4         8         9
 #&gt; </span><span style='color: #555555;'>2</span><span>     1     2 a         2     4         8         9
-#&gt; </span><span style='color: #555555;'>3</span><span>     1     2 b         2     4         8         9</div><div class='input'><span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate_across..html'>mutate_across.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>, <span class='no'>y</span>),
-                 <span class='kw'>.fns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>new</span> <span class='kw'>=</span> ~ <span class='no'>.x</span> * <span class='fl'>2</span>, <span class='kw'>another</span> <span class='kw'>=</span> ~ <span class='no'>.x</span> + <span class='fl'>7</span>),
-                 <span class='kw'>.names</span> <span class='kw'>=</span> <span class='st'>"{.col}_test_{.fn}"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [3 × 7]</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span>     1     2 b         2     4         8         9</div><div class='input'><span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate_across.</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>x</span>, <span class='kw'>y</span>),
+                 .fns = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(new = <span class='op'>~</span> <span class='kw'>.x</span> <span class='op'>*</span> <span class='fl'>2</span>, another = <span class='op'>~</span> <span class='kw'>.x</span> <span class='op'>+</span> <span class='fl'>7</span>),
+                 .names = <span class='st'>"{.col}_test_{.fn}"</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [3 × 7]</span><span>
 #&gt;       x     y z     x_test_new y_test_new x_test_another y_test_another
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     1     2 a              2          4              8              9
@@ -245,7 +238,7 @@ when a list is used for <code>.fns</code>.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

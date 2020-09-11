@@ -6,7 +6,6 @@
 #' @param .df A data.frame or data.table
 #' @param ... Conditions to filter by
 #' @param .by Columns to group by if filtering with a summary function
-#' @param by This argument has been renamed to .by and is deprecated
 #'
 #' @export
 #'
@@ -21,16 +20,16 @@
 #'
 #' test_df %>%
 #'   filter.(b <= mean(b), .by = c)
-filter. <- function(.df, ..., .by = NULL, by = NULL) {
+filter. <- function(.df, ..., .by = NULL) {
   UseMethod("filter.")
 }
 
 #' @export
-filter..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
+filter..data.frame <- function(.df, ..., .by = NULL) {
 
   .df <- as_tidytable(.df)
 
-  .by <- check_dot_by(enquo(.by), enquo(by), "filter.")
+  .by <- enquo(.by)
 
   dots <- enquos(...)
 
@@ -62,10 +61,8 @@ filter..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
 #' @export
 #' @rdname dt_verb
 #' @inheritParams filter.
-dt_filter <- function(.df, ..., .by = NULL, by = NULL) {
-  deprecate_warn("0.5.2", "tidytable::dt_filter()", "filter.()")
-
-  .by <- check_dot_by(enquo(.by), enquo(by))
+dt_filter <- function(.df, ..., .by = NULL) {
+  deprecate_stop("0.5.2", "tidytable::dt_filter()", "filter.()")
 
   filter.(.df, ..., .by = {{ .by }})
 }

@@ -4,7 +4,7 @@
 \alias{transmute.}
 \title{Add new variables and drop all others}
 \usage{
-transmute.(.df, ..., .by = NULL, by = NULL)
+transmute.(.df, ..., .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -12,8 +12,6 @@ transmute.(.df, ..., .by = NULL, by = NULL)
 \item{...}{Columns to create/modify}
 
 \item{.by}{Columns to group by}
-
-\item{by}{This argument has been renamed to .by and is deprecated}
 }
 \description{
 Unlike \code{mutate.()}, \code{transmute.()} keeps only the variables that you create

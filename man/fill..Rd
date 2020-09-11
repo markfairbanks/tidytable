@@ -4,24 +4,17 @@
 \alias{fill.}
 \title{Fill in missing values with previous or next value}
 \usage{
-fill.(
-  .df,
-  ...,
-  .direction = c("down", "up", "downup", "updown"),
-  .by = NULL,
-  by = NULL
-)
+fill.(.df, ..., .direction = c("down", "up", "downup", "updown"), .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
 
 \item{...}{A selection of columns. \code{tidyselect} compatible.}
 
-\item{.direction}{Direction in which to fill missing values. Currently "down" (the default), "up", "downup" (first down then up), or "updown" (first up and then down)}
+\item{.direction}{Direction in which to fill missing values.
+Currently "down" (the default), "up", "downup" (first down then up), or "updown" (first up and then down)}
 
 \item{.by}{Columns to group by when filling should be done by group}
-
-\item{by}{This argument has been renamed to .by and is deprecated}
 }
 \description{
 Fills missing values in the selected columns using the next or previous entry. Can be done by group.

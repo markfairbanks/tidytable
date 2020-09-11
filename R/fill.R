@@ -7,9 +7,9 @@
 #'
 #' @param .df A data.frame or data.table
 #' @param ... A selection of columns. `tidyselect` compatible.
-#' @param .direction Direction in which to fill missing values. Currently "down" (the default), "up", "downup" (first down then up), or "updown" (first up and then down)
+#' @param .direction Direction in which to fill missing values.
+#' Currently "down" (the default), "up", "downup" (first down then up), or "updown" (first up and then down)
 #' @param .by Columns to group by when filling should be done by group
-#' @param by This argument has been renamed to .by and is deprecated
 #'
 #' @export
 #' @md
@@ -27,20 +27,18 @@
 #'   fill.(x, y, .by = z, .direction = "downup")
 fill. <- function(.df, ...,
                   .direction = c("down", "up", "downup", "updown"),
-                  .by = NULL,
-                  by = NULL) {
+                  .by = NULL) {
   UseMethod("fill.")
 }
 
 #' @export
 fill..data.frame <- function(.df, ...,
                              .direction = c("down", "up", "downup", "updown"),
-                             .by = NULL,
-                             by = NULL) {
+                             .by = NULL) {
 
   .df <- as_tidytable(.df)
 
-  .by <- check_dot_by(enquo(.by), enquo(by), "fill.")
+  .by <- enquo(.by)
 
   .direction <- arg_match(.direction)
 
@@ -64,12 +62,9 @@ fill..data.frame <- function(.df, ...,
 #' @inheritParams fill.
 dt_fill <- function(.df, ...,
                     .direction = c("down", "up", "downup", "updown"),
-                    .by = NULL,
-                    by = NULL) {
+                    .by = NULL) {
 
-  deprecate_warn("0.5.2", "tidytable::dt_fill()", "fill.()")
-
-  .by <- check_dot_by(enquo(.by), enquo(by))
+  deprecate_stop("0.5.2", "tidytable::dt_fill()", "fill.()")
 
   fill.(.df, ..., .direction = .direction, .by = {{ .by }})
 }

@@ -85,7 +85,7 @@ Delete columns
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -142,7 +142,7 @@ Delete columns
     </div>
 
     <div class="ref-description">
-    <p>With <code><a href='mutate..html'>mutate.()</a></code> you can do 3 things:</p><ul>
+    <p>With <code>mutate.()</code> you can do 3 things:</p><ul>
 <li><p>Add new columns</p></li>
 <li><p>Modify existing columns</p></li>
 <li><p>Delete columns</p></li>
@@ -150,7 +150,7 @@ Delete columns
 
     </div>
 
-    <pre class="usage"><span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>mutate.</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .by = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,31 +167,29 @@ Delete columns
       <th>.by</th>
       <td><p>Columns to group by</p></td>
     </tr>
-    <tr>
-      <th>by</th>
-      <td><p>This argument has been renamed to .by and is deprecated</p></td>
-    </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
-  <span class='kw'>a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>),
-  <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>),
-  <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
+    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
+  a = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>),
+  b = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>),
+  c = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
 
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>double_a</span> <span class='kw'>=</span> <span class='no'>a</span> * <span class='fl'>2</span>,
-          <span class='kw'>a_plus_b</span> <span class='kw'>=</span> <span class='no'>a</span> + <span class='no'>b</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [3 × 5]</span><span>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate.</span>(double_a = <span class='kw'>a</span> <span class='op'>*</span> <span class='fl'>2</span>,
+          a_plus_b = <span class='kw'>a</span> <span class='op'>+</span> <span class='kw'>b</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [3 × 5]</span><span>
 #&gt;       a     b c     double_a a_plus_b
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     1     4 a            2        5
 #&gt; </span><span style='color: #555555;'>2</span><span>     2     5 a            4        7
 #&gt; </span><span style='color: #555555;'>3</span><span>     3     6 b            6        9</div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>double_a</span> <span class='kw'>=</span> <span class='no'>a</span> * <span class='fl'>2</span>,
-          <span class='kw'>avg_a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>a</span>),
-          <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>c</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [3 × 5]</span><span>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate.</span>(double_a = <span class='kw'>a</span> <span class='op'>*</span> <span class='fl'>2</span>,
+          avg_a = <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='kw'>a</span>),
+          .by = <span class='kw'>c</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [3 × 5]</span><span>
 #&gt;       a     b c     double_a avg_a
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     1     4 a            2   1.5
@@ -212,7 +210,7 @@ Delete columns
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

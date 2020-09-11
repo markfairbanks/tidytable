@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -140,7 +140,7 @@
     <p>Filters a dataset to choose rows where conditions are true.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='filter..html'>filter.</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>filter.</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .by = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -157,27 +157,25 @@
       <th>.by</th>
       <td><p>Columns to group by if filtering with a summary function</p></td>
     </tr>
-    <tr>
-      <th>by</th>
-      <td><p>This argument has been renamed to .by and is deprecated</p></td>
-    </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(
-  <span class='kw'>a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>),
-  <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>),
-  <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
+    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(
+  a = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>),
+  b = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>),
+  c = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
 
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='filter..html'>filter.</a></span>(<span class='no'>a</span> <span class='kw'>&gt;=</span> <span class='fl'>2</span>, <span class='no'>b</span> <span class='kw'>&gt;=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [2 × 3]</span><span>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>filter.</span>(<span class='kw'>a</span> <span class='op'>&gt;=</span> <span class='fl'>2</span>, <span class='kw'>b</span> <span class='op'>&gt;=</span> <span class='fl'>4</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [2 × 3]</span><span>
 #&gt;       a     b c    
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     2     5 a    
 #&gt; </span><span style='color: #555555;'>2</span><span>     3     6 b    </div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='filter..html'>filter.</a></span>(<span class='no'>b</span> <span class='kw'>&lt;=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>b</span>), <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>c</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 3]</span><span>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>filter.</span>(<span class='kw'>b</span> <span class='op'>&lt;=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='kw'>b</span>), .by = <span class='kw'>c</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 3]</span><span>
 #&gt;       a     b c    
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     1     4 a    
@@ -197,7 +195,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

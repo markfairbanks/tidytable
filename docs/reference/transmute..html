@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -137,10 +137,10 @@
     </div>
 
     <div class="ref-description">
-    <p>Unlike <code><a href='mutate..html'>mutate.()</a></code>, <code><a href='transmute..html'>transmute.()</a></code> keeps only the variables that you create</p>
+    <p>Unlike <code><a href='mutate..html'>mutate.()</a></code>, <code>transmute.()</code> keeps only the variables that you create</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='transmute..html'>transmute.</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>transmute.</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .by = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -157,16 +157,13 @@
       <th>.by</th>
       <td><p>Columns to group by</p></td>
     </tr>
-    <tr>
-      <th>by</th>
-      <td><p>This argument has been renamed to .by and is deprecated</p></td>
-    </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>mtcars</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='transmute..html'>transmute.</a></span>(<span class='kw'>displ_l</span> <span class='kw'>=</span> <span class='no'>disp</span> / <span class='fl'>61.0237</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [32 × 1]</span><span>
+    <pre class="examples"><div class='input'><span class='kw'>mtcars</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>transmute.</span>(displ_l = <span class='kw'>disp</span> <span class='op'>/</span> <span class='fl'>61.0237</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [32 × 1]</span><span>
 #&gt;    displ_l
 #&gt;      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>    2.62
@@ -196,7 +193,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>
