@@ -12,7 +12,6 @@
 #' `{.col}` stands for the selected column, and `{.fn}` stands for the name of the function being applied.
 #' The default (`NULL`) is equivalent to `"{.col}"` for a single function case and `"{.col}_{.fn}"`
 #' when a list is used for `.fns`.
-#' @param by This argument has been renamed to .by and is deprecated
 #'
 #' @export
 #'
@@ -48,20 +47,19 @@
 #'                     .by = z,
 #'                     .names = "{.col}_test_{.fn}")
 summarize_across. <- function(.df, .cols = everything(), .fns, ...,
-                              .by = NULL, .names = NULL, by = NULL) {
+                              .by = NULL, .names = NULL) {
   UseMethod("summarize_across.")
 }
 
 #' @export
 summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
-                                         .by = NULL, .names = NULL, by = NULL) {
+                                         .by = NULL, .names = NULL) {
 
   .df <- as_tidytable(.df)
 
   .cols <- select_vec_chr(.df, {{ .cols }})
 
-  .by <- check_dot_by(enquo(.by), enquo(by), "summarize_across.")
-  .by <- select_vec_chr(.df, !!.by)
+  .by <- select_vec_chr(.df, {{ .by }})
 
   .cols <- .cols[.cols %notin% .by]
 

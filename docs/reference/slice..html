@@ -81,7 +81,7 @@ Grouped data.tables grab rows within each group." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -142,15 +142,15 @@ Grouped data.tables grab rows within each group." />
 Grouped data.tables grab rows within each group.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='slice..html'>slice.</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>slice.</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .by = <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='slice..html'>slice_head.</a></span>(<span class='no'>.df</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>slice_head.</span>(<span class='kw'>.df</span>, n = <span class='fl'>5</span>, .by = <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='slice..html'>slice_tail.</a></span>(<span class='no'>.df</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>slice_tail.</span>(<span class='kw'>.df</span>, n = <span class='fl'>5</span>, .by = <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='slice..html'>slice_max.</a></span>(<span class='no'>.df</span>, <span class='no'>order_by</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>slice_max.</span>(<span class='kw'>.df</span>, <span class='kw'>order_by</span>, n = <span class='fl'>1</span>, .by = <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='slice..html'>slice_min.</a></span>(<span class='no'>.df</span>, <span class='no'>order_by</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>slice_min.</span>(<span class='kw'>.df</span>, <span class='kw'>order_by</span>, n = <span class='fl'>1</span>, .by = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -168,10 +168,6 @@ Grouped data.tables grab rows within each group.</p>
       <td><p>Columns to group by</p></td>
     </tr>
     <tr>
-      <th>by</th>
-      <td><p>This argument has been renamed to .by and is deprecated</p></td>
-    </tr>
-    <tr>
       <th>n</th>
       <td><p>Number of rows to grab</p></td>
     </tr>
@@ -183,50 +179,57 @@ Grouped data.tables grab rows within each group.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>4</span>),
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>,<span class='fl'>7</span>),
-  <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
+    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
+  x = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>4</span>),
+  y = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>,<span class='fl'>7</span>),
+  z = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
 
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='slice..html'>slice.</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [3 × 3]</span><span>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>slice.</span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [3 × 3]</span><span>
 #&gt;       x     y z    
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     1     4 a    
 #&gt; </span><span style='color: #555555;'>2</span><span>     2     5 a    
 #&gt; </span><span style='color: #555555;'>3</span><span>     3     6 a    </div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='slice..html'>slice.</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 3]</span><span>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>slice.</span>(<span class='fl'>1</span>, <span class='fl'>3</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 3]</span><span>
 #&gt;       x     y z    
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     1     4 a    
 #&gt; </span><span style='color: #555555;'>2</span><span>     3     6 a    </div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='slice..html'>slice.</a></span>(<span class='fl'>1</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 3]</span><span>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>slice.</span>(<span class='fl'>1</span>, .by = <span class='kw'>z</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 3]</span><span>
 #&gt;       x     y z    
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     1     4 a    
 #&gt; </span><span style='color: #555555;'>2</span><span>     4     7 b    </div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='slice..html'>slice_head.</a></span>(<span class='fl'>1</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 3]</span><span>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>slice_head.</span>(<span class='fl'>1</span>, .by = <span class='kw'>z</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 3]</span><span>
 #&gt;       x     y z    
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     1     4 a    
 #&gt; </span><span style='color: #555555;'>2</span><span>     4     7 b    </div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='slice..html'>slice_tail.</a></span>(<span class='fl'>1</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 3]</span><span>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>slice_tail.</span>(<span class='fl'>1</span>, .by = <span class='kw'>z</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 3]</span><span>
 #&gt;       x     y z    
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     3     6 a    
 #&gt; </span><span style='color: #555555;'>2</span><span>     4     7 b    </div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='slice..html'>slice_max.</a></span>(<span class='kw'>order_by</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 3]</span><span>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>slice_max.</span>(order_by = <span class='kw'>x</span>, .by = <span class='kw'>z</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 3]</span><span>
 #&gt;       x     y z    
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     4     7 b    
 #&gt; </span><span style='color: #555555;'>2</span><span>     3     6 a    </div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='slice..html'>slice_min.</a></span>(<span class='kw'>order_by</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 3]</span><span>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>slice_min.</span>(order_by = <span class='kw'>y</span>, .by = <span class='kw'>z</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 3]</span><span>
 #&gt;       x     y z    
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     1     4 a    
@@ -246,7 +249,7 @@ Grouped data.tables grab rows within each group.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

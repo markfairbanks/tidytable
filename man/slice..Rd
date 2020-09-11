@@ -8,15 +8,15 @@
 \alias{slice_min.}
 \title{Choose rows in a data.table}
 \usage{
-slice.(.df, ..., .by = NULL, by = NULL)
+slice.(.df, ..., .by = NULL)
 
-slice_head.(.df, n = 5, .by = NULL, by = NULL)
+slice_head.(.df, n = 5, .by = NULL)
 
-slice_tail.(.df, n = 5, .by = NULL, by = NULL)
+slice_tail.(.df, n = 5, .by = NULL)
 
-slice_max.(.df, order_by, n = 1, .by = NULL, by = NULL)
+slice_max.(.df, order_by, n = 1, .by = NULL)
 
-slice_min.(.df, order_by, n = 1, .by = NULL, by = NULL)
+slice_min.(.df, order_by, n = 1, .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -24,8 +24,6 @@ slice_min.(.df, order_by, n = 1, .by = NULL, by = NULL)
 \item{...}{Integer row values}
 
 \item{.by}{Columns to group by}
-
-\item{by}{This argument has been renamed to .by and is deprecated}
 
 \item{n}{Number of rows to grab}
 

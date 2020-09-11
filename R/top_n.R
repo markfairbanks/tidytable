@@ -7,7 +7,6 @@
 #' @param n Number of rows to return
 #' @param wt Optional. The variable to use for ordering. If NULL uses the last column in the data.table.
 #' @param .by Columns to group by
-#' @param by This argument has been renamed to .by and is deprecated
 #'
 #' @md
 #' @export
@@ -23,20 +22,18 @@
 #'
 #' test_df %>%
 #'   top_n.(2, wt = y, .by = z)
-top_n. <- function(.df, n = 5, wt = NULL, .by = NULL, by = NULL) {
+top_n. <- function(.df, n = 5, wt = NULL, .by = NULL) {
   UseMethod("top_n.")
 }
 
 #' @export
-top_n..data.frame <- function(.df, n = 5, wt = NULL, .by = NULL, by = NULL) {
+top_n..data.frame <- function(.df, n = 5, wt = NULL, .by = NULL) {
 
   deprecate_soft("0.5.2", "tidytable::top_n.()", "slice_max.()")
 
   .df <- as_tidytable(.df)
 
   wt <- enquo(wt)
-
-  .by <- check_dot_by(enquo(.by), enquo(by), "top_n.")
 
   if (quo_is_null(wt)) {
     slice_head.(.df, {{ n }}, {{ .by }})
@@ -47,10 +44,8 @@ top_n..data.frame <- function(.df, n = 5, wt = NULL, .by = NULL, by = NULL) {
 
 #' @export
 #' @rdname top_n.
-dt_top_n <- function(.df, n = 5, wt = NULL, .by = NULL, by = NULL) {
-  deprecate_warn("0.5.2", "tidytable::dt_top_n()", "top_n.()")
-
-  .by <- check_dot_by(enquo(.by), enquo(by))
+dt_top_n <- function(.df, n = 5, wt = NULL, .by = NULL) {
+  deprecate_stop("0.5.2", "tidytable::dt_top_n()", "top_n.()")
 
   top_n.(.df, {{ n }}, {{ wt }}, {{ .by }})
 }

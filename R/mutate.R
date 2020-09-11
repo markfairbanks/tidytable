@@ -9,7 +9,6 @@
 #' @param .df A data.frame or data.table
 #' @param ... Columns to add/modify
 #' @param .by Columns to group by
-#' @param by This argument has been renamed to .by and is deprecated
 #'
 #' @export
 #'
@@ -27,18 +26,18 @@
 #'   mutate.(double_a = a * 2,
 #'           avg_a = mean(a),
 #'           .by = c)
-mutate. <- function(.df, ..., .by = NULL, by = NULL) {
+mutate. <- function(.df, ..., .by = NULL) {
   UseMethod("mutate.")
 }
 
 #' @export
-mutate..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
+mutate..data.frame <- function(.df, ..., .by = NULL) {
 
   .df <- as_tidytable(.df)
   .df <- shallow(.df)
 
   dots <- enquos(...)
-  .by <- check_dot_by(enquo(.by), enquo(by), "mutate.")
+  .by <- enquo(.by)
 
   if (quo_is_null(.by)) {
     # Faster version if there is no "by" provided
@@ -91,9 +90,8 @@ mutate..data.frame <- function(.df, ..., .by = NULL, by = NULL) {
 #' @export
 #' @rdname dt_verb
 #' @inheritParams mutate.
-dt_mutate <- function(.df, ..., .by = NULL, by = NULL) {
-  deprecate_warn("0.5.2", "tidytable::dt_mutate()", "mutate.()")
+dt_mutate <- function(.df, ..., .by = NULL) {
+  deprecate_stop("0.5.2", "tidytable::dt_mutate()", "mutate.()")
 
-  .by <- check_dot_by(enquo(.by), enquo(by))
   mutate.(.df, ..., .by = {{ .by }})
 }

@@ -4,15 +4,7 @@
 \alias{mutate_across.}
 \title{Mutate multiple columns simultaneously}
 \usage{
-mutate_across.(
-  .df,
-  .cols = everything(),
-  .fns,
-  ...,
-  .by = NULL,
-  .names = NULL,
-  by = NULL
-)
+mutate_across.(.df, .cols = everything(), .fns, ..., .by = NULL, .names = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -29,8 +21,6 @@ mutate_across.(
 \code{{.col}} stands for the selected column, and \code{{.fn}} stands for the name of the function being applied.
 The default (\code{NULL}) is equivalent to \code{"{.col}"} for a single function case and \code{"{.col}_{.fn}"}
 when a list is used for \code{.fns}.}
-
-\item{by}{This argument has been renamed to .by and is deprecated}
 }
 \description{
 Mutate multiple columns simultaneously.
