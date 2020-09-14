@@ -134,7 +134,7 @@ test_that("unnesting works with nested data.table with quosure function", {
     mutate.(z = y)
 
   result_df <- test_df %>%
-    unnest.(y, .keep_all = TRUE)
+    unnest.(y, .drop = FALSE)
 
   expect_named(result_df, c("x","z","test"))
   expect_true(is.list(result_df$z))

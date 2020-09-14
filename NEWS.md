@@ -13,6 +13,9 @@
   + The old "case when" translation `case.()` will remain in the package,
   as it is called like `data.table::fcase()` but allows for the `default`
   to be a vector.
+  
+#### Deprecations
+* `unnest.()`: `.keep_all` arg changed to `.drop`
 
 # tidytable 0.5.5
 

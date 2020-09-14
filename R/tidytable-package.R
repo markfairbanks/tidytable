@@ -4,7 +4,7 @@
 #' @import vctrs
 #' @rawNamespace import(rlang, except = `:=`)
 #' @importFrom glue glue
-#' @importFrom lifecycle deprecate_soft deprecate_stop deprecate_warn expect_deprecated
+#' @importFrom lifecycle deprecated deprecate_soft deprecate_stop deprecate_warn expect_deprecated
 #' @importFrom methods as
 #' @importFrom stats as.formula na.omit
 #' @importFrom tibble glimpse trunc_mat
