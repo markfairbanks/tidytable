@@ -5,13 +5,14 @@
 #'
 #' @param .df A nested data.table
 #' @param ... Columns to unnest. If empty, unnests all list columns. `tidyselect` compatible.
-#' @param .keep_all Should list columns that were not unnested be kept
+#' @param .drop Should list columns that were not unnested be dropped
 #' @param names_sep If NULL, the default, the inner column names will become the new outer column names.
 #'
 #' If a string, the name of the outer column will be appended to the beginning of the inner column names,
 #' with `names_sep` used as a separator.
 #'
 #' @param names_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details.
+#' @param .keep_all Deprecated. Please use `.drop = FALSE` to keep unused list columns.
 #'
 #' @export
 #'
@@ -34,22 +35,24 @@
 #'   unnest.(data, pulled_vec)
 unnest. <- function(.df,
                     ...,
-                    .keep_all = FALSE,
+                    .drop = TRUE,
                     names_sep = NULL,
-                    names_repair = "unique") {
+                    names_repair = "unique",
+                    .keep_all = deprecated()) {
   UseMethod("unnest.")
 }
 
 #' @export
 unnest..data.frame <- function(.df,
                                ...,
-                               .keep_all = FALSE,
+                               .drop = TRUE,
                                names_sep = NULL,
-                               names_repair = "unique") {
+                               names_repair = "unique",
+                               .keep_all = deprecated()) {
 
   .df <- as_tidytable(.df)
 
-  vec_assert(.keep_all, logical(), 1)
+  vec_assert(.drop, logical(), 1)
 
   dots <- enquos(...)
 
@@ -62,7 +65,13 @@ unnest..data.frame <- function(.df,
 
   keep_cols <- data_names[!list_flag]
 
-  if (.keep_all) {
+  if (!is_missing(.keep_all)) {
+    .drop <- !.keep_all
+
+    deprecate_warn("0.5.6", "tidytable::unnest.(.keep_all = )", "unnest.(.drop = )")
+  }
+
+  if (!.drop) {
     list_cols <- data_names[list_flag]
 
     keep_cols <- c(keep_cols, list_cols[list_cols %notin% as.character(dots)])
