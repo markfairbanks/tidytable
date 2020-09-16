@@ -1,6 +1,9 @@
 #' Arrange/reorder rows
 #'
-#' @description Order rows in ascending or descending order
+#' @description Order rows in ascending or descending order.
+#'
+#' Note: `data.table` orders character columns slightly differently than `dplyr::arrange()` by
+#' ordering in the "C-locale". See `?data.table::setorder` for more details.
 #'
 #' @param .df A data.frame or data.table
 #' @param ... Variables to arrange by
