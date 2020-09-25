@@ -175,34 +175,30 @@ Currently "down" (the default), "up", "downup" (first down then up), or "updown"
 
 <span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>fill.</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, .by = <span class='kw'>z</span>)
-</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [10 × 3]</span><span>
-#&gt;        x     y z    
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     1 a    
-#&gt; </span><span style='color: #555555;'> 2</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     2 a    
-#&gt; </span><span style='color: #555555;'> 3</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     3 a    
-#&gt; </span><span style='color: #555555;'> 4</span><span>     4     4 a    
-#&gt; </span><span style='color: #555555;'> 5</span><span>     5     5 a    
-#&gt; </span><span style='color: #555555;'> 6</span><span>     6     6 a    
-#&gt; </span><span style='color: #555555;'> 7</span><span>     7     6 a    
-#&gt; </span><span style='color: #555555;'> 8</span><span>     8     8 a    
-#&gt; </span><span style='color: #555555;'> 9</span><span>     9    </span><span style='color: #BB0000;'>NA</span><span> b    
-#&gt; </span><span style='color: #555555;'>10</span><span>    10    10 b    </div><div class='input'>
+</div><div class='output co'>#&gt;     x  y z
+#&gt; 1  NA  1 a
+#&gt; 2  NA  2 a
+#&gt; 3  NA  3 a
+#&gt; 4   4  4 a
+#&gt; 5   5  5 a
+#&gt; 6   6  6 a
+#&gt; 7   7  6 a
+#&gt; 8   8  8 a
+#&gt; 9   9 NA b
+#&gt; 10 10 10 b</div><div class='input'>
 <span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>fill.</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, .by = <span class='kw'>z</span>, .direction = <span class='st'>"downup"</span>)
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [10 × 3]</span><span>
-#&gt;        x     y z    
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span>     4     1 a    
-#&gt; </span><span style='color: #555555;'> 2</span><span>     4     2 a    
-#&gt; </span><span style='color: #555555;'> 3</span><span>     4     3 a    
-#&gt; </span><span style='color: #555555;'> 4</span><span>     4     4 a    
-#&gt; </span><span style='color: #555555;'> 5</span><span>     5     5 a    
-#&gt; </span><span style='color: #555555;'> 6</span><span>     6     6 a    
-#&gt; </span><span style='color: #555555;'> 7</span><span>     7     6 a    
-#&gt; </span><span style='color: #555555;'> 8</span><span>     8     8 a    
-#&gt; </span><span style='color: #555555;'> 9</span><span>     9    10 b    
-#&gt; </span><span style='color: #555555;'>10</span><span>    10    10 b    </div></span></pre>
+</div><div class='output co'>#&gt;     x  y z
+#&gt; 1   4  1 a
+#&gt; 2   4  2 a
+#&gt; 3   4  3 a
+#&gt; 4   4  4 a
+#&gt; 5   5  5 a
+#&gt; 6   6  6 a
+#&gt; 7   7  6 a
+#&gt; 8   8  8 a
+#&gt; 9   9 10 b
+#&gt; 10 10 10 b</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -218,7 +214,7 @@ Currently "down" (the default), "up", "downup" (first down then up), or "updown"
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

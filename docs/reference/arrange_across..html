@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Uncount a data.table — uncount. • tidytable</title>
+<title>Arrange by a selection of variables — arrange_across. • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Uncount a data.table — uncount." />
-<meta property="og:description" content="Uncount a data.table" />
+<meta property="og:title" content="Arrange by a selection of variables — arrange_across." />
+<meta property="og:description" content="Arrange all rows in either ascending or descending order by a selection of variables." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -131,52 +131,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Uncount a data.table</h1>
-    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/uncount.R'><code>R/uncount.R</code></a></small>
-    <div class="hidden name"><code>uncount..Rd</code></div>
+    <h1>Arrange by a selection of variables</h1>
+    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/arrange_across.R'><code>R/arrange_across.R</code></a></small>
+    <div class="hidden name"><code>arrange_across..Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Uncount a data.table</p>
+    <p>Arrange all rows in either ascending or descending order by a selection of variables.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>uncount.</span>(<span class='kw'>.df</span>, <span class='kw'>weights</span>, .remove = <span class='fl'>TRUE</span>, .id = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>arrange_across.</span>(<span class='kw'>.df</span>, .cols = <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(), <span class='kw'>.fns</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.df</th>
-      <td><p>A data.frame or data.table</p></td>
+      <td><p>A data.table or data.frame</p></td>
     </tr>
     <tr>
-      <th>weights</th>
-      <td><p>A column containing the weights to uncount by</p></td>
+      <th>.cols</th>
+      <td><p>vector <code><a href='https://rdrr.io/r/base/c.html'>c()</a></code> of unquoted column names. <code>tidyselect</code> compatible.</p></td>
     </tr>
     <tr>
-      <th>.remove</th>
-      <td><p>If TRUE removes the selected <code>weights</code> column</p></td>
-    </tr>
-    <tr>
-      <th>.id</th>
-      <td><p>A string name for a new column containing a unique identifier for the newly uncounted rows.</p></td>
+      <th>.fns</th>
+      <td><p>Function to apply. If <code>desc.</code> it arranges in descending order</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(x = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>), n = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>))
+    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(a = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"a"</span>), b = <span class='fl'>3</span><span class='op'>:</span><span class='fl'>1</span>)
 
-<span class='fu'>uncount.</span>(<span class='kw'>df</span>, <span class='kw'>n</span>)
-</div><div class='output co'>#&gt;   x
-#&gt; 1 a
-#&gt; 2 b
-#&gt; 3 b</div><div class='input'>
-<span class='fu'>uncount.</span>(<span class='kw'>df</span>, <span class='kw'>n</span>, .id = <span class='st'>"id"</span>)
-</div><div class='output co'>#&gt;   x id
-#&gt; 1 a  1
-#&gt; 2 b  1
-#&gt; 3 b  2</div></pre>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>arrange_across.</span>()
+</div><div class='output co'>#&gt;   a b
+#&gt; 1 a 1
+#&gt; 2 a 3
+#&gt; 3 b 2</div><div class='input'>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>arrange_across.</span>(<span class='kw'>a</span>, <span class='kw'>desc.</span>)
+</div><div class='output co'>#&gt;   a b
+#&gt; 1 b 2
+#&gt; 2 a 3
+#&gt; 3 a 1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

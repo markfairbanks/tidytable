@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -140,21 +140,21 @@
     <p>These helpers have been deprecated. Please use <code><a href='rename_with..html'>rename_with.()</a></code></p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='rename_all..html'>rename_all.</a></span>(<span class='no'>.data</span>, <span class='no'>.fun</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>rename_all.</span>(<span class='kw'>.data</span>, <span class='kw'>.fun</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='rename_all..html'>rename_at.</a></span>(<span class='no'>.data</span>, <span class='no'>.vars</span>, <span class='no'>.fun</span>, <span class='no'>...</span>)
+<span class='fu'>rename_at.</span>(<span class='kw'>.data</span>, <span class='kw'>.vars</span>, <span class='kw'>.fun</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='rename_all..html'>rename_across.</a></span>(<span class='no'>.data</span>, <span class='no'>.cols</span>, <span class='no'>.fun</span>, <span class='no'>...</span>)
+<span class='fu'>rename_across.</span>(<span class='kw'>.data</span>, <span class='kw'>.cols</span>, <span class='kw'>.fun</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='rename_all..html'>rename_if.</a></span>(<span class='no'>.data</span>, <span class='no'>.predicate</span>, <span class='no'>.fun</span>, <span class='no'>...</span>)
+<span class='fu'>rename_if.</span>(<span class='kw'>.data</span>, <span class='kw'>.predicate</span>, <span class='kw'>.fun</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='rename_all..html'>dt_rename_across</a></span>(<span class='no'>.data</span>, <span class='no'>.cols</span>, <span class='no'>.fun</span>, <span class='no'>...</span>)
+<span class='fu'>dt_rename_across</span>(<span class='kw'>.data</span>, <span class='kw'>.cols</span>, <span class='kw'>.fun</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='rename_all..html'>dt_rename_all</a></span>(<span class='no'>.data</span>, <span class='no'>.fun</span>, <span class='no'>...</span>)
+<span class='fu'>dt_rename_all</span>(<span class='kw'>.data</span>, <span class='kw'>.fun</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='rename_all..html'>dt_rename_if</a></span>(<span class='no'>.data</span>, <span class='no'>.predicate</span>, <span class='no'>.fun</span>, <span class='no'>...</span>)
+<span class='fu'>dt_rename_if</span>(<span class='kw'>.data</span>, <span class='kw'>.predicate</span>, <span class='kw'>.fun</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='rename_all..html'>dt_rename_at</a></span>(<span class='no'>.data</span>, <span class='no'>.vars</span>, <span class='no'>.fun</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>dt_rename_at</span>(<span class='kw'>.data</span>, <span class='kw'>.fun</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -173,36 +173,34 @@
     </tr>
     <tr>
       <th>.vars</th>
-      <td><p>vector <code><a href='https://rdrr.io/r/base/c.html'>c()</a></code> of bare column names for <code><a href='rename_all..html'>rename_at.()</a></code> to use</p></td>
+      <td><p>vector <code><a href='https://rdrr.io/r/base/c.html'>c()</a></code> of bare column names for <code>rename_at.()</code> to use</p></td>
     </tr>
     <tr>
       <th>.cols</th>
-      <td><p>vector <code><a href='https://rdrr.io/r/base/c.html'>c()</a></code> of bare column names for <code><a href='rename_all..html'>rename_across.()</a></code> to use</p></td>
+      <td><p>vector <code><a href='https://rdrr.io/r/base/c.html'>c()</a></code> of bare column names for <code>rename_across.()</code> to use</p></td>
     </tr>
     <tr>
       <th>.predicate</th>
-      <td><p>Predicate to pass to <code><a href='rename_all..html'>rename_if.()</a></code></p></td>
+      <td><p>Predicate to pass to <code>rename_if.()</code></p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>double_x</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>double_y</span> <span class='kw'>=</span> <span class='fl'>4</span>)
+    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
+  x = <span class='fl'>1</span>,
+  y = <span class='fl'>2</span>,
+  double_x = <span class='fl'>2</span>,
+  double_y = <span class='fl'>4</span>)
 
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='rename_with..html'>rename_with.</a></span>(~ <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span>(<span class='st'>"x"</span>, <span class='st'>"stuff"</span>, <span class='no'>.x</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [1 × 4]</span><span>
-#&gt;   stuff     y double_stuff double_y
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     2            2        4</div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='rename_with..html'>rename_with.</a></span>(~ <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span>(<span class='st'>"x"</span>, <span class='st'>"stuff"</span>, <span class='no'>.x</span>), <span class='kw'>.cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>, <span class='no'>double_x</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [1 × 4]</span><span>
-#&gt;   stuff     y double_stuff double_y
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     2            2        4</div></span></pre>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='rename_with..html'>rename_with.</a></span>(<span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span>(<span class='st'>"x"</span>, <span class='st'>"stuff"</span>, <span class='kw'>.x</span>))
+</div><div class='output co'>#&gt;   stuff y double_stuff double_y
+#&gt; 1     1 2            2        4</div><div class='input'>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='rename_with..html'>rename_with.</a></span>(<span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span>(<span class='st'>"x"</span>, <span class='st'>"stuff"</span>, <span class='kw'>.x</span>), .cols = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>x</span>, <span class='kw'>double_x</span>))
+</div><div class='output co'>#&gt;   stuff y double_stuff double_y
+#&gt; 1     1 2            2        4</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -218,7 +216,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

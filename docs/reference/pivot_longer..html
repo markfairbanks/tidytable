@@ -82,7 +82,7 @@ pivot_longer.(). Syntax based on the tidyr equivalents." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -141,16 +141,16 @@ pivot_longer.(). Syntax based on the tidyr equivalents." />
     <div class="ref-description">
     <p><code><a href='pivot_wider..html'>pivot_wider.()</a></code> "widens" data, increasing the number of columns and
 decreasing the number of rows. The inverse transformation is
-<code><a href='pivot_longer..html'>pivot_longer.()</a></code>. Syntax based on the <code>tidyr</code> equivalents.</p>
+<code>pivot_longer.()</code>. Syntax based on the <code>tidyr</code> equivalents.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='pivot_longer..html'>pivot_longer.</a></span>(
-  <span class='no'>.df</span>,
-  <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(),
-  <span class='kw'>names_to</span> <span class='kw'>=</span> <span class='st'>"name"</span>,
-  <span class='kw'>values_to</span> <span class='kw'>=</span> <span class='st'>"value"</span>,
-  <span class='kw'>values_drop_na</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
+    <pre class="usage"><span class='fu'>pivot_longer.</span>(
+  <span class='kw'>.df</span>,
+  cols = <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(),
+  names_to = <span class='st'>"name"</span>,
+  values_to = <span class='st'>"value"</span>,
+  values_drop_na = <span class='fl'>FALSE</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -178,37 +178,35 @@ decreasing the number of rows. The inverse transformation is
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments to pass to <code>melt.data.table()</code></p></td>
+      <td><p>Additional arguments to pass to <code><a href='https://Rdatatable.gitlab.io/data.table/reference/melt.data.table.html'>melt.data.table()</a></code></p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>),
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>),
-  <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>))
+    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
+  x = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>),
+  y = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>),
+  z = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>))
 
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='pivot_longer..html'>pivot_longer.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>x</span>, <span class='no'>y</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [6 × 3]</span><span>
-#&gt;   z     name  value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> a     x         1
-#&gt; </span><span style='color: #555555;'>2</span><span> b     x         2
-#&gt; </span><span style='color: #555555;'>3</span><span> c     x         3
-#&gt; </span><span style='color: #555555;'>4</span><span> a     y         4
-#&gt; </span><span style='color: #555555;'>5</span><span> b     y         5
-#&gt; </span><span style='color: #555555;'>6</span><span> c     y         6</div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='pivot_longer..html'>pivot_longer.</a></span>(<span class='kw'>cols</span> <span class='kw'>=</span> -<span class='no'>z</span>, <span class='kw'>names_to</span> <span class='kw'>=</span> <span class='st'>"stuff"</span>, <span class='kw'>values_to</span> <span class='kw'>=</span> <span class='st'>"things"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [6 × 3]</span><span>
-#&gt;   z     stuff things
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> a     x          1
-#&gt; </span><span style='color: #555555;'>2</span><span> b     x          2
-#&gt; </span><span style='color: #555555;'>3</span><span> c     x          3
-#&gt; </span><span style='color: #555555;'>4</span><span> a     y          4
-#&gt; </span><span style='color: #555555;'>5</span><span> b     y          5
-#&gt; </span><span style='color: #555555;'>6</span><span> c     y          6</div></span></pre>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>pivot_longer.</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>x</span>, <span class='kw'>y</span>))
+</div><div class='output co'>#&gt;   z name value
+#&gt; 1 a    x     1
+#&gt; 2 b    x     2
+#&gt; 3 c    x     3
+#&gt; 4 a    y     4
+#&gt; 5 b    y     5
+#&gt; 6 c    y     6</div><div class='input'>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>pivot_longer.</span>(cols = <span class='op'>-</span><span class='kw'>z</span>, names_to = <span class='st'>"stuff"</span>, values_to = <span class='st'>"things"</span>)
+</div><div class='output co'>#&gt;   z stuff things
+#&gt; 1 a     x      1
+#&gt; 2 b     x      2
+#&gt; 3 c     x      3
+#&gt; 4 a     y      4
+#&gt; 5 b     y      5
+#&gt; 6 c     y      6</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -224,7 +222,7 @@ decreasing the number of rows. The inverse transformation is
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

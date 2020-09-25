@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -105,7 +105,7 @@
 <p>Below are some speed comparisons of various functions. More functions will get added to the speed comps over time.</p>
 <p>A few notes:</p>
 <ul>
-<li>Comparing times from separate functions won’t be very useful. For example - the <code>summarize()</code> tests were performed on a different dataset from <code>case_when()</code>.</li>
+<li>Comparing times from separate functions won’t be very useful. For example - the <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> tests were performed on a different dataset from <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code>.</li>
 <li>
 <code><a href="https://Rdatatable.gitlab.io/data.table/reference/openmp-utils.html">setDTthreads(4)</a></code> was used for <code>data.table</code> &amp; <code>tidytable</code> timings.</li>
 <li>Modify-by-reference was used in <code>data.table</code> when being compared to <code><a href="../reference/mutate..html">mutate.()</a></code> &amp; <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code>
@@ -122,23 +122,25 @@
 <li>All tests can be found in the source code <a href="https://github.com/markfairbanks/tidytable/blob/master/vignettes/speed_comparisons.Rmd">here</a>.</li>
 <li>Lastly I’d like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.</li>
 </ul>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">all_marks</span>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="kw">all_marks</span>
 <span class="co">#&gt; # A tibble: 13 x 7</span>
 <span class="co">#&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas tidytable_vs_dplyr</span>
 <span class="co">#&gt;    &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             </span>
-<span class="co">#&gt;  1 arrange            38        37.3   39.8    1210.   355   3.1%              </span>
-<span class="co">#&gt;  2 case_when          33.3      30.8   NA       319.    59.2 9.7%              </span>
-<span class="co">#&gt;  3 distinct           14        14     16.2      55.9  309   25.0%             </span>
-<span class="co">#&gt;  4 fill               28        39.9   NA        63.4  846   62.9%             </span>
-<span class="co">#&gt;  5 filter            216       216.   220.      238.   707   90.8%             </span>
-<span class="co">#&gt;  6 inner_join         57.2      46.9  105.       93.2   NA   50.3%             </span>
-<span class="co">#&gt;  7 left_join          55.7      56.1  163.      158.    NA   35.4%             </span>
-<span class="co">#&gt;  8 mutate             54.1      67.3  332.      103.    86.4 65.2%             </span>
-<span class="co">#&gt;  9 nest               12.3      14.8   NA        31.9   NA   46.4%             </span>
-<span class="co">#&gt; 10 pivot_longer        9.6      15.2   NA        47.7   NA   31.9%             </span>
-<span class="co">#&gt; 11 pivot_wider        93.7      93.2   NA        84.2   NA   110.7%            </span>
-<span class="co">#&gt; 12 summarize         168.      165.   174.      212.   834   77.7%             </span>
-<span class="co">#&gt; 13 unnest             18.8      14.1   NA        44.2   NA   31.9%</span></pre></body></html></div>
+<span class="co">#&gt;  1 arrange            37.7      37.3   38.7    1260.   355   3.0%              </span>
+<span class="co">#&gt;  2 case_when          31.3      27.7   NA       322.    59.2 8.6%              </span>
+<span class="co">#&gt;  3 distinct           12.1      14.5   16.8      51.5  309   28.2%             </span>
+<span class="co">#&gt;  4 fill               28.8      37.6   NA        65.8  846   57.1%             </span>
+<span class="co">#&gt;  5 filter            213.      223.   231       246    707   90.8%             </span>
+<span class="co">#&gt;  6 inner_join         45.1      47.1  104.       81.5   NA   57.8%             </span>
+<span class="co">#&gt;  7 left_join          63.9      53.9  164.       86.1   NA   62.6%             </span>
+<span class="co">#&gt;  8 mutate             59.3      59.2  501.       70.9   86.4 83.5%             </span>
+<span class="co">#&gt;  9 nest                8         8.9   NA        27.6   NA   32.2%             </span>
+<span class="co">#&gt; 10 pivot_longer        9.8      12.3   NA        46.4   NA   26.5%             </span>
+<span class="co">#&gt; 11 pivot_wider        88.6      88.7   NA        74.4   NA   119.2%            </span>
+<span class="co">#&gt; 12 summarize         166.      148    161.      202.   834   73.2%             </span>
+<span class="co">#&gt; 13 unnest             14.4      10     NA        27.9   NA   35.8%</span>
+</pre></div>
 </div>
   </div>
 
@@ -155,7 +157,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

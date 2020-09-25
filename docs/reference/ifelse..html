@@ -81,7 +81,7 @@ converts NAs to their proper type." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -138,11 +138,11 @@ converts NAs to their proper type." />
     </div>
 
     <div class="ref-description">
-    <p><code><a href='ifelse..html'>ifelse.()</a></code> utilizes <code><a href='https://Rdatatable.gitlab.io/data.table/reference/fifelse.html'>data.table::fifelse()</a></code> in the background, but automatically
+    <p><code>ifelse.()</code> utilizes <code><a href='https://Rdatatable.gitlab.io/data.table/reference/fifelse.html'>data.table::fifelse()</a></code> in the background, but automatically
 converts NAs to their proper type.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='ifelse..html'>ifelse.</a></span>(<span class='no'>conditions</span>, <span class='no'>true</span>, <span class='no'>false</span>, <span class='kw'>na</span> <span class='kw'>=</span> <span class='fl'>NA</span>)</pre>
+    <pre class="usage"><span class='fu'>ifelse.</span>(<span class='kw'>conditions</span>, <span class='kw'>true</span>, <span class='kw'>false</span>, na = <span class='fl'>NA</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,20 +167,20 @@ converts NAs to their proper type.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='fl'>5</span>
-<span class='fu'><a href='ifelse..html'>ifelse.</a></span>(<span class='no'>x</span> <span class='kw'>&gt;</span> <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>0</span>)</div><div class='output co'>#&gt; [1] 0 0 2 2 2</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>
+<span class='fu'>ifelse.</span>(<span class='kw'>x</span> <span class='op'>&gt;</span> <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>0</span>)
+</div><div class='output co'>#&gt; [1] 0 0 2 2 2</div><div class='input'>
 <span class='co'># Can also be used inside of mutate.()</span>
-<span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>)
+<span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(x = <span class='kw'>x</span>)
 
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>new_col</span> <span class='kw'>=</span> <span class='fu'><a href='ifelse..html'>ifelse.</a></span>(<span class='no'>x</span> <span class='kw'>&gt;</span> <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>0</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [5 × 2]</span><span>
-#&gt;       x new_col
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1       0
-#&gt; </span><span style='color: #555555;'>2</span><span>     2       0
-#&gt; </span><span style='color: #555555;'>3</span><span>     3       2
-#&gt; </span><span style='color: #555555;'>4</span><span>     4       2
-#&gt; </span><span style='color: #555555;'>5</span><span>     5       2</div></span></pre>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='mutate..html'>mutate.</a></span>(new_col = <span class='fu'>ifelse.</span>(<span class='kw'>x</span> <span class='op'>&gt;</span> <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>0</span>))
+</div><div class='output co'>#&gt;   x new_col
+#&gt; 1 1       0
+#&gt; 2 2       0
+#&gt; 3 3       2
+#&gt; 4 4       2
+#&gt; 5 5       2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -196,7 +196,7 @@ converts NAs to their proper type.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
