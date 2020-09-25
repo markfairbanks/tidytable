@@ -7,6 +7,7 @@
 * `bind_cols.()`: Added `.name_repair` arg
 * `unnest.()`: Added `names_sep` and `names_repair` args
 * `print()`: Added `n`, `width`, and `n_extra` args
+* `slice.()`: Can now drop specified rows with negative numbers
 
 #### New functions
 * `arrange_across.()`
@@ -15,6 +16,9 @@
   as it is called like `data.table::fcase()` but allows for the `default`
   to be a vector.
 * `desc.()`
+
+#### Functions with notable speed improvements
+* `slice.()`
   
 #### Deprecations
 * `unnest.()`: `.keep_all` arg changed to `.drop`

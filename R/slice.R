@@ -58,7 +58,7 @@ slice..data.frame <- function(.df, ..., .by = NULL) {
 
   if (by_is_null) {
     .df <- eval_quo(
-      .df[1:.N %in% c(!!!rows)],
+      .df[{.rows = c(!!!rows); .rows = .rows[data.table::between(.rows, -.N, .N)]; .rows}],
       new_data_mask(data_env), env = caller_env()
     )
   } else {
@@ -68,7 +68,9 @@ slice..data.frame <- function(.df, ..., .by = NULL) {
     .by <- select_vec_chr(.df, !!.by)
 
     .df <- eval_quo(
-      .df[, .SD[1:.N %in% c(!!!rows)], by = !!.by],
+      .df[,
+          .SD[{.rows = c(!!!rows); .rows = .rows[data.table::between(.rows, -.N, .N)]; .rows}],
+          by = !!.by],
       new_data_mask(data_env), env = caller_env()
     )
 

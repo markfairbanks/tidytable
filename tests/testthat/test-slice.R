@@ -73,6 +73,14 @@ test_that("works without .by with data.frame", {
   expect_equal(sliced_df, head(as_tidytable(test_df), 4))
 })
 
+test_that("negative numbers drop rows", {
+  test_df <- data.frame(x = c(1,2,3,4), y = c(4,5,6,7), z = c("a", "a", "a", "b"))
+  sliced_df <- test_df %>%
+    slice.(-3, -4)
+
+  expect_equal(sliced_df, head(as_tidytable(test_df), 2))
+})
+
 test_that("works with .by", {
   test_df <- tidytable(x = c(1,2,3,4), y = c(4,5,6,7), z = c("a", "a", "a", "b"))
   sliced_df <- test_df %>%
