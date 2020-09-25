@@ -61,11 +61,6 @@ case_when. <- function(...) {
 }
 
 validate_formula <- function(x, default_env) {
-  # Formula might be quosured
-  if (is_quosure(x)) {
-    default_env <- quo_get_env(x)
-    x <- quo_get_expr(x)
-  }
 
   if (!is_formula(x)) {
     abort("input must be a formula")
@@ -74,11 +69,8 @@ validate_formula <- function(x, default_env) {
     abort("formulas must be two-sided")
   }
 
-  # Formula might be unevaluated, e.g. if it's been quosured
-  env <- f_env(x) %||% default_env
-
   list(
-    lhs = new_quosure(f_lhs(x), env),
-    rhs = new_quosure(f_rhs(x), env)
+    lhs = new_quosure(f_lhs(x), default_env),
+    rhs = new_quosure(f_rhs(x), default_env)
   )
 }
