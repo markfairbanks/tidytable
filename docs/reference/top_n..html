@@ -174,20 +174,19 @@
 
 <span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>top_n.</span>(<span class='fl'>2</span>, wt = <span class='kw'>y</span>)
-</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [2 × 3]</span><span>
-#&gt;       x     y z    
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     5    10 b    
-#&gt; </span><span style='color: #555555;'>2</span><span>     4     9 b    </div><div class='input'>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: `top_n.()` is deprecated as of tidytable 0.5.2.</span>
+#&gt; <span class='warning'>Please use `slice_max.()` instead.</span>
+#&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
+#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt;   x  y z
+#&gt; 1 5 10 b
+#&gt; 2 4  9 b</div><div class='input'>
 <span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>top_n.</span>(<span class='fl'>2</span>, wt = <span class='kw'>y</span>, .by = <span class='kw'>z</span>)
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [4 × 3]</span><span>
-#&gt;       x     y z    
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     5    10 b    
-#&gt; </span><span style='color: #555555;'>2</span><span>     4     9 b    
-#&gt; </span><span style='color: #555555;'>3</span><span>     3     8 a    
-#&gt; </span><span style='color: #555555;'>4</span><span>     2     7 a    </div></span></pre>
+</div><div class='output co'>#&gt;   x  y z
+#&gt; 1 5 10 b
+#&gt; 2 4  9 b
+#&gt; 3 3  8 a
+#&gt; 4 2  7 a</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -203,7 +202,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

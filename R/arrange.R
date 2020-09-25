@@ -24,14 +24,30 @@ arrange. <- function(.df, ...) {
 
 #' @export
 arrange..data.frame <- function(.df, ...) {
-
   .df <- as_tidytable(.df)
 
   dots <- enquos(...)
 
+  if (length(dots) == 0) return(.df)
+
+  dots <- map.(dots, desc_as_minus)
+
   eval_quo(
     .df[order(!!!dots)]
   )
+}
+
+desc_as_minus <- function(quosure) {
+  if (quo_is_call(quosure, "desc.")) {
+    expr_str <- quo_text(node_cadr(quo_get_expr(quosure)))
+    expr_str <- str_c.("-", expr_str)
+
+    quosure <- new_quosure(
+      parse_expr(expr_str),
+      quo_get_env(quosure)
+    )
+  }
+  quosure
 }
 
 #' @export

@@ -1,0 +1,37 @@
+#' Arrange by a selection of variables
+#'
+#' Arrange all rows in either ascending or descending order by a selection of variables.
+#'
+#' @param .df A data.table or data.frame
+#' @param .cols vector `c()` of unquoted column names. `tidyselect` compatible.
+#' @param .fns Function to apply. If `desc.` it arranges in descending order
+#'
+#' @export
+#'
+#' @examples
+#' test_df <- tidytable(a = c("a", "b", "a"), b = 3:1)
+#'
+#' test_df %>%
+#'   arrange_across.()
+#'
+#' test_df %>%
+#'   arrange_across.(a, desc.)
+arrange_across. <- function(.df, .cols = everything(), .fns) {
+  .df <- as_tidytable(.df)
+
+  .cols <- select_vec_sym(.df, {{ .cols }})
+
+  if (length(.cols) == 0) return(.df)
+
+  if (missing(.fns)) {
+    .decreasing <- FALSE
+  } else if (quo_text(enexpr(.fns)) %in% c("desc", "desc.")){
+    .decreasing <- TRUE
+  } else {
+    abort(".fns must be either missing or desc.")
+  }
+
+  eval_quo(
+    .df[order(!!!.cols, decreasing = !!.decreasing)]
+  )
+}

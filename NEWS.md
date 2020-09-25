@@ -9,10 +9,12 @@
 * `print()`: Added `n`, `width`, and `n_extra` args
 
 #### New functions
+* `arrange_across.()`
 * `case_when.()`
   + The old "case when" translation `case.()` will remain in the package,
   as it is called like `data.table::fcase()` but allows for the `default`
   to be a vector.
+* `desc.()`
   
 #### Deprecations
 * `unnest.()`: `.keep_all` arg changed to `.drop`

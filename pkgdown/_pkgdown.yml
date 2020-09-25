@@ -15,6 +15,7 @@ reference:
   - summarize.
 - subtitle: Other dplyr functions
 - contents:
+  - arrange_across.
   - starts_with("bind")
   - case_when.
   - count.

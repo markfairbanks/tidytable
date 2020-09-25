@@ -318,7 +318,7 @@ Currently "down" (the default), "up", "downup" (first down then up), or "updown"
     <tr>
       <th>cols</th>
       <td><p>A single column or a vector of unquoted columns to dummify.
-Defaults to all character &amp; factor columns using <code><a href='https://rdrr.io/r/base/c.html'>c(is.character, is.factor)</a></code>.
+Defaults to all character &amp; factor columns using <code><a href='https://rdrr.io/r/base/c.html'>c(where(is.character), where(is.factor))</a></code>.
 <code>tidyselect</code> compatible.</p></td>
     </tr>
     <tr>
@@ -388,7 +388,7 @@ Defaults to all character &amp; factor columns using <code><a href='https://rdrr
     <tr>
       <th>.cols</th>
       <td><p>A single column or a vector of unquoted columns to dummify.
-Defaults to all character &amp; factor columns using <code><a href='https://rdrr.io/r/base/c.html'>c(is.character, is.factor)</a></code>.
+Defaults to all character &amp; factor columns using <code><a href='https://rdrr.io/r/base/c.html'>c(where(is.character), where(is.factor))</a></code>.
 <code>tidyselect</code> compatible.</p></td>
     </tr>
     <tr>
@@ -509,7 +509,7 @@ If <code>.x</code> is a vector, a single replacement value.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

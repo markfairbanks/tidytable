@@ -163,11 +163,22 @@
 <h4 class="hasAnchor">
 <a href="#new-functions" class="anchor"></a>New functions</h4>
 <ul>
+<li><code><a href="../reference/arrange_across..html">arrange_across.()</a></code></li>
 <li>
 <code><a href="../reference/case_when..html">case_when.()</a></code>
 <ul>
 <li>The old “case when” translation <code><a href="../reference/case..html">case.()</a></code> will remain in the package, as it is called like <code><a href="https://Rdatatable.gitlab.io/data.table/reference/fcase.html">data.table::fcase()</a></code> but allows for the <code>default</code> to be a vector.</li>
 </ul>
+</li>
+<li><code><a href="../reference/desc..html">desc.()</a></code></li>
+</ul>
+</div>
+<div id="deprecations" class="section level4">
+<h4 class="hasAnchor">
+<a href="#deprecations" class="anchor"></a>Deprecations</h4>
+<ul>
+<li>
+<code><a href="../reference/unnest..html">unnest.()</a></code>: <code>.keep_all</code> arg changed to <code>.drop</code>
 </li>
 </ul>
 </div>
@@ -331,12 +342,12 @@
 <code><a href="../reference/replace_na..html">replace_na.()</a></code>: Now works on <code>data.frame</code>/<code>data.table</code> inputs as well as vectors</li>
 </ul>
 </div>
-<div id="deprecations" class="section level4">
+<div id="deprecations-1" class="section level4">
 <h4 class="hasAnchor">
-<a href="#deprecations" class="anchor"></a>Deprecations</h4>
+<a href="#deprecations-1" class="anchor"></a>Deprecations</h4>
 <ul>
 <li>
-<code>desc.()</code> has been deprecated due to incompatibility with character columns</li>
+<code><a href="../reference/desc..html">desc.()</a></code> has been deprecated due to incompatibility with character columns</li>
 </ul>
 </div>
 </div>
@@ -347,9 +358,9 @@
 <ul>
 <li>This version contains general performance improvements</li>
 </ul>
-<div id="deprecations-1" class="section level4">
+<div id="deprecations-2" class="section level4">
 <h4 class="hasAnchor">
-<a href="#deprecations-1" class="anchor"></a>Deprecations</h4>
+<a href="#deprecations-2" class="anchor"></a>Deprecations</h4>
 <ul>
 <li>Group by arg <code>by</code> has been deprecated for <code>.by</code>. This will allow “by” to be used as a column name in <code><a href="../reference/mutate..html">mutate.()</a></code> &amp; <code><a href="../reference/summarize..html">summarize.()</a></code> in future releases.</li>
 <li>All <code><a href="../reference/dt_arrange.html">dt_verb()</a></code> functions are soft deprecated</li>
@@ -411,9 +422,9 @@
 <code><a href="../reference/nest_by..html">nest_by.()</a></code>: Added <code>.keep</code> arg</li>
 </ul>
 </div>
-<div id="deprecations-2" class="section level4">
+<div id="deprecations-3" class="section level4">
 <h4 class="hasAnchor">
-<a href="#deprecations-2" class="anchor"></a>Deprecations</h4>
+<a href="#deprecations-3" class="anchor"></a>Deprecations</h4>
 <ul>
 <li>Old select helpers like <code>everything.()</code> are now replaced by normal helpers like <code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code>
 </li>
@@ -471,7 +482,7 @@
 <h4 class="hasAnchor">
 <a href="#new-functions-6" class="anchor"></a>New functions</h4>
 <ul>
-<li><code>desc.()</code></li>
+<li><code><a href="../reference/desc..html">desc.()</a></code></li>
 <li><code><a href="../reference/unite..html">unite.()</a></code></li>
 </ul>
 </div>
@@ -680,7 +691,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
