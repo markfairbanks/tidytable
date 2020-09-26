@@ -69,7 +69,7 @@
 \usage{
 dt_arrange(.df, ...)
 
-dt_bind_rows(..., .id = NULL, .use_names = TRUE, .fill = TRUE)
+dt_bind_rows(..., .id = NULL)
 
 dt_bind_cols(...)
 
@@ -81,15 +81,9 @@ dt_distinct(.df, ..., .keep_all = FALSE)
 
 dt_drop_na(.df, ...)
 
-dt_fill(
-  .df,
-  ...,
-  .direction = c("down", "up", "downup", "updown"),
-  .by = NULL,
-  by = NULL
-)
+dt_fill(.df, ..., .direction = c("down", "up", "downup", "updown"), .by = NULL)
 
-dt_filter(.df, ..., .by = NULL, by = NULL)
+dt_filter(.df, ..., .by = NULL)
 
 dt_get_dummies(
   .df,
@@ -146,9 +140,9 @@ dt_map2_dfr(.x, .y, .f, ..., .id = NULL)
 
 dt_map2_df(.x, .y, .f, ..., .id = NULL)
 
-dt_mutate(.df, ..., .by = NULL, by = NULL)
+dt_mutate(.df, ..., .by = NULL)
 
-dt_mutate_across(.df, .cols = everything(), .fns, ..., .by = NULL, by = NULL)
+dt_mutate_across(.df, .cols = everything(), .fns, ..., .by = NULL)
 
 dt_n()
 
@@ -172,7 +166,7 @@ dt_pivot_wider(
   values_fn = NULL
 )
 
-dt_pull(.df, var = NULL)
+dt_pull(.df, var = -1)
 
 dt_relocate(.df, ..., .before = NULL, .after = NULL)
 
@@ -188,21 +182,21 @@ dt_select(.df, ...)
 
 dt_separate(.df, col, into, sep = "[^[:alnum:]]+", remove = TRUE, ...)
 
-dt_slice(.df, rows = 1:5, .by = NULL, by = NULL)
+dt_slice(.df, ..., .by = NULL)
 
-dt_slice_head(.df, n = 5, .by = NULL, by = NULL)
+dt_slice_head(.df, n = 5, .by = NULL)
 
-dt_slice_tail(.df, n = 5, .by = NULL, by = NULL)
+dt_slice_tail(.df, n = 5, .by = NULL)
 
-dt_slice_min(.df, order_by, n = 1, .by = NULL, by = NULL)
+dt_slice_min(.df, order_by, n = 1, .by = NULL)
 
-dt_slice_max(.df, order_by, n = 1, .by = NULL, by = NULL)
+dt_slice_max(.df, order_by, n = 1, .by = NULL)
 
-dt_summarise(.df, ..., .by = NULL, by = NULL)
+dt_summarise(.df, ..., .by = NULL)
 
-dt_summarize(.df, ..., .by = NULL, by = NULL)
+dt_summarize(.df, ..., .by = NULL)
 
-dt_transmute(.df, ..., .by = NULL, by = NULL)
+dt_transmute(.df, ..., .by = NULL)
 
 dt_unite(.df, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE)
 
@@ -215,24 +209,19 @@ dt_unnest_legacy(.df, ..., .keep_all = FALSE)
 
 \item{.id}{If TRUE, an integer column is made as a group id}
 
-\item{.use_names}{If TRUE, makes sure column names align}
-
-\item{.fill}{If TRUE, fills missing columns with NA}
-
 \item{default}{Default value. Set to NA by default.}
 
 \item{.keep_all}{Only relevant if columns are provided to ... arg.
 This keeps all columns, but only keeps the first row of each distinct
 values of columns provided to ... arg.}
 
-\item{.direction}{Direction in which to fill missing values. Currently "down" (the default), "up", "downup" (first down then up), or "updown" (first up and then down)}
+\item{.direction}{Direction in which to fill missing values.
+Currently "down" (the default), "up", "downup" (first down then up), or "updown" (first up and then down)}
 
 \item{.by}{Columns to group by when filling should be done by group}
 
-\item{by}{This argument has been renamed to .by and is deprecated}
-
 \item{cols}{A single column or a vector of unquoted columns to dummify.
-Defaults to all character & factor columns using \code{c(is.character, is.factor)}.
+Defaults to all character & factor columns using \code{c(where(is.character), where(is.factor))}.
 \code{tidyselect} compatible.}
 
 \item{prefix}{TRUE/FALSE - If TRUE, a prefix will be added to new column names}
@@ -257,6 +246,8 @@ Defaults to all character & factor columns using \code{c(is.character, is.factor
 
 \item{y}{A data.frame or data.table}
 
+\item{by}{Columns to group by when filling should be done by group}
+
 \item{suffix}{Append created for duplicated column names when using \code{full_join.()}}
 
 \item{.x}{A data.frame or data.table}
@@ -266,7 +257,7 @@ Defaults to all character & factor columns using \code{c(is.character, is.factor
 \item{.y}{A data.frame or data.table}
 
 \item{.cols}{A single column or a vector of unquoted columns to dummify.
-Defaults to all character & factor columns using \code{c(is.character, is.factor)}.
+Defaults to all character & factor columns using \code{c(where(is.character), where(is.factor))}.
 \code{tidyselect} compatible.}
 
 \item{.fns}{Functions to pass. Can pass a list of functions.}
@@ -296,7 +287,12 @@ Typically used when you have additional variables that is directly related.
 
 \item{values_fn}{Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.}
 
-\item{var}{The column to pull from the data.table. If NULL, pulls the last column.}
+\item{var}{The column to pull from the data.table as:
+\itemize{
+\item a variable name
+\item a positive integer giving the column position
+\item a negative integer giving the column position counting from the right
+}}
 
 \item{.before}{Column to move selection before}
 
@@ -314,8 +310,6 @@ If \code{.x} is a vector, a single replacement value.}
 \item{sep}{Separator to split on. Can be specified or detected automatically}
 
 \item{remove}{If TRUE, remove the input column from the output data.table}
-
-\item{rows}{Integer row values. Provide either positive values to keep, or negative values to drop. The values provided must be either all positive or all negative.}
 
 \item{n}{Number of rows to grab}
 

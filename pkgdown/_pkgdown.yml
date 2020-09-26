@@ -1,6 +1,7 @@
 reference:
 - title: tidytable helpers
 - contents:
+  - case.
   - dt
   - get_dummies.
   - '%notin%'
@@ -14,8 +15,9 @@ reference:
   - summarize.
 - subtitle: Other dplyr functions
 - contents:
+  - arrange_across.
   - starts_with("bind")
-  - case.
+  - case_when.
   - count.
   - distinct.
   - group_split.

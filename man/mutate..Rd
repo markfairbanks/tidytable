@@ -4,7 +4,7 @@
 \alias{mutate.}
 \title{Add/modify/delete columns}
 \usage{
-mutate.(.df, ..., .by = NULL, by = NULL)
+mutate.(.df, ..., .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -12,8 +12,6 @@ mutate.(.df, ..., .by = NULL, by = NULL)
 \item{...}{Columns to add/modify}
 
 \item{.by}{Columns to group by}
-
-\item{by}{This argument has been renamed to .by and is deprecated}
 }
 \description{
 With \code{mutate.()} you can do 3 things:

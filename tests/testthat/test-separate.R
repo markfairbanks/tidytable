@@ -1,16 +1,3 @@
-test_that("dt_ separate works automatically with space", {
-  df <- data.table(x = c("a", "a b", "a b", NA))
-
-  expect_deprecated(dt_separate(df, x, c("c1", "c2")))
-
-  df <- df %>%
-    dt_separate(x, c("c1", "c2"))
-
-  expect_named(df, c("c1", "c2"))
-  expect_equal(df$c1, c("a","a","a",NA))
-  expect_equal(df$c2, c(NA,"b","b",NA))
-})
-
 test_that("separate works automatically with space", {
   df <- data.table(x = c("a", "a b", "a b", NA))
 

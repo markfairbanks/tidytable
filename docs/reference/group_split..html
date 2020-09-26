@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -140,7 +140,7 @@
     <p>Split data frame by groups. Returns a list.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='group_split..html'>group_split.</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.keep</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>group_split.</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .keep = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -161,43 +161,37 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(
-  <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>,
-  <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>,
-  <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>,<span class='st'>"b"</span>),
-  <span class='kw'>d</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>,<span class='st'>"b"</span>))
+    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(
+  a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>,
+  b = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>,
+  c = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>,<span class='st'>"b"</span>),
+  d = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>,<span class='st'>"b"</span>))
 
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='group_split..html'>group_split.</a></span>(<span class='no'>c</span>, <span class='no'>d</span>)</div><div class='output co'>#&gt; [[1]]
-#&gt; # tidytable [3 × 4]
-#&gt;       a     b c     d    
-#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-#&gt; 1     1     1 a     a    
-#&gt; 2     2     2 a     a    
-#&gt; 3     3     3 a     a    
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>group_split.</span>(<span class='kw'>c</span>, <span class='kw'>d</span>)
+</div><div class='output co'>#&gt; [[1]]
+#&gt;   a b c d
+#&gt; 1 1 1 a a
+#&gt; 2 2 2 a a
+#&gt; 3 3 3 a a
 #&gt; 
 #&gt; [[2]]
-#&gt; # tidytable [2 × 4]
-#&gt;       a     b c     d    
-#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-#&gt; 1     4     4 b     b    
-#&gt; 2     5     5 b     b    
+#&gt;   a b c d
+#&gt; 1 4 4 b b
+#&gt; 2 5 5 b b
 #&gt; </div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='group_split..html'>group_split.</a></span>(<span class='no'>c</span>, <span class='no'>d</span>, <span class='kw'>.keep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [[1]]
-#&gt; # tidytable [3 × 2]
-#&gt;       a     b
-#&gt;   &lt;int&gt; &lt;int&gt;
-#&gt; 1     1     1
-#&gt; 2     2     2
-#&gt; 3     3     3
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>group_split.</span>(<span class='kw'>c</span>, <span class='kw'>d</span>, .keep = <span class='fl'>FALSE</span>)
+</div><div class='output co'>#&gt; [[1]]
+#&gt;   a b
+#&gt; 1 1 1
+#&gt; 2 2 2
+#&gt; 3 3 3
 #&gt; 
 #&gt; [[2]]
-#&gt; # tidytable [2 × 2]
-#&gt;       a     b
-#&gt;   &lt;int&gt; &lt;int&gt;
-#&gt; 1     4     4
-#&gt; 2     5     5
+#&gt;   a b
+#&gt; 1 4 4
+#&gt; 2 5 5
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -214,7 +208,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

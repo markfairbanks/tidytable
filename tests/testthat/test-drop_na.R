@@ -1,14 +1,3 @@
-test_that("dt_drop_na() works with no dots & is deprecated", {
-  test_df <- data.table(x = c(1, 2, NA), y = c("a", NA, "b"))
-  drop_df <- test_df %>%
-    dt_drop_na()
-
-  expect_deprecated(dt_drop_na(test_df))
-  expect_named(drop_df, c("x", "y"))
-  expect_equal(drop_df$x, 1)
-  expect_equal(drop_df$y, "a")
-})
-
 test_that("drop_na.() works with no dots", {
   test_df <- data.table(x = c(1, 2, NA), y = c("a", NA, "b"))
   drop_df <- test_df %>%

@@ -44,7 +44,7 @@ select..data.frame <- function(.df, ...) {
 
   .df <- as_tidytable(.df)
 
-  select_cols <- select_dots_i(.df, ...)
+  select_cols <- select_dots_idx(.df, ...)
 
   .df <- eval_quo(.df[, !!select_cols])
 
@@ -57,7 +57,7 @@ select..data.frame <- function(.df, ...) {
 #' @rdname dt_verb
 #' @inheritParams select.
 dt_select <- function(.df, ...) {
-  deprecate_soft("0.5.2", "tidytable::dt_select()", "select.()")
+  deprecate_stop("0.5.2", "tidytable::dt_select()", "select.()")
 
   select.(.df, ...)
 }

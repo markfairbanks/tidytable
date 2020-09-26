@@ -46,16 +46,16 @@ relocate..data.frame <- function(.df, ..., .before = NULL, .after = NULL) {
 
   data_names <- names(.df)
   all_cols_i <- seq_along(data_names)
-  selected_cols_i <- select_dots_i(.df, ...)
+  selected_cols_i <- select_dots_idx(.df, ...)
 
   if (!quo_is_null(.before)) {
 
-    before_i <- select_vec_i(.df, !!.before)
+    before_i <- select_vec_idx(.df, !!.before)
     start_cols_i <- all_cols_i[all_cols_i < before_i]
 
   } else {
 
-    after_i <- select_vec_i(.df, !!.after)
+    after_i <- select_vec_idx(.df, !!.after)
     start_cols_i <- all_cols_i[all_cols_i <= after_i]
 
   }
@@ -72,7 +72,7 @@ relocate..data.frame <- function(.df, ..., .before = NULL, .after = NULL) {
 #' @rdname dt_verb
 #' @inheritParams relocate.
 dt_relocate <- function(.df, ..., .before = NULL, .after = NULL) {
-  deprecate_soft("0.5.2", "tidytable::dt_relocate()", "relocate.()")
+  deprecate_stop("0.5.2", "tidytable::dt_relocate()", "relocate.()")
 
   relocate.(.df, ..., .before = {{ .before }}, .after = {{ .after }})
 }

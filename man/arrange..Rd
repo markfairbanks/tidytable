@@ -12,7 +12,10 @@ arrange.(.df, ...)
 \item{...}{Variables to arrange by}
 }
 \description{
-Order rows in ascending or descending order
+Order rows in ascending or descending order.
+
+Note: \code{data.table} orders character columns slightly differently than \code{dplyr::arrange()} by
+ordering in the "C-locale". See \code{?data.table::setorder} for more details.
 }
 \examples{
 test_df <- data.table(

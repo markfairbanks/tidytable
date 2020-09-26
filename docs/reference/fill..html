@@ -81,7 +81,7 @@ Supports tidyselect" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -142,13 +142,7 @@ Supports tidyselect" />
 <p>Supports tidyselect</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='fill..html'>fill.</a></span>(
-  <span class='no'>.df</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>.direction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"down"</span>, <span class='st'>"up"</span>, <span class='st'>"downup"</span>, <span class='st'>"updown"</span>),
-  <span class='kw'>.by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>fill.</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .direction = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"down"</span>, <span class='st'>"up"</span>, <span class='st'>"downup"</span>, <span class='st'>"updown"</span>), .by = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,53 +157,48 @@ Supports tidyselect" />
     </tr>
     <tr>
       <th>.direction</th>
-      <td><p>Direction in which to fill missing values. Currently "down" (the default), "up", "downup" (first down then up), or "updown" (first up and then down)</p></td>
+      <td><p>Direction in which to fill missing values.
+Currently "down" (the default), "up", "downup" (first down then up), or "updown" (first up and then down)</p></td>
     </tr>
     <tr>
       <th>.by</th>
       <td><p>Columns to group by when filling should be done by group</p></td>
     </tr>
-    <tr>
-      <th>by</th>
-      <td><p>This argument has been renamed to .by and is deprecated</p></td>
-    </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>NA</span>, <span class='fl'>NA</span>, <span class='fl'>4</span>:<span class='fl'>10</span>),
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>6</span>, <span class='fl'>NA</span>, <span class='fl'>8</span>, <span class='fl'>NA</span>, <span class='fl'>10</span>),
-  <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>8</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>2</span>)))
+    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(
+  x = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>NA</span>, <span class='fl'>NA</span>, <span class='fl'>4</span><span class='op'>:</span><span class='fl'>10</span>),
+  y = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>, <span class='fl'>NA</span>, <span class='fl'>8</span>, <span class='fl'>NA</span>, <span class='fl'>10</span>),
+  z = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>8</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>2</span>)))
 
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='fill..html'>fill.</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt; # tidytable [10 × 3]
-#&gt;        x     y z    
-#&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;
-#&gt;  1    NA     1 a    
-#&gt;  2    NA     2 a    
-#&gt;  3    NA     3 a    
-#&gt;  4     4     4 a    
-#&gt;  5     5     5 a    
-#&gt;  6     6     6 a    
-#&gt;  7     7     6 a    
-#&gt;  8     8     8 a    
-#&gt;  9     9    NA b    
-#&gt; 10    10    10 b    </div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='fill..html'>fill.</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>, <span class='kw'>.direction</span> <span class='kw'>=</span> <span class='st'>"downup"</span>)</div><div class='output co'>#&gt; # tidytable [10 × 3]
-#&gt;        x     y z    
-#&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;
-#&gt;  1     4     1 a    
-#&gt;  2     4     2 a    
-#&gt;  3     4     3 a    
-#&gt;  4     4     4 a    
-#&gt;  5     5     5 a    
-#&gt;  6     6     6 a    
-#&gt;  7     7     6 a    
-#&gt;  8     8     8 a    
-#&gt;  9     9    10 b    
-#&gt; 10    10    10 b    </div></pre>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>fill.</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, .by = <span class='kw'>z</span>)
+</div><div class='output co'>#&gt;     x  y z
+#&gt; 1  NA  1 a
+#&gt; 2  NA  2 a
+#&gt; 3  NA  3 a
+#&gt; 4   4  4 a
+#&gt; 5   5  5 a
+#&gt; 6   6  6 a
+#&gt; 7   7  6 a
+#&gt; 8   8  8 a
+#&gt; 9   9 NA b
+#&gt; 10 10 10 b</div><div class='input'>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>fill.</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, .by = <span class='kw'>z</span>, .direction = <span class='st'>"downup"</span>)
+</div><div class='output co'>#&gt;     x  y z
+#&gt; 1   4  1 a
+#&gt; 2   4  2 a
+#&gt; 3   4  3 a
+#&gt; 4   4  4 a
+#&gt; 5   5  5 a
+#&gt; 6   6  6 a
+#&gt; 7   7  6 a
+#&gt; 8   8  8 a
+#&gt; 9   9 10 b
+#&gt; 10 10 10 b</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -225,7 +214,7 @@ Supports tidyselect" />
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

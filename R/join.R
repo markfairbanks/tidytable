@@ -106,9 +106,18 @@ full_join. <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
 
 #' @export
 full_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
-    join_mold(x, y, by = by, suffix = suffix,
-              all_x = TRUE, all_y = TRUE)
+    result_df <- join_mold(x, y, by = by, suffix = suffix,
+                           all_x = TRUE, all_y = TRUE)
 
+    start_names <- names(x)
+    end_names <- names(result_df)
+    end_names <- end_names[end_names %notin% start_names]
+
+    col_order <- c(start_names, end_names)
+
+    setcolorder(result_df, col_order)
+
+    result_df
 }
 
 #' @export
@@ -132,6 +141,31 @@ anti_join..default <- function(x, y, by = NULL) {
   names(on_vec) <- by_x
 
   as_tidytable(x[!y, on = on_vec, allow.cartesian = TRUE])
+}
+
+#' @export
+#' @rdname left_join.
+semi_join. <- function(x, y, by = NULL) {
+  UseMethod("semi_join.")
+}
+
+#' @export
+semi_join..default <- function(x, y, by = NULL) {
+  if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
+  if (!is.data.table(x)) x <- as_tidytable(x)
+  if (!is.data.table(y)) y <- as_tidytable(y)
+
+  by_x_y <- get_bys(x, y, by)
+
+  by_x <- by_x_y[[1]]
+  by_y <- by_x_y[[2]]
+
+  on_vec <- by_y
+  names(on_vec) <- by_x
+
+  result_df <- fsetdiff(x, x[!y, on = on_vec], all=TRUE)
+
+  as_tidytable(result_df)
 }
 
 get_bys <- function(x, y, by = NULL) {
@@ -158,7 +192,7 @@ get_bys <- function(x, y, by = NULL) {
 #' @rdname dt_verb
 #' @inheritParams left_join.
 dt_left_join <- function(x, y, by = NULL) {
-  deprecate_soft("0.5.2", "tidytable::dt_left_join()", "left_join.()")
+  deprecate_stop("0.5.2", "tidytable::dt_left_join()", "left_join.()")
 
   left_join.(x, y, by)
 }
@@ -167,7 +201,7 @@ dt_left_join <- function(x, y, by = NULL) {
 #' @rdname dt_verb
 #' @inheritParams inner_join.
 dt_inner_join <- function(x, y, by = NULL) {
-  deprecate_soft("0.5.2", "tidytable::dt_inner_join()", "inner_join.()")
+  deprecate_stop("0.5.2", "tidytable::dt_inner_join()", "inner_join.()")
 
   inner_join.(x, y, by)
 }
@@ -176,7 +210,7 @@ dt_inner_join <- function(x, y, by = NULL) {
 #' @rdname dt_verb
 #' @inheritParams right_join.
 dt_right_join <- function(x, y, by = NULL) {
-  deprecate_soft("0.5.2", "tidytable::dt_right_join()", "right_join.()")
+  deprecate_stop("0.5.2", "tidytable::dt_right_join()", "right_join.()")
 
   right_join.(x, y, by)
 }
@@ -185,7 +219,7 @@ dt_right_join <- function(x, y, by = NULL) {
 #' @rdname dt_verb
 #' @inheritParams full_join.
 dt_full_join <- function(x, y, by = NULL,suffix =  c(".x", ".y")) {
-  deprecate_soft("0.5.2", "tidytable::dt_full_join()", "full_join.()")
+  deprecate_stop("0.5.2", "tidytable::dt_full_join()", "full_join.()")
 
   full_join.(x, y, by)
 }
@@ -194,7 +228,7 @@ dt_full_join <- function(x, y, by = NULL,suffix =  c(".x", ".y")) {
 #' @rdname dt_verb
 #' @inheritParams anti_join.
 dt_anti_join <- function(x, y, by = NULL) {
-  deprecate_soft("0.5.2", "tidytable::dt_anti_join()", "anti_join.()")
+  deprecate_stop("0.5.2", "tidytable::dt_anti_join()", "anti_join.()")
 
   anti_join.(x, y, by)
 }
@@ -212,7 +246,7 @@ join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
   result_df <- as_tidytable(
     merge(x = x, y = y, by.x = by_x, by.y = by_y, suffixes = suffix,
           all.x = all_x, all.y = all_y,
-          allow.cartesian = TRUE)
+          allow.cartesian = TRUE, sort = FALSE)
   )
 
   setkey(result_df, NULL)

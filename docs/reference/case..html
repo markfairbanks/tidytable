@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Case when — case. • tidytable</title>
+<title>Improved data.table::fcase() — case. • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,10 @@
 
 
 
-<meta property="og:title" content="Case when — case." />
+<meta property="og:title" content="Improved data.table::fcase() — case." />
 <meta property="og:description" content="This function allows you to use multiple if/else statements in one call.
-Note that this function is called differently than dplyr::case_when. See examples." />
+It is called like data.table::fcase(), but allows the user to use
+a vector as the default argument." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -81,7 +82,7 @@ Note that this function is called differently than dplyr::case_when. See example
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -132,17 +133,18 @@ Note that this function is called differently than dplyr::case_when. See example
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Case when</h1>
+    <h1>Improved data.table::fcase()</h1>
     <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/case.R'><code>R/case.R</code></a></small>
     <div class="hidden name"><code>case..Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>This function allows you to use multiple if/else statements in one call.</p>
-<p>Note that this function is called differently than <code><a href='https://dplyr.tidyverse.org/reference/case_when.html'>dplyr::case_when</a></code>. See examples.</p>
+<p>It is called like <code><a href='https://Rdatatable.gitlab.io/data.table/reference/fcase.html'>data.table::fcase()</a></code>, but allows the user to use
+a vector as the <code>default</code> argument.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='case..html'>case.</a></span>(<span class='no'>...</span>, <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>NA</span>)</pre>
+    <pre class="usage"><span class='fu'>case.</span>(<span class='kw'>...</span>, default = <span class='fl'>NA</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -159,44 +161,23 @@ Note that this function is called differently than dplyr::case_when. See example
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>data.table</span>)
+    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(x = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>)
 
-<span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(
-  <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>,
-  <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>11</span>:<span class='fl'>20</span>,
-  <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>6</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>4</span>)),
-  <span class='kw'>d</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>4</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>6</span>)))
-
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='case..html'>case.</a></span>(<span class='no'>b</span> <span class='kw'>&lt;</span> <span class='fl'>13</span>, <span class='fl'>3</span>,
-                    <span class='no'>a</span> <span class='kw'>&gt;</span> <span class='fl'>4</span>, <span class='fl'>2</span>,
-                    <span class='kw'>default</span> <span class='kw'>=</span> <span class='fl'>10</span>))</div><div class='output co'>#&gt; # tidytable [10 × 5]
-#&gt;        a     b c     d         x
-#&gt;    &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
-#&gt;  1     1    11 a     a         3
-#&gt;  2     2    12 a     a         3
-#&gt;  3     3    13 a     a        10
-#&gt;  4     4    14 a     a        10
-#&gt;  5     5    15 a     b         2
-#&gt;  6     6    16 a     b         2
-#&gt;  7     7    17 b     b         2
-#&gt;  8     8    18 b     b         2
-#&gt;  9     9    19 b     b         2
-#&gt; 10    10    20 b     b         2</div><div class='input'><span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='case..html'>case.</a></span>(<span class='no'>c</span> <span class='kw'>==</span> <span class='st'>"a"</span>, <span class='st'>"a"</span>,
-                    <span class='kw'>default</span> <span class='kw'>=</span> <span class='no'>d</span>))</div><div class='output co'>#&gt; # tidytable [10 × 5]
-#&gt;        a     b c     d     x    
-#&gt;    &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
-#&gt;  1     1    11 a     a     a    
-#&gt;  2     2    12 a     a     a    
-#&gt;  3     3    13 a     a     a    
-#&gt;  4     4    14 a     a     a    
-#&gt;  5     5    15 a     b     a    
-#&gt;  6     6    16 a     b     a    
-#&gt;  7     7    17 b     b     b    
-#&gt;  8     8    18 b     b     b    
-#&gt;  9     9    19 b     b     b    
-#&gt; 10    10    20 b     b     b    </div></pre>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='mutate..html'>mutate.</a></span>(case_x = <span class='fu'>case.</span>(<span class='kw'>x</span> <span class='op'>&lt;</span> <span class='fl'>5</span>, <span class='fl'>1</span>,
+                         <span class='kw'>x</span> <span class='op'>&lt;</span> <span class='fl'>7</span>, <span class='fl'>2</span>,
+                         default = <span class='fl'>3</span>))
+</div><div class='output co'>#&gt;     x case_x
+#&gt; 1   1      1
+#&gt; 2   2      1
+#&gt; 3   3      1
+#&gt; 4   4      1
+#&gt; 5   5      2
+#&gt; 6   6      2
+#&gt; 7   7      3
+#&gt; 8   8      3
+#&gt; 9   9      3
+#&gt; 10 10      3</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -212,7 +193,7 @@ Note that this function is called differently than dplyr::case_when. See example
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

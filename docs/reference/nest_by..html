@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -140,7 +140,7 @@
     <p>Nest data.tables by group</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='nest_by..html'>nest_by.</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.key</span> <span class='kw'>=</span> <span class='st'>"data"</span>, <span class='kw'>.keep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>nest_by.</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .key = <span class='st'>"data"</span>, .keep = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,38 +166,34 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
-  <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>,
-  <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>11</span>:<span class='fl'>20</span>,
-  <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>6</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>4</span>)),
-  <span class='kw'>d</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>4</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>6</span>)))
+    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
+  a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>,
+  b = <span class='fl'>11</span><span class='op'>:</span><span class='fl'>20</span>,
+  c = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>6</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>4</span>)),
+  d = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>4</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>6</span>)))
 
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='nest_by..html'>nest_by.</a></span>()</div><div class='output co'>#&gt; # tidytable [1 × 1]
-#&gt;   data                
-#&gt;   &lt;list&gt;              
-#&gt; 1 &lt;tidytable [10 × 4]&gt;</div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='nest_by..html'>nest_by.</a></span>(<span class='no'>c</span>, <span class='no'>d</span>)</div><div class='output co'>#&gt; # tidytable [3 × 3]
-#&gt;   c     d     data               
-#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;list&gt;             
-#&gt; 1 a     a     &lt;tidytable [4 × 2]&gt;
-#&gt; 2 a     b     &lt;tidytable [2 × 2]&gt;
-#&gt; 3 b     b     &lt;tidytable [4 × 2]&gt;</div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='nest_by..html'>nest_by.</a></span>(<span class='fu'>where</span>(<span class='no'>is.character</span>))</div><div class='output co'>#&gt; # tidytable [3 × 3]
-#&gt;   c     d     data               
-#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;list&gt;             
-#&gt; 1 a     a     &lt;tidytable [4 × 2]&gt;
-#&gt; 2 a     b     &lt;tidytable [2 × 2]&gt;
-#&gt; 3 b     b     &lt;tidytable [4 × 2]&gt;</div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='nest_by..html'>nest_by.</a></span>(<span class='no'>c</span>, <span class='no'>d</span>, <span class='kw'>.keep</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; # tidytable [3 × 3]
-#&gt;   c     d     data               
-#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;list&gt;             
-#&gt; 1 a     a     &lt;tidytable [4 × 4]&gt;
-#&gt; 2 a     b     &lt;tidytable [2 × 4]&gt;
-#&gt; 3 b     b     &lt;tidytable [4 × 4]&gt;</div></pre>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>nest_by.</span>()
+</div><div class='output co'>#&gt;                                                                                                                                data
+#&gt; 1 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, a, a, a, a, a, a, b, b, b, b, a, a, a, a, b, b, b, b, b, b</div><div class='input'>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>nest_by.</span>(<span class='kw'>c</span>, <span class='kw'>d</span>)
+</div><div class='output co'>#&gt;   c d                        data
+#&gt; 1 a a  1, 2, 3, 4, 11, 12, 13, 14
+#&gt; 2 a b                5, 6, 15, 16
+#&gt; 3 b b 7, 8, 9, 10, 17, 18, 19, 20</div><div class='input'>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>nest_by.</span>(<span class='fu'>where</span>(<span class='kw'>is.character</span>))
+</div><div class='output co'>#&gt;   c d                        data
+#&gt; 1 a a  1, 2, 3, 4, 11, 12, 13, 14
+#&gt; 2 a b                5, 6, 15, 16
+#&gt; 3 b b 7, 8, 9, 10, 17, 18, 19, 20</div><div class='input'>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>nest_by.</span>(<span class='kw'>c</span>, <span class='kw'>d</span>, .keep = <span class='fl'>TRUE</span>)
+</div><div class='output co'>#&gt;   c d                                                data
+#&gt; 1 a a  1, 2, 3, 4, 11, 12, 13, 14, a, a, a, a, a, a, a, a
+#&gt; 2 a b                            5, 6, 15, 16, a, a, b, b
+#&gt; 3 b b 7, 8, 9, 10, 17, 18, 19, 20, b, b, b, b, b, b, b, b</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -213,7 +209,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

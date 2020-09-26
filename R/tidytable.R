@@ -15,10 +15,11 @@ tidytable <- function(...) {
 
   dots <- enquos(...)
 
-  data_env <- env(quo_get_env(dots[[1]]))
+  if (length(dots) == 0) data_env <- caller_env()
+  else data_env <- env(quo_get_env(dots[[1]]))
 
   .df <- eval_quo(
-    data.table(!!!dots),
+    data.table::data.table(!!!dots),
     new_data_mask(data_env), env = caller_env()
   )
 

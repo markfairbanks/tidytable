@@ -4,7 +4,7 @@
 \alias{filter.}
 \title{Filter rows on one or more conditions}
 \usage{
-filter.(.df, ..., .by = NULL, by = NULL)
+filter.(.df, ..., .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -12,8 +12,6 @@ filter.(.df, ..., .by = NULL, by = NULL)
 \item{...}{Conditions to filter by}
 
 \item{.by}{Columns to group by if filtering with a summary function}
-
-\item{by}{This argument has been renamed to .by and is deprecated}
 }
 \description{
 Filters a dataset to choose rows where conditions are true.

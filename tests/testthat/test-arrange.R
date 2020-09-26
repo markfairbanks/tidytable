@@ -1,14 +1,3 @@
-setup(options(lifecycle_verbosity = "quiet"))
-
-test_that("dt_ can arrange the dataset & is deprecated", {
-  df <- data.table(x = c(4,3,9,7), y = 1:4)
-  df <- df %>%
-    dt_arrange(x)
-
-  expect_equal(df$x, c(3,4,7,9))
-  expect_deprecated(dt_arrange(df, x))
-})
-
 test_that("can arrange the dataset", {
   df <- data.table(x = c(4,3,9,7), y = 1:4)
   df <- df %>%
@@ -33,29 +22,29 @@ test_that("can arrange the dataset descending", {
   expect_equal(df$x, c(9,7,4,3))
 })
 
-# test_that("can arrange the dataset with desc.()", {
-#   df <- data.table(x = c(4,3,9,7), y = 1:4)
-#
-#   desc_df <- df %>%
-#     arrange.(desc.(x))
-#
-#   check_df <- df %>%
-#     arrange.(-x)
-#
-#   expect_equal(desc_df, check_df)
-# })
-#
-# test_that("can arrange the dataset with desc.() on chr", {
-#   df <- data.table(x = c("a", "a", "b"), y = 1:3)
-#
-#   desc_df <- df %>%
-#     arrange.(desc.(x))
-#
-#   check_df <- df %>%
-#     arrange.(-x)
-#
-#   expect_equal(desc_df, check_df)
-# })
+test_that("can arrange the dataset with desc.()", {
+  df <- data.table(x = c(4,3,9,7), y = 1:4)
+
+  desc_df <- df %>%
+    arrange.(desc.(x))
+
+  check_df <- df %>%
+    arrange.(-x)
+
+  expect_equal(desc_df, check_df)
+})
+
+test_that("can arrange the dataset with desc.() on chr", {
+  df <- data.table(x = c("a", "a", "b"), y = 1:3)
+
+  desc_df <- df %>%
+    arrange.(desc.(x))
+
+  check_df <- df %>%
+    arrange.(-x)
+
+  expect_equal(desc_df, check_df)
+})
 
 test_that("can arrange with multiple conditions", {
   df <- data.table(x = c(4,3,2,1), y = c("a","a","b","b"))

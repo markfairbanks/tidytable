@@ -6,33 +6,32 @@
 \alias{slice_tail.}
 \alias{slice_max.}
 \alias{slice_min.}
-\title{Choose rows by position}
+\title{Choose rows in a data.table}
 \usage{
-slice.(.df, rows = 1:5, .by = NULL, by = NULL)
+slice.(.df, ..., .by = NULL)
 
-slice_head.(.df, n = 5, .by = NULL, by = NULL)
+slice_head.(.df, n = 5, .by = NULL)
 
-slice_tail.(.df, n = 5, .by = NULL, by = NULL)
+slice_tail.(.df, n = 5, .by = NULL)
 
-slice_max.(.df, order_by, n = 1, .by = NULL, by = NULL)
+slice_max.(.df, order_by, n = 1, .by = NULL)
 
-slice_min.(.df, order_by, n = 1, .by = NULL, by = NULL)
+slice_min.(.df, order_by, n = 1, .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
 
-\item{rows}{Integer row values. Provide either positive values to keep, or negative values to drop. The values provided must be either all positive or all negative.}
+\item{...}{Integer row values}
 
 \item{.by}{Columns to group by}
-
-\item{by}{This argument has been renamed to .by and is deprecated}
 
 \item{n}{Number of rows to grab}
 
 \item{order_by}{Variable to arrange by}
 }
 \description{
-Choose rows by their ordinal position in a data.table. Grouped data.tables use the ordinal position within the group.
+Choose rows in a data.table.
+Grouped data.tables grab rows within each group.
 }
 \examples{
 test_df <- data.table(
@@ -41,7 +40,10 @@ test_df <- data.table(
   z = c("a","a","a","b"))
 
 test_df \%>\%
-  slice.(1:4)
+  slice.(1:3)
+
+test_df \%>\%
+  slice.(1, 3)
 
 test_df \%>\%
   slice.(1, .by = z)

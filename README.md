@@ -1,13 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidytable <img src="man/figures/logo.png" align="right" width="16%" height="16%" />
+# tidytable <img src="man/figures/logo.png" align="right" width="17%" height="17%" />
 
 <!-- badges: start -->
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/dev%20-0.5.4.9-green.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/dev%20-0.5.5.9-green.svg)](https://github.com/markfairbanks/tidytable)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN RStudio mirror
@@ -18,9 +18,8 @@ downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey)](h
 
   - `tidyverse`-like syntax with `data.table` speed
   - `rlang` compatibility
-  - Includes functions that
-    [`dtplyr`](https://github.com/tidyverse/dtplyr) is missing,
-    including many `tidyr` functions
+  - Includes functions that `dtplyr` is missing, including many `tidyr`
+    functions
 
 Note: `tidytable` functions do not use `data.table`’s
 modify-by-reference, and instead use the copy-on-modify principles

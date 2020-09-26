@@ -5,10 +5,16 @@
 #'
 #' @param .df A nested data.table
 #' @param ... Columns to unnest. If empty, unnests all list columns. `tidyselect` compatible.
-#' @param .keep_all Should list columns that were not unnested be kept
+#' @param .drop Should list columns that were not unnested be dropped
+#' @param names_sep If NULL, the default, the inner column names will become the new outer column names.
+#'
+#' If a string, the name of the outer column will be appended to the beginning of the inner column names,
+#' with `names_sep` used as a separator.
+#'
+#' @param names_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details.
+#' @param .keep_all Deprecated. Please use `.drop = FALSE` to keep unused list columns.
 #'
 #' @export
-#' @md
 #'
 #' @examples
 #' nested_df <- data.table(
@@ -23,17 +29,30 @@
 #'   unnest.(data)
 #'
 #' nested_df %>%
+#'   unnest.(data, names_sep = "_")
+#'
+#' nested_df %>%
 #'   unnest.(data, pulled_vec)
-unnest. <- function(.df, ..., .keep_all = FALSE) {
+unnest. <- function(.df,
+                    ...,
+                    .drop = TRUE,
+                    names_sep = NULL,
+                    names_repair = "unique",
+                    .keep_all = deprecated()) {
   UseMethod("unnest.")
 }
 
 #' @export
-unnest..data.frame <- function(.df, ..., .keep_all = FALSE) {
+unnest..data.frame <- function(.df,
+                               ...,
+                               .drop = TRUE,
+                               names_sep = NULL,
+                               names_repair = "unique",
+                               .keep_all = deprecated()) {
 
   .df <- as_tidytable(.df)
 
-  vec_assert(.keep_all, logical(), 1)
+  vec_assert(.drop, logical(), 1)
 
   dots <- enquos(...)
 
@@ -46,25 +65,31 @@ unnest..data.frame <- function(.df, ..., .keep_all = FALSE) {
 
   keep_cols <- data_names[!list_flag]
 
-  if (.keep_all) {
+  if (!is_missing(.keep_all)) {
+    .drop <- !.keep_all
+
+    deprecate_warn("0.5.6", "tidytable::unnest.(.keep_all = )", "unnest.(.drop = )")
+  }
+
+  if (!.drop) {
     list_cols <- data_names[list_flag]
 
     keep_cols <- c(keep_cols, list_cols[list_cols %notin% as.character(dots)])
   }
 
-  unnest_data <- map.(dots, ~ unnest_col(.df, .x))
+  unnest_data <- map.(dots, ~ unnest_col(.df, .x, names_sep))
 
-  unnest_nrow <- map_dbl.(unnest_data, nrow)
+  unnest_nrow <- list_sizes(unnest_data)
 
   if (!length(vec_unique(unnest_nrow)) == 1)
     abort("unnested data contains different row counts")
 
   # Get number of repeats for keep cols
-  rep_vec <- map_dbl.(pull.(.df, !!dots[[1]]), vec_size)
+  rep_vec <- list_sizes(pull.(.df, !!dots[[1]]))
 
-  keep_df <- .df[, ..keep_cols][rep(1:.N, rep_vec)]
+  keep_df <- .df[, ..keep_cols][vec_rep_each(1:.N, rep_vec)]
 
-  results_df <- bind_cols.(keep_df, unnest_data)
+  results_df <- bind_cols.(keep_df, unnest_data, .name_repair = names_repair)
 
   results_df
 }
@@ -73,12 +98,12 @@ unnest..data.frame <- function(.df, ..., .keep_all = FALSE) {
 #' @rdname dt_verb
 #' @inheritParams unnest.
 dt_unnest_legacy <- function(.df, ..., .keep_all = FALSE) {
-  deprecate_soft("0.5.2", "tidytable::dt_unnest_legacy()", "unnest.()")
+  deprecate_stop("0.5.2", "tidytable::dt_unnest_legacy()", "unnest.()")
 
   unnest.(.df, ..., .keep_all = .keep_all)
 }
 
-unnest_col <- function(.df, col = NULL) {
+unnest_col <- function(.df, col = NULL, names_sep = NULL) {
 
   # Check if nested data is a vector
   nested_data <- pull.(.df, !!col)[[1]]
@@ -93,6 +118,9 @@ unnest_col <- function(.df, col = NULL) {
     # bind_rows.() auto-converts lists of data.frames/tibbles/matrices to data.tables
     result_df <- bind_rows.(pull.(.df, !!col))
   }
+
+  if (!is.null(names_sep))
+    names(result_df) <- paste(quo_text(col), names(result_df), sep = names_sep)
 
   result_df
 }

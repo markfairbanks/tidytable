@@ -20,7 +20,7 @@ test_df <- data.table(
   x = c(1, 2, NA),
   y = c(NA, 1, 2))
 
-# Using replace_na.() inside mutate()
+# Using replace_na.() inside mutate.()
 test_df \%>\%
   mutate.(x = replace_na.(x, 5))
 

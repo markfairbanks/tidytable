@@ -2,7 +2,7 @@
 % Please edit documentation in R/desc.R
 \name{desc.}
 \alias{desc.}
-\title{Deprecated}
+\title{Descending order}
 \usage{
 desc.(x)
 }
@@ -10,8 +10,6 @@ desc.(x)
 \item{x}{Variable to arrange in descending order}
 }
 \description{
-This function is deprecated.
-
 Arrange in descending order. Can be used inside of \code{arrange.()}
 }
 \examples{
@@ -21,5 +19,5 @@ test_df <- data.table(
   c = c("a","a","b"))
 
 test_df \%>\%
-  arrange.(c, -a)
+  arrange.(c, desc.(a))
 }

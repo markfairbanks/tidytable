@@ -37,7 +37,7 @@ drop_na..data.frame <- function(.df, ...) {
   if (length(dots) == 0) {
     na.omit(.df)
   } else {
-    drop_cols <- select_dots_i(.df, ...)
+    drop_cols <- select_dots_idx(.df, ...)
 
     na.omit(.df, cols = drop_cols)
   }
@@ -47,7 +47,7 @@ drop_na..data.frame <- function(.df, ...) {
 #' @rdname dt_verb
 #' @inheritParams drop_na.
 dt_drop_na <- function(.df, ...) {
-  deprecate_soft("0.5.2", "tidytable::dt_drop_na()", "drop_na.()")
+  deprecate_stop("0.5.2", "tidytable::dt_drop_na()", "drop_na.()")
 
   drop_na.(.df, ...)
 }

@@ -1,28 +1,3 @@
-test_that("dt_ joins work & is deprecated", {
-  df1 <- data.table(a = 1:3)
-  df2 <- data.table(b = 1, c = 2, a = 4:1)
-
-  out <- dt_inner_join(df1, df2, by = "a")
-  expect_deprecated(dt_inner_join(df1, df2, by = "a"))
-  expect_named(out, c("a", "b", "c"))
-  expect_equal(out$a, 3:1)
-
-  out <- dt_left_join(df1, df2, by = "a")
-  expect_deprecated(dt_left_join(df1, df2, by = "a"))
-  expect_named(out, c("a", "b", "c"))
-  expect_equal(out$a, 1:3)
-
-  out <- dt_right_join(df1, df2, by = "a")
-  expect_deprecated(dt_right_join(df1, df2, by = "a"))
-  expect_named(out, c("a", "b", "c"))
-  expect_equal(out$a, 4:1)
-
-  out <- dt_full_join(df1, df2, by = "a")
-  expect_deprecated(dt_full_join(df1, df2, by = "a"))
-  expect_named(out, c("a", "b", "c"))
-  expect_equal(out$a, 1:4)
-})
-
 test_that("joins work", {
   df1 <- data.table(a = 1:3)
   df2 <- data.table(b = 1, c = 2, a = 4:1)
@@ -118,4 +93,24 @@ test_that("joins work with data.frame", {
   out <- full_join.(df1, df2, by = "a")
   expect_named(out, c("a", "b", "c"))
   expect_equal(out$a, 1:4)
+})
+
+test_that("filtering joins preserve row and column order of x", {
+  df1 <- data.frame(a = 4:1, b = 1)
+  df2 <- data.frame(b = 1, c = 2, a = 2:3)
+
+  out <- semi_join.(df1, df2, by = "a")
+  expect_named(out, c("a", "b"))
+  expect_equal(out$a, 3:2)
+
+  out <- anti_join.(df1, df2, by = "a")
+  expect_named(out, c("a", "b"))
+  expect_equal(out$a, c(4L, 1L))
+})
+
+test_that("joins matches NAs by default", {
+  df1 <- tidytable(x = c(NA_character_, 1))
+  df2 <- tidytable(x = c(NA_character_, 2))
+
+  expect_equal(nrow(semi_join.(df1, df2, by = "x")), 1)
 })

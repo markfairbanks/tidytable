@@ -81,7 +81,7 @@ Can be used inside summarize.(), mutate.(), &amp;amp; filter.()" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -142,30 +142,28 @@ Can be used inside summarize.(), mutate.(), &amp;amp; filter.()" />
 <p>Can be used inside <code><a href='summarize..html'>summarize.()</a></code>, <code><a href='mutate..html'>mutate.()</a></code>, &amp; <code><a href='filter..html'>filter.()</a></code></p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='n..html'>n.</a></span>()</pre>
+    <pre class="usage"><span class='fu'>n.</span>()</pre>
 
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>),
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>),
-  <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
+    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
+  x = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>),
+  y = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>),
+  z = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
 
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='summarize..html'>summarize.</a></span>(<span class='kw'>count</span> <span class='kw'>=</span> <span class='fu'><a href='n..html'>n.</a></span>(),
-             <span class='kw'>.by</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt; # tidytable [2 × 2]
-#&gt;   z     count
-#&gt;   &lt;chr&gt; &lt;int&gt;
-#&gt; 1 a         2
-#&gt; 2 b         1</div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>count</span> <span class='kw'>=</span> <span class='fu'><a href='n..html'>n.</a></span>())</div><div class='output co'>#&gt; # tidytable [3 × 4]
-#&gt;       x     y z     count
-#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;int&gt;
-#&gt; 1     1     4 a         3
-#&gt; 2     2     5 a         3
-#&gt; 3     3     6 b         3</div></pre>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='summarize..html'>summarize.</a></span>(count = <span class='fu'>n.</span>(),
+             .by = <span class='kw'>z</span>)
+</div><div class='output co'>#&gt;   z count
+#&gt; 1 a     2
+#&gt; 2 b     1</div><div class='input'>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='mutate..html'>mutate.</a></span>(count = <span class='fu'>n.</span>())
+</div><div class='output co'>#&gt;   x y z count
+#&gt; 1 1 4 a     3
+#&gt; 2 2 5 a     3
+#&gt; 3 3 6 b     3</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -181,7 +179,7 @@ Can be used inside summarize.(), mutate.(), &amp;amp; filter.()" />
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

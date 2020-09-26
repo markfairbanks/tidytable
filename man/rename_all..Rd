@@ -25,7 +25,7 @@ dt_rename_all(.data, .fun, ...)
 
 dt_rename_if(.data, .predicate, .fun, ...)
 
-dt_rename_at(.data, .vars, .fun, ...)
+dt_rename_at(.data, .fun, ...)
 }
 \arguments{
 \item{.data}{A data.frame or data.table}

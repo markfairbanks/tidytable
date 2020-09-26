@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -140,9 +140,9 @@
     <p>Bind multiple data.tables into one row-wise or col-wise.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='bind_cols..html'>bind_cols.</a></span>(<span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>bind_cols.</span>(<span class='kw'>...</span>, .name_repair = <span class='st'>"unique"</span>)
 
-<span class='fu'><a href='bind_cols..html'>bind_rows.</a></span>(<span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.use_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>.fill</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>bind_rows.</span>(<span class='kw'>...</span>, .id = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -152,53 +152,53 @@
       <td><p>data.tables or data.frames to bind</p></td>
     </tr>
     <tr>
+      <th>.name_repair</th>
+      <td><p>Treatment of duplicate names. See <code><a href='https://vctrs.r-lib.org/reference/vec_as_names.html'>?vctrs::vec_as_names</a></code> for options/details.</p></td>
+    </tr>
+    <tr>
       <th>.id</th>
       <td><p>If TRUE, an integer column is made as a group id</p></td>
-    </tr>
-    <tr>
-      <th>.use_names</th>
-      <td><p>If TRUE, makes sure column names align</p></td>
-    </tr>
-    <tr>
-      <th>.fill</th>
-      <td><p>If TRUE, fills missing columns with NA</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>df1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>4</span>,<span class='fl'>5</span>))
-<span class='no'>df2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>4</span>,<span class='fl'>5</span>))
+    <pre class="examples"><div class='input'><span class='kw'>df1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(x = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>), y = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>4</span>,<span class='fl'>5</span>))
+<span class='kw'>df2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(x = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>), y = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>4</span>,<span class='fl'>5</span>))
 
-<span class='no'>df1</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='bind_cols..html'>bind_rows.</a></span>(<span class='no'>df2</span>)</div><div class='output co'>#&gt; # tidytable [6 × 2]
-#&gt;       x     y
-#&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     1     3
-#&gt; 2     2     4
-#&gt; 3     3     5
-#&gt; 4     1     3
-#&gt; 5     2     4
-#&gt; 6     3     5</div><div class='input'>
-<span class='fu'><a href='bind_cols..html'>bind_rows.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>df1</span>, <span class='no'>df2</span>))</div><div class='output co'>#&gt; # tidytable [6 × 2]
-#&gt;       x     y
-#&gt;   &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     1     3
-#&gt; 2     2     4
-#&gt; 3     3     5
-#&gt; 4     1     3
-#&gt; 5     2     4
-#&gt; 6     3     5</div><div class='input'>
-<span class='no'>df1</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='bind_cols..html'>bind_cols.</a></span>(<span class='no'>df2</span>)</div><div class='output co'>#&gt; # tidytable [3 × 4]
-#&gt;       x     y    x1    y1
-#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+<span class='kw'>df1</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>bind_rows.</span>(<span class='kw'>df2</span>)
+</div><div class='output co'>#&gt;   x y
+#&gt; 1 1 3
+#&gt; 2 2 4
+#&gt; 3 3 5
+#&gt; 4 1 3
+#&gt; 5 2 4
+#&gt; 6 3 5</div><div class='input'>
+<span class='fu'>bind_rows.</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>df1</span>, <span class='kw'>df2</span>))
+</div><div class='output co'>#&gt;   x y
+#&gt; 1 1 3
+#&gt; 2 2 4
+#&gt; 3 3 5
+#&gt; 4 1 3
+#&gt; 5 2 4
+#&gt; 6 3 5</div><div class='input'>
+<span class='kw'>df1</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>bind_cols.</span>(<span class='kw'>df2</span>)
+</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* x -&gt; x...1</span>
+#&gt; <span class='message'>* y -&gt; y...2</span>
+#&gt; <span class='message'>* x -&gt; x...3</span>
+#&gt; <span class='message'>* y -&gt; y...4</span></div><div class='output co'>#&gt;   x...1 y...2 x...3 y...4
 #&gt; 1     1     3     1     3
 #&gt; 2     2     4     2     4
 #&gt; 3     3     5     3     5</div><div class='input'>
-<span class='fu'><a href='bind_cols..html'>bind_cols.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>df1</span>, <span class='no'>df2</span>))</div><div class='output co'>#&gt; # tidytable [3 × 4]
-#&gt;       x     y    x1    y1
-#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+<span class='fu'>bind_cols.</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>df1</span>, <span class='kw'>df2</span>))
+</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* x -&gt; x...1</span>
+#&gt; <span class='message'>* y -&gt; y...2</span>
+#&gt; <span class='message'>* x -&gt; x...3</span>
+#&gt; <span class='message'>* y -&gt; y...4</span></div><div class='output co'>#&gt;   x...1 y...2 x...3 y...4
 #&gt; 1     1     3     1     3
 #&gt; 2     2     4     2     4
 #&gt; 3     3     5     3     5</div></pre>
@@ -217,7 +217,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

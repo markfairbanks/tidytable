@@ -47,7 +47,9 @@
 
 
 <meta property="og:title" content="Arrange/reorder rows — arrange." />
-<meta property="og:description" content="Order rows in ascending or descending order" />
+<meta property="og:description" content="Order rows in ascending or descending order.
+Note: data.table orders character columns slightly differently than dplyr::arrange() by
+ordering in the &quot;C-locale&quot;. See ?data.table::setorder for more details." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -137,10 +139,12 @@
     </div>
 
     <div class="ref-description">
-    <p>Order rows in ascending or descending order</p>
+    <p>Order rows in ascending or descending order.</p>
+<p>Note: <code>data.table</code> orders character columns slightly differently than <code><a href='https://dplyr.tidyverse.org/reference/arrange.html'>dplyr::arrange()</a></code> by
+ordering in the "C-locale". See <code><a href='https://Rdatatable.gitlab.io/data.table/reference/setorder.html'>?data.table::setorder</a></code> for more details.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='arrange..html'>arrange.</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>arrange.</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -157,18 +161,17 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
-  <span class='kw'>a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>),
-  <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>),
-  <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
+    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
+  a = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>),
+  b = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>6</span>),
+  c = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
 
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='arrange..html'>arrange.</a></span>(<span class='no'>c</span>, -<span class='no'>a</span>)</div><div class='output co'>#&gt; # tidytable [3 × 3]
-#&gt;       a     b c    
-#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
-#&gt; 1     2     5 a    
-#&gt; 2     1     4 a    
-#&gt; 3     3     6 b    </div></pre>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>arrange.</span>(<span class='kw'>c</span>, <span class='op'>-</span><span class='kw'>a</span>)
+</div><div class='output co'>#&gt;   a b c
+#&gt; 1 2 5 a
+#&gt; 2 1 4 a
+#&gt; 3 3 6 b</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -184,7 +187,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

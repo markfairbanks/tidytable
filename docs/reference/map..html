@@ -86,7 +86,7 @@ _dfr.() &amp;amp; _dfc.() Return all data frame results combined utilizing row o
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -145,46 +145,46 @@ _dfr.() &amp;amp; _dfc.() Return all data frame results combined utilizing row o
     <div class="ref-description">
     <p>The map functions transform their input by applying a function to each element and returning
 a list/vector/data.table.</p><ul>
-<li><p><code><a href='map..html'>map.()</a></code> returns a list</p></li>
+<li><p><code>map.()</code> returns a list</p></li>
 <li><p><code>_lgl.()</code>, <code>_int.()</code>, <code>_dbl.()</code>,<code>_chr.()</code>, <code>_df.()</code> variants return their specified type</p></li>
 <li><p><code>_dfr.()</code> &amp; <code>_dfc.()</code> Return all data frame results combined utilizing row or column binding</p></li>
 </ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'><a href='map..html'>map.</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>map.</span>(<span class='kw'>.x</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='map..html'>map_lgl.</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
+<span class='fu'>map_lgl.</span>(<span class='kw'>.x</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='map..html'>map_int.</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
+<span class='fu'>map_int.</span>(<span class='kw'>.x</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='map..html'>map_dbl.</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
+<span class='fu'>map_dbl.</span>(<span class='kw'>.x</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='map..html'>map_chr.</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
+<span class='fu'>map_chr.</span>(<span class='kw'>.x</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='map..html'>map_dfc.</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
+<span class='fu'>map_dfc.</span>(<span class='kw'>.x</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='map..html'>map_dfr.</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>map_dfr.</span>(<span class='kw'>.x</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>, .id = <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='map..html'>map_df.</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>map_df.</span>(<span class='kw'>.x</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>, .id = <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='map..html'>walk.</a></span>(<span class='no'>.x</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
+<span class='fu'>walk.</span>(<span class='kw'>.x</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='map..html'>map2.</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
+<span class='fu'>map2.</span>(<span class='kw'>.x</span>, <span class='kw'>.y</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='map..html'>map2_lgl.</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
+<span class='fu'>map2_lgl.</span>(<span class='kw'>.x</span>, <span class='kw'>.y</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='map..html'>map2_int.</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
+<span class='fu'>map2_int.</span>(<span class='kw'>.x</span>, <span class='kw'>.y</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='map..html'>map2_dbl.</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
+<span class='fu'>map2_dbl.</span>(<span class='kw'>.x</span>, <span class='kw'>.y</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='map..html'>map2_chr.</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
+<span class='fu'>map2_chr.</span>(<span class='kw'>.x</span>, <span class='kw'>.y</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='map..html'>map2_dfc.</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>)
+<span class='fu'>map2_dfc.</span>(<span class='kw'>.x</span>, <span class='kw'>.y</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
 
-<span class='fu'><a href='map..html'>map2_dfr.</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>map2_dfr.</span>(<span class='kw'>.x</span>, <span class='kw'>.y</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>, .id = <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='map..html'>map2_df.</a></span>(<span class='no'>.x</span>, <span class='no'>.y</span>, <span class='no'>.f</span>, <span class='no'>...</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>map2_df.</span>(<span class='kw'>.x</span>, <span class='kw'>.y</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>, .id = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -203,7 +203,7 @@ a list/vector/data.table.</p><ul>
     </tr>
     <tr>
       <th>.id</th>
-      <td><p>Whether <code><a href='map..html'>map_dfr.()</a></code> should add an id column to the finished dataset</p></td>
+      <td><p>Whether <code>map_dfr.()</code> should add an id column to the finished dataset</p></td>
     </tr>
     <tr>
       <th>.y</th>
@@ -213,7 +213,8 @@ a list/vector/data.table.</p><ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='map..html'>map.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>), ~ <span class='no'>.x</span> + <span class='fl'>1</span>)</div><div class='output co'>#&gt; [[1]]
+    <pre class="examples"><div class='input'><span class='fu'>map.</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>), <span class='op'>~</span> <span class='kw'>.x</span> <span class='op'>+</span> <span class='fl'>1</span>)
+</div><div class='output co'>#&gt; [[1]]
 #&gt; [1] 2
 #&gt; 
 #&gt; [[2]]
@@ -222,8 +223,10 @@ a list/vector/data.table.</p><ul>
 #&gt; [[3]]
 #&gt; [1] 4
 #&gt; </div><div class='input'>
-<span class='fu'><a href='map..html'>map_dbl.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>), ~ <span class='no'>.x</span> + <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] 2 3 4</div><div class='input'>
-<span class='fu'><a href='map..html'>map_chr.</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>), <span class='no'>as.character</span>)</div><div class='output co'>#&gt; [1] "1" "2" "3"</div></pre>
+<span class='fu'>map_dbl.</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>), <span class='op'>~</span> <span class='kw'>.x</span> <span class='op'>+</span> <span class='fl'>1</span>)
+</div><div class='output co'>#&gt; [1] 2 3 4</div><div class='input'>
+<span class='fu'>map_chr.</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>), <span class='kw'>as.character</span>)
+</div><div class='output co'>#&gt; [1] "1" "2" "3"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -239,7 +242,7 @@ a list/vector/data.table.</p><ul>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -140,15 +140,17 @@
     <p>Join two data.tables together</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='left_join..html'>left_join.</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>left_join.</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, by = <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='left_join..html'>inner_join.</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>inner_join.</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, by = <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='left_join..html'>right_join.</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>right_join.</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, by = <span class='kw'>NULL</span>)
 
-<span class='fu'><a href='left_join..html'>full_join.</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>suffix</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>".x"</span>, <span class='st'>".y"</span>))
+<span class='fu'>full_join.</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, by = <span class='kw'>NULL</span>, suffix = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>".x"</span>, <span class='st'>".y"</span>))
 
-<span class='fu'><a href='left_join..html'>anti_join.</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>anti_join.</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, by = <span class='kw'>NULL</span>)
+
+<span class='fu'>semi_join.</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, by = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,7 +169,7 @@
     </tr>
     <tr>
       <th>suffix</th>
-      <td><p>Append created for duplicated column names when using <code><a href='left_join..html'>full_join.()</a></code></p></td>
+      <td><p>Append created for duplicated column names when using <code>full_join.()</code></p></td>
     </tr>
     </table>
 
@@ -176,39 +178,36 @@
     <p>A data.table</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>df1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>,<span class='st'>"b"</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>)
-<span class='no'>df2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"b"</span>), <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>)
+    <pre class="examples"><div class='input'><span class='kw'>df1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(x = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>,<span class='st'>"b"</span>), y = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>)
+<span class='kw'>df2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(x = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"b"</span>), z = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>)
 
-<span class='no'>df1</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='left_join..html'>left_join.</a></span>(<span class='no'>df2</span>)</div><div class='output co'>#&gt; # tidytable [5 × 3]
-#&gt;   x         y     z
-#&gt;   &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-#&gt; 1 a         1     1
-#&gt; 2 a         2     1
-#&gt; 3 a         3     1
-#&gt; 4 b         4     2
-#&gt; 5 b         5     2</div><div class='input'><span class='no'>df1</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='left_join..html'>inner_join.</a></span>(<span class='no'>df2</span>)</div><div class='output co'>#&gt; # tidytable [5 × 3]
-#&gt;   x         y     z
-#&gt;   &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-#&gt; 1 a         1     1
-#&gt; 2 a         2     1
-#&gt; 3 a         3     1
-#&gt; 4 b         4     2
-#&gt; 5 b         5     2</div><div class='input'><span class='no'>df1</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='left_join..html'>right_join.</a></span>(<span class='no'>df2</span>)</div><div class='output co'>#&gt; # tidytable [5 × 3]
-#&gt;   x         y     z
-#&gt;   &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-#&gt; 1 a         1     1
-#&gt; 2 a         2     1
-#&gt; 3 a         3     1
-#&gt; 4 b         4     2
-#&gt; 5 b         5     2</div><div class='input'><span class='no'>df1</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='left_join..html'>full_join.</a></span>(<span class='no'>df2</span>)</div><div class='output co'>#&gt; # tidytable [5 × 3]
-#&gt;   x         y     z
-#&gt;   &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-#&gt; 1 a         1     1
-#&gt; 2 a         2     1
-#&gt; 3 a         3     1
-#&gt; 4 b         4     2
-#&gt; 5 b         5     2</div><div class='input'><span class='no'>df1</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='left_join..html'>anti_join.</a></span>(<span class='no'>df2</span>)</div><div class='output co'>#&gt; # tidytable [0 × 2]
-#&gt; # … with 2 variables: x &lt;chr&gt;, y &lt;int&gt;</div></pre>
+<span class='kw'>df1</span> <span class='op'>%&gt;%</span> <span class='fu'>left_join.</span>(<span class='kw'>df2</span>)
+</div><div class='output co'>#&gt;   x y z
+#&gt; 1 a 1 1
+#&gt; 2 a 2 1
+#&gt; 3 a 3 1
+#&gt; 4 b 4 2
+#&gt; 5 b 5 2</div><div class='input'><span class='kw'>df1</span> <span class='op'>%&gt;%</span> <span class='fu'>inner_join.</span>(<span class='kw'>df2</span>)
+</div><div class='output co'>#&gt;   x y z
+#&gt; 1 a 1 1
+#&gt; 2 a 2 1
+#&gt; 3 a 3 1
+#&gt; 4 b 4 2
+#&gt; 5 b 5 2</div><div class='input'><span class='kw'>df1</span> <span class='op'>%&gt;%</span> <span class='fu'>right_join.</span>(<span class='kw'>df2</span>)
+</div><div class='output co'>#&gt;   x y z
+#&gt; 1 a 1 1
+#&gt; 2 a 2 1
+#&gt; 3 a 3 1
+#&gt; 4 b 4 2
+#&gt; 5 b 5 2</div><div class='input'><span class='kw'>df1</span> <span class='op'>%&gt;%</span> <span class='fu'>full_join.</span>(<span class='kw'>df2</span>)
+</div><div class='output co'>#&gt;   x y z
+#&gt; 1 a 1 1
+#&gt; 2 a 2 1
+#&gt; 3 a 3 1
+#&gt; 4 b 4 2
+#&gt; 5 b 5 2</div><div class='input'><span class='kw'>df1</span> <span class='op'>%&gt;%</span> <span class='fu'>anti_join.</span>(<span class='kw'>df2</span>)
+</div><div class='output co'>#&gt; [1] x y
+#&gt; &lt;0 rows&gt; (or 0-length row.names)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -224,7 +223,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

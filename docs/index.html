@@ -18,7 +18,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Tidy Interface to data.table">
-<meta property="og:description" content="A tidy interface to data.table that is rlang compatible, giving users the speed of data.table with the clean syntax of the tidyverse.">
+<meta property="og:description" content="A tidy interface to data.table that is rlang compatible,
+  giving users the speed of data.table with the clean syntax of the tidyverse.">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -38,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -90,7 +91,7 @@
   <div class="contents col-md-9">
 <div id="tidytable-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#tidytable-" class="anchor"></a>tidytable <img src="reference/figures/logo.png" align="right" width="16%" height="16%">
+<a href="#tidytable-" class="anchor"></a>tidytable <img src="reference/figures/logo.png" align="right" width="17%" height="17%">
 </h1></div>
 <!-- badges: start -->
 
@@ -102,7 +103,7 @@
 <code>tidyverse</code>-like syntax with <code>data.table</code> speed</li>
 <li>
 <code>rlang</code> compatibility</li>
-<li>Includes functions that <a href="https://github.com/tidyverse/dtplyr"><code>dtplyr</code></a> is missing, including many <code>tidyr</code> functions</li>
+<li>Includes functions that <code>dtplyr</code> is missing, including many <code>tidyr</code> functions</li>
 </ul>
 <p>Note: <code>tidytable</code> functions do not use <code>data.table</code>’s modify-by-reference, and instead use the copy-on-modify principles followed by the <code>tidyverse</code> and base R.</p>
 </div>
@@ -110,31 +111,37 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Install the released version from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"tidytable"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"tidytable"</span>)
+</pre></div>
 <p>Or install the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"markfairbanks/tidytable"</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="co"># install.packages("devtools")</span>
+<span class="kw">devtools</span>::<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"markfairbanks/tidytable"</span>)
+</pre></div>
 </div>
 <div id="general-syntax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#general-syntax" class="anchor"></a>General syntax</h2>
 <p><code>tidytable</code> uses <code>verb.()</code> syntax to replicate <code>tidyverse</code> functions:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidytable</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/markfairbanks/tidytable">tidytable</a></span>)
 
-<span class="no">test_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>), <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>), <span class="kw">z</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span>))
+<span class="kw">test_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(x = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>), y = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>), z = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span>))
 
-<span class="no">test_df</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/select..html">select.</a></span>(<span class="no">x</span>, <span class="no">y</span>, <span class="no">z</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/filter..html">filter.</a></span>(<span class="no">x</span> <span class="kw">&lt;</span> <span class="fl">4</span>, <span class="no">y</span> <span class="kw">&gt;</span> <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/arrange..html">arrange.</a></span>(<span class="no">x</span>, <span class="no">y</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/mutate..html">mutate.</a></span>(<span class="kw">double_x</span> <span class="kw">=</span> <span class="no">x</span> * <span class="fl">2</span>,
-          <span class="kw">double_y</span> <span class="kw">=</span> <span class="no">y</span> * <span class="fl">2</span>)
+<span class="kw">test_df</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/select..html">select.</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, <span class="kw">z</span>) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/filter..html">filter.</a></span>(<span class="kw">x</span> <span class="op">&lt;</span> <span class="fl">4</span>, <span class="kw">y</span> <span class="op">&gt;</span> <span class="fl">1</span>) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/arrange..html">arrange.</a></span>(<span class="kw">x</span>, <span class="kw">y</span>) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/mutate..html">mutate.</a></span>(double_x = <span class="kw">x</span> <span class="op">*</span> <span class="fl">2</span>,
+          double_y = <span class="kw">y</span> <span class="op">*</span> <span class="fl">2</span>)
 <span class="co">#&gt; # tidytable [3 × 5]</span>
 <span class="co">#&gt;       x     y z     double_x double_y</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span>
 <span class="co">#&gt; 1     1     4 a            2        8</span>
 <span class="co">#&gt; 2     2     5 a            4       10</span>
-<span class="co">#&gt; 3     3     6 b            6       12</span></pre></div>
+<span class="co">#&gt; 3     3     6 b            6       12</span>
+</pre></div>
 <p>A full list of functions can be found <a href="https://markfairbanks.github.io/tidytable/reference/index.html">here</a>.</p>
 </div>
 <div id="using-group-by" class="section level2">
@@ -158,15 +165,17 @@
 </ul>
 </li>
 </ul>
-<!-- end list --><div class="sourceCode" id="cb4"><pre class="r"><span class="no">test_df</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/summarize..html">summarize.</a></span>(<span class="kw">avg_x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">x</span>),
-             <span class="kw">count</span> <span class="kw">=</span> <span class="fu"><a href="reference/n..html">n.</a></span>(),
-             <span class="kw">.by</span> <span class="kw">=</span> <span class="no">z</span>)
+<!-- end list --><div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="kw">test_df</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/summarize..html">summarize.</a></span>(avg_x = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">x</span>),
+             count = <span class="fu"><a href="reference/n..html">n.</a></span>(),
+             .by = <span class="kw">z</span>)
 <span class="co">#&gt; # tidytable [2 × 3]</span>
 <span class="co">#&gt;   z     avg_x count</span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;int&gt;</span>
 <span class="co">#&gt; 1 a       1.5     2</span>
-<span class="co">#&gt; 2 b       3       1</span></pre></div>
+<span class="co">#&gt; 2 b       3       1</span>
+</pre></div>
 </div>
 <div id="tidyselect-support" class="section level2">
 <h2 class="hasAnchor">
@@ -177,28 +186,32 @@
 <li>Predicates: <code>where(is.numeric)</code>, <code>where(is.character)</code>, etc.</li>
 <li>Select helpers: <code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/all_of.html">any_of()</a></code>, etc.</li>
 </ul>
-<!-- end list --><div class="sourceCode" id="cb5"><pre class="r"><span class="no">test_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="kw">a</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>),
-                      <span class="kw">b</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>),
-                      <span class="kw">c</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span>),
-                      <span class="kw">d</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>))
+<!-- end list --><div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="kw">test_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(a = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>),
+                      b = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>),
+                      c = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span>),
+                      d = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>))
 
-<span class="no">test_df</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/select..html">select.</a></span>(<span class="fu">where</span>(<span class="no">is.numeric</span>), <span class="no">d</span>)
+<span class="kw">test_df</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/select..html">select.</a></span>(<span class="kw">a</span>, <span class="fu">where</span>(<span class="kw">is.character</span>))
 <span class="co">#&gt; # tidytable [3 × 3]</span>
-<span class="co">#&gt;       a     b d    </span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;</span>
-<span class="co">#&gt; 1     1     4 a    </span>
-<span class="co">#&gt; 2     2     5 b    </span>
-<span class="co">#&gt; 3     3     6 c</span></pre></div>
+<span class="co">#&gt;       a c     d    </span>
+<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;</span>
+<span class="co">#&gt; 1     1 a     a    </span>
+<span class="co">#&gt; 2     2 a     b    </span>
+<span class="co">#&gt; 3     3 b     c</span>
+</pre></div>
 <p>To drop columns use a <code><a href="https://rdrr.io/r/base/Arithmetic.html">-</a></code> sign:</p>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="no">test_df</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/select..html">select.</a></span>(-<span class="fu">where</span>(<span class="no">is.numeric</span>), -<span class="no">d</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">test_df</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/select..html">select.</a></span>(<span class="op">-</span><span class="kw">a</span>, <span class="op">-</span><span class="fu">where</span>(<span class="kw">is.character</span>))
 <span class="co">#&gt; # tidytable [3 × 1]</span>
-<span class="co">#&gt;   c    </span>
-<span class="co">#&gt;   &lt;chr&gt;</span>
-<span class="co">#&gt; 1 a    </span>
-<span class="co">#&gt; 2 a    </span>
-<span class="co">#&gt; 3 b</span></pre></div>
+<span class="co">#&gt;       b</span>
+<span class="co">#&gt;   &lt;dbl&gt;</span>
+<span class="co">#&gt; 1     4</span>
+<span class="co">#&gt; 2     5</span>
+<span class="co">#&gt; 3     6</span>
+</pre></div>
 <p>These same ideas can be used whenever selecting columns in <code>tidytable</code> functions - for example when using <code><a href="reference/count..html">count.()</a></code>, <code><a href="reference/drop_na..html">drop_na.()</a></code>, <code><a href="reference/mutate_across..html">mutate_across.()</a></code>, <code><a href="reference/pivot_longer..html">pivot_longer.()</a></code>, etc.</p>
 <p>A full overview of selection options can be found <a href="https://tidyselect.r-lib.org/reference/language.html">here</a>.</p>
 </div>
@@ -210,84 +223,92 @@
 <h5 class="hasAnchor">
 <a href="#custom-function-with-mutate" class="anchor"></a>Custom function with <code>mutate.()</code>
 </h5>
-<div class="sourceCode" id="cb7"><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>), <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>), <span class="kw">z</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span>))
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="kw">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(x = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>), y = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>), z = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span>))
 
 <span class="co"># Using enquo() with !!</span>
-<span class="no">add_one</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">data</span>, <span class="no">add_col</span>) {
-
-  <span class="no">add_col</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/nse-defuse.html">enquo</a></span>(<span class="no">add_col</span>)
-
-  <span class="no">data</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="reference/mutate..html">mutate.</a></span>(<span class="kw">new_col</span> <span class="kw">=</span> !!<span class="no">add_col</span> + <span class="fl">1</span>)
+<span class="kw">add_one</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">data</span>, <span class="kw">add_col</span>) {
+  
+  <span class="kw">add_col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/nse-defuse.html">enquo</a></span>(<span class="kw">add_col</span>)
+  
+  <span class="kw">data</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="reference/mutate..html">mutate.</a></span>(new_col = <span class="op">!</span><span class="op">!</span><span class="kw">add_col</span> <span class="op">+</span> <span class="fl">1</span>)
 }
 
 <span class="co"># Using the {{ }} shortcut</span>
-<span class="no">add_one</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">data</span>, <span class="no">add_col</span>) {
-  <span class="no">data</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="reference/mutate..html">mutate.</a></span>(<span class="kw">new_col</span> <span class="kw">=</span> {{ <span class="no">add_col</span> }} + <span class="fl">1</span>)
+<span class="kw">add_one</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">data</span>, <span class="kw">add_col</span>) {
+  <span class="kw">data</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="reference/mutate..html">mutate.</a></span>(new_col = {{ <span class="kw">add_col</span> }} <span class="op">+</span> <span class="fl">1</span>)
 }
 
-<span class="no">df</span> <span class="kw">%&gt;%</span>
-  <span class="fu">add_one</span>(<span class="no">x</span>)
+<span class="kw">df</span> <span class="op">%&gt;%</span>
+  <span class="fu">add_one</span>(<span class="kw">x</span>)
 <span class="co">#&gt; # tidytable [3 × 4]</span>
 <span class="co">#&gt;       x     y z     new_col</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;</span>
 <span class="co">#&gt; 1     1     1 a           2</span>
 <span class="co">#&gt; 2     1     1 a           2</span>
-<span class="co">#&gt; 3     1     1 b           2</span></pre></div>
+<span class="co">#&gt; 3     1     1 b           2</span>
+</pre></div>
 </div>
 <div id="custom-function-with-summarize" class="section level5">
 <h5 class="hasAnchor">
 <a href="#custom-function-with-summarize" class="anchor"></a>Custom function with <code>summarize.()</code>
 </h5>
-<div class="sourceCode" id="cb8"><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">10</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"a"</span>, <span class="fl">6</span>), <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"b"</span>, <span class="fl">4</span>)), <span class="kw">z</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"a"</span>, <span class="fl">6</span>), <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"b"</span>, <span class="fl">4</span>)))
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="kw">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(x = <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, y = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"a"</span>, <span class="fl">6</span>), <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"b"</span>, <span class="fl">4</span>)), z = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"a"</span>, <span class="fl">6</span>), <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"b"</span>, <span class="fl">4</span>)))
 
-<span class="no">find_mean</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">data</span>, <span class="no">grouping_cols</span>, <span class="no">col</span>) {
-  <span class="no">data</span> <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="reference/summarize..html">summarize.</a></span>(<span class="kw">avg</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>({{ <span class="no">col</span> }}),
-               <span class="kw">.by</span> <span class="kw">=</span> {{ <span class="no">grouping_cols</span> }})
+<span class="kw">find_mean</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">data</span>, <span class="kw">grouping_cols</span>, <span class="kw">col</span>) {
+  <span class="kw">data</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="reference/summarize..html">summarize.</a></span>(avg = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>({{ <span class="kw">col</span> }}),
+               .by = {{ <span class="kw">grouping_cols</span> }})
 }
 
-<span class="no">df</span> <span class="kw">%&gt;%</span>
-  <span class="fu">find_mean</span>(<span class="kw">grouping_cols</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">y</span>, <span class="no">z</span>), <span class="kw">col</span> <span class="kw">=</span> <span class="no">x</span>)
+<span class="kw">df</span> <span class="op">%&gt;%</span>
+  <span class="fu">find_mean</span>(grouping_cols = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">y</span>, <span class="kw">z</span>), col = <span class="kw">x</span>)
 <span class="co">#&gt; # tidytable [2 × 3]</span>
 <span class="co">#&gt;   y     z       avg</span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 a     a       3.5</span>
-<span class="co">#&gt; 2 b     b       8.5</span></pre></div>
+<span class="co">#&gt; 2 b     b       8.5</span>
+</pre></div>
 </div>
 </div>
 <div id="auto-conversion" class="section level2">
 <h2 class="hasAnchor">
 <a href="#auto-conversion" class="anchor"></a>Auto-conversion</h2>
 <p>All <code>tidytable</code> functions automatically convert <code>data.frame</code> and <code>tibble</code> inputs to a <code>data.table</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">data.table</span>)
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org">dplyr</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://r-datatable.com">data.table</a></span>)
 
-<span class="no">test_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">tibble</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>), <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>), <span class="kw">z</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span>))
+<span class="kw">test_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span>(x = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>), y = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>), z = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span>))
 
-<span class="no">test_df</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/mutate..html">mutate.</a></span>(<span class="kw">double_x</span> <span class="kw">=</span> <span class="no">x</span> * <span class="fl">2</span>) <span class="kw">%&gt;%</span>
+<span class="kw">test_df</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/mutate..html">mutate.</a></span>(double_x = <span class="kw">x</span> <span class="op">*</span> <span class="fl">2</span>) <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html">is.data.table</a></span>()
-<span class="co">#&gt; [1] TRUE</span></pre></div>
+<span class="co">#&gt; [1] TRUE</span>
+</pre></div>
 </div>
 <div id="dt-helper" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dt-helper" class="anchor"></a><code>dt()</code> helper</h2>
 <p>The <code><a href="reference/dt.html">dt()</a></code> function makes regular <code>data.table</code> syntax pipeable, so you can easily mix <code>tidytable</code> syntax with <code>data.table</code> syntax:</p>
-<div class="sourceCode" id="cb10"><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>), <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>), <span class="kw">z</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>))
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="kw">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(x = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>), y = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>), z = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>))
 
-<span class="no">df</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/dt.html">dt</a></span>(, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">x</span>, <span class="no">y</span>, <span class="no">z</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/dt.html">dt</a></span>(<span class="no">x</span> <span class="kw">&lt;</span> <span class="fl">4</span> <span class="kw">&amp;</span> <span class="no">y</span> <span class="kw">&gt;</span> <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/dt.html">dt</a></span>(<span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">order</a></span>(<span class="no">x</span>, <span class="no">y</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/dt.html">dt</a></span>(, <span class="no">double_x</span> <span class="kw">:=</span> <span class="no">x</span> * <span class="fl">2</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/dt.html">dt</a></span>(, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">avg_x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">x</span>)), <span class="kw">by</span> <span class="kw">=</span> <span class="no">z</span>)
+<span class="kw">df</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/dt.html">dt</a></span>(, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, <span class="kw">z</span>)) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/dt.html">dt</a></span>(<span class="kw">x</span> <span class="op">&lt;</span> <span class="fl">4</span> <span class="op">&amp;</span> <span class="kw">y</span> <span class="op">&gt;</span> <span class="fl">1</span>) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/dt.html">dt</a></span>(<span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">order</a></span>(<span class="kw">x</span>, <span class="kw">y</span>)) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/dt.html">dt</a></span>(, <span class="kw">double_x</span> <span class="op">:=</span> <span class="kw">x</span> <span class="op">*</span> <span class="fl">2</span>) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/dt.html">dt</a></span>(, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(avg_x = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">x</span>)), by = <span class="kw">z</span>)
 <span class="co">#&gt; # tidytable [2 × 2]</span>
 <span class="co">#&gt;   z     avg_x</span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 a       1.5</span>
-<span class="co">#&gt; 2 b       3</span></pre></div>
+<span class="co">#&gt; 2 b       3</span>
+</pre></div>
 </div>
 <div id="speed-comparisons" class="section level2">
 <h2 class="hasAnchor">
@@ -328,7 +349,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=tidytable"><img src="https://www.r-pkg.org/badges/version/tidytable" alt="CRAN status"></a></li>
-<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.5.4-green.svg"></a></li>
+<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.5.5.9-green.svg"></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 <li><a href="https://markfairbanks.github.io/tidytable/"><img src="https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey" alt="CRAN RStudio mirror downloads"></a></li>
 </ul>
@@ -342,7 +363,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

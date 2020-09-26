@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -140,7 +140,14 @@
     <p>Unnest a nested data.table.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='unnest..html'>unnest.</a></span>(<span class='no'>.df</span>, <span class='no'>...</span>, <span class='kw'>.keep_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>unnest.</span>(
+  <span class='kw'>.df</span>,
+  <span class='kw'>...</span>,
+  .drop = <span class='fl'>TRUE</span>,
+  names_sep = <span class='kw'>NULL</span>,
+  names_repair = <span class='st'>"unique"</span>,
+  .keep_all = <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>deprecated</a></span>()
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -154,49 +161,74 @@
       <td><p>Columns to unnest. If empty, unnests all list columns. <code>tidyselect</code> compatible.</p></td>
     </tr>
     <tr>
+      <th>.drop</th>
+      <td><p>Should list columns that were not unnested be dropped</p></td>
+    </tr>
+    <tr>
+      <th>names_sep</th>
+      <td><p>If NULL, the default, the inner column names will become the new outer column names.</p>
+<p>If a string, the name of the outer column will be appended to the beginning of the inner column names,
+with <code>names_sep</code> used as a separator.</p></td>
+    </tr>
+    <tr>
+      <th>names_repair</th>
+      <td><p>Treatment of duplicate names. See <code><a href='https://vctrs.r-lib.org/reference/vec_as_names.html'>?vctrs::vec_as_names</a></code> for options/details.</p></td>
+    </tr>
+    <tr>
       <th>.keep_all</th>
-      <td><p>Should list columns that were not unnested be kept</p></td>
+      <td><p>Deprecated. Please use <code>.drop = FALSE</code> to keep unused list columns.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>nested_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
-  <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>,
-  <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>11</span>:<span class='fl'>20</span>,
-  <span class='kw'>c</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>6</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>4</span>)),
-  <span class='kw'>d</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>4</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>6</span>))) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='nest_by..html'>nest_by.</a></span>(<span class='no'>c</span>, <span class='no'>d</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>mutate.</a></span>(<span class='kw'>pulled_vec</span> <span class='kw'>=</span> <span class='fu'><a href='map..html'>map.</a></span>(<span class='no'>data</span>, ~ <span class='fu'><a href='pull..html'>pull.</a></span>(<span class='no'>.x</span>, <span class='no'>a</span>)))
+    <pre class="examples"><div class='input'><span class='kw'>nested_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
+  a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>,
+  b = <span class='fl'>11</span><span class='op'>:</span><span class='fl'>20</span>,
+  c = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>6</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>4</span>)),
+  d = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a"</span>, <span class='fl'>4</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"b"</span>, <span class='fl'>6</span>))) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='nest_by..html'>nest_by.</a></span>(<span class='kw'>c</span>, <span class='kw'>d</span>) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='mutate..html'>mutate.</a></span>(pulled_vec = <span class='fu'><a href='map..html'>map.</a></span>(<span class='kw'>data</span>, <span class='op'>~</span> <span class='fu'><a href='pull..html'>pull.</a></span>(<span class='kw'>.x</span>, <span class='kw'>a</span>)))
 
-<span class='no'>nested_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='unnest..html'>unnest.</a></span>(<span class='no'>data</span>)</div><div class='output co'>#&gt; # tidytable [10 × 4]
-#&gt;    c     d         a     b
-#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-#&gt;  1 a     a         1    11
-#&gt;  2 a     a         2    12
-#&gt;  3 a     a         3    13
-#&gt;  4 a     a         4    14
-#&gt;  5 a     b         5    15
-#&gt;  6 a     b         6    16
-#&gt;  7 b     b         7    17
-#&gt;  8 b     b         8    18
-#&gt;  9 b     b         9    19
-#&gt; 10 b     b        10    20</div><div class='input'>
-<span class='no'>nested_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='unnest..html'>unnest.</a></span>(<span class='no'>data</span>, <span class='no'>pulled_vec</span>)</div><div class='output co'>#&gt; # tidytable [10 × 5]
-#&gt;    c     d         a     b pulled_vec
-#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt;      &lt;int&gt;
-#&gt;  1 a     a         1    11          1
-#&gt;  2 a     a         2    12          2
-#&gt;  3 a     a         3    13          3
-#&gt;  4 a     a         4    14          4
-#&gt;  5 a     b         5    15          5
-#&gt;  6 a     b         6    16          6
-#&gt;  7 b     b         7    17          7
-#&gt;  8 b     b         8    18          8
-#&gt;  9 b     b         9    19          9
-#&gt; 10 b     b        10    20         10</div></pre>
+<span class='kw'>nested_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>unnest.</span>(<span class='kw'>data</span>)
+</div><div class='output co'>#&gt;    c d  a  b
+#&gt; 1  a a  1 11
+#&gt; 2  a a  2 12
+#&gt; 3  a a  3 13
+#&gt; 4  a a  4 14
+#&gt; 5  a b  5 15
+#&gt; 6  a b  6 16
+#&gt; 7  b b  7 17
+#&gt; 8  b b  8 18
+#&gt; 9  b b  9 19
+#&gt; 10 b b 10 20</div><div class='input'>
+<span class='kw'>nested_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>unnest.</span>(<span class='kw'>data</span>, names_sep = <span class='st'>"_"</span>)
+</div><div class='output co'>#&gt;    c d data_a data_b
+#&gt; 1  a a      1     11
+#&gt; 2  a a      2     12
+#&gt; 3  a a      3     13
+#&gt; 4  a a      4     14
+#&gt; 5  a b      5     15
+#&gt; 6  a b      6     16
+#&gt; 7  b b      7     17
+#&gt; 8  b b      8     18
+#&gt; 9  b b      9     19
+#&gt; 10 b b     10     20</div><div class='input'>
+<span class='kw'>nested_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>unnest.</span>(<span class='kw'>data</span>, <span class='kw'>pulled_vec</span>)
+</div><div class='output co'>#&gt;    c d  a  b pulled_vec
+#&gt; 1  a a  1 11          1
+#&gt; 2  a a  2 12          2
+#&gt; 3  a a  3 13          3
+#&gt; 4  a a  4 14          4
+#&gt; 5  a b  5 15          5
+#&gt; 6  a b  6 16          6
+#&gt; 7  b b  7 17          7
+#&gt; 8  b b  8 18          8
+#&gt; 9  b b  9 19          9
+#&gt; 10 b b 10 20         10</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -212,7 +244,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

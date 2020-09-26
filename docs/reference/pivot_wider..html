@@ -82,7 +82,7 @@ pivot_longer.(). Syntax based on the tidyr equivalents." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
       </span>
     </div>
 
@@ -139,18 +139,18 @@ pivot_longer.(). Syntax based on the tidyr equivalents." />
     </div>
 
     <div class="ref-description">
-    <p><code><a href='pivot_wider..html'>pivot_wider.()</a></code> "widens" data, increasing the number of columns and
+    <p><code>pivot_wider.()</code> "widens" data, increasing the number of columns and
 decreasing the number of rows. The inverse transformation is
 <code><a href='pivot_longer..html'>pivot_longer.()</a></code>. Syntax based on the <code>tidyr</code> equivalents.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='pivot_wider..html'>pivot_wider.</a></span>(
-  <span class='no'>.df</span>,
-  <span class='kw'>names_from</span> <span class='kw'>=</span> <span class='no'>name</span>,
-  <span class='kw'>values_from</span> <span class='kw'>=</span> <span class='no'>value</span>,
-  <span class='kw'>id_cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>names_sep</span> <span class='kw'>=</span> <span class='st'>"_"</span>,
-  <span class='kw'>values_fn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+    <pre class="usage"><span class='fu'>pivot_wider.</span>(
+  <span class='kw'>.df</span>,
+  names_from = <span class='kw'>name</span>,
+  values_from = <span class='kw'>value</span>,
+  id_cols = <span class='kw'>NULL</span>,
+  names_sep = <span class='st'>"_"</span>,
+  values_fn = <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -191,25 +191,23 @@ Typically used when you have additional variables that is directly related.
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>test_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
-  <span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>), <span class='fl'>2</span>),
-  <span class='kw'>stuff</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"x"</span>, <span class='fl'>3</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"y"</span>, <span class='fl'>3</span>)),
-  <span class='kw'>things</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>6</span>)
+    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
+  z = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>), <span class='fl'>2</span>),
+  stuff = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"x"</span>, <span class='fl'>3</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"y"</span>, <span class='fl'>3</span>)),
+  things = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>)
 
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='pivot_wider..html'>pivot_wider.</a></span>(<span class='kw'>names_from</span> <span class='kw'>=</span> <span class='no'>stuff</span>, <span class='kw'>values_from</span> <span class='kw'>=</span> <span class='no'>things</span>)</div><div class='output co'>#&gt; # tidytable [3 × 3]
-#&gt;   z         x     y
-#&gt;   &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-#&gt; 1 a         1     4
-#&gt; 2 b         2     5
-#&gt; 3 c         3     6</div><div class='input'>
-<span class='no'>test_df</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='pivot_wider..html'>pivot_wider.</a></span>(<span class='kw'>names_from</span> <span class='kw'>=</span> <span class='no'>stuff</span>, <span class='kw'>values_from</span> <span class='kw'>=</span> <span class='no'>things</span>, <span class='kw'>id_cols</span> <span class='kw'>=</span> <span class='no'>z</span>)</div><div class='output co'>#&gt; # tidytable [3 × 3]
-#&gt;   z         x     y
-#&gt;   &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-#&gt; 1 a         1     4
-#&gt; 2 b         2     5
-#&gt; 3 c         3     6</div><div class='input'>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>pivot_wider.</span>(names_from = <span class='kw'>stuff</span>, values_from = <span class='kw'>things</span>)
+</div><div class='output co'>#&gt;   z x y
+#&gt; 1 a 1 4
+#&gt; 2 b 2 5
+#&gt; 3 c 3 6</div><div class='input'>
+<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>pivot_wider.</span>(names_from = <span class='kw'>stuff</span>, values_from = <span class='kw'>things</span>, id_cols = <span class='kw'>z</span>)
+</div><div class='output co'>#&gt;   z x y
+#&gt; 1 a 1 4
+#&gt; 2 b 2 5
+#&gt; 3 c 3 6</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -226,7 +224,7 @@ Typically used when you have additional variables that is directly related.
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

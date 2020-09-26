@@ -13,7 +13,6 @@
 #'   + Multiple predicates: `.by = c(where(is.character), where(is.factor))`
 #'   + A combination of predicates and column names: `.by = c(where(is.character), b)`
 #' @param .sort _experimental_: Should the resulting data.table be sorted by the grouping columns?
-#' @param by This argument has been renamed to .by and is deprecated
 #'
 #' @export
 #' @md
@@ -32,12 +31,12 @@
 #' test_df %>%
 #'   summarize.(avg_a = mean(a),
 #'              .by = c(c, d))
-summarize. <- function(.df, ..., .by = NULL, .sort = FALSE, by = NULL) {
+summarize. <- function(.df, ..., .by = NULL, .sort = FALSE) {
   UseMethod("summarize.")
 }
 
 #' @export
-summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE, by = NULL) {
+summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE) {
 
   .df <- as_tidytable(.df)
 
@@ -48,8 +47,7 @@ summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE, by = NULL
   # Needed so n.() works
   dots <- map.(dots, wrap_n_dot)
 
-  .by <- check_dot_by(enquo(.by), enquo(by), "summarize.")
-  .by <- select_vec_chr(.df, !!.by)
+  .by <- select_vec_chr(.df, {{ .by }})
 
   if (.sort) {
 
@@ -80,21 +78,17 @@ summarise. <- summarize.
 #' @export
 #' @rdname dt_verb
 #' @inheritParams summarize.
-dt_summarise <- function(.df, ..., .by = NULL, by = NULL) {
-  deprecate_soft("0.5.2", "tidytable::dt_summarise()", "summarise.()")
+dt_summarise <- function(.df, ..., .by = NULL) {
+  deprecate_stop("0.5.2", "tidytable::dt_summarise()", "summarise.()")
 
-  .by <- check_dot_by(enquo(.by), enquo(by))
-
-  summarize.(.df, ..., .by = !!.by)
+  summarize.(.df, ..., .by = {{ .by }})
 }
 
 #' @export
 #' @rdname dt_verb
 #' @inheritParams summarize.
-dt_summarize <- function(.df, ..., .by = NULL, by = NULL) {
-  deprecate_soft("0.5.2", "tidytable::dt_summarize()", "summarize.()")
-
-  .by <- check_dot_by(enquo(.by), enquo(by))
+dt_summarize <- function(.df, ..., .by = NULL) {
+  deprecate_stop("0.5.2", "tidytable::dt_summarize()", "summarize.()")
 
   summarize.(.df, ..., .by = {{ .by }})
 }

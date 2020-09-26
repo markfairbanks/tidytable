@@ -1,13 +1,3 @@
-test_that("dt_() keeps the grouping variables by default & is deprecated", {
-  tbl <- tidytable(x = 1:4, g = factor(rep(c("a", "b"), each = 2)))
-  res <- dt_group_split(tbl, g)
-
-  expect_deprecated(dt_group_split(tbl, g))
-
-  expect_equal(as.data.table(res[[1]]), as.data.table(tbl[1:2,]))
-  expect_equal(as.data.table(res[[2]]), as.data.table(tbl[3:4,]))
-})
-
 test_that("group_split.() keeps the grouping variables by default", {
   tbl <- tidytable(x = 1:4, g = factor(rep(c("a", "b"), each = 2)))
   res <- group_split.(tbl, g)

@@ -1,24 +1,19 @@
 # Use select_vec_*() functions when user inputs column names using c()
 # Use select_dots_*() functions when user inputs column names in ...
-# _i returns the index positions
-# _chr returns a character vector (very useful for `by` arg in data.table calls)
-# _sym returns a list of symbols/expressions
+# _idx: returns col index positions as a numeric vector
+# _chr: returns col names as a character vector (very useful for `by` arg in data.table calls)
+# _sym: returns col names as a list of symbols
 
 
 ## vec -----------------------------------
-select_vec_i <- function(.df, select_vars) {
+select_vec_idx <- function(.df, select_vars) {
   select_vars <- enquo(select_vars)
-
-  expr_char <- quo_text(select_vars)
-
-  if (str_detect.(expr_char, "list\\("))
-    abort("Using by = list(col1, col2) is deprecated. Please use by = c(col1, col2)")
 
   eval_select(select_vars, .df)
 }
 
 select_vec_chr <- function(.df, select_vars) {
-  names(select_vec_i(.df, {{ select_vars }}))
+  names(select_vec_idx(.df, {{ select_vars }}))
 }
 
 select_vec_sym <- function(.df, select_vars) {
@@ -27,12 +22,12 @@ select_vec_sym <- function(.df, select_vars) {
 
 
 ## dots -----------------------------------
-select_dots_i <- function(.df, ...) {
+select_dots_idx <- function(.df, ...) {
   eval_select(expr(c(...)), .df)
 }
 
 select_dots_chr <- function(.df, ...) {
-  names(select_dots_i(.df, ...))
+  names(select_dots_idx(.df, ...))
 }
 
 select_dots_sym <- function(.df, ...) {

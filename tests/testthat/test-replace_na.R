@@ -1,12 +1,3 @@
-test_that("dt_ works on numeric columns & is deprecated", {
-  test_df <- data.table(x = c(1, 2, NA), y = c("a", NA, "c"))
-  replaced_df <- test_df %>%
-    mutate.(x = dt_replace_na(x, 5))
-
-  expect_deprecated(mutate.(test_df, x = dt_replace_na(x, 5)))
-  expect_equal(replaced_df$x, c(1,2,5))
-})
-
 # vector ------------------------------------------------------------------
 
 test_that("empty call does nothing", {
@@ -50,6 +41,12 @@ test_that("empty call does nothing", {
 test_that("missing values are replaced", {
   df <- tidytable(x = c(1, NA))
   out <- replace_na.(df, list(x = 0))
+  expect_equal(out$x, c(1, 0))
+})
+
+test_that("missing values are replaced with correct type", {
+  df <- tidytable(x = c(1, NA))
+  out <- replace_na.(df, list(x = 0L))
   expect_equal(out$x, c(1, 0))
 })
 
