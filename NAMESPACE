@@ -2,6 +2,7 @@
 
 S3method(anti_join.,default)
 S3method(arrange.,data.frame)
+S3method(arrange_across.,data.frame)
 S3method(as_tidytable,data.table)
 S3method(as_tidytable,default)
 S3method(as_tidytable,tidytable)

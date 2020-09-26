@@ -17,6 +17,11 @@
 #' test_df %>%
 #'   arrange_across.(a, desc.)
 arrange_across. <- function(.df, .cols = everything(), .fns) {
+  UseMethod("arrange_across.")
+}
+
+#' @export
+arrange_across..data.frame <- function(.df, .cols = everything(), .fns) {
   .df <- as_tidytable(.df)
 
   .cols <- select_vec_sym(.df, {{ .cols }})
