@@ -2,7 +2,10 @@
 print.tidytable <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   if (knitr_installed && knitr_loaded) {
 
-    if (knitr::opts_chunk$get()$paged.print %||% TRUE)
+    paged_print <- knitr::opts_chunk$get()$paged.print %||% TRUE
+    knitting <- isTRUE(getOption('knitr.in.progress'))
+
+    if (paged_print && !knitting)
       print(rmarkdown::paged_table(x))
     else
       print_mat(x, n = n, width = width, n_extra = n_extra)
