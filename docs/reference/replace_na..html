@@ -140,7 +140,7 @@
     <p>Replace NAs with specified values</p>
     </div>
 
-    <pre class="usage"><span class='fu'>replace_na.</span>(<span class='kw'>.x</span>, replace = <span class='fl'>NA</span>)</pre>
+    <pre class="usage"><span class='fu'>replace_na.</span><span class='op'>(</span><span class='va'>.x</span>, replace <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,13 +158,13 @@ If <code>.x</code> is a vector, a single replacement value.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
-  x = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>NA</span>),
-  y = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>1</span>, <span class='fl'>2</span>))
+    <pre class="examples"><div class='input'><span class='va'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>
+  x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span>, <span class='cn'>NA</span><span class='op'>)</span>,
+  y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># Using replace_na.() inside mutate.()</span>
-<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>mutate.</a></span>(x = <span class='fu'>replace_na.</span>(<span class='kw'>x</span>, <span class='fl'>5</span>))
+<span class='va'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='mutate..html'>mutate.</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'>replace_na.</span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [3 × 2]</span><span>
 #&gt;       x     y
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
@@ -172,8 +172,8 @@ If <code>.x</code> is a vector, a single replacement value.</p></td>
 #&gt; </span><span style='color: #555555;'>2</span><span>     2     1
 #&gt; </span><span style='color: #555555;'>3</span><span>     5     2</div><div class='input'>
 <span class='co'># Using replace_na.() on a data frame</span>
-<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>replace_na.</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(x = <span class='fl'>5</span>, y = <span class='fl'>0</span>))
+<span class='va'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>replace_na.</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>5</span>, y <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [3 × 2]</span><span>
 #&gt;       x     y
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>

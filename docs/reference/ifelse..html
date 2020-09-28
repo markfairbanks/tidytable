@@ -142,7 +142,7 @@ converts NAs to their proper type." />
 converts NAs to their proper type.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ifelse.</span>(<span class='kw'>conditions</span>, <span class='kw'>true</span>, <span class='kw'>false</span>, na = <span class='fl'>NA</span>)</pre>
+    <pre class="usage"><span class='fu'>ifelse.</span><span class='op'>(</span><span class='va'>conditions</span>, <span class='va'>true</span>, <span class='va'>false</span>, na <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,14 +167,14 @@ converts NAs to their proper type.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>
-<span class='fu'>ifelse.</span>(<span class='kw'>x</span> <span class='op'>&gt;</span> <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>0</span>)
+    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>
+<span class='fu'>ifelse.</span><span class='op'>(</span><span class='va'>x</span> <span class='op'>&gt;</span> <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>0</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] 0 0 2 2 2</div><div class='input'>
 <span class='co'># Can also be used inside of mutate.()</span>
-<span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(x = <span class='kw'>x</span>)
+<span class='va'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span><span class='op'>)</span>
 
-<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>mutate.</a></span>(new_col = <span class='fu'>ifelse.</span>(<span class='kw'>x</span> <span class='op'>&gt;</span> <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>0</span>))
+<span class='va'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='mutate..html'>mutate.</a></span><span class='op'>(</span>new_col <span class='op'>=</span> <span class='fu'>ifelse.</span><span class='op'>(</span><span class='va'>x</span> <span class='op'>&gt;</span> <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [5 × 2]</span><span>
 #&gt;       x new_col
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>

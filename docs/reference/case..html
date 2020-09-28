@@ -144,7 +144,7 @@ a vector as the default argument." />
 a vector as the <code>default</code> argument.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>case.</span>(<span class='kw'>...</span>, default = <span class='fl'>NA</span>)</pre>
+    <pre class="usage"><span class='fu'>case.</span><span class='op'>(</span><span class='va'>...</span>, default <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -161,12 +161,12 @@ a vector as the <code>default</code> argument.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span>(x = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>)
+    <pre class="examples"><div class='input'><span class='va'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>
 
-<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='mutate..html'>mutate.</a></span>(case_x = <span class='fu'>case.</span>(<span class='kw'>x</span> <span class='op'>&lt;</span> <span class='fl'>5</span>, <span class='fl'>1</span>,
-                         <span class='kw'>x</span> <span class='op'>&lt;</span> <span class='fl'>7</span>, <span class='fl'>2</span>,
-                         default = <span class='fl'>3</span>))
+<span class='va'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='mutate..html'>mutate.</a></span><span class='op'>(</span>case_x <span class='op'>=</span> <span class='fu'>case.</span><span class='op'>(</span><span class='va'>x</span> <span class='op'>&lt;</span> <span class='fl'>5</span>, <span class='fl'>1</span>,
+                         <span class='va'>x</span> <span class='op'>&lt;</span> <span class='fl'>7</span>, <span class='fl'>2</span>,
+                         default <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [10 × 2]</span><span>
 #&gt;        x case_x
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
