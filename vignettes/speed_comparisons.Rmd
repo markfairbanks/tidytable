@@ -26,8 +26,7 @@ A few notes:
 * `setDTthreads(4)` was used for `data.table` & `tidytable` timings.
 * Modify-by-reference was used in `data.table` when being compared to `mutate.()` & `dplyr::mutate()`
 * `fill.()` & `tidyr::fill()` both work with character/factor/logical columns, whereas `data.table::nafill()` does not. Testing only included numeric columns due to this constraint.
-* `case.()` & `dplyr::case_when()` both can have a default value that is a vector, whereas `data.table::fcase()` can not. Testing used a default value of length 1 due to this constraint.
-* `dtplyr` is missing timings for functions that are not yet implemented in the package; this includes `pivot_wider()` & `unnest()`, among others.
+* `dtplyr` is missing timings for functions that are not yet implemented in the package
 * `pandas` comparisons are in the process of being added - more will be added soon.
 * All timings are in milliseconds.
 * All tests can be found in the source code [here](https://github.com/markfairbanks/tidytable/blob/master/vignettes/speed_comparisons.Rmd).
@@ -161,12 +160,13 @@ median_x <-  median(x)
 case_marks <- bench::mark(
   tidyverse = case_when(x < median_x ~ 1,
                         x >= median_x ~ 2,
-                        TRUE ~ NA_real_),
+                        TRUE ~ 3),
   tidytable = case.(x < median_x, 1,
                     x >= median_x, 2,
-                    default = NA),
+                    default = 3),
   data.table = fcase(x < median_x, 1,
                      x >= median_x, 2,
+                     rep(TRUE, length(x)), 3,
                      default = NA),
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
