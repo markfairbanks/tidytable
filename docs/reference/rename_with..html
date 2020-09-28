@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -173,16 +173,22 @@
 
 <span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>rename_with.</span>(<span class='kw'>toupper</span>)
-</div><div class='output co'>#&gt;   X Y DOUBLE_X DOUBLE_Y
-#&gt; 1 1 2        2        4</div><div class='input'>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [1 × 4]</span><span>
+#&gt;       X     Y DOUBLE_X DOUBLE_Y
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     2        2        4</div><div class='input'>
 <span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>rename_with.</span>(<span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span>(<span class='st'>"x"</span>, <span class='st'>"stuff"</span>, <span class='kw'>.x</span>))
-</div><div class='output co'>#&gt;   stuff y double_stuff double_y
-#&gt; 1     1 2            2        4</div><div class='input'>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [1 × 4]</span><span>
+#&gt;   stuff     y double_stuff double_y
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     2            2        4</div><div class='input'>
 <span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>rename_with.</span>(<span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span>(<span class='st'>"x"</span>, <span class='st'>"stuff"</span>, <span class='kw'>.x</span>), .cols = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>x</span>, <span class='kw'>double_x</span>))
-</div><div class='output co'>#&gt;   stuff y double_stuff double_y
-#&gt; 1     1 2            2        4</div></pre>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [1 × 4]</span><span>
+#&gt;   stuff     y double_stuff double_y
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     2            2        4</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

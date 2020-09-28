@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Count observations by group — count. • tidytable</title>
+<title>knit_print method for tidytables — knit_print.tidytable • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Count observations by group — count." />
-<meta property="og:description" content="Returns row counts of the dataset. If bare column names are provided, count.() returns counts by group." />
+<meta property="og:title" content="knit_print method for tidytables — knit_print.tidytable" />
+<meta property="og:description" content="knit_print method for tidytables" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -131,57 +131,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Count observations by group</h1>
-    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/count.R'><code>R/count.R</code></a></small>
-    <div class="hidden name"><code>count..Rd</code></div>
+    <h1>knit_print method for tidytables</h1>
+    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/print.R'><code>R/print.R</code></a></small>
+    <div class="hidden name"><code>knit_print.tidytable.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns row counts of the dataset. If bare column names are provided, <code>count.()</code> returns counts by group.</p>
+    <p>knit_print method for tidytables</p>
     </div>
 
-    <pre class="usage"><span class='fu'>count.</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>.df</th>
-      <td><p>A data.frame or data.table</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Columns to group by. <code>tidyselect</code> compatible.</p></td>
-    </tr>
-    </table>
+    <pre class="usage"><span class='fu'>knit_print.tidytable</span>(<span class='kw'>x</span>, <span class='kw'>...</span>, n = <span class='kw'>NULL</span>, width = <span class='kw'>NULL</span>, n_extra = <span class='kw'>NULL</span>)</pre>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
-  x = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,
-  y = <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span>,
-  z = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span>))
 
-<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>count.</span>()
-</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [1 × 1]</span><span>
-#&gt;       N
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     3</div><div class='input'>
-<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>count.</span>(<span class='kw'>z</span>)
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 2]</span><span>
-#&gt;   z         N
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> a         2
-#&gt; </span><span style='color: #555555;'>2</span><span> b         1</div><div class='input'>
-<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>count.</span>(<span class='fu'>where</span>(<span class='kw'>is.character</span>))
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 2]</span><span>
-#&gt;   z         N
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> a         2
-#&gt; </span><span style='color: #555555;'>2</span><span> b         1</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -1,4 +1,4 @@
-# tidytable 0.5.6 (in development)
+# tidytable 0.5.6
 
 #### Breaking changes
 * `bind_cols.()`: Name repair uses `vec_as_names()` instead of `vec_as_names_legacy()`

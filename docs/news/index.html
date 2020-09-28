@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -134,9 +134,9 @@
       <small>Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="tidytable-056-in-development" class="section level1">
+    <div id="tidytable-056" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.6">
-<a href="#tidytable-056-in-development" class="anchor"></a>tidytable 0.5.6 (in development)<small> Unreleased </small>
+<a href="#tidytable-056" class="anchor"></a>tidytable 0.5.6<small> Unreleased </small>
 </h1>
 <div id="breaking-changes" class="section level4">
 <h4 class="hasAnchor">
@@ -156,7 +156,14 @@
 <li>
 <code><a href="../reference/unnest..html">unnest.()</a></code>: Added <code>names_sep</code> and <code>names_repair</code> args</li>
 <li>
-<code><a href="https://rdrr.io/r/base/print.html">print()</a></code>: Added <code>n</code>, <code>width</code>, and <code>n_extra</code> args</li>
+<code><a href="https://rdrr.io/r/base/print.html">print()</a></code>
+<ul>
+<li>Added <code>n</code>, <code>width</code>, and <code>n_extra</code> args</li>
+<li>Now prints like tibbles in all cases (special thanks to <a href='https://github.com/moutikabdessabour'>@moutikabdessabour</a>)</li>
+</ul>
+</li>
+<li>
+<code><a href="../reference/slice..html">slice.()</a></code>: Can now drop specified rows with negative numbers</li>
 </ul>
 </div>
 <div id="new-functions" class="section level4">
@@ -171,6 +178,13 @@
 </ul>
 </li>
 <li><code><a href="../reference/desc..html">desc.()</a></code></li>
+</ul>
+</div>
+<div id="functions-with-notable-speed-improvements" class="section level4">
+<h4 class="hasAnchor">
+<a href="#functions-with-notable-speed-improvements" class="anchor"></a>Functions with notable speed improvements</h4>
+<ul>
+<li><code><a href="../reference/slice..html">slice.()</a></code></li>
 </ul>
 </div>
 <div id="deprecations" class="section level4">
@@ -239,9 +253,9 @@
 <code><a href="../reference/rename..html">rename.()</a></code>: Works when there are spaces in the column names (<a href='https://github.com/markfairbanks/tidytable/issues/109'>#109</a>)</li>
 </ul>
 </div>
-<div id="functions-with-notable-speed-improvements" class="section level4">
+<div id="functions-with-notable-speed-improvements-1" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functions-with-notable-speed-improvements" class="anchor"></a>Functions with notable speed improvements</h4>
+<a href="#functions-with-notable-speed-improvements-1" class="anchor"></a>Functions with notable speed improvements</h4>
 <ul>
 <li><code><a href="../reference/replace_na..html">replace_na.()</a></code></li>
 </ul>
@@ -451,9 +465,9 @@
 </li>
 </ul>
 </div>
-<div id="functions-with-notable-speed-improvements-1" class="section level4">
+<div id="functions-with-notable-speed-improvements-2" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functions-with-notable-speed-improvements-1" class="anchor"></a>Functions with notable speed improvements</h4>
+<a href="#functions-with-notable-speed-improvements-2" class="anchor"></a>Functions with notable speed improvements</h4>
 <ul>
 <li><code><a href="../reference/case..html">case.()</a></code></li>
 </ul>
@@ -512,9 +526,9 @@
 <code><a href="../reference/transmute..html">transmute.()</a></code>: Summary functions (<code>mean</code>/<code>max</code>/etc.) can now be used</li>
 </ul>
 </div>
-<div id="functions-with-notable-speed-improvements-2" class="section level4">
+<div id="functions-with-notable-speed-improvements-3" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functions-with-notable-speed-improvements-2" class="anchor"></a>Functions with notable speed improvements</h4>
+<a href="#functions-with-notable-speed-improvements-3" class="anchor"></a>Functions with notable speed improvements</h4>
 <ul>
 <li><code><a href="../reference/distinct..html">distinct.()</a></code></li>
 <li><code><a href="../reference/drop_na..html">drop_na.()</a></code></li>
@@ -577,9 +591,9 @@
 </li>
 </ul>
 </div>
-<div id="functions-with-notable-speed-improvements-3" class="section level4">
+<div id="functions-with-notable-speed-improvements-4" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functions-with-notable-speed-improvements-3" class="anchor"></a>Functions with notable speed improvements</h4>
+<a href="#functions-with-notable-speed-improvements-4" class="anchor"></a>Functions with notable speed improvements</h4>
 <ul>
 <li><code><a href="../reference/fill..html">fill.()</a></code></li>
 <li><code><a href="../reference/pivot_longer..html">pivot_longer.()</a></code></li>

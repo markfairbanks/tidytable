@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -113,9 +113,7 @@
 <li>
 <code><a href="../reference/fill..html">fill.()</a></code> &amp; <code><a href="https://tidyr.tidyverse.org/reference/fill.html">tidyr::fill()</a></code> both work with character/factor/logical columns, whereas <code><a href="https://Rdatatable.gitlab.io/data.table/reference/nafill.html">data.table::nafill()</a></code> does not. Testing only included numeric columns due to this constraint.</li>
 <li>
-<code><a href="../reference/case..html">case.()</a></code> &amp; <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">dplyr::case_when()</a></code> both can have a default value that is a vector, whereas <code><a href="https://Rdatatable.gitlab.io/data.table/reference/fcase.html">data.table::fcase()</a></code> can not. Testing used a default value of length 1 due to this constraint.</li>
-<li>
-<code>dtplyr</code> is missing timings for functions that are not yet implemented in the package; this includes <code>pivot_wider()</code> &amp; <code>unnest()</code>, among others.</li>
+<code>dtplyr</code> is missing timings for functions that are not yet implemented in the package</li>
 <li>
 <code>pandas</code> comparisons are in the process of being added - more will be added soon.</li>
 <li>All timings are in milliseconds.</li>
@@ -127,19 +125,19 @@
 <span class="co">#&gt; # A tibble: 13 x 7</span>
 <span class="co">#&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas tidytable_vs_dplyr</span>
 <span class="co">#&gt;    &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             </span>
-<span class="co">#&gt;  1 arrange            37.7      37.3   38.7    1260.   355   3.0%              </span>
-<span class="co">#&gt;  2 case_when          31.3      27.7   NA       322.    59.2 8.6%              </span>
-<span class="co">#&gt;  3 distinct           12.1      14.5   16.8      51.5  309   28.2%             </span>
-<span class="co">#&gt;  4 fill               28.8      37.6   NA        65.8  846   57.1%             </span>
-<span class="co">#&gt;  5 filter            213.      223.   231       246    707   90.8%             </span>
-<span class="co">#&gt;  6 inner_join         45.1      47.1  104.       81.5   NA   57.8%             </span>
-<span class="co">#&gt;  7 left_join          63.9      53.9  164.       86.1   NA   62.6%             </span>
-<span class="co">#&gt;  8 mutate             59.3      59.2  501.       70.9   86.4 83.5%             </span>
-<span class="co">#&gt;  9 nest                8         8.9   NA        27.6   NA   32.2%             </span>
-<span class="co">#&gt; 10 pivot_longer        9.8      12.3   NA        46.4   NA   26.5%             </span>
-<span class="co">#&gt; 11 pivot_wider        88.6      88.7   NA        74.4   NA   119.2%            </span>
-<span class="co">#&gt; 12 summarize         166.      148    161.      202.   834   73.2%             </span>
-<span class="co">#&gt; 13 unnest             14.4      10     NA        27.9   NA   35.8%</span>
+<span class="co">#&gt;  1 arrange            37        41.1   42      1275    355   3.2%              </span>
+<span class="co">#&gt;  2 case_when          29        30.2   NA       329.    59.2 9.2%              </span>
+<span class="co">#&gt;  3 distinct           14.8      15.1   18.6      51.8  309   29.2%             </span>
+<span class="co">#&gt;  4 fill               28.8      34.9   NA        63.4  846   55.0%             </span>
+<span class="co">#&gt;  5 filter            228.      224.   232.      248.   707   90.5%             </span>
+<span class="co">#&gt;  6 inner_join         48.7      55.1  139.       78.1   NA   70.6%             </span>
+<span class="co">#&gt;  7 left_join          61.4      50.1  171.       89.9   NA   55.7%             </span>
+<span class="co">#&gt;  8 mutate             65.3      52.1  498.       75.6   86.4 68.9%             </span>
+<span class="co">#&gt;  9 nest               10.5       9.5   NA        28     NA   33.9%             </span>
+<span class="co">#&gt; 10 pivot_longer       10.5      14.4   NA        48.5   NA   29.7%             </span>
+<span class="co">#&gt; 11 pivot_wider        97.4      98.4   NA        86.1   NA   114.3%            </span>
+<span class="co">#&gt; 12 summarize         174.      161.   188.      202.   834   79.9%             </span>
+<span class="co">#&gt; 13 unnest             15.4      10.7   NA        31.3   NA   34.2%</span>
 </pre></div>
 </div>
   </div>

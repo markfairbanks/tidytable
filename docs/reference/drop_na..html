@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -164,18 +164,24 @@
 
 <span class='kw'>df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>drop_na.</span>()
-</div><div class='output co'>#&gt;   x y
-#&gt; 1 1 a</div><div class='input'>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [1 × 2]</span><span>
+#&gt;       x y    
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1 a    </div><div class='input'>
 <span class='kw'>df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>drop_na.</span>(<span class='kw'>x</span>)
-</div><div class='output co'>#&gt;   x    y
-#&gt; 1 1    a
-#&gt; 2 2 &lt;NA&gt;</div><div class='input'>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 2]</span><span>
+#&gt;       x y    
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1 a    
+#&gt; </span><span style='color: #555555;'>2</span><span>     2 </span><span style='color: #BB0000;'>NA</span><span>   </div><div class='input'>
 <span class='kw'>df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>drop_na.</span>(<span class='fu'>where</span>(<span class='kw'>is.numeric</span>))
-</div><div class='output co'>#&gt;   x    y
-#&gt; 1 1    a
-#&gt; 2 2 &lt;NA&gt;</div></pre>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 2]</span><span>
+#&gt;       x y    
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1 a    
+#&gt; </span><span style='color: #555555;'>2</span><span>     2 </span><span style='color: #BB0000;'>NA</span><span>   </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

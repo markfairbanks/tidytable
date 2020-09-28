@@ -82,7 +82,7 @@ Note: Using automatic detection or regex will be slower than simple separators s
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -182,19 +182,23 @@ Note: Using automatic detection or regex will be slower than simple separators s
 <span class='co'># "sep" can be automatically detected (slower)</span>
 <span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>separate.</span>(<span class='kw'>x</span>, into = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"c1"</span>, <span class='st'>"c2"</span>))
-</div><div class='output co'>#&gt;     c1   c2
-#&gt; 1    a &lt;NA&gt;
-#&gt; 2    a    b
-#&gt; 3    a    b
-#&gt; 4 &lt;NA&gt; &lt;NA&gt;</div><div class='input'>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [4 × 2]</span><span>
+#&gt;   c1    c2   
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> a     </span><span style='color: #BB0000;'>NA</span><span>   
+#&gt; </span><span style='color: #555555;'>2</span><span> a     b    
+#&gt; </span><span style='color: #555555;'>3</span><span> a     b    
+#&gt; </span><span style='color: #555555;'>4</span><span> </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>   </div><div class='input'>
 <span class='co'># Faster if "sep" is provided</span>
 <span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>separate.</span>(<span class='kw'>x</span>, into = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"c1"</span>, <span class='st'>"c2"</span>), sep = <span class='st'>"."</span>)
-</div><div class='output co'>#&gt;     c1   c2
-#&gt; 1    a &lt;NA&gt;
-#&gt; 2    a    b
-#&gt; 3    a    b
-#&gt; 4 &lt;NA&gt; &lt;NA&gt;</div></pre>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [4 × 2]</span><span>
+#&gt;   c1    c2   
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> a     </span><span style='color: #BB0000;'>NA</span><span>   
+#&gt; </span><span style='color: #555555;'>2</span><span> a     b    
+#&gt; </span><span style='color: #555555;'>3</span><span> a     b    
+#&gt; </span><span style='color: #555555;'>4</span><span> </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>   </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

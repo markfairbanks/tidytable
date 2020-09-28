@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -168,14 +168,18 @@
 
 <span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>filter.</span>(<span class='kw'>a</span> <span class='op'>&gt;=</span> <span class='fl'>2</span>, <span class='kw'>b</span> <span class='op'>&gt;=</span> <span class='fl'>4</span>)
-</div><div class='output co'>#&gt;   a b c
-#&gt; 1 2 5 a
-#&gt; 2 3 6 b</div><div class='input'>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [2 × 3]</span><span>
+#&gt;       a     b c    
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     2     5 a    
+#&gt; </span><span style='color: #555555;'>2</span><span>     3     6 b    </div><div class='input'>
 <span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>filter.</span>(<span class='kw'>b</span> <span class='op'>&lt;=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='kw'>b</span>), .by = <span class='kw'>c</span>)
-</div><div class='output co'>#&gt;   a b c
-#&gt; 1 1 4 a
-#&gt; 2 3 6 b</div></pre>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [2 × 3]</span><span>
+#&gt;       a     b c    
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     4 a    
+#&gt; </span><span style='color: #555555;'>2</span><span>     3     6 b    </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
