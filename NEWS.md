@@ -6,7 +6,9 @@
 #### Functionality improvements
 * `bind_cols.()`: Added `.name_repair` arg
 * `unnest.()`: Added `names_sep` and `names_repair` args
-* `print()`: Added `n`, `width`, and `n_extra` args
+* `print()`
+  + Added `n`, `width`, and `n_extra` args
+  + Now prints like tibbles in all cases (special thanks to @moutikabdessabour)
 * `slice.()`: Can now drop specified rows with negative numbers
 
 #### New functions
