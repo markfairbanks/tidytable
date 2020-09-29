@@ -14,12 +14,6 @@ NULL
 globalVariables(c(".", "name", "value", "..all_cols", "..select_cols",
                   "..keep_names", "..unite_cols", "..keep_cols", ".env", ".id", "where"))
 
-release_questions <- function() {
-  c(
-    "Is the version number updated in DESCRIPTION, NEWS, and README?"
-  )
-}
-
 #' @docType import
 
 ## Reexports ------------------------
