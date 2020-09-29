@@ -16,7 +16,7 @@ globalVariables(c(".", "name", "value", "..all_cols", "..select_cols",
 
 release_questions <- function() {
   c(
-    "Is the version number updated in DESCRIPTION, NEWS, and README?",
+    "Is the version number updated in DESCRIPTION, NEWS, and README?"
   )
 }
 
