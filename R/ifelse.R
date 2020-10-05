@@ -36,12 +36,3 @@ ifelse. <- function(conditions, true, false, na = NA) {
 
   fifelse(conditions, true, false, na = na)
 }
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams ifelse.
-dt_ifelse <- function(conditions, true, false, na = NA) {
-  deprecate_stop("0.5.2", "tidytable::dt_ifelse()", "ifelse.()")
-
-  ifelse.(conditions, true, false, na)
-}

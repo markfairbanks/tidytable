@@ -15,11 +15,3 @@ row_number. <- function() {
   eval_tidy(expr(1:.N), env = caller_env())
 }
 
-#' @export
-#' @rdname dt_verb
-#' @inheritParams row_number.
-dt_row_number <- function() {
-  deprecate_stop("0.5.2", "tidytable::dt_row_number()", "row_number.()")
-
-  row_number.()
-}

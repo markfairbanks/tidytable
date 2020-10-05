@@ -94,15 +94,6 @@ unnest..data.frame <- function(.df,
   results_df
 }
 
-#' @export
-#' @rdname dt_verb
-#' @inheritParams unnest.
-dt_unnest_legacy <- function(.df, ..., .keep_all = FALSE) {
-  deprecate_stop("0.5.2", "tidytable::dt_unnest_legacy()", "unnest.()")
-
-  unnest.(.df, ..., .keep_all = .keep_all)
-}
-
 unnest_col <- function(.df, col = NULL, names_sep = NULL) {
 
   # Check if nested data is a vector

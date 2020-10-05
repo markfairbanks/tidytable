@@ -57,18 +57,6 @@ fill..data.frame <- function(.df, ...,
   }
 }
 
-#' @export
-#' @rdname dt_verb
-#' @inheritParams fill.
-dt_fill <- function(.df, ...,
-                    .direction = c("down", "up", "downup", "updown"),
-                    .by = NULL) {
-
-  deprecate_stop("0.5.2", "tidytable::dt_fill()", "fill.()")
-
-  fill.(.df, ..., .direction = .direction, .by = {{ .by }})
-}
-
 filler <- function(.df, ..., .type = "down", .by = NULL) {
 
   .type <- switch(.type, "down" = "locf", "up" = "nocb")

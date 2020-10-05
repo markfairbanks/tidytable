@@ -66,20 +66,3 @@ pivot_longer..data.frame <- function(.df,
        value.factor = FALSE))
 }
 
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams pivot_longer.
-dt_pivot_longer <- function(.df,
-                            cols = everything(),
-                            names_to = "name",
-                            values_to = "value",
-                            values_drop_na = FALSE,
-                            ...) {
-  deprecate_stop("0.5.2", "tidytable::dt_pivot_longer()", "pivot_longer.()")
-
-  pivot_longer.(.df, cols = {{ cols }},
-                names_to = names_to,
-                values_to = values_to,
-                values_drop_na = values_drop_na)
-}

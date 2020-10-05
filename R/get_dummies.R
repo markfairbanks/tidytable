@@ -108,18 +108,3 @@ get_dummies..data.frame <- function(.df,
   }
   .df[]
 }
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams get_dummies.
-dt_get_dummies <- function(.df,
-                           cols = c(where(is.character), where(is.factor)),
-                           prefix = TRUE,
-                           prefix_sep = "_",
-                           drop_first = FALSE,
-                           dummify_na = TRUE) {
-  deprecate_stop("0.5.2", "tidytable::dt_get_dummies()", "get_dummies.()")
-
-  get_dummies.(.df, cols = {{ cols }}, prefix = prefix, prefix_sep = prefix_sep,
-               drop_first = drop_first, dummify_na = dummify_na)
-}
