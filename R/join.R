@@ -188,51 +188,6 @@ get_bys <- function(x, y, by = NULL) {
   list(by_x, by_y)
 }
 
-#' @export
-#' @rdname dt_verb
-#' @inheritParams left_join.
-dt_left_join <- function(x, y, by = NULL) {
-  deprecate_stop("0.5.2", "tidytable::dt_left_join()", "left_join.()")
-
-  left_join.(x, y, by)
-}
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams inner_join.
-dt_inner_join <- function(x, y, by = NULL) {
-  deprecate_stop("0.5.2", "tidytable::dt_inner_join()", "inner_join.()")
-
-  inner_join.(x, y, by)
-}
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams right_join.
-dt_right_join <- function(x, y, by = NULL) {
-  deprecate_stop("0.5.2", "tidytable::dt_right_join()", "right_join.()")
-
-  right_join.(x, y, by)
-}
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams full_join.
-dt_full_join <- function(x, y, by = NULL,suffix =  c(".x", ".y")) {
-  deprecate_stop("0.5.2", "tidytable::dt_full_join()", "full_join.()")
-
-  full_join.(x, y, by)
-}
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams anti_join.
-dt_anti_join <- function(x, y, by = NULL) {
-  deprecate_stop("0.5.2", "tidytable::dt_anti_join()", "anti_join.()")
-
-  anti_join.(x, y, by)
-}
-
 join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
   if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
   if (!is.data.table(x)) x <- as_tidytable(x)

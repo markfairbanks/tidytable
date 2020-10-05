@@ -46,13 +46,3 @@ group_split..data.frame <- function(.df, ..., .keep = TRUE) {
   }
 }
 
-#' @export
-#' @rdname dt_verb
-#' @inheritParams group_split.
-dt_group_split <- function(.df, ..., .keep = TRUE) {
-  deprecate_stop("0.5.2", "tidytable::dt_group_split()", "group_split.()")
-
-  group_split.(.df, ..., .keep = .keep)
-}
-
-

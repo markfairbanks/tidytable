@@ -57,12 +57,3 @@ filter..data.frame <- function(.df, ..., .by = NULL) {
 
   .df
 }
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams filter.
-dt_filter <- function(.df, ..., .by = NULL) {
-  deprecate_stop("0.5.2", "tidytable::dt_filter()", "filter.()")
-
-  filter.(.df, ..., .by = {{ .by }})
-}

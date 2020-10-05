@@ -63,15 +63,3 @@ separate..data.frame <- function(.df, col, into,
 
   .df[]
 }
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams separate.
-dt_separate <- function(.df, col, into,
-                        sep = "[^[:alnum:]]+",
-                        remove = TRUE,
-                        ...) {
-  deprecate_stop("0.5.2", "tidytable::dt_separate()", "separate.()")
-
-  separate.(.df, {{ col }}, into, sep = sep, remove = remove, ...)
-}

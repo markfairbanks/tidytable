@@ -68,11 +68,3 @@ relocate..data.frame <- function(.df, ..., .before = NULL, .after = NULL) {
   setcolorder(.df, final_order)[]
 }
 
-#' @export
-#' @rdname dt_verb
-#' @inheritParams relocate.
-dt_relocate <- function(.df, ..., .before = NULL, .after = NULL) {
-  deprecate_stop("0.5.2", "tidytable::dt_relocate()", "relocate.()")
-
-  relocate.(.df, ..., .before = {{ .before }}, .after = {{ .after }})
-}

@@ -41,15 +41,6 @@ bind_cols. <- function(..., .name_repair = "unique") {
 }
 
 #' @export
-#' @rdname dt_verb
-#' @inheritParams bind_rows.
-dt_bind_rows <- function(..., .id = NULL) {
-  deprecate_stop("0.5.2", "tidytable::dt_bind_rows()", "bind_rows.()")
-
-  bind_rows.(..., .id = .id)
-}
-
-#' @export
 #' @rdname bind_cols.
 bind_rows. <- function(..., .id = NULL) {
 
@@ -62,14 +53,5 @@ bind_rows. <- function(..., .id = NULL) {
   dots <- rbindlist(dots, idcol = .id, use.names = TRUE, fill = TRUE)
 
   as_tidytable(dots)
-}
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams bind_cols.
-dt_bind_cols <- function(...) {
-  deprecate_stop("0.5.2", "tidytable::dt_bind_cols()", "bind_cols.()")
-
-  bind_cols.(...)
 }
 

@@ -41,12 +41,3 @@ pull..data.frame <- function(.df, var = -1) {
 
   .df[[.var]]
 }
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams pull.
-dt_pull <- function(.df, var = -1) {
-  deprecate_stop("0.5.2", "tidytable::dt_pull()", "pull.()")
-
-  pull.(.df, var = {{ var }})
-}

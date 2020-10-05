@@ -86,12 +86,3 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
   }
   .df[]
 }
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams mutate.
-dt_mutate <- function(.df, ..., .by = NULL) {
-  deprecate_stop("0.5.2", "tidytable::dt_mutate()", "mutate.()")
-
-  mutate.(.df, ..., .by = {{ .by }})
-}

@@ -66,11 +66,3 @@ replace_na..data.frame <- function(.x, replace = list()) {
   .x
 }
 
-#' @export
-#' @rdname dt_verb
-#' @inheritParams replace_na.
-dt_replace_na <- function(.x, replace = NA) {
-  deprecate_stop("0.5.2", "tidytable::dt_replace_na()", "replace_na.()")
-
-  replace_na.(.x, replace)
-}

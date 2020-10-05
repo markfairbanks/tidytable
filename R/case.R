@@ -45,12 +45,3 @@ case. <- function(..., default = NA) {
 
   eval_tidy(calls)
 }
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams case.
-dt_case <- function(..., default = NA) {
-  deprecate_stop("0.5.2", "tidytable::dt_case()", "case.()")
-
-  case.(..., default = default)
-}

@@ -41,11 +41,3 @@ top_n..data.frame <- function(.df, n = 5, wt = NULL, .by = NULL) {
     slice_max.(.df, order_by = !!wt, n = {{ n }}, .by = {{ .by }})
   }
 }
-
-#' @export
-#' @rdname top_n.
-dt_top_n <- function(.df, n = 5, wt = NULL, .by = NULL) {
-  deprecate_stop("0.5.2", "tidytable::dt_top_n()", "top_n.()")
-
-  top_n.(.df, {{ n }}, {{ wt }}, {{ .by }})
-}
