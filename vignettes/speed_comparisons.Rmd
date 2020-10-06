@@ -28,14 +28,14 @@ A few notes:
 * `fill.()` & `tidyr::fill()` both work with character/factor/logical columns, whereas `data.table::nafill()` does not. Testing only included numeric columns due to this constraint.
 * `dtplyr` is missing timings for functions that are not yet implemented in the package.
 * `pandas` comparisons are in the process of being added - more will be added soon.
-* All tests are run 5 times. The times shown are the median of those 10 runs.
+* All tests are run 5 times. The times shown are the median of those 5 runs.
 * All timings are in milliseconds.
 * All tests can be found in the source code [here](https://github.com/markfairbanks/tidytable/blob/master/vignettes/speed_comparisons.Rmd).
 * FAQ - Why are some `tidytable` functions faster than their `data.table` counterpart?
   + All R functions have some slight natural variation in their execution time. 
   If a `tidytable` function appears to be "faster" than `data.table` it's due to this.
-  Overall these timings are to highlight that the "time cost" of translating `tidyverse` syntax
-  to `data.table` syntax is negligible to the user.
+  However one goal of these tests is to show that the "time cost" of translating `tidyverse` syntax
+  to `data.table` is negligible to the user.
 * Lastly I'd like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.
 
 ```{r benchmark_setup, echo=FALSE}
