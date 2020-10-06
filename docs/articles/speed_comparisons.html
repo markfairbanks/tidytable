@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6.9</span>
       </span>
     </div>
 
@@ -86,7 +86,7 @@
 
       
 
-      </header><script src="speed_comparisons_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="speed_comparisons_files/header-attrs-2.3/header-attrs.js"></script><script src="speed_comparisons_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>speed_comparisons</h1>
@@ -113,31 +113,35 @@
 <li>
 <code><a href="../reference/fill..html">fill.()</a></code> &amp; <code><a href="https://tidyr.tidyverse.org/reference/fill.html">tidyr::fill()</a></code> both work with character/factor/logical columns, whereas <code><a href="https://Rdatatable.gitlab.io/data.table/reference/nafill.html">data.table::nafill()</a></code> does not. Testing only included numeric columns due to this constraint.</li>
 <li>
-<code>dtplyr</code> is missing timings for functions that are not yet implemented in the package</li>
+<code>dtplyr</code> is missing timings for functions that are not yet implemented in the package.</li>
 <li>
 <code>pandas</code> comparisons are in the process of being added - more will be added soon.</li>
+<li>All tests are run 5 times. The times shown are the median of those 10 runs.</li>
 <li>All timings are in milliseconds.</li>
 <li>All tests can be found in the source code <a href="https://github.com/markfairbanks/tidytable/blob/master/vignettes/speed_comparisons.Rmd">here</a>.</li>
+<li>FAQ - Why are some <code>tidytable</code> functions faster than their <code>data.table</code> counterpart?
+<ul>
+<li>All R functions have some slight natural variation in their execution time. If a <code>tidytable</code> function appears to be “faster” than <code>data.table</code> it’s due to this. Overall these timings are to highlight that the “time cost” of translating <code>tidyverse</code> syntax to <code>data.table</code> syntax is negligible to the user.</li>
+</ul>
+</li>
 <li>Lastly I’d like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="va">all_marks</span>
-<span class="co">#&gt; # A tibble: 13 x 7</span>
-<span class="co">#&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas tidytable_vs_dplyr</span>
-<span class="co">#&gt;    &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             </span>
-<span class="co">#&gt;  1 arrange            78.1      39.7   80.8    1302.   355   3.0%              </span>
-<span class="co">#&gt;  2 case_when          32.8      26.9   NA       343.    59.2 7.8%              </span>
-<span class="co">#&gt;  3 distinct           24.2      17.6   17.3      53.3  309   33.0%             </span>
-<span class="co">#&gt;  4 fill               27.9      45.7   NA        56.7  846   80.6%             </span>
-<span class="co">#&gt;  5 filter            224.      234    243       271.   707   86.4%             </span>
-<span class="co">#&gt;  6 inner_join         47        51.4  129.       82.8   NA   62.1%             </span>
-<span class="co">#&gt;  7 left_join          72.8      53.2  158        91     NA   58.5%             </span>
-<span class="co">#&gt;  8 mutate             60.2      60.1  533.       75.8   86.4 79.3%             </span>
-<span class="co">#&gt;  9 nest               10.9      12.6   NA        28.2   NA   44.7%             </span>
-<span class="co">#&gt; 10 pivot_longer       13.1       9.3   NA        38.8   NA   24.0%             </span>
-<span class="co">#&gt; 11 pivot_wider       114.      149.    NA       121.    NA   123.2%            </span>
-<span class="co">#&gt; 12 summarize         198       170.   173.      215.   834   78.7%             </span>
-<span class="co">#&gt; 13 unnest             17.1       7.8   NA        30.8   NA   25.3%</span></pre></div>
+<pre><code>#&gt; # tidytable [13 × 7]
+#&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas tidytable_vs_dplyr
+#&gt;    &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             
+#&gt;  1 arrange            43.7      43.5   40.1    1578.   355   2.8%              
+#&gt;  2 case_when          30.3      29.4   NA       352.    59.2 8.3%              
+#&gt;  3 distinct           15.2      14.6   17.7      52    309   28.1%             
+#&gt;  4 fill               30.9      41.4   NA        67.4  846   61.4%             
+#&gt;  5 filter            239.      240.   237.      244.   707   98.4%             
+#&gt;  6 inner_join         49.4      51.8  114.       77.3   NA   67.0%             
+#&gt;  7 left_join          70.7      53.8  170.       95.8   NA   56.2%             
+#&gt;  8 mutate             74.8      66.8  550.       77.8   86.4 85.9%             
+#&gt;  9 nest                8.9       9.6   NA        28.3   NA   33.9%             
+#&gt; 10 pivot_longer       13.1      12.6   NA        52.7   NA   23.9%             
+#&gt; 11 pivot_wider       111.      101.    NA        76.6   NA   132.4%            
+#&gt; 12 summarize         193.      181.   235       199.   834   90.7%             
+#&gt; 13 unnest             18.9       9.2   NA        34     NA   27.1%</code></pre>
 </div>
   </div>
 

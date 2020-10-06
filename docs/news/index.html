@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6.9</span>
       </span>
     </div>
 
@@ -134,9 +134,21 @@
       <small>Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="tidytable-057-in-development" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.7">
+<a href="#tidytable-057-in-development" class="anchor"></a>tidytable 0.5.7 (in development)<small> Unreleased </small>
+</h1>
+<div id="deprecations" class="section level4">
+<h4 class="hasAnchor">
+<a href="#deprecations" class="anchor"></a>Deprecations</h4>
+<ul>
+<li>The <code>dt_verb()</code> versions of functions have been removed from the package. They have been deprecated with warnings since v0.5.2</li>
+</ul>
+</div>
+</div>
     <div id="tidytable-056" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.6">
-<a href="#tidytable-056" class="anchor"></a>tidytable 0.5.6<small> Unreleased </small>
+<a href="#tidytable-056" class="anchor"></a>tidytable 0.5.6<small> 2020-09-30 </small>
 </h1>
 <div id="breaking-changes" class="section level4">
 <h4 class="hasAnchor">
@@ -187,9 +199,9 @@
 <li><code><a href="../reference/slice..html">slice.()</a></code></li>
 </ul>
 </div>
-<div id="deprecations" class="section level4">
+<div id="deprecations-1" class="section level4">
 <h4 class="hasAnchor">
-<a href="#deprecations" class="anchor"></a>Deprecations</h4>
+<a href="#deprecations-1" class="anchor"></a>Deprecations</h4>
 <ul>
 <li>
 <code><a href="../reference/unnest..html">unnest.()</a></code>: <code>.keep_all</code> arg changed to <code>.drop</code>
@@ -356,9 +368,9 @@
 <code><a href="../reference/replace_na..html">replace_na.()</a></code>: Now works on <code>data.frame</code>/<code>data.table</code> inputs as well as vectors</li>
 </ul>
 </div>
-<div id="deprecations-1" class="section level4">
+<div id="deprecations-2" class="section level4">
 <h4 class="hasAnchor">
-<a href="#deprecations-1" class="anchor"></a>Deprecations</h4>
+<a href="#deprecations-2" class="anchor"></a>Deprecations</h4>
 <ul>
 <li>
 <code><a href="../reference/desc..html">desc.()</a></code> has been deprecated due to incompatibility with character columns</li>
@@ -372,12 +384,12 @@
 <ul>
 <li>This version contains general performance improvements</li>
 </ul>
-<div id="deprecations-2" class="section level4">
+<div id="deprecations-3" class="section level4">
 <h4 class="hasAnchor">
-<a href="#deprecations-2" class="anchor"></a>Deprecations</h4>
+<a href="#deprecations-3" class="anchor"></a>Deprecations</h4>
 <ul>
 <li>Group by arg <code>by</code> has been deprecated for <code>.by</code>. This will allow “by” to be used as a column name in <code><a href="../reference/mutate..html">mutate.()</a></code> &amp; <code><a href="../reference/summarize..html">summarize.()</a></code> in future releases.</li>
-<li>All <code><a href="../reference/dt_arrange.html">dt_verb()</a></code> functions are soft deprecated</li>
+<li>All <code>dt_verb()</code> functions are soft deprecated</li>
 </ul>
 </div>
 <div id="new-functions-3" class="section level4">
@@ -436,9 +448,9 @@
 <code><a href="../reference/nest_by..html">nest_by.()</a></code>: Added <code>.keep</code> arg</li>
 </ul>
 </div>
-<div id="deprecations-3" class="section level4">
+<div id="deprecations-4" class="section level4">
 <h4 class="hasAnchor">
-<a href="#deprecations-3" class="anchor"></a>Deprecations</h4>
+<a href="#deprecations-4" class="anchor"></a>Deprecations</h4>
 <ul>
 <li>Old select helpers like <code>everything.()</code> are now replaced by normal helpers like <code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code>
 </li>
@@ -557,7 +569,7 @@
 <li>All functions are now written as <code>verb.()</code>
 </li>
 <li>
-<code><a href="../reference/dt_arrange.html">dt_verb()</a></code> functions still work, but may be slowly deprecated in future releases</li>
+<code>dt_verb()</code> functions still work, but may be slowly deprecated in future releases</li>
 </ul>
 </div>
 <div id="functionality-improvements-7" class="section level4">
@@ -580,12 +592,12 @@
 <li><code><a href="../reference/ifelse..html">ifelse.()</a></code></li>
 <li><code><a href="../reference/n..html">n.()</a></code></li>
 <li>
-<code><a href="../reference/nest_by..html">nest_by.()</a></code> replaces <code><a href="../reference/dt_arrange.html">dt_group_nest()</a></code>
+<code><a href="../reference/nest_by..html">nest_by.()</a></code> replaces <code>dt_group_nest()</code>
 </li>
 <li><code><a href="../reference/row_number..html">row_number.()</a></code></li>
 <li><code><a href="../reference/transmute..html">transmute.()</a></code></li>
 <li>
-<code><a href="../reference/unnest..html">unnest.()</a></code> replaces <code><a href="../reference/dt_arrange.html">dt_unnest_legacy()</a></code>
+<code><a href="../reference/unnest..html">unnest.()</a></code> replaces <code>dt_unnest_legacy()</code>
 </li>
 <li>Select helper <code>any_of.()</code>
 </li>
@@ -629,13 +641,13 @@
 </ul>
 </li>
 <li>
-<code><a href="../reference/dt_arrange.html">dt_get_dummies()</a></code>: Get dummy variables</li>
-<li><code><a href="../reference/dt_arrange.html">dt_separate()</a></code></li>
+<code>dt_get_dummies()</code>: Get dummy variables</li>
+<li><code>dt_separate()</code></li>
 <li>
-<code><a href="../reference/dt_arrange.html">dt_pivot_longer()</a></code> “cols” arg now defaults to <code>dt_everything()</code> instead of <code>NULL</code>. The result is the same, but is more consistent with other enhanced selection functions</li>
+<code>dt_pivot_longer()</code> “cols” arg now defaults to <code>dt_everything()</code> instead of <code>NULL</code>. The result is the same, but is more consistent with other enhanced selection functions</li>
 <li>
-<code>.N</code> now works when using <code><a href="../reference/dt_arrange.html">dt_slice()</a></code> &amp; variants</li>
-<li>Function length limit bug no longer occurs when using <code><a href="https://rdrr.io/r/base/tilde.html">~</a></code> in <code><a href="../reference/dt_arrange.html">dt_map()</a></code>
+<code>.N</code> now works when using <code>dt_slice()</code> &amp; variants</li>
+<li>Function length limit bug no longer occurs when using <code><a href="https://rdrr.io/r/base/tilde.html">~</a></code> in <code>dt_map()</code>
 </li>
 </ul>
 </div>
@@ -652,9 +664,9 @@
 <a href="#breaking-changes-6" class="anchor"></a>Breaking changes</h4>
 <ul>
 <li>
-<code><a href="../reference/dt_arrange.html">dt_mutate()</a></code> &amp; <code><a href="../reference/dt_arrange.html">dt_rename()</a></code> no longer modify-by-reference</li>
+<code>dt_mutate()</code> &amp; <code>dt_rename()</code> no longer modify-by-reference</li>
 <li>
-<code><a href="../reference/dt_arrange.html">dt_unnest_legacy()</a></code> drops “keep” argument, but automatically keeps all non-nested columns.
+<code>dt_unnest_legacy()</code> drops “keep” argument, but automatically keeps all non-nested columns.
 <ul>
 <li>New translation is ~5-10x faster than before</li>
 </ul>
@@ -668,7 +680,7 @@
 <li>
 <code><a href="../reference/dt.html">dt()</a></code> now automatically converts data.frame input to a data.table</li>
 <li>
-<code><a href="../reference/dt_arrange.html">dt_mutate_across()</a></code>: Added “by” arg</li>
+<code>dt_mutate_across()</code>: Added “by” arg</li>
 </ul>
 </div>
 <div id="bug-fixes-4" class="section level4">
@@ -676,7 +688,7 @@
 <a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h4>
 <ul>
 <li>
-<code><a href="../reference/dt_arrange.html">dt_left_join()</a></code> fix so columns are ordered correctly</li>
+<code>dt_left_join()</code> fix so columns are ordered correctly</li>
 </ul>
 </div>
 </div>

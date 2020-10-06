@@ -5,6 +5,7 @@ reference:
   - dt
   - get_dummies.
   - '%notin%'
+
 - title: dplyr
 - subtitle: Core dplyr verbs
 - contents:
@@ -32,6 +33,7 @@ reference:
   - slice.
   - summarize_across.
   - transmute.
+
 - title: tidyr
 - contents:
   - complete.
@@ -49,9 +51,18 @@ reference:
   - uncount.
   - unite.
   - unnest.
+
 - title: purrr
 - contents:
   - map.
+
+- title: reexports
+  desc: >
+    These functions are reexported from `data.table`, `rlang`, and `tidyselect`
+    for easier access.
+- contents:
+  - reexports
+
 - title: tidytable constructors
   desc: >
     A tidytable is simply a data.table with nice printing features.
