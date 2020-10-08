@@ -23,16 +23,10 @@
 #'   mutate.(new_col = ifelse.(x > 2, 2, 0))
 ifelse. <- function(conditions, true, false, na = NA) {
 
-  conditions <- conditions
-  true <- true
-  false <- false
-  na <- na
-
   ptype <- vec_ptype_common(true, false, na)
 
-  true <- vec_cast(true, ptype)
-  false <- vec_cast(false, ptype)
-  na <- vec_cast(na, ptype)
+  args <- vec_cast_common(true = true, false = false, na = na, .to = ptype)
 
-  fifelse(conditions, true, false, na = na)
+  fifelse(conditions, args$true, args$false, args$na)
+
 }
