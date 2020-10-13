@@ -5,7 +5,7 @@
 They have been deprecated with warnings since v0.5.2
 
 #### Functionality improvements
-* `get_dummies.()`: Dummy columns are now in alphabetical order
+* `get_dummies.()`: Dummy columns are now sorted in alphabetical order
 
 #### Functions with notable speed improvements
 * `get_dummies.()`
