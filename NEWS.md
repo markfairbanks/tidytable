@@ -4,6 +4,12 @@
 * The `dt_verb()` versions of functions have been removed from the package.
 They have been deprecated with warnings since v0.5.2
 
+#### Functionality improvements
+* `get_dummies.()`: Dummy columns are now in alphabetical order
+
+#### Functions with notable speed improvements
+* `get_dummies.()`
+
 # tidytable 0.5.6
 
 #### Breaking changes
