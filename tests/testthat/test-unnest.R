@@ -140,3 +140,12 @@ test_that("unnesting works with nested data.table with quosure function", {
   expect_true(is.list(result_df$z))
   expect_equal(result_df$test, rep(1:3, 3))
 })
+
+test_that("works when the only column is a list column", {
+  list_df <- tidytable(x = 1:3)
+  test_df <- tidytable(list_col = list(list_df, list_df, list_df))
+
+  result_df <- unnest.(test_df, list_col)
+
+  expect_equal(result_df$x, rep(1:3, 3))
+})
