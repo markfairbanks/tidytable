@@ -10,6 +10,9 @@ They have been deprecated with warnings since v0.5.2
 #### Functions with notable speed improvements
 * `get_dummies.()`
 
+#### Bug fixes
+* `unnest.()`: Works when the only column is the list column
+
 # tidytable 0.5.6
 
 #### Breaking changes

@@ -87,11 +87,20 @@ unnest..data.frame <- function(.df,
   # Get number of repeats for keep cols
   rep_vec <- list_sizes(pull.(.df, !!dots[[1]]))
 
-  keep_df <- .df[, ..keep_cols][vec_rep_each(1:.N, rep_vec)]
+  keep_df <- .df[, ..keep_cols]
 
-  results_df <- bind_cols.(keep_df, unnest_data, .name_repair = names_repair)
+  if (ncol(keep_df) > 0) {
+    keep_df <- keep_df[vec_rep_each(1:.N, rep_vec)]
 
-  results_df
+    result_df <- bind_cols.(keep_df, unnest_data, .name_repair = names_repair)
+
+  } else {
+
+    result_df <- bind_cols.(unnest_data, .name_repair = names_repair)
+
+  }
+
+  result_df
 }
 
 unnest_col <- function(.df, col = NULL, names_sep = NULL) {
