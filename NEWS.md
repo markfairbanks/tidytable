@@ -11,7 +11,8 @@ They have been deprecated with warnings since v0.5.2
 * `get_dummies.()`
 
 #### Bug fixes
-* `unnest.()`: Works when the only column is the list column
+* `unnest.()`: Works when the only column is the list column (#144)
+* `mutate_across.()`: Can refer to other columns within the data.table (#145)
 
 # tidytable 0.5.6
 
