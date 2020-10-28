@@ -145,5 +145,5 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
     }
   }
 
-  .df
+  .df[]
 }
