@@ -70,10 +70,8 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
       repair = "check_unique", quiet = TRUE
     )
 
-    is_anon_fun <- str_detect.(quo_text(enexpr(.fns)), "function[(]")
-
     # Build final expression
-    if (is_bare_formula(.fns) || is_anon_fun) {
+    if (is_anon_fun(.fns)) {
 
       .fns <- as_function(.fns)
 
@@ -122,7 +120,7 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
       .fn <- .fns[[i]]
 
       # Build final expression
-      if (is_bare_formula(.fn)) {
+      if (is_anon_fun(.fn)) {
 
         .fn <- as_function(.fn)
 
@@ -146,4 +144,8 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
   }
 
   .df[]
+}
+
+is_anon_fun <- function(fun) {
+  is.null(packageName(get_env(fun))) || is_bare_formula(fun)
 }
