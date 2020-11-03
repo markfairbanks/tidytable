@@ -10,11 +10,12 @@ pivot_wider.(
   values_from = value,
   id_cols = NULL,
   names_sep = "_",
-  values_fn = NULL
+  values_fn = NULL,
+  values_fill = NULL
 )
 }
 \arguments{
-\item{.df}{the data table to widen}
+\item{.df}{A data.frame or data.table}
 
 \item{names_from}{A pair of arguments describing which column (or columns) to get the name of the output column (\code{name_from}),
 and which column (or columns) to get the cell values from (\code{values_from}).
