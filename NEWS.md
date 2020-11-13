@@ -12,8 +12,9 @@ They have been deprecated with warnings since v0.5.2
 * `get_dummies.()`
 
 #### Bug fixes
+* `mutate.()`: Can delete a column using `NULL` when `.by` is provided (#151)
+* `mutate_across.()`: Can reference other columns in .fns call (#145)
 * `unnest.()`: Works when the only column is the list column (#144)
-* `mutate_across.()`: Can refer to other columns within the data.table (#145)
 
 # tidytable 0.5.6
 
