@@ -18,6 +18,7 @@
 #' `tidyselect` compatible.
 #' @param names_sep the separator between the names of the columns
 #' @param values_fn Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.
+#' @param values_fill If values are missing, what value should be filled in
 #'
 #' @examples
 #' test_df <- data.table(
