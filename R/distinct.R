@@ -51,6 +51,8 @@ distinct..data.frame <- function(.df, ..., .keep_all = FALSE) {
 
   }
 
+  .df <- set_names(.df, names(select_cols))
+
   .df
 }
 
