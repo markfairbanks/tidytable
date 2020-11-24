@@ -75,13 +75,6 @@ functionality (such as `summarize.()` & `mutate.()`)
 
   - A single column can be passed with `.by = z`
   - Multiple columns can be passed with `.by = c(y, z)`
-  - [`tidyselect`](https://tidyselect.r-lib.org/reference/language.html)
-    can also be used, including using predicates:
-      - Single predicate: `.by = where(is.character)`
-      - Multiple predicates: `.by = c(where(is.character),
-        where(is.factor))`
-      - A combination of predicates and column names: `.by =
-        c(where(is.character), y)`
 
 <!-- end list -->
 
@@ -97,51 +90,106 @@ test_df %>%
 #> 2 b       3       1
 ```
 
+##### `.by` vs. `group_by()`
+
+A key difference between `tidytable`/`data.table` & `dplyr` is that
+`dplyr` can chain multiple functions with a single `group_by()` call:
+
+``` r
+library(dplyr)
+
+test_df <- tibble(x = 1:5, y = c("a", "a", "a", "b", "b"))
+
+test_df %>%
+  group_by(y) %>%
+  mutate(avg_x = mean(x)) %>%
+  slice(1:2) %>%
+  ungroup()
+#> # A tibble: 4 x 3
+#>       x y     avg_x
+#>   <int> <chr> <dbl>
+#> 1     1 a       2  
+#> 2     2 a       2  
+#> 3     4 b       4.5
+#> 4     5 b       4.5
+```
+
+In this case both `mutate()` and `slice()` will operate “by group”. This
+happens until you call `ungroup()` at the end of the pipe chain.
+
+However `data.table` doesn’t “remember” groups between function calls,
+so this code would be written like this in `tidytable`:
+
+``` r
+test_df %>%
+  mutate.(avg_x = mean(x), .by = y) %>%
+  slice.(1:2, .by = y)
+#> # tidytable [4 × 3]
+#>       x y     avg_x
+#>   <int> <chr> <dbl>
+#> 1     1 a       2  
+#> 2     2 a       2  
+#> 3     4 b       4.5
+#> 4     5 b       4.5
+```
+
+Note how `.by` is called in both `mutate.()` and `slice.()`, and you
+don’t need to use `ungroup()` at the end.
+
 ## `tidyselect` support
 
 `tidytable` allows you to select/drop columns just like you would in the
-tidyverse.
+tidyverse by utilizing the [`tidyselect`](https://tidyselect.r-lib.org)
+package in the background.
 
-Normal selection can be mixed with:
-
-  - Predicates: `where(is.numeric)`, `where(is.character)`, etc.
-  - Select helpers: `everything()`, `starts_with()`, `ends_with()`,
-    `contains()`, `any_of()`, etc.
-
-<!-- end list -->
+Normal selection can be mixed with all `tidyselect` helpers:
+`everything()`, `starts_with()`, `ends_with()`, `any_of()`, `where()`,
+etc.
 
 ``` r
 test_df <- data.table(a = c(1,2,3),
                       b = c(4,5,6),
                       c = c("a","a","b"),
-                      d = c("a","b","c"))
+                      d = c("a","a","b"))
 
 test_df %>%
-  select.(a, where(is.character))
-#> # tidytable [3 × 3]
-#>       a c     d    
-#>   <dbl> <chr> <chr>
-#> 1     1 a     a    
-#> 2     2 a     b    
-#> 3     3 b     c
+  select.(a, b)
+#> # tidytable [3 × 2]
+#>       a     b
+#>   <dbl> <dbl>
+#> 1     1     4
+#> 2     2     5
+#> 3     3     6
 ```
 
 To drop columns use a `-` sign:
 
 ``` r
 test_df %>%
-  select.(-a, -where(is.character))
-#> # tidytable [3 × 1]
-#>       b
-#>   <dbl>
-#> 1     4
-#> 2     5
-#> 3     6
+  select.(-a, -b)
+#> # tidytable [3 × 2]
+#>   c     d    
+#>   <chr> <chr>
+#> 1 a     a    
+#> 2 a     a    
+#> 3 b     b
 ```
 
 These same ideas can be used whenever selecting columns in `tidytable`
 functions - for example when using `count.()`, `drop_na.()`,
 `mutate_across.()`, `pivot_longer.()`, etc.
+
+`tidyselect` helpers also work when using `.by`:
+
+``` r
+test_df %>%
+  summarize.(avg_b = mean(b), .by = where(is.character))
+#> # tidytable [2 × 3]
+#>   c     d     avg_b
+#>   <chr> <chr> <dbl>
+#> 1 a     a       4.5
+#> 2 b     b       6
+```
 
 A full overview of selection options can be found
 [here](https://tidyselect.r-lib.org/reference/language.html).
@@ -150,8 +198,6 @@ A full overview of selection options can be found
 
 `rlang` can be used to write custom functions with `tidytable`
 functions:
-
-##### Custom function with `mutate.()`
 
 ``` r
 df <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
@@ -179,26 +225,6 @@ df %>%
 #> 1     1     1 a           2
 #> 2     1     1 a           2
 #> 3     1     1 b           2
-```
-
-##### Custom function with `summarize.()`
-
-``` r
-df <- data.table(x = 1:10, y = c(rep("a", 6), rep("b", 4)), z = c(rep("a", 6), rep("b", 4)))
-
-find_mean <- function(data, grouping_cols, col) {
-  data %>%
-    summarize.(avg = mean({{ col }}),
-               .by = {{ grouping_cols }})
-}
-
-df %>%
-  find_mean(grouping_cols = c(y, z), col = x)
-#> # tidytable [2 × 3]
-#>   y     z       avg
-#>   <chr> <chr> <dbl>
-#> 1 a     a       3.5
-#> 2 b     b       8.5
 ```
 
 ## Auto-conversion

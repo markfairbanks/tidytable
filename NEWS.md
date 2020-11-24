@@ -6,6 +6,7 @@ They have been deprecated with warnings since v0.5.2
 
 #### Functionality improvements
 * `get_dummies.()`: Dummy columns are now sorted in alphabetical order
+* `distinct.()`: Can rename columns (#153)
 * `pivot_wider.()`: Added `values_fill` argument
 
 #### Functions with notable speed improvements

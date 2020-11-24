@@ -49,6 +49,14 @@ distinct..data.frame <- function(.df, ..., .keep_all = FALSE) {
 
     if (!.keep_all) .df <- .df[, ..select_cols]
 
+    named_flag <- have_name(dots)
+
+    if (any(named_flag)) {
+
+      named_dots <- dots[named_flag]
+
+      .df <- rename.(.df, !!!named_dots)
+    }
   }
 
   .df

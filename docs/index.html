@@ -150,17 +150,6 @@
 </li>
 <li>Multiple columns can be passed with <code>.by = c(y, z)</code>
 </li>
-<li>
-<a href="https://tidyselect.r-lib.org/reference/language.html"><code>tidyselect</code></a> can also be used, including using predicates:
-<ul>
-<li>Single predicate: <code>.by = where(is.character)</code>
-</li>
-<li>Multiple predicates: <code>.by = c(where(is.character),     where(is.factor))</code>
-</li>
-<li>A combination of predicates and column names: <code>.by =     c(where(is.character), y)</code>
-</li>
-</ul>
-</li>
 </ul>
 <!-- end list --><div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="va">test_df</span> <span class="op">%&gt;%</span>
@@ -172,52 +161,90 @@
 <span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;int&gt;</span>
 <span class="co">#&gt; 1 a       1.5     2</span>
 <span class="co">#&gt; 2 b       3       1</span></pre></div>
+<div id="by-vs-group_by" class="section level5">
+<h5 class="hasAnchor">
+<a href="#by-vs-group_by" class="anchor"></a><code>.by</code> vs. <code>group_by()</code>
+</h5>
+<p>A key difference between <code>tidytable</code>/<code>data.table</code> &amp; <code>dplyr</code> is that <code>dplyr</code> can chain multiple functions with a single <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> call:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+
+<span class="va">test_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">test_df</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>avg_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 4 x 3</span>
+<span class="co">#&gt;       x y     avg_x</span>
+<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1     1 a       2  </span>
+<span class="co">#&gt; 2     2 a       2  </span>
+<span class="co">#&gt; 3     4 b       4.5</span>
+<span class="co">#&gt; 4     5 b       4.5</span></pre></div>
+<p>In this case both <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice()</a></code> will operate “by group”. This happens until you call <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup()</a></code> at the end of the pipe chain.</p>
+<p>However <code>data.table</code> doesn’t “remember” groups between function calls, so this code would be written like this in <code>tidytable</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="va">test_df</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/mutate..html">mutate.</a></span><span class="op">(</span>avg_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, .by <span class="op">=</span> <span class="va">y</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/slice..html">slice.</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, .by <span class="op">=</span> <span class="va">y</span><span class="op">)</span>
+<span class="co">#&gt; # tidytable [4 × 3]</span>
+<span class="co">#&gt;       x y     avg_x</span>
+<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1     1 a       2  </span>
+<span class="co">#&gt; 2     2 a       2  </span>
+<span class="co">#&gt; 3     4 b       4.5</span>
+<span class="co">#&gt; 4     5 b       4.5</span></pre></div>
+<p>Note how <code>.by</code> is called in both <code><a href="reference/mutate..html">mutate.()</a></code> and <code><a href="reference/slice..html">slice.()</a></code>, and you don’t need to use <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup()</a></code> at the end.</p>
+</div>
 </div>
 <div id="tidyselect-support" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tidyselect-support" class="anchor"></a><code>tidyselect</code> support</h2>
-<p><code>tidytable</code> allows you to select/drop columns just like you would in the tidyverse.</p>
-<p>Normal selection can be mixed with:</p>
-<ul>
-<li>Predicates: <code>where(is.numeric)</code>, <code>where(is.character)</code>, etc.</li>
-<li>Select helpers: <code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/all_of.html">any_of()</a></code>, etc.</li>
-</ul>
-<!-- end list --><div class="sourceCode" id="cb5"><pre class="downlit">
+<p><code>tidytable</code> allows you to select/drop columns just like you would in the tidyverse by utilizing the <a href="https://tidyselect.r-lib.org"><code>tidyselect</code></a> package in the background.</p>
+<p>Normal selection can be mixed with all <code>tidyselect</code> helpers: <code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/all_of.html">any_of()</a></code>, <code>where()</code>, etc.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="va">test_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>,
                       b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span>,
                       c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span><span class="op">)</span>,
-                      d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span><span class="op">)</span><span class="op">)</span>
+                      d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">test_df</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/select..html">select.</a></span><span class="op">(</span><span class="va">a</span>, <span class="fu">where</span><span class="op">(</span><span class="va">is.character</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # tidytable [3 × 3]</span>
-<span class="co">#&gt;       a c     d    </span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;</span>
-<span class="co">#&gt; 1     1 a     a    </span>
-<span class="co">#&gt; 2     2 a     b    </span>
-<span class="co">#&gt; 3     3 b     c</span></pre></div>
+  <span class="fu"><a href="reference/select..html">select.</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span>
+<span class="co">#&gt; # tidytable [3 × 2]</span>
+<span class="co">#&gt;       a     b</span>
+<span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1     1     4</span>
+<span class="co">#&gt; 2     2     5</span>
+<span class="co">#&gt; 3     3     6</span></pre></div>
 <p>To drop columns use a <code><a href="https://rdrr.io/r/base/Arithmetic.html">-</a></code> sign:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
+<div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="va">test_df</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/select..html">select.</a></span><span class="op">(</span><span class="op">-</span><span class="va">a</span>, <span class="op">-</span><span class="fu">where</span><span class="op">(</span><span class="va">is.character</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # tidytable [3 × 1]</span>
-<span class="co">#&gt;       b</span>
-<span class="co">#&gt;   &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     4</span>
-<span class="co">#&gt; 2     5</span>
-<span class="co">#&gt; 3     6</span></pre></div>
+  <span class="fu"><a href="reference/select..html">select.</a></span><span class="op">(</span><span class="op">-</span><span class="va">a</span>, <span class="op">-</span><span class="va">b</span><span class="op">)</span>
+<span class="co">#&gt; # tidytable [3 × 2]</span>
+<span class="co">#&gt;   c     d    </span>
+<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;</span>
+<span class="co">#&gt; 1 a     a    </span>
+<span class="co">#&gt; 2 a     a    </span>
+<span class="co">#&gt; 3 b     b</span></pre></div>
 <p>These same ideas can be used whenever selecting columns in <code>tidytable</code> functions - for example when using <code><a href="reference/count..html">count.()</a></code>, <code><a href="reference/drop_na..html">drop_na.()</a></code>, <code><a href="reference/mutate_across..html">mutate_across.()</a></code>, <code><a href="reference/pivot_longer..html">pivot_longer.()</a></code>, etc.</p>
+<p><code>tidyselect</code> helpers also work when using <code>.by</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="va">test_df</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/summarize..html">summarize.</a></span><span class="op">(</span>avg_b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span>, .by <span class="op">=</span> <span class="fu">where</span><span class="op">(</span><span class="va">is.character</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; # tidytable [2 × 3]</span>
+<span class="co">#&gt;   c     d     avg_b</span>
+<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 a     a       4.5</span>
+<span class="co">#&gt; 2 b     b       6</span></pre></div>
 <p>A full overview of selection options can be found <a href="https://tidyselect.r-lib.org/reference/language.html">here</a>.</p>
 </div>
 <div id="rlang-compatibility" class="section level2">
 <h2 class="hasAnchor">
 <a href="#rlang-compatibility" class="anchor"></a><code>rlang</code> compatibility</h2>
 <p><code>rlang</code> can be used to write custom functions with <code>tidytable</code> functions:</p>
-<div id="custom-function-with-mutate" class="section level5">
-<h5 class="hasAnchor">
-<a href="#custom-function-with-mutate" class="anchor"></a>Custom function with <code>mutate.()</code>
-</h5>
-<div class="sourceCode" id="cb7"><pre class="downlit">
+<div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Using enquo() with !!</span>
@@ -244,33 +271,11 @@
 <span class="co">#&gt; 2     1     1 a           2</span>
 <span class="co">#&gt; 3     1     1 b           2</span></pre></div>
 </div>
-<div id="custom-function-with-summarize" class="section level5">
-<h5 class="hasAnchor">
-<a href="#custom-function-with-summarize" class="anchor"></a>Custom function with <code>summarize.()</code>
-</h5>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="fl">6</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"b"</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>, z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="fl">6</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"b"</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">find_mean</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">grouping_cols</span>, <span class="va">col</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">data</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="reference/summarize..html">summarize.</a></span><span class="op">(</span>avg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span> <span class="va">col</span> <span class="op">}</span><span class="op">}</span><span class="op">)</span>,
-               .by <span class="op">=</span> <span class="op">{</span><span class="op">{</span> <span class="va">grouping_cols</span> <span class="op">}</span><span class="op">}</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="va">df</span> <span class="op">%&gt;%</span>
-  <span class="fu">find_mean</span><span class="op">(</span>grouping_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">z</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">x</span><span class="op">)</span>
-<span class="co">#&gt; # tidytable [2 × 3]</span>
-<span class="co">#&gt;   y     z       avg</span>
-<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 a     a       3.5</span>
-<span class="co">#&gt; 2 b     b       8.5</span></pre></div>
-</div>
-</div>
 <div id="auto-conversion" class="section level2">
 <h2 class="hasAnchor">
 <a href="#auto-conversion" class="anchor"></a>Auto-conversion</h2>
 <p>All <code>tidytable</code> functions automatically convert <code>data.frame</code> and <code>tibble</code> inputs to a <code>data.table</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
+<div class="sourceCode" id="cb11"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://r-datatable.com">data.table</a></span><span class="op">)</span>
 
@@ -285,7 +290,7 @@
 <h2 class="hasAnchor">
 <a href="#dt-helper" class="anchor"></a><code>dt()</code> helper</h2>
 <p>The <code><a href="reference/dt.html">dt()</a></code> function makes regular <code>data.table</code> syntax pipeable, so you can easily mix <code>tidytable</code> syntax with <code>data.table</code> syntax:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
+<div class="sourceCode" id="cb12"><pre class="downlit">
 <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span>, z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">df</span> <span class="op">%&gt;%</span>
