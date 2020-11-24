@@ -151,6 +151,10 @@
 <ul>
 <li>
 <code><a href="../reference/get_dummies..html">get_dummies.()</a></code>: Dummy columns are now sorted in alphabetical order</li>
+<li>
+<code><a href="../reference/distinct..html">distinct.()</a></code>: Can rename columns ()</li>
+<li>
+<code><a href="../reference/pivot_wider..html">pivot_wider.()</a></code>: Added <code>values_fill</code> argument</li>
 </ul>
 </div>
 <div id="functions-with-notable-speed-improvements" class="section level4">
@@ -158,6 +162,18 @@
 <a href="#functions-with-notable-speed-improvements" class="anchor"></a>Functions with notable speed improvements</h4>
 <ul>
 <li><code><a href="../reference/get_dummies..html">get_dummies.()</a></code></li>
+</ul>
+</div>
+<div id="bug-fixes" class="section level4">
+<h4 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h4>
+<ul>
+<li>
+<code><a href="../reference/mutate..html">mutate.()</a></code>: Can delete a column using <code>NULL</code> when <code>.by</code> is provided (<a href='https://github.com/markfairbanks/tidytable/issues/151'>#151</a>)</li>
+<li>
+<code><a href="../reference/mutate_across..html">mutate_across.()</a></code>: Can reference other columns in .fns call (<a href='https://github.com/markfairbanks/tidytable/issues/145'>#145</a>)</li>
+<li>
+<code><a href="../reference/unnest..html">unnest.()</a></code>: Works when the only column is the list column (<a href='https://github.com/markfairbanks/tidytable/issues/144'>#144</a>)</li>
 </ul>
 </div>
 </div>
@@ -272,9 +288,9 @@
 <li><code><a href="../reference/left_join..html">semi_join.()</a></code></li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level4">
+<div id="bug-fixes-1" class="section level4">
 <h4 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h4>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h4>
 <ul>
 <li>
 <code><a href="../reference/rename..html">rename.()</a></code>: Works when there are spaces in the column names (<a href='https://github.com/markfairbanks/tidytable/issues/109'>#109</a>)</li>
@@ -311,9 +327,9 @@
 <code><a href="../reference/summarize..html">summarize.()</a></code>: Added <code>.sort</code> arg to optionally sort the resulting data.table</li>
 </ul>
 </div>
-<div id="bug-fixes-1" class="section level4">
+<div id="bug-fixes-2" class="section level4">
 <h4 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h4>
+<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h4>
 <ul>
 <li>
 <code><a href="../reference/transmute..html">transmute.()</a></code>: Doesn’t drop “by” columns (<a href='https://github.com/markfairbanks/tidytable/issues/98'>#98</a>)</li>
@@ -436,9 +452,9 @@
 </li>
 </ul>
 </div>
-<div id="bug-fixes-2" class="section level4">
+<div id="bug-fixes-3" class="section level4">
 <h4 class="hasAnchor">
-<a href="#bug-fixes-2" class="anchor"></a>Bug fixes:</h4>
+<a href="#bug-fixes-3" class="anchor"></a>Bug fixes:</h4>
 <ul>
 <li>Fixed <code><a href="../reference/distinct..html">distinct.()</a></code> bug where it wasn’t returning unique rows</li>
 </ul>
@@ -562,9 +578,9 @@
 <li><code><a href="../reference/relocate..html">relocate.()</a></code></li>
 </ul>
 </div>
-<div id="bug-fixes-3" class="section level4">
+<div id="bug-fixes-4" class="section level4">
 <h4 class="hasAnchor">
-<a href="#bug-fixes-3" class="anchor"></a>Bug fixes</h4>
+<a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h4>
 <ul>
 <li>
 <code><a href="../reference/group_split..html">group_split.()</a></code>: Now returns a list of tidytables instead of data.tables</li>
@@ -698,9 +714,9 @@
 <code>dt_mutate_across()</code>: Added “by” arg</li>
 </ul>
 </div>
-<div id="bug-fixes-4" class="section level4">
+<div id="bug-fixes-5" class="section level4">
 <h4 class="hasAnchor">
-<a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h4>
+<a href="#bug-fixes-5" class="anchor"></a>Bug fixes</h4>
 <ul>
 <li>
 <code>dt_left_join()</code> fix so columns are ordered correctly</li>
