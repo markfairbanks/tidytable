@@ -152,32 +152,34 @@ Normal selection can be mixed with all `tidyselect` helpers:
 etc.
 
 ``` r
-test_df <- data.table(a = c(1,2,3),
-                      b = c(4,5,6),
-                      c = c("a","a","b"),
-                      d = c("a","a","b"))
+test_df <- data.table(
+  a = c(1,2,3),
+  b1 = c(4,5,6),
+  b2 = c(7,8,9),
+  c = c("a","a","b")
+)
 
 test_df %>%
-  select.(a, b)
-#> # tidytable [3 × 2]
-#>       a     b
-#>   <dbl> <dbl>
-#> 1     1     4
-#> 2     2     5
-#> 3     3     6
+  select.(a, starts_with("b"))
+#> # tidytable [3 × 3]
+#>       a    b1    b2
+#>   <dbl> <dbl> <dbl>
+#> 1     1     4     7
+#> 2     2     5     8
+#> 3     3     6     9
 ```
 
 To drop columns use a `-` sign:
 
 ``` r
 test_df %>%
-  select.(-a, -b)
-#> # tidytable [3 × 2]
-#>   c     d    
-#>   <chr> <chr>
-#> 1 a     a    
-#> 2 a     a    
-#> 3 b     b
+  select.(-a, -starts_with("b"))
+#> # tidytable [3 × 1]
+#>   c    
+#>   <chr>
+#> 1 a    
+#> 2 a    
+#> 3 b
 ```
 
 These same ideas can be used whenever selecting columns in `tidytable`
@@ -192,13 +194,19 @@ A full overview of selection options can be found
 `tidyselect` helpers also work when using `.by`:
 
 ``` r
+test_df <- data.table(
+  a = c(1,2,3),
+  b = c(4,5,6),
+  c = c("a","a","b")
+)
+
 test_df %>%
   summarize.(avg_b = mean(b), .by = where(is.character))
-#> # tidytable [2 × 3]
-#>   c     d     avg_b
-#>   <chr> <chr> <dbl>
-#> 1 a     a       4.5
-#> 2 b     b       6
+#> # tidytable [2 × 2]
+#>   c     avg_b
+#>   <chr> <dbl>
+#> 1 a       4.5
+#> 2 b       6
 ```
 
 ## `rlang` compatibility
