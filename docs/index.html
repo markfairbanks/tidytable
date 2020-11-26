@@ -161,11 +161,12 @@
 <span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;int&gt;</span>
 <span class="co">#&gt; 1 a       1.5     2</span>
 <span class="co">#&gt; 2 b       3       1</span></pre></div>
-<div id="by-vs-group_by" class="section level5">
-<h5 class="hasAnchor">
+<div id="by-vs-group_by" class="section level3">
+<h3 class="hasAnchor">
 <a href="#by-vs-group_by" class="anchor"></a><code>.by</code> vs. <code>group_by()</code>
-</h5>
-<p>A key difference between <code>tidytable</code>/<code>data.table</code> &amp; <code>dplyr</code> is that <code>dplyr</code> can chain multiple functions with a single <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> call:</p>
+</h3>
+<p>A key difference between <code>tidytable</code>/<code>data.table</code> &amp; <code>dplyr</code> is that <code>dplyr</code> can chain multiple functions with a single <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> call.</p>
+<p>We’ll start with an example <code>dplyr</code> pipe chain and then rewrite it in <code>tidytable</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 
@@ -183,9 +184,11 @@
 <span class="co">#&gt; 2     2 a       2  </span>
 <span class="co">#&gt; 3     4 b       4.5</span>
 <span class="co">#&gt; 4     5 b       4.5</span></pre></div>
-<p>In this case both <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice()</a></code> will operate “by group”. This happens until you call <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup()</a></code> at the end of the pipe chain.</p>
-<p>However <code>data.table</code> doesn’t “remember” groups between function calls, so this code would be written like this in <code>tidytable</code>:</p>
+<p>In this case both <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice()</a></code> will operate “by group”. This happens until you call <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup()</a></code> at the end of the chain.</p>
+<p>However <code>data.table</code> doesn’t “remember” groups between function calls, so in <code>tidytable</code> this code becomes:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/markfairbanks/tidytable">tidytable</a></span><span class="op">)</span>
+
 <span class="va">test_df</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/mutate..html">mutate.</a></span><span class="op">(</span>avg_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, .by <span class="op">=</span> <span class="va">y</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/slice..html">slice.</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, .by <span class="op">=</span> <span class="va">y</span><span class="op">)</span>
@@ -229,6 +232,11 @@
 <span class="co">#&gt; 2 a     a    </span>
 <span class="co">#&gt; 3 b     b</span></pre></div>
 <p>These same ideas can be used whenever selecting columns in <code>tidytable</code> functions - for example when using <code><a href="reference/count..html">count.()</a></code>, <code><a href="reference/drop_na..html">drop_na.()</a></code>, <code><a href="reference/mutate_across..html">mutate_across.()</a></code>, <code><a href="reference/pivot_longer..html">pivot_longer.()</a></code>, etc.</p>
+<p>A full overview of selection options can be found <a href="https://tidyselect.r-lib.org/reference/language.html">here</a>.</p>
+<div id="using-tidyselect-in-by" class="section level3">
+<h3 class="hasAnchor">
+<a href="#using-tidyselect-in-by" class="anchor"></a>Using tidyselect in <code>.by</code>
+</h3>
 <p><code>tidyselect</code> helpers also work when using <code>.by</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="va">test_df</span> <span class="op">%&gt;%</span>
@@ -238,25 +246,15 @@
 <span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 a     a       4.5</span>
 <span class="co">#&gt; 2 b     b       6</span></pre></div>
-<p>A full overview of selection options can be found <a href="https://tidyselect.r-lib.org/reference/language.html">here</a>.</p>
+</div>
 </div>
 <div id="rlang-compatibility" class="section level2">
 <h2 class="hasAnchor">
 <a href="#rlang-compatibility" class="anchor"></a><code>rlang</code> compatibility</h2>
-<p><code>rlang</code> can be used to write custom functions with <code>tidytable</code> functions:</p>
+<p><code>rlang</code> can be used to write custom functions with <code>tidytable</code> functions. The embracing shortcut <code>{{ }}</code> works, or you can use <code><a href="https://rlang.r-lib.org/reference/nse-defuse.html">enquo()</a></code> with <code>!!</code> if you prefer.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="co"># Using enquo() with !!</span>
-<span class="va">add_one</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">add_col</span><span class="op">)</span> <span class="op">{</span>
-  
-  <span class="va">add_col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/nse-defuse.html">enquo</a></span><span class="op">(</span><span class="va">add_col</span><span class="op">)</span>
-  
-  <span class="va">data</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="reference/mutate..html">mutate.</a></span><span class="op">(</span>new_col <span class="op">=</span> <span class="op">!</span><span class="op">!</span><span class="va">add_col</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="co"># Using the {{ }} shortcut</span>
 <span class="va">add_one</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">add_col</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">data</span> <span class="op">%&gt;%</span>
     <span class="fu"><a href="reference/mutate..html">mutate.</a></span><span class="op">(</span>new_col <span class="op">=</span> <span class="op">{</span><span class="op">{</span> <span class="va">add_col</span> <span class="op">}</span><span class="op">}</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>

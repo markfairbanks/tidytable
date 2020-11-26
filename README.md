@@ -90,10 +90,13 @@ test_df %>%
 #> 2 b       3       1
 ```
 
-##### `.by` vs. `group_by()`
+### `.by` vs. `group_by()`
 
 A key difference between `tidytable`/`data.table` & `dplyr` is that
-`dplyr` can chain multiple functions with a single `group_by()` call:
+`dplyr` can chain multiple functions with a single `group_by()` call.
+
+We’ll start with an example `dplyr` pipe chain and then rewrite it in
+`tidytable`:
 
 ``` r
 library(dplyr)
@@ -115,12 +118,14 @@ test_df %>%
 ```
 
 In this case both `mutate()` and `slice()` will operate “by group”. This
-happens until you call `ungroup()` at the end of the pipe chain.
+happens until you call `ungroup()` at the end of the chain.
 
 However `data.table` doesn’t “remember” groups between function calls,
-so this code would be written like this in `tidytable`:
+so in `tidytable` this code becomes:
 
 ``` r
+library(tidytable)
+
 test_df %>%
   mutate.(avg_x = mean(x), .by = y) %>%
   slice.(1:2, .by = y)
@@ -179,6 +184,11 @@ These same ideas can be used whenever selecting columns in `tidytable`
 functions - for example when using `count.()`, `drop_na.()`,
 `mutate_across.()`, `pivot_longer.()`, etc.
 
+A full overview of selection options can be found
+[here](https://tidyselect.r-lib.org/reference/language.html).
+
+### Using tidyselect in `.by`
+
 `tidyselect` helpers also work when using `.by`:
 
 ``` r
@@ -191,27 +201,15 @@ test_df %>%
 #> 2 b     b       6
 ```
 
-A full overview of selection options can be found
-[here](https://tidyselect.r-lib.org/reference/language.html).
-
 ## `rlang` compatibility
 
 `rlang` can be used to write custom functions with `tidytable`
-functions:
+functions. The embracing shortcut `{{ }}` works, or you can use
+`enquo()` with `!!` if you prefer.
 
 ``` r
 df <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
 
-# Using enquo() with !!
-add_one <- function(data, add_col) {
-  
-  add_col <- enquo(add_col)
-  
-  data %>%
-    mutate.(new_col = !!add_col + 1)
-}
-
-# Using the {{ }} shortcut
 add_one <- function(data, add_col) {
   data %>%
     mutate.(new_col = {{ add_col }} + 1)
