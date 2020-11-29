@@ -93,10 +93,13 @@ test_df %>%
 ### `.by` vs. `group_by()`
 
 A key difference between `tidytable`/`data.table` & `dplyr` is that
-`dplyr` can chain multiple functions with a single `group_by()` call.
+`dplyr` can have multiple functions operate “by group” with a single
+`group_by()` call.
 
-We’ll start with an example `dplyr` pipe chain and then rewrite it in
-`tidytable`:
+We’ll start with an example `dplyr` pipe chain that utilizes
+`group_by()` and then rewrite it in `tidytable`. The goal is to grab the
+first two rows of each group using `slice()`, then add a row number
+column using `mutate()`:
 
 ``` r
 library(dplyr)
@@ -105,41 +108,39 @@ test_df <- tibble(x = 1:5, y = c("a", "a", "a", "b", "b"))
 
 test_df %>%
   group_by(y) %>%
-  mutate(avg_x = mean(x)) %>%
   slice(1:2) %>%
+  mutate(group_row_num = row_number()) %>%
   ungroup()
 #> # A tibble: 4 x 3
-#>       x y     avg_x
-#>   <int> <chr> <dbl>
-#> 1     1 a       2  
-#> 2     2 a       2  
-#> 3     4 b       4.5
-#> 4     5 b       4.5
+#>       x y     group_row_num
+#>   <int> <chr>         <int>
+#> 1     1 a                 1
+#> 2     2 a                 2
+#> 3     4 b                 1
+#> 4     5 b                 2
 ```
 
-In this case both `mutate()` and `slice()` will operate “by group”. This
+In this case both `slice()` and `mutate()` will operate “by group”. This
 happens until you call `ungroup()` at the end of the chain.
 
-However `data.table` doesn’t “remember” groups between function calls,
-so in `tidytable` this code becomes:
+However `data.table` doesn’t “remember” groups between function calls.
+So in `tidytable` you need to call `.by` in each function you want to
+operate “by group”, and you don’t need to call `ungroup()` at the end.
 
 ``` r
 library(tidytable)
 
 test_df %>%
-  mutate.(avg_x = mean(x), .by = y) %>%
-  slice.(1:2, .by = y)
+  slice.(1:2, .by = y) %>%
+  mutate.(group_row_num = row_number.(), .by = y)
 #> # tidytable [4 × 3]
-#>       x y     avg_x
-#>   <int> <chr> <dbl>
-#> 1     1 a       2  
-#> 2     2 a       2  
-#> 3     4 b       4.5
-#> 4     5 b       4.5
+#>       x y     group_row_num
+#>   <int> <chr>         <int>
+#> 1     1 a                 1
+#> 2     2 a                 2
+#> 3     4 b                 1
+#> 4     5 b                 2
 ```
-
-Note how `.by` is called in both `mutate.()` and `slice.()`, and you
-don’t need to use `ungroup()` at the end.
 
 ## `tidyselect` support
 
@@ -197,16 +198,17 @@ A full overview of selection options can be found
 test_df <- data.table(
   a = c(1,2,3),
   b = c(4,5,6),
-  c = c("a","a","b")
+  c = c("a","a","b"),
+  d = c("a","a","b")
 )
 
 test_df %>%
   summarize.(avg_b = mean(b), .by = where(is.character))
-#> # tidytable [2 × 2]
-#>   c     avg_b
-#>   <chr> <dbl>
-#> 1 a       4.5
-#> 2 b       6
+#> # tidytable [2 × 3]
+#>   c     d     avg_b
+#>   <chr> <chr> <dbl>
+#> 1 a     a       4.5
+#> 2 b     b       6
 ```
 
 ## `rlang` compatibility
