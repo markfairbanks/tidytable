@@ -46,7 +46,7 @@ expand..data.frame <- function(.df, ..., .name_repair = "check_unique") {
 
   setkey(result_df, NULL)
 
-  names(result_df) <- vec_as_names(names(result_df), repair = .name_repair)
+  result_df <- df_name_repair(result_df, .name_repair = .name_repair)
 
   as_tidytable(result_df)
 }

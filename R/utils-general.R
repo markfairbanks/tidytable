@@ -23,6 +23,16 @@ shallow <- function(x, cols = names(x), reset_class = FALSE) {
   ans[]
 }
 
+df_name_repair <- function(.df, .name_repair = "unique") {
+
+  names(.df) <- vec_as_names(
+    names(.df),
+    repair = .name_repair
+  )
+
+  .df
+}
+
 # For internal use only
 # Taken from: https://github.com/r-lib/rlang/blob/master/R/compat-purrr.R
 pmap. <- function(.l, .f, ...) {

@@ -34,7 +34,7 @@ bind_cols. <- function(..., .name_repair = "unique") {
 
   dots <- setDT(unlist(dots, recursive = FALSE), check.names = FALSE)
 
-  names(dots) <- vec_as_names(names(dots), repair = .name_repair)
+  dots <- df_name_repair(dots, .name_repair = .name_repair)
 
   as_tidytable(dots)
 

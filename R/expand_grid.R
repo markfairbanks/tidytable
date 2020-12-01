@@ -22,11 +22,7 @@ expand_grid. <- function(..., .name_repair = "check_unique") {
 
   setkey(result_df, NULL)
 
-  old_names <- names(result_df)
-
-  new_names <- vec_as_names(old_names, repair = .name_repair)
-
-  setnames(result_df, old_names, new_names)
+  result_df <- df_name_repair(result_df, .name_repair = .name_repair)
 
   as_tidytable(result_df)
 }
