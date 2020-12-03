@@ -140,14 +140,7 @@
     <p>Unnest a nested data.table.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>unnest.</span><span class='op'>(</span>
-  <span class='va'>.df</span>,
-  <span class='va'>...</span>,
-  .drop <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  names_sep <span class='op'>=</span> <span class='cn'>NULL</span>,
-  names_repair <span class='op'>=</span> <span class='st'>"unique"</span>,
-  .keep_all <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>deprecated</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>unnest.</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span>, .drop <span class='op'>=</span> <span class='cn'>TRUE</span>, names_sep <span class='op'>=</span> <span class='cn'>NULL</span>, names_repair <span class='op'>=</span> <span class='st'>"unique"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -173,10 +166,6 @@ with <code>names_sep</code> used as a separator.</p></td>
     <tr>
       <th>names_repair</th>
       <td><p>Treatment of duplicate names. See <code><a href='https://vctrs.r-lib.org/reference/vec_as_names.html'>?vctrs::vec_as_names</a></code> for options/details.</p></td>
-    </tr>
-    <tr>
-      <th>.keep_all</th>
-      <td><p>Deprecated. Please use <code>.drop = FALSE</code> to keep unused list columns.</p></td>
     </tr>
     </table>
 

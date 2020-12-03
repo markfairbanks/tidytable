@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Deprecated rename helpers — rename_all. • tidytable</title>
+<title>Deprecated tidytable conversion — as_dt • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Deprecated rename helpers — rename_all." />
-<meta property="og:description" content="These helpers have been deprecated. Please use rename_with.()" />
+<meta property="og:title" content="Deprecated tidytable conversion — as_dt" />
+<meta property="og:description" content="Deprecated way to convert an object to a tidytable. Please use as_tidytable()." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -131,66 +131,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Deprecated rename helpers</h1>
-    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/rename_variants.R'><code>R/rename_variants.R</code></a></small>
-    <div class="hidden name"><code>rename_all..Rd</code></div>
+    <h1>Deprecated tidytable conversion</h1>
+    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/as_tidytable.R'><code>R/as_tidytable.R</code></a></small>
+    <div class="hidden name"><code>as_dt.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>These helpers have been deprecated. Please use <code><a href='rename_with..html'>rename_with.()</a></code></p>
+    <p>Deprecated way to convert an object to a tidytable. Please use <code><a href='as_tidytable.html'>as_tidytable()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rename_all.</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>.fun</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='fu'>rename_at.</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>.vars</span>, <span class='va'>.fun</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='fu'>rename_if.</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>.predicate</span>, <span class='va'>.fun</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>as_dt</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.data</th>
-      <td><p>A data.frame or data.table</p></td>
-    </tr>
-    <tr>
-      <th>.fun</th>
-      <td><p>Function to pass</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Other arguments for the passed function</p></td>
-    </tr>
-    <tr>
-      <th>.vars</th>
-      <td><p>vector <code><a href='https://rdrr.io/r/base/c.html'>c()</a></code> of bare column names for <code>rename_at.()</code> to use</p></td>
-    </tr>
-    <tr>
-      <th>.predicate</th>
-      <td><p>Predicate to pass to <code>rename_if.()</code></p></td>
+      <th>x</th>
+      <td><p>An R object</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>
-  x <span class='op'>=</span> <span class='fl'>1</span>,
-  y <span class='op'>=</span> <span class='fl'>2</span>,
-  double_x <span class='op'>=</span> <span class='fl'>2</span>,
-  double_y <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='op'>-</span><span class='fl'>2</span><span class='op'>:</span><span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='fl'>3</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"b"</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='rename_with..html'>rename_with.</a></span><span class='op'>(</span><span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span><span class='op'>(</span><span class='st'>"x"</span>, <span class='st'>"stuff"</span>, <span class='va'>.x</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [1 × 4]</span><span>
-#&gt;   stuff     y double_stuff double_y
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     2            2        4</div><div class='input'>
-<span class='va'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='rename_with..html'>rename_with.</a></span><span class='op'>(</span><span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span><span class='op'>(</span><span class='st'>"x"</span>, <span class='st'>"stuff"</span>, <span class='va'>.x</span><span class='op'>)</span>, .cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>double_x</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [1 × 4]</span><span>
-#&gt;   stuff     y double_stuff double_y
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     2            2        4</div></span></pre>
+  <span class='fu'><a href='as_tidytable.html'>as_tidytable</a></span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [5 × 2]</span><span>
+#&gt;       x c.rep..a...3...rep..b...2..
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                      
+#&gt; </span><span style='color: #555555;'>1</span><span>    -</span><span style='color: #BB0000;'>2</span><span> a                          
+#&gt; </span><span style='color: #555555;'>2</span><span>    -</span><span style='color: #BB0000;'>1</span><span> a                          
+#&gt; </span><span style='color: #555555;'>3</span><span>     0 a                          
+#&gt; </span><span style='color: #555555;'>4</span><span>     1 b                          
+#&gt; </span><span style='color: #555555;'>5</span><span>     2 b                          </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
