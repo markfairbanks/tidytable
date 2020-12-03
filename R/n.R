@@ -20,16 +20,5 @@
 #' test_df %>%
 #'   mutate.(count = n.())
 n. <- function() {
-
   eval_tidy(expr(.N), env = caller_env())
 }
-
-# deprecate_soft("0.5.3", "tidytable::n.()",
-#                details = paste(
-#                  c("Using n.() is much slower than the data.table helper .N and should be avoided.",
-#                    "",
-#                    "  # Good",
-#                    "  df %>% summarize.(count = .N)",
-#                    "",
-#                    "  # Bad",
-#                    "  df %>% summarize.(count = n.())"), collapse = "\n"))

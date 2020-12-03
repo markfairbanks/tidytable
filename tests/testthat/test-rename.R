@@ -104,13 +104,12 @@ test_that("rename_if() works with predicate", {
 })
 
 # twiddle testing -----------------------------------
-test_that("rename_across() works with twiddle", {
+test_that("rename_with.() works with twiddle", {
   df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   anon_df <- df %>%
-    as_tidytable() %>%
-    rename_across.(c(starts_with("x")), ~ paste0(.x, "_append"))
+    rename_with.(function(.x) paste0(.x, "_append"), c(starts_with("x")))
   twiddle_df <- df %>%
-    rename_across.(c(starts_with("x")), ~ paste0(.x, "_append"))
+    rename_with.(~ paste0(.x, "_append"), c(starts_with("x")))
 
   expect_equal(anon_df, twiddle_df)
 })
@@ -118,11 +117,9 @@ test_that("rename_across() works with twiddle", {
 test_that("rename_all() works with twiddle", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2))
   anon_df <- df %>%
-    as_tidytable() %>%
     rename_all.(function(.x) paste0(.x, "_append"))
 
   twiddle_df <- df %>%
-    as_tidytable() %>%
     rename_all.(~ paste0(.x, "_append"))
 
   expect_named(twiddle_df, c("x_append", "y_append"))

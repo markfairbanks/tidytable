@@ -20,12 +20,14 @@ reference:
   - starts_with("bind")
   - case_when.
   - count.
+  - desc.
   - distinct.
   - group_split.
   - ifelse.
   - lags.
   - left_join.
   - mutate_across.
+  - n.
   - pull.
   - relocate.
   - rename.

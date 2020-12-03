@@ -3,15 +3,12 @@
 \name{rename_all.}
 \alias{rename_all.}
 \alias{rename_at.}
-\alias{rename_across.}
 \alias{rename_if.}
 \title{Deprecated rename helpers}
 \usage{
 rename_all.(.data, .fun, ...)
 
 rename_at.(.data, .vars, .fun, ...)
-
-rename_across.(.data, .cols, .fun, ...)
 
 rename_if.(.data, .predicate, .fun, ...)
 }
@@ -23,8 +20,6 @@ rename_if.(.data, .predicate, .fun, ...)
 \item{...}{Other arguments for the passed function}
 
 \item{.vars}{vector \code{c()} of bare column names for \code{rename_at.()} to use}
-
-\item{.cols}{vector \code{c()} of bare column names for \code{rename_across.()} to use}
 
 \item{.predicate}{Predicate to pass to \code{rename_if.()}}
 }

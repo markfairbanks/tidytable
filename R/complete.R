@@ -6,7 +6,6 @@
 #' @param .df A data.frame or data.table
 #' @param ... Columns to expand
 #' @param fill A named list of values to fill NAs with.
-#' @param .fill This argument has been renamed to fill and is deprecated
 #'
 #' @export
 #'
@@ -18,15 +17,12 @@
 #'
 #' test_df %>%
 #'   complete.(x, y, fill = list(z = 10))
-complete. <- function(.df, ..., fill = list(), .fill = NULL) {
+complete. <- function(.df, ..., fill = list()) {
   UseMethod("complete.")
 }
 
 #' @export
-complete..data.frame <- function(.df, ..., fill = list(), .fill = NULL) {
-
-  if (!is.null(.fill))
-    deprecate_stop("0.5.5", "tidytable::complete.(.fill = )", "complete(fill = )")
+complete..data.frame <- function(.df, ..., fill = list()) {
 
   dots <- enquos(...)
 

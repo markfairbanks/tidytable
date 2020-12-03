@@ -12,7 +12,9 @@
 #' @export
 #'
 #' @examples
-#' data.frame(x = 1:3) %>%
+#' test_df <- data.frame(x = -2:2, c(rep("a", 3), rep("b", 2)))
+#'
+#' test_df %>%
 #'   as_tidytable()
 as_tidytable <- function(x) {
   UseMethod("as_tidytable")
@@ -33,14 +35,6 @@ as_tidytable.default <- function(x) {
   add_class(as.data.table(x))
 }
 
-#' @export
-#' @rdname as_tidytable
-as_dt <- function(x) {
-  deprecate_soft("0.5.5", "tidytable::as_dt()", "as_tidytable()")
-
-  as_tidytable(x)
-}
-
 # Add tidytable class to a data.table
 add_class <- function(.df) {
 
@@ -48,4 +42,24 @@ add_class <- function(.df) {
 
   .df
 
+}
+
+#' Deprecated tidytable conversion
+#'
+#' @description
+#' Deprecated way to convert an object to a tidytable. Please use `as_tidytable()`.
+#'
+#' @param x An R object
+#'
+#' @export
+#'
+#' @examples
+#' test_df <- data.frame(x = -2:2, c(rep("a", 3), rep("b", 2)))
+#'
+#' test_df %>%
+#'   as_tidytable()
+as_dt <- function(x) {
+  deprecate_stop("0.5.5", "tidytable::as_dt()", "as_tidytable()")
+
+  as_tidytable(x)
 }

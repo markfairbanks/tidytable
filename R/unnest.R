@@ -12,7 +12,6 @@
 #' with `names_sep` used as a separator.
 #'
 #' @param names_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details.
-#' @param .keep_all Deprecated. Please use `.drop = FALSE` to keep unused list columns.
 #'
 #' @export
 #'
@@ -37,8 +36,7 @@ unnest. <- function(.df,
                     ...,
                     .drop = TRUE,
                     names_sep = NULL,
-                    names_repair = "unique",
-                    .keep_all = deprecated()) {
+                    names_repair = "unique") {
   UseMethod("unnest.")
 }
 
@@ -47,8 +45,7 @@ unnest..data.frame <- function(.df,
                                ...,
                                .drop = TRUE,
                                names_sep = NULL,
-                               names_repair = "unique",
-                               .keep_all = deprecated()) {
+                               names_repair = "unique") {
 
   .df <- as_tidytable(.df)
 
@@ -64,12 +61,6 @@ unnest..data.frame <- function(.df,
   else dots <- select_dots_sym(.df, ...)
 
   keep_cols <- data_names[!list_flag]
-
-  if (!is_missing(.keep_all)) {
-    .drop <- !.keep_all
-
-    deprecate_warn("0.5.6", "tidytable::unnest.(.keep_all = )", "unnest.(.drop = )")
-  }
 
   if (!.drop) {
     list_cols <- data_names[list_flag]

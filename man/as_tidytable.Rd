@@ -2,12 +2,9 @@
 % Please edit documentation in R/as_tidytable.R
 \name{as_tidytable}
 \alias{as_tidytable}
-\alias{as_dt}
 \title{Coerce an object to a data.table/tidytable}
 \usage{
 as_tidytable(x)
-
-as_dt(x)
 }
 \arguments{
 \item{x}{An R object}
@@ -20,6 +17,8 @@ Note that all tidytable functions automatically convert data.frames & data.table
 As such this function will rarely need to be used by the user.
 }
 \examples{
-data.frame(x = 1:3) \%>\%
+test_df <- data.frame(x = -2:2, c(rep("a", 3), rep("b", 2)))
+
+test_df \%>\%
   as_tidytable()
 }
