@@ -50,24 +50,30 @@ fill..data.frame <- function(.df, ...,
 
   with_by <- !quo_is_null(.by)
 
-  if (with_by) col_order <- copy(names(.df))
+  if (with_by) col_order <- names(.df)
+
+  select_cols <- syms(select_cols)
 
   if (all(numeric_flag)) {
 
     # Use data.table::nafill() if all numeric
-    select_cols <- syms(select_cols)
-
     if (.direction %in% c("down", "up")) {
       .type <- switch(.direction, "down" = "locf", "up" = "nocb")
 
-      .df <- mutate_across.(.df, c(!!!select_cols), nafill, .type, .by = !!.by)
+      .df <- mutate_across.(
+        .df, c(!!!select_cols), nafill, .type, .by = !!.by
+      )
     } else if (.direction == "downup") {
       .df <- mutate_across.(
-        .df, c(!!!select_cols), ~ nafill(nafill(.x, type = "locf"), type = "nocb"), .by = !!.by
+        .df, c(!!!select_cols),
+        ~ nafill(nafill(.x, type = "locf"), type = "nocb"),
+        .by = !!.by
       )
     } else {
       .df <- mutate_across.(
-        .df, c(!!!select_cols), ~ nafill(nafill(.x, type = "nocb"), type = "locf"), .by = !!.by
+        .df, c(!!!select_cols),
+        ~ nafill(nafill(.x, type = "nocb"), type = "locf"),
+        .by = !!.by
       )
     }
 
