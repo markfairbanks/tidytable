@@ -48,6 +48,9 @@ tidyselect::last_col
 
 ## data.table ------------------------
 #' @export
+data.table::`%between%`
+
+#' @export
 data.table::data.table
 
 #' @export
