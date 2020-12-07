@@ -36,7 +36,7 @@ Imports:
     rlang (>= 0.4.7),
     methods,
     tidyselect (>= 1.1.0),
-    vctrs (>= 0.3.1),
+    vctrs (>= 0.3.5),
     lifecycle (>= 0.2.0),
     glue (>= 1.4.0),
     tibble (>= 2.1.3)

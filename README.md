@@ -9,7 +9,7 @@
 status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
 [![](https://img.shields.io/badge/dev%20-0.5.6.9-green.svg)](https://github.com/markfairbanks/tidytable)
 [![CRAN RStudio mirror
-downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey)](https://markfairbanks.github.io/tidytable/)
+downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=blue)](https://markfairbanks.github.io/tidytable/)
 <!-- badges: end -->
 
 #### Why `tidytable`?
@@ -123,7 +123,7 @@ happens until you call `ungroup()` at the end of the chain.
 
 However `data.table` doesn’t “remember” groups between function calls.
 So in `tidytable` you need to call `.by` in each function you want to
-operate “by group”, and you don’t need to call `ungroup()` at the end.
+operate “by group”, and you don’t need to call `ungroup()` at the end:
 
 ``` r
 library(tidytable)

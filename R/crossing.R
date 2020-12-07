@@ -52,7 +52,7 @@ crossing_df <- function(..., .name_repair = "check_unique") {
     each <- lg / cumprod(lgs)
     times <- lg / each / lgs
 
-    out <- tidytable:::pmap.(
+    out <- pmap.(
       list(x = l, each = each, times = times, x_name = names(l)),
       make_cj_tidytable
     )

@@ -185,7 +185,7 @@
 <span class="co">#&gt; 3     4 b                 1</span>
 <span class="co">#&gt; 4     5 b                 2</span></code></pre></div>
 <p>In this case both <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> will operate “by group”. This happens until you call <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup()</a></code> at the end of the chain.</p>
-<p>However <code>data.table</code> doesn’t “remember” groups between function calls. So in <code>tidytable</code> you need to call <code>.by</code> in each function you want to operate “by group”, and you don’t need to call <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup()</a></code> at the end.</p>
+<p>However <code>data.table</code> doesn’t “remember” groups between function calls. So in <code>tidytable</code> you need to call <code>.by</code> in each function you want to operate “by group”, and you don’t need to call <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup()</a></code> at the end:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/markfairbanks/tidytable">tidytable</a></span><span class="op">)</span>
 
@@ -351,8 +351,7 @@
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=tidytable"><img src="https://www.r-pkg.org/badges/version/tidytable" alt="CRAN status"></a></li>
 <li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.5.6.9-green.svg"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
-<li><a href="https://markfairbanks.github.io/tidytable/"><img src="https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey" alt="CRAN RStudio mirror downloads"></a></li>
+<li><a href="https://markfairbanks.github.io/tidytable/"><img src="https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=blue" alt="CRAN RStudio mirror downloads"></a></li>
 </ul>
 </div>
 </div>
