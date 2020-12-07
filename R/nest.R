@@ -60,12 +60,3 @@ nest_by..data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
   .df
 
 }
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams nest_by.
-dt_group_nest <- function(.df, ..., .key = "data", .keep = FALSE) {
-  deprecate_stop("0.5.2", "tidytable::dt_group_nest()", "nest_by.()")
-
-  nest_by.(.df, ..., .key = .key, .keep = .keep)
-}

@@ -4,7 +4,7 @@
 \alias{complete.}
 \title{Complete a data.table with missing combinations of data}
 \usage{
-complete.(.df, ..., fill = list(), .fill = NULL)
+complete.(.df, ..., fill = list())
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -12,8 +12,6 @@ complete.(.df, ..., fill = list(), .fill = NULL)
 \item{...}{Columns to expand}
 
 \item{fill}{A named list of values to fill NAs with.}
-
-\item{.fill}{This argument has been renamed to fill and is deprecated}
 }
 \description{
 Turns implicit missing values into explicit missing values.

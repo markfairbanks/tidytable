@@ -2,12 +2,9 @@
 % Please edit documentation in R/top_n.R
 \name{top_n.}
 \alias{top_n.}
-\alias{dt_top_n}
 \title{Select top (or bottom) n rows (by value)}
 \usage{
 top_n.(.df, n = 5, wt = NULL, .by = NULL)
-
-dt_top_n(.df, n = 5, wt = NULL, .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

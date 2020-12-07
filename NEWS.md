@@ -1,4 +1,24 @@
-# tidytable 0.5.6 (in development)
+# tidytable 0.5.7 (in development)
+
+#### Deprecations
+* The `dt_verb()` versions of functions have been removed from the package.
+They have been deprecated with warnings since v0.5.2
+
+#### Functionality improvements
+* `get_dummies.()`: Dummy columns are now sorted in alphabetical order
+* `distinct.()`: Can rename columns (#153)
+* `pivot_wider.()`: Added `values_fill` argument
+
+#### Functions with notable speed improvements
+* `get_dummies.()`
+* `fill.()`
+
+#### Bug fixes
+* `mutate.()`: Can delete a column using `NULL` when `.by` is provided (#151)
+* `mutate_across.()`: Can reference other columns in .fns call (#145)
+* `unnest.()`: Works when the only column is the list column (#144)
+
+# tidytable 0.5.6
 
 #### Breaking changes
 * `bind_cols.()`: Name repair uses `vec_as_names()` instead of `vec_as_names_legacy()`
@@ -6,7 +26,9 @@
 #### Functionality improvements
 * `bind_cols.()`: Added `.name_repair` arg
 * `unnest.()`: Added `names_sep` and `names_repair` args
-* `print()`: Added `n`, `width`, and `n_extra` args
+* `print()`
+  + Added `n`, `width`, and `n_extra` args
+  + Now prints like tibbles in all cases (special thanks to @moutikabdessabour)
 * `slice.()`: Can now drop specified rows with negative numbers
 
 #### New functions

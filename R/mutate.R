@@ -78,20 +78,27 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
 
     data_env <- env(quo_get_env(dots[[1]]), .df = .df, .by = .by)
 
-    eval_quo(
-      .df[, ':='(!!!dots), by = .by],
-      new_data_mask(data_env), env = caller_env()
-    )
+    # Check for NULL inputs so columns can be deleted
+    null_flag <- map_lgl.(dots, quo_is_null)
+
+    if (any(null_flag)) {
+      null_dots <- dots[null_flag]
+
+      dots <- dots[!null_flag]
+
+      eval_quo(
+        .df[, ':='(!!!null_dots)],
+        new_data_mask(data_env), env = caller_env()
+      )
+    }
+
+    if (length(dots) > 0) {
+      eval_quo(
+        .df[, ':='(!!!dots), by = .by],
+        new_data_mask(data_env), env = caller_env()
+      )
+    }
 
   }
   .df[]
-}
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams mutate.
-dt_mutate <- function(.df, ..., .by = NULL) {
-  deprecate_stop("0.5.2", "tidytable::dt_mutate()", "mutate.()")
-
-  mutate.(.df, ..., .by = {{ .by }})
 }

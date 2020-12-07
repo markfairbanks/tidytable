@@ -8,10 +8,10 @@
 #' @importFrom methods as
 #' @importFrom stats as.formula na.omit
 #' @importFrom tibble glimpse trunc_mat
-#' @importFrom utils capture.output head tail type.convert
+#' @importFrom utils capture.output head packageName tail type.convert
 NULL
 
-globalVariables(c(".", "name", "value", "..all_cols", "..select_cols",
+globalVariables(c(".", "name", "value", "..select_cols",
                   "..keep_names", "..unite_cols", "..keep_cols", ".env", ".id", "where"))
 
 #' @docType import
@@ -47,6 +47,9 @@ tidyselect::num_range
 tidyselect::last_col
 
 ## data.table ------------------------
+#' @export
+data.table::`%between%`
+
 #' @export
 data.table::data.table
 

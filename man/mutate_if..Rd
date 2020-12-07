@@ -4,9 +4,6 @@
 \alias{mutate_if.}
 \alias{mutate_at.}
 \alias{mutate_all.}
-\alias{dt_mutate_if}
-\alias{dt_mutate_at}
-\alias{dt_mutate_all}
 \title{Deprecated mutate helpers}
 \usage{
 mutate_if.(.df, .predicate, .funs, ..., .by = NULL)
@@ -14,12 +11,6 @@ mutate_if.(.df, .predicate, .funs, ..., .by = NULL)
 mutate_at.(.df, .vars, .funs, ..., .by = NULL)
 
 mutate_all.(.df, .funs, ..., .by = NULL)
-
-dt_mutate_if(.df, .predicate, .funs, ..., .by = NULL)
-
-dt_mutate_at(.df, .vars, .funs, ..., .by = NULL)
-
-dt_mutate_all(.df, .funs, ..., .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

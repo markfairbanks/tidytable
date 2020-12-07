@@ -40,13 +40,13 @@ expand..data.frame <- function(.df, ..., .name_repair = "check_unique") {
   data_env <- env(quo_get_env(dots[[1]]), !!!data_vars)
 
   result_df <- eval_quo(
-    tidytable::crossing.(!!!dots),
+    data.table::CJ(!!!dots, sorted = TRUE, unique = TRUE),
     new_data_mask(data_env), env = caller_env()
   )
 
   setkey(result_df, NULL)
 
-  names(result_df) <- vec_as_names(names(result_df), repair = .name_repair)
+  result_df <- df_name_repair(result_df, .name_repair = .name_repair)
 
-  result_df
+  as_tidytable(result_df)
 }

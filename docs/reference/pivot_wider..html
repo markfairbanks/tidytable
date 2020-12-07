@@ -82,7 +82,7 @@ pivot_longer.(). Syntax based on the tidyr equivalents." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6.9</span>
       </span>
     </div>
 
@@ -144,21 +144,22 @@ decreasing the number of rows. The inverse transformation is
 <code><a href='pivot_longer..html'>pivot_longer.()</a></code>. Syntax based on the <code>tidyr</code> equivalents.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pivot_wider.</span>(
-  <span class='kw'>.df</span>,
-  names_from = <span class='kw'>name</span>,
-  values_from = <span class='kw'>value</span>,
-  id_cols = <span class='kw'>NULL</span>,
-  names_sep = <span class='st'>"_"</span>,
-  values_fn = <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>pivot_wider.</span><span class='op'>(</span>
+  <span class='va'>.df</span>,
+  names_from <span class='op'>=</span> <span class='va'>name</span>,
+  values_from <span class='op'>=</span> <span class='va'>value</span>,
+  id_cols <span class='op'>=</span> <span class='cn'>NULL</span>,
+  names_sep <span class='op'>=</span> <span class='st'>"_"</span>,
+  values_fn <span class='op'>=</span> <span class='cn'>NULL</span>,
+  values_fill <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.df</th>
-      <td><p>the data table to widen</p></td>
+      <td><p>A data.frame or data.table</p></td>
     </tr>
     <tr>
       <th>names_from</th>
@@ -187,28 +188,36 @@ Typically used when you have additional variables that is directly related.
       <th>values_fn</th>
       <td><p>Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.</p></td>
     </tr>
+    <tr>
+      <th>values_fill</th>
+      <td><p>If values are missing, what value should be filled in</p></td>
+    </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
-  z = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>), <span class='fl'>2</span>),
-  stuff = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"x"</span>, <span class='fl'>3</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"y"</span>, <span class='fl'>3</span>)),
-  things = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>)
+    <pre class="examples"><div class='input'><span class='va'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>
+  z <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span><span class='op'>)</span>, <span class='fl'>2</span><span class='op'>)</span>,
+  stuff <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"x"</span>, <span class='fl'>3</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"y"</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>,
+  things <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>
 
-<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>pivot_wider.</span>(names_from = <span class='kw'>stuff</span>, values_from = <span class='kw'>things</span>)
-</div><div class='output co'>#&gt;   z x y
-#&gt; 1 a 1 4
-#&gt; 2 b 2 5
-#&gt; 3 c 3 6</div><div class='input'>
-<span class='kw'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>pivot_wider.</span>(names_from = <span class='kw'>stuff</span>, values_from = <span class='kw'>things</span>, id_cols = <span class='kw'>z</span>)
-</div><div class='output co'>#&gt;   z x y
-#&gt; 1 a 1 4
-#&gt; 2 b 2 5
-#&gt; 3 c 3 6</div><div class='input'>
-</div></pre>
+<span class='va'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>pivot_wider.</span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>stuff</span>, values_from <span class='op'>=</span> <span class='va'>things</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [3 × 3]</span><span>
+#&gt;   z         x     y
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> a         1     4
+#&gt; </span><span style='color: #555555;'>2</span><span> b         2     5
+#&gt; </span><span style='color: #555555;'>3</span><span> c         3     6</div><div class='input'>
+<span class='va'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>pivot_wider.</span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>stuff</span>, values_from <span class='op'>=</span> <span class='va'>things</span>, id_cols <span class='op'>=</span> <span class='va'>z</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [3 × 3]</span><span>
+#&gt;   z         x     y
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> a         1     4
+#&gt; </span><span style='color: #555555;'>2</span><span> b         2     5
+#&gt; </span><span style='color: #555555;'>3</span><span> c         3     6</div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

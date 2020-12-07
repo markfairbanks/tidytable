@@ -12,7 +12,6 @@
 #' with `names_sep` used as a separator.
 #'
 #' @param names_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details.
-#' @param .keep_all Deprecated. Please use `.drop = FALSE` to keep unused list columns.
 #'
 #' @export
 #'
@@ -37,8 +36,7 @@ unnest. <- function(.df,
                     ...,
                     .drop = TRUE,
                     names_sep = NULL,
-                    names_repair = "unique",
-                    .keep_all = deprecated()) {
+                    names_repair = "unique") {
   UseMethod("unnest.")
 }
 
@@ -47,8 +45,7 @@ unnest..data.frame <- function(.df,
                                ...,
                                .drop = TRUE,
                                names_sep = NULL,
-                               names_repair = "unique",
-                               .keep_all = deprecated()) {
+                               names_repair = "unique") {
 
   .df <- as_tidytable(.df)
 
@@ -64,12 +61,6 @@ unnest..data.frame <- function(.df,
   else dots <- select_dots_sym(.df, ...)
 
   keep_cols <- data_names[!list_flag]
-
-  if (!is_missing(.keep_all)) {
-    .drop <- !.keep_all
-
-    deprecate_warn("0.5.6", "tidytable::unnest.(.keep_all = )", "unnest.(.drop = )")
-  }
 
   if (!.drop) {
     list_cols <- data_names[list_flag]
@@ -87,20 +78,20 @@ unnest..data.frame <- function(.df,
   # Get number of repeats for keep cols
   rep_vec <- list_sizes(pull.(.df, !!dots[[1]]))
 
-  keep_df <- .df[, ..keep_cols][vec_rep_each(1:.N, rep_vec)]
+  keep_df <- .df[, ..keep_cols]
 
-  results_df <- bind_cols.(keep_df, unnest_data, .name_repair = names_repair)
+  if (ncol(keep_df) > 0) {
+    keep_df <- keep_df[vec_rep_each(1:.N, rep_vec)]
 
-  results_df
-}
+    result_df <- bind_cols.(keep_df, unnest_data, .name_repair = names_repair)
 
-#' @export
-#' @rdname dt_verb
-#' @inheritParams unnest.
-dt_unnest_legacy <- function(.df, ..., .keep_all = FALSE) {
-  deprecate_stop("0.5.2", "tidytable::dt_unnest_legacy()", "unnest.()")
+  } else {
 
-  unnest.(.df, ..., .keep_all = .keep_all)
+    result_df <- bind_cols.(unnest_data, .name_repair = names_repair)
+
+  }
+
+  result_df
 }
 
 unnest_col <- function(.df, col = NULL, names_sep = NULL) {

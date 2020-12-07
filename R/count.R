@@ -37,12 +37,3 @@ count..data.frame <- function(.df, ...) {
   summarize.(.df, N = .N, .by = c(!!!.by))
 
 }
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams count.
-dt_count <- function(.df, ...) {
-  deprecate_stop("0.5.2", "tidytable::dt_count()", "count.()")
-
-  count.(.df, ...)
-}

@@ -42,75 +42,47 @@ fill..data.frame <- function(.df, ...,
 
   .direction <- arg_match(.direction)
 
-  if (.direction == "down") {
-    filler(.df, ..., .type = "down", .by = !!.by)
-  } else if (.direction == "up") {
-    filler(.df, ..., .type = "up", .by = !!.by)
-  } else if (.direction == "downup") {
-    .df %>%
-      filler(..., .type = "down", .by = !!.by) %>%
-      filler(..., .type = "up", .by = !!.by)
-  } else {
-    .df %>%
-      filler(..., .type = "up", .by = !!.by) %>%
-      filler(..., .type = "down", .by = !!.by)
-  }
-}
+  select_cols <- select_dots_chr(.df, ...)
 
-#' @export
-#' @rdname dt_verb
-#' @inheritParams fill.
-dt_fill <- function(.df, ...,
-                    .direction = c("down", "up", "downup", "updown"),
-                    .by = NULL) {
-
-  deprecate_stop("0.5.2", "tidytable::dt_fill()", "fill.()")
-
-  fill.(.df, ..., .direction = .direction, .by = {{ .by }})
-}
-
-filler <- function(.df, ..., .type = "down", .by = NULL) {
-
-  .type <- switch(.type, "down" = "locf", "up" = "nocb")
-
-  all_cols <- select_dots_chr(.df, ...)
-
-  .by <- enquo(.by)
-
-  subset_data <- .df[, ..all_cols]
+  subset_data <- .df[, ..select_cols]
 
   numeric_flag <- map_lgl.(subset_data, is.numeric)
-  numeric_cols <- all_cols[numeric_flag]
-  other_cols <- all_cols[!numeric_flag]
 
   with_by <- !quo_is_null(.by)
 
   if (with_by) col_order <- names(.df)
 
-  if (length(numeric_cols) > 0) {
+  select_cols <- syms(select_cols)
 
-    numeric_cols <- syms(numeric_cols)
+  if (all(numeric_flag)) {
 
-    .df <- mutate_across.(.df,
-                          c(!!!numeric_cols),
-                          nafill, .type,
-                          .by = !!.by)
+    # Use data.table::nafill() if all numeric
+    if (.direction %in% c("down", "up")) {
+      .type <- switch(.direction, "down" = "locf", "up" = "nocb")
 
-  }
-
-  if (length(other_cols) > 0) {
-
-    other_cols <- syms(other_cols)
-    .df <- shallow(.df)
-
-    .by <- select_vec_chr(.df, !!.by)
-
-    for (col in other_cols) {
-      eval_quo(
-        .df[, !!col := .SD[, !!col][nafill(fifelse(is.na(!!col), NA_integer_, 1:.N), type = !!.type)],
-          by = .by]
+      .df <- mutate_across.(
+        .df, c(!!!select_cols), nafill, .type, .by = !!.by
+      )
+    } else if (.direction == "downup") {
+      .df <- mutate_across.(
+        .df, c(!!!select_cols),
+        ~ nafill(nafill(.x, type = "locf"), type = "nocb"),
+        .by = !!.by
+      )
+    } else {
+      .df <- mutate_across.(
+        .df, c(!!!select_cols),
+        ~ nafill(nafill(.x, type = "nocb"), type = "locf"),
+        .by = !!.by
       )
     }
+
+  } else {
+
+    # Use vctrs::vec_fill_missing() if there are any character cols
+    .df <- mutate_across.(
+      .df, c(!!!select_cols), vec_fill_missing, direction = .direction, .by = !!.by
+    )
   }
 
   if (with_by) setcolorder(.df, col_order)

@@ -71,23 +71,3 @@ mutate_all..data.frame <- function(.df, .funs, ..., .by = NULL) {
 
   mutate_across.(.df, everything(), .funs, ..., .by = {{ .by }})
 }
-
-#' @export
-#' @rdname mutate_if.
-dt_mutate_if <- function(.df, .predicate, .funs, ..., .by = NULL) {
-  deprecate_stop("0.5.2", "tidytable::dt_mutate_if()", "mutate_if.()")
-
-  mutate_if.(.df, .predicate, .funs, ..., .by = {{ .by }})
-}
-
-#' @export
-#' @rdname mutate_if.
-dt_mutate_at <- function(.df, .vars, .funs, ..., .by = NULL) {
-  deprecate_stop("0.5.2", "tidytable::dt_mutate_at()", "mutate_at.()")
-}
-
-#' @export
-#' @rdname mutate_if.
-dt_mutate_all <- function(.df, .funs, ..., .by = NULL) {
-  deprecate_stop("0.5.2", "tidytable::dt_mutate_all()", "mutate_all.()")
-}

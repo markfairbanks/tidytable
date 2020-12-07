@@ -83,7 +83,7 @@ as the dt_verb() functions will be removed by the end of 2020." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -146,140 +146,140 @@ These functions have since been deprecated.</p>
 as the <code>dt_verb()</code> functions will be removed by the end of 2020.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dt_arrange</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>dt_arrange</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_bind_rows</span>(<span class='kw'>...</span>, .id = <span class='kw'>NULL</span>)
+<span class='fu'>dt_bind_rows</span><span class='op'>(</span><span class='va'>...</span>, .id <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_bind_cols</span>(<span class='kw'>...</span>)
+<span class='fu'>dt_bind_cols</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_case</span>(<span class='kw'>...</span>, default = <span class='fl'>NA</span>)
+<span class='fu'>dt_case</span><span class='op'>(</span><span class='va'>...</span>, default <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>
 
-<span class='fu'>dt_count</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>)
+<span class='fu'>dt_count</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_distinct</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .keep_all = <span class='fl'>FALSE</span>)
+<span class='fu'>dt_distinct</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span>, .keep_all <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>dt_drop_na</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>)
+<span class='fu'>dt_drop_na</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_fill</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .direction = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"down"</span>, <span class='st'>"up"</span>, <span class='st'>"downup"</span>, <span class='st'>"updown"</span>), .by = <span class='kw'>NULL</span>)
+<span class='fu'>dt_fill</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span>, .direction <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"down"</span>, <span class='st'>"up"</span>, <span class='st'>"downup"</span>, <span class='st'>"updown"</span><span class='op'>)</span>, .by <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_filter</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .by = <span class='kw'>NULL</span>)
+<span class='fu'>dt_filter</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span>, .by <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_get_dummies</span>(
-  <span class='kw'>.df</span>,
-  cols = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'>where</span>(<span class='kw'>is.character</span>), <span class='fu'>where</span>(<span class='kw'>is.factor</span>)),
-  prefix = <span class='fl'>TRUE</span>,
-  prefix_sep = <span class='st'>"_"</span>,
-  drop_first = <span class='fl'>FALSE</span>,
-  dummify_na = <span class='fl'>TRUE</span>
-)
+<span class='fu'>dt_get_dummies</span><span class='op'>(</span>
+  <span class='va'>.df</span>,
+  cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'>where</span><span class='op'>(</span><span class='va'>is.character</span><span class='op'>)</span>, <span class='fu'>where</span><span class='op'>(</span><span class='va'>is.factor</span><span class='op'>)</span><span class='op'>)</span>,
+  prefix <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  prefix_sep <span class='op'>=</span> <span class='st'>"_"</span>,
+  drop_first <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  dummify_na <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>dt_group_split</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .keep = <span class='fl'>TRUE</span>)
+<span class='fu'>dt_group_split</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span>, .keep <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
-<span class='fu'>dt_ifelse</span>(<span class='kw'>conditions</span>, <span class='kw'>true</span>, <span class='kw'>false</span>, na = <span class='fl'>NA</span>)
+<span class='fu'>dt_ifelse</span><span class='op'>(</span><span class='va'>conditions</span>, <span class='va'>true</span>, <span class='va'>false</span>, na <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>
 
-<span class='fu'>dt_left_join</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, by = <span class='kw'>NULL</span>)
+<span class='fu'>dt_left_join</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, by <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_inner_join</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, by = <span class='kw'>NULL</span>)
+<span class='fu'>dt_inner_join</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, by <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_right_join</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, by = <span class='kw'>NULL</span>)
+<span class='fu'>dt_right_join</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, by <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_full_join</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, by = <span class='kw'>NULL</span>, suffix = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>".x"</span>, <span class='st'>".y"</span>))
+<span class='fu'>dt_full_join</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, by <span class='op'>=</span> <span class='cn'>NULL</span>, suffix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>".x"</span>, <span class='st'>".y"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>dt_anti_join</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, by = <span class='kw'>NULL</span>)
+<span class='fu'>dt_anti_join</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, by <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_map</span>(<span class='kw'>.x</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
+<span class='fu'>dt_map</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.f</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_map_lgl</span>(<span class='kw'>.x</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
+<span class='fu'>dt_map_lgl</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.f</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_map_int</span>(<span class='kw'>.x</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
+<span class='fu'>dt_map_int</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.f</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_map_dbl</span>(<span class='kw'>.x</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
+<span class='fu'>dt_map_dbl</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.f</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_map_chr</span>(<span class='kw'>.x</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
+<span class='fu'>dt_map_chr</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.f</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_map_dfc</span>(<span class='kw'>.x</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
+<span class='fu'>dt_map_dfc</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.f</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_map_dfr</span>(<span class='kw'>.x</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>, .id = <span class='kw'>NULL</span>)
+<span class='fu'>dt_map_dfr</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.f</span>, <span class='va'>...</span>, .id <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_map_df</span>(<span class='kw'>.x</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
+<span class='fu'>dt_map_df</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.f</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_map2</span>(<span class='kw'>.x</span>, <span class='kw'>.y</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
+<span class='fu'>dt_map2</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.y</span>, <span class='va'>.f</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_map2_lgl</span>(<span class='kw'>.x</span>, <span class='kw'>.y</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
+<span class='fu'>dt_map2_lgl</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.y</span>, <span class='va'>.f</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_map2_int</span>(<span class='kw'>.x</span>, <span class='kw'>.y</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
+<span class='fu'>dt_map2_int</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.y</span>, <span class='va'>.f</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_map2_dbl</span>(<span class='kw'>.x</span>, <span class='kw'>.y</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
+<span class='fu'>dt_map2_dbl</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.y</span>, <span class='va'>.f</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_map2_chr</span>(<span class='kw'>.x</span>, <span class='kw'>.y</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
+<span class='fu'>dt_map2_chr</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.y</span>, <span class='va'>.f</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_map2_dfc</span>(<span class='kw'>.x</span>, <span class='kw'>.y</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>)
+<span class='fu'>dt_map2_dfc</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.y</span>, <span class='va'>.f</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_map2_dfr</span>(<span class='kw'>.x</span>, <span class='kw'>.y</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>, .id = <span class='kw'>NULL</span>)
+<span class='fu'>dt_map2_dfr</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.y</span>, <span class='va'>.f</span>, <span class='va'>...</span>, .id <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_map2_df</span>(<span class='kw'>.x</span>, <span class='kw'>.y</span>, <span class='kw'>.f</span>, <span class='kw'>...</span>, .id = <span class='kw'>NULL</span>)
+<span class='fu'>dt_map2_df</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.y</span>, <span class='va'>.f</span>, <span class='va'>...</span>, .id <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_mutate</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .by = <span class='kw'>NULL</span>)
+<span class='fu'>dt_mutate</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span>, .by <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_mutate_across</span>(<span class='kw'>.df</span>, .cols = <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(), <span class='kw'>.fns</span>, <span class='kw'>...</span>, .by = <span class='kw'>NULL</span>)
+<span class='fu'>dt_mutate_across</span><span class='op'>(</span><span class='va'>.df</span>, .cols <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>.fns</span>, <span class='va'>...</span>, .by <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_n</span>()
+<span class='fu'>dt_n</span><span class='op'>(</span><span class='op'>)</span>
 
-<span class='fu'>dt_group_nest</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .key = <span class='st'>"data"</span>, .keep = <span class='fl'>FALSE</span>)
+<span class='fu'>dt_group_nest</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span>, .key <span class='op'>=</span> <span class='st'>"data"</span>, .keep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>dt_pivot_longer</span>(
-  <span class='kw'>.df</span>,
-  cols = <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(),
-  names_to = <span class='st'>"name"</span>,
-  values_to = <span class='st'>"value"</span>,
-  values_drop_na = <span class='fl'>FALSE</span>,
-  <span class='kw'>...</span>
-)
+<span class='fu'>dt_pivot_longer</span><span class='op'>(</span>
+  <span class='va'>.df</span>,
+  cols <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span>,
+  names_to <span class='op'>=</span> <span class='st'>"name"</span>,
+  values_to <span class='op'>=</span> <span class='st'>"value"</span>,
+  values_drop_na <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>dt_pivot_wider</span>(
-  <span class='kw'>.df</span>,
-  names_from = <span class='kw'>name</span>,
-  values_from = <span class='kw'>value</span>,
-  id_cols = <span class='kw'>NULL</span>,
-  names_sep = <span class='st'>"_"</span>,
-  values_fn = <span class='kw'>NULL</span>
-)
+<span class='fu'>dt_pivot_wider</span><span class='op'>(</span>
+  <span class='va'>.df</span>,
+  names_from <span class='op'>=</span> <span class='va'>name</span>,
+  values_from <span class='op'>=</span> <span class='va'>value</span>,
+  id_cols <span class='op'>=</span> <span class='cn'>NULL</span>,
+  names_sep <span class='op'>=</span> <span class='st'>"_"</span>,
+  values_fn <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span>
 
-<span class='fu'>dt_pull</span>(<span class='kw'>.df</span>, var = <span class='op'>-</span><span class='fl'>1</span>)
+<span class='fu'>dt_pull</span><span class='op'>(</span><span class='va'>.df</span>, var <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
 
-<span class='fu'>dt_relocate</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .before = <span class='kw'>NULL</span>, .after = <span class='kw'>NULL</span>)
+<span class='fu'>dt_relocate</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span>, .before <span class='op'>=</span> <span class='cn'>NULL</span>, .after <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_rename</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>)
+<span class='fu'>dt_rename</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_rename_with</span>(<span class='kw'>.df</span>, <span class='kw'>.fn</span>, .cols = <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span>(), <span class='kw'>...</span>)
+<span class='fu'>dt_rename_with</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>.fn</span>, .cols <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_replace_na</span>(<span class='kw'>.x</span>, replace = <span class='fl'>NA</span>)
+<span class='fu'>dt_replace_na</span><span class='op'>(</span><span class='va'>.x</span>, replace <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>
 
-<span class='fu'>dt_row_number</span>()
+<span class='fu'>dt_row_number</span><span class='op'>(</span><span class='op'>)</span>
 
-<span class='fu'>dt_select</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>)
+<span class='fu'>dt_select</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_separate</span>(<span class='kw'>.df</span>, <span class='kw'>col</span>, <span class='kw'>into</span>, sep = <span class='st'>"[^[:alnum:]]+"</span>, remove = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)
+<span class='fu'>dt_separate</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>col</span>, <span class='va'>into</span>, sep <span class='op'>=</span> <span class='st'>"[^[:alnum:]]+"</span>, remove <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>dt_slice</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .by = <span class='kw'>NULL</span>)
+<span class='fu'>dt_slice</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span>, .by <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_slice_head</span>(<span class='kw'>.df</span>, n = <span class='fl'>5</span>, .by = <span class='kw'>NULL</span>)
+<span class='fu'>dt_slice_head</span><span class='op'>(</span><span class='va'>.df</span>, n <span class='op'>=</span> <span class='fl'>5</span>, .by <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_slice_tail</span>(<span class='kw'>.df</span>, n = <span class='fl'>5</span>, .by = <span class='kw'>NULL</span>)
+<span class='fu'>dt_slice_tail</span><span class='op'>(</span><span class='va'>.df</span>, n <span class='op'>=</span> <span class='fl'>5</span>, .by <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_slice_min</span>(<span class='kw'>.df</span>, <span class='kw'>order_by</span>, n = <span class='fl'>1</span>, .by = <span class='kw'>NULL</span>)
+<span class='fu'>dt_slice_min</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>order_by</span>, n <span class='op'>=</span> <span class='fl'>1</span>, .by <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_slice_max</span>(<span class='kw'>.df</span>, <span class='kw'>order_by</span>, n = <span class='fl'>1</span>, .by = <span class='kw'>NULL</span>)
+<span class='fu'>dt_slice_max</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>order_by</span>, n <span class='op'>=</span> <span class='fl'>1</span>, .by <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_summarise</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .by = <span class='kw'>NULL</span>)
+<span class='fu'>dt_summarise</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span>, .by <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_summarize</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .by = <span class='kw'>NULL</span>)
+<span class='fu'>dt_summarize</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span>, .by <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_transmute</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .by = <span class='kw'>NULL</span>)
+<span class='fu'>dt_transmute</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span>, .by <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>dt_unite</span>(<span class='kw'>.df</span>, col = <span class='st'>"new_col"</span>, <span class='kw'>...</span>, sep = <span class='st'>"_"</span>, remove = <span class='fl'>TRUE</span>, na.rm = <span class='fl'>FALSE</span>)
+<span class='fu'>dt_unite</span><span class='op'>(</span><span class='va'>.df</span>, col <span class='op'>=</span> <span class='st'>"new_col"</span>, <span class='va'>...</span>, sep <span class='op'>=</span> <span class='st'>"_"</span>, remove <span class='op'>=</span> <span class='cn'>TRUE</span>, na.rm <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>dt_unnest_legacy</span>(<span class='kw'>.df</span>, <span class='kw'>...</span>, .keep_all = <span class='fl'>FALSE</span>)</pre>
+<span class='fu'>dt_unnest_legacy</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span>, .keep_all <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

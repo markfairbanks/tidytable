@@ -49,12 +49,3 @@ desc_as_minus <- function(quosure) {
   }
   quosure
 }
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams arrange.
-dt_arrange <- function(.df, ...) {
-  deprecate_stop("0.5.2", "tidytable::dt_arrange()", "arrange.()")
-
-  arrange.(.df, ...)
-}

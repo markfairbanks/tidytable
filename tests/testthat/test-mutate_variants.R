@@ -243,3 +243,33 @@ test_that("mutate_across.() works with .by enhanced selection", {
   expect_equal(results_df$x, c(1.5, 1.5, 3))
   expect_equal(results_df$y, c(4.5, 4.5, 6))
 })
+
+test_that("_across.() can refer to variables in the data.table", {
+  test_df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
+
+  results_df <- test_df %>%
+    mutate_across.(c(x, y), ~ .x + y)
+
+  expect_equal(results_df$x, c(3,3,3))
+  expect_equal(results_df$y, c(4,4,4))
+})
+
+test_that("_across.() can refer to variables in the data.table w/ list of .fns", {
+  test_df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
+
+  results_df <- test_df %>%
+    mutate_across.(x, list(~ .x + 1, new = ~ .x + y))
+
+  expect_equal(results_df$x_1, c(2,2,2))
+  expect_equal(results_df$x_new, c(3,3,3))
+})
+
+test_that("_across.() can use bare functions", {
+  test_df <- tidytable(x = 1:3, y = 2:4, z = c("a", "a", "b"))
+
+  results_df <- test_df %>%
+    mutate_across.(c(x, y), between, 1, 3)
+
+  expect_equal(results_df$x, c(TRUE, TRUE, TRUE))
+  expect_equal(results_df$y, c(TRUE, TRUE, FALSE))
+})

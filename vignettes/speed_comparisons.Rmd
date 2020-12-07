@@ -26,11 +26,16 @@ A few notes:
 * `setDTthreads(4)` was used for `data.table` & `tidytable` timings.
 * Modify-by-reference was used in `data.table` when being compared to `mutate.()` & `dplyr::mutate()`
 * `fill.()` & `tidyr::fill()` both work with character/factor/logical columns, whereas `data.table::nafill()` does not. Testing only included numeric columns due to this constraint.
-* `case.()` & `dplyr::case_when()` both can have a default value that is a vector, whereas `data.table::fcase()` can not. Testing used a default value of length 1 due to this constraint.
-* `dtplyr` is missing timings for functions that are not yet implemented in the package; this includes `pivot_wider()` & `unnest()`, among others.
+* `dtplyr` is missing timings for functions that are not yet implemented in the package.
 * `pandas` comparisons are in the process of being added - more will be added soon.
+* All tests are run 5 times. The times shown are the median of those 5 runs.
 * All timings are in milliseconds.
 * All tests can be found in the source code [here](https://github.com/markfairbanks/tidytable/blob/master/vignettes/speed_comparisons.Rmd).
+* FAQ - Why are some `tidytable` functions faster than their `data.table` counterpart?
+  + All R functions have some slight natural variation in their execution time. 
+  If a `tidytable` function appears to be "faster" than `data.table` it's due to this.
+  However one goal of these tests is to show that the "time cost" of translating `tidyverse` syntax
+  to `data.table` is negligible to the user.
 * Lastly I'd like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.
 
 ```{r benchmark_setup, echo=FALSE}
@@ -40,7 +45,8 @@ setDTthreads(4)
 iters <- 5
 
 set.seed(123)
-data_size <- 10000000
+initial_data_size <- 10000000
+data_size <- initial_data_size
 test_dt <- tidytable(a = sample(1:20, data_size, TRUE),
                      b = sample(1:20, data_size, TRUE),
                      c = sample(c("a","a","b","c","d"), data_size, TRUE),
@@ -95,7 +101,7 @@ inv_gc(); inv_gc();
 ```{r arrange, echo=FALSE}
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-data_size <- 1000000
+data_size <- initial_data_size * .1
 test_dt <- tidytable(a = sample(1:20, data_size, TRUE),
                      b = sample(1:20, data_size, TRUE),
                      c = sample(c("a","a","b","c","d"), data_size, TRUE),
@@ -129,7 +135,7 @@ inv_gc(); inv_gc();
 ```{r fill, echo = FALSE}
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-size <- 2e6
+size <- initial_data_size * .2
 fill_dt <- tidytable(
   id = sample(1:3, size, replace = TRUE),
   # chr = sample(c("a","a","a","b","b",NA), size, replace = TRUE),
@@ -142,9 +148,6 @@ fill_marks <- bench::mark(
   tidyverse = fill(group_by(fill_tbl, id), int1, int2),
   tidytable = fill.(fill_dt, int1, int2, .by = id),
   # needs shallow copy or subsequent runs won't have NAs to fill
-  # data.table = tidytable:::shallow(fill_dt)[, ':='(int1 = nafill(int1, type = "locf"),
-  #                                                  int2 = nafill(int2, type = "locf")),
-  #                                           by = id],
   data.table = tidytable:::shallow(fill_dt)[, c("int1", "int2") := lapply(.SD, nafill, type = "locf"),
                                             by = id],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
@@ -155,18 +158,20 @@ fill_marks <- bench::mark(
 ```{r case, echo=FALSE}
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-x <- rnorm(3000000)
+data_size <- initial_data_size * .3
+x <- rnorm(data_size)
 median_x <-  median(x)
 
 case_marks <- bench::mark(
   tidyverse = case_when(x < median_x ~ 1,
                         x >= median_x ~ 2,
-                        TRUE ~ NA_real_),
+                        TRUE ~ 3),
   tidytable = case.(x < median_x, 1,
                     x >= median_x, 2,
-                    default = NA),
+                    default = 3),
   data.table = fcase(x < median_x, 1,
                      x >= median_x, 2,
+                     rep(TRUE, length(x)), 3,
                      default = NA),
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
@@ -178,8 +183,9 @@ remove(x, median_x)
 
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-wider_tbl <- expand_grid(case = as.character(seq(1, 2000)),
-                         year = seq(1900, 2000),
+data_size <- initial_data_size/5000
+wider_tbl <- expand_grid(case = as.character(seq(1, data_size)),
+                         year = seq(1900, data_size),
                          name = c("x", "y", "z")) %>%
   mutate(value = rnorm(nrow(.)))
 
@@ -214,7 +220,7 @@ longer_marks <- bench::mark(
 ```{r left_join, echo=FALSE}
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-data_size <- 1000000
+data_size <- initial_data_size * .1
 left_dt <- tidytable(a = sample(1:20, data_size, TRUE),
                       b = sample(1:20, data_size, TRUE),
                       c = sample(c("a","a","b","c","d"), data_size, TRUE),
@@ -248,7 +254,7 @@ inner_join_marks <- bench::mark(
 ```
 
 ```{r unnest, echo = FALSE}
-data_size <- 300000
+data_size <- initial_data_size * .03
 list_dt <- data.table(x = sample(1:20, data_size, TRUE))
 
 unnest_dt <- data.table(id = 1:5,
@@ -269,7 +275,7 @@ unnest_marks <- bench::mark(
 ```{r nest, echo = FALSE}
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-data_size <- 300000
+data_size <- initial_data_size * .03
 list_df <- data.table(x = sample(1:20, data_size, TRUE))
 
 nest_dt <- data.table(id = 1:5,
@@ -380,9 +386,9 @@ pandas_marks <- tibble(arrange = 355,
 
 all_marks <- all_marks %>%
   left_join(pandas_marks) %>%
-  select(func_tested, data.table, tidytable, dtplyr, tidyverse, pandas, tidytable_vs_dplyr)
+  select.(func_tested, data.table, tidytable, dtplyr, tidyverse, pandas, tidytable_vs_dplyr)
 ```
 
-```{r}
+```{r echo=FALSE}
 all_marks
 ```

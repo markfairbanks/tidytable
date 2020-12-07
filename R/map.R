@@ -29,29 +29,11 @@ map. <- function(.x, .f, ...) {
 }
 
 #' @export
-#' @rdname dt_verb
-#' @inheritParams map.
-dt_map <- function(.x, .f, ...) {
-  deprecate_stop("0.5.2", "tidytable::dt_map()", "map.()")
-
-  map.(.x, .f, ...)
-}
-
-#' @export
 #' @rdname map.
 map_lgl. <- function(.x, .f, ...) {
   .f <- as_function(.f)
 
   vapply(.x, .f, logical(1), ...)
-}
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams map_lgl.
-dt_map_lgl <- function(.x, .f, ...) {
-  deprecate_stop("0.5.2", "tidytable::dt_map_lgl()", "map_lgl.()")
-
-  map_lgl.(.x, .f, ...)
 }
 
 #' @export
@@ -63,29 +45,11 @@ map_int. <- function(.x, .f, ...) {
 }
 
 #' @export
-#' @rdname dt_verb
-#' @inheritParams map_int.
-dt_map_int <- function(.x, .f, ...) {
-  deprecate_stop("0.5.2", "tidytable::dt_map_int()", "map_int.()")
-
-  map_int.(.x, .f, ...)
-}
-
-#' @export
 #' @rdname map.
 map_dbl. <- function(.x, .f, ...) {
   .f <- as_function(.f)
 
   vapply(.x, .f, double(1), ...)
-}
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams map_dbl.
-dt_map_dbl <- function(.x, .f, ...) {
-  deprecate_stop("0.5.2", "tidytable::dt_map_dbl()", "map_dbl.()")
-
-  map_dbl.(.x, .f, ...)
 }
 
 #' @export
@@ -97,29 +61,11 @@ map_chr. <- function(.x, .f, ...) {
 }
 
 #' @export
-#' @rdname dt_verb
-#' @inheritParams map_chr.
-dt_map_chr <- function(.x, .f, ...) {
-  deprecate_stop("0.5.2", "tidytable::dt_map_chr()", "map_chr.()")
-
-  map_chr.(.x, .f, ...)
-}
-
-#' @export
 #' @rdname map.
 map_dfc. <- function(.x, .f, ...) {
   .f <- as_function(.f)
   result_list <- map.(.x, .f, ...)
   bind_cols.(result_list)
-}
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams map_dfc.
-dt_map_dfc <- function(.x, .f, ...) {
-  deprecate_stop("0.5.2", "tidytable::dt_map_dfc()", "map_dfc.()")
-
-  map_dfc.(.x, .f, ...)
 }
 
 #' @export
@@ -133,26 +79,8 @@ map_dfr. <- function(.x, .f, ..., .id = NULL) {
 }
 
 #' @export
-#' @rdname dt_verb
-#' @inheritParams map_dfr.
-dt_map_dfr <- function(.x, .f, ..., .id = NULL) {
-  deprecate_stop("0.5.2", "tidytable::dt_map_dfr()", "map_dfr.()")
-
-  map_dfr.(.x, .f, ..., .id = .id)
-}
-
-#' @export
 #' @rdname map.
 map_df. <- map_dfr.
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams map_df.
-dt_map_df <- function(.x, .f, ...) {
-  deprecate_stop("0.5.2", "tidytable::dt_map_df()", "map_df.()")
-
-  map_df.(.x, .f, ...)
-}
 
 #' @export
 #' @rdname map.

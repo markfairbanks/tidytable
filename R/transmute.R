@@ -35,14 +35,4 @@ transmute..data.frame <- function(.df, ..., .by = NULL) {
   .df[, ..keep_names]
 }
 
-#' @export
-#' @rdname dt_verb
-#' @inheritParams transmute.
-dt_transmute <- function(.df, ..., .by = NULL) {
-  deprecate_stop("0.5.2", "tidytable::dt_transmute()", "transmute.()")
-
-
-  transmute.(.df, ..., .by = {{ .by }})
-}
-
 

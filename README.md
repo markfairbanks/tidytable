@@ -7,9 +7,7 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/dev%20-0.5.5.9-green.svg)](https://github.com/markfairbanks/tidytable)
-[![Lifecycle:
-maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![](https://img.shields.io/badge/dev%20-0.5.6.9-green.svg)](https://github.com/markfairbanks/tidytable)
 [![CRAN RStudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey)](https://markfairbanks.github.io/tidytable/)
 <!-- badges: end -->
@@ -75,13 +73,6 @@ functionality (such as `summarize.()` & `mutate.()`)
 
   - A single column can be passed with `.by = z`
   - Multiple columns can be passed with `.by = c(y, z)`
-  - [`tidyselect`](https://tidyselect.r-lib.org/reference/language.html)
-    can also be used, including using predicates:
-      - Single predicate: `.by = where(is.character)`
-      - Multiple predicates: `.by = c(where(is.character),
-        where(is.factor))`
-      - A combination of predicates and column names: `.by =
-        c(where(is.character), y)`
 
 <!-- end list -->
 
@@ -97,46 +88,97 @@ test_df %>%
 #> 2 b       3       1
 ```
 
+### `.by` vs. `group_by()`
+
+A key difference between `tidytable`/`data.table` & `dplyr` is that
+`dplyr` can have multiple functions operate “by group” with a single
+`group_by()` call.
+
+We’ll start with an example `dplyr` pipe chain that utilizes
+`group_by()` and then rewrite it in `tidytable`. The goal is to grab the
+first two rows of each group using `slice()`, then add a row number
+column using `mutate()`:
+
+``` r
+library(dplyr)
+
+test_df <- tibble(x = 1:5, y = c("a", "a", "a", "b", "b"))
+
+test_df %>%
+  group_by(y) %>%
+  slice(1:2) %>%
+  mutate(group_row_num = row_number()) %>%
+  ungroup()
+#> # A tibble: 4 x 3
+#>       x y     group_row_num
+#>   <int> <chr>         <int>
+#> 1     1 a                 1
+#> 2     2 a                 2
+#> 3     4 b                 1
+#> 4     5 b                 2
+```
+
+In this case both `slice()` and `mutate()` will operate “by group”. This
+happens until you call `ungroup()` at the end of the chain.
+
+However `data.table` doesn’t “remember” groups between function calls.
+So in `tidytable` you need to call `.by` in each function you want to
+operate “by group”, and you don’t need to call `ungroup()` at the end.
+
+``` r
+library(tidytable)
+
+test_df %>%
+  slice.(1:2, .by = y) %>%
+  mutate.(group_row_num = row_number.(), .by = y)
+#> # tidytable [4 × 3]
+#>       x y     group_row_num
+#>   <int> <chr>         <int>
+#> 1     1 a                 1
+#> 2     2 a                 2
+#> 3     4 b                 1
+#> 4     5 b                 2
+```
+
 ## `tidyselect` support
 
 `tidytable` allows you to select/drop columns just like you would in the
-tidyverse.
+tidyverse by utilizing the [`tidyselect`](https://tidyselect.r-lib.org)
+package in the background.
 
-Normal selection can be mixed with:
-
-  - Predicates: `where(is.numeric)`, `where(is.character)`, etc.
-  - Select helpers: `everything()`, `starts_with()`, `ends_with()`,
-    `contains()`, `any_of()`, etc.
-
-<!-- end list -->
+Normal selection can be mixed with all `tidyselect` helpers:
+`everything()`, `starts_with()`, `ends_with()`, `any_of()`, `where()`,
+etc.
 
 ``` r
-test_df <- data.table(a = c(1,2,3),
-                      b = c(4,5,6),
-                      c = c("a","a","b"),
-                      d = c("a","b","c"))
+test_df <- data.table(
+  a = c(1,2,3),
+  b1 = c(4,5,6),
+  b2 = c(7,8,9),
+  c = c("a","a","b")
+)
 
 test_df %>%
-  select.(a, where(is.character))
+  select.(a, starts_with("b"))
 #> # tidytable [3 × 3]
-#>       a c     d    
-#>   <dbl> <chr> <chr>
-#> 1     1 a     a    
-#> 2     2 a     b    
-#> 3     3 b     c
+#>       a    b1    b2
+#>   <dbl> <dbl> <dbl>
+#> 1     1     4     7
+#> 2     2     5     8
+#> 3     3     6     9
 ```
 
 To drop columns use a `-` sign:
 
 ``` r
 test_df %>%
-  select.(-a, -where(is.character))
+  select.(-a, -starts_with("b"))
 #> # tidytable [3 × 1]
-#>       b
-#>   <dbl>
-#> 1     4
-#> 2     5
-#> 3     6
+#>   c    
+#>   <chr>
+#> 1 a    
+#> 2 a    
+#> 3 b
 ```
 
 These same ideas can be used whenever selecting columns in `tidytable`
@@ -146,26 +188,36 @@ functions - for example when using `count.()`, `drop_na.()`,
 A full overview of selection options can be found
 [here](https://tidyselect.r-lib.org/reference/language.html).
 
+### Using tidyselect in `.by`
+
+`tidyselect` helpers also work when using `.by`:
+
+``` r
+test_df <- data.table(
+  a = c(1,2,3),
+  b = c(4,5,6),
+  c = c("a","a","b"),
+  d = c("a","a","b")
+)
+
+test_df %>%
+  summarize.(avg_b = mean(b), .by = where(is.character))
+#> # tidytable [2 × 3]
+#>   c     d     avg_b
+#>   <chr> <chr> <dbl>
+#> 1 a     a       4.5
+#> 2 b     b       6
+```
+
 ## `rlang` compatibility
 
 `rlang` can be used to write custom functions with `tidytable`
-functions:
-
-##### Custom function with `mutate.()`
+functions. The embracing shortcut `{{ }}` works, or you can use
+`enquo()` with `!!` if you prefer.
 
 ``` r
 df <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
 
-# Using enquo() with !!
-add_one <- function(data, add_col) {
-  
-  add_col <- enquo(add_col)
-  
-  data %>%
-    mutate.(new_col = !!add_col + 1)
-}
-
-# Using the {{ }} shortcut
 add_one <- function(data, add_col) {
   data %>%
     mutate.(new_col = {{ add_col }} + 1)
@@ -179,26 +231,6 @@ df %>%
 #> 1     1     1 a           2
 #> 2     1     1 a           2
 #> 3     1     1 b           2
-```
-
-##### Custom function with `summarize.()`
-
-``` r
-df <- data.table(x = 1:10, y = c(rep("a", 6), rep("b", 4)), z = c(rep("a", 6), rep("b", 4)))
-
-find_mean <- function(data, grouping_cols, col) {
-  data %>%
-    summarize.(avg = mean({{ col }}),
-               .by = {{ grouping_cols }})
-}
-
-df %>%
-  find_mean(grouping_cols = c(y, z), col = x)
-#> # tidytable [2 × 3]
-#>   y     z       avg
-#>   <chr> <chr> <dbl>
-#> 1 a     a       3.5
-#> 2 b     b       8.5
 ```
 
 ## Auto-conversion

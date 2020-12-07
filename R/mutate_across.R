@@ -55,6 +55,10 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
 
   .cols <- .cols[.cols %notin% .by]
 
+  data_env <- env(quo_get_env(enquo(.fns)), .df = .df)
+
+  dots <- enquos(...)
+
   if (length(.cols) == 0) return(.df)
 
   if (!is.list(.fns)) {
@@ -66,9 +70,27 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
       repair = "check_unique", quiet = TRUE
     )
 
-    eval_quo(
-      .df[, (.col_names) := map.(.SD, .fns, ...), .SDcols = !!.cols, by = !!.by],
-    )
+    # Build final expression
+    if (is_anon_fun(.fns)) {
+
+      .fns <- as_function(.fns)
+
+      result_expr <- quo(.df[, (!!.col_names) := lapply(.SD, !!.fns, !!!dots), .SDcols = !!.cols, by = !!.by])
+
+    } else {
+
+      env_bind(data_env, .fns = .fns)
+
+      result_expr <- quo(.df[, (!!.col_names) := lapply(.SD, .fns, !!!dots), .SDcols = !!.cols, by = !!.by])
+
+    }
+
+    # Convert result_expr to text and back to expression to avoid environment issues (#145)
+    result_expr <- quo_squash(result_expr)
+    result_expr <- quo_text(result_expr)
+    result_expr <- parse_expr(result_expr)
+
+    eval_tidy(result_expr, new_data_mask(data_env), caller_env())
 
   } else {
 
@@ -95,19 +117,35 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
         warn("\nTo avoid this use a named list in the .fns arg or adjust .names arg\n")
       }
 
-      eval_quo(
-        .df[, (.col_names) := map.(.SD, .fns[[i]]), .SDcols = !!.cols, by = !!.by],
-      )
+      .fn <- .fns[[i]]
+
+      # Build final expression
+      if (is_anon_fun(.fn)) {
+
+        .fn <- as_function(.fn)
+
+        result_expr <- quo(.df[, (!!.col_names) := lapply(.SD, !!.fn, !!!dots), .SDcols = !!.cols, by = !!.by])
+
+      } else {
+
+        env_bind(data_env, .fn = .fn)
+
+        result_expr <- quo(.df[, (!!.col_names) := lapply(.SD, .fn, !!!dots), .SDcols = !!.cols, by = !!.by])
+
+      }
+
+      # Convert result_expr to text and back to expression to avoid environment issues (#145)
+      result_expr <- quo_squash(result_expr)
+      result_expr <- quo_text(result_expr)
+      result_expr <- parse_expr(result_expr)
+
+      eval_tidy(result_expr, new_data_mask(data_env), caller_env())
     }
   }
+
   .df[]
 }
 
-#' @export
-#' @rdname dt_verb
-#' @inheritParams mutate_across.
-dt_mutate_across <- function(.df, .cols = everything(), .fns, ..., .by = NULL) {
-  deprecate_stop("0.5.2", "tidytable::dt_mutate_across()", "mutate_across.()")
-
-  mutate_across.(.df, .cols = {{ .cols }}, .fns, ..., .by = {{ .by }})
+is_anon_fun <- function(fun) {
+  is.null(packageName(get_env(fun))) || is_bare_formula(fun)
 }

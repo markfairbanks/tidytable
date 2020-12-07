@@ -10,8 +10,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%",
-  warning = FALSE,
-  paged.print = FALSE
+  warning = FALSE
 )
 ```
 
@@ -19,8 +18,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/dev%20-0.5.5.9-green.svg)](https://github.com/markfairbanks/tidytable)
-[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![](https://img.shields.io/badge/dev%20-0.5.6.9-green.svg)](https://github.com/markfairbanks/tidytable)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=grey)](https://markfairbanks.github.io/tidytable/)
 <!-- badges: end -->
 
@@ -72,11 +70,6 @@ Group by calls are done from inside any function that has group by functionality
 
 * A single column can be passed with `.by = z`
 * Multiple columns can be passed with `.by = c(y, z)`
-* [`tidyselect`](https://tidyselect.r-lib.org/reference/language.html) can 
-also be used, including using predicates:
-  + Single predicate: `.by = where(is.character)`
-  + Multiple predicates: `.by = c(where(is.character), where(is.factor))`
-  + A combination of predicates and column names: `.by = c(where(is.character), y)`
 
 ```{r}
 test_df %>%
@@ -85,55 +78,88 @@ test_df %>%
              .by = z)
 ```
 
-## `tidyselect` support
+### `.by` vs. `group_by()`
 
-`tidytable` allows you to select/drop columns just like you would in the tidyverse.
+A key difference between `tidytable`/`data.table` & `dplyr` is that `dplyr` can have multiple functions operate "by group" with a single `group_by()` call.
 
-Normal selection can be mixed with:
+We'll start with an example `dplyr` pipe chain that utilizes `group_by()` and then rewrite it in `tidytable`. The goal is to grab the first two rows of each group using `slice()`, then add a row number column using `mutate()`:
 
-* Predicates: `where(is.numeric)`, `where(is.character)`, etc.
-* Select helpers: `everything()`, `starts_with()`, `ends_with()`, `contains()`, `any_of()`, etc.
+```{r message = FALSE}
+library(dplyr)
 
-```{r}
-test_df <- data.table(a = c(1,2,3),
-                      b = c(4,5,6),
-                      c = c("a","a","b"),
-                      d = c("a","b","c"))
+test_df <- tibble(x = 1:5, y = c("a", "a", "a", "b", "b"))
 
 test_df %>%
-  select.(a, where(is.character))
+  group_by(y) %>%
+  slice(1:2) %>%
+  mutate(group_row_num = row_number()) %>%
+  ungroup()
+```
+
+In this case both `slice()` and `mutate()` will operate "by group". This happens until you call `ungroup()` at the end of the chain.
+
+However `data.table` doesn't "remember" groups between function calls. So in `tidytable` you need to call `.by` in each function you want to operate "by group", and you don't need to call `ungroup()` at the end.
+
+```{r message = FALSE}
+library(tidytable)
+
+test_df %>%
+  slice.(1:2, .by = y) %>%
+  mutate.(group_row_num = row_number.(), .by = y)
+```
+
+## `tidyselect` support
+
+`tidytable` allows you to select/drop columns just like you would in the tidyverse by utilizing the [`tidyselect`](https://tidyselect.r-lib.org) package in the background.
+
+Normal selection can be mixed with all `tidyselect` helpers: `everything()`, `starts_with()`, `ends_with()`, `any_of()`, `where()`, etc.
+
+```{r}
+test_df <- data.table(
+  a = c(1,2,3),
+  b1 = c(4,5,6),
+  b2 = c(7,8,9),
+  c = c("a","a","b")
+)
+
+test_df %>%
+  select.(a, starts_with("b"))
 ```
 
 To drop columns use a `-` sign:
 
 ```{r}
 test_df %>%
-  select.(-a, -where(is.character))
+  select.(-a, -starts_with("b"))
 ```
 
 These same ideas can be used whenever selecting columns in `tidytable` functions - for example when using `count.()`, `drop_na.()`, `mutate_across.()`, `pivot_longer.()`, etc.
 
 A full overview of selection options can be found [here](https://tidyselect.r-lib.org/reference/language.html).
 
+### Using tidyselect in `.by`
+
+`tidyselect` helpers also work when using `.by`:
+
+```{r}
+test_df <- data.table(
+  a = c(1,2,3),
+  b = c(4,5,6),
+  c = c("a","a","b"),
+  d = c("a","a","b")
+)
+
+test_df %>%
+  summarize.(avg_b = mean(b), .by = where(is.character))
+```
+
 ## `rlang` compatibility
 
-`rlang` can be used to write custom functions with `tidytable` functions:
-
-##### Custom function with `mutate.()`
+`rlang` can be used to write custom functions with `tidytable` functions. The embracing shortcut `{{ }}` works, or you can use `enquo()` with `!!` if you prefer.
 
 ```{r message = FALSE}
 df <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
 
-# Using enquo() with !!
-add_one <- function(data, add_col) {
-  
-  add_col <- enquo(add_col)
-  
-  data %>%
-    mutate.(new_col = !!add_col + 1)
-}
-
-# Using the {{ }} shortcut
 add_one <- function(data, add_col) {
   data %>%
     mutate.(new_col = {{ add_col }} + 1)
@@ -141,21 +167,6 @@ add_one <- function(data, add_col) {
 
 df %>%
   add_one(x)
-```
-
-##### Custom function with `summarize.()`
-
-```{r}
-df <- data.table(x = 1:10, y = c(rep("a", 6), rep("b", 4)), z = c(rep("a", 6), rep("b", 4)))
-
-find_mean <- function(data, grouping_cols, col) {
-  data %>%
-    summarize.(avg = mean({{ col }}),
-               .by = {{ grouping_cols }})
-}
-
-df %>%
-  find_mean(grouping_cols = c(y, z), col = x)
 ```
 
 ## Auto-conversion

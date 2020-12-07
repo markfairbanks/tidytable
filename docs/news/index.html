@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6.9</span>
       </span>
     </div>
 
@@ -134,9 +134,53 @@
       <small>Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="tidytable-056-in-development" class="section level1">
+    <div id="tidytable-057-in-development" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.7">
+<a href="#tidytable-057-in-development" class="anchor"></a>tidytable 0.5.7 (in development)<small> Unreleased </small>
+</h1>
+<div id="deprecations" class="section level4">
+<h4 class="hasAnchor">
+<a href="#deprecations" class="anchor"></a>Deprecations</h4>
+<ul>
+<li>The <code>dt_verb()</code> versions of functions have been removed from the package. They have been deprecated with warnings since v0.5.2</li>
+</ul>
+</div>
+<div id="functionality-improvements" class="section level4">
+<h4 class="hasAnchor">
+<a href="#functionality-improvements" class="anchor"></a>Functionality improvements</h4>
+<ul>
+<li>
+<code><a href="../reference/get_dummies..html">get_dummies.()</a></code>: Dummy columns are now sorted in alphabetical order</li>
+<li>
+<code><a href="../reference/distinct..html">distinct.()</a></code>: Can rename columns (<a href='https://github.com/markfairbanks/tidytable/issues/153'>#153</a>)</li>
+<li>
+<code><a href="../reference/pivot_wider..html">pivot_wider.()</a></code>: Added <code>values_fill</code> argument</li>
+</ul>
+</div>
+<div id="functions-with-notable-speed-improvements" class="section level4">
+<h4 class="hasAnchor">
+<a href="#functions-with-notable-speed-improvements" class="anchor"></a>Functions with notable speed improvements</h4>
+<ul>
+<li><code><a href="../reference/get_dummies..html">get_dummies.()</a></code></li>
+<li><code><a href="../reference/fill..html">fill.()</a></code></li>
+</ul>
+</div>
+<div id="bug-fixes" class="section level4">
+<h4 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h4>
+<ul>
+<li>
+<code><a href="../reference/mutate..html">mutate.()</a></code>: Can delete a column using <code>NULL</code> when <code>.by</code> is provided (<a href='https://github.com/markfairbanks/tidytable/issues/151'>#151</a>)</li>
+<li>
+<code><a href="../reference/mutate_across..html">mutate_across.()</a></code>: Can reference other columns in .fns call (<a href='https://github.com/markfairbanks/tidytable/issues/145'>#145</a>)</li>
+<li>
+<code><a href="../reference/unnest..html">unnest.()</a></code>: Works when the only column is the list column (<a href='https://github.com/markfairbanks/tidytable/issues/144'>#144</a>)</li>
+</ul>
+</div>
+</div>
+    <div id="tidytable-056" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.6">
-<a href="#tidytable-056-in-development" class="anchor"></a>tidytable 0.5.6 (in development)<small> Unreleased </small>
+<a href="#tidytable-056" class="anchor"></a>tidytable 0.5.6<small> 2020-09-30 </small>
 </h1>
 <div id="breaking-changes" class="section level4">
 <h4 class="hasAnchor">
@@ -147,16 +191,23 @@
 </li>
 </ul>
 </div>
-<div id="functionality-improvements" class="section level4">
+<div id="functionality-improvements-1" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-1" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/bind_cols..html">bind_cols.()</a></code>: Added <code>.name_repair</code> arg</li>
 <li>
 <code><a href="../reference/unnest..html">unnest.()</a></code>: Added <code>names_sep</code> and <code>names_repair</code> args</li>
 <li>
-<code><a href="https://rdrr.io/r/base/print.html">print()</a></code>: Added <code>n</code>, <code>width</code>, and <code>n_extra</code> args</li>
+<code><a href="https://rdrr.io/r/base/print.html">print()</a></code>
+<ul>
+<li>Added <code>n</code>, <code>width</code>, and <code>n_extra</code> args</li>
+<li>Now prints like tibbles in all cases (special thanks to <a href='https://github.com/moutikabdessabour'>@moutikabdessabour</a>)</li>
+</ul>
+</li>
+<li>
+<code><a href="../reference/slice..html">slice.()</a></code>: Can now drop specified rows with negative numbers</li>
 </ul>
 </div>
 <div id="new-functions" class="section level4">
@@ -173,9 +224,16 @@
 <li><code><a href="../reference/desc..html">desc.()</a></code></li>
 </ul>
 </div>
-<div id="deprecations" class="section level4">
+<div id="functions-with-notable-speed-improvements-1" class="section level4">
 <h4 class="hasAnchor">
-<a href="#deprecations" class="anchor"></a>Deprecations</h4>
+<a href="#functions-with-notable-speed-improvements-1" class="anchor"></a>Functions with notable speed improvements</h4>
+<ul>
+<li><code><a href="../reference/slice..html">slice.()</a></code></li>
+</ul>
+</div>
+<div id="deprecations-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#deprecations-1" class="anchor"></a>Deprecations</h4>
 <ul>
 <li>
 <code><a href="../reference/unnest..html">unnest.()</a></code>: <code>.keep_all</code> arg changed to <code>.drop</code>
@@ -210,9 +268,9 @@
 <code><a href="../reference/slice..html">slice.()</a></code>: <code>.by</code> must be named when slicing by group</li>
 </ul>
 </div>
-<div id="functionality-improvements-1" class="section level4">
+<div id="functionality-improvements-2" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-1" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-2" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code>tidytable</code> now integrates better with tidyverse functions through <code>vctrs</code>. This means code such as <code>vec_cbind(tibble::tibble(x = 1:3), tidytable(y = "foo"))</code> will bind the results into a tidytable.</li>
@@ -231,17 +289,17 @@
 <li><code><a href="../reference/left_join..html">semi_join.()</a></code></li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level4">
+<div id="bug-fixes-1" class="section level4">
 <h4 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h4>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h4>
 <ul>
 <li>
 <code><a href="../reference/rename..html">rename.()</a></code>: Works when there are spaces in the column names (<a href='https://github.com/markfairbanks/tidytable/issues/109'>#109</a>)</li>
 </ul>
 </div>
-<div id="functions-with-notable-speed-improvements" class="section level4">
+<div id="functions-with-notable-speed-improvements-2" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functions-with-notable-speed-improvements" class="anchor"></a>Functions with notable speed improvements</h4>
+<a href="#functions-with-notable-speed-improvements-2" class="anchor"></a>Functions with notable speed improvements</h4>
 <ul>
 <li><code><a href="../reference/replace_na..html">replace_na.()</a></code></li>
 </ul>
@@ -258,9 +316,9 @@
 <li>Column names auto-generated by <code><a href="../reference/summarize_across..html">summarize_across.()</a></code> now use a suffix instead of a prefix</li>
 </ul>
 </div>
-<div id="functionality-improvements-2" class="section level4">
+<div id="functionality-improvements-3" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-2" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-3" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/mutate_across..html">mutate_across.()</a></code>: Added <code>.names</code> arg to help with naming newly created columns</li>
@@ -270,9 +328,9 @@
 <code><a href="../reference/summarize..html">summarize.()</a></code>: Added <code>.sort</code> arg to optionally sort the resulting data.table</li>
 </ul>
 </div>
-<div id="bug-fixes-1" class="section level4">
+<div id="bug-fixes-2" class="section level4">
 <h4 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h4>
+<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h4>
 <ul>
 <li>
 <code><a href="../reference/transmute..html">transmute.()</a></code>: Doesn’t drop “by” columns (<a href='https://github.com/markfairbanks/tidytable/issues/98'>#98</a>)</li>
@@ -334,17 +392,17 @@
 <li><code><a href="../reference/uncount..html">uncount.()</a></code></li>
 </ul>
 </div>
-<div id="functionality-improvements-3" class="section level4">
+<div id="functionality-improvements-4" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-3" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-4" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/replace_na..html">replace_na.()</a></code>: Now works on <code>data.frame</code>/<code>data.table</code> inputs as well as vectors</li>
 </ul>
 </div>
-<div id="deprecations-1" class="section level4">
+<div id="deprecations-2" class="section level4">
 <h4 class="hasAnchor">
-<a href="#deprecations-1" class="anchor"></a>Deprecations</h4>
+<a href="#deprecations-2" class="anchor"></a>Deprecations</h4>
 <ul>
 <li>
 <code><a href="../reference/desc..html">desc.()</a></code> has been deprecated due to incompatibility with character columns</li>
@@ -358,12 +416,12 @@
 <ul>
 <li>This version contains general performance improvements</li>
 </ul>
-<div id="deprecations-2" class="section level4">
+<div id="deprecations-3" class="section level4">
 <h4 class="hasAnchor">
-<a href="#deprecations-2" class="anchor"></a>Deprecations</h4>
+<a href="#deprecations-3" class="anchor"></a>Deprecations</h4>
 <ul>
 <li>Group by arg <code>by</code> has been deprecated for <code>.by</code>. This will allow “by” to be used as a column name in <code><a href="../reference/mutate..html">mutate.()</a></code> &amp; <code><a href="../reference/summarize..html">summarize.()</a></code> in future releases.</li>
-<li>All <code><a href="../reference/dt_arrange.html">dt_verb()</a></code> functions are soft deprecated</li>
+<li>All <code>dt_verb()</code> functions are soft deprecated</li>
 </ul>
 </div>
 <div id="new-functions-3" class="section level4">
@@ -373,9 +431,9 @@
 <li><code><a href="../reference/separate_rows..html">separate_rows.()</a></code></li>
 </ul>
 </div>
-<div id="functionality-improvements-4" class="section level4">
+<div id="functionality-improvements-5" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-4" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-5" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/unnest..html">unnest.()</a></code>: Added <code>.keep_all</code> arg to keep all list columns that were not unnested</li>
@@ -395,9 +453,9 @@
 </li>
 </ul>
 </div>
-<div id="bug-fixes-2" class="section level4">
+<div id="bug-fixes-3" class="section level4">
 <h4 class="hasAnchor">
-<a href="#bug-fixes-2" class="anchor"></a>Bug fixes:</h4>
+<a href="#bug-fixes-3" class="anchor"></a>Bug fixes:</h4>
 <ul>
 <li>Fixed <code><a href="../reference/distinct..html">distinct.()</a></code> bug where it wasn’t returning unique rows</li>
 </ul>
@@ -414,17 +472,17 @@
 <code>tidyselect v0.1.1</code> compatibility: Updated functions to use <code>where()</code>
 </li>
 </ul>
-<div id="functionality-improvements-5" class="section level4">
+<div id="functionality-improvements-6" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-5" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-6" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/nest_by..html">nest_by.()</a></code>: Added <code>.keep</code> arg</li>
 </ul>
 </div>
-<div id="deprecations-3" class="section level4">
+<div id="deprecations-4" class="section level4">
 <h4 class="hasAnchor">
-<a href="#deprecations-3" class="anchor"></a>Deprecations</h4>
+<a href="#deprecations-4" class="anchor"></a>Deprecations</h4>
 <ul>
 <li>Old select helpers like <code>everything.()</code> are now replaced by normal helpers like <code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code>
 </li>
@@ -451,9 +509,9 @@
 </li>
 </ul>
 </div>
-<div id="functions-with-notable-speed-improvements-1" class="section level4">
+<div id="functions-with-notable-speed-improvements-3" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functions-with-notable-speed-improvements-1" class="anchor"></a>Functions with notable speed improvements</h4>
+<a href="#functions-with-notable-speed-improvements-3" class="anchor"></a>Functions with notable speed improvements</h4>
 <ul>
 <li><code><a href="../reference/case..html">case.()</a></code></li>
 </ul>
@@ -486,9 +544,9 @@
 <li><code><a href="../reference/unite..html">unite.()</a></code></li>
 </ul>
 </div>
-<div id="functionality-improvements-6" class="section level4">
+<div id="functionality-improvements-7" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-6" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-7" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>Paged printing now works in Rmarkdown</li>
 <li>
@@ -512,18 +570,18 @@
 <code><a href="../reference/transmute..html">transmute.()</a></code>: Summary functions (<code>mean</code>/<code>max</code>/etc.) can now be used</li>
 </ul>
 </div>
-<div id="functions-with-notable-speed-improvements-2" class="section level4">
+<div id="functions-with-notable-speed-improvements-4" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functions-with-notable-speed-improvements-2" class="anchor"></a>Functions with notable speed improvements</h4>
+<a href="#functions-with-notable-speed-improvements-4" class="anchor"></a>Functions with notable speed improvements</h4>
 <ul>
 <li><code><a href="../reference/distinct..html">distinct.()</a></code></li>
 <li><code><a href="../reference/drop_na..html">drop_na.()</a></code></li>
 <li><code><a href="../reference/relocate..html">relocate.()</a></code></li>
 </ul>
 </div>
-<div id="bug-fixes-3" class="section level4">
+<div id="bug-fixes-4" class="section level4">
 <h4 class="hasAnchor">
-<a href="#bug-fixes-3" class="anchor"></a>Bug fixes</h4>
+<a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h4>
 <ul>
 <li>
 <code><a href="../reference/group_split..html">group_split.()</a></code>: Now returns a list of tidytables instead of data.tables</li>
@@ -543,12 +601,12 @@
 <li>All functions are now written as <code>verb.()</code>
 </li>
 <li>
-<code><a href="../reference/dt_arrange.html">dt_verb()</a></code> functions still work, but may be slowly deprecated in future releases</li>
+<code>dt_verb()</code> functions still work, but may be slowly deprecated in future releases</li>
 </ul>
 </div>
-<div id="functionality-improvements-7" class="section level4">
+<div id="functionality-improvements-8" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-7" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-8" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>Enhanced selection now works in “by” calls</li>
 <li>
@@ -566,20 +624,20 @@
 <li><code><a href="../reference/ifelse..html">ifelse.()</a></code></li>
 <li><code><a href="../reference/n..html">n.()</a></code></li>
 <li>
-<code><a href="../reference/nest_by..html">nest_by.()</a></code> replaces <code><a href="../reference/dt_arrange.html">dt_group_nest()</a></code>
+<code><a href="../reference/nest_by..html">nest_by.()</a></code> replaces <code>dt_group_nest()</code>
 </li>
 <li><code><a href="../reference/row_number..html">row_number.()</a></code></li>
 <li><code><a href="../reference/transmute..html">transmute.()</a></code></li>
 <li>
-<code><a href="../reference/unnest..html">unnest.()</a></code> replaces <code><a href="../reference/dt_arrange.html">dt_unnest_legacy()</a></code>
+<code><a href="../reference/unnest..html">unnest.()</a></code> replaces <code>dt_unnest_legacy()</code>
 </li>
 <li>Select helper <code>any_of.()</code>
 </li>
 </ul>
 </div>
-<div id="functions-with-notable-speed-improvements-3" class="section level4">
+<div id="functions-with-notable-speed-improvements-5" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functions-with-notable-speed-improvements-3" class="anchor"></a>Functions with notable speed improvements</h4>
+<a href="#functions-with-notable-speed-improvements-5" class="anchor"></a>Functions with notable speed improvements</h4>
 <ul>
 <li><code><a href="../reference/fill..html">fill.()</a></code></li>
 <li><code><a href="../reference/pivot_longer..html">pivot_longer.()</a></code></li>
@@ -615,13 +673,13 @@
 </ul>
 </li>
 <li>
-<code><a href="../reference/dt_arrange.html">dt_get_dummies()</a></code>: Get dummy variables</li>
-<li><code><a href="../reference/dt_arrange.html">dt_separate()</a></code></li>
+<code>dt_get_dummies()</code>: Get dummy variables</li>
+<li><code>dt_separate()</code></li>
 <li>
-<code><a href="../reference/dt_arrange.html">dt_pivot_longer()</a></code> “cols” arg now defaults to <code>dt_everything()</code> instead of <code>NULL</code>. The result is the same, but is more consistent with other enhanced selection functions</li>
+<code>dt_pivot_longer()</code> “cols” arg now defaults to <code>dt_everything()</code> instead of <code>NULL</code>. The result is the same, but is more consistent with other enhanced selection functions</li>
 <li>
-<code>.N</code> now works when using <code><a href="../reference/dt_arrange.html">dt_slice()</a></code> &amp; variants</li>
-<li>Function length limit bug no longer occurs when using <code><a href="https://rdrr.io/r/base/tilde.html">~</a></code> in <code><a href="../reference/dt_arrange.html">dt_map()</a></code>
+<code>.N</code> now works when using <code>dt_slice()</code> &amp; variants</li>
+<li>Function length limit bug no longer occurs when using <code><a href="https://rdrr.io/r/base/tilde.html">~</a></code> in <code>dt_map()</code>
 </li>
 </ul>
 </div>
@@ -638,31 +696,31 @@
 <a href="#breaking-changes-6" class="anchor"></a>Breaking changes</h4>
 <ul>
 <li>
-<code><a href="../reference/dt_arrange.html">dt_mutate()</a></code> &amp; <code><a href="../reference/dt_arrange.html">dt_rename()</a></code> no longer modify-by-reference</li>
+<code>dt_mutate()</code> &amp; <code>dt_rename()</code> no longer modify-by-reference</li>
 <li>
-<code><a href="../reference/dt_arrange.html">dt_unnest_legacy()</a></code> drops “keep” argument, but automatically keeps all non-nested columns.
+<code>dt_unnest_legacy()</code> drops “keep” argument, but automatically keeps all non-nested columns.
 <ul>
 <li>New translation is ~5-10x faster than before</li>
 </ul>
 </li>
 </ul>
 </div>
-<div id="functionality-improvements-8" class="section level4">
+<div id="functionality-improvements-9" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-8" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-9" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/dt.html">dt()</a></code> now automatically converts data.frame input to a data.table</li>
 <li>
-<code><a href="../reference/dt_arrange.html">dt_mutate_across()</a></code>: Added “by” arg</li>
+<code>dt_mutate_across()</code>: Added “by” arg</li>
 </ul>
 </div>
-<div id="bug-fixes-4" class="section level4">
+<div id="bug-fixes-5" class="section level4">
 <h4 class="hasAnchor">
-<a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h4>
+<a href="#bug-fixes-5" class="anchor"></a>Bug fixes</h4>
 <ul>
 <li>
-<code><a href="../reference/dt_arrange.html">dt_left_join()</a></code> fix so columns are ordered correctly</li>
+<code>dt_left_join()</code> fix so columns are ordered correctly</li>
 </ul>
 </div>
 </div>

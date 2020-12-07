@@ -69,6 +69,10 @@ get_dummies..data.frame <- function(.df,
 
   cols <- select_vec_sym(.df, {{ cols }})
 
+  original_cols <- copy(names(.df))
+
+  ordered_cols <- character(0)
+
   for (col in cols) {
 
     col_name <- as.character(col)
@@ -77,21 +81,20 @@ get_dummies..data.frame <- function(.df,
     else unique_vals <- vec_unique(as.character(.df[[col_name]]))
 
     # If NAs need dummies, convert to character string "NA" for col name creation
-    if (dummify_na) unique_vals <- fifelse(is.na(unique_vals), "NA", unique_vals)
+    if (dummify_na) unique_vals <- unique_vals %|% "NA"
     else unique_vals <- unique_vals[!is.na(unique_vals)]
 
     if (prefix) new_names <- str_c.(col_name, unique_vals, sep = prefix_sep)
     else new_names <- unique_vals
-
-    .df[, (new_names) := 0]
 
     # Remove "NA" from unique vals after new_names columns are made
     not_na_cols <- new_names[unique_vals != "NA"]
     unique_vals <- unique_vals[unique_vals != "NA"]
 
     for (i in seq_along(unique_vals)) {
+      not_na_col <- not_na_cols[i]
       eval_quo(
-        .df[!!col == unique_vals[i], not_na_cols[i] := 1L]
+        .df[, (not_na_col) := ifelse.(!!col == unique_vals[i], 1L, 0L, 0L)]
       )
     }
 
@@ -101,25 +104,21 @@ get_dummies..data.frame <- function(.df,
 
       na_col <- new_names[!new_names %in% not_na_cols]
 
-      eval_quo(
-        .df[is.na(!!col), (na_col) := 1]
-      )
+      if (length(na_col) > 0) {
+        eval_quo(
+          .df[, (na_col) := as.integer(is.na(!!col))]
+        )
+      }
     }
+
+    new_names <- fsort(new_names, internal = TRUE)
+
+    ordered_cols <- c(ordered_cols, new_names)
   }
-  .df[]
-}
 
-#' @export
-#' @rdname dt_verb
-#' @inheritParams get_dummies.
-dt_get_dummies <- function(.df,
-                           cols = c(where(is.character), where(is.factor)),
-                           prefix = TRUE,
-                           prefix_sep = "_",
-                           drop_first = FALSE,
-                           dummify_na = TRUE) {
-  deprecate_stop("0.5.2", "tidytable::dt_get_dummies()", "get_dummies.()")
+  final_order <- c(original_cols, ordered_cols)
 
-  get_dummies.(.df, cols = {{ cols }}, prefix = prefix, prefix_sep = prefix_sep,
-               drop_first = drop_first, dummify_na = dummify_na)
+  setcolorder(.df, final_order)
+
+  .df
 }

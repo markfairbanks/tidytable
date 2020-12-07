@@ -75,23 +75,6 @@ summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE) {
 #' @rdname summarize.
 summarise. <- summarize.
 
-#' @export
-#' @rdname dt_verb
-#' @inheritParams summarize.
-dt_summarise <- function(.df, ..., .by = NULL) {
-  deprecate_stop("0.5.2", "tidytable::dt_summarise()", "summarise.()")
-
-  summarize.(.df, ..., .by = {{ .by }})
-}
-
-#' @export
-#' @rdname dt_verb
-#' @inheritParams summarize.
-dt_summarize <- function(.df, ..., .by = NULL) {
-  deprecate_stop("0.5.2", "tidytable::dt_summarize()", "summarize.()")
-
-  summarize.(.df, ..., .by = {{ .by }})
-}
 
 wrap_n_dot <- function(quosure) {
   quo_string <- quo_text(quosure)
