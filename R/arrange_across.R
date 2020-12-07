@@ -24,19 +24,21 @@ arrange_across. <- function(.df, .cols = everything(), .fns) {
 arrange_across..data.frame <- function(.df, .cols = everything(), .fns) {
   .df <- as_tidytable(.df)
 
-  .cols <- select_vec_sym(.df, {{ .cols }})
+  .cols <- select_vec_chr(.df, {{ .cols }})
 
   if (length(.cols) == 0) return(.df)
 
   if (missing(.fns)) {
-    .decreasing <- FALSE
+    .order <- 1
   } else if (quo_text(enexpr(.fns)) %in% c("desc", "desc.")){
-    .decreasing <- TRUE
+    .order <- -1
   } else {
     abort(".fns must be either missing or desc.")
   }
 
-  eval_quo(
-    .df[order(!!!.cols, decreasing = !!.decreasing)]
-  )
+  .df <- copy(.df)
+
+  setorderv(.df, cols = .cols, order = .order)
+
+  .df
 }
