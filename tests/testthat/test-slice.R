@@ -25,6 +25,16 @@ test_that("works with gaps & doesn't return NAs", {
   expect_equal(sliced_df$x, c(1,3))
 })
 
+test_that("can slice when all cols are in .by", {
+  test_df <- tidytable(x = c("a", "a", "b"))
+
+  sliced_df <- test_df %>%
+    slice.(1, .by = x)
+
+  expect_named(sliced_df, c("x"))
+  expect_equal(sliced_df$x, c("a", "b"))
+})
+
 test_that("can use dots", {
   test_df <- tidytable(x = c(1,2,3,4), y = c(4,5,6,7), z = c("a", "a", "a", "b"))
 
@@ -193,6 +203,16 @@ test_that("_head.() works in custom function", {
   expect_equal(sliced_df, head(test_df, 3))
 })
 
+test_that("can slice_head when all cols are in .by", {
+  test_df <- tidytable(x = c("a", "a", "b"))
+
+  sliced_df <- test_df %>%
+    slice_head.(1, .by = x)
+
+  expect_named(sliced_df, c("x"))
+  expect_equal(sliced_df$x, c("a", "b"))
+})
+
 # slice_tail.() ----------------------------------------------------
 
 test_that("_tail.() works when empty", {
@@ -245,6 +265,16 @@ test_that("_tail.() works with a custom function", {
     slice_tail_fn(3)
 
   expect_equal(sliced_df, tail(test_df, 3))
+})
+
+test_that("can slice_tail when all cols are in .by", {
+  test_df <- tidytable(x = c("a", "a", "b"))
+
+  sliced_df <- test_df %>%
+    slice_tail.(1, .by = x)
+
+  expect_named(sliced_df, c("x"))
+  expect_equal(sliced_df$x, c("a", "b"))
 })
 
 # slice_min.() ----------------------------------------------------
