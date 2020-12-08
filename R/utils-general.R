@@ -5,6 +5,8 @@ eval_expr <- function(express) {
   eval_tidy(enexpr(express), env = caller_env())
 }
 
+# Allows use of quosures inside data.tables
+# Squashes all quosures to expressions
 eval_quo <- function(express, data = NULL, env = caller_env()) {
   eval_tidy(quo_squash(enquo(express)), data = data, env = env)
 }
@@ -23,6 +25,7 @@ shallow <- function(x, cols = names(x), reset_class = FALSE) {
   ans[]
 }
 
+# Repair names of a data.table
 df_name_repair <- function(.df, .name_repair = "unique") {
 
   names(.df) <- vec_as_names(
@@ -33,7 +36,12 @@ df_name_repair <- function(.df, .name_repair = "unique") {
   .df
 }
 
-# For internal use only
+# data.table::fsort() with internal = TRUE
+f_sort <- function(x, decreasing = FALSE, na.last = FALSE) {
+  fsort(x, decreasing = decreasing, na.last = na.last, internal = TRUE)
+}
+
+# pmap - for internal use only
 # Taken from: https://github.com/r-lib/rlang/blob/master/R/compat-purrr.R
 pmap. <- function(.l, .f, ...) {
   .f <- as_function(.f)

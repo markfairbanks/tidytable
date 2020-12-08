@@ -70,7 +70,7 @@ sort_unique <- function(x) {
   } else if (is.data.frame(x)) {
     setorderv(unique(as_tidytable(x)))[]
   } else {
-    fsort(vec_unique(x), internal = TRUE)
+    f_sort(vec_unique(x))
   }
 }
 

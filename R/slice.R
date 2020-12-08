@@ -46,7 +46,7 @@ slice..data.frame <- function(.df, ..., .by = NULL) {
 
   .df <- as_tidytable(.df)
 
-  rows <- enquos(...) # Needed so 1:.N works
+  rows <- enquos(...) # Needed so .N works
 
   if (length(rows) == 0) return(.df)
 
@@ -56,26 +56,39 @@ slice..data.frame <- function(.df, ..., .by = NULL) {
 
   by_is_null <- quo_is_null(.by)
 
+  slice_call <- quo(
+    {.rows = c(!!!rows); .rows = .rows[data.table::between(.rows, -.N, .N)]; .rows}
+  )
+
   if (by_is_null) {
     .df <- eval_quo(
-      .df[{.rows = c(!!!rows); .rows = .rows[data.table::between(.rows, -.N, .N)]; .rows}],
+      .df[!!slice_call],
       new_data_mask(data_env), env = caller_env()
     )
   } else {
 
-    col_order <- names(.df)
+    .df_names <- copy(names(.df))
 
     .by <- select_vec_chr(.df, !!.by)
 
-    .df <- eval_quo(
-      .df[,
-          .SD[{.rows = c(!!!rows); .rows = .rows[data.table::between(.rows, -.N, .N)]; .rows}],
-          by = !!.by],
-      new_data_mask(data_env), env = caller_env()
+    all_cols_in_by <- identical(
+      f_sort(.by), f_sort(.df_names)
     )
 
-    setcolorder(.df, col_order)
+    if (all_cols_in_by) {
+      .df <- eval_quo(
+        .df[, .SD[!!slice_call], by = !!.by, .SDcols = !!.df_names][, (!!.df_names) := NULL][],
+        new_data_mask(data_env), env = caller_env()
+      )
+    } else {
+      .df <- eval_quo(
+        .df[, .SD[!!slice_call], by = !!.by],
+        new_data_mask(data_env), env = caller_env()
+      )
 
+      # Need to preserve original column order
+      setcolorder(.df, .df_names)
+    }
   }
 
   .df
@@ -98,14 +111,29 @@ slice_head..data.frame <- function(.df, n = 5, .by = NULL) {
 
   .by <- select_vec_chr(.df, {{ .by }})
 
-  if (length(.by) > 0) col_order <- names(.df)
+  with_by <- length(.by) > 0
 
-  .df <- eval_quo(
-    .df[, head(.SD, !!n), by = !!.by],
-    new_data_mask(data_env), env = caller_env()
-  )
+  if (!with_by) {
+    all_cols_in_by <- FALSE
+  } else {
+    .df_names <- names(.df)
 
-  if (length(.by) > 0) setcolorder(.df, col_order)
+    all_cols_in_by <- identical(f_sort(.by), f_sort(.df_names))
+  }
+
+  if (all_cols_in_by) {
+    .df <- eval_quo(
+      .df[, head(.SD, !!n), by = !!.by, .SDcols = !!.df_names][, (!!.df_names) := NULL][],
+      new_data_mask(data_env), env = caller_env()
+    )
+  } else {
+    .df <- eval_quo(
+      .df[, head(.SD, !!n), by = !!.by],
+      new_data_mask(data_env), env = caller_env()
+    )
+  }
+
+  if (with_by) setcolorder(.df, .df_names)
 
   .df
 
@@ -128,14 +156,29 @@ slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
 
   .by <- select_vec_chr(.df, {{ .by }})
 
-  if (length(.by) > 0) col_order <- names(.df)
+  with_by <- length(.by) > 0
 
-  .df <- eval_quo(
-    .df[, tail(.SD, !!n), by = !!.by],
-    new_data_mask(data_env), env = caller_env()
-  )
+  if (!with_by) {
+    all_cols_in_by <- FALSE
+  } else {
+    .df_names <- names(.df)
 
-  if (length(.by) > 0) setcolorder(.df, col_order)
+    all_cols_in_by <- identical(f_sort(.by), f_sort(.df_names))
+  }
+
+  if (all_cols_in_by) {
+    .df <- eval_quo(
+      .df[, tail(.SD, !!n), by = !!.by, .SDcols = !!.df_names][, (!!.df_names) := NULL][],
+      new_data_mask(data_env), env = caller_env()
+    )
+  } else {
+    .df <- eval_quo(
+      .df[, tail(.SD, !!n), by = !!.by],
+      new_data_mask(data_env), env = caller_env()
+    )
+  }
+
+  if (with_by) setcolorder(.df, .df_names)
 
   .df
 }
