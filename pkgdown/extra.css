@@ -1,5 +1,5 @@
 .navbar {
-    box-shadow: 0 1px 6px rgba(0,0,0,0.3) !important;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.3) !important;
 }
 
 .label-default {
@@ -27,6 +27,10 @@ h1, .h1 {
 }
 h2, .h2 {
     font-size: 32px;
+    color: #9c0000;
+}
+h2 > code, .h2>code {
+    color: #9c0000;
 }
 h3, .h3 {
     font-size: 28px;
