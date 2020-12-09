@@ -86,7 +86,7 @@
   <div class="contents col-md-9">
 <div id="tidytable" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#tidytable" class="anchor"></a>tidytable <img src="reference/figures/logo.png" align="right" width="17%" height="17%">
+<a href="#tidytable" class="anchor"></a>tidytable <img id="logo" src="reference/figures/logo.png" align="right" width="17%" height="17%">
 </h1></div>
 <!-- badges: start -->
 
@@ -156,9 +156,9 @@
 <span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;int&gt;</span>
 <span class="co">#&gt; 1 a       1.5     2</span>
 <span class="co">#&gt; 2 b       3       1</span></code></pre></div>
-<div id="by-vs-group_by" class="section level3">
+<div id="by-vs--group_by" class="section level3">
 <h3 class="hasAnchor">
-<a href="#by-vs-group_by" class="anchor"></a><code>.by</code> vs. <code>group_by()</code>
+<a href="#by-vs--group_by" class="anchor"></a><code>.by</code> vs. <code>group_by()</code>
 </h3>
 <p>A key difference between <code>tidytable</code>/<code>data.table</code> &amp; <code>dplyr</code> is that <code>dplyr</code> can have multiple functions operate “by group” with a single <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> call.</p>
 <p>We’ll start with an example <code>dplyr</code> pipe chain that utilizes <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> and then rewrite it in <code>tidytable</code>. The goal is to grab the first two rows of each group using <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice()</a></code>, then add a row number column using <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>:</p>
