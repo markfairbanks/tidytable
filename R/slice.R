@@ -55,29 +55,31 @@ slice..data.frame <- function(.df, ..., .by = NULL) {
   .by <- enquo(.by)
 
   by_is_null <- quo_is_null(.by)
-  
-  slice_call <- quo(
-    {.rows = c(!!!rows); .rows = .rows[data.table::between(.rows, -.N, .N)]; .rows}
-  )
 
   if (by_is_null) {
     eval_quo(
-      .df[!!slice_call],
+      .df[{.rows = c(!!!rows); .rows[data.table::between(.rows, -.N, .N)]}],
       new_data_mask(data_env), env = caller_env()
     )
   } else {
     .df_names <- names(.df)
 
     .by <- select_vec_chr(.df, !!.by)
-    
+
+    slice_call <- quo(
+      {.rows = c(!!!rows);
+      .rows = .rows[data.table::between(.rows, -.N, .N)];
+      vctrs::vec_slice(.SD, .rows)}
+    )
+
     if (all(.df_names %in% .by)) {
       eval_quo(
-        .df[, .SD[!!slice_call], by = !!.by, .SDcols = !!.df_names][, (!!.df_names) := NULL][],
+        .df[, !!slice_call, by = !!.by, .SDcols = !!.df_names][, (!!.df_names) := NULL][],
         new_data_mask(data_env), env = caller_env()
       )
     } else {
       .df <- eval_quo(
-        .df[, .SD[!!slice_call], by = !!.by],
+        .df[, !!slice_call, by = !!.by],
         new_data_mask(data_env), env = caller_env()
       )
       # Need to preserve original column order
@@ -117,7 +119,8 @@ slice_head..data.frame <- function(.df, n = 5, .by = NULL) {
       .df[, head(.SD, !!n), by = !!.by],
       new_data_mask(data_env), env = caller_env()
     )
-    if (with_by) setcolorder(.df, .df_names)[] else .df
+    if (with_by) setcolorder(.df, .df_names)[]
+    else .df
   }
 
 }
@@ -142,7 +145,6 @@ slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
   with_by <- length(.by) > 0
 
   .df_names <- names(.df)
-  
 
   if (all(.df_names %in% .by)) {
     eval_quo(
@@ -154,7 +156,8 @@ slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
       .df[, tail(.SD, !!n), by = !!.by],
       new_data_mask(data_env), env = caller_env()
     )
-    if (with_by) setcolorder(.df, .df_names)[] else .df
+    if (with_by) setcolorder(.df, .df_names)[]
+    else .df
   }
 }
 

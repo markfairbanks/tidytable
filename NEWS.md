@@ -13,6 +13,7 @@ They have been deprecated with warnings since v0.5.2
 #### Functions with notable speed improvements
 * `get_dummies.()`
 * `fill.()`
+* `slice.()`
 
 #### Bug fixes
 * `mutate.()`: Can delete a column using `NULL` when `.by` is provided (#151)
