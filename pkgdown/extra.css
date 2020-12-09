@@ -28,7 +28,13 @@ h1, .h1 {
 h2, .h2 {
     font-size: 32px;
 }
-h1, .h1, h1 > code, .h1>code,
+h3, .h3 {
+    font-size: 28px;
+}
+#logo {
+    background-color: white;
+}
+/*h1, .h1, h1 > code, .h1>code,
 h2, .h2, h2 > code, .h2>code,
 h3, .h3, h3 > code, .h3>code,
 h4, .h4, h4 > code, .h4>code,
@@ -36,10 +42,7 @@ h5, .h5, h5 > code, .h5>code,
 h6, .h6, h6 > code, .h6>code   {
     color: #9c0000;
 }
-h3, .h3 {
-    font-size: 28px;
-}
-/*h4, .h4 {
+h4, .h4 {
     font-size: 56px;
 }
 h5, .h5 {
