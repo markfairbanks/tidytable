@@ -31,7 +31,6 @@ h2, .h2 {
 h3, .h3 {
     font-size: 28px;
 }
-
 body{
     font-size: 16px;
 }
@@ -45,6 +44,7 @@ h4, .h4, h4 > code, .h4>code,
 h5, .h5, h5 > code, .h5>code, 
 h6, .h6, h6 > code, .h6>code   {
     color: #9c0000;
+    col
 }
 h4, .h4 {
     font-size: 56px;
