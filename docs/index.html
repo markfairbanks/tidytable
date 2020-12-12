@@ -12,12 +12,13 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Tidy Interface to data.table">
+<script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
+<meta property="og:title" content="Tidy Interface to data.table">
 <meta property="og:description" content="A tidy interface to data.table that is rlang compatible,
   giving users the speed of data.table with the clean syntax of the tidyverse.">
 <meta property="og:image" content="/logo.png">
@@ -45,12 +46,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -89,9 +84,9 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="tidytable-" class="section level1">
+<div id="tidytable" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#tidytable-" class="anchor"></a>tidytable <img src="reference/figures/logo.png" align="right" width="17%" height="17%">
+<a href="#tidytable" class="anchor"></a>tidytable <img id="logo" src="reference/figures/logo.png" align="right" width="17%" height="17%">
 </h1></div>
 <!-- badges: start -->
 
@@ -161,9 +156,9 @@
 <span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;int&gt;</span>
 <span class="co">#&gt; 1 a       1.5     2</span>
 <span class="co">#&gt; 2 b       3       1</span></code></pre></div>
-<div id="by-vs-group_by" class="section level3">
+<div id="by-vs--group_by" class="section level3">
 <h3 class="hasAnchor">
-<a href="#by-vs-group_by" class="anchor"></a><code>.by</code> vs. <code>group_by()</code>
+<a href="#by-vs--group_by" class="anchor"></a><code>.by</code> vs. <code>group_by()</code>
 </h3>
 <p>A key difference between <code>tidytable</code>/<code>data.table</code> &amp; <code>dplyr</code> is that <code>dplyr</code> can have multiple functions operate “by group” with a single <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> call.</p>
 <p>We’ll start with an example <code>dplyr</code> pipe chain that utilizes <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> and then rewrite it in <code>tidytable</code>. The goal is to grab the first two rows of each group using <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice()</a></code>, then add a row number column using <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>:</p>
@@ -234,9 +229,9 @@
 <span class="co">#&gt; 3 b</span></code></pre></div>
 <p>These same ideas can be used whenever selecting columns in <code>tidytable</code> functions - for example when using <code><a href="reference/count..html">count.()</a></code>, <code><a href="reference/drop_na..html">drop_na.()</a></code>, <code><a href="reference/mutate_across..html">mutate_across.()</a></code>, <code><a href="reference/pivot_longer..html">pivot_longer.()</a></code>, etc.</p>
 <p>A full overview of selection options can be found <a href="https://tidyselect.r-lib.org/reference/language.html">here</a>.</p>
-<div id="using-tidyselect-in-by" class="section level3">
+<div id="using-tidyselect-in--by" class="section level3">
 <h3 class="hasAnchor">
-<a href="#using-tidyselect-in-by" class="anchor"></a>Using tidyselect in <code>.by</code>
+<a href="#using-tidyselect-in--by" class="anchor"></a>Using tidyselect in <code>.by</code>
 </h3>
 <p><code>tidyselect</code> helpers also work when using <code>.by</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -363,7 +358,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

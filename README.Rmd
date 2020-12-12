@@ -14,11 +14,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-# tidytable  <img src="man/figures/logo.png" align="right" width="17%" height="17%" />
+# tidytable  <img id="logo" src="man/figures/logo.png" align="right" width="17%" height="17%" />
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/dev%20-0.5.6.9-green.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/dev%20-`r desc::desc_get_version()`-green.svg)](https://github.com/markfairbanks/tidytable)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=blue)](https://markfairbanks.github.io/tidytable/)
 <!-- badges: end -->
 

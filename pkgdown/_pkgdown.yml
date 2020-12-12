@@ -1,3 +1,6 @@
+template:
+  params:
+    bootswatch: paper
 reference:
 - title: tidytable helpers
 - contents:

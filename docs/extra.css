@@ -1,0 +1,62 @@
+.navbar {
+    box-shadow: 0 1px 8px rgba(0,0,0,0.3) !important;
+}
+
+.label-default {
+    color : #9c0000;
+    font-weight: 400;
+    font-size: 50%; 
+    padding: 0px;
+    background-color: #fff;
+}
+.navbar-default .navbar-link{
+    font-weight: 700;
+}
+.fa{
+    -moz-transition:color .3s ease-in;
+    -o-transition:color .3s ease-in;
+    -webkit-transition:color .3s ease-in;
+    transition : color .3s ease-in;
+}
+a:hover > .fa-linkedin{
+    color : #0073b1!important;
+}
+
+h1, .h1 {
+    font-size: 36px;
+}
+h2, .h2 {
+    font-size: 32px;
+}
+h3, .h3 {
+    font-size: 28px;
+}
+body{
+    font-size: 14px;
+}
+code span, pre span{
+    font-size: 13px;
+}
+code a, pre a {
+    white-space: nowrap;
+}
+#logo {
+    background-color: white;
+}
+/*h1, .h1, h1 > code, .h1>code,
+h2, .h2, h2 > code, .h2>code,
+h3, .h3, h3 > code, .h3>code,
+h4, .h4, h4 > code, .h4>code,
+h5, .h5, h5 > code, .h5>code, 
+h6, .h6, h6 > code, .h6>code   {
+    color: #9c0000;
+}
+h4, .h4 {
+    font-size: 56px;
+}
+h5, .h5 {
+    font-size: 56px;
+}
+h6, .h6 {
+    font-size: 56px;
+}*/
