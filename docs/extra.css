@@ -32,7 +32,10 @@ h3, .h3 {
     font-size: 28px;
 }
 body{
-    font-size: 16px;
+    font-size: 14px;
+}
+code span, pre span{
+    font-size: 13px;
 }
 code a, pre a {
     white-space: nowrap;
