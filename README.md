@@ -88,7 +88,7 @@ test_df %>%
 #> 2 b       3       1
 ```
 
-### `.by` vs. `group_by()`
+### `.by` vs. `group_by()`
 
 A key difference between `tidytable`/`data.table` & `dplyr` is that
 `dplyr` can have multiple functions operate “by group” with a single
@@ -102,20 +102,20 @@ column using `mutate()`:
 ``` r
 library(dplyr)
 
-test_df <- tibble(x = 1:5, y = c("a", "a", "a", "b", "b"))
+test_df <- tibble(x = c("a", "a", "a", "b", "b"))
 
 test_df %>%
-  group_by(y) %>%
+  group_by(x) %>%
   slice(1:2) %>%
   mutate(group_row_num = row_number()) %>%
   ungroup()
-#> # A tibble: 4 x 3
-#>       x y     group_row_num
-#>   <int> <chr>         <int>
-#> 1     1 a                 1
-#> 2     2 a                 2
-#> 3     4 b                 1
-#> 4     5 b                 2
+#> # A tibble: 4 x 2
+#>   x     group_row_num
+#>   <chr>         <int>
+#> 1 a                 1
+#> 2 a                 2
+#> 3 b                 1
+#> 4 b                 2
 ```
 
 In this case both `slice()` and `mutate()` will operate “by group”. This
@@ -129,15 +129,15 @@ operate “by group”, and you don’t need to call `ungroup()` at the end:
 library(tidytable)
 
 test_df %>%
-  slice.(1:2, .by = y) %>%
-  mutate.(group_row_num = row_number.(), .by = y)
-#> # tidytable [4 × 3]
-#>       x y     group_row_num
-#>   <int> <chr>         <int>
-#> 1     1 a                 1
-#> 2     2 a                 2
-#> 3     4 b                 1
-#> 4     5 b                 2
+  slice.(1:2, .by = x) %>%
+  mutate.(group_row_num = row_number.(), .by = x)
+#> # tidytable [4 × 2]
+#>   x     group_row_num
+#>   <chr>         <int>
+#> 1 a                 1
+#> 2 a                 2
+#> 3 b                 1
+#> 4 b                 2
 ```
 
 ## `tidyselect` support

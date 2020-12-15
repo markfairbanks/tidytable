@@ -87,10 +87,10 @@ We'll start with an example `dplyr` pipe chain that utilizes `group_by()` and th
 ```{r message = FALSE}
 library(dplyr)
 
-test_df <- tibble(x = 1:5, y = c("a", "a", "a", "b", "b"))
+test_df <- tibble(x = c("a", "a", "a", "b", "b"))
 
 test_df %>%
-  group_by(y) %>%
+  group_by(x) %>%
   slice(1:2) %>%
   mutate(group_row_num = row_number()) %>%
   ungroup()
@@ -104,8 +104,8 @@ However `data.table` doesn't "remember" groups between function calls. So in `ti
 library(tidytable)
 
 test_df %>%
-  slice.(1:2, .by = y) %>%
-  mutate.(group_row_num = row_number.(), .by = y)
+  slice.(1:2, .by = x) %>%
+  mutate.(group_row_num = row_number.(), .by = x)
 ```
 
 ## `tidyselect` support
