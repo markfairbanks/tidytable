@@ -36,9 +36,11 @@ df_name_repair <- function(.df, .name_repair = "unique") {
   .df
 }
 
-# data.table::fsort() with internal = TRUE
+# data.table::fsort() with no warning messages
 f_sort <- function(x, decreasing = FALSE, na.last = FALSE) {
-  fsort(x, decreasing = decreasing, na.last = na.last, internal = TRUE)
+  suppressWarnings(
+    fsort(x, decreasing = decreasing, na.last = na.last)
+  )
 }
 
 # pmap - for internal use only
