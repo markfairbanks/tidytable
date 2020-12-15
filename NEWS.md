@@ -1,4 +1,4 @@
-# tidytable 0.5.7 (in development)
+# tidytable 0.5.7
 
 #### Deprecations
 * The `dt_verb()` versions of functions have been removed from the package.

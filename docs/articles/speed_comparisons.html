@@ -39,12 +39,18 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+<li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -67,7 +73,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/markfairbanks/tidytable/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -81,7 +87,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="speed_comparisons_files/header-attrs-2.6/header-attrs.js"></script><script src="speed_comparisons_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>speed_comparisons</h1>
@@ -121,23 +127,23 @@
 </li>
 <li>Lastly I’d like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.</li>
 </ul>
-<div class="sourceCode"><pre><code>#&gt; # tidytable [13 × 7]
+<pre><code>#&gt; # tidytable [13 × 7]
 #&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas tidytable_vs_dplyr
 #&gt;    &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             
-#&gt;  1 arrange            37.6      39.5   46.6    1397.   355   2.8%              
-#&gt;  2 case_when          26.4      26     NA       328.    59.2 7.9%              
-#&gt;  3 distinct           12.5      11.5   14.9      39.9  309   28.8%             
-#&gt;  4 fill               21.8      43.4   NA        63.3  846   68.6%             
-#&gt;  5 filter            229.      226.   236.      261.   707   86.6%             
-#&gt;  6 inner_join         40.7      48.6  115.       73     NA   66.6%             
-#&gt;  7 left_join          51.6      59.3  148.       85.9   NA   69.0%             
-#&gt;  8 mutate             64.8      65.7  521.       76.4   86.4 86.0%             
-#&gt;  9 nest                9.8      10     NA        28.9   NA   34.6%             
-#&gt; 10 pivot_longer       11.6      12.1   NA        46.9   NA   25.8%             
-#&gt; 11 pivot_wider        76.8      83.9   NA        66.1   NA   126.9%            
-#&gt; 12 summarize         154.      165.   242.      210.   834   78.6%             
-#&gt; 13 unnest              5         8.8   NA        30.8   NA   28.6%</code></pre>
-</div></div>
+#&gt;  1 arrange            68.5      68.3   63.1    1383.   355   4.9%              
+#&gt;  2 case_when          30.2      53.1   NA       325.    59.2 16.4%             
+#&gt;  3 distinct           36.7      34.3   45.5      40.7  309   84.3%             
+#&gt;  4 fill               35.7      52.8   NA        60.6  846   87.1%             
+#&gt;  5 filter            238.      243.   234.      288.   707   84.1%             
+#&gt;  6 inner_join         59        58.9  142.       73.9   NA   79.7%             
+#&gt;  7 left_join          81.9      56.8  169       101.    NA   56.2%             
+#&gt;  8 mutate             73.4      57.1  538.       76.7   86.4 74.4%             
+#&gt;  9 nest               17.5      20.3   NA        27     NA   75.2%             
+#&gt; 10 pivot_longer       10.3      12.2   NA        48.5   NA   25.2%             
+#&gt; 11 pivot_wider       112.      123.    NA        77.2   NA   159.6%            
+#&gt; 12 summarize         251.      239.   274.      199.   834   119.7%            
+#&gt; 13 unnest              7.2      11.8   NA        29.7   NA   39.7%</code></pre>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -153,7 +159,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
