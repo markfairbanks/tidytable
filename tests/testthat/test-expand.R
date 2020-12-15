@@ -10,6 +10,24 @@ test_that("auto-converts data.frame inputs", {
   expect_equal(nrow(out), 4)
 })
 
+test_that("crossing work with data.frame inputs", {
+  test_df <- tidytable(a = c("a", "a", "b"), b = c("a", "a", "b"))
+  crossing_df <- crossing.(test_df)
+  unique_df <- unique(test_df)
+
+  expect_equal(crossing_df, unique_df)
+})
+
+test_that("crossing works when only input is a data frame", {
+  test_df <- tidytable(a = c("a", "b"), b = c("a", "b"))
+  crossing_df <- crossing.(test_df, x = 1:2)
+
+  expect_named(crossing_df, c("a", "b", "x"))
+  expect_equal(crossing_df$a, c("a", "a", "b", "b"))
+  expect_equal(crossing_df$b, c("a", "a", "b", "b"))
+  expect_equal(crossing_df$x, rep(1:2, 2))
+})
+
 test_that("preserves ordered factors", {
   df <- data.table(a = ordered("a"))
   out <- expand.(df, a)

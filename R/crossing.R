@@ -51,9 +51,10 @@ crossing_df <- function(..., .name_repair = "check_unique") {
   } else {
     each <- lg / cumprod(lgs)
     times <- lg / each / lgs
+    l_names <- names(l) %||% as.character(seq_along(l))
 
     out <- pmap.(
-      list(x = l, each = each, times = times, x_name = names(l)),
+      list(x = l, each = each, times = times, x_name = l_names),
       make_cj_tidytable
     )
   }
