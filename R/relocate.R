@@ -38,17 +38,20 @@ relocate..data.frame <- function(.df, ..., .before = NULL, .after = NULL) {
   .after <- enquo(.after)
   .df <- shallow(.df)
 
-  if  (!quo_is_null(.before) && !quo_is_null(.after))
+  before_is_null <- quo_is_null(.before)
+  after_is_null <- quo_is_null(.after)
+
+  if  (!before_is_null && !after_is_null)
     stop("Must supply only one of `.before` and `.after`")
 
-  if (quo_is_null(.before) && quo_is_null(.after))
+  if (before_is_null && after_is_null)
     .before <- quo(1)
 
   data_names <- names(.df)
   all_cols_i <- seq_along(data_names)
   selected_cols_i <- select_dots_idx(.df, ...)
 
-  if (!quo_is_null(.before)) {
+  if (!before_is_null) {
 
     before_i <- select_vec_idx(.df, !!.before)
     start_cols_i <- all_cols_i[all_cols_i < before_i]
