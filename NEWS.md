@@ -1,3 +1,5 @@
+# tidytable 0.5.8 (in development)
+
 # tidytable 0.5.7
 
 #### Deprecations
