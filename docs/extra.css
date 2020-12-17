@@ -5,7 +5,7 @@
 .label-default {
     color : #9c0000;
     font-weight: 400;
-    font-size: 50%; 
+    font-size: 50%;
     padding: 0px;
     background-color: #fff;
 }
@@ -32,7 +32,7 @@ h3, .h3 {
     font-size: 28px;
 }
 body{
-    font-size: 16px;
+    font-size: 15px;
 }
 code span, pre span{
     font-size: 13px;
@@ -47,7 +47,7 @@ code a, pre a {
 h2, .h2, h2 > code, .h2>code,
 h3, .h3, h3 > code, .h3>code,
 h4, .h4, h4 > code, .h4>code,
-h5, .h5, h5 > code, .h5>code, 
+h5, .h5, h5 > code, .h5>code,
 h6, .h6, h6 > code, .h6>code   {
     color: #9c0000;
     col
