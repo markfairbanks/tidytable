@@ -39,19 +39,21 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
   dots <- enquos(...)
   .by <- enquo(.by)
 
+  if (length(dots) == 0) return(.df)
+
   if (quo_is_null(.by)) {
-    # Faster version if there is no "by" provided
+    # Faster version if there is no ".by" provided
     all_names <- names(dots)
+
+    data_env <- env(quo_get_env(dots[[1]]), .df = .df)
 
     for (i in seq_along(dots)) {
 
       .col_name <- all_names[[i]]
       .val <- dots[[i]]
 
-      data_env <- env(quo_get_env(.val), .df = .df)
-
       # Prevent modify-by-reference if the column already exists in the data.table
-      # Fixes cases when user supplies a single value ex. 1, -1, "a"
+        # Fixes case when user supplies a single value ex. 1, -1, "a"
       # !quo_is_null(val) allows for columns to be deleted using mutate.(.df, col = NULL)
       if (.col_name %in% names(.df) && !quo_is_null(.val)) {
 
