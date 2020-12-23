@@ -13,7 +13,7 @@ as_dt(x)
 Deprecated way to convert an object to a tidytable. Please use \code{as_tidytable()}.
 }
 \examples{
-test_df <- data.frame(x = -2:2, c(rep("a", 3), rep("b", 2)))
+test_df <- data.frame(x = -2:2, y = c(rep("a", 3), rep("b", 2)))
 
 test_df \%>\%
   as_tidytable()
