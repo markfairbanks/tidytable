@@ -111,7 +111,7 @@ get_dummies..data.frame <- function(.df,
       }
     }
 
-    new_names <- fsort(new_names, internal = TRUE)
+    new_names <- f_sort(new_names)
 
     ordered_cols <- c(ordered_cols, new_names)
   }
