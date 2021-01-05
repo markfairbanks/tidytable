@@ -343,3 +343,10 @@ test_that("mutate_rowwise.() doesn't work when user has a .rowwise_id column", {
   expect_error(test_df %>%
     mutate_rowwise.(pasted = paste0(c_across(!z))))
 })
+test_that("c_across.() works with space named columns", {
+  test_df <- data.table(`x y`=1:3, `x z`=1, y=3)
+  resultdf <- test_df %>%
+    mutate_rowwise.(sum = sum(c_across(contains(" "))))
+
+  expect_equal(resultdf$sum, 2:4)
+})
