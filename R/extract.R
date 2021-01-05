@@ -42,17 +42,3 @@ str_extract_groups <- function(string, pattern){
 
   map.(1:ncol(start), ~ substr(string, start[, .x], end[, .x]))
 }
-### making the test_df
-x <- paste0(LETTERS, letters, 1:28)[1:10]
-data.table(y = c(paste0(x, "-", rev(x)), 1:4)) -> test_df
-
-# extracting two columns
-test_df %>% extract.(y, c("A","B"), regex="([[:alnum:]]+)-([[:alnum:]]+)")
-
-# extracting only the first columns
-test_df %>% extract.(y, "A", regex="([[:alnum:]]+)")
-
-
-# extracting only the first columns
-test_df %>% extract.(y, "A")
- test_df[, x:=y]
