@@ -33,8 +33,6 @@ mutate_rowwise..data.frame <- function(.df, ...) {
   if (any(names(dots) %in% names(.df))) .df <- copy(.df)
   else .df <- shallow(.df)
   
-  .df[, .rowwise_id := .I]
-  
   data_env <- env(quo_get_env(dots[[1]]), .df = .df)
   
   dots_text <- map_chr.(dots, quo_text)
@@ -56,6 +54,8 @@ mutate_rowwise..data.frame <- function(.df, ...) {
     dots[use_across] <- map.(which(use_across), ~ quo_set_expr(dots[[.x]], parse_expr(dots_text[[.x]])))
   }
   
+  .df[, .rowwise_id := .I]
+
   eval_quo(
     .df[, ':='(!!!dots), by = .rowwise_id],
     new_data_mask(data_env), env = caller_env()
