@@ -1,5 +1,9 @@
 # tidytable 0.5.8 (in development)
 
+#### New functions
+* `mutate_rowwise.()`
+* `c_across.()`
+
 # tidytable 0.5.7
 
 #### Deprecations
