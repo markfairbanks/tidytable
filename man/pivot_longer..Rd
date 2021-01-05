@@ -9,7 +9,14 @@ pivot_longer.(
   cols = everything(),
   names_to = "name",
   values_to = "value",
+  names_sep = NULL,
+  names_ptypes = list(),
+  names_transform = list(),
+  names_repair = "check_unique",
   values_drop_na = FALSE,
+  values_ptypes = list(),
+  values_transform = list(),
+  fast_pivot = FALSE,
   ...
 )
 }
@@ -22,20 +29,34 @@ pivot_longer.(
 
 \item{values_to}{Name of the new "values" column. Must be a string.}
 
+\item{names_sep}{If \code{names_to} contains multiple values, \code{names_sep} takes
+the same specification as \code{separate.()}.}
+
+\item{names_ptypes, values_ptypes}{A list of column name-prototype pairs. See ``?vctrs::`theory-faq-coercion```
+for more info on vctrs coercion.}
+
+\item{names_transform, values_transform}{A list of column name-function pairs. Use these arguments
+if you need to change the types of specific columns.}
+
+\item{names_repair}{Treatment of duplicate names. See \code{?vctrs::vec_as_names} for options/details.}
+
 \item{values_drop_na}{If TRUE, rows will be dropped that contain NAs.}
 
-\item{...}{Additional arguments to pass to \code{melt.data.table()}}
+\item{fast_pivot}{\emph{experimental}: Fast pivoting. If \code{TRUE}, the \code{names_to} column will be returned as a \code{factor},
+otherwise it will be a \code{character} column. Defaults to \code{FALSE} to match tidyverse semantics.}
+
+\item{...}{Additional arguments to passed on to methods.}
 }
 \description{
-\code{pivot_wider.()} "widens" data, increasing the number of columns and
-decreasing the number of rows. The inverse transformation is
-\code{pivot_longer.()}. Syntax based on the \code{tidyr} equivalents.
+\code{pivot_longer.()} "lengthens" the data, increasing the number of rows and decreasing
+the number of columns.
 }
 \examples{
 test_df <- data.table(
-  x = c(1,2,3),
-  y = c(4,5,6),
-  z = c("a", "b", "c"))
+  x = 1:3,
+  y = 4:6,
+  z = c("a", "b", "c")
+)
 
 test_df \%>\%
   pivot_longer.(c(x, y))
