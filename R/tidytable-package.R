@@ -11,8 +11,10 @@
 #' @importFrom utils capture.output head packageName tail type.convert
 NULL
 
-globalVariables(c(".", "name", "value", "..select_cols",
-                  "..keep_names", "..unite_cols", "..keep_cols", ".env", ".id", "where"))
+globalVariables(
+  c(".", "name", "value", "..select_cols", "..keep_names", "..unite_cols",
+    "..keep_cols", ".env", ".id", "where", ".rowwise_id")
+)
 
 #' @docType import
 
