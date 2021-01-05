@@ -81,5 +81,5 @@ extract_cols <- function(x) {
 get_selected <- function(.df, cols) {
   cols <- if (cols == "()") "everything()" else cols
   
-  toString(select_vec_chr(.df, !!parse_expr(cols)))
+  toString(glue("`{select_vec_chr(.df, !!parse_expr(cols))}`"))
 }
