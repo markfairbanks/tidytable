@@ -3,7 +3,9 @@
 #' @description 
 #' Given a regular expression with capturing groups, `extract()` turns each group
 #' into a new column. If the groups don't match, or the input is `NA`, the output
-#' will be `NA`.
+#' will be `NA`. When you pass same name in the `into` argument it will merge 
+#' the groups together. Whilst passing `NA` in the `into` arg will drop the group
+#' from the resulting `tidytable`
 #'
 #' @param .df A data.table or data.frame
 #' @param col Column to extract from
@@ -18,12 +20,16 @@
 #' @export
 #'
 #' @examples
-#' df <- data.table(x = c(NA, "a-b", "a-d", "b-c", "d-e"))
+#' df <- data.table(x = c(NA, "a-b-1", "a-d-3", "b-c-2", "d-e-7"))
 #' df %>% extract.(x, "A")
 #' df %>% extract.(x, c("A", "B"), "([[:alnum:]]+)-([[:alnum:]]+)")
 #'
 #' # If no match, NA:
 #' df %>% extract.(x, c("A", "B"), "([a-d]+)-([a-d]+)")
+#' # drop columns by passing NA
+#' df %>% extract.(x, c("A", NA, "B"), "([a-d]+)-([a-d]+)-(\\d+)")
+#' # merge groups by passing same name
+#' df %>% extract.(x, c("A", "B", "A"), "([a-d]+)-([a-d]+)-(\\d+)")
 extract. <- function(.df, col, into, regex = "([[:alnum:]]+)",
                      remove = TRUE, convert = FALSE, ...) {
   UseMethod("extract.")
