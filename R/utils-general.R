@@ -55,16 +55,6 @@ pmap. <- function(.l, .f, ..., .SIMPLIFY = FALSE) {
   ))
 }
 
-pmap. <- function(.l, .f, ..., .SIMPLIFY = FALSE) {
-  .f <- rlang::as_function(.f)
-  args <- tidytable:::args_recycle(.l)
-  do.call("mapply", c(
-    FUN = list(quote(.f)),
-    args, MoreArgs = quote(list(...)),
-    SIMPLIFY = .SIMPLIFY, USE.NAMES = FALSE
-  ))
-}
-
 args_recycle <- function(args) {
   lengths <- map_int.(args, length)
   n <- max(lengths)
