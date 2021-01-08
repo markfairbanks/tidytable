@@ -41,7 +41,7 @@ extract..data.frame <- function(.df, col, into, regex = "([[:alnum:]]+)",
   
   col <- select_vec_idx(.df, {{ col }})
   
-  groups <- str_extract_groups(.df[[col]], regex, convert)
+  groups <- str_extract_groups(.df[[col]], regex, convert = convert)
   
   if (length(groups) != length(into)) {
     abort(
@@ -49,6 +49,15 @@ extract..data.frame <- function(.df, col, into, regex = "([[:alnum:]]+)",
     )
   }
   
+  keep_group <- !is.na(into)
+  groups <- groups[keep_group]
+  into <- into[keep_group]
+
+  if(anyDuplicated(into) > 0){
+    groups <- lapply(split(groups, into), pmap., paste0, .SIMPLIFY = TRUE)
+    into <- names(groups)
+  }
+
   .df[, (into) := ..groups]
   
   if (remove) .df[, (col) := NULL]
@@ -69,11 +78,15 @@ str_extract_groups <- function(string, pattern, convert){
   
   lapply(
     seq_len(ncol(start)),
-    function(.x) type_convert(substr(string, start[, .x], end[, .x]))
+    function(.x) type_convert(substr(string, start[, .x], end[, .x]), convert)
   )
 }
 
-type_convert <- function(x, .convert = convert) {
+type_convert <- function(x, .convert) {
     if (.convert) type.convert(x, as.is = TRUE)
     else x
 }
+
+extract.(dt, y, LETTERS[1:4], regex = "([[:alpha:]]+)(\\d+)-([[:alpha:]]+)(\\d+)")
+extract.(dt, y, rep(LETTERS[1:2], 2), regex = "([[:alpha:]]+)(\\d+)-([[:alpha:]]+)(\\d+)")
+str_extract_groups()
