@@ -58,6 +58,8 @@ extract..data.frame <- function(.df, col, into, regex = "([[:alnum:]]+)",
     into <- names(groups)
   }
 
+  if(convert) groups <- lapply(groups, type.convert, as.is = TRUE)
+
   .df[, (into) := ..groups]
   
   if (remove) .df[, (col) := NULL]
@@ -65,7 +67,7 @@ extract..data.frame <- function(.df, col, into, regex = "([[:alnum:]]+)",
   .df[]
 }
 
-str_extract_groups <- function(string, pattern, convert){
+str_extract_groups <- function(string, pattern, convert = FALSE){
   groups <- regexpr(pattern, string, perl = TRUE)
   start <- attr(groups, "capture.start")
   end <- start + attr(groups, "capture.length") - 1L
@@ -78,15 +80,6 @@ str_extract_groups <- function(string, pattern, convert){
   
   lapply(
     seq_len(ncol(start)),
-    function(.x) type_convert(substr(string, start[, .x], end[, .x]), convert)
+    function(.x) substr(string, start[, .x], end[, .x])
   )
 }
-
-type_convert <- function(x, .convert) {
-    if (.convert) type.convert(x, as.is = TRUE)
-    else x
-}
-
-extract.(dt, y, LETTERS[1:4], regex = "([[:alpha:]]+)(\\d+)-([[:alpha:]]+)(\\d+)")
-extract.(dt, y, rep(LETTERS[1:2], 2), regex = "([[:alpha:]]+)(\\d+)-([[:alpha:]]+)(\\d+)")
-str_extract_groups()
