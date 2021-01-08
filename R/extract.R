@@ -71,7 +71,9 @@ str_extract_groups <- function(string, pattern, convert = FALSE){
   groups <- regexpr(pattern, string, perl = TRUE)
   start <- attr(groups, "capture.start")
   end <- start + attr(groups, "capture.length") - 1L
-  
+  if(is.null(start)) {
+    return(list())
+  }
   # in order to force substr to return NA when No match is found
   # set the start and end to NA
   none_found <- start == -1 
