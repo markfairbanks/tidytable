@@ -3,6 +3,7 @@
 #### New functions
 * `mutate_rowwise.()`
 * `c_across.()`
+* `extract.()`
 
 # tidytable 0.5.7
 
