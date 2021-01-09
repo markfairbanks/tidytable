@@ -28,6 +28,48 @@ test_that("can pivot all cols (specified) to long", {
   expect_equal(pivot_df$value, c(1,2,3,4))
 })
 
+test_that("can coerce names with names_transform", {
+  df <- data.table("1"=10, "2"=20)
+  pivot_df <- df %>%
+    pivot_longer.(1:2, names_to = "int", names_transform = list(int = as.integer))
+
+  expect_named(pivot_df, c("int", "value"))
+  expect_equal(pivot_df$int, c(1, 2))
+  expect_equal(pivot_df$value, c(10, 20))
+})
+
+test_that("can coerce names with names_ptype", {
+  df <- data.table("1"=10, "2"=20)
+  pivot_df <- df %>%
+    pivot_longer.(1:2, names_to = "int", names_ptype = list(int = factor()))
+
+  expect_named(pivot_df, c("int", "value"))
+  expect_equal(pivot_df$int, as.factor(c(1, 2)))
+  expect_equal(pivot_df$value, c(10, 20))
+})
+
+test_that("can coerce values with values_transform", {
+  df <- data.table(x = 1:2, y = 3:4)
+  pivot_df <- df %>%
+    pivot_longer.(cols = c(x,y), values_transform = list(value = as.character)) %>%
+    arrange.(name, value)
+
+  expect_named(pivot_df, c("name", "value"))
+  expect_equal(pivot_df$name, c("x","x","y","y"))
+  expect_equal(pivot_df$value, as.character(c(1,2,3,4)))
+})
+
+test_that("can coerce values with values_ptypes", {
+  df <- data.table(x = 1:2, y = 3:4)
+  pivot_df <- df %>%
+    pivot_longer.(cols = c(x,y), values_ptype = list(value = int())) %>%
+    arrange.(name, value)
+
+  expect_named(pivot_df, c("name", "value"))
+  expect_equal(pivot_df$name, c("x","x","y","y"))
+  expect_equal(pivot_df$value, c(1L,2L,3L,4L))
+})
+
 test_that("can select a single column", {
   df <- data.table(x = 1:2, y = 3:4)
   pivot_df <- pivot_longer.(df, cols = x)[order(name, value)]
@@ -42,7 +84,7 @@ test_that("can select a single column", {
 
 test_that("preserves original keys", {
   df <- data.table(x = 1:2, y = 2, z = 1:2) %>%
-    mutate_all.(as.double)
+    mutate_across.(everything(), as.double)
   pivot_df <- pivot_longer.(df, cols = c(y, z))[order(name, value)]
 
   expect_named(pivot_df, c("x", "name", "value"))
@@ -67,7 +109,7 @@ test_that("testing removal of multiple columns", {
   expect_named(pivot_longer.(df, c(-x)), c("x", "name", "value"))
   expect_named(pivot_longer.(df, -x), c("x", "name", "value"))
   expect_named(pivot_longer.(df, c(-x,-y)), c("x", "y", "name", "value"))
-  expect_warning(pivot_longer.(df, c(-x,-y,-z)))
+  expect_error(pivot_longer.(df, c(-x,-y,-z)))
 })
 
 test_that("stops if given vector", {
@@ -84,24 +126,6 @@ test_that("works with select helpers", {
   expect_equal(pivot_df$x, c(1,2,1,2))
   expect_equal(pivot_df$name, c("y","y","z","z"))
   expect_equal(pivot_df$value, c(2,2,1,2))
-})
-
-test_that("a single helper works outside of c() call", {
-  df <- data.table(x = 1:2, y = 3:4)
-  pivot_df <- pivot_longer.(df, cols = everything())[order(name, value)]
-
-  expect_named(pivot_df, c("name", "value"))
-  expect_equal(pivot_df$name, c("x","x","y","y"))
-  expect_equal(pivot_df$value, 1:4)
-})
-
-test_that("can pivot all cols (specified) to long", {
-  df <- data.table(x = 1:2, y = 3:4)
-  pivot_df <- pivot_longer.(df, cols = where(is.numeric))[order(name, value)]
-
-  expect_named(pivot_df, c("name", "value"))
-  expect_equal(pivot_df$name, c("x","x","y","y"))
-  expect_equal(pivot_df$value, 1:4)
 })
 
 test_that("can pivot all cols (specified) to long with quosure function", {

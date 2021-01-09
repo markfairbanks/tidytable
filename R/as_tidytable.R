@@ -41,25 +41,4 @@ add_class <- function(.df) {
   class(.df) <- c("tidytable", "data.table", "data.frame")
 
   .df
-
-}
-
-#' Deprecated tidytable conversion
-#'
-#' @description
-#' Deprecated way to convert an object to a tidytable. Please use `as_tidytable()`.
-#'
-#' @param x An R object
-#'
-#' @export
-#'
-#' @examples
-#' test_df <- data.frame(x = -2:2, y = c(rep("a", 3), rep("b", 2)))
-#'
-#' test_df %>%
-#'   as_tidytable()
-as_dt <- function(x) {
-  deprecate_stop("0.5.5", "tidytable::as_dt()", "as_tidytable()")
-
-  as_tidytable(x)
 }

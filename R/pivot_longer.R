@@ -2,25 +2,34 @@
 #'
 #'
 #' @description
-#' \code{pivot_wider.()} "widens" data, increasing the number of columns and
-#' decreasing the number of rows. The inverse transformation is
-#' \code{pivot_longer.()}. Syntax based on the \code{tidyr} equivalents.
+#' `pivot_longer.()` "lengthens" the data, increasing the number of rows and decreasing
+#' the number of columns.
 #'
 #' @param .df The data table to pivot longer
 #' @param cols Vector of bare column names. Can add/drop columns. `tidyselect` compatible.
 #' @param names_to Name of the new "names" column. Must be a string.
 #' @param values_to Name of the new "values" column. Must be a string.
+#' @param names_sep If `names_to` contains multiple values, `names_sep` takes
+#' the same specification as `separate.()`.
+#' @param names_ptypes,values_ptypes A list of column name-prototype pairs. See ``?vctrs::`theory-faq-coercion```
+#' for more info on vctrs coercion.
+#' @param names_transform,values_transform A list of column name-function pairs. Use these arguments
+#' if you need to change the types of specific columns.
+#' @param names_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details.
 #' @param values_drop_na If TRUE, rows will be dropped that contain NAs.
-#' @param ... Additional arguments to pass to `melt.data.table()`
+#' @param fast_pivot _experimental_: Fast pivoting. If `TRUE`, the `names_to` column will be returned as a `factor`,
+#' otherwise it will be a `character` column. Defaults to `FALSE` to match tidyverse semantics.
+#' @param ... Additional arguments to passed on to methods.
 #'
 #' @export
 #' @md
 #'
 #' @examples
 #' test_df <- data.table(
-#'   x = c(1,2,3),
-#'   y = c(4,5,6),
-#'   z = c("a", "b", "c"))
+#'   x = 1:3,
+#'   y = 4:6,
+#'   z = c("a", "b", "c")
+#' )
 #'
 #' test_df %>%
 #'   pivot_longer.(c(x, y))
@@ -31,7 +40,14 @@ pivot_longer. <- function(.df,
                           cols = everything(),
                           names_to = "name",
                           values_to = "value",
+                          names_sep = NULL,
+                          names_ptypes = list(),
+                          names_transform = list(),
+                          names_repair = "check_unique",
                           values_drop_na = FALSE,
+                          values_ptypes = list(),
+                          values_transform = list(),
+                          fast_pivot = FALSE,
                           ...) {
   UseMethod("pivot_longer.")
 }
@@ -41,7 +57,14 @@ pivot_longer..data.frame <- function(.df,
                                      cols = everything(),
                                      names_to = "name",
                                      values_to = "value",
+                                     names_sep = NULL,
+                                     names_ptypes = list(),
+                                     names_transform = list(),
+                                     names_repair = "check_unique",
                                      values_drop_na = FALSE,
+                                     values_ptypes = list(),
+                                     values_transform = list(),
+                                     fast_pivot = FALSE,
                                      ...) {
 
   .df <- as_tidytable(.df)
@@ -50,19 +73,71 @@ pivot_longer..data.frame <- function(.df,
 
   cols <- select_vec_chr(.df, {{ cols }})
 
-  if (length(cols) == 0) warning("No columns remaining after removing")
+  if (length(cols) == 0) abort("At least one column must be supplied to cols")
 
   id_vars <- names[!names %in% cols]
 
-  as_tidytable(
-    melt(data = .df,
-       id.vars = id_vars,
-       measure.vars = cols,
-       variable.name = names_to,
-       value.name = values_to,
-       ...,
-       na.rm = values_drop_na,
-       variable.factor = FALSE,
-       value.factor = FALSE))
+  multiple_names_to <- length(names_to) > 1
+
+  if (multiple_names_to) {
+
+    if (is.null(names_sep))
+      abort("If you supply multiple names in `names_to` you must also supply `names_sep`")
+
+    var_name <- str_c.(names_to, collapse = "___")
+  } else {
+    var_name <- names_to
+  }
+
+  .df <- melt(
+    data = .df,
+    id.vars = id_vars,
+    measure.vars = cols,
+    variable.name = var_name,
+    value.name = values_to,
+    ...,
+    na.rm = values_drop_na,
+    variable.factor = fast_pivot,
+    value.factor = FALSE
+  )
+
+  if (multiple_names_to) {
+    .df <- separate.(.df, !!sym(var_name), into = names_to, sep = names_sep)
+
+    # Put new names before value column
+    .df <- relocate.(.df, !!!syms(names_to), .before = !!sym(values_to))
+  }
+
+  .df <- df_name_repair(.df, .name_repair = names_repair)
+
+  ## names_ptype & names_transform
+  # optionally, cast variables generated from columns
+  cast_cols <- intersect(names_to, names(names_ptypes))
+  for (col in cast_cols) {
+    .df[[col]] <- vec_cast(.df[[col]], names_ptypes[[col]])
+  }
+
+  # transform cols
+  coerce_cols <- intersect(names_to, names(names_transform))
+  for (col in coerce_cols) {
+    f <- as_function(names_transform[[col]])
+    .df[[col]] <- f(.df[[col]])
+  }
+
+  ## values_ptype & values_transform
+  # optionally, cast variables generated from columns
+  cast_cols <- intersect(values_to, names(values_ptypes))
+  for (col in cast_cols) {
+    .df[[col]] <- vec_cast(.df[[col]], values_ptypes[[col]])
+  }
+
+  # transform cols
+  coerce_cols <- intersect(values_to, names(values_transform))
+  for (col in coerce_cols) {
+    f <- as_function(values_transform[[col]])
+    .df[[col]] <- f(.df[[col]])
+  }
+
+  as_tidytable(.df)
 }
 
