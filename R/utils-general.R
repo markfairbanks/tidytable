@@ -45,14 +45,18 @@ f_sort <- function(x, decreasing = FALSE, na.last = FALSE) {
 
 # pmap - for internal use only
 # Taken from: https://github.com/r-lib/rlang/blob/master/R/compat-purrr.R
-pmap. <- function(.l, .f, ..., .SIMPLIFY = FALSE) {
+pmap. <- function(.l, .f, ...) {
   .f <- as_function(.f)
   args <- args_recycle(.l)
   do.call("mapply", c(
     FUN = list(quote(.f)),
     args, MoreArgs = quote(list(...)),
-    SIMPLIFY = .SIMPLIFY, USE.NAMES = FALSE
+    SIMPLIFY = FALSE, USE.NAMES = FALSE
   ))
+}
+
+pmap_chr. <- function(.l, .f, ...) {
+  as.character(pmap.(.l, .f, ...))
 }
 
 args_recycle <- function(args) {
