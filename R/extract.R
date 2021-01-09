@@ -60,7 +60,7 @@ extract..data.frame <- function(.df, col, into, regex = "([[:alnum:]]+)",
   into <- into[keep_group]
 
   if(anyDuplicated(into) > 0){
-    groups <- lapply(split(groups, into), pmap., paste0, .SIMPLIFY = TRUE)
+    groups <- lapply(split(groups, into), pmap_chr., paste0)
     into <- names(groups)
   }
 
