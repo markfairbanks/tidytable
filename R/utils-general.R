@@ -55,6 +55,10 @@ pmap. <- function(.l, .f, ...) {
   ))
 }
 
+pmap_chr. <- function(.l, .f, ...) {
+  as.character(pmap.(.l, .f, ...))
+}
+
 args_recycle <- function(args) {
   lengths <- map_int.(args, length)
   n <- max(lengths)

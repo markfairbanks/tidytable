@@ -6,6 +6,7 @@
 #### New functions
 * `mutate_rowwise.()`
 * `c_across.()`
+* `extract.()`
 
 #### Functionality improvements
 * `pivot_longer.()`
