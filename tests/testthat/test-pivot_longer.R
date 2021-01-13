@@ -128,6 +128,21 @@ test_that("works with select helpers", {
   expect_equal(pivot_df$value, c(2,2,1,2))
 })
 
+test_that("names_pattern works", {
+  test_df <- data.table(a1_1 = 1, b2_2 = 2)
+
+  pivot_df <- test_df %>%
+    pivot_longer.(
+      names_to = c("a", "b"),
+      names_pattern = "([[:alnum:]]+)_([[:alnum:]]+)"
+    )
+
+  expect_named(pivot_df, c("a", "b", "value"))
+  expect_equal(pivot_df$a, c("a1", "b2"))
+  expect_equal(pivot_df$b, c("1", "2"))
+  expect_equal(pivot_df$value, c(1, 2))
+})
+
 test_that("can pivot all cols (specified) to long with quosure function", {
   df <- data.table(x = 1:2, y = 3:4)
 

@@ -10,6 +10,7 @@ pivot_longer.(
   names_to = "name",
   values_to = "value",
   names_sep = NULL,
+  names_pattern = NULL,
   names_ptypes = list(),
   names_transform = list(),
   names_repair = "check_unique",
@@ -31,6 +32,9 @@ pivot_longer.(
 
 \item{names_sep}{If \code{names_to} contains multiple values, \code{names_sep} takes
 the same specification as \code{separate.()}.}
+
+\item{names_pattern}{If \code{names_to} contains multiple values, \code{names_pattern} takes
+the same specification as \code{extract.()}, a regular expression containing matching groups.}
 
 \item{names_ptypes, values_ptypes}{A list of column name-prototype pairs. See ``?vctrs::`theory-faq-coercion```
 for more info on vctrs coercion.}

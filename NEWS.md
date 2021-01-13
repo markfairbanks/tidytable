@@ -10,7 +10,7 @@
 
 #### Functionality improvements
 * `pivot_longer.()`
-  + New args: `names_sep`, `names_ptypes`, `names_transform`, `names_repair`,
+  + New args: `names_sep`, `names_pattern`, `names_ptypes`, `names_transform`, `names_repair`,
   `values_ptypes`, `values_transform`, `fast_pivot`
   + `fast_pivot` arg: Faster pivoting. The "names" column will be a factor instead of character.
   Default is set to `FALSE` to match tidyverse semantics. Note: This option sets `variable.factor = TRUE`

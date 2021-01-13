@@ -11,6 +11,8 @@
 #' @param values_to Name of the new "values" column. Must be a string.
 #' @param names_sep If `names_to` contains multiple values, `names_sep` takes
 #' the same specification as `separate.()`.
+#' @param names_pattern If `names_to` contains multiple values, `names_pattern` takes
+#' the same specification as `extract.()`, a regular expression containing matching groups.
 #' @param names_ptypes,values_ptypes A list of column name-prototype pairs. See ``?vctrs::`theory-faq-coercion```
 #' for more info on vctrs coercion.
 #' @param names_transform,values_transform A list of column name-function pairs. Use these arguments
@@ -41,6 +43,7 @@ pivot_longer. <- function(.df,
                           names_to = "name",
                           values_to = "value",
                           names_sep = NULL,
+                          names_pattern = NULL,
                           names_ptypes = list(),
                           names_transform = list(),
                           names_repair = "check_unique",
@@ -58,6 +61,7 @@ pivot_longer..data.frame <- function(.df,
                                      names_to = "name",
                                      values_to = "value",
                                      names_sep = NULL,
+                                     names_pattern = NULL,
                                      names_ptypes = list(),
                                      names_transform = list(),
                                      names_repair = "check_unique",
@@ -81,8 +85,12 @@ pivot_longer..data.frame <- function(.df,
 
   if (multiple_names_to) {
 
-    if (is.null(names_sep))
-      abort("If you supply multiple names in `names_to` you must also supply `names_sep`")
+    null_sep <- is.null(names_sep)
+    null_pattern <- is.null(names_pattern)
+
+    if (null_sep && null_pattern)
+      abort("If you supply multiple names in `names_to` you must also
+            supply `names_sep` or `names_pattern`")
 
     var_name <- str_c.(names_to, collapse = "___")
   } else {
@@ -102,7 +110,15 @@ pivot_longer..data.frame <- function(.df,
   )
 
   if (multiple_names_to) {
-    .df <- separate.(.df, !!sym(var_name), into = names_to, sep = names_sep)
+
+    if (!null_sep && !null_pattern)
+      abort("only one of names_sep or names_pattern should be provided")
+
+    if (!null_sep) {
+      .df <- separate.(.df, !!sym(var_name), into = names_to, sep = names_sep)
+    } else {
+      .df <- extract.(.df, !!sym(var_name), into = names_to, regex = names_pattern)
+    }
 
     # Put new names before value column
     .df <- relocate.(.df, !!!syms(names_to), .before = !!sym(values_to))
