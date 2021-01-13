@@ -21,6 +21,7 @@ reference:
 - contents:
   - arrange_across.
   - starts_with("bind")
+  - c_across.
   - case_when.
   - count.
   - desc.
@@ -30,6 +31,7 @@ reference:
   - lags.
   - left_join.
   - mutate_across.
+  - mutate_rowwise.
   - n.
   - pull.
   - relocate.
@@ -46,6 +48,7 @@ reference:
   - drop_na.
   - expand.
   - expand_grid.
+  - extract.
   - fill.
   - nest_by.
   - pivot_longer.
