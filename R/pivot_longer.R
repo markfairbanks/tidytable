@@ -92,6 +92,9 @@ pivot_longer..data.frame <- function(.df,
       abort("If you supply multiple names in `names_to` you must also
             supply `names_sep` or `names_pattern`")
 
+    if (!null_sep && !null_pattern)
+      abort("only one of names_sep or names_pattern should be provided")
+
     var_name <- str_c.(names_to, collapse = "___")
   } else {
     var_name <- names_to
@@ -110,9 +113,6 @@ pivot_longer..data.frame <- function(.df,
   )
 
   if (multiple_names_to) {
-
-    if (!null_sep && !null_pattern)
-      abort("only one of names_sep or names_pattern should be provided")
 
     if (!null_sep) {
       .df <- separate.(.df, !!sym(var_name), into = names_to, sep = names_sep)
