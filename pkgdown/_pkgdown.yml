@@ -37,6 +37,7 @@ reference:
   - relocate.
   - rename.
   - rename_with.
+  - row_number.
   - slice.
   - summarize_across.
   - transmute.

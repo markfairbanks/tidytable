@@ -7,7 +7,7 @@
 row_number.()
 }
 \description{
-This function is designed to work inside of \code{mutate.()}
+Returns row number. This function is designed to work inside of \code{mutate.()}
 }
 \examples{
 test_df <- data.table(x = c(1,1,1))

@@ -20,5 +20,5 @@
 #' test_df %>%
 #'   mutate.(count = n.())
 n. <- function() {
-  eval_tidy(expr(.N), env = caller_env())
+  eval_expr(.N, env = caller_env())
 }
