@@ -50,9 +50,15 @@ fill..data.frame <- function(.df, ...,
 
   with_by <- !quo_is_null(.by)
 
-  if (with_by) col_order <- names(.df)
+  if (with_by) {
+    .df <- copy(.df)
 
-  select_cols <- syms(select_cols)
+    col_order <- names(.df)
+  } else {
+    .df <- shallow(.df)
+  }
+
+  .by <- select_vec_chr(.df, !!.by)
 
   if (all(numeric_flag)) {
 
@@ -60,32 +66,24 @@ fill..data.frame <- function(.df, ...,
     if (.direction %in% c("down", "up")) {
       .type <- switch(.direction, "down" = "locf", "up" = "nocb")
 
-      .df <- mutate_across.(
-        .df, c(!!!select_cols), nafill, .type, .by = !!.by
-      )
+      .df[, (select_cols) := lapply(.SD, nafill, .type), .SDcols = select_cols, by = .by]
+
     } else if (.direction == "downup") {
-      .df <- mutate_across.(
-        .df, c(!!!select_cols),
-        ~ nafill(nafill(.x, type = "locf"), type = "nocb"),
-        .by = !!.by
-      )
+      .df[, (select_cols) := lapply(.SD, function(.x) nafill(nafill(.x, type = "locf"), type = "nocb")),
+          .SDcols = select_cols, by = .by]
     } else {
-      .df <- mutate_across.(
-        .df, c(!!!select_cols),
-        ~ nafill(nafill(.x, type = "nocb"), type = "locf"),
-        .by = !!.by
-      )
+      .df[, (select_cols) := lapply(.SD, function(.x) nafill(nafill(.x, type = "nocb"), type = "locf")),
+          .SDcols = select_cols, by = .by]
     }
 
   } else {
 
     # Use vctrs::vec_fill_missing() if there are any character cols
-    .df <- mutate_across.(
-      .df, c(!!!select_cols), vec_fill_missing, direction = .direction, .by = !!.by
-    )
+    .df[, (select_cols) := lapply(.SD, vec_fill_missing, direction = .direction),
+        .SDcols = select_cols, by = .by]
   }
 
   if (with_by) setcolorder(.df, col_order)
 
-  .df
+  .df[]
 }
