@@ -6,6 +6,7 @@
 \alias{slice_tail.}
 \alias{slice_max.}
 \alias{slice_min.}
+\alias{slice_sample.}
 \title{Choose rows in a data.table}
 \usage{
 slice.(.df, ..., .by = NULL)
@@ -17,6 +18,8 @@ slice_tail.(.df, n = 5, .by = NULL)
 slice_max.(.df, order_by, n = 1, .by = NULL)
 
 slice_min.(.df, order_by, n = 1, .by = NULL)
+
+slice_sample.(.data, n, prop, weight_by = NULL, replace = FALSE, .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
