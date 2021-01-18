@@ -216,7 +216,7 @@ test_that("mutate_across.() works with twiddle", {
   expect_equal(anon_df, twiddle_df)
 })
 
-test_that("mutate_across() works with .by", {
+test_that("mutate_across() works with .by, doesn't modify-by-reference", {
   test_df <- data.table::data.table(
     x = c(1,2,3),
     y = c(4,5,6),
@@ -228,6 +228,7 @@ test_that("mutate_across() works with .by", {
   expect_named(results_df, c("x", "y", "z"))
   expect_equal(results_df$x, c(1.5, 1.5, 3))
   expect_equal(results_df$y, c(4.5, 4.5, 6))
+  expect_equal(test_df$x, c(1,2,3))
 })
 
 test_that("mutate_across.() works with .by enhanced selection", {

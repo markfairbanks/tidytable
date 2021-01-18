@@ -34,9 +34,11 @@
 #'   mutate_across.(c(x, y), list(new = ~ .x * 2,
 #'                                another = ~ .x + 7))
 #' test_df %>%
-#'   mutate_across.(c(x, y),
-#'                  .fns = list(new = ~ .x * 2, another = ~ .x + 7),
-#'                  .names = "{.col}_test_{.fn}")
+#'   mutate_across.(
+#'     .cols = c(x, y),
+#'     .fns = list(new = ~ .x * 2, another = ~ .x + 7),
+#'     .names = "{.col}_test_{.fn}"
+#'   )
 mutate_across. <- function(.df, .cols = everything(), .fns, ...,
                            .by = NULL, .names = NULL) {
   UseMethod("mutate_across.")
@@ -47,11 +49,16 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
                                       .by = NULL, .names = NULL) {
 
   .df <- as_tidytable(.df)
-  .df <- shallow(.df)
 
   .cols <- select_vec_chr(.df, {{ .cols }})
 
   .by <- select_vec_chr(.df, {{ .by }})
+
+  if (length(.by) > 0 && !is.list(.fns)) {
+    .df <- copy(.df)
+  } else {
+    .df <- shallow(.df)
+  }
 
   .cols <- .cols[.cols %notin% .by]
 
