@@ -12,8 +12,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   warning = FALSE,
-  paged.print = FALSE,
-  eval = FALSE
+  paged.print = FALSE
 )
 ```
 

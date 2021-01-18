@@ -127,6 +127,22 @@
 </li>
 <li>Lastly I’d like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.</li>
 </ul>
+<pre><code>#&gt; # tidytable [13 × 7]
+#&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas tidytable_vs_dplyr
+#&gt;    &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             
+#&gt;  1 arrange            38.3      40.4   41.1    1293.   355   3.1%              
+#&gt;  2 case_when          31.8      30.5   NA       374.    59.2 8.2%              
+#&gt;  3 distinct           12.2      13.6   15.6      34.4  309   39.5%             
+#&gt;  4 fill               25.8      48.5   NA        63.1  846   76.9%             
+#&gt;  5 filter            214.      215.   220.      252.   707   85.4%             
+#&gt;  6 inner_join         45        47.9  105.       76.7   NA   62.5%             
+#&gt;  7 left_join          44.5      50.6  148.      162.    NA   31.2%             
+#&gt;  8 mutate             66.3      53.9  474.       75.9   86.4 71.0%             
+#&gt;  9 nest                6.7      10     NA        31.8   NA   31.4%             
+#&gt; 10 pivot_longer       11.9      14.2   NA        49.7   NA   28.6%             
+#&gt; 11 pivot_wider        79        89.8   NA        78.9   NA   113.8%            
+#&gt; 12 summarize         171       156.   154.      213.   834   72.9%             
+#&gt; 13 unnest              9.8       8.1   NA        44.3   NA   18.3%</code></pre>
 </div>
   </div>
 
