@@ -197,4 +197,66 @@ slice_min..data.frame <- function(.df, order_by, n = 1, .by = NULL) {
     slice_head.(n, .by = {{ .by }})
 }
 
+#' @export
+#' @rdname slice.
+slice_sample. <- function(.data, n, prop, weight_by = NULL,
+                          replace = FALSE, .by = NULL) {
+  UseMethod("slice_sample.")
+}
 
+#' @export
+slice_sample..data.frame <- function(.data, n, prop, weight_by = NULL,
+                                     replace = FALSE, .by = NULL) {
+  size <- check_slice_size(n, prop, "slice_sample")
+
+  idx <- switch(size$type,
+                n =    function(x, n) sample_int(n, size$n, replace = replace, wt = x),
+                prop = function(x, n) sample_int(n, size$prop * n, replace = replace, wt = x),
+  )
+
+  slice.(.data, idx({{ weight_by }}, .N), .by = {{ .by }})
+}
+
+sample_int <- function(n, size, replace = FALSE, wt = NULL) {
+  if (replace) {
+    sample.int(n, size, prob = wt, replace = TRUE)
+  } else {
+    sample.int(n, min(size, n), prob = wt)
+  }
+}
+
+check_constant <- function(x, name, fn) {
+  withCallingHandlers(force(x), error = function(e) {
+    abort(c(
+      glue("`{name}` must be a constant in `{fn}()`."),
+      x = conditionMessage(e)
+    ), parent = e)
+  })
+}
+
+check_slice_size <- function(n, prop, .slice_fn = "check_slice_size") {
+  if (missing(n) && missing(prop)) {
+    list(type = "n", n = 1L)
+  } else if (!missing(n) && missing(prop)) {
+    n <- check_constant(n, "n", .slice_fn)
+    if (!is.numeric(n) || length(n) != 1) {
+      abort("`n` must be a single number.")
+    }
+    if (is.na(n) || n < 0) {
+      abort("`n` must be a non-missing positive number.")
+    }
+
+    list(type = "n", n = n)
+  } else if (!missing(prop) && missing(n)) {
+    prop <- check_constant(prop, "prop", .slice_fn)
+    if (!is.numeric(prop) || length(prop) != 1) {
+      abort("`prop` must be a single number")
+    }
+    if (is.na(prop) || prop < 0) {
+      abort("`prop` must be a non-missing positive number.")
+    }
+    list(type = "prop", prop = prop)
+  } else {
+    abort("Must supply exactly one of `n` and `prop` arguments.")
+  }
+}
