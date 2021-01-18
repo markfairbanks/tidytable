@@ -148,8 +148,9 @@ fill_marks <- bench::mark(
   tidyverse = fill(group_by(fill_tbl, id), int1, int2),
   tidytable = fill.(fill_dt, int1, int2, .by = id),
   # needs shallow copy or subsequent runs won't have NAs to fill
-  data.table = tidytable:::shallow(fill_dt)[, c("int1", "int2") := lapply(.SD, nafill, type = "locf"),
-                                            by = id],
+  data.table = copy(fill_dt)[,
+                             c("int1", "int2") := lapply(.SD, nafill, type = "locf"),
+                             by = id],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
          func_tested = "fill")

@@ -4,9 +4,10 @@
 * `pivot_longer.()`: `values_drop_na` is no longer the 5th argument in the function
 
 #### New functions
-* `mutate_rowwise.()`
 * `c_across.()`
 * `extract.()`
+* `mutate_rowwise.()`
+* `slice_sample.()`
 
 #### Functionality improvements
 * `pivot_longer.()`
