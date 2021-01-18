@@ -1,3 +1,4 @@
+/*
 .navbar {
     box-shadow: 0 1px 8px rgba(0,0,0,0.3) !important;
 }
@@ -32,7 +33,7 @@ h3, .h3 {
     font-size: 28px;
 }
 body{
-    font-size: 15px;
+    font-size: 16px;
 }
 code span, pre span{
     font-size: 13px;

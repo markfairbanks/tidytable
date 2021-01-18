@@ -19,7 +19,7 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/lumen/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9</span>
       </span>
     </div>
 
@@ -136,9 +136,46 @@
       <small>Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="tidytable-058-in-development" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.8">
+<a href="#tidytable-058-in-development" class="anchor"></a>tidytable 0.5.8 (in development)<small> Unreleased </small>
+</h1>
+<div id="breaking-changes" class="section level4">
+<h4 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h4>
+<ul>
+<li>
+<code><a href="../reference/pivot_longer..html">pivot_longer.()</a></code>: <code>values_drop_na</code> is no longer the 5th argument in the function</li>
+</ul>
+</div>
+<div id="new-functions" class="section level4">
+<h4 class="hasAnchor">
+<a href="#new-functions" class="anchor"></a>New functions</h4>
+<ul>
+<li><code><a href="../reference/mutate_rowwise..html">mutate_rowwise.()</a></code></li>
+<li><code><a href="../reference/c_across..html">c_across.()</a></code></li>
+<li><code><a href="../reference/extract..html">extract.()</a></code></li>
+</ul>
+</div>
+<div id="functionality-improvements" class="section level4">
+<h4 class="hasAnchor">
+<a href="#functionality-improvements" class="anchor"></a>Functionality improvements</h4>
+<ul>
+<li>
+<code><a href="../reference/pivot_longer..html">pivot_longer.()</a></code>
+<ul>
+<li>New args: <code>names_sep</code>, <code>names_pattern</code>, <code>names_ptypes</code>, <code>names_transform</code>, <code>names_repair</code>, <code>values_ptypes</code>, <code>values_transform</code>, <code>fast_pivot</code>
+</li>
+<li>
+<code>fast_pivot</code> arg: Faster pivoting. The “names” column will be a factor instead of character. Default is set to <code>FALSE</code> to match tidyverse semantics. Note: This option sets <code>variable.factor = TRUE</code> in <code><a href="https://Rdatatable.gitlab.io/data.table/reference/melt.data.table.html">data.table::melt()</a></code>, which is what leads to it being faster.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
     <div id="tidytable-057" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.7">
-<a href="#tidytable-057" class="anchor"></a>tidytable 0.5.7<small> Unreleased </small>
+<a href="#tidytable-057" class="anchor"></a>tidytable 0.5.7<small> 2020-12-16 </small>
 </h1>
 <div id="deprecations" class="section level4">
 <h4 class="hasAnchor">
@@ -147,9 +184,9 @@
 <li>The <code>dt_verb()</code> versions of functions have been removed from the package. They have been deprecated with warnings since v0.5.2</li>
 </ul>
 </div>
-<div id="functionality-improvements" class="section level4">
+<div id="functionality-improvements-1" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-1" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/crossing..html">crossing.()</a></code>: Now works with data frame inputs (<a href='https://github.com/moutikabdessabour'>@moutikabdessabour</a>, <a href='https://github.com/markfairbanks/tidytable/issues/143'>#143</a>)</li>
@@ -189,18 +226,18 @@
 <h1 class="page-header" data-toc-text="0.5.6">
 <a href="#tidytable-056" class="anchor"></a>tidytable 0.5.6<small> 2020-09-30 </small>
 </h1>
-<div id="breaking-changes" class="section level4">
+<div id="breaking-changes-1" class="section level4">
 <h4 class="hasAnchor">
-<a href="#breaking-changes" class="anchor"></a>Breaking changes</h4>
+<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h4>
 <ul>
 <li>
 <code><a href="../reference/bind_cols..html">bind_cols.()</a></code>: Name repair uses <code>vec_as_names()</code> instead of <code>vec_as_names_legacy()</code>
 </li>
 </ul>
 </div>
-<div id="functionality-improvements-1" class="section level4">
+<div id="functionality-improvements-2" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-1" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-2" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/bind_cols..html">bind_cols.()</a></code>: Added <code>.name_repair</code> arg</li>
@@ -217,9 +254,9 @@
 <code><a href="../reference/slice..html">slice.()</a></code>: Can now drop specified rows with negative numbers</li>
 </ul>
 </div>
-<div id="new-functions" class="section level4">
+<div id="new-functions-1" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions" class="anchor"></a>New functions</h4>
+<a href="#new-functions-1" class="anchor"></a>New functions</h4>
 <ul>
 <li><code><a href="../reference/arrange_across..html">arrange_across.()</a></code></li>
 <li>
@@ -252,9 +289,9 @@
 <h1 class="page-header" data-toc-text="0.5.5">
 <a href="#tidytable-055" class="anchor"></a>tidytable 0.5.5<small> 2020-09-02 </small>
 </h1>
-<div id="breaking-changes-1" class="section level4">
+<div id="breaking-changes-2" class="section level4">
 <h4 class="hasAnchor">
-<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h4>
+<a href="#breaking-changes-2" class="anchor"></a>Breaking changes</h4>
 <ul>
 <li>
 <code><a href="../reference/bind_cols..html">bind_rows.()</a></code>: Removed <code>.use_names</code> and <code>.fill</code> args
@@ -275,9 +312,9 @@
 <code><a href="../reference/slice..html">slice.()</a></code>: <code>.by</code> must be named when slicing by group</li>
 </ul>
 </div>
-<div id="functionality-improvements-2" class="section level4">
+<div id="functionality-improvements-3" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-2" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-3" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code>tidytable</code> now integrates better with tidyverse functions through <code>vctrs</code>. This means code such as <code>vec_cbind(tibble::tibble(x = 1:3), tidytable(y = "foo"))</code> will bind the results into a tidytable.</li>
@@ -289,9 +326,9 @@
 <code><a href="../reference/slice..html">slice.()</a></code>: Now uses <code>...</code> to select which rows to slice</li>
 </ul>
 </div>
-<div id="new-functions-1" class="section level4">
+<div id="new-functions-2" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-1" class="anchor"></a>New functions</h4>
+<a href="#new-functions-2" class="anchor"></a>New functions</h4>
 <ul>
 <li><code><a href="../reference/left_join..html">semi_join.()</a></code></li>
 </ul>
@@ -316,16 +353,16 @@
 <h1 class="page-header" data-toc-text="0.5.4">
 <a href="#tidytable-054" class="anchor"></a>tidytable 0.5.4<small> 2020-08-10 </small>
 </h1>
-<div id="breaking-changes-2" class="section level4">
+<div id="breaking-changes-3" class="section level4">
 <h4 class="hasAnchor">
-<a href="#breaking-changes-2" class="anchor"></a>Breaking changes</h4>
+<a href="#breaking-changes-3" class="anchor"></a>Breaking changes</h4>
 <ul>
 <li>Column names auto-generated by <code><a href="../reference/summarize_across..html">summarize_across.()</a></code> now use a suffix instead of a prefix</li>
 </ul>
 </div>
-<div id="functionality-improvements-3" class="section level4">
+<div id="functionality-improvements-4" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-3" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-4" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/mutate_across..html">mutate_across.()</a></code>: Added <code>.names</code> arg to help with naming newly created columns</li>
@@ -371,9 +408,9 @@
 <h1 class="page-header" data-toc-text="0.5.3">
 <a href="#tidytable-053" class="anchor"></a>tidytable 0.5.3<small> 2020-07-16 </small>
 </h1>
-<div id="breaking-changes-3" class="section level4">
+<div id="breaking-changes-4" class="section level4">
 <h4 class="hasAnchor">
-<a href="#breaking-changes-3" class="anchor"></a>Breaking changes</h4>
+<a href="#breaking-changes-4" class="anchor"></a>Breaking changes</h4>
 <ul>
 <li>
 <code><a href="../reference/bind_cols..html">bind_rows.()</a></code>
@@ -388,9 +425,9 @@
 </li>
 </ul>
 </div>
-<div id="new-functions-2" class="section level4">
+<div id="new-functions-3" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-2" class="anchor"></a>New functions</h4>
+<a href="#new-functions-3" class="anchor"></a>New functions</h4>
 <ul>
 <li><code><a href="../reference/complete..html">complete.()</a></code></li>
 <li><code><a href="../reference/crossing..html">crossing.()</a></code></li>
@@ -399,9 +436,9 @@
 <li><code><a href="../reference/uncount..html">uncount.()</a></code></li>
 </ul>
 </div>
-<div id="functionality-improvements-4" class="section level4">
+<div id="functionality-improvements-5" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-4" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-5" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/replace_na..html">replace_na.()</a></code>: Now works on <code>data.frame</code>/<code>data.table</code> inputs as well as vectors</li>
@@ -431,16 +468,16 @@
 <li>All <code>dt_verb()</code> functions are soft deprecated</li>
 </ul>
 </div>
-<div id="new-functions-3" class="section level4">
+<div id="new-functions-4" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-3" class="anchor"></a>New functions</h4>
+<a href="#new-functions-4" class="anchor"></a>New functions</h4>
 <ul>
 <li><code><a href="../reference/separate_rows..html">separate_rows.()</a></code></li>
 </ul>
 </div>
-<div id="functionality-improvements-5" class="section level4">
+<div id="functionality-improvements-6" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-5" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-6" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/unnest..html">unnest.()</a></code>: Added <code>.keep_all</code> arg to keep all list columns that were not unnested</li>
@@ -451,9 +488,9 @@
 <h1 class="page-header" data-toc-text="0.5.1">
 <a href="#tidytable-051" class="anchor"></a>tidytable 0.5.1<small> 2020-05-29 </small>
 </h1>
-<div id="new-functions-4" class="section level4">
+<div id="new-functions-5" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-4" class="anchor"></a>New functions</h4>
+<a href="#new-functions-5" class="anchor"></a>New functions</h4>
 <ul>
 <li>
 <code><a href="../reference/summarize_across..html">summarize_across.()</a></code> &amp; <code><a href="../reference/summarize_across..html">summarise_across.()</a></code>
@@ -479,9 +516,9 @@
 <code>tidyselect v0.1.1</code> compatibility: Updated functions to use <code>where()</code>
 </li>
 </ul>
-<div id="functionality-improvements-6" class="section level4">
+<div id="functionality-improvements-7" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-6" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-7" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/nest_by..html">nest_by.()</a></code>: Added <code>.keep</code> arg</li>
@@ -498,18 +535,18 @@
 </li>
 </ul>
 </div>
-<div id="breaking-changes-4" class="section level4">
+<div id="breaking-changes-5" class="section level4">
 <h4 class="hasAnchor">
-<a href="#breaking-changes-4" class="anchor"></a>Breaking changes</h4>
+<a href="#breaking-changes-5" class="anchor"></a>Breaking changes</h4>
 <ul>
 <li>
 <code><a href="../reference/group_split..html">group_split.()</a></code>: <code>keep</code> arg renamed to <code>.keep</code>
 </li>
 </ul>
 </div>
-<div id="new-functions-5" class="section level4">
+<div id="new-functions-6" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-5" class="anchor"></a>New functions</h4>
+<a href="#new-functions-6" class="anchor"></a>New functions</h4>
 <ul>
 <li>
 <code><a href="../reference/lags..html">lags.()</a></code> &amp; <code><a href="../reference/lags..html">leads.()</a></code>
@@ -533,9 +570,9 @@
 <code>tidytable</code> now utilizes <code>tidyselect</code> &amp; <code>vctrs</code>
 </li>
 </ul>
-<div id="breaking-changes-5" class="section level4">
+<div id="breaking-changes-6" class="section level4">
 <h4 class="hasAnchor">
-<a href="#breaking-changes-5" class="anchor"></a>Breaking changes</h4>
+<a href="#breaking-changes-6" class="anchor"></a>Breaking changes</h4>
 <ul>
 <li>
 <code><a href="../reference/get_dummies..html">get_dummies.()</a></code>: <code>cols</code> arg defaults to <code><a href="https://rdrr.io/r/base/c.html">c(is.character, is.factor)</a></code>. The result is the same, but is more consistent with other enhanced selection functions</li>
@@ -543,17 +580,17 @@
 <code><a href="../reference/mutate_across..html">mutate_across.()</a></code>: <code>.funs</code> argument renamed to <code>.fns</code> to match dplyr 1.0</li>
 </ul>
 </div>
-<div id="new-functions-6" class="section level4">
+<div id="new-functions-7" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-6" class="anchor"></a>New functions</h4>
+<a href="#new-functions-7" class="anchor"></a>New functions</h4>
 <ul>
 <li><code><a href="../reference/desc..html">desc.()</a></code></li>
 <li><code><a href="../reference/unite..html">unite.()</a></code></li>
 </ul>
 </div>
-<div id="functionality-improvements-7" class="section level4">
+<div id="functionality-improvements-8" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-7" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-8" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>Paged printing now works in Rmarkdown</li>
 <li>
@@ -611,9 +648,9 @@
 <code>dt_verb()</code> functions still work, but may be slowly deprecated in future releases</li>
 </ul>
 </div>
-<div id="functionality-improvements-8" class="section level4">
+<div id="functionality-improvements-9" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-8" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-9" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>Enhanced selection now works in “by” calls</li>
 <li>
@@ -624,9 +661,9 @@
 <code><a href="../reference/pull..html">pull.()</a></code> defaults to last column in a data.table</li>
 </ul>
 </div>
-<div id="new-functions-7" class="section level4">
+<div id="new-functions-8" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-7" class="anchor"></a>New functions</h4>
+<a href="#new-functions-8" class="anchor"></a>New functions</h4>
 <ul>
 <li><code><a href="../reference/ifelse..html">ifelse.()</a></code></li>
 <li><code><a href="../reference/n..html">n.()</a></code></li>
@@ -665,9 +702,9 @@
 <li>All tidytable functions automatically convert to <code>tidytable</code> class in the background.</li>
 </ul>
 </div>
-<div id="new-functions-8" class="section level4">
+<div id="new-functions-9" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-8" class="anchor"></a>New functions</h4>
+<a href="#new-functions-9" class="anchor"></a>New functions</h4>
 <ul>
 <li>tidytable constructors:
 <ul>
@@ -698,9 +735,9 @@
 <ul>
 <li>Updated <code><a href="../reference/dt.html">dt()</a></code> docs per CRAN instructions</li>
 </ul>
-<div id="breaking-changes-6" class="section level4">
+<div id="breaking-changes-7" class="section level4">
 <h4 class="hasAnchor">
-<a href="#breaking-changes-6" class="anchor"></a>Breaking changes</h4>
+<a href="#breaking-changes-7" class="anchor"></a>Breaking changes</h4>
 <ul>
 <li>
 <code>dt_mutate()</code> &amp; <code>dt_rename()</code> no longer modify-by-reference</li>
@@ -712,9 +749,9 @@
 </li>
 </ul>
 </div>
-<div id="functionality-improvements-9" class="section level4">
+<div id="functionality-improvements-10" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-9" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-10" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/dt.html">dt()</a></code> now automatically converts data.frame input to a data.table</li>
