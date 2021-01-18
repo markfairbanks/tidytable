@@ -1,6 +1,6 @@
 template:
   params:
-    bootswatch: paper
+    bootswatch: lumen
 reference:
 - title: tidytable helpers
 - contents:

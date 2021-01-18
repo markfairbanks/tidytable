@@ -47,7 +47,7 @@ devtools::install_github("markfairbanks/tidytable")
 ``` r
 library(tidytable)
 
-test_df <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a","a","b"))
+test_df <- data.table(x = 1:3, y = 4:6, z = c("a","a","b"))
 
 test_df %>%
   select.(x, y, z) %>%
@@ -57,7 +57,7 @@ test_df %>%
           double_y = y * 2)
 #> # tidytable [3 × 5]
 #>       x     y z     double_x double_y
-#>   <dbl> <dbl> <chr>    <dbl>    <dbl>
+#>   <int> <int> <chr>    <dbl>    <dbl>
 #> 1     1     4 a            2        8
 #> 2     2     5 a            4       10
 #> 3     3     6 b            6       12
@@ -152,9 +152,9 @@ etc.
 
 ``` r
 test_df <- data.table(
-  a = c(1,2,3),
-  b1 = c(4,5,6),
-  b2 = c(7,8,9),
+  a = 1:3,
+  b1 = 4:6,
+  b2 = 7:9,
   c = c("a","a","b")
 )
 
@@ -162,7 +162,7 @@ test_df %>%
   select.(a, starts_with("b"))
 #> # tidytable [3 × 3]
 #>       a    b1    b2
-#>   <dbl> <dbl> <dbl>
+#>   <int> <int> <int>
 #> 1     1     4     7
 #> 2     2     5     8
 #> 3     3     6     9
@@ -242,7 +242,7 @@ All `tidytable` functions automatically convert `data.frame` and
 library(dplyr)
 library(data.table)
 
-test_df <- tibble(x = c(1,2,3), y = c(4,5,6), z = c("a","a","b"))
+test_df <- tibble(x = 1:3, y = 4:6, z = c("a","a","b"))
 
 test_df %>%
   mutate.(double_x = x * 2) %>%
@@ -256,7 +256,7 @@ The `dt()` function makes regular `data.table` syntax pipeable, so you
 can easily mix `tidytable` syntax with `data.table` syntax:
 
 ``` r
-df <- data.table(x = c(1,2,3), y = c(4,5,6), z = c("a", "a", "b"))
+df <- data.table(x = 1:3, y = 4:6, z = c("a", "a", "b"))
 
 df %>%
   dt(, list(x, y, z)) %>%

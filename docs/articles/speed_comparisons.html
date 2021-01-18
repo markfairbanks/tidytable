@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/lumen/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9</span>
       </span>
     </div>
 
@@ -127,22 +127,6 @@
 </li>
 <li>Lastly I’d like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.</li>
 </ul>
-<pre><code>#&gt; # tidytable [13 × 7]
-#&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas tidytable_vs_dplyr
-#&gt;    &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             
-#&gt;  1 arrange            68.5      68.3   63.1    1383.   355   4.9%              
-#&gt;  2 case_when          30.2      53.1   NA       325.    59.2 16.4%             
-#&gt;  3 distinct           36.7      34.3   45.5      40.7  309   84.3%             
-#&gt;  4 fill               35.7      52.8   NA        60.6  846   87.1%             
-#&gt;  5 filter            238.      243.   234.      288.   707   84.1%             
-#&gt;  6 inner_join         59        58.9  142.       73.9   NA   79.7%             
-#&gt;  7 left_join          81.9      56.8  169       101.    NA   56.2%             
-#&gt;  8 mutate             73.4      57.1  538.       76.7   86.4 74.4%             
-#&gt;  9 nest               17.5      20.3   NA        27     NA   75.2%             
-#&gt; 10 pivot_longer       10.3      12.2   NA        48.5   NA   25.2%             
-#&gt; 11 pivot_wider       112.      123.    NA        77.2   NA   159.6%            
-#&gt; 12 summarize         251.      239.   274.      199.   834   119.7%            
-#&gt; 13 unnest              7.2      11.8   NA        29.7   NA   39.7%</code></pre>
 </div>
   </div>
 
