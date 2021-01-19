@@ -8,6 +8,9 @@
 #' @param order_by Variable to arrange by
 #' @param n Number of rows to grab
 #' @param .by Columns to group by
+#' @param prop The proportion of rows to select
+#' @param weight_by Sampling weights
+#' @param replace Should sampling be performed with (`TRUE`) or without (`FALSE`, default) replacement
 #'
 #' @export
 #'
@@ -199,13 +202,13 @@ slice_min..data.frame <- function(.df, order_by, n = 1, .by = NULL) {
 
 #' @export
 #' @rdname slice.
-slice_sample. <- function(.data, n, prop, weight_by = NULL,
+slice_sample. <- function(.df, n, prop, weight_by = NULL,
                           replace = FALSE, .by = NULL) {
   UseMethod("slice_sample.")
 }
 
 #' @export
-slice_sample..data.frame <- function(.data, n, prop, weight_by = NULL,
+slice_sample..data.frame <- function(.df, n, prop, weight_by = NULL,
                                      replace = FALSE, .by = NULL) {
   size <- check_slice_size(n, prop, "slice_sample")
 
@@ -214,7 +217,7 @@ slice_sample..data.frame <- function(.data, n, prop, weight_by = NULL,
                 prop = function(x, n) sample_int(n, size$prop * n, replace = replace, wt = x),
   )
 
-  slice.(.data, idx({{ weight_by }}, .N), .by = {{ .by }})
+  slice.(.df, idx({{ weight_by }}, .N), .by = {{ .by }})
 }
 
 sample_int <- function(n, size, replace = FALSE, wt = NULL) {

@@ -19,7 +19,7 @@ slice_max.(.df, order_by, n = 1, .by = NULL)
 
 slice_min.(.df, order_by, n = 1, .by = NULL)
 
-slice_sample.(.data, n, prop, weight_by = NULL, replace = FALSE, .by = NULL)
+slice_sample.(.df, n, prop, weight_by = NULL, replace = FALSE, .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -31,6 +31,12 @@ slice_sample.(.data, n, prop, weight_by = NULL, replace = FALSE, .by = NULL)
 \item{n}{Number of rows to grab}
 
 \item{order_by}{Variable to arrange by}
+
+\item{prop}{The proportion of rows to select}
+
+\item{weight_by}{Sampling weights}
+
+\item{replace}{Should sampling be performed with (\code{TRUE}) or without (\code{FALSE}, default) replacement}
 }
 \description{
 Choose rows in a data.table.
