@@ -33,6 +33,7 @@ reference:
   - mutate_across.
   - mutate_rowwise.
   - n.
+  - nest_by.
   - pull.
   - relocate.
   - rename.
@@ -51,7 +52,7 @@ reference:
   - expand_grid.
   - extract.
   - fill.
-  - nest_by.
+  - nest.
   - pivot_longer.
   - pivot_wider.
   - replace_na.

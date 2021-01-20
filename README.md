@@ -14,9 +14,9 @@ downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=blue)](h
 
 #### Why `tidytable`?
 
-  - `tidyverse`-like syntax with `data.table` speed
-  - `rlang` compatibility
-  - Includes functions that `dtplyr` is missing, including many `tidyr`
+-   `tidyverse`-like syntax with `data.table` speed
+-   `rlang` compatibility
+-   Includes functions that `dtplyr` is missing, including many `tidyr`
     functions
 
 Note: `tidytable` functions do not use `data.table`’s
@@ -71,10 +71,8 @@ A full list of functions can be found
 Group by calls are done from inside any function that has group by
 functionality (such as `summarize.()` & `mutate.()`)
 
-  - A single column can be passed with `.by = z`
-  - Multiple columns can be passed with `.by = c(y, z)`
-
-<!-- end list -->
+-   A single column can be passed with `.by = z`
+-   Multiple columns can be passed with `.by = c(y, z)`
 
 ``` r
 test_df %>%
@@ -194,8 +192,8 @@ A full overview of selection options can be found
 
 ``` r
 test_df <- data.table(
-  a = c(1,2,3),
-  b = c(4,5,6),
+  a = 1:3,
+  b = 4:6,
   c = c("a","a","b"),
   d = c("a","a","b")
 )

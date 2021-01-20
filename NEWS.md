@@ -8,6 +8,7 @@
 * `c_across.()`
 * `extract.()`
 * `mutate_rowwise.()`
+* `nest.()`
 * `slice_sample.()`
 
 #### Functionality improvements
