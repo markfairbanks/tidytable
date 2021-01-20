@@ -10,8 +10,11 @@ pivot_wider.(
   values_from = value,
   id_cols = NULL,
   names_sep = "_",
-  values_fn = NULL,
-  values_fill = NULL
+  names_prefix = "",
+  names_glue = NULL,
+  names_sort = FALSE,
+  values_fill = NULL,
+  values_fn = NULL
 )
 }
 \arguments{
@@ -32,25 +35,34 @@ Typically used when you have additional variables that is directly related.
 
 \item{names_sep}{the separator between the names of the columns}
 
-\item{values_fn}{Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.}
+\item{names_prefix}{prefix to add to the names of the new columns}
+
+\item{names_glue}{Instead of using \code{names_sep} and \code{names_prefix}, you can supply a
+glue specification that uses the \code{names_from} columns to create custom column names}
+
+\item{names_sort}{Should the resulting new columns be sorted}
 
 \item{values_fill}{If values are missing, what value should be filled in}
+
+\item{values_fn}{Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.}
 }
 \description{
 \code{pivot_wider.()} "widens" data, increasing the number of columns and
-decreasing the number of rows. The inverse transformation is
-\code{pivot_longer.()}. Syntax based on the \code{tidyr} equivalents.
+decreasing the number of rows.
 }
 \examples{
 test_df <- data.table(
-  z = rep(c("a", "b", "c"), 2),
-  stuff = c(rep("x", 3), rep("y", 3)),
-  things = 1:6)
+  a = rep(c("a", "b", "c"), 2),
+  b = c(rep("x", 3), rep("y", 3)),
+  vals = 1:6
+)
 
 test_df \%>\%
-  pivot_wider.(names_from = stuff, values_from = things)
+  pivot_wider.(names_from = b, values_from = vals)
 
 test_df \%>\%
-  pivot_wider.(names_from = stuff, values_from = things, id_cols = z)
+  pivot_wider.(
+    names_from = b, values_from = vals, names_prefix = "new_"
+  )
 
 }

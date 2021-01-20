@@ -1,9 +1,8 @@
 #' Pivot data from long to wide
 #'
 #' @description
-#' \code{pivot_wider.()} "widens" data, increasing the number of columns and
-#' decreasing the number of rows. The inverse transformation is
-#' \code{pivot_longer.()}. Syntax based on the \code{tidyr} equivalents.
+#' `pivot_wider.()` "widens" data, increasing the number of columns and
+#' decreasing the number of rows.
 #'
 #' @param .df A data.frame or data.table
 #' @param id_cols A set of columns that uniquely identifies each observation.
@@ -17,20 +16,27 @@
 #' and which column (or columns) to get the cell values from (\code{values_from}).
 #' `tidyselect` compatible.
 #' @param names_sep the separator between the names of the columns
+#' @param names_prefix prefix to add to the names of the new columns
+#' @param names_glue Instead of using `names_sep` and `names_prefix`, you can supply a
+#' glue specification that uses the `names_from` columns to create custom column names
+#' @param names_sort Should the resulting new columns be sorted
 #' @param values_fn Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.
 #' @param values_fill If values are missing, what value should be filled in
 #'
 #' @examples
 #' test_df <- data.table(
-#'   z = rep(c("a", "b", "c"), 2),
-#'   stuff = c(rep("x", 3), rep("y", 3)),
-#'   things = 1:6)
+#'   a = rep(c("a", "b", "c"), 2),
+#'   b = c(rep("x", 3), rep("y", 3)),
+#'   vals = 1:6
+#' )
 #'
 #' test_df %>%
-#'   pivot_wider.(names_from = stuff, values_from = things)
+#'   pivot_wider.(names_from = b, values_from = vals)
 #'
 #' test_df %>%
-#'   pivot_wider.(names_from = stuff, values_from = things, id_cols = z)
+#'   pivot_wider.(
+#'     names_from = b, values_from = vals, names_prefix = "new_"
+#'   )
 #'
 #' @export
 pivot_wider. <- function(.df,
@@ -38,8 +44,11 @@ pivot_wider. <- function(.df,
                          values_from = value,
                          id_cols = NULL,
                          names_sep = "_",
-                         values_fn = NULL,
-                         values_fill = NULL) {
+                         names_prefix = "",
+                         names_glue = NULL,
+                         names_sort = FALSE,
+                         values_fill = NULL,
+                         values_fn = NULL) {
   UseMethod("pivot_wider.")
 }
 
@@ -49,8 +58,11 @@ pivot_wider..data.frame <- function(.df,
                                     values_from = value,
                                     id_cols = NULL,
                                     names_sep = "_",
-                                    values_fn = NULL,
-                                    values_fill = NULL) {
+                                    names_prefix = "",
+                                    names_glue = NULL,
+                                    names_sort = FALSE,
+                                    values_fill = NULL,
+                                    values_fn = NULL) {
 
   .df <- as_tidytable(.df)
 
@@ -68,19 +80,40 @@ pivot_wider..data.frame <- function(.df,
     id_cols <- select_vec_chr(.df, !!id_cols)
   }
 
+  if (names_sort) {
+    .df <- arrange.(.df, !!!syms(names_from))
+  }
+
+  if (nchar(names_prefix) > 0 && is.null(names_glue)) {
+    .first_name <- sym(names_from[[1]])
+
+    .df <- mutate.(.df, !!.first_name := paste0(!!names_prefix, !!.first_name))
+  }
+
+  if (!is.null(names_glue)) {
+    .df <- mutate.(.df, .names_from = glue(names_glue, .envir = .SD))
+
+    .df <- relocate.(.df, .names_from, .before = !!sym(names_from[[1]]))
+
+    .df <- .df[, -..names_from]
+
+    names_from <- ".names_from"
+  }
+
   if (length(id_cols) == 0) {
-    dcast_form <- as.formula(
-      paste("...",
-            paste(names_from, collapse = " + "),
-            sep = " ~ ")
+    dcast_form <- paste0(
+      "... ~ ",
+      paste(names_from, collapse = " + ")
     )
   } else {
-    dcast_form <- as.formula(
-      paste(paste(id_cols, collapse = " + "),
-            paste(names_from, collapse = " + "),
-            sep = " ~ ")
+    dcast_form <- paste0(
+      paste(id_cols, collapse = " + "),
+      " ~ ",
+      paste(names_from, collapse = " + ")
     )
   }
+
+  dcast_form <- as.formula(dcast_form)
 
   .df <- eval_quo(
     dcast.data.table(
@@ -99,3 +132,4 @@ pivot_wider..data.frame <- function(.df,
   as_tidytable(.df)
 }
 
+globalVariables(c(".", ".names_from", "..names_from", "name", "value"))

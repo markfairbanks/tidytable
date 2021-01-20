@@ -2,6 +2,7 @@
 
 #### Breaking changes
 * `pivot_longer.()`: `values_drop_na` is no longer the 5th argument in the function
+* `pivot_wider.()`: `values_fn` & `values_fill` args are no longer the 6th & 7th args
 
 #### New functions
 * `c_across.()`
@@ -16,6 +17,8 @@
   + `fast_pivot` arg: Faster pivoting. The "names" column will be a factor instead of character.
   Default is set to `FALSE` to match tidyverse semantics. Note: This option sets `variable.factor = TRUE`
   in `data.table::melt()`, which is what leads to it being faster.
+* `pivot_wider.()`
+  + New args: `names_prefix`, `names_glue`, `names_sort`
 
 # tidytable 0.5.7
 
