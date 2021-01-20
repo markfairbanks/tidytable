@@ -1,62 +1,65 @@
 #' Nest data.tables
 #'
 #' @description
-#' Nest data.tables by group
+#' Nest data.tables
 #'
-#' @param .df A data.frame or data.table
-#' @param ... Columns to group by. If empty nests the entire data.table.
-#' `tidyselect` compatible.
-#' @param .key Name of the new column created by nesting.
-#' @param .keep Should the grouping columns be kept in the list column.
+#' @param .df A data.table or data.frame
+#' @param ... Columns to be nested.
+#' @param .names_sep If NULL, the names will be left alone. If a string,
+#' the names of the columns will be created by pasting together the inner
+#' column names and the outer column names.
 #'
 #' @export
-#' @md
 #'
 #' @examples
 #' test_df <- data.table(
 #'   a = 1:10,
 #'   b = 11:20,
 #'   c = c(rep("a", 6), rep("b", 4)),
-#'   d = c(rep("a", 4), rep("b", 6)))
+#'   d = c(rep("a", 4), rep("b", 6))
+#' )
 #'
 #' test_df %>%
-#'   nest_by.()
+#'   nest_by.(data = c(a, b))
 #'
 #' test_df %>%
-#'   nest_by.(c, d)
-#'
-#' test_df %>%
-#'   nest_by.(where(is.character))
-#'
-#' test_df %>%
-#'   nest_by.(c, d, .keep = TRUE)
-nest_by. <- function(.df, ..., .key = "data", .keep = FALSE) {
-  UseMethod("nest_by.")
+#'   nest.(data = where(is.numeric))
+nest. <- function(.df, ..., .names_sep = NULL) {
+  UseMethod("nest.")
 }
 
 #' @export
-nest_by..data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
+nest..data.frame <- function(.df, ..., .names_sep = NULL) {
 
   .df <- as_tidytable(.df)
 
-  vec_assert(.key, character(), 1)
-  vec_assert(.keep, logical(), 1)
+  if (!is.null(.names_sep)) vec_assert(.names_sep, character(), 1)
 
-  if (.keep) {
+  dots <- enquos(...)
 
-    split_list <- group_split.(.df, ..., .keep = .keep)
-
-    .df <- distinct.(.df, ...)
-
-    .df <- mutate.(.df, !!.key := split_list)
-
-  } else {
-
-    .by <- enquos(...)
-
-    .df <- summarize.(.df, !!.key := list(.SD), .by = c(!!!.by))
+  if (length(dots) > 1) {
+    abort("Currently only one nesting can be passed at a time.")
   }
 
-  .df
+  if (!is_named(dots)) {
+    abort("All elements of `...` must be named. For example `nest.(data = c(x, y))`")
+  }
 
+  .key <- names(dots)
+
+  dots <- unname(dots)
+
+  if (!is.null(.names_sep)) {
+    nest_cols <- eval_quo(select_vec_chr(.df, !!!dots))
+
+    new_names <- paste(.key, nest_cols, sep = .names_sep)
+
+    .df <- shallow(.df)
+
+    setnames(.df, nest_cols, new_names)
+
+    dots <- syms(new_names)
+  }
+
+  nest_by.(.df, -c(!!!dots), .key = .key)
 }
