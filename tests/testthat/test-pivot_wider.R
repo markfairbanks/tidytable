@@ -8,15 +8,6 @@ test_that("can pivot all cols to wide", {
   expect_equal(nrow(pivot_df), 1)
 })
 
-
-test_that("can pivot all cols to wide with data.frame", {
-  df <- data.frame(label = c("x", "y", "z"), val = 1:3)
-  pivot_df <- pivot_wider.(df, names_from = label, values_from = val)
-
-  expect_named(pivot_df, c("x", "y", "z"))
-  expect_equal(nrow(pivot_df), 1)
-})
-
 test_that("non-pivoted cols are preserved", {
   df <- data.table(a = 1, label = c("x", "y"), val = 1:2)
   pivot_df <- pivot_wider.(df, names_from = label, values_from = val)
@@ -68,22 +59,70 @@ test_that("can pivot from multiple measure cols using all keys", {
 
 test_that("can pivot from multiple measure cols using helpers", {
   df <- data.table(row = 1, var = c("x", "y"), a = 1:2, b = 3:4)
-  pv <- pivot_wider.(df,
-                     names_from = var,
-                     values_from = c(starts_with("a"), ends_with("b")))
+  pv <- pivot_wider.(
+    df,
+    names_from = var,
+    values_from = c(starts_with("a"), ends_with("b"))
+  )
 
   expect_named(pv, c("row", "a_x", "a_y", "b_x", "b_y"))
   expect_equal(pv$a_x, 1)
   expect_equal(pv$b_y, 4)
 })
 
-test_that("works with is.numeric helper", {
-  df <- data.table(row = 1, var = c("x", "y"), a = 1:2, b = 3:4)
-  pv <- pivot_wider.(df, names_from = var, values_from = c(where(is.numeric), -row))
+# names args ----------------------------------------------------------
+test_that("can add a prefix", {
+  df <- data.table(label = c("x", "y", "z"), val = 1:3)
+  pivot_df <- pivot_wider.(
+    df, names_from = label, values_from = val, names_prefix = "test_"
+  )
 
-  expect_named(pv, c("row", "a_x", "a_y", "b_x", "b_y"))
-  expect_equal(pv$a_x, 1)
-  expect_equal(pv$b_y, 4)
+  expect_named(pivot_df, c("test_x", "test_y", "test_z"))
+  expect_equal(nrow(pivot_df), 1)
+})
+
+test_that("can add a prefix - multiple names_from", {
+  df <- data.table(label1 = c("x", "y", "z"), label2 = c("x", "y", "z"), val = 1:3)
+  pivot_df <- pivot_wider.(
+    df, names_from = c(label1, label2),
+    values_from = val,
+    names_prefix = "test_"
+  )
+
+  expect_named(pivot_df, c("test_x_x", "test_y_y", "test_z_z"))
+  expect_equal(nrow(pivot_df), 1)
+})
+
+test_that("can use names_glue", {
+  df <- data.table(label = c("x", "y", "z"), val = 1:3)
+  pivot_df <- pivot_wider.(
+    df, names_from = label, values_from = val, names_glue = "test_{label}"
+  )
+
+  expect_named(pivot_df, c("test_x", "test_y", "test_z"))
+  expect_equal(nrow(pivot_df), 1)
+})
+
+test_that("can use names_glue - multiple names_from", {
+  df <- data.table(label1 = c("x", "y", "z"), label2 = c("x", "y", "z"), val = 1:3)
+  pivot_df <- pivot_wider.(
+    df, names_from = c(label1, label2), values_from = val,
+    names_glue = "test_{label1}_{label2}"
+  )
+
+  expect_named(pivot_df, c("test_x_x", "test_y_y", "test_z_z"))
+  expect_equal(nrow(pivot_df), 1)
+})
+
+test_that("can sort names", {
+  df <- data.table(label = c("z", "y", "x"), val = 1:3)
+  pivot_df <- pivot_wider.(
+    df, names_from = label, values_from = val,
+    names_glue = "test_{label}", names_sort = TRUE
+  )
+
+  expect_named(pivot_df, c("test_x", "test_y", "test_z"))
+  expect_equal(nrow(pivot_df), 1)
 })
 
 # using values_fn ----------------------------------------------------------
