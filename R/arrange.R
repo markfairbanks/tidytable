@@ -39,11 +39,8 @@ arrange..data.frame <- function(.df, ...) {
 
 desc_as_minus <- function(quosure) {
   if (quo_is_call(quosure, "desc.")) {
-    expr_str <- quo_text(node_cadr(quo_get_expr(quosure)))
-    expr_str <- str_c.("-", expr_str)
-
     quosure <- new_quosure(
-      parse_expr(expr_str),
+      node_poke_car(quo_get_expr(quosure), sym("-")),
       quo_get_env(quosure)
     )
   }
