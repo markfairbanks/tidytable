@@ -27,7 +27,7 @@ test_df <- data.table(
 )
 
 test_df \%>\%
-  nest_by.(data = c(a, b))
+  nest.(data = c(a, b))
 
 test_df \%>\%
   nest.(data = where(is.numeric))
