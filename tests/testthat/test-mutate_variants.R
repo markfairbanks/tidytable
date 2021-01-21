@@ -14,6 +14,9 @@ test_that("mutate_across.(): modify-by-reference doesn't occur", {
   df %>%
     mutate_across.(where(is.numeric), ~ .x + 1)
 
+  df %>%
+    mutate_across.(where(is.numeric), ~ 1, .by = z)
+
   expect_equal(df$x_start, c(1,1,1))
   expect_equal(df$end_x, c(2,2,2))
 })
