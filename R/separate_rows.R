@@ -66,3 +66,5 @@ separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert 
 
   .df[]
 }
+
+globalVariables(".id")

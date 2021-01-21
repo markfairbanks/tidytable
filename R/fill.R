@@ -87,3 +87,5 @@ fill..data.frame <- function(.df, ...,
 
   .df[]
 }
+
+globalVariables("..select_cols")

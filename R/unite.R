@@ -77,3 +77,5 @@ unite..data.frame <- function(.df, col = "new_col", ..., sep = "_", remove = TRU
 
   .df
 }
+
+globalVariables("..unite_cols")

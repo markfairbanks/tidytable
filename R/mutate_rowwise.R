@@ -84,3 +84,5 @@ get_selected <- function(.df, cols) {
 
   toString(glue("`{select_vec_chr(.df, !!parse_expr(cols))}`"))
 }
+
+globalVariables(".rowwise_id")

@@ -35,4 +35,4 @@ transmute..data.frame <- function(.df, ..., .by = NULL) {
   .df[, ..keep_names]
 }
 
-
+globalVariables("..keep_names")

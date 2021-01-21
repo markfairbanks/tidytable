@@ -122,3 +122,5 @@ get_dummies..data.frame <- function(.df,
 
   .df
 }
+
+globalVariables("where")

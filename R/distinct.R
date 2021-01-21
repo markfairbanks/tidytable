@@ -62,3 +62,4 @@ distinct..data.frame <- function(.df, ..., .keep_all = FALSE) {
   .df
 }
 
+globalVariables("..select_cols")

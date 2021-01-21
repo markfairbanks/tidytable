@@ -46,9 +46,11 @@ select..data.frame <- function(.df, ...) {
 
   select_cols <- select_dots_idx(.df, ...)
 
-  .df <- eval_quo(.df[, !!select_cols])
+  .df <- .df[, ..select_cols]
 
   .df <- set_names(.df, names(select_cols))
 
   .df
 }
+
+globalVariables("..select_cols")

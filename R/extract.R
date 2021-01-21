@@ -1,9 +1,9 @@
 #' Extract a character column into multiple columns using regex
-#' 
-#' @description 
+#'
+#' @description
 #' Given a regular expression with capturing groups, `extract()` turns each group
 #' into a new column. If the groups don't match, or the input is `NA`, the output
-#' will be `NA`. When you pass same name in the `into` argument it will merge 
+#' will be `NA`. When you pass same name in the `into` argument it will merge
 #' the groups together. Whilst passing `NA` in the `into` arg will drop the group
 #' from the resulting `tidytable`
 #'
@@ -38,23 +38,23 @@ extract. <- function(.df, col, into, regex = "([[:alnum:]]+)",
 #' @export
 extract..data.frame <- function(.df, col, into, regex = "([[:alnum:]]+)",
                                 remove = TRUE, convert = FALSE, ...) {
-  
+
   .df <- as_tidytable(.df)
   .df <- shallow(.df)
-  
+
   if (missing(col)) abort("col is missing and must be supplied")
   if (missing(into)) abort("into is missing and must be supplied")
-  
+
   col <- select_vec_idx(.df, {{ col }})
-  
+
   groups <- str_extract_groups(.df[[col]], regex, convert = convert)
-  
+
   if (length(groups) != length(into)) {
     abort(
       glue("`regex` pattern should define {length(into)} groups; {length(groups)} found.")
     )
   }
-  
+
   keep_group <- !is.na(into)
   groups <- groups[keep_group]
   into <- into[keep_group]
@@ -67,9 +67,9 @@ extract..data.frame <- function(.df, col, into, regex = "([[:alnum:]]+)",
   if(convert) groups <- lapply(groups, type.convert, as.is = TRUE)
 
   .df[, (into) := ..groups]
-  
+
   if (remove) .df[, (col) := NULL]
-  
+
   .df[]
 }
 
@@ -82,12 +82,14 @@ str_extract_groups <- function(string, pattern, convert = FALSE){
   }
   # in order to force substr to return NA when No match is found
   # set the start and end to NA
-  none_found <- start == -1 
+  none_found <- start == -1
   start[none_found] <- NA
   end[none_found] <- NA
-  
+
   lapply(
     seq_len(ncol(start)),
     function(.x) substr(string, start[, .x], end[, .x])
   )
 }
+
+globalVariables("..groups")

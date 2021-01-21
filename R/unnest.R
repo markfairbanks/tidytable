@@ -116,3 +116,4 @@ unnest_col <- function(.df, col = NULL, names_sep = NULL) {
   result_df
 }
 
+globalVariables("..keep_cols")
