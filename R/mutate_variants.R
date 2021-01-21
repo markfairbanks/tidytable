@@ -39,7 +39,7 @@ mutate_if. <- function(.df, .predicate, .funs, ..., .by = NULL) {
 #' @export
 mutate_if..data.frame <- function(.df, .predicate, .funs, ..., .by = NULL) {
 
-  deprecate_soft("0.5.0", "tidytable::mutate_if.()", "mutate_across.()")
+  deprecate_stop("0.5.0", "tidytable::mutate_if.()", "mutate_across.()")
 
   mutate_across.(.df, where({{.predicate}}), .funs, ..., .by = {{ .by }})
 }
@@ -53,7 +53,7 @@ mutate_at. <- function(.df, .vars, .funs, ..., .by = NULL) {
 #' @export
 mutate_at..data.frame <- function(.df, .vars, .funs, ..., .by = NULL) {
 
-  deprecate_soft("0.5.0", "tidytable::mutate_at.()", "mutate_across.()")
+  deprecate_stop("0.5.0", "tidytable::mutate_at.()", "mutate_across.()")
 
   mutate_across.(.df, {{.vars}}, .funs, ..., .by = {{ .by }})
 }
@@ -67,7 +67,7 @@ mutate_all. <- function(.df, .funs, ..., .by = NULL) {
 #' @export
 mutate_all..data.frame <- function(.df, .funs, ..., .by = NULL) {
 
-  deprecate_soft("0.5.0", "tidytable::mutate_all.()", "mutate_across.()")
+  deprecate_stop("0.5.0", "tidytable::mutate_all.()", "mutate_across.()")
 
   mutate_across.(.df, everything(), .funs, ..., .by = {{ .by }})
 }

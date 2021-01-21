@@ -39,46 +39,6 @@ test_that("rename.() works for multiple columns", {
   expect_named(df, c("new_x", "new_y", "z"))
 })
 
-test_that("rename_if() works with predicate", {
-  df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
-  df <- df %>%
-    rename_if.(is.character, function(.x) paste0(.x, "_character"))
-
-  expect_named(df, c("x","y","z_character"))
-})
-
-test_that("rename_at(): .vars works with select helpers in c()", {
-  df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
-  df <- df %>%
-    rename_at.(c(starts_with("x")), function(.x) paste0(.x, "_append"))
-
-  expect_named(df, c("x_start_append", "end_x", "z"))
-})
-
-test_that("rename_at() works for range selection", {
-  df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
-  df <- df %>%
-    rename_at.(c(x:y), function(.x) paste0(.x, "_append"))
-
-  expect_named(df, c("x_append", "y_append", "z"))
-})
-
-test_that("rename_all() works for all variables", {
-  df <- data.table(x = c(1,1,1), y = c(2,2,2))
-  df <- df %>%
-    rename_all.(function(.x) paste0(.x, "_append"))
-
-  expect_named(df, c("x_append", "y_append"))
-})
-
-test_that("rename_all() works for all variables w/ data.frame", {
-  df <- data.frame(x = c(1,1,1), y = c(2,2,2))
-  df <- df %>%
-    rename_all.(function(.x) paste0(.x, "_append"))
-
-  expect_named(df, c("x_append", "y_append"))
-})
-
 test_that("rename_with() works for all variables", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2))
   df <- df %>%
@@ -111,18 +71,6 @@ test_that("rename_with.() works with twiddle", {
   twiddle_df <- df %>%
     rename_with.(~ paste0(.x, "_append"), c(starts_with("x")))
 
-  expect_equal(anon_df, twiddle_df)
-})
-
-test_that("rename_all() works with twiddle", {
-  df <- data.table(x = c(1,1,1), y = c(2,2,2))
-  anon_df <- df %>%
-    rename_all.(function(.x) paste0(.x, "_append"))
-
-  twiddle_df <- df %>%
-    rename_all.(~ paste0(.x, "_append"))
-
-  expect_named(twiddle_df, c("x_append", "y_append"))
   expect_equal(anon_df, twiddle_df)
 })
 
