@@ -31,7 +31,7 @@ rename_all. <- function(.data, .fun, ...) {
 #' @export
 rename_all..default <- function(.data, .fun, ...) {
 
-  deprecate_soft("0.5.0", "tidytable::rename_all.()", "rename_with.()")
+  deprecate_stop("0.5.0", "tidytable::rename_all.()", "rename_with.()")
 
   rename_with.(.data, .fn = .fun, .cols = everything(), ...)
 }
@@ -45,7 +45,7 @@ rename_at. <- function(.data, .vars, .fun, ...) {
 #' @export
 rename_at..default <- function(.data, .vars, .fun, ...) {
 
-  deprecate_soft("0.5.0", "tidytable::rename_at.()", "rename_with.()")
+  deprecate_stop("0.5.0", "tidytable::rename_at.()", "rename_with.()")
 
   .vars <- enexpr(.vars)
 
@@ -61,7 +61,7 @@ rename_if. <- function(.data, .predicate, .fun, ...) {
 #' @export
 rename_if..default <- function(.data, .predicate, .fun, ...) {
 
-  deprecate_soft("0.5.0", "tidytable::rename_if.()", "rename_with.()")
+  deprecate_stop("0.5.0", "tidytable::rename_if.()", "rename_with.()")
 
   .predicate <- enexpr(.predicate)
 
