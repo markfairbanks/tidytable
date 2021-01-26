@@ -59,52 +59,61 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
 
   .cols <- select_vec_chr(.df, {{ .cols }})
 
-  .by <- select_vec_chr(.df, {{ .by }})
+  data_env <- env(quo_get_env(enquo(.fns)), .df = .df)
 
-  .cols <- .cols[.cols %notin% .by]
+  dots <- enquos(...)
 
-  if (length(.cols) == 0) abort("No columns have been selected to summarize.()")
+  if (length(.cols) == 0) return(.df)
+
+  # Need to capture separately for use later, otherwise a bare function call pre-evaluates
+  # Ex: data.table mutate_across.(test_df, everything(), between, 1, 3)
+  # R will search for data.table's Cbetween instead of the R function
+  .fun <- enexpr(.fns)
 
   if (!is.list(.fns)) {
 
+    if (is_anon_fun(.fns)) .fun <- as_function(.fns)
+
+    call_list <- map.(syms(.cols), ~ call2(.fun, .x, !!!dots))
+
     .names <- .names %||% "{.col}"
 
-    .col_names <- vec_as_names(
+    names(call_list) <- vec_as_names(
       glue(.names, .col = .cols, .fn = "1", col = .cols, fn = "1"),
       repair = "check_unique", quiet = TRUE
     )
-
-    .fns <- as_function(.fns)
-
-    .df <- eval_quo(
-      .df[, lapply(.SD, .fns, ...), .SDcols = .cols, by = .by]
-    )
-
-    names(.df) <- c(.by, .col_names)
-
   } else {
-
-    # Make new names
     names_flag <- have_name(.fns)
 
     if (!all(names_flag)) names(.fns)[!names_flag] <- seq_len(length(.fns))[!names_flag]
 
+    .fns <- map.(.fns, as_function)
+
     fn_names <- names(.fns)
+
+    combos <- expand_grid.(.fns = .fns, .cols = .cols)
+
+    .fns <- combos$.fns
+
+    .cols <- combos$.cols
+
+    call_list <- map2.(.fns, syms(.cols), ~ call2(.x, .y, !!!dots))
+
+    fn_names <- vec_rep_each(fn_names, length(.fns)/length(fn_names))
 
     .names <- .names %||% "{.col}_{.fn}"
 
-    new_names <- unlist(map.(fn_names, ~ glue(.names, .col = .cols, .fn = .x, col = .cols, fn = .x)))
-
-    # Convert .fns to list of map./lapply calls
-    .fns <- map.(.fns, ~ call2('map.', quo(.SD), .x))
-
-    .df <- eval_quo(
-      .df[, c(!!!.fns), .SDcols = .cols, by = .by]
+    names(call_list) <- vec_as_names(
+      glue(.names, .col = .cols, .fn = fn_names, col = .cols, fn = fn_names),
+      repair = "check_unique", quiet = TRUE
     )
-
-    names(.df) <- c(.by, new_names)
   }
-  .df
+
+  result_expr <- reset_expr(
+    summarize.(.df, !!!call_list, .by = {{ .by }})
+  )
+
+  eval_tidy(result_expr, new_data_mask(data_env), caller_env())
 }
 
 #' @export

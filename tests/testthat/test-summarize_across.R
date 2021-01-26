@@ -12,6 +12,28 @@ test_that("single function works", {
   expect_equal(result_df$b, 5)
 })
 
+test_that("can use anonymous functions", {
+  test_df <- tidytable(a = 1:3, b = 4:6, z = c("a", "a", "b"))
+
+  result_df <- test_df %>%
+    summarize_across.(c(a, b), ~ mean(.x, na.rm = TRUE))
+
+  expect_named(result_df, c("a", "b"))
+  expect_equal(result_df$a, 2)
+  expect_equal(result_df$b, 5)
+})
+
+test_that("can use other columns", {
+  test_df <- tidytable(a = 1:3, b = 1:3, z = c("a", "a", "b"))
+
+  result_df <- test_df %>%
+    summarize_across.(c(a, b), ~ mean(.x)/mean(b))
+
+  expect_named(result_df, c("a", "b"))
+  expect_equal(result_df$a, 1)
+  expect_equal(result_df$b, 1)
+})
+
 test_that("summarise spelling works", {
   test_df <- tidytable(a = 1:3, b = 4:6, z = c("a", "a", "b"))
 
@@ -39,6 +61,15 @@ test_that("can pass list of named functions", {
 
   result_df <- test_df %>%
     summarize_across.(c(a, b), list(avg = mean, max = max))
+
+  expect_named(result_df, c("a_avg", "b_avg", "a_max", "b_max"))
+  expect_equal(result_df$a_avg, 2)
+  expect_equal(result_df$b_avg, 5)
+  expect_equal(result_df$a_max, 3)
+  expect_equal(result_df$b_max, 6)
+
+  result_df <- test_df %>%
+    summarize_across.(c(a, b), list(avg = ~ mean(.x), max = ~ max(.x)))
 
   expect_named(result_df, c("a_avg", "b_avg", "a_max", "b_max"))
   expect_equal(result_df$a_avg, 2)
