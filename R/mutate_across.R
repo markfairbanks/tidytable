@@ -52,105 +52,68 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
 
   .cols <- select_vec_chr(.df, {{ .cols }})
 
-  .by <- select_vec_chr(.df, {{ .by }})
-
-  if (length(.by) > 0 && !is.list(.fns)) {
-    .df <- copy(.df)
-  } else {
-    .df <- shallow(.df)
-  }
-
-  .cols <- .cols[.cols %notin% .by]
-
   data_env <- env(quo_get_env(enquo(.fns)), .df = .df)
 
   dots <- enquos(...)
 
   if (length(.cols) == 0) return(.df)
 
+  # Need to capture separately for use later, otherwise a bare function call evaluates
+  # Ex: data.table mutate_across.(test_df, everything(), between, 1, 3)
+  # R will search for data.table's Cbetween instead of the R function
+  .fun <- enexpr(.fns)
+
   if (!is.list(.fns)) {
+
+    if (is_anon_fun(.fns)) .fun <- as_function(.fns)
+
+    call_list <- map.(syms(.cols), ~ call2(.fun, .x, !!!dots))
 
     .names <- .names %||% "{.col}"
 
-    .col_names <- vec_as_names(
+    names(call_list) <- vec_as_names(
       glue(.names, .col = .cols, .fn = "1", col = .cols, fn = "1"),
       repair = "check_unique", quiet = TRUE
     )
-
-    # Build final expression
-    if (is_anon_fun(.fns)) {
-
-      .fns <- as_function(.fns)
-
-      result_expr <- quo(.df[, (!!.col_names) := lapply(.SD, !!.fns, !!!dots), .SDcols = !!.cols, by = !!.by])
-
-    } else {
-
-      env_bind(data_env, .fns = .fns)
-
-      result_expr <- quo(.df[, (!!.col_names) := lapply(.SD, .fns, !!!dots), .SDcols = !!.cols, by = !!.by])
-
-    }
-
-    # Convert result_expr to text and back to expression to avoid environment issues (#145)
-    result_expr <- quo_squash(result_expr)
-    result_expr <- quo_text(result_expr)
-    result_expr <- parse_expr(result_expr)
-
-    eval_tidy(result_expr, new_data_mask(data_env), caller_env())
-
   } else {
-
     names_flag <- have_name(.fns)
 
     if (!all(names_flag)) names(.fns)[!names_flag] <- seq_len(length(.fns))[!names_flag]
 
+    .fns <- map.(.fns, as_function)
+
     fn_names <- names(.fns)
+
+    combos <- expand_grid.(.fns = .fns, .cols = .cols)
+
+    .fns <- combos$.fns
+
+    .cols <- combos$.cols
+
+    call_list <- map2.(.fns, syms(.cols), ~ call2(.x, .y, !!!dots))
+
+    fn_names <- vec_rep_each(fn_names, length(.fns)/length(fn_names))
 
     .names <- .names %||% "{.col}_{.fn}"
 
-    for (i in seq_along(fn_names)) {
-
-      .col_names <- vec_as_names(
-        glue(.names, .col = .cols, .fn = fn_names[[i]], col = .cols, fn = fn_names[[i]]),
-        repair = "check_unique", quiet = TRUE
-      )
-
-      if (any(.col_names %in% names(.df))) {
-        overwrite_cols <- .col_names[.col_names %in% names(.df)]
-
-        warn(glue("Newly created column {overwrite_cols} overwrote an existing column called {overwrite_cols}"))
-        warn("\nThis occurred due to the auto-naming feature of mutate_across.()")
-        warn("\nTo avoid this use a named list in the .fns arg or adjust .names arg\n")
-      }
-
-      .fn <- .fns[[i]]
-
-      # Build final expression
-      if (is_anon_fun(.fn)) {
-
-        .fn <- as_function(.fn)
-
-        result_expr <- quo(.df[, (!!.col_names) := lapply(.SD, !!.fn, !!!dots), .SDcols = !!.cols, by = !!.by])
-
-      } else {
-
-        env_bind(data_env, .fn = .fn)
-
-        result_expr <- quo(.df[, (!!.col_names) := lapply(.SD, .fn, !!!dots), .SDcols = !!.cols, by = !!.by])
-
-      }
-
-      # Convert result_expr to text and back to expression to avoid environment issues (#145)
-      result_expr <- quo_squash(result_expr)
-      result_expr <- quo_text(result_expr)
-      result_expr <- parse_expr(result_expr)
-
-      eval_tidy(result_expr, new_data_mask(data_env), caller_env())
-    }
+    names(call_list) <- vec_as_names(
+      glue(.names, .col = .cols, .fn = fn_names, col = .cols, fn = fn_names),
+      repair = "check_unique", quiet = TRUE
+    )
   }
 
-  .df[]
+  result_expr <- reset_expr(
+    mutate.(.df, !!!call_list, .by = {{ .by }})
+  )
+
+  eval_tidy(result_expr, new_data_mask(data_env), caller_env())
+}
+
+# Converts result_expr to text and back to expression to avoid environment issues (#145)
+reset_expr <- function(express) {
+  parse_expr(quo_text(quo_squash(enquo(
+    express
+  ))))
 }
 
 is_anon_fun <- function(fun) {
