@@ -13,6 +13,7 @@ pivot_wider.(
   names_prefix = "",
   names_glue = NULL,
   names_sort = FALSE,
+  names_repair = "check_unique",
   values_fill = NULL,
   values_fn = NULL
 )
@@ -41,6 +42,8 @@ Typically used when you have additional variables that is directly related.
 glue specification that uses the \code{names_from} columns to create custom column names}
 
 \item{names_sort}{Should the resulting new columns be sorted}
+
+\item{names_repair}{Treatment of duplicate names. See \code{?vctrs::vec_as_names} for options/details.}
 
 \item{values_fill}{If values are missing, what value should be filled in}
 

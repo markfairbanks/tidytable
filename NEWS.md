@@ -19,7 +19,7 @@
   Default is set to `FALSE` to match tidyverse semantics. Note: This option sets `variable.factor = TRUE`
   in `data.table::melt()`, which is what leads to it being faster.
 * `pivot_wider.()`
-  + New args: `names_prefix`, `names_glue`, `names_sort`
+  + New args: `names_prefix`, `names_glue`, `names_sort`, `names_repair`
 
 # tidytable 0.5.7
 

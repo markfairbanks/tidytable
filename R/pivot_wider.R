@@ -20,6 +20,7 @@
 #' @param names_glue Instead of using `names_sep` and `names_prefix`, you can supply a
 #' glue specification that uses the `names_from` columns to create custom column names
 #' @param names_sort Should the resulting new columns be sorted
+#' @param names_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details.
 #' @param values_fn Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.
 #' @param values_fill If values are missing, what value should be filled in
 #'
@@ -47,6 +48,7 @@ pivot_wider. <- function(.df,
                          names_prefix = "",
                          names_glue = NULL,
                          names_sort = FALSE,
+                         names_repair = "check_unique",
                          values_fill = NULL,
                          values_fn = NULL) {
   UseMethod("pivot_wider.")
@@ -61,6 +63,7 @@ pivot_wider..data.frame <- function(.df,
                                     names_prefix = "",
                                     names_glue = NULL,
                                     names_sort = FALSE,
+                                    names_repair = "check_unique",
                                     values_fill = NULL,
                                     values_fn = NULL) {
 
@@ -128,6 +131,8 @@ pivot_wider..data.frame <- function(.df,
   )
 
   if (length(id_cols) == 0) .df[, . := NULL]
+
+  .df <- df_name_repair(.df, .name_repair = names_repair)
 
   as_tidytable(.df)
 }
