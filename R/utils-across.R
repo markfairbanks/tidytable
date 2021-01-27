@@ -1,4 +1,13 @@
+# Build across calls
 across_calls <- function(.fns, .fun, .cols, .names, dots) {
+
+  # Note for .fun = enexpr(.fns)
+  # Needed to capture .fun separately for use later, otherwise a bare function call pre-evaluates
+  # when .fns is called in is.list(.funs)
+  # Ex: data.table mutate_across.(test_df, everything(), between, 1, 3)
+  # R will search for data.table's Cbetween instead of the R function
+  # This workaround works, but there's probably a better way to deal with this
+
   if (!is.list(.fns)) {
 
     if (is_anon_fun(.fns)) .fun <- as_function(.fns)

@@ -58,9 +58,6 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
 
   if (length(.cols) == 0) return(.df)
 
-  # Need to capture separately for use later, otherwise a bare function call pre-evaluates
-  # Ex: data.table mutate_across.(test_df, everything(), between, 1, 3)
-  # R will search for data.table's Cbetween instead of the R function
   .fun <- enexpr(.fns)
 
   call_list <- across_calls(.fns, .fun, .cols, .names, dots)
