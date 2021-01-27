@@ -142,16 +142,16 @@ pivot_longer..data.frame <- function(.df,
 
   ## values_ptype & values_transform
   # optionally, cast variables generated from columns
-  cast_cols <- intersect(values_to, names(values_ptypes))
-  for (col in cast_cols) {
-    .df[[col]] <- vec_cast(.df[[col]], values_ptypes[[col]])
+  cast_col <- intersect(values_to, names(values_ptypes))
+  if (length(cast_col) > 0) {
+    .df[[cast_col]] <- vec_cast(.df[[cast_col]], values_ptypes[[cast_col]])
   }
 
   # transform cols
-  coerce_cols <- intersect(values_to, names(values_transform))
-  for (col in coerce_cols) {
-    f <- as_function(values_transform[[col]])
-    .df[[col]] <- f(.df[[col]])
+  coerce_col <- intersect(values_to, names(values_transform))
+  if (length(coerce_col) > 0) {
+    f <- as_function(values_transform[[coerce_col]])
+    .df[[coerce_col]] <- f(.df[[coerce_col]])
   }
 
   as_tidytable(.df)
