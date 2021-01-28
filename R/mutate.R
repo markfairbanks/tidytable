@@ -74,7 +74,7 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
     # Faster with "by", since the "by" call isn't looped multiple times for each column added
     .by <- select_vec_chr(.df, !!.by)
 
-    needs_copy <- any(vec_in(names(dots), names(.df)))
+    needs_copy <- any(names(dots) %in% names(.df))
 
     if (needs_copy) .df <- copy(.df)
 
@@ -95,8 +95,14 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
     }
 
     if (length(dots) > 0) {
+
+      assign <- map2.(syms(names(dots)), dots, ~ call2("<-", .x, .y))
+      output <- call2("list", !!!syms(names(dots)))
+      expr <- call2("{", !!!assign, output)
+      j <- call2(":=", call2("c", !!!names(dots)), expr)
+
       eval_quo(
-        .df[, ':='(!!!dots), by = .by],
+        .df[, !!j, by = .by],
         new_data_mask(data_env), env = caller_env()
       )
     }
