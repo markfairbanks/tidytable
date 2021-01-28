@@ -1,3 +1,8 @@
+# tidytable 0.5.9 (in development)
+
+#### Functionality improvements
+* `mutate.()`: Variables are now updated in order when using ".by" (#166)
+
 # tidytable 0.5.8
 
 #### Breaking changes
