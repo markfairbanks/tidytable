@@ -103,23 +103,17 @@ pivot_wider..data.frame <- function(.df,
     names_from <- ".names_from"
   }
 
-  if (length(id_cols) == 0) {
-    dcast_form <- paste0(
-      "... ~ ",
-      paste(names_from, collapse = " + ")
-    )
-  } else {
-    dcast_form <- paste0(
-      paste(id_cols, collapse = " + "),
-      " ~ ",
-      paste(names_from, collapse = " + ")
-    )
-  }
+  no_id <- length(id_cols) == 0
 
-  dcast_form <- as.formula(dcast_form)
+  if (no_id) id_cols <- "..."
+  else id_cols <- paste(id_cols, collapse = " + ")
+
+  names_from <- paste(names_from, collapse = " + ")
+
+  dcast_form <- paste(id_cols, names_from, sep = " ~ ")
 
   .df <- eval_quo(
-    dcast.data.table(
+    dcast(
       .df,
       formula = dcast_form,
       value.var = values_from,
@@ -130,7 +124,7 @@ pivot_wider..data.frame <- function(.df,
     )
   )
 
-  if (length(id_cols) == 0) .df[, . := NULL]
+  if (no_id) .df[, . := NULL]
 
   .df <- df_name_repair(.df, .name_repair = names_repair)
 
