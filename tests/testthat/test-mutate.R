@@ -105,6 +105,15 @@ test_that("can use .by", {
 
 })
 
+test_that("can mutate in order with .by", {
+  df <- tidytable(x = rep(1, 3), z = c("a", "a", "b"))
+
+  tidytable_df <- df %>%
+    mutate.(x = x + 1, y = x + 1, .by = z)
+
+  expect_equal(tidytable_df$y, rep(3, 3))
+})
+
 test_that("modify-by-reference doesn't occur with single val with .by", {
   df <- data.table(x = 1:3, y = 1:3)
   df %>%
