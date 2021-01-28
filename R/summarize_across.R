@@ -70,7 +70,7 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
   call_list <- across_calls(.fns, .fun, .cols, .names, dots)
 
   result_expr <- reset_expr(
-    summarize.(.df, !!!call_list, .by = {{ .by }})
+    tidytable::summarize.(.df, !!!call_list, .by = {{ .by }})
   )
 
   eval_tidy(result_expr, new_data_mask(data_env), caller_env())
