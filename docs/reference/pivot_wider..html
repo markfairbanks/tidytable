@@ -50,8 +50,7 @@
 
 <meta property="og:title" content="Pivot data from long to wide — pivot_wider." />
 <meta property="og:description" content="pivot_wider.() &quot;widens&quot; data, increasing the number of columns and
-decreasing the number of rows. The inverse transformation is
-pivot_longer.(). Syntax based on the tidyr equivalents." />
+decreasing the number of rows." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -84,7 +83,7 @@ pivot_longer.(). Syntax based on the tidyr equivalents." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.8</span>
       </span>
     </div>
 
@@ -142,8 +141,7 @@ pivot_longer.(). Syntax based on the tidyr equivalents." />
 
     <div class="ref-description">
     <p><code>pivot_wider.()</code> "widens" data, increasing the number of columns and
-decreasing the number of rows. The inverse transformation is
-<code><a href='pivot_longer..html'>pivot_longer.()</a></code>. Syntax based on the <code>tidyr</code> equivalents.</p>
+decreasing the number of rows.</p>
     </div>
 
     <pre class="usage"><span class='fu'>pivot_wider.</span><span class='op'>(</span>
@@ -152,8 +150,12 @@ decreasing the number of rows. The inverse transformation is
   values_from <span class='op'>=</span> <span class='va'>value</span>,
   id_cols <span class='op'>=</span> <span class='cn'>NULL</span>,
   names_sep <span class='op'>=</span> <span class='st'>"_"</span>,
-  values_fn <span class='op'>=</span> <span class='cn'>NULL</span>,
-  values_fill <span class='op'>=</span> <span class='cn'>NULL</span>
+  names_prefix <span class='op'>=</span> <span class='st'>""</span>,
+  names_glue <span class='op'>=</span> <span class='cn'>NULL</span>,
+  names_sort <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  names_repair <span class='op'>=</span> <span class='st'>"check_unique"</span>,
+  values_fill <span class='op'>=</span> <span class='cn'>NULL</span>,
+  values_fn <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -187,34 +189,54 @@ Typically used when you have additional variables that is directly related.
       <td><p>the separator between the names of the columns</p></td>
     </tr>
     <tr>
-      <th>values_fn</th>
-      <td><p>Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.</p></td>
+      <th>names_prefix</th>
+      <td><p>prefix to add to the names of the new columns</p></td>
+    </tr>
+    <tr>
+      <th>names_glue</th>
+      <td><p>Instead of using <code>names_sep</code> and <code>names_prefix</code>, you can supply a
+glue specification that uses the <code>names_from</code> columns to create custom column names</p></td>
+    </tr>
+    <tr>
+      <th>names_sort</th>
+      <td><p>Should the resulting new columns be sorted</p></td>
+    </tr>
+    <tr>
+      <th>names_repair</th>
+      <td><p>Treatment of duplicate names. See <code><a href='https://vctrs.r-lib.org/reference/vec_as_names.html'>?vctrs::vec_as_names</a></code> for options/details.</p></td>
     </tr>
     <tr>
       <th>values_fill</th>
       <td><p>If values are missing, what value should be filled in</p></td>
+    </tr>
+    <tr>
+      <th>values_fn</th>
+      <td><p>Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>
-  z <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span><span class='op'>)</span>, <span class='fl'>2</span><span class='op'>)</span>,
-  stuff <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"x"</span>, <span class='fl'>3</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"y"</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>,
-  things <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>
+  a <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span><span class='op'>)</span>, <span class='fl'>2</span><span class='op'>)</span>,
+  b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"x"</span>, <span class='fl'>3</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"y"</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>,
+  vals <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>
+<span class='op'>)</span>
 
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>pivot_wider.</span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>stuff</span>, values_from <span class='op'>=</span> <span class='va'>things</span><span class='op'>)</span>
+  <span class='fu'>pivot_wider.</span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>b</span>, values_from <span class='op'>=</span> <span class='va'>vals</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [3 × 3]</span><span>
-#&gt;   z         x     y
+#&gt;   a         x     y
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> a         1     4
 #&gt; </span><span style='color: #555555;'>2</span><span> b         2     5
 #&gt; </span><span style='color: #555555;'>3</span><span> c         3     6</div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>pivot_wider.</span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>stuff</span>, values_from <span class='op'>=</span> <span class='va'>things</span>, id_cols <span class='op'>=</span> <span class='va'>z</span><span class='op'>)</span>
+  <span class='fu'>pivot_wider.</span><span class='op'>(</span>
+    names_from <span class='op'>=</span> <span class='va'>b</span>, values_from <span class='op'>=</span> <span class='va'>vals</span>, names_prefix <span class='op'>=</span> <span class='st'>"new_"</span>
+  <span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [3 × 3]</span><span>
-#&gt;   z         x     y
+#&gt;   a     new_x new_y
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> a         1     4
 #&gt; </span><span style='color: #555555;'>2</span><span> b         2     5

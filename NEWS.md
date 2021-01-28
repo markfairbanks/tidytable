@@ -1,4 +1,4 @@
-# tidytable 0.5.8 (in development)
+# tidytable 0.5.8
 
 #### Breaking changes
 * `pivot_longer.()`: `values_drop_na` is no longer the 5th argument in the function

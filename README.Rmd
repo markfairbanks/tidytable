@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# tidytable  <img id="logo" src="man/figures/logo.png" align="right" width="17%" height="17%" />
+# tidytable  <img id="logo" src="man/figures/logo.png" align="right" width="17%" height="17%" /> 
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
@@ -27,8 +27,6 @@ knitr::opts_chunk$set(
 * `tidyverse`-like syntax with `data.table` speed
 * `rlang` compatibility
 * Includes functions that `dtplyr` is missing, including many `tidyr` functions
-
-Note: `tidytable` functions do not use `data.table`'s modify-by-reference, and instead use the copy-on-modify principles followed by the `tidyverse` and base R.
 
 ## Installation
 

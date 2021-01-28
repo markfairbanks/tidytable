@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.8</span>
       </span>
     </div>
 
@@ -136,9 +136,9 @@
       <small>Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="tidytable-058-in-development" class="section level1">
+    <div id="tidytable-058" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.8">
-<a href="#tidytable-058-in-development" class="anchor"></a>tidytable 0.5.8 (in development)<small> Unreleased </small>
+<a href="#tidytable-058" class="anchor"></a>tidytable 0.5.8<small> Unreleased </small>
 </h1>
 <div id="breaking-changes" class="section level4">
 <h4 class="hasAnchor">
@@ -146,6 +146,8 @@
 <ul>
 <li>
 <code><a href="../reference/pivot_longer..html">pivot_longer.()</a></code>: <code>values_drop_na</code> is no longer the 5th argument in the function</li>
+<li>
+<code><a href="../reference/pivot_wider..html">pivot_wider.()</a></code>: <code>values_fn</code> &amp; <code>values_fill</code> args are no longer the 6th &amp; 7th args</li>
 </ul>
 </div>
 <div id="new-functions" class="section level4">
@@ -155,6 +157,7 @@
 <li><code><a href="../reference/c_across..html">c_across.()</a></code></li>
 <li><code><a href="../reference/extract..html">extract.()</a></code></li>
 <li><code><a href="../reference/mutate_rowwise..html">mutate_rowwise.()</a></code></li>
+<li><code><a href="../reference/nest..html">nest.()</a></code></li>
 <li><code><a href="../reference/slice..html">slice_sample.()</a></code></li>
 </ul>
 </div>
@@ -169,6 +172,13 @@
 </li>
 <li>
 <code>fast_pivot</code> arg: Faster pivoting. The “names” column will be a factor instead of character. Default is set to <code>FALSE</code> to match tidyverse semantics. Note: This option sets <code>variable.factor = TRUE</code> in <code><a href="https://Rdatatable.gitlab.io/data.table/reference/melt.data.table.html">data.table::melt()</a></code>, which is what leads to it being faster.</li>
+</ul>
+</li>
+<li>
+<code><a href="../reference/pivot_wider..html">pivot_wider.()</a></code>
+<ul>
+<li>New args: <code>names_prefix</code>, <code>names_glue</code>, <code>names_sort</code>, <code>names_repair</code>
+</li>
 </ul>
 </li>
 </ul>

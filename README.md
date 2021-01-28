@@ -7,7 +7,7 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/dev%20-0.5.7.9-green.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/dev%20-0.5.8-green.svg)](https://github.com/markfairbanks/tidytable)
 [![CRAN RStudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=blue)](https://markfairbanks.github.io/tidytable/)
 <!-- badges: end -->
@@ -18,10 +18,6 @@ downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=blue)](h
 -   `rlang` compatibility
 -   Includes functions that `dtplyr` is missing, including many `tidyr`
     functions
-
-Note: `tidytable` functions do not use `data.table`’s
-modify-by-reference, and instead use the copy-on-modify principles
-followed by the `tidyverse` and base R.
 
 ## Installation
 

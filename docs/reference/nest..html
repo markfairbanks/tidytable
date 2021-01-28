@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a data.table from all combinations of inputs — expand_grid. • tidytable</title>
+<title>Nest data.tables — nest. • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +48,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Create a data.table from all combinations of inputs — expand_grid." />
-<meta property="og:description" content="Create a data.table from all combinations of inputs" />
+<meta property="og:title" content="Nest data.tables — nest." />
+<meta property="og:description" content="Nest data.tables" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -133,51 +133,61 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a data.table from all combinations of inputs</h1>
-    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/expand_grid.R'><code>R/expand_grid.R</code></a></small>
-    <div class="hidden name"><code>expand_grid..Rd</code></div>
+    <h1>Nest data.tables</h1>
+    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/nest.R'><code>R/nest.R</code></a></small>
+    <div class="hidden name"><code>nest..Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a data.table from all combinations of inputs</p>
+    <p>Nest data.tables</p>
     </div>
 
-    <pre class="usage"><span class='fu'>expand_grid.</span><span class='op'>(</span><span class='va'>...</span>, .name_repair <span class='op'>=</span> <span class='st'>"check_unique"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>nest.</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span>, .names_sep <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>...</th>
-      <td><p>Variables to get combinations of</p></td>
+      <th>.df</th>
+      <td><p>A data.table or data.frame</p></td>
     </tr>
     <tr>
-      <th>.name_repair</th>
-      <td><p>Treatment of problematic names. See <code><a href='https://vctrs.r-lib.org/reference/vec_as_names.html'>?vctrs::vec_as_names</a></code> for options/details</p></td>
+      <th>...</th>
+      <td><p>Columns to be nested.</p></td>
+    </tr>
+    <tr>
+      <th>.names_sep</th>
+      <td><p>If NULL, the names will be left alone. If a string,
+the names of the columns will be created by pasting together the inner
+column names and the outer column names.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>
-<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>
+    <pre class="examples"><div class='input'><span class='va'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>
+  a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>,
+  b <span class='op'>=</span> <span class='fl'>11</span><span class='op'>:</span><span class='fl'>20</span>,
+  c <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='fl'>6</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"b"</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>,
+  d <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='fl'>4</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"b"</span>, <span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>)</span>
 
-<span class='fu'>expand_grid.</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [4 × 2]</span><span>
-#&gt;       x     y
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     1
-#&gt; </span><span style='color: #555555;'>2</span><span>     1     2
-#&gt; </span><span style='color: #555555;'>3</span><span>     2     1
-#&gt; </span><span style='color: #555555;'>4</span><span>     2     2</div><div class='input'>
-<span class='fu'>expand_grid.</span><span class='op'>(</span>stuff <span class='op'>=</span> <span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [4 × 2]</span><span>
-#&gt;   stuff     y
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     1
-#&gt; </span><span style='color: #555555;'>2</span><span>     1     2
-#&gt; </span><span style='color: #555555;'>3</span><span>     2     1
-#&gt; </span><span style='color: #555555;'>4</span><span>     2     2</div></span></pre>
+<span class='va'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>nest.</span><span class='op'>(</span>data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [3 × 3]</span><span>
+#&gt;   c     d     data               
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>             
+#&gt; </span><span style='color: #555555;'>1</span><span> a     a     </span><span style='color: #555555;'>&lt;tidytable [4 × 2]&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span> a     b     </span><span style='color: #555555;'>&lt;tidytable [2 × 2]&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span> b     b     </span><span style='color: #555555;'>&lt;tidytable [4 × 2]&gt;</span><span></div><div class='input'>
+<span class='va'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>nest.</span><span class='op'>(</span>data <span class='op'>=</span> <span class='fu'>where</span><span class='op'>(</span><span class='va'>is.numeric</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [3 × 3]</span><span>
+#&gt;   c     d     data               
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>             
+#&gt; </span><span style='color: #555555;'>1</span><span> a     a     </span><span style='color: #555555;'>&lt;tidytable [4 × 2]&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span> a     b     </span><span style='color: #555555;'>&lt;tidytable [2 × 2]&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span> b     b     </span><span style='color: #555555;'>&lt;tidytable [4 × 2]&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
