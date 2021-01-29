@@ -2,7 +2,7 @@
 
 #### Functionality improvements
 * `mutate.()`: Variables are now updated in order when using ".by" (#166)
-* `summarize.()`: Variables are now created in order
+* `summarize.()`: Variables are now created in order (#188)
 
 # tidytable 0.5.8
 
