@@ -55,23 +55,6 @@ test_that("can do group aggregation with no by", {
   expect_equal(tidytable_df, datatable_df)
 })
 
-test_that("by = list() causes an error", {
-  df <- tidytable(x = 1:4, y = c("a","a","a","b"))
-
-  expect_error(summarize.(df, avg_x = mean(x), .by = list(y)))
-})
-
-test_that("by = list works for column named list", {
-  df <- tidytable(x = 1:4, list = c("a","a","a","b"))
-
-  tidytable_df <- df %>%
-    summarize.(avg_x = mean(x), .by = list)
-
-  datatable_df <- df[, list(avg_x = mean(x)), by = list]
-
-  expect_equal(tidytable_df, datatable_df)
-})
-
 test_that("can do group aggregation with by c()", {
   df <- tidytable(x = 1:4, y = c("a","a","a","b"))
 
@@ -81,6 +64,16 @@ test_that("can do group aggregation with by c()", {
   datatable_df <- df[, list(avg_x = mean(x)), by = y]
 
   expect_equal(tidytable_df, datatable_df)
+})
+
+test_that("can refer to newly created columns", {
+  test_df <- tidytable(x = 1:4, y = c("a","a","a","b"))
+
+  new_df <- test_df %>%
+    summarize.(avg_x = mean(x), avg_x_plus_one = avg_x + 1, .by = y)
+
+  expect_named(new_df, c("y", "avg_x", "avg_x_plus_one"))
+  expect_equal(new_df$avg_x_plus_one, c(3, 5))
 })
 
 test_that("can use .sort & doesn't modify-by-reference", {
