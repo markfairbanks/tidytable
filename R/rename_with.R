@@ -22,10 +22,10 @@
 #'   rename_with.(toupper)
 #'
 #' test_df %>%
-#'   rename_with.(~ sub("x", "stuff", .x))
+#'   rename_with.(~ toupper(.x))
 #'
 #' test_df %>%
-#'   rename_with.(~ sub("x", "stuff", .x), .cols = c(x, double_x))
+#'   rename_with.(~ toupper(.x), .cols = c(x, double_x))
 rename_with. <- function(.df, .fn, .cols = everything(), ...) {
   UseMethod("rename_with.")
 }
@@ -37,17 +37,13 @@ rename_with..data.frame <- function(.df, .fn, .cols = everything(), ...) {
 
   .cols <- select_vec_chr(.df, {{ .cols }})
 
+  if (length(.cols) == 0) return(.df)
+
   .df <- shallow(.df)
 
   .fn <- as_function(.fn)
 
-  if (length(.cols) > 0) {
+  new_names <- .fn(.cols, ...)
 
-    new_names <- .fn(.cols, ...)
-    setnames(.df, .cols, new_names)
-
-    .df
-  } else {
-    .df
-  }
+  setnames(.df, .cols, new_names)[]
 }

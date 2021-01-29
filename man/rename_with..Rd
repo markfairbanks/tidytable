@@ -29,8 +29,8 @@ test_df \%>\%
   rename_with.(toupper)
 
 test_df \%>\%
-  rename_with.(~ sub("x", "stuff", .x))
+  rename_with.(~ toupper(.x))
 
 test_df \%>\%
-  rename_with.(~ sub("x", "stuff", .x), .cols = c(x, double_x))
+  rename_with.(~ toupper(.x), .cols = c(x, double_x))
 }
