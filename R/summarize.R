@@ -45,38 +45,36 @@ summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE) {
   data_env <- env(quo_get_env(dots[[1]]), .df = .df)
 
   # Needed so n.() works
-  dots <- map.(dots, wrap_n_dot)
+  dots <- map.(dots, replace_n_dot)
 
   .by <- select_vec_chr(.df, {{ .by }})
 
   if (.sort) {
-
     .df <- eval_quo(
       .df[, list(!!!dots), keyby = !!.by],
       new_data_mask(data_env), env = caller_env()
     )
 
     setkey(.df, NULL)
-
   } else {
+    assign <- map2.(syms(names(dots)), dots, ~ call2("<-", .x, .y))
+    output <- call2("list", !!!syms(names(dots)))
+    expr <- call2("{", !!!assign, output)
 
     .df <- eval_quo(
-      .df[, list(!!!dots), by = !!.by],
+      .df[, !!expr, by = !!.by],
       new_data_mask(data_env), env = caller_env()
     )
-
   }
 
   .df
-
 }
 
 #' @export
 #' @rdname summarize.
 summarise. <- summarize.
 
-
-wrap_n_dot <- function(quosure) {
+replace_n_dot <- function(quosure) {
   quo_string <- quo_text(quosure)
 
   if (str_detect.(quo_string, "n.[(]")) {
