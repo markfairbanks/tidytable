@@ -173,3 +173,18 @@ test_that("_across.() can use bare functions", {
   expect_equal(results_df$x, c(TRUE, TRUE, TRUE))
   expect_equal(results_df$y, c(TRUE, TRUE, FALSE))
 })
+
+test_that("can be used in custom functions", {
+  df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
+
+  mutate_across_fn <- function(data, cols, val) {
+    data %>%
+      mutate_across.({{ cols }}, ~ .x + val)
+  }
+
+  df <- df %>%
+    mutate_across_fn(where(is.numeric), 1)
+
+  expect_equal(df$x_start, c(2,2,2))
+  expect_equal(df$end_x, c(3,3,3))
+})
