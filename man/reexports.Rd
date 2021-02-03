@@ -14,6 +14,7 @@
 \alias{last_col}
 \alias{\%between\%}
 \alias{data.table}
+\alias{\%like\%}
 \alias{setDTthreads}
 \alias{enquo}
 \alias{enquos}
@@ -25,7 +26,7 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{data.table}{\code{\link[data.table:between]{\%between\%}}, \code{\link[data.table]{data.table}}, \code{\link[data.table:openmp-utils]{setDTthreads}}}
+  \item{data.table}{\code{\link[data.table:between]{\%between\%}}, \code{\link[data.table:like]{\%like\%}}, \code{\link[data.table]{data.table}}, \code{\link[data.table:openmp-utils]{setDTthreads}}}
 
   \item{rlang}{\code{\link[rlang:nse-defuse]{enquo}}, \code{\link[rlang:nse-defuse]{enquos}}}
 

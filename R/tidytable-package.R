@@ -51,6 +51,9 @@ data.table::`%between%`
 data.table::data.table
 
 #' @export
+data.table::`%like%`
+
+#' @export
 data.table::setDTthreads
 
 ## rlang ------------------------
