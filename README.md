@@ -65,7 +65,8 @@ A full list of functions can be found
 ## Using “group by”
 
 Group by calls are done from inside any function that has group by
-functionality (such as `summarize.()` & `mutate.()`)
+functionality (such as `summarize.()` & `mutate.()`) by using the `.by`
+argument.
 
 -   A single column can be passed with `.by = z`
 -   Multiple columns can be passed with `.by = c(y, z)`
@@ -88,10 +89,31 @@ A key difference between `tidytable`/`data.table` & `dplyr` is that
 `dplyr` can have multiple functions operate “by group” with a single
 `group_by()` call.
 
-We’ll start with an example `dplyr` pipe chain that utilizes
-`group_by()` and then rewrite it in `tidytable`. The goal is to grab the
-first two rows of each group using `slice()`, then add a row number
-column using `mutate()`:
+Below is some example `tidytable` code that utilizes `.by` that we’ll
+then compare to its `dplyr` equivalent. The goal is to grab the first
+two rows of each group using `slice.()`, then add a row number column
+using `mutate.()`:
+
+``` r
+library(tidytable)
+
+test_df <- data.table(x = c("a", "a", "a", "b", "b"))
+
+test_df %>%
+  slice.(1:2, .by = x) %>%
+  mutate.(group_row_num = row_number.(), .by = x)
+#> # tidytable [4 × 2]
+#>   x     group_row_num
+#>   <chr>         <int>
+#> 1 a                 1
+#> 2 a                 2
+#> 3 b                 1
+#> 4 b                 2
+```
+
+Note how you have to call `.by` in both `slice.()` and `mutate.()`.
+
+Compared to a `dplyr` pipe chain that utilizes `group_by()`:
 
 ``` r
 library(dplyr)
@@ -113,26 +135,8 @@ test_df %>%
 ```
 
 In this case both `slice()` and `mutate()` will operate “by group”. This
-happens until you call `ungroup()` at the end of the chain.
-
-However `data.table` doesn’t “remember” groups between function calls.
-So in `tidytable` you need to call `.by` in each function you want to
-operate “by group”, and you don’t need to call `ungroup()` at the end:
-
-``` r
-library(tidytable)
-
-test_df %>%
-  slice.(1:2, .by = x) %>%
-  mutate.(group_row_num = row_number.(), .by = x)
-#> # tidytable [4 × 2]
-#>   x     group_row_num
-#>   <chr>         <int>
-#> 1 a                 1
-#> 2 a                 2
-#> 3 b                 1
-#> 4 b                 2
-```
+happens until you call `ungroup()` at the end of the chain. Note that
+the `ungroup()` call is unnecessary in `tidytable`.
 
 ## `tidyselect` support
 
