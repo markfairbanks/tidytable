@@ -156,3 +156,13 @@ test_that("can pivot all cols (specified) to long with quosure function", {
   expect_equal(pivot_df$name, c("x","x","y","y"))
   expect_equal(pivot_df$value, c(1,2,3,4))
 })
+
+test_that("can use names_prefix", {
+  df <- data.table(x_x = 1:2, x_y = 3:4)
+  pivot_df <- pivot_longer.(df, names_prefix = "x_") %>%
+    arrange.(name, value)
+
+  expect_named(pivot_df, c("name", "value"))
+  expect_equal(pivot_df$name, c("x","x","y","y"))
+  expect_equal(pivot_df$value, c(1,2,3,4))
+})

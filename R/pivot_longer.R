@@ -9,11 +9,11 @@
 #' @param cols Vector of bare column names. Can add/drop columns. `tidyselect` compatible.
 #' @param names_to Name of the new "names" column. Must be a string.
 #' @param values_to Name of the new "values" column. Must be a string.
+#' @param names_prefix Remove matching text from the start of selected columns using regex.
 #' @param names_sep If `names_to` contains multiple values, `names_sep` takes
 #' the same specification as `separate.()`.
 #' @param names_pattern If `names_to` contains multiple values, `names_pattern` takes
 #' the same specification as `extract.()`, a regular expression containing matching groups.
-#' @param names_prefix Append a prefix to the new names
 #' @param names_ptypes,values_ptypes A list of column name-prototype pairs. See ``?vctrs::`theory-faq-coercion```
 #' for more info on vctrs coercion.
 #' @param names_transform,values_transform A list of column name-function pairs. Use these arguments
@@ -43,9 +43,9 @@ pivot_longer. <- function(.df,
                           cols = everything(),
                           names_to = "name",
                           values_to = "value",
-                          names_pattern = NULL,
-                          names_sep = NULL,
                           names_prefix = NULL,
+                          names_sep = NULL,
+                          names_pattern = NULL,
                           names_ptypes = list(),
                           names_transform = list(),
                           names_repair = "check_unique",
@@ -62,9 +62,9 @@ pivot_longer..data.frame <- function(.df,
                                      cols = everything(),
                                      names_to = "name",
                                      values_to = "value",
-                                     names_pattern = NULL,
-                                     names_sep = NULL,
                                      names_prefix = NULL,
+                                     names_sep = NULL,
+                                     names_pattern = NULL,
                                      names_ptypes = list(),
                                      names_transform = list(),
                                      names_repair = "check_unique",

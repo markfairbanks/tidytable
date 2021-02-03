@@ -9,9 +9,9 @@ pivot_longer.(
   cols = everything(),
   names_to = "name",
   values_to = "value",
-  names_pattern = NULL,
-  names_sep = NULL,
   names_prefix = NULL,
+  names_sep = NULL,
+  names_pattern = NULL,
   names_ptypes = list(),
   names_transform = list(),
   names_repair = "check_unique",
@@ -31,13 +31,13 @@ pivot_longer.(
 
 \item{values_to}{Name of the new "values" column. Must be a string.}
 
-\item{names_pattern}{If \code{names_to} contains multiple values, \code{names_pattern} takes
-the same specification as \code{extract.()}, a regular expression containing matching groups.}
+\item{names_prefix}{Remove matching text from the start of selected columns using regex.}
 
 \item{names_sep}{If \code{names_to} contains multiple values, \code{names_sep} takes
 the same specification as \code{separate.()}.}
 
-\item{names_prefix}{Append a prefix to the new names}
+\item{names_pattern}{If \code{names_to} contains multiple values, \code{names_pattern} takes
+the same specification as \code{extract.()}, a regular expression containing matching groups.}
 
 \item{names_ptypes, values_ptypes}{A list of column name-prototype pairs. See ``?vctrs::`theory-faq-coercion```
 for more info on vctrs coercion.}
