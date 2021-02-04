@@ -13,7 +13,8 @@
 #' @examples
 #' test_df <- data.table(
 #'   x = c(1, 2, NA),
-#'   y = c(NA, 1, 2))
+#'   y = c(NA, 1, 2)
+#' )
 #'
 #' # Using replace_na.() inside mutate.()
 #' test_df %>%
@@ -31,7 +32,7 @@ replace_na..default <- function(.x, replace = NA) {
 
   vec_assert(replace, size = 1)
 
-  if (class(replace) %in% c("integer", "double", "numeric")) {
+  if (is.integer(.x) || is.double(.x)) {
 
     nafill(.x, "const", fill = replace)
 
