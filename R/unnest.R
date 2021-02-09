@@ -84,7 +84,6 @@ unnest..data.frame <- function(.df,
     keep_df <- keep_df[vec_rep_each(1:.N, rep_vec)]
 
     result_df <- bind_cols.(keep_df, unnest_data, .name_repair = names_repair)
-
   } else {
 
     result_df <- bind_cols.(unnest_data, .name_repair = names_repair)
@@ -98,7 +97,7 @@ unnest_col <- function(.df, col = NULL, names_sep = NULL) {
 
   # Check if nested data is a vector
   nested_data <- pull.(.df, !!col)[[1]]
-  is_vec <- any(vec_in(class(nested_data), c("character", "factor", "numeric", "integer")))
+  is_vec <- is.atomic(nested_data) && !is.matrix(nested_data)
 
   if (is_vec) {
 
@@ -111,7 +110,7 @@ unnest_col <- function(.df, col = NULL, names_sep = NULL) {
   }
 
   if (!is.null(names_sep))
-    names(result_df) <- paste(quo_text(col), names(result_df), sep = names_sep)
+    names(result_df) <- paste(as_name(col), names(result_df), sep = names_sep)
 
   result_df
 }
