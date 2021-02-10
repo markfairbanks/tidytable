@@ -1,5 +1,8 @@
 # tidytable 0.5.9 (in development)
 
+#### New functions
+* `between.()`
+
 #### Functionality improvements
 * `mutate.()`: Variables are now updated in order when using ".by" (#166)
 * `summarize.()`: Variables are now created in order (#188)
