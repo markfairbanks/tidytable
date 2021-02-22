@@ -1,4 +1,4 @@
-test_that("missings are filled correctly", {
+test_that("missings are filled correctly & doesn't modify-by-reference", {
   # filled down from last non-missing
   df <- data.table::data.table(x = c(NA, 1, NA, 2, NA, NA))
 
@@ -13,6 +13,9 @@ test_that("missings are filled correctly", {
 
   out <- as_tidytable(df) %>% fill.(x, .direction = 'updown')
   expect_equal(out$x, c(1, 1, 2, 2, 2, 2))
+
+  # modify-by-reference test
+  expect_equal(df$x, c(NA, 1, NA, 2, NA, NA))
 })
 
 test_that("missings filled down for each atomic vector", {

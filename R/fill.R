@@ -44,15 +44,10 @@ fill..data.frame <- function(.df, ...,
 
   select_cols <- select_dots_chr(.df, ...)
 
-  subset_data <- .df[, ..select_cols]
-
-  numeric_flag <- map_lgl.(subset_data, is.numeric)
-
   with_by <- !quo_is_null(.by)
 
   if (with_by) {
     .df <- copy(.df)
-
     col_order <- names(.df)
   } else {
     .df <- shallow(.df)
@@ -60,32 +55,33 @@ fill..data.frame <- function(.df, ...,
 
   .by <- select_vec_chr(.df, !!.by)
 
-  if (all(numeric_flag)) {
-
-    # Use data.table::nafill() if all numeric
-    if (.direction %in% c("down", "up")) {
-      .type <- switch(.direction, "down" = "locf", "up" = "nocb")
-
-      .df[, (select_cols) := lapply(.SD, nafill, .type), .SDcols = select_cols, by = .by]
-
-    } else if (.direction == "downup") {
-      .df[, (select_cols) := lapply(.SD, function(.x) nafill(nafill(.x, type = "locf"), type = "nocb")),
-          .SDcols = select_cols, by = .by]
-    } else {
-      .df[, (select_cols) := lapply(.SD, function(.x) nafill(nafill(.x, type = "nocb"), type = "locf")),
-          .SDcols = select_cols, by = .by]
-    }
-
-  } else {
-
-    # Use vctrs::vec_fill_missing() if there are any character cols
-    .df[, (select_cols) := lapply(.SD, vec_fill_missing, direction = .direction),
-        .SDcols = select_cols, by = .by]
-  }
+  .df[, (select_cols) := lapply(.SD, fill_na, .direction), .SDcols = select_cols, by = .by]
 
   if (with_by) setcolorder(.df, col_order)
 
   .df[]
+}
+
+fill_na <- function(x, direction) {
+  if (is.numeric(x)) {
+    if (direction %in% c("down", "up")) {
+      type <- switch(direction, "down" = "locf", "up" = "nocb")
+
+      nafill(x, type = type)
+    } else {
+      if (direction == "downup") {
+        type1 <- "locf"
+        type2 <- "nocb"
+      } else {
+        type1 <- "nocb"
+        type2 <- "locf"
+      }
+
+      nafill(nafill(x, type = type1), type = type2)
+    }
+  } else {
+    vec_fill_missing(x, direction = direction)
+  }
 }
 
 globalVariables("..select_cols")
