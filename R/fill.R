@@ -83,5 +83,3 @@ fill_na <- function(x, direction) {
     vec_fill_missing(x, direction = direction)
   }
 }
-
-globalVariables("..select_cols")
