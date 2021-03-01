@@ -114,6 +114,18 @@ test_that("can use names_glue - multiple names_from", {
   expect_equal(nrow(pivot_df), 1)
 })
 
+test_that("names_glue works with .value", {
+  df <- data.table(
+    x = c("X", "Y"),
+    y = 1:2,
+    a = 1:2,
+    b = 1:2
+  )
+
+  out <- pivot_wider.(df, names_from = x:y, values_from = a:b, names_glue = "{x}{y}_{.value}")
+  expect_named(out, c("X1_a", "Y2_a", "X1_b", "Y2_b"))
+})
+
 test_that("can sort names", {
   df <- data.table(label = c("z", "y", "x"), val = 1:3)
   pivot_df <- pivot_wider.(

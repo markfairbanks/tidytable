@@ -18,7 +18,7 @@
 #' @param names_sep the separator between the names of the columns
 #' @param names_prefix prefix to add to the names of the new columns
 #' @param names_glue Instead of using `names_sep` and `names_prefix`, you can supply a
-#' glue specification that uses the `names_from` columns to create custom column names
+#' glue specification that uses the `names_from` columns (and special `.value`) to create custom column names
 #' @param names_sort Should the resulting new columns be sorted
 #' @param names_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details.
 #' @param values_fn Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.
@@ -76,6 +76,13 @@ pivot_wider..data.frame <- function(.df,
   names_from <- select_vec_chr(.df, {{ names_from }})
   values_from <- select_vec_chr(.df, {{ values_from }})
 
+  uses_dot_value <- FALSE
+  if (!is.null(names_glue)) {
+    if (str_detect.(names_glue, ".value")) {
+      uses_dot_value <- TRUE
+    }
+  }
+
   if (quo_is_null(id_cols)) {
     data_names <- names(.df)
     id_cols <- data_names[!data_names %in% c(names_from, values_from)]
@@ -91,13 +98,16 @@ pivot_wider..data.frame <- function(.df,
     .first_name <- sym(names_from[[1]])
 
     .df <- mutate.(.df, !!.first_name := paste0(!!names_prefix, !!.first_name))
-  }
+  } else if (uses_dot_value) {
+    glue_df <- distinct.(.df, !!!syms(names_from))
+    values_from_reps <- nrow(glue_df)
+    glue_df <- vec_rep(glue_df, length(values_from))
+    glue_df$.value <- vec_rep_each(values_from, values_from_reps)
 
-  if (!is.null(names_glue)) {
+    glue_vars <- as.character(glue::glue_data(glue_df, names_glue))
+  } else if (!is.null(names_glue)) {
     .df <- mutate.(.df, .names_from = glue(names_glue, .envir = .SD))
-
     .df <- relocate.(.df, .names_from, .before = !!sym(names_from[[1]]))
-
     .df <- .df[, -..names_from]
 
     names_from <- ".names_from"
@@ -105,12 +115,15 @@ pivot_wider..data.frame <- function(.df,
 
   no_id <- length(id_cols) == 0
 
-  if (no_id) id_cols <- "..."
-  else id_cols <- paste(id_cols, collapse = " + ")
+  if (no_id) {
+    lhs <- "..."
+  } else {
+    lhs <- paste(id_cols, collapse = " + ")
+  }
 
-  names_from <- paste(names_from, collapse = " + ")
+  rhs <- paste(names_from, collapse = " + ")
 
-  dcast_form <- paste(id_cols, names_from, sep = " ~ ")
+  dcast_form <- paste(lhs, rhs, sep = " ~ ")
 
   .df <- eval_quo(
     dcast(
@@ -119,12 +132,17 @@ pivot_wider..data.frame <- function(.df,
       value.var = values_from,
       fun.aggregate = !!values_fn,
       sep = names_sep,
-      drop = TRUE,
       fill = !!values_fill
     )
   )
 
   if (no_id) .df[, . := NULL]
+
+  if (uses_dot_value) {
+    new_vars <- setdiff(names(.df), id_cols)
+
+    setnames(.df, new_vars, glue_vars)
+  }
 
   .df <- df_name_repair(.df, .name_repair = names_repair)
 
