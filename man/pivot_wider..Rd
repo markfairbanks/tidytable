@@ -39,7 +39,7 @@ Typically used when you have additional variables that is directly related.
 \item{names_prefix}{prefix to add to the names of the new columns}
 
 \item{names_glue}{Instead of using \code{names_sep} and \code{names_prefix}, you can supply a
-glue specification that uses the \code{names_from} columns to create custom column names}
+glue specification that uses the \code{names_from} columns (and special \code{.value}) to create custom column names}
 
 \item{names_sort}{Should the resulting new columns be sorted}
 
