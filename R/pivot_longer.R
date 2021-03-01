@@ -78,89 +78,163 @@ pivot_longer..data.frame <- function(.df,
 
   names <- names(.df)
 
-  cols <- select_vec_chr(.df, {{ cols }})
+  measure_vars <- select_vec_chr(.df, {{ cols }})
 
-  if (length(cols) == 0) abort("At least one column must be supplied to cols")
+  if (length(measure_vars) == 0) abort("At least one column must be supplied to cols")
 
-  id_vars <- names[!names %in% cols]
+  id_vars <- names[!names %in% measure_vars]
 
   multiple_names_to <- length(names_to) > 1
+  uses_dot_value <- ".value" %in% names_to
 
-  if (multiple_names_to) {
+  variable_name <- "variable"
 
-    null_sep <- is.null(names_sep)
-    null_pattern <- is.null(names_pattern)
+  if (uses_dot_value) {
+    if (!is.null(names_sep)) {
+      .value <- str_separate(measure_vars, into = names_to, sep = names_sep)$.value
+    } else if (!is.null(names_pattern)) {
+      .value <- str_extract(measure_vars, into = names_to, names_pattern)$.value
+    } else {
+      abort("If you use '.value' in `names_to` you must also supply
+            `names_sep' or `names_pattern")
+    }
 
-    if (null_sep && null_pattern)
+    v_fct <- factor(.value, levels = unique(.value))
+    measure_vars <- split(measure_vars, v_fct)
+    values_to <- names(measure_vars)
+    names(measure_vars) <- NULL
+
+    if (multiple_names_to) {
+      variable_name <- names_to[!names_to == ".value"]
+    }
+  } else if (multiple_names_to) {
+    if (is.null(names_sep) && is.null(names_pattern)) {
       abort("If you supply multiple names in `names_to` you must also
             supply `names_sep` or `names_pattern`")
-
-    if (!null_sep && !null_pattern)
+    } else if (!is.null(names_sep) && !is.null(names_pattern)) {
       abort("only one of names_sep or names_pattern should be provided")
+    }
 
-    var_name <- str_c.(names_to, collapse = "___")
+    variable_name <- paste0(names_to, collapse = "___")
   } else {
-    var_name <- names_to
+    variable_name <- names_to
   }
 
   .df <- melt(
     data = .df,
     id.vars = id_vars,
-    measure.vars = cols,
-    variable.name = var_name,
+    measure.vars = measure_vars,
+    variable.name = variable_name,
     value.name = values_to,
     ...,
-    na.rm = values_drop_na,
+    # na.rm = values_drop_na,
     variable.factor = fast_pivot,
     value.factor = FALSE
   )
 
   if (!is.null(names_prefix)) {
-    .df[[var_name]] <- gsub(paste0("^", names_prefix), "", .df[[var_name]])
+    .df[[variable_name]] <- gsub(paste0("^", names_prefix), "", .df[[variable_name]])
   }
 
-  if (multiple_names_to) {
-
-    if (!null_sep) {
-      .df <- separate.(.df, !!sym(var_name), into = names_to, sep = names_sep)
+  if (multiple_names_to && !uses_dot_value) {
+    if (!is.null(names_sep)) {
+      .df <- separate.(.df, !!sym(variable_name), into = names_to, sep = names_sep)
     } else {
-      .df <- extract.(.df, !!sym(var_name), into = names_to, regex = names_pattern)
+      .df <- extract.(.df, !!sym(variable_name), into = names_to, regex = names_pattern)
     }
 
     # Put new names before value column
     .df <- relocate.(.df, !!!syms(names_to), .before = !!sym(values_to))
+  } else if (!multiple_names_to && uses_dot_value) {
+    out <- mutate.(out, variable = NULL)
   }
 
   .df <- df_name_repair(.df, .name_repair = names_repair)
 
   ## names_ptype & names_transform
   # optionally, cast variables generated from columns
-  cast_cols <- intersect(names_to, names(names_ptypes))
-  for (col in cast_cols) {
-    .df[[col]] <- vec_cast(.df[[col]], names_ptypes[[col]])
+  cast_vars <- intersect(names_to, names(names_ptypes))
+  if (length(cast_vars) > 0) {
+    cast_calls <- vector("list", length(cast_vars))
+    names(cast_calls) <- cast_vars
+    for (i in seq_along(cast_vars)) {
+      cast_calls[[i]] <- call2("vec_cast", sym(cast_vars[[i]]), names_ptypes[[i]])
+    }
+    .df <- mutate.(.df, !!!cast_calls)
   }
 
   # transform cols
-  coerce_cols <- intersect(names_to, names(names_transform))
-  for (col in coerce_cols) {
-    f <- as_function(names_transform[[col]])
-    .df[[col]] <- f(.df[[col]])
+  coerce_vars <- intersect(names_to, names(names_transform))
+  if (length(coerce_vars) > 0) {
+    coerce_calls <- vector("list", length(coerce_vars))
+    names(coerce_calls) <- coerce_vars
+    for (i in seq_along(coerce_vars)) {
+      fn <- as_function(names_transform[[i]])
+      coerce_calls[[i]] <- call2(fn, sym(coerce_vars[[i]]))
+    }
+    .df <- mutate.(.df, !!!coerce_calls)
   }
 
   ## values_ptype & values_transform
   # optionally, cast variables generated from columns
-  cast_col <- intersect(values_to, names(values_ptypes))
-  if (length(cast_col) > 0) {
-    .df[[cast_col]] <- vec_cast(.df[[cast_col]], values_ptypes[[cast_col]])
+  cast_vars <- intersect(values_to, names(values_ptypes))
+  if (length(cast_vars) > 0) {
+    cast_calls <- vector("list", length(cast_vars))
+    names(cast_calls) <- cast_vars
+    for (i in seq_along(cast_vars)) {
+      cast_calls[[i]] <- call2("vec_cast", sym(cast_vars[[i]]), values_ptypes[[i]])
+    }
+    .df <- mutate.(.df, !!!cast_calls)
   }
 
   # transform cols
-  coerce_col <- intersect(values_to, names(values_transform))
-  if (length(coerce_col) > 0) {
-    f <- as_function(values_transform[[coerce_col]])
-    .df[[coerce_col]] <- f(.df[[coerce_col]])
+  coerce_vars <- intersect(values_to, names(values_transform))
+  if (length(coerce_vars) > 0) {
+    coerce_calls <- vector("list", length(coerce_vars))
+    names(coerce_calls) <- coerce_vars
+    for (i in seq_along(coerce_vars)) {
+      fn <- as_function(values_transform[[i]])
+      coerce_calls[[i]] <- call2(fn, sym(coerce_vars[[i]]))
+    }
+    .df <- mutate.(.df, !!!coerce_calls)
+  }
+
+  # data.table::melt() drops NAs using "&" logic, not "|"
+  # Example in tidytable #186 shows why this is necessary
+  if (values_drop_na) {
+    filter_calls <- vector("list", length(values_to))
+    for (i in seq_along(filter_calls)) {
+      filter_calls[[i]] <- call2("is.na", sym(values_to[[i]]))
+      filter_calls[[i]] <- call2("!", filter_calls[[i]])
+    }
+
+    filter_expr <- filter_calls[[1]]
+    if (length(filter_calls) > 1) {
+      for (i in 2:length(filter_calls)) {
+        filter_expr <- call2("|", filter_calls[[i]], filter_expr)
+      }
+    }
+
+    .df <- filter.(.df, !!filter_expr)
   }
 
   as_tidytable(.df)
+}
+
+str_extract <- function(x, into, regex, convert = FALSE) {
+  out <- str_extract_groups(x, pattern = regex, convert = convert)
+  out <- as_tidytable(out)
+  names(out) <- into
+  out
+}
+
+str_separate <- function(x, into, sep, convert = FALSE) {
+  vec_assert(into, character())
+
+  out <- data.table::tstrsplit(x, sep, fixed = TRUE, names = TRUE, type.convert = convert)
+  out <- as_tidytable(out)
+  names(out) <- as_utf8_character(into)
+
+  out
 }
 

@@ -166,3 +166,52 @@ test_that("can use names_prefix", {
   expect_equal(pivot_df$name, c("x","x","y","y"))
   expect_equal(pivot_df$value, c(1,2,3,4))
 })
+
+test_that("can pivot to multiple measure cols", {
+  out <- pivot_longer.(
+    anscombe,
+    everything(),
+    names_to = c(".value", "set"),
+    names_pattern = "(.)(.)"
+  )
+
+  expect_named(out, c("set", "x", "y"))
+})
+
+test_that(".value can be at any position in `names_to`", {
+  samp1 <- tidytable(
+    i = 1:4,
+    y_t1 = rnorm(4),
+    y_t2 = rnorm(4),
+    z_t1 = rep(3, 4),
+    z_t2 = rep(-2, 4),
+  )
+
+  value_first <- samp1 %>%
+    pivot_longer.(-i, names_to = c(".value", "time"), names_sep = "_")
+
+  samp2 <- samp1 %>%
+    rename.(t1_y = y_t1,
+            t2_y = y_t2,
+            t1_z = z_t1,
+            t2_z = z_t2)
+
+  value_second <- samp2 %>%
+    pivot_longer.(-i, names_to = c("time", ".value"), names_sep = "_")
+
+  expect_identical(value_first, value_second)
+})
+
+test_that("can handle missing combinations", {
+  dt <- tidytable(
+    id = c("A", "B"),
+    x_1 = c(1, 3),
+    x_2 = c(2, 4),
+    y_2 = c("a", "b")
+  )
+  out <- pivot_longer.(dt, -id, names_to = c(".value", "n"), names_sep = "_")
+
+  expect_named(out, c("id", "n", "x", "y"))
+  expect_equal(out$x, c(1, 3, 2, 4))
+  expect_equal(out$y, c("a", "b", NA, NA))
+})
