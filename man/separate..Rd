@@ -4,7 +4,15 @@
 \alias{separate.}
 \title{Separate a character column into multiple columns}
 \usage{
-separate.(.df, col, into, sep = "[^[:alnum:]]+", remove = TRUE, ...)
+separate.(
+  .df,
+  col,
+  into,
+  sep = "[^[:alnum:]]+",
+  remove = TRUE,
+  convert = FALSE,
+  ...
+)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -17,7 +25,9 @@ separate.(.df, col, into, sep = "[^[:alnum:]]+", remove = TRUE, ...)
 
 \item{remove}{If TRUE, remove the input column from the output data.table}
 
-\item{...}{Further argument to pass to data.table::tstrsplit}
+\item{convert}{TRUE calls \code{type.convert()} with \code{as.is = TRUE} on new columns}
+
+\item{...}{Arguments passed on to methods}
 }
 \description{
 Separates a single column into multiple columns using a user supplied separator or regex.
