@@ -8,7 +8,9 @@
 * `mutate.()`: Variables are now updated in order when using ".by" (#166)
 * `separate.()`: Added `convert` arg
 * `summarize.()`: Variables are now created in order (#188)
-* `pivot_longer.()`: Added `names_prefix` arg
+* `pivot_longer.()`
+  + Added `names_prefix` arg
+  + Can now use `".value"` in `names_to`
 * `pivot_wider.()`: Can now use `".value"` in `names_glue`
 
 # tidytable 0.5.8
