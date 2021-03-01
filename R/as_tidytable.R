@@ -8,6 +8,10 @@
 #' As such this function will rarely need to be used by the user.
 #'
 #' @param x An R object
+#' @param .name_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details.
+#' @param .keep_rownames Default is `FALSE`. If `TRUE`, adds the input object's names as a separate
+#' column named `"rn"`. `.keep_rownames = "id"` names the column "id" instead.
+#' @param ... Additional arguments to be passed to or from other methods.
 #'
 #' @export
 #'
@@ -16,29 +20,45 @@
 #'
 #' test_df %>%
 #'   as_tidytable()
-as_tidytable <- function(x) {
+as_tidytable <- function(x, ...,
+                         .name_repair = c("check_unique", "unique", "universal", "minimal"),
+                         .keep_rownames = NULL) {
   UseMethod("as_tidytable")
 }
 
 #' @export
-as_tidytable.tidytable <- function(x) {
+as_tidytable.tidytable <- function(x, ...,
+                                   .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   x
 }
 
 #' @export
-as_tidytable.data.table <- function(x) {
-  add_class(x)
+as_tidytable.data.table <- function(x, ...,
+                                    .name_repair = c("check_unique", "unique", "universal", "minimal")) {
+  x <- add_tidytable_class(x)
+
+  df_name_repair(x, .name_repair = .name_repair)
 }
 
 #' @export
-as_tidytable.default <- function(x) {
-  add_class(as.data.table(x))
+as_tidytable.data.frame <- function(x, ...,
+                                    .name_repair = c("check_unique", "unique", "universal", "minimal"),
+                                    .keep_rownames = FALSE) {
+
+  x <- as.data.table(x, keep.rownames = .keep_rownames)
+  x <- add_tidytable_class(x)
+
+  df_name_repair(x, .name_repair = .name_repair)
 }
 
-# Add tidytable class to a data.table
-add_class <- function(.df) {
+#' @export
+as_tidytable.default <- function(x, ...) {
+  add_tidytable_class(as.data.table(x))
+}
 
-  class(.df) <- c("tidytable", "data.table", "data.frame")
+add_tidytable_class <- function(x) {
 
-  .df
+  class(x) <- c("tidytable", "data.table", "data.frame")
+
+  x
 }

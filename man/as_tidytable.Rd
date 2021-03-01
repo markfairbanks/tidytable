@@ -4,10 +4,22 @@
 \alias{as_tidytable}
 \title{Coerce an object to a data.table/tidytable}
 \usage{
-as_tidytable(x)
+as_tidytable(
+  x,
+  ...,
+  .name_repair = c("check_unique", "unique", "universal", "minimal"),
+  .keep_rownames = NULL
+)
 }
 \arguments{
 \item{x}{An R object}
+
+\item{...}{Additional arguments to be passed to or from other methods.}
+
+\item{.name_repair}{Treatment of duplicate names. See \code{?vctrs::vec_as_names} for options/details.}
+
+\item{.keep_rownames}{Default is \code{FALSE}. If \code{TRUE}, adds the input object's names as a separate
+column named \code{"rn"}. \code{.keep_rownames = "id"} names the column "id" instead.}
 }
 \description{
 A tidytable object is simply a data.table with nice printing features.
