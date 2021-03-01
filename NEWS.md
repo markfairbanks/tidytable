@@ -5,6 +5,7 @@
 
 #### Functionality improvements
 * `mutate.()`: Variables are now updated in order when using ".by" (#166)
+* `separate.()`: Added `convert` arg
 * `summarize.()`: Variables are now created in order (#188)
 * `pivot_longer.()`: Added `names_prefix` arg
 

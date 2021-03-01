@@ -12,7 +12,8 @@
 #' @param into New column names to split into. A character vector.
 #' @param sep Separator to split on. Can be specified or detected automatically
 #' @param remove If TRUE, remove the input column from the output data.table
-#' @param ... Further argument to pass to data.table::tstrsplit
+#' @param convert TRUE calls `type.convert()` with `as.is = TRUE` on new columns
+#' @param ... Arguments passed on to methods
 #'
 #' @export
 #'
@@ -29,6 +30,7 @@
 separate. <- function(.df, col, into,
                       sep = "[^[:alnum:]]+",
                       remove = TRUE,
+                      convert = FALSE,
                       ...) {
   UseMethod("separate.")
 }
@@ -37,27 +39,28 @@ separate. <- function(.df, col, into,
 separate..data.frame <- function(.df, col, into,
                                  sep = "[^[:alnum:]]+",
                                  remove = TRUE,
+                                 convert = FALSE,
                                  ...) {
 
   .df <- as_tidytable(.df)
   .df <- shallow(.df)
 
+  vec_assert(into, character())
+
   if (missing(col)) abort("col is missing and must be supplied")
   if (missing(into)) abort("into is missing and must be supplied")
 
+  if (nchar(sep) == 1) {
+    fixed <- TRUE
+  } else {
+    fixed <- FALSE
+  }
+
   col <- enquo(col)
 
-  if (nchar(sep) > 1) {
-    # Works automatically, but is slower
-    eval_quo(
-      .df[, (into) := tstrsplit(!!col, split = str_extract.(!!col, sep), fixed=TRUE, ...)]
-    )
-  } else {
-    # Faster, but sep must be supplied
-    eval_quo(
-      .df[, (into) := tstrsplit(!!col, split = sep, fixed=TRUE, ...)]
-    )
-  }
+  eval_quo(
+    .df[, (into) := tstrsplit(!!col, split = sep, fixed = fixed, type.convert = convert)]
+  )
 
   if (remove) eval_quo(.df[, !!col := NULL])
 
