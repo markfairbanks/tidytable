@@ -49,25 +49,25 @@ summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE) {
 
   .by <- select_vec_chr(.df, {{ .by }})
 
+  assign <- map2.(syms(names(dots)), dots, ~ call2("<-", .x, .y))
+  output <- call2("list", !!!syms(names(dots)))
+  expr <- call2("{", !!!assign, output)
+
   if (.sort) {
     .df <- eval_quo(
-      .df[, list(!!!dots), keyby = !!.by],
+      .df[, !!expr, keyby = !!.by],
       new_data_mask(data_env), env = caller_env()
     )
 
     setkey(.df, NULL)
   } else {
-    assign <- map2.(syms(names(dots)), dots, ~ call2("<-", .x, .y))
-    output <- call2("list", !!!syms(names(dots)))
-    expr <- call2("{", !!!assign, output)
-
     .df <- eval_quo(
       .df[, !!expr, by = !!.by],
       new_data_mask(data_env), env = caller_env()
     )
   }
 
-  .df
+  df_name_repair(.df, .name_repair = "unique")
 }
 
 #' @export
