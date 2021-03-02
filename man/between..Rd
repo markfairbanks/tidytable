@@ -9,7 +9,7 @@ between.(x, left, right)
 \arguments{
 \item{x}{A numeric vector of values}
 
-\item{left, right}{Boundary values (must be scalars).}
+\item{left, right}{Boundary values}
 }
 \description{
 \code{between.()} utilizes \code{data.table::between()} in the background
@@ -17,16 +17,16 @@ between.(x, left, right)
 \examples{
 between.(1:10, 5, 7)
 
-test_df <- data.frame(x = sample(1:5, 10, replace = TRUE), y = sample(1:5, 10, replace = TRUE))
+test_df <- data.table(
+  x = sample(1:5, 10, replace = TRUE),
+  y = sample(1:5, 10, replace = TRUE)
+)
 
-## Use in a filter
+# Typically used in a filter.()
 test_df \%>\%
   filter.(between.(x, 1,3))
 
- ## Use in a mutate
- test_df \%>\%
-   mutate.(x_between = between.(x, 2,3),
-   x_between_by_two = ifelse.(between.(x, 2,3), x * 2, 0))
-
-
+# Can also use the \%between\% operator
+test_df \%>\%
+  filter.(x \%between\% c(1, 3))
 }
