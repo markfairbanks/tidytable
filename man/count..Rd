@@ -4,12 +4,25 @@
 \alias{count.}
 \title{Count observations by group}
 \usage{
-count.(.df, ...)
+count.(.df, ..., wt = NULL, sort = FALSE, name = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
 
 \item{...}{Columns to group by. \code{tidyselect} compatible.}
+
+\item{wt}{Frequency weights.  \code{tidyselect} compatible.
+Can be \code{NULL} or a variable:
+\itemize{
+\item If \code{NULL} (the default), counts the number of rows in each group.
+\item If a variable, computes \code{sum(wt)} for each group.
+}}
+
+\item{sort}{If \code{TRUE}, will show the largest groups at the top.}
+
+\item{name}{The name of the new column in the output.
+
+If omitted, it will default to \code{N}.}
 }
 \description{
 Returns row counts of the dataset. If bare column names are provided, \code{count.()} returns counts by group.
@@ -28,4 +41,10 @@ test_df \%>\%
 
 test_df \%>\%
   count.(where(is.character))
+
+test_df \%>\%
+  count.(z, wt = y, name = "Sum of Y")
+
+test_df \%>\%
+  count.(z, sort = TRUE)
 }
