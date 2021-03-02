@@ -49,19 +49,20 @@ count..data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   .by <- enquos(...)
   wt <- enquo(wt)
   
-  if(quo_is_null(wt)){
-    .df <- summarize.(.df, N = .N, .by = c(!!!.by))
+  if (is.null(name)) {
+    name <- "N"
+  }
+
+  if (quo_is_null(wt)) {
+    .df <- summarize.(.df, !!name := .N, .by = c(!!!.by))
   } else {
-    .df <- summarize.(.df, N = sum(!!wt), .by = c(!!!.by))
+    .df <- summarize.(.df, !!name := sum(!!wt), .by = c(!!!.by))
   }
   
-  if(sort) {
-    .df <- .df[order(-N)]
+  if (sort) {
+    .df <- arrange.(.df, !!name)
   }
   
-  if(!is.null(name)){
-    setnames(.df, "N", name)
-  }
 
   .df
 }
