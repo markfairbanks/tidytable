@@ -28,12 +28,26 @@ count. <- function(.df, ...) {
 }
 
 #' @export
-count..data.frame <- function(.df, ...) {
+count..data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
 
-  .df <- as_tidytable(.df)
+  .df <- tidytable:::as_tidytable(.df)
 
   .by <- enquos(...)
+  wt <- enquo(wt)
+  
+  if(quo_is_null(wt)){
+    .df <- summarize.(.df, N = .N, .by = c(!!!.by))
+  } else {
+    .df <- summarize.(.df, N = sum(!!wt), .by = c(!!!.by))
+  }
+  
+  if(sort) {
+    .df <- .df[order(-N)]
+  }
+  
+  if(!is.null(name)){
+    data.table::setnames(.df, "N", name)
+  }
 
-  summarize.(.df, N = .N, .by = c(!!!.by))
-
+  .df
 }
