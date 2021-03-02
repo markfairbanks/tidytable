@@ -5,7 +5,15 @@
 #'
 #' @param .df A data.frame or data.table
 #' @param ... Columns to group by. `tidyselect` compatible.
+#' @param wt Frequency weights.  `tidyselect` compatible.
+#'   Can be `NULL` or a variable:
 #'
+#'   * If `NULL` (the default), counts the number of rows in each group.
+#'   * If a variable, computes `sum(wt)` for each group.
+#' @param sort If `TRUE`, will show the largest groups at the top.
+#' @param name The name of the new column in the output.
+#'
+#'   If omitted, it will default to `N`.
 #' @export
 #' @md
 #'
@@ -23,7 +31,7 @@
 #'
 #' test_df %>%
 #'   count.(where(is.character))
-count. <- function(.df, ...) {
+count. <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   UseMethod("count.")
 }
 
