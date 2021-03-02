@@ -208,17 +208,16 @@ pivot_longer..data.frame <- function(.df,
       filter_calls[[i]] <- call2("!", filter_calls[[i]])
     }
 
-    filter_expr <- filter_calls[[1]]
-    if (length(filter_calls) > 1) {
-      for (i in 2:length(filter_calls)) {
-        filter_expr <- call2("|", filter_calls[[i]], filter_expr)
-      }
-    }
+    filter_expr <- call_reduce(filter_calls, "|")
 
     .df <- filter.(.df, !!filter_expr)
   }
 
   as_tidytable(.df)
+}
+
+call_reduce <- function(x, fun) {
+  Reduce(function(x, y) call2(fun, x, y), x)
 }
 
 str_extract <- function(x, into, regex, convert = FALSE) {
