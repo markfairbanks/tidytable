@@ -23,9 +23,9 @@ pivot_longer.(
 )
 }
 \arguments{
-\item{.df}{The data table to pivot longer}
+\item{.df}{A data.table or data.frame}
 
-\item{cols}{Vector of bare column names. Can add/drop columns. \code{tidyselect} compatible.}
+\item{cols}{Columns to pivot. \code{tidyselect} compatible.}
 
 \item{names_to}{Name of the new "names" column. Must be a string.}
 
@@ -66,7 +66,7 @@ test_df <- data.table(
 )
 
 test_df \%>\%
-  pivot_longer.(c(x, y))
+  pivot_longer.(cols = c(x, y))
 
 test_df \%>\%
   pivot_longer.(cols = -z, names_to = "stuff", values_to = "things")

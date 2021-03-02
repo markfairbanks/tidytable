@@ -1,12 +1,11 @@
 #' Pivot data from wide to long
 #'
-#'
 #' @description
 #' `pivot_longer.()` "lengthens" the data, increasing the number of rows and decreasing
 #' the number of columns.
 #'
-#' @param .df The data table to pivot longer
-#' @param cols Vector of bare column names. Can add/drop columns. `tidyselect` compatible.
+#' @param .df A data.table or data.frame
+#' @param cols Columns to pivot. `tidyselect` compatible.
 #' @param names_to Name of the new "names" column. Must be a string.
 #' @param values_to Name of the new "values" column. Must be a string.
 #' @param names_prefix Remove matching text from the start of selected columns using regex.
@@ -35,7 +34,7 @@
 #' )
 #'
 #' test_df %>%
-#'   pivot_longer.(c(x, y))
+#'   pivot_longer.(cols = c(x, y))
 #'
 #' test_df %>%
 #'   pivot_longer.(cols = -z, names_to = "stuff", values_to = "things")
@@ -204,8 +203,9 @@ pivot_longer..data.frame <- function(.df,
   if (values_drop_na) {
     filter_calls <- vector("list", length(values_to))
     for (i in seq_along(filter_calls)) {
-      filter_calls[[i]] <- call2("is.na", sym(values_to[[i]]))
-      filter_calls[[i]] <- call2("!", filter_calls[[i]])
+      filter_call <- call2("is.na", sym(values_to[[i]]))
+      filter_call <- call2("!", filter_call)
+      filter_calls[[i]] <- filter_call
     }
 
     filter_expr <- call_reduce(filter_calls, "|")
