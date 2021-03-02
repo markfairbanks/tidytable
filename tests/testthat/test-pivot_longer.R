@@ -215,3 +215,17 @@ test_that("can handle missing combinations", {
   expect_equal(out$x, c(1, 3, 2, 4))
   expect_equal(out$y, c("a", "b", NA, NA))
 })
+
+test_that("works with names_to = '.value'", {
+  dt <- tidytable(id = 1:3, x1 = 4:6, x2 = 5:7, y1 = 7:9, y2 = 10:12)
+  out <- dt %>%
+    pivot_longer.(
+      !id,
+      names_to = ".value",
+      names_pattern = "(.)."
+    )
+
+  expect_named(out, c("id", "x", "y"))
+})
+
+

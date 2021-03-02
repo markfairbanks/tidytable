@@ -146,7 +146,7 @@ pivot_longer..data.frame <- function(.df,
     # Put new names before value column
     .df <- relocate.(.df, !!!syms(names_to), .before = !!sym(values_to))
   } else if (!multiple_names_to && uses_dot_value) {
-    out <- mutate.(out, variable = NULL)
+    .df <- mutate.(.df, variable = NULL)
   }
 
   .df <- df_name_repair(.df, .name_repair = names_repair)
