@@ -31,6 +31,12 @@
 #'
 #' test_df %>%
 #'   count.(where(is.character))
+#' 
+#' test_df %>%
+#'   count.(z, wt = y, name = "Sum of Y")
+#' 
+#' test_df %>%
+#'   count.(z, sort = TRUE)
 count. <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   UseMethod("count.")
 }
