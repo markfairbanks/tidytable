@@ -44,7 +44,7 @@ count. <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
 #' @export
 count..data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
 
-  .df <- tidytable:::as_tidytable(.df)
+  .df <- as_tidytable(.df)
 
   .by <- enquos(...)
   wt <- enquo(wt)
@@ -60,8 +60,10 @@ count..data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   }
   
   if(!is.null(name)){
-    data.table::setnames(.df, "N", name)
+    setnames(.df, "N", name)
   }
 
   .df
 }
+
+globalVariables("N")
