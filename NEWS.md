@@ -4,7 +4,7 @@
 * `between.()`
 
 #### Functionality improvements
-* `as_tidytable()`: Gains `.name_repair` and `keep_rownames` args
+* `as_tidytable()`: Gains `.name_repair` and `.keep_rownames` args
 * `mutate.()`: Variables are now updated in order when using ".by" (#166)
 * `separate.()`: Added `convert` arg
 * `summarize.()`: Variables are now created in order (#188)
