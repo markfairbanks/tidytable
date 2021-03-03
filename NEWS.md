@@ -12,7 +12,7 @@
   + Added `names_prefix` arg
   + Can now use `".value"` in `names_to`
 * `pivot_wider.()`: Can now use `".value"` in `names_glue`
-
+* `count.()`: Added `wt`, `sort` and `name` args. (#196)
 # tidytable 0.5.8
 
 #### Breaking changes
