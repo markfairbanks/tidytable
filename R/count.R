@@ -60,11 +60,9 @@ count..data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   }
   
   if (sort) {
-    .df <- arrange.(.df, !!name)
+    .df <- arrange.(.df, -!!sym(name))
   }
   
-
+  
   .df
 }
-
-globalVariables("N")
