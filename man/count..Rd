@@ -43,7 +43,7 @@ test_df \%>\%
   count.(where(is.character))
 
 test_df \%>\%
-  count.(z, wt = y, name = "Sum of Y")
+  count.(z, wt = y, name = "y_sum")
 
 test_df \%>\%
   count.(z, sort = TRUE)

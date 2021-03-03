@@ -31,10 +31,10 @@
 #'
 #' test_df %>%
 #'   count.(where(is.character))
-#' 
+#'
 #' test_df %>%
-#'   count.(z, wt = y, name = "Sum of Y")
-#' 
+#'   count.(z, wt = y, name = "y_sum")
+#'
 #' test_df %>%
 #'   count.(z, sort = TRUE)
 count. <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
@@ -48,7 +48,7 @@ count..data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
 
   .by <- enquos(...)
   wt <- enquo(wt)
-  
+
   if (is.null(name)) {
     name <- "N"
   }
@@ -56,13 +56,12 @@ count..data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   if (quo_is_null(wt)) {
     .df <- summarize.(.df, !!name := .N, .by = c(!!!.by))
   } else {
-    .df <- summarize.(.df, !!name := sum(!!wt), .by = c(!!!.by))
+    .df <- summarize.(.df, !!name := sum(!!wt, na.rm = TRUE), .by = c(!!!.by))
   }
-  
+
   if (sort) {
     .df <- arrange.(.df, -!!sym(name))
   }
-  
-  
+
   .df
 }
