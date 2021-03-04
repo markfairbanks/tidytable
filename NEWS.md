@@ -1,18 +1,19 @@
-# tidytable 0.5.9 (in development)
+# tidytable 0.5.9
 
 #### New functions
 * `between.()`
 
 #### Functionality improvements
 * `as_tidytable()`: Gains `.name_repair` and `.keep_rownames` args
+* `count.()`: Added `wt`, `sort` and `name` args. (@moutikabdessabour, #196)
 * `mutate.()`: Variables are now updated in order when using ".by" (#166)
-* `separate.()`: Added `convert` arg
-* `summarize.()`: Variables are now created in order (#188)
 * `pivot_longer.()`
   + Added `names_prefix` arg
   + Can now use `".value"` in `names_to`
 * `pivot_wider.()`: Can now use `".value"` in `names_glue`
-* `count.()`: Added `wt`, `sort` and `name` args. (#196)
+* `separate.()`: Added `convert` arg
+* `summarize.()`: Variables are now created in order (#188)
+
 # tidytable 0.5.8
 
 #### Breaking changes

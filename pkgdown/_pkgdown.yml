@@ -20,6 +20,7 @@ reference:
 - subtitle: Other dplyr functions
 - contents:
   - arrange_across.
+  - between.
   - starts_with("bind")
   - c_across.
   - case_when.
