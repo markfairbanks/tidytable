@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9</span>
       </span>
     </div>
 
@@ -87,7 +87,7 @@
 
       
 
-      </header><script src="speed_comparisons_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
+      </header><script src="speed_comparisons_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>speed_comparisons</h1>
@@ -106,7 +106,7 @@
 <p>Below are some speed comparisons of various functions. More functions will get added to the speed comps over time.</p>
 <p>A few notes:</p>
 <ul>
-<li>Comparing times from separate functions won’t be very useful. For example - the <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> tests were performed on a different dataset from <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code>.</li>
+<li>Comparing times from separate functions won’t be very useful. For example - the <code>summarize()</code> tests were performed on a different dataset from <code>case_when()</code>.</li>
 <li>
 <code><a href="https://Rdatatable.gitlab.io/data.table/reference/openmp-utils.html">setDTthreads(4)</a></code> was used for <code>data.table</code> &amp; <code>tidytable</code> timings.</li>
 <li>Modify-by-reference was used in <code>data.table</code> when being compared to <code><a href="../reference/mutate..html">mutate.()</a></code> &amp; <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code>
@@ -130,19 +130,19 @@
 <pre><code>#&gt; # tidytable [13 × 7]
 #&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas tidytable_vs_dplyr
 #&gt;    &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             
-#&gt;  1 arrange            37.3      37.7   40.8    1331.   355   2.8%              
-#&gt;  2 case_when          31.6      28.5   NA       372.    59.2 7.7%              
-#&gt;  3 distinct           12.2      14.7   15.5      36.3  309   40.5%             
-#&gt;  4 fill               43.1      42.1   NA        52.6  846   80.0%             
-#&gt;  5 filter            222.      236.   232.      264.   707   89.6%             
-#&gt;  6 inner_join         52.5      63.9  116.       85     NA   75.2%             
-#&gt;  7 left_join          53.9      48.6  165.      172.    NA   28.2%             
-#&gt;  8 mutate             58.3      63.7  331.      110.    86.4 58.0%             
-#&gt;  9 nest               12.5      10.8   NA        35     NA   30.9%             
-#&gt; 10 pivot_longer       11.5      17.3   NA        47.3   NA   36.6%             
-#&gt; 11 pivot_wider        74.7      83.5   NA        77.9   NA   107.2%            
-#&gt; 12 summarize         178.      162.   182.      208.   834   77.9%             
-#&gt; 13 unnest             10.9       7.5   NA        32.3   NA   23.2%</code></pre>
+#&gt;  1 arrange            39        39.9   38.3    1318.   355   3.0%              
+#&gt;  2 case_when          40.3      34.3   NA       345.    59.2 9.9%              
+#&gt;  3 distinct           13.8      13.2   17.6      36.4  309   36.3%             
+#&gt;  4 fill               28.4      34.6   NA        72    846   48.1%             
+#&gt;  5 filter            217.      229.   214.      277.   707   82.8%             
+#&gt;  6 inner_join         48.8      51.3  107.       86.4   NA   59.4%             
+#&gt;  7 left_join          73.8      56.9  154.       87.5   NA   65.0%             
+#&gt;  8 mutate             45.2      53.3  290.       91.4   86.4 58.3%             
+#&gt;  9 nest                6.9       8     NA        26.1   NA   30.7%             
+#&gt; 10 pivot_longer       10.8      12.5   NA        38.9   NA   32.1%             
+#&gt; 11 pivot_wider        76.6      79.3  109.       79.6   NA   99.6%             
+#&gt; 12 summarize         172.       92.5  202.      204.   834   45.3%             
+#&gt; 13 unnest              5.6       8.2   NA        34.2   NA   24.0%</code></pre>
 </div>
   </div>
 

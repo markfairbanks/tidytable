@@ -194,6 +194,7 @@ wider_dt <- as_tidytable(wider_tbl)
 
 wider_marks <- bench::mark(
   tidyverse = pivot_wider(wider_tbl, names_from = name, values_from = value),
+  dtplyr = collect(pivot_wider(lazy_dt(wider_dt), names_from = name, values_from = value)),
   tidytable = pivot_wider.(wider_dt, names_from = name, values_from = value),
   data.table = data.table::dcast.data.table(wider_dt, case + year ~ name),
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
@@ -262,7 +263,8 @@ unnest_dt <- data.table(id = 1:5,
                         list_column = list(list_dt, list_dt, list_dt, list_dt, list_dt))
 
 unnest_tbl <- unnest_dt %>%
-  mutate(list_column = map(list_column, as_tibble))
+  mutate.(list_column = map(list_column, as_tibble)) %>%
+  as_tibble()
 
 unnest_marks <- bench::mark(
   tidyverse = tidyr::unnest(unnest_tbl, list_column),
