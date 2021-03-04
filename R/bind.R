@@ -11,17 +11,27 @@
 #' @md
 #'
 #' @examples
-#' df1 <- data.table(x = c(1,2,3), y = c(3,4,5))
-#' df2 <- data.table(x = c(1,2,3), y = c(3,4,5))
+#'
+#' # Binding data together by row
+#' df1 <- data.table(x = 1:3, y = 10:12)
+#' df2 <- data.table(x = 4:6, y = 13:15)
 #'
 #' df1 %>%
 #'   bind_rows.(df2)
 #'
-#' bind_rows.(list(df1, df2))
+#' # Can pass a list of data.tables
+#' df_list <- list(df1, df2)
+#'
+#' bind_rows.(df_list)
+#'
+#' # Binding data together by column
+#' df1 <- data.table(a = 1:3, b = 4:6)
+#' df2 <- data.table(c = 7:9)
 #'
 #' df1 %>%
 #'   bind_cols.(df2)
 #'
+#' # Can pass a list of data frames
 #' bind_cols.(list(df1, df2))
 #' @export
 bind_cols. <- function(..., .name_repair = "unique") {
@@ -29,15 +39,11 @@ bind_cols. <- function(..., .name_repair = "unique") {
   dots <- list(...)
   dots <- squash(dots)
 
-  if (!all(map_lgl.(dots, is.data.table)))
+  if (!all(map_lgl.(dots, is.data.table))) {
     dots <- map.(dots, as_tidytable)
+  }
 
-  dots <- setDT(unlist(dots, recursive = FALSE), check.names = FALSE)
-
-  dots <- df_name_repair(dots, .name_repair = .name_repair)
-
-  as_tidytable(dots)
-
+  vec_cbind(!!!dots, .ptype = tidytable(), .name_repair = .name_repair)
 }
 
 #' @export
@@ -47,8 +53,9 @@ bind_rows. <- function(..., .id = NULL) {
   dots <- list(...)
   dots <- squash(dots)
 
-  if (!all(map_lgl.(dots, is.data.table)))
+  if (!all(map_lgl.(dots, is.data.table))) {
     dots <- map.(dots, as_tidytable)
+  }
 
   dots <- rbindlist(dots, idcol = .id, use.names = TRUE, fill = TRUE)
 
