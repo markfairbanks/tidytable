@@ -31,16 +31,19 @@ case. <- function(..., default = NA) {
   if (length(conditions) == 0) abort("No conditions supplied")
   if (length(values) == 0) abort("No values supplied")
 
-  if (length(conditions) != length(values))
+  if (length(conditions) != length(values)) {
     abort("The length of conditions does not equal the length of values")
+  }
 
   calls <- default
 
   for (i in rev(seq_along(conditions))) {
-    calls <- call("ifelse.",
-                  quo(rlang::'%|%'(!!conditions[[i]], FALSE)),
-                  values[[i]],
-                  calls)
+    calls <- call2(
+      "ifelse.",
+      call2('%|%', conditions[[i]], FALSE),
+      values[[i]],
+      calls
+    )
   }
 
   eval_tidy(calls)
