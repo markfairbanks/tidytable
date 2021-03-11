@@ -55,6 +55,8 @@ slice..data.frame <- function(.df, ..., .by = NULL) {
 
   data_env <- env(quo_get_env(rows[[1]]), .df = .df)
 
+  rows <- map.(rows, clean_expr, .df)
+
   .by <- enquo(.by)
 
   by_is_null <- quo_is_null(.by)
@@ -106,6 +108,8 @@ slice_head..data.frame <- function(.df, n = 5, .by = NULL) {
 
   data_env <- env(quo_get_env(n), .df = .df)
 
+  n <- clean_expr(n)
+
   .by <- select_vec_chr(.df, {{ .by }})
 
   with_by <- length(.by) > 0
@@ -142,6 +146,8 @@ slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
   n <- enquo(n)
 
   data_env <- env(quo_get_env(n), .df = .df)
+
+  n <- clean_expr(n)
 
   .by <- select_vec_chr(.df, {{ .by }})
 

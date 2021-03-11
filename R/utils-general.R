@@ -1,5 +1,4 @@
 # Shortcut to use rlang quoting/unquoting with data.table/base R expressions
-# Currently used in `R/n.R` and `R/row_number.R`
 # Can be replaced by rlang::inject() if rlang dependency is bumped to v0.4.9
 eval_expr <- function(express, env = caller_env()) {
   eval_tidy(enexpr(express), env = env)
@@ -27,13 +26,45 @@ shallow <- function(x, cols = names(x), reset_class = FALSE) {
 
 # Repair names of a data.table
 df_name_repair <- function(.df, .name_repair = "unique") {
-
   names(.df) <- vec_as_names(
     names(.df),
     repair = .name_repair
   )
 
   .df
+}
+
+# Allows use of functions like n()/n.() and c_across()/c_across.()
+# General idea follows dt_squash found here: https://github.com/tidyverse/dtplyr/blob/master/R/tidyeval.R
+clean_expr <- function(x, data) {
+  if (is_quosure(x)) {
+    x <- get_expr(x)
+  }
+
+  if (is_symbol(x) || is_atomic(x) || is_null(x)) {
+    x
+  } else if (is_call(x, "n.") || is_call(x, "n")) {
+    expr(.N)
+  } else if (is_call(x, "desc.") || is_call(x, "desc")) {
+    x[[1]] <- sym("-")
+    x
+  } else if (is_call(x, "row_number.") || is_call(x, "row_number")) {
+    expr(1:.N)
+  } else if (is_call(x, "ifelse") || is_call(x, "if_else")) {
+    x[[1]] <- expr(ifelse.)
+    x
+  } else if (is_call(x, "case_when")) {
+    x[[1]] <- expr(case_when.)
+    x
+  } else if (is_call(x, "c_across.")) {
+    call <- match.call(tidytable::c_across., x, expand.dots = FALSE)
+    cols <- call$cols %||% expr(everything())
+    cols <- select_vec_sym(data, !!cols)
+    call2("vec_c", !!!cols, .ns = "vctrs")
+  } else {
+    x[-1] <- lapply(x[-1], clean_expr, data)
+    x
+  }
 }
 
 # data.table::fsort() with no warning messages

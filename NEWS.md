@@ -1,5 +1,19 @@
 # tidytable 0.5.10 (in development)
 
+#### Functionality improvements
+* The following tidyverse functions are now automatically converted to their tidytable equivalents when
+used inside of `mutate.()`/`arrange.()`/`filter.()`/`summarize.()`/`slice.()`.
+  + Functions that previously failed but now work:
+    - `n()` -> `n.()`/`.N`
+    - `row_number()` -> `row_number.()`/`1:.N`
+  + Functions that previously worked with tidytable but now converted to their faster tidytable equivalents:
+    - `if_else()`/`ifelse()` -> `ifelse.()`
+    - `case_when()` -> `case_when.()`
+    - `desc()` -> `desc.()`
+  
+#### Functions with notable speed improvements
+* `mutate_rowwise.()` when `c_across.()` is used
+
 # tidytable 0.5.9
 
 #### New functions

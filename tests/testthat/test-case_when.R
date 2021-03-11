@@ -42,6 +42,18 @@ test_that("case_when. isn't tripped up by NA results v2", {
   expect_equal(case_df$check, c(2,1,2,0))
 })
 
+test_that("dplyr::case_when() is replaced by tidytable::case_when.()", {
+  # Test should pass even without dplyr loaded
+  test_df <- tidytable(x = c(1, NA, 1, 2))
+
+  case_df <- test_df %>%
+    mutate.(check = case_when(x < 2 ~ 2,
+                              is.na(x) ~ 1,
+                              TRUE ~ 0))
+
+  expect_equal(case_df$check, c(2,1,2,0))
+})
+
 test_that("lower conditions don't overwrite prior conditions", {
 
   x <- 1:10

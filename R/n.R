@@ -20,5 +20,5 @@
 #' test_df %>%
 #'   mutate.(count = n.())
 n. <- function() {
-  eval_expr(.N, env = caller_env())
+  abort("n.() should only be used inside tidytable verbs")
 }
