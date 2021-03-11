@@ -50,12 +50,12 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
     for (i in seq_along(dots)) {
 
       .col_name <- all_names[[i]]
-      .val <- dots[[i]]
+      .val <- clean_expr(dots[[i]], .df)
 
       # Prevent modify-by-reference if the column already exists in the data.table
         # Fixes case when user supplies a single value ex. 1, -1, "a"
-      # !quo_is_null(val) allows for columns to be deleted using mutate.(.df, col = NULL)
-      if (.col_name %in% names(.df) && !quo_is_null(.val)) {
+      # !is_null(val) allows for columns to be deleted using mutate.(.df, col = NULL)
+      if (.col_name %in% names(.df) && !is_null(.val)) {
 
         eval_quo(
           .df[, !!.col_name := vctrs::vec_recycle(!!.val, .N)],
@@ -80,8 +80,10 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
 
     data_env <- env(quo_get_env(dots[[1]]), .df = .df, .by = .by)
 
+    dots <- map.(dots, clean_expr, .df)
+
     # Check for NULL inputs so columns can be deleted
-    null_flag <- map_lgl.(dots, quo_is_null)
+    null_flag <- map_lgl.(dots, is_null)
 
     if (any(null_flag)) {
       null_dots <- dots[null_flag]

@@ -44,8 +44,7 @@ summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE) {
 
   data_env <- env(quo_get_env(dots[[1]]), .df = .df)
 
-  # Needed so n.() works
-  dots <- map.(dots, replace_n_dot)
+  dots <- map.(dots, clean_expr, .df)
 
   .by <- select_vec_chr(.df, {{ .by }})
 
@@ -73,14 +72,3 @@ summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE) {
 #' @export
 #' @rdname summarize.
 summarise. <- summarize.
-
-replace_n_dot <- function(quosure) {
-  quo_string <- quo_text(quosure)
-
-  if (str_detect.(quo_string, "n.[(]")) {
-    parse_expr(str_replace.(quo_string, "n.\\()", ".N"))
-  } else {
-    quosure
-  }
-
-}

@@ -31,29 +31,15 @@ mutate_rowwise..data.frame <- function(.df, ...) {
 
   if (length(dots) == 0) return(.df)
 
-  if (any(names(dots) %in% names(.df))) .df <- copy(.df)
-  else .df <- shallow(.df)
+  if (any(names(dots) %in% names(.df))) {
+    .df <- copy(.df)
+  } else {
+    .df <- shallow(.df)
+  }
 
   data_env <- env(quo_get_env(dots[[1]]), .df = .df)
 
-  dots_text <- map_chr.(dots, quo_text)
-  use_across <- str_detect.(dots_text, "c_across.(", fixed = TRUE)
-
-  if (any(use_across)) {
-
-    cols <- extract_cols(dots_text[use_across])
-
-    selected <- map_chr.(cols, ~ get_selected(.df, .x))
-
-    dots_text[use_across] <- str_replace_all.(
-      dots_text[use_across],
-      glue("c_across.{cols}"),
-      glue("vctrs::vec_c(!!!c({selected}))"),
-      fixed = TRUE
-    )
-
-    dots[use_across] <- map.(which(use_across), ~ quo_set_expr(dots[[.x]], parse_expr(dots_text[[.x]])))
-  }
+  dots <- map.(dots, clean_expr, .df)
 
   .df[, .rowwise_id := .I]
 
@@ -63,26 +49,6 @@ mutate_rowwise..data.frame <- function(.df, ...) {
   )
 
   .df[, .rowwise_id := NULL][]
-}
-
-# extract the inside of each c_across call
-extract_cols <- function(x) {
-
-  patterns <- c(
-    "\\((?>[^()]|(?R))*\\)",
-    "c_across\\.(?:.(?!c_across\\.))+",
-    "\\((?>[^()]|(?R))*\\)"
-  )
-
-  for (pattern in patterns) x <- unlist(str_extract_all.(x, pattern, perl = TRUE))
-
-  vec_unique(x)
-}
-
-get_selected <- function(.df, cols) {
-  cols <- if (cols == "()") "everything()" else cols
-
-  toString(glue("`{select_vec_chr(.df, !!parse_expr(cols))}`"))
 }
 
 globalVariables(".rowwise_id")

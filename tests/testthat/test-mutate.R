@@ -44,6 +44,25 @@ test_that("row_number.() works v2", {
   expect_equal(df$row, df$row_check)
 })
 
+test_that("row_number() works", {
+  df <- data.table(x = 1:3, y = 1:3)
+  df <- df %>%
+    mutate.(row = row_number(),
+            row_check = 1:.N)
+
+  expect_equal(df$row, df$row_check)
+})
+
+test_that("row_number() works v2", {
+  df <- data.table(x = 1:3, y = 1:3)
+  df <- df %>%
+    mutate.(double_x = x * 2,
+            row = row_number(),
+            row_check = 1:.N)
+
+  expect_equal(df$row, df$row_check)
+})
+
 test_that("modify-by-reference doesn't occur", {
   df <- data.table(x = 1:3, y = 1:3)
   df %>%

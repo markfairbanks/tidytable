@@ -18,16 +18,14 @@ test_that("mutate_rowwise.() doesn't modify by reference", {
 })
 
 test_that("c_across.() provides all columns", {
-  test_df <- data.table(x = 1:3, y = 4:6, z = c("a", "a", "b"))
+  test_df <- data.table(x = 1:3, y = 4:6)
 
   results_df <- test_df %>%
-    mutate_rowwise.(pasted = paste0(c_across.(), collapse=""))
+    mutate_rowwise.(row_mean = mean(c_across.()))
   results_df_every <- test_df %>%
-    mutate_rowwise.(pasted = paste0(c_across.(cols = everything()) , collapse=""))
+    mutate_rowwise.(row_mean = mean(c_across.(everything())))
 
-
-  expect_equal(results_df$pasted, c("14a", "25a", "36b"))
-  expect_equal(results_df$pasted, results_df_every$pasted)
+  expect_equal(results_df$row_mean, results_df_every$row_mean)
 })
 
 

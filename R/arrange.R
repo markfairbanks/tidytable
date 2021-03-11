@@ -30,19 +30,9 @@ arrange..data.frame <- function(.df, ...) {
 
   if (length(dots) == 0) return(.df)
 
-  dots <- map.(dots, desc_as_minus)
+  dots <- map.(dots, clean_expr, .df)
 
   eval_quo(
     .df[order(!!!dots)]
   )
-}
-
-desc_as_minus <- function(quosure) {
-  if (quo_is_call(quosure, "desc.")) {
-    quosure <- new_quosure(
-      node_poke_car(quo_get_expr(quosure), sym("-")),
-      quo_get_env(quosure)
-    )
-  }
-  quosure
 }
