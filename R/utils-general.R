@@ -56,7 +56,7 @@ clean_expr <- function(x, data) {
   } else if (is_call(x, "case_when")) {
     x[[1]] <- expr(case_when.)
     x
-  } else if (is_call(x, "c_across.")) {
+  } else if (is_call(x, "c_across.") || is_call(x, "c_across")) {
     call <- match.call(tidytable::c_across., x, expand.dots = FALSE)
     cols <- call$cols %||% expr(everything())
     cols <- select_vec_sym(data, !!cols)
