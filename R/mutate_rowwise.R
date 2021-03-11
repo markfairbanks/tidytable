@@ -31,24 +31,17 @@ mutate_rowwise..data.frame <- function(.df, ...) {
 
   if (length(dots) == 0) return(.df)
 
-  if (any(names(dots) %in% names(.df))) {
-    .df <- copy(.df)
-  } else {
-    .df <- shallow(.df)
-  }
-
   data_env <- env(quo_get_env(dots[[1]]), .df = .df)
 
+  # Need to clean dots before .rowwise_id is added
+  # Otherwise c_across.(cols = everything()) will grab .rowwise_id
   dots <- map.(dots, clean_expr, .df)
 
-  .df[, .rowwise_id := .I]
+  .df <- mutate.(.df, .rowwise_id = .I)
 
-  eval_quo(
-    .df[, ':='(!!!dots), by = .rowwise_id],
-    new_data_mask(data_env), env = caller_env()
-  )
+  .df <- mutate.(.df, !!!dots, .by = .rowwise_id)
 
-  .df[, .rowwise_id := NULL][]
+  mutate.(.df, .rowwise_id = NULL)
 }
 
 globalVariables(".rowwise_id")
