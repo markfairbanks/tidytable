@@ -29,9 +29,9 @@ uncount..data.frame <- function(.df, weights, .remove = TRUE, .id = NULL) {
 
   result_df <- .df[rep(1:.N, rep_vec)]
 
-  if (.remove) eval_quo(result_df[, !!weights := NULL])
-
   if (!is.null(.id)) result_df <- mutate.(result_df, !!.id := sequence(!!rep_vec))
+
+  if (.remove) result_df <- mutate.(result_df, !!weights := NULL)
 
   result_df
 }
