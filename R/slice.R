@@ -152,6 +152,8 @@ slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
 
   n <- enquo(n)
 
+  mask <- build_data_mask(n)
+
   data_env <- env(quo_get_env(n), .df = .df)
 
   n <- clean_expr(n)
@@ -162,18 +164,24 @@ slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
 
   .df_names <- names(.df)
 
+  j <- expr(tail(.SD, !!n))
+
   if (all(.df_names %in% .by)) {
-    eval_quo(
-      .df[, tail(.SD, !!n), by = !!.by, .SDcols = !!.df_names][, (!!.df_names) := NULL][],
-      new_data_mask(data_env), env = caller_env()
-    )
+    dt_expr <- dt_call_j(.df, j, .by, .SDcols = .df_names)
+
+    .df <- eval_tidy(dt_expr, mask, caller_env())
+
+    .df[, (.df_names) := NULL][]
   } else {
-    .df <- eval_quo(
-      .df[, tail(.SD, !!n), by = !!.by],
-      new_data_mask(data_env), env = caller_env()
-    )
-    if (with_by) setcolorder(.df, .df_names)[]
-    else .df
+    dt_expr <- dt_call_j(.df, j, .by)
+
+    .df <- eval_tidy(dt_expr, mask, caller_env())
+
+    if (with_by) {
+      setcolorder(.df, .df_names)[]
+    } else {
+      .df
+    }
   }
 }
 
