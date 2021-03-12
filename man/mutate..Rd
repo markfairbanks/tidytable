@@ -25,7 +25,8 @@ With \code{mutate.()} you can do 3 things:
 test_df <- data.table(
   a = c(1,2,3),
   b = c(4,5,6),
-  c = c("a","a","b"))
+  c = c("a","a","b")
+)
 
 test_df \%>\%
   mutate.(double_a = a * 2,

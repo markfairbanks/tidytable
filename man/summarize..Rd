@@ -33,10 +33,11 @@ Aggregate data using summary statistics such as mean or median. Can be calculate
 }
 \examples{
 test_df <- data.table(
-  a = c(1,2,3),
-  b = c(4,5,6),
+  a = 1:3,
+  b = 4:6,
   c = c("a","a","b"),
-  d = c("a","a","b"))
+  d = c("a","a","b")
+)
 
 test_df \%>\%
   summarize.(avg_a = mean(a),

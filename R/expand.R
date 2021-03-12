@@ -29,20 +29,15 @@ expand..data.frame <- function(.df, ..., .name_repair = "check_unique") {
   .df <- as_tidytable(.df)
 
   dots <- enquos(...)
-
-  # Remove NULL inputs
   dots <- dots[!map_lgl.(dots, quo_is_null)]
-
   if (length(dots) == 0) return(.df)
 
-  data_vars <- unclass(.df)
+  mask <- build_data_mask(dots, !!!.df)
 
-  data_env <- env(quo_get_env(dots[[1]]), !!!data_vars)
+  cj <- call2("CJ", !!!dots, sorted = TRUE, unique = TRUE, .ns = "data.table")
+  cj <- quo_squash(cj)
 
-  result_df <- eval_quo(
-    data.table::CJ(!!!dots, sorted = TRUE, unique = TRUE),
-    new_data_mask(data_env), env = caller_env()
-  )
+  result_df <- eval_tidy(cj, mask, caller_env())
 
   setkey(result_df, NULL)
 

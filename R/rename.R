@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-#' dt <- data.table(x = c(1,2,3), y = c(4,5,6))
+#' dt <- data.table(x = 1:3, y = 4:6)
 #'
 #' dt %>%
 #'   rename.(new_x = x,
@@ -27,7 +27,7 @@ rename..data.frame <- function(.df, ...) {
   .df <- shallow(.df)
 
   new_names <- names(dots)
-  old_names <- map_chr.(dots, quo_name)
+  old_names <- map_chr.(dots, as_name)
 
   setnames(.df, old_names, new_names)
 

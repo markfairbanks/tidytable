@@ -132,7 +132,7 @@ pivot_longer..data.frame <- function(.df,
   )
 
   if (!is.null(names_prefix)) {
-    .df[[variable_name]] <- gsub(paste0("^", names_prefix), "", .df[[variable_name]])
+    .df <- mutate.(.df, !!variable_name := gsub(paste0("^", names_prefix), "", !!sym(variable_name)))
   }
 
   if (multiple_names_to && !uses_dot_value) {

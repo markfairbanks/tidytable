@@ -62,7 +62,7 @@ separate..data.frame <- function(.df, col, into,
     .df[, (into) := tstrsplit(!!col, split = sep, fixed = fixed, type.convert = convert)]
   )
 
-  if (remove) eval_quo(.df[, !!col := NULL])
+  if (remove) .df <- mutate.(.df, !!col := NULL)
 
   .df[]
 }

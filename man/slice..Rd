@@ -44,9 +44,10 @@ Grouped data.tables grab rows within each group.
 }
 \examples{
 test_df <- data.table(
-  x = c(1,2,3,4),
-  y = c(4,5,6,7),
-  z = c("a","a","a","b"))
+  x = 1:4,
+  y = 5:8,
+  z = c("a","a","a","b")
+)
 
 test_df \%>\%
   slice.(1:3)
@@ -55,7 +56,7 @@ test_df \%>\%
   slice.(1, 3)
 
 test_df \%>\%
-  slice.(1, .by = z)
+  slice.(1:2, .by = z)
 
 test_df \%>\%
   slice_head.(1, .by = z)

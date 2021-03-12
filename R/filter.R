@@ -13,7 +13,8 @@
 #' test_df <- tidytable(
 #'   a = c(1,2,3),
 #'   b = c(4,5,6),
-#'   c = c("a","a","b"))
+#'   c = c("a","a","b")
+#' )
 #'
 #' test_df %>%
 #'   filter.(a >= 2, b >= 4)
@@ -33,24 +34,22 @@ filter..data.frame <- function(.df, ..., .by = NULL) {
 
   dots <- enquos(...)
 
-  data_env <- env(quo_get_env(dots[[1]]), .df = .df)
+  mask <- build_data_mask(dots)
+
+  i <- expr(Reduce('&', list(!!!dots)))
 
   if (quo_is_null(.by)) {
+    dt_expr <- dt_call_i(.df, i)
 
-    .df <- eval_quo(
-      .df[Reduce('&', list(!!!dots))],
-      new_data_mask(data_env), env = caller_env()
-    )
-
+    .df <- eval_tidy(dt_expr, mask, caller_env())
   } else {
     .by <- select_vec_chr(.df, !!.by)
 
     col_order <- names(.df)
 
-    .df <- eval_quo(
-      .df[, .SD[Reduce('&', list(!!!dots))], by = !!.by],
-      new_data_mask(data_env), env = caller_env()
-    )
+    dt_expr <- dt_call_i(.df, i, .by)
+
+    .df <- eval_tidy(dt_expr, mask, env = caller_env())
 
     setcolorder(.df, col_order)
   }

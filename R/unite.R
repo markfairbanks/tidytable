@@ -68,9 +68,7 @@ unite..data.frame <- function(.df, col = "new_col", ..., sep = "_", remove = TRU
   } else {
     .df <- shallow(.df)
 
-    eval_quo(
-      .df[, !!col := do.call(paste, c(.SD, sep = sep)), .SDcols = !!unite_cols]
-    )
+    .df[, (col) := do.call(paste, c(.SD, sep = sep)), .SDcols = unite_cols]
   }
 
   if (remove) .df <- .df[, -..unite_cols]

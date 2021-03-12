@@ -13,15 +13,40 @@ eval_quo <- function(express, data = NULL, env = caller_env()) {
 # Creates a shallow copy to prevent modify-by-reference
 shallow <- function(x, cols = names(x), reset_class = FALSE) {
   stopifnot(is.data.table(x), all(cols %in% names(x)))
-  ans = vector("list", length(cols))
-  setattr(ans, 'names', data.table::copy(cols))
-  for (col in cols)
+  ans <- vector("list", length(cols))
+  setattr(ans, 'names', copy(cols))
+  for (col in cols) {
     ans[[col]] = x[[col]]
+  }
   setDT(ans)
-  class = if (!reset_class) data.table::copy(class(x))
-  else c("data.table", "data.frame")
+  class  <- if (!reset_class) copy(class(x)) else c("data.table", "data.frame")
   setattr(ans, 'class', class)
   ans[]
+}
+
+# Create a call to data.table (i position)
+dt_call_i <- function(data, i = NULL, .by = NULL, ...) {
+  i <- quo_squash(i)
+
+  if (is.null(.by)) {
+    call2("[", data, i)
+  } else {
+    j <- call2("[", expr(.SD), i)
+    dt_call_j(data, j, .by, ...)
+  }
+}
+
+# Create a call to data.table (j position)
+dt_call_j <- function(data, j = NULL, .by = NULL, ...) {
+  j <- quo_squash(j)
+  call2("[", call2("[", data, , j, by = .by, ...))
+}
+
+# Extract environment from quosures and build a data mask
+build_data_mask <- function(x, ...) {
+  if (is_quosures(x)) x <- x[[1]]
+  dots <- enexprs(...)
+  new_data_mask(env(get_env(x), !!!dots))
 }
 
 # Repair names of a data.table
