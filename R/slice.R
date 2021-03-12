@@ -16,9 +16,10 @@
 #'
 #' @examples
 #' test_df <- data.table(
-#'   x = c(1,2,3,4),
-#'   y = c(4,5,6,7),
-#'   z = c("a","a","a","b"))
+#'   x = 1:4,
+#'   y = 5:8,
+#'   z = c("a","a","a","b")
+#' )
 #'
 #' test_df %>%
 #'   slice.(1:3)
@@ -27,7 +28,7 @@
 #'   slice.(1, 3)
 #'
 #' test_df %>%
-#'   slice.(1, .by = z)
+#'   slice.(1:2, .by = z)
 #'
 #' test_df %>%
 #'   slice_head.(1, .by = z)
@@ -49,44 +50,44 @@ slice..data.frame <- function(.df, ..., .by = NULL) {
 
   .df <- as_tidytable(.df)
 
-  rows <- enquos(...) # Needed so .N works
+  dots <- enquos(...) # Needed so .N works
+  if (length(dots) == 0) return(.df)
 
-  if (length(rows) == 0) return(.df)
+  mask <- build_data_mask(dots)
 
-  data_env <- env(quo_get_env(rows[[1]]), .df = .df)
-
-  rows <- map.(rows, clean_expr, .df)
+  dots <- map.(dots, clean_expr, .df)
 
   .by <- enquo(.by)
 
   by_is_null <- quo_is_null(.by)
 
   if (by_is_null) {
-    eval_quo(
-      .df[{.rows = c(!!!rows); .rows[data.table::between(.rows, -.N, .N)]}],
-      new_data_mask(data_env), env = caller_env()
-    )
+    i <- expr({.rows = c(!!!dots); .rows[data.table::between(.rows, -.N, .N)]})
+    dt_expr <- dt_call_i(.df, i)
+
+    eval_tidy(dt_expr, mask, caller_env())
   } else {
     .df_names <- names(.df)
 
     .by <- select_vec_chr(.df, !!.by)
 
     slice_call <- quo(
-      {.rows = c(!!!rows);
+      {.rows = c(!!!dots);
       .rows = .rows[data.table::between(.rows, -.N, .N)];
       vctrs::vec_slice(.SD, .rows)}
     )
 
     if (all(.df_names %in% .by)) {
-      eval_quo(
-        .df[, !!slice_call, by = !!.by, .SDcols = !!.df_names][, (!!.df_names) := NULL][],
-        new_data_mask(data_env), env = caller_env()
-      )
+      dt_expr <- dt_call_j(.df, slice_call, .by, .SDcols = .df_names)
+
+      .df <- eval_tidy(dt_expr, mask, caller_env())
+
+      .df[, (.df_names) := NULL][]
     } else {
-      .df <- eval_quo(
-        .df[, !!slice_call, by = !!.by],
-        new_data_mask(data_env), env = caller_env()
-      )
+      dt_expr <- dt_call_j(.df, slice_call, .by)
+
+      .df <- eval_tidy(dt_expr, mask, caller_env())
+
       # Need to preserve original column order
       setcolorder(.df, .df_names)[]
     }
@@ -106,7 +107,7 @@ slice_head..data.frame <- function(.df, n = 5, .by = NULL) {
 
   n <- enquo(n)
 
-  data_env <- env(quo_get_env(n), .df = .df)
+  mask <- build_data_mask(n)
 
   n <- clean_expr(n)
 
@@ -116,18 +117,24 @@ slice_head..data.frame <- function(.df, n = 5, .by = NULL) {
 
   .df_names <- names(.df)
 
+  j <- expr(head(.SD, !!n))
+
   if (all(.df_names %in% .by)) {
-    eval_quo(
-      .df[, head(.SD, !!n), by = !!.by, .SDcols = !!.df_names][, (!!.df_names) := NULL][],
-      new_data_mask(data_env), env = caller_env()
-    )
+    dt_expr <- dt_call_j(.df, j, .by, .SDcols = .df_names)
+
+    .df <- eval_tidy(dt_expr, mask, caller_env())
+
+    .df[, (.df_names) := NULL][]
   } else {
-    .df <- eval_quo(
-      .df[, head(.SD, !!n), by = !!.by],
-      new_data_mask(data_env), env = caller_env()
-    )
-    if (with_by) setcolorder(.df, .df_names)[]
-    else .df
+    dt_expr <- dt_call_j(.df, j, .by)
+
+    .df <- eval_tidy(dt_expr, mask, caller_env())
+
+    if (with_by) {
+      setcolorder(.df, .df_names)[]
+    } else {
+      .df
+    }
   }
 
 }
