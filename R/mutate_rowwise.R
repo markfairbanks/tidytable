@@ -31,8 +31,6 @@ mutate_rowwise..data.frame <- function(.df, ...) {
 
   if (length(dots) == 0) return(.df)
 
-  data_env <- env(quo_get_env(dots[[1]]), .df = .df)
-
   # Need to clean dots before .rowwise_id is added
   # Otherwise c_across.(cols = everything()) will grab .rowwise_id
   dots <- map.(dots, clean_expr, .df)
