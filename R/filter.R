@@ -11,8 +11,8 @@
 #'
 #' @examples
 #' test_df <- tidytable(
-#'   a = c(1,2,3),
-#'   b = c(4,5,6),
+#'   a = 1:3,
+#'   b = 4:6,
 #'   c = c("a","a","b")
 #' )
 #'
@@ -49,7 +49,7 @@ filter..data.frame <- function(.df, ..., .by = NULL) {
 
     dt_expr <- dt_call_i(.df, i, .by)
 
-    .df <- eval_tidy(dt_expr, mask, env = caller_env())
+    .df <- eval_tidy(dt_expr, mask, caller_env())
 
     setcolorder(.df, col_order)
   }

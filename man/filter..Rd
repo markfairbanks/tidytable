@@ -18,8 +18,8 @@ Filters a dataset to choose rows where conditions are true.
 }
 \examples{
 test_df <- tidytable(
-  a = c(1,2,3),
-  b = c(4,5,6),
+  a = 1:3,
+  b = 4:6,
   c = c("a","a","b")
 )
 
