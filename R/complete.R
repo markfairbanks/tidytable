@@ -23,19 +23,11 @@ complete. <- function(.df, ..., fill = list()) {
 
 #' @export
 complete..data.frame <- function(.df, ..., fill = list()) {
-
   dots <- enquos(...)
-
   dots <- dots[!map_lgl.(dots, quo_is_null)]
-
   if (length(dots) == 0) return(.df)
 
-  data_env <- env(quo_get_env(dots[[1]]), .df = .df)
-
-  full_df <- eval_quo(
-    tidytable::expand.(.df, !!!dots),
-    new_data_mask(data_env), env = caller_env()
-  )
+  full_df <- expand.(.df, !!!dots)
 
   if (is_empty(full_df)) return(.df)
 
