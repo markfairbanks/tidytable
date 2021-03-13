@@ -17,3 +17,10 @@ test_that("can construct using quosures", {
   expect_named(df, c("stuff"))
   expect_equal(df$stuff, 1:3)
 })
+
+test_that("can create an empty tidytable", {
+  df <- tidytable()
+
+  expect_equal(names(df), character(0))
+  expect_equal(nrow(df), 0)
+})

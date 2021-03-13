@@ -14,7 +14,6 @@
 tidytable <- function(...) {
 
   dots <- enquos(...)
-  if (length(dots) == 0) dots <- quo(1)
 
   mask <- build_data_mask(dots)
 

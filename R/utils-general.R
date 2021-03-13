@@ -44,7 +44,11 @@ dt_call_j <- function(data, j = NULL, .by = NULL, ...) {
 
 # Extract environment from quosures and build a data mask
 build_data_mask <- function(x, ...) {
-  if (is_quosures(x)) x <- x[[1]]
+  if (length(x) == 0) {
+    x <- quo(1)
+  } else if (is_quosures(x)) {
+    x <- x[[1]]
+  }
   dots <- enexprs(...)
   new_data_mask(env(get_env(x), !!!dots))
 }
