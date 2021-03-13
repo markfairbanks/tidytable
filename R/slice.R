@@ -154,8 +154,6 @@ slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
 
   mask <- build_data_mask(n)
 
-  data_env <- env(quo_get_env(n), .df = .df)
-
   n <- clean_expr(n)
 
   .by <- select_vec_chr(.df, {{ .by }})
