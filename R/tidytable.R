@@ -10,18 +10,18 @@
 #' @export
 #'
 #' @examples
-#' tidytable(x = c(1,2,3), y = c(4,5,6))
+#' tidytable(x = 1:3, y = c("a", "a", "b"))
 tidytable <- function(...) {
 
   dots <- enquos(...)
+  if (length(dots) == 0) dots <- quo(1)
 
-  if (length(dots) == 0) data_env <- caller_env()
-  else data_env <- env(quo_get_env(dots[[1]]))
+  mask <- build_data_mask(dots)
 
-  .df <- eval_quo(
-    data.table::data.table(!!!dots),
-    new_data_mask(data_env), env = caller_env()
-  )
+  dt_expr <- call2("data.table", !!!dots)
+  dt_expr <- quo_squash(dt_expr)
+
+  .df <- eval_tidy(dt_expr, mask, caller_env())
 
   as_tidytable(.df)
 }

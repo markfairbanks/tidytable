@@ -14,5 +14,5 @@ tidytable(...)
 As such it can be used exactly like a data.table would be used.
 }
 \examples{
-tidytable(x = c(1,2,3), y = c(4,5,6))
+tidytable(x = 1:3, y = c("a", "a", "b"))
 }
