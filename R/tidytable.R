@@ -17,8 +17,7 @@ tidytable <- function(...) {
 
   mask <- build_data_mask(dots)
 
-  dt_expr <- call2("data.table", !!!dots)
-  dt_expr <- quo_squash(dt_expr)
+  dt_expr <- dt_call2("data.table", !!!dots)
 
   .df <- eval_tidy(dt_expr, mask, caller_env())
 

@@ -27,7 +27,6 @@ shallow <- function(x, cols = names(x), reset_class = FALSE) {
 # Create a call to data.table (i position)
 dt_call_i <- function(data, i = NULL, .by = NULL, ...) {
   i <- quo_squash(i)
-
   if (is.null(.by)) {
     call2("[", data, i)
   } else {
@@ -40,6 +39,13 @@ dt_call_i <- function(data, i = NULL, .by = NULL, ...) {
 dt_call_j <- function(data, j = NULL, .by = NULL, ...) {
   j <- quo_squash(j)
   call2("[", call2("[", data, , j, by = .by, ...))
+}
+
+# Call a data.table function
+# Squashes quosures
+dt_call2 <- function(.fn, ..., .ns = NULL) {
+  call <- call2(.fn, ..., .ns = .ns)
+  quo_squash(call)
 }
 
 # Extract environment from quosures and build a data mask

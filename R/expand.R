@@ -34,8 +34,7 @@ expand..data.frame <- function(.df, ..., .name_repair = "check_unique") {
 
   mask <- build_data_mask(dots, !!!.df)
 
-  cj <- call2("CJ", !!!dots, sorted = TRUE, unique = TRUE, .ns = "data.table")
-  cj <- quo_squash(cj)
+  cj <- dt_call2("CJ", !!!dots, sorted = TRUE, unique = TRUE)
 
   result_df <- eval_tidy(cj, mask, caller_env())
 
