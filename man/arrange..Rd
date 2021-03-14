@@ -19,9 +19,10 @@ ordering in the "C-locale". See \code{?data.table::setorder} for more details.
 }
 \examples{
 test_df <- data.table(
-  a = c(1,2,3),
-  b = c(4,5,6),
-  c = c("a","a","b"))
+  a = 1:3,
+  b = 4:6,
+  c = c("a","a","b")
+)
 
 test_df \%>\%
   arrange.(c, -a)

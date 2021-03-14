@@ -12,9 +12,10 @@
 #'
 #' @examples
 #' test_df <- data.table(
-#'   a = c(1,2,3),
-#'   b = c(4,5,6),
-#'   c = c("a","a","b"))
+#'   a = 1:3,
+#'   b = 4:6,
+#'   c = c("a","a","b")
+#' )
 #'
 #' test_df %>%
 #'   arrange.(c, -a)
@@ -32,7 +33,9 @@ arrange..data.frame <- function(.df, ...) {
 
   dots <- map.(dots, clean_expr, .df)
 
-  eval_quo(
-    .df[order(!!!dots)]
-  )
+  i <- expr(order(!!!dots))
+
+  dt_expr <- dt_call_i(.df, i)
+
+  eval_tidy(dt_expr)
 }
