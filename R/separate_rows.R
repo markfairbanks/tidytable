@@ -27,17 +27,20 @@ separate_rows. <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
 
 #' @export
 separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
-
   .df <- as_tidytable(.df)
+  .df <- shallow(.df)
 
   vec_assert(sep, character(), 1)
   vec_assert(convert, logical(), 1)
 
-  col_order <- names(.df)
+  col_order <- copy(names(.df))
 
-  .df <- shallow(.df)
+  dots <- enquos(...)
+  if (length(dots) == 0) return(.df)
 
-  cols <- select_dots_sym(.df, ...)
+  mask <- build_data_mask(dots)
+
+  cols <- select_dots_sym(.df, !!!dots)
 
   .df[ , .id := .I]
 
@@ -54,9 +57,11 @@ separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert 
   split_calls <- map.(cols, ~ call2('strsplit', .x, split = sep, fixed = fixed_flag))
   names(split_calls) <- col_names
 
-  .df <- eval_quo(
-    .df[, c(!!!split_calls), by = other_col_names]
-  )
+  j <- expr(c(!!!split_calls))
+
+  dt_expr <- dt_call_j(.df, j, .by = other_col_names)
+
+  .df <- eval_tidy(dt_expr, mask, caller_env())
 
   .df[ , .id := NULL]
 
