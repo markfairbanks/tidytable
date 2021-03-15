@@ -43,7 +43,7 @@ dt_call_j <- function(data, j = NULL, .by = NULL, ...) {
 
 # Call a data.table function
 # Squashes quosures
-dt_call2 <- function(.fn, ..., .ns = NULL) {
+dt_call2 <- function(.fn, ..., .ns = "data.table") {
   call <- call2(.fn, ..., .ns = .ns)
   quo_squash(call)
 }
