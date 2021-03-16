@@ -29,15 +29,15 @@ replace_na. <- function(.x, replace = NA) {
 
 #' @export
 replace_na..default <- function(.x, replace = NA) {
-
   vec_assert(replace, size = 1)
 
   if (is.integer(.x) || is.double(.x)) {
-
     nafill(.x, "const", fill = replace)
-
+  } else if (vec_is_list(.x)) {
+    null_flag <- map_lgl.(.x, is.null)
+    .x[null_flag] <- replace
+    .x
   } else {
-
     replace <- vec_cast(replace, vec_ptype(.x))
 
     .x %|% replace
