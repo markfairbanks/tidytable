@@ -10,21 +10,13 @@ eval_quo <- function(express, data = NULL, env = caller_env()) {
   eval_tidy(quo_squash(enquo(express)), data = data, env = env)
 }
 
-# Creates a shallow copy to prevent modify-by-reference
-shallow <- function(x, cols = names(x), reset_class = FALSE) {
-  stopifnot(is.data.table(x), all(cols %in% names(x)))
-  ans <- vector("list", length(cols))
-  setattr(ans, 'names', copy(cols))
-  for (col in cols) {
-    ans[[col]] = x[[col]]
-  }
-  setDT(ans)
-  class  <- if (!reset_class) copy(class(x)) else c("data.table", "data.frame")
-  setattr(ans, 'class', class)
-  ans[]
+# Creates a shallow copy
+# Can add new columns or rename columns without modify-by-reference
+shallow <- function(x) {
+  x[TRUE]
 }
 
-# Create a call to data.table (i position)
+# Create a call to data.table subset "[" (i position)
 dt_call_i <- function(data, i = NULL, .by = NULL, ...) {
   i <- quo_squash(i)
   if (is.null(.by)) {
@@ -35,7 +27,7 @@ dt_call_i <- function(data, i = NULL, .by = NULL, ...) {
   }
 }
 
-# Create a call to data.table (j position)
+# Create a call to data.table subset "[" (j position)
 dt_call_j <- function(data, j = NULL, .by = NULL, ...) {
   j <- quo_squash(j)
   call2("[", call2("[", data, , j, by = .by, ...))
@@ -138,3 +130,17 @@ args_recycle <- function(args) {
 
   args
 }
+
+# deprecated shallow() ------------------------------------------------
+# shallow <- function(x, cols = names(x), reset_class = FALSE) {
+#   stopifnot(is.data.table(x), all(cols %in% names(x)))
+#   ans <- vector("list", length(cols))
+#   setattr(ans, 'names', copy(cols))
+#   for (col in cols) {
+#     ans[[col]] = x[[col]]
+#   }
+#   setDT(ans)
+#   class  <- if (!reset_class) copy(class(x)) else c("data.table", "data.frame")
+#   setattr(ans, 'class', class)
+#   ans[]
+# }

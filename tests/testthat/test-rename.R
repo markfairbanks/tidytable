@@ -47,6 +47,14 @@ test_that("rename_with() works for all variables", {
   expect_named(df, c("x_append", "y_append"))
 })
 
+test_that("rename_with() doesn't modify by reference", {
+  df <- data.table(x = c(1,1,1), y = c(2,2,2))
+  df %>%
+    rename_with.(~ paste0(.x, "_append"))
+
+  expect_named(df, c("x", "y"))
+})
+
 test_that("rename_with() works for all variables w/ data.frame", {
   df <- data.frame(x = c(1,1,1), y = c(2,2,2))
   df <- df %>%

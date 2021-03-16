@@ -6,6 +6,13 @@ test_that("default removes old column and returns first alpha group", {
   expect_null(results_df$y)
 })
 
+test_that("doesn't modify-by-reference", {
+  data.table(y = c("a1-1", "b2-2", "c3-3")) -> test_df
+  test_df %>% extract.(y, "A", regex="([[:alnum:]]+)")
+
+  expect_equal(test_df$y, c("a1-1", "b2-2", "c3-3"))
+})
+
 test_that("match failures give NAs", {
   data.table(y = c("a1-1", "b2-2", "c3-3")) -> test_df
   test_df %>% extract.(y, "A", regex="(b)") -> results_df
