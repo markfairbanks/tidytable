@@ -30,6 +30,12 @@ test_that("works on character columns", {
   expect_equal(replaced_df$y, c("a", "b", "c"))
 })
 
+test_that("tidyr::replace_na is converted to tidytable", {
+  x <- c(1, NA)
+  test_df <- tidytable(x = x)
+  expect_equal(mutate.(test_df, x = replace_na(x, 0))$x, c(1, 0))
+})
+
 # data frame -------------------------------------------------------------
 
 test_that("empty call does nothing", {
@@ -56,11 +62,11 @@ test_that("doesn't complain about variables that don't exist", {
   expect_equal(out, tidytable(a = c(1, 100)))
 })
 
-# test_that("can replace NULLs in list-column", {
-#   df <- tidytable(x = list(1, NULL))
-#   rs <- replace_na.(df, list(x = list(1:5)))
-#
-#   expect_identical(rs, tidytable(x = list(1, 1:5)))
-# })
+test_that("can replace NULLs in list-column", {
+  df <- tidytable(x = list(1, NULL))
+  rs <- replace_na.(df, list(x = list(1:5)))
+
+  expect_identical(rs, tidytable(x = list(1, 1:5)))
+})
 
 
