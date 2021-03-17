@@ -1,4 +1,5 @@
 test_that("works with no wt/no .by", {
+  local_options(lifecycle_verbosity = "quiet")
   test_df <- data.table(x = 1:5,
                         y = 6:10,
                         z = c(rep("a", 3), rep("b", 2)))
@@ -12,6 +13,7 @@ test_that("works with no wt/no .by", {
 })
 
 test_that("works with no wt, no .by, and .N", {
+  local_options(lifecycle_verbosity = "quiet")
   test_df <- tidytable(x = 1:5,
                         y = 6:10,
                         z = c(rep("a", 3), rep("b", 2)))
@@ -23,6 +25,7 @@ test_that("works with no wt, no .by, and .N", {
 })
 
 test_that("works with no wt/no .by with data.frame", {
+  local_options(lifecycle_verbosity = "quiet")
   test_df <- data.frame(x = 1:5,
                         y = 6:10,
                         z = c(rep("a", 3), rep("b", 2)),
@@ -37,6 +40,7 @@ test_that("works with no wt/no .by with data.frame", {
 })
 
 test_that("works with wt/no .by", {
+  local_options(lifecycle_verbosity = "quiet")
   test_df <- data.table(x = 1:5,
                         y = 6:10,
                         z = c(rep("a", 3), rep("b", 2)))
@@ -50,6 +54,7 @@ test_that("works with wt/no .by", {
 })
 
 test_that("works with wt/no .by with data.frame", {
+  local_options(lifecycle_verbosity = "quiet")
   test_df <- data.frame(x = 1:5,
                         y = 6:10,
                         z = c(rep("a", 3), rep("b", 2)),
@@ -64,6 +69,7 @@ test_that("works with wt/no .by with data.frame", {
 })
 
 test_that("works with no wt/with .by", {
+  local_options(lifecycle_verbosity = "quiet")
   test_df <- data.table(x = 1:5,
                         y = 6:10,
                         z = c(rep("a", 3), rep("b", 2)))
@@ -77,6 +83,7 @@ test_that("works with no wt/with .by", {
 })
 
 test_that("works with wt/with .by", {
+  local_options(lifecycle_verbosity = "quiet")
   test_df <- data.table(x = 1:5,
                         y = 6:10,
                         z = c(rep("a", 3), rep("b", 2)))
@@ -90,6 +97,7 @@ test_that("works with wt/with .by", {
 })
 
 test_that("works with wt/with enhanced selection", {
+  local_options(lifecycle_verbosity = "quiet")
   test_df <- data.table(x = 1:5,
                         y = 6:10,
                         z = c(rep("a", 3), rep("b", 2)))

@@ -88,7 +88,7 @@ test_that("duplicate names are fixed", {
 
   df_list <- list(df1, df2)
 
-  bind_df <- bind_cols.(df_list)
+  bind_df <- suppressMessages(bind_cols.(df_list))
 
   expect_named(bind_df, c("x...1","y...2","x...3","y...4"))
   expect_equal(bind_df$x...1, c(1,2,3))

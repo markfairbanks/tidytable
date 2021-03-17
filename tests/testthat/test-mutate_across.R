@@ -1,5 +1,3 @@
-setup(options(lifecycle_verbosity = "quiet"))
-
 test_that("mutate_across.(): .cols works with is.numeric", {
   df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
