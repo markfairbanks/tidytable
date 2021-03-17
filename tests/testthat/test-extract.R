@@ -68,15 +68,15 @@ test_that("str_extract_groups handles edge cases", {
     str_extract_groups(NA, "test"),
     list()
   )
-  expect_equivalent(
+  expect_equal(
     str_extract_groups(c("", " "), "^(.*)$"),
     list(c("", " "))
   )
-  expect_equivalent(
+  expect_equal(
     str_extract_groups("", "(.)-(.)"),
     list(NA_character_, NA_character_)
   )
-  expect_equivalent(
+  expect_equal(
     str_extract_groups(character(), "(.)-(.)"),
     list(character(), character())
   )
