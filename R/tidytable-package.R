@@ -4,11 +4,10 @@
 #' @import vctrs
 #' @rawNamespace import(rlang, except = `:=`)
 #' @importFrom glue glue
-#' @importFrom lifecycle deprecated deprecate_soft deprecate_stop deprecate_warn expect_deprecated
-#' @importFrom methods as
-#' @importFrom stats as.formula na.omit
+#' @importFrom lifecycle deprecated deprecate_soft deprecate_stop
+#' @importFrom stats na.omit
 #' @importFrom tibble glimpse trunc_mat
-#' @importFrom utils capture.output head packageName tail type.convert
+#' @importFrom utils head packageName tail type.convert
 NULL
 
 #' @docType import
