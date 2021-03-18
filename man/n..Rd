@@ -13,14 +13,15 @@ Can be used inside \code{summarize.()}, \code{mutate.()}, & \code{filter.()}
 }
 \examples{
 test_df <- data.table(
-  x = c(1,2,3),
-  y = c(4,5,6),
-  z = c("a","a","b"))
+  x = 1:3,
+  y = 4:6,
+  z = c("a","a","b")
+ )
 
 test_df \%>\%
-  summarize.(count = n.(),
-             .by = z)
+  summarize.(count = n.(), .by = z)
 
+# The dplyr version `n()` also works
 test_df \%>\%
-  mutate.(count = n.())
+  summarize.(count = n(), .by = z)
 }
