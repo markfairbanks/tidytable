@@ -33,13 +33,16 @@ filter..data.frame <- function(.df, ..., .by = NULL) {
   .by <- enquo(.by)
 
   dots <- enquos(...)
+  if (length(dots) == 0) return(.df)
 
   mask <- build_data_mask(dots)
+
+  dots <- clean_exprs(dots, .df)
 
   i <- expr(Reduce('&', list(!!!dots)))
 
   if (quo_is_null(.by)) {
-    dt_expr <- dt_call_i(.df, i)
+    dt_expr <- dt_call2_i(.df, i)
 
     .df <- eval_tidy(dt_expr, mask, caller_env())
   } else {
@@ -47,7 +50,9 @@ filter..data.frame <- function(.df, ..., .by = NULL) {
 
     col_order <- names(.df)
 
-    dt_expr <- dt_call_i(.df, i, .by)
+    j <- expr(.SD[!!i])
+
+    dt_expr <- dt_call2_j(.df, j, .by)
 
     .df <- eval_tidy(dt_expr, mask, caller_env())
 

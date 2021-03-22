@@ -28,14 +28,12 @@ arrange..data.frame <- function(.df, ...) {
   .df <- as_tidytable(.df)
 
   dots <- enquos(...)
-
   if (length(dots) == 0) return(.df)
-
-  dots <- map.(dots, clean_expr, .df)
+  dots <- clean_exprs(dots, .df)
 
   i <- expr(order(!!!dots))
 
-  dt_expr <- dt_call_i(.df, i)
+  dt_expr <- dt_call2_i(.df, i)
 
   eval_tidy(dt_expr)
 }

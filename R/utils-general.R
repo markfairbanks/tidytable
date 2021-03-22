@@ -1,15 +1,3 @@
-# Shortcut to use rlang quoting/unquoting with data.table/base R expressions
-# Can be replaced by rlang::inject() if rlang dependency is bumped to v0.4.9
-eval_expr <- function(express, env = caller_env()) {
-  eval_tidy(enexpr(express), env = env)
-}
-
-# Allows use of quosures inside data.tables
-# Squashes all quosures to expressions
-eval_quo <- function(express, data = NULL, env = caller_env()) {
-  eval_tidy(quo_squash(enquo(express)), data = data, env = env)
-}
-
 # Creates a shallow copy
 # Can add new columns or rename columns without modify-by-reference
 shallow <- function(x) {
@@ -17,20 +5,16 @@ shallow <- function(x) {
 }
 
 # Create a call to data.table subset "[" (i position)
-dt_call_i <- function(data, i = NULL, .by = NULL, ...) {
+dt_call2_i <- function(data, i = NULL, .by = NULL, ...) {
   i <- quo_squash(i)
-  if (is.null(.by)) {
-    call2("[", data, i)
-  } else {
-    j <- call2("[", expr(.SD), i)
-    dt_call_j(data, j, .by, ...)
-  }
+  call2("[", data, i)
 }
 
 # Create a call to data.table subset "[" (j position)
-dt_call_j <- function(data, j = NULL, .by = NULL, ...) {
+dt_call2_j <- function(data, j = NULL, .by = NULL, ...) {
   j <- quo_squash(j)
-  call2("[", call2("[", data, , j, by = .by, ...))
+  dt_expr <- call2("[", data, , j, by = .by, ...)
+  call2("[", dt_expr)
 }
 
 # Call a data.table function
@@ -51,18 +35,16 @@ build_data_mask <- function(x, ...) {
   new_data_mask(env(get_env(x), !!!dots))
 }
 
-# Repair names of a data.table
-df_name_repair <- function(.df, .name_repair = "unique") {
-  names(.df) <- vec_as_names(
-    names(.df),
-    repair = .name_repair
-  )
-
-  .df
-}
-
 # Allows use of functions like n()/n.() and c_across()/c_across.()
 # General idea follows dt_squash found here: https://github.com/tidyverse/dtplyr/blob/master/R/tidyeval.R
+clean_exprs <- function(x, data) {
+  if (is.list(x)) {
+    lapply(x, clean_expr, data)
+  } else {
+    clean_expr(x, data)
+  }
+}
+
 clean_expr <- function(x, data) {
   if (is_quosure(x)) {
     x <- get_expr(x)
@@ -95,6 +77,28 @@ clean_expr <- function(x, data) {
     x[-1] <- lapply(x[-1], clean_expr, data)
     x
   }
+}
+
+# Repair names of a data.table
+df_name_repair <- function(.df, .name_repair = "unique") {
+  names(.df) <- vec_as_names(
+    names(.df),
+    repair = .name_repair
+  )
+
+  .df
+}
+
+# Shortcut to use rlang quoting/unquoting with data.table/base R expressions
+# Can be replaced by rlang::inject() if rlang dependency is bumped to v0.4.9
+eval_expr <- function(express, env = caller_env()) {
+  eval_tidy(enexpr(express), env = env)
+}
+
+# Allows use of quosures inside data.tables
+# Squashes all quosures to expressions
+eval_quo <- function(express, data = NULL, env = caller_env()) {
+  eval_tidy(quo_squash(enquo(express)), data = data, env = env)
 }
 
 # data.table::fsort() with no warning messages

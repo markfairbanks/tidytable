@@ -33,7 +33,7 @@ mutate_rowwise..data.frame <- function(.df, ...) {
 
   # Need to clean dots before .rowwise_id is added
   # Otherwise c_across.(cols = everything()) will grab .rowwise_id
-  dots <- map.(dots, clean_expr, .df)
+  dots <- clean_exprs(dots, .df)
 
   .df <- mutate.(.df, .rowwise_id = .I)
 
