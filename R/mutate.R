@@ -42,6 +42,8 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
 
   mask <- build_data_mask(dots)
 
+  dots <- clean_exprs(dots, .df)
+
   .by <- enquo(.by)
 
   if (quo_is_null(.by)) {
@@ -50,30 +52,26 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
     for (i in seq_along(dots)) {
 
       .col_name <- dots_names[[i]]
-      .val <- clean_expr(dots[[i]], .df)
+      .val <- dots[[i]]
 
       # vec_recycle() prevents modify-by-reference if the column already exists in the data.table
         ## Fixes case when user supplies a single value ex. 1, -1, "a"
       # !is_null(val) allows for columns to be deleted using mutate.(.df, col = NULL)
       if (.col_name %in% names(.df) && !is_null(.val)) {
         j <- expr(!!.col_name := vctrs::vec_recycle(!!.val, .N))
-        dt_expr <- dt_call_j(.df, j)
-
-        .df <- eval_tidy(dt_expr, mask, caller_env())
       } else {
         j <- expr(!!.col_name := !!.val)
-        dt_expr <- dt_call_j(.df, j)
-
-        .df <- eval_tidy(dt_expr, mask, caller_env())
       }
+
+      dt_expr <- dt_call2_j(.df, j)
+
+      .df <- eval_tidy(dt_expr, mask, caller_env())
     }
   } else {
     .by <- select_vec_chr(.df, !!.by)
 
     needs_copy <- any(names(dots) %in% names(.df))
     if (needs_copy) .df <- copy(.df)
-
-    dots <- map.(dots, clean_expr, .df)
 
     # Check for NULL inputs so columns can be deleted
     null_flag <- map_lgl.(dots, is_null)
@@ -83,7 +81,7 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
       dots <- dots[!null_flag]
 
       j <- call2(":=", !!!null_dots)
-      dt_expr <- dt_call_j(.df, j)
+      dt_expr <- dt_call2_j(.df, j)
 
       .df <- eval_tidy(dt_expr, mask, caller_env())
     }
@@ -93,7 +91,7 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
       output <- call2("list", !!!syms(names(dots)))
       expr <- call2("{", !!!assign, output)
       j <- call2(":=", call2("c", !!!names(dots)), expr)
-      dt_expr <- dt_call_j(.df, j, .by)
+      dt_expr <- dt_call2_j(.df, j, .by)
 
       .df <- eval_tidy(dt_expr, mask, caller_env())
     }

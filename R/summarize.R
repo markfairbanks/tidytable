@@ -45,7 +45,7 @@ summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE) {
 
   mask <- build_data_mask(dots)
 
-  dots <- map.(dots, clean_expr, .df)
+  dots <- clean_exprs(dots, .df)
 
   .by <- select_vec_chr(.df, {{ .by }})
 
@@ -53,7 +53,7 @@ summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE) {
   output <- call2("list", !!!syms(names(dots)))
   j <- call2("{", !!!assign, output)
 
-  dt_expr <- dt_call_j(.df, j, .by)
+  dt_expr <- dt_call2_j(.df, j, .by)
 
   .df <- eval_tidy(dt_expr, mask, caller_env())
 
