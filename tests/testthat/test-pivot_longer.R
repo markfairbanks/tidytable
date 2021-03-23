@@ -168,14 +168,21 @@ test_that("can use names_prefix", {
 })
 
 test_that("can pivot to multiple measure cols", {
-  out <- pivot_longer.(
-    anscombe,
-    everything(),
-    names_to = c(".value", "set"),
-    names_pattern = "(.)(.)"
-  )
+  test_df <- tidytable(x_3 = 3, x_4 = 4, y_3 = 3, y_4 = 4)
 
-  expect_named(out, c("set", "x", "y"))
+  out <- test_df %>%
+    pivot_longer.(names_to = c(".value", "id"), names_sep = "_")
+
+  expect_named(out, c("id", "x", "y"))
+  expect_equal(out$id, c("3", "4"))
+})
+
+test_that("errors on unbalanced data", {
+  test_df <- tidytable(x_3 = 3, x_4 = 4, y_5 = 5, y_6 = 6)
+
+  expect_error(
+    pivot_longer.(test_df, names_to = c(".value", "id"), names_sep = "_")
+  )
 })
 
 test_that(".value can be at any position in `names_to`", {
@@ -202,19 +209,19 @@ test_that(".value can be at any position in `names_to`", {
   expect_identical(value_first, value_second)
 })
 
-test_that("can handle missing combinations", {
-  dt <- tidytable(
-    id = c("A", "B"),
-    x_1 = c(1, 3),
-    x_2 = c(2, 4),
-    y_2 = c("a", "b")
-  )
-  out <- pivot_longer.(dt, -id, names_to = c(".value", "n"), names_sep = "_")
-
-  expect_named(out, c("id", "n", "x", "y"))
-  expect_equal(out$x, c(1, 3, 2, 4))
-  expect_equal(out$y, c("a", "b", NA, NA))
-})
+# test_that("can handle missing combinations", {
+#   dt <- tidytable(
+#     id = c("A", "B"),
+#     x_1 = c(1, 3),
+#     x_2 = c(2, 4),
+#     y_2 = c("a", "b")
+#   )
+#   out <- pivot_longer.(dt, -id, names_to = c(".value", "n"), names_sep = "_")
+#
+#   expect_named(out, c("id", "n", "x", "y"))
+#   expect_equal(out$x, c(1, 3, 2, 4))
+#   expect_equal(out$y, c("a", "b", NA, NA))
+# })
 
 test_that("works with names_to = '.value'", {
   dt <- tidytable(id = 1:3, x1 = 4:6, x2 = 5:7, y1 = 7:9, y2 = 10:12)
