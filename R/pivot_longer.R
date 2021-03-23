@@ -122,7 +122,7 @@ pivot_longer..data.frame <- function(.df,
       equal_ids <- all(equal_ids)
 
       if (equal_ids) {
-        .value_id <- vctrs::vec_rep_each(.value_id, nrow(.df))
+        .value_id <- vec_rep_each(.value_id, nrow(.df))
       } else {
         abort("`data.table::melt()` doesn't currently support melting of unbalanced datasets.")
       }
@@ -197,7 +197,6 @@ pivot_longer..data.frame <- function(.df,
   }
 
   ## values_ptype & values_transform
-  # optionally, cast variables generated from columns
   cast_vars <- intersect(values_to, names(values_ptypes))
   if (length(cast_vars) > 0) {
     cast_calls <- vector("list", length(cast_vars))
