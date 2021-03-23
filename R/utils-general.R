@@ -73,6 +73,15 @@ clean_expr <- function(x, data) {
     cols <- call$cols %||% expr(everything())
     cols <- select_vec_sym(data, !!cols)
     call2("vec_c", !!!cols, .ns = "vctrs")
+  } else if (is_call(x, "if_all.") || is_call(x, "if_any.")) {
+    call <- match.call(tidytable::if_all., x, expand.dots = FALSE)
+    if (is.null(call$.fns)) return(TRUE)
+    .cols <- call$.cols %||% expr(everything())
+    .cols <- select_vec_sym(data, !!.cols)
+    .fn <- as_function(eval_tidy(call$.fns))
+    call_list <- map.(.cols, ~ call2(.fn, .x, call$...))
+    reduce_fn <- if (is_call(x, "if_all.")) "&" else "|"
+    call_reduce(call_list, reduce_fn)
   } else {
     x[-1] <- lapply(x[-1], clean_expr, data)
     x

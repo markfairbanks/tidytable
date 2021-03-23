@@ -28,6 +28,7 @@ reference:
   - desc.
   - distinct.
   - group_split.
+  - if_all.
   - ifelse.
   - lags.
   - left_join.
