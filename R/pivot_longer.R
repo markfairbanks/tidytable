@@ -114,11 +114,7 @@ pivot_longer..data.frame <- function(.df,
       # Make sure data is "balanced"
       # https://github.com/Rdatatable/data.table/issues/2575
       # The list passed to measure.vars also needs the same number of column names per element
-      equal_ids <- vapply(
-        .value_ids[-1],
-        function(.x) isTRUE(all.equal(.value_id, .x)),
-        logical(1)
-      )
+      equal_ids <- map_lgl.(.value_ids[-1], ~ isTRUE(all.equal(.value_id, .x)))
       equal_ids <- all(equal_ids)
 
       if (equal_ids) {
