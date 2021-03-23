@@ -233,10 +233,6 @@ pivot_longer..data.frame <- function(.df,
   as_tidytable(.df)
 }
 
-call_reduce <- function(x, fun) {
-  Reduce(function(x, y) call2(fun, x, y), x)
-}
-
 str_extract <- function(x, into, regex, convert = FALSE) {
   out <- str_extract_groups(x, pattern = regex, convert = convert)
   out <- as_tidytable(out)

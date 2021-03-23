@@ -110,6 +110,11 @@ eval_quo <- function(express, data = NULL, env = caller_env()) {
   eval_tidy(quo_squash(enquo(express)), data = data, env = env)
 }
 
+# Reduce a list of calls
+call_reduce <- function(x, fun) {
+  Reduce(function(x, y) call2(fun, x, y), x)
+}
+
 # data.table::fsort() with no warning messages
 f_sort <- function(x, decreasing = FALSE, na.last = FALSE) {
   suppressWarnings(
