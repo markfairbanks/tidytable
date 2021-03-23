@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9.9</span>
       </span>
     </div>
 
@@ -175,34 +175,34 @@
 
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>relocate.</span><span class='op'>(</span><span class='va'>c</span>, .before <span class='op'>=</span> <span class='va'>b</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [5 × 4]</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># tidytable [5 × 4]</span><span>
 #&gt;       a c         b d    
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1 a         1 a    
-#&gt; </span><span style='color: #555555;'>2</span><span>     2 a         2 a    
-#&gt; </span><span style='color: #555555;'>3</span><span>     3 a         3 a    
-#&gt; </span><span style='color: #555555;'>4</span><span>     4 b         4 b    
-#&gt; </span><span style='color: #555555;'>5</span><span>     5 b         5 b    </div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a         1 a    
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2 a         2 a    
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3 a         3 a    
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4 b         4 b    
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     5 b         5 b    </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>relocate.</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span>, .after <span class='op'>=</span> <span class='va'>c</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [5 × 4]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [5 × 4]</span><span>
 #&gt;   c         a     b d    
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> a         1     1 a    
-#&gt; </span><span style='color: #555555;'>2</span><span> a         2     2 a    
-#&gt; </span><span style='color: #555555;'>3</span><span> a         3     3 a    
-#&gt; </span><span style='color: #555555;'>4</span><span> b         4     4 b    
-#&gt; </span><span style='color: #555555;'>5</span><span> b         5     5 b    </div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a         1     1 a    
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> a         2     2 a    
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> a         3     3 a    
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> b         4     4 b    
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> b         5     5 b    </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>relocate.</span><span class='op'>(</span><span class='fu'>where</span><span class='op'>(</span><span class='va'>is.numeric</span><span class='op'>)</span>, .after <span class='op'>=</span> <span class='va'>c</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [5 × 4]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [5 × 4]</span><span>
 #&gt;   c         a     b d    
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> a         1     1 a    
-#&gt; </span><span style='color: #555555;'>2</span><span> a         2     2 a    
-#&gt; </span><span style='color: #555555;'>3</span><span> a         3     3 a    
-#&gt; </span><span style='color: #555555;'>4</span><span> b         4     4 b    
-#&gt; </span><span style='color: #555555;'>5</span><span> b         5     5 b    </div></span></pre>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a         1     1 a    
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> a         2     2 a    
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> a         3     3 a    
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> b         4     4 b    
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> b         5     5 b    </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

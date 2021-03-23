@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9.9</span>
       </span>
     </div>
 
@@ -185,48 +185,48 @@ when a list is used for <code>.fns</code>.</p></td>
 
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>mutate_across.</span><span class='op'>(</span><span class='fu'>where</span><span class='op'>(</span><span class='va'>is.numeric</span><span class='op'>)</span>, <span class='va'>as.character</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [3 × 3]</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># tidytable [3 × 3]</span><span>
 #&gt;   x     y     z    
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> 1     2     a    
-#&gt; </span><span style='color: #555555;'>2</span><span> 1     2     a    
-#&gt; </span><span style='color: #555555;'>3</span><span> 1     2     b    </div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 1     2     a    
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 1     2     a    
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 1     2     b    </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>mutate_across.</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span>, <span class='op'>~</span> <span class='va'>.x</span> <span class='op'>*</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [3 × 3]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [3 × 3]</span><span>
 #&gt;       x     y z    
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     2     4 a    
-#&gt; </span><span style='color: #555555;'>2</span><span>     2     4 a    
-#&gt; </span><span style='color: #555555;'>3</span><span>     2     4 b    </div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     2     4 a    
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     4 a    
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     2     4 b    </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>mutate_across.</span><span class='op'>(</span><span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>as.character</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [3 × 3]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [3 × 3]</span><span>
 #&gt;   x     y     z    
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> 1     2     a    
-#&gt; </span><span style='color: #555555;'>2</span><span> 1     2     a    
-#&gt; </span><span style='color: #555555;'>3</span><span> 1     2     b    </div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 1     2     a    
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 1     2     a    
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 1     2     b    </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>mutate_across.</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>new <span class='op'>=</span> <span class='op'>~</span> <span class='va'>.x</span> <span class='op'>*</span> <span class='fl'>2</span>,
                                another <span class='op'>=</span> <span class='op'>~</span> <span class='va'>.x</span> <span class='op'>+</span> <span class='fl'>7</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [3 × 7]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [3 × 7]</span><span>
 #&gt;       x     y z     x_new y_new x_another y_another
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     2 a         2     4         8         9
-#&gt; </span><span style='color: #555555;'>2</span><span>     1     2 a         2     4         8         9
-#&gt; </span><span style='color: #555555;'>3</span><span>     1     2 b         2     4         8         9</div><div class='input'><span class='va'>test_df</span> <span class='op'>%&gt;%</span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     2 a         2     4         8         9
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     1     2 a         2     4         8         9
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     1     2 b         2     4         8         9</div><div class='input'><span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>mutate_across.</span><span class='op'>(</span>
     .cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span>,
     .fns <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>new <span class='op'>=</span> <span class='op'>~</span> <span class='va'>.x</span> <span class='op'>*</span> <span class='fl'>2</span>, another <span class='op'>=</span> <span class='op'>~</span> <span class='va'>.x</span> <span class='op'>+</span> <span class='fl'>7</span><span class='op'>)</span>,
     .names <span class='op'>=</span> <span class='st'>"{.col}_test_{.fn}"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [3 × 7]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [3 × 7]</span><span>
 #&gt;       x     y z     x_test_new y_test_new x_test_another y_test_another
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     2 a              2          4              8              9
-#&gt; </span><span style='color: #555555;'>2</span><span>     1     2 a              2          4              8              9
-#&gt; </span><span style='color: #555555;'>3</span><span>     1     2 b              2          4              8              9</div></span></pre>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     2 a              2          4              8              9
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     1     2 a              2          4              8              9
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     1     2 b              2          4              8              9</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

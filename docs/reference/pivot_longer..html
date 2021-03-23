@@ -83,7 +83,7 @@ the number of columns." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9.9</span>
       </span>
     </div>
 
@@ -149,6 +149,7 @@ the number of columns.</p>
   cols <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span>,
   names_to <span class='op'>=</span> <span class='st'>"name"</span>,
   values_to <span class='op'>=</span> <span class='st'>"value"</span>,
+  names_prefix <span class='op'>=</span> <span class='cn'>NULL</span>,
   names_sep <span class='op'>=</span> <span class='cn'>NULL</span>,
   names_pattern <span class='op'>=</span> <span class='cn'>NULL</span>,
   names_ptypes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
@@ -166,11 +167,11 @@ the number of columns.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.df</th>
-      <td><p>The data table to pivot longer</p></td>
+      <td><p>A data.table or data.frame</p></td>
     </tr>
     <tr>
       <th>cols</th>
-      <td><p>Vector of bare column names. Can add/drop columns. <code>tidyselect</code> compatible.</p></td>
+      <td><p>Columns to pivot. <code>tidyselect</code> compatible.</p></td>
     </tr>
     <tr>
       <th>names_to</th>
@@ -179,6 +180,10 @@ the number of columns.</p>
     <tr>
       <th>values_to</th>
       <td><p>Name of the new "values" column. Must be a string.</p></td>
+    </tr>
+    <tr>
+      <th>names_prefix</th>
+      <td><p>Remove matching text from the start of selected columns using regex.</p></td>
     </tr>
     <tr>
       <th>names_sep</th>
@@ -228,27 +233,27 @@ otherwise it will be a <code>character</code> column. Defaults to <code>FALSE</c
 <span class='op'>)</span>
 
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>pivot_longer.</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># tidytable [6 × 3]</span><span>
+  <span class='fu'>pivot_longer.</span><span class='op'>(</span>cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># tidytable [6 × 3]</span><span>
 #&gt;   z     name  value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> a     x         1
-#&gt; </span><span style='color: #555555;'>2</span><span> b     x         2
-#&gt; </span><span style='color: #555555;'>3</span><span> c     x         3
-#&gt; </span><span style='color: #555555;'>4</span><span> a     y         4
-#&gt; </span><span style='color: #555555;'>5</span><span> b     y         5
-#&gt; </span><span style='color: #555555;'>6</span><span> c     y         6</div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     x         1
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> b     x         2
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> c     x         3
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> a     y         4
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> b     y         5
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> c     y         6</div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>pivot_longer.</span><span class='op'>(</span>cols <span class='op'>=</span> <span class='op'>-</span><span class='va'>z</span>, names_to <span class='op'>=</span> <span class='st'>"stuff"</span>, values_to <span class='op'>=</span> <span class='st'>"things"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># tidytable [6 × 3]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [6 × 3]</span><span>
 #&gt;   z     stuff things
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> a     x          1
-#&gt; </span><span style='color: #555555;'>2</span><span> b     x          2
-#&gt; </span><span style='color: #555555;'>3</span><span> c     x          3
-#&gt; </span><span style='color: #555555;'>4</span><span> a     y          4
-#&gt; </span><span style='color: #555555;'>5</span><span> b     y          5
-#&gt; </span><span style='color: #555555;'>6</span><span> c     y          6</div></span></pre>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     x          1
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> b     x          2
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> c     x          3
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> a     y          4
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> b     y          5
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> c     y          6</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

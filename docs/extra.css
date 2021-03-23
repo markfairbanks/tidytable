@@ -1,6 +1,3 @@
-#logo {
-    background-color: white;
-}
 /*
 .navbar {
     box-shadow: 0 1px 8px rgba(0,0,0,0.3) !important;
@@ -43,6 +40,9 @@ code span, pre span{
 }
 code a, pre a {
     white-space: nowrap;
+}
+#logo {
+    background-color: white;
 }
 /*h1, .h1, h1 > code, .h1>code,
 h2, .h2, h2 > code, .h2>code,

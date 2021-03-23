@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9.9</span>
       </span>
     </div>
 
@@ -172,36 +172,36 @@
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_split.</span><span class='op'>(</span><span class='va'>c</span>, <span class='va'>d</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [[1]]
-#&gt; <span style='color: #555555;'># tidytable [3 × 4]</span><span>
+#&gt; <span style='color: #949494;'># tidytable [3 × 4]</span><span>
 #&gt;       a     b c     d    
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     1 a     a    
-#&gt; </span><span style='color: #555555;'>2</span><span>     2     2 a     a    
-#&gt; </span><span style='color: #555555;'>3</span><span>     3     3 a     a    
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     1 a     a    
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     2 a     a    
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3     3 a     a    
 #&gt; 
 #&gt; [[2]]
-#&gt; </span><span style='color: #555555;'># tidytable [2 × 4]</span><span>
+#&gt; </span><span style='color: #949494;'># tidytable [2 × 4]</span><span>
 #&gt;       a     b c     d    
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     4     4 b     b    
-#&gt; </span><span style='color: #555555;'>2</span><span>     5     5 b     b    
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     4     4 b     b    
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     5     5 b     b    
 #&gt; </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_split.</span><span class='op'>(</span><span class='va'>c</span>, <span class='va'>d</span>, .keep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [[1]]
-#&gt; </span><span style='color: #555555;'># tidytable [3 × 2]</span><span>
+#&gt; </span><span style='color: #949494;'># tidytable [3 × 2]</span><span>
 #&gt;       a     b
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     1
-#&gt; </span><span style='color: #555555;'>2</span><span>     2     2
-#&gt; </span><span style='color: #555555;'>3</span><span>     3     3
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     1
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     2
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3     3
 #&gt; 
 #&gt; [[2]]
-#&gt; </span><span style='color: #555555;'># tidytable [2 × 2]</span><span>
+#&gt; </span><span style='color: #949494;'># tidytable [2 × 2]</span><span>
 #&gt;       a     b
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     4     4
-#&gt; </span><span style='color: #555555;'>2</span><span>     5     5
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     4     4
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     5     5
 #&gt; </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
