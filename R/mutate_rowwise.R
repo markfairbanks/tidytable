@@ -24,16 +24,14 @@ mutate_rowwise. <- function(.df, ...) {
 
 #' @export
 mutate_rowwise..data.frame <- function(.df, ...) {
-
   .df <- as_tidytable(.df)
 
   dots <- enquos(...)
-
   if (length(dots) == 0) return(.df)
 
-  # Need to clean dots before .rowwise_id is added
+  # Need to prep expressions before .rowwise_id is added
   # Otherwise c_across.(cols = everything()) will grab .rowwise_id
-  dots <- clean_exprs(dots, .df)
+  dots <- prep_exprs(dots, .df)
 
   .df <- mutate.(.df, .rowwise_id = .I)
 

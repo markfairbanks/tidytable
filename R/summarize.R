@@ -38,14 +38,13 @@ summarize. <- function(.df, ..., .by = NULL, .sort = FALSE) {
 
 #' @export
 summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE) {
-
   .df <- as_tidytable(.df)
 
   dots <- enquos(...)
 
   mask <- build_data_mask(dots)
 
-  dots <- clean_exprs(dots, .df)
+  dots <- prep_exprs(dots, .df)
 
   .by <- select_vec_chr(.df, {{ .by }})
 

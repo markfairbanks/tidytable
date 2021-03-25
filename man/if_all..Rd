@@ -12,7 +12,7 @@ if_any.(.cols = everything(), .fns = NULL, ...)
 \arguments{
 \item{.cols}{Selection of columns}
 
-\item{.fns}{Function to create conditions}
+\item{.fns}{Function to create filter conditions}
 
 \item{...}{Other arguments passed to the function}
 }

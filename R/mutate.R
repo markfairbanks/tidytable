@@ -42,7 +42,7 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
 
   mask <- build_data_mask(dots)
 
-  dots <- clean_exprs(dots, .df)
+  dots <- prep_exprs(dots, .df)
 
   .by <- enquo(.by)
 
@@ -50,7 +50,6 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
     dots_names <- names(dots)
 
     for (i in seq_along(dots)) {
-
       .col_name <- dots_names[[i]]
       .val <- dots[[i]]
 

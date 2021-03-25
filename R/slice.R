@@ -55,7 +55,7 @@ slice..data.frame <- function(.df, ..., .by = NULL) {
 
   mask <- build_data_mask(dots)
 
-  dots <- clean_exprs(dots, .df)
+  dots <- prep_exprs(dots, .df)
 
   .by <- enquo(.by)
 
@@ -109,7 +109,7 @@ slice_head..data.frame <- function(.df, n = 5, .by = NULL) {
 
   mask <- build_data_mask(n)
 
-  n <- clean_expr(n)
+  n <- prep_expr(n)
 
   .by <- select_vec_chr(.df, {{ .by }})
 
@@ -154,7 +154,7 @@ slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
 
   mask <- build_data_mask(n)
 
-  n <- clean_expr(n)
+  n <- prep_expr(n)
 
   .by <- select_vec_chr(.df, {{ .by }})
 

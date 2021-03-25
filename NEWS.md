@@ -1,5 +1,8 @@
 # tidytable 0.5.10 (in development)
 
+#### New functions
+* `if_all.()`/`if_any.()`
+
 #### Functionality improvements
 * The following tidyverse functions are now automatically converted to their tidytable equivalents when
 used inside of tidytable's mutate/arrange/filter/summarize/slice.

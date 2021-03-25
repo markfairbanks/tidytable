@@ -29,7 +29,7 @@ arrange..data.frame <- function(.df, ...) {
 
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
-  dots <- clean_exprs(dots, .df)
+  dots <- prep_exprs(dots, .df)
 
   i <- expr(order(!!!dots))
 

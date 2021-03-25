@@ -33,59 +33,6 @@ build_data_mask <- function(x, ...) {
   new_data_mask(env(get_env(x), !!!dots))
 }
 
-# Allows use of functions like n()/n.() and c_across()/c_across.()
-# General idea follows dt_squash found here: https://github.com/tidyverse/dtplyr/blob/master/R/tidyeval.R
-clean_exprs <- function(x, data) {
-  if (is.list(x)) {
-    lapply(x, clean_expr, data)
-  } else {
-    clean_expr(x, data)
-  }
-}
-
-clean_expr <- function(x, data) {
-  if (is_quosure(x)) {
-    x <- get_expr(x)
-  }
-
-  if (is_symbol(x) || is_atomic(x) || is_null(x)) {
-    x
-  } else if (is_call(x, "n.") || is_call(x, "n")) {
-    expr(.N)
-  } else if (is_call(x, "desc.") || is_call(x, "desc")) {
-    x[[1]] <- sym("-")
-    x
-  } else if (is_call(x, "row_number.") || is_call(x, "row_number")) {
-    expr(1:.N)
-  } else if (is_call(x, "ifelse") || is_call(x, "if_else")) {
-    x[[1]] <- expr(ifelse.)
-    x
-  } else if (is_call(x, "case_when")) {
-    x[[1]] <- expr(case_when.)
-    x
-  } else if (is_call(x, "replace_na")) {
-    x[[1]] <- expr(replace_na.)
-    x
-  } else if (is_call(x, "c_across.") || is_call(x, "c_across")) {
-    call <- match.call(tidytable::c_across., x, expand.dots = FALSE)
-    cols <- call$cols %||% expr(everything())
-    cols <- select_vec_sym(data, !!cols)
-    call2("vec_c", !!!cols, .ns = "vctrs")
-  } else if (is_call(x, "if_all.") || is_call(x, "if_any.")) {
-    call <- match.call(tidytable::if_all., x, expand.dots = FALSE)
-    if (is.null(call$.fns)) return(TRUE)
-    .cols <- call$.cols %||% expr(everything())
-    .cols <- select_vec_sym(data, !!.cols)
-    .fn <- as_function(eval_tidy(call$.fns))
-    call_list <- map.(.cols, ~ call2(.fn, .x, call$...))
-    reduce_fn <- if (is_call(x, "if_all.")) "&" else "|"
-    call_reduce(call_list, reduce_fn)
-  } else {
-    x[-1] <- lapply(x[-1], clean_expr, data)
-    x
-  }
-}
-
 # Repair names of a data.table
 df_name_repair <- function(.df, .name_repair = "unique") {
   names(.df) <- vec_as_names(

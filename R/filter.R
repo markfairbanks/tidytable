@@ -37,7 +37,7 @@ filter..data.frame <- function(.df, ..., .by = NULL) {
 
   mask <- build_data_mask(dots)
 
-  dots <- clean_exprs(dots, .df)
+  dots <- prep_exprs(dots, .df)
 
   i <- expr(Reduce('&', list(!!!dots)))
 
