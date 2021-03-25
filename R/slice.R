@@ -71,7 +71,7 @@ slice..data.frame <- function(.df, ..., .by = NULL) {
 
     .by <- select_vec_chr(.df, !!.by)
 
-    slice_call <- quo(
+    slice_call <- expr(
       {.rows = c(!!!dots);
       .rows = .rows[data.table::between(.rows, -.N, .N)];
       vctrs::vec_slice(.SD, .rows)}

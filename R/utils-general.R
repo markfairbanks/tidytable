@@ -6,13 +6,11 @@ shallow <- function(x) {
 
 # Create a call to data.table subset "[" (i position)
 dt_call2_i <- function(data, i = NULL, .by = NULL, ...) {
-  i <- quo_squash(i)
   call2("[", data, i)
 }
 
 # Create a call to data.table subset "[" (j position)
 dt_call2_j <- function(data, j = NULL, .by = NULL, ...) {
-  j <- quo_squash(j)
   dt_expr <- call2("[", data, , j, by = .by, ...)
   call2("[", dt_expr)
 }
