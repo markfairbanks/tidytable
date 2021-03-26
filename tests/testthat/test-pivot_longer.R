@@ -177,6 +177,16 @@ test_that("can pivot to multiple measure cols", {
   expect_equal(out$id, c("3", "4"))
 })
 
+test_that("balanced data can have different column order", {
+  test_df <- tidytable(x_3 = 3, x_4 = 4, y_4 = 4, y_3 = 3)
+
+  out <- test_df %>%
+    pivot_longer.(names_to = c(".value", "id"), names_sep = "_")
+
+  expect_named(out, c("id", "x", "y"))
+  expect_equal(out$id, c("3", "4"))
+})
+
 test_that("errors on unbalanced data", {
   test_df <- tidytable(x_3 = 3, x_4 = 4, y_5 = 5, y_6 = 6)
 

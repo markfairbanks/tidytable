@@ -102,6 +102,7 @@ pivot_longer..data.frame <- function(.df,
 
     v_fct <- factor(.value, levels = unique(.value))
     measure_vars <- split(measure_vars, v_fct)
+    measure_vars <- map.(measure_vars, f_sort)
     values_to <- names(measure_vars)
     names(measure_vars) <- NULL
 
@@ -109,12 +110,19 @@ pivot_longer..data.frame <- function(.df,
       variable_name <- names_to[!names_to == ".value"]
 
       .value_ids <- split(names_to_setup[[variable_name]], v_fct)
+
+      # .value_id is the .value_ids to compare all the rest to
       .value_id <- .value_ids[[1]]
+
+      # .value_ids should only be the remaning ids.
+      # They also need to be sorted so balanced data can have different column order
+      .value_ids <- .value_ids[-1]
+      .value_ids <- map.(.value_ids, f_sort)
 
       # Make sure data is "balanced"
       # https://github.com/Rdatatable/data.table/issues/2575
       # The list passed to measure.vars also needs the same number of column names per element
-      equal_ids <- map_lgl.(.value_ids[-1], ~ isTRUE(all.equal(.value_id, .x)))
+      equal_ids <- map_lgl.(.value_ids, ~ isTRUE(all.equal(.value_id, .x)))
       equal_ids <- all(equal_ids)
 
       if (equal_ids) {
