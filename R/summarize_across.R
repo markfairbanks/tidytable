@@ -16,9 +16,11 @@
 #' @export
 #'
 #' @examples
-#' test_df <- data.table(a = 1:3,
-#'                       b = 4:6,
-#'                       z = c("a", "a", "b"))
+#' test_df <- data.table(
+#'   a = 1:3,
+#'   b = 4:6,
+#'   z = c("a", "a", "b")
+#' )
 #'
 #' # Pass a single function
 #' test_df %>%
@@ -46,34 +48,27 @@
 #'                          max = ~ max(.x)),
 #'                     .by = z,
 #'                     .names = "{.col}_test_{.fn}")
-summarize_across. <- function(.df, .cols = everything(), .fns, ...,
+summarize_across. <- function(.df, .cols = everything(), .fns = NULL, ...,
                               .by = NULL, .names = NULL) {
   UseMethod("summarize_across.")
 }
 
 #' @export
-summarize_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
+summarize_across..data.frame <- function(.df, .cols = everything(), .fns = NULL, ...,
                                          .by = NULL, .names = NULL) {
-
   .df <- as_tidytable(.df)
 
   .cols <- select_vec_chr(.df, {{ .cols }})
 
-  data_env <- env(quo_get_env(enquo(.fns)), .df = .df)
-
   dots <- enquos(...)
-
   if (length(.cols) == 0) return(.df)
 
   .fun <- enexpr(.fns)
+  if (is_null(.fun)) return(.df)
 
   call_list <- across_calls(.fns, .fun, .cols, .names, dots)
 
-  result_expr <- reset_expr(
-    tidytable::summarize.(.df, !!!call_list, .by = {{ .by }})
-  )
-
-  eval_tidy(result_expr, new_data_mask(data_env), caller_env())
+  summarize.(.df, !!!call_list, .by = {{ .by }})
 }
 
 #' @export

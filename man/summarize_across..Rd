@@ -8,7 +8,7 @@
 summarize_across.(
   .df,
   .cols = everything(),
-  .fns,
+  .fns = NULL,
   ...,
   .by = NULL,
   .names = NULL
@@ -17,7 +17,7 @@ summarize_across.(
 summarise_across.(
   .df,
   .cols = everything(),
-  .fns,
+  .fns = NULL,
   ...,
   .by = NULL,
   .names = NULL
@@ -43,9 +43,11 @@ when a list is used for \code{.fns}.}
 Summarize multiple columns simultaneously
 }
 \examples{
-test_df <- data.table(a = 1:3,
-                      b = 4:6,
-                      z = c("a", "a", "b"))
+test_df <- data.table(
+  a = 1:3,
+  b = 4:6,
+  z = c("a", "a", "b")
+)
 
 # Pass a single function
 test_df \%>\%

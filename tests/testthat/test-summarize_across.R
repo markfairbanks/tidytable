@@ -62,7 +62,7 @@ test_that("can pass list of named functions", {
   result_df <- test_df %>%
     summarize_across.(c(a, b), list(avg = mean, max = max))
 
-  expect_named(result_df, c("a_avg", "b_avg", "a_max", "b_max"))
+  expect_named(result_df, c("a_avg", "a_max", "b_avg", "b_max"))
   expect_equal(result_df$a_avg, 2)
   expect_equal(result_df$b_avg, 5)
   expect_equal(result_df$a_max, 3)
@@ -71,7 +71,7 @@ test_that("can pass list of named functions", {
   result_df <- test_df %>%
     summarize_across.(c(a, b), list(avg = ~ mean(.x), max = ~ max(.x)))
 
-  expect_named(result_df, c("a_avg", "b_avg", "a_max", "b_max"))
+  expect_named(result_df, c("a_avg", "a_max", "b_avg", "b_max"))
   expect_equal(result_df$a_avg, 2)
   expect_equal(result_df$b_avg, 5)
   expect_equal(result_df$a_max, 3)
@@ -84,7 +84,7 @@ test_that("can pass list of functions with no names", {
   result_df <- test_df %>%
     summarize_across.(c(a, b), list(mean, max))
 
-  expect_named(result_df, c("a_1", "b_1", "a_2", "b_2"))
+  expect_named(result_df, c("a_1", "a_2", "b_1", "b_2"))
   expect_equal(result_df$a_1, 2)
   expect_equal(result_df$b_1, 5)
   expect_equal(result_df$a_2, 3)
@@ -97,7 +97,7 @@ test_that("can pass list of functions with some names", {
   result_df <- test_df %>%
     summarize_across.(c(a, b), list(avg = mean, max))
 
-  expect_named(result_df, c("a_avg", "b_avg", "a_2", "b_2"))
+  expect_named(result_df, c("a_avg", "a_2", "b_avg", "b_2"))
   expect_equal(result_df$a_avg, 2)
   expect_equal(result_df$b_avg, 5)
   expect_equal(result_df$a_2, 3)
@@ -110,7 +110,7 @@ test_that("can pass list of named functions with .by and .names", {
   result_df <- test_df %>%
     summarize_across.(c(a, b), list(avg = mean, max = max), .by = z, .names = "{.fn}_{.col}")
 
-  expect_named(result_df, c("z", "avg_a", "avg_b", "max_a", "max_b"))
+  expect_named(result_df, c("z", "avg_a", "max_a", "avg_b", "max_b"))
   expect_equal(result_df$avg_a, c(1.5, 3))
   expect_equal(result_df$avg_b, c(4.5, 6))
   expect_equal(result_df$max_a, c(2, 3))
@@ -126,7 +126,7 @@ test_that("can pass list of named functions with .by and .names using fn and col
   result_df <- test_df %>%
     summarize_across.(c(a, b), list(avg = mean, max = max), .by = z, .names = "{fn}_{col}")
 
-  expect_named(result_df, c("z", "avg_a", "avg_b", "max_a", "max_b"))
+  expect_named(result_df, c("z", "avg_a", "max_a", "avg_b", "max_b"))
   expect_equal(result_df$avg_a, c(1.5, 3))
   expect_equal(result_df$avg_b, c(4.5, 6))
   expect_equal(result_df$max_a, c(2, 3))
