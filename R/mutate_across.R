@@ -17,9 +17,10 @@
 #'
 #' @examples
 #' test_df <- data.table(
-#'   x = c(1,1,1),
-#'   y = c(2,2,2),
-#'   z = c("a", "a", "b"))
+#'   x = rep(1, 3),
+#'   y = rep(2, 3),
+#'   z = c("a", "a", "b")
+#' )
 #'
 #' test_df %>%
 #'   mutate_across.(where(is.numeric), as.character)
@@ -39,32 +40,27 @@
 #'     .fns = list(new = ~ .x * 2, another = ~ .x + 7),
 #'     .names = "{.col}_test_{.fn}"
 #'   )
-mutate_across. <- function(.df, .cols = everything(), .fns, ...,
+mutate_across. <- function(.df, .cols = everything(), .fns = NULL, ...,
                            .by = NULL, .names = NULL) {
   UseMethod("mutate_across.")
 }
 
 #' @export
-mutate_across..data.frame <- function(.df, .cols = everything(), .fns, ...,
+mutate_across..data.frame <- function(.df, .cols = everything(), .fns = NULL, ...,
                                       .by = NULL, .names = NULL) {
-
   .df <- as_tidytable(.df)
 
   .cols <- select_vec_chr(.df, {{ .cols }})
 
-  data_env <- env(quo_get_env(enquo(.fns)), .df = .df)
-
   dots <- enquos(...)
-
   if (length(.cols) == 0) return(.df)
 
   .fun <- enexpr(.fns)
+  if (is_null(.fun)) return(.df)
 
   call_list <- across_calls(.fns, .fun, .cols, .names, dots)
 
-  result_expr <- reset_expr(
-    tidytable::mutate.(.df, !!!call_list, .by = {{ .by }})
-  )
+  dt_expr <- call2("mutate.", .df, !!!call_list, .by = enquo(.by), .ns = "tidytable")
 
-  eval_tidy(result_expr, new_data_mask(data_env), caller_env())
+  eval_tidy(dt_expr, env = caller_env())
 }

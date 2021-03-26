@@ -4,7 +4,14 @@
 \alias{mutate_across.}
 \title{Mutate multiple columns simultaneously}
 \usage{
-mutate_across.(.df, .cols = everything(), .fns, ..., .by = NULL, .names = NULL)
+mutate_across.(
+  .df,
+  .cols = everything(),
+  .fns = NULL,
+  ...,
+  .by = NULL,
+  .names = NULL
+)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -27,9 +34,10 @@ Mutate multiple columns simultaneously.
 }
 \examples{
 test_df <- data.table(
-  x = c(1,1,1),
-  y = c(2,2,2),
-  z = c("a", "a", "b"))
+  x = rep(1, 3),
+  y = rep(2, 3),
+  z = c("a", "a", "b")
+)
 
 test_df \%>\%
   mutate_across.(where(is.numeric), as.character)
