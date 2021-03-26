@@ -60,3 +60,29 @@ reset_expr <- function(express) {
 is_anon_fun <- function(fun) {
   is.null(packageName(get_env(fun))) || is_bare_formula(fun)
 }
+
+# Generate expression from function call
+fn_to_expr <- function(.fn, .col, ...) {
+  if (is_symbol(.fn) || is_string(.fn) || is_call(.fn, "function")) {
+    dots <- enexprs(...)
+    call2(.fn, sym(.col), !!!dots)
+  } else if (is_call(.fn, "~")) {
+    call <- f_rhs(.fn)
+    call <- replace_dot(call, sym(.col))
+    call
+  } else {
+    abort(".fns needs to be a list, function name, or formula")
+  }
+}
+
+# Replace occurrence of . or .x in rlang lambdas
+replace_dot <- function(call, sym) {
+  if (is_symbol(call, ".") || is_symbol(call, ".x")) {
+    sym
+  } else if (is_call(call)) {
+    call[] <- lapply(call, replace_dot, sym)
+    call
+  } else {
+    call
+  }
+}
