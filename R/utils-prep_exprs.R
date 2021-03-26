@@ -43,8 +43,7 @@ prep_expr <- function(x, data) {
     if (is.null(call$.fns)) return(TRUE)
     .cols <- call$.cols %||% quote(everything())
     .cols <- select_vec_sym(data, !!.cols)
-    .fn <- as_function(eval_tidy(call$.fns))
-    call_list <- map.(.cols, ~ call2(.fn, .x, call$...))
+    call_list <- map.(.cols, ~ fn_to_expr(call$.fns, .x))
     reduce_fn <- if (is_call(x, "if_all.")) "&" else "|"
     call_reduce(call_list, reduce_fn)
   } else {

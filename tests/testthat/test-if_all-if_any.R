@@ -21,3 +21,42 @@ test_that("can use if_any", {
 
   expect_equal(nrow(out), 0)
 })
+
+test_that("can filter using another column", {
+  test_df <- tidytable(x = 1:3, y = rep(3, 3))
+
+  out <- test_df %>% filter.(if_any.(x, ~ .x == y))
+
+  expect_equal(out$x, 3)
+})
+
+test_that("can use a bare function", {
+  test_df <- tidytable(x = c(1:2, NA), y = rep(3, 3))
+
+  out <- test_df %>% filter.(if_any.(x, is.na))
+
+  expect_equal(out$y, 3)
+})
+
+test_that("can filter using a pre-defined variable", {
+  test_df <- tidytable(x = 1:3, y = rep(3, 3))
+
+  filter_val <- 3
+
+  out <- test_df %>% filter.(if_any.(x, ~ .x == filter_val))
+
+  expect_equal(out$x, 3)
+})
+
+test_that("can be used in a custom function", {
+  test_df <- tidytable(x = 1:3, y = rep(3, 3))
+
+  filter_if_any <- function(data, cols, filter_val) {
+    data %>%
+      filter.(if_any.({{ cols }}, ~ .x == filter_val))
+  }
+
+  out <- test_df %>% filter_if_any(x, 3)
+
+  expect_equal(out$x, 3)
+})
