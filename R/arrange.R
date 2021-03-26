@@ -19,6 +19,9 @@
 #'
 #' test_df %>%
 #'   arrange.(c, -a)
+#'
+#' test_df %>%
+#'   arrange.(c, desc(a))
 arrange. <- function(.df, ...) {
   UseMethod("arrange.")
 }
@@ -26,14 +29,14 @@ arrange. <- function(.df, ...) {
 #' @export
 arrange..data.frame <- function(.df, ...) {
   .df <- as_tidytable(.df)
+  .df <- copy(.df)
 
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
   dots <- prep_exprs(dots, .df)
 
-  i <- expr(order(!!!dots))
-
-  dt_expr <- dt_call2_i(.df, i)
+  dt_expr <- dt_call2("setorder", .df, !!!dots)
+  dt_expr <- call2("[", dt_expr)
 
   eval_tidy(dt_expr)
 }

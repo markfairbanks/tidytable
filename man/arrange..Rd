@@ -26,4 +26,7 @@ test_df <- data.table(
 
 test_df \%>\%
   arrange.(c, -a)
+
+test_df \%>\%
+  arrange.(c, desc(a))
 }
