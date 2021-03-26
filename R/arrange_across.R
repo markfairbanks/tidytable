@@ -4,7 +4,7 @@
 #'
 #' @param .df A data.table or data.frame
 #' @param .cols vector `c()` of unquoted column names. `tidyselect` compatible.
-#' @param .fns Function to apply. If `desc.` it arranges in descending order
+#' @param .fns Function to apply. If `desc` it arranges in descending order
 #'
 #' @export
 #'
@@ -16,27 +16,34 @@
 #'
 #' test_df %>%
 #'   arrange_across.(a, desc.)
-arrange_across. <- function(.df, .cols = everything(), .fns) {
+arrange_across. <- function(.df, .cols = everything(), .fns = NULL) {
   UseMethod("arrange_across.")
 }
 
 #' @export
-arrange_across..data.frame <- function(.df, .cols = everything(), .fns) {
+arrange_across..data.frame <- function(.df, .cols = everything(), .fns = NULL) {
   .df <- as_tidytable(.df)
+  .df <- copy(.df)
 
   .cols <- select_vec_chr(.df, {{ .cols }})
-
   if (length(.cols) == 0) return(.df)
 
-  if (missing(.fns)) {
-    .order <- 1
-  } else if (quo_text(enexpr(.fns)) %in% c("desc", "desc.")){
-    .order <- -1
-  } else {
-    abort(".fns must be either missing or desc.")
-  }
+  .fns <- enexpr(.fns)
 
-  .df <- copy(.df)
+  if (is_null(.fns)) {
+    .order <- 1
+  } else if (is_symbol(.fns, c("desc", "desc."))) {
+    .order <- -1
+  } else if (is_call(.fns, "~")) {
+    .fns <- f_rhs(.fns)
+    if (is_call(.fns, c("desc", "desc."))) {
+      .order <- -1
+    } else {
+      abort(".fns must be either NULL, desc, or ~ desc(.x)")
+    }
+  } else {
+    abort(".fns must be either NULL, desc, or ~ desc(.x)")
+  }
 
   setorderv(.df, cols = .cols, order = .order)
 

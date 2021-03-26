@@ -4,14 +4,14 @@
 \alias{arrange_across.}
 \title{Arrange by a selection of variables}
 \usage{
-arrange_across.(.df, .cols = everything(), .fns)
+arrange_across.(.df, .cols = everything(), .fns = NULL)
 }
 \arguments{
 \item{.df}{A data.table or data.frame}
 
 \item{.cols}{vector \code{c()} of unquoted column names. \code{tidyselect} compatible.}
 
-\item{.fns}{Function to apply. If \code{desc.} it arranges in descending order}
+\item{.fns}{Function to apply. If \code{desc} it arranges in descending order}
 }
 \description{
 Arrange all rows in either ascending or descending order by a selection of variables.
