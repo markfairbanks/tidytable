@@ -254,11 +254,11 @@ can easily mix `tidytable` syntax with `data.table` syntax:
 df <- data.table(x = 1:3, y = 4:6, z = c("a", "a", "b"))
 
 df %>%
-  dt(, list(x, y, z)) %>%
+  dt(, .(x, y, z)) %>%
   dt(x < 4 & y > 1) %>%
   dt(order(x, y)) %>%
   dt(, double_x := x * 2) %>%
-  dt(, list(avg_x = mean(x)), by = z)
+  dt(, .(avg_x = mean(x)), by = z)
 #> # tidytable [2 × 2]
 #>   z     avg_x
 #>   <chr> <dbl>
