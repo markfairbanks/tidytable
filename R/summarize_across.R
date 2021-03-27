@@ -58,17 +58,20 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns = NULL,
                                          .by = NULL, .names = NULL) {
   .df <- as_tidytable(.df)
 
-  .cols <- select_vec_chr(.df, {{ .cols }})
+  .by <- enquo(.by)
+
+  .cols <- list(enquo(.cols), quo(-!!.by))
+  .cols <- select_dots_chr(.df, !!!.cols)
+  if (length(.cols) == 0) return(.df)
 
   dots <- enquos(...)
-  if (length(.cols) == 0) return(.df)
 
   .fun <- enexpr(.fns)
   if (is_null(.fun)) return(.df)
 
   call_list <- across_calls(.fns, .fun, .cols, .names, dots)
 
-  summarize.(.df, !!!call_list, .by = {{ .by }})
+  summarize.(.df, !!!call_list, .by = !!.by)
 }
 
 #' @export

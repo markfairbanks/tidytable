@@ -1,4 +1,4 @@
-test_that("mutate_across.(): .cols works with is.numeric", {
+test_that(".cols works with is.numeric", {
   df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
     mutate_across.(where(is.numeric), function(.x) .x + 1)
@@ -7,7 +7,7 @@ test_that("mutate_across.(): .cols works with is.numeric", {
   expect_equal(df$end_x, c(3,3,3))
 })
 
-test_that("mutate_across.(): modify-by-reference doesn't occur", {
+test_that("modify-by-reference doesn't occur", {
   df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   df %>%
     mutate_across.(where(is.numeric), ~ .x + 1)
@@ -19,7 +19,7 @@ test_that("mutate_across.(): modify-by-reference doesn't occur", {
   expect_equal(df$end_x, c(2,2,2))
 })
 
-test_that("mutate_across(): .cols works with is.numeric with data.frame", {
+test_that(".cols works with is.numeric with data.frame", {
   df <- data.frame(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
     mutate_across.(where(is.numeric), function(.x) .x + 1)
@@ -28,7 +28,7 @@ test_that("mutate_across(): .cols works with is.numeric with data.frame", {
   expect_equal(df$end_x, c(3,3,3))
 })
 
-test_that("mutate_across(): .cols works with is.character", {
+test_that(".cols works with is.character", {
   df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
     mutate_across.(where(is.character), function(.x) paste0(.x, "_append"))
@@ -37,7 +37,7 @@ test_that("mutate_across(): .cols works with is.character", {
   expect_equal(df$z, c("a_append", "a_append", "b_append"))
 })
 
-test_that("mutate_across() works with newly named columns", {
+test_that("works with newly named columns", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
     mutate_across.(c(x:y), list(new = function(.x) .x + 1))
@@ -47,7 +47,7 @@ test_that("mutate_across() works with newly named columns", {
   expect_equal(df$y_new, c(3,3,3))
 })
 
-test_that("mutate_across() works with newly named columns using .names with single .fn", {
+test_that("works with newly named columns using .names with single .fn", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
     mutate_across.(c(x:y), ~ .x + 1, .names = "new_{.col}")
@@ -57,7 +57,7 @@ test_that("mutate_across() works with newly named columns using .names with sing
   expect_equal(df$new_y, c(3,3,3))
 })
 
-test_that("mutate_across() works with newly named columns using .names with single .fn using col", {
+test_that("works with newly named columns using .names with single .fn using col", {
   # This test will need to be removed when {col} is deprecated
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
@@ -68,7 +68,7 @@ test_that("mutate_across() works with newly named columns using .names with sing
   expect_equal(df$new_y, c(3,3,3))
 })
 
-test_that("mutate_across() works with newly named columns using .names", {
+test_that("works with newly named columns using .names", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
     mutate_across.(c(x:y), list(new = function(.x) .x + 1), .names = "{.fn}_{.col}")
@@ -78,7 +78,7 @@ test_that("mutate_across() works with newly named columns using .names", {
   expect_equal(df$new_y, c(3,3,3))
 })
 
-test_that("mutate_across() works with newly named columns using .names with using fn and col", {
+test_that("works with newly named columns using .names with using fn and col", {
   # This test will need to be removed when {col} and {fn} is deprecated
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
@@ -89,7 +89,7 @@ test_that("mutate_across() works with newly named columns using .names with usin
   expect_equal(df$new_y, c(3,3,3))
 })
 
-test_that("mutate_across() works with newly named columns using .names w/ autonaming", {
+test_that("works with newly named columns using .names w/ autonaming", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
     mutate_across.(c(x:y), list(new = ~ .x + 1, ~ .x + 2), .names = "{.col}_{.fn}_stuff")
@@ -102,7 +102,7 @@ test_that("mutate_across() works with newly named columns using .names w/ autona
 })
 
 # twiddle testing ----------------------------
-test_that("mutate_across.() works with twiddle", {
+test_that("works with twiddle", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   anon_df <- df %>%
     mutate_across.(c(x:y), function(.x) .x + 1)
@@ -113,8 +113,8 @@ test_that("mutate_across.() works with twiddle", {
   expect_equal(anon_df, twiddle_df)
 })
 
-test_that("mutate_across() works with .by, doesn't modify-by-reference", {
-  test_df <- data.table::data.table(
+test_that("works with .by, doesn't modify-by-reference", {
+  test_df <- data.table(
     x = c(1,2,3),
     y = c(4,5,6),
     z = c("a","a","b"))
@@ -128,8 +128,24 @@ test_that("mutate_across() works with .by, doesn't modify-by-reference", {
   expect_equal(test_df$x, c(1,2,3))
 })
 
-test_that("mutate_across.() works with .by enhanced selection", {
-  test_df <- data.table::data.table(
+test_that(".cols doesn't use .by columns", {
+  test_df <- data.table(
+    x = c(1,2,3),
+    y = c(4,5,6),
+    z = c("a","a","b")
+  )
+
+  results_df <- test_df %>%
+    mutate_across.(everything(), ~ mean(.x), .by = z)
+
+  expect_named(results_df, c("x", "y", "z"))
+  expect_equal(results_df$x, c(1.5, 1.5, 3))
+  expect_equal(results_df$y, c(4.5, 4.5, 6))
+  expect_equal(test_df$x, c(1,2,3))
+})
+
+test_that("works with .by enhanced selection", {
+  test_df <- data.table(
     x = c(1,2,3),
     y = c(4,5,6),
     z = c("a","a","b"))

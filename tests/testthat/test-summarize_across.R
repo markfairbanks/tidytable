@@ -56,6 +56,17 @@ test_that("single function works with .by", {
   expect_equal(result_df$b, c(4.5, 6))
 })
 
+test_that(".cols doesn't use .by columns", {
+  test_df <- tidytable(a = 1:3, b = 4:6, z = c("a", "a", "b"))
+
+  result_df <- test_df %>%
+    summarize_across.(everything(), mean, na.rm = TRUE, .by = z)
+
+  expect_named(result_df, c("z", "a", "b"))
+  expect_equal(result_df$a, c(1.5, 3))
+  expect_equal(result_df$b, c(4.5, 6))
+})
+
 test_that("can pass list of named functions", {
   test_df <- tidytable(a = 1:3, b = 4:6, z = c("a", "a", "b"))
 
