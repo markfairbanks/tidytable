@@ -5,19 +5,19 @@ shallow <- function(x) {
 }
 
 # Create a call to data.table subset "[" (i position)
-dt_call2_i <- function(data, i = NULL, .by = NULL, ...) {
+call2_i <- function(data, i = NULL, .by = NULL, ...) {
   call2("[", data, i)
 }
 
 # Create a call to data.table subset "[" (j position)
-dt_call2_j <- function(data, j = NULL, .by = NULL, ...) {
+call2_j <- function(data, j = NULL, .by = NULL, ...) {
   dt_expr <- call2("[", data, , j, by = .by, ...)
   call2("[", dt_expr)
 }
 
 # Call a data.table function
 # Squashes quosures
-dt_call2 <- function(.fn, ..., .ns = "data.table") {
+call2_dt <- function(.fn, ..., .ns = "data.table") {
   call <- call2(.fn, ..., .ns = .ns)
   quo_squash(call)
 }

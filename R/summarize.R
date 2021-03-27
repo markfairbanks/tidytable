@@ -52,7 +52,7 @@ summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE) {
   output <- call2("list", !!!syms(names(dots)))
   j <- call2("{", !!!assign, output)
 
-  dt_expr <- dt_call2_j(.df, j, .by)
+  dt_expr <- call2_j(.df, j, .by)
 
   .df <- eval_tidy(dt_expr, mask, caller_env())
 

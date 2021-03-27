@@ -59,7 +59,7 @@ separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert 
 
   j <- expr(c(!!!split_calls))
 
-  dt_expr <- dt_call2_j(.df, j, .by = other_col_names)
+  dt_expr <- call2_j(.df, j, .by = other_col_names)
 
   .df <- eval_tidy(dt_expr, mask, caller_env())
 

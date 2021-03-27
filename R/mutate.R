@@ -33,7 +33,6 @@ mutate. <- function(.df, ..., .by = NULL) {
 
 #' @export
 mutate..data.frame <- function(.df, ..., .by = NULL) {
-
   .df <- as_tidytable(.df)
   .df <- shallow(.df)
 
@@ -62,7 +61,7 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
         j <- expr(!!.col_name := !!.val)
       }
 
-      dt_expr <- dt_call2_j(.df, j)
+      dt_expr <- call2_j(.df, j)
 
       .df <- eval_tidy(dt_expr, mask, caller_env())
     }
@@ -80,7 +79,7 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
       dots <- dots[!null_flag]
 
       j <- call2(":=", !!!null_dots)
-      dt_expr <- dt_call2_j(.df, j)
+      dt_expr <- call2_j(.df, j)
 
       .df <- eval_tidy(dt_expr, mask, caller_env())
     }
@@ -90,7 +89,7 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
       output <- call2("list", !!!syms(names(dots)))
       expr <- call2("{", !!!assign, output)
       j <- call2(":=", call2("c", !!!names(dots)), expr)
-      dt_expr <- dt_call2_j(.df, j, .by)
+      dt_expr <- call2_j(.df, j, .by)
 
       .df <- eval_tidy(dt_expr, mask, caller_env())
     }

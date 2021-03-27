@@ -63,7 +63,7 @@ slice..data.frame <- function(.df, ..., .by = NULL) {
 
   if (by_is_null) {
     i <- expr({.rows = c(!!!dots); .rows[data.table::between(.rows, -.N, .N)]})
-    dt_expr <- dt_call2_i(.df, i)
+    dt_expr <- call2_i(.df, i)
 
     eval_tidy(dt_expr, mask, caller_env())
   } else {
@@ -78,13 +78,13 @@ slice..data.frame <- function(.df, ..., .by = NULL) {
     )
 
     if (all(.df_names %in% .by)) {
-      dt_expr <- dt_call2_j(.df, slice_call, .by, .SDcols = .df_names)
+      dt_expr <- call2_j(.df, slice_call, .by, .SDcols = .df_names)
 
       .df <- eval_tidy(dt_expr, mask, caller_env())
 
       .df[, (.df_names) := NULL][]
     } else {
-      dt_expr <- dt_call2_j(.df, slice_call, .by)
+      dt_expr <- call2_j(.df, slice_call, .by)
 
       .df <- eval_tidy(dt_expr, mask, caller_env())
 
@@ -120,13 +120,13 @@ slice_head..data.frame <- function(.df, n = 5, .by = NULL) {
   j <- expr(head(.SD, !!n))
 
   if (all(.df_names %in% .by)) {
-    dt_expr <- dt_call2_j(.df, j, .by, .SDcols = .df_names)
+    dt_expr <- call2_j(.df, j, .by, .SDcols = .df_names)
 
     .df <- eval_tidy(dt_expr, mask, caller_env())
 
     .df[, (.df_names) := NULL][]
   } else {
-    dt_expr <- dt_call2_j(.df, j, .by)
+    dt_expr <- call2_j(.df, j, .by)
 
     .df <- eval_tidy(dt_expr, mask, caller_env())
 
@@ -165,13 +165,13 @@ slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
   j <- expr(tail(.SD, !!n))
 
   if (all(.df_names %in% .by)) {
-    dt_expr <- dt_call2_j(.df, j, .by, .SDcols = .df_names)
+    dt_expr <- call2_j(.df, j, .by, .SDcols = .df_names)
 
     .df <- eval_tidy(dt_expr, mask, caller_env())
 
     .df[, (.df_names) := NULL][]
   } else {
-    dt_expr <- dt_call2_j(.df, j, .by)
+    dt_expr <- call2_j(.df, j, .by)
 
     .df <- eval_tidy(dt_expr, mask, caller_env())
 

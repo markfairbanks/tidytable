@@ -27,7 +27,6 @@ filter. <- function(.df, ..., .by = NULL) {
 
 #' @export
 filter..data.frame <- function(.df, ..., .by = NULL) {
-
   .df <- as_tidytable(.df)
 
   .by <- enquo(.by)
@@ -42,7 +41,7 @@ filter..data.frame <- function(.df, ..., .by = NULL) {
   i <- expr(Reduce('&', list(!!!dots)))
 
   if (quo_is_null(.by)) {
-    dt_expr <- dt_call2_i(.df, i)
+    dt_expr <- call2_i(.df, i)
 
     .df <- eval_tidy(dt_expr, mask, caller_env())
   } else {
@@ -52,7 +51,7 @@ filter..data.frame <- function(.df, ..., .by = NULL) {
 
     j <- expr(.SD[!!i])
 
-    dt_expr <- dt_call2_j(.df, j, .by)
+    dt_expr <- call2_j(.df, j, .by)
 
     .df <- eval_tidy(dt_expr, mask, caller_env())
 

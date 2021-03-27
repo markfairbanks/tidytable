@@ -36,7 +36,7 @@ arrange..data.frame <- function(.df, ...) {
 
   i <- expr(order(!!!dots))
 
-  dt_expr <- dt_call2_i(.df, i)
+  dt_expr <- call2_i(.df, i)
 
   eval_tidy(dt_expr)
 }
