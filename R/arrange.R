@@ -29,14 +29,14 @@ arrange. <- function(.df, ...) {
 #' @export
 arrange..data.frame <- function(.df, ...) {
   .df <- as_tidytable(.df)
-  .df <- copy(.df)
 
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
   dots <- prep_exprs(dots, .df)
 
-  dt_expr <- dt_call2("setorder", .df, !!!dots)
-  dt_expr <- call2("[", dt_expr)
+  i <- expr(order(!!!dots))
+
+  dt_expr <- dt_call2_i(.df, i)
 
   eval_tidy(dt_expr)
 }
