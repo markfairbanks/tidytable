@@ -1,24 +1,26 @@
-# tidytable 0.5.10 (in development)
+# tidytable 0.6.0 (in development)
 
 #### New functions
 * `if_all.()`/`if_any.()`
 
 #### Functionality improvements
-* The following tidyverse functions are now automatically converted to their tidytable equivalents when
+* The following tidyverse functions are now automatically converted to their tidytable `verb.()` equivalents when
 used inside of tidytable's mutate/arrange/filter/summarize/slice.
   + Functions that previously failed but now work:
-    - `n()` --> `n.()`
-    - `row_number()` --> `row_number.()`
-    - `c_across()` --> `c_across.()`
+    - `n()`
+    - `row_number()`
+    - `c_across()`
   + Functions that previously worked with tidytable but are now converted to their faster tidytable equivalents:
-    - `if_else()`/`ifelse()` --> `ifelse.()`
-    - `case_when()` --> `case_when.()`
-    - `desc()` --> `desc.()`
-    - `replace_na()` --> `replace_na.()`
-* `replace_na.()`: Now can replace `NULL` values in list-columns
+    - `if_else()`/`ifelse()`
+    - `case_when()`
+    - `desc()`
+    - `replace_na()`
+* `replace_na.()`: Can now replace `NULL` values in list-columns
 
 #### Functions with notable speed improvements
+* `mutate_across.()`
 * `mutate_rowwise.()` when `c_across.()` is used
+* `slice.()`/`slice_head.()`/`slice_tail.()`/`slice_min.()`/`slice_max.()`
 
 # tidytable 0.5.9
 

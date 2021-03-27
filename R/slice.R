@@ -47,7 +47,6 @@ slice. <- function(.df, ..., .by = NULL) {
 
 #' @export
 slice..data.frame <- function(.df, ..., .by = NULL) {
-
   .df <- as_tidytable(.df)
 
   dots <- enquos(...) # Needed so .N works
@@ -55,7 +54,7 @@ slice..data.frame <- function(.df, ..., .by = NULL) {
 
   mask <- build_data_mask(dots)
 
-  dots <- prep_exprs(dots, .df)
+  dots <- prep_exprs(dots)
 
   .by <- enquo(.by)
 
@@ -67,30 +66,23 @@ slice..data.frame <- function(.df, ..., .by = NULL) {
 
     eval_tidy(dt_expr, mask, caller_env())
   } else {
-    .df_names <- names(.df)
+    col_order <- names(.df)
 
     .by <- select_vec_chr(.df, !!.by)
 
-    slice_call <- expr(
+    j <- expr(
       {.rows = c(!!!dots);
       .rows = .rows[data.table::between(.rows, -.N, .N)];
-      vctrs::vec_slice(.SD, .rows)}
+      .I[.rows]}
     )
 
-    if (all(.df_names %in% .by)) {
-      dt_expr <- call2_j(.df, slice_call, .by, .SDcols = .df_names)
+    dt_expr <- call2_j(.df, j, .by)
+    dt_expr <- call2("$", dt_expr, expr(V1))
+    dt_expr <- call2_i(.df, dt_expr)
 
-      .df <- eval_tidy(dt_expr, mask, caller_env())
+    .df <- eval_tidy(dt_expr, mask, caller_env())
 
-      .df[, (.df_names) := NULL][]
-    } else {
-      dt_expr <- call2_j(.df, slice_call, .by)
-
-      .df <- eval_tidy(dt_expr, mask, caller_env())
-
-      # Need to preserve original column order
-      setcolorder(.df, .df_names)[]
-    }
+    setcolorder(.df, col_order)[]
   }
 }
 
@@ -102,7 +94,6 @@ slice_head. <- function(.df, n = 5, .by = NULL) {
 
 #' @export
 slice_head..data.frame <- function(.df, n = 5, .by = NULL) {
-
   .df <- as_tidytable(.df)
 
   n <- enquo(n)
@@ -115,28 +106,21 @@ slice_head..data.frame <- function(.df, n = 5, .by = NULL) {
 
   with_by <- length(.by) > 0
 
-  .df_names <- names(.df)
+  col_order <- names(.df)
 
-  j <- expr(head(.SD, !!n))
+  j <- expr(.I[seq.int(min(!!n, .N))])
 
-  if (all(.df_names %in% .by)) {
-    dt_expr <- call2_j(.df, j, .by, .SDcols = .df_names)
+  dt_expr <- call2_j(.df, j, .by)
+  dt_expr <- call2("$", dt_expr, expr(V1))
+  dt_expr <- call2_i(.df, dt_expr)
 
-    .df <- eval_tidy(dt_expr, mask, caller_env())
+  .df <- eval_tidy(dt_expr, mask, caller_env())
 
-    .df[, (.df_names) := NULL][]
-  } else {
-    dt_expr <- call2_j(.df, j, .by)
-
-    .df <- eval_tidy(dt_expr, mask, caller_env())
-
-    if (with_by) {
-      setcolorder(.df, .df_names)[]
-    } else {
-      .df
-    }
+  if (with_by) {
+    setcolorder(.df, col_order)
   }
 
+  .df
 }
 
 #' @export
@@ -147,7 +131,6 @@ slice_tail. <- function(.df, n = 5, .by = NULL) {
 
 #' @export
 slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
-
   .df <- as_tidytable(.df)
 
   n <- enquo(n)
@@ -160,27 +143,21 @@ slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
 
   with_by <- length(.by) > 0
 
-  .df_names <- names(.df)
+  col_order <- names(.df)
 
-  j <- expr(tail(.SD, !!n))
+  j <- expr(.I[seq.int(.N - min(!!n, .N) + 1, .N)])
 
-  if (all(.df_names %in% .by)) {
-    dt_expr <- call2_j(.df, j, .by, .SDcols = .df_names)
+  dt_expr <- call2_j(.df, j, .by)
+  dt_expr <- call2("$", dt_expr, expr(V1))
+  dt_expr <- call2_i(.df, dt_expr)
 
-    .df <- eval_tidy(dt_expr, mask, caller_env())
+  .df <- eval_tidy(dt_expr, mask, caller_env())
 
-    .df[, (.df_names) := NULL][]
-  } else {
-    dt_expr <- call2_j(.df, j, .by)
-
-    .df <- eval_tidy(dt_expr, mask, caller_env())
-
-    if (with_by) {
-      setcolorder(.df, .df_names)[]
-    } else {
-      .df
-    }
+  if (with_by) {
+    setcolorder(.df, col_order)
   }
+
+  .df
 }
 
 #' @export
@@ -191,10 +168,9 @@ slice_max. <- function(.df, order_by, n = 1, .by = NULL) {
 
 #' @export
 slice_max..data.frame <- function(.df, order_by, n = 1, .by = NULL) {
-
   .df <- as_tidytable(.df)
 
-  if (missing(order_by)) stop("order_by must be supplied")
+  if (missing(order_by)) abort("order_by must be supplied")
 
   .df %>%
     arrange.(-{{ order_by }}) %>%
@@ -209,10 +185,9 @@ slice_min. <- function(.df, order_by, n = 1, .by = NULL) {
 
 #' @export
 slice_min..data.frame <- function(.df, order_by, n = 1, .by = NULL) {
-
   .df <- as_tidytable(.df)
 
-  if (missing(order_by)) stop("order_by must be supplied")
+  if (missing(order_by)) abort("order_by must be supplied")
 
   .df %>%
     arrange.({{ order_by }}) %>%
@@ -282,3 +257,5 @@ check_slice_size <- function(n, prop, .slice_fn = "check_slice_size") {
     abort("Must supply exactly one of `n` and `prop` arguments.")
   }
 }
+
+globalVariables("V1")
