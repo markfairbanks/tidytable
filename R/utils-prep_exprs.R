@@ -26,6 +26,7 @@ prep_expr <- function(x, data) {
     quote(1:.N)
   } else if (is_call(x, c("ifelse", "if_else"))) {
     x[[1]] <- quote(ifelse.)
+    names(x) <- arg_map[names(x)]
     x
   } else if (is_call(x, "case_when")) {
     x[[1]] <- quote(case_when.)
@@ -51,3 +52,8 @@ prep_expr <- function(x, data) {
     x
   }
 }
+
+arg_map <- c(
+  "yes" = "true", "no" = "false", "missing" = "na",
+  "test" = "conditions", "condition" = "conditions"
+)
