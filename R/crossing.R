@@ -17,19 +17,21 @@
 #'
 #' crossing.(stuff = x, y)
 crossing. <- function(..., .name_repair = "check_unique") {
-
-  dots <- list2(...)
+  dots <- dots_list(..., .named = TRUE)
 
   if (any(map_lgl.(dots, is.data.frame))) {
-    crossing_df(..., .name_repair = .name_repair)
+    crossing_df(!!!dots, .name_repair = .name_repair)
   } else {
-    crossing_vec(..., .name_repair = .name_repair)
+    crossing_vec(!!!dots, .name_repair = .name_repair)
   }
 }
 
 crossing_vec <- function(..., .name_repair = "check_unique") {
+  dots <- list2(...)
 
-  result_df <- CJ(..., sorted = TRUE, unique = TRUE)
+  cj <- call2_dt("CJ", !!!dots, unique = TRUE, sorted = TRUE)
+
+  result_df <- eval_tidy(cj, env = caller_env())
 
   setkey(result_df, NULL)
 
@@ -39,7 +41,6 @@ crossing_vec <- function(..., .name_repair = "check_unique") {
 }
 
 crossing_df <- function(..., .name_repair = "check_unique") {
-
   l <- list2(...)
   l <- map.(l, sort_unique)
   lgs <- map_int.(l, vec_size)

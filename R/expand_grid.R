@@ -17,8 +17,11 @@
 #'
 #' expand_grid.(stuff = x, y)
 expand_grid. <- function(..., .name_repair = "check_unique") {
+  dots <- dots_list(..., .named = TRUE)
 
-  result_df <- CJ(..., unique = FALSE, sorted = FALSE)
+  cj <- call2_dt("CJ", !!!dots, unique = FALSE, sorted = FALSE)
+
+  result_df <- eval_tidy(cj, env = caller_env())
 
   setkey(result_df, NULL)
 

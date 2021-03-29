@@ -10,6 +10,18 @@ test_that("auto-converts data.frame inputs", {
   expect_equal(nrow(out), 4)
 })
 
+test_that("crossing works with splicing", {
+  test_list <- list(x = 1:2, y = 1:2)
+  out <- crossing.(!!!test_list)
+  expect_equal(nrow(out), 4)
+})
+
+test_that("expand_grid works with splicing", {
+  test_list <- list(x = 1:2, y = 1:2)
+  out <- expand_grid.(!!!test_list)
+  expect_equal(nrow(out), 4)
+})
+
 test_that("crossing work with data.frame inputs", {
   test_df <- tidytable(a = c("a", "a", "b"), b = c("a", "a", "b"))
   crossing_df <- crossing.(test_df)

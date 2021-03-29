@@ -4,6 +4,8 @@
 * `if_all.()`/`if_any.()`
 
 #### Functionality improvements
+* `replace_na.()`: Can now replace `NULL` values in list-columns
+* Splicing lists using `!!!` now works in `crossing.()` and `expand_grid.()`
 * The following tidyverse functions are now automatically converted to their tidytable `verb.()` equivalents when
 used inside of tidytable's mutate/arrange/filter/summarize/slice.
   + Functions that previously failed but now work:
@@ -15,7 +17,6 @@ used inside of tidytable's mutate/arrange/filter/summarize/slice.
     - `case_when()`
     - `desc()`
     - `replace_na()`
-* `replace_na.()`: Can now replace `NULL` values in list-columns
 
 #### Functions with notable speed improvements
 * `mutate_across.()`
