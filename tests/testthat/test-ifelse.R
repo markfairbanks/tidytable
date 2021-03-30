@@ -28,7 +28,7 @@ test_that("dplyr::if_else() is converted to ifelse.()", {
   df <- tidytable(x = c(1:3, NA))
 
   # Named arguments
-  df_named <- mutate.(df, new_col = if_else(x > 2L, true = x - 1L, false = NA, missing = 3))
+  df_named <- mutate.(df, new_col = if_else(x > 2L, false = NA, tr = x - 1L,  missing = 3))
   expect_equal(df_named$new_col, c(NA,NA,2,3))
 })
 

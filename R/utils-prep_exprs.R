@@ -26,11 +26,18 @@ prep_expr <- function(x, data) {
   } else if (is_call(x, c("row_number.", "row_number"))) {
     quote(1:.N)
   } else if (is_call(x, c("ifelse", "if_else"))) {
+    if (is_call(x, "if_else")) {
+      x <- match.call(internal_if_else, x)
+    } else {
+      x <- match.call(base::ifelse, x)
+    }
+    x <- unname(x)
     x[[1]] <- quote(ifelse.)
-    names(x) <- ifelse_arg_map[names(x)]
+    x[-1] <- lapply(x[-1], prep_expr, data)
     x
   } else if (is_call(x, "case_when")) {
     x[[1]] <- quote(case_when.)
+    x[-1] <- lapply(x[-1], prep_expr, data)
     x
   } else if (is_call(x, "replace_na")) {
     x[[1]] <- quote(replace_na.)
@@ -54,7 +61,6 @@ prep_expr <- function(x, data) {
   }
 }
 
-ifelse_arg_map <- c(
-  "yes" = "true", "no" = "false", "missing" = "na",
-  "test" = "conditions", "condition" = "conditions"
-)
+internal_if_else <- function(condition, true, false, missing = NULL) {
+  abort("Only for use in prep_exprs")
+}
