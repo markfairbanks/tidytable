@@ -177,51 +177,13 @@ pivot_longer..data.frame <- function(.df,
 
   .df <- df_name_repair(.df, .name_repair = names_repair)
 
-  ## names_ptype & names_transform
-  cast_vars <- intersect(names_to, names(names_ptypes))
-  if (length(cast_vars) > 0) {
-    cast_calls <- vector("list", length(cast_vars))
-    names(cast_calls) <- cast_vars
-    for (i in seq_along(cast_vars)) {
-      cast_calls[[i]] <- call2("vec_cast", sym(cast_vars[[i]]), names_ptypes[[i]])
-    }
-    .df <- mutate.(.df, !!!cast_calls)
-  }
+  # names_ptype & names_transform
+  .df <- fix_types(.df, names_to, names_ptypes, "ptypes")
+  .df <- fix_types(.df, names_to, names_transform, "transform")
 
-  # transform cols
-  coerce_vars <- intersect(names_to, names(names_transform))
-  if (length(coerce_vars) > 0) {
-    coerce_calls <- vector("list", length(coerce_vars))
-    names(coerce_calls) <- coerce_vars
-    for (i in seq_along(coerce_vars)) {
-      fn <- as_function(names_transform[[i]])
-      coerce_calls[[i]] <- call2(fn, sym(coerce_vars[[i]]))
-    }
-    .df <- mutate.(.df, !!!coerce_calls)
-  }
-
-  ## values_ptype & values_transform
-  cast_vars <- intersect(values_to, names(values_ptypes))
-  if (length(cast_vars) > 0) {
-    cast_calls <- vector("list", length(cast_vars))
-    names(cast_calls) <- cast_vars
-    for (i in seq_along(cast_vars)) {
-      cast_calls[[i]] <- call2("vec_cast", sym(cast_vars[[i]]), values_ptypes[[i]])
-    }
-    .df <- mutate.(.df, !!!cast_calls)
-  }
-
-  # transform cols
-  coerce_vars <- intersect(values_to, names(values_transform))
-  if (length(coerce_vars) > 0) {
-    coerce_calls <- vector("list", length(coerce_vars))
-    names(coerce_calls) <- coerce_vars
-    for (i in seq_along(coerce_vars)) {
-      fn <- as_function(values_transform[[i]])
-      coerce_calls[[i]] <- call2(fn, sym(coerce_vars[[i]]))
-    }
-    .df <- mutate.(.df, !!!coerce_calls)
-  }
+  # values_ptype & values_transform
+  .df <- fix_types(.df, values_to, values_ptypes, "ptypes")
+  .df <- fix_types(.df, values_to, values_transform, "transform")
 
   # data.table::melt() drops NAs using "&" logic, not "|"
   # Example in tidytable #186 shows why this is necessary
@@ -257,4 +219,49 @@ str_separate <- function(x, into, sep, convert = FALSE) {
 
   out
 }
+
+fix_types <- function(.df, .to, .list, .ptypes_transform) {
+  vars <- intersect(.to, names(.list))
+  if (length(vars) > 0) {
+    calls <- vector("list", length(vars))
+    names(calls) <- vars
+    if (.ptypes_transform == "ptypes") {
+      .fn <- "vec_cast"
+      for (i in seq_along(vars)) {
+        calls[[i]] <- call2(.fn, sym(vars[[i]]), .list[[i]])
+      }
+    } else if (.ptypes_transform == "transform") {
+      for (i in seq_along(vars)) {
+        .fn <- as_function(.list[[i]])
+        calls[[i]] <- call2(.fn, sym(vars[[i]]))
+      }
+    } else {
+      abort("Please specify ptypes or transform")
+    }
+    .df <- mutate.(.df, !!!calls)
+  }
+  .df
+}
+
+# cast_vars <- intersect(names_to, names(names_ptypes))
+# if (length(cast_vars) > 0) {
+#   cast_calls <- vector("list", length(cast_vars))
+#   names(cast_calls) <- cast_vars
+#   for (i in seq_along(cast_vars)) {
+#     cast_calls[[i]] <- call2("vec_cast", sym(cast_vars[[i]]), names_ptypes[[i]])
+#   }
+#   .df <- mutate.(.df, !!!cast_calls)
+# }
+#
+# # transform cols
+# coerce_vars <- intersect(names_to, names(names_transform))
+# if (length(coerce_vars) > 0) {
+#   coerce_calls <- vector("list", length(coerce_vars))
+#   names(coerce_calls) <- coerce_vars
+#   for (i in seq_along(coerce_vars)) {
+#     fn <- as_function(names_transform[[i]])
+#     coerce_calls[[i]] <- call2(fn, sym(coerce_vars[[i]]))
+#   }
+#   .df <- mutate.(.df, !!!coerce_calls)
+# }
 
