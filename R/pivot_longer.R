@@ -188,13 +188,7 @@ pivot_longer..data.frame <- function(.df,
   # data.table::melt() drops NAs using "&" logic, not "|"
   # Example in tidytable #186 shows why this is necessary
   if (values_drop_na) {
-    filter_calls <- vector("list", length(values_to))
-    for (i in seq_along(filter_calls)) {
-      filter_call <- call2("is.na", sym(values_to[[i]]))
-      filter_call <- call2("!", filter_call)
-      filter_calls[[i]] <- filter_call
-    }
-
+    filter_calls <- map.(syms(values_to), ~ call2("!", call2("is.na", .x)))
     filter_expr <- call_reduce(filter_calls, "|")
 
     .df <- filter.(.df, !!filter_expr)
