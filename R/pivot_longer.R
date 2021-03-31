@@ -237,25 +237,3 @@ fix_types <- function(.df, .to, .list, .ptypes_transform) {
   .df
 }
 
-# cast_vars <- intersect(names_to, names(names_ptypes))
-# if (length(cast_vars) > 0) {
-#   cast_calls <- vector("list", length(cast_vars))
-#   names(cast_calls) <- cast_vars
-#   for (i in seq_along(cast_vars)) {
-#     cast_calls[[i]] <- call2("vec_cast", sym(cast_vars[[i]]), names_ptypes[[i]])
-#   }
-#   .df <- mutate.(.df, !!!cast_calls)
-# }
-#
-# # transform cols
-# coerce_vars <- intersect(names_to, names(names_transform))
-# if (length(coerce_vars) > 0) {
-#   coerce_calls <- vector("list", length(coerce_vars))
-#   names(coerce_calls) <- coerce_vars
-#   for (i in seq_along(coerce_vars)) {
-#     fn <- as_function(names_transform[[i]])
-#     coerce_calls[[i]] <- call2(fn, sym(coerce_vars[[i]]))
-#   }
-#   .df <- mutate.(.df, !!!coerce_calls)
-# }
-
