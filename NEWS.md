@@ -23,6 +23,11 @@ used inside of tidytable's mutate/arrange/filter/summarize/slice.
 * `mutate_rowwise.()` when `c_across.()` is used
 * `slice.()`/`slice_head.()`/`slice_tail.()`/`slice_min.()`/`slice_max.()`
 
+#### Other news
+* `tidytable` has dropped the `tibble` package as a dependency and now uses `pillar` instead. 
+`tibble` was originally used for its `trunc_mat()` function that enabled tidytables to print like
+tibbles do in console. `pillar` is the same package that `tibble` uses in the background.
+
 # tidytable 0.5.9
 
 #### New functions

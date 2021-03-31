@@ -15,6 +15,7 @@
 \alias{\%between\%}
 \alias{data.table}
 \alias{\%like\%}
+\alias{getDTthreads}
 \alias{setDTthreads}
 \alias{enquo}
 \alias{enquos}
@@ -26,11 +27,11 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{data.table}{\code{\link[data.table:between]{\%between\%}}, \code{\link[data.table:like]{\%like\%}}, \code{\link[data.table]{data.table}}, \code{\link[data.table:openmp-utils]{setDTthreads}}}
+  \item{data.table}{\code{\link[data.table:between]{\%between\%}}, \code{\link[data.table:like]{\%like\%}}, \code{\link[data.table]{data.table}}, \code{\link[data.table:openmp-utils]{getDTthreads}}, \code{\link[data.table:openmp-utils]{setDTthreads}}}
+
+  \item{pillar}{\code{\link[pillar]{glimpse}}}
 
   \item{rlang}{\code{\link[rlang:nse-defuse]{enquo}}, \code{\link[rlang:nse-defuse]{enquos}}}
-
-  \item{tibble}{\code{\link[tibble:reexports]{glimpse}}}
 
   \item{tidyselect}{\code{\link[tidyselect]{all_of}}, \code{\link[tidyselect:all_of]{any_of}}, \code{\link[tidyselect:starts_with]{contains}}, \code{\link[tidyselect:starts_with]{ends_with}}, \code{\link[tidyselect]{everything}}, \code{\link[tidyselect:everything]{last_col}}, \code{\link[tidyselect:starts_with]{matches}}, \code{\link[tidyselect:starts_with]{num_range}}, \code{\link[tidyselect]{starts_with}}}
 }}
