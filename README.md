@@ -51,7 +51,7 @@ test_df %>%
   arrange.(x, y) %>%
   mutate.(double_x = x * 2,
           double_y = y * 2)
-#> # tidytable [3 × 5]
+#> # A tidytable: 3 × 5
 #>       x     y z     double_x double_y
 #>   <int> <int> <chr>    <dbl>    <dbl>
 #> 1     1     4 a            2        8
@@ -75,7 +75,7 @@ test_df %>%
   summarize.(avg_x = mean(x),
              max_y = max(y),
              .by = z)
-#> # tidytable [2 × 3]
+#> # A tidytable: 2 × 3
 #>   z     avg_x max_y
 #>   <chr> <dbl> <int>
 #> 1 a       1.5     5
@@ -100,7 +100,7 @@ test_df <- data.table(x = c("a", "a", "a", "b", "b"))
 test_df %>%
   slice.(1:2, .by = x) %>%
   mutate.(group_row_num = row_number.(), .by = x)
-#> # tidytable [4 × 2]
+#> # A tidytable: 4 × 2
 #>   x     group_row_num
 #>   <chr>         <int>
 #> 1 a                 1
@@ -155,7 +155,7 @@ test_df <- data.table(
 
 test_df %>%
   select.(a, starts_with("b"))
-#> # tidytable [3 × 3]
+#> # A tidytable: 3 × 3
 #>       a    b1    b2
 #>   <int> <int> <int>
 #> 1     1     4     7
@@ -168,7 +168,7 @@ To drop columns use a `-` sign:
 ``` r
 test_df %>%
   select.(-a, -starts_with("b"))
-#> # tidytable [3 × 1]
+#> # A tidytable: 3 × 1
 #>   c    
 #>   <chr>
 #> 1 a    
@@ -197,7 +197,7 @@ test_df <- data.table(
 
 test_df %>%
   summarize.(avg_b = mean(b), .by = where(is.character))
-#> # tidytable [2 × 3]
+#> # A tidytable: 2 × 3
 #>   c     d     avg_b
 #>   <chr> <chr> <dbl>
 #> 1 a     a       4.5
@@ -220,7 +220,7 @@ add_one <- function(data, add_col) {
 
 df %>%
   add_one(x)
-#> # tidytable [3 × 4]
+#> # A tidytable: 3 × 4
 #>       x     y z     new_col
 #>   <dbl> <dbl> <chr>   <dbl>
 #> 1     1     1 a           2
@@ -259,7 +259,7 @@ df %>%
   dt(order(x, y)) %>%
   dt(, double_x := x * 2) %>%
   dt(, .(avg_x = mean(x)), by = z)
-#> # tidytable [2 × 2]
+#> # A tidytable: 2 × 2
 #>   z     avg_x
 #>   <chr> <dbl>
 #> 1 a       1.5
