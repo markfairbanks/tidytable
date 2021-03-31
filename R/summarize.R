@@ -48,9 +48,7 @@ summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE) {
 
   .by <- select_vec_chr(.df, {{ .by }})
 
-  assign <- map2.(syms(names(dots)), dots, ~ call2("<-", .x, .y))
-  output <- call2("list", !!!syms(names(dots)))
-  j <- call2("{", !!!assign, output)
+  j <- expr(list(!!!dots))
 
   dt_expr <- call2_j(.df, j, .by)
 

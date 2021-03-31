@@ -77,16 +77,6 @@ test_that("can do group aggregation with by c()", {
   expect_equal(tidytable_df, datatable_df)
 })
 
-test_that("can refer to newly created columns", {
-  test_df <- tidytable(x = 1:4, y = c("a","a","a","b"))
-
-  new_df <- test_df %>%
-    summarize.(avg_x = mean(x), avg_x_plus_one = avg_x + 1, .by = y)
-
-  expect_named(new_df, c("y", "avg_x", "avg_x_plus_one"))
-  expect_equal(new_df$avg_x_plus_one, c(3, 5))
-})
-
 test_that("can use .sort & doesn't modify-by-reference", {
   test_df <- tidytable(x = 1:3, y = c("b", "a", "a"), z = c("b", "a", "a"))
 
