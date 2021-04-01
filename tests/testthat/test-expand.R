@@ -10,6 +10,28 @@ test_that("auto-converts data.frame inputs", {
   expect_equal(nrow(out), 4)
 })
 
+test_that("crossing works with naming", {
+  x <- 1:2
+  y <- 1:2
+  out <- crossing.(x, new_y = y)
+  expect_equal(out$x, c(1,1,2,2))
+  expect_equal(out$new_y, c(1,2,1,2))
+})
+
+test_that("expand_grid works with naming", {
+  x <- 1:2
+  y <- 1:2
+  out <- expand_grid.(x, new_y = y)
+  expect_equal(out$x, c(1,1,2,2))
+  expect_equal(out$new_y, c(1,2,1,2))
+})
+
+test_that("expand_grid works with splicing", {
+  test_list <- list(x = 1:2, y = 1:2)
+  out <- expand_grid.(!!!test_list)
+  expect_equal(nrow(out), 4)
+})
+
 test_that("crossing works with splicing", {
   test_list <- list(x = 1:2, y = 1:2)
   out <- crossing.(!!!test_list)
