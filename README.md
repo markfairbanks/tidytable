@@ -7,7 +7,7 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
-[![](https://img.shields.io/badge/dev%20-0.5.9.9-green.svg)](https://github.com/markfairbanks/tidytable)
+[![](https://img.shields.io/badge/dev%20-0.6.0.0-green.svg)](https://github.com/markfairbanks/tidytable)
 [![CRAN RStudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=blue)](https://markfairbanks.github.io/tidytable/)
 <!-- badges: end -->
@@ -73,13 +73,13 @@ has “by group” functionality.
 ``` r
 test_df %>%
   summarize.(avg_x = mean(x),
-             max_y = max(y),
+             count = n(),
              .by = z)
 #> # A tidytable: 2 × 3
-#>   z     avg_x max_y
+#>   z     avg_x count
 #>   <chr> <dbl> <int>
-#> 1 a       1.5     5
-#> 2 b       3       6
+#> 1 a       1.5     2
+#> 2 b       3       1
 ```
 
 ### `.by` vs. `group_by()`
@@ -99,7 +99,7 @@ test_df <- data.table(x = c("a", "a", "a", "b", "b"))
 
 test_df %>%
   slice.(1:2, .by = x) %>%
-  mutate.(group_row_num = row_number.(), .by = x)
+  mutate.(group_row_num = row_number(), .by = x)
 #> # A tidytable: 4 × 2
 #>   x     group_row_num
 #>   <chr>         <int>

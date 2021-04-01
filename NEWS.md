@@ -1,4 +1,4 @@
-# tidytable 0.6.0 (in development)
+# tidytable 0.6.0
 
 #### New functions
 * `if_all.()`/`if_any.()`
