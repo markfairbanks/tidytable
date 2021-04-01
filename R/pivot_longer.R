@@ -72,7 +72,6 @@ pivot_longer..data.frame <- function(.df,
                                      values_transform = list(),
                                      fast_pivot = FALSE,
                                      ...) {
-
   .df <- as_tidytable(.df)
 
   names <- names(.df)
@@ -89,47 +88,46 @@ pivot_longer..data.frame <- function(.df,
   variable_name <- "variable"
 
   if (uses_dot_value) {
+    .df <- shallow(.df)
+
     if (!is.null(names_sep)) {
       names_to_setup <- str_separate(measure_vars, into = names_to, sep = names_sep)
+
+      names_glue <- paste0("{", names_to, "}", collapse = names_sep)
     } else if (!is.null(names_pattern)) {
       names_to_setup <- str_extract(measure_vars, into = names_to, names_pattern)
+
+      names_glue <- paste0("{", names_to, "}", collapse = "___")
+      new_names <- glue(names_glue, .envir = names_to_setup)
+      setnames(.df, measure_vars, new_names)
+      measure_vars <- new_names
     } else {
       abort("If you use '.value' in `names_to` you must also supply
             `names_sep' or `names_pattern")
     }
 
-    .value <- names_to_setup$.value
+    names_to_setup <- crossing.(!!!names_to_setup)
 
+    glued <- glue(names_glue, .envir = names_to_setup)
+
+    na_cols <- setdiff(glued, measure_vars)
+
+    if (length(na_cols) > 0) {
+      .df[, (na_cols) := NA]
+    }
+
+    .value <- names_to_setup$.value
     v_fct <- factor(.value, levels = unique(.value))
-    measure_vars <- split(measure_vars, v_fct)
-    measure_vars <- map.(measure_vars, f_sort)
+
+    measure_vars <- split(glued, v_fct)
     values_to <- names(measure_vars)
     names(measure_vars) <- NULL
 
     if (multiple_names_to) {
       variable_name <- names_to[!names_to == ".value"]
 
-      .value_ids <- split(names_to_setup[[variable_name]], v_fct)
-
-      # .value_id is the .value_ids to compare all the rest to
-      .value_id <- .value_ids[[1]]
-
-      # .value_ids should only be the remaning ids.
-      # They also need to be sorted so balanced data can have different column order
-      .value_ids <- .value_ids[-1]
-      .value_ids <- map.(.value_ids, f_sort)
-
-      # Make sure data is "balanced"
-      # https://github.com/Rdatatable/data.table/issues/2575
-      # The list passed to measure.vars also needs the same number of column names per element
-      equal_ids <- map_lgl.(.value_ids, ~ isTRUE(all.equal(.value_id, .x)))
-      equal_ids <- all(equal_ids)
-
-      if (equal_ids) {
-        .value_id <- vec_rep_each(.value_id, nrow(.df))
-      } else {
-        abort("`data.table::melt()` doesn't currently support melting of unbalanced datasets.")
-      }
+      .value_ids <- unique(names_to_setup[[variable_name]])
+      .value_ids <- vec_rep_each(.value_ids, nrow(.df))
     }
   } else if (multiple_names_to) {
     if (is.null(names_sep) && is.null(names_pattern)) {
@@ -144,7 +142,7 @@ pivot_longer..data.frame <- function(.df,
     variable_name <- names_to
   }
 
-  .df <- melt(
+  .df <- suppressWarnings(melt(
     data = .df,
     id.vars = id_vars,
     measure.vars = measure_vars,
@@ -154,14 +152,14 @@ pivot_longer..data.frame <- function(.df,
     # na.rm = values_drop_na,
     variable.factor = fast_pivot,
     value.factor = FALSE
-  )
+  ))
 
   if (!is.null(names_prefix)) {
     .df <- mutate.(.df, !!variable_name := gsub(paste0("^", names_prefix), "", !!sym(variable_name)))
   }
 
   if (multiple_names_to && uses_dot_value) {
-    .df <- mutate.(.df, !!variable_name := !!.value_id)
+    .df <- mutate.(.df, !!variable_name := !!.value_ids)
   } else if (multiple_names_to && !uses_dot_value) {
     if (!is.null(names_sep)) {
       .df <- separate.(.df, !!sym(variable_name), into = names_to, sep = names_sep)
