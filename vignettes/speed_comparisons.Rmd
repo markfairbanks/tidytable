@@ -72,10 +72,10 @@ inv_gc(); inv_gc();
 
 ```{r summarize, echo=FALSE}
 summarize_marks <- bench::mark(
-  tidyverse = summarize(group_by(test_tbl, c), avg_a = mean(a), .groups = "drop"),
-  dtplyr = collect(summarize(group_by(lazy_dt(test_dt), c), avg_a = mean(a))),
-  tidytable = summarize.(test_dt, avg_a = mean(a), .by = c),
-  data.table = test_dt[, list(avg_a = mean(a)), by = c],
+  tidyverse = summarize(group_by(test_tbl, c, d), avg_a = mean(a), .groups = "drop"),
+  dtplyr = as.data.table(summarize(group_by(lazy_dt(test_dt), c, d), avg_a = mean(a))),
+  tidytable = summarize.(test_dt, avg_a = mean(a), .by = c(c, d)),
+  data.table = test_dt[, list(avg_a = mean(a)), by = .(c, d)],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
          func_tested = "summarize")
