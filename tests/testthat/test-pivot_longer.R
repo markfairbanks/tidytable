@@ -254,7 +254,7 @@ test_that("works with unbalanced data - 3", {
     c(-0.118, 1.237, 0.809, NA, NA, NA, -0.766, -0.592, 0.528)
   )
   expect_equal(
-    round(out$b),
+    round(out$b, 3),
     c(NA, NA, NA, 1.682, -0.574, -0.057, -0.706, 0.002, 1.064)
   )
 })
