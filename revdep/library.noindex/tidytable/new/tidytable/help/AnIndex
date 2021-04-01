@@ -33,6 +33,7 @@ extract.	extract.
 fill.	fill.
 filter.	filter.
 full_join.	left_join.
+getDTthreads	reexports
 get_dummies.	get_dummies.
 glimpse	reexports
 group_split.	group_split.
@@ -42,7 +43,6 @@ if_any.	if_all.
 inner_join.	left_join.
 inv_gc	inv_gc
 is_tidytable	is_tidytable
-knit_print.tidytable	knit_print.tidytable
 lags.	lags.
 last_col	reexports
 leads.	lags.

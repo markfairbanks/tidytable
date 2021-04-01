@@ -317,7 +317,7 @@ Warning in min(p_futimeyrs, na.rm = TRUE) :
   no non-missing arguments to min; returning Inf
 Warning in max(p_futimeyrs, na.rm = TRUE) :
   no non-missing arguments to max; returning -Inf
-# tidytable [7 × 5]
+# A tidytable: 7 × 5
   p_status mean_futime min_futime max_futime median_futime
      <dbl>       <dbl>      <dbl>      <dbl>         <dbl>
 1        2        8.94     0            26.9          7.83
@@ -327,7 +327,7 @@ Warning in max(p_futimeyrs, na.rm = TRUE) :
 5       98      NaN      Inf          -Inf           NA   
 6       97      NaN      Inf          -Inf           NA   
 7       NA      NaN      Inf          -Inf           NA   
-# tidytable [68,060 × 122]
+# A tidytable: 68,060 × 122
    fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1
    <chr>   <chr>      <chr> <chr>  <date>      <date>       <chr>        <chr>  
  1 100004  SEER Reg … Male  White  1926-01-01  1992-07-15   C50          histol…
@@ -808,7 +808,7 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 +                        use_lifedatmin = FALSE, 
 +                        check = TRUE, 
 +                        as_labelled_factor = FALSE)
-# tidytable [11 × 3]
+# A tidytable: 11 × 3
    p_alive.1 p_status     N
    <chr>        <dbl> <int>
  1 Alive            2 17609
@@ -822,7 +822,7 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
  9 Alive           97    19
 10 Dead            97     2
 11 Dead            NA     5
-# tidytable [7 × 2]
+# A tidytable: 7 × 2
   p_status     N
      <dbl> <int>
 1        2 19756
@@ -832,7 +832,7 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 5       98  2670
 6       97    21
 7       NA     5
-# tidytable [68,060 × 121]
+# A tidytable: 68,060 × 121
    fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1
    <chr>   <chr>      <chr> <chr>  <date>      <date>       <chr>        <chr>  
  1 100004  SEER Reg … Male  White  1926-01-01  1992-07-15   C50          histol…
@@ -938,19 +938,19 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 +  msSPChelpR::renumber_time_id_tt(new_time_id_var = "t_tumid",
 +                              dattype = "seer",
 +                              case_id_var = "fake_id")
-# tidytable [10,000 × 16]
-   fake_id SEQ_NUM registry sex   race  datebirth  t_datediag t_site_icd t_dco
-   <chr>     <int> <chr>    <chr> <chr> <date>     <date>     <chr>      <chr>
- 1 100004        1 SEER Re… Male  White 1926-01-01 1992-07-15 C50        hist…
- 2 100004        2 SEER Re… Male  White 1926-01-01 2004-01-15 C54        hist…
- 3 100004        3 SEER Re… Male  White 1926-01-01 2006-06-15 C34        hist…
- 4 100004        4 SEER Re… Male  White 1926-01-01 2018-06-15 C14        DCO …
- 5 100034        1 SEER Re… Male  White 1979-01-01 2000-06-15 C50        hist…
- 6 100037        1 SEER Re… Fema… White 1938-01-01 1996-01-15 C54        hist…
- 7 100038        1 SEER Re… Male  White 1989-01-01 1991-04-15 C50        hist…
- 8 100038        2 SEER Re… Male  White 1989-01-01 2000-03-15 C80        hist…
- 9 100039        1 SEER Re… Fema… White 1946-01-01 2003-08-15 C50        hist…
-10 100039        2 SEER Re… Fema… White 1946-01-01 2011-04-15 C34        hist…
+# A tidytable: 10,000 × 16
+   fake_id SEQ_NUM registry   sex   race  datebirth  t_datediag t_site_icd t_dco
+   <chr>     <int> <chr>      <chr> <chr> <date>     <date>     <chr>      <chr>
+ 1 100004        1 SEER Reg … Male  White 1926-01-01 1992-07-15 C50        hist…
+ 2 100004        2 SEER Reg … Male  White 1926-01-01 2004-01-15 C54        hist…
+ 3 100004        3 SEER Reg … Male  White 1926-01-01 2006-06-15 C34        hist…
+ 4 100004        4 SEER Reg … Male  White 1926-01-01 2018-06-15 C14        DCO …
+ 5 100034        1 SEER Reg … Male  White 1979-01-01 2000-06-15 C50        hist…
+ 6 100037        1 SEER Reg … Fema… White 1938-01-01 1996-01-15 C54        hist…
+ 7 100038        1 SEER Reg … Male  White 1989-01-01 1991-04-15 C50        hist…
+ 8 100038        2 SEER Reg … Male  White 1989-01-01 2000-03-15 C80        hist…
+ 9 100039        1 SEER Reg … Fema… White 1946-01-01 2003-08-15 C50        hist…
+10 100039        2 SEER Reg … Fema… White 1946-01-01 2011-04-15 C34        hist…
 # … with 9,990 more rows, and 7 more variables: fc_age <int>, datedeath <date>,
 #   p_alive <chr>, p_dodmin <date>, fc_agegroup <chr>, t_yeardiag <chr>,
 #   t_tumid <int>
@@ -43354,7 +43354,7 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 +                          timevar_max = 2,
 +                          datsize = 10000)
 Long dataset had too many cases per patient. Wide dataset is limited to  2  cases per id as defined in timevar_max option.
-# tidytable [6,003 × 27]
+# A tidytable: 6,003 × 27
    fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1
    <chr>   <chr>      <chr> <chr>  <date>      <date>       <chr>        <chr>  
  1 100004  SEER Reg … Male  White  1926-01-01  1992-07-15   C50          histol…
@@ -43632,7 +43632,7 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 +                         life_var_new = "p_alive_new", 
 +                         check = TRUE, 
 +                         as_labelled_factor = FALSE)
-# tidytable [7 × 3]
+# A tidytable: 7 × 3
   p_status p_alive_new     n
      <dbl>       <dbl> <int>
 1        1          10 18428
@@ -43642,7 +43642,7 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 5       97          97    21
 6       98          98  2670
 7       NA          NA     5
-# tidytable [68,060 × 122]
+# A tidytable: 68,060 × 122
    fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1
    <chr>   <chr>      <chr> <chr>  <date>      <date>       <chr>        <chr>  
  1 100004  SEER Reg … Male  White  1926-01-01  1992-07-15   C50          histol…
@@ -43692,7 +43692,7 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  10.879 1.09 12.034 0.002 0.003 
+Time elapsed:  11.381 1.336 12.919 0.002 0.003 
 > grDevices::dev.off()
 null device 
           1 
