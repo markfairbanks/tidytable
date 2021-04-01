@@ -42,7 +42,7 @@ prep_expr <- function(x, data) {
   } else if (is_call(x, "replace_na")) {
     x[[1]] <- quote(replace_na.)
     x
-  } else if (is_call(x, c("c_across.", "c_across"))) {
+  } else if (is_call(x, "c_across.")) {
     call <- match.call(tidytable::c_across., x, expand.dots = FALSE)
     cols <- call$cols %||% quote(everything())
     cols <- select_vec_sym(data, !!cols)

@@ -1,5 +1,5 @@
 #' Combine values from multiple columns
-#' 
+#'
 #' @description
 #' `c_across.()` works inside of `mutate_rowwise.()`. It uses tidyselect so
 #' you can easily select multiple variables.
@@ -14,5 +14,5 @@
 #' test_df %>%
 #'   mutate_rowwise.(row_mean = mean(c_across.(x:z)))
 c_across. <- function(cols = everything()) {
-  abort("c_across.() can only be used inside of mutate_rowwise.()")
+  abort("c_across.() can only be used inside of tidytable verbs")
 }

@@ -28,17 +28,16 @@ test_that("c_across.() provides all columns", {
   expect_equal(results_df$row_mean, results_df_every$row_mean)
 })
 
-test_that("c_across() works", {
-  test_df <- data.table(x = 1:3, y = 4:6)
-
-  results_df <- test_df %>%
-    mutate_rowwise.(row_mean = mean(c_across()))
-  results_df_every <- test_df %>%
-    mutate_rowwise.(row_mean = mean(c_across(everything())))
-
-  expect_equal(results_df$row_mean, results_df_every$row_mean)
-})
-
+# test_that("c_across() works", {
+#   test_df <- data.table(x = 1:3, y = 4:6)
+#
+#   results_df <- test_df %>%
+#     mutate_rowwise.(row_mean = mean(c_across()))
+#   results_df_every <- test_df %>%
+#     mutate_rowwise.(row_mean = mean(c_across(everything())))
+#
+#   expect_equal(results_df$row_mean, results_df_every$row_mean)
+# })
 
 test_that("c_across.(cols = where(is.numeric)) provides numeric columns", {
   test_df <- data.table(x = 1:3, y = 4:6, z = c("a", "a", "b"))

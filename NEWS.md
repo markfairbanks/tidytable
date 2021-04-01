@@ -11,7 +11,6 @@ used inside of tidytable's mutate/arrange/filter/summarize/slice.
   + Functions that previously failed but now work:
     - `n()`
     - `row_number()`
-    - `c_across()`
   + Functions that previously worked with tidytable but are now converted to their faster tidytable equivalents:
     - `if_else()`/`ifelse()`
     - `case_when()`
