@@ -16,6 +16,10 @@ used inside of tidytable's mutate/arrange/filter/summarize/slice.
     - `case_when()`
     - `desc()`
     - `replace_na()`
+    
+#### Bug fixes
+* `pivot_longer.()`: Correctly pivots unbalanced datasets when `".value"` is used
+in `names_to` (@moutikabdessabour, #212)
 
 #### Functions with notable speed improvements
 * `mutate_across.()`
