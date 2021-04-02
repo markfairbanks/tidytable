@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -127,22 +127,22 @@
 </li>
 <li>Lastly I’d like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.</li>
 </ul>
-<pre><code>#&gt; # tidytable [13 × 7]
+<pre><code>#&gt; # A tidytable: 13 × 7
 #&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas tidytable_vs_dplyr
 #&gt;    &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             
-#&gt;  1 arrange            35        34.7   36.6    1148.   355   3.0%              
-#&gt;  2 case_when          31.7      30.8   NA       407.    59.2 7.6%              
-#&gt;  3 distinct           11.7      12.5   14.8      34    309   36.8%             
-#&gt;  4 fill               45.3      41.1   NA        63.3  846   64.9%             
-#&gt;  5 filter            207.      206.   223.      247.   707   83.5%             
-#&gt;  6 inner_join         40        47.1  111.       65.4   NA   72.0%             
-#&gt;  7 left_join          50        48.1  138.       87.6   NA   54.9%             
-#&gt;  8 mutate             59.7      47.8  403.       68.3   86.4 70.0%             
-#&gt;  9 nest                5.6       7.6   NA        25.3   NA   30.0%             
-#&gt; 10 pivot_longer       12.4      13.2   NA        43.7   NA   30.2%             
-#&gt; 11 pivot_wider        83.4      83.3   96.6      76.1   NA   109.5%            
-#&gt; 12 summarize         154.       84.3  162       195.   834   43.3%             
-#&gt; 13 unnest              6.2       8.3   NA        37     NA   22.4%</code></pre>
+#&gt;  1 arrange            55.9      51     58.3    1291.   355   3.9%              
+#&gt;  2 case_when          34.7      51     NA       372.    59.2 13.7%             
+#&gt;  3 distinct           31.9      34.1   37.8      40.9  309   83.4%             
+#&gt;  4 fill               44.1      47.5   NA        59.5  846   79.8%             
+#&gt;  5 filter            222.      228.   234.      254    707   89.9%             
+#&gt;  6 inner_join         52.8      78.5  219.       91.1   NA   86.2%             
+#&gt;  7 left_join          59.5      61.4  185.       99.4   NA   61.8%             
+#&gt;  8 mutate             54.6      64.5  355.       87.9   86.4 73.4%             
+#&gt;  9 nest               15        14.4   NA        30.2   NA   47.7%             
+#&gt; 10 pivot_longer       12.2      16.8   NA        51.5   NA   32.6%             
+#&gt; 11 pivot_wider       132       127.   143.       75.4   NA   168.6%            
+#&gt; 12 summarize         411.      414.   351.      320.   834   129.3%            
+#&gt; 13 unnest             12.9      19.3   NA        44     NA   43.9%</code></pre>
 </div>
   </div>
 

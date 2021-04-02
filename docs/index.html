@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@
   <span class="fu"><a href="reference/arrange..html">arrange.</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/mutate..html">mutate.</a></span><span class="op">(</span>double_x <span class="op">=</span> <span class="va">x</span> <span class="op">*</span> <span class="fl">2</span>,
           double_y <span class="op">=</span> <span class="va">y</span> <span class="op">*</span> <span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt; # tidytable [3 × 5]</span>
+<span class="co">#&gt; # A tidytable: 3 × 5</span>
 <span class="co">#&gt;       x     y z     double_x double_y</span>
 <span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span>
 <span class="co">#&gt; 1     1     4 a            2        8</span>
@@ -154,13 +154,13 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">test_df</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/summarize..html">summarize.</a></span><span class="op">(</span>avg_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,
-             max_y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>,
+             count <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span>,
              .by <span class="op">=</span> <span class="va">z</span><span class="op">)</span>
-<span class="co">#&gt; # tidytable [2 × 3]</span>
-<span class="co">#&gt;   z     avg_x max_y</span>
+<span class="co">#&gt; # A tidytable: 2 × 3</span>
+<span class="co">#&gt;   z     avg_x count</span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1 a       1.5     5</span>
-<span class="co">#&gt; 2 b       3       6</span></code></pre></div>
+<span class="co">#&gt; 1 a       1.5     2</span>
+<span class="co">#&gt; 2 b       3       1</span></code></pre></div>
 <div id="by-vs-group_by" class="section level3">
 <h3 class="hasAnchor">
 <a href="#by-vs-group_by" class="anchor"></a><code>.by</code> vs. <code>group_by()</code>
@@ -174,8 +174,8 @@
 
 <span class="va">test_df</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/slice..html">slice.</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, .by <span class="op">=</span> <span class="va">x</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/mutate..html">mutate.</a></span><span class="op">(</span>group_row_num <span class="op">=</span> <span class="fu"><a href="reference/row_number..html">row_number.</a></span><span class="op">(</span><span class="op">)</span>, .by <span class="op">=</span> <span class="va">x</span><span class="op">)</span>
-<span class="co">#&gt; # tidytable [4 × 2]</span>
+  <span class="fu"><a href="reference/mutate..html">mutate.</a></span><span class="op">(</span>group_row_num <span class="op">=</span> <span class="fu">row_number</span><span class="op">(</span><span class="op">)</span>, .by <span class="op">=</span> <span class="va">x</span><span class="op">)</span>
+<span class="co">#&gt; # A tidytable: 4 × 2</span>
 <span class="co">#&gt;   x     group_row_num</span>
 <span class="co">#&gt;   &lt;chr&gt;         &lt;int&gt;</span>
 <span class="co">#&gt; 1 a                 1</span>
@@ -219,7 +219,7 @@
 
 <span class="va">test_df</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/select..html">select.</a></span><span class="op">(</span><span class="va">a</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"b"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # tidytable [3 × 3]</span>
+<span class="co">#&gt; # A tidytable: 3 × 3</span>
 <span class="co">#&gt;       a    b1    b2</span>
 <span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;</span>
 <span class="co">#&gt; 1     1     4     7</span>
@@ -229,7 +229,7 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">test_df</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/select..html">select.</a></span><span class="op">(</span><span class="op">-</span><span class="va">a</span>, <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"b"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # tidytable [3 × 1]</span>
+<span class="co">#&gt; # A tidytable: 3 × 1</span>
 <span class="co">#&gt;   c    </span>
 <span class="co">#&gt;   &lt;chr&gt;</span>
 <span class="co">#&gt; 1 a    </span>
@@ -252,7 +252,7 @@
 
 <span class="va">test_df</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/summarize..html">summarize.</a></span><span class="op">(</span>avg_b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span>, .by <span class="op">=</span> <span class="fu">where</span><span class="op">(</span><span class="va">is.character</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # tidytable [2 × 3]</span>
+<span class="co">#&gt; # A tidytable: 2 × 3</span>
 <span class="co">#&gt;   c     d     avg_b</span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 a     a       4.5</span>
@@ -273,7 +273,7 @@
 
 <span class="va">df</span> <span class="op">%&gt;%</span>
   <span class="fu">add_one</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="co">#&gt; # tidytable [3 × 4]</span>
+<span class="co">#&gt; # A tidytable: 3 × 4</span>
 <span class="co">#&gt;       x     y z     new_col</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;</span>
 <span class="co">#&gt; 1     1     1 a           2</span>
@@ -303,12 +303,12 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">df</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/dt.html">dt</a></span><span class="op">(</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/dt.html">dt</a></span><span class="op">(</span>, <span class="fu">.</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/dt.html">dt</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">4</span> <span class="op">&amp;</span> <span class="va">y</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/dt.html">dt</a></span><span class="op">(</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">order</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/dt.html">dt</a></span><span class="op">(</span>, <span class="va">double_x</span> <span class="op">:=</span> <span class="va">x</span> <span class="op">*</span> <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/dt.html">dt</a></span><span class="op">(</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>avg_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, by <span class="op">=</span> <span class="va">z</span><span class="op">)</span>
-<span class="co">#&gt; # tidytable [2 × 2]</span>
+  <span class="fu"><a href="reference/dt.html">dt</a></span><span class="op">(</span>, <span class="fu">.</span><span class="op">(</span>avg_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, by <span class="op">=</span> <span class="va">z</span><span class="op">)</span>
+<span class="co">#&gt; # A tidytable: 2 × 2</span>
 <span class="co">#&gt;   z     avg_x</span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 a       1.5</span>
@@ -353,7 +353,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=tidytable"><img src="https://www.r-pkg.org/badges/version/tidytable" alt="CRAN status"></a></li>
-<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.5.9.9-green.svg"></a></li>
+<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.6.0-green.svg"></a></li>
 <li><a href="https://markfairbanks.github.io/tidytable/"><img src="https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=blue" alt="CRAN RStudio mirror downloads"></a></li>
 </ul>
 </div>

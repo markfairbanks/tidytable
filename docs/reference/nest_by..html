@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -176,34 +176,34 @@
 
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>nest_by.</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># tidytable [1 × 1]</span><span>
-#&gt;   data                
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>              
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='color: #949494;'>&lt;tidytable [10 × 4]&gt;</span><span></div><div class='input'>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 1 × 1</span><span>
+#&gt;   data                    
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>                  
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='color: #949494;'>&lt;tidytable[,4] [10 × 4]&gt;</span><span></div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>nest_by.</span><span class='op'>(</span><span class='va'>c</span>, <span class='va'>d</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [3 × 3]</span><span>
-#&gt;   c     d     data               
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>             
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     a     </span><span style='color: #949494;'>&lt;tidytable [4 × 2]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> a     b     </span><span style='color: #949494;'>&lt;tidytable [2 × 2]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> b     b     </span><span style='color: #949494;'>&lt;tidytable [4 × 2]&gt;</span><span></div><div class='input'>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 3 × 3</span><span>
+#&gt;   c     d     data                   
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>                 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     a     </span><span style='color: #949494;'>&lt;tidytable[,2] [4 × 2]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> a     b     </span><span style='color: #949494;'>&lt;tidytable[,2] [2 × 2]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> b     b     </span><span style='color: #949494;'>&lt;tidytable[,2] [4 × 2]&gt;</span><span></div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>nest_by.</span><span class='op'>(</span><span class='fu'>where</span><span class='op'>(</span><span class='va'>is.character</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [3 × 3]</span><span>
-#&gt;   c     d     data               
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>             
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     a     </span><span style='color: #949494;'>&lt;tidytable [4 × 2]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> a     b     </span><span style='color: #949494;'>&lt;tidytable [2 × 2]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> b     b     </span><span style='color: #949494;'>&lt;tidytable [4 × 2]&gt;</span><span></div><div class='input'>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 3 × 3</span><span>
+#&gt;   c     d     data                   
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>                 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     a     </span><span style='color: #949494;'>&lt;tidytable[,2] [4 × 2]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> a     b     </span><span style='color: #949494;'>&lt;tidytable[,2] [2 × 2]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> b     b     </span><span style='color: #949494;'>&lt;tidytable[,2] [4 × 2]&gt;</span><span></div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>nest_by.</span><span class='op'>(</span><span class='va'>c</span>, <span class='va'>d</span>, .keep <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [3 × 3]</span><span>
-#&gt;   c     d     data               
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>             
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     a     </span><span style='color: #949494;'>&lt;tidytable [4 × 4]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> a     b     </span><span style='color: #949494;'>&lt;tidytable [2 × 4]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> b     b     </span><span style='color: #949494;'>&lt;tidytable [4 × 4]&gt;</span><span></div></span></pre>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 3 × 3</span><span>
+#&gt;   c     d     data                   
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>                 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     a     </span><span style='color: #949494;'>&lt;tidytable[,4] [4 × 4]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> a     b     </span><span style='color: #949494;'>&lt;tidytable[,4] [2 × 4]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> b     b     </span><span style='color: #949494;'>&lt;tidytable[,4] [4 × 4]&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

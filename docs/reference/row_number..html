@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -151,7 +151,7 @@
 
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='mutate..html'>mutate.</a></span><span class='op'>(</span>row <span class='op'>=</span> <span class='fu'>row_number.</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># tidytable [3 × 3]</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 3</span><span>
 #&gt;       x y       row
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a         1
@@ -160,7 +160,7 @@
 <span class='co'># The dplyr version `row_number()` also works</span>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='mutate..html'>mutate.</a></span><span class='op'>(</span>row <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/ranking.html'>row_number</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [3 × 3]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 3 × 3</span><span>
 #&gt;       x y       row
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a         1

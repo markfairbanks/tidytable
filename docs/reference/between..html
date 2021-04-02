@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -169,7 +169,7 @@
 <span class='co'># Typically used in a filter.()</span>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='filter..html'>filter.</a></span><span class='op'>(</span><span class='fu'>between.</span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># tidytable [3 × 2]</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 2</span><span>
 #&gt;       x     y
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     5
@@ -178,7 +178,7 @@
 <span class='co'># Can also use the %between% operator</span>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='filter..html'>filter.</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>%between%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [3 × 2]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 3 × 2</span><span>
 #&gt;       x     y
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     5

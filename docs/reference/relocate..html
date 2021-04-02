@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -175,7 +175,7 @@
 
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>relocate.</span><span class='op'>(</span><span class='va'>c</span>, .before <span class='op'>=</span> <span class='va'>b</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># tidytable [5 × 4]</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 5 × 4</span><span>
 #&gt;       a c         b d    
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a         1 a    
@@ -185,7 +185,7 @@
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span>     5 b         5 b    </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>relocate.</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span>, .after <span class='op'>=</span> <span class='va'>c</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [5 × 4]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 5 × 4</span><span>
 #&gt;   c         a     b d    
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> a         1     1 a    
@@ -195,7 +195,7 @@
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> b         5     5 b    </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>relocate.</span><span class='op'>(</span><span class='fu'>where</span><span class='op'>(</span><span class='va'>is.numeric</span><span class='op'>)</span>, .after <span class='op'>=</span> <span class='va'>c</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [5 × 4]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 5 × 4</span><span>
 #&gt;   c         a     b d    
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> a         1     1 a    

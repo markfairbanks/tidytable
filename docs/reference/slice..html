@@ -83,7 +83,7 @@ Grouped data.tables grab rows within each group." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -203,7 +203,7 @@ Grouped data.tables grab rows within each group.</p>
 
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>slice.</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># tidytable [3 × 3]</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 3</span><span>
 #&gt;       x     y z    
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     5 a    
@@ -211,14 +211,14 @@ Grouped data.tables grab rows within each group.</p>
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3     7 a    </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>slice.</span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [2 × 3]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 2 × 3</span><span>
 #&gt;       x     y z    
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     5 a    
 #&gt; </span><span style='color: #BCBCBC;'>2</span><span>     3     7 a    </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>slice.</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, .by <span class='op'>=</span> <span class='va'>z</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [3 × 3]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 3 × 3</span><span>
 #&gt;       x     y z    
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     5 a    
@@ -226,28 +226,28 @@ Grouped data.tables grab rows within each group.</p>
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span>     4     8 b    </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>slice_head.</span><span class='op'>(</span><span class='fl'>1</span>, .by <span class='op'>=</span> <span class='va'>z</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [2 × 3]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 2 × 3</span><span>
 #&gt;       x     y z    
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     5 a    
 #&gt; </span><span style='color: #BCBCBC;'>2</span><span>     4     8 b    </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>slice_tail.</span><span class='op'>(</span><span class='fl'>1</span>, .by <span class='op'>=</span> <span class='va'>z</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [2 × 3]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 2 × 3</span><span>
 #&gt;       x     y z    
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>     3     7 a    
 #&gt; </span><span style='color: #BCBCBC;'>2</span><span>     4     8 b    </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>slice_max.</span><span class='op'>(</span>order_by <span class='op'>=</span> <span class='va'>x</span>, .by <span class='op'>=</span> <span class='va'>z</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [2 × 3]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 2 × 3</span><span>
 #&gt;       x     y z    
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>     4     8 b    
 #&gt; </span><span style='color: #BCBCBC;'>2</span><span>     3     7 a    </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>slice_min.</span><span class='op'>(</span>order_by <span class='op'>=</span> <span class='va'>y</span>, .by <span class='op'>=</span> <span class='va'>z</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [2 × 3]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 2 × 3</span><span>
 #&gt;       x     y z    
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     5 a    

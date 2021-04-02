@@ -86,7 +86,7 @@ from the resulting tidytable" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -199,7 +199,7 @@ Useful if the resulting column should be type integer/double.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"a-b-1"</span>, <span class='st'>"a-d-3"</span>, <span class='st'>"b-c-2"</span>, <span class='st'>"d-e-7"</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>extract.</span><span class='op'>(</span><span class='va'>x</span>, <span class='st'>"A"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># tidytable [5 × 1]</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 5 × 1</span><span>
 #&gt;   A    
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='color: #BB0000;'>NA</span><span>   
@@ -207,7 +207,7 @@ Useful if the resulting column should be type integer/double.</p></td>
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span> a    
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span> b    
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> d    </div><div class='input'><span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>extract.</span><span class='op'>(</span><span class='va'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span><span class='op'>)</span>, <span class='st'>"([[:alnum:]]+)-([[:alnum:]]+)"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [5 × 2]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 5 × 2</span><span>
 #&gt;   A     B    
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>   
@@ -217,7 +217,7 @@ Useful if the resulting column should be type integer/double.</p></td>
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> d     e    </div><div class='input'>
 <span class='co'># If no match, NA:</span>
 <span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>extract.</span><span class='op'>(</span><span class='va'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span><span class='op'>)</span>, <span class='st'>"([a-d]+)-([a-d]+)"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [5 × 2]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 5 × 2</span><span>
 #&gt;   A     B    
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>   
@@ -226,7 +226,7 @@ Useful if the resulting column should be type integer/double.</p></td>
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span> b     c    
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>   </div><div class='input'><span class='co'># drop columns by passing NA</span>
 <span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>extract.</span><span class='op'>(</span><span class='va'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='cn'>NA</span>, <span class='st'>"B"</span><span class='op'>)</span>, <span class='st'>"([a-d]+)-([a-d]+)-(\\d+)"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [5 × 2]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 5 × 2</span><span>
 #&gt;   A     B    
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>   
@@ -235,7 +235,7 @@ Useful if the resulting column should be type integer/double.</p></td>
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span> b     2    
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>   </div><div class='input'><span class='co'># merge groups by passing same name</span>
 <span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>extract.</span><span class='op'>(</span><span class='va'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"A"</span><span class='op'>)</span>, <span class='st'>"([a-d]+)-([a-d]+)-(\\d+)"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [5 × 2]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 5 × 2</span><span>
 #&gt;   A     B    
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> NANA  NA   

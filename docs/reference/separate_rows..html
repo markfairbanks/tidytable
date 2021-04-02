@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -175,7 +175,7 @@ Useful if the resulting column should be type integer/double.</p></td>
 <span class='op'>)</span>
 
 <span class='fu'>separate_rows.</span><span class='op'>(</span><span class='va'>test_df</span>, <span class='va'>y</span>, <span class='va'>z</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># tidytable [6 × 3]</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 6 × 3</span><span>
 #&gt;       x y     z    
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a     1    
@@ -185,7 +185,7 @@ Useful if the resulting column should be type integer/double.</p></td>
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span>     3 g     5    
 #&gt; </span><span style='color: #BCBCBC;'>6</span><span>     3 h     6    </div><div class='input'>
 <span class='fu'>separate_rows.</span><span class='op'>(</span><span class='va'>test_df</span>, <span class='va'>y</span>, <span class='va'>z</span>, convert <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [6 × 3]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 6 × 3</span><span>
 #&gt;       x y         z
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a         1

@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -182,7 +182,7 @@
 
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>unite.</span><span class='op'>(</span><span class='st'>"new_col"</span>, <span class='va'>b</span>, <span class='va'>c</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># tidytable [3 × 2]</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 2</span><span>
 #&gt;   a     new_col
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     b_c    
@@ -190,7 +190,7 @@
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span> a     b_NA   </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>unite.</span><span class='op'>(</span><span class='st'>"new_col"</span>, <span class='fu'>where</span><span class='op'>(</span><span class='va'>is.character</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [3 × 1]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 3 × 1</span><span>
 #&gt;   new_col
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> a_b_c  
@@ -198,7 +198,7 @@
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span> a_b_NA </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>unite.</span><span class='op'>(</span><span class='st'>"new_col"</span>, <span class='va'>b</span>, <span class='va'>c</span>, remove <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [3 × 4]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 3 × 4</span><span>
 #&gt;   a     b     c     new_col
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     b     c     b_c    
@@ -206,7 +206,7 @@
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span> a     b     </span><span style='color: #BB0000;'>NA</span><span>    b_NA   </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>unite.</span><span class='op'>(</span><span class='st'>"new_col"</span>, <span class='va'>b</span>, <span class='va'>c</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [3 × 2]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 3 × 2</span><span>
 #&gt;   a     new_col
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     b_c    
@@ -214,7 +214,7 @@
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span> a     b      </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>unite.</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [3 × 1]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 3 × 1</span><span>
 #&gt;   new_col
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> a_b_c  

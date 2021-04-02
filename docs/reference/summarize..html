@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -188,7 +188,7 @@
   <span class='fu'>summarize.</span><span class='op'>(</span>avg_a <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>,
              max_b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>b</span><span class='op'>)</span>,
              .by <span class='op'>=</span> <span class='va'>c</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># tidytable [2 × 3]</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 2 × 3</span><span>
 #&gt;   c     avg_a max_b
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> a       1.5     5
@@ -196,7 +196,7 @@
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>summarize.</span><span class='op'>(</span>avg_a <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>,
              .by <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>c</span>, <span class='va'>d</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># tidytable [2 × 3]</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 2 × 3</span><span>
 #&gt;   c     d     avg_a
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     a       1.5
