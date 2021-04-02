@@ -29,7 +29,6 @@ Description: A tidy interface to 'data.table' that is 'rlang' compatible,
   giving users the speed of 'data.table' with the clean syntax of the tidyverse.
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 Imports: 
     data.table (>= 1.12.6),
     glue (>= 1.4.0),
