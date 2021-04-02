@@ -29,8 +29,7 @@ build_data_mask <- function(x, ...) {
   } else if (is_quosures(x)) {
     x <- x[[1]]
   }
-  dots <- enexprs(...)
-  new_data_mask(env(get_env(x), !!!dots))
+  new_data_mask(env(get_env(x), ...))
 }
 
 # Repair names of a data.table
