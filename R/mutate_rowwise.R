@@ -29,10 +29,6 @@ mutate_rowwise..data.frame <- function(.df, ...) {
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
 
-  # Need to prep expressions before .rowwise_id is added
-  # Otherwise c_across.(cols = everything()) will grab .rowwise_id
-  dots <- prep_exprs(dots, .df)
-
   .df <- mutate.(.df, .rowwise_id = .I)
 
   .df <- mutate.(.df, !!!dots, .by = .rowwise_id)

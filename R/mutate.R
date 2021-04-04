@@ -36,14 +36,14 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
   .df <- as_tidytable(.df)
   .df <- shallow(.df)
 
+  .by <- enquo(.by)
+
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
 
   mask <- build_data_mask(dots)
 
-  dots <- prep_exprs(dots, .df)
-
-  .by <- enquo(.by)
+  dots <- prep_exprs(dots, .df, !!.by)
 
   if (quo_is_null(.by)) {
     dots_names <- names(dots)
