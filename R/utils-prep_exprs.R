@@ -2,15 +2,15 @@
 # Allows use of functions like n()/n.() and c_across()/c_across.()
   ## Replaces these functions with the necessary data.table translations
 # General idea follows dt_squash found here: https://github.com/tidyverse/dtplyr/blob/master/R/tidyeval.R
-prep_exprs <- function(x, data) {
+prep_exprs <- function(x, data, .by = NULL) {
   if (is.list(x)) {
-    lapply(x, prep_expr, data)
+    lapply(x, prep_expr, data, {{ .by }})
   } else {
-    prep_expr(x, data)
+    prep_expr(x, data, {{ .by }})
   }
 }
 
-prep_expr <- function(x, data) {
+prep_expr <- function(x, data, .by = NULL) {
   if (is_quosure(x)) {
     x <- get_expr(x)
   }
@@ -33,32 +33,40 @@ prep_expr <- function(x, data) {
     }
     x <- unname(x)
     x[[1]] <- quote(ifelse.)
-    x[-1] <- lapply(x[-1], prep_expr, data)
+    x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }})
     x
   } else if (is_call(x, "case_when")) {
     x[[1]] <- quote(case_when.)
-    x[-1] <- lapply(x[-1], prep_expr, data)
+    x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }})
     x
   } else if (is_call(x, "replace_na")) {
     x[[1]] <- quote(replace_na.)
     x
   } else if (is_call(x, "c_across.")) {
     call <- match.call(tidytable::c_across., x, expand.dots = FALSE)
-    cols <- call$cols %||% quote(everything())
-    cols <- select_vec_sym(data, !!cols)
+    cols <- get_cols(data, call$cols, {{ .by }})
     call2("vec_c", !!!cols, .ns = "vctrs")
   } else if (is_call(x, c("if_all.", "if_any."))) {
     call <- match.call(tidytable::if_all., x, expand.dots = FALSE)
     if (is.null(call$.fns)) return(TRUE)
-    .cols <- call$.cols %||% quote(everything())
-    .cols <- select_vec_sym(data, !!.cols)
+    .cols <- get_cols(data, call$.cols, {{ .by }})
     call_list <- map.(.cols, ~ fn_to_expr(call$.fns, .x))
     reduce_fn <- if (is_call(x, "if_all.")) "&" else "|"
-    call_reduce(call_list, reduce_fn)
+    filter_expr <- call_reduce(call_list, reduce_fn)
+    prep_expr(filter_expr, data, {{ .by }})
   } else {
-    x[-1] <- lapply(x[-1], prep_expr, data)
+    x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }})
     x
   }
+}
+
+# Get cols for c_across/if_all/if_any
+# If cols is not provided defaults to everything()
+# Removes .by columns from selection
+get_cols <- function(data, call_cols, .by = NULL) {
+  .cols <- call_cols %||% quote(everything())
+  .cols <- expr(c(!!.cols, - {{ .by }}))
+  select_vec_sym(data, !!.cols)
 }
 
 internal_if_else <- function(condition, true, false, missing = NULL) {

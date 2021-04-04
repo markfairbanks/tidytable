@@ -48,6 +48,19 @@ test_that("can filter using a pre-defined variable", {
   expect_equal(out$x, 3)
 })
 
+test_that("doesn't use .by columns, can use n()", {
+  test_df <- tidytable(
+    group = c("a", "a", "b"),
+    val1 = 1:3,
+    val2 = 1:3
+  )
+
+  out <- test_df %>%
+    filter.(if_any.(everything(), ~ .x <= n()), .by = group)
+
+  expect_equal(nrow(out), 2)
+})
+
 test_that("can be used in a custom function", {
   test_df <- tidytable(x = 1:3, y = rep(3, 3))
 
