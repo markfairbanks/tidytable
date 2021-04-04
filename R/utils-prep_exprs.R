@@ -52,7 +52,8 @@ prep_expr <- function(x, data, .by = NULL) {
     .cols <- get_cols(data, call$.cols, {{ .by }})
     call_list <- map.(.cols, ~ fn_to_expr(call$.fns, .x))
     reduce_fn <- if (is_call(x, "if_all.")) "&" else "|"
-    call_reduce(call_list, reduce_fn)
+    filter_expr <- call_reduce(call_list, reduce_fn)
+    prep_expr(filter_expr, data, {{ .by }})
   } else {
     x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }})
     x
