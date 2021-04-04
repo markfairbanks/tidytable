@@ -60,8 +60,8 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns = NULL,
 
   .by <- enquo(.by)
 
-  .cols <- list(enquo(.cols), quo(-!!.by))
-  .cols <- select_dots_chr(.df, !!!.cols)
+  .cols <- expr(c({{ .cols }}, -!!.by))
+  .cols <- select_vec_chr(.df, !!.cols)
   if (length(.cols) == 0) return(.df)
 
   dots <- enquos(...)
