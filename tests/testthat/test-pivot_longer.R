@@ -271,4 +271,9 @@ test_that("works with names_to = '.value'", {
   expect_named(out, c("id", "x", "y"))
 })
 
+test_that("doesn't convert factor cols to character, #202", {
+  fct_df <- tidytable(x = factor("a"), y = factor("b"))
+  out <- pivot_longer.(fct_df)
 
+  expect_equal(out$value, as.factor(c("a", "b")))
+})

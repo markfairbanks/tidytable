@@ -82,6 +82,11 @@ pivot_longer..data.frame <- function(.df,
 
   id_vars <- names[!names %in% measure_vars]
 
+  # Check if value.factor should be TRUE, #202
+  fct_flag <- map_lgl.(.df, is.factor)
+  names(fct_flag) <- names
+  value_factor <- all(fct_flag[measure_vars])
+
   multiple_names_to <- length(names_to) > 1
   uses_dot_value <- ".value" %in% names_to
 
@@ -151,7 +156,7 @@ pivot_longer..data.frame <- function(.df,
     ...,
     # na.rm = values_drop_na,
     variable.factor = fast_pivot,
-    value.factor = FALSE
+    value.factor = value_factor
   ))
 
   if (!is.null(names_prefix)) {
