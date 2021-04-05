@@ -1,5 +1,8 @@
 # tidytable 0.6.1 (in development)
 
+#### New functions
+* `coalesce.()`
+
 #### Bug fixes
 * `if_all.()`/`if_any.()`
   + No longer try to use `.by` columns (#225)

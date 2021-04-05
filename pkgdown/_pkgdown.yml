@@ -24,6 +24,7 @@ reference:
   - starts_with("bind")
   - c_across.
   - case_when.
+  - coalesce.
   - count.
   - desc.
   - distinct.
