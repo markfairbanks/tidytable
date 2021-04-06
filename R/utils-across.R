@@ -53,6 +53,8 @@ fn_to_expr <- function(.fn, .col, ...) {
     call <- f_rhs(.fn)
     call <- replace_dot(call, sym(.col))
     call
+  } else if (is_null(.fn)) {
+    sym(.col)
   } else {
     abort(".fns needs to be a list, function name, or formula")
   }

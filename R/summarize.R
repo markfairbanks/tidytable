@@ -44,7 +44,7 @@ summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE) {
 
   mask <- build_data_mask(dots)
 
-  dots <- prep_exprs(dots, .df)
+  dots <- prep_exprs(dots, .df, {{ .by }})
 
   .by <- select_vec_chr(.df, {{ .by }})
 

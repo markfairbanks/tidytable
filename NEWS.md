@@ -1,6 +1,7 @@
 # tidytable 0.6.1 (in development)
 
 #### New functions
+* `across.()`
 * `coalesce.()`
 
 #### Bug fixes
