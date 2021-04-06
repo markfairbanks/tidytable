@@ -4,7 +4,8 @@
 # General idea follows dt_squash found here: https://github.com/tidyverse/dtplyr/blob/master/R/tidyeval.R
 prep_exprs <- function(x, data, .by = NULL) {
   if (is.list(x)) {
-    lapply(x, prep_expr, data, {{ .by }})
+    x <- lapply(x, prep_expr, data, {{ .by }})
+    squash(x)
   } else {
     prep_expr(x, data, {{ .by }})
   }
@@ -44,16 +45,22 @@ prep_expr <- function(x, data, .by = NULL) {
     x
   } else if (is_call(x, "c_across.")) {
     call <- match.call(tidytable::c_across., x, expand.dots = FALSE)
-    cols <- get_cols(data, call$cols, {{ .by }})
+    cols <- get_across_cols(data, call$cols, {{ .by }})
     call2("vec_c", !!!cols, .ns = "vctrs")
   } else if (is_call(x, c("if_all.", "if_any."))) {
     call <- match.call(tidytable::if_all., x, expand.dots = FALSE)
     if (is.null(call$.fns)) return(TRUE)
-    .cols <- get_cols(data, call$.cols, {{ .by }})
+    .cols <- get_across_cols(data, call$.cols, {{ .by }})
     call_list <- map.(.cols, ~ fn_to_expr(call$.fns, .x))
     reduce_fn <- if (is_call(x, "if_all.")) "&" else "|"
     filter_expr <- call_reduce(call_list, reduce_fn)
     prep_expr(filter_expr, data, {{ .by }})
+  } else if (is_call(x, "across.")) {
+    call <- match.call(tidytable::across., x, expand.dots = FALSE)
+    .cols <- get_across_cols(data, call$.cols, {{ .by }})
+    dots <- call$...
+    call_list <- across_calls(eval_tidy(call$.fns), call$.fns, .cols, call$.names, dots)
+    prep_exprs(call_list, data, {{ .by }})
   } else {
     x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }})
     x
@@ -63,7 +70,7 @@ prep_expr <- function(x, data, .by = NULL) {
 # Get cols for c_across/if_all/if_any
 # If cols is not provided defaults to everything()
 # Removes .by columns from selection
-get_cols <- function(data, call_cols, .by = NULL) {
+get_across_cols <- function(data, call_cols, .by = NULL) {
   .cols <- call_cols %||% quote(everything())
   .cols <- expr(c(!!.cols, - {{ .by }}))
   select_vec_sym(data, !!.cols)

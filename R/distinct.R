@@ -37,22 +37,20 @@ distinct..data.frame <- function(.df, ..., .keep_all = FALSE) {
 
   dots <- enquos(...)
 
+  across_check(dots)
+
   if (length(dots) == 0) {
-
     .df <- unique(.df)
-
   } else {
+    cols <- select_dots_idx(.df, ...)
 
-    select_cols <- select_dots_idx(.df, ...)
+    .df <- unique(.df, by = cols)
 
-    .df <- unique(.df, by = select_cols)
-
-    if (!.keep_all) .df <- .df[, ..select_cols]
+    if (!.keep_all) .df <- .df[, ..cols]
 
     named_flag <- have_name(dots)
 
     if (any(named_flag)) {
-
       named_dots <- dots[named_flag]
 
       .df <- rename.(.df, !!!named_dots)
@@ -62,4 +60,19 @@ distinct..data.frame <- function(.df, ..., .keep_all = FALSE) {
   .df
 }
 
-globalVariables("..select_cols")
+across_check <- function(dots) {
+  use_across <- map_lgl.(dots, quo_is_call, "across.")
+
+  if (any(use_across)) {
+    abort(
+      paste0(
+        c("across.() is unnecessary in distinct.()",
+        "Please directly use tidyselect:",
+        "Ex: df %>% distinct.(starts_with('x'))"),
+        collapse = "\n"
+      )
+    )
+  }
+}
+
+globalVariables("..cols")
