@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0.9</span>
       </span>
     </div>
 
@@ -103,10 +103,9 @@
 <div id="speed-comparisons" class="section level3">
 <h3 class="hasAnchor">
 <a href="#speed-comparisons" class="anchor"></a>Speed Comparisons</h3>
-<p>Below are some speed comparisons of various functions. More functions will get added to the speed comps over time.</p>
 <p>A few notes:</p>
 <ul>
-<li>Comparing times from separate functions won’t be very useful. For example - the <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> tests were performed on a different dataset from <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code>.</li>
+<li>Comparing times from separate functions won’t be very useful. For example - the <code>summarize()</code> tests were performed on a different dataset from <code>case_when()</code>.</li>
 <li>
 <code><a href="https://Rdatatable.gitlab.io/data.table/reference/openmp-utils.html">setDTthreads(4)</a></code> was used for <code>data.table</code> &amp; <code>tidytable</code> timings.</li>
 <li>Modify-by-reference was used in <code>data.table</code> when being compared to <code><a href="../reference/mutate..html">mutate.()</a></code> &amp; <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code>
@@ -122,7 +121,8 @@
 <li>All tests can be found in the source code <a href="https://github.com/markfairbanks/tidytable/blob/master/vignettes/speed_comparisons.Rmd">here</a>.</li>
 <li>FAQ - Why are some <code>tidytable</code> functions faster than their <code>data.table</code> counterpart?
 <ul>
-<li>All R functions have some slight natural variation in their execution time. If a <code>tidytable</code> function appears to be “faster” than <code>data.table</code> it’s due to this. However one goal of these tests is to show that the “time cost” of translating <code>tidyverse</code> syntax to <code>data.table</code> is negligible to the user.</li>
+<li>Short answer - they’re not! After all they’re just using <code>data.table</code> in the background.</li>
+<li>Long answer - All R functions have some slight natural variation in their execution time. By chance the <code>tidytable</code> runs were slightly shorter on those specific functions on this iteration of the tests. However one goal of these tests is to show that the “time cost” of translating <code>tidyverse</code> syntax to <code>data.table</code> is very negligible to the user (especially on medium-to-large datasets).</li>
 </ul>
 </li>
 <li>Lastly I’d like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.</li>
@@ -130,19 +130,19 @@
 <pre><code>#&gt; # A tidytable: 13 × 7
 #&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas tidytable_vs_dplyr
 #&gt;    &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             
-#&gt;  1 arrange            55.9      51     58.3    1291.   355   3.9%              
-#&gt;  2 case_when          34.7      51     NA       372.    59.2 13.7%             
-#&gt;  3 distinct           31.9      34.1   37.8      40.9  309   83.4%             
-#&gt;  4 fill               44.1      47.5   NA        59.5  846   79.8%             
-#&gt;  5 filter            222.      228.   234.      254    707   89.9%             
-#&gt;  6 inner_join         52.8      78.5  219.       91.1   NA   86.2%             
-#&gt;  7 left_join          59.5      61.4  185.       99.4   NA   61.8%             
-#&gt;  8 mutate             54.6      64.5  355.       87.9   86.4 73.4%             
-#&gt;  9 nest               15        14.4   NA        30.2   NA   47.7%             
-#&gt; 10 pivot_longer       12.2      16.8   NA        51.5   NA   32.6%             
-#&gt; 11 pivot_wider       132       127.   143.       75.4   NA   168.6%            
-#&gt; 12 summarize         411.      414.   351.      320.   834   129.3%            
-#&gt; 13 unnest             12.9      19.3   NA        44     NA   43.9%</code></pre>
+#&gt;  1 arrange            39.1      38.6   40.5    1347.   355   2.9%              
+#&gt;  2 case_when          27.5      34.7   NA       362.    59.2 9.6%              
+#&gt;  3 distinct           12.2      12.9   15.6      36.5  309   35.3%             
+#&gt;  4 fill               33.6      44.6   NA        59.7  846   74.7%             
+#&gt;  5 filter            217.      212.   244.      271    707   78.1%             
+#&gt;  6 inner_join         42.8      48.3  177.       82.4   NA   58.6%             
+#&gt;  7 left_join          54.9      54    131.       91.1   NA   59.3%             
+#&gt;  8 mutate             49.8      53.2  304.       56.7   86.4 93.8%             
+#&gt;  9 nest               10.1      12.1   NA        26.9   NA   45.0%             
+#&gt; 10 pivot_longer       11.2      22.4   NA        40.3   NA   55.6%             
+#&gt; 11 pivot_wider        84.9      81.1  109.       72.1   NA   112.5%            
+#&gt; 12 summarize         193.      216.   230.      209.   834   103.6%            
+#&gt; 13 unnest              8.7       9.6   NA        29.7   NA   32.3%</code></pre>
 </div>
   </div>
 

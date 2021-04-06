@@ -18,24 +18,25 @@ knitr::opts_chunk$set(
 
 ### Speed Comparisons
 
-Below are some speed comparisons of various functions. More functions will get added to the speed comps over time.
-
 A few notes:
 
 * Comparing times from separate functions won't be very useful. For example - the `summarize()` tests were performed on a different dataset from `case_when()`.
 * `setDTthreads(4)` was used for `data.table` & `tidytable` timings.
 * Modify-by-reference was used in `data.table` when being compared to `mutate.()` & `dplyr::mutate()`
-* `fill.()` & `tidyr::fill()` both work with character/factor/logical columns, whereas `data.table::nafill()` does not. Testing only included numeric columns due to this constraint.
+* `fill.()` & `tidyr::fill()` both work with character/factor/logical columns, whereas `data.table::nafill()`
+does not. Testing only included numeric columns due to this constraint.
 * `dtplyr` is missing timings for functions that are not yet implemented in the package.
 * `pandas` comparisons are in the process of being added - more will be added soon.
 * All tests are run 5 times. The times shown are the median of those 5 runs.
 * All timings are in milliseconds.
 * All tests can be found in the source code [here](https://github.com/markfairbanks/tidytable/blob/master/vignettes/speed_comparisons.Rmd).
 * FAQ - Why are some `tidytable` functions faster than their `data.table` counterpart?
-  + All R functions have some slight natural variation in their execution time. 
-  If a `tidytable` function appears to be "faster" than `data.table` it's due to this.
-  However one goal of these tests is to show that the "time cost" of translating `tidyverse` syntax
-  to `data.table` is negligible to the user.
+  + Short answer - they're not! After all they're just using `data.table` in the background.
+  + Long answer - All R functions have some slight natural variation in their execution time. 
+  By chance the `tidytable` runs were slightly shorter on those specific functions on this
+  iteration of the tests. However one goal of these tests is to show that the "time cost" of
+  translating `tidyverse` syntax to `data.table` is very negligible to the
+  user (especially on medium-to-large datasets).
 * Lastly I'd like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.
 
 ```{r benchmark_setup, echo=FALSE}
@@ -72,10 +73,10 @@ inv_gc(); inv_gc();
 
 ```{r summarize, echo=FALSE}
 summarize_marks <- bench::mark(
-  tidyverse = summarize(group_by(test_tbl, c, d), avg_a = mean(a), .groups = "drop"),
-  dtplyr = as.data.table(summarize(group_by(lazy_dt(test_dt), c, d), avg_a = mean(a))),
-  tidytable = summarize.(test_dt, avg_a = mean(a), .by = c(c, d)),
-  data.table = test_dt[, list(avg_a = mean(a)), by = .(c, d)],
+  tidyverse = summarize(group_by(test_tbl, c), avg_a = mean(a), .groups = "drop"),
+  dtplyr = as.data.table(summarize(group_by(lazy_dt(test_dt), c), avg_a = mean(a))),
+  tidytable = summarize.(test_dt, avg_a = mean(a), .by = c),
+  data.table = test_dt[, list(avg_a = mean(a)), by = c],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
          func_tested = "summarize")
