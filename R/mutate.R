@@ -58,6 +58,15 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
       .df <- eval_tidy(dt_expr, mask, caller_env())
     }
   } else {
+    across_flag <- map_lgl.(dots, quo_is_call, "across.")
+
+    if (length(dots) > 1) {
+      if (any(across_flag[-1])) {
+        abort("across.() can only be used in the first position of mutate.()
+              when `.by` is used.")
+      }
+    }
+
     dots <- prep_exprs(dots, .df, !!.by)
 
     .by <- select_vec_chr(.df, !!.by)

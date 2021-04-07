@@ -7,7 +7,6 @@ test_that("ascending order works", {
   check_df <- arrange.(test_df, a, b)
 
   expect_equal(across_df, check_df)
-
 })
 
 test_that("descending order works", {
@@ -140,6 +139,18 @@ test_that("can be used in custom functions", {
 
   expect_equal(df$x_start, c(2,2,2))
   expect_equal(df$end_x, c(3,3,3))
+})
+
+test_that("can refer to newly created columns", {
+  test_df <- tidytable(x = rep(1, 3), y = rep(2, 3))
+
+  out <- test_df %>%
+    mutate.(
+      double_x = x * 2,
+      across.(c(x, double_x), as.character)
+    )
+
+  expect_equal(out$double_x, c("2", "2", "2"))
 })
 
 # summarize -----------------------------------------------------
