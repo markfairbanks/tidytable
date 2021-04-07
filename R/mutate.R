@@ -48,7 +48,6 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
       dots_i <- prep_exprs(dots[i], .df, !!.by)
       dots_i_names <- names(dots_i)
 
-      # If across is used dots_i can be length > 1
       dots_i <- map2.(dots_i, dots_i_names, ~ mutate_prep(.df, .x, .y))
 
       j <- expr(':='(!!!dots_i))
@@ -58,10 +57,10 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
       .df <- eval_tidy(dt_expr, mask, caller_env())
     }
   } else {
-    across_flag <- map_lgl.(dots, quo_is_call, "across.")
-
     if (length(dots) > 1) {
-      if (any(across_flag[-1])) {
+      across_flag <- map_lgl.(dots[-1], quo_is_call, "across.")
+
+      if (any(across_flag)) {
         abort("across.() can only be used in the first position of mutate.()
               when `.by` is used.")
       }
