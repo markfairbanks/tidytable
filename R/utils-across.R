@@ -1,8 +1,7 @@
 # Build across calls
-across_calls <- function(.fns, .fun, .cols, .names, dots) {
-
-  if (!is.list(.fns)) {
-    call_list <- map.(.cols, ~ fn_to_expr(.fun, .x, !!!dots))
+across_calls <- function(.fns, .cols, .names, dots) {
+  if (!is_call(.fns, c("list", "list2"))) {
+    call_list <- map.(.cols, ~ fn_to_expr(.fns, .x, !!!dots))
 
     .names <- .names %||% "{.col}"
 
@@ -11,13 +10,15 @@ across_calls <- function(.fns, .fun, .cols, .names, dots) {
       repair = "check_unique", quiet = TRUE
     )
   } else {
+    .fns <- .fns[-1]
+
     names_flag <- have_name(.fns)
 
     if (!all(names_flag)) names(.fns)[!names_flag] <- seq_len(length(.fns))[!names_flag]
 
     fn_names <- names(.fns)
 
-    .args <- unname(.fun[-1])
+    .args <- unname(.fns)
 
     call_list <- vector("list", length(.cols) * length(.args))
     k <- 1
