@@ -19,6 +19,7 @@ reference:
   - summarize.
 - subtitle: Other dplyr functions
 - contents:
+  - across.
   - arrange_across.
   - between.
   - starts_with("bind")

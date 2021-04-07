@@ -2,8 +2,12 @@
 #' @rdname map.
 map2. <- function(.x, .y, .f, ...) {
   .f <- as_function(.f)
-
-  mapply(.f, .x, .y, MoreArgs = list(...), SIMPLIFY = FALSE)
+  out <- mapply(.f, .x, .y, MoreArgs = list(...), SIMPLIFY = FALSE)
+  if (length(out) == length(.x)) {
+    set_names(out, names(.x))
+  } else {
+    set_names(out, NULL)
+  }
 }
 
 #' @export
