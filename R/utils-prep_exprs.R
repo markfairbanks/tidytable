@@ -58,8 +58,9 @@ prep_expr <- function(x, data, .by = NULL) {
   } else if (is_call(x, "across.")) {
     call <- match.call(tidytable::across., x, expand.dots = FALSE)
     .cols <- get_across_cols(data, call$.cols, {{ .by }})
+    .fns <- fix_across_fns(call$.fns)
     dots <- call$...
-    call_list <- across_calls(eval_tidy(call$.fns), call$.fns, .cols, call$.names, dots)
+    call_list <- across_calls(eval_tidy(.fns), .fns, .cols, call$.names, dots)
     prep_exprs(call_list, data, {{ .by }})
   } else {
     x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }})
@@ -74,6 +75,18 @@ get_across_cols <- function(data, call_cols, .by = NULL) {
   .cols <- call_cols %||% quote(everything())
   .cols <- expr(c(!!.cols, - {{ .by }}))
   select_vec_sym(data, !!.cols)
+}
+
+# Make sure n and desc can be used as bare functions in across
+fix_across_fns <- function(call_fns) {
+  if (is_symbol(call_fns, c("n", "desc"))) {
+    if (is_symbol(call_fns, "n")) {
+      call_fns <- quote(n.)
+    } else {
+      call_fns <- quote(desc.)
+    }
+  }
+  call_fns
 }
 
 internal_if_else <- function(condition, true, false, missing = NULL) {

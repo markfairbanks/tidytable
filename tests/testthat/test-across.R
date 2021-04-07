@@ -9,8 +9,16 @@ test_that("ascending order works", {
   expect_equal(across_df, check_df)
 })
 
-test_that("descending order works", {
+test_that("descending order works with desc.", {
   across_df <- arrange.(test_df, across.(everything(), desc.))
+
+  check_df <- arrange.(test_df, -a, -b)
+
+  expect_equal(across_df, check_df)
+})
+
+test_that("descending order works with desc", {
+  across_df <- arrange.(test_df, across.(everything(), desc))
 
   check_df <- arrange.(test_df, -a, -b)
 
@@ -163,6 +171,17 @@ test_that("single function works", {
   expect_named(result_df, c("a", "b"))
   expect_equal(result_df$a, 1.5)
   expect_equal(result_df$b, 5)
+})
+
+test_that("n works", {
+  test_df <- tidytable(a = 1:3, b = 4:6)
+
+  result_df <- test_df %>%
+    summarize.(across.(c(a, b), n))
+
+  expect_named(result_df, c("a", "b"))
+  expect_equal(result_df$a, 3)
+  expect_equal(result_df$b, 3)
 })
 
 test_that("can use anonymous functions", {
