@@ -8,7 +8,9 @@
 * `if_all.()`/`if_any.()`
   + No longer try to use `.by` columns (#225)
   + Can use `n()` in filtering (#226)
-* `pivot_longer.()`: No longer converts factor values to character (#202)
+* `pivot_longer.()`
+  + No longer converts factor values to character (#202, #234)
+  + Preserves column order when using `names_to = c(".value", "id")`
 
 # tidytable 0.6.0
 
