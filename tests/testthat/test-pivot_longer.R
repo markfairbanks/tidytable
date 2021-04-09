@@ -189,6 +189,17 @@ test_that("can pivot to multiple measure cols", {
   expect_equal(out$id, c("3", "4"))
 })
 
+test_that("can drop the 'id' column by specifying NA", {
+  test_df <- tidytable(x_3 = 3, x_4 = 4, y_3 = 3, y_4 = 4)
+
+  out <- test_df %>%
+    pivot_longer.(names_to = c(".value", NA), names_sep = "_")
+
+  expect_named(out, c("x", "y"))
+  expect_equal(out$x, c(3, 4))
+  expect_equal(out$y, c(3, 4))
+})
+
 test_that("balanced data can have different column order", {
   test_df <- tidytable(x_3 = 3, x_4 = 4, y_4 = 4, y_3 = 3)
 
@@ -271,16 +282,17 @@ test_that("works with unbalanced data - 3", {
   )
 })
 
-test_that("works with names_to = '.value'", {
-  dt <- tidytable(id = 1:3, x1 = 4:6, x2 = 5:7, y1 = 7:9, y2 = 10:12)
-  out <- dt %>%
-    pivot_longer.(
-      !id,
-      names_to = ".value",
-      names_pattern = "(.)."
-    )
+test_that("errors with `names_to = '.value'`", {
+  dt <- tidytable(x1 = 1, x2 = 2, y1 = 1, y2 = 2)
 
-  expect_named(out, c("id", "x", "y"))
+  expect_error(
+    dt %>%
+      pivot_longer.(
+        !id,
+        names_to = ".value",
+        names_pattern = "(.)."
+      )
+  )
 })
 
 test_that("doesn't convert factor cols to character, #202", {

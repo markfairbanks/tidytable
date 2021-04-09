@@ -1,5 +1,8 @@
 # tidytable 0.6.1 (in development)
 
+#### Functionality improvements
+* `pivot_longer.()`: Can now use `names_to = c(".value", NA)` to drop the id column.
+
 #### New functions
 * `across.()`
 * `coalesce.()`
@@ -10,7 +13,7 @@
   + Can use `n()` in filtering (#226)
 * `pivot_longer.()`
   + No longer converts factor values to character (#202, #234)
-  + Preserves column order when using `names_to = c(".value", "id")`
+  + Preserves column order when using `names_to = c(".value", "id")` (#235)
 
 # tidytable 0.6.0
 
