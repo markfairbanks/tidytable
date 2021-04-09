@@ -18,12 +18,8 @@
 #'   filter.(col1 < 2, col2 < 4) %>%
 #'   inv_gc() %>%
 #'   select.(col1)
-inv_gc <- function(x) {
-  UseMethod("inv_gc")
-}
-
 #' @export
-inv_gc.default <- function(x) {
+inv_gc <- function(x) {
   if(missing(x)) {
     invisible(gc())
   } else {
