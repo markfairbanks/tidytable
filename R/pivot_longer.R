@@ -84,11 +84,18 @@ pivot_longer..data.frame <- function(.df,
 
   multiple_names_to <- length(names_to) > 1
   uses_dot_value <- ".value" %in% names_to
+  na_in_names_to <- is.na(names_to)
 
   variable_name <- "variable"
 
   if (uses_dot_value) {
     .df <- shallow(.df)
+
+    if (multiple_names_to && any(na_in_names_to)) {
+      names_to[na_in_names_to] <- ".id"
+    } else if (!multiple_names_to) {
+      abort("The use of `names_to = '.value'` is not yet supported")
+    }
 
     if (!is.null(names_sep)) {
       names_to_setup <- str_separate(measure_vars, into = names_to, sep = names_sep)
@@ -112,8 +119,6 @@ pivot_longer..data.frame <- function(.df,
       variable_name <- names_to[!names_to == ".value"]
       .value_ids <- f_sort(unique(names_to_setup[[variable_name]]))
       names_to_setup <- expand_grid.(.value = .value, !!variable_name := .value_ids)
-    } else {
-      names_to_setup <- tidytable(.value = .value)
     }
 
     glued <- glue_data(names_to_setup, names_glue)
@@ -171,6 +176,10 @@ pivot_longer..data.frame <- function(.df,
   }
 
   if (multiple_names_to && uses_dot_value) {
+    if (any(na_in_names_to)) {
+      .value_ids <- NULL
+    }
+
     .df <- mutate.(.df, !!variable_name := !!.value_ids)
   } else if (multiple_names_to && !uses_dot_value) {
     if (!is.null(names_sep)) {
