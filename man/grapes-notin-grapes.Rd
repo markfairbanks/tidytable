@@ -12,7 +12,7 @@ x \%notin\% y
 \item{y}{vector or NULL}
 }
 \description{
-notin operator
+"not in" operator - works best when used inside \code{filter.()}
 }
 \examples{
 test_df <- tidytable(x = 1:4, y = 1:4)

@@ -1,5 +1,8 @@
 #' notin operator
 #'
+#' @description
+#' "not in" operator - works best when used inside `filter.()`
+#'
 #' @param x vector or NULL
 #' @param y vector or NULL
 #'
@@ -10,7 +13,6 @@
 #'
 #' test_df %>%
 #'   filter.(x %notin% c(2, 4))
-'%notin%' <- function(x,y){
-  # vctrs is faster than base %in%, even inside data.table filter
+'%notin%' <- function(x, y){
   !vec_in(x, y)
 }
