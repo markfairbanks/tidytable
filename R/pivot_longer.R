@@ -82,11 +82,6 @@ pivot_longer..data.frame <- function(.df,
 
   id_vars <- names[!names %in% measure_vars]
 
-  # Check if value.factor should be TRUE, #202
-  fct_flag <- map_lgl.(.df, is.factor)
-  names(fct_flag) <- names
-  value_factor <- all(fct_flag[measure_vars])
-
   multiple_names_to <- length(names_to) > 1
   uses_dot_value <- ".value" %in% names_to
 
@@ -147,6 +142,12 @@ pivot_longer..data.frame <- function(.df,
     variable_name <- names_to
   }
 
+  if (values_drop_na && !multiple_names_to) {
+    na_rm <- TRUE
+  } else {
+    na_rm <- FALSE
+  }
+
   .df <- suppressWarnings(melt(
     data = .df,
     id.vars = id_vars,
@@ -154,9 +155,9 @@ pivot_longer..data.frame <- function(.df,
     variable.name = variable_name,
     value.name = values_to,
     ...,
-    # na.rm = values_drop_na,
+    na.rm = na_rm,
     variable.factor = fast_pivot,
-    value.factor = value_factor
+    value.factor = TRUE
   ))
 
   if (!is.null(names_prefix)) {
@@ -190,7 +191,7 @@ pivot_longer..data.frame <- function(.df,
 
   # data.table::melt() drops NAs using "&" logic, not "|"
   # Example in tidytable #186 shows why this is necessary
-  if (values_drop_na) {
+  if (values_drop_na && multiple_names_to) {
     filter_calls <- map.(syms(values_to), ~ call2("!", call2("is.na", .x)))
     filter_expr <- call_reduce(filter_calls, "|")
 

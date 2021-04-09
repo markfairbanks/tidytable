@@ -2,30 +2,38 @@
 
 test_that("can pivot all cols (unspecified) to long", {
   df <- data.table(x = 1:2, y = 3:4)
-  pivot_df <- pivot_longer.(df)[order(name, value)]
+  pivot_df <- pivot_longer.(df)
 
   expect_named(pivot_df, c("name", "value"))
   expect_equal(pivot_df$name, c("x","x","y","y"))
-  expect_equal(pivot_df$value, c(1,2,3,4))
+  expect_equal(pivot_df$value, 1:4)
 })
 
 test_that("can pivot all cols (unspecified) to long with data.frame", {
   df <- data.frame(x = 1:2, y = 3:4)
-  pivot_df <- pivot_longer.(df)[order(name, value)]
+  pivot_df <- pivot_longer.(df)
 
   expect_named(pivot_df, c("name", "value"))
   expect_equal(pivot_df$name, c("x","x","y","y"))
-  expect_equal(pivot_df$value, c(1,2,3,4))
+  expect_equal(pivot_df$value, 1:4)
 })
 
+test_that("doesn't convert character cols to factor", {
+  df <- data.table(x = c("a", "b"), y = c("a", "b"))
+  pivot_df <- pivot_longer.(df)
+
+  expect_named(pivot_df, c("name", "value"))
+  expect_equal(pivot_df$name, c("x","x","y","y"))
+  expect_equal(pivot_df$value, c("a", "b", "a", "b"))
+})
 
 test_that("can pivot all cols (specified) to long", {
   df <- data.table(x = 1:2, y = 3:4)
-  pivot_df <- pivot_longer.(df, cols = c(x,y))[order(name, value)]
+  pivot_df <- pivot_longer.(df, cols = c(x,y))
 
   expect_named(pivot_df, c("name", "value"))
   expect_equal(pivot_df$name, c("x","x","y","y"))
-  expect_equal(pivot_df$value, c(1,2,3,4))
+  expect_equal(pivot_df$value, 1:4)
 })
 
 test_that("can coerce names with names_transform", {
@@ -70,22 +78,10 @@ test_that("can coerce values with values_ptypes", {
   expect_equal(pivot_df$value, c(1L,2L,3L,4L))
 })
 
-test_that("can select a single column", {
-  df <- data.table(x = 1:2, y = 3:4)
-  pivot_df <- pivot_longer.(df, cols = x)[order(name, value)]
-
-  expect_named(pivot_df, c("y", "name", "value"))
-  expect_equal(pivot_df$name, c("x","x"))
-  expect_equal(pivot_df$value, c(1,2))
-
-  pivot_df2 <- pivot_longer.(df, cols = c(x))[order(name, value)]
-  expect_equal(pivot_df, pivot_df2)
-})
-
 test_that("preserves original keys", {
   df <- data.table(x = 1:2, y = 2, z = 1:2) %>%
     mutate_across.(everything(), as.double)
-  pivot_df <- pivot_longer.(df, cols = c(y, z))[order(name, value)]
+  pivot_df <- pivot_longer.(df, cols = c(y, z))
 
   expect_named(pivot_df, c("x", "name", "value"))
   expect_equal(pivot_df$x, c(1,2,1,2))
@@ -93,10 +89,26 @@ test_that("preserves original keys", {
 
 test_that("can drop missing values", {
   df <- data.table(x = c(1, NA), y = c(NA, 2))
-  pivot_df <- pivot_longer.(df, c(x,y), values_drop_na = TRUE)[order(name, value)]
+  pivot_df <- pivot_longer.(df, c(x,y), values_drop_na = TRUE)
 
   expect_equal(pivot_df$name, c("x", "y"))
   expect_equal(pivot_df$value, c(1,2))
+})
+
+test_that("drops using | condition when using .value", {
+  df <- data.table(x_1 = 1, x_2 = 2,  y_1 = NA, y_2 = 2)
+  pivot_df <- df %>%
+    pivot_longer.(names_to = c(".value", "id"), names_sep = "_", values_drop_na = TRUE)
+
+  expect_named(pivot_df, c("id", "x", "y"))
+  expect_equal(pivot_df$y, c(NA,2))
+
+  df <- data.table(x_1 = NA, x_2 = 2,  y_1 = NA, y_2 = 2)
+  pivot_df <- df %>%
+    pivot_longer.(names_to = c(".value", "id"), names_sep = "_", values_drop_na = TRUE)
+
+  expect_named(pivot_df, c("id", "x", "y"))
+  expect_equal(pivot_df$y, 2)
 })
 
 test_that("... args to melt", {
@@ -277,3 +289,26 @@ test_that("doesn't convert factor cols to character, #202", {
 
   expect_equal(out$value, as.factor(c("a", "b")))
 })
+
+test_that("doesn't convert factor cols to character, #202", {
+  df <- tidytable(
+    fct_1 = factor("a"),
+    fct_2 = factor("b"),
+    dbl_1 = 1,
+    dbl_2 = 2,
+    chr_1 = "a",
+    chr_2 = "b"
+  )
+
+  out <- df %>%
+    pivot_longer.(names_to = c(".value", "id"), names_sep = "_")
+
+  expect_named(out, c("id", "chr", "dbl", "fct"))
+  expect_equal(out$fct, as.factor(c("a", "b")))
+  expect_equal(out$chr, c("a", "b"))
+  expect_equal(out$dbl, c(1, 2))
+})
+
+
+
+
