@@ -98,7 +98,7 @@ pivot_longer..data.frame <- function(.df,
       names_to_setup <- str_extract(measure_vars, into = names_to, names_pattern)
 
       names_glue <- paste0("{", names_to, "}", collapse = "___")
-      new_names <- glue(names_glue, .envir = names_to_setup)
+      new_names <- glue_data(names_to_setup, names_glue)
       setnames(.df, measure_vars, new_names)
       measure_vars <- new_names
     } else {
@@ -106,9 +106,17 @@ pivot_longer..data.frame <- function(.df,
             `names_sep' or `names_pattern")
     }
 
-    names_to_setup <- crossing.(!!!names_to_setup)
+    .value <- unique(names_to_setup$.value)
 
-    glued <- glue(names_glue, .envir = names_to_setup)
+    if (multiple_names_to) {
+      variable_name <- names_to[!names_to == ".value"]
+      .value_ids <- f_sort(unique(names_to_setup[[variable_name]]))
+      names_to_setup <- expand_grid.(.value = .value, !!variable_name := .value_ids)
+    } else {
+      names_to_setup <- tidytable(.value = .value)
+    }
+
+    glued <- glue_data(names_to_setup, names_glue)
 
     na_cols <- setdiff(glued, measure_vars)
 
@@ -124,8 +132,6 @@ pivot_longer..data.frame <- function(.df,
     names(measure_vars) <- NULL
 
     if (multiple_names_to) {
-      variable_name <- names_to[!names_to == ".value"]
-
       .value_ids <- unique(names_to_setup[[variable_name]])
       .value_ids <- vec_rep_each(.value_ids, nrow(.df))
     }

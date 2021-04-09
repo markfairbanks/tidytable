@@ -290,7 +290,8 @@ test_that("doesn't convert factor cols to character, #202", {
   expect_equal(out$value, as.factor(c("a", "b")))
 })
 
-test_that("doesn't convert factor cols to character, #202", {
+test_that("doesn't convert factor cols to character, #234.
+          Preserves column order, #235", {
   df <- tidytable(
     fct_1 = factor("a"),
     fct_2 = factor("b"),
@@ -303,7 +304,7 @@ test_that("doesn't convert factor cols to character, #202", {
   out <- df %>%
     pivot_longer.(names_to = c(".value", "id"), names_sep = "_")
 
-  expect_named(out, c("id", "chr", "dbl", "fct"))
+  expect_named(out, c("id", "fct", "dbl", "chr"))
   expect_equal(out$fct, as.factor(c("a", "b")))
   expect_equal(out$chr, c("a", "b"))
   expect_equal(out$dbl, c(1, 2))

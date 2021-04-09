@@ -3,7 +3,7 @@
 #' @import tidyselect
 #' @import vctrs
 #' @rawNamespace import(rlang, except = `:=`)
-#' @importFrom glue glue
+#' @importFrom glue glue glue_data
 #' @importFrom lifecycle deprecated deprecate_soft deprecate_stop
 #' @importFrom pillar glimpse dim_desc tbl_sum
 #' @importFrom stats na.omit
