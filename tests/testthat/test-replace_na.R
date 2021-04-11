@@ -1,5 +1,4 @@
 # vector ------------------------------------------------------------------
-
 test_that("empty call does nothing", {
   x <- c(1, NA)
   expect_equal(replace_na.(x), x)
@@ -37,7 +36,6 @@ test_that("tidyr::replace_na is converted to tidytable", {
 })
 
 # data frame -------------------------------------------------------------
-
 test_that("empty call does nothing", {
   df <- tidytable(x = c(1, NA))
   out <- replace_na.(df)
@@ -45,9 +43,10 @@ test_that("empty call does nothing", {
 })
 
 test_that("missing values are replaced", {
-  df <- tidytable(x = c(1, NA))
-  out <- replace_na.(df, list(x = 0))
+  df <- tidytable(x = c(1, NA), y = c(NA, 1))
+  out <- replace_na.(df, list(x = 0, y = 0))
   expect_equal(out$x, c(1, 0))
+  expect_equal(out$y, c(0, 1))
 })
 
 test_that("missing values are replaced with correct type", {
