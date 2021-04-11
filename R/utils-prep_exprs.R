@@ -68,15 +68,6 @@ prep_expr <- function(x, data, .by = NULL) {
   }
 }
 
-# Get cols for c_across/if_all/if_any
-# If cols is not provided defaults to everything()
-# Removes .by columns from selection
-get_across_cols <- function(data, call_cols, .by = NULL) {
-  .cols <- call_cols %||% quote(everything())
-  .cols <- expr(c(!!.cols, - {{ .by }}))
-  select_vec_chr(data, !!.cols)
-}
-
 internal_if_else <- function(condition, true, false, missing = NULL) {
   abort("Only for use in prep_exprs")
 }
