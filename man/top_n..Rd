@@ -22,7 +22,8 @@ Select the top or bottom entries in each group, ordered by \code{wt}.
 test_df <- data.table(
   x = 1:5,
   y = 6:10,
-  z = c(rep("a", 3), rep("b", 2)))
+  z = c(rep("a", 3), rep("b", 2))
+)
 
 test_df \%>\%
   top_n.(2, wt = y)

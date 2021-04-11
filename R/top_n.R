@@ -15,7 +15,8 @@
 #' test_df <- data.table(
 #'   x = 1:5,
 #'   y = 6:10,
-#'   z = c(rep("a", 3), rep("b", 2)))
+#'   z = c(rep("a", 3), rep("b", 2))
+#' )
 #'
 #' test_df %>%
 #'   top_n.(2, wt = y)
@@ -28,9 +29,6 @@ top_n. <- function(.df, n = 5, wt = NULL, .by = NULL) {
 
 #' @export
 top_n..data.frame <- function(.df, n = 5, wt = NULL, .by = NULL) {
-
-  deprecate_soft("0.5.2", "tidytable::top_n.()", "slice_max.()")
-
   .df <- as_tidytable(.df)
 
   wt <- enquo(wt)
