@@ -2,7 +2,6 @@
 #'
 #' @description
 #' A tidytable object is simply a data.table with nice printing features.
-#' As such it can be used exactly like a data.table would be used.
 #'
 #' Note that all tidytable functions automatically convert data.frames & data.tables to tidytables in the background.
 #' As such this function will rarely need to be used by the user.

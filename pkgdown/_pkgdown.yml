@@ -80,7 +80,6 @@ reference:
 - title: tidytable constructors
   desc: >
     A tidytable is simply a data.table with nice printing features.
-    As such it can be used exactly like a data.table would be used.
 
 
     Note: All tidytable functions automatically convert data.frame/tibble inputs to a data.table/tidytable.

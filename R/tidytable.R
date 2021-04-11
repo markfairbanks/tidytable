@@ -2,7 +2,6 @@
 #'
 #' @description
 #' `tidytable()` constructs a data.table, but one with nice printing features.
-#' As such it can be used exactly like a data.table would be used.
 #'
 #' @param ... Arguments passed to `data.table()`
 #'
