@@ -52,8 +52,7 @@ mutate_across..data.frame <- function(.df, .cols = everything(), .fns = NULL, ..
 
   .by <- enquo(.by)
 
-  .cols <- expr(c({{ .cols }}, -!!.by))
-  .cols <- select_vec_chr(.df, !!.cols)
+  .cols <- get_across_cols(.df, enquo(.cols), {{ .by }})
   if (length(.cols) == 0) return(.df)
 
   dots <- enquos(...)
