@@ -5,7 +5,7 @@ shallow <- function(x) {
 }
 
 # Create a call to data.table subset "[" (i position)
-call2_i <- function(data, i = NULL, .by = NULL, ...) {
+call2_i <- function(data, i = NULL) {
   call2("[", data, i)
 }
 
