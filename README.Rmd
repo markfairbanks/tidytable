@@ -10,7 +10,8 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%",
-  warning = FALSE
+  warning = FALSE,
+  message = FALSE
 )
 ```
 
@@ -47,7 +48,7 @@ devtools::install_github("markfairbanks/tidytable")
 
 `tidytable` uses `verb.()` syntax to replicate `tidyverse` functions:
 
-```{r message = FALSE}
+```{r}
 library(tidytable)
 
 test_df <- data.table(x = 1:3, y = 4:6, z = c("a","a","b"))
@@ -82,7 +83,7 @@ test_df %>%
 
 Below is some example `tidytable` code that utilizes `.by` that we'll then compare to its `dplyr` equivalent. The goal is to grab the first two rows of each group using `slice.()`, then add a group row number column using `mutate.()`:
 
-```{r message = FALSE}
+```{r}
 library(tidytable)
 
 test_df <- data.table(x = c("a", "a", "a", "b", "b"))
@@ -96,7 +97,7 @@ Note how `.by` is called in both `slice.()` and `mutate.()`.
 
 Compared to a `dplyr` pipe chain that utilizes `group_by()`, where each function operates "by group" until `ungroup()` is called:
 
-```{r message = FALSE}
+```{r}
 library(dplyr)
 
 test_df <- tibble(x = c("a", "a", "a", "b", "b"))
@@ -110,7 +111,7 @@ test_df %>%
 
 Note that the `ungroup()` call is unnecessary in `tidytable`.
 
-## `tidyselect` support
+## tidyselect support
 
 `tidytable` allows you to select/drop columns just like you would in the tidyverse by utilizing the [`tidyselect`](https://tidyselect.r-lib.org) package in the background.
 
@@ -155,11 +156,11 @@ test_df %>%
   summarize.(avg_b = mean(b), .by = where(is.character))
 ```
 
-## `rlang` compatibility
+## rlang compatibility
 
 `rlang` can be used to write custom functions with `tidytable` functions. The embracing shortcut `{{ }}` works, or you can use `enquo()` with `!!` if you prefer.
 
-```{r message = FALSE}
+```{r}
 df <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
 
 add_one <- function(data, add_col) {
@@ -169,21 +170,6 @@ add_one <- function(data, add_col) {
 
 df %>%
   add_one(x)
-```
-
-## Auto-conversion
-
-All `tidytable` functions automatically convert `data.frame` and `tibble` inputs to a `data.table`:
-
-```{r message = FALSE}
-library(dplyr)
-library(data.table)
-
-test_df <- tibble(x = 1:3, y = 4:6, z = c("a","a","b"))
-
-test_df %>%
-  mutate.(double_x = x * 2) %>%
-  is.data.table()
 ```
 
 ## `dt()` helper
@@ -199,6 +185,44 @@ df %>%
   dt(order(x, y)) %>%
   dt(, double_x := x * 2) %>%
   dt(, .(avg_x = mean(x)), by = z)
+```
+
+## Compatibility
+
+##### Compatibility with dplyr (and other tidyverse packages)
+
+If you want to use a `dplyr` function that hasn't yet been implemented in `tidytable` you can. 
+For example - `dplyr::add_count()`:
+
+```{r}
+library(tidytable)
+library(dplyr)
+
+test_df <- tidytable(x = 1:3, y = c("a", "a", "b"))
+
+test_df %>%
+  mutate.(double_x = x * 2) %>%
+  add_count()
+```
+
+
+##### Compatibility with data.table
+
+If you want to use `data.table` you can - however it is recommended to first convert the object to a data.table 
+if you are using any of data.table's "set" operations to prevent issues with data.table's modify-by-reference.
+
+```{r}
+library(tidytable)
+library(data.table)
+
+test_df <- tidytable(x = 3:1, y = c("c", "b", "a"))
+
+new_df <- test_df %>%
+  mutate.(double_x = x * 2)
+
+new_df <- as.data.table(new_df)
+
+setorder(new_df, y)[]
 ```
 
 ## Speed Comparisons
