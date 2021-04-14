@@ -148,7 +148,7 @@ fill_tbl <- as_tibble(fill_dt)
 fill_marks <- bench::mark(
   tidyverse = fill(group_by(fill_tbl, id), int1, int2),
   tidytable = fill.(fill_dt, int1, int2, .by = id),
-  # needs shallow copy or subsequent runs won't have NAs to fill
+  # needs a copy or subsequent runs won't have NAs to fill
   data.table = copy(fill_dt)[,
                              c("int1", "int2") := lapply(.SD, nafill, type = "locf"),
                              by = id],
@@ -185,35 +185,43 @@ remove(x, median_x)
 
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-data_size <- initial_data_size/5000
-wider_tbl <- expand_grid(case = as.character(seq(1, data_size)),
-                         year = seq(1900, data_size),
-                         name = c("x", "y", "z")) %>%
-  mutate(value = rnorm(nrow(.)))
+wider_dt <- 1:3 %>%
+  map_dfr.(
+    ~ expand_grid.(a = letters, b = LETTERS, c = paste0(letters, LETTERS)) %>%
+    unite.("name") %>%
+    mutate.(value = sample(as.double(1:n()), n())) %>%
+    mutate.(id = .x)
+  ) %>%
+  relocate.(id)
 
-wider_dt <- as_tidytable(wider_tbl)
+wider_tbl <- as_tibble(wider_dt)
 
 wider_marks <- bench::mark(
   tidyverse = pivot_wider(wider_tbl, names_from = name, values_from = value),
-  dtplyr = collect(pivot_wider(lazy_dt(wider_dt), names_from = name, values_from = value)),
+  dtplyr = as.data.table(pivot_wider(lazy_dt(wider_dt), names_from = name, values_from = value)),
   tidytable = pivot_wider.(wider_dt, names_from = name, values_from = value),
-  data.table = data.table::dcast.data.table(wider_dt, case + year ~ name),
+  data.table = data.table::dcast.data.table(wider_dt, id ~ name),
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
          func_tested = "pivot_wider")
 ```
 
 ```{r pivot_longer, echo=FALSE}
-longer_dt <- pivot_wider.(wider_dt, names_from = name, values_from = value)
+remove(wider_dt, wider_tbl); inv_gc(); inv_gc();
+
+data_size <- 20000
+longer_dt <-
+  tidytable(id = 1:data_size) %>%
+  bind_cols.(
+    map_dfc.(letters, ~ tidytable(!!.x := sample(c(letters, LETTERS), data_size, TRUE)))
+  )
 
 longer_tbl <- as_tibble(longer_dt)
 
-remove(wider_dt, wider_tbl); inv_gc(); inv_gc();
-
 longer_marks <- bench::mark(
-  tidyverse = pivot_longer(longer_tbl, cols = c(x, y, z)),
-  tidytable = pivot_longer.(longer_dt, cols = c(x, y, z)),
-  data.table = data.table::melt(longer_dt, measure.vars = c("x","y","z"),
+  tidyverse = pivot_longer(longer_tbl, cols = -id),
+  tidytable = pivot_longer.(longer_dt, cols = -id),
+  data.table = data.table::melt(longer_dt, measure.vars = names(longer_dt)[names(longer_dt) != "id"],
                                 variable.name = "name", variable.factor = FALSE),
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
