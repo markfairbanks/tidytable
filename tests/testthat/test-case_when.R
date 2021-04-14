@@ -1,25 +1,16 @@
 test_that("case_when. works", {
+  x <- 1:5
 
-  set.seed(843)
-  x <- rnorm(1e5)
-
-  cased <- case_when.(
-    x < median(x) ~ "low",
-    x >= median(x) ~ "high",
-    is.na(x) ~ "other"
+  case_x <- case_when.(
+    x < 3 ~ 1,
+    x < 4 ~ 2,
+    TRUE ~ 3
   )
 
-
-  expect_named(table(cased), c("high", "low"))
-  expect_error(case_when.(x < median(x), "three",
-                          TRUE ~ x))
-  expect_equal(head(cased),
-               c("low","low","low","low","low","high"))
-
+  expect_equal(case_x, c(1,1,2,3,3))
 })
 
 test_that("case_when. isn't tripped up by NA results v1", {
-
   test_df <- tidytable(x = c(1, NA, 1, 2))
 
   case_df <- test_df %>%
@@ -31,7 +22,6 @@ test_that("case_when. isn't tripped up by NA results v1", {
 })
 
 test_that("case_when. isn't tripped up by NA results v2", {
-
   test_df <- tidytable(x = c(1, NA, 1, 2))
 
   case_df <- test_df %>%
@@ -55,7 +45,6 @@ test_that("dplyr::case_when() is replaced by tidytable::case_when.()", {
 })
 
 test_that("lower conditions don't overwrite prior conditions", {
-
   x <- 1:10
 
   new_x <- case_when.(x < 5 ~ 1,
@@ -66,7 +55,6 @@ test_that("lower conditions don't overwrite prior conditions", {
 })
 
 test_that("multiple NAs can be used as inputs", {
-
   x <- 1:10
 
   new_x <- case_when.(x < 3 ~ 1,

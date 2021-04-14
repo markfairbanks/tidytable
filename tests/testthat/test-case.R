@@ -1,25 +1,17 @@
 test_that("case. works", {
+  x <- 1:5
 
-  set.seed(843)
-  x <- rnorm(1e5)
+  case_x <- case.(
+    x < 3, 1,
+    x < 4, 2,
+    TRUE, 3
+  )
 
-  cased <- case.(
-      x < median(x), "low",
-      x >= median(x), "high",
-      is.na(x), "other"
-    )
-
-
-  expect_named(table(cased), c("high", "low"))
-  expect_error(case.(x < median(x), "three",
-                       default = x))
-  expect_equal(head(cased),
-               c("low","low","low","low","low","high"))
+  expect_equal(case_x, c(1,1,2,3,3))
 
 })
 
 test_that("case. isn't tripped up by NA results v1", {
-
   test_df <- tidytable(x = c(1, NA, 1, 2))
 
   case_df <- test_df %>%
@@ -31,7 +23,6 @@ test_that("case. isn't tripped up by NA results v1", {
 })
 
 test_that("case. isn't tripped up by NA results v2", {
-
   test_df <- tidytable(x = c(1, NA, 1, 2))
 
   case_df <- test_df %>%
@@ -43,7 +34,6 @@ test_that("case. isn't tripped up by NA results v2", {
 })
 
 test_that("lower conditions don't overwrite prior conditions", {
-
   x <- 1:10
 
   new_x <- case.(x < 5, 1,
@@ -54,7 +44,6 @@ test_that("lower conditions don't overwrite prior conditions", {
 })
 
 test_that("multiple NAs can be used as inputs", {
-
   x <- 1:10
 
   new_x <- case.(x < 3, 1,
