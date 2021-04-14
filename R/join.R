@@ -29,27 +29,24 @@ left_join..default <- function(x, y, by = NULL) {
   if (!is.data.table(x)) x <- as_tidytable(x)
   if (!is.data.table(y)) y <- as_tidytable(y)
 
-  by_x_y <- get_bys(x, y, by)
+  by <- get_bys(x, y, by)
 
-  by_x <- by_x_y[[1]]
-  by_y <- by_x_y[[2]]
+  on <- by$x
+  names(on) <- by$y
+  on[on == ""] <- by$y[on == ""]
 
-  on_vec <- by_x
-  names(on_vec) <- by_y
-  on_vec[on_vec == ""] <- names(on_vec)[on_vec == ""]
-
-  # Get y names
+  # Get result names to have correct column order
   y_names <- names(y)
-  y_names <- y_names[!y_names %in% names(x)] # Names not in x
-  y_names <- y_names[!y_names %in% by_y] # Remove old names
+  y_names <- y_names[y_names %notin% names(x)]
+  y_names <- y_names[y_names %notin% by$y]
   all_names <- c(names(x), y_names)
 
-  return_df <- y[x, on = on_vec, allow.cartesian = TRUE]
+  result_df <- y[x, on = on, allow.cartesian = TRUE]
 
-  setnames(return_df, names(on_vec), on_vec)
-  setcolorder(return_df, all_names)
+  setnames(result_df, by$y, on)
+  setcolorder(result_df, all_names)
 
-  as_tidytable(return_df)
+  as_tidytable(result_df)
 }
 
 #' @export
@@ -64,15 +61,12 @@ inner_join..default <- function(x, y, by = NULL) {
   if (!is.data.table(x)) x <- as_tidytable(x)
   if (!is.data.table(y)) y <- as_tidytable(y)
 
-  by_x_y <- get_bys(x, y, by)
+  by <- get_bys(x, y, by)
 
-  by_x <- by_x_y[[1]]
-  by_y <- by_x_y[[2]]
+  on <- by$y
+  names(on) <- by$x
 
-  on_vec <- by_y
-  names(on_vec) <- by_x
-
-  as_tidytable(x[y, on = on_vec, allow.cartesian = TRUE, nomatch = 0])
+  as_tidytable(x[y, on = on, allow.cartesian = TRUE, nomatch = 0])
 }
 
 #' @export
@@ -87,15 +81,12 @@ right_join..default <- function(x, y, by = NULL) {
   if (!is.data.table(x)) x <- as_tidytable(x)
   if (!is.data.table(y)) y <- as_tidytable(y)
 
-  by_x_y <- get_bys(x, y, by)
+  by <- get_bys(x, y, by)
 
-  by_x <- by_x_y[[1]]
-  by_y <- by_x_y[[2]]
+  on <- by$y
+  names(on) <- by$x
 
-  on_vec <- by_y
-  names(on_vec) <- by_x
-
-  as_tidytable(x[y, on = on_vec, allow.cartesian = TRUE])
+  as_tidytable(x[y, on = on, allow.cartesian = TRUE])
 }
 
 #' @export
@@ -132,15 +123,12 @@ anti_join..default <- function(x, y, by = NULL) {
   if (!is.data.table(x)) x <- as_tidytable(x)
   if (!is.data.table(y)) y <- as_tidytable(y)
 
-  by_x_y <- get_bys(x, y, by)
+  by <- get_bys(x, y, by)
 
-  by_x <- by_x_y[[1]]
-  by_y <- by_x_y[[2]]
+  on <- by$y
+  names(on) <- by$x
 
-  on_vec <- by_y
-  names(on_vec) <- by_x
-
-  as_tidytable(x[!y, on = on_vec, allow.cartesian = TRUE])
+  as_tidytable(x[!y, on = on, allow.cartesian = TRUE])
 }
 
 #' @export
@@ -155,15 +143,12 @@ semi_join..default <- function(x, y, by = NULL) {
   if (!is.data.table(x)) x <- as_tidytable(x)
   if (!is.data.table(y)) y <- as_tidytable(y)
 
-  by_x_y <- get_bys(x, y, by)
+  by <- get_bys(x, y, by)
 
-  by_x <- by_x_y[[1]]
-  by_y <- by_x_y[[2]]
+  on <- by$y
+  names(on) <- by$x
 
-  on_vec <- by_y
-  names(on_vec) <- by_x
-
-  result_df <- fsetdiff(x, x[!y, on = on_vec], all=TRUE)
+  result_df <- fsetdiff(x, x[!y, on = on], all=TRUE)
 
   as_tidytable(result_df)
 }
@@ -185,7 +170,7 @@ get_bys <- function(x, y, by = NULL) {
   if (any(by_x[by_x != ""] %notin% names_x)) stop("by.x columns not in x")
   if (any(by_y[by_y != ""] %notin% names_y)) stop("by.y columns not in y")
 
-  list(by_x, by_y)
+  list(x = by_x, y = by_y)
 }
 
 join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
@@ -193,18 +178,14 @@ join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
   if (!is.data.table(x)) x <- as_tidytable(x)
   if (!is.data.table(y)) y <- as_tidytable(y)
 
-  by_x_y <- get_bys(x, y, by)
+  by <- get_bys(x, y, by)
 
-  by_x <- by_x_y[[1]]
-  by_y <- by_x_y[[2]]
-
-  result_df <- as_tidytable(
-    merge(x = x, y = y, by.x = by_x, by.y = by_y, suffixes = suffix,
-          all.x = all_x, all.y = all_y,
-          allow.cartesian = TRUE, sort = FALSE)
+  result_df <- merge(
+    x = x, y = y, by.x = by$x, by.y = by$y, suffixes = suffix,
+    all.x = all_x, all.y = all_y, allow.cartesian = TRUE, sort = FALSE
   )
 
   setkey(result_df, NULL)
 
-  result_df
+  as_tidytable(result_df)
 }
