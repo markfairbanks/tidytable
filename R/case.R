@@ -1,4 +1,4 @@
-#' Improved data.table::fcase()
+#' data.table::fcase() with vectorized default
 #'
 #' @description
 #' This function allows you to use multiple if/else statements in one call.

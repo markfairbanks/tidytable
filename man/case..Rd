@@ -2,7 +2,7 @@
 % Please edit documentation in R/case.R
 \name{case.}
 \alias{case.}
-\title{Improved data.table::fcase()}
+\title{data.table::fcase() with vectorized default}
 \usage{
 case.(..., default = NA)
 }
