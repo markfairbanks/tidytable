@@ -4,7 +4,7 @@
 \alias{group_split.}
 \title{Split data frame by groups}
 \usage{
-group_split.(.df, ..., .keep = TRUE)
+group_split.(.df, ..., .keep = TRUE, .named = FALSE)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -12,20 +12,26 @@ group_split.(.df, ..., .keep = TRUE)
 \item{...}{Columns to group and split by. \code{tidyselect} compatible.}
 
 \item{.keep}{Should the grouping columns be kept}
+
+\item{.named}{Should the list be named with labels that identify the group}
 }
 \description{
 Split data frame by groups. Returns a list.
 }
 \examples{
 test_df <- tidytable(
-  a = 1:5,
-  b = 1:5,
-  c = c("a","a","a","b","b"),
-  d = c("a","a","a","b","b"))
+  a = 1:3,
+  b = 1:3,
+  c = c("a","a","b"),
+  d = c("a","a","b")
+ )
 
 test_df \%>\%
   group_split.(c, d)
 
 test_df \%>\%
   group_split.(c, d, .keep = FALSE)
+
+test_df \%>\%
+  group_split.(c, d, .named = TRUE)
 }
