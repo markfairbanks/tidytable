@@ -58,7 +58,6 @@ map_chr. <- function(.x, .f, ...) {
 #' @export
 #' @rdname map.
 map_dfc. <- function(.x, .f, ...) {
-  .f <- as_function(.f)
   result_list <- map.(.x, .f, ...)
   bind_cols.(result_list)
 }
@@ -66,7 +65,6 @@ map_dfc. <- function(.x, .f, ...) {
 #' @export
 #' @rdname map.
 map_dfr. <- function(.x, .f, ..., .id = NULL) {
-  .f <- as_function(.f)
   result_list <- map.(.x, .f, ...)
   bind_rows.(result_list, .id = .id)
 }
@@ -78,7 +76,6 @@ map_df. <- map_dfr.
 #' @export
 #' @rdname map.
 walk. <- function(.x, .f, ...) {
-  .f <- as_function(.f)
   map.(.x, .f, ...)
   invisible(.x)
 }
