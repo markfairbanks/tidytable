@@ -23,7 +23,8 @@ test_df <- data.table(
   x = 1,
   y = 2,
   double_x = 2,
-  double_y = 4)
+  double_y = 4
+)
 
 test_df \%>\%
   rename_with.(toupper)

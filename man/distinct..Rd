@@ -23,7 +23,8 @@ Retain only unique/distinct rows from an input df.
 test_df <- tidytable(
   x = 1:3,
   y = 4:6,
-  z = c("a", "a", "b"))
+  z = c("a", "a", "b")
+)
 
 test_df \%>\%
   distinct.()

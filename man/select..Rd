@@ -21,7 +21,8 @@ test_df <- data.table(
   x = c(1,1,1),
   y = c(4,5,6),
   double_x = c(2,2,2),
-  z = c("a","a","b"))
+  z = c("a","a","b")
+)
 
 test_df \%>\%
   select.(x, y)

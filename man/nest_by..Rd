@@ -21,10 +21,11 @@ Nest data.tables by group
 }
 \examples{
 test_df <- data.table(
-  a = 1:10,
-  b = 11:20,
-  c = c(rep("a", 6), rep("b", 4)),
-  d = c(rep("a", 4), rep("b", 6)))
+  a = 1:5,
+  b = 6:10,
+  c = c(rep("a", 3), rep("b", 2)),
+  d = c(rep("a", 3), rep("b", 2))
+)
 
 test_df \%>\%
   nest_by.()

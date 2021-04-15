@@ -17,10 +17,11 @@ Pipeable data.table call
 Note: This function does not use data.table's modify-by-reference
 }
 \examples{
-test_df <- tidytable(
-  x = c(1,2,3),
-  y = c(4,5,6),
-  z = c("a", "a", "b"))
+test_df <- data.table(
+  x = 1:3,
+  y = 4:5,
+  z = c("a", "a", "b")
+)
 
 test_df \%>\%
   dt(, double_x := x * 2) \%>\%

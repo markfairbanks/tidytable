@@ -30,7 +30,6 @@ nest. <- function(.df, ..., .names_sep = NULL) {
 
 #' @export
 nest..data.frame <- function(.df, ..., .names_sep = NULL) {
-
   .df <- as_tidytable(.df)
 
   if (!is.null(.names_sep)) vec_assert(.names_sep, character(), 1)

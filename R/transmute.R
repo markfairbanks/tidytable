@@ -19,7 +19,6 @@ transmute. <- function(.df, ..., .by = NULL) {
 
 #' @export
 transmute..data.frame <- function(.df, ..., .by = NULL) {
-
   .df <- as_tidytable(.df)
 
   dots <- enquos(...)

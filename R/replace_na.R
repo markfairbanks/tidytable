@@ -46,7 +46,6 @@ replace_na..default <- function(.x, replace = NA) {
 
 #' @export
 replace_na..data.frame <- function(.x, replace = list()) {
-
   .x <- as_tidytable(.x)
 
   stopifnot(vec_is_list(replace))

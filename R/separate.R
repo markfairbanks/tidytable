@@ -41,7 +41,6 @@ separate..data.frame <- function(.df, col, into,
                                  remove = TRUE,
                                  convert = FALSE,
                                  ...) {
-
   .df <- as_tidytable(.df)
   .df <- shallow(.df)
 

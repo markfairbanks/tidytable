@@ -21,11 +21,11 @@ converts NAs to their proper type.
 }
 \examples{
 x <- 1:5
-ifelse.(x > 2, 2, 0)
+ifelse.(x < 3, 1, 0)
 
 # Can also be used inside of mutate.()
 test_df <- data.table(x = x)
 
 test_df \%>\%
-  mutate.(new_col = ifelse.(x > 2, 2, 0))
+  mutate.(new_col = ifelse.(x < 3, 1, 0))
 }

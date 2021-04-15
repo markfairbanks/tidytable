@@ -25,7 +25,6 @@ expand. <- function(.df, ..., .name_repair = "check_unique") {
 
 #' @export
 expand..data.frame <- function(.df, ..., .name_repair = "check_unique") {
-
   .df <- as_tidytable(.df)
 
   dots <- enquos(...)

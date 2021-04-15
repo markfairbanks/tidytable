@@ -58,7 +58,6 @@ get_dummies..data.frame <- function(.df,
                                     prefix_sep = "_",
                                     drop_first = FALSE,
                                     dummify_na = TRUE) {
-
   .df <- as_tidytable(.df)
   .df <- shallow(.df)
 

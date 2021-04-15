@@ -15,9 +15,9 @@ rename.(.df, ...)
 Rename variables from a data.table.
 }
 \examples{
-dt <- data.table(x = 1:3, y = 4:6)
+df <- data.table(x = 1:3, y = 4:6)
 
-dt \%>\%
+df \%>\%
   rename.(new_x = x,
           new_y = y)
 }

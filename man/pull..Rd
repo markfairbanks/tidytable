@@ -21,15 +21,19 @@ Pull a single variable from a data.table as a vector.
 }
 \examples{
 test_df <- data.table(
-  x = c(1,2,3),
-  y = c(4,5,6))
+  x = 1:3,
+  y = 1:3
+)
 
+# Grab column by name
 test_df \%>\%
   pull.(y)
 
+# Grab column by position
 test_df \%>\%
   pull.(1)
 
+# Defaults to last column
 test_df \%>\%
-  pull.(-1)
+  pull.()
 }

@@ -20,7 +20,6 @@ uncount. <- function(.df, weights, .remove = TRUE, .id = NULL) {
 
 #' @export
 uncount..data.frame <- function(.df, weights, .remove = TRUE, .id = NULL) {
-
   .df <- as_tidytable(.df)
 
   weights <- enquo(weights)

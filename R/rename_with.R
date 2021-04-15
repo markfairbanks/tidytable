@@ -16,7 +16,8 @@
 #'   x = 1,
 #'   y = 2,
 #'   double_x = 2,
-#'   double_y = 4)
+#'   double_y = 4
+#' )
 #'
 #' test_df %>%
 #'   rename_with.(toupper)
@@ -32,7 +33,6 @@ rename_with. <- function(.df, .fn, .cols = everything(), ...) {
 
 #' @export
 rename_with..data.frame <- function(.df, .fn, .cols = everything(), ...) {
-
   .df <- as_tidytable(.df)
 
   .cols <- select_vec_chr(.df, {{ .cols }})
@@ -45,5 +45,7 @@ rename_with..data.frame <- function(.df, .fn, .cols = everything(), ...) {
 
   new_names <- .fn(.cols, ...)
 
-  setnames(.df, .cols, new_names)[]
+  setnames(.df, .cols, new_names)
+
+  .df
 }

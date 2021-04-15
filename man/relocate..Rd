@@ -20,10 +20,11 @@ Move a column or columns to a new position
 }
 \examples{
 test_df <- data.table(
-  a = 1:5,
-  b = 1:5,
-  c = c("a","a","a","b","b"),
-  d = c("a","a","a","b","b"))
+  a = 1:3,
+  b = 1:3,
+  c = c("a", "a", "b"),
+  d = c("a", "a", "b")
+)
 
 test_df \%>\%
   relocate.(c, .before = b)

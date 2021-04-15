@@ -38,7 +38,6 @@ extract. <- function(.df, col, into, regex = "([[:alnum:]]+)",
 #' @export
 extract..data.frame <- function(.df, col, into, regex = "([[:alnum:]]+)",
                                 remove = TRUE, convert = FALSE, ...) {
-
   .df <- as_tidytable(.df)
   .df <- shallow(.df)
 

@@ -9,10 +9,11 @@
 #' @param ... Arguments passed to data.table call. See ?data.table::`[.data.table`
 #'
 #' @examples
-#' test_df <- tidytable(
-#'   x = c(1,2,3),
-#'   y = c(4,5,6),
-#'   z = c("a", "a", "b"))
+#' test_df <- data.table(
+#'   x = 1:3,
+#'   y = 4:5,
+#'   z = c("a", "a", "b")
+#' )
 #'
 #' test_df %>%
 #'   dt(, double_x := x * 2) %>%
@@ -24,7 +25,6 @@ dt <- function(.df, ...) {
 
 #' @export
 dt.data.frame <- function(.df, ...) {
-
   .df <- as_tidytable(.df)
 
   dots <- substitute(list(...))

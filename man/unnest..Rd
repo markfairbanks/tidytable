@@ -24,11 +24,13 @@ with \code{names_sep} used as a separator.}
 Unnest a nested data.table.
 }
 \examples{
-nested_df <- data.table(
-  a = 1:10,
-  b = 11:20,
-  c = c(rep("a", 6), rep("b", 4)),
-  d = c(rep("a", 4), rep("b", 6))) \%>\%
+nested_df <-
+  data.table(
+    a = 1:10,
+    b = 11:20,
+    c = c(rep("a", 6), rep("b", 4)),
+    d = c(rep("a", 4), rep("b", 6))
+  ) \%>\%
   nest_by.(c, d) \%>\%
   mutate.(pulled_vec = map.(data, ~ pull.(.x, a)))
 

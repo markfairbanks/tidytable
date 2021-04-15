@@ -16,11 +16,13 @@
 #' @export
 #'
 #' @examples
-#' nested_df <- data.table(
-#'   a = 1:10,
-#'   b = 11:20,
-#'   c = c(rep("a", 6), rep("b", 4)),
-#'   d = c(rep("a", 4), rep("b", 6))) %>%
+#' nested_df <-
+#'   data.table(
+#'     a = 1:10,
+#'     b = 11:20,
+#'     c = c(rep("a", 6), rep("b", 4)),
+#'     d = c(rep("a", 4), rep("b", 6))
+#'   ) %>%
 #'   nest_by.(c, d) %>%
 #'   mutate.(pulled_vec = map.(data, ~ pull.(.x, a)))
 #'
@@ -46,7 +48,6 @@ unnest..data.frame <- function(.df,
                                .drop = TRUE,
                                names_sep = NULL,
                                names_repair = "unique") {
-
   .df <- as_tidytable(.df)
 
   vec_assert(.drop, logical(), 1)
@@ -57,8 +58,11 @@ unnest..data.frame <- function(.df,
 
   list_flag <- map_lgl.(.df, is.list)
 
-  if (length(dots) == 0) dots <- syms(data_names[list_flag])
-  else dots <- select_dots_sym(.df, ...)
+  if (length(dots) == 0) {
+    dots <- syms(data_names[list_flag])
+  } else {
+    dots <- select_dots_sym(.df, ...)
+  }
 
   keep_cols <- data_names[!list_flag]
 
@@ -72,8 +76,9 @@ unnest..data.frame <- function(.df,
 
   unnest_nrow <- list_sizes(unnest_data)
 
-  if (!length(vec_unique(unnest_nrow)) == 1)
+  if (!length(vec_unique(unnest_nrow)) == 1) {
     abort("unnested data contains different row counts")
+  }
 
   # Get number of repeats for keep cols
   rep_vec <- list_sizes(pull.(.df, !!dots[[1]]))
@@ -85,32 +90,27 @@ unnest..data.frame <- function(.df,
 
     result_df <- bind_cols.(keep_df, unnest_data, .name_repair = names_repair)
   } else {
-
     result_df <- bind_cols.(unnest_data, .name_repair = names_repair)
-
   }
 
   result_df
 }
 
 unnest_col <- function(.df, col = NULL, names_sep = NULL) {
-
   # Check if nested data is a vector
   nested_data <- pull.(.df, !!col)[[1]]
   is_vec <- is.atomic(nested_data) && !is.matrix(nested_data)
 
   if (is_vec) {
-
     result_df <- summarize.(.df, !!col := unlist(!!col, recursive = FALSE))
-
   } else {
-
     # bind_rows.() auto-converts lists of data.frames/tibbles/matrices to data.tables
     result_df <- bind_rows.(pull.(.df, !!col))
   }
 
-  if (!is.null(names_sep))
+  if (!is.null(names_sep)) {
     names(result_df) <- paste(as_name(col), names(result_df), sep = names_sep)
+  }
 
   result_df
 }

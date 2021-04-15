@@ -17,7 +17,8 @@
 #' test_df <- tidytable(
 #'   x = 1:3,
 #'   y = 4:6,
-#'   z = c("a", "a", "b"))
+#'   z = c("a", "a", "b")
+#' )
 #'
 #' test_df %>%
 #'   distinct.()
@@ -30,7 +31,6 @@ distinct. <- function(.df, ..., .keep_all = FALSE) {
 
 #' @export
 distinct..data.frame <- function(.df, ..., .keep_all = FALSE) {
-
   .df <- as_tidytable(.df)
 
   vec_assert(.keep_all, logical(), 1)

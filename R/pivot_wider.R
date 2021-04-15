@@ -66,7 +66,6 @@ pivot_wider..data.frame <- function(.df,
                                     names_repair = "check_unique",
                                     values_fill = NULL,
                                     values_fn = NULL) {
-
   .df <- as_tidytable(.df)
 
   id_cols <- enquo(id_cols)

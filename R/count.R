@@ -21,7 +21,8 @@
 #' test_df <- data.table(
 #'   x = 1:3,
 #'   y = 4:6,
-#'   z = c("a", "a", "b"))
+#'   z = c("a", "a", "b")
+#' )
 #'
 #' test_df %>%
 #'   count.()
@@ -43,7 +44,6 @@ count. <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
 
 #' @export
 count..data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
-
   .df <- as_tidytable(.df)
 
   .by <- enquos(...)

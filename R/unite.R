@@ -39,7 +39,6 @@ unite. <- function(.df, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = 
 
 #' @export
 unite..data.frame <- function(.df, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
-
   .df <- as_tidytable(.df)
 
   vec_assert(sep, character(), 1)

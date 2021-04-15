@@ -16,7 +16,8 @@
 #'   x = c(1,1,1),
 #'   y = c(4,5,6),
 #'   double_x = c(2,2,2),
-#'   z = c("a","a","b"))
+#'   z = c("a","a","b")
+#' )
 #'
 #' test_df %>%
 #'   select.(x, y)
@@ -41,7 +42,6 @@ select. <- function(.df, ...) {
 
 #' @export
 select..data.frame <- function(.df, ...) {
-
   .df <- as_tidytable(.df)
 
   select_cols <- select_dots_idx(.df, ...)

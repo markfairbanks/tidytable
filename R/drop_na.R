@@ -13,7 +13,8 @@
 #' @examples
 #' df <- data.table(
 #'   x = c(1,2,NA),
-#'   y = c("a",NA,"b"))
+#'   y = c("a",NA,"b")
+#' )
 #'
 #' df %>%
 #'   drop_na.()
@@ -29,7 +30,6 @@ drop_na. <- function(.df, ...) {
 
 #' @export
 drop_na..data.frame <- function(.df, ...) {
-
   .df <- as_tidytable(.df)
 
   dots <- enquos(...)

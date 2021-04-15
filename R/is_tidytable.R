@@ -8,13 +8,13 @@
 #' @export
 #'
 #' @examples
-#' dt <- data.table(x = 1)
+#' df <- data.frame(x = 1:3, y = 1:3)
 #'
-#' is_tidytable(dt) # Returns FALSE
+#' is_tidytable(df)
 #'
-#' df <- tidytable(x = 1)
+#' df <- tidytable(x = 1:3, y = 1:3)
 #'
-#' is_tidytable(df) # Returns TRUE
+#' is_tidytable(df)
 is_tidytable <- function(x) {
   inherits(x, "tidytable")
 }
