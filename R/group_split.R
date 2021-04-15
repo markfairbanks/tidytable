@@ -6,32 +6,36 @@
 #' @param .df A data.frame or data.table
 #' @param ... Columns to group and split by. `tidyselect` compatible.
 #' @param .keep Should the grouping columns be kept
+#' @param .named Should the list be named with labels that identify the group
 #'
 #' @export
-#' @md
 #'
 #' @examples
 #' test_df <- tidytable(
-#'   a = 1:5,
-#'   b = 1:5,
-#'   c = c("a","a","a","b","b"),
-#'   d = c("a","a","a","b","b"))
+#'   a = 1:3,
+#'   b = 1:3,
+#'   c = c("a","a","b"),
+#'   d = c("a","a","b")
+#'  )
 #'
 #' test_df %>%
 #'   group_split.(c, d)
 #'
 #' test_df %>%
 #'   group_split.(c, d, .keep = FALSE)
-group_split. <- function(.df, ..., .keep = TRUE) {
+#'
+#' test_df %>%
+#'   group_split.(c, d, .named = TRUE)
+group_split. <- function(.df, ..., .keep = TRUE, .named = FALSE) {
   UseMethod("group_split.")
 }
 
 #' @export
-group_split..data.frame <- function(.df, ..., .keep = TRUE) {
-
+group_split..data.frame <- function(.df, ..., .keep = TRUE, .named = FALSE) {
   .df <- as_tidytable(.df)
 
   vec_assert(.keep, logical(), 1)
+  vec_assert(.named, logical(), 1)
 
   dots <- enquos(...)
 
@@ -40,7 +44,11 @@ group_split..data.frame <- function(.df, ..., .keep = TRUE) {
   } else {
     dots <- select_dots_chr(.df, ...)
 
-    dots <- unname(split(.df, by = dots, keep.by = .keep))
+    dots <- split(.df, by = dots, keep.by = .keep)
+
+    if (!.named) {
+      dots <- unname(dots)
+    }
 
     map.(dots, as_tidytable)
   }
