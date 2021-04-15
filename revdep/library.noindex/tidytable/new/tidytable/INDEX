@@ -1,4 +1,5 @@
 %notin%                 notin operator
+across.                 Apply a function across a selection of columns
 arrange.                Arrange/reorder rows
 arrange_across.         Arrange by a selection of variables
 as_tidytable            Coerce an object to a data.table/tidytable
@@ -6,8 +7,9 @@ between.                Do the values from x fall between the left and
                         right bounds?
 bind_cols.              Bind data.tables by row and column
 c_across.               Combine values from multiple columns
-case.                   Improved data.table::fcase()
+case.                   data.table::fcase() with vectorized default
 case_when.              Case when
+coalesce.               Coalesce missing values
 complete.               Complete a data.table with missing combinations
                         of data
 count.                  Count observations by group

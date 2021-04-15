@@ -43692,7 +43692,7 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  11.381 1.336 12.919 0.002 0.003 
+Time elapsed:  12.7 1.873 14.74 0.002 0.004 
 > grDevices::dev.off()
 null device 
           1 

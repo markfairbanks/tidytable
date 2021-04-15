@@ -29,6 +29,7 @@ filter.                 Filter rows on one or more conditions
 get_dummies.            Convert character and factor columns to dummy
                         variables
 group_split.            Split data frame by groups
+if_all.                 Create conditions on a selection of columns
 ifelse.                 Fast ifelse
 inv_gc                  Run invisible garbage collection
 is_tidytable            Test if the object is a tidytable

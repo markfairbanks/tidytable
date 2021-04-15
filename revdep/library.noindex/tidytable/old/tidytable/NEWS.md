@@ -1,3 +1,36 @@
+# tidytable 0.6.0
+
+#### New functions
+* `if_all.()`/`if_any.()`
+
+#### Functionality improvements
+* `replace_na.()`: Can now replace `NULL` values in list-columns
+* Splicing lists using `!!!` now works in `crossing.()` and `expand_grid.()`
+* The following tidyverse functions are now automatically converted to their tidytable `verb.()` equivalents when
+used inside of tidytable's mutate/arrange/filter/summarize/slice.
+  + Functions that previously failed but now work:
+    - `n()`
+    - `row_number()`
+  + Functions that previously worked with tidytable but are now converted to their faster tidytable equivalents:
+    - `if_else()`/`ifelse()`
+    - `case_when()`
+    - `desc()`
+    - `replace_na()`
+    
+#### Bug fixes
+* `pivot_longer.()`: Correctly pivots unbalanced datasets when `".value"` is used
+in `names_to` (@moutikabdessabour, #212)
+
+#### Functions with notable speed improvements
+* `mutate_across.()`
+* `mutate_rowwise.()` when `c_across.()` is used
+* `slice.()`/`slice_head.()`/`slice_tail.()`/`slice_min.()`/`slice_max.()`
+
+#### Other news
+* `tidytable` has dropped the `tibble` package as a dependency and now uses `pillar` instead. 
+`tibble` was originally used for its `trunc_mat()` function that enabled tidytables to print like
+tibbles do in console. `pillar` is the same package that `tibble` uses in the background.
+
 # tidytable 0.5.9
 
 #### New functions
