@@ -38,7 +38,6 @@ map2_chr. <- function(.x, .y, .f, ...) {
 #' @rdname map.
 map2_dfc. <- function(.x, .y, .f, ...) {
   result_list <- map2.(.x, .y, .f, ...)
-
   bind_cols.(result_list)
 }
 
@@ -46,7 +45,6 @@ map2_dfc. <- function(.x, .y, .f, ...) {
 #' @rdname map.
 map2_dfr. <- function(.x, .y, .f, ..., .id = NULL) {
   result_list <- map2.(.x, .y, .f, ...)
-
   bind_rows.(result_list, .id = .id)
 }
 
