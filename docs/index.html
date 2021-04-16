@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
       </span>
     </div>
 
@@ -154,7 +154,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">test_df</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/summarize..html">summarize.</a></span><span class="op">(</span>avg_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,
-             count <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span>,
+             count <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,
              .by <span class="op">=</span> <span class="va">z</span><span class="op">)</span>
 <span class="co">#&gt; # A tidytable: 2 × 3</span>
 <span class="co">#&gt;   z     avg_x count</span>
@@ -174,7 +174,7 @@
 
 <span class="va">test_df</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/slice..html">slice.</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, .by <span class="op">=</span> <span class="va">x</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/mutate..html">mutate.</a></span><span class="op">(</span>group_row_num <span class="op">=</span> <span class="fu">row_number</span><span class="op">(</span><span class="op">)</span>, .by <span class="op">=</span> <span class="va">x</span><span class="op">)</span>
+  <span class="fu"><a href="reference/mutate..html">mutate.</a></span><span class="op">(</span>group_row_num <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html">row_number</a></span><span class="op">(</span><span class="op">)</span>, .by <span class="op">=</span> <span class="va">x</span><span class="op">)</span>
 <span class="co">#&gt; # A tidytable: 4 × 2</span>
 <span class="co">#&gt;   x     group_row_num</span>
 <span class="co">#&gt;   &lt;chr&gt;         &lt;int&gt;</span>
@@ -206,7 +206,7 @@
 </div>
 <div id="tidyselect-support" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tidyselect-support" class="anchor"></a><code>tidyselect</code> support</h2>
+<a href="#tidyselect-support" class="anchor"></a>tidyselect support</h2>
 <p><code>tidytable</code> allows you to select/drop columns just like you would in the tidyverse by utilizing the <a href="https://tidyselect.r-lib.org"><code>tidyselect</code></a> package in the background.</p>
 <p>Normal selection can be mixed with all <code>tidyselect</code> helpers: <code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/all_of.html">any_of()</a></code>, <code>where()</code>, etc.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -261,7 +261,7 @@
 </div>
 <div id="rlang-compatibility" class="section level2">
 <h2 class="hasAnchor">
-<a href="#rlang-compatibility" class="anchor"></a><code>rlang</code> compatibility</h2>
+<a href="#rlang-compatibility" class="anchor"></a>rlang compatibility</h2>
 <p><code>rlang</code> can be used to write custom functions with <code>tidytable</code> functions. The embracing shortcut <code>{{ }}</code> works, or you can use <code><a href="https://rlang.r-lib.org/reference/nse-defuse.html">enquo()</a></code> with <code>!!</code> if you prefer.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span><span class="op">)</span><span class="op">)</span>
@@ -280,26 +280,11 @@
 <span class="co">#&gt; 2     1     1 a           2</span>
 <span class="co">#&gt; 3     1     1 b           2</span></code></pre></div>
 </div>
-<div id="auto-conversion" class="section level2">
-<h2 class="hasAnchor">
-<a href="#auto-conversion" class="anchor"></a>Auto-conversion</h2>
-<p>All <code>tidytable</code> functions automatically convert <code>data.frame</code> and <code>tibble</code> inputs to a <code>data.table</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span>
-
-<span class="va">test_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">test_df</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/mutate..html">mutate.</a></span><span class="op">(</span>double_x <span class="op">=</span> <span class="va">x</span> <span class="op">*</span> <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html">is.data.table</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] TRUE</span></code></pre></div>
-</div>
 <div id="dt-helper" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dt-helper" class="anchor"></a><code>dt()</code> helper</h2>
 <p>The <code><a href="reference/dt.html">dt()</a></code> function makes regular <code>data.table</code> syntax pipeable, so you can easily mix <code>tidytable</code> syntax with <code>data.table</code> syntax:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">df</span> <span class="op">%&gt;%</span>
@@ -313,6 +298,51 @@
 <span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 a       1.5</span>
 <span class="co">#&gt; 2 b       3</span></code></pre></div>
+</div>
+<div id="compatibility" class="section level2">
+<h2 class="hasAnchor">
+<a href="#compatibility" class="anchor"></a>Compatibility</h2>
+<div id="compatibility-with-dplyr-and-other-tidyverse-packages" class="section level5">
+<h5 class="hasAnchor">
+<a href="#compatibility-with-dplyr-and-other-tidyverse-packages" class="anchor"></a>Compatibility with dplyr (and other tidyverse packages)</h5>
+<p>If you want to use a <code>dplyr</code> function that hasn’t yet been implemented in <code>tidytable</code> you can. For example - <code><a href="https://dplyr.tidyverse.org/reference/count.html">dplyr::add_count()</a></code>:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/markfairbanks/tidytable">tidytable</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+
+<span class="va">test_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tidytable.html">tidytable</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">test_df</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/mutate..html">mutate.</a></span><span class="op">(</span>double_x <span class="op">=</span> <span class="va">x</span> <span class="op">*</span> <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">add_count</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; # A tidytable: 3 × 4</span>
+<span class="co">#&gt;       x y     double_x     n</span>
+<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;int&gt;</span>
+<span class="co">#&gt; 1     1 a            2     3</span>
+<span class="co">#&gt; 2     2 a            4     3</span>
+<span class="co">#&gt; 3     3 b            6     3</span></code></pre></div>
+</div>
+<div id="compatibility-with-datatable" class="section level5">
+<h5 class="hasAnchor">
+<a href="#compatibility-with-datatable" class="anchor"></a>Compatibility with data.table</h5>
+<p>If you want to use <code>data.table</code> you can - however it is recommended to first convert the object to a data.table if you are using any of data.table’s “set” operations to prevent issues with data.table’s modify-by-reference.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/markfairbanks/tidytable">tidytable</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span>
+
+<span class="va">test_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tidytable.html">tidytable</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">1</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"c"</span>, <span class="st">"b"</span>, <span class="st">"a"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">new_df</span> <span class="op">&lt;-</span> <span class="va">test_df</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/mutate..html">mutate.</a></span><span class="op">(</span>double_x <span class="op">=</span> <span class="va">x</span> <span class="op">*</span> <span class="fl">2</span><span class="op">)</span>
+
+<span class="va">new_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html">as.data.table</a></span><span class="op">(</span><span class="va">new_df</span><span class="op">)</span>
+
+<span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">setorder</a></span><span class="op">(</span><span class="va">new_df</span>, <span class="va">y</span><span class="op">)</span><span class="op">[</span><span class="op">]</span>
+<span class="co">#&gt;    x y double_x</span>
+<span class="co">#&gt; 1: 1 a        2</span>
+<span class="co">#&gt; 2: 2 b        4</span>
+<span class="co">#&gt; 3: 3 c        6</span></code></pre></div>
+</div>
 </div>
 <div id="speed-comparisons" class="section level2">
 <h2 class="hasAnchor">
@@ -353,7 +383,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=tidytable"><img src="https://www.r-pkg.org/badges/version/tidytable" alt="CRAN status"></a></li>
-<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.6.0-green.svg"></a></li>
+<li><a href="https://github.com/markfairbanks/tidytable"><img src="https://img.shields.io/badge/dev%20-0.6.1-green.svg"></a></li>
 <li><a href="https://markfairbanks.github.io/tidytable/"><img src="https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=blue" alt="CRAN RStudio mirror downloads"></a></li>
 </ul>
 </div>

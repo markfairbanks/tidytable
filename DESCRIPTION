@@ -1,28 +1,22 @@
 Package: tidytable
 Title: Tidy Interface to 'data.table'
-Version: 0.6.0.9
+Version: 0.6.1
 Authors@R: 
     c(person(given = "Mark",
              family = "Fairbanks",
              role = c("aut", "cre"),
              email = "mark.t.fairbanks@gmail.com"),
-      person(given = "Tyson",
-             family = "Barrett",
+      person(given = "Abdessabour",
+             family = "Moutik",
+             role = "ctb"),
+      person(given = "Matt",
+             family = "Carlson",
              role = "ctb"),
       person(given = "Ivan",
              family = "Leung",
              role = "ctb"),
       person(given = "Ross",
              family = "Kennedy",
-             role = "ctb"),
-      person(given = "Lionel",
-             family = "Henry",
-             role = "ctb"),
-      person(given = "Matt",
-             family = "Carlson",
-             role = "ctb"),
-      person(given = "Abdessabour",
-             family = "Moutik",
              role = "ctb")
              )
 Description: A tidy interface to 'data.table' that is 'rlang' compatible,

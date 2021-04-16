@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
       </span>
     </div>
 
@@ -105,7 +105,7 @@
 <a href="#speed-comparisons" class="anchor"></a>Speed Comparisons</h3>
 <p>A few notes:</p>
 <ul>
-<li>Comparing times from separate functions won’t be very useful. For example - the <code>summarize()</code> tests were performed on a different dataset from <code>case_when()</code>.</li>
+<li>Comparing times from separate functions won’t be very useful. For example - the <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> tests were performed on a different dataset from <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code>.</li>
 <li>
 <code><a href="https://Rdatatable.gitlab.io/data.table/reference/openmp-utils.html">setDTthreads(4)</a></code> was used for <code>data.table</code> &amp; <code>tidytable</code> timings.</li>
 <li>Modify-by-reference was used in <code>data.table</code> when being compared to <code><a href="../reference/mutate..html">mutate.()</a></code> &amp; <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code>
@@ -130,19 +130,19 @@
 <pre><code>#&gt; # A tidytable: 13 × 7
 #&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas tidytable_vs_dplyr
 #&gt;    &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             
-#&gt;  1 arrange            32.9      33.7   36.6    1177.   355   2.9%              
-#&gt;  2 case_when          26.1      26.9   NA       333.    59.2 8.1%              
-#&gt;  3 distinct           12.2      12.1   14.2      36.1  309   33.5%             
-#&gt;  4 fill               33.3      33.2   NA        57.3  846   57.9%             
-#&gt;  5 filter            207.      214.   210.      246.   707   87.0%             
-#&gt;  6 inner_join         44.3      44.8  156.       81.3   NA   55.1%             
-#&gt;  7 left_join          42.5      45.8  135.       73.6   NA   62.2%             
-#&gt;  8 mutate             44.4      45.2  272.       55.1   86.4 82.0%             
-#&gt;  9 nest                7        10.7   NA        26     NA   41.2%             
-#&gt; 10 pivot_longer        8.3      11.4   NA        38.5   NA   29.6%             
-#&gt; 11 pivot_wider        38.9      53.8   98.7     155.    NA   34.6%             
-#&gt; 12 summarize         184.      191.   188.      188.   834   102.1%            
-#&gt; 13 unnest              8.7      12.7   NA        36     NA   35.3%</code></pre>
+#&gt;  1 arrange            36.9      39     38.7    1180.   355   3.3%              
+#&gt;  2 case_when          30.5      33.9   NA       340.    59.2 10.0%             
+#&gt;  3 distinct           17        14.3   15.3      36.7  309   39.0%             
+#&gt;  4 fill               34        34.6   NA        54.4  846   63.6%             
+#&gt;  5 filter            221.      213    209.      245.   707   87.1%             
+#&gt;  6 inner_join         47.7      58.8  164.       89.6   NA   65.6%             
+#&gt;  7 left_join          45.3      49.8  142.       89.9   NA   55.4%             
+#&gt;  8 mutate             50.1      52.4  402.       58.3   86.4 89.9%             
+#&gt;  9 nest                9.4      12.3   NA        27.7   NA   44.4%             
+#&gt; 10 pivot_longer        9.2      12.3   NA        45.4   NA   27.1%             
+#&gt; 11 pivot_wider        41.1      53    106.      151.    NA   35.1%             
+#&gt; 12 summarize         190.      195.   304.      209.   834   93.4%             
+#&gt; 13 unnest              9.7      12.5   NA        34     NA   36.8%</code></pre>
 </div>
   </div>
 

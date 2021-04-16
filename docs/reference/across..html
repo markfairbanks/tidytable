@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pull out a single variable — pull. • tidytable</title>
+<title>Apply a function across a selection of columns — across. • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +48,9 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Pull out a single variable — pull." />
-<meta property="og:description" content="Pull a single variable from a data.table as a vector." />
+<meta property="og:title" content="Apply a function across a selection of columns — across." />
+<meta property="og:description" content="Apply a function across a selection of columns. For use in arrange.(),
+mutate.(), and summarize.()." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -133,53 +134,73 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pull out a single variable</h1>
-    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/pull.R'><code>R/pull.R</code></a></small>
-    <div class="hidden name"><code>pull..Rd</code></div>
+    <h1>Apply a function across a selection of columns</h1>
+    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/across.R'><code>R/across.R</code></a></small>
+    <div class="hidden name"><code>across..Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Pull a single variable from a data.table as a vector.</p>
+    <p>Apply a function across a selection of columns. For use in <code><a href='arrange..html'>arrange.()</a></code>,
+<code><a href='mutate..html'>mutate.()</a></code>, and <code><a href='summarize..html'>summarize.()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pull.</span><span class='op'>(</span><span class='va'>.df</span>, var <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>across.</span><span class='op'>(</span>.cols <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span>, .fns <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span>, .names <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.df</th>
-      <td><p>A data.frame or data.table</p></td>
+      <th>.cols</th>
+      <td><p>vector <code><a href='https://rdrr.io/r/base/c.html'>c()</a></code> of unquoted column names. <code>tidyselect</code> compatible.</p></td>
     </tr>
     <tr>
-      <th>var</th>
-      <td><p>The column to pull from the data.table as:</p><ul>
-<li><p>a variable name</p></li>
-<li><p>a positive integer giving the column position</p></li>
-<li><p>a negative integer giving the column position counting from the right</p></li>
-</ul></td>
+      <th>.fns</th>
+      <td><p>Functions to pass. Can pass a list of functions.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other arguments for the passed function</p></td>
+    </tr>
+    <tr>
+      <th>.names</th>
+      <td><p>A glue specification that helps with renaming output columns.
+<code>{.col}</code> stands for the selected column, and <code>{.fn}</code> stands for the name of the function being applied.
+The default (<code>NULL</code>) is equivalent to <code>"{.col}"</code> for a single function case and <code>"{.col}_{.fn}"</code>
+when a list is used for <code>.fns</code>.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>
-  x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,
-  y <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>
+  x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span>,
+  y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span>,
+  z <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span><span class='op'>)</span>
 <span class='op'>)</span>
 
-<span class='co'># Grab column by name</span>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>pull.</span><span class='op'>(</span><span class='va'>y</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'>
-<span class='co'># Grab column by position</span>
+  <span class='fu'><a href='mutate..html'>mutate.</a></span><span class='op'>(</span><span class='fu'>across.</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span>, <span class='op'>~</span> <span class='va'>.x</span> <span class='op'>*</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 3</span><span>
+#&gt;       x     y z    
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     2     4 a    
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     4 a    
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     2     4 b    </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>pull.</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'>
-<span class='co'># Defaults to last column</span>
+  <span class='fu'><a href='summarize..html'>summarize.</a></span><span class='op'>(</span><span class='fu'>across.</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span>, <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>.x</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>, .by <span class='op'>=</span> <span class='va'>z</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 2 × 3</span><span>
+#&gt;   z         x     y
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a         1     2
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> b         1     2</div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>pull.</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 1 2 3</div></pre>
+  <span class='fu'><a href='arrange..html'>arrange.</a></span><span class='op'>(</span><span class='fu'>across.</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>y</span>, <span class='va'>z</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 3 × 3</span><span>
+#&gt;       x     y z    
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     2 a    
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     1     2 a    
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     1     2 b    </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

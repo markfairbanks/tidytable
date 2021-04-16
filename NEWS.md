@@ -1,4 +1,4 @@
-# tidytable 0.6.1 (in development)
+# tidytable 0.6.1
 
 #### New functions
 * `across.()`
