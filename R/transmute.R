@@ -24,7 +24,5 @@ transmute. <- function(.df, ..., .by = NULL) {
 
 #' @export
 transmute..data.frame <- function(.df, ..., .by = NULL) {
-  .df <- as_tidytable(.df)
-
   mutate.(.df, ..., .by = {{ .by }}, .keep = "none")
 }
