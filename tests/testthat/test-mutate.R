@@ -261,3 +261,65 @@ test_that("can make custom functions with quosures", {
   expect_named(result_df, c("x", "y", "z", "stuff"))
   expect_equal(result_df$stuff, c(2,3,4))
 })
+
+# .before, .after, .keep ------------------------------------------------------
+
+test_that(".keep = 'unused' keeps variables explicitly mentioned", {
+  df <- tidytable(x = 1, y = 2)
+  out <- mutate.(df, x1 = x + 1, y = y, .keep = "unused")
+  expect_named(out, c("y", "x1"))
+})
+
+test_that(".keep = 'used' not affected by across()", {
+  df <- tidytable(x = 1, y = 2, z = 3, a = "a", b = "b", c = "c")
+
+  # This must evaluate every column in order to figure out if should
+  # be included in the set or not, but that shouldn't be counted for
+  # the purposes of "used" variables
+  out <- mutate.(df, across.(where(is.numeric), identity), .keep = "unused")
+  expect_named(out, names(df))
+})
+
+test_that(".keep = 'used' keeps variables used in expressions", {
+  df <- tidytable(a = 1, b = 2, c = 3, x = 1, y = 2)
+  out <- mutate.(df, xy = x + y, .keep = "used")
+  expect_named(out, c("x", "y", "xy"))
+})
+
+test_that(".keep = 'none' only keeps grouping variables", {
+  df <- tidytable(x = 1, y = 2)
+
+  expect_named(mutate.(df, z = 1, .keep = "none"), "z")
+  expect_named(mutate.(df, z = 1, .by = x, .keep = "none"), c("x", "z"))
+})
+
+test_that(".keep= always retains grouping variables (#5582)", {
+  df <- tidytable(x = 1, y = 2, z = 3)
+  expect_equal(
+    mutate.(df, a = x + 1, .keep = "none", .by = z),
+    tidytable(z = 3, a = 2)
+  )
+  expect_equal(
+    mutate.(df, a = x + 1, .keep = "all", .by = z),
+    tidytable(x = 1, y = 2, z = 3, a = 2)
+  )
+  expect_equal(
+    mutate.(df, a = x + 1, .keep = "used", .by = z),
+    tidytable(x = 1, z = 3, a = 2)
+  )
+  expect_equal(
+    mutate.(df, a = x + 1, .keep = "unused"),
+    tidytable(y = 2, z = 3, a = 2)
+  )
+})
+
+# test_that("can use .before and .after to control column position", {
+#   df <- tibble(x = 1, y = 2)
+#   expect_named(mutate(df, z = 1), c("x", "y", "z"))
+#   expect_named(mutate(df, z = 1, .before = 1), c("z", "x", "y"))
+#   expect_named(mutate(df, z = 1, .after = 1), c("x", "z", "y"))
+#
+#   # but doesn't affect order of existing columns
+#   df <- tibble(x = 1, y = 2)
+#   expect_named(mutate(df, x = 1, .after = y), c("x", "y"))
+# })
