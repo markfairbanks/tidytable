@@ -7,12 +7,17 @@
 #' @param ... Columns to create/modify
 #' @param .by Columns to group by
 #'
-#' @md
-#' @examples
-#' mtcars %>%
-#'   transmute.(displ_l = disp / 61.0237)
-#'
 #' @export
+#'
+#' @examples
+#' test_df <- data.table(
+#'   a = 1:3,
+#'   b = 4:6,
+#'   c = c("a","a","b")
+#' )
+#'
+#' test_df %>%
+#'   transmute.(double_a = a * 2)
 transmute. <- function(.df, ..., .by = NULL) {
   UseMethod("transmute.")
 }
@@ -21,17 +26,5 @@ transmute. <- function(.df, ..., .by = NULL) {
 transmute..data.frame <- function(.df, ..., .by = NULL) {
   .df <- as_tidytable(.df)
 
-  dots <- enquos(...)
-
-  .by <- enquo(.by)
-
-  .df <- mutate.(.df, ..., .by = !!.by)
-
-  by_cols <- select_vec_chr(.df, !!.by)
-
-  keep_names <- c(by_cols, names(dots))
-
-  .df[, ..keep_names]
+  mutate.(.df, ..., .by = {{ .by }}, .keep = "none")
 }
-
-globalVariables("..keep_names")
