@@ -9,13 +9,23 @@
 #' @param .df A data.frame or data.table
 #' @param ... Columns to add/modify
 #' @param .by Columns to group by
+#' @param .keep *experimental*:
+#'   This is an experimental argument that allows you to control which columns
+#'   from `.df` are retained in the output:
+#'
+#'   * `"all"`, the default, retains all variables.
+#'   * `"used"` keeps any variables used to make new variables; it's useful
+#'     for checking your work as it displays inputs and outputs side-by-side.
+#'   * `"unused"` keeps only existing variables **not** used to make new
+#'     variables.
+#'   * `"none"`, only keeps grouping keys (like [transmute.()]).
 #'
 #' @export
 #'
 #' @examples
 #' test_df <- data.table(
-#'   a = c(1,2,3),
-#'   b = c(4,5,6),
+#'   a = 1:3,
+#'   b = 4:6,
 #'   c = c("a","a","b")
 #' )
 #'
@@ -27,6 +37,10 @@
 #'   mutate.(double_a = a * 2,
 #'           avg_a = mean(a),
 #'           .by = c)
+#'
+#' test_df %>%
+#'   mutate.(double_a = a * 2,
+#'           .keep = "used")
 mutate. <- function(.df, ..., .by = NULL,
                     .keep = "all") {
   UseMethod("mutate.")
@@ -148,3 +162,5 @@ extract_used <- function(x) {
     unique(unlist(lapply(x[-1], extract_used)))
   }
 }
+
+globalVariables("..keep")
