@@ -27,12 +27,14 @@
 #'   mutate.(double_a = a * 2,
 #'           avg_a = mean(a),
 #'           .by = c)
-mutate. <- function(.df, ..., .by = NULL) {
+mutate. <- function(.df, ..., .by = NULL,
+                    .keep = "all") {
   UseMethod("mutate.")
 }
 
 #' @export
-mutate..data.frame <- function(.df, ..., .by = NULL) {
+mutate..data.frame <- function(.df, ..., .by = NULL,
+                               .keep = "all") {
   .df <- as_tidytable(.df)
   .df <- shallow(.df)
 
@@ -97,6 +99,12 @@ mutate..data.frame <- function(.df, ..., .by = NULL) {
     }
 
   }
+
+  if (.keep != "all") {
+    keep <- get_keep_vars(.df, dots, .by, .keep)
+    .df <- .df[, ..keep]
+  }
+
   .df[]
 }
 
@@ -108,4 +116,35 @@ mutate_prep <- function(data, dot, dot_name) {
     dot <- call2("vec_recycle", dot, expr(.N), .ns = "vctrs")
   }
   dot
+}
+
+get_keep_vars <- function(df, dots, .by, .keep = "all") {
+  if (is_quosure(.by)) {
+    dots <- prep_exprs(dots, df)
+    .by <- character()
+  }
+  df_names <- names(df)
+  dots_names <- names(dots)
+  used <- unlist(map.(dots, extract_used)) %||% character()
+  used <- used[used %in% df_names]
+
+  if (.keep == "used") {
+    keep <- c(.by, used, dots_names)
+  } else if (.keep == "unused") {
+    unused <- df_names[df_names %notin% used]
+    keep <- c(.by, unused, dots_names)
+  } else if (.keep == "none") {
+    keep <- c(.by, dots_names)
+  }
+
+  keep <- unique(keep)
+  df_names[df_names %in% keep] # Preserve column order
+}
+
+extract_used <- function(x) {
+  if (is.symbol(x)) {
+    as.character(x)
+  } else {
+    unique(unlist(lapply(x[-1], extract_used)))
+  }
 }
