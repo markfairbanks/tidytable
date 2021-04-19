@@ -4,7 +4,7 @@
 \alias{mutate.}
 \title{Add/modify/delete columns}
 \usage{
-mutate.(.df, ..., .by = NULL, .keep = "all")
+mutate.(.df, ..., .by = NULL, .keep = "all", .before = NULL, .after = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -24,6 +24,9 @@ for checking your work as it displays inputs and outputs side-by-side.
 variables.
 \item \code{"none"}, only keeps grouping keys (like \code{\link[=transmute.]{transmute.()}}).
 }}
+
+\item{.before, .after}{Optionally indicate where new columns should be placed.
+Defaults to the right side of the data frame.}
 }
 \description{
 With \code{mutate.()} you can do 3 things:
@@ -50,6 +53,8 @@ test_df \%>\%
           .by = c)
 
 test_df \%>\%
-  mutate.(double_a = a * 2,
-          .keep = "used")
+  mutate.(double_a = a * 2, .keep = "used")
+
+test_df \%>\%
+  mutate.(double_a = a * 2, .after = a)
 }
