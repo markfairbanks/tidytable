@@ -19,6 +19,8 @@
 #'   * `"unused"` keeps only existing variables **not** used to make new
 #'     variables.
 #'   * `"none"`, only keeps grouping keys (like [transmute.()]).
+#' @param .before,.after Optionally indicate where new columns should be placed.
+#' Defaults to the right side of the data frame.
 #'
 #' @export
 #'
@@ -39,16 +41,18 @@
 #'           .by = c)
 #'
 #' test_df %>%
-#'   mutate.(double_a = a * 2,
-#'           .keep = "used")
+#'   mutate.(double_a = a * 2, .keep = "used")
+#'
+#' test_df %>%
+#'   mutate.(double_a = a * 2, .after = a)
 mutate. <- function(.df, ..., .by = NULL,
-                    .keep = "all") {
+                    .keep = "all", .before = NULL, .after = NULL) {
   UseMethod("mutate.")
 }
 
 #' @export
 mutate..data.frame <- function(.df, ..., .by = NULL,
-                               .keep = "all") {
+                               .keep = "all", .before = NULL, .after = NULL) {
   .df <- as_tidytable(.df)
   .df <- shallow(.df)
 
@@ -58,6 +62,14 @@ mutate..data.frame <- function(.df, ..., .by = NULL,
   if (length(dots) == 0) return(.df)
 
   mask <- build_data_mask(dots)
+
+  .before <- enquo(.before)
+  .after <- enquo(.after)
+
+  needs_relocate <- !quo_is_null(.before) || !quo_is_null(.after)
+  if (needs_relocate) {
+    original_names <- copy(names(.df))
+  }
 
   if (quo_is_null(.by)) {
     for (i in seq_along(dots)) {
@@ -103,15 +115,21 @@ mutate..data.frame <- function(.df, ..., .by = NULL,
     }
 
     if (length(dots) > 0) {
-      assign <- map2.(syms(names(dots)), dots, ~ call2("<-", .x, .y))
-      output <- call2("list", !!!syms(names(dots)))
+      dots_names <- names(dots)
+      assign <- map2.(syms(dots_names), dots, ~ call2("<-", .x, .y))
+      output <- call2("list", !!!syms(dots_names))
       expr <- call2("{", !!!assign, output)
-      j <- call2(":=", call2("c", !!!names(dots)), expr)
+      j <- call2(":=", call2("c", !!!dots_names), expr)
       dt_expr <- call2_j(.df, j, .by)
 
       .df <- eval_tidy(dt_expr, mask, caller_env())
     }
+  }
 
+  if (needs_relocate) {
+    df_names <- names(.df)
+    new_names <- df_names[df_names %notin% original_names]
+    .df <- relocate.(.df, !!!syms(new_names), .before = !!.before, .after = !!.after)
   }
 
   if (.keep != "all") {

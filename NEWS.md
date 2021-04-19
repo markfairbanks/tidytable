@@ -1,7 +1,9 @@
 # tidytable 0.6.2 (in development)
 
 #### Functionality improvements
-* `mutate.()`: Added `.keep` argument.
+* `mutate.()`:
+  + Added `.keep` argument
+  + Added `.before`/`.after` arguments
 
 # tidytable 0.6.1
 
