@@ -27,6 +27,7 @@ reference:
   - case_when.
   - coalesce.
   - count.
+  - cumall.
   - desc.
   - distinct.
   - group_split.
@@ -37,6 +38,7 @@ reference:
   - mutate_across.
   - mutate_rowwise.
   - n.
+  - n_distinct.
   - nest_by.
   - pull.
   - relocate.

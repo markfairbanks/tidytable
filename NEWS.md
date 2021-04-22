@@ -2,6 +2,7 @@
 
 #### New functions
 * `cumall.()`/`cumany.()`/`cummean.()`
+* `n_distinct.()`
 
 #### Functionality improvements
 * `mutate.()`:
