@@ -26,23 +26,18 @@ str_replace. <- function(string, pattern, replacement, fixed = FALSE, perl = FAL
 }
 
 str_replace_all. <- function(string, pattern, replacement, fixed = FALSE, perl = FALSE) {
-
   if (missing(replacement)) {
-
     replacement <- unname(pattern)
     pattern <- names(pattern)
-
   } else if (length(pattern) != length(replacement)) {
-
     if (length(pattern) > 1 & length(replacement) > 1) {
-
       stop("replacement has to have the same length as pattern")
-
     } else {
-
-      if (length(replacement) == 1) replacement <- rep(replacement, length(pattern))
-      else pattern <- rep(pattern, length(replacement))
-
+      if (length(replacement) == 1) {
+        replacement <- rep(replacement, length(pattern))
+      } else {
+        pattern <- rep(pattern, length(replacement))
+      }
     }
   }
 
