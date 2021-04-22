@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>License • tidytable</title>
+<title>NA • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -48,7 +48,7 @@
   <link href="extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="License" />
+<meta property="og:title" content="NA" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -132,12 +132,53 @@
 <div class="row">
   <div class="contents col-md-9">
     <div class="page-header">
-      <h1>License</h1>
+      <h1>NA</h1>
     </div>
 
-<pre>YEAR: 2019
-COPYRIGHT HOLDER: Mark Fairbanks
-</pre>
+<div id="pull-request-template" class="section level3">
+<h3 class="hasAnchor">
+<a href="#pull-request-template" class="anchor"></a>Pull Request Template</h3>
+<p><em>Please remove this template before you submit</em></p>
+<p>If you are unsure of any of these steps feel free to reach out and I can help walk you through the process.</p>
+<div id="before-you-make-a-pull-request" class="section level4">
+<h4 class="hasAnchor">
+<a href="#before-you-make-a-pull-request" class="anchor"></a>Before you make a pull request</h4>
+<ul>
+<li>If you are adding a new feature - please make sure you have opened an issue beforehand and we have discussed the feature</li>
+<li>You have made your changes in a new/separate branch. Branches should have descriptive names.
+<ul>
+<li>Example 1: Fixing an issue
+<ul>
+<li>fix-drop_na-col-order</li>
+</ul>
+</li>
+<li>Example 2: Adding a new argument to an existing function
+<ul>
+<li>add-mutate-keep</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Use a descriptive commit message</li>
+<li>Keep commit count to a relative minimum. For example - you shouldn’t need 5 separate commits to add one argument to a function. Work out the kinks on your own locally before submitting the PR!</li>
+<li>Add or update documentation (if necessary)</li>
+<li>Run <code><a href="https://devtools.r-lib.org//reference/document.html">devtools::document()</a></code> - updates documentation files</li>
+<li>Update NEWS.md</li>
+<li>Add simple unit tests (if necessary)</li>
+<li>Run <code><a href="https://devtools.r-lib.org//reference/test.html">devtools::test()</a></code> - runs unit tests</li>
+<li>Run <code><a href="https://devtools.r-lib.org//reference/check.html">devtools::check()</a></code> - makes sure everything follows CRAN rules</li>
+</ul>
+</div>
+<div id="when-making-a-pull-request" class="section level4">
+<h4 class="hasAnchor">
+<a href="#when-making-a-pull-request" class="anchor"></a>When making a pull request</h4>
+<ul>
+<li>Give a descriptive title</li>
+<li>Provide a description of your changes</li>
+<li>If fixing an issue - put “Closes #xx” in your description so the issue is auto-closed.</li>
+</ul>
+</div>
+</div>
 
   </div>
 
