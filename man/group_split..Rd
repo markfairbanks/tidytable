@@ -24,7 +24,7 @@ test_df <- tidytable(
   b = 1:3,
   c = c("a","a","b"),
   d = c("a","a","b")
- )
+)
 
 test_df \%>\%
   group_split.(c, d)
