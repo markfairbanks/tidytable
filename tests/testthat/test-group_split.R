@@ -1,16 +1,24 @@
-test_that("group_split.() keeps the grouping variables by default", {
-  tbl <- tidytable(x = 1:4, g = factor(rep(c("a", "b"), each = 2)))
-  res <- group_split.(tbl, g)
+test_df <- tidytable(x = 1:3, y = c("a", "a", "b"), z = c("a", "a", "b"))
 
-  expect_equal(as.data.table(res[[1]]), as.data.table(tbl[1:2,]))
-  expect_equal(as.data.table(res[[2]]), as.data.table(tbl[3:4,]))
+test_that("keeps the grouping variables by default", {
+  out <- group_split.(test_df, y)
+
+  expect_equal(out[[1]], slice.(test_df, 1:2))
+  expect_equal(out[[2]], slice.(test_df, 3))
+  expect_equal(names(out), NULL)
 })
 
+test_that("can return a named list", {
+  out <- group_split.(test_df, y, z, .named = TRUE)
 
-test_that("group_split() can discard the grouping variables with .keep = FALSE", {
-  tbl <- tidytable(x = 1:4, g = factor(rep(c("a", "b"), each = 2)))
-  res <- group_split.(tbl, g, .keep = FALSE)
+  expect_equal(out$a_a, slice.(test_df, 1:2))
+  expect_equal(out$b_b, slice.(test_df, 3))
+})
 
-  expect_equal(as.data.table(res[[1]]), as.data.table(tbl[1:2, 1]))
-  expect_equal(as.data.table(res[[2]]), as.data.table(tbl[3:4,1]))
+test_that("can discard the grouping variables with .keep = FALSE", {
+  out <- group_split.(test_df, y, z, .keep = FALSE)
+  comp_df <- select.(test_df, x)
+
+  expect_equal(out[[1]], slice.(comp_df, 1:2))
+  expect_equal(out[[2]], slice.(comp_df, 3))
 })

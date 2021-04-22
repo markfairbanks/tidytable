@@ -16,7 +16,7 @@
 #'   b = 1:3,
 #'   c = c("a","a","b"),
 #'   d = c("a","a","b")
-#'  )
+#' )
 #'
 #' test_df %>%
 #'   group_split.(c, d)
@@ -42,11 +42,13 @@ group_split..data.frame <- function(.df, ..., .keep = TRUE, .named = FALSE) {
   if (length(dots) == 0) {
     list(.df)
   } else {
-    dots <- select_dots_chr(.df, ...)
+    by <- select_dots_chr(.df, !!!dots)
 
-    dots <- split(.df, by = dots, keep.by = .keep)
+    dots <- split(.df, by = by, keep.by = .keep)
 
-    if (!.named) {
+    if (.named) {
+      names(dots) <- str_replace_all.(names(dots), ".", "_", fixed = TRUE)
+    } else {
       dots <- unname(dots)
     }
 
