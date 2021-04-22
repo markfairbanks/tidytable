@@ -1,5 +1,8 @@
 # tidytable 0.6.2 (in development)
 
+#### New functions
+* `cumall.()`/`cumany.()`/`cummean.()`
+
 #### Functionality improvements
 * `mutate.()`:
   + Added `.keep` argument
