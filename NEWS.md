@@ -8,6 +8,7 @@
 * `mutate.()`:
   + Added `.keep` argument
   + Added `.before`/`.after` arguments
+* `tidytable()`: Added `.name_repair` argument
 
 # tidytable 0.6.1
 
