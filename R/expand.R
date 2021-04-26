@@ -7,6 +7,8 @@
 #' * use with `right_join.()` to convert implicit missing values to explicit missing values
 #' * use with `anti_join.()` to find out which combinations are missing
 #'
+#' `nesting.()` is a helper that only finds combinations already present in the dataset.
+#'
 #' @param .df A data.frame or data.table
 #' @param ... Columns to get combinations of
 #' @param .name_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details
@@ -15,10 +17,13 @@
 #' @export
 #'
 #' @examples
-#' test_df <- tidytable(x = 1:2, y = 1:2)
+#' test_df <- tidytable(x = c(1, 1, 2), y = c(1, 1, 2))
 #'
 #' test_df %>%
 #'   expand.(x, y)
+#'
+#' test_df %>%
+#'   expand.(nesting.(x, y))
 expand. <- function(.df, ..., .name_repair = "check_unique") {
   UseMethod("expand.")
 }
@@ -33,13 +38,18 @@ expand..data.frame <- function(.df, ..., .name_repair = "check_unique") {
 
   mask <- build_data_mask(dots, !!!.df)
 
-  cj <- call2_dt("CJ", !!!dots, sorted = TRUE, unique = TRUE)
+  out <- call2("crossing.", !!!dots, .name_repair = .name_repair, .ns = "tidytable")
 
-  result_df <- eval_tidy(cj, mask, caller_env())
+  eval_tidy(out, mask, caller_env())
+}
 
-  setkey(result_df, NULL)
+#' @export
+#' @rdname expand.
+nesting. <- function(..., .name_repair = "check_unique") {
+  cols <- dots_list(..., .named = TRUE)
 
-  result_df <- df_name_repair(result_df, .name_repair = .name_repair)
-
-  as_tidytable(result_df)
+  out <- tidytable(!!!cols, .name_repair = .name_repair)
+  out <- distinct.(out)
+  setorder(out)
+  out
 }
