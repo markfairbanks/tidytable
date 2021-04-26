@@ -4,10 +4,15 @@
 \alias{tidytable}
 \title{Build a data.table/tidytable}
 \usage{
-tidytable(...)
+tidytable(
+  ...,
+  .name_repair = c("check_unique", "unique", "universal", "minimal")
+)
 }
 \arguments{
 \item{...}{Arguments passed to \code{data.table()}}
+
+\item{.name_repair}{Treatment of duplicate names. See \code{?vctrs::vec_as_names} for options/details.}
 }
 \description{
 \code{tidytable()} constructs a data.table, but one with nice printing features.
