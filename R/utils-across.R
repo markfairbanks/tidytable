@@ -48,8 +48,7 @@ across_calls <- function(.fns, .cols, .names, dots) {
 # Generate expression from function call
 fn_to_expr <- function(.fn, .col, ...) {
   if (is_symbol(.fn) || is_string(.fn) || is_call(.fn, "function")) {
-    dots <- enexprs(...)
-    call2(.fn, sym(.col), !!!dots)
+    call2(.fn, sym(.col), ...)
   } else if (is_call(.fn, "~")) {
     call <- f_rhs(.fn)
     call <- replace_dot(call, sym(.col))
