@@ -178,7 +178,7 @@ test_df %>%
 
 These same ideas can be used whenever selecting columns in `tidytable`
 functions - for example when using `count.()`, `drop_na.()`,
-`mutate_across.()`, `pivot_longer.()`, etc.
+`across.()`, `pivot_longer.()`, etc.
 
 A full overview of selection options can be found
 [here](https://tidyselect.r-lib.org/reference/language.html).
@@ -251,7 +251,7 @@ df %>%
 
 ## Compatibility
 
-##### Compatibility with dplyr (and other tidyverse packages)
+#### Compatibility with dplyr (and other tidyverse packages)
 
 If you want to use a `dplyr` function that hasn’t yet been implemented
 in `tidytable` you can. For example - `dplyr::add_count()`:
@@ -273,7 +273,7 @@ test_df %>%
 #> 3     3 b            6     3
 ```
 
-##### Compatibility with data.table
+#### Compatibility with data.table
 
 If you want to use `data.table` you can - however it is recommended to
 first convert the object to a data.table if you are using any of
