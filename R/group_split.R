@@ -6,7 +6,7 @@
 #' @param .df A data.frame or data.table
 #' @param ... Columns to group and split by. `tidyselect` compatible.
 #' @param .keep Should the grouping columns be kept
-#' @param .named Should the list be named with labels that identify the group
+#' @param .named _experimental_: Should the list be named with labels that identify the group
 #'
 #' @export
 #'

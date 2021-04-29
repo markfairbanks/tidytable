@@ -13,7 +13,7 @@ group_split.(.df, ..., .keep = TRUE, .named = FALSE)
 
 \item{.keep}{Should the grouping columns be kept}
 
-\item{.named}{Should the list be named with labels that identify the group}
+\item{.named}{\emph{experimental}: Should the list be named with labels that identify the group}
 }
 \description{
 Split data frame by groups. Returns a list.
