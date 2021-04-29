@@ -36,7 +36,7 @@ prep_expr <- function(x, data, .by = NULL) {
     x[[1]] <- quote(ifelse.)
     x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }})
     x
-  } else if (is_call(x, "case_when")) {
+  } else if (is_call(x, "case_when", ns = "")) {
     x[[1]] <- quote(case_when.)
     x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }})
     x
