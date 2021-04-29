@@ -63,6 +63,14 @@ test_that("row_number() works v2", {
   expect_equal(df$row, df$row_check)
 })
 
+test_that("row_number.() works in .by", {
+  df <- data.table(x = 1:3, y = 1:3)
+  df <- df %>%
+    mutate.(row = row_number.(), .by = x)
+
+  expect_equal(df$row, c(1, 1, 1))
+})
+
 test_that("modify-by-reference doesn't occur", {
   df <- data.table(x = 1:3, y = 1:3)
   df %>%
