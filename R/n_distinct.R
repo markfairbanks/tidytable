@@ -12,5 +12,12 @@
 #' x <- sample(1:10, 1e5, rep = TRUE)
 #' n_distinct.(x)
 n_distinct. <- function(..., na.rm = FALSE) {
-  uniqueN(c(...), na.rm = na.rm)
+  # replace with uniqueN(c(...), na.rm = na.rm) when
+  # data.table issue #3739 is fixed
+  # https://github.com/Rdatatable/data.table/issues/3739
+  x <- c(...)
+  if (na.rm) {
+    x <- x[!vec_equal_na(x)]
+  }
+  vec_unique_count(x)
 }
