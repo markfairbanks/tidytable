@@ -26,6 +26,7 @@ filter. <- function(.df, ..., .by = NULL) {
 }
 
 #' @export
+#' @export
 filter..tidytable <- function(.df, ..., .by = NULL) {
   .df <- as_tidytable(.df)
 
@@ -47,15 +48,13 @@ filter..tidytable <- function(.df, ..., .by = NULL) {
   } else {
     .by <- select_vec_chr(.df, !!.by)
 
-    col_order <- names(.df)
-
-    j <- expr(.SD[!!i])
+    j <- expr(.I[!!i])
 
     dt_expr <- call2_j(.df, j, .by)
+    dt_expr <- call2("$", dt_expr, expr(V1))
+    dt_expr <- call2_i(.df, dt_expr)
 
     .df <- eval_tidy(dt_expr, env = dt_env)
-
-    setcolorder(.df, col_order)
   }
 
   .df
