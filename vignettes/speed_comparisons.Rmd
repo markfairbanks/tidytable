@@ -61,7 +61,7 @@ inv_gc(); inv_gc();
 
 filter_marks <- bench::mark(
   tidyverse = filter(test_tbl, a <= 7, c == "a"),
-  dtplyr = collect(filter(lazy_dt(test_dt), a <= 7, c == "a")),
+  dtplyr = as.data.table(filter(lazy_dt(test_dt), a <= 7, c == "a")),
   tidytable = filter.(test_dt, a <= 7, c == "a"),
   data.table = test_dt[a <= 7 & c == "a"],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
@@ -89,7 +89,7 @@ mut_dt <- copy(test_dt)
 
 mutate_marks <- bench::mark(
   tidyverse = mutate(test_tbl, double_a = a * 2, a_plus_b = a + b),
-  dtplyr = collect(mutate(lazy_dt(test_dt), double_a = a * 2, a_plus_b = a + b)),
+  dtplyr = as.data.table(mutate(lazy_dt(test_dt), double_a = a * 2, a_plus_b = a + b)),
   tidytable = mutate.(test_dt, double_a = a * 2, a_plus_b = a + b),
   data.table = mut_dt[, ':='(double_a = a * 2, a_b = a + b)][],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
@@ -112,7 +112,7 @@ test_tbl <- as_tibble(test_dt)
 
 arrange_marks <- bench::mark(
   tidyverse = arrange(test_tbl, c, a),
-  dtplyr = collect(arrange(lazy_dt(test_dt), c, a)),
+  dtplyr = as.data.table(arrange(lazy_dt(test_dt), c, a)),
   tidytable = arrange.(test_dt, c, a),
   data.table = test_dt[order(c, a)],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
@@ -123,7 +123,7 @@ arrange_marks <- bench::mark(
 ```{r distinct, echo=FALSE}
 distinct_marks <- bench::mark(
   tidyverse = distinct(test_tbl),
-  dtplyr = collect(distinct(lazy_dt(test_dt))),
+  dtplyr = as.data.table(distinct(lazy_dt(test_dt))),
   tidytable = distinct.(test_dt),
   data.table = unique(test_dt),
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
@@ -245,7 +245,7 @@ right_tbl <- as_tibble(right_dt)
 
 left_join_marks <- bench::mark(
   tidyverse = left_join(left_tbl, right_tbl, by = "c"),
-  dtplyr = collect(left_join(lazy_dt(left_tbl), lazy_dt(right_tbl), by = "c")),
+  dtplyr = as.data.table(left_join(lazy_dt(left_dt), lazy_dt(right_dt), by = "c")),
   tidytable = left_join.(left_dt, right_dt),
   data.table = right_dt[left_dt, on = "c", allow.cartesian = TRUE],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
@@ -256,7 +256,7 @@ left_join_marks <- bench::mark(
 ```{r inner_join, echo=FALSE}
 inner_join_marks <- bench::mark(
   tidyverse = inner_join(left_tbl, right_tbl, by = "c"),
-  dtplyr = collect(inner_join(lazy_dt(left_tbl), lazy_dt(right_tbl), by = "c")),
+  dtplyr = as.data.table(inner_join(lazy_dt(left_dt), lazy_dt(right_dt), by = "c")),
   tidytable = inner_join.(left_dt, right_dt),
   data.table = left_dt[right_dt, on = "c", allow.cartesian = TRUE, nomatch = 0],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
