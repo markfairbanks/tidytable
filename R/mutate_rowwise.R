@@ -23,9 +23,7 @@ mutate_rowwise. <- function(.df, ...) {
 }
 
 #' @export
-mutate_rowwise..data.frame <- function(.df, ...) {
-  .df <- as_tidytable(.df)
-
+mutate_rowwise..tidytable <- function(.df, ...) {
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
 
@@ -34,6 +32,12 @@ mutate_rowwise..data.frame <- function(.df, ...) {
   .df <- mutate.(.df, !!!dots, .by = .rowwise_id)
 
   mutate.(.df, .rowwise_id = NULL)
+}
+
+#' @export
+mutate_rowwise..data.frame <- function(.df, ...) {
+  .df <- as_tidytable(.df)
+  mutate_rowwise.(.df, ...)
 }
 
 globalVariables(".rowwise_id")

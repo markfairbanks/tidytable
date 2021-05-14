@@ -23,6 +23,12 @@ transmute. <- function(.df, ..., .by = NULL) {
 }
 
 #' @export
-transmute..data.frame <- function(.df, ..., .by = NULL) {
+transmute..tidytable <- function(.df, ..., .by = NULL) {
   mutate.(.df, ..., .by = {{ .by }}, .keep = "none")
+}
+
+#' @export
+transmute..data.frame <- function(.df, ..., .by = NULL) {
+  .df <- as_tidytable(.df)
+  transmute.(.df, ..., .by = {{ .by }})
 }

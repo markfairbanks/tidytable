@@ -18,7 +18,7 @@
 #' test_df <- data.table(
 #'   x = 1:4,
 #'   y = 5:8,
-#'   z = c("a","a","a","b")
+#'   z = c("a", "a", "a", "b")
 #' )
 #'
 #' test_df %>%
@@ -46,13 +46,11 @@ slice. <- function(.df, ..., .by = NULL) {
 }
 
 #' @export
-slice..data.frame <- function(.df, ..., .by = NULL) {
-  .df <- as_tidytable(.df)
-
-  dots <- enquos(...) # Needed so .N works
+slice..tidytable <- function(.df, ..., .by = NULL) {
+  dots <- enquos(...)
   if (length(dots) == 0) return(.df)
 
-  mask <- build_data_mask(dots)
+  dt_env <- build_dt_env(dots)
 
   dots <- prep_exprs(dots)
 
@@ -64,7 +62,7 @@ slice..data.frame <- function(.df, ..., .by = NULL) {
     i <- expr({.rows = c(!!!dots); .rows[data.table::between(.rows, -.N, .N)]})
     dt_expr <- call2_i(.df, i)
 
-    eval_tidy(dt_expr, mask, caller_env())
+    eval_tidy(dt_expr, env = dt_env)
   } else {
     col_order <- names(.df)
 
@@ -80,10 +78,16 @@ slice..data.frame <- function(.df, ..., .by = NULL) {
     dt_expr <- call2("$", dt_expr, expr(V1))
     dt_expr <- call2_i(.df, dt_expr)
 
-    .df <- eval_tidy(dt_expr, mask, caller_env())
+    .df <- eval_tidy(dt_expr, env = dt_env)
 
     setcolorder(.df, col_order)[]
   }
+}
+
+#' @export
+slice..data.frame <- function(.df, ..., .by = NULL) {
+  .df <- as_tidytable(.df)
+  slice.(.df, ..., .by = {{ .by }})
 }
 
 #' @export
@@ -93,12 +97,10 @@ slice_head. <- function(.df, n = 5, .by = NULL) {
 }
 
 #' @export
-slice_head..data.frame <- function(.df, n = 5, .by = NULL) {
-  .df <- as_tidytable(.df)
-
+slice_head..tidytable <- function(.df, n = 5, .by = NULL) {
   n <- enquo(n)
 
-  mask <- build_data_mask(n)
+  dt_env <- build_dt_env(n)
 
   n <- prep_expr(n)
 
@@ -114,7 +116,7 @@ slice_head..data.frame <- function(.df, n = 5, .by = NULL) {
   dt_expr <- call2("$", dt_expr, expr(V1))
   dt_expr <- call2_i(.df, dt_expr)
 
-  .df <- eval_tidy(dt_expr, mask, caller_env())
+  .df <- eval_tidy(dt_expr, env = dt_env)
 
   if (with_by) {
     setcolorder(.df, col_order)
@@ -124,18 +126,22 @@ slice_head..data.frame <- function(.df, n = 5, .by = NULL) {
 }
 
 #' @export
+slice_head..data.frame <- function(.df, n = 5, .by = NULL) {
+  .df <- as_tidytable(.df)
+  slice_head.(.df, {{ n }}, {{ .by }})
+}
+
+#' @export
 #' @rdname slice.
 slice_tail. <- function(.df, n = 5, .by = NULL) {
   UseMethod("slice_tail.")
 }
 
 #' @export
-slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
-  .df <- as_tidytable(.df)
-
+slice_tail..tidytable <- function(.df, n = 5, .by = NULL) {
   n <- enquo(n)
 
-  mask <- build_data_mask(n)
+  dt_env <- build_dt_env(n)
 
   n <- prep_expr(n)
 
@@ -151,7 +157,7 @@ slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
   dt_expr <- call2("$", dt_expr, expr(V1))
   dt_expr <- call2_i(.df, dt_expr)
 
-  .df <- eval_tidy(dt_expr, mask, caller_env())
+  .df <- eval_tidy(dt_expr, env = dt_env)
 
   if (with_by) {
     setcolorder(.df, col_order)
@@ -161,9 +167,24 @@ slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
 }
 
 #' @export
+slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
+  .df <- as_tidytable(.df)
+  slice_tail.(.df, {{ n }}, {{ .by }})
+}
+
+#' @export
 #' @rdname slice.
 slice_max. <- function(.df, order_by, n = 1, .by = NULL) {
   UseMethod("slice_max.")
+}
+
+#' @export
+slice_max..tidytable <- function(.df, order_by, n = 1, .by = NULL) {
+  if (missing(order_by)) abort("order_by must be supplied")
+
+  .df %>%
+    arrange.(-{{ order_by }}) %>%
+    slice_head.(n, .by = {{ .by }})
 }
 
 #' @export
@@ -172,9 +193,7 @@ slice_max..data.frame <- function(.df, order_by, n = 1, .by = NULL) {
 
   if (missing(order_by)) abort("order_by must be supplied")
 
-  .df %>%
-    arrange.(-{{ order_by }}) %>%
-    slice_head.(n, .by = {{ .by }})
+  slice_max.(.df, {{ order_by }}, n = 1, .by = {{ .by }})
 }
 
 #' @export
@@ -184,14 +203,18 @@ slice_min. <- function(.df, order_by, n = 1, .by = NULL) {
 }
 
 #' @export
-slice_min..data.frame <- function(.df, order_by, n = 1, .by = NULL) {
-  .df <- as_tidytable(.df)
-
+slice_min..tidytable <- function(.df, order_by, n = 1, .by = NULL) {
   if (missing(order_by)) abort("order_by must be supplied")
 
   .df %>%
     arrange.({{ order_by }}) %>%
     slice_head.(n, .by = {{ .by }})
+}
+
+#' @export
+slice_min..data.frame <- function(.df, order_by, n = 1, .by = NULL) {
+  .df <- as_tidytable(.df)
+  slice_min.(.df, {{ order_by }}, n = 1, .by = {{ .by }})
 }
 
 #' @export
@@ -202,7 +225,7 @@ slice_sample. <- function(.df, n, prop, weight_by = NULL,
 }
 
 #' @export
-slice_sample..data.frame <- function(.df, n, prop, weight_by = NULL,
+slice_sample..tidytable <- function(.df, n, prop, weight_by = NULL,
                                      replace = FALSE, .by = NULL) {
   size <- check_slice_size(n, prop, "slice_sample")
 
@@ -212,6 +235,15 @@ slice_sample..data.frame <- function(.df, n, prop, weight_by = NULL,
   )
 
   slice.(.df, idx({{ weight_by }}, .N), .by = {{ .by }})
+}
+
+#' @export
+slice_sample..data.frame <- function(.df, n, prop, weight_by = NULL,
+                                     replace = FALSE, .by = NULL) {
+  .df <- as_tidytable(.df)
+  slice_sample.(
+    .df, n, prop, {{ weight_by }}, replace, {{ .by }}
+  )
 }
 
 sample_int <- function(n, size, replace = FALSE, wt = NULL) {

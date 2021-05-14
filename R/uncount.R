@@ -6,7 +6,6 @@
 #' @param .id A string name for a new column containing a unique identifier for the newly uncounted rows.
 #'
 #' @export
-#' @md
 #'
 #' @examples
 #' df <- data.table(x = c("a", "b"), n = c(1, 2))
@@ -19,9 +18,7 @@ uncount. <- function(.df, weights, .remove = TRUE, .id = NULL) {
 }
 
 #' @export
-uncount..data.frame <- function(.df, weights, .remove = TRUE, .id = NULL) {
-  .df <- as_tidytable(.df)
-
+uncount..tidytable <- function(.df, weights, .remove = TRUE, .id = NULL) {
   weights <- enquo(weights)
 
   rep_vec <- pull.(.df, !!weights)
@@ -33,4 +30,10 @@ uncount..data.frame <- function(.df, weights, .remove = TRUE, .id = NULL) {
   if (.remove) result_df <- mutate.(result_df, !!weights := NULL)
 
   result_df
+}
+
+#' @export
+uncount..data.frame <- function(.df, weights, .remove = TRUE, .id = NULL) {
+  .df <- as_tidytable(.df)
+  uncount.(.df, {{ weights }}, .remove, .id)
 }

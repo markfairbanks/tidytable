@@ -8,12 +8,11 @@
 #' `tidyselect` compatible.
 #'
 #' @export
-#' @md
 #'
 #' @examples
 #' df <- data.table(
-#'   x = c(1,2,NA),
-#'   y = c("a",NA,"b")
+#'   x = c(1, 2, NA),
+#'   y = c("a", NA, "b")
 #' )
 #'
 #' df %>%
@@ -29,9 +28,7 @@ drop_na. <- function(.df, ...) {
 }
 
 #' @export
-drop_na..data.frame <- function(.df, ...) {
-  .df <- as_tidytable(.df)
-
+drop_na..tidytable <- function(.df, ...) {
   dots <- enquos(...)
 
   if (length(dots) == 0) {
@@ -41,4 +38,10 @@ drop_na..data.frame <- function(.df, ...) {
 
     na.omit(.df, cols = drop_cols)
   }
+}
+
+#' @export
+drop_na..data.frame <- function(.df, ...) {
+  .df <- as_tidytable(.df)
+  drop_na.(.df, ...)
 }

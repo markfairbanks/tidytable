@@ -9,7 +9,7 @@ rename.(.df, ...)
 \arguments{
 \item{.df}{A data.frame or data.table}
 
-\item{...}{Rename expression like dplyr::rename()}
+\item{...}{Rename expression like \code{dplyr::rename()}}
 }
 \description{
 Rename variables from a data.table.

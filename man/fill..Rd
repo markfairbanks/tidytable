@@ -26,7 +26,7 @@ test_df <- data.table(
   a = c(1, NA, 3, 4, 5),
   b = c(NA, 2, NA, NA, 5),
   groups = c("a", "a", "a", "b", "b")
- )
+)
 
 test_df \%>\%
   fill.(a, b)

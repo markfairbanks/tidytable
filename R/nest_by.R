@@ -36,9 +36,7 @@ nest_by. <- function(.df, ..., .key = "data", .keep = FALSE) {
 }
 
 #' @export
-nest_by..data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
-  .df <- as_tidytable(.df)
-
+nest_by..tidytable <- function(.df, ..., .key = "data", .keep = FALSE) {
   vec_assert(.key, character(), 1)
   vec_assert(.keep, logical(), 1)
 
@@ -55,4 +53,10 @@ nest_by..data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
   }
 
   .df
+}
+
+#' @export
+nest_by..data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
+  .df <- as_tidytable(.df)
+  nest_by.(.df, ..., .key = .key, .keep = .keep)
 }

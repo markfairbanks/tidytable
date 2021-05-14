@@ -18,17 +18,17 @@ Select or drop columns from a data.table
 }
 \examples{
 test_df <- data.table(
-  x = c(1,1,1),
-  y = c(4,5,6),
-  double_x = c(2,2,2),
-  z = c("a","a","b")
+  x1 = 1:3,
+  x2 = 1:3,
+  y = c("a", "b", "c"),
+  z = c("a", "b", "c")
 )
 
 test_df \%>\%
-  select.(x, y)
+  select.(x1, y)
 
 test_df \%>\%
-  select.(x:z)
+  select.(x1:y)
 
 test_df \%>\%
   select.(-y, -z)
@@ -37,8 +37,8 @@ test_df \%>\%
   select.(starts_with("x"), z)
 
 test_df \%>\%
-  select.(where(is.character), x)
+  select.(where(is.character), x1)
 
 test_df \%>\%
-  select.(stuff = x, y)
+  select.(new = x1, y)
 }

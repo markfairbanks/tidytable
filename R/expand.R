@@ -13,7 +13,6 @@
 #' @param ... Columns to get combinations of
 #' @param .name_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details
 #'
-#' @md
 #' @export
 #'
 #' @examples
@@ -29,18 +28,24 @@ expand. <- function(.df, ..., .name_repair = "check_unique") {
 }
 
 #' @export
-expand..data.frame <- function(.df, ..., .name_repair = "check_unique") {
-  .df <- as_tidytable(.df)
-
+expand..tidytable <- function(.df, ..., .name_repair = "check_unique") {
   dots <- enquos(...)
   dots <- dots[!map_lgl.(dots, quo_is_null)]
   if (length(dots) == 0) return(.df)
 
-  mask <- build_data_mask(dots, !!!.df)
+  dt_env <- build_dt_env(dots, !!!.df)
+
+  dots <- map.(dots, quo_squash)
 
   out <- call2("crossing.", !!!dots, .name_repair = .name_repair, .ns = "tidytable")
 
-  eval_tidy(out, mask, caller_env())
+  eval_tidy(out, env = dt_env)
+}
+
+#' @export
+expand..data.frame <- function(.df, ..., .name_repair = "check_unique") {
+  .df <- as_tidytable(.df)
+  expand.(.df, ..., .name_repair = .name_repair)
 }
 
 #' @export

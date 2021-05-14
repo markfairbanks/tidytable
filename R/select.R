@@ -9,21 +9,20 @@
 #' `tidyselect` compatible.
 #'
 #' @export
-#' @md
 #'
 #' @examples
 #' test_df <- data.table(
-#'   x = c(1,1,1),
-#'   y = c(4,5,6),
-#'   double_x = c(2,2,2),
-#'   z = c("a","a","b")
+#'   x1 = 1:3,
+#'   x2 = 1:3,
+#'   y = c("a", "b", "c"),
+#'   z = c("a", "b", "c")
 #' )
 #'
 #' test_df %>%
-#'   select.(x, y)
+#'   select.(x1, y)
 #'
 #' test_df %>%
-#'   select.(x:z)
+#'   select.(x1:y)
 #'
 #' test_df %>%
 #'   select.(-y, -z)
@@ -32,18 +31,16 @@
 #'   select.(starts_with("x"), z)
 #'
 #' test_df %>%
-#'   select.(where(is.character), x)
+#'   select.(where(is.character), x1)
 #'
 #' test_df %>%
-#'   select.(stuff = x, y)
+#'   select.(new = x1, y)
 select. <- function(.df, ...) {
   UseMethod("select.")
 }
 
 #' @export
-select..data.frame <- function(.df, ...) {
-  .df <- as_tidytable(.df)
-
+select..tidytable <- function(.df, ...) {
   select_cols <- select_dots_idx(.df, ...)
 
   .df <- .df[, ..select_cols]
@@ -51,6 +48,12 @@ select..data.frame <- function(.df, ...) {
   .df <- set_names(.df, names(select_cols))
 
   .df
+}
+
+#' @export
+select..data.frame <- function(.df, ...) {
+  .df <- as_tidytable(.df)
+  select.(.df, ...)
 }
 
 globalVariables("..select_cols")

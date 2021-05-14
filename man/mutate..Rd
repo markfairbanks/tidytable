@@ -40,7 +40,7 @@ With \code{mutate.()} you can do 3 things:
 test_df <- data.table(
   a = 1:3,
   b = 4:6,
-  c = c("a","a","b")
+  c = c("a", "a", "b")
 )
 
 test_df \%>\%

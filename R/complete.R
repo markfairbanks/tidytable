@@ -22,7 +22,7 @@ complete. <- function(.df, ..., fill = list()) {
 }
 
 #' @export
-complete..data.frame <- function(.df, ..., fill = list()) {
+complete..tidytable <- function(.df, ..., fill = list()) {
   dots <- enquos(...)
   dots <- dots[!map_lgl.(dots, quo_is_null)]
   if (length(dots) == 0) return(.df)
@@ -35,4 +35,10 @@ complete..data.frame <- function(.df, ..., fill = list()) {
   full_df <- replace_na.(full_df, replace = fill)
 
   full_df
+}
+
+#' @export
+complete..data.frame <- function(.df, ..., fill = list()) {
+  .df <- as_tidytable(.df)
+  complete.(.df, ..., fill = fill)
 }

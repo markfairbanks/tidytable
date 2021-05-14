@@ -28,7 +28,7 @@
 #' test_df <- data.table(
 #'   a = 1:3,
 #'   b = 4:6,
-#'   c = c("a","a","b")
+#'   c = c("a", "a", "b")
 #' )
 #'
 #' test_df %>%
@@ -51,9 +51,8 @@ mutate. <- function(.df, ..., .by = NULL,
 }
 
 #' @export
-mutate..data.frame <- function(.df, ..., .by = NULL,
-                               .keep = "all", .before = NULL, .after = NULL) {
-  .df <- as_tidytable(.df)
+mutate..tidytable <- function(.df, ..., .by = NULL,
+                              .keep = "all", .before = NULL, .after = NULL) {
   .df <- shallow(.df)
 
   .by <- enquo(.by)
@@ -61,7 +60,7 @@ mutate..data.frame <- function(.df, ..., .by = NULL,
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
 
-  mask <- build_data_mask(dots)
+  dt_env <- build_dt_env(dots)
 
   .before <- enquo(.before)
   .after <- enquo(.after)
@@ -82,7 +81,7 @@ mutate..data.frame <- function(.df, ..., .by = NULL,
 
       dt_expr <- call2_j(.df, j)
 
-      .df <- eval_tidy(dt_expr, mask, caller_env())
+      .df <- eval_tidy(dt_expr, env = dt_env)
     }
   } else {
     if (length(dots) > 1) {
@@ -111,7 +110,7 @@ mutate..data.frame <- function(.df, ..., .by = NULL,
       j <- call2(":=", !!!null_dots)
       dt_expr <- call2_j(.df, j)
 
-      .df <- eval_tidy(dt_expr, mask, caller_env())
+      .df <- eval_tidy(dt_expr, env = dt_env)
     }
 
     if (length(dots) > 0) {
@@ -122,7 +121,7 @@ mutate..data.frame <- function(.df, ..., .by = NULL,
       j <- call2(":=", call2("c", !!!dots_names), expr)
       dt_expr <- call2_j(.df, j, .by)
 
-      .df <- eval_tidy(dt_expr, mask, caller_env())
+      .df <- eval_tidy(dt_expr, env = dt_env)
     }
   }
 
@@ -138,6 +137,16 @@ mutate..data.frame <- function(.df, ..., .by = NULL,
   }
 
   .df[]
+}
+
+#' @export
+mutate..data.frame <- function(.df, ..., .by = NULL,
+                               .keep = "all", .before = NULL, .after = NULL) {
+  .df <- as_tidytable(.df)
+  mutate.(
+    .df, ..., .by = {{ .by }}, .keep = .keep,
+    .before = {{ .before }}, .after = {{ .after }}
+  )
 }
 
 # vec_recycle() prevents modify-by-reference if the column already exists in the data.table

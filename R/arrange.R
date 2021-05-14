@@ -14,7 +14,7 @@
 #' test_df <- data.table(
 #'   a = 1:3,
 #'   b = 4:6,
-#'   c = c("a","a","b")
+#'   c = c("a", "a", "b")
 #' )
 #'
 #' test_df %>%
@@ -27,9 +27,7 @@ arrange. <- function(.df, ...) {
 }
 
 #' @export
-arrange..data.frame <- function(.df, ...) {
-  .df <- as_tidytable(.df)
-
+arrange..tidytable <- function(.df, ...) {
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
   dots <- prep_exprs(dots, .df)
@@ -39,4 +37,10 @@ arrange..data.frame <- function(.df, ...) {
   dt_expr <- call2_i(.df, i)
 
   eval_tidy(dt_expr)
+}
+
+#' @export
+arrange..data.frame <- function(.df, ...) {
+  .df <- as_tidytable(.df)
+  arrange.(.df, ...)
 }

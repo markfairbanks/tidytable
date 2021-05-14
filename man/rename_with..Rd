@@ -4,7 +4,7 @@
 \alias{rename_with.}
 \title{Rename multiple columns}
 \usage{
-rename_with.(.df, .fn, .cols = everything(), ...)
+rename_with.(.df, .fn = NULL, .cols = everything(), ...)
 }
 \arguments{
 \item{.df}{A data.table or data.frame}

@@ -37,12 +37,10 @@ summarize. <- function(.df, ..., .by = NULL, .sort = FALSE) {
 }
 
 #' @export
-summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE) {
-  .df <- as_tidytable(.df)
-
+summarize..tidytable <- function(.df, ..., .by = NULL, .sort = FALSE) {
   dots <- enquos(...)
 
-  mask <- build_data_mask(dots)
+  dt_env <- build_dt_env(dots)
 
   dots <- prep_exprs(dots, .df, {{ .by }})
 
@@ -52,13 +50,19 @@ summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE) {
 
   dt_expr <- call2_j(.df, j, .by)
 
-  .df <- eval_tidy(dt_expr, mask, caller_env())
+  .df <- eval_tidy(dt_expr, env = dt_env)
 
   if (.sort) {
     .df <- arrange.(.df, !!!syms(.by))
   }
 
   df_name_repair(.df, .name_repair = "unique")
+}
+
+#' @export
+summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE) {
+  .df <- as_tidytable(.df)
+  summarize.(.df, ..., .by = {{ .by }}, .sort = .sort)
 }
 
 #' @export

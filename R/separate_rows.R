@@ -26,8 +26,7 @@ separate_rows. <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
 }
 
 #' @export
-separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
-  .df <- as_tidytable(.df)
+separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
   .df <- shallow(.df)
 
   vec_assert(sep, character(), 1)
@@ -38,7 +37,7 @@ separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert 
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
 
-  mask <- build_data_mask(dots)
+  dt_env <- build_dt_env(dots)
 
   cols <- select_dots_sym(.df, !!!dots)
 
@@ -47,8 +46,11 @@ separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert 
   col_names <- as.character(cols)
   other_col_names <- setdiff(names(.df), col_names)
 
-  if (nchar(sep) == 1) fixed_flag <- TRUE
-  else fixed_flag <- FALSE
+  if (nchar(sep) == 1) {
+    fixed_flag <- TRUE
+  } else {
+    fixed_flag <- FALSE
+  }
 
   # Create a list of calls to strsplit()
   # Can't use a for loop - all columns selected must be in the same data.table call
@@ -61,7 +63,7 @@ separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert 
 
   dt_expr <- call2_j(.df, j, .by = other_col_names)
 
-  .df <- eval_tidy(dt_expr, mask, caller_env())
+  .df <- eval_tidy(dt_expr, env = dt_env)
 
   .df[ , .id := NULL]
 
@@ -70,6 +72,12 @@ separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert 
   if (convert) .df <- mutate_across.(.df, c(!!!cols), type.convert, as.is = TRUE)
 
   .df[]
+}
+
+#' @export
+separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
+  .df <- as_tidytable(.df)
+  separate_rows.(.df, ..., sep = sep, convert = convert)
 }
 
 globalVariables(".id")

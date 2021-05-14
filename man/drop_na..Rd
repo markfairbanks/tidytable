@@ -17,8 +17,8 @@ Drop rows containing missing values
 }
 \examples{
 df <- data.table(
-  x = c(1,2,NA),
-  y = c("a",NA,"b")
+  x = c(1, 2, NA),
+  y = c("a", NA, "b")
 )
 
 df \%>\%

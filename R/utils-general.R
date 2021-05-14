@@ -22,14 +22,22 @@ call2_dt <- function(.fn, ..., .ns = "data.table") {
   quo_squash(call)
 }
 
-# Extract environment from quosures and build a data mask
-build_data_mask <- function(x, ...) {
+# Extract environment from quosures to build the evaluation environment
+build_dt_env <- function(x, ...) {
   if (length(x) == 0) {
-    x <- quo(1)
+    dt_env <- caller_env(2)
   } else if (is_quosures(x)) {
     x <- x[[1]]
+    dt_env <- get_env(x)
+  } else {
+    dt_env <- get_env(x)
   }
-  new_data_mask(env(get_env(x), ...))
+
+  if (identical(dt_env, empty_env())) {
+    dt_env <- caller_env(2)
+  }
+
+  env(dt_env, ...)
 }
 
 # Repair names of a data.table
