@@ -65,10 +65,14 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns = NULL,
 
   dots <- enquos(...)
 
+  dt_env <- build_dt_env(dots)
+
   .fns <- enexpr(.fns)
   if (is_null(.fns)) return(.df)
 
   call_list <- across_calls(.fns, .cols, .names, dots)
+
+  call_list <- as_quosures(call_list, dt_env)
 
   summarize.(.df, !!!call_list, .by = !!.by)
 }
