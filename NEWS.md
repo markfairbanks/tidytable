@@ -1,6 +1,7 @@
 # tidytable 0.6.2 (in development)
 
 #### New functions
+* `cur_group_id.()`/`cur_group_rows.()`
 * `n_distinct.()`
 * `nesting.()`
 
