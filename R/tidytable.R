@@ -13,11 +13,11 @@
 tidytable <- function(..., .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   dots <- enquos(...)
 
-  mask <- build_data_mask(dots)
+  dt_env <- build_dt_env(dots)
 
   dt_expr <- call2_dt("data.table", !!!dots)
 
-  .df <- eval_tidy(dt_expr, mask, caller_env())
+  .df <- eval_tidy(dt_expr, env = dt_env)
 
   .df <- df_name_repair(.df, .name_repair = .name_repair)
 
