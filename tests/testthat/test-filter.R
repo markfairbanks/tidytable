@@ -42,6 +42,7 @@ test_that("filter works with '.by'", {
   df <- df %>%
     filter.(x == mean(x), .by = y)
 
+  expect_named(df, c("x", "y"))
   expect_equal(df$x, 2)
   expect_equal(df$y, "b")
 })
@@ -52,6 +53,7 @@ test_that("filter works with '.by' & multiple conditions & .N", {
   result_df <- df %>%
     filter.(x <= mean(x), x < .N, .by = y)
 
+  expect_named(result_df, c("x", "y"))
   expect_equal(result_df$x, c(1))
   expect_equal(result_df$y, c("a"))
 })

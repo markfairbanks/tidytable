@@ -11,6 +11,9 @@
   + Added `.before`/`.after` arguments
 * `tidytable()`: Added `.name_repair` argument
 
+#### Functions with notable speed improvements
+* `filter.()` when `.by` is used
+
 # tidytable 0.6.1
 
 #### New functions
