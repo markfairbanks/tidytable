@@ -36,9 +36,8 @@ extract. <- function(.df, col, into, regex = "([[:alnum:]]+)",
 }
 
 #' @export
-extract..data.frame <- function(.df, col, into, regex = "([[:alnum:]]+)",
-                                remove = TRUE, convert = FALSE, ...) {
-  .df <- as_tidytable(.df)
+extract..tidytable <- function(.df, col, into, regex = "([[:alnum:]]+)",
+                               remove = TRUE, convert = FALSE, ...) {
   .df <- shallow(.df)
 
   if (missing(col)) abort("col is missing and must be supplied")
@@ -70,6 +69,13 @@ extract..data.frame <- function(.df, col, into, regex = "([[:alnum:]]+)",
   if (remove) .df[, (col) := NULL]
 
   .df[]
+}
+
+#' @export
+extract..data.frame <- function(.df, col, into, regex = "([[:alnum:]]+)",
+                                remove = TRUE, convert = FALSE, ...) {
+  .df <- as_tidytable(.df)
+  extract.(.df, {{ col }}, into, regex, remove, convert, ...)
 }
 
 str_extract_groups <- function(string, pattern, convert = FALSE){

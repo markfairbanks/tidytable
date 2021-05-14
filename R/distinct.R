@@ -11,7 +11,6 @@
 #' values of columns provided to ... arg.
 #'
 #' @export
-#' @md
 #'
 #' @examples
 #' test_df <- tidytable(
@@ -30,9 +29,7 @@ distinct. <- function(.df, ..., .keep_all = FALSE) {
 }
 
 #' @export
-distinct..data.frame <- function(.df, ..., .keep_all = FALSE) {
-  .df <- as_tidytable(.df)
-
+distinct..tidytable <- function(.df, ..., .keep_all = FALSE) {
   vec_assert(.keep_all, logical(), 1)
 
   dots <- enquos(...)
@@ -58,6 +55,12 @@ distinct..data.frame <- function(.df, ..., .keep_all = FALSE) {
   }
 
   .df
+}
+
+#' @export
+distinct..data.frame <- function(.df, ..., .keep_all = FALSE) {
+  .df <- as_tidytable(.df)
+  distinct.(.df, ..., .keep_all = .keep_all)
 }
 
 across_check <- function(dots) {

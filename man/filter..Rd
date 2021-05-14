@@ -20,7 +20,7 @@ Filters a dataset to choose rows where conditions are true.
 test_df <- tidytable(
   a = 1:3,
   b = 4:6,
-  c = c("a","a","b")
+  c = c("a", "a", "b")
 )
 
 test_df \%>\%

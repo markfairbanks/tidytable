@@ -43,13 +43,11 @@ unnest. <- function(.df,
 }
 
 #' @export
-unnest..data.frame <- function(.df,
-                               ...,
-                               .drop = TRUE,
-                               names_sep = NULL,
-                               names_repair = "unique") {
-  .df <- as_tidytable(.df)
-
+unnest..tidytable <- function(.df,
+                              ...,
+                              .drop = TRUE,
+                              names_sep = NULL,
+                              names_repair = "unique") {
   vec_assert(.drop, logical(), 1)
 
   dots <- enquos(...)
@@ -94,6 +92,16 @@ unnest..data.frame <- function(.df,
   }
 
   result_df
+}
+
+#' @export
+unnest..data.frame <- function(.df,
+                               ...,
+                               .drop = TRUE,
+                               names_sep = NULL,
+                               names_repair = "unique") {
+  .df <- as_tidytable(.df)
+  unnest.(.df, ..., .drop = .drop, names_sep = names_sep, names_repair = "unique")
 }
 
 unnest_col <- function(.df, col = NULL, names_sep = NULL) {

@@ -31,9 +31,7 @@ group_split. <- function(.df, ..., .keep = TRUE, .named = FALSE) {
 }
 
 #' @export
-group_split..data.frame <- function(.df, ..., .keep = TRUE, .named = FALSE) {
-  .df <- as_tidytable(.df)
-
+group_split..tidytable <- function(.df, ..., .keep = TRUE, .named = FALSE) {
   vec_assert(.keep, logical(), 1)
   vec_assert(.named, logical(), 1)
 
@@ -54,5 +52,11 @@ group_split..data.frame <- function(.df, ..., .keep = TRUE, .named = FALSE) {
 
     map.(dots, as_tidytable)
   }
+}
+
+#' @export
+group_split..data.frame <- function(.df, ..., .keep = TRUE, .named = FALSE) {
+  .df <- as_tidytable(.df)
+  group_split.(.df, ..., .keep = .keep, .named = .named)
 }
 

@@ -45,9 +45,7 @@ replace_na..default <- function(.x, replace = NA) {
 }
 
 #' @export
-replace_na..data.frame <- function(.x, replace = list()) {
-  .x <- as_tidytable(.x)
-
+replace_na..tidytable <- function(.x, replace = list()) {
   stopifnot(vec_is_list(replace))
 
   if (length(replace) == 0) return(.x)
@@ -66,5 +64,11 @@ replace_na..data.frame <- function(.x, replace = list()) {
   .x <- mutate.(.x, !!!calls)
 
   .x
+}
+
+#' @export
+replace_na..data.frame <- function(.x, replace = list()) {
+  .x <- as_tidytable(.x)
+  replace_na.(.x, replace = replace)
 }
 

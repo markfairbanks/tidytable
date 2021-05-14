@@ -1,5 +1,5 @@
-test_that("complete with no variables returns data as is", {
-  expect_equal(complete.(mtcars), mtcars)
+test_that("complete with no variables returns data as tidytable", {
+  expect_equal(complete.(mtcars), as_tidytable(mtcars))
 })
 
 test_that("basic invocation works", {

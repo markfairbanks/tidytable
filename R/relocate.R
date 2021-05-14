@@ -31,8 +31,7 @@ relocate. <- function(.df, ..., .before = NULL, .after = NULL) {
 }
 
 #' @export
-relocate..data.frame <- function(.df, ..., .before = NULL, .after = NULL) {
-  .df <- as_tidytable(.df)
+relocate..tidytable <- function(.df, ..., .before = NULL, .after = NULL) {
   .df <- shallow(.df)
 
   .before <- enquo(.before)
@@ -71,5 +70,11 @@ relocate..data.frame <- function(.df, ..., .before = NULL, .after = NULL) {
   setcolorder(.df, final_order)
 
   .df
+}
+
+#' @export
+relocate..data.frame <- function(.df, ..., .before = NULL, .after = NULL) {
+  .df <- as_tidytable(.df)
+  relocate.(.df, ..., .before = {{ .before }}, .after = {{ .after }})
 }
 

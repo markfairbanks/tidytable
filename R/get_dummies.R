@@ -52,13 +52,12 @@ get_dummies. <- function(.df,
 }
 
 #' @export
-get_dummies..data.frame <- function(.df,
-                                    cols = c(where(is.character), where(is.factor)),
-                                    prefix = TRUE,
-                                    prefix_sep = "_",
-                                    drop_first = FALSE,
-                                    dummify_na = TRUE) {
-  .df <- as_tidytable(.df)
+get_dummies..tidytable <- function(.df,
+                                   cols = c(where(is.character), where(is.factor)),
+                                   prefix = TRUE,
+                                   prefix_sep = "_",
+                                   drop_first = FALSE,
+                                   dummify_na = TRUE) {
   .df <- shallow(.df)
 
   vec_assert(prefix, logical(), 1)
@@ -70,7 +69,7 @@ get_dummies..data.frame <- function(.df,
 
   original_cols <- copy(names(.df))
 
-  ordered_cols <- character(0)
+  ordered_cols <- character()
 
   for (col in cols) {
 
@@ -120,6 +119,17 @@ get_dummies..data.frame <- function(.df,
   setcolorder(.df, final_order)
 
   .df
+}
+
+#' @export
+get_dummies..data.frame <- function(.df,
+                                    cols = c(where(is.character), where(is.factor)),
+                                    prefix = TRUE,
+                                    prefix_sep = "_",
+                                    drop_first = FALSE,
+                                    dummify_na = TRUE) {
+  .df <- as_tidytable(.df)
+  get_dummies.(.df, {{ cols }}, prefix, prefix_sep, drop_first, dummify_na)
 }
 
 globalVariables("where")

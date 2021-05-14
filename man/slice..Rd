@@ -46,7 +46,7 @@ Grouped data.tables grab rows within each group.
 test_df <- data.table(
   x = 1:4,
   y = 5:8,
-  z = c("a","a","a","b")
+  z = c("a", "a", "a", "b")
 )
 
 test_df \%>\%

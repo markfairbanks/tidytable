@@ -21,7 +21,7 @@ ordering in the "C-locale". See \code{?data.table::setorder} for more details.
 test_df <- data.table(
   a = 1:3,
   b = 4:6,
-  c = c("a","a","b")
+  c = c("a", "a", "b")
 )
 
 test_df \%>\%
