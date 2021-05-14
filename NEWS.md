@@ -1,7 +1,6 @@
 # tidytable 0.6.2 (in development)
 
 #### New functions
-* `cumall.()`/`cumany.()`/`cummean.()`
 * `n_distinct.()`
 * `nesting.()`
 

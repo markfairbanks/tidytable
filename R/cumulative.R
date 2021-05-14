@@ -6,8 +6,6 @@
 #' @param x For `cumall.()` and `cumany.()` a logical vector.
 #' For `cummean.()` and integer or numeric vector.
 #'
-#' @export
-#'
 #' @examples
 #' x <- c(1, 3, 5, 2, 2)
 #' cummean.(x)
@@ -27,58 +25,59 @@
 #'
 #' # all rows until first overdraft
 #' df %>% filter.(cumall.(!(balance < 0)))
-cumall. <- function(x) {
-  end <- length(x)
-  if (is.na(all(x))) return(rep(NA, end))
-  out <- rep(TRUE, end)
-  which_not_x <- which(!x)
-  which_na_x <- which(is.na(x))
-  if (length(which_not_x) > 0) {
-    which_not_x <- which_not_x[[1]]
-    if (length(which_na_x) > 0) {
-      which_na_x <- which_na_x[[1]]
-      start <- min(which_na_x, which_not_x)
-    } else {
-      start <- which_not_x
-    }
+#' @keywords internal
+# cumall. <- function(x) {
+#   end <- length(x)
+#   if (is.na(all(x))) return(rep(NA, end))
+#   out <- rep(TRUE, end)
+#   which_not_x <- which(!x)
+#   which_na_x <- which(is.na(x))
+#   if (length(which_not_x) > 0) {
+#     which_not_x <- which_not_x[[1]]
+#     if (length(which_na_x) > 0) {
+#       which_na_x <- which_na_x[[1]]
+#       start <- min(which_na_x, which_not_x)
+#     } else {
+#       start <- which_not_x
+#     }
+#
+#     out[start:end] <- FALSE
+#
+#     if (identical(which_na_x, start)) {
+#       out[which_na_x] <- NA
+#     }
+#   }
+#   out
+# }
 
-    out[start:end] <- FALSE
-
-    if (identical(which_na_x, start)) {
-      out[which_na_x] <- NA
-    }
-  }
-  out
-}
-
-#' @export
+#' @keywords internal
 #' @rdname cumall.
-cumany. <- function(x) {
-  end <- length(x)
-  if (is.na(all(x))) return(rep(NA, end))
-  out <- rep(FALSE, end)
-  which_x <- which(x)
-  which_na_x <- which(is.na(x))
-  if (length(which_x) > 0) {
-    which_x <- which_x[[1]]
-    if (length(which_na_x) > 0) {
-      which_na_x <- which_na_x[[1]]
-      start <- min(which_na_x, which_x)
-    } else {
-      start <- which_x
-    }
+# cumany. <- function(x) {
+#   end <- length(x)
+#   if (is.na(all(x))) return(rep(NA, end))
+#   out <- rep(FALSE, end)
+#   which_x <- which(x)
+#   which_na_x <- which(is.na(x))
+#   if (length(which_x) > 0) {
+#     which_x <- which_x[[1]]
+#     if (length(which_na_x) > 0) {
+#       which_na_x <- which_na_x[[1]]
+#       start <- min(which_na_x, which_x)
+#     } else {
+#       start <- which_x
+#     }
+#
+#     out[start:end] <- TRUE
+#
+#     if (identical(which_na_x, start)) {
+#       out[which_na_x] <- NA
+#     }
+#   }
+#   out
+# }
 
-    out[start:end] <- TRUE
-
-    if (identical(which_na_x, start)) {
-      out[which_na_x] <- NA
-    }
-  }
-  out
-}
-
-#' @export
+#' @keywords internal
 #' @rdname cumall.
-cummean. <- function(x) {
-  cumsum(x)/seq_along(x)
-}
+# cummean. <- function(x) {
+#   cumsum(x)/seq_along(x)
+# }
