@@ -35,7 +35,7 @@ rename_with. <- function(.df, .fn = NULL, .cols = everything(), ...) {
 rename_with..tidytable <- function(.df, .fn = NULL, .cols = everything(), ...) {
   if (is.null(.fn)) return(.df)
 
-  .cols <- select_vec_chr(.df, {{ .cols }})
+  .cols <- tidyselect_names(.df, {{ .cols }})
 
   if (length(.cols) == 0) return(.df)
 

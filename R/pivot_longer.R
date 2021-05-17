@@ -73,7 +73,7 @@ pivot_longer..tidytable <- function(.df,
                                     ...) {
   names <- names(.df)
 
-  measure_vars <- select_vec_chr(.df, {{ cols }})
+  measure_vars <- tidyselect_names(.df, {{ cols }})
 
   if (length(measure_vars) == 0) abort("At least one column must be supplied to cols")
 

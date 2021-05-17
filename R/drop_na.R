@@ -34,7 +34,7 @@ drop_na..tidytable <- function(.df, ...) {
   if (length(dots) == 0) {
     na.omit(.df)
   } else {
-    drop_cols <- select_dots_idx(.df, ...)
+    drop_cols <- tidyselect_locs(.df, ...)
 
     na.omit(.df, cols = drop_cols)
   }

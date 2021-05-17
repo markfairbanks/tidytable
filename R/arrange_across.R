@@ -25,7 +25,7 @@ arrange_across..data.frame <- function(.df, .cols = everything(), .fns = NULL) {
   .df <- as_tidytable(.df)
   .df <- copy(.df)
 
-  .cols <- select_vec_chr(.df, {{ .cols }})
+  .cols <- tidyselect_names(.df, {{ .cols }})
   if (length(.cols) == 0) return(.df)
 
   .fns <- enexpr(.fns)

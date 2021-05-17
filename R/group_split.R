@@ -40,7 +40,7 @@ group_split..tidytable <- function(.df, ..., .keep = TRUE, .named = FALSE) {
   if (length(dots) == 0) {
     list(.df)
   } else {
-    by <- select_dots_chr(.df, !!!dots)
+    by <- tidyselect_names(.df, !!!dots)
 
     dots <- split(.df, by = by, keep.by = .keep)
 

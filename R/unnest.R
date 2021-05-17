@@ -59,7 +59,7 @@ unnest..tidytable <- function(.df,
   if (length(dots) == 0) {
     dots <- syms(data_names[list_flag])
   } else {
-    dots <- select_dots_sym(.df, ...)
+    dots <- tidyselect_syms(.df, ...)
   }
 
   keep_cols <- data_names[!list_flag]

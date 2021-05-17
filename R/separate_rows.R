@@ -39,7 +39,7 @@ separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert =
 
   dt_env <- build_dt_env(dots)
 
-  cols <- select_dots_sym(.df, !!!dots)
+  cols <- tidyselect_syms(.df, !!!dots)
 
   .df[ , .id := .I]
 

@@ -43,7 +43,7 @@ extract..tidytable <- function(.df, col, into, regex = "([[:alnum:]]+)",
   if (missing(col)) abort("col is missing and must be supplied")
   if (missing(into)) abort("into is missing and must be supplied")
 
-  col <- select_vec_idx(.df, {{ col }})
+  col <- tidyselect_locs(.df, {{ col }})
 
   groups <- str_extract_groups(.df[[col]], regex, convert = convert)
 

@@ -49,23 +49,21 @@ relocate..tidytable <- function(.df, ..., .before = NULL, .after = NULL) {
   }
 
   data_names <- names(.df)
-  all_cols_i <- seq_along(data_names)
-  selected_cols_i <- select_dots_idx(.df, ...)
+  all_cols <- seq_along(data_names)
+  selected_cols <- tidyselect_locs(.df, ...)
 
   if (!before_is_null) {
-    before_i <- select_vec_idx(.df, !!.before)
+    before <- tidyselect_locs(.df, !!.before)
 
-    start_cols_i <- all_cols_i[all_cols_i < before_i]
+    start_cols <- all_cols[all_cols < before]
   } else {
-    after_i <- select_vec_idx(.df, !!.after)
+    after <- tidyselect_locs(.df, !!.after)
 
-    start_cols_i <- all_cols_i[all_cols_i <= after_i]
+    start_cols <- all_cols[all_cols <= after]
   }
 
-  start_cols_i <- start_cols_i[start_cols_i %notin% selected_cols_i]
-  final_order_i <- vec_unique(c(start_cols_i, selected_cols_i, all_cols_i))
-
-  final_order <- data_names[final_order_i]
+  start_cols <- start_cols[start_cols %notin% selected_cols]
+  final_order <- vec_unique(c(start_cols, selected_cols, all_cols))
 
   setcolorder(.df, final_order)
 
