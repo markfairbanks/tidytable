@@ -1,14 +1,10 @@
 # "Prepare" quosures/expressions for use in a data.table "[" call
-# Allows use of functions like n()/n.() and c_across()/c_across.()
-  ## Replaces these functions with the necessary data.table translations
+# Allows the use of functions like n() and across.()
+# Replaces these functions with the necessary data.table translations
 # General idea follows dt_squash found here: https://github.com/tidyverse/dtplyr/blob/master/R/tidyeval.R
 prep_exprs <- function(x, data, .by = NULL) {
-  if (is.list(x)) {
-    x <- lapply(x, prep_expr, data, {{ .by }})
-    squash(x)
-  } else {
-    prep_expr(x, data, {{ .by }})
-  }
+  x <- lapply(x, prep_expr, data, {{ .by }})
+  squash(x)
 }
 
 prep_expr <- function(x, data, .by = NULL) {
