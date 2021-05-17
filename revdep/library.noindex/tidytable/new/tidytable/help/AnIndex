@@ -19,6 +19,8 @@ complete.	complete.
 contains	reexports
 count.	count.
 crossing.	crossing.
+cur_group_id.	cur_group_id.
+cur_group_rows.	cur_group_id.
 c_across.	c_across.
 data.table	reexports
 desc.	desc.
@@ -71,8 +73,10 @@ mutate_across.	mutate_across.
 mutate_rowwise.	mutate_rowwise.
 n.	n.
 nest.	nest.
+nesting.	expand.
 nest_by.	nest_by.
 num_range	reexports
+n_distinct.	n_distinct.
 pivot_longer.	pivot_longer.
 pivot_wider.	pivot_wider.
 pull.	pull.

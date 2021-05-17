@@ -2,6 +2,7 @@
 %between%	reexports
 %like%	reexports
 %notin%	grapes-notin-grapes
+across.	across.
 all_of	reexports
 anti_join.	left_join.
 any_of	reexports
@@ -13,6 +14,7 @@ bind_cols.	bind_cols.
 bind_rows.	bind_cols.
 case.	case.
 case_when.	case_when.
+coalesce.	coalesce.
 complete.	complete.
 contains	reexports
 count.	count.

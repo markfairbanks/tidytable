@@ -1,3 +1,22 @@
+# tidytable 0.6.1
+
+#### New functions
+* `across.()`
+* `coalesce.()`
+
+#### Functionality improvements
+* `group_split.()`: Added a `.named` argument. If `.named = TRUE`, the resulting list will
+have names that indicate the group they are a part of.
+* `pivot_longer.()`: Can now use `names_to = c(".value", NA)` to drop the id column.
+
+#### Bug fixes
+* `if_all.()`/`if_any.()`
+  + No longer try to use `.by` columns (#225)
+  + Can use `n()` in filtering (#226)
+* `pivot_longer.()`
+  + No longer converts factor values to character (#202, #234)
+  + Preserves column order when using `names_to = c(".value", "id")` (#235)
+
 # tidytable 0.6.0
 
 #### New functions
