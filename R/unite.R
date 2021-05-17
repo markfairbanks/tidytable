@@ -47,7 +47,7 @@ unite..tidytable <- function(.df, col = "new_col", ..., sep = "_", remove = TRUE
   if (length(dots) == 0) {
     unite_cols <- names(.df)
   } else {
-    unite_cols <- select_dots_chr(.df, ...)
+    unite_cols <- tidyselect_names(.df, ...)
   }
 
   if (na.rm) {

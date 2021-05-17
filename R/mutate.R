@@ -95,7 +95,7 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
 
     dots <- prep_exprs(dots, .df, !!.by)
 
-    .by <- select_vec_chr(.df, !!.by)
+    .by <- tidyselect_names(.df, !!.by)
 
     needs_copy <- any(names(dots) %in% names(.df))
     if (needs_copy) .df <- copy(.df)

@@ -43,7 +43,7 @@ fill..tidytable <- function(.df, ...,
 
   .direction <- arg_match(.direction)
 
-  select_cols <- select_dots_chr(.df, ...)
+  select_cols <- tidyselect_names(.df, ...)
 
   with_by <- !quo_is_null(.by)
 
@@ -54,7 +54,7 @@ fill..tidytable <- function(.df, ...,
     .df <- shallow(.df)
   }
 
-  .by <- select_vec_chr(.df, !!.by)
+  .by <- tidyselect_names(.df, !!.by)
 
   .df[, (select_cols) := lapply(.SD, fill_na, .direction), .SDcols = select_cols, by = .by]
 

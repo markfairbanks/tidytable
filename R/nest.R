@@ -47,7 +47,7 @@ nest..tidytable <- function(.df, ..., .names_sep = NULL) {
   dots <- unname(dots)
 
   if (!is.null(.names_sep)) {
-    nest_cols <- select_dots_chr(.df, !!!dots)
+    nest_cols <- tidyselect_names(.df, !!!dots)
 
     new_names <- paste(.key, nest_cols, sep = .names_sep)
 

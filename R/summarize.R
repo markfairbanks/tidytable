@@ -44,7 +44,7 @@ summarize..tidytable <- function(.df, ..., .by = NULL, .sort = FALSE) {
 
   dots <- prep_exprs(dots, .df, {{ .by }})
 
-  .by <- select_vec_chr(.df, {{ .by }})
+  .by <- tidyselect_names(.df, {{ .by }})
 
   j <- expr(list(!!!dots))
 

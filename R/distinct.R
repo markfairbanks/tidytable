@@ -39,7 +39,7 @@ distinct..tidytable <- function(.df, ..., .keep_all = FALSE) {
   if (length(dots) == 0) {
     .df <- unique(.df)
   } else {
-    cols <- select_dots_idx(.df, ...)
+    cols <- tidyselect_locs(.df, ...)
 
     .df <- unique(.df, by = cols)
 

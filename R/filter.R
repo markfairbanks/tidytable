@@ -46,7 +46,7 @@ filter..tidytable <- function(.df, ..., .by = NULL) {
 
     .df <- eval_tidy(dt_expr, env = dt_env)
   } else {
-    .by <- select_vec_chr(.df, !!.by)
+    .by <- tidyselect_names(.df, !!.by)
 
     j <- expr(.I[!!i])
 

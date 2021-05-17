@@ -66,7 +66,7 @@ slice..tidytable <- function(.df, ..., .by = NULL) {
   } else {
     col_order <- names(.df)
 
-    .by <- select_vec_chr(.df, !!.by)
+    .by <- tidyselect_names(.df, !!.by)
 
     j <- expr(
       {.rows = c(!!!dots);
@@ -104,7 +104,7 @@ slice_head..tidytable <- function(.df, n = 5, .by = NULL) {
 
   n <- prep_expr(n)
 
-  .by <- select_vec_chr(.df, {{ .by }})
+  .by <- tidyselect_names(.df, {{ .by }})
 
   with_by <- length(.by) > 0
 
@@ -145,7 +145,7 @@ slice_tail..tidytable <- function(.df, n = 5, .by = NULL) {
 
   n <- prep_expr(n)
 
-  .by <- select_vec_chr(.df, {{ .by }})
+  .by <- tidyselect_names(.df, {{ .by }})
 
   with_by <- length(.by) > 0
 
