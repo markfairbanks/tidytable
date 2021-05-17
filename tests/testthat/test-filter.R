@@ -96,3 +96,18 @@ test_that("works with map2.() in nested data.tables", {
   expect_equal(result_list2[[3]]$x, c(3))
 })
 
+test_that("properly passes quosure environment", {
+  val_list <- list(2, 3)
+  test_df <- data.table(x = 1:3)
+
+  dt_filter <- function(dt, conditions) {
+    conditions <- enquo(conditions)
+    filter.(dt, !!conditions)
+  }
+
+  result_list <- lapply(val_list, function(val) dt_filter(test_df, x < val))
+
+  expect_equal(result_list[[1]], tidytable(x = 1))
+  expect_equal(result_list[[2]], tidytable(x = 1:2))
+})
+
