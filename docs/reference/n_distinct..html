@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Combine values from multiple columns — c_across. • tidytable</title>
+<title>Count the number of unique values in a vector — n_distinct. • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,9 +48,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Combine values from multiple columns — c_across." />
-<meta property="og:description" content="c_across.() works inside of mutate_rowwise.(). It uses tidyselect so
-you can easily select multiple variables." />
+<meta property="og:title" content="Count the number of unique values in a vector — n_distinct." />
+<meta property="og:description" content="This is a faster version of length(unique(x)) that calls data.table::uniqueN()." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -134,42 +133,35 @@ you can easily select multiple variables." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Combine values from multiple columns</h1>
-    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/c_across.R'><code>R/c_across.R</code></a></small>
-    <div class="hidden name"><code>c_across..Rd</code></div>
+    <h1>Count the number of unique values in a vector</h1>
+    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/n_distinct.R'><code>R/n_distinct.R</code></a></small>
+    <div class="hidden name"><code>n_distinct..Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>c_across.()</code> works inside of <code><a href='mutate_rowwise..html'>mutate_rowwise.()</a></code>. It uses tidyselect so
-you can easily select multiple variables.</p>
+    <p>This is a faster version of <code><a href='https://rdrr.io/r/base/length.html'>length(unique(x))</a></code> that calls <code><a href='https://Rdatatable.gitlab.io/data.table/reference/duplicated.html'>data.table::uniqueN()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>c_across.</span><span class='op'>(</span>cols <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>n_distinct.</span><span class='op'>(</span><span class='va'>...</span>, na.rm <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>cols</th>
-      <td><p>Columns to transform.</p></td>
+      <th>...</th>
+      <td><p>vectors of values</p></td>
+    </tr>
+    <tr>
+      <th>na.rm</th>
+      <td><p>If <code>TRUE</code> missing values don't count</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>6</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>6</span><span class='op'>)</span>, z <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='va'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='mutate_rowwise..html'>mutate_rowwise.</a></span><span class='op'>(</span>row_mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='fu'>c_across.</span><span class='op'>(</span><span class='va'>x</span><span class='op'>:</span><span class='va'>z</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 6 × 4</span><span>
-#&gt;       x      y     z row_mean
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.949 0.660  0.389    0.666
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 0.180 0.096</span><span style='text-decoration: underline;'>0</span><span> 0.461    0.246
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.217 0.766  0.315    0.433
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.680 0.770  0.175    0.542
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.499 0.991  0.532    0.674
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span> 0.642 0.971  0.494    0.702</div></span></pre>
+    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='fl'>1e5</span>, rep <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'>n_distinct.</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 10</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
       </span>
     </div>
 
@@ -161,7 +161,7 @@
     </tr>
     <tr>
       <th>.named</th>
-      <td><p>Should the list be named with labels that identify the group</p></td>
+      <td><p><em>experimental</em>: Should the list be named with labels that identify the group</p></td>
     </tr>
     </table>
 
@@ -172,7 +172,7 @@
   b <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,
   c <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span><span class='op'>)</span>,
   d <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span><span class='op'>)</span>
- <span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_split.</span><span class='op'>(</span><span class='va'>c</span>, <span class='va'>d</span><span class='op'>)</span>
@@ -206,14 +206,14 @@
 #&gt; </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_split.</span><span class='op'>(</span><span class='va'>c</span>, <span class='va'>d</span>, .named <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $a.a
+</div><div class='output co'>#&gt; $a_a
 #&gt; </span><span style='color: #949494;'># A tidytable: 2 × 4</span><span>
 #&gt;       a     b c     d    
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     1 a     a    
 #&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     2 a     a    
 #&gt; 
-#&gt; $b.b
+#&gt; $b_b
 #&gt; </span><span style='color: #949494;'># A tidytable: 1 × 4</span><span>
 #&gt;       a     b c     d    
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>

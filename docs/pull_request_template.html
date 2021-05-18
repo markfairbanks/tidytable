@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
       </span>
     </div>
 
@@ -135,32 +135,34 @@
       <h1>NA</h1>
     </div>
 
-<div id="pull-request-template" class="section level3">
-<h3 class="hasAnchor">
-<a href="#pull-request-template" class="anchor"></a>Pull Request Template</h3>
+<div id="pull-request-template" class="section level2">
+<h2 class="hasAnchor">
+<a href="#pull-request-template" class="anchor"></a>Pull Request Template</h2>
 <p><em>Please remove this template before you submit</em></p>
 <p>If you are unsure of any of these steps feel free to reach out and I can help walk you through the process.</p>
-<div id="before-you-make-a-pull-request" class="section level4">
+<div id="before-you-make-a-pull-request" class="section level3">
+<h3 class="hasAnchor">
+<a href="#before-you-make-a-pull-request" class="anchor"></a>Before you make a pull request</h3>
+<div id="code-style-and-git" class="section level4">
 <h4 class="hasAnchor">
-<a href="#before-you-make-a-pull-request" class="anchor"></a>Before you make a pull request</h4>
+<a href="#code-style-and-git" class="anchor"></a>Code style and git</h4>
 <ul>
-<li>If you are adding a new feature - please make sure you have opened an issue beforehand and we have discussed the feature</li>
-<li>You have made your changes in a new/separate branch. Branches should have descriptive names.
+<li>If you are adding a new feature - please make sure we have discussed the feature in a GitHub issue.</li>
+<li>Please make your changes in a new branch. Branches should have descriptive names.
 <ul>
-<li>Example 1: Fixing an issue
-<ul>
-<li>fix-drop_na-col-order</li>
+<li>Ex: fix-drop_na-col-order</li>
 </ul>
 </li>
-<li>Example 2: Adding a new argument to an existing function
+<li>Use descriptive commit messages</li>
+<li>Keep commit count to a relative minimum. For example - you typically shouldn’t need 10 separate commits to add one argument to a function. Please work out the kinks on your own locally before submitting the PR!</li>
+<li>Your code generally follows the <a href="https://style.tidyverse.org">tidyverse style guide</a>
+</li>
+</ul>
+</div>
+<div id="package-update-checklist" class="section level4">
+<h4 class="hasAnchor">
+<a href="#package-update-checklist" class="anchor"></a>Package Update Checklist</h4>
 <ul>
-<li>add-mutate-keep</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Use a descriptive commit message</li>
-<li>Keep commit count to a relative minimum. For example - you shouldn’t need 5 separate commits to add one argument to a function. Work out the kinks on your own locally before submitting the PR!</li>
 <li>Add or update documentation (if necessary)</li>
 <li>Run <code><a href="https://devtools.r-lib.org//reference/document.html">devtools::document()</a></code> - updates documentation files</li>
 <li>Update NEWS.md</li>
@@ -169,9 +171,10 @@
 <li>Run <code><a href="https://devtools.r-lib.org//reference/check.html">devtools::check()</a></code> - makes sure everything follows CRAN rules</li>
 </ul>
 </div>
-<div id="when-making-a-pull-request" class="section level4">
-<h4 class="hasAnchor">
-<a href="#when-making-a-pull-request" class="anchor"></a>When making a pull request</h4>
+</div>
+<div id="when-making-a-pull-request" class="section level3">
+<h3 class="hasAnchor">
+<a href="#when-making-a-pull-request" class="anchor"></a>When making a pull request</h3>
 <ul>
 <li>Give a descriptive title</li>
 <li>Provide a description of your changes</li>

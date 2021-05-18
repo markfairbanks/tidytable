@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
       </span>
     </div>
 
@@ -142,7 +142,10 @@
     <p><code>tidytable()</code> constructs a data.table, but one with nice printing features.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tidytable</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>tidytable</span><span class='op'>(</span>
+  <span class='va'>...</span>,
+  .name_repair <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"check_unique"</span>, <span class='st'>"unique"</span>, <span class='st'>"universal"</span>, <span class='st'>"minimal"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,6 +153,10 @@
     <tr>
       <th>...</th>
       <td><p>Arguments passed to <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>.name_repair</th>
+      <td><p>Treatment of duplicate names. See <code><a href='https://vctrs.r-lib.org/reference/vec_as_names.html'>?vctrs::vec_as_names</a></code> for options/details.</p></td>
     </tr>
     </table>
 

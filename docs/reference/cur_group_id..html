@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Combine values from multiple columns — c_across. • tidytable</title>
+<title>Current group context — cur_group_id. • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,9 +48,13 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Combine values from multiple columns — c_across." />
-<meta property="og:description" content="c_across.() works inside of mutate_rowwise.(). It uses tidyselect so
-you can easily select multiple variables." />
+<meta property="og:title" content="Current group context — cur_group_id." />
+<meta property="og:description" content="These functions give information about the &quot;current&quot; group.
+cur_group_id.() gives a group identification number
+cur_group_rows.() gives the row indices for each group
+
+
+Can be used inside summarize.(), mutate.(), &amp;amp; filter.()" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -134,42 +138,54 @@ you can easily select multiple variables." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Combine values from multiple columns</h1>
-    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/c_across.R'><code>R/c_across.R</code></a></small>
-    <div class="hidden name"><code>c_across..Rd</code></div>
+    <h1>Current group context</h1>
+    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/cur_group.R'><code>R/cur_group.R</code></a></small>
+    <div class="hidden name"><code>cur_group_id..Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>c_across.()</code> works inside of <code><a href='mutate_rowwise..html'>mutate_rowwise.()</a></code>. It uses tidyselect so
-you can easily select multiple variables.</p>
+    <p>These functions give information about the "current" group.</p><ul>
+<li><p><code>cur_group_id.()</code> gives a group identification number</p></li>
+<li><p><code>cur_group_rows.()</code> gives the row indices for each group</p></li>
+</ul>
+
+<p>Can be used inside <code><a href='summarize..html'>summarize.()</a></code>, <code><a href='mutate..html'>mutate.()</a></code>, &amp; <code><a href='filter..html'>filter.()</a></code></p>
     </div>
 
-    <pre class="usage"><span class='fu'>c_across.</span><span class='op'>(</span>cols <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>cur_group_id.</span><span class='op'>(</span><span class='op'>)</span>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>cols</th>
-      <td><p>Columns to transform.</p></td>
-    </tr>
-    </table>
+<span class='fu'>cur_group_rows.</span><span class='op'>(</span><span class='op'>)</span></pre>
+
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>6</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>6</span><span class='op'>)</span>, z <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>
+  x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>,
+  y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"b"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='mutate_rowwise..html'>mutate_rowwise.</a></span><span class='op'>(</span>row_mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='fu'>c_across.</span><span class='op'>(</span><span class='va'>x</span><span class='op'>:</span><span class='va'>z</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 6 × 4</span><span>
-#&gt;       x      y     z row_mean
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.949 0.660  0.389    0.666
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 0.180 0.096</span><span style='text-decoration: underline;'>0</span><span> 0.461    0.246
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.217 0.766  0.315    0.433
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.680 0.770  0.175    0.542
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.499 0.991  0.532    0.674
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span> 0.642 0.971  0.494    0.702</div></span></pre>
+  <span class='fu'><a href='mutate..html'>mutate.</a></span><span class='op'>(</span>group_id <span class='op'>=</span> <span class='fu'>cur_group_id.</span><span class='op'>(</span><span class='op'>)</span>,
+          .by <span class='op'>=</span> <span class='va'>y</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 5 × 3</span><span>
+#&gt;       x y     group_id
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a            1
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2 a            1
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3 a            1
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4 b            2
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     5 b            2</div><div class='input'>
+<span class='va'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='mutate..html'>mutate.</a></span><span class='op'>(</span>group_rows <span class='op'>=</span> <span class='fu'>cur_group_rows.</span><span class='op'>(</span><span class='op'>)</span>,
+          .by <span class='op'>=</span> <span class='va'>y</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 5 × 3</span><span>
+#&gt;       x y     group_rows
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a              1
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2 a              2
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3 a              3
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4 b              1
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     5 b              2</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -27,7 +27,7 @@ reference:
   - case_when.
   - coalesce.
   - count.
-  - cumall.
+  - cur_group_id.
   - desc.
   - distinct.
   - group_split.
