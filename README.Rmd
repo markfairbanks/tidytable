@@ -58,7 +58,7 @@ test_df %>%
   filter.(x < 4, y > 1) %>%
   arrange.(x, y) %>%
   mutate.(double_x = x * 2,
-          double_y = y * 2)
+          x_plus_y = x + y)
 ```
 
 A full list of functions can be found [here](https://markfairbanks.github.io/tidytable/reference/index.html).
@@ -204,7 +204,6 @@ test_df %>%
   mutate.(double_x = x * 2) %>%
   add_count()
 ```
-
 
 #### Compatibility with data.table
 

@@ -50,13 +50,13 @@ test_df %>%
   filter.(x < 4, y > 1) %>%
   arrange.(x, y) %>%
   mutate.(double_x = x * 2,
-          double_y = y * 2)
+          x_plus_y = x + y)
 #> # A tidytable: 3 × 5
-#>       x     y z     double_x double_y
-#>   <int> <int> <chr>    <dbl>    <dbl>
-#> 1     1     4 a            2        8
-#> 2     2     5 a            4       10
-#> 3     3     6 b            6       12
+#>       x     y z     double_x x_plus_y
+#>   <int> <int> <chr>    <dbl>    <int>
+#> 1     1     4 a            2        5
+#> 2     2     5 a            4        7
+#> 3     3     6 b            6        9
 ```
 
 A full list of functions can be found
