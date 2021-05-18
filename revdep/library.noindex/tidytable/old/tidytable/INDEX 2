@@ -1,0 +1,67 @@
+%notin%                 notin operator
+arrange.                Arrange/reorder rows
+arrange_across.         Arrange by a selection of variables
+as_tidytable            Coerce an object to a data.table/tidytable
+between.                Do the values from x fall between the left and
+                        right bounds?
+bind_cols.              Bind data.tables by row and column
+c_across.               Combine values from multiple columns
+case.                   Improved data.table::fcase()
+case_when.              Case when
+complete.               Complete a data.table with missing combinations
+                        of data
+count.                  Count observations by group
+crossing.               Create a data.table from all unique
+                        combinations of inputs
+desc.                   Descending order
+distinct.               Select distinct/unique rows
+drop_na.                Drop rows containing missing values
+dt                      Pipeable data.table call
+expand.                 Expand a data.table to use all combinations of
+                        values
+expand_grid.            Create a data.table from all combinations of
+                        inputs
+extract.                Extract a character column into multiple
+                        columns using regex
+fill.                   Fill in missing values with previous or next
+                        value
+filter.                 Filter rows on one or more conditions
+get_dummies.            Convert character and factor columns to dummy
+                        variables
+group_split.            Split data frame by groups
+if_all.                 Create conditions on a selection of columns
+ifelse.                 Fast ifelse
+inv_gc                  Run invisible garbage collection
+is_tidytable            Test if the object is a tidytable
+lags.                   Get lagging or leading values
+left_join.              Join two data.tables together
+map.                    Apply a function to each element of a vector or
+                        list
+mutate.                 Add/modify/delete columns
+mutate_across.          Mutate multiple columns simultaneously
+mutate_rowwise.         Add/modify columns by row
+n.                      Number of observations in each group
+nest.                   Nest data.tables
+nest_by.                Nest data.tables
+pivot_longer.           Pivot data from wide to long
+pivot_wider.            Pivot data from long to wide
+pull.                   Pull out a single variable
+relocate.               Relocate a column to a new position
+rename.                 Rename variables by name
+rename_with.            Rename multiple columns
+replace_na.             Replace missing values
+row_number.             Return row number
+select.                 Select or drop columns
+separate.               Separate a character column into multiple
+                        columns
+separate_rows.          Separate a collapsed column into multiple rows
+slice.                  Choose rows in a data.table
+summarize.              Aggregate data using summary statistics
+summarize_across.       Summarize multiple columns
+tidytable               Build a data.table/tidytable
+top_n.                  Select top (or bottom) n rows (by value)
+transmute.              Add new variables and drop all others
+uncount.                Uncount a data.table
+unite.                  Unite multiple columns by pasting strings
+                        together
+unnest.                 Unnest a nested data.table
