@@ -1,4 +1,4 @@
-# tidytable 0.6.2 (in development)
+# tidytable 0.6.2
 
 #### New functions
 * `cur_group_id.()`/`cur_group_rows.()`
