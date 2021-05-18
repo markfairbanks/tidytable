@@ -1,3 +1,5 @@
+# tidytable 0.6.3 (in development)
+
 # tidytable 0.6.2
 
 #### New functions
