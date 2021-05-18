@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2.9</span>
       </span>
     </div>
 
@@ -132,13 +132,13 @@
   <span class="fu"><a href="reference/filter..html">filter.</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">4</span>, <span class="va">y</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/arrange..html">arrange.</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/mutate..html">mutate.</a></span><span class="op">(</span>double_x <span class="op">=</span> <span class="va">x</span> <span class="op">*</span> <span class="fl">2</span>,
-          double_y <span class="op">=</span> <span class="va">y</span> <span class="op">*</span> <span class="fl">2</span><span class="op">)</span>
+          x_plus_y <span class="op">=</span> <span class="va">x</span> <span class="op">+</span> <span class="va">y</span><span class="op">)</span>
 <span class="co">#&gt; # A tidytable: 3 × 5</span>
-<span class="co">#&gt;       x     y z     double_x double_y</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1     4 a            2        8</span>
-<span class="co">#&gt; 2     2     5 a            4       10</span>
-<span class="co">#&gt; 3     3     6 b            6       12</span></code></pre></div>
+<span class="co">#&gt;       x     y z     double_x x_plus_y</span>
+<span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;    &lt;int&gt;</span>
+<span class="co">#&gt; 1     1     4 a            2        5</span>
+<span class="co">#&gt; 2     2     5 a            4        7</span>
+<span class="co">#&gt; 3     3     6 b            6        9</span></code></pre></div>
 <p>A full list of functions can be found <a href="https://markfairbanks.github.io/tidytable/reference/index.html">here</a>.</p>
 </div>
 <div id="using-group-by" class="section level2">
