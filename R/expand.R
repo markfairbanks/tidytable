@@ -33,7 +33,7 @@ expand..tidytable <- function(.df, ..., .name_repair = "check_unique") {
   dots <- dots[!map_lgl.(dots, quo_is_null)]
   if (length(dots) == 0) return(.df)
 
-  dt_env <- build_dt_env(dots, !!!.df)
+  dt_env <- get_dt_env(dots, !!!.df)
 
   dots <- map.(dots, quo_squash)
 

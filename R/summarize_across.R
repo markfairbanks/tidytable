@@ -65,7 +65,7 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns = NULL,
 
   dots <- enquos(...)
 
-  dt_env <- build_dt_env(dots)
+  dt_env <- get_dt_env(dots)
 
   .fns <- enexpr(.fns)
   if (is_null(.fns)) return(.df)
