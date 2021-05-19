@@ -40,7 +40,7 @@ summarize. <- function(.df, ..., .by = NULL, .sort = FALSE) {
 summarize..tidytable <- function(.df, ..., .by = NULL, .sort = FALSE) {
   dots <- enquos(...)
 
-  dt_env <- build_dt_env(dots)
+  dt_env <- get_dt_env(dots)
 
   dots <- prep_exprs(dots, .df, {{ .by }})
 

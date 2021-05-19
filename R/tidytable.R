@@ -13,7 +13,7 @@
 tidytable <- function(..., .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   dots <- enquos(...)
 
-  dt_env <- build_dt_env(dots)
+  dt_env <- get_dt_env(dots)
 
   dt_expr <- call2_dt("data.table", !!!dots)
 

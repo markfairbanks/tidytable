@@ -37,7 +37,7 @@ separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert =
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
 
-  dt_env <- build_dt_env(dots)
+  dt_env <- get_dt_env(dots)
 
   cols <- tidyselect_syms(.df, !!!dots)
 

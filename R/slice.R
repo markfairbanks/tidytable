@@ -50,7 +50,7 @@ slice..tidytable <- function(.df, ..., .by = NULL) {
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
 
-  dt_env <- build_dt_env(dots)
+  dt_env <- get_dt_env(dots)
 
   dots <- prep_exprs(dots)
 
@@ -100,7 +100,7 @@ slice_head. <- function(.df, n = 5, .by = NULL) {
 slice_head..tidytable <- function(.df, n = 5, .by = NULL) {
   n <- enquo(n)
 
-  dt_env <- build_dt_env(n)
+  dt_env <- get_dt_env(n)
 
   n <- prep_expr(n)
 
@@ -141,7 +141,7 @@ slice_tail. <- function(.df, n = 5, .by = NULL) {
 slice_tail..tidytable <- function(.df, n = 5, .by = NULL) {
   n <- enquo(n)
 
-  dt_env <- build_dt_env(n)
+  dt_env <- get_dt_env(n)
 
   n <- prep_expr(n)
 

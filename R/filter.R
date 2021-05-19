@@ -35,7 +35,7 @@ filter..tidytable <- function(.df, ..., .by = NULL) {
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
 
-  dt_env <- build_dt_env(dots)
+  dt_env <- get_dt_env(dots)
 
   dots <- prep_exprs(dots, .df, !!.by)
 

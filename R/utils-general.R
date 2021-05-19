@@ -23,7 +23,7 @@ call2_dt <- function(.fn, ..., .ns = "data.table") {
 }
 
 # Extract environment from quosures to build the evaluation environment
-build_dt_env <- function(x, ...) {
+get_dt_env <- function(x, ...) {
   if (length(x) == 0) {
     dt_env <- caller_env(2)
   } else if (is_quosures(x)) {
