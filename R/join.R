@@ -26,8 +26,8 @@ left_join. <- function(x, y, by = NULL) {
 #' @export
 left_join..default <- function(x, y, by = NULL) {
   if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-  if (!is.data.table(x)) x <- as_tidytable(x)
-  if (!is.data.table(y)) y <- as_tidytable(y)
+  if (!is_tidytable(x)) x <- as_tidytable(x)
+  if (!is_tidytable(y)) y <- as_tidytable(y)
 
   by <- get_bys(x, y, by)
 
@@ -46,7 +46,7 @@ left_join..default <- function(x, y, by = NULL) {
   setnames(result_df, by$y, on)
   setcolorder(result_df, all_names)
 
-  as_tidytable(result_df)
+  vec_restore(result_df, x)
 }
 
 #' @export
@@ -58,15 +58,17 @@ inner_join. <- function(x, y, by = NULL) {
 #' @export
 inner_join..default <- function(x, y, by = NULL) {
   if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-  if (!is.data.table(x)) x <- as_tidytable(x)
-  if (!is.data.table(y)) y <- as_tidytable(y)
+  if (!is_tidytable(x)) x <- as_tidytable(x)
+  if (!is_tidytable(y)) y <- as_tidytable(y)
 
   by <- get_bys(x, y, by)
 
   on <- by$y
   names(on) <- by$x
 
-  as_tidytable(x[y, on = on, allow.cartesian = TRUE, nomatch = 0])
+  result_df <- x[y, on = on, allow.cartesian = TRUE, nomatch = 0]
+
+  vec_restore(result_df, x)
 }
 
 #' @export
@@ -78,15 +80,17 @@ right_join. <- function(x, y, by = NULL) {
 #' @export
 right_join..default <- function(x, y, by = NULL) {
   if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-  if (!is.data.table(x)) x <- as_tidytable(x)
-  if (!is.data.table(y)) y <- as_tidytable(y)
+  if (!is_tidytable(x)) x <- as_tidytable(x)
+  if (!is_tidytable(y)) y <- as_tidytable(y)
 
   by <- get_bys(x, y, by)
 
   on <- by$y
   names(on) <- by$x
 
-  as_tidytable(x[y, on = on, allow.cartesian = TRUE])
+  result_df <- x[y, on = on, allow.cartesian = TRUE]
+
+  vec_restore(result_df, x)
 }
 
 #' @export
@@ -97,8 +101,10 @@ full_join. <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
 
 #' @export
 full_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
-    result_df <- join_mold(x, y, by = by, suffix = suffix,
-                           all_x = TRUE, all_y = TRUE)
+    result_df <- join_mold(
+      x, y, by = by, suffix = suffix,
+      all_x = TRUE, all_y = TRUE
+    )
 
     start_names <- names(x)
     end_names <- names(result_df)
@@ -108,7 +114,7 @@ full_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
 
     setcolorder(result_df, col_order)
 
-    result_df
+    vec_restore(result_df, x)
 }
 
 #' @export
@@ -120,15 +126,17 @@ anti_join. <- function(x, y, by = NULL) {
 #' @export
 anti_join..default <- function(x, y, by = NULL) {
   if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-  if (!is.data.table(x)) x <- as_tidytable(x)
-  if (!is.data.table(y)) y <- as_tidytable(y)
+  if (!is_tidytable(x)) x <- as_tidytable(x)
+  if (!is_tidytable(y)) y <- as_tidytable(y)
 
   by <- get_bys(x, y, by)
 
   on <- by$y
   names(on) <- by$x
 
-  as_tidytable(x[!y, on = on, allow.cartesian = TRUE])
+  result_df <- x[!y, on = on, allow.cartesian = TRUE]
+
+  vec_restore(result_df, x)
 }
 
 #' @export
@@ -140,8 +148,8 @@ semi_join. <- function(x, y, by = NULL) {
 #' @export
 semi_join..default <- function(x, y, by = NULL) {
   if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-  if (!is.data.table(x)) x <- as_tidytable(x)
-  if (!is.data.table(y)) y <- as_tidytable(y)
+  if (!is_tidytable(x)) x <- as_tidytable(x)
+  if (!is_tidytable(y)) y <- as_tidytable(y)
 
   by <- get_bys(x, y, by)
 
@@ -150,7 +158,7 @@ semi_join..default <- function(x, y, by = NULL) {
 
   result_df <- fsetdiff(x, x[!y, on = on], all=TRUE)
 
-  as_tidytable(result_df)
+  vec_restore(result_df, x)
 }
 
 get_bys <- function(x, y, by = NULL) {
@@ -175,8 +183,8 @@ get_bys <- function(x, y, by = NULL) {
 
 join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
   if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-  if (!is.data.table(x)) x <- as_tidytable(x)
-  if (!is.data.table(y)) y <- as_tidytable(y)
+  if (!is_tidytable(x)) x <- as_tidytable(x)
+  if (!is_tidytable(y)) y <- as_tidytable(y)
 
   by <- get_bys(x, y, by)
 
@@ -187,5 +195,5 @@ join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
 
   setkey(result_df, NULL)
 
-  as_tidytable(result_df)
+  result_df
 }

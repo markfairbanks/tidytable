@@ -35,30 +35,38 @@
 #' bind_cols.(list(df1, df2))
 #' @export
 bind_cols. <- function(..., .name_repair = "unique") {
-
   dots <- list(...)
   dots <- squash(dots)
 
-  if (!all(map_lgl.(dots, is.data.table))) {
-    dots <- map.(dots, as_tidytable)
+  not_tt <- !map_lgl.(dots, is_tidytable)
+
+  if (any(not_tt)) {
+    dots[not_tt] <- map.(dots[not_tt], as_tidytable)
   }
 
-  vec_cbind(!!!dots, .ptype = tidytable(), .name_repair = .name_repair)
+  first <- dots[[1]]
+
+  out <- vec_cbind(!!!dots, .ptype = tidytable(), .name_repair = .name_repair)
+
+  vec_restore(out, first)
 }
 
 #' @export
 #' @rdname bind_cols.
 bind_rows. <- function(..., .id = NULL) {
-
   dots <- list(...)
   dots <- squash(dots)
 
-  if (!all(map_lgl.(dots, is.data.table))) {
-    dots <- map.(dots, as_tidytable)
+  not_tt <- !map_lgl.(dots, is_tidytable)
+
+  if (any(not_tt)) {
+    dots[not_tt] <- map.(dots[not_tt], as_tidytable)
   }
 
-  dots <- rbindlist(dots, idcol = .id, use.names = TRUE, fill = TRUE)
+  first <- dots[[1]]
 
-  as_tidytable(dots)
+  out <- rbindlist(dots, idcol = .id, use.names = TRUE, fill = TRUE)
+
+  vec_restore(out, first)
 }
 

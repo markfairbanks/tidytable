@@ -37,6 +37,17 @@ test_that("bind_rows.() works with a list", {
   expect_equal(bind_df$y, c(3,4,5,3,4,5))
 })
 
+test_that("bind_rows.() preserves attributes", {
+  df1 <- tidytable(x = c(1,2,3), y = c(3,4,5))
+  df2 <- tidytable(x = c(1,2,3), y = c(3,4,5))
+
+  attr(df1, "test") <- "foo"
+
+  bind_df <- bind_rows.(df1, df2)
+
+  expect_equal(attr(bind_df, "test"), "foo")
+  expect_true(is_tidytable(bind_df))
+})
 
 ##### bind_cols.()
 test_that("bind_cols.() works with data.tables", {
@@ -51,6 +62,18 @@ test_that("bind_cols.() works with data.tables", {
   expect_equal(bind_df$y, c(3,4,5))
   expect_equal(bind_df$a, c(1,2,3))
   expect_equal(bind_df$b, c(3,4,5))
+})
+
+test_that("bind_cols.() preserves attributes", {
+  df1 <- tidytable(x = c(1,2,3), y = c(3,4,5))
+  df2 <- tidytable(a = c(1,2,3), b = c(3,4,5))
+
+  attr(df1, "test") <- "foo"
+
+  bind_df <- bind_cols.(df1, df2)
+
+  expect_equal(attr(bind_df, "test"), "foo")
+  expect_true(is_tidytable(bind_df))
 })
 
 test_that("bind_cols.() works with data.frames", {
