@@ -1,5 +1,9 @@
 # tidytable 0.6.3 (in development)
 
+#### Functionality improvements
+* Subclasses and attributes are now preserved when using `bind_cols`,
+`bind_rows`, `group_split`, or joins.
+
 # tidytable 0.6.2
 
 #### New functions
