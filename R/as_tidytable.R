@@ -56,8 +56,6 @@ as_tidytable.default <- function(x, ...) {
 }
 
 add_tidytable_class <- function(x) {
-
   class(x) <- c("tidytable", "data.table", "data.frame")
-
   x
 }

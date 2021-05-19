@@ -19,6 +19,17 @@ test_that("joins work", {
   expect_equal(out$a, 1:4)
 })
 
+test_that("preserve attributes", {
+  df1 <- tidytable(a = 1:3)
+  df2 <- tidytable(b = 1, c = 2, a = 4:1)
+
+  attr(df1, "test") <- "foo"
+
+  out <- left_join.(df1, df2, by = "a")
+  expect_equal(attr(out, "test"), "foo")
+  expect_true(is_tidytable(out))
+})
+
 test_that("joins work with different names", {
   df1 <- data.table(a = 1:3)
   df2 <- data.table(b = 1, c = 2, q = 4:1)

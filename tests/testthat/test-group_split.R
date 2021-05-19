@@ -22,3 +22,12 @@ test_that("can discard the grouping variables with .keep = FALSE", {
   expect_equal(out[[1]], slice.(comp_df, 1:2))
   expect_equal(out[[2]], slice.(comp_df, 3))
 })
+
+test_that("preserves attributes", {
+  new_df <- test_df
+  attr(new_df, "test") <- "foo"
+  out <- group_split.(new_df, y)
+
+  expect_equal(map_chr.(out, attr, "test"), rep("foo", 2))
+  expect_true(all(map_lgl.(out, is_tidytable)))
+})
