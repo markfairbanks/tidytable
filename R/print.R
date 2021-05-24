@@ -1,7 +1,9 @@
 #' @export
 print.tidytable <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
-  class(x) <- c("paged_df", "tidytable_print", "tbl", "tidytable", "data.table", "data.frame")
-  print(x, ..., n = n, width = width, n_extra = n_extra)
+  y <- x
+  class(y) <- c("paged_df", "tidytable_print", "tbl", "tidytable", "data.table", "data.frame")
+  print(y, ..., n = n, width = width, n_extra = n_extra)
+  invisible(x)
 }
 
 #' @export
