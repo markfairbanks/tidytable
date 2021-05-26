@@ -3,6 +3,8 @@
 #### Functionality improvements
 * Subclasses and attributes are now preserved when using `bind_cols`,
 `bind_rows`, `group_split`, or joins.
+* `complete.()`: Added a `.by` argument
+* `expand.()`: Added a `.by` argument
 
 # tidytable 0.6.2
 
