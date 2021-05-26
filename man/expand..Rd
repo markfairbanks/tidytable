@@ -5,7 +5,7 @@
 \alias{nesting.}
 \title{Expand a data.table to use all combinations of values}
 \usage{
-expand.(.df, ..., .name_repair = "check_unique")
+expand.(.df, ..., .name_repair = "check_unique", .by = NULL)
 
 nesting.(..., .name_repair = "check_unique")
 }
@@ -15,6 +15,8 @@ nesting.(..., .name_repair = "check_unique")
 \item{...}{Columns to get combinations of}
 
 \item{.name_repair}{Treatment of duplicate names. See \code{?vctrs::vec_as_names} for options/details}
+
+\item{.by}{Columns to group by}
 }
 \description{
 Generates all combinations of variables found in a dataset.

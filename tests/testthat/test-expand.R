@@ -75,13 +75,26 @@ test_that("preserves NAs", {
 })
 
 test_that("zero length input gives zero length output", {
-  tb <- tidytable(x = character())
-  expect_equal(expand.(tb, x), tb)
+  df <- tidytable(x = character())
+  expect_equal(expand.(df, x), df)
 
   expect_equal(
     expand_grid.(x = integer(), y = 1:3),
     tidytable(x = integer(), y = integer())
   )
+})
+
+test_that("Works with .by", {
+  test_df <- tidytable(id = c(1, 2), start = c(2, 3))
+
+  result_df <- test_df %>%
+    expand.(start_end = start:3, start, .by = id)
+
+  expect_named(result_df, c("id", "start_end", "start"))
+
+  expect_equal(result_df$id, c(1,1,2))
+  expect_equal(result_df$start_end, c(2,3,3))
+  expect_equal(result_df$start, c(2,2,3))
 })
 
 # nesting() ---------------------------------------------------

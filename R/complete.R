@@ -6,6 +6,7 @@
 #' @param .df A data.frame or data.table
 #' @param ... Columns to expand
 #' @param fill A named list of values to fill NAs with.
+#' @param .by Columns to group by
 #'
 #' @export
 #'
@@ -17,17 +18,17 @@
 #'
 #' test_df %>%
 #'   complete.(x, y, fill = list(z = 10))
-complete. <- function(.df, ..., fill = list()) {
+complete. <- function(.df, ..., fill = list(), .by = NULL) {
   UseMethod("complete.")
 }
 
 #' @export
-complete..tidytable <- function(.df, ..., fill = list()) {
+complete..tidytable <- function(.df, ..., fill = list(), .by = NULL) {
   dots <- enquos(...)
   dots <- dots[!map_lgl.(dots, quo_is_null)]
   if (length(dots) == 0) return(.df)
 
-  full_df <- expand.(.df, !!!dots)
+  full_df <- expand.(.df, !!!dots, .by = {{ .by }})
 
   if (is_empty(full_df)) return(.df)
 
@@ -38,7 +39,7 @@ complete..tidytable <- function(.df, ..., fill = list()) {
 }
 
 #' @export
-complete..data.frame <- function(.df, ..., fill = list()) {
+complete..data.frame <- function(.df, ..., fill = list(), .by = NULL) {
   .df <- as_tidytable(.df)
-  complete.(.df, ..., fill = fill)
+  complete.(.df, ..., fill = fill, .by = {{ .by }})
 }
