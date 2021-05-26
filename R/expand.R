@@ -12,6 +12,7 @@
 #' @param .df A data.frame or data.table
 #' @param ... Columns to get combinations of
 #' @param .name_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details
+#' @param .by Columns to group by
 #'
 #' @export
 #'
@@ -23,29 +24,51 @@
 #'
 #' test_df %>%
 #'   expand.(nesting.(x, y))
-expand. <- function(.df, ..., .name_repair = "check_unique") {
+expand. <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
   UseMethod("expand.")
 }
 
 #' @export
-expand..tidytable <- function(.df, ..., .name_repair = "check_unique") {
+expand..tidytable <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
   dots <- enquos(...)
   dots <- dots[!map_lgl.(dots, quo_is_null)]
   if (length(dots) == 0) return(.df)
+
+  .by <- enquo(.by)
+
+  if (quo_is_null(.by)) {
+    expand_df(.df, !!!dots, .name_repair = .name_repair)
+  } else {
+    .by <- tidyselect_names(.df, !!.by)
+
+    out <- .df[, expand_df(.SD, !!!dots, .name_repair = "minimal"), by = .by]
+
+    df_name_repair(out, .name_repair = .name_repair)
+  }
+}
+
+#' @export
+expand..data.frame <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
+  .df <- as_tidytable(.df)
+  expand.(.df, ..., .name_repair = .name_repair, .by = {{ .by }})
+}
+
+expand_df <- function(.df, ..., .name_repair = .name_repair) {
+  dots <- enquos(...)
 
   dt_env <- get_dt_env(dots, !!!.df)
 
   dots <- map.(dots, quo_squash)
 
-  out <- call2("crossing.", !!!dots, .name_repair = .name_repair, .ns = "tidytable")
+  out <- call2("crossing.", !!!dots, .name_repair = "minimal", .ns = "tidytable")
 
   eval_tidy(out, env = dt_env)
 }
 
 #' @export
-expand..data.frame <- function(.df, ..., .name_repair = "check_unique") {
+expand..data.frame <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
   .df <- as_tidytable(.df)
-  expand.(.df, ..., .name_repair = .name_repair)
+  expand.(.df, ..., .name_repair = .name_repair, .by = {{ .by }})
 }
 
 #' @export
