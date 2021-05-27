@@ -60,7 +60,7 @@ expand_df <- function(.df, ..., .name_repair = .name_repair) {
 
   dots <- map.(dots, quo_squash)
 
-  out <- call2("crossing.", !!!dots, .name_repair = "minimal", .ns = "tidytable")
+  out <- call2("crossing.", !!!dots, .name_repair = .name_repair, .ns = "tidytable")
 
   eval_tidy(out, env = dt_env)
 }
