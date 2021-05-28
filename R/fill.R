@@ -49,12 +49,15 @@ fill..tidytable <- function(.df, ...,
 
   if (with_by) {
     .df <- copy(.df)
+
     col_order <- names(.df)
+
+    .by <- tidyselect_names(.df, !!.by)
   } else {
     .df <- shallow(.df)
-  }
 
-  .by <- tidyselect_names(.df, !!.by)
+    .by <- character()
+  }
 
   .df[, (select_cols) := lapply(.SD, fill_na, .direction), .SDcols = select_cols, by = .by]
 
