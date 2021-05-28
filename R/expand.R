@@ -66,12 +66,6 @@ expand_df <- function(.df, ..., .name_repair = .name_repair) {
 }
 
 #' @export
-expand..data.frame <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
-  .df <- as_tidytable(.df)
-  expand.(.df, ..., .name_repair = .name_repair, .by = {{ .by }})
-}
-
-#' @export
 #' @rdname expand.
 nesting. <- function(..., .name_repair = "check_unique") {
   cols <- dots_list(..., .named = TRUE)
