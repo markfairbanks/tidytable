@@ -101,7 +101,7 @@ unnest..data.frame <- function(.df,
                                names_sep = NULL,
                                names_repair = "unique") {
   .df <- as_tidytable(.df)
-  unnest.(.df, ..., .drop = .drop, names_sep = names_sep, names_repair = "unique")
+  unnest.(.df, ..., .drop = .drop, names_sep = names_sep, names_repair = names_repair)
 }
 
 unnest_col <- function(.df, col = NULL, names_sep = NULL) {
