@@ -26,10 +26,7 @@ filter. <- function(.df, ..., .by = NULL) {
 }
 
 #' @export
-#' @export
 filter..tidytable <- function(.df, ..., .by = NULL) {
-  .df <- as_tidytable(.df)
-
   .by <- enquo(.by)
 
   dots <- enquos(...)
