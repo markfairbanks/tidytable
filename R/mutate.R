@@ -73,6 +73,7 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
   if (quo_is_null(.by)) {
     for (i in seq_along(dots)) {
       dots_i <- prep_exprs(dots[i], .df, !!.by)
+      dots_i <- exprs_auto_name(dots_i)
       dots_i_names <- names(dots_i)
 
       dots_i <- map2.(dots_i, dots_i_names, ~ mutate_prep(.df, .x, .y))
@@ -114,6 +115,7 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
     }
 
     if (length(dots) > 0) {
+      dots <- exprs_auto_name(dots)
       dots_names <- names(dots)
       assign <- map2.(syms(dots_names), dots, ~ call2("<-", .x, .y))
       output <- call2("list", !!!syms(dots_names))
@@ -162,6 +164,7 @@ mutate_prep <- function(data, dot, dot_name) {
 get_keep_vars <- function(df, dots, .by, .keep = "all") {
   if (is_quosure(.by)) {
     dots <- prep_exprs(dots, df)
+    dots <- exprs_auto_name(dots)
     .by <- character()
   }
   df_names <- names(df)

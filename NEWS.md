@@ -5,6 +5,8 @@
 `bind_rows`, `group_split`, or joins.
 * `complete.()`: Added a `.by` argument
 * `expand.()`: Added a `.by` argument
+* `mutate.()`: Auto-names unnamed inputs
+* `transmute.()`: Auto-names unnamed inputs
 
 # tidytable 0.6.2
 

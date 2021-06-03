@@ -18,5 +18,19 @@ test_that("can use .by", {
   datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y][, list(y, z)]
 
   expect_equal(tidytable_df, datatable_df)
-
 })
+
+test_that("auto-naming works, #270", {
+  df <- tidytable(
+    a = 1:3,
+    b = 4:6,
+    c = 7:9
+  )
+
+  df <- df %>%
+    transmute.(a, b, d = a + b)
+
+  expect_named(df, c("a", "b", "d"))
+})
+
+
