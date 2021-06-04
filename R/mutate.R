@@ -86,9 +86,9 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
     }
   } else {
     if (length(dots) > 1) {
-      across_flag <- map_lgl.(dots[-1], quo_is_call, "across.")
+      across_bool <- map_lgl.(dots[-1], quo_is_call, "across.")
 
-      if (any(across_flag)) {
+      if (any(across_bool)) {
         abort("across.() can only be used in the first position of mutate.()
               when `.by` is used.")
       }
@@ -102,16 +102,13 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
     if (needs_copy) .df <- copy(.df)
 
     # Check for NULL inputs so columns can be deleted
-    null_flag <- map_lgl.(dots, is_null)
-    if (any(null_flag)) {
-      null_dots <- dots[null_flag]
+    null_bool <- map_lgl.(dots, is_null)
+    any_null <- any(null_bool)
 
-      dots <- dots[!null_flag]
+    if (any_null) {
+      null_dots <- dots[null_bool]
 
-      j <- call2(":=", !!!null_dots)
-      dt_expr <- call2_j(.df, j)
-
-      .df <- eval_tidy(dt_expr, env = dt_env)
+      dots <- dots[!null_bool]
     }
 
     if (length(dots) > 0) {
@@ -122,6 +119,13 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
       expr <- call2("{", !!!assign, output)
       j <- call2(":=", call2("c", !!!dots_names), expr)
       dt_expr <- call2_j(.df, j, .by)
+
+      .df <- eval_tidy(dt_expr, env = dt_env)
+    }
+
+    if (any_null) {
+      j <- call2(":=", !!!null_dots)
+      dt_expr <- call2_j(.df, j)
 
       .df <- eval_tidy(dt_expr, env = dt_env)
     }
