@@ -1,14 +1,14 @@
 test_that("can remove variables with NULL", {
-  df <- data.table(x = 1:3, y = 1:3)
+  df <- data.table(x = rep(1, 3), y = rep(2, 3))
   tidytable_df <- mutate.(df, y = NULL)
 
   # check that .by with NULL works
-  tidytable2_df <- mutate.(df, y = NULL, .by = x)
+  tidytable2_df <- mutate.(df, x_plus_y = x + y, y = NULL, .by = x)
 
-  df_check <- as_tidytable(df)
+  df_check <- tidytable(x = rep(1, 3), x_plus_y = rep(3, 3))
 
-  expect_equal(tidytable_df, df_check[, 1])
-  expect_equal(tidytable2_df, df_check[, 1])
+  expect_named(tidytable_df, c("x"))
+  expect_equal(tidytable2_df, df_check)
 
   # if it doesn't exist
   expect_warning(df %>% mutate.(z = NULL))
