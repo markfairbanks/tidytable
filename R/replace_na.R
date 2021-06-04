@@ -34,8 +34,8 @@ replace_na..default <- function(.x, replace = NA) {
   if (is.integer(.x) || is.double(.x)) {
     nafill(.x, "const", fill = replace)
   } else if (vec_is_list(.x)) {
-    null_flag <- map_lgl.(.x, is.null)
-    .x[null_flag] <- replace
+    null_bool <- map_lgl.(.x, is.null)
+    .x[null_bool] <- replace
     .x
   } else {
     replace <- vec_cast(replace, vec_ptype(.x))

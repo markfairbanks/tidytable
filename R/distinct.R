@@ -45,10 +45,10 @@ distinct..tidytable <- function(.df, ..., .keep_all = FALSE) {
 
     if (!.keep_all) .df <- .df[, ..cols]
 
-    named_flag <- have_name(dots)
+    named_bool <- have_name(dots)
 
-    if (any(named_flag)) {
-      named_dots <- dots[named_flag]
+    if (any(named_bool)) {
+      named_dots <- dots[named_bool]
 
       .df <- rename.(.df, !!!named_dots)
     }

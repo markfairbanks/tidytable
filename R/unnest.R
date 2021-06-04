@@ -54,18 +54,18 @@ unnest..tidytable <- function(.df,
 
   data_names <- names(.df)
 
-  list_flag <- map_lgl.(.df, is.list)
+  list_bool <- map_lgl.(.df, is.list)
 
   if (length(dots) == 0) {
-    dots <- syms(data_names[list_flag])
+    dots <- syms(data_names[list_bool])
   } else {
     dots <- tidyselect_syms(.df, ...)
   }
 
-  keep_cols <- data_names[!list_flag]
+  keep_cols <- data_names[!list_bool]
 
   if (!.drop) {
-    list_cols <- data_names[list_flag]
+    list_cols <- data_names[list_bool]
 
     keep_cols <- c(keep_cols, list_cols[list_cols %notin% as.character(dots)])
   }

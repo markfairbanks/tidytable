@@ -12,9 +12,9 @@ across_calls <- function(.fns, .cols, .names, dots) {
   } else {
     .fns <- .fns[-1]
 
-    names_flag <- have_name(.fns)
+    names_bool <- have_name(.fns)
 
-    if (!all(names_flag)) names(.fns)[!names_flag] <- seq_len(length(.fns))[!names_flag]
+    if (!all(names_bool)) names(.fns)[!names_bool] <- seq_len(length(.fns))[!names_bool]
 
     fn_names <- names(.fns)
 

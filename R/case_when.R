@@ -24,16 +24,16 @@ case_when. <- function(...) {
   if (dots_length == 0) abort("No cases provided.")
 
   # Extract default value
-  default_flag <- map_lgl.(dots, ~ isTRUE(f_lhs(.x)))
+  default_bool <- map_lgl.(dots, ~ isTRUE(f_lhs(.x)))
 
-  if (all(default_flag == FALSE)) default_val <- TRUE ~ NA
-  else default_val <- dots[default_flag][[1]]
+  if (all(default_bool == FALSE)) default_val <- TRUE ~ NA
+  else default_val <- dots[default_bool][[1]]
 
   default_env <- caller_env()
   default_val <- new_quosure(f_rhs(default_val), env = f_env(default_val) %||% default_env)
 
   # Remove default value from queries
-  dots <- dots[!default_flag]
+  dots <- dots[!default_bool]
 
   dots_length <- length(dots)
 

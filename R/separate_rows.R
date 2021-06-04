@@ -47,16 +47,16 @@ separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert =
   other_col_names <- setdiff(names(.df), col_names)
 
   if (nchar(sep) == 1) {
-    fixed_flag <- TRUE
+    fixed_bool <- TRUE
   } else {
-    fixed_flag <- FALSE
+    fixed_bool <- FALSE
   }
 
   # Create a list of calls to strsplit()
   # Can't use a for loop - all columns selected must be in the same data.table call
   # Reason: Using df %>% separate_rows(col1) %>% separate_rows(col2)
   # is different than df %>% separate_rows(col1, col2)
-  split_calls <- map.(cols, ~ call2('strsplit', .x, split = sep, fixed = fixed_flag))
+  split_calls <- map.(cols, ~ call2('strsplit', .x, split = sep, fixed = fixed_bool))
   names(split_calls) <- col_names
 
   j <- expr(c(!!!split_calls))
