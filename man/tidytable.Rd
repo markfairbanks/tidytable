@@ -10,12 +10,12 @@ tidytable(
 )
 }
 \arguments{
-\item{...}{Arguments passed to \code{data.table()}}
+\item{...}{A set of name-value pairs}
 
 \item{.name_repair}{Treatment of duplicate names. See \code{?vctrs::vec_as_names} for options/details.}
 }
 \description{
-\code{tidytable()} constructs a data.table, but one with nice printing features.
+Constructs a data.table, but one with nice printing features.
 }
 \examples{
 tidytable(x = 1:3, y = c("a", "a", "b"))
