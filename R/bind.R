@@ -67,6 +67,12 @@ bind_rows. <- function(..., .id = NULL) {
 
   out <- rbindlist(dots, idcol = .id, use.names = TRUE, fill = TRUE)
 
-  vec_restore(out, first)
+  out <- vec_restore(out, first)
+
+  # Make sure auto-index is reset since vec_restore reapplies the original index
+  # https://github.com/Rdatatable/data.table/issues/5042
+  setindex(out, NULL)
+
+  out
 }
 
