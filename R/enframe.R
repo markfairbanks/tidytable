@@ -18,6 +18,8 @@
 enframe. <- function(x, name = "name", value = "value") {
   if (is.null(x)) x <- logical()
 
+  if (is.null(value)) abort("`value` can't be NULL")
+
   if (is.null(name)) {
     df <- list(unname(x))
   } else if (is.null(names(x))) {
