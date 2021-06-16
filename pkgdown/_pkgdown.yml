@@ -30,7 +30,9 @@ reference:
   - cur_group_id.
   - desc.
   - distinct.
+  - enframe.
   - group_split.
+  - first.
   - if_all.
   - ifelse.
   - lags.

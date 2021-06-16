@@ -2,6 +2,8 @@
 
 #### New functions
 * `enframe.()`
+* `first.()`
+* `last.()`
 
 #### Functionality improvements
 * Subclasses and attributes are now preserved when using `bind_cols`,

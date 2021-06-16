@@ -161,6 +161,17 @@ test_that("can refer to newly created columns", {
   expect_equal(out$double_x, c("2", "2", "2"))
 })
 
+test_that("tidyselect with no cols works, #280", {
+  df <- tidytable(x = 1:3, y = 1:3)
+
+  across_df <- df %>%
+    mutate.(
+      across.(starts_with("a"), ~ .x + 1)
+    )
+
+  expect_equal(df, across_df)
+})
+
 # summarize -----------------------------------------------------
 test_that("single function works", {
   test_df <- tidytable(a = c(1:2, NA), b = 4:6, z = c("a", "a", "b"))
