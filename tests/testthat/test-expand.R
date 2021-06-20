@@ -4,6 +4,13 @@ test_that("expand completes all values", {
   expect_equal(nrow(out), 4)
 })
 
+test_that("expand works with negative values, #282", {
+  df <- data.table(x = 1:2)
+  out <- expand.(df, nesting.(x), y = c(-1.0, -2.0))
+  expect_equal(out$x, c(1, 1, 2, 2))
+  expect_equal(out$y, c(-2, -1, -2, -1))
+})
+
 test_that("auto-converts data.frame inputs", {
   df <- data.frame(x = 1:2, y = 1:2)
   out <- expand.(df, x, y)

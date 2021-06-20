@@ -46,14 +46,7 @@ df_name_repair <- function(.df, .name_repair = "unique") {
     names(.df),
     repair = .name_repair
   )
-
   .df
-}
-
-# Shortcut to use rlang quoting/unquoting with data.table/base R expressions
-# Can be replaced by rlang::inject() if rlang dependency is bumped to v0.4.9
-eval_expr <- function(express, env = caller_env()) {
-  eval_tidy(enexpr(express), env = env)
 }
 
 # Allows use of quosures inside data.tables
@@ -67,11 +60,15 @@ call_reduce <- function(x, fun) {
   Reduce(function(x, y) call2(fun, x, y), x)
 }
 
-# data.table::fsort() with no warning messages
+# radix sort
+# proxy for data.table::fsort since negative values aren't supported, #282
 f_sort <- function(x, decreasing = FALSE, na.last = FALSE) {
-  suppressWarnings(
-    fsort(x, decreasing = decreasing, na.last = na.last)
-  )
+  # # Can switch to data.table::fsort once negative doubles are handled
+  # suppressWarnings(
+  #   fsort(x, decreasing = decreasing, na.last = na.last)
+  # )
+
+  sort(x, decreasing = decreasing, na.last = na.last, method = "radix")
 }
 
 # pmap - for internal use only
