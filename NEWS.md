@@ -26,6 +26,10 @@
   + Added `.before`/`.after` arguments
 * `tidytable()`: Added `.name_repair` argument
 
+#### Bug fixes
+* `expand.()` with `nesting.()`
+  + Additional double vectors can have negative values (#282)
+
 #### Functions with notable speed improvements
 * `filter.()` when `.by` is used
 
