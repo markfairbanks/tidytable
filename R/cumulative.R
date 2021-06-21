@@ -28,8 +28,8 @@
 #' @keywords internal
 # cumall. <- function(x) {
 #   end <- length(x)
-#   if (is.na(all(x))) return(rep(NA, end))
-#   out <- rep(TRUE, end)
+#   if (is.na(all(x))) return(vec_rep(NA, end))
+#   out <- vec_rep(TRUE, end)
 #   which_not_x <- which(!x)
 #   which_na_x <- which(is.na(x))
 #   if (length(which_not_x) > 0) {
@@ -54,8 +54,8 @@
 #' @rdname cumall.
 # cumany. <- function(x) {
 #   end <- length(x)
-#   if (is.na(all(x))) return(rep(NA, end))
-#   out <- rep(FALSE, end)
+#   if (is.na(all(x))) return(vec_rep(NA, end))
+#   out <- vec_rep(FALSE, end)
 #   which_x <- which(x)
 #   which_na_x <- which(is.na(x))
 #   if (length(which_x) > 0) {

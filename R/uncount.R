@@ -21,11 +21,11 @@ uncount. <- function(.df, weights, .remove = TRUE, .id = NULL) {
 uncount..tidytable <- function(.df, weights, .remove = TRUE, .id = NULL) {
   weights <- enquo(weights)
 
-  rep_vec <- pull.(.df, !!weights)
+  .reps <- pull.(.df, !!weights)
 
-  result_df <- .df[rep(1:.N, rep_vec)]
+  result_df <- .df[vec_rep_each(1:.N, .reps)]
 
-  if (!is.null(.id)) result_df <- mutate.(result_df, !!.id := sequence(!!rep_vec))
+  if (!is.null(.id)) result_df <- mutate.(result_df, !!.id := sequence(.reps))
 
   if (.remove) result_df <- mutate.(result_df, !!weights := NULL)
 

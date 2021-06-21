@@ -78,8 +78,8 @@ sort_unique <- function(x) {
 
 make_cj_tidytable <- function(x, each, times, x_name) {
   if (is.data.frame(x)) {
-    x[rep(1:.N, each = each, times = times)]
+    x[vec_rep(vec_rep_each(1:.N, each), times = times)]
   } else {
-    tidytable(!!x_name := rep(x, each = each, times = times))
+    tidytable(!!x_name := vec_rep(vec_rep_each(x, each), times))
   }
 }

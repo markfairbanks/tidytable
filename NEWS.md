@@ -13,6 +13,10 @@
 * `mutate.()`: Auto-names unnamed inputs
 * `transmute.()`: Auto-names unnamed inputs
 
+#### Bug fixes
+* `expand.()` with `nesting.()`
+  + Additional double vectors can have negative values (#282)
+
 # tidytable 0.6.2
 
 #### New functions
@@ -25,10 +29,6 @@
   + Added `.keep` argument
   + Added `.before`/`.after` arguments
 * `tidytable()`: Added `.name_repair` argument
-
-#### Bug fixes
-* `expand.()` with `nesting.()`
-  + Additional double vectors can have negative values (#282)
 
 #### Functions with notable speed improvements
 * `filter.()` when `.by` is used
