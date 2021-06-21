@@ -98,6 +98,13 @@ args_recycle <- function(args) {
   args
 }
 
+tidytable_restore <- function(x, to) {
+  # Make sure auto-index is reset since vec_restore reapplies the original index
+  # https://github.com/Rdatatable/data.table/issues/5042
+  attr(to, "index") <- NULL
+  vec_restore(x, to)
+}
+
 # deprecated shallow() ------------------------------------------------
 # shallow <- function(x, cols = names(x), reset_class = FALSE) {
 #   stopifnot(is.data.table(x), all(cols %in% names(x)))

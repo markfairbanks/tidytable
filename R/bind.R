@@ -48,7 +48,7 @@ bind_cols. <- function(..., .name_repair = "unique") {
 
   out <- vec_cbind(!!!dots, .ptype = tidytable(), .name_repair = .name_repair)
 
-  vec_restore(out, first)
+  tidytable_restore(out, first)
 }
 
 #' @export
@@ -67,12 +67,6 @@ bind_rows. <- function(..., .id = NULL) {
 
   out <- rbindlist(dots, idcol = .id, use.names = TRUE, fill = TRUE)
 
-  out <- vec_restore(out, first)
-
-  # Make sure auto-index is reset since vec_restore reapplies the original index
-  # https://github.com/Rdatatable/data.table/issues/5042
-  setindex(out, NULL)
-
-  out
+  tidytable_restore(out, first)
 }
 

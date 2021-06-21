@@ -50,7 +50,7 @@ group_split..tidytable <- function(.df, ..., .keep = TRUE, .named = FALSE) {
       dots <- unname(dots)
     }
 
-    map.(dots, vec_restore, .df)
+    map.(dots, tidytable_restore, .df)
   }
 }
 

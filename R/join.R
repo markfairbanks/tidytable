@@ -46,7 +46,7 @@ left_join..default <- function(x, y, by = NULL) {
   setnames(result_df, by$y, on)
   setcolorder(result_df, all_names)
 
-  vec_restore(result_df, x)
+  tidytable_restore(result_df, x)
 }
 
 #' @export
@@ -68,7 +68,7 @@ inner_join..default <- function(x, y, by = NULL) {
 
   result_df <- x[y, on = on, allow.cartesian = TRUE, nomatch = 0]
 
-  vec_restore(result_df, x)
+  tidytable_restore(result_df, x)
 }
 
 #' @export
@@ -90,7 +90,7 @@ right_join..default <- function(x, y, by = NULL) {
 
   result_df <- x[y, on = on, allow.cartesian = TRUE]
 
-  vec_restore(result_df, x)
+  tidytable_restore(result_df, x)
 }
 
 #' @export
@@ -114,7 +114,7 @@ full_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
 
     setcolorder(result_df, col_order)
 
-    vec_restore(result_df, x)
+    tidytable_restore(result_df, x)
 }
 
 #' @export
@@ -136,7 +136,7 @@ anti_join..default <- function(x, y, by = NULL) {
 
   result_df <- x[!y, on = on, allow.cartesian = TRUE]
 
-  vec_restore(result_df, x)
+  tidytable_restore(result_df, x)
 }
 
 #' @export
@@ -158,7 +158,7 @@ semi_join..default <- function(x, y, by = NULL) {
 
   result_df <- fsetdiff(x, x[!y, on = on], all=TRUE)
 
-  vec_restore(result_df, x)
+  tidytable_restore(result_df, x)
 }
 
 get_bys <- function(x, y, by = NULL) {
