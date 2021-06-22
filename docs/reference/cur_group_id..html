@@ -87,7 +87,7 @@ Can be used inside summarize.(), mutate.(), &amp;amp; filter.()" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3</span>
       </span>
     </div>
 
@@ -167,25 +167,25 @@ Can be used inside summarize.(), mutate.(), &amp;amp; filter.()" />
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='mutate..html'>mutate.</a></span><span class='op'>(</span>group_id <span class='op'>=</span> <span class='fu'>cur_group_id.</span><span class='op'>(</span><span class='op'>)</span>,
           .by <span class='op'>=</span> <span class='va'>y</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 5 × 3</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 5 × 3</span>
 #&gt;       x y     group_id
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a            1
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2 a            1
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3 a            1
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4 b            2
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     5 b            2</div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     1 a            1
+#&gt; <span style='color: #BCBCBC;'>2</span>     2 a            1
+#&gt; <span style='color: #BCBCBC;'>3</span>     3 a            1
+#&gt; <span style='color: #BCBCBC;'>4</span>     4 b            2
+#&gt; <span style='color: #BCBCBC;'>5</span>     5 b            2</div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='mutate..html'>mutate.</a></span><span class='op'>(</span>group_rows <span class='op'>=</span> <span class='fu'>cur_group_rows.</span><span class='op'>(</span><span class='op'>)</span>,
           .by <span class='op'>=</span> <span class='va'>y</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 5 × 3</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 5 × 3</span>
 #&gt;       x y     group_rows
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a              1
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2 a              2
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3 a              3
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4 b              1
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     5 b              2</div></span></pre>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     1 a              1
+#&gt; <span style='color: #BCBCBC;'>2</span>     2 a              2
+#&gt; <span style='color: #BCBCBC;'>3</span>     3 a              3
+#&gt; <span style='color: #BCBCBC;'>4</span>     4 b              1
+#&gt; <span style='color: #BCBCBC;'>5</span>     5 b              2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

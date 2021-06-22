@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3</span>
       </span>
     </div>
 
@@ -177,48 +177,48 @@
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_split.</span><span class='op'>(</span><span class='va'>c</span>, <span class='va'>d</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [[1]]
-#&gt; <span style='color: #949494;'># A tidytable: 2 × 4</span><span>
+#&gt; <span style='color: #949494;'># A tidytable: 2 × 4</span>
 #&gt;       a     b c     d    
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     1 a     a    
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     2 a     a    
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     1     1 a     a    
+#&gt; <span style='color: #BCBCBC;'>2</span>     2     2 a     a    
 #&gt; 
 #&gt; [[2]]
-#&gt; </span><span style='color: #949494;'># A tidytable: 1 × 4</span><span>
+#&gt; <span style='color: #949494;'># A tidytable: 1 × 4</span>
 #&gt;       a     b c     d    
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     3     3 b     b    
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     3     3 b     b    
 #&gt; </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_split.</span><span class='op'>(</span><span class='va'>c</span>, <span class='va'>d</span>, .keep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [[1]]
-#&gt; </span><span style='color: #949494;'># A tidytable: 2 × 2</span><span>
+#&gt; <span style='color: #949494;'># A tidytable: 2 × 2</span>
 #&gt;       a     b
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     1
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     2
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     1     1
+#&gt; <span style='color: #BCBCBC;'>2</span>     2     2
 #&gt; 
 #&gt; [[2]]
-#&gt; </span><span style='color: #949494;'># A tidytable: 1 × 2</span><span>
+#&gt; <span style='color: #949494;'># A tidytable: 1 × 2</span>
 #&gt;       a     b
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     3     3
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     3     3
 #&gt; </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_split.</span><span class='op'>(</span><span class='va'>c</span>, <span class='va'>d</span>, .named <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $a_a
-#&gt; </span><span style='color: #949494;'># A tidytable: 2 × 4</span><span>
+#&gt; <span style='color: #949494;'># A tidytable: 2 × 4</span>
 #&gt;       a     b c     d    
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     1 a     a    
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     2 a     a    
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     1     1 a     a    
+#&gt; <span style='color: #BCBCBC;'>2</span>     2     2 a     a    
 #&gt; 
 #&gt; $b_b
-#&gt; </span><span style='color: #949494;'># A tidytable: 1 × 4</span><span>
+#&gt; <span style='color: #949494;'># A tidytable: 1 × 4</span>
 #&gt;       a     b c     d    
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     3     3 b     b    
-#&gt; </div></span></pre>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     3     3 b     b    
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

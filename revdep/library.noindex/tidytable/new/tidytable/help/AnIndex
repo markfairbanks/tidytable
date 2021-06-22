@@ -28,6 +28,7 @@ distinct.	distinct.
 drop_na.	drop_na.
 dt	dt
 ends_with	reexports
+enframe.	enframe.
 enquo	reexports
 enquos	reexports
 everything	reexports
@@ -36,6 +37,7 @@ expand_grid.	expand_grid.
 extract.	extract.
 fill.	fill.
 filter.	filter.
+first.	first.
 full_join.	left_join.
 getDTthreads	reexports
 get_dummies.	get_dummies.
@@ -48,6 +50,7 @@ inner_join.	left_join.
 inv_gc	inv_gc
 is_tidytable	is_tidytable
 lags.	lags.
+last.	first.
 last_col	reexports
 leads.	lags.
 left_join.	left_join.

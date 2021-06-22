@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3</span>
       </span>
     </div>
 
@@ -170,52 +170,52 @@ Use named arguments, e.g. new_name = old_name, to rename selected variables.
 
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>select.</span><span class='op'>(</span><span class='va'>x1</span>, <span class='va'>y</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 2</span>
 #&gt;      x1 y    
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a    
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2 b    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3 c    </div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     1 a    
+#&gt; <span style='color: #BCBCBC;'>2</span>     2 b    
+#&gt; <span style='color: #BCBCBC;'>3</span>     3 c    </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>select.</span><span class='op'>(</span><span class='va'>x1</span><span class='op'>:</span><span class='va'>y</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 3 × 3</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 3</span>
 #&gt;      x1    x2 y    
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     1 a    
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     2 b    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3     3 c    </div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     1     1 a    
+#&gt; <span style='color: #BCBCBC;'>2</span>     2     2 b    
+#&gt; <span style='color: #BCBCBC;'>3</span>     3     3 c    </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>select.</span><span class='op'>(</span><span class='op'>-</span><span class='va'>y</span>, <span class='op'>-</span><span class='va'>z</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 3 × 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 2</span>
 #&gt;      x1    x2
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     1
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     2
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3     3</div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     1     1
+#&gt; <span style='color: #BCBCBC;'>2</span>     2     2
+#&gt; <span style='color: #BCBCBC;'>3</span>     3     3</div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>select.</span><span class='op'>(</span><span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></span><span class='op'>(</span><span class='st'>"x"</span><span class='op'>)</span>, <span class='va'>z</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 3 × 3</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 3</span>
 #&gt;      x1    x2 z    
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     1 a    
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     2 b    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3     3 c    </div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     1     1 a    
+#&gt; <span style='color: #BCBCBC;'>2</span>     2     2 b    
+#&gt; <span style='color: #BCBCBC;'>3</span>     3     3 c    </div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>select.</span><span class='op'>(</span><span class='fu'>where</span><span class='op'>(</span><span class='va'>is.character</span><span class='op'>)</span>, <span class='va'>x1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 3 × 3</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 3</span>
 #&gt;   y     z        x1
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     a         1
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> b     b         2
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> c     c         3</div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> a     a         1
+#&gt; <span style='color: #BCBCBC;'>2</span> b     b         2
+#&gt; <span style='color: #BCBCBC;'>3</span> c     c         3</div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>select.</span><span class='op'>(</span>new <span class='op'>=</span> <span class='va'>x1</span>, <span class='va'>y</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 3 × 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 2</span>
 #&gt;     new y    
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a    
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2 b    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3 c    </div></span></pre>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     1 a    
+#&gt; <span style='color: #BCBCBC;'>2</span>     2 b    
+#&gt; <span style='color: #BCBCBC;'>3</span>     3 c    </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

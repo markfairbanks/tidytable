@@ -1,3 +1,22 @@
+# tidytable 0.6.3
+
+#### New functions
+* `enframe.()`
+* `first.()`
+* `last.()`
+
+#### Functionality improvements
+* Subclasses and attributes are now preserved when using `bind_cols`,
+`bind_rows`, `group_split`, or joins.
+* `complete.()`: Added a `.by` argument
+* `expand.()`: Added a `.by` argument
+* `mutate.()`: Auto-names unnamed inputs
+* `transmute.()`: Auto-names unnamed inputs
+
+#### Bug fixes
+* `expand.()` with `nesting.()`
+  + Additional double vectors can have negative values (#282)
+
 # tidytable 0.6.2
 
 #### New functions

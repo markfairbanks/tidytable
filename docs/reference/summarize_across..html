@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3</span>
       </span>
     </div>
 
@@ -203,36 +203,36 @@ when a list is used for <code>.fns</code>.</p></td>
 <span class='co'># Pass a single function</span>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>summarize_across.</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span><span class='op'>)</span>, <span class='va'>mean</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 1 × 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 1 × 2</span>
 #&gt;       a     b
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     2     5</div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     2     5</div><div class='input'>
 <span class='co'># Single function using purrr style interface</span>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>summarize_across.</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span><span class='op'>)</span>, <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>.x</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 1 × 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 1 × 2</span>
 #&gt;       a     b
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     2     5</div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     2     5</div><div class='input'>
 <span class='co'># Passing a list of functions (with .by)</span>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>summarize_across.</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>mean</span>, <span class='va'>max</span><span class='op'>)</span>, .by <span class='op'>=</span> <span class='va'>z</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 2 × 5</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 2 × 5</span>
 #&gt;   z       a_1   a_2   b_1   b_2
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a       1.5     2   4.5     5
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> b       3       3   6       6</div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> a       1.5     2   4.5     5
+#&gt; <span style='color: #BCBCBC;'>2</span> b       3       3   6       6</div><div class='input'>
 <span class='co'># Passing a named list of functions (with .by)</span>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>summarize_across.</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span><span class='op'>)</span>,
                     <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>avg <span class='op'>=</span> <span class='va'>mean</span>,
                          max <span class='op'>=</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>.x</span><span class='op'>)</span><span class='op'>)</span>,
                     .by <span class='op'>=</span> <span class='va'>z</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 2 × 5</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 2 × 5</span>
 #&gt;   z     a_avg a_max b_avg b_max
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a       1.5     2   4.5     5
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> b       3       3   6       6</div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> a       1.5     2   4.5     5
+#&gt; <span style='color: #BCBCBC;'>2</span> b       3       3   6       6</div><div class='input'>
 <span class='co'># Use the `.names` argument for more naming control</span>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>summarize_across.</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span><span class='op'>)</span>,
@@ -240,11 +240,11 @@ when a list is used for <code>.fns</code>.</p></td>
                          max <span class='op'>=</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>.x</span><span class='op'>)</span><span class='op'>)</span>,
                     .by <span class='op'>=</span> <span class='va'>z</span>,
                     .names <span class='op'>=</span> <span class='st'>"{.col}_test_{.fn}"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 2 × 5</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 2 × 5</span>
 #&gt;   z     a_test_avg a_test_max b_test_avg b_test_max
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a            1.5          2        4.5          5
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> b            3            3        6            6</div></span></pre>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> a            1.5          2        4.5          5
+#&gt; <span style='color: #BCBCBC;'>2</span> b            3            3        6            6</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

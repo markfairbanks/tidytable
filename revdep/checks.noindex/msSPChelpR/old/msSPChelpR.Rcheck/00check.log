@@ -1,5 +1,5 @@
 * using log directory ‘/Users/xmxf129/Desktop/NU/R/R_Packages/tidytable/revdep/checks.noindex/msSPChelpR/old/msSPChelpR.Rcheck’
-* using R version 4.0.4 (2021-02-15)
+* using R version 4.1.0 (2021-05-18)
 * using platform: x86_64-apple-darwin17.0 (64-bit)
 * using session charset: UTF-8
 * using options ‘--no-manual --no-build-vignettes’
@@ -46,6 +46,7 @@
 * checking for unstated dependencies in examples ... OK
 * checking contents of ‘data’ directory ... OK
 * checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
 * checking data for ASCII and uncompressed saves ... OK
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK

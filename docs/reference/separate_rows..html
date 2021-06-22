@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3</span>
       </span>
     </div>
 
@@ -175,25 +175,25 @@ Useful if the resulting column should be type integer/double.</p></td>
 <span class='op'>)</span>
 
 <span class='fu'>separate_rows.</span><span class='op'>(</span><span class='va'>test_df</span>, <span class='va'>y</span>, <span class='va'>z</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 6 × 3</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 6 × 3</span>
 #&gt;       x y     z    
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a     1    
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2 d     2    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     2 e     3    
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     2 f     4    
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     3 g     5    
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>     3 h     6    </div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     1 a     1    
+#&gt; <span style='color: #BCBCBC;'>2</span>     2 d     2    
+#&gt; <span style='color: #BCBCBC;'>3</span>     2 e     3    
+#&gt; <span style='color: #BCBCBC;'>4</span>     2 f     4    
+#&gt; <span style='color: #BCBCBC;'>5</span>     3 g     5    
+#&gt; <span style='color: #BCBCBC;'>6</span>     3 h     6    </div><div class='input'>
 <span class='fu'>separate_rows.</span><span class='op'>(</span><span class='va'>test_df</span>, <span class='va'>y</span>, <span class='va'>z</span>, convert <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 6 × 3</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 6 × 3</span>
 #&gt;       x y         z
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a         1
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2 d         2
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     2 e         3
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     2 f         4
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     3 g         5
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>     3 h         6</div></span></pre>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     1 a         1
+#&gt; <span style='color: #BCBCBC;'>2</span>     2 d         2
+#&gt; <span style='color: #BCBCBC;'>3</span>     2 e         3
+#&gt; <span style='color: #BCBCBC;'>4</span>     2 f         4
+#&gt; <span style='color: #BCBCBC;'>5</span>     3 g         5
+#&gt; <span style='color: #BCBCBC;'>6</span>     3 h         6</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

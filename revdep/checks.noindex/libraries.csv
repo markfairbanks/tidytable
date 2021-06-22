@@ -1,4 +1,2 @@
 package,old,new,delta
-tidytable,0.6.1,0.6.2,*
-data.table,NA,1.14.1,*
-pillar,NA,1.6.1,*
+tidytable,0.6.2,0.6.3,*

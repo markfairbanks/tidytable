@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3</span>
       </span>
     </div>
 
@@ -184,38 +184,38 @@ Can be <code>NULL</code> or a variable:</p><ul>
 
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count.</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 1 × 1</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 1 × 1</span>
 #&gt;       N
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     3</div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     3</div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count.</span><span class='op'>(</span><span class='va'>z</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 2 × 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 2 × 2</span>
 #&gt;   z         N
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a         2
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> b         1</div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> a         2
+#&gt; <span style='color: #BCBCBC;'>2</span> b         1</div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count.</span><span class='op'>(</span><span class='fu'>where</span><span class='op'>(</span><span class='va'>is.character</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 2 × 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 2 × 2</span>
 #&gt;   z         N
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a         2
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> b         1</div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> a         2
+#&gt; <span style='color: #BCBCBC;'>2</span> b         1</div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count.</span><span class='op'>(</span><span class='va'>z</span>, wt <span class='op'>=</span> <span class='va'>y</span>, name <span class='op'>=</span> <span class='st'>"y_sum"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 2 × 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 2 × 2</span>
 #&gt;   z     y_sum
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a         9
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> b         6</div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> a         9
+#&gt; <span style='color: #BCBCBC;'>2</span> b         6</div><div class='input'>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>count.</span><span class='op'>(</span><span class='va'>z</span>, sort <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 2 × 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 2 × 2</span>
 #&gt;   z         N
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a         2
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> b         1</div></span></pre>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> a         2
+#&gt; <span style='color: #BCBCBC;'>2</span> b         1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

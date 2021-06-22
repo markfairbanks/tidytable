@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3</span>
       </span>
     </div>
 
@@ -185,49 +185,49 @@ with <code>names_sep</code> used as a separator.</p></td>
 
 <span class='va'>nested_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>unnest.</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 10 × 4</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 10 × 4</span>
 #&gt;    c     d         a     b
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> a     a         1    11
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> a     a         2    12
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> a     a         3    13
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> a     a         4    14
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> a     b         5    15
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> a     b         6    16
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> b     b         7    17
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> b     b         8    18
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> b     b         9    19
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> b     b        10    20</div><div class='input'>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span> a     a         1    11
+#&gt; <span style='color: #BCBCBC;'> 2</span> a     a         2    12
+#&gt; <span style='color: #BCBCBC;'> 3</span> a     a         3    13
+#&gt; <span style='color: #BCBCBC;'> 4</span> a     a         4    14
+#&gt; <span style='color: #BCBCBC;'> 5</span> a     b         5    15
+#&gt; <span style='color: #BCBCBC;'> 6</span> a     b         6    16
+#&gt; <span style='color: #BCBCBC;'> 7</span> b     b         7    17
+#&gt; <span style='color: #BCBCBC;'> 8</span> b     b         8    18
+#&gt; <span style='color: #BCBCBC;'> 9</span> b     b         9    19
+#&gt; <span style='color: #BCBCBC;'>10</span> b     b        10    20</div><div class='input'>
 <span class='va'>nested_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>unnest.</span><span class='op'>(</span><span class='va'>data</span>, names_sep <span class='op'>=</span> <span class='st'>"_"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 10 × 4</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 10 × 4</span>
 #&gt;    c     d     data_a data_b
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> a     a          1     11
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> a     a          2     12
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> a     a          3     13
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> a     a          4     14
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> a     b          5     15
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> a     b          6     16
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> b     b          7     17
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> b     b          8     18
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> b     b          9     19
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> b     b         10     20</div><div class='input'>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span> a     a          1     11
+#&gt; <span style='color: #BCBCBC;'> 2</span> a     a          2     12
+#&gt; <span style='color: #BCBCBC;'> 3</span> a     a          3     13
+#&gt; <span style='color: #BCBCBC;'> 4</span> a     a          4     14
+#&gt; <span style='color: #BCBCBC;'> 5</span> a     b          5     15
+#&gt; <span style='color: #BCBCBC;'> 6</span> a     b          6     16
+#&gt; <span style='color: #BCBCBC;'> 7</span> b     b          7     17
+#&gt; <span style='color: #BCBCBC;'> 8</span> b     b          8     18
+#&gt; <span style='color: #BCBCBC;'> 9</span> b     b          9     19
+#&gt; <span style='color: #BCBCBC;'>10</span> b     b         10     20</div><div class='input'>
 <span class='va'>nested_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>unnest.</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>pulled_vec</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tidytable: 10 × 5</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 10 × 5</span>
 #&gt;    c     d         a     b pulled_vec
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> a     a         1    11          1
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> a     a         2    12          2
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> a     a         3    13          3
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> a     a         4    14          4
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> a     b         5    15          5
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> a     b         6    16          6
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> b     b         7    17          7
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> b     b         8    18          8
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> b     b         9    19          9
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> b     b        10    20         10</div></span></pre>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span> a     a         1    11          1
+#&gt; <span style='color: #BCBCBC;'> 2</span> a     a         2    12          2
+#&gt; <span style='color: #BCBCBC;'> 3</span> a     a         3    13          3
+#&gt; <span style='color: #BCBCBC;'> 4</span> a     a         4    14          4
+#&gt; <span style='color: #BCBCBC;'> 5</span> a     b         5    15          5
+#&gt; <span style='color: #BCBCBC;'> 6</span> a     b         6    16          6
+#&gt; <span style='color: #BCBCBC;'> 7</span> b     b         7    17          7
+#&gt; <span style='color: #BCBCBC;'> 8</span> b     b         8    18          8
+#&gt; <span style='color: #BCBCBC;'> 9</span> b     b         9    19          9
+#&gt; <span style='color: #BCBCBC;'>10</span> b     b        10    20         10</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

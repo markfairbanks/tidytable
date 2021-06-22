@@ -1,3 +1,19 @@
+# tidytable 0.6.2
+
+#### New functions
+* `cur_group_id.()`/`cur_group_rows.()`
+* `n_distinct.()`
+* `nesting.()`
+
+#### Functionality improvements
+* `mutate.()`:
+  + Added `.keep` argument
+  + Added `.before`/`.after` arguments
+* `tidytable()`: Added `.name_repair` argument
+
+#### Functions with notable speed improvements
+* `filter.()` when `.by` is used
+
 # tidytable 0.6.1
 
 #### New functions

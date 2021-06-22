@@ -20,6 +20,7 @@ desc.                   Descending order
 distinct.               Select distinct/unique rows
 drop_na.                Drop rows containing missing values
 dt                      Pipeable data.table call
+enframe.                Convert a vector to a data.table/tidytable
 expand.                 Expand a data.table to use all combinations of
                         values
 expand_grid.            Create a data.table from all combinations of
@@ -29,6 +30,7 @@ extract.                Extract a character column into multiple
 fill.                   Fill in missing values with previous or next
                         value
 filter.                 Filter rows on one or more conditions
+first.                  Extract the first or last value from a vector
 get_dummies.            Convert character and factor columns to dummy
                         variables
 group_split.            Split data frame by groups

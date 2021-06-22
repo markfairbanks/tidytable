@@ -15,6 +15,7 @@ complete.               Complete a data.table with missing combinations
 count.                  Count observations by group
 crossing.               Create a data.table from all unique
                         combinations of inputs
+cur_group_id.           Current group context
 desc.                   Descending order
 distinct.               Select distinct/unique rows
 drop_na.                Drop rows containing missing values
@@ -43,6 +44,7 @@ mutate.                 Add/modify/delete columns
 mutate_across.          Mutate multiple columns simultaneously
 mutate_rowwise.         Add/modify columns by row
 n.                      Number of observations in each group
+n_distinct.             Count the number of unique values in a vector
 nest.                   Nest data.tables
 nest_by.                Nest data.tables
 pivot_longer.           Pivot data from wide to long

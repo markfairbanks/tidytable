@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Do the values from x fall between the left and right bounds? — between. • tidytable</title>
+<title>Convert a vector to a data.table/tidytable — enframe. • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +48,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Do the values from x fall between the left and right bounds? — between." />
-<meta property="og:description" content="between.() utilizes data.table::between() in the background" />
+<meta property="og:title" content="Convert a vector to a data.table/tidytable — enframe." />
+<meta property="og:description" content="Converts named and unnamed vectors to a data.table/tidytable." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -133,57 +133,47 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Do the values from x fall between the left and right bounds?</h1>
-    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/between.R'><code>R/between.R</code></a></small>
-    <div class="hidden name"><code>between..Rd</code></div>
+    <h1>Convert a vector to a data.table/tidytable</h1>
+    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/enframe.R'><code>R/enframe.R</code></a></small>
+    <div class="hidden name"><code>enframe..Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>between.()</code> utilizes <code><a href='https://Rdatatable.gitlab.io/data.table/reference/between.html'>data.table::between()</a></code> in the background</p>
+    <p>Converts named and unnamed vectors to a data.table/tidytable.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>between.</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>left</span>, <span class='va'>right</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>enframe.</span><span class='op'>(</span><span class='va'>x</span>, name <span class='op'>=</span> <span class='st'>"name"</span>, value <span class='op'>=</span> <span class='st'>"value"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A numeric vector of values</p></td>
+      <td><p>A vector</p></td>
     </tr>
     <tr>
-      <th>left, right</th>
-      <td><p>Boundary values</p></td>
+      <th>name</th>
+      <td><p>Name of the column that stores the names. If <code>name = NULL</code>,
+a one-column tidytable will be returned.</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>Name of the column that stores the values.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>between.</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='fl'>5</span>, <span class='fl'>7</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE</div><div class='input'>
-<span class='va'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>
-  x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>10</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,
-  y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>10</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>vec</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>vec</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>]</span>
 
-<span class='co'># Typically used in a filter.()</span>
-<span class='va'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='filter..html'>filter.</a></span><span class='op'>(</span><span class='fu'>between.</span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>enframe.</span><span class='op'>(</span><span class='va'>vec</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 2</span>
-#&gt;       x     y
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>     1     5
-#&gt; <span style='color: #BCBCBC;'>2</span>     2     3
-#&gt; <span style='color: #BCBCBC;'>3</span>     3     1</div><div class='input'>
-<span class='co'># Can also use the %between% operator</span>
-<span class='va'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='filter..html'>filter.</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>%between%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 2</span>
-#&gt;       x     y
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>     1     5
-#&gt; <span style='color: #BCBCBC;'>2</span>     2     3
-#&gt; <span style='color: #BCBCBC;'>3</span>     3     1</div></pre>
+#&gt;   name  value
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> a         1
+#&gt; <span style='color: #BCBCBC;'>2</span> b         2
+#&gt; <span style='color: #BCBCBC;'>3</span> c         3</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
