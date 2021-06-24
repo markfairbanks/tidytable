@@ -17,6 +17,7 @@
 \alias{\%like\%}
 \alias{getDTthreads}
 \alias{setDTthreads}
+\alias{\%chin\%}
 \alias{enquo}
 \alias{enquos}
 \alias{glimpse}
@@ -27,7 +28,7 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{data.table}{\code{\link[data.table:between]{\%between\%}}, \code{\link[data.table:like]{\%like\%}}, \code{\link[data.table]{data.table}}, \code{\link[data.table:openmp-utils]{getDTthreads}}, \code{\link[data.table:openmp-utils]{setDTthreads}}}
+  \item{data.table}{\code{\link[data.table:between]{\%between\%}}, \code{\link[data.table:chmatch]{\%chin\%}}, \code{\link[data.table:like]{\%like\%}}, \code{\link[data.table]{data.table}}, \code{\link[data.table:openmp-utils]{getDTthreads}}, \code{\link[data.table:openmp-utils]{setDTthreads}}}
 
   \item{pillar}{\code{\link[pillar]{glimpse}}}
 

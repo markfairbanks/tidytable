@@ -58,6 +58,9 @@ data.table::getDTthreads
 #' @export
 data.table::setDTthreads
 
+#' @export
+data.table::`%chin%`
+
 # rlang ------------------------
 #' @export
 rlang::enquo
