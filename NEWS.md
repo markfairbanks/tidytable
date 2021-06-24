@@ -1,5 +1,8 @@
 # tidytable 0.6.4 (in development)
 
+#### Functionality improvements
+* `separate.()`: Can omit output columns by using `NA` in `into`
+
 # tidytable 0.6.3
 
 #### New functions
