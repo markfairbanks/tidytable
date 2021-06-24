@@ -10,6 +10,7 @@
 #' @param .df A data.frame or data.table
 #' @param col The column to split into multiple columns
 #' @param into New column names to split into. A character vector.
+#' Use `NA` to omit the variable in the output.
 #' @param sep Separator to split on. Can be specified or detected automatically
 #' @param remove If TRUE, remove the input column from the output data.table
 #' @param convert TRUE calls `type.convert()` with `as.is = TRUE` on new columns
@@ -56,8 +57,18 @@ separate..tidytable <- function(.df, col, into,
 
   col <- enquo(col)
 
+  na_into <- is.na(into)
+
+  .keep <- seq_along(into)[!na_into]
+  into <- into[!na_into]
+
   eval_quo(
-    .df[, (into) := tstrsplit(!!col, split = sep, fixed = fixed, type.convert = convert)]
+    .df[,
+        (into) :=
+          tstrsplit(
+            !!col, split = sep, fixed = fixed, keep = .keep, type.convert = convert
+          )
+        ]
   )
 
   if (remove) .df <- mutate.(.df, !!col := NULL)

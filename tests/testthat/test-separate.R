@@ -53,3 +53,13 @@ test_that("separate works automatically with data.frame", {
   expect_equal(df$c1, c("a","a","a",NA))
   expect_equal(df$c2, c(NA,"b","b",NA))
 })
+
+test_that("can drop columns using NA, #288", {
+  df <- data.frame(x = c("a", "a b", "a b", NA))
+
+  df <- df %>%
+    separate.(x, c("c1", NA))
+
+  expect_named(df, c("c1"))
+  expect_equal(df$c1, c("a","a","a",NA))
+})

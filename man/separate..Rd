@@ -19,7 +19,8 @@ separate.(
 
 \item{col}{The column to split into multiple columns}
 
-\item{into}{New column names to split into. A character vector.}
+\item{into}{New column names to split into. A character vector.
+Use \code{NA} to omit the variable in the output.}
 
 \item{sep}{Separator to split on. Can be specified or detected automatically}
 
