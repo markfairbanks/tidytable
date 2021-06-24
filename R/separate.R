@@ -57,10 +57,10 @@ separate..tidytable <- function(.df, col, into,
 
   col <- enquo(col)
 
-  na_into <- is.na(into)
+  not_na_into <- !is.na(into)
 
-  .keep <- seq_along(into)[!na_into]
-  into <- into[!na_into]
+  .keep <- seq_along(into)[not_na_into]
+  into <- into[not_na_into]
 
   eval_quo(
     .df[,
