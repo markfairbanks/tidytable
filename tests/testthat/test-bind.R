@@ -37,6 +37,19 @@ test_that("bind_rows.() works with a list", {
   expect_equal(bind_df$y, c(3,4,5,3,4,5))
 })
 
+test_that("bind_rows.() works with list splicing", {
+  df1 <- data.table(x = c(1,2,3), y = c(3,4,5))
+  df2 <- data.table(x = c(1,2,3), y = c(3,4,5))
+
+  df_list <- list(df1, df2)
+
+  bind_df <- bind_rows.(!!!df_list)
+
+  expect_named(bind_df, c("x","y"))
+  expect_equal(bind_df$x, c(1,2,3,1,2,3))
+  expect_equal(bind_df$y, c(3,4,5,3,4,5))
+})
+
 test_that("bind_rows.() preserves attributes", {
   df1 <- tidytable(x = c(1,2,3), y = c(3,4,5))
   df2 <- tidytable(x = c(1,2,3), y = c(3,4,5))
@@ -97,6 +110,21 @@ test_that("bind_cols.() works with a list", {
   df_list <- list(df1, df2)
 
   bind_df <- bind_cols.(df_list)
+
+  expect_named(bind_df, c("x","y","a","b"))
+  expect_equal(bind_df$x, c(1,2,3))
+  expect_equal(bind_df$y, c(3,4,5))
+  expect_equal(bind_df$a, c(1,2,3))
+  expect_equal(bind_df$b, c(3,4,5))
+})
+
+test_that("bind_cols.() works with list splicing", {
+  df1 <- data.table(x = c(1,2,3), y = c(3,4,5))
+  df2 <- data.table(a = c(1,2,3), b = c(3,4,5))
+
+  df_list <- list(df1, df2)
+
+  bind_df <- bind_cols.(!!!df_list)
 
   expect_named(bind_df, c("x","y","a","b"))
   expect_equal(bind_df$x, c(1,2,3))

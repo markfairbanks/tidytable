@@ -35,7 +35,7 @@
 #' bind_cols.(list(df1, df2))
 #' @export
 bind_cols. <- function(..., .name_repair = "unique") {
-  dots <- list(...)
+  dots <- list2(...)
   dots <- squash(dots)
 
   not_tt <- !map_lgl.(dots, is_tidytable)
@@ -54,7 +54,7 @@ bind_cols. <- function(..., .name_repair = "unique") {
 #' @export
 #' @rdname bind_cols.
 bind_rows. <- function(..., .id = NULL) {
-  dots <- list(...)
+  dots <- list2(...)
   dots <- squash(dots)
 
   not_tt <- !map_lgl.(dots, is_tidytable)
