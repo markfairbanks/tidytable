@@ -80,7 +80,7 @@ test_that("can coerce values with values_ptypes", {
 
 test_that("preserves original keys", {
   df <- data.table(x = 1:2, y = 2, z = 1:2) %>%
-    mutate_across.(everything(), as.double)
+    mutate.(across.(everything(), as.double))
   pivot_df <- pivot_longer.(df, cols = c(y, z))
 
   expect_named(pivot_df, c("x", "name", "value"))
@@ -131,7 +131,7 @@ test_that("stops if given vector", {
 
 test_that("works with select helpers", {
   df <- data.table(x = 1:2, y = 2, z = 1:2) %>%
-    mutate_across.(everything(), as.double)
+    mutate.(across.(everything(), as.double))
   pivot_df <- pivot_longer.(df, cols = c(starts_with("y"), contains("z")))[order(name, value)]
 
   expect_named(pivot_df, c("x", "name", "value"))

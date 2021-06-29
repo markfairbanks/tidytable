@@ -20,7 +20,6 @@ reference:
 - subtitle: Other dplyr functions
 - contents:
   - across.
-  - arrange_across.
   - between.
   - starts_with("bind")
   - c_across.
@@ -37,7 +36,6 @@ reference:
   - ifelse.
   - lags.
   - left_join.
-  - mutate_across.
   - mutate_rowwise.
   - n.
   - n_distinct.
@@ -48,7 +46,6 @@ reference:
   - rename_with.
   - row_number.
   - slice.
-  - summarize_across.
   - transmute.
 
 - title: tidyr

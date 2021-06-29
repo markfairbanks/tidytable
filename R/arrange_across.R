@@ -22,6 +22,8 @@ arrange_across. <- function(.df, .cols = everything(), .fns = NULL) {
 
 #' @export
 arrange_across..data.frame <- function(.df, .cols = everything(), .fns = NULL) {
+  deprecate_old_across("arrange")
+
   .df <- as_tidytable(.df)
   .df <- copy(.df)
 

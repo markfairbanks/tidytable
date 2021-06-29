@@ -48,6 +48,8 @@ mutate_across. <- function(.df, .cols = everything(), .fns = NULL, ...,
 #' @export
 mutate_across..data.frame <- function(.df, .cols = everything(), .fns = NULL, ...,
                                       .by = NULL, .names = NULL) {
+  deprecate_old_across("mutate")
+
   .df <- as_tidytable(.df)
 
   .by <- enquo(.by)
