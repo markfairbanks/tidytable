@@ -69,7 +69,7 @@ separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert =
 
   setcolorder(.df, col_order)
 
-  if (convert) .df <- mutate_across.(.df, c(!!!cols), type.convert, as.is = TRUE)
+  if (convert) .df <- mutate.(.df, across.(c(!!!cols), type.convert, as.is = TRUE))
 
   .df[]
 }

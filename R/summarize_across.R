@@ -56,6 +56,8 @@ summarize_across. <- function(.df, .cols = everything(), .fns = NULL, ...,
 #' @export
 summarize_across..data.frame <- function(.df, .cols = everything(), .fns = NULL, ...,
                                          .by = NULL, .names = NULL) {
+  deprecate_old_across("summarize")
+
   .df <- as_tidytable(.df)
 
   .by <- enquo(.by)
