@@ -3,6 +3,7 @@
 #### Functionality improvements
 * `bind_rows.()`/`bind_cols.()`
   + Can splice lists of data frames using `!!!`
+* `pull.()`: Added a `name` argument
 * `separate.()`: Can omit output columns by using `NA` in `into`
 
 # tidytable 0.6.3

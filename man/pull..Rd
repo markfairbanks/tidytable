@@ -4,7 +4,7 @@
 \alias{pull.}
 \title{Pull out a single variable}
 \usage{
-pull.(.df, var = -1)
+pull.(.df, var = -1, name = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -15,6 +15,8 @@ pull.(.df, var = -1)
 \item a positive integer giving the column position
 \item a negative integer giving the column position counting from the right
 }}
+
+\item{name}{Optional - specifies the column to be used as names for the vector.}
 }
 \description{
 Pull a single variable from a data.table as a vector.

@@ -8,6 +8,7 @@
 #' * a variable name
 #' * a positive integer giving the column position
 #' * a negative integer giving the column position counting from the right
+#' @param name Optional - specifies the column to be used as names for the vector.
 #'
 #' @export
 #'
@@ -28,12 +29,23 @@
 #' # Defaults to last column
 #' test_df %>%
 #'   pull.()
-pull. <- function(.df, var = -1) {
+pull. <- function(.df, var = -1, name = NULL) {
   UseMethod("pull.")
 }
 
 #' @export
-pull..data.frame <- function(.df, var = -1) {
+pull..data.frame <- function(.df, var = -1, name = NULL) {
+  vec <- .pull(.df, {{ var }})
+
+  name <- enquo(name)
+  if (!quo_is_null(name)) {
+    names(vec) <- .pull(.df, !!name)
+  }
+
+  vec
+}
+
+.pull <- function(.df, var) {
   var_list <- as.list(seq_along(.df))
 
   names(var_list) <- names(.df)

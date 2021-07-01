@@ -48,3 +48,14 @@ test_that("can use custom function with quosures", {
 
   expect_equal(test_df$y, result_vec)
 })
+
+test_that("can return a named vector", {
+  test_df <- data.frame(names = letters[1:3], values = 1:3)
+  result_vec <- test_df %>%
+    pull.(values, names)
+
+  expected_vec <- 1:3
+  names(expected_vec) <- letters[1:3]
+
+  expect_equal(expected_vec, result_vec)
+})
