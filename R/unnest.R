@@ -62,12 +62,10 @@ unnest..tidytable <- function(.df,
     dots <- tidyselect_syms(.df, ...)
   }
 
-  keep_cols <- data_names[!list_bool]
-
-  if (!.drop) {
-    list_cols <- data_names[list_bool]
-
-    keep_cols <- c(keep_cols, list_cols[list_cols %notin% as.character(dots)])
+  if (.drop) {
+    keep_cols <- data_names[!list_bool]
+  } else {
+    keep_cols <- data_names[data_names %notin% as.character(dots)]
   }
 
   unnest_data <- map.(dots, ~ unnest_col(.df, .x, names_sep))
@@ -81,9 +79,9 @@ unnest..tidytable <- function(.df,
   # Get number of repeats for keep cols
   rep_vec <- list_sizes(pull.(.df, !!dots[[1]]))
 
-  keep_df <- .df[, ..keep_cols]
+  if (length(keep_cols) > 0) {
+    keep_df <- .df[, ..keep_cols]
 
-  if (ncol(keep_df) > 0) {
     keep_df <- keep_df[vec_rep_each(1:.N, rep_vec)]
 
     result_df <- bind_cols.(keep_df, unnest_data, .name_repair = names_repair)
