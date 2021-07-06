@@ -59,17 +59,19 @@ separate..tidytable <- function(.df, col, into,
 
   not_na_into <- !is.na(into)
 
-  .keep <- seq_along(into)[not_na_into]
+  keep <- seq_along(into)[not_na_into]
   into <- into[not_na_into]
 
-  eval_quo(
-    .df[,
-        (into) :=
-          tstrsplit(
-            !!col, split = sep, fixed = fixed, keep = .keep, type.convert = convert
-          )
-        ]
+  t_str_split <- call2_dt(
+    "tstrsplit", col, split = sep, fixed = fixed,
+    keep = keep, type.convert = convert
   )
+
+  j <- call2(":=", into, t_str_split)
+
+  call <- call2_j(.df, j)
+
+  .df <- eval_tidy(call)
 
   if (remove) .df <- mutate.(.df, !!col := NULL)
 
