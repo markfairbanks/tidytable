@@ -258,26 +258,3 @@ str_separate <- function(x, into, sep, convert = FALSE) {
   out
 }
 
-change_types <- function(.df, .to, .list, .ptypes_transform) {
-  vars <- intersect(.to, names(.list))
-  if (length(vars) > 0) {
-    calls <- vector("list", length(vars))
-    names(calls) <- vars
-    if (.ptypes_transform == "ptypes") {
-      .fn <- "vec_cast"
-      for (i in seq_along(vars)) {
-        calls[[i]] <- call2(.fn, sym(vars[[i]]), .list[[i]])
-      }
-    } else if (.ptypes_transform == "transform") {
-      for (i in seq_along(vars)) {
-        .fn <- as_function(.list[[i]])
-        calls[[i]] <- call2(.fn, sym(vars[[i]]))
-      }
-    } else {
-      abort("Please specify ptypes or transform")
-    }
-    .df <- mutate.(.df, !!!calls)
-  }
-  .df
-}
-
