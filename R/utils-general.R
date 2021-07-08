@@ -98,6 +98,7 @@ args_recycle <- function(args) {
   args
 }
 
+# Restore user defined attributes
 tidytable_restore <- function(x, to) {
   # Make sure auto-index is reset since vec_restore reapplies the original index
   # https://github.com/Rdatatable/data.table/issues/5042
@@ -110,6 +111,31 @@ deprecate_old_across <- function(fn) {
   .details <- glue("Please use `{fn}.(across.())")
 
   deprecate_warn("0.6.4", what = .what, details = .details, id = fn)
+}
+
+# For use in pivot_longer/unnest_longer/unnest_wider
+# Does type changes with either ptype or transform logic
+change_types <- function(.df, .to, .list, .ptypes_transform) {
+  vars <- intersect(.to, names(.list))
+  if (length(vars) > 0) {
+    calls <- vector("list", length(vars))
+    names(calls) <- vars
+    if (.ptypes_transform == "ptypes") {
+      .fn <- "vec_cast"
+      for (i in seq_along(vars)) {
+        calls[[i]] <- call2(.fn, sym(vars[[i]]), .list[[i]])
+      }
+    } else if (.ptypes_transform == "transform") {
+      for (i in seq_along(vars)) {
+        .fn <- as_function(.list[[i]])
+        calls[[i]] <- call2(.fn, sym(vars[[i]]))
+      }
+    } else {
+      abort("Please specify ptypes or transform")
+    }
+    .df <- mutate.(.df, !!!calls)
+  }
+  .df
 }
 
 # deprecated shallow() ------------------------------------------------

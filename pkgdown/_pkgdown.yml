@@ -66,6 +66,8 @@ reference:
   - uncount.
   - unite.
   - unnest.
+  - unnest_longer.
+  - unnest_wider.
 
 - title: purrr
 - contents:
