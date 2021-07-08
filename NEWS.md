@@ -1,5 +1,9 @@
 # tidytable 0.6.4 (in development)
 
+#### New functions
+* `unnest_longer.()`
+* `unnest_wider.()`
+
 #### Functionality improvements
 * `bind_rows.()`/`bind_cols.()`
   + Can splice lists of data frames using `!!!`
