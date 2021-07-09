@@ -13,9 +13,16 @@
 tidytable <- function(..., .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   dots <- dots_list(..., .named = TRUE)
 
-  df <- data_frame(!!!dots, .name_repair = .name_repair)
+  if (length(dots) == 0) {
+    df <- data.table()
+  } else {
+    dots <- map.(dots, ~ if (is_quosure(.x)) eval_tidy(.x) else .x)
+    dots <- dots[!map_lgl.(dots, is.null)]
 
-  setDT(df)
+    df <- vctrs::data_frame(!!!dots, .name_repair = .name_repair)
+
+    setDT(df)
+  }
 
   setattr(df, "class", c("tidytable", "data.table", "data.frame"))
 
