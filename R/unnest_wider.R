@@ -56,11 +56,8 @@ unnest_wider..tidytable <- function(.df, col, names_sep = NULL,
 
     setnames(out, out_names, new_names)
   } else {
-    out <- df_name_repair(out, .name_repair = names_repair)
+    out <- df_name_repair(out, .name_repair = "universal")
   }
-
-  out <- change_types(out, names(out), ptype, "ptypes")
-  out <- change_types(out, names(out), transform, "transform")
 
   .df <- mutate.(.df, !!.col := NULL)
 
@@ -68,7 +65,10 @@ unnest_wider..tidytable <- function(.df, col, names_sep = NULL,
     out <- bind_cols.(.df, out, .name_repair = names_repair)
   }
 
-  df_name_repair(out, .name_repair = "universal")
+  out <- change_types(out, names(out), ptype, "ptypes")
+  out <- change_types(out, names(out), transform, "transform")
+
+  out
 }
 
 #' @export
