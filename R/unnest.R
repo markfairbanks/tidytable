@@ -103,8 +103,8 @@ unnest..data.frame <- function(.df,
 }
 
 unnest_col <- function(.df, col = NULL, names_sep = NULL) {
-  # Check if nested data is a vector
   .l <- pull.(.df, !!col)
+
   .check_data <- .l[[1]]
   is_vec <- is.atomic(.check_data) && !is.matrix(.check_data)
 
@@ -112,7 +112,6 @@ unnest_col <- function(.df, col = NULL, names_sep = NULL) {
     # Use do.call so lists of dates are not unclassed by unlist
     result_df <- tidytable(!!col := do.call("c", .l))
   } else {
-    # bind_rows auto-converts lists of data.frames/tibbles/matrices to data.tables
     result_df <- bind_rows.(.l)
   }
 
