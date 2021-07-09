@@ -61,18 +61,20 @@ unnest_longer..tidytable <- function(.df, col, values_to = NULL, indices_to = NU
     .df <- rename.(.df, !!.values_to := !!.col)
   }
 
-  types_vec <- as.character(c(.values_to, .indices_to))
+  to_vec <- as.character(c(.values_to, .indices_to))
 
   # TODO: Use keep_empty = TRUE when implemented in unnest
   .df <- unnest.(
-    .df, !!.values_to, !!.indices_to,
+    .df, !!!syms(to_vec),
     names_repair = names_repair, .drop = FALSE
   )
 
-  .df <- change_types(.df, types_vec, ptype, "ptypes")
-  .df <- change_types(.df, types_vec, transform, "transform")
+  .df <- df_name_repair(.df, .name_repair = names_repair)
 
-  df_name_repair(.df, .name_repair = names_repair)
+  .df <- change_types(.df, to_vec, ptype, "ptypes")
+  .df <- change_types(.df, to_vec, transform, "transform")
+
+  .df
 }
 
 #' @export
