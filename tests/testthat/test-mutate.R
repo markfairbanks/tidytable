@@ -331,3 +331,12 @@ test_that("can use .before and .after to control column position", {
   df <- tidytable(x = 1, y = 2)
   expect_named(mutate.(df, x = 1, .after = y), c("x", "y"))
 })
+
+test_that("Can use glue, #276", {
+  test_df <- data.table(a = letters[1:3], b = letters[1:3])
+  out <- mutate.(test_df, new = glue("{a}_{b}"))
+  expect_named(out, c("a", "b", "new"))
+  expect_equal(as.character(out$new), c("a_a", "b_b", "c_c"))
+})
+
+
