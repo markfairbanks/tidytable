@@ -7,8 +7,10 @@
 #### Functionality improvements
 * `bind_rows.()`/`bind_cols.()`
   + Can splice lists of data frames using `!!!`
+* `mutate.()`: Can use `glue::glue()` without specifying `.envir`
 * `pull.()`: Added a `name` argument
 * `separate.()`: Can omit output columns by using `NA` in `into`
+* `tidytable.()`: Can splice quosures
 
 # tidytable 0.6.3
 

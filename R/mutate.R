@@ -72,7 +72,7 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
 
   if (quo_is_null(.by)) {
     for (i in seq_along(dots)) {
-      dots_i <- prep_exprs(dots[i], .df, !!.by)
+      dots_i <- prep_exprs(dots[i], .df, !!.by, j = TRUE)
       if (length(dots_i) == 0) next
       dots_i <- exprs_auto_name(dots_i)
       dots_i_names <- names(dots_i)
@@ -95,7 +95,7 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
       }
     }
 
-    dots <- prep_exprs(dots, .df, !!.by)
+    dots <- prep_exprs(dots, .df, !!.by, j = TRUE)
 
     .by <- tidyselect_names(.df, !!.by)
 
@@ -168,7 +168,7 @@ mutate_prep <- function(data, dot, dot_name) {
 
 get_keep_vars <- function(df, dots, .by, .keep = "all") {
   if (is_quosure(.by)) {
-    dots <- prep_exprs(dots, df)
+    dots <- prep_exprs(dots, df, j = TRUE)
     dots <- exprs_auto_name(dots)
     .by <- character()
   }

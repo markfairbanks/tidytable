@@ -2,12 +2,12 @@
 # Allows the use of functions like n() and across.()
 # Replaces these functions with the necessary data.table translations
 # General idea follows dt_squash found here: https://github.com/tidyverse/dtplyr/blob/master/R/tidyeval.R
-prep_exprs <- function(x, data, .by = NULL) {
-  x <- lapply(x, prep_expr, data, {{ .by }})
+prep_exprs <- function(x, data, .by = NULL, j = FALSE) {
+  x <- lapply(x, prep_expr, data, {{ .by }}, j = j)
   squash(x)
 }
 
-prep_expr <- function(x, data, .by = NULL) {
+prep_expr <- function(x, data, .by = NULL, j = j) {
   if (is_quosure(x)) {
     x <- get_expr(x)
   }
@@ -60,6 +60,13 @@ prep_expr <- function(x, data, .by = NULL) {
     dots <- call$...
     call_list <- across_calls(call$.fns, .cols, call$.names, dots)
     prep_exprs(call_list, data, {{ .by }})
+  } else if (is_call(x, "glue") && j) {
+    # Needed so the user doesn't need to specify .envir, #276
+    glue_call <- match.call(glue::glue, x, expand.dots = TRUE)
+    if (is.null(glue_call$.envir)) {
+      glue_call$.envir <- quote(.SD)
+    }
+    glue_call
   } else {
     x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }})
     x
