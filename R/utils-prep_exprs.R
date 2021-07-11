@@ -7,7 +7,7 @@ prep_exprs <- function(x, data, .by = NULL, j = FALSE) {
   squash(x)
 }
 
-prep_expr <- function(x, data, .by = NULL, j = j) {
+prep_expr <- function(x, data, .by = NULL, j = FALSE) {
   if (is_quosure(x)) {
     x <- get_expr(x)
   }
