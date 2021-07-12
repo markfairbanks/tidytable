@@ -50,7 +50,6 @@ unnest_wider..tidytable <- function(.df, col, names_sep = NULL,
   out <- bind_rows.(.l)
 
   if (!is.null(names_sep)) {
-    df_names <- names(.df)
     out_names <- names(out)
     new_names <- paste(as_name(.col), out_names, sep = names_sep)
 
