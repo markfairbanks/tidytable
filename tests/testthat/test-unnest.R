@@ -149,3 +149,23 @@ test_that("works when the only column is a list column", {
 
   expect_equal(result_df$x, rep(1:3, 3))
 })
+
+test_that("keep_empty", {
+  nest_df <- tidytable(x = 1, y = 2)
+
+  test_df <- tidytable(
+    groups = c("a", "b", "c"),
+    df_list = list(NULL, nest_df, nest_df),
+    vecs = list(NULL, 1, 2)
+
+  )
+
+  out <- unnest.(test_df, df_list, vecs, keep_empty = TRUE)
+
+  expect_named(out, c("groups", "x", "y", "vecs"))
+  expect_equal(out$x, c(NA, 1, 1))
+  expect_equal(out$y, c(NA, 2, 2))
+  expect_equal(out$vecs, c(NA, 1, 2))
+})
+
+

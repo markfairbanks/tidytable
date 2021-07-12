@@ -1,15 +1,16 @@
-#' Unnest a nested data.table
+#' Unnest list-columns
 #'
 #' @description
-#' Unnest a nested data.table.
+#' Unnest list-columns.
 #'
-#' @param .df A nested data.table
+#' @param .df A data.table
 #' @param ... Columns to unnest. If empty, unnests all list columns. `tidyselect` compatible.
+#' @param keep_empty Return `NA` for any `NULL` elements of the list column
 #' @param .drop Should list columns that were not unnested be dropped
 #' @param names_sep If NULL, the default, the inner column names will become the new outer column names.
 #'
-#' If a string, the name of the outer column will be appended to the beginning of the inner column names,
-#' with `names_sep` used as a separator.
+#'   If a string, the name of the outer column will be appended to the beginning of the inner column names,
+#'   with `names_sep` used as a separator.
 #'
 #' @param names_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details.
 #'
@@ -36,6 +37,7 @@
 #'   unnest.(data, pulled_vec)
 unnest. <- function(.df,
                     ...,
+                    keep_empty = FALSE,
                     .drop = TRUE,
                     names_sep = NULL,
                     names_repair = "unique") {
@@ -45,6 +47,7 @@ unnest. <- function(.df,
 #' @export
 unnest..tidytable <- function(.df,
                               ...,
+                              keep_empty = FALSE,
                               .drop = TRUE,
                               names_sep = NULL,
                               names_repair = "unique") {
@@ -66,6 +69,10 @@ unnest..tidytable <- function(.df,
     keep_cols <- data_names[!list_bool]
   } else {
     keep_cols <- data_names[data_names %notin% as.character(dots)]
+  }
+
+  if (keep_empty) {
+    .df <- mutate_lapply(.df, as.character(dots), keep_empty_prep)
   }
 
   unnest_data <- map.(dots, ~ unnest_col(.df, .x, names_sep))
@@ -99,13 +106,18 @@ unnest..data.frame <- function(.df,
                                names_sep = NULL,
                                names_repair = "unique") {
   .df <- as_tidytable(.df)
-  unnest.(.df, ..., .drop = .drop, names_sep = names_sep, names_repair = names_repair)
+  unnest.(
+    .df, ..., keep_empty = FALSE, .drop = .drop,
+    names_sep = names_sep, names_repair = names_repair
+  )
 }
 
 unnest_col <- function(.df, col = NULL, names_sep = NULL) {
   .l <- pull.(.df, !!col)
 
-  .check_data <- .l[[1]]
+  null_bool <- map_lgl.(.l, is.null)
+
+  .check_data <- .l[!null_bool][[1]]
   is_vec <- is.atomic(.check_data) && !is.matrix(.check_data)
 
   if (is_vec) {
@@ -120,6 +132,26 @@ unnest_col <- function(.df, col = NULL, names_sep = NULL) {
   }
 
   result_df
+}
+
+keep_empty_prep <- function(.l) {
+  null_bool <- map_lgl.(.l, is.null)
+
+  if (!any(null_bool)) return(.l)
+
+  .check_data <- .l[!null_bool][[1]]
+  is_vec <- is.atomic(.check_data) && !is.matrix(.check_data)
+
+  if (is_vec) {
+    .replace <- NA
+  } else {
+    null_df <- vec_slice(.check_data, 1)
+    vec_slice(null_df, 1) <- NA
+
+    .replace <- list(null_df)
+  }
+
+  replace_na.(.l, .replace)
 }
 
 globalVariables("..keep_cols")

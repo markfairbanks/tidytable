@@ -48,18 +48,14 @@ fill..tidytable <- function(.df, ...,
   with_by <- !quo_is_null(.by)
 
   if (with_by) {
-    .df <- copy(.df)
-
     col_order <- names(.df)
 
     .by <- tidyselect_names(.df, !!.by)
   } else {
-    .df <- shallow(.df)
-
     .by <- character()
   }
 
-  .df[, (select_cols) := lapply(.SD, fill_na, .direction), .SDcols = select_cols, by = .by]
+  .df <- mutate_lapply(.df, select_cols, fill_na, .direction, .by = .by)
 
   if (with_by) setcolorder(.df, col_order)
 

@@ -138,6 +138,20 @@ change_types <- function(.df, .to, .list, .ptypes_transform) {
   .df
 }
 
+# Internal mutate.(across.())
+# Use when you don't want to repeat tidyselect steps
+mutate_lapply <- function(.df, .cols, fn, ..., .by = character()) {
+  if (length(.by) == 0) {
+    .df <- shallow(.df)
+  } else {
+    copy(.df)
+  }
+
+  .df[, (.cols) := map.(.SD, fn, ...), by = .by, .SDcols = .cols]
+
+  .df
+}
+
 # deprecated shallow() ------------------------------------------------
 # shallow <- function(x, cols = names(x), reset_class = FALSE) {
 #   stopifnot(is.data.table(x), all(cols %in% names(x)))

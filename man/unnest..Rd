@@ -2,14 +2,23 @@
 % Please edit documentation in R/unnest.R
 \name{unnest.}
 \alias{unnest.}
-\title{Unnest a nested data.table}
+\title{Unnest list-columns}
 \usage{
-unnest.(.df, ..., .drop = TRUE, names_sep = NULL, names_repair = "unique")
+unnest.(
+  .df,
+  ...,
+  keep_empty = FALSE,
+  .drop = TRUE,
+  names_sep = NULL,
+  names_repair = "unique"
+)
 }
 \arguments{
-\item{.df}{A nested data.table}
+\item{.df}{A data.table}
 
 \item{...}{Columns to unnest. If empty, unnests all list columns. \code{tidyselect} compatible.}
+
+\item{keep_empty}{Return \code{NA} for any \code{NULL} elements of the list column}
 
 \item{.drop}{Should list columns that were not unnested be dropped}
 
@@ -21,7 +30,7 @@ with \code{names_sep} used as a separator.}
 \item{names_repair}{Treatment of duplicate names. See \code{?vctrs::vec_as_names} for options/details.}
 }
 \description{
-Unnest a nested data.table.
+Unnest list-columns.
 }
 \examples{
 nested_df <-
