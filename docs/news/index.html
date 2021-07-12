@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3.9</span>
       </span>
     </div>
 
@@ -136,22 +136,71 @@
       <small>Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="tidytable-063" class="section level1">
-<h1 class="page-header" data-toc-text="0.6.3">
-<a href="#tidytable-063" class="anchor"></a>tidytable 0.6.3<small> Unreleased </small>
+    <div id="tidytable-064-in-development" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.4">
+<a href="#tidytable-064-in-development" class="anchor"></a>tidytable 0.6.4 (in development)<small> Unreleased </small>
 </h1>
 <div id="new-functions" class="section level4">
 <h4 class="hasAnchor">
 <a href="#new-functions" class="anchor"></a>New functions</h4>
+<ul>
+<li><code><a href="../reference/unnest_longer..html">unnest_longer.()</a></code></li>
+<li><code><a href="../reference/unnest_wider..html">unnest_wider.()</a></code></li>
+</ul>
+</div>
+<div id="functionality-improvements" class="section level4">
+<h4 class="hasAnchor">
+<a href="#functionality-improvements" class="anchor"></a>Functionality improvements</h4>
+<ul>
+<li>
+<code><a href="../reference/bind_cols..html">bind_rows.()</a></code>/<code><a href="../reference/bind_cols..html">bind_cols.()</a></code>
+<ul>
+<li>Can splice lists of data frames using <code>!!!</code>
+</li>
+</ul>
+</li>
+<li>
+<code><a href="../reference/mutate..html">mutate.()</a></code>: Can use <code><a href="https://glue.tidyverse.org/reference/glue.html">glue::glue()</a></code> without specifying <code>.envir</code>
+</li>
+<li>
+<code><a href="../reference/pull..html">pull.()</a></code>: Added a <code>name</code> argument</li>
+<li>
+<code><a href="../reference/separate..html">separate.()</a></code>: Can omit output columns by using <code>NA</code> in <code>into</code>
+</li>
+<li>
+<code>tidytable.()</code>: Can splice quosures</li>
+</ul>
+</div>
+<div id="deprecations" class="section level4">
+<h4 class="hasAnchor">
+<a href="#deprecations" class="anchor"></a>Deprecations</h4>
+<ul>
+<li>The following functions have all been deprecated due to the addition of <code><a href="../reference/across..html">across.()</a></code> in v0.6.1
+<ul>
+<li><code><a href="../reference/arrange_across..html">arrange_across.()</a></code></li>
+<li><code><a href="../reference/mutate_across..html">mutate_across.()</a></code></li>
+<li><code><a href="../reference/summarize_across..html">summarize_across.()</a></code></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+    <div id="tidytable-063" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.3">
+<a href="#tidytable-063" class="anchor"></a>tidytable 0.6.3<small> 2021-06-22 </small>
+</h1>
+<div id="new-functions-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#new-functions-1" class="anchor"></a>New functions</h4>
 <ul>
 <li><code><a href="../reference/enframe..html">enframe.()</a></code></li>
 <li><code><a href="../reference/first..html">first.()</a></code></li>
 <li><code><a href="../reference/first..html">last.()</a></code></li>
 </ul>
 </div>
-<div id="functionality-improvements" class="section level4">
+<div id="functionality-improvements-1" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-1" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>Subclasses and attributes are now preserved when using <code>bind_cols</code>, <code>bind_rows</code>, <code>group_split</code>, or joins.</li>
 <li>
@@ -181,9 +230,9 @@
 <h1 class="page-header" data-toc-text="0.6.2">
 <a href="#tidytable-062" class="anchor"></a>tidytable 0.6.2<small> 2021-05-18 </small>
 </h1>
-<div id="new-functions-1" class="section level4">
+<div id="new-functions-2" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-1" class="anchor"></a>New functions</h4>
+<a href="#new-functions-2" class="anchor"></a>New functions</h4>
 <ul>
 <li>
 <code><a href="../reference/cur_group_id..html">cur_group_id.()</a></code>/<code><a href="../reference/cur_group_id..html">cur_group_rows.()</a></code>
@@ -192,9 +241,9 @@
 <li><code><a href="../reference/expand..html">nesting.()</a></code></li>
 </ul>
 </div>
-<div id="functionality-improvements-1" class="section level4">
+<div id="functionality-improvements-2" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-1" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-2" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/mutate..html">mutate.()</a></code>:
@@ -220,17 +269,17 @@
 <h1 class="page-header" data-toc-text="0.6.1">
 <a href="#tidytable-061" class="anchor"></a>tidytable 0.6.1<small> 2021-04-16 </small>
 </h1>
-<div id="new-functions-2" class="section level4">
+<div id="new-functions-3" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-2" class="anchor"></a>New functions</h4>
+<a href="#new-functions-3" class="anchor"></a>New functions</h4>
 <ul>
 <li><code><a href="../reference/across..html">across.()</a></code></li>
 <li><code><a href="../reference/coalesce..html">coalesce.()</a></code></li>
 </ul>
 </div>
-<div id="functionality-improvements-2" class="section level4">
+<div id="functionality-improvements-3" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-2" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-3" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/group_split..html">group_split.()</a></code>: Added a <code>.named</code> argument. If <code>.named = TRUE</code>, the resulting list will have names that indicate the group they are a part of.</li>
@@ -263,18 +312,18 @@
 <h1 class="page-header" data-toc-text="0.6.0">
 <a href="#tidytable-060" class="anchor"></a>tidytable 0.6.0<small> 2021-04-02 </small>
 </h1>
-<div id="new-functions-3" class="section level4">
+<div id="new-functions-4" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-3" class="anchor"></a>New functions</h4>
+<a href="#new-functions-4" class="anchor"></a>New functions</h4>
 <ul>
 <li>
 <code><a href="../reference/if_all..html">if_all.()</a></code>/<code><a href="../reference/if_all..html">if_any.()</a></code>
 </li>
 </ul>
 </div>
-<div id="functionality-improvements-3" class="section level4">
+<div id="functionality-improvements-4" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-3" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-4" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/replace_na..html">replace_na.()</a></code>: Can now replace <code>NULL</code> values in list-columns</li>
@@ -335,16 +384,16 @@
 <h1 class="page-header" data-toc-text="0.5.9">
 <a href="#tidytable-059" class="anchor"></a>tidytable 0.5.9<small> 2021-03-04 </small>
 </h1>
-<div id="new-functions-4" class="section level4">
+<div id="new-functions-5" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-4" class="anchor"></a>New functions</h4>
+<a href="#new-functions-5" class="anchor"></a>New functions</h4>
 <ul>
 <li><code><a href="../reference/between..html">between.()</a></code></li>
 </ul>
 </div>
-<div id="functionality-improvements-4" class="section level4">
+<div id="functionality-improvements-5" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-4" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-5" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/as_tidytable.html">as_tidytable()</a></code>: Gains <code>.name_repair</code> and <code>.keep_rownames</code> args</li>
@@ -384,9 +433,9 @@
 <code><a href="../reference/pivot_wider..html">pivot_wider.()</a></code>: <code>values_fn</code> &amp; <code>values_fill</code> args are no longer the 6th &amp; 7th args</li>
 </ul>
 </div>
-<div id="new-functions-5" class="section level4">
+<div id="new-functions-6" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-5" class="anchor"></a>New functions</h4>
+<a href="#new-functions-6" class="anchor"></a>New functions</h4>
 <ul>
 <li><code><a href="../reference/c_across..html">c_across.()</a></code></li>
 <li><code><a href="../reference/extract..html">extract.()</a></code></li>
@@ -395,9 +444,9 @@
 <li><code><a href="../reference/slice..html">slice_sample.()</a></code></li>
 </ul>
 </div>
-<div id="functionality-improvements-5" class="section level4">
+<div id="functionality-improvements-6" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-5" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-6" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/pivot_longer..html">pivot_longer.()</a></code>
@@ -422,16 +471,16 @@
 <h1 class="page-header" data-toc-text="0.5.7">
 <a href="#tidytable-057" class="anchor"></a>tidytable 0.5.7<small> 2020-12-16 </small>
 </h1>
-<div id="deprecations" class="section level4">
+<div id="deprecations-1" class="section level4">
 <h4 class="hasAnchor">
-<a href="#deprecations" class="anchor"></a>Deprecations</h4>
+<a href="#deprecations-1" class="anchor"></a>Deprecations</h4>
 <ul>
 <li>The <code>dt_verb()</code> versions of functions have been removed from the package. They have been deprecated with warnings since v0.5.2</li>
 </ul>
 </div>
-<div id="functionality-improvements-6" class="section level4">
+<div id="functionality-improvements-7" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-6" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-7" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/crossing..html">crossing.()</a></code>: Now works with data frame inputs (<a href='https://github.com/moutikabdessabour'>@moutikabdessabour</a>, <a href='https://github.com/markfairbanks/tidytable/issues/143'>#143</a>)</li>
@@ -480,9 +529,9 @@
 </li>
 </ul>
 </div>
-<div id="functionality-improvements-7" class="section level4">
+<div id="functionality-improvements-8" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-7" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-8" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/bind_cols..html">bind_cols.()</a></code>: Added <code>.name_repair</code> arg</li>
@@ -499,9 +548,9 @@
 <code><a href="../reference/slice..html">slice.()</a></code>: Can now drop specified rows with negative numbers</li>
 </ul>
 </div>
-<div id="new-functions-6" class="section level4">
+<div id="new-functions-7" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-6" class="anchor"></a>New functions</h4>
+<a href="#new-functions-7" class="anchor"></a>New functions</h4>
 <ul>
 <li><code><a href="../reference/arrange_across..html">arrange_across.()</a></code></li>
 <li>
@@ -520,9 +569,9 @@
 <li><code><a href="../reference/slice..html">slice.()</a></code></li>
 </ul>
 </div>
-<div id="deprecations-1" class="section level4">
+<div id="deprecations-2" class="section level4">
 <h4 class="hasAnchor">
-<a href="#deprecations-1" class="anchor"></a>Deprecations</h4>
+<a href="#deprecations-2" class="anchor"></a>Deprecations</h4>
 <ul>
 <li>
 <code><a href="../reference/unnest..html">unnest.()</a></code>: <code>.keep_all</code> arg changed to <code>.drop</code>
@@ -557,9 +606,9 @@
 <code><a href="../reference/slice..html">slice.()</a></code>: <code>.by</code> must be named when slicing by group</li>
 </ul>
 </div>
-<div id="functionality-improvements-8" class="section level4">
+<div id="functionality-improvements-9" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-8" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-9" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code>tidytable</code> now integrates better with tidyverse functions through <code>vctrs</code>. This means code such as <code>vec_cbind(tibble::tibble(x = 1:3), tidytable(y = "foo"))</code> will bind the results into a tidytable.</li>
@@ -571,9 +620,9 @@
 <code><a href="../reference/slice..html">slice.()</a></code>: Now uses <code>...</code> to select which rows to slice</li>
 </ul>
 </div>
-<div id="new-functions-7" class="section level4">
+<div id="new-functions-8" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-7" class="anchor"></a>New functions</h4>
+<a href="#new-functions-8" class="anchor"></a>New functions</h4>
 <ul>
 <li><code><a href="../reference/left_join..html">semi_join.()</a></code></li>
 </ul>
@@ -605,9 +654,9 @@
 <li>Column names auto-generated by <code><a href="../reference/summarize_across..html">summarize_across.()</a></code> now use a suffix instead of a prefix</li>
 </ul>
 </div>
-<div id="functionality-improvements-9" class="section level4">
+<div id="functionality-improvements-10" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-9" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-10" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/mutate_across..html">mutate_across.()</a></code>: Added <code>.names</code> arg to help with naming newly created columns</li>
@@ -670,9 +719,9 @@
 </li>
 </ul>
 </div>
-<div id="new-functions-8" class="section level4">
+<div id="new-functions-9" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-8" class="anchor"></a>New functions</h4>
+<a href="#new-functions-9" class="anchor"></a>New functions</h4>
 <ul>
 <li><code><a href="../reference/complete..html">complete.()</a></code></li>
 <li><code><a href="../reference/crossing..html">crossing.()</a></code></li>
@@ -681,17 +730,17 @@
 <li><code><a href="../reference/uncount..html">uncount.()</a></code></li>
 </ul>
 </div>
-<div id="functionality-improvements-10" class="section level4">
+<div id="functionality-improvements-11" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-10" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-11" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/replace_na..html">replace_na.()</a></code>: Now works on <code>data.frame</code>/<code>data.table</code> inputs as well as vectors</li>
 </ul>
 </div>
-<div id="deprecations-2" class="section level4">
+<div id="deprecations-3" class="section level4">
 <h4 class="hasAnchor">
-<a href="#deprecations-2" class="anchor"></a>Deprecations</h4>
+<a href="#deprecations-3" class="anchor"></a>Deprecations</h4>
 <ul>
 <li>
 <code><a href="../reference/desc..html">desc.()</a></code> has been deprecated due to incompatibility with character columns</li>
@@ -705,24 +754,24 @@
 <ul>
 <li>This version contains general performance improvements</li>
 </ul>
-<div id="deprecations-3" class="section level4">
+<div id="deprecations-4" class="section level4">
 <h4 class="hasAnchor">
-<a href="#deprecations-3" class="anchor"></a>Deprecations</h4>
+<a href="#deprecations-4" class="anchor"></a>Deprecations</h4>
 <ul>
 <li>Group by arg <code>by</code> has been deprecated for <code>.by</code>. This will allow “by” to be used as a column name in <code><a href="../reference/mutate..html">mutate.()</a></code> &amp; <code><a href="../reference/summarize..html">summarize.()</a></code> in future releases.</li>
 <li>All <code>dt_verb()</code> functions are soft deprecated</li>
 </ul>
 </div>
-<div id="new-functions-9" class="section level4">
+<div id="new-functions-10" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-9" class="anchor"></a>New functions</h4>
+<a href="#new-functions-10" class="anchor"></a>New functions</h4>
 <ul>
 <li><code><a href="../reference/separate_rows..html">separate_rows.()</a></code></li>
 </ul>
 </div>
-<div id="functionality-improvements-11" class="section level4">
+<div id="functionality-improvements-12" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-11" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-12" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/unnest..html">unnest.()</a></code>: Added <code>.keep_all</code> arg to keep all list columns that were not unnested</li>
@@ -733,9 +782,9 @@
 <h1 class="page-header" data-toc-text="0.5.1">
 <a href="#tidytable-051" class="anchor"></a>tidytable 0.5.1<small> 2020-05-29 </small>
 </h1>
-<div id="new-functions-10" class="section level4">
+<div id="new-functions-11" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-10" class="anchor"></a>New functions</h4>
+<a href="#new-functions-11" class="anchor"></a>New functions</h4>
 <ul>
 <li>
 <code><a href="../reference/summarize_across..html">summarize_across.()</a></code> &amp; <code><a href="../reference/summarize_across..html">summarise_across.()</a></code>
@@ -761,17 +810,17 @@
 <code>tidyselect v0.1.1</code> compatibility: Updated functions to use <code>where()</code>
 </li>
 </ul>
-<div id="functionality-improvements-12" class="section level4">
+<div id="functionality-improvements-13" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-12" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-13" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/nest_by..html">nest_by.()</a></code>: Added <code>.keep</code> arg</li>
 </ul>
 </div>
-<div id="deprecations-4" class="section level4">
+<div id="deprecations-5" class="section level4">
 <h4 class="hasAnchor">
-<a href="#deprecations-4" class="anchor"></a>Deprecations</h4>
+<a href="#deprecations-5" class="anchor"></a>Deprecations</h4>
 <ul>
 <li>Old select helpers like <code>everything.()</code> are now replaced by normal helpers like <code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code>
 </li>
@@ -789,9 +838,9 @@
 </li>
 </ul>
 </div>
-<div id="new-functions-11" class="section level4">
+<div id="new-functions-12" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-11" class="anchor"></a>New functions</h4>
+<a href="#new-functions-12" class="anchor"></a>New functions</h4>
 <ul>
 <li>
 <code><a href="../reference/lags..html">lags.()</a></code> &amp; <code><a href="../reference/lags..html">leads.()</a></code>
@@ -825,17 +874,17 @@
 <code><a href="../reference/mutate_across..html">mutate_across.()</a></code>: <code>.funs</code> argument renamed to <code>.fns</code> to match dplyr 1.0</li>
 </ul>
 </div>
-<div id="new-functions-12" class="section level4">
+<div id="new-functions-13" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-12" class="anchor"></a>New functions</h4>
+<a href="#new-functions-13" class="anchor"></a>New functions</h4>
 <ul>
 <li><code><a href="../reference/desc..html">desc.()</a></code></li>
 <li><code><a href="../reference/unite..html">unite.()</a></code></li>
 </ul>
 </div>
-<div id="functionality-improvements-13" class="section level4">
+<div id="functionality-improvements-14" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-13" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-14" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>Paged printing now works in Rmarkdown</li>
 <li>
@@ -893,9 +942,9 @@
 <code>dt_verb()</code> functions still work, but may be slowly deprecated in future releases</li>
 </ul>
 </div>
-<div id="functionality-improvements-14" class="section level4">
+<div id="functionality-improvements-15" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-14" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-15" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>Enhanced selection now works in “by” calls</li>
 <li>
@@ -906,9 +955,9 @@
 <code><a href="../reference/pull..html">pull.()</a></code> defaults to last column in a data.table</li>
 </ul>
 </div>
-<div id="new-functions-13" class="section level4">
+<div id="new-functions-14" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-13" class="anchor"></a>New functions</h4>
+<a href="#new-functions-14" class="anchor"></a>New functions</h4>
 <ul>
 <li><code><a href="../reference/ifelse..html">ifelse.()</a></code></li>
 <li><code><a href="../reference/n..html">n.()</a></code></li>
@@ -947,9 +996,9 @@
 <li>All tidytable functions automatically convert to <code>tidytable</code> class in the background.</li>
 </ul>
 </div>
-<div id="new-functions-14" class="section level4">
+<div id="new-functions-15" class="section level4">
 <h4 class="hasAnchor">
-<a href="#new-functions-14" class="anchor"></a>New functions</h4>
+<a href="#new-functions-15" class="anchor"></a>New functions</h4>
 <ul>
 <li>tidytable constructors:
 <ul>
@@ -994,9 +1043,9 @@
 </li>
 </ul>
 </div>
-<div id="functionality-improvements-15" class="section level4">
+<div id="functionality-improvements-16" class="section level4">
 <h4 class="hasAnchor">
-<a href="#functionality-improvements-15" class="anchor"></a>Functionality improvements</h4>
+<a href="#functionality-improvements-16" class="anchor"></a>Functionality improvements</h4>
 <ul>
 <li>
 <code><a href="../reference/dt.html">dt()</a></code> now automatically converts data.frame input to a data.table</li>

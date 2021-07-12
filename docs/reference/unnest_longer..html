@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Aggregate data using summary statistics — summarize. • tidytable</title>
+<title>Unnest a list-column of vectors into regular columns — unnest_longer. • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +48,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Aggregate data using summary statistics — summarize." />
-<meta property="og:description" content="Aggregate data using summary statistics such as mean or median. Can be calculated by group." />
+<meta property="og:title" content="Unnest a list-column of vectors into regular columns — unnest_longer." />
+<meta property="og:description" content="Turns each element of a list-column into a row." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -133,74 +133,86 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Aggregate data using summary statistics</h1>
-    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/summarize.R'><code>R/summarize.R</code></a></small>
-    <div class="hidden name"><code>summarize..Rd</code></div>
+    <h1>Unnest a list-column of vectors into regular columns</h1>
+    <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/unnest_longer.R'><code>R/unnest_longer.R</code></a></small>
+    <div class="hidden name"><code>unnest_longer..Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Aggregate data using summary statistics such as mean or median. Can be calculated by group.</p>
+    <p>Turns each element of a list-column into a row.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>summarize.</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span>, .by <span class='op'>=</span> <span class='cn'>NULL</span>, .sort <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='fu'>summarise.</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span>, .by <span class='op'>=</span> <span class='cn'>NULL</span>, .sort <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>unnest_longer.</span><span class='op'>(</span>
+  <span class='va'>.df</span>,
+  <span class='va'>col</span>,
+  values_to <span class='op'>=</span> <span class='cn'>NULL</span>,
+  indices_to <span class='op'>=</span> <span class='cn'>NULL</span>,
+  indices_include <span class='op'>=</span> <span class='cn'>NULL</span>,
+  names_repair <span class='op'>=</span> <span class='st'>"check_unique"</span>,
+  simplify <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ptype <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
+  transform <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.df</th>
-      <td><p>A data.frame or data.table</p></td>
+      <td><p>A data.table or data.frame</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Aggregations to perform</p></td>
+      <th>col</th>
+      <td><p>Column to unnest</p></td>
     </tr>
     <tr>
-      <th>.by</th>
-      <td><p>Columns to group by.</p><ul>
-<li><p>A single column can be passed with <code>.by = d</code>.</p></li>
-<li><p>Multiple columns can be passed with <code>.by = c(c, d)</code></p></li>
-<li><p><code>tidyselect</code> can be used:</p><ul>
-<li><p>Single predicate: <code>.by = where(is.character)</code></p></li>
-<li><p>Multiple predicates: <code>.by = c(where(is.character), where(is.factor))</code></p></li>
-<li><p>A combination of predicates and column names: <code>.by = c(where(is.character), b)</code></p></li>
-</ul></li>
-</ul></td>
+      <th>values_to</th>
+      <td><p>Name of column to store values</p></td>
     </tr>
     <tr>
-      <th>.sort</th>
-      <td><p><em>experimental</em>: Should the resulting data.table be sorted by the grouping columns?</p></td>
+      <th>indices_to</th>
+      <td><p>Name of column to store indices</p></td>
+    </tr>
+    <tr>
+      <th>indices_include</th>
+      <td><p>Should an index column be included?
+Defaults to <code>TRUE</code> when <code>col</code> has inner names.</p></td>
+    </tr>
+    <tr>
+      <th>names_repair</th>
+      <td><p>Treatment of duplicate names. See <code><a href='https://vctrs.r-lib.org/reference/vec_as_names.html'>?vctrs::vec_as_names</a></code> for options/details.</p></td>
+    </tr>
+    <tr>
+      <th>simplify</th>
+      <td><p>Currently not supported. Errors if not <code>NULL</code>.</p></td>
+    </tr>
+    <tr>
+      <th>ptype</th>
+      <td><p>Optionally a named list of ptypes declaring the desired output type of each component.</p></td>
+    </tr>
+    <tr>
+      <th>transform</th>
+      <td><p>Optionally a named list of transformation functions applied to each component.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>
-  a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,
-  b <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span>,
-  c <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span><span class='op'>)</span>,
-  d <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tidytable.html'>tidytable</a></span><span class='op'>(</span>
+  x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,
+  y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span>
 <span class='op'>)</span>
 
-<span class='va'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>summarize.</span><span class='op'>(</span>avg_a <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>,
-             max_b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>b</span><span class='op'>)</span>,
-             .by <span class='op'>=</span> <span class='va'>c</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 2 × 3</span>
-#&gt;   c     avg_a max_b
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> a       1.5     5
-#&gt; <span style='color: #BCBCBC;'>2</span> b       3       6</div><div class='input'>
-<span class='va'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>summarize.</span><span class='op'>(</span>avg_a <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>,
-             .by <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>c</span>, <span class='va'>d</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 2 × 3</span>
-#&gt;   c     d     avg_a
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> a     a       1.5
-#&gt; <span style='color: #BCBCBC;'>2</span> b     b       3  </div></pre>
+<span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>unnest_longer.</span><span class='op'>(</span><span class='va'>y</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 6 × 2</span>
+#&gt;       x     y
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     1     0
+#&gt; <span style='color: #BCBCBC;'>2</span>     2     1
+#&gt; <span style='color: #BCBCBC;'>3</span>     2     2
+#&gt; <span style='color: #BCBCBC;'>4</span>     2     3
+#&gt; <span style='color: #BCBCBC;'>5</span>     3     4
+#&gt; <span style='color: #BCBCBC;'>6</span>     3     5</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

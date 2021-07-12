@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3.9</span>
       </span>
     </div>
 
@@ -165,26 +165,26 @@
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>mutate_rowwise.</span><span class='op'>(</span>row_mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>z</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 6 × 4</span>
-#&gt;        x     y     z row_mean
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> 0.372  0.560 0.290    0.407
-#&gt; <span style='color: #BCBCBC;'>2</span> 0.028<span style='text-decoration: underline;'>1</span> 0.857 0.480    0.455
-#&gt; <span style='color: #BCBCBC;'>3</span> 0.466  0.385 0.920    0.590
-#&gt; <span style='color: #BCBCBC;'>4</span> 0.390  0.528 0.401    0.440
-#&gt; <span style='color: #BCBCBC;'>5</span> 0.020<span style='text-decoration: underline;'>1</span> 0.601 0.213    0.278
-#&gt; <span style='color: #BCBCBC;'>6</span> 0.377  0.261 0.672    0.437</div><div class='input'>
+#&gt;       x      y     z row_mean
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> 0.706 0.642  0.971    0.773
+#&gt; <span style='color: #BCBCBC;'>2</span> 0.949 0.660  0.389    0.666
+#&gt; <span style='color: #BCBCBC;'>3</span> 0.180 0.096<span style='text-decoration: underline;'>0</span> 0.461    0.246
+#&gt; <span style='color: #BCBCBC;'>4</span> 0.217 0.766  0.315    0.433
+#&gt; <span style='color: #BCBCBC;'>5</span> 0.680 0.770  0.175    0.542
+#&gt; <span style='color: #BCBCBC;'>6</span> 0.499 0.991  0.532    0.674</div><div class='input'>
 <span class='co'># Use c_across.() to more easily select many variables</span>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>mutate_rowwise.</span><span class='op'>(</span>row_mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='fu'><a href='c_across..html'>c_across.</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>:</span><span class='va'>z</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 6 × 4</span>
-#&gt;        x     y     z row_mean
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> 0.372  0.560 0.290    0.407
-#&gt; <span style='color: #BCBCBC;'>2</span> 0.028<span style='text-decoration: underline;'>1</span> 0.857 0.480    0.455
-#&gt; <span style='color: #BCBCBC;'>3</span> 0.466  0.385 0.920    0.590
-#&gt; <span style='color: #BCBCBC;'>4</span> 0.390  0.528 0.401    0.440
-#&gt; <span style='color: #BCBCBC;'>5</span> 0.020<span style='text-decoration: underline;'>1</span> 0.601 0.213    0.278
-#&gt; <span style='color: #BCBCBC;'>6</span> 0.377  0.261 0.672    0.437</div></pre>
+#&gt;       x      y     z row_mean
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> 0.706 0.642  0.971    0.773
+#&gt; <span style='color: #BCBCBC;'>2</span> 0.949 0.660  0.389    0.666
+#&gt; <span style='color: #BCBCBC;'>3</span> 0.180 0.096<span style='text-decoration: underline;'>0</span> 0.461    0.246
+#&gt; <span style='color: #BCBCBC;'>4</span> 0.217 0.766  0.315    0.433
+#&gt; <span style='color: #BCBCBC;'>5</span> 0.680 0.770  0.175    0.542
+#&gt; <span style='color: #BCBCBC;'>6</span> 0.499 0.991  0.532    0.674</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

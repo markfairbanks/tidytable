@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3.9</span>
       </span>
     </div>
 
@@ -149,7 +149,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A numeric vector of values</p></td>
+      <td><p>A numeric vector</p></td>
     </tr>
     <tr>
       <th>left, right</th>
@@ -159,31 +159,37 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>between.</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='fl'>5</span>, <span class='fl'>7</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE</div><div class='input'>
-<span class='va'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>
-  x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>10</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,
-  y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>10</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>test_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>
+  x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>,
+  y <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>
 <span class='op'>)</span>
 
 <span class='co'># Typically used in a filter.()</span>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='filter..html'>filter.</a></span><span class='op'>(</span><span class='fu'>between.</span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='fu'><a href='filter..html'>filter.</a></span><span class='op'>(</span><span class='fu'>between.</span><span class='op'>(</span><span class='va'>x</span>, <span class='fl'>2</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 2</span>
 #&gt;       x     y
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>     1     5
-#&gt; <span style='color: #BCBCBC;'>2</span>     2     3
-#&gt; <span style='color: #BCBCBC;'>3</span>     3     1</div><div class='input'>
+#&gt; <span style='color: #BCBCBC;'>1</span>     2     2
+#&gt; <span style='color: #BCBCBC;'>2</span>     3     3
+#&gt; <span style='color: #BCBCBC;'>3</span>     4     4</div><div class='input'>
+<span class='va'>test_df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='filter..html'>filter.</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>%&gt;%</span> <span class='fu'>between.</span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 2</span>
+#&gt;       x     y
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     2     2
+#&gt; <span style='color: #BCBCBC;'>2</span>     3     3
+#&gt; <span style='color: #BCBCBC;'>3</span>     4     4</div><div class='input'>
 <span class='co'># Can also use the %between% operator</span>
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='filter..html'>filter.</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>%between%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='fu'><a href='filter..html'>filter.</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>%between%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 2</span>
 #&gt;       x     y
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>     1     5
-#&gt; <span style='color: #BCBCBC;'>2</span>     2     3
-#&gt; <span style='color: #BCBCBC;'>3</span>     3     1</div></pre>
+#&gt; <span style='color: #BCBCBC;'>1</span>     2     2
+#&gt; <span style='color: #BCBCBC;'>2</span>     3     3
+#&gt; <span style='color: #BCBCBC;'>3</span>     4     4</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

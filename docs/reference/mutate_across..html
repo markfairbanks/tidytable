@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3.9</span>
       </span>
     </div>
 
@@ -193,7 +193,8 @@ when a list is used for <code>.fns</code>.</p></td>
 
 <span class='va'>test_df</span> <span class='op'>%&gt;%</span>
   <span class='fu'>mutate_across.</span><span class='op'>(</span><span class='fu'>where</span><span class='op'>(</span><span class='va'>is.numeric</span><span class='op'>)</span>, <span class='va'>as.character</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 3</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: `mutate_across.()` was deprecated in tidytable 0.6.4.</span>
+#&gt; <span class='warning'>Please use `mutate.(across.())</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tidytable: 3 × 3</span>
 #&gt;   x     y     z    
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> 1     2     a    
