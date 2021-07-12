@@ -12,6 +12,13 @@
 * `separate.()`: Can omit output columns by using `NA` in `into`
 * `tidytable.()`: Can splice quosures
 
+#### Deprecations
+* The following functions have all been deprecated due to the addition of
+  `across.()` in v0.6.1
+  + `arrange_across.()`
+  + `mutate_across.()`
+  + `summarize_across.()`
+
 # tidytable 0.6.3
 
 #### New functions
