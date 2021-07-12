@@ -11,6 +11,7 @@
 * `pull.()`: Added a `name` argument
 * `separate.()`: Can omit output columns by using `NA` in `into`
 * `tidytable.()`: Can splice quosures
+* `unnest.()`: Added `keep_empty` arg
 
 #### Deprecations
 * The following functions have all been deprecated due to the addition of
