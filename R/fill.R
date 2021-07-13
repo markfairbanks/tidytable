@@ -39,8 +39,6 @@ fill. <- function(.df, ...,
 fill..tidytable <- function(.df, ...,
                             .direction = c("down", "up", "downup", "updown"),
                             .by = NULL) {
-  .by <- enquo(.by)
-
   .direction <- arg_match(.direction)
 
   dots <- enquos(...)
