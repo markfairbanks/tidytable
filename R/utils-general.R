@@ -4,12 +4,12 @@ shallow <- function(x) {
   x[TRUE]
 }
 
-# Create a call to data.table subset "[" (i position)
+# Create a call to "[.data.table" (i position)
 call2_i <- function(data, i = NULL) {
   call2("[", data, i)
 }
 
-# Create a call to data.table subset "[" (j position)
+# Create a call to "[.data.table" (j position)
 call2_j <- function(data, j = NULL, .by = NULL, ...) {
   dt_expr <- call2("[", data, , j, by = .by, ...)
   call2("[", dt_expr)
@@ -113,8 +113,8 @@ deprecate_old_across <- function(fn) {
   deprecate_warn("0.6.4", what = .what, details = .details, id = fn)
 }
 
-# For use in pivot_longer/unnest_longer/unnest_wider
 # Does type changes with either ptype or transform logic
+# For use in pivot_longer/unnest_longer/unnest_wider
 change_types <- function(.df, .to, .list, .ptypes_transform) {
   vars <- intersect(.to, names(.list))
   if (length(vars) > 0) {
@@ -140,6 +140,7 @@ change_types <- function(.df, .to, .list, .ptypes_transform) {
 
 # Internal mutate.(across.())
 # Use when you don't want to repeat tidyselect steps
+# .cols and .by should be character vectors
 mutate_lapply <- function(.df, .cols, fn, ..., .by = character()) {
   if (length(.by) == 0) {
     .df <- shallow(.df)
