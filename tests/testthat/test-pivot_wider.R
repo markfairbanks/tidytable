@@ -163,7 +163,7 @@ test_that("can pivot all cols to wide with quosure function", {
 })
 
 test_that("can fill in missing cells", {
-  df <- tidytable(g = c(1, 2), var = c("x", "y"), val = c(1, 2))
+  df <- data.table(g = c(1, 2), var = c("x", "y"), val = c(1, 2))
 
   widen <- function(...) {
     df %>% pivot_wider.(names_from = var, values_from = val, ...)

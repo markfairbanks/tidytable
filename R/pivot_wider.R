@@ -165,7 +165,7 @@ pivot_wider..data.frame <- function(.df,
     id_cols = {{ id_cols }}, names_sep = names_sep,
     names_prefix = names_prefix, names_glue = names_glue,
     names_sort = names_sort, names_repair = names_repair,
-    values_fill = !!enexpr(values_fill), values_fn = !!enexpr(values_fn)
+    values_fill = {{ values_fill }}, values_fn = {{ values_fn }}
   )
 }
 
