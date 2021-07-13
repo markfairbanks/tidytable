@@ -27,8 +27,6 @@ separate_rows. <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
 
 #' @export
 separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
-  .df <- shallow(.df)
-
   vec_assert(sep, character(), 1)
   vec_assert(convert, logical(), 1)
 
@@ -41,7 +39,7 @@ separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert =
 
   cols <- tidyselect_syms(.df, !!!dots)
 
-  .df[ , .id := .I]
+  .df <- mutate.(.df, .separate_id = .I)
 
   col_names <- as.character(cols)
   other_col_names <- setdiff(names(.df), col_names)
@@ -65,11 +63,11 @@ separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert =
 
   .df <- eval_tidy(dt_expr, env = dt_env)
 
-  .df[ , .id := NULL]
+  .df <- mutate.(.df, .separate_id = NULL)
 
   setcolorder(.df, col_order)
 
-  if (convert) .df <- mutate.(.df, across.(c(!!!cols), type.convert, as.is = TRUE))
+  if (convert) .df <- mutate_lapply(.df, col_names, type.convert, as.is = TRUE)
 
   .df[]
 }
