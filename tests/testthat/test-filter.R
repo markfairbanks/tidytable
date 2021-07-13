@@ -111,3 +111,9 @@ test_that("properly passes quosure environment", {
   expect_equal(result_list[[2]], tidytable(x = 1:2))
 })
 
+test_that("errors on named inputs", {
+  df <- data.table(x = 1:5)
+
+  expect_error(filter.(.df, x = 4))
+})
+
