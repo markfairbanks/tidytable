@@ -43,23 +43,9 @@ fill..tidytable <- function(.df, ...,
 
   .direction <- arg_match(.direction)
 
-  select_cols <- tidyselect_names(.df, ...)
+  dots <- enquos(...)
 
-  with_by <- !quo_is_null(.by)
-
-  if (with_by) {
-    col_order <- names(.df)
-
-    .by <- tidyselect_names(.df, !!.by)
-  } else {
-    .by <- character()
-  }
-
-  .df <- mutate_lapply(.df, select_cols, fill_na, .direction, .by = .by)
-
-  if (with_by) setcolorder(.df, col_order)
-
-  .df[]
+  mutate.(.df, across.(c(!!!dots), fill_na, .direction), .by = {{ .by }})
 }
 
 #' @export
