@@ -122,16 +122,17 @@ pivot_wider..tidytable <- function(.df,
 
   dcast_form <- paste(lhs, rhs, sep = " ~ ")
 
-  .df <- eval_quo(
-    dcast(
-      .df,
-      formula = dcast_form,
-      value.var = values_from,
-      fun.aggregate = !!values_fn,
-      sep = names_sep,
-      fill = !!values_fill
-    )
+  dcast_call <- call2_dt(
+    "dcast",
+    .df,
+    formula = dcast_form,
+    value.var = values_from,
+    fun.aggregate = expr(!!values_fn),
+    sep = names_sep,
+    fill = expr(!!values_fill)
   )
+
+  .df <- eval_tidy(dcast_call)
 
   if (no_id) .df[, . := NULL]
 
