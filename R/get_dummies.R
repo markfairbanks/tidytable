@@ -72,7 +72,6 @@ get_dummies..tidytable <- function(.df,
   ordered_cols <- character()
 
   for (col in cols) {
-
     col_name <- as.character(col)
 
     if (drop_first) {
@@ -89,7 +88,7 @@ get_dummies..tidytable <- function(.df,
     }
 
     if (prefix) {
-      new_names <- str_c.(col_name, unique_vals, sep = prefix_sep)
+      new_names <- paste(col_name, unique_vals, sep = prefix_sep)
     } else {
       new_names <- unique_vals
     }
@@ -98,22 +97,20 @@ get_dummies..tidytable <- function(.df,
     not_na_cols <- new_names[unique_vals != "NA"]
     unique_vals <- unique_vals[unique_vals != "NA"]
 
+    dummy_calls <- vector("list", length(unique_vals))
+    names(dummy_calls) <- not_na_cols
     for (i in seq_along(unique_vals)) {
-      not_na_col <- not_na_cols[i]
-      eval_quo(
-        .df[, (not_na_col) := ifelse.(!!col == unique_vals[i], 1L, 0L, 0L)]
-      )
+      dummy_calls[[i]] <- expr(ifelse.(!!col == !!unique_vals[i], 1L, 0L, 0L))
     }
+
+    .df <- mutate.(.df, !!!dummy_calls)
 
     # Since the prior step doesn't recognize NA as a character,
     # an extra step is needed to flag NA vals
     if (dummify_na) {
-      na_col <- new_names[!new_names %in% not_na_cols]
-
+      na_col <- new_names[new_names %notin% not_na_cols]
       if (length(na_col) > 0) {
-        eval_quo(
-          .df[, (na_col) := as.integer(is.na(!!col))]
-        )
+        .df <- mutate.(.df, !!na_col := as.integer(is.na(!!col)))
       }
     }
 
