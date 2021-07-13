@@ -32,6 +32,8 @@ filter..tidytable <- function(.df, ..., .by = NULL) {
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
 
+  check_filter(dots)
+
   dt_env <- get_dt_env(dots)
 
   dots <- prep_exprs(dots, .df, !!.by)
@@ -61,4 +63,23 @@ filter..tidytable <- function(.df, ..., .by = NULL) {
 filter..data.frame <- function(.df, ..., .by = NULL) {
   .df <- as_tidytable(.df)
   filter.(.df, ..., .by = {{ .by }})
+}
+
+check_filter <- function(dots) {
+  named_bool <- have_name(dots)
+
+  if (any(named_bool)) {
+    named_dots <- dots[named_bool]
+
+    i <- which(named_bool)[[1]]
+    dot <- as_label(quo_get_expr(named_dots[[1]]))
+    dot_name <- names(named_dots[1])
+
+    abort(c(
+      glue("Problem with `filter.()` input `..{i}`."),
+      x = glue("Input `..{i}` is named."),
+      i = glue("This usually means that you've used `=` instead of `==`."),
+      i = glue("Did you mean `{dot_name} == {dot}`?")
+    ))
+  }
 }
