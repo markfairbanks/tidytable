@@ -102,12 +102,13 @@ unnest..tidytable <- function(.df,
 #' @export
 unnest..data.frame <- function(.df,
                                ...,
+                               keep_empty = FALSE,
                                .drop = TRUE,
                                names_sep = NULL,
                                names_repair = "unique") {
   .df <- as_tidytable(.df)
   unnest.(
-    .df, ..., keep_empty = FALSE, .drop = .drop,
+    .df, ..., keep_empty = keep_empty, .drop = .drop,
     names_sep = names_sep, names_repair = names_repair
   )
 }
