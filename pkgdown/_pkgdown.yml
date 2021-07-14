@@ -6,7 +6,6 @@ reference:
 - contents:
   - case.
   - dt
-  - get_dummies.
   - '%notin%'
 
 - title: dplyr

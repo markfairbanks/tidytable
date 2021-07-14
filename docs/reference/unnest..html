@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Unnest a nested data.table — unnest. • tidytable</title>
+<title>Unnest list-columns — unnest. • tidytable</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +48,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Unnest a nested data.table — unnest." />
-<meta property="og:description" content="Unnest a nested data.table." />
+<meta property="og:title" content="Unnest list-columns — unnest." />
+<meta property="og:description" content="Unnest list-columns." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -133,27 +133,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Unnest a nested data.table</h1>
+    <h1>Unnest list-columns</h1>
     <small class="dont-index">Source: <a href='https://github.com/markfairbanks/tidytable/blob/master/R/unnest.R'><code>R/unnest.R</code></a></small>
     <div class="hidden name"><code>unnest..Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Unnest a nested data.table.</p>
+    <p>Unnest list-columns.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>unnest.</span><span class='op'>(</span><span class='va'>.df</span>, <span class='va'>...</span>, .drop <span class='op'>=</span> <span class='cn'>TRUE</span>, names_sep <span class='op'>=</span> <span class='cn'>NULL</span>, names_repair <span class='op'>=</span> <span class='st'>"unique"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>unnest.</span><span class='op'>(</span>
+  <span class='va'>.df</span>,
+  <span class='va'>...</span>,
+  keep_empty <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  .drop <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  names_sep <span class='op'>=</span> <span class='cn'>NULL</span>,
+  names_repair <span class='op'>=</span> <span class='st'>"unique"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.df</th>
-      <td><p>A nested data.table</p></td>
+      <td><p>A data.table</p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>Columns to unnest. If empty, unnests all list columns. <code>tidyselect</code> compatible.</p></td>
+    </tr>
+    <tr>
+      <th>keep_empty</th>
+      <td><p>Return <code>NA</code> for any <code>NULL</code> elements of the list column</p></td>
     </tr>
     <tr>
       <th>.drop</th>
