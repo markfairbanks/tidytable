@@ -10,7 +10,7 @@
 * `mutate.()`: Can use `glue::glue()` without specifying `.envir`
 * `pull.()`: Added a `name` argument
 * `separate.()`: Can omit output columns by using `NA` in `into`
-* `tidytable.()`: Can splice quosures
+* `tidytable()`: Can splice quosures
 * `unnest.()`: Added `keep_empty` arg
 
 #### Deprecations

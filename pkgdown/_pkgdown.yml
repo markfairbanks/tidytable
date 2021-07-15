@@ -4,7 +4,6 @@ template:
 reference:
 - title: tidytable helpers
 - contents:
-  - case.
   - dt
   - '%notin%'
 
