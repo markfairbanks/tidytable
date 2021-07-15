@@ -21,12 +21,12 @@ pivot_wider.(
 \arguments{
 \item{.df}{A data.frame or data.table}
 
-\item{names_from}{A pair of arguments describing which column (or columns) to get the name of the output column (\code{name_from}),
-and which column (or columns) to get the cell values from (\code{values_from}).
+\item{names_from}{A pair of arguments describing which column (or columns) to get the name of the output column \code{name_from},
+and which column (or columns) to get the cell values from \code{values_from}).
 \code{tidyselect} compatible.}
 
-\item{values_from}{A pair of arguments describing which column (or columns) to get the name of the output column (\code{name_from}),
-and which column (or columns) to get the cell values from (\code{values_from}).
+\item{values_from}{A pair of arguments describing which column (or columns) to get the name of the output column \code{name_from},
+and which column (or columns) to get the cell values from \code{values_from}.
 \code{tidyselect} compatible.}
 
 \item{id_cols}{A set of columns that uniquely identifies each observation.
@@ -50,7 +50,7 @@ glue specification that uses the \code{names_from} columns (and special \code{.v
 \item{values_fn}{Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.}
 }
 \description{
-\code{pivot_wider.()} "widens" data, increasing the number of columns and
+"Widens" data, increasing the number of columns and
 decreasing the number of rows.
 }
 \examples{
@@ -67,5 +67,4 @@ test_df \%>\%
   pivot_wider.(
     names_from = b, values_from = vals, names_prefix = "new_"
   )
-
 }

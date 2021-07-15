@@ -1,24 +1,23 @@
 #' Pivot data from long to wide
 #'
-#' @description
-#' `pivot_wider.()` "widens" data, increasing the number of columns and
-#' decreasing the number of rows.
+#' @description "Widens" data, increasing the number of columns and
+#'   decreasing the number of rows.
 #'
 #' @param .df A data.frame or data.table
 #' @param id_cols A set of columns that uniquely identifies each observation.
-#' Defaults to all columns in the data table except for the columns specified in \code{names_from} and \code{values_from}.
-#' Typically used when you have additional variables that is directly related.
-#' `tidyselect` compatible.
-#' @param names_from A pair of arguments describing which column (or columns) to get the name of the output column (\code{name_from}),
-#' and which column (or columns) to get the cell values from (\code{values_from}).
-#' `tidyselect` compatible.
-#' @param values_from A pair of arguments describing which column (or columns) to get the name of the output column (\code{name_from}),
-#' and which column (or columns) to get the cell values from (\code{values_from}).
-#' `tidyselect` compatible.
+#'   Defaults to all columns in the data table except for the columns specified in `names_from` and `values_from`.
+#'   Typically used when you have additional variables that is directly related.
+#'   `tidyselect` compatible.
+#' @param names_from A pair of arguments describing which column (or columns) to get the name of the output column `name_from`,
+#'   and which column (or columns) to get the cell values from `values_from`).
+#'   `tidyselect` compatible.
+#' @param values_from A pair of arguments describing which column (or columns) to get the name of the output column `name_from`,
+#'   and which column (or columns) to get the cell values from `values_from`.
+#'   `tidyselect` compatible.
 #' @param names_sep the separator between the names of the columns
 #' @param names_prefix prefix to add to the names of the new columns
 #' @param names_glue Instead of using `names_sep` and `names_prefix`, you can supply a
-#' glue specification that uses the `names_from` columns (and special `.value`) to create custom column names
+#'   glue specification that uses the `names_from` columns (and special `.value`) to create custom column names
 #' @param names_sort Should the resulting new columns be sorted
 #' @param names_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details.
 #' @param values_fn Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.
@@ -38,7 +37,6 @@
 #'   pivot_wider.(
 #'     names_from = b, values_from = vals, names_prefix = "new_"
 #'   )
-#'
 #' @export
 pivot_wider. <- function(.df,
                          names_from = name,
@@ -68,7 +66,6 @@ pivot_wider..tidytable <- function(.df,
                                   values_fn = NULL) {
   id_cols <- enquo(id_cols)
   values_fn <- enquo(values_fn)
-  values_fill <- enquo(values_fill)
 
   names_from <- tidyselect_names(.df, {{ names_from }})
   values_from <- tidyselect_names(.df, {{ values_from }})
@@ -129,7 +126,7 @@ pivot_wider..tidytable <- function(.df,
     value.var = values_from,
     fun.aggregate = expr(!!values_fn),
     sep = names_sep,
-    fill = expr(!!values_fill)
+    fill = values_fill
   )
 
   .df <- eval_tidy(dcast_call)
@@ -165,7 +162,7 @@ pivot_wider..data.frame <- function(.df,
     id_cols = {{ id_cols }}, names_sep = names_sep,
     names_prefix = names_prefix, names_glue = names_glue,
     names_sort = names_sort, names_repair = names_repair,
-    values_fill = {{ values_fill }}, values_fn = {{ values_fn }}
+    values_fill = values_fill, values_fn = {{ values_fn }}
   )
 }
 
