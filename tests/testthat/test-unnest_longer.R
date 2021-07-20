@@ -21,15 +21,14 @@ test_that("can force integer indexes", {
   expect_named(out, c("x", "y", "y2"))
 })
 
-# # Add back in when NULLs can be handled
-# test_that("preserves empty rows", {
-#   df <- tibble(
-#     x = 1:3,
-#     y = list(NULL, NULL, 1)
-#   )
-#   out <- df %>% unnest_longer(y)
-#   expect_equal(nrow(out), 3)
-# })
+test_that("preserves empty rows", {
+  df <- tidytable(
+    x = 1:3,
+    y = list(NULL, NULL, 1)
+  )
+  out <- df %>% unnest_longer.(y)
+  expect_equal(nrow(out), 3)
+})
 
 # test_that("can handle data frames consistently with vectors" , {
 #   df <- tibble(x = 1:2, y = list(tibble(a = 1:2, b = 2:3)))
