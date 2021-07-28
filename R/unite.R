@@ -58,9 +58,7 @@ unite..tidytable <- function(.df, col = "new_col", ..., sep = "_", remove = TRUE
 
     .df <- mutate.(.df, !!col := .united)
   } else {
-    .df <- shallow(.df)
-
-    .df[, (col) := do.call(paste, c(.SD, sep = sep)), .SDcols = unite_cols]
+    .df <- mutate.(.df, !!col := paste(!!!syms(unite_cols), sep = sep))
   }
 
   if (remove) .df <- .df[, -..unite_cols]
