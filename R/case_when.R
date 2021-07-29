@@ -24,7 +24,7 @@ case_when. <- function(...) {
   if (dots_length == 0) abort("No cases provided.")
 
   # Extract default value
-  default_bool <- map_lgl.(dots, ~ isTRUE(f_lhs(.x)))
+  default_bool <- map_lgl.(dots, ~ is_true(f_lhs(.x)))
 
   if (all(default_bool == FALSE)) default_val <- TRUE ~ NA
   else default_val <- dots[default_bool][[1]]
