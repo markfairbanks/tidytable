@@ -4,7 +4,14 @@
 \alias{mutate.}
 \title{Add/modify/delete columns}
 \usage{
-mutate.(.df, ..., .by = NULL, .keep = "all", .before = NULL, .after = NULL)
+mutate.(
+  .df,
+  ...,
+  .by = NULL,
+  .keep = c("all", "used", "unused", "none"),
+  .before = NULL,
+  .after = NULL
+)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}

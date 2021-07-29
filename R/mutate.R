@@ -46,13 +46,15 @@
 #' test_df %>%
 #'   mutate.(double_a = a * 2, .after = a)
 mutate. <- function(.df, ..., .by = NULL,
-                    .keep = "all", .before = NULL, .after = NULL) {
+                    .keep = c("all", "used", "unused", "none"),
+                    .before = NULL, .after = NULL) {
   UseMethod("mutate.")
 }
 
 #' @export
 mutate..tidytable <- function(.df, ..., .by = NULL,
-                              .keep = "all", .before = NULL, .after = NULL) {
+                              .keep = c("all", "used", "unused", "none"),
+                              .before = NULL, .after = NULL) {
   .df <- shallow(.df)
 
   .by <- enquo(.by)
@@ -138,6 +140,7 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
     .df <- relocate.(.df, !!!syms(new_names), .before = !!.before, .after = !!.after)
   }
 
+  .keep <- arg_match(.keep)
   if (.keep != "all") {
     keep <- get_keep_vars(.df, dots, .by, .keep)
     .df <- .df[, ..keep]
@@ -148,7 +151,8 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
 
 #' @export
 mutate..data.frame <- function(.df, ..., .by = NULL,
-                               .keep = "all", .before = NULL, .after = NULL) {
+                               .keep = c("all", "used", "unused", "none"),
+                               .before = NULL, .after = NULL) {
   .df <- as_tidytable(.df)
   mutate.(
     .df, ..., .by = {{ .by }}, .keep = .keep,
