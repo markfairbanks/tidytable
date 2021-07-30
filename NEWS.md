@@ -1,4 +1,4 @@
-# tidytable 0.6.4 (in development)
+# tidytable 0.6.4
 
 #### New functions
 * `unnest_longer.()`

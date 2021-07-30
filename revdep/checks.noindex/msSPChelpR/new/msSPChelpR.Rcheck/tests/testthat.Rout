@@ -19,8 +19,33 @@ Type 'q()' to quit R.
 > library(msSPChelpR)
 > 
 > test_check("msSPChelpR")
-[ FAIL 0 | WARN 0 | SKIP 0 | PASS 1 ]
+# A tibble: 11 x 3
+   p_alive.1 other_var_name     n
+   <chr>              <dbl> <int>
+ 1 Alive                  1 15884
+ 2 Alive                  2 17609
+ 3 Alive                 97    19
+ 4 Alive                 98  2488
+ 5 Dead                   1  2544
+ 6 Dead                   2  2147
+ 7 Dead                   3 18358
+ 8 Dead                   4  8822
+ 9 Dead                  97     2
+10 Dead                  98   182
+11 Dead                  NA     5
+# A tibble: 7 x 2
+  other_var_name     n
+           <dbl> <int>
+1              1 18428
+2              2 19756
+3              3 18358
+4              4  8822
+5             97    21
+6             98  2670
+7             NA     5
+Long dataset had too many cases per patient. Wide dataset is limited to  2  cases per id as defined in timevar_max option.
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 4 ]
 > 
 > proc.time()
    user  system elapsed 
-  0.446   0.082   0.616 
+  2.387   0.209   2.684 

@@ -487,6 +487,37 @@ msSPChelpR::reshape_long_tidyr(usdata_wide_sample,
 
 
 cleanEx()
+nameEx("reshape_long_tt")
+### * reshape_long_tt
+
+flush(stderr()); flush(stdout())
+
+### Name: reshape_long_tt
+### Title: Reshape dataset to wide format - tidytable version
+### Aliases: reshape_long_tt
+
+### ** Examples
+
+
+data(us_second_cancer)
+
+#prep step - reshape wide a sample of 10000 rows from us_second_cancer
+usdata_wide_sample <- msSPChelpR::reshape_wide(us_second_cancer,
+                         case_id_var = "fake_id", 
+                         time_id_var = "SEQ_NUM", 
+                         timevar_max = 2,
+                         datsize = 10000)
+
+#now we can reshape long again
+msSPChelpR::reshape_long_tt(usdata_wide_sample,
+                         case_id_var = "fake_id", 
+                         time_id_var = "SEQ_NUM")
+
+
+
+
+
+cleanEx()
 nameEx("reshape_wide")
 ### * reshape_wide
 
@@ -594,6 +625,43 @@ flush(stderr()); flush(stdout())
 ##D         
 ## End(Not run)
 
+
+
+
+cleanEx()
+nameEx("sir_ratio")
+### * sir_ratio
+
+flush(stderr()); flush(stdout())
+
+### Name: sir_ratio
+### Title: Calculate Ratio of two SIRs or SMRs
+### Aliases: sir_ratio sir_ratio_lci sir_ratio_uci
+
+### ** Examples
+
+#provide the two expected and observed count to get the ratio of SIRs/SMRs
+msSPChelpR::sir_ratio(o1 = 2140, o2 = 3158, e1 = 1993, e2 = 2123)
+
+#calculate lower confidence limit
+msSPChelpR::sir_ratio_lci(o1 = 2140, o2 = 3158, e1 = 1993, e2 = 2123, alpha = 0.05)
+
+#calculate upper confidence limit
+msSPChelpR::sir_ratio_uci(o1 = 2140, o2 = 3158, e1 = 1993, e2 = 2123, alpha = 0.05)
+
+#functions can be easily used inside dplyr::mutate function
+library(dplyr)
+test_df <- data.frame(sir_oth = c(1.07, 1.36, 0.96), 
+                  sir_smo = c(1.49, 1.81, 1.41),
+                  observed_oth = c(2140, 748, 1392),
+                  expected_oth = c(1993, 550, 1443),
+                  observed_smo = c(3158, 744, 2414),
+                  expected_smo = c(2123, 412, 1711))
+
+test_df %>%
+  mutate(smo_ratio = sir_ratio(observed_oth, observed_smo, expected_oth, expected_smo),
+         smo_ratio_lci = sir_ratio_lci(observed_oth, observed_smo, expected_oth, expected_smo),
+         smo_ratio_uci = sir_ratio_uci(observed_oth, observed_smo, expected_oth, expected_smo))
 
 
 

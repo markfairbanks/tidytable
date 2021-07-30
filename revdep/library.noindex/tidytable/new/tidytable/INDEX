@@ -70,4 +70,8 @@ transmute.              Add new variables and drop all others
 uncount.                Uncount a data.table
 unite.                  Unite multiple columns by pasting strings
                         together
-unnest.                 Unnest a nested data.table
+unnest.                 Unnest list-columns
+unnest_longer.          Unnest a list-column of vectors into regular
+                        columns
+unnest_wider.           Unnest a list-column of vectors into a wide
+                        data frame

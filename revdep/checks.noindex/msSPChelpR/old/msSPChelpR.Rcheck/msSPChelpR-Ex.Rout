@@ -79,7 +79,7 @@ Using person-years at risk [PYAR] from reference population as pyears for calcul
 Be careful, in this calculation it is assumed that all included regions have collected data for the full time period: 1990 to 2010
                        If you have included registries with differing times, please check this assumption by looking at groups with 0 incidence and specify option 'inclusion_restrictions' if needed.
 The following regions, age groups, years, sexes and ICD codes are considered:  SEER Reg 01 - San Francisco-Oakland SMSA, SEER Reg 02 - Connecticut, SEER Reg 20 - Detroit (Metropolitan), SEER Reg 21 - Hawaii 1995 - 1999, 2000 - 2004, 2005 - 2009, 2010 - 2014, 1990 - 1994 00 - 04, 05 - 09, 10 - 14, 15 - 19, 20 - 24, 25 - 29, 30 - 34, 35 - 39, 40 - 44, 45 - 49, 50 - 54, 55 - 59, 60 - 64, 65 - 69, 70 - 74, 75 - 79, 80 - 84, 85 - 120 Female, Male C18, C34, C44, C50, C54, C64, C80, C14
-# A tibble: 320 x 17
+# A tibble: 320 × 17
    age       region   sex   year  t_site  asir observed   pyar abs_ir abs_ir_lci
    <chr>     <chr>    <chr> <chr> <chr>  <dbl>    <dbl>  <dbl>  <dbl>      <dbl>
  1 Age stan… SEER Re… Fema… 1990… C14        0        0 1.92e7      0          0
@@ -134,7 +134,7 @@ The following regions, age groups, years, sexes and ICD codes are considered:  S
 +                   msSPChelpR::pat_status(., fu_end = "2017-12-31", dattype = "seer",
 +                                          status_var = "p_status", life_var = "p_alive.1",
 +                                          birthdat_var = "datebirth.1", lifedat_var = "datedeath.1")
-# A tibble: 11 x 3
+# A tibble: 11 × 3
    p_alive.1 p_status     n
    <chr>        <dbl> <int>
  1 Alive            1 15884
@@ -148,7 +148,7 @@ The following regions, age groups, years, sexes and ICD codes are considered:  S
  9 Dead            97     2
 10 Dead            98   182
 11 Dead            NA     5
-# A tibble: 7 x 2
+# A tibble: 7 × 2
   p_status     n
      <dbl> <int>
 1        1 18428
@@ -181,7 +181,7 @@ Warning in max(.data[["p_futimeyrs"]], na.rm = TRUE) :
   no non-missing arguments to max; returning -Inf
 Warning in max(.data[["p_futimeyrs"]], na.rm = TRUE) :
   no non-missing arguments to max; returning -Inf
-# A tibble: 7 x 5
+# A tibble: 7 × 5
   p_status mean_futime min_futime max_futime median_futime
      <dbl>       <dbl>      <dbl>      <dbl>         <dbl>
 1        1        9.23     0.0438       27.0          8.04
@@ -191,7 +191,7 @@ Warning in max(.data[["p_futimeyrs"]], na.rm = TRUE) :
 5       97      NaN      Inf          -Inf           NA   
 6       98      NaN      Inf          -Inf           NA   
 7       NA      NaN      Inf          -Inf           NA   
-# A tibble: 68,060 x 122
+# A tibble: 68,060 × 122
    fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1
    <chr>   <chr>      <chr> <chr>  <date>      <date>       <chr>        <chr>  
  1 100004  SEER Reg … Male  White  1926-01-01  1992-07-15   C50          histol…
@@ -210,28 +210,7 @@ Warning in max(.data[["p_futimeyrs"]], na.rm = TRUE) :
 #   race.2 <chr>, datebirth.2 <date>, t_datediag.2 <date>, t_site_icd.2 <chr>,
 #   t_dco.2 <chr>, fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>,
 #   p_dodmin.2 <date>, fc_agegroup.2 <chr>, t_yeardiag.2 <chr>,
-#   registry.3 <chr>, sex.3 <chr>, race.3 <chr>, datebirth.3 <date>,
-#   t_datediag.3 <date>, t_site_icd.3 <chr>, t_dco.3 <chr>, fc_age.3 <int>,
-#   datedeath.3 <date>, p_alive.3 <chr>, p_dodmin.3 <date>,
-#   fc_agegroup.3 <chr>, t_yeardiag.3 <chr>, registry.4 <chr>, sex.4 <chr>,
-#   race.4 <chr>, datebirth.4 <date>, t_datediag.4 <date>, t_site_icd.4 <chr>,
-#   t_dco.4 <chr>, fc_age.4 <int>, datedeath.4 <date>, p_alive.4 <chr>,
-#   p_dodmin.4 <date>, fc_agegroup.4 <chr>, t_yeardiag.4 <chr>,
-#   registry.5 <chr>, sex.5 <chr>, race.5 <chr>, datebirth.5 <date>,
-#   t_datediag.5 <date>, t_site_icd.5 <chr>, t_dco.5 <chr>, fc_age.5 <int>,
-#   datedeath.5 <date>, p_alive.5 <chr>, p_dodmin.5 <date>,
-#   fc_agegroup.5 <chr>, t_yeardiag.5 <chr>, registry.6 <chr>, sex.6 <chr>,
-#   race.6 <chr>, datebirth.6 <date>, t_datediag.6 <date>, t_site_icd.6 <chr>,
-#   t_dco.6 <chr>, fc_age.6 <int>, datedeath.6 <date>, p_alive.6 <chr>,
-#   p_dodmin.6 <date>, fc_agegroup.6 <chr>, t_yeardiag.6 <chr>,
-#   registry.7 <chr>, sex.7 <chr>, race.7 <chr>, datebirth.7 <date>,
-#   t_datediag.7 <date>, t_site_icd.7 <chr>, t_dco.7 <chr>, fc_age.7 <int>,
-#   datedeath.7 <date>, p_alive.7 <chr>, p_dodmin.7 <date>,
-#   fc_agegroup.7 <chr>, t_yeardiag.7 <chr>, registry.8 <chr>, sex.8 <chr>,
-#   race.8 <chr>, datebirth.8 <date>, t_datediag.8 <date>, t_site_icd.8 <chr>,
-#   t_dco.8 <chr>, fc_age.8 <int>, datedeath.8 <date>, p_alive.8 <chr>,
-#   p_dodmin.8 <date>, fc_agegroup.8 <chr>, t_yeardiag.8 <chr>,
-#   registry.9 <chr>, sex.9 <chr>, race.9 <chr>, …
+#   registry.3 <chr>, sex.3 <chr>, race.3 <chr>, datebirth.3 <date>, …
 > 
 > 
 > 
@@ -270,7 +249,7 @@ Warning in max(.data[["p_futimeyrs"]], na.rm = TRUE) :
 +                   msSPChelpR::pat_status(., fu_end = "2017-12-31", dattype = "seer",
 +                                          status_var = "p_status", life_var = "p_alive.1",
 +                                          birthdat_var = "datebirth.1", lifedat_var = "datedeath.1")
-# A tibble: 11 x 3
+# A tibble: 11 × 3
    p_alive.1 p_status     n
    <chr>        <dbl> <int>
  1 Alive            1 15884
@@ -284,7 +263,7 @@ Warning in max(.data[["p_futimeyrs"]], na.rm = TRUE) :
  9 Dead            97     2
 10 Dead            98   182
 11 Dead            NA     5
-# A tibble: 7 x 2
+# A tibble: 7 × 2
   p_status     n
      <dbl> <int>
 1        1 18428
@@ -346,28 +325,7 @@ Warning in max(p_futimeyrs, na.rm = TRUE) :
 #   race.2 <chr>, datebirth.2 <date>, t_datediag.2 <date>, t_site_icd.2 <chr>,
 #   t_dco.2 <chr>, fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>,
 #   p_dodmin.2 <date>, fc_agegroup.2 <chr>, t_yeardiag.2 <chr>,
-#   registry.3 <chr>, sex.3 <chr>, race.3 <chr>, datebirth.3 <date>,
-#   t_datediag.3 <date>, t_site_icd.3 <chr>, t_dco.3 <chr>, fc_age.3 <int>,
-#   datedeath.3 <date>, p_alive.3 <chr>, p_dodmin.3 <date>,
-#   fc_agegroup.3 <chr>, t_yeardiag.3 <chr>, registry.4 <chr>, sex.4 <chr>,
-#   race.4 <chr>, datebirth.4 <date>, t_datediag.4 <date>, t_site_icd.4 <chr>,
-#   t_dco.4 <chr>, fc_age.4 <int>, datedeath.4 <date>, p_alive.4 <chr>,
-#   p_dodmin.4 <date>, fc_agegroup.4 <chr>, t_yeardiag.4 <chr>,
-#   registry.5 <chr>, sex.5 <chr>, race.5 <chr>, datebirth.5 <date>,
-#   t_datediag.5 <date>, t_site_icd.5 <chr>, t_dco.5 <chr>, fc_age.5 <int>,
-#   datedeath.5 <date>, p_alive.5 <chr>, p_dodmin.5 <date>,
-#   fc_agegroup.5 <chr>, t_yeardiag.5 <chr>, registry.6 <chr>, sex.6 <chr>,
-#   race.6 <chr>, datebirth.6 <date>, t_datediag.6 <date>, t_site_icd.6 <chr>,
-#   t_dco.6 <chr>, fc_age.6 <int>, datedeath.6 <date>, p_alive.6 <chr>,
-#   p_dodmin.6 <date>, fc_agegroup.6 <chr>, t_yeardiag.6 <chr>,
-#   registry.7 <chr>, sex.7 <chr>, race.7 <chr>, datebirth.7 <date>,
-#   t_datediag.7 <date>, t_site_icd.7 <chr>, t_dco.7 <chr>, fc_age.7 <int>,
-#   datedeath.7 <date>, p_alive.7 <chr>, p_dodmin.7 <date>,
-#   fc_agegroup.7 <chr>, t_yeardiag.7 <chr>, registry.8 <chr>, sex.8 <chr>,
-#   race.8 <chr>, datebirth.8 <date>, t_datediag.8 <date>, t_site_icd.8 <chr>,
-#   t_dco.8 <chr>, fc_age.8 <int>, datedeath.8 <date>, p_alive.8 <chr>,
-#   p_dodmin.8 <date>, fc_agegroup.8 <chr>, t_yeardiag.8 <chr>,
-#   registry.9 <chr>, sex.9 <chr>, race.9 <chr>, …
+#   registry.3 <chr>, sex.3 <chr>, race.3 <chr>, datebirth.3 <date>, …
 > 
 > 
 > 
@@ -406,7 +364,7 @@ Warning in max(p_futimeyrs, na.rm = TRUE) :
 +                   msSPChelpR::pat_status(., fu_end = "2017-12-31", dattype = "seer",
 +                                          status_var = "p_status", life_var = "p_alive.1",
 +                                          birthdat_var = "datebirth.1", lifedat_var = "datedeath.1")
-# A tibble: 11 x 3
+# A tibble: 11 × 3
    p_alive.1 p_status     n
    <chr>        <dbl> <int>
  1 Alive            1 15884
@@ -420,7 +378,7 @@ Warning in max(p_futimeyrs, na.rm = TRUE) :
  9 Dead            97     2
 10 Dead            98   182
 11 Dead            NA     5
-# A tibble: 7 x 2
+# A tibble: 7 × 2
   p_status     n
      <dbl> <int>
 1        1 18428
@@ -454,7 +412,7 @@ Warning in max(.data[["p_futimeyrs"]], na.rm = TRUE) :
   no non-missing arguments to max; returning -Inf
 Warning in max(.data[["p_futimeyrs"]], na.rm = TRUE) :
   no non-missing arguments to max; returning -Inf
-# A tibble: 7 x 5
+# A tibble: 7 × 5
   p_status mean_futime min_futime max_futime median_futime
      <dbl>       <dbl>      <dbl>      <dbl>         <dbl>
 1        1        9.23     0.0438       27.0          8.04
@@ -476,7 +434,7 @@ Warning in max(.data[["p_futimeyrs"]], na.rm = TRUE) :
 +       add_n_percentages = FALSE,
 +       futime_var = "p_futimeyrs",
 +       alpha = 0.05)
-# A tibble: 6 x 8
+# A tibble: 6 × 8
   yvar_name  yvar_label      n_base observed   pyar abs_ir abs_ir_lci abs_ir_uci
   <chr>      <chr>            <int>    <dbl>  <dbl>  <dbl>      <dbl>      <dbl>
 1 sex.1      Female           33786    18218 279226  6524.      6430.      6620.
@@ -527,7 +485,7 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 +                   msSPChelpR::pat_status(., fu_end = "2017-12-31", dattype = "seer",
 +                                          status_var = "p_status", life_var = "p_alive.1",
 +                                          birthdat_var = "datebirth.1", lifedat_var = "datedeath.1")
-# A tibble: 8 x 3
+# A tibble: 8 × 3
   p_alive.1 p_status     n
   <chr>        <dbl> <int>
 1 Alive            1  1728
@@ -538,7 +496,7 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 6 Dead             3  2052
 7 Dead             4  1002
 8 Dead            98    27
-# A tibble: 5 x 2
+# A tibble: 5 × 2
   p_status     n
      <dbl> <int>
 1        1  2003
@@ -562,7 +520,7 @@ Warning in min(.data[["p_futimeyrs"]], na.rm = TRUE) :
   no non-missing arguments to min; returning Inf
 Warning in max(.data[["p_futimeyrs"]], na.rm = TRUE) :
   no non-missing arguments to max; returning -Inf
-# A tibble: 5 x 5
+# A tibble: 5 × 5
   p_status mean_futime min_futime max_futime median_futime
      <dbl>       <dbl>      <dbl>      <dbl>         <dbl>
 1        1        9.22     0.0438       27.0          8.13
@@ -698,7 +656,7 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 +                        use_lifedatmin = FALSE, 
 +                        check = TRUE, 
 +                        as_labelled_factor = FALSE)
-# A tibble: 11 x 3
+# A tibble: 11 × 3
    p_alive.1 p_status     n
    <chr>        <dbl> <int>
  1 Alive            1 15884
@@ -712,7 +670,7 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
  9 Dead            97     2
 10 Dead            98   182
 11 Dead            NA     5
-# A tibble: 7 x 2
+# A tibble: 7 × 2
   p_status     n
      <dbl> <int>
 1        1 18428
@@ -722,7 +680,7 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 5       97    21
 6       98  2670
 7       NA     5
-# A tibble: 68,060 x 121
+# A tibble: 68,060 × 121
    fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1
    <chr>   <chr>      <chr> <chr>  <date>      <date>       <chr>        <chr>  
  1 100004  SEER Reg … Male  White  1926-01-01  1992-07-15   C50          histol…
@@ -741,28 +699,7 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 #   race.2 <chr>, datebirth.2 <date>, t_datediag.2 <date>, t_site_icd.2 <chr>,
 #   t_dco.2 <chr>, fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>,
 #   p_dodmin.2 <date>, fc_agegroup.2 <chr>, t_yeardiag.2 <chr>,
-#   registry.3 <chr>, sex.3 <chr>, race.3 <chr>, datebirth.3 <date>,
-#   t_datediag.3 <date>, t_site_icd.3 <chr>, t_dco.3 <chr>, fc_age.3 <int>,
-#   datedeath.3 <date>, p_alive.3 <chr>, p_dodmin.3 <date>,
-#   fc_agegroup.3 <chr>, t_yeardiag.3 <chr>, registry.4 <chr>, sex.4 <chr>,
-#   race.4 <chr>, datebirth.4 <date>, t_datediag.4 <date>, t_site_icd.4 <chr>,
-#   t_dco.4 <chr>, fc_age.4 <int>, datedeath.4 <date>, p_alive.4 <chr>,
-#   p_dodmin.4 <date>, fc_agegroup.4 <chr>, t_yeardiag.4 <chr>,
-#   registry.5 <chr>, sex.5 <chr>, race.5 <chr>, datebirth.5 <date>,
-#   t_datediag.5 <date>, t_site_icd.5 <chr>, t_dco.5 <chr>, fc_age.5 <int>,
-#   datedeath.5 <date>, p_alive.5 <chr>, p_dodmin.5 <date>,
-#   fc_agegroup.5 <chr>, t_yeardiag.5 <chr>, registry.6 <chr>, sex.6 <chr>,
-#   race.6 <chr>, datebirth.6 <date>, t_datediag.6 <date>, t_site_icd.6 <chr>,
-#   t_dco.6 <chr>, fc_age.6 <int>, datedeath.6 <date>, p_alive.6 <chr>,
-#   p_dodmin.6 <date>, fc_agegroup.6 <chr>, t_yeardiag.6 <chr>,
-#   registry.7 <chr>, sex.7 <chr>, race.7 <chr>, datebirth.7 <date>,
-#   t_datediag.7 <date>, t_site_icd.7 <chr>, t_dco.7 <chr>, fc_age.7 <int>,
-#   datedeath.7 <date>, p_alive.7 <chr>, p_dodmin.7 <date>,
-#   fc_agegroup.7 <chr>, t_yeardiag.7 <chr>, registry.8 <chr>, sex.8 <chr>,
-#   race.8 <chr>, datebirth.8 <date>, t_datediag.8 <date>, t_site_icd.8 <chr>,
-#   t_dco.8 <chr>, fc_age.8 <int>, datedeath.8 <date>, p_alive.8 <chr>,
-#   p_dodmin.8 <date>, fc_agegroup.8 <chr>, t_yeardiag.8 <chr>,
-#   registry.9 <chr>, sex.9 <chr>, race.9 <chr>, …
+#   registry.3 <chr>, sex.3 <chr>, race.3 <chr>, datebirth.3 <date>, …
 >                        
 > 
 > 
@@ -851,28 +788,7 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 #   race.2 <chr>, datebirth.2 <date>, t_datediag.2 <date>, t_site_icd.2 <chr>,
 #   t_dco.2 <chr>, fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>,
 #   p_dodmin.2 <date>, fc_agegroup.2 <chr>, t_yeardiag.2 <chr>,
-#   registry.3 <chr>, sex.3 <chr>, race.3 <chr>, datebirth.3 <date>,
-#   t_datediag.3 <date>, t_site_icd.3 <chr>, t_dco.3 <chr>, fc_age.3 <int>,
-#   datedeath.3 <date>, p_alive.3 <chr>, p_dodmin.3 <date>,
-#   fc_agegroup.3 <chr>, t_yeardiag.3 <chr>, registry.4 <chr>, sex.4 <chr>,
-#   race.4 <chr>, datebirth.4 <date>, t_datediag.4 <date>, t_site_icd.4 <chr>,
-#   t_dco.4 <chr>, fc_age.4 <int>, datedeath.4 <date>, p_alive.4 <chr>,
-#   p_dodmin.4 <date>, fc_agegroup.4 <chr>, t_yeardiag.4 <chr>,
-#   registry.5 <chr>, sex.5 <chr>, race.5 <chr>, datebirth.5 <date>,
-#   t_datediag.5 <date>, t_site_icd.5 <chr>, t_dco.5 <chr>, fc_age.5 <int>,
-#   datedeath.5 <date>, p_alive.5 <chr>, p_dodmin.5 <date>,
-#   fc_agegroup.5 <chr>, t_yeardiag.5 <chr>, registry.6 <chr>, sex.6 <chr>,
-#   race.6 <chr>, datebirth.6 <date>, t_datediag.6 <date>, t_site_icd.6 <chr>,
-#   t_dco.6 <chr>, fc_age.6 <int>, datedeath.6 <date>, p_alive.6 <chr>,
-#   p_dodmin.6 <date>, fc_agegroup.6 <chr>, t_yeardiag.6 <chr>,
-#   registry.7 <chr>, sex.7 <chr>, race.7 <chr>, datebirth.7 <date>,
-#   t_datediag.7 <date>, t_site_icd.7 <chr>, t_dco.7 <chr>, fc_age.7 <int>,
-#   datedeath.7 <date>, p_alive.7 <chr>, p_dodmin.7 <date>,
-#   fc_agegroup.7 <chr>, t_yeardiag.7 <chr>, registry.8 <chr>, sex.8 <chr>,
-#   race.8 <chr>, datebirth.8 <date>, t_datediag.8 <date>, t_site_icd.8 <chr>,
-#   t_dco.8 <chr>, fc_age.8 <int>, datedeath.8 <date>, p_alive.8 <chr>,
-#   p_dodmin.8 <date>, fc_agegroup.8 <chr>, t_yeardiag.8 <chr>,
-#   registry.9 <chr>, sex.9 <chr>, race.9 <chr>, …
+#   registry.3 <chr>, sex.3 <chr>, race.3 <chr>, datebirth.3 <date>, …
 >                        
 > 
 > 
@@ -897,7 +813,7 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 +  msSPChelpR::renumber_time_id(new_time_id_var = "t_tumid",
 +                              dattype = "seer",
 +                              case_id_var = "fake_id")
-# A tibble: 10,000 x 16
+# A tibble: 10,000 × 16
    fake_id SEQ_NUM registry   sex   race  datebirth  t_datediag t_site_icd t_dco
    <chr>     <int> <chr>      <chr> <chr> <date>     <date>     <chr>      <chr>
  1 100004        1 SEER Reg … Male  White 1926-01-01 1992-07-15 C50        hist…
@@ -21019,7 +20935,54 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 > msSPChelpR::reshape_long_tidyr(usdata_wide_sample,
 +                          case_id_var = "fake_id", 
 +                          time_id_var = "SEQ_NUM")
-# A tibble: 8,746 x 15
+# A tibble: 8,746 × 15
+   fake_id SEQ_NUM registry   sex   race  datebirth  t_datediag t_site_icd t_dco
+   <chr>     <dbl> <chr>      <chr> <chr> <date>     <date>     <chr>      <chr>
+ 1 100004        1 SEER Reg … Male  White 1926-01-01 1992-07-15 C50        hist…
+ 2 100004        2 SEER Reg … Male  White 1926-01-01 2004-01-15 C54        hist…
+ 3 100034        1 SEER Reg … Male  White 1979-01-01 2000-06-15 C50        hist…
+ 4 100037        1 SEER Reg … Fema… White 1938-01-01 1996-01-15 C54        hist…
+ 5 100038        1 SEER Reg … Male  White 1989-01-01 1991-04-15 C50        hist…
+ 6 100038        2 SEER Reg … Male  White 1989-01-01 2000-03-15 C80        hist…
+ 7 100039        1 SEER Reg … Fema… White 1946-01-01 2003-08-15 C50        hist…
+ 8 100039        2 SEER Reg … Fema… White 1946-01-01 2011-04-15 C34        hist…
+ 9 100047        1 SEER Reg … Fema… White 1927-01-01 1998-04-15 C50        hist…
+10 100047        2 SEER Reg … Fema… White 1927-01-01 2003-10-15 C14        hist…
+# … with 8,736 more rows, and 6 more variables: fc_age <int>, datedeath <date>,
+#   p_alive <chr>, p_dodmin <date>, fc_agegroup <chr>, t_yeardiag <chr>
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("reshape_long_tt")
+> ### * reshape_long_tt
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: reshape_long_tt
+> ### Title: Reshape dataset to wide format - tidytable version
+> ### Aliases: reshape_long_tt
+> 
+> ### ** Examples
+> 
+> 
+> data(us_second_cancer)
+> 
+> #prep step - reshape wide a sample of 10000 rows from us_second_cancer
+> usdata_wide_sample <- msSPChelpR::reshape_wide(us_second_cancer,
++                          case_id_var = "fake_id", 
++                          time_id_var = "SEQ_NUM", 
++                          timevar_max = 2,
++                          datsize = 10000)
+Long dataset had too many cases per patient. Wide dataset is limited to  2  cases per id as defined in timevar_max option.
+> 
+> #now we can reshape long again
+> msSPChelpR::reshape_long_tt(usdata_wide_sample,
++                          case_id_var = "fake_id", 
++                          time_id_var = "SEQ_NUM")
+# A tidytable: 8,746 × 15
    fake_id SEQ_NUM registry   sex   race  datebirth  t_datediag t_site_icd t_dco
    <chr>     <dbl> <chr>      <chr> <chr> <date>     <date>     <chr>      <chr>
  1 100004        1 SEER Reg … Male  White 1926-01-01 1992-07-15 C50        hist…
@@ -43310,7 +43273,7 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 +                          timevar_max = 2,
 +                          datsize = 10000)
 Long dataset had too many cases per patient. Wide dataset is limited to  2  cases per id as defined in timevar_max option.
-# A tibble: 6,003 x 27
+# A tibble: 6,003 × 27
    fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1
    <chr>   <chr>      <chr> <chr>  <date>      <date>       <chr>        <chr>  
  1 100004  SEER Reg … Male  White  1926-01-01  1992-07-15   C50          histol…
@@ -43417,6 +43380,68 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 > 
 > 
 > cleanEx()
+> nameEx("sir_ratio")
+> ### * sir_ratio
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: sir_ratio
+> ### Title: Calculate Ratio of two SIRs or SMRs
+> ### Aliases: sir_ratio sir_ratio_lci sir_ratio_uci
+> 
+> ### ** Examples
+> 
+> #provide the two expected and observed count to get the ratio of SIRs/SMRs
+> msSPChelpR::sir_ratio(o1 = 2140, o2 = 3158, e1 = 1993, e2 = 2123)
+[1] 1.385338
+> 
+> #calculate lower confidence limit
+> msSPChelpR::sir_ratio_lci(o1 = 2140, o2 = 3158, e1 = 1993, e2 = 2123, alpha = 0.05)
+[1] 1.310944
+> 
+> #calculate upper confidence limit
+> msSPChelpR::sir_ratio_uci(o1 = 2140, o2 = 3158, e1 = 1993, e2 = 2123, alpha = 0.05)
+[1] 1.464168
+> 
+> #functions can be easily used inside dplyr::mutate function
+> library(dplyr)
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+> test_df <- data.frame(sir_oth = c(1.07, 1.36, 0.96), 
++                   sir_smo = c(1.49, 1.81, 1.41),
++                   observed_oth = c(2140, 748, 1392),
++                   expected_oth = c(1993, 550, 1443),
++                   observed_smo = c(3158, 744, 2414),
++                   expected_smo = c(2123, 412, 1711))
+> 
+> test_df %>%
++   mutate(smo_ratio = sir_ratio(observed_oth, observed_smo, expected_oth, expected_smo),
++          smo_ratio_lci = sir_ratio_lci(observed_oth, observed_smo, expected_oth, expected_smo),
++          smo_ratio_uci = sir_ratio_uci(observed_oth, observed_smo, expected_oth, expected_smo))
+  sir_oth sir_smo observed_oth expected_oth observed_smo expected_smo smo_ratio
+1    1.07    1.49         2140         1993         3158         2123  1.385338
+2    1.36    1.81          748          550          744          412  1.327813
+3    0.96    1.41         1392         1443         2414         1711  1.462562
+  smo_ratio_lci smo_ratio_uci
+1      1.310944      1.464168
+2      1.198055      1.471613
+3      1.368629      1.563409
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:dplyr’
+
 > nameEx("summarize_sir_results")
 > ### * summarize_sir_results
 > 
@@ -43481,7 +43506,7 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 +                   msSPChelpR::pat_status(., fu_end = "2017-12-31", dattype = "seer",
 +                                          status_var = "p_status", life_var = "p_alive.1",
 +                                          birthdat_var = "datebirth.1", lifedat_var = "datedeath.1")
-# A tibble: 11 x 3
+# A tibble: 11 × 3
    p_alive.1 p_status     n
    <chr>        <dbl> <int>
  1 Alive            1 15884
@@ -43495,7 +43520,7 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
  9 Dead            97     2
 10 Dead            98   182
 11 Dead            NA     5
-# A tibble: 7 x 2
+# A tibble: 7 × 2
   p_status     n
      <dbl> <int>
 1        1 18428
@@ -43512,7 +43537,7 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 +                         life_var_new = "p_alive_new", 
 +                         check = TRUE, 
 +                         as_labelled_factor = FALSE)
-# A tibble: 7 x 3
+# A tibble: 7 × 3
   p_status p_alive_new     n
      <dbl>       <dbl> <int>
 1        1          10 18428
@@ -43522,7 +43547,7 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 5       97          97    21
 6       98          98  2670
 7       NA          NA     5
-# A tibble: 68,060 x 122
+# A tibble: 68,060 × 122
    fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1
    <chr>   <chr>      <chr> <chr>  <date>      <date>       <chr>        <chr>  
  1 100004  SEER Reg … Male  White  1926-01-01  1992-07-15   C50          histol…
@@ -43541,28 +43566,7 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 #   race.2 <chr>, datebirth.2 <date>, t_datediag.2 <date>, t_site_icd.2 <chr>,
 #   t_dco.2 <chr>, fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>,
 #   p_dodmin.2 <date>, fc_agegroup.2 <chr>, t_yeardiag.2 <chr>,
-#   registry.3 <chr>, sex.3 <chr>, race.3 <chr>, datebirth.3 <date>,
-#   t_datediag.3 <date>, t_site_icd.3 <chr>, t_dco.3 <chr>, fc_age.3 <int>,
-#   datedeath.3 <date>, p_alive.3 <chr>, p_dodmin.3 <date>,
-#   fc_agegroup.3 <chr>, t_yeardiag.3 <chr>, registry.4 <chr>, sex.4 <chr>,
-#   race.4 <chr>, datebirth.4 <date>, t_datediag.4 <date>, t_site_icd.4 <chr>,
-#   t_dco.4 <chr>, fc_age.4 <int>, datedeath.4 <date>, p_alive.4 <chr>,
-#   p_dodmin.4 <date>, fc_agegroup.4 <chr>, t_yeardiag.4 <chr>,
-#   registry.5 <chr>, sex.5 <chr>, race.5 <chr>, datebirth.5 <date>,
-#   t_datediag.5 <date>, t_site_icd.5 <chr>, t_dco.5 <chr>, fc_age.5 <int>,
-#   datedeath.5 <date>, p_alive.5 <chr>, p_dodmin.5 <date>,
-#   fc_agegroup.5 <chr>, t_yeardiag.5 <chr>, registry.6 <chr>, sex.6 <chr>,
-#   race.6 <chr>, datebirth.6 <date>, t_datediag.6 <date>, t_site_icd.6 <chr>,
-#   t_dco.6 <chr>, fc_age.6 <int>, datedeath.6 <date>, p_alive.6 <chr>,
-#   p_dodmin.6 <date>, fc_agegroup.6 <chr>, t_yeardiag.6 <chr>,
-#   registry.7 <chr>, sex.7 <chr>, race.7 <chr>, datebirth.7 <date>,
-#   t_datediag.7 <date>, t_site_icd.7 <chr>, t_dco.7 <chr>, fc_age.7 <int>,
-#   datedeath.7 <date>, p_alive.7 <chr>, p_dodmin.7 <date>,
-#   fc_agegroup.7 <chr>, t_yeardiag.7 <chr>, registry.8 <chr>, sex.8 <chr>,
-#   race.8 <chr>, datebirth.8 <date>, t_datediag.8 <date>, t_site_icd.8 <chr>,
-#   t_dco.8 <chr>, fc_age.8 <int>, datedeath.8 <date>, p_alive.8 <chr>,
-#   p_dodmin.8 <date>, fc_agegroup.8 <chr>, t_yeardiag.8 <chr>,
-#   registry.9 <chr>, sex.9 <chr>, race.9 <chr>, …
+#   registry.3 <chr>, sex.3 <chr>, race.3 <chr>, datebirth.3 <date>, …
 > 
 > 
 > 
@@ -43601,7 +43605,7 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 +                   msSPChelpR::pat_status(., fu_end = "2017-12-31", dattype = "seer",
 +                                          status_var = "p_status", life_var = "p_alive.1",
 +                                          birthdat_var = "datebirth.1", lifedat_var = "datedeath.1")
-# A tibble: 11 x 3
+# A tibble: 11 × 3
    p_alive.1 p_status     n
    <chr>        <dbl> <int>
  1 Alive            1 15884
@@ -43615,7 +43619,7 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
  9 Dead            97     2
 10 Dead            98   182
 11 Dead            NA     5
-# A tibble: 7 x 2
+# A tibble: 7 × 2
   p_status     n
      <dbl> <int>
 1        1 18428
@@ -43661,28 +43665,7 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 #   race.2 <chr>, datebirth.2 <date>, t_datediag.2 <date>, t_site_icd.2 <chr>,
 #   t_dco.2 <chr>, fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>,
 #   p_dodmin.2 <date>, fc_agegroup.2 <chr>, t_yeardiag.2 <chr>,
-#   registry.3 <chr>, sex.3 <chr>, race.3 <chr>, datebirth.3 <date>,
-#   t_datediag.3 <date>, t_site_icd.3 <chr>, t_dco.3 <chr>, fc_age.3 <int>,
-#   datedeath.3 <date>, p_alive.3 <chr>, p_dodmin.3 <date>,
-#   fc_agegroup.3 <chr>, t_yeardiag.3 <chr>, registry.4 <chr>, sex.4 <chr>,
-#   race.4 <chr>, datebirth.4 <date>, t_datediag.4 <date>, t_site_icd.4 <chr>,
-#   t_dco.4 <chr>, fc_age.4 <int>, datedeath.4 <date>, p_alive.4 <chr>,
-#   p_dodmin.4 <date>, fc_agegroup.4 <chr>, t_yeardiag.4 <chr>,
-#   registry.5 <chr>, sex.5 <chr>, race.5 <chr>, datebirth.5 <date>,
-#   t_datediag.5 <date>, t_site_icd.5 <chr>, t_dco.5 <chr>, fc_age.5 <int>,
-#   datedeath.5 <date>, p_alive.5 <chr>, p_dodmin.5 <date>,
-#   fc_agegroup.5 <chr>, t_yeardiag.5 <chr>, registry.6 <chr>, sex.6 <chr>,
-#   race.6 <chr>, datebirth.6 <date>, t_datediag.6 <date>, t_site_icd.6 <chr>,
-#   t_dco.6 <chr>, fc_age.6 <int>, datedeath.6 <date>, p_alive.6 <chr>,
-#   p_dodmin.6 <date>, fc_agegroup.6 <chr>, t_yeardiag.6 <chr>,
-#   registry.7 <chr>, sex.7 <chr>, race.7 <chr>, datebirth.7 <date>,
-#   t_datediag.7 <date>, t_site_icd.7 <chr>, t_dco.7 <chr>, fc_age.7 <int>,
-#   datedeath.7 <date>, p_alive.7 <chr>, p_dodmin.7 <date>,
-#   fc_agegroup.7 <chr>, t_yeardiag.7 <chr>, registry.8 <chr>, sex.8 <chr>,
-#   race.8 <chr>, datebirth.8 <date>, t_datediag.8 <date>, t_site_icd.8 <chr>,
-#   t_dco.8 <chr>, fc_age.8 <int>, datedeath.8 <date>, p_alive.8 <chr>,
-#   p_dodmin.8 <date>, fc_agegroup.8 <chr>, t_yeardiag.8 <chr>,
-#   registry.9 <chr>, sex.9 <chr>, race.9 <chr>, …
+#   registry.3 <chr>, sex.3 <chr>, race.3 <chr>, datebirth.3 <date>, …
 > 
 > 
 > 
@@ -43692,7 +43675,7 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  12.258 1.406 14.083 0.002 0.004 
+Time elapsed:  11.099 1.3 12.6 0.002 0.004 
 > grDevices::dev.off()
 null device 
           1 

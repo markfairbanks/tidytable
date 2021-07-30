@@ -10,13 +10,16 @@
 |collate  |en_US.UTF-8                  |
 |ctype    |en_US.UTF-8                  |
 |tz       |America/Phoenix              |
-|date     |2021-06-21                   |
+|date     |2021-07-30                   |
 
 # Dependencies
 
-|package   |old   |new   |Δ  |
-|:---------|:-----|:-----|:--|
-|tidytable |0.6.2 |0.6.3 |*  |
+|package    |old   |new    |Δ  |
+|:----------|:-----|:------|:--|
+|tidytable  |0.6.3 |0.6.4  |*  |
+|data.table |NA    |1.14.1 |*  |
+|pillar     |NA    |1.6.2  |*  |
+|utf8       |NA    |1.2.2  |*  |
 
 # Revdeps
 
