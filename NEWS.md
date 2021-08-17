@@ -1,3 +1,8 @@
+# tidytable 0.6.5 (in development)
+
+#### Bug fixes
+* Traceback error messages no longer unnecessarily print the full data frame (#305)
+
 # tidytable 0.6.4
 
 #### New functions
