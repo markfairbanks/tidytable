@@ -11,7 +11,7 @@
 #' @examples
 #' test_df <- data.table(
 #'   x = 1:3,
-#'   y = 4:5,
+#'   y = 4:6,
 #'   z = c("a", "a", "b")
 #' )
 #'
