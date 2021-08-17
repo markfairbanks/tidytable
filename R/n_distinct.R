@@ -24,6 +24,6 @@ n_distinct. <- function(..., na.rm = FALSE) {
     }
     vec_unique_count(x)
   } else {
-    uniqueN(new_data_frame(dots, class = c("tidytable", "data.table")), na.rm = na.rm)
+    uniqueN(new_tidytable(dots), na.rm = na.rm)
   }
 }

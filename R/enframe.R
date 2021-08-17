@@ -21,14 +21,14 @@ enframe. <- function(x, name = "name", value = "value") {
   if (is.null(value)) abort("`value` can't be NULL")
 
   if (is.null(name)) {
-    df <- list(unname(x))
+    l <- list(unname(x))
   } else if (is.null(names(x))) {
-    df <- list(seq_along(x), x)
+    l <- list(seq_along(x), x)
   } else {
-    df <- list(names(x), unname(x))
+    l <- list(names(x), unname(x))
   }
 
-  names(df) <- c(name, value)
+  names(l) <- c(name, value)
 
-  new_data_frame(df, class = c("tidytable", "data.table"))
+  new_tidytable(l)
 }
