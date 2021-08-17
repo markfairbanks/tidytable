@@ -4,14 +4,15 @@ shallow <- function(x) {
   x[TRUE]
 }
 
-# Create a call to "[.data.table" (i position)
-call2_i <- function(data, i = NULL) {
-  call2("[", data, i)
+# Create a call to `[.data.table` (i position)
+call2_i <- function(.df, i = NULL) {
+  # Use enquo(.df) to clean up error messages, #305
+  call2("[", enquo(.df), i)
 }
 
-# Create a call to "[.data.table" (j position)
-call2_j <- function(data, j = NULL, .by = NULL, ...) {
-  dt_expr <- call2("[", data, , j, by = .by, ...)
+# Create a call to `[.data.table` (j position)
+call2_j <- function(.df, j = NULL, .by = NULL, ...) {
+  dt_expr <- call2("[", enquo(.df), , j, by = .by, ...)
   call2("[", dt_expr)
 }
 
