@@ -50,13 +50,7 @@ df_name_repair <- function(.df, .name_repair = "unique") {
   .df
 }
 
-# Allows use of quosures inside data.tables
-# Squashes all quosures to expressions
-eval_quo <- function(express, data = NULL, env = caller_env()) {
-  eval_tidy(quo_squash(enquo(express)), data = data, env = env)
-}
-
-# Reduce a list of calls
+# Reduce a list of calls to a single combined call
 call_reduce <- function(x, fun) {
   Reduce(function(x, y) call2(fun, x, y), x)
 }
