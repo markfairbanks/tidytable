@@ -49,3 +49,24 @@ test_that("bad inputs generate errors", {
   df <- tidytable(x = 1, y = list(mean))
   expect_error(unnest_longer(df, y))
 })
+
+test_that("ptype and transform work", {
+  df <- tidytable(
+    x = 1:3,
+    y = list(0, 1:3, 4:5)
+  )
+
+  ptype_df <- df %>%
+    unnest_longer.(y, ptype = list(y = int()))
+
+  expect_true(is.integer(ptype_df$y))
+
+  transform_df <- df %>%
+    unnest_longer.(y, transform = list(y = as.integer))
+
+  expect_true(is.integer(transform_df$y))
+})
+
+
+
+

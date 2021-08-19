@@ -124,21 +124,15 @@ deprecate_old_across <- function(fn) {
 change_types <- function(.df, .to, .list, .ptypes_transform) {
   vars <- intersect(.to, names(.list))
   if (length(vars) > 0) {
-    calls <- vector("list", length(vars))
-    names(calls) <- vars
     if (.ptypes_transform == "ptypes") {
-      .fn <- "vec_cast"
-      for (i in seq_along(vars)) {
-        calls[[i]] <- call2(.fn, sym(vars[[i]]), .list[[i]])
-      }
+      calls <- map2.(syms(vars), .list, ~ call2("vec_cast", .x, .y))
     } else if (.ptypes_transform == "transform") {
-      for (i in seq_along(vars)) {
-        .fn <- as_function(.list[[i]])
-        calls[[i]] <- call2(.fn, sym(vars[[i]]))
-      }
+      .list <- map.(.list, as_function)
+      calls <- map2.(.list, syms(vars), call2)
     } else {
       abort("Please specify ptypes or transform")
     }
+    names(calls) <- vars
     .df <- mutate.(.df, !!!calls)
   }
   .df
