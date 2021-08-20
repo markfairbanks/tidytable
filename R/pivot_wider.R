@@ -100,7 +100,7 @@ pivot_wider..tidytable <- function(.df,
 
     glue_vars <- as.character(glue_data(glue_df, names_glue))
   } else if (!is.null(names_glue)) {
-    .df <- mutate.(.df, .names_from = glue(names_glue, .envir = .SD))
+    .df <- mutate.(.df, .names_from = glue(names_glue))
     .df <- relocate.(.df, .names_from, .before = !!sym(names_from[[1]]))
     .df <- .df[, -..names_from]
 
