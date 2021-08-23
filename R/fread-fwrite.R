@@ -12,11 +12,11 @@
 #' @export
 #'
 #' @examples
-#' fread.(
-#'   "A,B
-#'   1,2
-#'   3,4"
-#' )
+#' fake_csv <- "A,B
+#'              1,2
+#'              3,4"
+#'
+#' fread.(fake_csv)
 fread. <- function(...) {
   .df <- fread(...)
   as_tidytable(.df)

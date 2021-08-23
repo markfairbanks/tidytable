@@ -20,9 +20,9 @@ instead of a data.table.
 \code{fwrite.()} is a simple wrapper around \code{data.table::fwrite()}.
 }
 \examples{
-fread.(
-  "A,B
-  1,2
-  3,4"
-)
+fake_csv <- "A,B
+             1,2
+             3,4"
+
+fread.(fake_csv)
 }
