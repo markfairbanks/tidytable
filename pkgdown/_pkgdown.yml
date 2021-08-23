@@ -89,3 +89,8 @@ reference:
   - is_tidytable
   - tidytable
 
+
+- title: Read/write files
+- contents:
+  - fread.
+
