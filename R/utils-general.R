@@ -23,6 +23,15 @@ call2_dt <- function(.fn, ..., .ns = "data.table") {
   quo_squash(call)
 }
 
+# Uses fast by trick for i position using .I
+# For use in slice/filter
+call2_fast_by_i <- function(.df, j, .by) {
+  dt_expr <- call2_j(.df, j, .by)
+  dt_expr <- call2("$", dt_expr, expr(V1))
+  dt_expr <- call2_i(.df, dt_expr)
+  dt_expr
+}
+
 # Extract environment from quosures to build the evaluation environment
 get_dt_env <- function(x, ...) {
   if (length(x) == 0) {

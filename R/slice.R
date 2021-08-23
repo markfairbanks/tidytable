@@ -61,11 +61,7 @@ slice..tidytable <- function(.df, ..., .by = NULL) {
   if (by_is_null) {
     i <- expr({.rows = c(!!!dots); .rows[data.table::between(.rows, -.N, .N)]})
     dt_expr <- call2_i(.df, i)
-
-    eval_tidy(dt_expr, env = dt_env)
   } else {
-    col_order <- names(.df)
-
     .by <- tidyselect_names(.df, !!.by)
 
     j <- expr(
@@ -74,14 +70,10 @@ slice..tidytable <- function(.df, ..., .by = NULL) {
       .I[.rows]}
     )
 
-    dt_expr <- call2_j(.df, j, .by)
-    dt_expr <- call2("$", dt_expr, expr(V1))
-    dt_expr <- call2_i(.df, dt_expr)
-
-    .df <- eval_tidy(dt_expr, env = dt_env)
-
-    setcolorder(.df, col_order)[]
+    dt_expr <- call2_fast_by_i(.df, j, .by)
   }
+
+  eval_tidy(dt_expr, env = dt_env)
 }
 
 #' @export
@@ -106,21 +98,11 @@ slice_head..tidytable <- function(.df, n = 5, .by = NULL) {
 
   .by <- tidyselect_names(.df, {{ .by }})
 
-  with_by <- length(.by) > 0
-
-  col_order <- names(.df)
-
   j <- expr(.I[seq.int(min(!!n, .N))])
 
-  dt_expr <- call2_j(.df, j, .by)
-  dt_expr <- call2("$", dt_expr, expr(V1))
-  dt_expr <- call2_i(.df, dt_expr)
+  dt_expr <- call2_fast_by_i(.df, j, .by)
 
   .df <- eval_tidy(dt_expr, env = dt_env)
-
-  if (with_by) {
-    setcolorder(.df, col_order)
-  }
 
   .df
 }
@@ -147,21 +129,11 @@ slice_tail..tidytable <- function(.df, n = 5, .by = NULL) {
 
   .by <- tidyselect_names(.df, {{ .by }})
 
-  with_by <- length(.by) > 0
-
-  col_order <- names(.df)
-
   j <- expr(.I[seq.int(.N - min(!!n, .N) + 1, .N)])
 
-  dt_expr <- call2_j(.df, j, .by)
-  dt_expr <- call2("$", dt_expr, expr(V1))
-  dt_expr <- call2_i(.df, dt_expr)
+  dt_expr <- call2_fast_by_i(.df, j, .by)
 
   .df <- eval_tidy(dt_expr, env = dt_env)
-
-  if (with_by) {
-    setcolorder(.df, col_order)
-  }
 
   .df
 }

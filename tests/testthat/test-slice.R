@@ -149,6 +149,14 @@ test_that("works in custom function", {
   expect_equal(sliced_df$y, c(4, 7))
 })
 
+test_that("preserves column order when .by is used", {
+  test_df <- tidytable(x = 1:3, y = c("a", "a", "b"))
+
+  sliced_df <- slice.(test_df, 1, .by = y)
+
+  expect_named(test_df, c("x", "y"))
+})
+
 # slice_head.() ----------------------------------------------------
 
 test_that("_head.() works when empty", {
@@ -166,7 +174,6 @@ test_that("_head.() works when empty, doesn't return NAs", {
 
   expect_equal(sliced_df, head(test_df, 3))
 })
-
 
 test_that("_head.() works with n specified", {
   test_df <- tidytable(x = 1:10, y = 20:11, z = c(rep("a", 6), rep("b", 4)))

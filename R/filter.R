@@ -49,9 +49,7 @@ filter..tidytable <- function(.df, ..., .by = NULL) {
 
     j <- expr(.I[!!i])
 
-    dt_expr <- call2_j(.df, j, .by)
-    dt_expr <- call2("$", dt_expr, expr(V1))
-    dt_expr <- call2_i(.df, dt_expr)
+    dt_expr <- call2_fast_by_i(.df, j, .by)
 
     .df <- eval_tidy(dt_expr, env = dt_env)
   }
