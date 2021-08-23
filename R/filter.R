@@ -38,7 +38,7 @@ filter..tidytable <- function(.df, ..., .by = NULL) {
 
   dots <- prep_exprs(dots, .df, !!.by)
 
-  i <- expr(Reduce('&', list(!!!dots)))
+  i <- call_reduce(dots, "&")
 
   if (quo_is_null(.by)) {
     dt_expr <- call2_i(.df, i)
