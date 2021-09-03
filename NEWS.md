@@ -1,4 +1,4 @@
-# tidytable 0.6.5 (in development)
+# tidytable 0.6.5
 
 #### New functions
 - `fread.()`
