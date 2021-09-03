@@ -1,2 +1,0 @@
-CC=/usr/local/opt/llvm/bin/clang -fopenmp
-CFLAGS=-g -O3 -Wall -pedantic -std=gnu99 -mtune=native -pipe

@@ -1,3 +1,25 @@
+# tidytable 0.6.4
+
+#### New functions
+* `unnest_longer.()`
+* `unnest_wider.()`
+
+#### Functionality improvements
+* `bind_rows.()`/`bind_cols.()`
+  + Can splice lists of data frames using `!!!`
+* `mutate.()`: Can use `glue::glue()` without specifying `.envir`
+* `pull.()`: Added a `name` argument
+* `separate.()`: Can omit output columns by using `NA` in `into`
+* `tidytable()`: Can splice quosures
+* `unnest.()`: Added `keep_empty` arg
+
+#### Deprecations
+* The following functions have all been deprecated due to the addition of
+  `across.()` in v0.6.1
+  + `arrange_across.()`
+  + `mutate_across.()`
+  + `summarize_across.()`
+
 # tidytable 0.6.3
 
 #### New functions

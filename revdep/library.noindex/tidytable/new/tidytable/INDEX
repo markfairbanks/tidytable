@@ -31,6 +31,7 @@ fill.                   Fill in missing values with previous or next
                         value
 filter.                 Filter rows on one or more conditions
 first.                  Extract the first or last value from a vector
+fread.                  Read/write files
 get_dummies.            Convert character and factor columns to dummy
                         variables
 group_split.            Split data frame by groups

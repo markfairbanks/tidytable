@@ -9,17 +9,14 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |ctype    |en_US.UTF-8                  |
-|tz       |America/Phoenix              |
-|date     |2021-07-30                   |
+|tz       |America/Denver               |
+|date     |2021-09-02                   |
 
 # Dependencies
 
-|package    |old   |new    |Δ  |
-|:----------|:-----|:------|:--|
-|tidytable  |0.6.3 |0.6.4  |*  |
-|data.table |NA    |1.14.1 |*  |
-|pillar     |NA    |1.6.2  |*  |
-|utf8       |NA    |1.2.2  |*  |
+|package   |old   |new   |Δ  |
+|:---------|:-----|:-----|:--|
+|tidytable |0.6.4 |0.6.5 |*  |
 
 # Revdeps
 

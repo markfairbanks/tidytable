@@ -1,5 +1,6 @@
 %>%	pipe
 %between%	reexports
+%chin%	reexports
 %like%	reexports
 %notin%	grapes-notin-grapes
 across.	across.
@@ -113,4 +114,6 @@ transmute.	transmute.
 uncount.	uncount.
 unite.	unite.
 unnest.	unnest.
+unnest_longer.	unnest_longer.
+unnest_wider.	unnest_wider.
 walk.	map.
