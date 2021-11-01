@@ -23,7 +23,8 @@ prep_expr <- function(x, data, .by = NULL, j = FALSE) {
 }
 
 call_fns <- c(
-  "across.", "c_across.", "case_when",
+  "across.", "between",
+  "c_across.", "case_when",
   "cur_group_rows.", "cur_group_rows", "cur_group_id.", "cur_group_id",
   "desc.", "desc",
   "glue",
@@ -87,6 +88,9 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE) {
       glue_call$.envir <- quote(.SD)
     }
     glue_call
+  } else if (is_call(x, "between", ns = "")) {
+    x[[1]] <- quote(between.)
+    x
   }
 }
 
