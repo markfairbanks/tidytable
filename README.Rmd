@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 #### Why `tidytable`?
 
 * `tidyverse`-like syntax built on top of the fast `data.table` package
-* Compatible with the tidy evaluation framework
+* Compatibility with the tidy evaluation framework
 * Includes functions that `dtplyr` is missing, including many `tidyr` functions
 
 ## Installation

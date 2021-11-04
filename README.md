@@ -16,7 +16,7 @@ downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=blue)](h
 
 -   `tidyverse`-like syntax built on top of the fast `data.table`
     package
--   Compatible with the tidy evaluation framework
+-   Compatibility with the tidy evaluation framework
 -   Includes functions that `dtplyr` is missing, including many `tidyr`
     functions
 

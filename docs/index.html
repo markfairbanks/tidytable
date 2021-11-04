@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.5.9</span>
       </span>
     </div>
 
@@ -101,9 +101,8 @@
 <a href="#why-tidytable" class="anchor"></a>Why <code>tidytable</code>?</h4>
 <ul>
 <li>
-<code>tidyverse</code>-like syntax with <code>data.table</code> speed</li>
-<li>
-<code>rlang</code> compatibility</li>
+<code>tidyverse</code>-like syntax built on top of the fast <code>data.table</code> package</li>
+<li>Compatibility with the tidy evaluation framework</li>
 <li>Includes functions that <code>dtplyr</code> is missing, including many <code>tidyr</code> functions</li>
 </ul>
 </div>
@@ -194,7 +193,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>group_row_num <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html">row_number</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 x 2</span>
+<span class="co">#&gt; # A tibble: 4 × 2</span>
 <span class="co">#&gt;   x     group_row_num</span>
 <span class="co">#&gt;   &lt;chr&gt;         &lt;int&gt;</span>
 <span class="co">#&gt; 1 a                 1</span>
@@ -259,10 +258,10 @@
 <span class="co">#&gt; 2 b     b       6</span></code></pre></div>
 </div>
 </div>
-<div id="rlang-compatibility" class="section level2">
+<div id="tidy-evaluation-compatibility" class="section level2">
 <h2 class="hasAnchor">
-<a href="#rlang-compatibility" class="anchor"></a>rlang compatibility</h2>
-<p><code>rlang</code> can be used to write custom functions with <code>tidytable</code> functions. The embracing shortcut <code>{{ }}</code> works, or you can use <code><a href="https://rlang.r-lib.org/reference/nse-defuse.html">enquo()</a></code> with <code>!!</code> if you prefer.</p>
+<a href="#tidy-evaluation-compatibility" class="anchor"></a>Tidy evaluation compatibility</h2>
+<p>Tidy evaluation can be used to write custom functions with <code>tidytable</code> functions. The embracing shortcut <code>{{ }}</code> works, or you can use <code><a href="https://rlang.r-lib.org/reference/nse-defuse.html">enquo()</a></code> with <code>!!</code> if you prefer.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"a"</span>,<span class="st">"b"</span><span class="op">)</span><span class="op">)</span>
 
@@ -279,6 +278,7 @@
 <span class="co">#&gt; 1     1     1 a           2</span>
 <span class="co">#&gt; 2     1     1 a           2</span>
 <span class="co">#&gt; 3     1     1 b           2</span></code></pre></div>
+<p>A full overview of tidy evaluation can be found <a href="https://rlang.r-lib.org/reference/topic-data-mask.html">here</a>.</p>
 </div>
 <div id="dt-helper" class="section level2">
 <h2 class="hasAnchor">
