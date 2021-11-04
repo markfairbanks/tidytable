@@ -2,6 +2,7 @@
 
 #### Functionality improvements
 * `between()` is now auto-translated to `between.()` when used inside `tidytable` functions
+* `%notin%` now uses `%chin%` on character vectors
 
 # tidytable 0.6.5
 

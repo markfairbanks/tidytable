@@ -14,5 +14,9 @@
 #' test_df %>%
 #'   filter.(x %notin% c(2, 4))
 '%notin%' <- function(x, y){
-  !vec_in(x, y)
+  if (is.character(x) && is.character(y)) {
+    !x %chin% y
+  } else {
+    !vec_in(x, y)
+  }
 }
