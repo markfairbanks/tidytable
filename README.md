@@ -14,8 +14,9 @@ downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=blue)](h
 
 #### Why `tidytable`?
 
--   `tidyverse`-like syntax with `data.table` speed
--   `rlang` compatibility
+-   `tidyverse`-like syntax built on top of the fast `data.table`
+    package
+-   Compatible with the tidy evaluation framework
 -   Includes functions that `dtplyr` is missing, including many `tidyr`
     functions
 
@@ -124,7 +125,7 @@ test_df %>%
   slice(1:2) %>%
   mutate(group_row_num = row_number()) %>%
   ungroup()
-#> # A tibble: 4 x 2
+#> # A tibble: 4 × 2
 #>   x     group_row_num
 #>   <chr>         <int>
 #> 1 a                 1
@@ -204,9 +205,9 @@ test_df %>%
 #> 2 b     b       6
 ```
 
-## rlang compatibility
+## Tidy evaluation compatibility
 
-`rlang` can be used to write custom functions with `tidytable`
+Tidy evaluation can be used to write custom functions with `tidytable`
 functions. The embracing shortcut `{{ }}` works, or you can use
 `enquo()` with `!!` if you prefer.
 
@@ -227,6 +228,9 @@ df %>%
 #> 2     1     1 a           2
 #> 3     1     1 b           2
 ```
+
+A full overview of tidy evaluation can be found
+[here](https://rlang.r-lib.org/reference/topic-data-mask.html).
 
 ## `dt()` helper
 

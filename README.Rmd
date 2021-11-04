@@ -25,8 +25,8 @@ knitr::opts_chunk$set(
 
 #### Why `tidytable`?
 
-* `tidyverse`-like syntax with `data.table` speed
-* `rlang` compatibility
+* `tidyverse`-like syntax built on top of the fast `data.table` package
+* Compatible with the tidy evaluation framework
 * Includes functions that `dtplyr` is missing, including many `tidyr` functions
 
 ## Installation
@@ -156,9 +156,9 @@ test_df %>%
   summarize.(avg_b = mean(b), .by = where(is.character))
 ```
 
-## rlang compatibility
+## Tidy evaluation compatibility
 
-`rlang` can be used to write custom functions with `tidytable` functions. The embracing shortcut `{{ }}` works, or you can use `enquo()` with `!!` if you prefer.
+Tidy evaluation can be used to write custom functions with `tidytable` functions. The embracing shortcut `{{ }}` works, or you can use `enquo()` with `!!` if you prefer.
 
 ```{r}
 df <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
@@ -171,6 +171,8 @@ add_one <- function(data, add_col) {
 df %>%
   add_one(x)
 ```
+
+A full overview of tidy evaluation can be found [here](https://rlang.r-lib.org/reference/topic-data-mask.html).
 
 ## `dt()` helper
 
