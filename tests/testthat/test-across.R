@@ -263,6 +263,19 @@ test_that("can pass list of functions with no names", {
   expect_equal(result_df$b_2, 6)
 })
 
+test_that("dots work with list of functions", {
+  test_df <- tidytable(a = c(1:2, NA), b = 4:6, z = c("a", "a", "b"))
+
+  result_df <- test_df %>%
+    summarize.(across.(c(a, b), list(mean = mean, max = max), na.rm = TRUE))
+
+  expect_named(result_df, c("a_mean", "a_max", "b_mean", "b_max"))
+  expect_equal(result_df$a_mean, 1.5)
+  expect_equal(result_df$b_mean, 5)
+  expect_equal(result_df$a_max, 2)
+  expect_equal(result_df$b_max, 6)
+})
+
 test_that("can pass list of functions with some names", {
   test_df <- tidytable(a = 1:3, b = 4:6, z = c("a", "a", "b"))
 

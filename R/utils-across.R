@@ -25,7 +25,7 @@ across_calls <- function(.fns, .cols, .names, dots) {
     for (i in seq_along(.cols)) {
       .col <- .cols[[i]]
       for (j in seq_along(.args)) {
-        call_list[[k]] <- fn_to_expr(.args[[j]], .col)
+        call_list[[k]] <- fn_to_expr(.args[[j]], .col, !!!dots)
         k <- k + 1
       }
     }
