@@ -228,31 +228,31 @@ test_that("can use .GRP", {
   expect_equal(df$z, c(1,1,2))
 })
 
-# test_that("can use .y in map2.() in nested data.tables", {
-#   test_df <- data.table(
-#     id = seq(1, 3),
-#     val_1 = seq(1, 3, 1),
-#     val_2 = seq(4, 6, 1)
-#   )
-#
-#   result_df1 <- test_df %>%
-#     nest_by.(id) %>%
-#     mutate.(example_1 = map2.(data, id,
-#                               ~ mutate.(.x, id = .y))) %>%
-#     unnest.(example_1)
-#
-#   expect_named(result_df1, c("id","val_1", "val_2", "id1"))
-#   expect_equal(result_df1$id1, c(1,2,3))
-#
-#   result_df2 <- test_df %>%
-#     nest_by.(id) %>%
-#     mutate.(example_1 = map2.(data, id,
-#                               ~ .x %>% mutate.(id = .y))) %>%
-#     unnest.(example_1)
-#
-#   expect_named(result_df2, c("id","val_1", "val_2", "id1"))
-#   expect_equal(result_df2$id1, c(1,2,3))
-# })
+test_that("can use .y in map2.() in nested data.tables", {
+  test_df <- data.table(
+    id = seq(1, 3),
+    val_1 = seq(1, 3, 1),
+    val_2 = seq(4, 6, 1)
+  )
+
+  result_df1 <- test_df %>%
+    nest_by.(id) %>%
+    mutate.(example_1 = map2.(data, id,
+                              ~ mutate.(.x, id1 = .y))) %>%
+    unnest.(example_1)
+
+  expect_named(result_df1, c("id","val_1", "val_2", "id1"))
+  expect_equal(result_df1$id1, c(1,2,3))
+
+  result_df2 <- test_df %>%
+    nest_by.(id) %>%
+    mutate.(example_1 = map2.(data, id,
+                              ~ .x %>% mutate.(id1 = .y))) %>%
+    unnest.(example_1)
+
+  expect_named(result_df2, c("id","val_1", "val_2", "id1"))
+  expect_equal(result_df2$id1, c(1,2,3))
+})
 
 test_that("can make custom functions with quosures", {
   df <- data.table(x = c(1,2,3), y = c(1,1,1), z = c("a","a","b"))
