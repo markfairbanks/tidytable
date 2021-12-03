@@ -25,11 +25,22 @@ dt <- function(.df, ...) {
 
 #' @export
 dt.tidytable <- function(.df, ...) {
-  dots <- substitute(list(...))
+  # TODO: Add test that let() doesn't modify-by-reference
+    ## once 1.14.4 is released
+  dots <- as.list(substitute(...()))
+  dots_names <- names(dots)
 
-  needs_copy <- str_detect.(expr_text(dots), ":=")
+  if (length(dots) > 1 | "j" %chin% dots_names) {
+    if ("j" %chin% dots_names) {
+      j <- dots[["j"]]
+    } else {
+      j <- dots[[2]]
+    }
 
-  if (needs_copy) .df <- copy(.df)
+    if (is_call(j, c(":=", "let"))) {
+      .df <- copy(.df)
+    }
+  }
 
   .df[...]
 }
