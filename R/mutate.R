@@ -135,8 +135,7 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
   }
 
   if (needs_relocate) {
-    df_names <- names(.df)
-    new_names <- df_names[df_names %notin% original_names]
+    new_names <- setdiff(names(.df), original_names)
     .df <- relocate.(.df, !!!syms(new_names), .before = !!.before, .after = !!.after)
   }
 
