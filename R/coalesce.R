@@ -27,6 +27,5 @@ coalesce. <- function(...) {
   values <- list2(...)
   values <- vec_cast_common(!!!values)
 
-  dt_expr <- call2_dt("fcoalesce", !!!values)
-  eval_tidy(dt_expr)
+  do.call("fcoalesce", values)
 }
