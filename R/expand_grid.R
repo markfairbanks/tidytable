@@ -19,7 +19,7 @@
 expand_grid. <- function(..., .name_repair = "check_unique") {
   dots <- dots_list(..., .named = TRUE)
 
-  result_df <- exec("CJ", !!!dots, unique = FALSE, sorted = FALSE, .env = caller_env())
+  result_df <- exec("CJ", !!!dots, unique = FALSE, sorted = FALSE)
 
   setkey(result_df, NULL)
 
