@@ -29,9 +29,7 @@ crossing. <- function(..., .name_repair = "check_unique") {
 crossing_vec <- function(..., .name_repair = "check_unique") {
   dots <- list2(...)
 
-  cj <- call2_dt("CJ", !!!dots, unique = TRUE, sorted = TRUE)
-
-  result_df <- eval_tidy(cj, env = caller_env())
+  result_df <- exec("CJ", !!!dots, unique = TRUE, sorted = TRUE)
 
   setkey(result_df, NULL)
 
