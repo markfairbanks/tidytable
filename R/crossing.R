@@ -29,7 +29,7 @@ crossing. <- function(..., .name_repair = "check_unique") {
 crossing_vec <- function(..., .name_repair = "check_unique") {
   dots <- list2(...)
 
-  result_df <- exec("CJ", !!!dots, unique = TRUE, sorted = TRUE)
+  result_df <- exec("CJ", !!!dots, unique = TRUE, sorted = TRUE, .env = caller_env())
 
   result_df <- df_name_repair(result_df, .name_repair = .name_repair)
 
