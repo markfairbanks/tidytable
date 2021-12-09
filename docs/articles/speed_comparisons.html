@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,18 +41,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.5.9</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -72,7 +68,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/markfairbanks/tidytable/">
+  <a href="https://github.com/markfairbanks/tidytable/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -87,38 +83,38 @@
 
       
 
-      </header><script src="speed_comparisons_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>speed_comparisons</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/markfairbanks/tidytable/blob/master/vignettes/speed_comparisons.Rmd"><code>vignettes/speed_comparisons.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/markfairbanks/tidytable/blob/HEAD/vignettes/speed_comparisons.Rmd" class="external-link"><code>vignettes/speed_comparisons.Rmd</code></a></small>
       <div class="hidden name"><code>speed_comparisons.Rmd</code></div>
 
     </div>
 
     
     
-<div id="speed-comparisons" class="section level3">
-<h3 class="hasAnchor">
-<a href="#speed-comparisons" class="anchor"></a>Speed Comparisons</h3>
+<div class="section level3">
+<h3 id="speed-comparisons">Speed Comparisons<a class="anchor" aria-label="anchor" href="#speed-comparisons"></a>
+</h3>
 <p>A few notes:</p>
 <ul>
-<li>Comparing times from separate functions won’t be very useful. For example - the <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> tests were performed on a different dataset from <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code>.</li>
+<li>Comparing times from separate functions won’t be very useful. For example - the <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code> tests were performed on a different dataset from <code><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when()</a></code>.</li>
 <li>
-<code><a href="https://Rdatatable.gitlab.io/data.table/reference/openmp-utils.html">setDTthreads(4)</a></code> was used for <code>data.table</code> &amp; <code>tidytable</code> timings.</li>
-<li>Modify-by-reference was used in <code>data.table</code> when being compared to <code><a href="../reference/mutate..html">mutate.()</a></code> &amp; <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code>
+<code>setDTthreads(4)</code> was used for <code>data.table</code> &amp; <code>tidytable</code> timings.</li>
+<li>Modify-by-reference was used in <code>data.table</code> when being compared to <code><a href="../reference/mutate..Rd.html">mutate.()</a></code> &amp; <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code>
 </li>
 <li>
-<code><a href="../reference/fill..html">fill.()</a></code> &amp; <code><a href="https://tidyr.tidyverse.org/reference/fill.html">tidyr::fill()</a></code> both work with character/factor/logical columns, whereas <code><a href="https://Rdatatable.gitlab.io/data.table/reference/nafill.html">data.table::nafill()</a></code> does not. Testing only included numeric columns due to this constraint.</li>
+<code><a href="../reference/fill..Rd.html">fill.()</a></code> &amp; <code><a href="https://tidyr.tidyverse.org/reference/fill.html" class="external-link">tidyr::fill()</a></code> both work with character/factor/logical columns, whereas <code><a href="https://Rdatatable.gitlab.io/data.table/reference/nafill.html" class="external-link">data.table::nafill()</a></code> does not. Testing only included numeric columns due to this constraint.</li>
 <li>
 <code>dtplyr</code> is missing timings for functions that are not yet implemented in the package.</li>
 <li>
 <code>pandas</code> comparisons are in the process of being added - more will be added soon.</li>
 <li>All tests are run 5 times. The times shown are the median of those 5 runs.</li>
 <li>All timings are in milliseconds.</li>
-<li>All tests can be found in the source code <a href="https://github.com/markfairbanks/tidytable/blob/master/vignettes/speed_comparisons.Rmd">here</a>.</li>
+<li>All tests can be found in the source code <a href="https://github.com/markfairbanks/tidytable/blob/master/vignettes/speed_comparisons.Rmd" class="external-link">here</a>.</li>
 <li>FAQ - Why are some <code>tidytable</code> functions faster than their <code>data.table</code> counterpart?
 <ul>
 <li>Short answer - they’re not! After all they’re just using <code>data.table</code> in the background.</li>
@@ -127,22 +123,22 @@
 </li>
 <li>Lastly I’d like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.</li>
 </ul>
-<pre><code>#&gt; # A tidytable: 13 × 7
-#&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas tidytable_vs_dplyr
-#&gt;    &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             
-#&gt;  1 arrange            41.7      45.4   50.3    1371    355   3.3%              
-#&gt;  2 case_when          35.4      30     NA       345.    59.2 8.7%              
-#&gt;  3 distinct           13.7      15.5   21.5      34.7  309   44.7%             
-#&gt;  4 fill               43.3      45.2   NA        65.4  846   69.1%             
-#&gt;  5 filter            233       224.   227.      278.   707   80.6%             
-#&gt;  6 inner_join         45.2      61.7   52.7      74.5   NA   82.8%             
-#&gt;  7 left_join          51.8      60.8  129.      171.    NA   35.5%             
-#&gt;  8 mutate             62.4      64    450.       58.2   86.4 110.0%            
-#&gt;  9 nest                6.3      14.7   NA        28.1   NA   52.3%             
-#&gt; 10 pivot_longer        8        13     NA        38.6   NA   33.7%             
-#&gt; 11 pivot_wider        37.7      65.9  103.      165.    NA   40.0%             
-#&gt; 12 summarize         205.      227.   264.      254.   834   89.2%             
-#&gt; 13 unnest              8.5      14.3   NA        36.8   NA   38.9%</code></pre>
+<pre><code><span class="co">#&gt; <span style="color: #949494;"># A tidytable: 13 × 6</span></span>
+<span class="co">#&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> arrange            35.6      35.2   35.6    <span style="text-decoration: underline;">1</span>222.   355  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> case_when          32.6      30.5   <span style="color: #BB0000;">NA</span>       373.    59.2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> distinct           15.6      12.2   15.7      37.7  309  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> fill               47.2      58.7   48        65.7  846  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> filter            214.      207.   213.      268.   707  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> inner_join         50.1      42.8   68.5      82.2   <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> left_join          59.4      64.6   73.4      79.5   <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> mutate             56.4      70.8  283.       70     86.4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> nest                7.2      12.7   21.9      32.1   <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> pivot_longer        8.5       6.7   13.1      11.8   <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> pivot_wider        41.7      58.6  117.      161.    <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> summarize         200.      192.   213.      213.   834  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> unnest              8.2      15.7   <span style="color: #BB0000;">NA</span>         9.5   <span style="color: #BB0000;">NA</span></span></code></pre>
 </div>
   </div>
 
@@ -155,11 +151,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Mark Fairbanks.</p>
+  <p></p>
+<p>Developed by Mark Fairbanks.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -167,6 +165,8 @@
 
   
 
+
+  
 
   </body>
 </html>

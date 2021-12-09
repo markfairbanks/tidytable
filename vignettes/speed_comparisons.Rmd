@@ -147,6 +147,7 @@ fill_tbl <- as_tibble(fill_dt)
 
 fill_marks <- bench::mark(
   tidyverse = fill(group_by(fill_tbl, id), int1, int2),
+  dtplyr = as.data.table(fill(group_by(lazy_dt(fill_dt), id), int1, int2)),
   tidytable = fill.(fill_dt, int1, int2, .by = id),
   # needs a copy or subsequent runs won't have NAs to fill
   data.table = copy(fill_dt)[,
@@ -220,7 +221,8 @@ longer_tbl <- as_tibble(longer_dt)
 
 longer_marks <- bench::mark(
   tidyverse = pivot_longer(longer_tbl, cols = -id),
-  tidytable = pivot_longer.(longer_dt, cols = -id),
+  dtplyr = as.data.table(pivot_longer(lazy_dt(longer_dt), cols = -id)),
+  tidytable = pivot_longer.(longer_dt, cols = -id, fast_pivot = TRUE),
   data.table = data.table::melt(longer_dt, measure.vars = names(longer_dt)[names(longer_dt) != "id"],
                                 variable.name = "name", variable.factor = FALSE),
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
@@ -298,6 +300,7 @@ nest_tbl <- as_tibble(nest_dt)
 
 nest_marks <- bench::mark(
   tidyverse = group_nest(nest_tbl, id),
+  dtplyr = as.data.table(nest(lazy_dt(nest_dt), data = -id)),
   tidytable = nest_by.(nest_dt, id),
   data.table = nest_dt[, list(data = list(.SD)), by = id],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
@@ -381,7 +384,6 @@ all_marks <- all_marks %>%
   mutate(median = round(median, 1)) %>%
   pivot_wider.(names_from = expression, values_from = median) %>%
   as_tibble() %>%
-  mutate(tidytable_vs_dplyr = scales::percent(tidytable/tidyverse, accuracy = .1)) %>%
   # mutate_at(vars(tidyverse, tidytable, data.table, dtplyr), ~str_c(.x, "ms")) %>%
   arrange(func_tested)
 ```
@@ -398,7 +400,7 @@ pandas_marks <- tibble(arrange = 355,
 
 all_marks <- all_marks %>%
   left_join(pandas_marks) %>%
-  select.(func_tested, data.table, tidytable, dtplyr, tidyverse, pandas, tidytable_vs_dplyr)
+  select.(func_tested, data.table, tidytable, dtplyr, tidyverse, pandas)
 ```
 
 ```{r echo=FALSE}
