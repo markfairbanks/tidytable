@@ -16,13 +16,6 @@ call2_j <- function(.df, j = NULL, .by = NULL, ...) {
   call2("[", dt_expr)
 }
 
-# Call a data.table function
-# Squashes quosures
-call2_dt <- function(.fn, ..., .ns = "data.table") {
-  call <- call2(.fn, ..., .ns = .ns)
-  quo_squash(call)
-}
-
 # Uses fast by trick for i position using .I
 # For use in slice/filter
 call2_fast_by_i <- function(.df, j, .by) {
