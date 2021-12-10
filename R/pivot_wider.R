@@ -65,7 +65,7 @@ pivot_wider..tidytable <- function(.df,
                                   values_fill = NULL,
                                   values_fn = NULL) {
   id_cols <- enquo(id_cols)
-  values_fn <- enquo(values_fn)
+  values_fn <- quo_squash(enquo(values_fn))
 
   names_from <- tidyselect_names(.df, {{ names_from }})
   values_from <- tidyselect_names(.df, {{ values_from }})
@@ -119,14 +119,15 @@ pivot_wider..tidytable <- function(.df,
 
   dcast_form <- paste(lhs, rhs, sep = " ~ ")
 
-  dcast_call <- call2_dt(
+  dcast_call <- call2(
     "dcast",
-    .df,
+    quo(.df), # use quo(.df) to clean up error messages (#305)
     formula = dcast_form,
     value.var = values_from,
     fun.aggregate = expr(!!values_fn),
     sep = names_sep,
-    fill = values_fill
+    fill = values_fill,
+    .ns = "data.table"
   )
 
   .df <- eval_tidy(dcast_call)
