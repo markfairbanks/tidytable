@@ -1,6 +1,6 @@
 Package: tidytable
 Title: Tidy Interface to 'data.table'
-Version: 0.6.6
+Version: 0.6.6.9
 Authors@R: 
     c(person(given = "Mark",
              family = "Fairbanks",
