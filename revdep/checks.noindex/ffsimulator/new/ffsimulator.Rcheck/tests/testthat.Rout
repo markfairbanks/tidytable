@@ -1,0 +1,35 @@
+
+R version 4.1.0 (2021-05-18) -- "Camp Pontanezen"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> library(ffsimulator)
+> library(checkmate)
+> 
+> test_check("ffsimulator")
+══ Skipped tests ═══════════════════════════════════════════════════════════════
+• On CRAN (6)
+
+[ FAIL 0 | WARN 0 | SKIP 6 | PASS 27 ]
+Deleting unused snapshots:
+* ffs_autoplot/points-plot.svg
+* ffs_autoplot/rank-plot.svg
+* ffs_autoplot/weekly-luck-plot.svg
+* ffs_autoplot/weekly-points-plot.svg
+> 
+> proc.time()
+   user  system elapsed 
+  4.492   0.400   7.123 

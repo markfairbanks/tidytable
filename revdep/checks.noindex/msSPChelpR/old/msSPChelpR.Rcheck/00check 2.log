@@ -1,0 +1,10 @@
+* using log directory ‘/Users/xmxf129/Desktop/NU/R/R_Packages/tidytable/revdep/checks.noindex/msSPChelpR/old/msSPChelpR.Rcheck’
+* using R version 4.1.0 (2021-05-18)
+* using platform: x86_64-apple-darwin17.0 (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘msSPChelpR/DESCRIPTION’ ... OK
+* this is package ‘msSPChelpR’ version ‘0.8.7’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ...

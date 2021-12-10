@@ -1,4 +1,4 @@
-# tidytable 0.6.6 (in development)
+# tidytable 0.6.6
 
 #### Functionality improvements
 * `between()` is now auto-translated to `between.()` when used inside `tidytable` functions

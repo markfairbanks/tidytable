@@ -39,7 +39,9 @@ extract.	extract.
 fill.	fill.
 filter.	filter.
 first.	first.
+fread.	fread.
 full_join.	left_join.
+fwrite.	fread.
 getDTthreads	reexports
 get_dummies.	get_dummies.
 glimpse	reexports
