@@ -1,5 +1,8 @@
 # tidytable 0.6.7 (in development)
 
+#### Functionality improvements
+* `mutate.()`: Can use `stringr::str_glue()` without specifying `.envir`
+
 # tidytable 0.6.6
 
 #### Functionality improvements

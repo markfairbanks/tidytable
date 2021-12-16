@@ -31,7 +31,8 @@ call_fns <- c(
   "ifelse", "if_else",
   "if_all.", "if_any.",
   "n.", "n", "row_number.", "row_number",
-  "replace_na"
+  "replace_na",
+  "str_glue"
 )
 
 prep_expr_call <- function(x, data, .by = NULL, j = FALSE) {
@@ -81,7 +82,10 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE) {
     dots <- call$...
     call_list <- across_calls(call$.fns, .cols, call$.names, dots)
     lapply(call_list, prep_expr, data, {{ .by }})
-  } else if (is_call(x, "glue") && j) {
+  } else if (is_call(x, c("glue", "str_glue")) && j) {
+    if (is_call(x, "str_glue")) {
+      x[[1]] <- quote(glue)
+    }
     # Needed so the user doesn't need to specify .envir, #276
     glue_call <- match.call(glue::glue, x, expand.dots = TRUE)
     if (is.null(glue_call$.envir)) {
