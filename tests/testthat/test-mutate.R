@@ -339,4 +339,11 @@ test_that("Can use glue, #276", {
   expect_equal(as.character(out$new), c("a_a", "b_b", "c_c"))
 })
 
+test_that("Can use str_glue, #378", {
+  test_df <- data.table(a = letters[1:3], b = letters[1:3])
+  out <- mutate.(test_df, new = str_glue("{a}_{b}"))
+  expect_named(out, c("a", "b", "new"))
+  expect_equal(as.character(out$new), c("a_a", "b_b", "c_c"))
+})
+
 
