@@ -53,15 +53,15 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE) {
       x <- match.call(base::ifelse, x)
     }
     x <- unname(x)
-    x[[1]] <- quote(ifelse.)
+    x[[1]] <- quote(tidytable::ifelse.)
     x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }})
     x
   } else if (is_call(x, "case_when", ns = "")) {
-    x[[1]] <- quote(case_when.)
+    x[[1]] <- quote(tidytable::case_when.)
     x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }})
     x
   } else if (is_call(x, "replace_na")) {
-    x[[1]] <- quote(replace_na.)
+    x[[1]] <- quote(tidytable::replace_na.)
     x
   } else if (is_call(x, "c_across.")) {
     call <- match.call(tidytable::c_across., x, expand.dots = FALSE)
@@ -84,7 +84,7 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE) {
     lapply(call_list, prep_expr, data, {{ .by }})
   } else if (is_call(x, c("glue", "str_glue")) && j) {
     if (is_call(x, "str_glue")) {
-      x[[1]] <- quote(glue)
+      x[[1]] <- quote(glue::glue)
     }
     # Needed so the user doesn't need to specify .envir, #276
     glue_call <- match.call(glue::glue, x, expand.dots = TRUE)
@@ -93,7 +93,7 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE) {
     }
     glue_call
   } else if (is_call(x, "between", ns = "")) {
-    x[[1]] <- quote(between.)
+    x[[1]] <- quote(tidytable::between.)
     x
   }
 }
