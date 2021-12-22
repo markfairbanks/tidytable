@@ -2,6 +2,7 @@
 
 #### Functionality improvements
 * `mutate.()`: Can use `stringr::str_glue()` without specifying `.envir`
+* `replace_na.()`: Checks that `replace` arg only uses columns that exist in the data frame
 
 # tidytable 0.6.6
 
