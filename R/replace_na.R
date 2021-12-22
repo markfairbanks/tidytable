@@ -38,9 +38,8 @@ replace_na..default <- function(.x, replace = NA) {
     .x[null_bool] <- replace
     .x
   } else {
-    replace <- vec_cast(replace, vec_ptype(.x))
-
-    .x %|% replace
+    missing <- vec_equal_na(.x)
+    vec_assign(.x, missing, replace)
   }
 }
 
@@ -50,16 +49,15 @@ replace_na..tidytable <- function(.x, replace = list()) {
 
   if (length(replace) == 0) return(.x)
 
-  replace_vars <- intersect(names(replace), names(.x))
+  keep_bool <- names(replace) %in% names(.x)
 
-  calls <- vector("list", length(replace_vars))
+  replace <- replace[keep_bool]
+
+  replace_vars <- names(replace)[keep_bool]
+
+  calls <- map2.(syms(replace_vars), replace, ~ call2("replace_na.", .x, .y, .ns = "tidytable"))
+
   names(calls) <- replace_vars
-  for (i in seq_along(replace_vars)) {
-    calls[[i]] <- call2(
-      "replace_na.", sym(replace_vars[[i]]), replace[[i]],
-      .ns = "tidytable"
-    )
-  }
 
   .x <- mutate.(.x, !!!calls)
 
