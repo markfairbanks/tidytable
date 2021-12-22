@@ -117,7 +117,8 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
     if (length(dots) > 0) {
       dots <- exprs_auto_name(dots)
       dots_names <- names(dots)
-      assign <- map2.(syms(dots_names), dots, ~ call2("<-", .x, .y))
+      assign <- map2.(syms(dots_names), dots, ~ call2("=", .x, .y))
+      dots_names <- unique(dots_names)
       output <- call2("list", !!!syms(dots_names))
       expr <- call2("{", !!!assign, output)
       j <- call2(":=", call2("c", !!!dots_names), expr)

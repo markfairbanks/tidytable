@@ -346,4 +346,11 @@ test_that("Can use str_glue, #378", {
   expect_equal(as.character(out$new), c("a_a", "b_b", "c_c"))
 })
 
+test_that("Can assign to the same column multiple times when .by = character(0), #332", {
+  test_df <- tidytable(x = 1, y = 2)
+  out <- mutate.(test_df, x = x + 10, x = x, .by = character(0))
+  expect_named(out, c("x", "y"))
+  expect_equal(out$x, 11)
+})
+
 
