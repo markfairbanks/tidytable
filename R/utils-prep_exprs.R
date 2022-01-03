@@ -17,7 +17,7 @@ prep_expr <- function(x, data, .by = NULL, j = FALSE) {
   } else if (is_call(x, call_fns)) {
     prep_expr_call(x, data, {{ .by }}, j)
   } else {
-    x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }})
+    x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }}, j)
     x
   }
 }

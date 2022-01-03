@@ -344,6 +344,8 @@ test_that("Can use str_glue, #378", {
   out <- mutate.(test_df, new = str_glue("{a}_{b}"))
   expect_named(out, c("a", "b", "new"))
   expect_equal(as.character(out$new), c("a_a", "b_b", "c_c"))
+  out2 <- mutate.(test_df, new = paste0(str_glue("{a}_{b}_check")))
+  expect_equal(as.character(out2$new), c("a_a_check", "b_b_check", "c_c_check"))
 })
 
 test_that("Can assign to the same column multiple times when .by = character(0), #332", {
