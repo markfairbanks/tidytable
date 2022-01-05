@@ -74,7 +74,7 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
 
   if (quo_is_null(.by)) {
     for (i in seq_along(dots)) {
-      dots_i <- prep_exprs(dots[i], .df, !!.by, j = TRUE)
+      dots_i <- prep_exprs(dots[i], .df, !!.by, j = TRUE, dt_env)
       if (length(dots_i) == 0) next
       dots_i <- exprs_auto_name(dots_i)
       dots_i_names <- names(dots_i)
@@ -85,7 +85,7 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
 
       dt_expr <- call2_j(.df, j)
 
-      .df <- eval_tidy(dt_expr, env = dt_env)
+      .df <- eval_tidy(dt_expr, .df, dt_env)
     }
   } else {
     if (length(dots) > 1) {
@@ -97,7 +97,7 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
       }
     }
 
-    dots <- prep_exprs(dots, .df, !!.by, j = TRUE)
+    dots <- prep_exprs(dots, .df, !!.by, j = TRUE, dt_env)
 
     .by <- tidyselect_names(.df, !!.by)
 
@@ -124,14 +124,14 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
       j <- call2(":=", call2("c", !!!dots_names), expr)
       dt_expr <- call2_j(.df, j, .by)
 
-      .df <- eval_tidy(dt_expr, env = dt_env)
+      .df <- eval_tidy(dt_expr, .df, dt_env)
     }
 
     if (any_null) {
       j <- call2(":=", !!!null_dots)
       dt_expr <- call2_j(.df, j)
 
-      .df <- eval_tidy(dt_expr, env = dt_env)
+      .df <- eval_tidy(dt_expr, .df, dt_env)
     }
   }
 

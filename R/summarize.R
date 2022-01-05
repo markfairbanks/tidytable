@@ -42,7 +42,7 @@ summarize..tidytable <- function(.df, ..., .by = NULL, .sort = FALSE) {
 
   dt_env <- get_dt_env(dots)
 
-  dots <- prep_exprs(dots, .df, {{ .by }})
+  dots <- prep_exprs(dots, .df, {{ .by }}, dt_env = dt_env)
 
   .by <- tidyselect_names(.df, {{ .by }})
 
@@ -50,7 +50,7 @@ summarize..tidytable <- function(.df, ..., .by = NULL, .sort = FALSE) {
 
   dt_expr <- call2_j(.df, j, .by)
 
-  .df <- eval_tidy(dt_expr, env = dt_env)
+  .df <- eval_tidy(dt_expr, .df, dt_env)
 
   if (.sort) {
     .df <- arrange.(.df, !!!syms(.by))

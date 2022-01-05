@@ -141,3 +141,25 @@ test_that("can make a function with quosures", {
 
   expect_equal(tidytable_df, datatable_df)
 })
+
+test_that("can use .data and .env", {
+  df <- tidytable(x = 1:3)
+
+  x <- 1
+
+  result_df <- df %>%
+    summarize.(check = mean(.data$x) + .env$x)
+
+  expect_equal(result_df$check, 3)
+})
+
+test_that("can use .data and .env with .by", {
+  df <- tidytable(x = 1:4, y = c("a","a","a","b"))
+
+  x <- 1
+
+  result_df <- df %>%
+    summarize.(check = mean(.data$x) + .env$x, .by = y)
+
+  expect_equal(result_df$check, c(3, 5))
+})
