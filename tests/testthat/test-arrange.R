@@ -83,3 +83,11 @@ test_that("can make function with quosures", {
   expect_equal(df$x, c(3,2,1))
   expect_equal(df$y, c("b", "a", "a"))
 })
+
+test_that("can use .data", {
+  df <- data.table(x = c(4,3,9,7), y = 1:4)
+  df <- df %>%
+    arrange.(.data$x)
+
+  expect_equal(df$x, c(3,4,7,9))
+})

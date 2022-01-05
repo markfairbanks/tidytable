@@ -29,8 +29,12 @@ arrange. <- function(.df, ...) {
 #' @export
 arrange..tidytable <- function(.df, ...) {
   dots <- enquos(...)
+
   if (length(dots) == 0) return(.df)
-  dots <- prep_exprs(dots, .df)
+
+  dt_env <- get_dt_env(dots)
+
+  dots <- prep_exprs(dots, .df, dt_env = dt_env)
 
   i <- expr(order(!!!dots))
 

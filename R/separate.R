@@ -57,6 +57,8 @@ separate..tidytable <- function(.df, col, into,
 
   col <- enquo(col)
 
+  col <- tidyselect_syms(.df, !!col)[[1]]
+
   not_na_into <- !is.na(into)
 
   keep <- seq_along(into)[not_na_into]
