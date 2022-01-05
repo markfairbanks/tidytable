@@ -2,12 +2,12 @@
 # Allows the use of functions like n() and across.()
 # Replaces these functions with the necessary data.table translations
 # General idea follows dt_squash found here: https://github.com/tidyverse/dtplyr/blob/master/R/tidyeval.R
-prep_exprs <- function(x, data, .by = NULL, j = FALSE) {
-  x <- lapply(x, prep_expr, data, {{ .by }}, j = j)
+prep_exprs <- function(x, data, .by = NULL, j = FALSE, dt_env) {
+  x <- lapply(x, prep_expr, data, {{ .by }}, j = j, dt_env = dt_env)
   squash(x)
 }
 
-prep_expr <- function(x, data, .by = NULL, j = FALSE) {
+prep_expr <- function(x, data, .by = NULL, j = FALSE, dt_env) {
   if (is_quosure(x)) {
     x <- get_expr(x)
   }
@@ -15,14 +15,15 @@ prep_expr <- function(x, data, .by = NULL, j = FALSE) {
   if (is_symbol(x) || is_atomic(x) || is_null(x)) {
     x
   } else if (is_call(x, call_fns)) {
-    prep_expr_call(x, data, {{ .by }}, j)
+    prep_expr_call(x, data, {{ .by }}, j, dt_env)
   } else {
-    x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }}, j)
+    x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }}, j = j, dt_env = dt_env)
     x
   }
 }
 
 call_fns <- c(
+  "$", "[[",
   "across.", "between",
   "c_across.", "case_when",
   "cur_group_rows.", "cur_group_rows", "cur_group_id.", "cur_group_id",
@@ -35,7 +36,7 @@ call_fns <- c(
   "str_glue"
 )
 
-prep_expr_call <- function(x, data, .by = NULL, j = FALSE) {
+prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env) {
   if (is_call(x, c("n.", "n"))) {
     quote(.N)
   } else if (is_call(x, c("desc.", "desc"))) {
@@ -95,7 +96,21 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE) {
   } else if (is_call(x, "between", ns = "")) {
     x[[1]] <- quote(tidytable::between.)
     x
+  } else if (is_data_pronoun(x)) {
+    var <- x[[3]]
+    if (is_call(x, "[[")) {
+      var <- sym(eval(var, dt_env))
+    }
+    var
+  } else {
+    # Catches case when "$" or "[[" is used but is not using .data pronoun
+    x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }}, j = j, dt_env = dt_env)
+    x
   }
+}
+
+is_data_pronoun <- function(x) {
+  is_call(x, c("$", "[["), n = 2) && is_symbol(x[[2]], ".data")
 }
 
 internal_if_else <- function(condition, true, false, missing = NULL) {

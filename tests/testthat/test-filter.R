@@ -117,3 +117,24 @@ test_that("errors on named inputs", {
   expect_error(filter.(.df, x = 4))
 })
 
+test_that("can use .data and .env", {
+  df <- data.table(x = 1:5)
+
+  x <- 3
+
+  df <- df %>%
+    filter.(.data[["x"]] == .env$x)
+
+  expect_equal(df$x, 3)
+})
+
+test_that("can use .data and .env with .by", {
+  df <- data.table(x = 1:6, y = vec_rep_each(c("a", "b"), 3))
+
+  x <- 3
+
+  df <- df %>%
+    filter.(.data[["x"]] == .env$x, .by = y)
+
+  expect_equal(df$x, 3)
+})

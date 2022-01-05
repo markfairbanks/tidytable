@@ -355,4 +355,30 @@ test_that("Can assign to the same column multiple times when .by = character(0),
   expect_equal(out$x, 11)
 })
 
+test_that("can use .data and .env", {
+  df <- data.table(x = 1:3, y = 1:3)
+
+  x <- 1
+
+  col <- "x"
+
+  df <- df %>%
+    mutate.(x_x = .data[[col]] + .env$x)
+
+  expect_named(df, c("x", "y", "x_x"))
+  expect_equal(df$x_x, 2:4)
+})
+
+test_that("can use .data and .env with .by", {
+  df <- data.table(x = 1:3, y = c("a", "a", "b"))
+
+  x <- 1
+
+  df <- df %>%
+    mutate.(new = mean(.data$x) + .env$x, .by = y)
+
+  expect_named(df, c("x", "y", "new"))
+  expect_equal(df$new, c(2.5, 2.5, 4))
+})
+
 
