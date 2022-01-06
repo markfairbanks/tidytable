@@ -15,19 +15,19 @@
 #' @export
 #'
 #' @examples
-#' test_df <- data.table(
+#' df <- data.table(
 #'   x = rep(1, 3),
 #'   y = rep(2, 3),
 #'   z = c("a", "a", "b")
 #' )
 #'
-#' test_df %>%
+#' df %>%
 #'   mutate.(across.(c(x, y), ~ .x * 2))
 #'
-#' test_df %>%
+#' df %>%
 #'   summarize.(across.(c(x, y), ~ mean(.x, na.rm = TRUE)), .by = z)
 #'
-#' test_df %>%
+#' df %>%
 #'   arrange.(across.(c(y, z)))
 across. <- function(.cols = everything(), .fns = NULL, ..., .names = NULL) {
   abort("across.() can only work inside of tidytable verbs")

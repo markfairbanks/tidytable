@@ -17,19 +17,19 @@
 #' @export
 #' @md
 #' @examples
-#' test_df <- data.table(
+#' df <- data.table(
 #'   a = 1:3,
 #'   b = 4:6,
-#'   c = c("a","a","b"),
-#'   d = c("a","a","b")
+#'   c = c("a", "a", "b"),
+#'   d = c("a", "a", "b")
 #' )
 #'
-#' test_df %>%
+#' df %>%
 #'   summarize.(avg_a = mean(a),
 #'              max_b = max(b),
 #'              .by = c)
 #'
-#' test_df %>%
+#' df %>%
 #'   summarize.(avg_a = mean(a),
 #'              .by = c(c, d))
 summarize. <- function(.df, ..., .by = NULL, .sort = FALSE) {

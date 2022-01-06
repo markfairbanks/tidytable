@@ -28,24 +28,24 @@ If omitted, it will default to \code{N}.}
 Returns row counts of the dataset. If bare column names are provided, \code{count.()} returns counts by group.
 }
 \examples{
-test_df <- data.table(
+df <- data.table(
   x = 1:3,
   y = 4:6,
   z = c("a", "a", "b")
 )
 
-test_df \%>\%
+df \%>\%
   count.()
 
-test_df \%>\%
+df \%>\%
   count.(z)
 
-test_df \%>\%
+df \%>\%
   count.(where(is.character))
 
-test_df \%>\%
+df \%>\%
   count.(z, wt = y, name = "y_sum")
 
-test_df \%>\%
+df \%>\%
   count.(z, sort = TRUE)
 }

@@ -25,25 +25,25 @@
 #' @export
 #'
 #' @examples
-#' test_df <- data.table(
+#' df <- data.table(
 #'   a = 1:3,
 #'   b = 4:6,
 #'   c = c("a", "a", "b")
 #' )
 #'
-#' test_df %>%
+#' df %>%
 #'   mutate.(double_a = a * 2,
 #'           a_plus_b = a + b)
 #'
-#' test_df %>%
+#' df %>%
 #'   mutate.(double_a = a * 2,
 #'           avg_a = mean(a),
 #'           .by = c)
 #'
-#' test_df %>%
+#' df %>%
 #'   mutate.(double_a = a * 2, .keep = "used")
 #'
-#' test_df %>%
+#' df %>%
 #'   mutate.(double_a = a * 2, .after = a)
 mutate. <- function(.df, ..., .by = NULL,
                     .keep = c("all", "used", "unused", "none"),

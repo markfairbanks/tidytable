@@ -13,23 +13,23 @@
 #' @md
 #'
 #' @examples
-#' test_df <- data.table(
+#' df <- data.table(
 #'   a = 1:5,
 #'   b = 6:10,
 #'   c = c(rep("a", 3), rep("b", 2)),
 #'   d = c(rep("a", 3), rep("b", 2))
 #' )
 #'
-#' test_df %>%
+#' df %>%
 #'   nest_by.()
 #'
-#' test_df %>%
+#' df %>%
 #'   nest_by.(c, d)
 #'
-#' test_df %>%
+#' df %>%
 #'   nest_by.(where(is.character))
 #'
-#' test_df %>%
+#' df %>%
 #'   nest_by.(c, d, .keep = TRUE)
 nest_by. <- function(.df, ..., .key = "data", .keep = FALSE) {
   UseMethod("nest_by.")

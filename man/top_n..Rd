@@ -19,15 +19,15 @@ top_n.(.df, n = 5, wt = NULL, .by = NULL)
 Select the top or bottom entries in each group, ordered by \code{wt}.
 }
 \examples{
-test_df <- data.table(
+df <- data.table(
   x = 1:5,
   y = 6:10,
   z = c(rep("a", 3), rep("b", 2))
 )
 
-test_df \%>\%
+df \%>\%
   top_n.(2, wt = y)
 
-test_df \%>\%
+df \%>\%
   top_n.(2, wt = y, .by = z)
 }

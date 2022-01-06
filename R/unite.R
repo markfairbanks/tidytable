@@ -14,23 +14,23 @@
 #' @export
 #'
 #' @examples
-#' test_df <- tidytable(a = c("a", "a", "a"),
+#' df <- tidytable(a = c("a", "a", "a"),
 #'                      b = c("b", "b", "b"),
 #'                      c = c("c", "c", NA))
 #'
-#' test_df %>%
+#' df %>%
 #'   unite.("new_col", b, c)
 #'
-#' test_df %>%
+#' df %>%
 #'   unite.("new_col", where(is.character))
 #'
-#' test_df %>%
+#' df %>%
 #'   unite.("new_col", b, c, remove = FALSE)
 #'
-#' test_df %>%
+#' df %>%
 #'   unite.("new_col", b, c, na.rm = TRUE)
 #'
-#' test_df %>%
+#' df %>%
 #'   unite.()
 unite. <- function(.df, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
   UseMethod("unite.")

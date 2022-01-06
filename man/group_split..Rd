@@ -19,19 +19,19 @@ group_split.(.df, ..., .keep = TRUE, .named = FALSE)
 Split data frame by groups. Returns a list.
 }
 \examples{
-test_df <- tidytable(
+df <- tidytable(
   a = 1:3,
   b = 1:3,
   c = c("a","a","b"),
   d = c("a","a","b")
 )
 
-test_df \%>\%
+df \%>\%
   group_split.(c, d)
 
-test_df \%>\%
+df \%>\%
   group_split.(c, d, .keep = FALSE)
 
-test_df \%>\%
+df \%>\%
   group_split.(c, d, .named = TRUE)
 }

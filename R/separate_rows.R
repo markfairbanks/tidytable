@@ -12,15 +12,15 @@
 #' @export
 #'
 #' @examples
-#' test_df <- data.table(
+#' df <- data.table(
 #'   x = 1:3,
 #'   y = c("a", "d,e,f", "g,h"),
 #'   z = c("1", "2,3,4", "5,6")
 #' )
 #'
-#' separate_rows.(test_df, y, z)
+#' separate_rows.(df, y, z)
 #'
-#' separate_rows.(test_df, y, z, convert = TRUE)
+#' separate_rows.(df, y, z, convert = TRUE)
 separate_rows. <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
   UseMethod("separate_rows.")
 }

@@ -12,16 +12,16 @@ Helper function that can be used to find counts by group.
 Can be used inside \code{summarize.()}, \code{mutate.()}, & \code{filter.()}
 }
 \examples{
-test_df <- data.table(
+df <- data.table(
   x = 1:3,
   y = 4:6,
   z = c("a","a","b")
  )
 
-test_df \%>\%
+df \%>\%
   summarize.(count = n.(), .by = z)
 
 # The dplyr version `n()` also works
-test_df \%>\%
+df \%>\%
   summarize.(count = n(), .by = z)
 }

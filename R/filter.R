@@ -10,16 +10,16 @@
 #' @export
 #'
 #' @examples
-#' test_df <- tidytable(
+#' df <- tidytable(
 #'   a = 1:3,
 #'   b = 4:6,
 #'   c = c("a", "a", "b")
 #' )
 #'
-#' test_df %>%
+#' df %>%
 #'   filter.(a >= 2, b >= 4)
 #'
-#' test_df %>%
+#' df %>%
 #'   filter.(b <= mean(b), .by = c)
 filter. <- function(.df, ..., .by = NULL) {
   UseMethod("filter.")

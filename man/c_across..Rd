@@ -14,8 +14,8 @@ c_across.(cols = everything())
 you can easily select multiple variables.
 }
 \examples{
-test_df <- data.table(x = runif(6), y = runif(6), z = runif(6))
+df <- data.table(x = runif(6), y = runif(6), z = runif(6))
 
-test_df \%>\%
+df \%>\%
   mutate_rowwise.(row_mean = mean(c_across.(x:z)))
 }

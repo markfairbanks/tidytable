@@ -16,33 +16,33 @@
 #' @export
 #'
 #' @examples
-#' test_df <- data.table(
+#' df <- data.table(
 #'   a = 1:3,
 #'   b = 4:6,
 #'   z = c("a", "a", "b")
 #' )
 #'
 #' # Pass a single function
-#' test_df %>%
+#' df %>%
 #'   summarize_across.(c(a, b), mean, na.rm = TRUE)
 #'
 #' # Single function using purrr style interface
-#' test_df %>%
+#' df %>%
 #'   summarize_across.(c(a, b), ~ mean(.x, na.rm = TRUE))
 #'
 #' # Passing a list of functions (with .by)
-#' test_df %>%
+#' df %>%
 #'   summarize_across.(c(a, b), list(mean, max), .by = z)
 #'
 #' # Passing a named list of functions (with .by)
-#' test_df %>%
+#' df %>%
 #'   summarize_across.(c(a, b),
 #'                     list(avg = mean,
 #'                          max = ~ max(.x)),
 #'                     .by = z)
 #'
 #' # Use the `.names` argument for more naming control
-#' test_df %>%
+#' df %>%
 #'   summarize_across.(c(a, b),
 #'                     list(avg = mean,
 #'                          max = ~ max(.x)),

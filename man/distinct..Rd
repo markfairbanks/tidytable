@@ -20,15 +20,15 @@ values of columns provided to ... arg.}
 Retain only unique/distinct rows from an input df.
 }
 \examples{
-test_df <- tidytable(
+df <- tidytable(
   x = 1:3,
   y = 4:6,
   z = c("a", "a", "b")
 )
 
-test_df \%>\%
+df \%>\%
   distinct.()
 
-test_df \%>\%
+df \%>\%
   distinct.(z)
 }

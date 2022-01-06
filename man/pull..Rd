@@ -22,20 +22,20 @@ pull.(.df, var = -1, name = NULL)
 Pull a single variable from a data.table as a vector.
 }
 \examples{
-test_df <- data.table(
+df <- data.table(
   x = 1:3,
   y = 1:3
 )
 
 # Grab column by name
-test_df \%>\%
+df \%>\%
   pull.(y)
 
 # Grab column by position
-test_df \%>\%
+df \%>\%
   pull.(1)
 
 # Defaults to last column
-test_df \%>\%
+df \%>\%
   pull.()
 }

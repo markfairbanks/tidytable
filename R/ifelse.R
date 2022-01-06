@@ -17,9 +17,9 @@
 #' ifelse.(x < 3, 1, 0)
 #'
 #' # Can also be used inside of mutate.()
-#' test_df <- data.table(x = x)
+#' df <- data.table(x = x)
 #'
-#' test_df %>%
+#' df %>%
 #'   mutate.(new_col = ifelse.(x < 3, 1, 0))
 ifelse. <- function(conditions, true, false, na = NA) {
   ptype <- vec_ptype_common(true, false, na)

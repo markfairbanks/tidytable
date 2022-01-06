@@ -11,20 +11,20 @@
 #' @export
 #'
 #' @examples
-#' test_df <- tidytable(
+#' df <- tidytable(
 #'   a = 1:3,
 #'   b = 1:3,
 #'   c = c("a","a","b"),
 #'   d = c("a","a","b")
 #' )
 #'
-#' test_df %>%
+#' df %>%
 #'   group_split.(c, d)
 #'
-#' test_df %>%
+#' df %>%
 #'   group_split.(c, d, .keep = FALSE)
 #'
-#' test_df %>%
+#' df %>%
 #'   group_split.(c, d, .named = TRUE)
 group_split. <- function(.df, ..., .keep = TRUE, .named = FALSE) {
   UseMethod("group_split.")

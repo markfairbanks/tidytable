@@ -15,9 +15,9 @@
 #' lags.(x, 1)
 #'
 #' # Also works inside of `mutate.()`
-#' test_df <- tidytable(x = 1:5)
+#' df <- tidytable(x = 1:5)
 #'
-#' test_df %>%
+#' df %>%
 #'   mutate.(lag_x = lags.(x))
 #'
 #' @export

@@ -11,12 +11,12 @@
 #' @export
 #'
 #' @examples
-#' test_df <- data.table(x = 1:2, y = 1:2, z = 3:4)
+#' df <- data.table(x = 1:2, y = 1:2, z = 3:4)
 #'
-#' test_df %>%
+#' df %>%
 #'   complete.(x, y)
 #'
-#' test_df %>%
+#' df %>%
 #'   complete.(x, y, fill = list(z = 10))
 complete. <- function(.df, ..., fill = list(), .by = NULL) {
   UseMethod("complete.")

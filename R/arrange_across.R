@@ -9,12 +9,12 @@
 #' @export
 #'
 #' @examples
-#' test_df <- tidytable(a = c("a", "b", "a"), b = 3:1)
+#' df <- tidytable(a = c("a", "b", "a"), b = 3:1)
 #'
-#' test_df %>%
+#' df %>%
 #'   arrange_across.()
 #'
-#' test_df %>%
+#' df %>%
 #'   arrange_across.(a, desc.)
 arrange_across. <- function(.df, .cols = everything(), .fns = NULL) {
   UseMethod("arrange_across.")

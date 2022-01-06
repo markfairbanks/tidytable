@@ -17,28 +17,28 @@ Use named arguments, e.g. new_name = old_name, to rename selected variables.
 Select or drop columns from a data.table
 }
 \examples{
-test_df <- data.table(
+df <- data.table(
   x1 = 1:3,
   x2 = 1:3,
   y = c("a", "b", "c"),
   z = c("a", "b", "c")
 )
 
-test_df \%>\%
+df \%>\%
   select.(x1, y)
 
-test_df \%>\%
+df \%>\%
   select.(x1:y)
 
-test_df \%>\%
+df \%>\%
   select.(-y, -z)
 
-test_df \%>\%
+df \%>\%
   select.(starts_with("x"), z)
 
-test_df \%>\%
+df \%>\%
   select.(where(is.character), x1)
 
-test_df \%>\%
+df \%>\%
   select.(new = x1, y)
 }

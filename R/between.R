@@ -9,20 +9,20 @@
 #' @export
 #'
 #' @examples
-#' test_df <- data.table(
+#' df <- data.table(
 #'   x = 1:5,
 #'   y = 1:5
 #' )
 #'
 #' # Typically used in a filter.()
-#' test_df %>%
+#' df %>%
 #'   filter.(between.(x, 2, 4))
 #'
-#' test_df %>%
+#' df %>%
 #'   filter.(x %>% between.(2, 4))
 #'
 #' # Can also use the %between% operator
-#' test_df %>%
+#' df %>%
 #'   filter.(x %between% c(2, 4))
 between. <- function(x, left, right) {
   between(x = x, lower = left, upper = right)

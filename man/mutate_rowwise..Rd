@@ -15,13 +15,13 @@ mutate_rowwise.(.df, ...)
 Allows you to mutate "by row". this is most useful when a vectorized function doesn't exist.
 }
 \examples{
-test_df <- data.table(x = runif(6), y = runif(6), z = runif(6))
+df <- data.table(x = runif(6), y = runif(6), z = runif(6))
 
 # Compute the mean of x, y, z in each row
-test_df \%>\%
+df \%>\%
   mutate_rowwise.(row_mean = mean(c(x, y, z)))
 
 # Use c_across.() to more easily select many variables
-test_df \%>\%
+df \%>\%
   mutate_rowwise.(row_mean = mean(c_across.(x:z)))
 }

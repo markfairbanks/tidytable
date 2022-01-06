@@ -26,16 +26,16 @@
 #' @export
 #'
 #' @examples
-#' test_df <- data.table(
+#' df <- data.table(
 #'   x = 1:3,
 #'   y = 4:6,
 #'   z = c("a", "b", "c")
 #' )
 #'
-#' test_df %>%
+#' df %>%
 #'   pivot_longer.(cols = c(x, y))
 #'
-#' test_df %>%
+#' df %>%
 #'   pivot_longer.(cols = -z, names_to = "stuff", values_to = "things")
 pivot_longer. <- function(.df,
                           cols = everything(),

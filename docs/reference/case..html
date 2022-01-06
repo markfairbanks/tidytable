@@ -19,7 +19,7 @@ a vector as the default argument."><meta property="og:image" content="/logo.png"
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.6.9</span>
       </span>
     </div>
 
@@ -80,9 +80,9 @@ a vector as the <code>default</code> argument.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">test_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="tidytable.html">tidytable</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="tidytable.html">tidytable</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="va">test_df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in"><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu"><a href="mutate..Rd.html">mutate.</a></span><span class="op">(</span>case_x <span class="op">=</span> <span class="fu">case.</span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">5</span>, <span class="fl">1</span>,</span>
 <span class="r-in">                         <span class="va">x</span> <span class="op">&lt;</span> <span class="fl">7</span>, <span class="fl">2</span>,</span>
 <span class="r-in">                         default <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>

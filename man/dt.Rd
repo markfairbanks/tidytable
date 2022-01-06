@@ -17,13 +17,13 @@ Pipeable data.table call
 Note: This function does not use data.table's modify-by-reference
 }
 \examples{
-test_df <- data.table(
+df <- data.table(
   x = 1:3,
   y = 4:6,
   z = c("a", "a", "b")
 )
 
-test_df \%>\%
+df \%>\%
   dt(, double_x := x * 2) \%>\%
   dt(order(-double_x))
 }

@@ -15,19 +15,19 @@ between.(x, left, right)
 \code{between.()} utilizes \code{data.table::between()} in the background
 }
 \examples{
-test_df <- data.table(
+df <- data.table(
   x = 1:5,
   y = 1:5
 )
 
 # Typically used in a filter.()
-test_df \%>\%
+df \%>\%
   filter.(between.(x, 2, 4))
 
-test_df \%>\%
+df \%>\%
   filter.(x \%>\% between.(2, 4))
 
 # Can also use the \%between\% operator
-test_df \%>\%
+df \%>\%
   filter.(x \%between\% c(2, 4))
 }

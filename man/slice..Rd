@@ -43,30 +43,30 @@ Choose rows in a data.table.
 Grouped data.tables grab rows within each group.
 }
 \examples{
-test_df <- data.table(
+df <- data.table(
   x = 1:4,
   y = 5:8,
   z = c("a", "a", "a", "b")
 )
 
-test_df \%>\%
+df \%>\%
   slice.(1:3)
 
-test_df \%>\%
+df \%>\%
   slice.(1, 3)
 
-test_df \%>\%
+df \%>\%
   slice.(1:2, .by = z)
 
-test_df \%>\%
+df \%>\%
   slice_head.(1, .by = z)
 
-test_df \%>\%
+df \%>\%
   slice_tail.(1, .by = z)
 
-test_df \%>\%
+df \%>\%
   slice_max.(order_by = x, .by = z)
 
-test_df \%>\%
+df \%>\%
   slice_min.(order_by = y, .by = z)
 }

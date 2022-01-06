@@ -11,16 +11,16 @@
 #' @export
 #'
 #' @examples
-#' test_df <- data.table(
+#' df <- data.table(
 #'   a = 1:3,
 #'   b = 4:6,
 #'   c = c("a", "a", "b")
 #' )
 #'
-#' test_df %>%
+#' df %>%
 #'   arrange.(c, -a)
 #'
-#' test_df %>%
+#' df %>%
 #'   arrange.(c, desc(a))
 arrange. <- function(.df, ...) {
   UseMethod("arrange.")

@@ -17,9 +17,9 @@ It is called like \code{dplyr::case_when()}, but utilizes \code{data.table::fife
 in the background for improved performance.
 }
 \examples{
-test_df <- tidytable(x = 1:10)
+df <- tidytable(x = 1:10)
 
-test_df \%>\%
+df \%>\%
   mutate.(case_x = case_when.(x < 5 ~ 1,
                               x < 7 ~ 2,
                               TRUE ~ 3))

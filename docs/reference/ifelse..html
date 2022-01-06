@@ -18,7 +18,7 @@ converts NAs to their proper type."><meta property="og:image" content="/logo.png
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.6.9</span>
       </span>
     </div>
 
@@ -87,9 +87,9 @@ converts NAs to their proper type.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 1 0 0 0</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Can also be used inside of mutate.()</span></span>
-<span class="r-in"><span class="va">test_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="va">test_df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in"><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu"><a href="mutate..Rd.html">mutate.</a></span><span class="op">(</span>new_col <span class="op">=</span> <span class="fu">ifelse.</span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 5 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       x new_col</span>

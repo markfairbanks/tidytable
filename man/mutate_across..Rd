@@ -33,25 +33,25 @@ when a list is used for \code{.fns}.}
 Mutate multiple columns simultaneously.
 }
 \examples{
-test_df <- data.table(
+df <- data.table(
   x = rep(1, 3),
   y = rep(2, 3),
   z = c("a", "a", "b")
 )
 
-test_df \%>\%
+df \%>\%
   mutate_across.(where(is.numeric), as.character)
 
-test_df \%>\%
+df \%>\%
   mutate_across.(c(x, y), ~ .x * 2)
 
-test_df \%>\%
+df \%>\%
   mutate_across.(everything(), as.character)
 
-test_df \%>\%
+df \%>\%
   mutate_across.(c(x, y), list(new = ~ .x * 2,
                                another = ~ .x + 7))
-test_df \%>\%
+df \%>\%
   mutate_across.(
     .cols = c(x, y),
     .fns = list(new = ~ .x * 2, another = ~ .x + 7),

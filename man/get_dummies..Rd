@@ -32,30 +32,31 @@ Defaults to all character & factor columns using \code{c(where(is.character), wh
 Convert character and factor columns to dummy variables
 }
 \examples{
-test_df <- tidytable(
+df <- tidytable(
   col1 = c("a", "b", "c", NA),
   col2 = as.factor(c("a", "b", NA, "d")),
-  var1 = rnorm(4,0,1))
+  var1 = rnorm(4, 0, 1)
+)
 
 # Automatically does all character/factor columns
-test_df \%>\%
+df \%>\%
   get_dummies.()
 
 # Can select one column
-test_df \%>\%
+df \%>\%
   get_dummies.(col1)
 
 # Can select one or multiple columns in a vector of unquoted column names
-test_df \%>\%
+df \%>\%
   get_dummies.(c(col1, col2))
 
 # Can drop certain columns using
-test_df \%>\%
+df \%>\%
   get_dummies.(c(where(is.character), -col2))
 
-test_df \%>\%
+df \%>\%
   get_dummies.(prefix_sep = ".", drop_first = TRUE)
 
-test_df \%>\%
+df \%>\%
   get_dummies.(c(col1, col2), dummify_na = FALSE)
 }

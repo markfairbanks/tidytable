@@ -18,9 +18,9 @@ It is called like \code{data.table::fcase()}, but allows the user to use
 a vector as the \code{default} argument.
 }
 \examples{
-test_df <- tidytable(x = 1:10)
+df <- tidytable(x = 1:10)
 
-test_df \%>\%
+df \%>\%
   mutate.(case_x = case.(x < 5, 1,
                          x < 7, 2,
                          default = 3))

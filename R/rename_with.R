@@ -12,20 +12,20 @@
 #' @md
 #'
 #' @examples
-#' test_df <- data.table(
+#' df <- data.table(
 #'   x = 1,
 #'   y = 2,
 #'   double_x = 2,
 #'   double_y = 4
 #' )
 #'
-#' test_df %>%
+#' df %>%
 #'   rename_with.(toupper)
 #'
-#' test_df %>%
+#' df %>%
 #'   rename_with.(~ toupper(.x))
 #'
-#' test_df %>%
+#' df %>%
 #'   rename_with.(~ toupper(.x), .cols = c(x, double_x))
 rename_with. <- function(.df, .fn = NULL, .cols = everything(), ...) {
   UseMethod("rename_with.")

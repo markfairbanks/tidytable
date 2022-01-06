@@ -8,17 +8,17 @@
 #' @export
 #'
 #' @examples
-#' test_df <- data.table(
+#' df <- data.table(
 #'   x = 1:3,
 #'   y = 4:6,
 #'   z = c("a","a","b")
 #'  )
 #'
-#' test_df %>%
+#' df %>%
 #'   summarize.(count = n.(), .by = z)
 #'
 #' # The dplyr version `n()` also works
-#' test_df %>%
+#' df %>%
 #'   summarize.(count = n(), .by = z)
 n. <- function() {
   abort("n.() should only be used inside tidytable verbs")

@@ -30,11 +30,11 @@ Generates all combinations of variables found in a dataset.
 \code{nesting.()} is a helper that only finds combinations already present in the dataset.
 }
 \examples{
-test_df <- tidytable(x = c(1, 1, 2), y = c(1, 1, 2))
+df <- tidytable(x = c(1, 1, 2), y = c(1, 1, 2))
 
-test_df \%>\%
+df \%>\%
   expand.(x, y)
 
-test_df \%>\%
+df \%>\%
   expand.(nesting.(x, y))
 }

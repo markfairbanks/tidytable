@@ -9,13 +9,13 @@
 #' @param ... Arguments passed to data.table call. See ?data.table::`[.data.table`
 #'
 #' @examples
-#' test_df <- data.table(
+#' df <- data.table(
 #'   x = 1:3,
 #'   y = 4:6,
 #'   z = c("a", "a", "b")
 #' )
 #'
-#' test_df %>%
+#' df %>%
 #'   dt(, double_x := x * 2) %>%
 #'   dt(order(-double_x))
 #' @export

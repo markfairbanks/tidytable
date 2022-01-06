@@ -15,9 +15,9 @@
 #' @export
 #'
 #' @examples
-#' test_df <- data.frame(x = -2:2, y = c(rep("a", 3), rep("b", 2)))
+#' df <- data.frame(x = -2:2, y = c(rep("a", 3), rep("b", 2)))
 #'
-#' test_df %>%
+#' df %>%
 #'   as_tidytable()
 as_tidytable <- function(x, ...,
                          .name_repair = c("check_unique", "unique", "universal", "minimal"),

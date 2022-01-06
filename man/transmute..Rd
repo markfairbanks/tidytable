@@ -17,12 +17,12 @@ transmute.(.df, ..., .by = NULL)
 Unlike \code{mutate.()}, \code{transmute.()} keeps only the variables that you create
 }
 \examples{
-test_df <- data.table(
+df <- data.table(
   a = 1:3,
   b = 4:6,
   c = c("a","a","b")
 )
 
-test_df \%>\%
+df \%>\%
   transmute.(double_a = a * 2)
 }

@@ -18,7 +18,7 @@ Useful for comparing values behind or ahead of the current values.'><meta proper
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.6.9</span>
       </span>
     </div>
 
@@ -90,9 +90,9 @@ Useful for comparing values behind or ahead of the current values.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA  1  2  3  4</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Also works inside of `mutate.()`</span></span>
-<span class="r-in"><span class="va">test_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="tidytable.html">tidytable</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="tidytable.html">tidytable</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="va">test_df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in"><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu"><a href="mutate..Rd.html">mutate.</a></span><span class="op">(</span>lag_x <span class="op">=</span> <span class="fu">lags.</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 5 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       x lag_x</span>

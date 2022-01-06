@@ -54,16 +54,16 @@ glue specification that uses the \code{names_from} columns (and special \code{.v
 decreasing the number of rows.
 }
 \examples{
-test_df <- data.table(
+df <- data.table(
   a = rep(c("a", "b", "c"), 2),
   b = c(rep("x", 3), rep("y", 3)),
   vals = 1:6
 )
 
-test_df \%>\%
+df \%>\%
   pivot_wider.(names_from = b, values_from = vals)
 
-test_df \%>\%
+df \%>\%
   pivot_wider.(
     names_from = b, values_from = vals, names_prefix = "new_"
   )

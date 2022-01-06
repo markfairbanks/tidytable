@@ -18,15 +18,15 @@ Note: \code{data.table} orders character columns slightly differently than \code
 ordering in the "C-locale". See \code{?data.table::setorder} for more details.
 }
 \examples{
-test_df <- data.table(
+df <- data.table(
   a = 1:3,
   b = 4:6,
   c = c("a", "a", "b")
 )
 
-test_df \%>\%
+df \%>\%
   arrange.(c, -a)
 
-test_df \%>\%
+df \%>\%
   arrange.(c, desc(a))
 }

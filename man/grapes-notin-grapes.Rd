@@ -15,8 +15,8 @@ x \%notin\% y
 "not in" operator - works best when used inside \code{filter.()}
 }
 \examples{
-test_df <- tidytable(x = 1:4, y = 1:4)
+df <- tidytable(x = 1:4, y = 1:4)
 
-test_df \%>\%
+df \%>\%
   filter.(x \%notin\% c(2, 4))
 }

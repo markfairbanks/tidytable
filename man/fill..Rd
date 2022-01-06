@@ -22,18 +22,18 @@ Fills missing values in the selected columns using the next or previous entry. C
 Supports tidyselect
 }
 \examples{
-test_df <- data.table(
+df <- data.table(
   a = c(1, NA, 3, 4, 5),
   b = c(NA, 2, NA, NA, 5),
   groups = c("a", "a", "a", "b", "b")
 )
 
-test_df \%>\%
+df \%>\%
   fill.(a, b)
 
-test_df \%>\%
-  fill.(a, b, .direction = "downup")
+df \%>\%
+  fill.(a, b, .by = groups)
 
-test_df \%>\%
+df \%>\%
   fill.(a, b, .direction = "downup", .by = groups)
 }

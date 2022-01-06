@@ -28,8 +28,8 @@ Note that all tidytable functions automatically convert data.frames & data.table
 As such this function will rarely need to be used by the user.
 }
 \examples{
-test_df <- data.frame(x = -2:2, y = c(rep("a", 3), rep("b", 2)))
+df <- data.frame(x = -2:2, y = c(rep("a", 3), rep("b", 2)))
 
-test_df \%>\%
+df \%>\%
   as_tidytable()
 }

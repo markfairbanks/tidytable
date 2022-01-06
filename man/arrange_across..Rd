@@ -17,11 +17,11 @@ arrange_across.(.df, .cols = everything(), .fns = NULL)
 Arrange all rows in either ascending or descending order by a selection of variables.
 }
 \examples{
-test_df <- tidytable(a = c("a", "b", "a"), b = 3:1)
+df <- tidytable(a = c("a", "b", "a"), b = 3:1)
 
-test_df \%>\%
+df \%>\%
   arrange_across.()
 
-test_df \%>\%
+df \%>\%
   arrange_across.(a, desc.)
 }

@@ -10,12 +10,12 @@ row_number.()
 Returns row number. This function is designed to work inside of \code{mutate.()}
 }
 \examples{
-test_df <- data.table(x = rep(1, 3), y = c("a", "a", "b"))
+df <- data.table(x = rep(1, 3), y = c("a", "a", "b"))
 
-test_df \%>\%
+df \%>\%
   mutate.(row = row_number.())
 
 # The dplyr version `row_number()` also works
-test_df \%>\%
+df \%>\%
   mutate.(row = row_number())
 }

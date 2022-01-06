@@ -16,16 +16,16 @@ If \code{.x} is a vector, a single replacement value.}
 Replace NAs with specified values
 }
 \examples{
-test_df <- data.table(
+df <- data.table(
   x = c(1, 2, NA),
   y = c(NA, 1, 2)
 )
 
 # Using replace_na.() inside mutate.()
-test_df \%>\%
+df \%>\%
   mutate.(x = replace_na.(x, 5))
 
 # Using replace_na.() on a data frame
-test_df \%>\%
+df \%>\%
   replace_na.(list(x = 5, y = 0))
 }

@@ -19,16 +19,16 @@ These functions give information about the "current" group.
 Can be used inside \code{summarize.()}, \code{mutate.()}, & \code{filter.()}
 }
 \examples{
-test_df <- data.table(
+df <- data.table(
   x = 1:5,
   y = c("a", "a", "a", "b", "b")
 )
 
-test_df \%>\%
+df \%>\%
   mutate.(group_id = cur_group_id.(),
           .by = y)
 
-test_df \%>\%
+df \%>\%
   mutate.(group_rows = cur_group_rows.(),
           .by = y)
 }

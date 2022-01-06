@@ -19,19 +19,19 @@ relocate.(.df, ..., .before = NULL, .after = NULL)
 Move a column or columns to a new position
 }
 \examples{
-test_df <- data.table(
+df <- data.table(
   a = 1:3,
   b = 1:3,
   c = c("a", "a", "b"),
   d = c("a", "a", "b")
 )
 
-test_df \%>\%
+df \%>\%
   relocate.(c, .before = b)
 
-test_df \%>\%
+df \%>\%
   relocate.(a, b, .after = c)
 
-test_df \%>\%
+df \%>\%
   relocate.(where(is.numeric), .after = c)
 }

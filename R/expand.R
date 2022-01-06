@@ -17,12 +17,12 @@
 #' @export
 #'
 #' @examples
-#' test_df <- tidytable(x = c(1, 1, 2), y = c(1, 1, 2))
+#' df <- tidytable(x = c(1, 1, 2), y = c(1, 1, 2))
 #'
-#' test_df %>%
+#' df %>%
 #'   expand.(x, y)
 #'
-#' test_df %>%
+#' df %>%
 #'   expand.(nesting.(x, y))
 expand. <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
   UseMethod("expand.")
