@@ -51,9 +51,9 @@ devtools::install_github("markfairbanks/tidytable")
 ```{r}
 library(tidytable)
 
-test_df <- data.table(x = 1:3, y = 4:6, z = c("a","a","b"))
+df <- data.table(x = 1:3, y = 4:6, z = c("a", "a", "b"))
 
-test_df %>%
+df %>%
   select.(x, y, z) %>%
   filter.(x < 4, y > 1) %>%
   arrange.(x, y) %>%
@@ -71,7 +71,7 @@ Group by calls are done by using the `.by` argument of any function that has "by
 * Multiple columns can be passed with `.by = c(y, z)`
 
 ```{r}
-test_df %>%
+df %>%
   summarize.(avg_x = mean(x),
              count = n(),
              .by = z)
@@ -86,9 +86,9 @@ Below is some example `tidytable` code that utilizes `.by` that we'll then compa
 ```{r}
 library(tidytable)
 
-test_df <- data.table(x = c("a", "a", "a", "b", "b"))
+df <- data.table(x = c("a", "a", "a", "b", "b"))
 
-test_df %>%
+df %>%
   slice.(1:2, .by = x) %>%
   mutate.(group_row_num = row_number(), .by = x)
 ```
@@ -100,9 +100,9 @@ Compared to a `dplyr` pipe chain that utilizes `group_by()`, where each function
 ```{r}
 library(dplyr)
 
-test_df <- tibble(x = c("a", "a", "a", "b", "b"))
+df <- tibble(x = c("a", "a", "a", "b", "b"))
 
-test_df %>%
+df %>%
   group_by(x) %>%
   slice(1:2) %>%
   mutate(group_row_num = row_number()) %>%
@@ -118,21 +118,21 @@ Note that the `ungroup()` call is unnecessary in `tidytable`.
 Normal selection can be mixed with all `tidyselect` helpers: `everything()`, `starts_with()`, `ends_with()`, `any_of()`, `where()`, etc.
 
 ```{r}
-test_df <- data.table(
+df <- data.table(
   a = 1:3,
   b1 = 4:6,
   b2 = 7:9,
-  c = c("a","a","b")
+  c = c("a", "a", "b")
 )
 
-test_df %>%
+df %>%
   select.(a, starts_with("b"))
 ```
 
 To drop columns use a `-` sign:
 
 ```{r}
-test_df %>%
+df %>%
   select.(-a, -starts_with("b"))
 ```
 
@@ -145,15 +145,14 @@ A full overview of selection options can be found [here](https://tidyselect.r-li
 `tidyselect` helpers also work when using `.by`:
 
 ```{r}
-test_df <- data.table(
+df <- data.table(
   a = 1:3,
-  b = 4:6,
-  c = c("a","a","b"),
-  d = c("a","a","b")
+  b = c("a", "a", "b"),
+  c = c("a", "a", "b")
 )
 
-test_df %>%
-  summarize.(avg_b = mean(b), .by = where(is.character))
+df %>%
+  summarize.(avg_a = mean(a), .by = where(is.character))
 ```
 
 ## Tidy evaluation compatibility
@@ -161,7 +160,7 @@ test_df %>%
 Tidy evaluation can be used to write custom functions with `tidytable` functions. The embracing shortcut `{{ }}` works, or you can use `enquo()` with `!!` if you prefer.
 
 ```{r}
-df <- data.table(x = c(1,1,1), y = c(1,1,1), z = c("a","a","b"))
+df <- data.table(x = c(1, 1, 1), y = c(1, 1, 1), z = c("a", "a", "b"))
 
 add_one <- function(data, add_col) {
   data %>%
@@ -200,9 +199,9 @@ For example - `dplyr::add_count()`:
 library(tidytable)
 library(dplyr)
 
-test_df <- tidytable(x = 1:3, y = c("a", "a", "b"))
+df <- tidytable(x = 1:3, y = c("a", "a", "b"))
 
-test_df %>%
+df %>%
   mutate.(double_x = x * 2) %>%
   add_count()
 ```
@@ -216,9 +215,9 @@ if you are using any of data.table's "set" operations to prevent issues with dat
 library(tidytable)
 library(data.table)
 
-test_df <- tidytable(x = 3:1, y = c("c", "b", "a"))
+df <- tidytable(x = 3:1, y = c("c", "b", "a"))
 
-new_df <- test_df %>%
+new_df <- df %>%
   mutate.(double_x = x * 2)
 
 new_df <- as.data.table(new_df)
