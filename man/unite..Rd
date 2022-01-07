@@ -24,9 +24,11 @@ unite.(.df, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE)
 Convenience function to paste together multiple columns into one.
 }
 \examples{
-df <- tidytable(a = c("a", "a", "a"),
-                     b = c("b", "b", "b"),
-                     c = c("c", "c", NA))
+df <- tidytable(
+    a = c("a", "a", "a"),
+    b = c("b", "b", "b"),
+    c = c("c", "c", NA)
+)
 
 df \%>\%
   unite.("new_col", b, c)

@@ -14,9 +14,11 @@
 #' @export
 #'
 #' @examples
-#' df <- tidytable(a = c("a", "a", "a"),
-#'                      b = c("b", "b", "b"),
-#'                      c = c("c", "c", NA))
+#' df <- tidytable(
+#'     a = c("a", "a", "a"),
+#'     b = c("b", "b", "b"),
+#'     c = c("c", "c", NA)
+#' )
 #'
 #' df %>%
 #'   unite.("new_col", b, c)

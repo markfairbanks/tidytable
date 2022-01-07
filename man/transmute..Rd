@@ -20,7 +20,7 @@ Unlike \code{mutate.()}, \code{transmute.()} keeps only the variables that you c
 df <- data.table(
   a = 1:3,
   b = 4:6,
-  c = c("a","a","b")
+  c = c("a", "a", "b")
 )
 
 df \%>\%

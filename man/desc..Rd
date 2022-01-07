@@ -14,9 +14,9 @@ Arrange in descending order. Can be used inside of \code{arrange.()}
 }
 \examples{
 df <- data.table(
-  a = c(1,2,3),
-  b = c(4,5,6),
-  c = c("a","a","b")
+  a = 1:3,
+  b = 4:6,
+  c = c("a", "a", "b")
 )
 
 df \%>\%

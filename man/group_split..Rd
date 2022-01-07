@@ -22,8 +22,8 @@ Split data frame by groups. Returns a list.
 df <- tidytable(
   a = 1:3,
   b = 1:3,
-  c = c("a","a","b"),
-  d = c("a","a","b")
+  c = c("a", "a", "b"),
+  d = c("a", "a", "b")
 )
 
 df \%>\%
