@@ -63,10 +63,34 @@ data.table::`%chin%`
 
 # rlang ------------------------
 #' @export
+rlang::enexpr
+
+#' @export
+rlang::enexprs
+
+#' @export
 rlang::enquo
 
 #' @export
 rlang::enquos
+
+#' @export
+rlang::expr
+
+#' @export
+rlang::exprs
+
+#' @export
+rlang::quo
+
+#' @export
+rlang::quos
+
+#' @export
+rlang::sym
+
+#' @export
+rlang::syms
 
 # pillar ------------------------
 #' @export
