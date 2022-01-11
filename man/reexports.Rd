@@ -18,8 +18,16 @@
 \alias{getDTthreads}
 \alias{setDTthreads}
 \alias{\%chin\%}
+\alias{enexpr}
+\alias{enexprs}
 \alias{enquo}
 \alias{enquos}
+\alias{expr}
+\alias{exprs}
+\alias{quo}
+\alias{quos}
+\alias{sym}
+\alias{syms}
 \alias{glimpse}
 \title{Objects exported from other packages}
 \keyword{internal}
@@ -32,7 +40,7 @@ below to see their documentation.
 
   \item{pillar}{\code{\link[pillar]{glimpse}}}
 
-  \item{rlang}{\code{\link[rlang:nse-defuse]{enquo}}, \code{\link[rlang:nse-defuse]{enquos}}}
+  \item{rlang}{\code{\link[rlang:nse-defuse]{enexpr}}, \code{\link[rlang:nse-defuse]{enexprs}}, \code{\link[rlang:nse-defuse]{enquo}}, \code{\link[rlang:nse-defuse]{enquos}}, \code{\link[rlang:nse-defuse]{expr}}, \code{\link[rlang:nse-defuse]{exprs}}, \code{\link[rlang:nse-defuse]{quo}}, \code{\link[rlang:nse-defuse]{quos}}, \code{\link[rlang]{sym}}, \code{\link[rlang:sym]{syms}}}
 
   \item{tidyselect}{\code{\link[tidyselect]{all_of}}, \code{\link[tidyselect:all_of]{any_of}}, \code{\link[tidyselect:starts_with]{contains}}, \code{\link[tidyselect:starts_with]{ends_with}}, \code{\link[tidyselect]{everything}}, \code{\link[tidyselect:everything]{last_col}}, \code{\link[tidyselect:starts_with]{matches}}, \code{\link[tidyselect:starts_with]{num_range}}, \code{\link[tidyselect]{starts_with}}}
 }}
