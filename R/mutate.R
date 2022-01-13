@@ -62,6 +62,8 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
 
+  named_bool <- have_name(dots)
+
   dt_env <- get_dt_env(dots)
 
   .before <- enquo(.before)
@@ -74,7 +76,7 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
 
   if (quo_is_null(.by)) {
     for (i in seq_along(dots)) {
-      dots_i <- prep_exprs(dots[i], .df, !!.by, j = TRUE, dt_env)
+      dots_i <- prep_exprs(dots[i], .df, !!.by, j = TRUE, dt_env, named_bool[[i]])
       if (length(dots_i) == 0) next
       dots_i <- exprs_auto_name(dots_i)
       dots_i_names <- names(dots_i)

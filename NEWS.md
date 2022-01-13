@@ -2,6 +2,7 @@
 
 #### Functionality improvements
 * `.data` and `.env` pronouns now work in `tidytable` functions
+* `across.()`: Works inside of a named `mutate.()`. Useful with `rowSums`/`rowMeans`. (#346)
 * `mutate.()`: Can use `stringr::str_glue()` without specifying `.envir`
 * `replace_na.()`: Checks that `replace` arg only uses columns that exist in the data frame
 

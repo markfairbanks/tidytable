@@ -172,6 +172,16 @@ test_that("tidyselect with no cols works, #280", {
   expect_equal(df, across_df)
 })
 
+test_that("works inside of a named mutate, #346", {
+  df <- tidytable(x = 1:3, y = 1:3, z = c("a", "a", "b"))
+
+  across_df <- df %>%
+    mutate.(row_sum = rowSums(across.(where(is.numeric))))
+
+  expect_named(across_df, c("x", "y", "z", "row_sum"))
+  expect_equal(across_df$row_sum, c(2, 4, 6))
+})
+
 # summarize -----------------------------------------------------
 test_that("single function works", {
   test_df <- tidytable(a = c(1:2, NA), b = 4:6, z = c("a", "a", "b"))
