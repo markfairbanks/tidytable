@@ -83,10 +83,8 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env, named) {
     dots <- call$...
     call_list <- across_calls(call$.fns, .cols, call$.names, dots)
     out <- lapply(call_list, prep_expr, data, {{ .by }})
-    print(out)
     if (named) {
       out <- call2("data_frame", !!!out, .ns = "vctrs")
-      print(out)
     }
     out
   } else if (is_call(x, c("glue", "str_glue")) && j) {
