@@ -157,7 +157,7 @@ df %>%
 
 ## Tidy evaluation compatibility
 
-Tidy evaluation can be used to write custom functions with `tidytable` functions. The embracing shortcut `{{ }}` works, or you can use `enquo()` with `!!` if you prefer.
+Tidy evaluation can be used to write custom functions with `tidytable` functions. The embracing shortcut `{{ }}` works, or you can use `enquo()` with `!!` if you prefer:
 
 ```{r}
 df <- data.table(x = c(1, 1, 1), y = c(1, 1, 1), z = c("a", "a", "b"))
@@ -169,6 +169,15 @@ add_one <- function(data, add_col) {
 
 df %>%
   add_one(x)
+```
+
+The `.data` and `.env` pronouns also work within `tidytable` functions:
+
+```{r}
+var <- 10
+
+df %>%
+  mutate.(new_col = .data$x + .env$var)
 ```
 
 A full overview of tidy evaluation can be found [here](https://rlang.r-lib.org/reference/topic-data-mask.html).
@@ -186,43 +195,6 @@ df %>%
   dt(order(x, y)) %>%
   dt(, double_x := x * 2) %>%
   dt(, .(avg_x = mean(x)), by = z)
-```
-
-## Compatibility
-
-#### Compatibility with dplyr (and other tidyverse packages)
-
-If you want to use a `dplyr` function that hasn't yet been implemented in `tidytable` you can. 
-For example - `dplyr::add_count()`:
-
-```{r}
-library(tidytable)
-library(dplyr)
-
-df <- tidytable(x = 1:3, y = c("a", "a", "b"))
-
-df %>%
-  mutate.(double_x = x * 2) %>%
-  add_count()
-```
-
-#### Compatibility with data.table
-
-If you want to use `data.table` you can - however it is recommended to first convert the object to a data.table 
-if you are using any of data.table's "set" operations to prevent issues with data.table's modify-by-reference.
-
-```{r}
-library(tidytable)
-library(data.table)
-
-df <- tidytable(x = 3:1, y = c("c", "b", "a"))
-
-new_df <- df %>%
-  mutate.(double_x = x * 2)
-
-new_df <- as.data.table(new_df)
-
-setorder(new_df, y)[]
 ```
 
 ## Speed Comparisons

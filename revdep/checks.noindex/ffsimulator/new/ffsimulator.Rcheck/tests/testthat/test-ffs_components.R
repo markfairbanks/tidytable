@@ -69,6 +69,20 @@ test_that("ffs_generate_projections() returns a tibble and specific columns", {
   )
 })
 
+test_that("ffs_add_replacement_level() works",{
+
+  rosters_rl <- ffs_add_replacement_level(
+    rosters = cache$mfl_rosters,
+    latest_rankings = cache$latest_rankings,
+    franchises = cache$mfl_franchises,
+    lineup_constraints = cache$mfl_lineup_constraints
+  )
+  rosters <- cache$mfl_rosters
+
+  checkmate::expect_data_frame(rosters_rl, min.rows = nrow(rosters)+12)
+
+})
+
 test_that("ffs_score_rosters() connects the scores to the rosters", {
   roster_scores <- ffs_score_rosters(
     projected_scores = cache$projected_scores,

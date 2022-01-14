@@ -70,6 +70,22 @@ flush(stderr()); flush(stdout())
 
 
 cleanEx()
+nameEx("ff_wins_added")
+### * ff_wins_added
+
+flush(stderr()); flush(stdout())
+
+### Name: ff_wins_added
+### Title: Wins Added
+### Aliases: ff_wins_added
+
+### ** Examples
+
+
+
+
+
+cleanEx()
 nameEx("ffs_adp_outcomes")
 ### * ffs_adp_outcomes
 

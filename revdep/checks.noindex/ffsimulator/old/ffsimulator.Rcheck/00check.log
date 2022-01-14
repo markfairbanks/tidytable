@@ -4,7 +4,7 @@
 * using session charset: UTF-8
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘ffsimulator/DESCRIPTION’ ... OK
-* this is package ‘ffsimulator’ version ‘1.1.0’
+* this is package ‘ffsimulator’ version ‘1.2.0’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK

@@ -208,7 +208,7 @@ df %>%
 
 Tidy evaluation can be used to write custom functions with `tidytable`
 functions. The embracing shortcut `{{ }}` works, or you can use
-`enquo()` with `!!` if you prefer.
+`enquo()` with `!!` if you prefer:
 
 ``` r
 df <- data.table(x = c(1, 1, 1), y = c(1, 1, 1), z = c("a", "a", "b"))
@@ -226,6 +226,21 @@ df %>%
 #> 1     1     1 a           2
 #> 2     1     1 a           2
 #> 3     1     1 b           2
+```
+
+The `.data` and `.env` pronouns also work within `tidytable` functions:
+
+``` r
+var <- 10
+
+df %>%
+  mutate.(new_col = .data$x + .env$var)
+#> # A tidytable: 3 × 4
+#>       x     y z     new_col
+#>   <dbl> <dbl> <chr>   <dbl>
+#> 1     1     1 a          11
+#> 2     1     1 a          11
+#> 3     1     1 b          11
 ```
 
 A full overview of tidy evaluation can be found
@@ -250,56 +265,6 @@ df %>%
 #>   <chr> <dbl>
 #> 1 a       1.5
 #> 2 b       3
-```
-
-## Compatibility
-
-#### Compatibility with dplyr (and other tidyverse packages)
-
-If you want to use a `dplyr` function that hasn’t yet been implemented
-in `tidytable` you can. For example - `dplyr::add_count()`:
-
-``` r
-library(tidytable)
-library(dplyr)
-
-df <- tidytable(x = 1:3, y = c("a", "a", "b"))
-
-df %>%
-  mutate.(double_x = x * 2) %>%
-  add_count()
-#> # A tidytable: 3 × 4
-#>       x y     double_x     n
-#>   <int> <chr>    <dbl> <int>
-#> 1     1 a            2     3
-#> 2     2 a            4     3
-#> 3     3 b            6     3
-```
-
-#### Compatibility with data.table
-
-If you want to use `data.table` you can - however it is recommended to
-first convert the object to a data.table if you are using any of
-data.table’s “set” operations to prevent issues with data.table’s
-modify-by-reference.
-
-``` r
-library(tidytable)
-library(data.table)
-
-df <- tidytable(x = 3:1, y = c("c", "b", "a"))
-
-new_df <- df %>%
-  mutate.(double_x = x * 2)
-
-new_df <- as.data.table(new_df)
-
-setorder(new_df, y)[]
-#>        x      y double_x
-#>    <int> <char>    <num>
-#> 1:     1      a        2
-#> 2:     2      b        4
-#> 3:     3      c        6
 ```
 
 ## Speed Comparisons

@@ -1,3 +1,18 @@
+# tidytable 0.6.7
+
+#### Functionality improvements
+* `.data` and `.env` pronouns now work in `tidytable` functions
+* `across.()`: Works inside of a named `mutate.()`. Useful with `rowSums`/`rowMeans` (#346)
+* `first.()`/`last.()`: Gain a `default` arg
+* `mutate.()`: Can use `stringr::str_glue()` without specifying `.envir`
+* `replace_na.()`: Checks that `replace` arg only uses columns that exist in the data frame
+
+#### New functions
+* `nth.()`
+
+#### Bug fixes
+* `mutate.()`: Can assign to the same column when `.by = character(0)` (#332)
+
 # tidytable 0.6.6
 
 #### Functionality improvements

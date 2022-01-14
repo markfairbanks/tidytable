@@ -43675,7 +43675,7 @@ detaching ‘package:dplyr’
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  15.652 2.993 19.167 0.003 0.006 
+Time elapsed:  12.564 2.64 15.503 0.003 0.005 
 > grDevices::dev.off()
 null device 
           1 

@@ -1,4 +1,4 @@
-# tidytable 0.6.7 (in development)
+# tidytable 0.6.7
 
 #### Functionality improvements
 * `.data` and `.env` pronouns now work in `tidytable` functions

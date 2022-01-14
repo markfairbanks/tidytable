@@ -30,7 +30,8 @@ extract.                Extract a character column into multiple
 fill.                   Fill in missing values with previous or next
                         value
 filter.                 Filter rows on one or more conditions
-first.                  Extract the first or last value from a vector
+first.                  Extract the first, last, or nth value from a
+                        vector
 fread.                  Read/write files
 get_dummies.            Convert character and factor columns to dummy
                         variables

@@ -1,8 +1,17 @@
+# tidytable 0.6.6
+
+#### Functionality improvements
+* `between()` is now auto-translated to `between.()` when used inside `tidytable` functions
+* `%notin%` now uses `%chin%` on character vectors
+
+#### Bug fixes
+* `across.()`: Can pass extra arguments to a list of functions (#319)
+
 # tidytable 0.6.5
 
 #### New functions
-- `fread.()`
-- `fwrite.()`
+* `fread.()`
+* `fwrite.()`
 
 #### Bug fixes
 * Traceback error messages no longer unnecessarily print the full data frame (#305)
