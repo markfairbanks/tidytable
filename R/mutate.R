@@ -107,13 +107,16 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
     if (needs_copy) .df <- copy(.df)
 
     # Check for NULL inputs so columns can be deleted
+    # Only delete if the NULL is the last call
     null_bool <- map_lgl.(dots, is_null)
-    any_null <- any(null_bool)
+    is_last <- !duplicated(names(dots), fromLast = TRUE)
+    needs_removal <- null_bool & is_last
+    any_null <- any(needs_removal)
 
     if (any_null) {
-      null_dots <- dots[null_bool]
+      null_dots <- dots[needs_removal]
 
-      dots <- dots[!null_bool]
+      dots <- dots[!needs_removal]
     }
 
     if (length(dots) > 0) {

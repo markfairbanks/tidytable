@@ -2,8 +2,14 @@ test_that("can remove variables with NULL", {
   df <- data.table(x = rep(1, 3), y = rep(2, 3))
   tidytable_df <- mutate.(df, y = NULL)
 
-  # check that .by with NULL works
-  tidytable2_df <- mutate.(df, x_plus_y = x + y, y = NULL, .by = x)
+  # Check that .by with NULL works
+  # Only deletes if the the NULL is in the last position
+  tidytable2_df <- df %>%
+    mutate.(x = NULL,
+            x = rep(1, 3),
+            x_plus_y = x + y,
+            y = NULL,
+            .by = x)
 
   df_check <- tidytable(x = rep(1, 3), x_plus_y = rep(3, 3))
 
