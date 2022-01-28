@@ -42,63 +42,6 @@ left_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., kee
   tidytable_restore(result_df, x)
 }
 
-join_selection <- function(x, y, by, keep, suffix, type = "left") {
-  x_names <- names(x)
-  y_names <- names(y)
-
-  if (!keep) {
-    if (type == "left") {
-      y_names <- setdiff(y_names, c(x_names, by$y))
-    } else if (type %in% c("inner", "right")) {
-      x_names <- setdiff(x_names, c(y_names, by$y))
-    }
-  }
-
-  result_names <- c(x_names, y_names)
-  result_names <- suffix_join_names(result_names, suffix)
-
-  if (type == "left") {
-    x_suffix <- "i."
-    y_suffix <- "x."
-  } else if (type %in% c("inner", "right")) {
-    x_suffix <- "x."
-    y_suffix <- "i."
-  } else {
-    abort("Unsupported join type")
-  }
-
-  if (length(x_names) > 0) {
-    x_names <- paste0(x_suffix, x_names)
-  }
-
-  if (length(y_names) > 0) {
-    y_names <- paste0(y_suffix, y_names)
-  }
-
-  if (type == "left") {
-    selection <- c(x_names, y_names)
-  } else {
-    selection <- c(x_names, y_names)
-  }
-
-  selection <- syms(selection)
-  names(selection) <- result_names
-
-  call2(".", !!!selection)
-}
-
-suffix_join_names <- function(df_names, suffix) {
-  is_x_duplicate <- duplicated(df_names, fromLast = TRUE)
-  if (any(is_x_duplicate)) {
-    is_y_duplicate <- duplicated(df_names)
-    new_names <- df_names
-    new_names[is_x_duplicate] <- paste0(new_names[is_x_duplicate], suffix[[1]])
-    new_names[is_y_duplicate] <- paste0(new_names[is_y_duplicate], suffix[[2]])
-    df_names <- new_names
-  }
-  df_names
-}
-
 #' @export
 #' @rdname left_join.
 right_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
@@ -297,4 +240,61 @@ join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
   setkey(result_df, NULL)
 
   result_df
+}
+
+join_selection <- function(x, y, by, keep, suffix, type = "left") {
+  x_names <- names(x)
+  y_names <- names(y)
+
+  if (!keep) {
+    if (type == "left") {
+      y_names <- setdiff(y_names, c(x_names, by$y))
+    } else if (type %in% c("inner", "right")) {
+      x_names <- setdiff(x_names, c(y_names, by$y))
+    }
+  }
+
+  result_names <- c(x_names, y_names)
+  result_names <- suffix_join_names(result_names, suffix)
+
+  if (type == "left") {
+    x_suffix <- "i."
+    y_suffix <- "x."
+  } else if (type %in% c("inner", "right")) {
+    x_suffix <- "x."
+    y_suffix <- "i."
+  } else {
+    abort("Unsupported join type")
+  }
+
+  if (length(x_names) > 0) {
+    x_names <- paste0(x_suffix, x_names)
+  }
+
+  if (length(y_names) > 0) {
+    y_names <- paste0(y_suffix, y_names)
+  }
+
+  if (type == "left") {
+    selection <- c(x_names, y_names)
+  } else {
+    selection <- c(x_names, y_names)
+  }
+
+  selection <- syms(selection)
+  names(selection) <- result_names
+
+  call2(".", !!!selection)
+}
+
+suffix_join_names <- function(df_names, suffix) {
+  is_x_duplicate <- duplicated(df_names, fromLast = TRUE)
+  if (any(is_x_duplicate)) {
+    is_y_duplicate <- duplicated(df_names)
+    new_names <- df_names
+    new_names[is_x_duplicate] <- paste0(new_names[is_x_duplicate], suffix[[1]])
+    new_names[is_y_duplicate] <- paste0(new_names[is_y_duplicate], suffix[[2]])
+    df_names <- new_names
+  }
+  df_names
 }
