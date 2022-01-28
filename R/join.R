@@ -19,12 +19,12 @@
 #' df1 %>% right_join.(df2)
 #' df1 %>% full_join.(df2)
 #' df1 %>% anti_join.(df2)
-left_join. <- function(x, y, by = NULL) {
+left_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
   UseMethod("left_join.")
 }
 
 #' @export
-left_join..default <- function(x, y, by = NULL) {
+left_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
   if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
   if (!is_tidytable(x)) x <- as_tidytable(x)
   if (!is_tidytable(y)) y <- as_tidytable(y)
@@ -33,52 +33,80 @@ left_join..default <- function(x, y, by = NULL) {
 
   on <- by$x
   names(on) <- by$y
-  on[on == ""] <- by$y[on == ""]
 
-  # Get result names to have correct column order
+  selection <- join_selection(x, y, by, keep, suffix, "left")
+
+  dt_expr <- call2("[", quo(y), quo(x), selection, on = on, allow.cartesian = TRUE)
+  result_df <- eval_tidy(dt_expr)
+
+  tidytable_restore(result_df, x)
+}
+
+join_selection <- function(x, y, by, keep, suffix, type = "left") {
+  x_names <- names(x)
   y_names <- names(y)
-  y_names <- y_names[y_names %notin% names(x)]
-  y_names <- y_names[y_names %notin% by$y]
-  all_names <- c(names(x), y_names)
 
-  result_df <- y[x, on = on, allow.cartesian = TRUE]
+  if (!keep) {
+    if (type == "left") {
+      y_names <- setdiff(y_names, c(x_names, by$y))
+    } else if (type %in% c("inner", "right")) {
+      x_names <- setdiff(x_names, c(y_names, by$y))
+    }
+  }
 
-  setnames(result_df, by$y, on)
-  setcolorder(result_df, all_names)
+  result_names <- c(x_names, y_names)
+  result_names <- suffix_join_names(result_names, suffix)
 
-  tidytable_restore(result_df, x)
+  if (type == "left") {
+    x_suffix <- "i."
+    y_suffix <- "x."
+  } else if (type %in% c("inner", "right")) {
+    x_suffix <- "x."
+    y_suffix <- "i."
+  } else {
+    abort("Unsupported join type")
+  }
+
+  if (length(x_names) > 0) {
+    x_names <- paste0(x_suffix, x_names)
+  }
+
+  if (length(y_names) > 0) {
+    y_names <- paste0(y_suffix, y_names)
+  }
+
+  if (type == "left") {
+    selection <- c(x_names, y_names)
+  } else {
+    selection <- c(x_names, y_names)
+  }
+
+  selection <- syms(selection)
+  names(selection) <- result_names
+
+  call2(".", !!!selection)
+}
+
+suffix_join_names <- function(df_names, suffix) {
+  is_x_duplicate <- duplicated(df_names, fromLast = TRUE)
+  if (any(is_x_duplicate)) {
+    is_y_duplicate <- duplicated(df_names)
+    new_names <- df_names
+    new_names[is_x_duplicate] <- paste0(new_names[is_x_duplicate], suffix[[1]])
+    new_names[is_y_duplicate] <- paste0(new_names[is_y_duplicate], suffix[[2]])
+    df_names <- new_names
+  }
+  df_names
 }
 
 #' @export
 #' @rdname left_join.
-inner_join. <- function(x, y, by = NULL) {
-  UseMethod("inner_join.")
-}
-
-#' @export
-inner_join..default <- function(x, y, by = NULL) {
-  if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-  if (!is_tidytable(x)) x <- as_tidytable(x)
-  if (!is_tidytable(y)) y <- as_tidytable(y)
-
-  by <- get_bys(x, y, by)
-
-  on <- by$y
-  names(on) <- by$x
-
-  result_df <- x[y, on = on, allow.cartesian = TRUE, nomatch = 0]
-
-  tidytable_restore(result_df, x)
-}
-
-#' @export
-#' @rdname left_join.
-right_join. <- function(x, y, by = NULL) {
+right_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
   UseMethod("right_join.")
 }
 
 #' @export
-right_join..default <- function(x, y, by = NULL) {
+right_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
   if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
   if (!is_tidytable(x)) x <- as_tidytable(x)
   if (!is_tidytable(y)) y <- as_tidytable(y)
@@ -88,33 +116,104 @@ right_join..default <- function(x, y, by = NULL) {
   on <- by$y
   names(on) <- by$x
 
-  result_df <- x[y, on = on, allow.cartesian = TRUE]
+  if (!keep) {
+    result_df <- x[y, on = on, allow.cartesian = TRUE]
+    names(result_df) <- suffix_join_names(names(result_df), suffix)
+  } else {
+    selection <- join_selection(x, y, by, keep, suffix, "right")
+
+    dt_expr <- call2("[", quo(x), quo(y), selection, on = on, allow.cartesian = TRUE)
+    result_df <- eval_tidy(dt_expr)
+  }
 
   tidytable_restore(result_df, x)
 }
 
 #' @export
 #' @rdname left_join.
-full_join. <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
+inner_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
+  UseMethod("inner_join.")
+}
+
+#' @export
+inner_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
+  if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
+  if (!is_tidytable(x)) x <- as_tidytable(x)
+  if (!is_tidytable(y)) y <- as_tidytable(y)
+
+  by <- get_bys(x, y, by)
+
+  on <- by$y
+  names(on) <- by$x
+
+  if (!keep) {
+    result_df <- x[y, on = on, allow.cartesian = TRUE, nomatch = 0]
+    names(result_df) <- suffix_join_names(names(result_df), suffix)
+  } else {
+    selection <- join_selection(x, y, by, keep, suffix, "inner")
+
+    dt_expr <- call2("[", quo(x), quo(y), selection, on = on, allow.cartesian = TRUE, nomatch = 0)
+    result_df <- eval_tidy(dt_expr)
+  }
+
+  tidytable_restore(result_df, x)
+}
+
+#' @export
+#' @rdname left_join.
+full_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
   UseMethod("full_join.")
 }
 
 #' @export
-full_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y")) {
-    result_df <- join_mold(
-      x, y, by = by, suffix = suffix,
-      all_x = TRUE, all_y = TRUE
-    )
+full_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
+    if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
+    if (!is_tidytable(x)) x <- as_tidytable(x)
+    if (!is_tidytable(y)) y <- as_tidytable(y)
 
-    start_names <- names(x)
-    end_names <- names(result_df)
-    end_names <- end_names[end_names %notin% start_names]
+    if (!keep) {
+      result_df <- join_mold(
+        x, y, by = by, suffix = suffix,
+        all_x = TRUE, all_y = TRUE
+      )
 
-    col_order <- c(start_names, end_names)
+      start_names <- names(x)
+      end_names <- names(result_df)
+      end_names <- end_names[end_names %notin% start_names]
 
-    setcolorder(result_df, col_order)
+      col_order <- c(start_names, end_names)
+
+      setcolorder(result_df, col_order)
+      setkey(result_df, NULL)
+    } else {
+      bys <- get_bys(x, y, by)
+      by_x <- bys$x
+      by_y <- bys$y
+
+      unique_keys_df <- x[, ..by_x] %>%
+        set_names(by_y) %>%
+        bind_rows.(y[, ..by_y]) %>%
+        distinct.()
+
+      step_df <- right_join.(y, unique_keys_df, keep = TRUE, suffix = c("__temp__", ""))
+
+      drop_cols <- by_y[by_x != by_y]
+      if (length(by_y[by_x == by_y]) > 0) {
+        drop_cols <- c(drop_cols, paste0(by_y[by_x == by_y], suffix[[2]]))
+      }
+
+      result_df <- right_join.(x, step_df, by = by, suffix = suffix, keep = TRUE)
+      result_df <- shallow(result_df)[, (drop_cols) := NULL]
+      result_df <- rename_with.(result_df, ~ temp_names_fix(.x, by_x, suffix[[2]]), ends_with("__temp__"))
+    }
 
     tidytable_restore(result_df, x)
+}
+
+temp_names_fix <- function(names, by_x, y_suffix) {
+  new_names <- str_replace.(names, "__temp__", "")
+
+  map_chr.(new_names, ~ if (.x %in% by_x) paste0(.x, y_suffix) else .x)
 }
 
 #' @export
@@ -177,6 +276,8 @@ get_bys <- function(x, y, by = NULL) {
 
   if (any(by_x[by_x != ""] %notin% names_x)) stop("by.x columns not in x")
   if (any(by_y[by_y != ""] %notin% names_y)) stop("by.y columns not in y")
+
+  by_x[by_x == ""] <- by_y[by_x == ""]
 
   list(x = by_x, y = by_y)
 }
