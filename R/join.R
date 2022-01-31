@@ -275,11 +275,7 @@ join_selection <- function(x, y, by, keep, suffix, type = "left") {
     y_names <- paste0(y_suffix, y_names)
   }
 
-  if (type == "left") {
-    selection <- c(x_names, y_names)
-  } else {
-    selection <- c(x_names, y_names)
-  }
+  selection <- c(x_names, y_names)
 
   selection <- syms(selection)
   names(selection) <- result_names
