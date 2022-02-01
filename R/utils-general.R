@@ -68,11 +68,6 @@ f_sort <- function(x, decreasing = FALSE, na.last = FALSE) {
   sort(x, decreasing = decreasing, na.last = na.last, method = "radix")
 }
 
-# Create a tidytable from a list
-new_tidytable <- function(x = list(), n = NULL, ...) {
-  new_data_frame(x, n, ..., class = c("tidytable", "data.table"))
-}
-
 # pmap - for internal use only
 # Taken from: https://github.com/r-lib/rlang/blob/master/R/compat-purrr.R
 pmap. <- function(.l, .f, ...) {

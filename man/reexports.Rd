@@ -40,7 +40,7 @@ below to see their documentation.
 
   \item{pillar}{\code{\link[pillar]{glimpse}}}
 
-  \item{rlang}{\code{\link[rlang:nse-defuse]{enexpr}}, \code{\link[rlang:nse-defuse]{enexprs}}, \code{\link[rlang:nse-defuse]{enquo}}, \code{\link[rlang:nse-defuse]{enquos}}, \code{\link[rlang:nse-defuse]{expr}}, \code{\link[rlang:nse-defuse]{exprs}}, \code{\link[rlang:nse-defuse]{quo}}, \code{\link[rlang:nse-defuse]{quos}}, \code{\link[rlang]{sym}}, \code{\link[rlang:sym]{syms}}}
+  \item{rlang}{\code{\link[rlang:defusing-advanced]{enexpr}}, \code{\link[rlang:defusing-advanced]{enexprs}}, \code{\link[rlang]{enquo}}, \code{\link[rlang:enquo]{enquos}}, \code{\link[rlang]{expr}}, \code{\link[rlang:defusing-advanced]{exprs}}, \code{\link[rlang:defusing-advanced]{quo}}, \code{\link[rlang:defusing-advanced]{quos}}, \code{\link[rlang]{sym}}, \code{\link[rlang:sym]{syms}}}
 
   \item{tidyselect}{\code{\link[tidyselect]{all_of}}, \code{\link[tidyselect:all_of]{any_of}}, \code{\link[tidyselect:starts_with]{contains}}, \code{\link[tidyselect:starts_with]{ends_with}}, \code{\link[tidyselect]{everything}}, \code{\link[tidyselect:everything]{last_col}}, \code{\link[tidyselect:starts_with]{matches}}, \code{\link[tidyselect:starts_with]{num_range}}, \code{\link[tidyselect]{starts_with}}}
 }}
