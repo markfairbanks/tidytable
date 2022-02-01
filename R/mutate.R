@@ -76,7 +76,7 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
 
   if (quo_is_null(.by)) {
     for (i in seq_along(dots)) {
-      dots_i <- prep_exprs(dots[i], .df, !!.by, j = TRUE, dt_env, named_bool[[i]])
+      dots_i <- prep_exprs(dots[i], .df, !!.by, j = TRUE, dt_env, quo_is_call(dots[[i]], "across."))
       if (length(dots_i) == 0) next
       dots_i <- exprs_auto_name(dots_i)
       dots_i_names <- names(dots_i)
