@@ -87,8 +87,8 @@ reference:
 - contents:
   - as_tidytable
   - is_tidytable
+  - new_tidytable
   - tidytable
-
 
 - title: Read/write files
 - contents:
