@@ -29,6 +29,10 @@ semi_join.(x, y, by = NULL)
 \item{by}{A character vector of variables to join by. If NULL, the default, the join will do a natural join, using all variables with common names across the two tables.}
 
 \item{suffix}{Append created for duplicated column names when using \code{full_join.()}}
+
+\item{...}{Other parameters passed on to methods}
+
+\item{keep}{Should the join keys from both \code{x} and \code{y} be preserved in the output?}
 }
 \value{
 A data.table

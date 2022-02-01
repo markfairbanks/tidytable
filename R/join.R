@@ -6,6 +6,8 @@
 #' @param y A data.frame or data.table
 #' @param by A character vector of variables to join by. If NULL, the default, the join will do a natural join, using all variables with common names across the two tables.
 #' @param suffix Append created for duplicated column names when using `full_join.()`
+#' @param ... Other parameters passed on to methods
+#' @param keep Should the join keys from both `x` and `y` be preserved in the output?
 #'
 #' @return A data.table
 #' @export
@@ -158,6 +160,8 @@ temp_names_fix <- function(names, by_x, y_suffix) {
 
   map_chr.(new_names, ~ if (.x %in% by_x) paste0(.x, y_suffix) else .x)
 }
+
+globalVariables(c("..by_x", "..by_y"))
 
 #' @export
 #' @rdname left_join.
