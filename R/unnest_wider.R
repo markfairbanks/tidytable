@@ -85,5 +85,5 @@ unnest_wider_tidytable <- function(...) {
   dots <- list2(...)
   names(dots) <- names(dots) %||% seq_along(dots)
 
-  tidytable(!!!dots)
+  new_tidytable(dots)
 }

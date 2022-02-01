@@ -69,8 +69,7 @@ expand_df <- function(.df, ..., .name_repair = .name_repair) {
 #' @rdname expand.
 nesting. <- function(..., .name_repair = "check_unique") {
   cols <- dots_list(..., .named = TRUE)
-
-  out <- tidytable(!!!cols, .name_repair = .name_repair)
+  out <- df_name_repair(new_tidytable(cols), .name_repair)
   out <- distinct.(out)
   setorder(out)
   out
