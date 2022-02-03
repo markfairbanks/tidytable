@@ -29,7 +29,7 @@ Imports:
     lifecycle (>= 0.2.0),
     magrittr (>= 1.5),
     pillar (>= 1.5.0),
-    rlang (>= 0.4.12),
+    rlang (>= 1.0.0),
     tidyselect (>= 1.1.0),
     vctrs (>= 0.3.8)
 RoxygenNote: 7.1.2
