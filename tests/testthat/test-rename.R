@@ -39,7 +39,16 @@ test_that("rename.() works for multiple columns", {
   expect_named(df, c("new_x", "new_y", "z"))
 })
 
-test_that("rename_with() works for all variables", {
+test_that("rename.() works by column position", {
+  df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
+  df <- df %>%
+    rename.(new_x = 1,
+            new_y = 2)
+
+  expect_named(df, c("new_x", "new_y", "z"))
+})
+
+test_that("rename_with.() works for all variables", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2))
   df <- df %>%
     rename_with.(~ paste0(.x, "_append"))
@@ -47,7 +56,7 @@ test_that("rename_with() works for all variables", {
   expect_named(df, c("x_append", "y_append"))
 })
 
-test_that("rename_with() doesn't modify by reference", {
+test_that("rename_with.() doesn't modify by reference", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2))
   df %>%
     rename_with.(~ paste0(.x, "_append"))
@@ -55,7 +64,7 @@ test_that("rename_with() doesn't modify by reference", {
   expect_named(df, c("x", "y"))
 })
 
-test_that("rename_with() works for all variables w/ data.frame", {
+test_that("rename_with.() works for all variables w/ data.frame", {
   df <- data.frame(x = c(1,1,1), y = c(2,2,2))
   df <- df %>%
     rename_with.(~ paste0(.x, "_append"))
@@ -63,7 +72,7 @@ test_that("rename_with() works for all variables w/ data.frame", {
   expect_named(df, c("x_append", "y_append"))
 })
 
-test_that("rename_if() works with predicate", {
+test_that("rename_with.() works with predicate", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
     rename_with.(~ paste0(.x, "_character"), where(is.character))
@@ -87,7 +96,7 @@ test_that("can make a custom function with quosures", {
 
   rename_fn <- function(data, new_name, old_name) {
     data %>%
-      rename.({{new_name}} := {{old_name}})
+      rename.({{ new_name }} := {{ old_name }})
   }
 
   df <- df %>%

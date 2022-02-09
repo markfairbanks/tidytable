@@ -20,15 +20,12 @@ rename. <- function(.df, ...) {
 
 #' @export
 rename..tidytable <- function(.df, ...) {
-  dots <- enquos(...)
-  .df <- shallow(.df)
+  locs <- eval_rename(expr(c(...)), .df)
 
-  new_names <- names(dots)
-  old_names <- map_chr.(dots, as_name)
+  names <- names(.df)
+  names[locs] <- names(locs)
 
-  setnames(.df, old_names, new_names)
-
-  .df
+  set_names(.df, names)
 }
 
 #' @export
