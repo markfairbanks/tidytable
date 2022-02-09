@@ -7,6 +7,7 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/tidytable)](https://cran.r-project.org/package=tidytable)
+[![downloads](http://cranlogs.r-pkg.org/badges/grand-total/tidytable?color=grey)](https://r-pkg.org/pkg/tidytable)
 [![CRAN RStudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=blue)](https://markfairbanks.github.io/tidytable/)
 [![R-CMD-check](https://github.com/markfairbanks/tidytable/workflows/R-CMD-check/badge.svg)](https://github.com/markfairbanks/tidytable/actions)
