@@ -1,7 +1,8 @@
 # tidytable 0.7.0 (in development)
 
 #### Functionality improvements
-* `left`/`right`/`inner`/`full` joins gain `suffix` and `keep` args
+* `left`/`right`/`inner`/`full` joins gain `suffix` and `keep` args (#354)
+* `rename.()`: Can now rename columns by position (#361)
 
 #### New functions
 * `new_tidytable()`
