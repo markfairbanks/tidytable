@@ -44,8 +44,9 @@ unite..tidytable <- function(.df, col = "new_col", ..., sep = "_", remove = TRUE
   vec_assert(remove, logical(), 1)
   vec_assert(na.rm, logical(), 1)
 
-  dots <- enquos(...)
+  col <- as_name(enquo(col))
 
+  dots <- enquos(...)
   if (length(dots) == 0) {
     unite_cols <- names(.df)
   } else {
@@ -63,7 +64,10 @@ unite..tidytable <- function(.df, col = "new_col", ..., sep = "_", remove = TRUE
     .df <- mutate.(.df, !!col := paste(!!!syms(unite_cols), sep = sep))
   }
 
-  if (remove) .df <- .df[, -..unite_cols]
+  if (remove) {
+    drop_cols <- setdiff(unite_cols, col)
+    .df <- .df[, -..drop_cols]
+  }
 
   .df
 }
@@ -71,7 +75,7 @@ unite..tidytable <- function(.df, col = "new_col", ..., sep = "_", remove = TRUE
 #' @export
 unite..data.frame <- function(.df, col = "new_col", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
   .df <- as_tidytable(.df)
-  unite.(.df, col = col, ..., sep = sep, remove = remove, na.rm = na.rm)
+  unite.(.df, {{ col }}, ..., sep = sep, remove = remove, na.rm = na.rm)
 }
 
 globalVariables("..unite_cols")

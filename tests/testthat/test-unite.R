@@ -23,6 +23,13 @@ test_that("works with selected cols", {
   expect_equal(unite_df$new_col, c("a_b", "a_b", "a_b"))
 })
 
+test_that("does not remove new col in case of name clash", {
+  df <- data.table(x = "a", y = "b")
+  out <- unite.(df, x, x:y)
+  expect_equal(names(out), "x")
+  expect_equal(out$x, "a_b")
+})
+
 test_that("na.rm works", {
   test_df <- tidytable(a = c("a", "a", "a"),
                        b = c("b", "b", "b"),
