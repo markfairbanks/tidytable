@@ -45,7 +45,7 @@ nest_by..tidytable <- function(.df, ..., .key = "data", .keep = FALSE) {
 
     .df <- distinct.(.df, ...)
 
-    .df <- mutate.(.df, !!.key := split_list)
+    .df <- mutate.(.df, !!.key := .env$split_list)
   } else {
     .by <- enquos(...)
 
