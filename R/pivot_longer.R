@@ -169,7 +169,7 @@ pivot_longer..tidytable <- function(.df,
   ))
 
   if (!is.null(names_prefix)) {
-    .df <- mutate.(.df, !!variable_name := gsub(paste0("^", names_prefix), "", !!sym(variable_name)))
+    .df <- mutate.(.df, !!variable_name := gsub(paste0("^", .env$names_prefix), "", !!sym(variable_name)))
   }
 
   if (multiple_names_to && uses_dot_value) {
@@ -177,7 +177,7 @@ pivot_longer..tidytable <- function(.df,
       .value_ids <- NULL
     }
 
-    .df <- mutate.(.df, !!variable_name := !!.value_ids)
+    .df <- mutate.(.df, !!variable_name := .env$.value_ids)
   } else if (multiple_names_to && !uses_dot_value) {
     if (!is.null(names_sep)) {
       .df <- separate.(.df, !!sym(variable_name), into = names_to, sep = names_sep)
