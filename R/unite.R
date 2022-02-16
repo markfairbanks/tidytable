@@ -47,7 +47,7 @@ unite..tidytable <- function(.df, col = ".united", ..., sep = "_", remove = TRUE
     unite_cols <- names(.df)
     locs <- seq_along(unite_cols)
   } else {
-    locs <- tidyselect_locs(.df, ..., .allow_rename = FALSE)
+    locs <- tidyselect_locs(.df, !!!dots)
     unite_cols <- names(.df)[locs]
   }
 
