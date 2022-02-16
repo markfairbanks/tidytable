@@ -40,17 +40,15 @@ unite. <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = 
 
 #' @export
 unite..tidytable <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
-  vec_assert(sep, character(), 1)
-  vec_assert(remove, logical(), 1)
-  vec_assert(na.rm, logical(), 1)
-
   col <- as_name(enquo(col))
 
   dots <- enquos(...)
   if (length(dots) == 0) {
     unite_cols <- names(.df)
+    locs <- seq_along(unite_cols)
   } else {
-    unite_cols <- tidyselect_names(.df, ...)
+    locs <- tidyselect_locs(.df, !!!dots)
+    unite_cols <- names(.df)[locs]
   }
 
   if (is_true(na.rm)) {
@@ -64,7 +62,7 @@ unite..tidytable <- function(.df, col = ".united", ..., sep = "_", remove = TRUE
     .df <- mutate.(.df, !!col := paste(!!!syms(unite_cols), sep = sep))
   }
 
-  .df <- relocate.(.df, !!col, .before = !!sym(unite_cols[[1]]))
+  .df <- relocate.(.df, !!col, .before = min(locs))
 
   if (is_true(remove)) {
     drop_cols <- setdiff(unite_cols, col)
