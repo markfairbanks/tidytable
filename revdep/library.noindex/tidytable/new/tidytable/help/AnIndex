@@ -85,6 +85,7 @@ n.	n.
 nest.	nest.
 nesting.	expand.
 nest_by.	nest_by.
+new_tidytable	new_tidytable
 nth.	first.
 num_range	reexports
 n_distinct.	n_distinct.

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0</span>
       </span>
     </div>
 
@@ -58,7 +58,28 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.6.7" id="tidytable-067">tidytable 0.6.7<a class="anchor" aria-label="anchor" href="#tidytable-067"></a></h2>
+<h2 class="page-header" data-toc-text="0.7.0" id="tidytable-070">tidytable 0.7.0<a class="anchor" aria-label="anchor" href="#tidytable-070"></a></h2>
+<div class="section level5">
+<h5 id="functionality-improvements-0-7-0">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-7-0"></a></h5>
+<ul><li>
+<code>left</code>/<code>right</code>/<code>inner</code>/<code>full</code> joins gain <code>suffix</code> and <code>keep</code> args (<a href="https://github.com/markfairbanks/tidytable/issues/354" class="external-link">#354</a>)</li>
+<li>
+<code><a href="../reference/rename..Rd.html">rename.()</a></code>: Can now rename columns by position (<a href="https://github.com/markfairbanks/tidytable/issues/361" class="external-link">#361</a>)</li>
+<li>
+<code><a href="../reference/unite..Rd.html">unite.()</a></code>: New columns are placed before united columns to match tidyr behavior</li>
+</ul></div>
+<div class="section level5">
+<h5 id="new-functions-0-7-0">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-7-0"></a></h5>
+<ul><li><code><a href="../reference/new_tidytable.html">new_tidytable()</a></code></li>
+</ul></div>
+<div class="section level5">
+<h5 id="breaking-changes-0-7-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-7-0"></a></h5>
+<ul><li>
+<code><a href="../reference/unite..Rd.html">unite.()</a></code>: If <code>col</code> isn’t provided, the new column is auto-named <code>.united</code> to reduce the chance of naming conflicts</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.6.7" id="tidytable-067">tidytable 0.6.7<small>2022-01-14</small><a class="anchor" aria-label="anchor" href="#tidytable-067"></a></h2>
 <div class="section level5">
 <h5 id="functionality-improvements-0-6-7">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-6-7"></a></h5>
 <ul><li>
@@ -274,7 +295,7 @@
 <div class="section level5">
 <h5 id="other-news-0-6-0">Other news<a class="anchor" aria-label="anchor" href="#other-news-0-6-0"></a></h5>
 <ul><li>
-<code>tidytable</code> has dropped the <code>tibble</code> package as a dependency and now uses <code>pillar</code> instead. <code>tibble</code> was originally used for its <code><a href="https://tibble.tidyverse.org/reference/trunc_mat.html" class="external-link">trunc_mat()</a></code> function that enabled tidytables to print like tibbles do in console. <code>pillar</code> is the same package that <code>tibble</code> uses in the background.</li>
+<code>tidytable</code> has dropped the <code>tibble</code> package as a dependency and now uses <code>pillar</code> instead. <code>tibble</code> was originally used for its <code>trunc_mat()</code> function that enabled tidytables to print like tibbles do in console. <code>pillar</code> is the same package that <code>tibble</code> uses in the background.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -762,7 +783,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

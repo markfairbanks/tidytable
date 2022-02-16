@@ -1,0 +1,363 @@
+
+R version 4.1.0 (2021-05-18) -- "Camp Pontanezen"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "ffsimulator"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('ffsimulator')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("autoplot.ff_simulation")
+> ### * autoplot.ff_simulation
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: autoplot.ff_simulation
+> ### Title: Automatically Plot ff_simulation Object
+> ### Aliases: autoplot.ff_simulation plot.ff_simulation
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("autoplot.ff_simulation_week")
+> ### * autoplot.ff_simulation_week
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: autoplot.ff_simulation_week
+> ### Title: Automatically Plot ff_simulation Object
+> ### Aliases: autoplot.ff_simulation_week plot.ff_simulation_week
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ff_simulate")
+> ### * ff_simulate
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ff_simulate
+> ### Title: Simulate Fantasy Seasons
+> ### Aliases: ff_simulate
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ff_simulate_week")
+> ### * ff_simulate_week
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ff_simulate_week
+> ### Title: Simulate Fantasy Week
+> ### Aliases: ff_simulate_week
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ff_wins_added")
+> ### * ff_wins_added
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ff_wins_added
+> ### Title: Wins Added
+> ### Aliases: ff_wins_added
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ffs_adp_outcomes")
+> ### * ffs_adp_outcomes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ffs_adp_outcomes
+> ### Title: Connects ff_scoringhistory to past ADP rankings
+> ### Aliases: ffs_adp_outcomes
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ffs_adp_outcomes_week")
+> ### * ffs_adp_outcomes_week
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ffs_adp_outcomes_week
+> ### Title: Connects ff_scoringhistory to past ADP rankings
+> ### Aliases: ffs_adp_outcomes_week
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ffs_build_schedules")
+> ### * ffs_build_schedules
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ffs_build_schedules
+> ### Title: Generate fantasy schedules
+> ### Aliases: ffs_build_schedules
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ffs_copy_template")
+> ### * ffs_copy_template
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ffs_copy_template
+> ### Title: Copy simulation template to filename
+> ### Aliases: ffs_copy_template
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ffs_franchises")
+> ### * ffs_franchises
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ffs_franchises
+> ### Title: Get Franchises
+> ### Aliases: ffs_franchises
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ffs_generate_projections")
+> ### * ffs_generate_projections
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ffs_generate_projections
+> ### Title: Generate Projections
+> ### Aliases: ffs_generate_projections
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ffs_generate_projections_week")
+> ### * ffs_generate_projections_week
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ffs_generate_projections_week
+> ### Title: Generate Projections
+> ### Aliases: ffs_generate_projections_week
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ffs_latest_rankings")
+> ### * ffs_latest_rankings
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ffs_latest_rankings
+> ### Title: Download latest rankings from DynastyProcess GitHub
+> ### Aliases: ffs_latest_rankings
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ffs_optimise_lineups")
+> ### * ffs_optimise_lineups
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ffs_optimise_lineups
+> ### Title: Optimise Lineups
+> ### Aliases: ffs_optimise_lineups ffs_optimize_lineups
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ffs_repeat_schedules")
+> ### * ffs_repeat_schedules
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ffs_repeat_schedules
+> ### Title: Repeat fantasy schedules
+> ### Aliases: ffs_repeat_schedules
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ffs_rosters")
+> ### * ffs_rosters
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ffs_rosters
+> ### Title: Get Rosters
+> ### Aliases: ffs_rosters ffs_rosters.mfl_conn ffs_rosters.sleeper_conn
+> ###   ffs_rosters.flea_conn ffs_rosters.espn_conn
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ffs_schedule")
+> ### * ffs_schedule
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ffs_schedule
+> ### Title: Get Schedule
+> ### Aliases: ffs_schedule
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ffs_score_rosters")
+> ### * ffs_score_rosters
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ffs_score_rosters
+> ### Title: Join Rosters to Projected Scores
+> ### Aliases: ffs_score_rosters
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ffs_starter_positions")
+> ### * ffs_starter_positions
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ffs_starter_positions
+> ### Title: Get league starter positions
+> ### Aliases: ffs_starter_positions
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ffs_summaries")
+> ### * ffs_summaries
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ffs_summarise_week
+> ### Title: Summarise simulation outputs
+> ### Aliases: ffs_summarise_week ffs_summarise_season
+> ###   ffs_summarise_simulation ffs_summarise_inseason ffs_summarize_week
+> ###   ffs_summarize_season ffs_summarize_simulation
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.364 0.058 0.43 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

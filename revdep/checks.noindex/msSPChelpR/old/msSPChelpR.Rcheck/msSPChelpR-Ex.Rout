@@ -80,18 +80,18 @@ Be careful, in this calculation it is assumed that all included regions have col
                        If you have included registries with differing times, please check this assumption by looking at groups with 0 incidence and specify option 'inclusion_restrictions' if needed.
 The following regions, age groups, years, sexes and ICD codes are considered:  SEER Reg 01 - San Francisco-Oakland SMSA, SEER Reg 02 - Connecticut, SEER Reg 20 - Detroit (Metropolitan), SEER Reg 21 - Hawaii 1995 - 1999, 2000 - 2004, 2005 - 2009, 2010 - 2014, 1990 - 1994 00 - 04, 05 - 09, 10 - 14, 15 - 19, 20 - 24, 25 - 29, 30 - 34, 35 - 39, 40 - 44, 45 - 49, 50 - 54, 55 - 59, 60 - 64, 65 - 69, 70 - 74, 75 - 79, 80 - 84, 85 - 120 Female, Male C18, C34, C44, C50, C54, C64, C80, C14
 # A tibble: 320 × 17
-   age       region   sex   year  t_site  asir observed   pyar abs_ir abs_ir_lci
-   <chr>     <chr>    <chr> <chr> <chr>  <dbl>    <dbl>  <dbl>  <dbl>      <dbl>
- 1 Age stan… SEER Re… Fema… 1990… C14        0        0 1.92e7      0          0
- 2 Age stan… SEER Re… Fema… 1990… C18        0        0 1.92e7      0          0
- 3 Age stan… SEER Re… Fema… 1990… C34        0        0 1.92e7      0          0
- 4 Age stan… SEER Re… Fema… 1990… C44        0        0 1.92e7      0          0
- 5 Age stan… SEER Re… Fema… 1990… C50        0        0 1.92e7      0          0
- 6 Age stan… SEER Re… Fema… 1990… C54        0        0 1.92e7      0          0
- 7 Age stan… SEER Re… Fema… 1990… C64        0        0 1.92e7      0          0
- 8 Age stan… SEER Re… Fema… 1990… C80        0        0 1.92e7      0          0
- 9 Age stan… SEER Re… Fema… 1995… C14        0        0 2.01e7      0          0
-10 Age stan… SEER Re… Fema… 1995… C18        0        0 2.01e7      0          0
+   age         region sex   year  t_site  asir observed   pyar abs_ir abs_ir_lci
+   <chr>       <chr>  <chr> <chr> <chr>  <dbl>    <dbl>  <dbl>  <dbl>      <dbl>
+ 1 Age standa… SEER … Fema… 1990… C14        0        0 1.92e7      0          0
+ 2 Age standa… SEER … Fema… 1990… C18        0        0 1.92e7      0          0
+ 3 Age standa… SEER … Fema… 1990… C34        0        0 1.92e7      0          0
+ 4 Age standa… SEER … Fema… 1990… C44        0        0 1.92e7      0          0
+ 5 Age standa… SEER … Fema… 1990… C50        0        0 1.92e7      0          0
+ 6 Age standa… SEER … Fema… 1990… C54        0        0 1.92e7      0          0
+ 7 Age standa… SEER … Fema… 1990… C64        0        0 1.92e7      0          0
+ 8 Age standa… SEER … Fema… 1990… C80        0        0 1.92e7      0          0
+ 9 Age standa… SEER … Fema… 1995… C14        0        0 2.01e7      0          0
+10 Age standa… SEER … Fema… 1995… C18        0        0 2.01e7      0          0
 # … with 310 more rows, and 7 more variables: abs_ir_uci <dbl>,
 #   asir_copy <dbl>, asir_lci <dbl>, asir_lci_gam <dbl>, asir_uci <dbl>,
 #   asir_uci_gam <dbl>, asir_e6 <dbl>
@@ -43405,6 +43405,7 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 > 
 > #functions can be easily used inside dplyr::mutate function
 > library(dplyr)
+Warning: package ‘dplyr’ was built under R version 4.1.2
 
 Attaching package: ‘dplyr’
 
@@ -43675,7 +43676,7 @@ detaching ‘package:dplyr’
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  12.564 2.64 15.503 0.003 0.005 
+Time elapsed:  14.677 2.252 17.143 0.002 0.004 
 > grDevices::dev.off()
 null device 
           1 

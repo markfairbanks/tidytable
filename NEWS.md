@@ -1,4 +1,4 @@
-# tidytable 0.7.0 (in development)
+# tidytable 0.7.0
 
 #### Functionality improvements
 * `left`/`right`/`inner`/`full` joins gain `suffix` and `keep` args (#354)

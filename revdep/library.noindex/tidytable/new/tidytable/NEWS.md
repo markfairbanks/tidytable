@@ -1,3 +1,17 @@
+# tidytable 0.7.0
+
+#### Functionality improvements
+* `left`/`right`/`inner`/`full` joins gain `suffix` and `keep` args (#354)
+* `rename.()`: Can now rename columns by position (#361)
+* `unite.()`: New columns are placed before united columns to match tidyr behavior
+
+#### New functions
+* `new_tidytable()`
+
+#### Breaking changes
+* `unite.()`: If `col` isn't provided, the new column is
+auto-named `.united` to reduce the chance of naming conflicts
+
 # tidytable 0.6.7
 
 #### Functionality improvements
