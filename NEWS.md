@@ -1,5 +1,8 @@
 # tidytable 0.7.1 (in development)
 
+#### New functions
+* `add_count.()`
+
 #### Bug fixes
 * `unite.()`: New column is always placed before the first united column in the data frame,
 regardless of order provided.
