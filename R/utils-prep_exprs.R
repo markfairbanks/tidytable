@@ -41,7 +41,7 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env, is_top_across
     quote(.N)
   } else if (is_call(x, c("desc.", "desc"))) {
     x[[1]] <- sym("-")
-    x[[2]] <- get_expr(x[[2]])
+    x[[2]] <- prep_expr(x[[2]], data, {{ .by }}, j, dt_env, is_top_across)
     x
   } else if (is_call(x, c("row_number.", "row_number", "cur_group_rows.", "cur_group_rows"))) {
     quote(1:.N)

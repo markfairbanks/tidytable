@@ -61,6 +61,18 @@ test_that("desc works with internal quosure", {
   expect_equal(desc_df, check_df)
 })
 
+test_that("desc wworks with .data pronoun", {
+  df <- data.table(x = c(4,3,9,7), y = 1:4)
+
+  desc_df <- df %>%
+    arrange.(desc(.data$x))
+
+  check_df <- df %>%
+    arrange.(-x)
+
+  expect_equal(desc_df, check_df)
+})
+
 test_that("can arrange with multiple conditions", {
   df <- data.table(x = c(4,3,2,1), y = c("a","a","b","b"))
   df <- df %>%
