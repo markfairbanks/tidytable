@@ -6,7 +6,7 @@
 #### Bug fixes
 * `unite.()`: New column is always placed before the first united column in the data frame,
 regardless of order provided.
-* Can use `.data` pronoun inside `desc()` in `arrange()` (#371)
+* Can use `.data` pronoun inside `desc()` in `arrange.()` (#371)
 
 # tidytable 0.7.0
 
