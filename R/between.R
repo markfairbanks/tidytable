@@ -1,7 +1,7 @@
 #' Do the values from x fall between the left and right bounds?
 #'
 #' @description
-#' `between.()` utilizes `data.table::between()` in the background
+#' Do the values from x fall between the left and right bounds?
 #'
 #' @param x A numeric vector
 #' @param left,right Boundary values
@@ -25,5 +25,5 @@
 #' df %>%
 #'   filter.(x %between% c(2, 4))
 between. <- function(x, left, right) {
-  between(x = x, lower = left, upper = right)
+  data.table::between(x = x, lower = left, upper = right)
 }

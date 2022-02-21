@@ -12,7 +12,7 @@ between.(x, left, right)
 \item{left, right}{Boundary values}
 }
 \description{
-\code{between.()} utilizes \code{data.table::between()} in the background
+Do the values from x fall between the left and right bounds?
 }
 \examples{
 df <- data.table(
