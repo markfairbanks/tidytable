@@ -18,12 +18,12 @@
 #'
 #' fread.(fake_csv)
 fread. <- function(...) {
-  .df <- fread(...)
+  .df <- data.table::fread(...)
   as_tidytable(.df)
 }
 
 #' @export
 #' @rdname fread.
 fwrite. <- function(...) {
-  fwrite(...)
+  data.table::fwrite(...)
 }
