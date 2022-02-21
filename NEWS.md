@@ -1,5 +1,9 @@
 # tidytable 0.7.1 (in development)
 
+#### Functionality improvements
+* Added global option `tidytable_no_dot`. If `option(tidytable_no_dot = TRUE)` before loading tidytable,
+  tidytable exports functions without the dot. Ex: `df %>% summarize(avg_x = mean(x), .by = z)`
+
 #### New functions
 * `add_count.()`
 
