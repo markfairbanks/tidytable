@@ -40,23 +40,32 @@ summarize. <- function(.df, ..., .by = NULL, .sort = FALSE) {
 summarize..tidytable <- function(.df, ..., .by = NULL, .sort = FALSE) {
   dots <- enquos(...)
 
-  dt_env <- get_dt_env(dots)
+  .by <- enquo(.by)
 
-  dots <- prep_exprs(dots, .df, {{ .by }}, dt_env = dt_env)
+  if (length(dots) == 0) {
+    # Issue #379
+    out <- distinct.(.df, !!.by)
+  } else {
+    dt_env <- get_dt_env(dots)
 
-  .by <- tidyselect_names(.df, {{ .by }})
+    dots <- prep_exprs(dots, .df, !!.by, dt_env = dt_env)
 
-  j <- expr(list(!!!dots))
+    .by <- tidyselect_names(.df, !!.by)
 
-  dt_expr <- call2_j(.df, j, .by)
+    j <- expr(list(!!!dots))
 
-  .df <- eval_tidy(dt_expr, .df, dt_env)
+    dt_expr <- call2_j(.df, j, .by)
 
-  if (.sort) {
-    .df <- arrange.(.df, !!!syms(.by))
+    out <- eval_tidy(dt_expr, .df, dt_env)
+
+    if (.sort) {
+      out <- arrange.(out, !!!syms(.by))
+    }
+
+    out <- df_name_repair(out, .name_repair = "unique")
   }
 
-  df_name_repair(.df, .name_repair = "unique")
+  out
 }
 
 #' @export

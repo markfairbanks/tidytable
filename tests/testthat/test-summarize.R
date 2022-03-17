@@ -163,3 +163,14 @@ test_that("can use .data and .env with .by", {
 
   expect_equal(result_df$check, c(3, 5))
 })
+
+test_that("empty dots with .by returns distinct, #379", {
+  df <- tidytable(x = c("a", "a", "b"), y = c("a", "a", "b"))
+
+  result_df <- df %>%
+    summarize.(.by = c(x, y))
+
+  check_df <- tidytable(x = c("a", "b"), y = c("a", "b"))
+
+  expect_equal(result_df, check_df)
+})
