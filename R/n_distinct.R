@@ -12,18 +12,13 @@
 #' x <- sample(1:10, 1e5, rep = TRUE)
 #' n_distinct.(x)
 n_distinct. <- function(..., na.rm = FALSE) {
-  dots <- dots_list(..., .named = TRUE)
+  dots <- list2(...)
 
   if (length(dots) == 1) {
-    # replace with uniqueN(dots[[1]], na.rm = na.rm) when
-    # data.table issue #3739 is fixed
-    # https://github.com/Rdatatable/data.table/issues/3739
     x <- dots[[1]]
-    if (na.rm) {
-      x <- vec_slice(x, !vec_equal_na(x))
-    }
-    vec_unique_count(x)
   } else {
-    uniqueN(new_tidytable(dots), na.rm = na.rm)
+    x <- new_data_frame(dots)
   }
+
+  uniqueN(x, na.rm = na.rm)
 }
