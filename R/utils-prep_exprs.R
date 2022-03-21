@@ -81,7 +81,7 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env, is_top_across
     call <- call_match(x, tidytable::across., dots_expand = FALSE)
     .cols <- get_across_cols(data, call$.cols, {{ .by }})
     dots <- call$...
-    call_list <- across_calls(call$.fns, .cols, call$.names, dots)
+    call_list <- expand_across(call$.fns, .cols, call$.names, dots)
     out <- lapply(call_list, prep_expr, data, {{ .by }})
     if (!is_top_across) {
       out <- call2("data_frame", !!!out, .ns = "vctrs")

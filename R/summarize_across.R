@@ -72,7 +72,7 @@ summarize_across..data.frame <- function(.df, .cols = everything(), .fns = NULL,
   .fns <- enexpr(.fns)
   if (is_null(.fns)) return(.df)
 
-  call_list <- across_calls(.fns, .cols, .names, dots)
+  call_list <- expand_across(.fns, .cols, .names, dots)
 
   call_list <- as_quosures(call_list, dt_env)
 
