@@ -1,5 +1,5 @@
 # Build across calls
-across_calls <- function(.fns, .cols, .names, dots) {
+expand_across <- function(.fns, .cols, .names, dots) {
   if (!is_call(.fns, c("list", "list2"))) {
     call_list <- map.(.cols, ~ fn_to_expr(.fns, .x, !!!dots))
 
@@ -42,6 +42,8 @@ across_calls <- function(.fns, .cols, .names, dots) {
     )
   }
 
+  call_list <- map2.(call_list, names(call_list), replace_cur_column)
+
   call_list
 }
 
@@ -79,4 +81,15 @@ get_across_cols <- function(data, call_cols, .by = NULL) {
   .cols <- call_cols %||% quote(everything())
   .cols <- expr(c(!!.cols, - {{ .by }}))
   tidyselect_names(data, !!.cols)
+}
+
+replace_cur_column <- function(x, x_name) {
+  if (is_symbol(x) || is_atomic(x) || is_null(x)) {
+    x
+  } else if (is_call(x, c("cur_column", "cur_column."))) {
+    x_name
+  } else {
+    x[-1] <- lapply(x[-1], replace_cur_column, x_name)
+    x
+  }
 }
