@@ -34,6 +34,15 @@ df <- data.table(
 )
 
 df \%>\%
+  mutate.(
+    across.(c(x, y), ~ paste(cur_column.(), .x))
+  )
+
+df \%>\%
+  summarize.(data = list(cur_data.()),
+             .by = y)
+
+df \%>\%
   mutate.(group_id = cur_group_id.(),
           .by = y)
 
