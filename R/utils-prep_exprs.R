@@ -26,6 +26,7 @@ call_fns <- c(
   "$", "[[",
   "across.", "between",
   "c_across.", "case_when",
+  "cur_data.", "cur_data",
   "cur_group_rows.", "cur_group_rows", "cur_group_id.", "cur_group_id",
   "desc.", "desc",
   "glue",
@@ -47,6 +48,8 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env, is_top_across
     quote(1:.N)
   } else if (is_call(x, c("cur_group_id.", "cur_group_id"))) {
     quote(.GRP)
+  } else if (is_call(x, c("cur_data.", "cur_data"))) {
+    quote(.SD)
   } else if (is_call(x, c("ifelse", "if_else"))) {
     if (is_call(x, "if_else")) {
       x <- call_match(x, internal_if_else)
