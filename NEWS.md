@@ -2,6 +2,8 @@
 
 #### New functions
 * `add_count.()`
+* `cur_column.()`
+* `cur_data.()`
 
 #### Bug fixes
 * `unite.()`: New column is always placed before the first united column in the data frame,
