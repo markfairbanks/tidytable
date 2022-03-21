@@ -11,7 +11,7 @@ add_count.(.df, ..., wt = NULL, sort = FALSE, name = NULL)
 
 \item{...}{Columns to group by. \code{tidyselect} compatible.}
 
-\item{wt}{Frequency weights.  \code{tidyselect} compatible.
+\item{wt}{Frequency weights.
 Can be \code{NULL} or a variable:
 \itemize{
 \item If \code{NULL} (the default), counts the number of rows in each group.
