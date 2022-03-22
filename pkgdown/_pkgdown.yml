@@ -25,7 +25,7 @@ reference:
   - case_when.
   - coalesce.
   - count.
-  - cur_group_id.
+  - context
   - desc.
   - distinct.
   - enframe.
