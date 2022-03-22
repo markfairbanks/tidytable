@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.1</span>
       </span>
     </div>
 
@@ -51,7 +51,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -101,44 +101,65 @@
 </h3>
 <p>A few notes:</p>
 <ul>
-<li>Comparing times from separate functions won’t be very useful. For example - the <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code> tests were performed on a different dataset from <code><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when()</a></code>.</li>
+<li>Comparing times from separate functions won’t be very useful. For
+example - the <code>summarize()</code> tests were performed on a
+different dataset from <code>case_when()</code>.</li>
 <li>
-<code>setDTthreads(4)</code> was used for <code>data.table</code> &amp; <code>tidytable</code> timings.</li>
-<li>Modify-by-reference was used in <code>data.table</code> when being compared to <code><a href="../reference/mutate..Rd.html">mutate.()</a></code> &amp; <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code>
+<code>setDTthreads(4)</code> was used for <code>data.table</code>
+&amp; <code>tidytable</code> timings.</li>
+<li>Modify-by-reference was used in <code>data.table</code> when being
+compared to <code><a href="../reference/mutate..Rd.html">mutate.()</a></code> &amp;
+<code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code>
 </li>
 <li>
-<code><a href="../reference/fill..Rd.html">fill.()</a></code> &amp; <code><a href="https://tidyr.tidyverse.org/reference/fill.html" class="external-link">tidyr::fill()</a></code> both work with character/factor/logical columns, whereas <code><a href="https://Rdatatable.gitlab.io/data.table/reference/nafill.html" class="external-link">data.table::nafill()</a></code> does not. Testing only included numeric columns due to this constraint.</li>
+<code><a href="../reference/fill..Rd.html">fill.()</a></code> &amp; <code><a href="https://tidyr.tidyverse.org/reference/fill.html" class="external-link">tidyr::fill()</a></code> both work with
+character/factor/logical columns, whereas
+<code><a href="https://Rdatatable.gitlab.io/data.table/reference/nafill.html" class="external-link">data.table::nafill()</a></code> does not. Testing only included
+numeric columns due to this constraint.</li>
 <li>
-<code>dtplyr</code> is missing timings for functions that are not yet implemented in the package.</li>
+<code>dtplyr</code> is missing timings for functions that are not
+yet implemented in the package.</li>
 <li>
-<code>pandas</code> comparisons are in the process of being added - more will be added soon.</li>
-<li>All tests are run 5 times. The times shown are the median of those 5 runs.</li>
+<code>pandas</code> comparisons are in the process of being added -
+more will be added soon.</li>
+<li>All tests are run 5 times. The times shown are the median of those 5
+runs.</li>
 <li>All timings are in milliseconds.</li>
 <li>All tests can be found in the source code <a href="https://github.com/markfairbanks/tidytable/blob/master/vignettes/speed_comparisons.Rmd" class="external-link">here</a>.</li>
-<li>FAQ - Why are some <code>tidytable</code> functions faster than their <code>data.table</code> counterpart?
+<li>FAQ - Why are some <code>tidytable</code> functions faster than
+their <code>data.table</code> counterpart?
 <ul>
-<li>Short answer - they’re not! After all they’re just using <code>data.table</code> in the background.</li>
-<li>Long answer - All R functions have some slight natural variation in their execution time. By chance the <code>tidytable</code> runs were slightly shorter on those specific functions on this iteration of the tests. However one goal of these tests is to show that the “time cost” of translating <code>tidyverse</code> syntax to <code>data.table</code> is very negligible to the user (especially on medium-to-large datasets).</li>
+<li>Short answer - they’re not! After all they’re just using
+<code>data.table</code> in the background.</li>
+<li>Long answer - All R functions have some slight natural variation in
+their execution time. By chance the <code>tidytable</code> runs were
+slightly shorter on those specific functions on this iteration of the
+tests. However one goal of these tests is to show that the “time cost”
+of translating <code>tidyverse</code> syntax to <code>data.table</code>
+is very negligible to the user (especially on medium-to-large
+datasets).</li>
 </ul>
 </li>
-<li>Lastly I’d like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.</li>
+<li>Lastly I’d like to mention that these tests were not rigorously
+created to cover all angles equally. They are just meant to be used as
+general insight into the performance of these packages.</li>
 </ul>
 <pre><code><span class="co">#&gt; <span style="color: #949494;"># A tidytable: 13 × 6</span></span>
 <span class="co">#&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> arrange            30.1      31.4   37.5    <span style="text-decoration: underline;">1</span>024.   355  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> case_when          32.2      27.9   <span style="color: #BB0000;">NA</span>       334.    59.2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> distinct           14.5      12.9   15.9      35.1  309  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> fill               31.6      48.2   50.5      82.1  846  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> filter            224.      225.   216.      285.   707  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> inner_join         45.2      48.1   53.4      66.3   <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> left_join          56.9     155.   132.      175     <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> mutate             46.9      62.9  225.       67.5   86.4</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> nest                8.1      10.4   16.1      33     <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> pivot_longer        7.4       7.4   13.6      11.5   <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> pivot_wider        41.5      61.7  110.      110.    <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> summarize         184.      188.   199.      202.   834  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> unnest              9        11.9   <span style="color: #BB0000;">NA</span>        19.5   <span style="color: #BB0000;">NA</span></span></code></pre>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> arrange            30.8      31.4   33.1    <span style="text-decoration: underline;">1</span>134.   355  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> case_when          31.6      30.3   <span style="color: #BB0000;">NA</span>       338.    59.2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> distinct           12.7      11.9   15.6      36.3  309  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> fill               33.1      39.9   39.6      91.3  846  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> filter            211.      213.   222.      336.   707  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> inner_join         51.5      40.2   58.8      71.6   <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> left_join          43       148.   131.      171.    <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> mutate             52.7      49.5  395.       58.4   86.4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> nest                6.9       7.9   14.8      32.9   <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> pivot_longer        7.9       7.3   15.3      12.3   <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> pivot_wider        44.7      57.3  109.       99.4   <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> summarize         193       202.   211.      204.   834  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> unnest              9.6      10.9   <span style="color: #BB0000;">NA</span>        14.6   <span style="color: #BB0000;">NA</span></span></code></pre>
 </div>
   </div>
 
@@ -157,7 +178,8 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
       </footer>

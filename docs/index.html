@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.1</span>
       </span>
     </div>
 
@@ -52,7 +52,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -87,7 +87,8 @@
       </header><div class="row">
   <div class="contents col-md-9">
 <div class="section level1">
-<div class="page-header"><h1 id="tidytable-">tidytable <img id="logo" src="reference/figures/logo.png" align="right" width="17%" height="17%"><a class="anchor" aria-label="anchor" href="#tidytable-"></a>
+<div class="page-header"><h1 id="tidytable-">tidytable
+<img id="logo" src="reference/figures/logo.png" align="right" width="17%" height="17%"><a class="anchor" aria-label="anchor" href="#tidytable-"></a>
 </h1></div>
 <!-- badges: start -->
 
@@ -96,9 +97,11 @@
 </h4>
 <ul>
 <li>
-<code>tidyverse</code>-like syntax built on top of the fast <code>data.table</code> package</li>
+<code>tidyverse</code>-like syntax built on top of the fast
+<code>data.table</code> package</li>
 <li>Compatibility with the tidy evaluation framework</li>
-<li>Includes functions that <code>dtplyr</code> is missing, including many <code>tidyr</code> functions</li>
+<li>Includes functions that <code>dtplyr</code> is missing, including
+many <code>tidyr</code> functions</li>
 </ul>
 </div>
 <div class="section level2">
@@ -115,7 +118,8 @@
 <div class="section level2">
 <h2 id="general-syntax">General syntax<a class="anchor" aria-label="anchor" href="#general-syntax"></a>
 </h2>
-<p><code>tidytable</code> uses <code>verb.()</code> syntax to replicate <code>tidyverse</code> functions:</p>
+<p><code>tidytable</code> uses <code>verb.()</code> syntax to replicate
+<code>tidyverse</code> functions:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/markfairbanks/tidytable" class="external-link">tidytable</a></span><span class="op">)</span>
 
@@ -138,7 +142,8 @@
 <div class="section level2">
 <h2 id="using-group-by">Using “group by”<a class="anchor" aria-label="anchor" href="#using-group-by"></a>
 </h2>
-<p>Group by calls are done by using the <code>.by</code> argument of any function that has “by group” functionality.</p>
+<p>Group by calls are done by using the <code>.by</code> argument of any
+function that has “by group” functionality.</p>
 <ul>
 <li>A single column can be passed with <code>.by = z</code>
 </li>
@@ -160,8 +165,14 @@
 <code>.by</code> vs. <code>group_by()</code>
 <a class="anchor" aria-label="anchor" href="#by-vs-group_by"></a>
 </h3>
-<p><code>tidytable</code> follows <code>data.table</code> semantics where <code>.by</code> must be called each time you want a function to operate “by group”.</p>
-<p>Below is some example <code>tidytable</code> code that utilizes <code>.by</code> that we’ll then compare to its <code>dplyr</code> equivalent. The goal is to grab the first two rows of each group using <code><a href="reference/slice..Rd.html">slice.()</a></code>, then add a group row number column using <code><a href="reference/mutate..Rd.html">mutate.()</a></code>:</p>
+<p><code>tidytable</code> follows <code>data.table</code> semantics
+where <code>.by</code> must be called each time you want a function to
+operate “by group”.</p>
+<p>Below is some example <code>tidytable</code> code that utilizes
+<code>.by</code> that we’ll then compare to its <code>dplyr</code>
+equivalent. The goal is to grab the first two rows of each group using
+<code><a href="reference/slice..Rd.html">slice.()</a></code>, then add a group row number column using
+<code><a href="reference/mutate..Rd.html">mutate.()</a></code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/markfairbanks/tidytable" class="external-link">tidytable</a></span><span class="op">)</span>
 
@@ -177,8 +188,11 @@
 <span class="co">#&gt; 2 a                 2</span>
 <span class="co">#&gt; 3 b                 1</span>
 <span class="co">#&gt; 4 b                 2</span></code></pre></div>
-<p>Note how <code>.by</code> is called in both <code><a href="reference/slice..Rd.html">slice.()</a></code> and <code><a href="reference/mutate..Rd.html">mutate.()</a></code>.</p>
-<p>Compared to a <code>dplyr</code> pipe chain that utilizes <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code>, where each function operates “by group” until <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup()</a></code> is called:</p>
+<p>Note how <code>.by</code> is called in both <code><a href="reference/slice..Rd.html">slice.()</a></code> and
+<code><a href="reference/mutate..Rd.html">mutate.()</a></code>.</p>
+<p>Compared to a <code>dplyr</code> pipe chain that utilizes
+<code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code>, where each function operates “by group” until
+<code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup()</a></code> is called:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
 
@@ -196,14 +210,20 @@
 <span class="co">#&gt; 2 a                 2</span>
 <span class="co">#&gt; 3 b                 1</span>
 <span class="co">#&gt; 4 b                 2</span></code></pre></div>
-<p>Note that the <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup()</a></code> call is unnecessary in <code>tidytable</code>.</p>
+<p>Note that the <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup()</a></code> call is unnecessary in
+<code>tidytable</code>.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="tidyselect-support">tidyselect support<a class="anchor" aria-label="anchor" href="#tidyselect-support"></a>
 </h2>
-<p><code>tidytable</code> allows you to select/drop columns just like you would in the tidyverse by utilizing the <a href="https://tidyselect.r-lib.org" class="external-link"><code>tidyselect</code></a> package in the background.</p>
-<p>Normal selection can be mixed with all <code>tidyselect</code> helpers: <code><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">ends_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">any_of()</a></code>, <code>where()</code>, etc.</p>
+<p><code>tidytable</code> allows you to select/drop columns just like
+you would in the tidyverse by utilizing the <a href="https://tidyselect.r-lib.org" class="external-link"><code>tidyselect</code></a> package
+in the background.</p>
+<p>Normal selection can be mixed with all <code>tidyselect</code>
+helpers: <code><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with()</a></code>,
+<code><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">ends_with()</a></code>, <code><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">any_of()</a></code>, <code>where()</code>,
+etc.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span>
   a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,
@@ -230,13 +250,17 @@
 <span class="co">#&gt; 1 a    </span>
 <span class="co">#&gt; 2 a    </span>
 <span class="co">#&gt; 3 b</span></code></pre></div>
-<p>These same ideas can be used whenever selecting columns in <code>tidytable</code> functions - for example when using <code><a href="reference/count..Rd.html">count.()</a></code>, <code><a href="reference/drop_na..Rd.html">drop_na.()</a></code>, <code><a href="reference/across..Rd.html">across.()</a></code>, <code><a href="reference/pivot_longer..Rd.html">pivot_longer.()</a></code>, etc.</p>
+<p>These same ideas can be used whenever selecting columns in
+<code>tidytable</code> functions - for example when using
+<code><a href="reference/count..Rd.html">count.()</a></code>, <code><a href="reference/drop_na..Rd.html">drop_na.()</a></code>, <code><a href="reference/across..Rd.html">across.()</a></code>,
+<code><a href="reference/pivot_longer..Rd.html">pivot_longer.()</a></code>, etc.</p>
 <p>A full overview of selection options can be found <a href="https://tidyselect.r-lib.org/reference/language.html" class="external-link">here</a>.</p>
 <div class="section level3">
 <h3 id="using-tidyselect-in-by">Using tidyselect in <code>.by</code>
 <a class="anchor" aria-label="anchor" href="#using-tidyselect-in-by"></a>
 </h3>
-<p><code>tidyselect</code> helpers also work when using <code>.by</code>:</p>
+<p><code>tidyselect</code> helpers also work when using
+<code>.by</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span>
   a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,
@@ -256,7 +280,10 @@
 <div class="section level2">
 <h2 id="tidy-evaluation-compatibility">Tidy evaluation compatibility<a class="anchor" aria-label="anchor" href="#tidy-evaluation-compatibility"></a>
 </h2>
-<p>Tidy evaluation can be used to write custom functions with <code>tidytable</code> functions. The embracing shortcut <code>{{ }}</code> works, or you can use <code><a href="https://rlang.r-lib.org/reference/enquo.html" class="external-link">enquo()</a></code> with <code>!!</code> if you prefer:</p>
+<p>Tidy evaluation can be used to write custom functions with
+<code>tidytable</code> functions. The embracing shortcut
+<code>{{ }}</code> works, or you can use <code><a href="https://rlang.r-lib.org/reference/enquo.html" class="external-link">enquo()</a></code> with
+<code>!!</code> if you prefer:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span>
 
@@ -273,7 +300,8 @@
 <span class="co">#&gt; 1     1     1 a           2</span>
 <span class="co">#&gt; 2     1     1 a           2</span>
 <span class="co">#&gt; 3     1     1 b           2</span></code></pre></div>
-<p>The <code>.data</code> and <code>.env</code> pronouns also work within <code>tidytable</code> functions:</p>
+<p>The <code>.data</code> and <code>.env</code> pronouns also work
+within <code>tidytable</code> functions:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">var</span> <span class="op">&lt;-</span> <span class="fl">10</span>
 
@@ -291,7 +319,9 @@
 <h2 id="dt-helper">
 <code>dt()</code> helper<a class="anchor" aria-label="anchor" href="#dt-helper"></a>
 </h2>
-<p>The <code><a href="reference/dt.html">dt()</a></code> function makes regular <code>data.table</code> syntax pipeable, so you can easily mix <code>tidytable</code> syntax with <code>data.table</code> syntax:</p>
+<p>The <code><a href="reference/dt.html">dt()</a></code> function makes regular <code>data.table</code>
+syntax pipeable, so you can easily mix <code>tidytable</code> syntax
+with <code>data.table</code> syntax:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span>
 
@@ -310,7 +340,8 @@
 <div class="section level2">
 <h2 id="speed-comparisons">Speed Comparisons<a class="anchor" aria-label="anchor" href="#speed-comparisons"></a>
 </h2>
-<p>For those interested in performance, speed comparisons can be found <a href="https://markfairbanks.github.io/tidytable/articles/speed_comparisons.html" class="external-link">here</a>.</p>
+<p>For those interested in performance, speed comparisons can be found
+<a href="https://markfairbanks.github.io/tidytable/articles/speed_comparisons.html" class="external-link">here</a>.</p>
 </div>
 </div>
   </div>
@@ -370,7 +401,8 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
       </footer>

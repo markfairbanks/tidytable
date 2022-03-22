@@ -31,6 +31,9 @@
     <loc>/reference/across..html</loc>
   </url>
   <url>
+    <loc>/reference/add_count..html</loc>
+  </url>
+  <url>
     <loc>/reference/arrange..html</loc>
   </url>
   <url>
@@ -65,6 +68,9 @@
   </url>
   <url>
     <loc>/reference/complete..html</loc>
+  </url>
+  <url>
+    <loc>/reference/context.html</loc>
   </url>
   <url>
     <loc>/reference/count..html</loc>

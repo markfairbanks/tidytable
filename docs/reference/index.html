@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.1</span>
       </span>
     </div>
 
@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -105,6 +105,10 @@
         </td>
         <td><p>Apply a function across a selection of columns</p></td>
       </tr><tr><td>
+          <p><code><a href="add_count..html">add_count.()</a></code> </p>
+        </td>
+        <td><p>Add a count column to the data frame</p></td>
+      </tr><tr><td>
           <p><code><a href="between..html">between.()</a></code> </p>
         </td>
         <td><p>Do the values from x fall between the left and right bounds?</p></td>
@@ -129,9 +133,9 @@
         </td>
         <td><p>Count observations by group</p></td>
       </tr><tr><td>
-          <p><code><a href="cur_group_id..html">cur_group_id.()</a></code> <code><a href="cur_group_id..html">cur_group_rows.()</a></code> </p>
+          <p><code><a href="context.html">cur_column.()</a></code> <code><a href="context.html">cur_data.()</a></code> <code><a href="context.html">cur_group_id.()</a></code> <code><a href="context.html">cur_group_rows.()</a></code> </p>
         </td>
-        <td><p>Current group context</p></td>
+        <td><p>Context functions</p></td>
       </tr><tr><td>
           <p><code><a href="desc..html">desc.()</a></code> </p>
         </td>
@@ -298,7 +302,8 @@
         <td><p>Apply a function to each element of a vector or list</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="reexports">reexports <a href="#reexports" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>These functions are reexported from <code>data.table</code>, <code>rlang</code>, and <code>tidyselect</code> for easier access.</p>
+          <p class="section-desc"></p><p>These functions are reexported from <code>data.table</code>,
+<code>rlang</code>, and <code>tidyselect</code> for easier access.</p>
         </th>
       </tr></tbody><tbody><tr><td>
           <p><code><a href="reexports.html">reexports</a></code> </p>
@@ -306,7 +311,8 @@
         <td><p>Objects exported from other packages</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="tidytable-constructors">tidytable constructors <a href="#tidytable-constructors" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>A tidytable is simply a data.table with nice printing features.</p><p>Note: All tidytable functions automatically convert data.frame/tibble inputs to a data.table/tidytable.</p>
+          <p class="section-desc"></p><p>A tidytable is simply a data.table with nice printing features.</p><p>Note: All tidytable functions automatically convert data.frame/tibble
+inputs to a data.table/tidytable.</p>
         </th>
       </tr></tbody><tbody><tr><td>
           <p><code><a href="as_tidytable.html">as_tidytable()</a></code> </p>
@@ -345,7 +351,8 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
       </footer></div>
