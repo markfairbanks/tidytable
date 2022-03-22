@@ -1,9 +1,21 @@
+# tidytable 0.7.1
+
+#### New functions
+* `add_count.()`
+* `cur_column.()`
+* `cur_data.()`
+
+#### Bug fixes
+* `unite.()`: New column is always placed before the first united column in the data frame,
+regardless of order provided.
+* Can use `.data` pronoun inside `desc()` in `arrange.()` (#371)
+
 # tidytable 0.7.0
 
 #### Functionality improvements
 * `left`/`right`/`inner`/`full` joins gain `suffix` and `keep` args (#354)
 * `rename.()`: Can now rename columns by position (#361)
-* `unite.()`: New columns are placed before united columns to match tidyr behavior
+* `unite.()`: The new column is placed before united columns to match tidyr behavior
 
 #### New functions
 * `new_tidytable()`

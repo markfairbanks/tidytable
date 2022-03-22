@@ -4,6 +4,7 @@
 %like%	reexports
 %notin%	grapes-notin-grapes
 across.	across.
+add_count.	add_count.
 all_of	reexports
 anti_join.	left_join.
 any_of	reexports
@@ -18,10 +19,13 @@ case_when.	case_when.
 coalesce.	coalesce.
 complete.	complete.
 contains	reexports
+context	context
 count.	count.
 crossing.	crossing.
-cur_group_id.	cur_group_id.
-cur_group_rows.	cur_group_id.
+cur_column.	context
+cur_data.	context
+cur_group_id.	context
+cur_group_rows.	context
 c_across.	c_across.
 data.table	reexports
 desc.	desc.

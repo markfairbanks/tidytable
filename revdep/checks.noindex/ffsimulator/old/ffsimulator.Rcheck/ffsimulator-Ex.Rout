@@ -1,5 +1,5 @@
 
-R version 4.1.0 (2021-05-18) -- "Camp Pontanezen"
+R version 4.1.2 (2021-11-01) -- "Bird Hippie"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-apple-darwin17.0 (64-bit)
 
@@ -351,7 +351,7 @@ Type 'q()' to quit R.
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.399 0.047 0.448 0 0 
+Time elapsed:  0.433 0.047 0.486 0 0 
 > grDevices::dev.off()
 null device 
           1 

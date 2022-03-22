@@ -1,26 +1,24 @@
 # Platform
 
-|field    |value                                                                       |
-|:--------|:---------------------------------------------------------------------------|
-|version  |R version 4.1.0 (2021-05-18)                                                |
-|os       |macOS 12.2.1                                                                |
-|system   |x86_64, darwin17.0                                                          |
-|ui       |RStudio                                                                     |
-|language |(EN)                                                                        |
-|collate  |en_US.UTF-8                                                                 |
-|ctype    |en_US.UTF-8                                                                 |
-|tz       |America/Denver                                                              |
-|date     |2022-02-15                                                                  |
-|rstudio  |2021.09.1+372 Ghost Orchid (desktop)                                        |
-|pandoc   |2.14.0.3 @ /Applications/RStudio.app/Contents/MacOS/pandoc/ (via rmarkdown) |
+|field    |value                                                                           |
+|:--------|:-------------------------------------------------------------------------------|
+|version  |R version 4.1.2 (2021-11-01)                                                    |
+|os       |macOS Monterey 12.3                                                             |
+|system   |x86_64, darwin17.0                                                              |
+|ui       |RStudio                                                                         |
+|language |(EN)                                                                            |
+|collate  |en_US.UTF-8                                                                     |
+|ctype    |en_US.UTF-8                                                                     |
+|tz       |America/Denver                                                                  |
+|date     |2022-03-22                                                                      |
+|rstudio  |2022.02.0+443 Prairie Trillium (desktop)                                        |
+|pandoc   |2.17.1.1 @ /Applications/RStudio.app/Contents/MacOS/quarto/bin/ (via rmarkdown) |
 
 # Dependencies
 
 |package   |old   |new   |Δ  |
 |:---------|:-----|:-----|:--|
-|tidytable |0.6.7 |0.7.0 |*  |
-|cli       |NA    |3.2.0 |*  |
-|crayon    |NA    |1.5.0 |*  |
+|tidytable |0.7.0 |0.7.1 |*  |
 
 # Revdeps
 

@@ -1,5 +1,5 @@
 
-R version 4.1.0 (2021-05-18) -- "Camp Pontanezen"
+R version 4.1.2 (2021-11-01) -- "Bird Hippie"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-apple-darwin17.0 (64-bit)
 
@@ -43405,7 +43405,6 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 > 
 > #functions can be easily used inside dplyr::mutate function
 > library(dplyr)
-Warning: package ‘dplyr’ was built under R version 4.1.2
 
 Attaching package: ‘dplyr’
 
@@ -43676,7 +43675,7 @@ detaching ‘package:dplyr’
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  14.677 2.252 17.143 0.002 0.004 
+Time elapsed:  12.648 2.145 15.023 0.003 0.005 
 > grDevices::dev.off()
 null device 
           1 

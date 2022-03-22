@@ -1,5 +1,5 @@
 
-R version 4.1.0 (2021-05-18) -- "Camp Pontanezen"
+R version 4.1.2 (2021-11-01) -- "Bird Hippie"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-apple-darwin17.0 (64-bit)
 
@@ -16,8 +16,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
-Warning message:
-package 'testthat' was built under R version 4.1.2 
 > library(ffsimulator)
 > library(checkmate)
 > 
@@ -36,4 +34,4 @@ Deleting unused snapshots:
 > 
 > proc.time()
    user  system elapsed 
-  4.068   0.289   6.658 
+  3.941   0.291   5.925 

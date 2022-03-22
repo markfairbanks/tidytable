@@ -51,6 +51,7 @@ n.                      Number of observations in each group
 n_distinct.             Count the number of unique values in a vector
 nest.                   Nest data.tables
 nest_by.                Nest data.tables
+new_tidytable           Create a tidytable from a list
 pivot_longer.           Pivot data from wide to long
 pivot_wider.            Pivot data from long to wide
 pull.                   Pull out a single variable

@@ -1,6 +1,6 @@
 Package: tidytable
 Title: Tidy Interface to 'data.table'
-Version: 0.6.7
+Version: 0.7.0
 Authors@R: 
     c(person(given = "Mark",
              family = "Fairbanks",
@@ -24,7 +24,7 @@ Description: A tidy interface to 'data.table' that is 'rlang' compatible,
 License: MIT + file LICENSE
 Encoding: UTF-8
 Imports: data.table (>= 1.12.6), glue (>= 1.4.0), lifecycle (>= 0.2.0),
-        magrittr (>= 1.5), pillar (>= 1.5.0), rlang (>= 0.4.12),
+        magrittr (>= 1.5), pillar (>= 1.5.0), rlang (>= 1.0.0),
         tidyselect (>= 1.1.0), vctrs (>= 0.3.8)
 RoxygenNote: 7.1.2
 Config/testthat/edition: 3
@@ -32,7 +32,7 @@ URL: https://github.com/markfairbanks/tidytable
 BugReports: https://github.com/markfairbanks/tidytable/issues
 Suggests: testthat (>= 2.1.0), bit64, knitr, rmarkdown
 NeedsCompilation: no
-Packaged: 2022-01-14 02:47:33 UTC; xmxf129
+Packaged: 2022-02-16 04:28:19 UTC; xmxf129
 Author: Mark Fairbanks [aut, cre],
   Abdessabour Moutik [ctb],
   Matt Carlson [ctb],
@@ -40,5 +40,5 @@ Author: Mark Fairbanks [aut, cre],
   Ross Kennedy [ctb]
 Maintainer: Mark Fairbanks <mark.t.fairbanks@gmail.com>
 Repository: CRAN
-Date/Publication: 2022-01-14 03:30:02 UTC
-Built: R 4.1.2; ; 2022-01-14 11:33:38 UTC; unix
+Date/Publication: 2022-02-16 15:10:02 UTC
+Built: R 4.1.2; ; 2022-02-17 13:12:51 UTC; unix
