@@ -186,6 +186,22 @@ test_that("works with rowSums, #346/352", {
   expect_equal(across_df2[[4]], c(2, 4, 6))
 })
 
+test_that(".cols detects environment variables in custom functions, #389", {
+  df <- tidytable(x = 1:3, y = 1:3, z = 1:3)
+
+  make_character <- function(data, char_varlist){
+    var_names <- char_varlist
+    data %>%
+      mutate.(across.(.cols = all_of(var_names), .fns = ~as.character(.)))
+  }
+
+  out <- df %>%
+    make_character(char_varlist = c("x", "y"))
+
+  expect_equal(out$x, c("1", "2", "3"))
+  expect_equal(out$y, c("1", "2", "3"))
+})
+
 # summarize -----------------------------------------------------
 test_that("single function works", {
   test_df <- tidytable(a = c(1:2, NA), b = 4:6, z = c("a", "a", "b"))
