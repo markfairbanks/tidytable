@@ -1,13 +1,13 @@
 # "Prepare" quosures/expressions for use in a "[.data.table" call
 # Allows the use of functions like n() and across.()
 # Replaces these functions with the necessary data.table translations
-# General idea follows dt_squash found here: https://github.com/tidyverse/dtplyr/blob/master/R/tidyeval.R
-prep_exprs <- function(x, data, .by = NULL, j = FALSE, dt_env, is_top_across = TRUE) {
+# Adapted from dt_squash found here: https://github.com/tidyverse/dtplyr/blob/master/R/tidyeval.R
+prep_exprs <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env(), is_top_across = TRUE) {
   x <- lapply(x, prep_expr, data, {{ .by }}, j = j, dt_env = dt_env, is_top_across)
   squash(x)
 }
 
-prep_expr <- function(x, data, .by = NULL, j = FALSE, dt_env, is_top_across) {
+prep_expr <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env(), is_top_across = TRUE) {
   if (is_quosure(x)) {
     x <- get_expr(x)
   }
@@ -37,7 +37,7 @@ call_fns <- c(
   "str_glue"
 )
 
-prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env, is_top_across) {
+prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env(), is_top_across) {
   if (is_call(x, c("n.", "n"))) {
     quote(.N)
   } else if (is_call(x, c("desc.", "desc"))) {
@@ -69,20 +69,20 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env, is_top_across
     x
   } else if (is_call(x, "c_across.")) {
     call <- call_match(x, tidytable::c_across.)
-    cols <- get_across_cols(data, call$cols, {{ .by }})
+    cols <- get_across_cols(data, call$cols, {{ .by }}, dt_env)
     cols <- syms(cols)
     call2("vec_c", !!!cols, .ns = "vctrs")
   } else if (is_call(x, c("if_all.", "if_any."))) {
     call <- call_match(x, tidytable::if_all.)
     if (is.null(call$.fns)) return(TRUE)
-    .cols <- get_across_cols(data, call$.cols, {{ .by }})
+    .cols <- get_across_cols(data, call$.cols, {{ .by }}, dt_env)
     call_list <- map.(.cols, ~ fn_to_expr(call$.fns, .x))
     reduce_fn <- if (is_call(x, "if_all.")) "&" else "|"
     filter_expr <- call_reduce(call_list, reduce_fn)
     prep_expr(filter_expr, data, {{ .by }})
   } else if (is_call(x, "across.")) {
     call <- call_match(x, tidytable::across., dots_expand = FALSE)
-    .cols <- get_across_cols(data, call$.cols, {{ .by }})
+    .cols <- get_across_cols(data, call$.cols, {{ .by }}, dt_env)
     dots <- call$...
     call_list <- expand_across(call$.fns, .cols, call$.names, dots)
     out <- lapply(call_list, prep_expr, data, {{ .by }})

@@ -105,7 +105,7 @@ tidytable_restore <- function(x, to) {
 
 deprecate_old_across <- function(fn) {
   .what <- glue("tidytable::{fn}_across.()")
-  .details <- glue("Please use `{fn}.(across.())")
+  .details <- glue("Please use `{fn}.(across.())`")
 
   deprecate_warn("0.6.4", what = .what, details = .details, id = fn)
 }

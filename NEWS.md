@@ -1,3 +1,8 @@
+# tidytable 0.7.2 (in development)
+
+#### Bug fixes
+* `across.()`: `.cols` arg can find environment variables in custom functions (#389)
+
 # tidytable 0.7.1
 
 #### New functions
