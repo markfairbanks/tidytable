@@ -66,3 +66,22 @@ test_that("can make a function with quosures", {
   expect_named(distinct_df, c("b"))
   expect_equal(test_df$b, 4:6)
 })
+
+test_that("can find environment vars in custom functions, #392", {
+  df <- tidytable(x = 1:3, y = c("a", "b", "a"))
+
+  get_distinct <- function(data, char_varlist){
+    var_names <- char_varlist
+
+    data %>%
+      distinct.(all_of(var_names))
+  }
+
+  result_df <- df %>%
+    get_distinct(char_varlist = c("y"))
+
+  expect_named(result_df, c("y"))
+  expect_equal(result_df$y, c("a", "b"))
+})
+
+
