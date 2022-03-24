@@ -77,10 +77,13 @@ replace_dot <- function(call, sym) {
 # Get cols for c_across/if_all/if_any/across
 # If cols is not provided defaults to everything()
 # Removes .by columns from selection
-get_across_cols <- function(data, call_cols, .by = NULL, dt_env = caller_env()) {
+get_across_cols <- function(data, call_cols, .by = NULL, .env = caller_env()) {
   .cols <- call_cols %||% quote(everything())
-  .cols <- expr(c(!!.cols, - {{ .by }}))
-  tidyselect_names(data, !!.cols, .env = dt_env)
+  .cols <- new_quosure(
+    expr(c(!!.cols, - {{ .by }})),
+    .env
+  )
+  tidyselect_names(data, !!.cols)
 }
 
 replace_cur_column <- function(x, x_name) {
