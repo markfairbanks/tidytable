@@ -59,72 +59,73 @@ get_dummies..tidytable <- function(.df,
                                    prefix_sep = "_",
                                    drop_first = FALSE,
                                    dummify_na = TRUE) {
-  .df <- shallow(.df)
-
-  vec_assert(prefix, logical(), 1)
-  vec_assert(prefix_sep, character(), 1)
-  vec_assert(drop_first, logical(), 1)
-  vec_assert(dummify_na, logical(), 1)
-
   cols <- tidyselect_syms(.df, {{ cols }})
 
-  original_cols <- copy(names(.df))
+  original_cols <- names(.df)
 
   ordered_cols <- character()
 
-  for (col in cols) {
-    col_name <- as.character(col)
+  df_list <- vector("list", length(cols))
 
-    if (drop_first) {
-      unique_vals <- vec_unique(as.character(.df[[col_name]]))[-1]
-    } else {
-      unique_vals <- vec_unique(as.character(.df[[col_name]]))
+  for (i in seq_along(cols)) {
+    col <- cols[[i]]
+    col_name <- as.character(col)
+    .vals <- .df[[col_name]]
+
+    if (!is.character(.vals)) {
+      .vals <- as.character(.vals)
     }
 
-    # If NAs need dummies, convert to character string "NA" for col name creation
     if (dummify_na) {
-      unique_vals <- unique_vals %|% "NA"
+      .vals <- .vals %|% "NA"
     } else {
-      unique_vals <- unique_vals[!is.na(unique_vals)]
+      .vals <- .vals %|% "...NA..."
     }
 
     if (prefix) {
-      new_names <- paste(col_name, unique_vals, sep = prefix_sep)
+      col_prefix <- paste0(col_name, prefix_sep)
     } else {
-      new_names <- unique_vals
+      col_prefix <- ""
     }
 
-    # Remove "NA" from unique vals after new_names columns are made
-    not_na_cols <- new_names[unique_vals != "NA"]
-    unique_vals <- unique_vals[unique_vals != "NA"]
+    dummy_df <- model.matrix(~ .vals - 1)
+    df_names <- colnames(dummy_df)
+    dummy_df <- map.(seq_len(ncol(dummy_df)), ~ unname(dummy_df[, .x]))
+    names(dummy_df) <- df_names
+    dummy_df <- new_tidytable(dummy_df)
 
-    dummy_calls <- vector("list", length(unique_vals))
-    names(dummy_calls) <- not_na_cols
-    for (i in seq_along(unique_vals)) {
-      dummy_calls[[i]] <- expr(ifelse.(!!col == !!unique_vals[i], 1L, 0L, 0L))
-    }
+    df_names <- names(dummy_df)
+    df_names <- str_replace.(df_names, "^.vals", col_prefix)
+    dummy_df <- set_names(dummy_df, df_names)
 
-    .df <- mutate.(.df, !!!dummy_calls)
-
-    # Since the prior step doesn't recognize NA as a character,
-    # an extra step is needed to flag NA vals
-    if (dummify_na) {
-      na_col <- new_names[new_names %notin% not_na_cols]
+    if (!dummify_na) {
+      na_col <- df_names[endsWith(df_names, "...NA...")]
       if (length(na_col) > 0) {
-        .df <- mutate.(.df, !!na_col := as.integer(is.na(!!col)))
+        dummy_df[, (na_col) := NULL]
+        df_names <- names(dummy_df)
       }
     }
 
-    new_names <- f_sort(new_names)
+    if (drop_first) {
+      first_col <- df_names[as.logical(vec_slice(dummy_df, 1))]
+      dummy_df[, (first_col) := NULL]
+      df_names <- names(dummy_df)
+    }
 
-    ordered_cols <- c(ordered_cols, new_names)
+    df_list[[i]] <- dummy_df
+
+    sorted_names <- f_sort(df_names)
+
+    ordered_cols <- c(ordered_cols, sorted_names)
   }
 
   final_order <- c(original_cols, ordered_cols)
 
-  setcolorder(.df, final_order)
+  out <- bind_cols.(.df, df_list)
 
-  .df
+  setcolorder(out, final_order)
+
+  out
 }
 
 #' @export
