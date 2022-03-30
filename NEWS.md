@@ -1,5 +1,8 @@
 # tidytable 0.7.2 (in development)
 
+#### Functionality improvements
+* `summarize.()`: Now sorts by the grouping variables when `.by` is used.
+
 #### Bug fixes
 * `across.()`: `.cols` arg can find environment variables in custom functions (#389)
 * Joins: Duplicate columns are treated properly when `keep = FALSE` (#397)
