@@ -63,7 +63,7 @@ right_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., ke
 
   if (!keep) {
     result_df <- x[y, on = on, allow.cartesian = TRUE]
-    names(result_df) <- suffix_join_names(names(result_df), suffix)
+    names(result_df) <- suffix_join_names(names(x), names(y), suffix, keep, by, "right")
   } else {
     selection <- join_selection(x, y, by, keep, suffix, "right")
 
@@ -93,7 +93,7 @@ inner_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., ke
 
   if (!keep) {
     result_df <- x[y, on = on, allow.cartesian = TRUE, nomatch = 0]
-    names(result_df) <- suffix_join_names(names(result_df), suffix)
+    names(result_df) <- suffix_join_names(names(x), names(y), suffix, keep, by, "inner")
   } else {
     selection <- join_selection(x, y, by, keep, suffix, "inner")
 
@@ -122,11 +122,7 @@ full_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., kee
         all_x = TRUE, all_y = TRUE
       )
 
-      start_names <- names(x)
-      end_names <- names(result_df)
-      end_names <- end_names[end_names %notin% start_names]
-
-      col_order <- c(start_names, end_names)
+      col_order <- suffix_join_names(names(x), names(y), suffix, keep, get_bys(x, y, by), "full")
 
       setcolorder(result_df, col_order)
       setkey(result_df, NULL)
@@ -252,31 +248,30 @@ join_selection <- function(x, y, by, keep, suffix, type = "left") {
 
   if (!keep) {
     if (type == "left") {
-      y_names <- setdiff(y_names, c(x_names, by$y))
+      y_names <- setdiff(y_names, c(by$x, by$y))
     } else if (type %in% c("inner", "right")) {
-      x_names <- setdiff(x_names, c(y_names, by$y))
+      x_names <- setdiff(x_names, c(by$x, by$y))
     }
   }
 
-  result_names <- c(x_names, y_names)
-  result_names <- suffix_join_names(result_names, suffix)
+  result_names <- suffix_join_names(x_names, y_names, suffix, keep, by, type)
 
   if (type == "left") {
-    x_suffix <- "i."
-    y_suffix <- "x."
+    x_prefix <- "i."
+    y_prefix <- "x."
   } else if (type %in% c("inner", "right")) {
-    x_suffix <- "x."
-    y_suffix <- "i."
+    x_prefix <- "x."
+    y_prefix <- "i."
   } else {
     abort("Unsupported join type")
   }
 
   if (length(x_names) > 0) {
-    x_names <- paste0(x_suffix, x_names)
+    x_names <- paste0(x_prefix, x_names)
   }
 
   if (length(y_names) > 0) {
-    y_names <- paste0(y_suffix, y_names)
+    y_names <- paste0(y_prefix, y_names)
   }
 
   selection <- c(x_names, y_names)
@@ -287,7 +282,11 @@ join_selection <- function(x, y, by, keep, suffix, type = "left") {
   call2(".", !!!selection)
 }
 
-suffix_join_names <- function(df_names, suffix) {
+suffix_join_names <- function(x_names, y_names, suffix, keep, by = NULL, type) {
+  if (!keep && type != "left") {
+    y_names <- y_names[y_names %notin% by$y]
+  }
+  df_names <- c(x_names, y_names)
   is_x_duplicate <- duplicated(df_names, fromLast = TRUE)
   if (any(is_x_duplicate)) {
     is_y_duplicate <- duplicated(df_names)
