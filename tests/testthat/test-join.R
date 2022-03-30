@@ -161,6 +161,29 @@ test_that("joins matches NAs by default", {
   expect_equal(nrow(semi_join.(df1, df2, by = "x")), 1)
 })
 
+test_that("joins matches NAs by default", {
+  df1 <- tidytable(year = 1:5, value = 1:5)
+  df2 <- tidytable(year = 1:3, value = 6:8)
+
+  left_out <- left_join.(df1, df2, by = "year")
+  left_check <- tidytable(year = 1:5, value.x = 1:5, value.y = c(6:8, NA, NA))
+  expect_equal(left_out, left_check)
+
+  right_out <- right_join.(df1, df2, by = "year")
+  right_check <- tidytable(year = 1:3, value.x = 1:3, value.y = 6:8)
+  expect_equal(right_out, right_check)
+
+  inner_out <- right_join.(df1, df2, by = "year")
+  inner_check <- tidytable(year = 1:3, value.x = 1:3, value.y = 6:8)
+  expect_equal(inner_out, inner_check)
+
+  full_out <- left_join.(df1, df2, by = "year")
+  full_check <- tidytable(year = 1:5, value.x = 1:5, value.y = c(6:8, NA, NA))
+  expect_equal(full_out, full_check)
+})
+
+
+
 # Some dplyr tests ----------------------------------------------------------------
 test_that("when keep = TRUE, left_join.() preserves both sets of keys", {
   # when keys have different names
