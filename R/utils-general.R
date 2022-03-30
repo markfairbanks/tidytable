@@ -11,8 +11,12 @@ call2_i <- function(.df, i = NULL) {
 }
 
 # Create a call to `[.data.table` (j position)
-call2_j <- function(.df, j = NULL, .by = NULL, ...) {
-  dt_expr <- call2("[", enquo(.df), , j, by = .by, ...)
+call2_j <- function(.df, j = NULL, .by = NULL, .keyby = NULL, ...) {
+  if (is.null(.keyby)) {
+    dt_expr <- call2("[", enquo(.df), , j, by = .by, ...)
+  } else {
+    dt_expr <- call2("[", enquo(.df), , j, keyby = .keyby, ...)
+  }
   call2("[", dt_expr)
 }
 

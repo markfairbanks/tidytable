@@ -12,7 +12,8 @@
 #'   + Single predicate: `.by = where(is.character)`
 #'   + Multiple predicates: `.by = c(where(is.character), where(is.factor))`
 #'   + A combination of predicates and column names: `.by = c(where(is.character), b)`
-#' @param .sort _experimental_: Should the resulting data.table be sorted by the grouping columns?
+#' @param .sort _experimental_: Default TRUE.
+#'   If FALSE the original order of the grouping variables will be preserved.
 #'
 #' @export
 #' @md
@@ -32,12 +33,12 @@
 #' df %>%
 #'   summarize.(avg_a = mean(a),
 #'              .by = c(c, d))
-summarize. <- function(.df, ..., .by = NULL, .sort = FALSE) {
+summarize. <- function(.df, ..., .by = NULL, .sort = TRUE) {
   UseMethod("summarize.")
 }
 
 #' @export
-summarize..tidytable <- function(.df, ..., .by = NULL, .sort = FALSE) {
+summarize..tidytable <- function(.df, ..., .by = NULL, .sort = TRUE) {
   dots <- enquos(...)
 
   .by <- enquo(.by)
@@ -54,13 +55,15 @@ summarize..tidytable <- function(.df, ..., .by = NULL, .sort = FALSE) {
 
     j <- expr(list(!!!dots))
 
-    dt_expr <- call2_j(.df, j, .by)
+    if (.sort) {
+      dt_expr <- call2_j(.df, j, .keyby = .by)
+    } else {
+      dt_expr <- call2_j(.df, j, .by = .by)
+    }
 
     out <- eval_tidy(dt_expr, .df, dt_env)
 
-    if (.sort) {
-      out <- arrange.(out, !!!syms(.by))
-    }
+    setkey(out, NULL)
 
     out <- df_name_repair(out, .name_repair = "unique")
   }
@@ -69,7 +72,7 @@ summarize..tidytable <- function(.df, ..., .by = NULL, .sort = FALSE) {
 }
 
 #' @export
-summarize..data.frame <- function(.df, ..., .by = NULL, .sort = FALSE) {
+summarize..data.frame <- function(.df, ..., .by = NULL, .sort = TRUE) {
   .df <- as_tidytable(.df)
   summarize.(.df, ..., .by = {{ .by }}, .sort = .sort)
 }

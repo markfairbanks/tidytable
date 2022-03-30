@@ -5,9 +5,9 @@
 \alias{summarise.}
 \title{Aggregate data using summary statistics}
 \usage{
-summarize.(.df, ..., .by = NULL, .sort = FALSE)
+summarize.(.df, ..., .by = NULL, .sort = TRUE)
 
-summarise.(.df, ..., .by = NULL, .sort = FALSE)
+summarise.(.df, ..., .by = NULL, .sort = TRUE)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -26,7 +26,8 @@ summarise.(.df, ..., .by = NULL, .sort = FALSE)
 }
 }}
 
-\item{.sort}{\emph{experimental}: Should the resulting data.table be sorted by the grouping columns?}
+\item{.sort}{\emph{experimental}: Default TRUE.
+If FALSE the original order of the grouping variables will be preserved.}
 }
 \description{
 Aggregate data using summary statistics such as mean or median. Can be calculated by group.
