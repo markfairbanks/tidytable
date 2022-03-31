@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.1.9</span>
       </span>
     </div>
 
@@ -105,7 +105,7 @@
 example - the <code>summarize()</code> tests were performed on a
 different dataset from <code>case_when()</code>.</li>
 <li>
-<code>setDTthreads(4)</code> was used for <code>data.table</code>
+<code>setDTthreads(6)</code> was used for <code>data.table</code>
 &amp; <code>tidytable</code> timings.</li>
 <li>Modify-by-reference was used in <code>data.table</code> when being
 compared to <code><a href="../reference/mutate..Rd.html">mutate.()</a></code> &amp;
@@ -144,22 +144,23 @@ datasets).</li>
 created to cover all angles equally. They are just meant to be used as
 general insight into the performance of these packages.</li>
 </ul>
-<pre><code><span class="co">#&gt; <span style="color: #949494;"># A tidytable: 13 × 6</span></span>
+<pre><code><span class="co">#&gt; Date last run: 2022-03-31</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tidytable: 13 × 6</span></span>
 <span class="co">#&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> arrange            30.8      31.4   33.1    <span style="text-decoration: underline;">1</span>134.   355  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> case_when          31.6      30.3   <span style="color: #BB0000;">NA</span>       338.    59.2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> distinct           12.7      11.9   15.6      36.3  309  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> fill               33.1      39.9   39.6      91.3  846  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> filter            211.      213.   222.      336.   707  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> inner_join         51.5      40.2   58.8      71.6   <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> left_join          43       148.   131.      171.    <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> mutate             52.7      49.5  395.       58.4   86.4</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> nest                6.9       7.9   14.8      32.9   <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> pivot_longer        7.9       7.3   15.3      12.3   <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> pivot_wider        44.7      57.3  109.       99.4   <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> summarize         193       202.   211.      204.   834  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> unnest              9.6      10.9   <span style="color: #BB0000;">NA</span>        14.6   <span style="color: #BB0000;">NA</span></span></code></pre>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> arrange            47.3      59.5   58.8    <span style="text-decoration: underline;">1</span>723.   716. </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> case_when          32.6      29.9   <span style="color: #BB0000;">NA</span>       424.    64.4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> distinct           27.7      27.3   28.6      60    309. </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> fill               33.8      46     45.4      80.6  724  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> filter            149.      148.   150.      232.   904. </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> inner_join         53.4      60.5   58.9     109.    <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> left_join          59.8     193.   101.       98.9   <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> mutate             57.4      50.2  388.       56.8  780. </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> nest               15.7      15.6   16.3      37.4   <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> pivot_longer        8.3       7.7   12.9      24.6   <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> pivot_wider        73.3      91.4  178.      125.    <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> summarize         359.      353.   417.      671.  <span style="text-decoration: underline;">3</span>080. </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> unnest             23.7      14.9   <span style="color: #BB0000;">NA</span>        25.8   <span style="color: #BB0000;">NA</span></span></code></pre>
 </div>
   </div>
 
