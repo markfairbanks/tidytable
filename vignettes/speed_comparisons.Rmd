@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 A few notes:
 
 * Comparing times from separate functions won't be very useful. For example - the `summarize()` tests were performed on a different dataset from `case_when()`.
-* `setDTthreads(4)` was used for `data.table` & `tidytable` timings.
+* `setDTthreads(6)` was used for `data.table` & `tidytable` timings.
 * Modify-by-reference was used in `data.table` when being compared to `mutate.()` & `dplyr::mutate()`
 * `fill.()` & `tidyr::fill()` both work with character/factor/logical columns, whereas `data.table::nafill()`
 does not. Testing only included numeric columns due to this constraint.
@@ -41,17 +41,19 @@ does not. Testing only included numeric columns due to this constraint.
 
 ```{r benchmark_setup, echo=FALSE}
 pacman::p_load(tidytable, tidyverse, data.table, dtplyr)
-setDTthreads(4)
+setDTthreads(6)
 
 iters <- 5
+
+random_strings <- c('OoVt', 'wCbu', 'cXxX', 'jdFu', 'MCRx', 'ukhz', 'ikce', 'PHyu', 'jpBY', 'nLQM')
 
 set.seed(123)
 initial_data_size <- 10000000
 data_size <- initial_data_size
 test_dt <- tidytable(a = sample(1:20, data_size, TRUE),
                      b = sample(1:20, data_size, TRUE),
-                     c = sample(c("a","a","b","c","d"), data_size, TRUE),
-                     d = sample(c("a","a","b","c","d"), data_size, TRUE))
+                     c = sample(random_strings, data_size, TRUE),
+                     d = sample(random_strings, data_size, TRUE))
 
 test_tbl <- as_tibble(test_dt)
 ```
@@ -60,10 +62,10 @@ test_tbl <- as_tibble(test_dt)
 inv_gc(); inv_gc();
 
 filter_marks <- bench::mark(
-  tidyverse = filter(test_tbl, a <= 7, c == "a"),
-  dtplyr = as.data.table(filter(lazy_dt(test_dt), a <= 7, c == "a")),
-  tidytable = filter.(test_dt, a <= 7, c == "a"),
-  data.table = test_dt[a <= 7 & c == "a"],
+  tidyverse = filter(test_tbl, a <= 7, c == 'OoVt'),
+  dtplyr = as.data.table(filter(lazy_dt(test_dt), a <= 7, c == 'OoVt')),
+  tidytable = filter.(test_dt, a <= 7, c == 'OoVt'),
+  data.table = test_dt[a <= 7 & c == 'OoVt'],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
          func_tested = "filter")
@@ -73,10 +75,15 @@ inv_gc(); inv_gc();
 
 ```{r summarize, echo=FALSE}
 summarize_marks <- bench::mark(
-  tidyverse = summarize(group_by(test_tbl, c), avg_a = mean(a), .groups = "drop"),
-  dtplyr = as.data.table(summarize(group_by(lazy_dt(test_dt), c), avg_a = mean(a))),
-  tidytable = summarize.(test_dt, avg_a = mean(a), .by = c),
-  data.table = test_dt[, list(avg_a = mean(a)), by = c],
+  tidyverse = test_tbl %>%
+    group_by(c, d) %>%
+    summarize(avg_a = mean(a), med_b = median(b), .groups = "drop"),
+  dtplyr = lazy_dt(test_dt) %>%
+    group_by(c, d) %>%
+    summarize(avg_a = mean(a), med_b = median(b), .groups = "drop") %>%
+    as.data.table(),
+  tidytable = summarize.(test_dt, avg_a = mean(a), med_b = median(b), .by = c(c, d)),
+  data.table = test_dt[, list(avg_a = mean(a), med_b = median(b)), by = .(c, d)],
   check = FALSE, iterations = iters, memory = FALSE, filter_gc = FALSE, time_unit = 'ms') %>%
   mutate(expression = as.character(expression),
          func_tested = "summarize")
@@ -105,8 +112,8 @@ remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(
 data_size <- initial_data_size * .1
 test_dt <- tidytable(a = sample(1:20, data_size, TRUE),
                      b = sample(1:20, data_size, TRUE),
-                     c = sample(c("a","a","b","c","d"), data_size, TRUE),
-                     d = sample(c("a","a","b","c","d"), data_size, TRUE))
+                     c = sample(random_strings, data_size, TRUE),
+                     d = sample(random_strings, data_size, TRUE))
 
 test_tbl <- as_tibble(test_dt)
 
@@ -235,12 +242,12 @@ remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(
 
 data_size <- initial_data_size * .1
 left_dt <- tidytable(a = sample(1:20, data_size, TRUE),
-                      b = sample(1:20, data_size, TRUE),
-                      c = sample(c("a","a","b","c","d"), data_size, TRUE),
-                      d = sample(c("a","a","b","c","d"), data_size, TRUE))
+                     b = sample(1:20, data_size, TRUE),
+                     c = sample(random_strings, data_size, TRUE),
+                     d = sample(random_strings, data_size, TRUE))
 
-right_dt <- tidytable(c = c("a","b","c","d"),
-                      e = c(1,2,3,4))
+right_dt <- tidytable(c = random_strings,
+                      e = 1:length(random_strings))
 
 left_tbl <- as_tibble(left_dt)
 right_tbl <- as_tibble(right_dt)
@@ -309,100 +316,131 @@ nest_marks <- bench::mark(
 ```
 
 ```{r echo = FALSE}
-# # pandas code
+# # pandas code (run in a .ipynb in vscode)
 # import pandas as pd
 # import numpy as np
 # import gc
-# data_size = 10000000
-#
-# test_df = pd.DataFrame(
-#     {'a': np.random.choice(np.arange(20), data_size),
-#      'b': np.random.choice(np.arange(20), data_size),
-#      'c': np.random.choice(['a','a','b','c','d'], data_size),
-#      'd': np.random.choice(['a','a','b','c','d'], data_size)}).convert_dtypes()
-#
-# print('filter')
-# %timeit test_df.loc[(test_df.a <= 7) & (test_df.c == 'a')]
-# print('summarize')
-# %timeit test_df.groupby('c')['a'].mean()
-# print('mutate pt1')
-# %timeit test_df['double_a'] = test_df.a * 2
-# print('mutate pt2')
-# %timeit test_df['a_plus_b'] = test_df.a + test_df.b
-#
+# from timeit import timeit
+# 
+# num_runs = 5
+# def run_benchmarks(_dict):
+#     return {key: np.round(timeit(value, number = num_runs) * 1000/num_runs, 1) for key, value in _dict.items()}
+# 
+# np.random.seed(123)
+# random_strings = np.array(['OoVt', 'wCbu', 'cXxX', 'jdFu', 'MCRx', 'ukhz', 'ikce', 'PHyu', 'jpBY', 'nLQM'])
+# 
+# initial_data_size = 10000000
+# data_size = initial_data_size
+# 
+# test_df = (
+#     pd.DataFrame({
+#         'a': np.random.choice(np.arange(20), data_size),
+#         'b': np.random.choice(np.arange(20), data_size),
+#         'c': np.random.choice(random_strings, data_size),
+#         'd': np.random.choice(random_strings, data_size)
+#     })
+#     .convert_dtypes()
+# )
+# 
+# bench_fns1 = dict(
+#     filter = lambda: test_df.loc[(test_df.a <= 7) & (test_df.c == 'OoVt')],
+#     summarize = lambda: test_df.groupby(['c', 'd']).agg(avg_a = ('a', np.mean), med_b = ('b', np.median)),
+#     mutate = lambda: test_df.assign(double_a = test_df.a * 2, a_plus_b = test_df.a + test_df.b)
+# )
+# 
+# bench_marks1 = run_benchmarks(bench_fns1)
+# 
+# data_size = initial_data_size * .1
+# test_df = test_df.head(int(data_size))
+# gc.collect()
+# 
+# bench_fns2 = dict(
+#     arrange = lambda: test_df.sort_values(['c', 'a']),
+#     distinct = lambda: test_df.drop_duplicates()
+# )
+# 
+# bench_marks2 = run_benchmarks(bench_fns2)
+# 
 # del test_df
 # gc.collect()
-#
-# arrange_size = 1000000
-#
-# arrange_df = pd.DataFrame(
-#     {'a': np.random.choice(np.arange(20), arrange_size),
-#      'b': np.random.choice(np.arange(20), arrange_size),
-#      'c': np.random.choice(['a','a','b','c','d'], arrange_size),
-#      'd': np.random.choice(['a','a','b','c','d'], arrange_size)}).convert_dtypes()
-#
-# print('arrange')
-# %timeit arrange_df.sort_values(['c', 'a'])
-# print('distinct')
-# %timeit arrange_df.drop_duplicates()
-# del arrange_df
+# 
+# x = np.random.normal(size = 3000000)
+# median_x = np.median(x)
+# 
+# bench_fns3 = dict(
+#     case_when = lambda: np.select(
+#         [x < median_x, x <= median_x],
+#         [1, 2],
+#         default = 3
+#     )
+# )
+# 
+# bench_marks3 = run_benchmarks(bench_fns3)
+# 
+# del x, median_x
 # gc.collect()
-#
-# case_df = pd.DataFrame({'x': np.random.normal(size = 3000000)})
-#
-# case_df['median_x'] = case_df['x'].median()
-#
-# print('case_when')
-# %timeit case_df['test'] = np.where(case_df.x < case_df.median_x, case_df.x * 2, np.where(case_df.x >= case_df.median_x, case_df.x * 3, case_df.x))
-#
-# del case_df
+# 
+# data_size = int(initial_data_size * .2)
+# fill_df = (
+#     pd.DataFrame(dict(
+#         id = np.random.choice(np.arange(3), data_size),
+#         int1 = np.random.choice(np.array([1, 2, 3, 4, 5, np.nan]), data_size),
+#         int2 = np.random.choice(np.array([1, 2, 3, 4, 5, np.nan]), data_size)
+#     ))
+#     .convert_dtypes()
+# )
+# 
+# bench_fns4 = dict(
+#     fill = lambda: fill_df.groupby('id')[['int1','int2']].fillna(method = 'ffill')
+# )
+# 
+# bench_marks4 = run_benchmarks(bench_fns4)
+# 
+# del fill_df
 # gc.collect()
-#
-# fill_size = 2000000
-# fill_df = pd.DataFrame({'x': np.arange(fill_size),
-#                         'id': np.random.choice(np.arange(3), fill_size)})
-#
-# fill_df = fill_df.assign(y = fill_df.x.shift(10), z = fill_df.x.shift(-10)).convert_dtypes()
-#
-# print('fill')
-# %timeit fill_df.groupby('id')[['x','y']].fillna(method = 'ffill')
+# 
+# bench_marks = bench_marks1 | bench_marks2 | bench_marks3 | bench_marks4
+# 
+# dict(sorted(bench_marks.items()))
 ```
 
 ```{r all_marks, echo = FALSE, message = FALSE, paged.print = FALSE}
-library(magrittr)
 remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$")); inv_gc(); inv_gc();
 
-all_marks <- ls(pattern="marks$") %>%
-  lapply(get) %>%
-  map(~.x %>%
-        select(func_tested, expression, median)
-      ) %>%
-  bind_rows()
+marks_names <- unlist(ls(pattern="marks$"))
+marks_names <- marks_names[!marks_names %in% c("all_marks", "pandas_marks")]
 
-all_marks <- all_marks %>%
-  mutate_if(is.character, str_trim) %>%
-  mutate(median = round(median, 1)) %>%
+all_marks <- marks_names %>%
+  map.(get) %>%
+  map.(~ .x %>% select.(func_tested, expression, median)) %>%
+  bind_rows.() %>%
+  mutate.(
+    across.(where(is.character), str_trim),
+    median = round(median, 1)
+  ) %>%
   pivot_wider.(names_from = expression, values_from = median) %>%
-  as_tibble() %>%
-  # mutate_at(vars(tidyverse, tidytable, data.table, dtplyr), ~str_c(.x, "ms")) %>%
-  arrange(func_tested)
+  arrange.(func_tested)
 ```
 
 ```{r pandas, echo = FALSE, message = FALSE}
-pandas_marks <- tibble(arrange = 355,
-                       case_when = 59.2,
-                       distinct = 309,
-                       filter = 707,
-                       fill = 846,
-                       mutate = 86.4,
-                       summarize = 834) %>%
-  pivot_longer(everything(), names_to = "func_tested", values_to = "pandas")
+pandas_marks <-
+  tidytable(
+    arrange = 715.8,
+    case_when = 64.4,
+    distinct = 308.7,
+    fill = 724,
+    filter = 903.8,
+    mutate = 780.1,
+    summarize = 3079.8
+  ) %>%
+  pivot_longer.(everything(), names_to = "func_tested", values_to = "pandas")
 
 all_marks <- all_marks %>%
-  left_join(pandas_marks) %>%
+  left_join.(pandas_marks) %>%
   select.(func_tested, data.table, tidytable, dtplyr, tidyverse, pandas)
 ```
 
 ```{r echo=FALSE}
+print(str_glue("Date last run: {lubridate::today()}\n\n"))
 all_marks
 ```
