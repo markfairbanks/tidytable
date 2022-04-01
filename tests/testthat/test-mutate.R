@@ -387,4 +387,12 @@ test_that("can use .data and .env with .by", {
   expect_equal(df$new, c(2.5, 2.5, 4))
 })
 
+test_that("can use anonymous functions with map, #402", {
+  df <- tidytable(x = list(1, 1, 1), y = list(2, 2, 2))
 
+  out <- df %>%
+    mutate.(z = map2_dbl.(x, y, function(.x, .y) .x + .y))
+
+  expect_named(out, c("x", "y", "z"))
+  expect_equal(out$z, c(3, 3, 3))
+})

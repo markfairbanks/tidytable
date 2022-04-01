@@ -6,6 +6,7 @@
 #### Bug fixes
 * `across.()`: `.cols` arg can find environment variables in custom functions (#389)
 * Joins: Duplicate columns are treated properly when `keep = FALSE` (#397)
+* Can use anonymous functions inside `map` functions inside `mutate.()` (#402)
 
 # tidytable 0.7.1
 
