@@ -29,6 +29,7 @@ call_fns <- c(
   "cur_data.", "cur_data",
   "cur_group_rows.", "cur_group_rows", "cur_group_id.", "cur_group_id",
   "desc.", "desc",
+  "function",
   "glue",
   "ifelse", "if_else",
   "if_all.", "if_any.",
@@ -109,6 +110,8 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env()
       var <- sym(eval(var, dt_env))
     }
     var
+  } else if (is_call(x, "function")) {
+    x
   } else {
     # Catches case when "$" or "[[" is used but is not using .data pronoun
     x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }}, j, dt_env, is_top_across)
