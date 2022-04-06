@@ -1,5 +1,8 @@
 # tidytable 0.7.2 (in development)
 
+#### New functions
+* `pmap.()`
+
 #### Functionality improvements
 * `summarize.()`: Now sorts by the grouping variables when `.by` is used.
 

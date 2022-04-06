@@ -63,40 +63,16 @@ call_reduce <- function(x, fun) {
 
 # radix sort
 # proxy for data.table::fsort since negative values aren't supported, #282
-f_sort <- function(x, decreasing = FALSE, na.last = FALSE) {
-  # # Can switch to data.table::fsort once negative doubles are handled
-  # suppressWarnings(
-  #   fsort(x, decreasing = decreasing, na.last = na.last)
-  # )
-
-  sort(x, decreasing = decreasing, na.last = na.last, method = "radix")
-}
-
-# pmap - for internal use only
-# Taken from: https://github.com/r-lib/rlang/blob/master/R/compat-purrr.R
-pmap. <- function(.l, .f, ...) {
-  .f <- as_function(.f)
-  args <- args_recycle(.l)
-  do.call("mapply", c(
-    FUN = list(quote(.f)),
-    args, MoreArgs = quote(list(...)),
-    SIMPLIFY = FALSE, USE.NAMES = FALSE
-  ))
-}
-
-pmap_chr. <- function(.l, .f, ...) {
-  as.character(pmap.(.l, .f, ...))
-}
-
-args_recycle <- function(args) {
-  lengths <- map_int.(args, length)
-  n <- max(lengths)
-
-  stopifnot(all(lengths == 1L | lengths == n))
-  to_recycle <- lengths == 1L
-  args[to_recycle] <- map.(args[to_recycle], function(x) rep.int(x, n))
-
-  args
+f_sort <- function(x) {
+  # Can switch to data.table::fsort once negative doubles are handled
+  # See: https://github.com/Rdatatable/data.table/issues/5051
+  if (is.character(x)) {
+    suppressWarnings(
+      fsort(x)
+    )
+  } else {
+    vec_sort(x)
+  }
 }
 
 # Restore user defined attributes
