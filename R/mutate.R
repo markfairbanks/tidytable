@@ -55,7 +55,7 @@ mutate. <- function(.df, ..., .by = NULL,
 mutate..tidytable <- function(.df, ..., .by = NULL,
                               .keep = c("all", "used", "unused", "none"),
                               .before = NULL, .after = NULL) {
-  .df <- shallow(.df)
+  .df <- fast_copy(.df)
 
   .by <- enquo(.by)
 
@@ -101,9 +101,6 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
 
     .by <- tidyselect_names(.df, !!.by)
 
-    needs_copy <- any(names(dots) %in% names(.df))
-    if (needs_copy) .df <- copy(.df)
-
     # Check for NULL inputs so columns can be deleted
     # Only delete if the NULL is the last call
     null_bool <- map_lgl.(dots, is_null)
@@ -120,6 +117,9 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
     if (length(dots) > 0) {
       dots <- exprs_auto_name(dots)
       dots_names <- names(dots)
+
+      .df <- fast_copy(.df, dots_names)
+
       assign <- map2.(syms(dots_names), dots, ~ call2("=", .x, .y))
       dots_names <- unique(dots_names)
       output <- call2("list", !!!syms(dots_names))

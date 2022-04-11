@@ -42,12 +42,10 @@ separate..tidytable <- function(.df, col, into,
                                 remove = TRUE,
                                 convert = FALSE,
                                 ...) {
-  .df <- shallow(.df)
-
-  vec_assert(into, character())
-
   if (missing(col)) abort("col is missing and must be supplied")
   if (missing(into)) abort("into is missing and must be supplied")
+
+  vec_assert(into, character())
 
   if (nchar(sep) == 1) {
     fixed <- TRUE
@@ -69,6 +67,8 @@ separate..tidytable <- function(.df, col, into,
     keep = keep, type.convert = convert,
     .ns = "data.table"
   ))
+
+  .df <- fast_copy(.df, into)
 
   j <- call2(":=", into, t_str_split)
 
