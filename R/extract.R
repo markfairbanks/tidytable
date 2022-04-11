@@ -38,8 +38,6 @@ extract. <- function(.df, col, into, regex = "([[:alnum:]]+)",
 #' @export
 extract..tidytable <- function(.df, col, into, regex = "([[:alnum:]]+)",
                                remove = TRUE, convert = FALSE, ...) {
-  .df <- shallow(.df)
-
   if (missing(col)) abort("col is missing and must be supplied")
   if (missing(into)) abort("into is missing and must be supplied")
 
@@ -63,6 +61,8 @@ extract..tidytable <- function(.df, col, into, regex = "([[:alnum:]]+)",
   }
 
   if(convert) groups <- lapply(groups, type.convert, as.is = TRUE)
+
+  .df <- fast_copy(.df, into)
 
   .df[, (into) := ..groups]
 

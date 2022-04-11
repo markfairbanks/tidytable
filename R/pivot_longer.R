@@ -86,8 +86,6 @@ pivot_longer..tidytable <- function(.df,
   variable_name <- "variable"
 
   if (uses_dot_value) {
-    .df <- shallow(.df)
-
     if (multiple_names_to && any(na_in_names_to)) {
       names_to[na_in_names_to] <- ".id"
     } else if (!multiple_names_to) {
@@ -123,6 +121,7 @@ pivot_longer..tidytable <- function(.df,
     na_cols <- setdiff(glued, measure_vars)
 
     if (length(na_cols) > 0) {
+      .df <- fast_copy(.df, na_cols)
       .df[, (na_cols) := NA]
     }
 
@@ -156,7 +155,7 @@ pivot_longer..tidytable <- function(.df,
     na_rm <- FALSE
   }
 
-  .df <- suppressWarnings(melt(
+  out <- suppressWarnings(melt(
     data = .df,
     id.vars = id_vars,
     measure.vars = measure_vars,
@@ -169,7 +168,7 @@ pivot_longer..tidytable <- function(.df,
   ))
 
   if (!is.null(names_prefix)) {
-    .df <- mutate.(.df, !!variable_name := gsub(paste0("^", .env$names_prefix), "", !!sym(variable_name)))
+    out <- mutate.(out, !!variable_name := gsub(paste0("^", .env$names_prefix), "", !!sym(variable_name)))
   }
 
   if (multiple_names_to && uses_dot_value) {
@@ -177,29 +176,29 @@ pivot_longer..tidytable <- function(.df,
       .value_ids <- NULL
     }
 
-    .df <- mutate.(.df, !!variable_name := .env$.value_ids)
+    out <- mutate.(out, !!variable_name := .env$.value_ids)
   } else if (multiple_names_to && !uses_dot_value) {
     if (!is.null(names_sep)) {
-      .df <- separate.(.df, !!sym(variable_name), into = names_to, sep = names_sep)
+      out <- separate.(out, !!sym(variable_name), into = names_to, sep = names_sep)
     } else {
-      .df <- extract.(.df, !!sym(variable_name), into = names_to, regex = names_pattern)
+      out <- extract.(out, !!sym(variable_name), into = names_to, regex = names_pattern)
     }
 
     # Put new names before value column
-    .df <- relocate.(.df, !!!syms(names_to), .before = !!sym(values_to))
+    out <- relocate.(out, !!!syms(names_to), .before = !!sym(values_to))
   } else if (!multiple_names_to && uses_dot_value) {
-    .df <- mutate.(.df, variable = NULL)
+    out <- mutate.(out, !!variable_name := NULL)
   }
 
-  .df <- df_name_repair(.df, .name_repair = names_repair)
+  out <- df_name_repair(out, .name_repair = names_repair)
 
   # names_ptype & names_transform
-  .df <- change_types(.df, names_to, names_ptypes, "ptypes")
-  .df <- change_types(.df, names_to, names_transform, "transform")
+  out <- change_types(out, names_to, names_ptypes, "ptypes")
+  out <- change_types(out, names_to, names_transform, "transform")
 
   # values_ptype & values_transform
-  .df <- change_types(.df, values_to, values_ptypes, "ptypes")
-  .df <- change_types(.df, values_to, values_transform, "transform")
+  out <- change_types(out, values_to, values_ptypes, "ptypes")
+  out <- change_types(out, values_to, values_transform, "transform")
 
   # data.table::melt() drops NAs using "&" logic, not "|"
   # Example in tidytable #186 shows why this is necessary
@@ -207,10 +206,10 @@ pivot_longer..tidytable <- function(.df,
     filter_calls <- map.(syms(values_to), ~ call2("!", call2("is.na", .x)))
     filter_expr <- call_reduce(filter_calls, "|")
 
-    .df <- filter.(.df, !!filter_expr)
+    out <- filter.(out, !!filter_expr)
   }
 
-  as_tidytable(.df)
+  as_tidytable(out)
 }
 
 #' @export

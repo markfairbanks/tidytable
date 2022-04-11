@@ -4,6 +4,39 @@ shallow <- function(x) {
   x[TRUE]
 }
 
+# Copy columns that are being overwritten
+# If columns are all new uses shallow copy
+# Faster than running `copy()` on an entire dataset
+fast_copy <- function(x, new_cols = character()) {
+  if (length(new_cols) == 0) return(shallow(x))
+
+  x_names <- copy(names(x))
+  needs_copy <- new_cols %chin% x_names
+  if (any(needs_copy)) {
+    copy_cols <- new_cols[needs_copy]
+  } else {
+    copy_cols <- new_cols
+  }
+
+  if (length(copy_cols) == 0) {
+    out <- shallow(x)
+  } else {
+    out <- vector("list", length(x_names))
+    setattr(out, "names", x_names)
+    for (col in x_names) {
+      if (col %chin% copy_cols) {
+        out[[col]] <- copy(x[[col]])
+      } else {
+        out[[col]] <- x[[col]]
+      }
+    }
+    setDT(out)
+    class <- copy(class(x))
+    setattr(out, "class", class)
+  }
+  out[]
+}
+
 # Create a call to `[.data.table` (i position)
 call2_i <- function(.df, i = NULL) {
   # Use enquo(.df) to clean up error messages, #305
