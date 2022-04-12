@@ -15,7 +15,7 @@ fast_copy <- function(x, new_cols = character()) {
   if (any(needs_copy)) {
     copy_cols <- new_cols[needs_copy]
   } else {
-    copy_cols <- new_cols
+    copy_cols <- character()
   }
 
   if (length(copy_cols) == 0) {
