@@ -50,7 +50,8 @@ dt.tidytable <- function(.df, ...) {
           # .df[, x := x * 2]
           col_name <- as.character(col_name)
         } else {
-          # .df[, c("x", "y") := lapply(.SD, function(x) x + 1), .SDcols = c("x", "y")]
+          # .df[, "double_x" := x * 2]
+          # .df[, c("x", "y") := lapply(.SD, \(x) x + 1), .SDcols = c("x", "y")]
           col_name <- eval_tidy(col_name)
         }
         .df <- fast_copy(.df, col_name)
@@ -63,7 +64,11 @@ dt.tidytable <- function(.df, ...) {
   }
 
   dt_expr <- call2("[", quo(.df), !!!dots)
-  dt_expr <- call2("[", dt_expr)
+
+  # Only add empty `[` when using mutate
+  if (exists("mut_exprs", envir = current_env())) {
+    dt_expr <- call2("[", dt_expr)
+  }
 
   eval_tidy(dt_expr, env = dt_env)
 }
