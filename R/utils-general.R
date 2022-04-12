@@ -50,7 +50,12 @@ call2_j <- function(.df, j = NULL, .by = NULL, .keyby = NULL, ...) {
   } else {
     dt_expr <- call2("[", enquo(.df), , j, keyby = .keyby, ...)
   }
-  call2("[", dt_expr)
+
+  if (is_call(j, c(":=", "let"))) {
+    dt_expr <- call2("[", dt_expr)
+  }
+
+  dt_expr
 }
 
 # Uses fast by trick for i position using .I
