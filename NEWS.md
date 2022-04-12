@@ -6,6 +6,10 @@
 #### Functionality improvements
 * `summarize.()`: Now sorts by the grouping variables when `.by` is used.
 
+
+#### Functions with notable speed improvements
+* `dt()`: Faster when adding new columns
+
 #### Bug fixes
 * `across.()`: `.cols` arg can find environment variables in custom functions (#389)
 * Joins: Duplicate columns are treated properly when `keep = FALSE` (#397)
