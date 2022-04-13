@@ -5,10 +5,10 @@
 
 #### Functionality improvements
 * `summarize.()`: Now sorts by the grouping variables when `.by` is used.
-
+* `dt()`: Experimental support for tidy evaluation
 
 #### Functions with notable speed improvements
-* `dt()`: Faster when adding new columns
+* `dt()`: Faster when adding new columns or updating existing columns
 
 #### Bug fixes
 * `across.()`: `.cols` arg can find environment variables in custom functions (#389)
