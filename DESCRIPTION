@@ -31,7 +31,7 @@ Imports:
     pillar (>= 1.5.0),
     rlang (>= 1.0.0),
     tidyselect (>= 1.1.0),
-    vctrs (>= 0.4.0)
+    vctrs (>= 0.4.1)
 RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
