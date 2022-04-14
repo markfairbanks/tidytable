@@ -68,21 +68,22 @@ call2_fast_by_i <- function(.df, j, .by) {
 }
 
 # Extract environment from quosures to build the evaluation environment
-get_dt_env <- function(x, ..., .default_env = caller_env()) {
+get_dt_env <- function(x, ...) {
+  .default <- caller_env(2)
   if (length(x) == 0) {
-    dt_env <- .default_env
+    dt_env <- .default
   } else if (is_quosures(x)) {
     envs <- map.(x, get_env)
     non_empty <- map_lgl.(envs, ~ !identical(.x, empty_env()))
     if (any(non_empty)) {
       dt_env <- envs[non_empty][[1]]
     } else {
-      dt_env <- .default_env
+      dt_env <- .default
     }
   } else {
     dt_env <- get_env(x)
     if (identical(dt_env, empty_env())) {
-      dt_env <- .default_env
+      dt_env <- .default
     }
   }
 
