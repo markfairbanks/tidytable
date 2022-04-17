@@ -72,7 +72,8 @@ unnest..tidytable <- function(.df,
   }
 
   if (keep_empty) {
-    .df <- mutate_lapply(.df, as.character(dots), keep_empty_prep)
+    dots_chr <- as.character(dots)
+    .df <- mutate.(.df, across.(all_of(dots_chr), keep_empty_prep))
   }
 
   unnest_data <- map.(dots, ~ unnest_col(.df, .x, names_sep))
