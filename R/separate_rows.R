@@ -67,7 +67,9 @@ separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert =
 
   setcolorder(.df, col_order)
 
-  if (convert) .df <- mutate_lapply(.df, col_names, type.convert, as.is = TRUE)
+  if (convert) {
+    .df <- mutate.(.df, across.(all_of(col_names), ~ type.convert(.x, as.is = TRUE)))
+  }
 
   .df[]
 }
