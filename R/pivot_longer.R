@@ -242,18 +242,15 @@ pivot_longer..data.frame <- function(.df,
 
 str_extract <- function(x, into, regex, convert = FALSE) {
   out <- str_extract_groups(x, pattern = regex, convert = convert)
-  out <- as_tidytable(out)
   names(out) <- into
+  out <- new_tidytable(out)
   out
 }
 
 str_separate <- function(x, into, sep, convert = FALSE) {
-  vec_assert(into, character())
-
   out <- data.table::tstrsplit(x, sep, fixed = TRUE, names = TRUE, type.convert = convert)
-  out <- as_tidytable(out)
   names(out) <- as_utf8_character(into)
-
+  out <- new_tidytable(out)
   out
 }
 

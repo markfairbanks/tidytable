@@ -10,10 +10,10 @@ NULL
 # See https://vctrs.r-lib.org/reference/howto-faq-coercion-data-frame.html#arguments
 
 tt_ptype2 <- function(x, y, ...) {
-  as_tidytable(df_ptype2(x, y, ...))
+  new_tidytable(df_ptype2(x, y, ...))
 }
 tt_cast <- function(x, to, ...) {
-  as_tidytable(df_cast(x, to, ...))
+  new_tidytable(df_cast(x, to, ...))
 }
 
 ## vec_ptype2 ########################################
