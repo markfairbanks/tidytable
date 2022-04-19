@@ -1,0 +1,12 @@
+test_that("works", {
+  .list <- suppressMessages(as_tidytable(list(x = 1:3, 1)))
+  expect_named(.list, c("x", "...2"))
+  expect_equal(.list$...2, c(1, 1, 1))
+  expect_true(is_tidytable(.list))
+  .df <- as_tidytable(data.frame(x = 1:3, y = 1:3))
+  expect_named(.df, c("x", "y"))
+  expect_true(is_tidytable(.df))
+  .dt <- as_tidytable(data.table(x = 1:3, y = 1:3))
+  expect_named(.dt, c("x", "y"))
+  expect_true(is_tidytable(.dt))
+})

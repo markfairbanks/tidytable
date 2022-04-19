@@ -12,7 +12,9 @@ dt(.df, ...)
 \item{...}{Arguments passed to data.table call. See ?data.table::\verb{[.data.table}}
 }
 \description{
-Pipeable data.table call with (experimental) support for tidy evaluation.
+Pipeable data.table call.
+
+Has \emph{experimental} support for tidy evaluation.
 
 Note: This function does not use data.table's modify-by-reference
 }

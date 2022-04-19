@@ -6,9 +6,11 @@
 #### Functionality improvements
 * `summarize.()`: Now sorts by the grouping variables when `.by` is used.
 * `dt()`: Experimental support for tidy evaluation
+* `as_tidytable()`: Now defaults to `.name_repair = "unique"` to relax restrictions on creating new tidytables
 
 #### Functions with notable speed improvements
 * `dt()`: Faster when adding new columns or updating existing columns
+* `as_tidytable()`: Faster when converting `data.frame` or `list` objects to a tidytable
 
 #### Bug fixes
 * `across.()`: `.cols` arg can find environment variables in custom functions (#389)

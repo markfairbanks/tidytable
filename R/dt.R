@@ -1,7 +1,9 @@
 #' Pipeable data.table call
 #'
 #' @description
-#' Pipeable data.table call with (experimental) support for tidy evaluation.
+#' Pipeable data.table call.
+#'
+#' Has *experimental* support for tidy evaluation.
 #'
 #' Note: This function does not use data.table's modify-by-reference
 #'

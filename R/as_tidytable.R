@@ -20,20 +20,20 @@
 #' df %>%
 #'   as_tidytable()
 as_tidytable <- function(x, ...,
-                         .name_repair = c("check_unique", "unique", "universal", "minimal"),
+                         .name_repair = "unique",
                          .keep_rownames = NULL) {
   UseMethod("as_tidytable")
 }
 
 #' @export
 as_tidytable.tidytable <- function(x, ...,
-                                   .name_repair = c("check_unique", "unique", "universal", "minimal")) {
+                                   .name_repair = "unique") {
   x
 }
 
 #' @export
 as_tidytable.data.table <- function(x, ...,
-                                    .name_repair = c("check_unique", "unique", "universal", "minimal")) {
+                                    .name_repair = "unique") {
   x <- add_tidytable_class(x)
 
   df_name_repair(x, .name_repair = .name_repair)
@@ -41,11 +41,36 @@ as_tidytable.data.table <- function(x, ...,
 
 #' @export
 as_tidytable.data.frame <- function(x, ...,
-                                    .name_repair = c("check_unique", "unique", "universal", "minimal"),
+                                    .name_repair = "unique",
                                     .keep_rownames = FALSE) {
+  if (!is_false(.keep_rownames)) {
+    if (is.character(.keep_rownames)) {
+      col_name <- .keep_rownames
+      .keep_rownames <- TRUE
+    } else {
+      col_name <- "rn"
+    }
+  }
 
-  x <- as.data.table(x, keep.rownames = .keep_rownames)
-  x <- add_tidytable_class(x)
+  out <- shallow(new_tidytable(x))
+
+  if (.keep_rownames) {
+    row_names <- new_tidytable(list2(!!col_name := rownames(x)))
+    out <- vec_cbind(row_names, out)
+  }
+
+  df_name_repair(out, .name_repair = .name_repair)
+}
+
+#' @export
+as_tidytable.list <- function(x, ...,
+                              .name_repair = "unique") {
+  x <- x[!map_lgl.(x, is.null)]
+  x <- vec_recycle_common(!!!x)
+  if (is.null(names(x))) {
+    names(x) <- vec_rep("", length(x))
+  }
+  x <- new_tidytable(x)
 
   df_name_repair(x, .name_repair = .name_repair)
 }
