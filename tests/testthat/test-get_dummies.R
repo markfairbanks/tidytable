@@ -8,7 +8,7 @@ test_df2 <- data.table(
   "col2" = as.factor(c(letters[3:1], NA, letters[3:1])),
   "var1"= rnorm(7,0,1))
 
-test_that("default uses all cols - no NAs", {
+test_that("default uses all cols - no NAs & no modify-by-reference", {
   dummy_df <- get_dummies.(test_df)
 
   expect_named(dummy_df, c("col1", "col2", "var1",
@@ -22,6 +22,8 @@ test_that("default uses all cols - no NAs", {
   expect_equal(dummy_df$col2_a, c(0, 0, 1, 0, 0, 1))
   expect_equal(dummy_df$col2_b, c(0, 1, 0, 0, 1, 0))
   expect_equal(dummy_df$col2_c, c(1, 0, 0, 1, 0, 0))
+
+  expect_named(test_df, c("col1", "col2", "var1"))
 })
 
 test_that("works with data.frame input", {
@@ -47,8 +49,8 @@ test_that("default uses all cols - with NAs", {
   dummy_df <- get_dummies.(test_df2)
 
   expect_named(dummy_df, c("col1", "col2", "var1",
-                           "col1_NA","col1_a", "col1_b", "col1_c",
-                           "col2_NA", "col2_a", "col2_b", "col2_c"))
+                           "col1_a", "col1_b", "col1_c", "col1_NA",
+                           "col2_a", "col2_b", "col2_c", "col2_NA"))
 
   expect_equal(dummy_df$col1_a, c(1, 0, 0, 0, 1, 0, 0))
   expect_equal(dummy_df$col1_b, c(0, 1, 0, 0, 0, 1, 0))
