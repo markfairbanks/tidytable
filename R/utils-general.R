@@ -37,6 +37,12 @@ fast_copy <- function(x, new_cols = character()) {
   out[]
 }
 
+# dt call starting with the j position
+dt_j <- function(.df, j, ...) {
+  j <- enquo(j)
+  dt(.df, , !!j, ...)
+}
+
 # Create a call to `[.data.table` (i position)
 call2_i <- function(.df, i = NULL) {
   # Use enquo(.df) to clean up error messages, #305
@@ -65,6 +71,12 @@ call2_fast_by_i <- function(.df, j, .by) {
   dt_expr <- call2("$", dt_expr, expr(V1))
   dt_expr <- call2_i(.df, dt_expr)
   dt_expr
+}
+
+# setnames without modify-by-reference
+setnames. <- function(x, old, new) {
+  x <- shallow(x)
+  setnames(x, old, new)
 }
 
 # Extract environment from quosures to build the evaluation environment
