@@ -96,22 +96,22 @@ get_dummies..tidytable <- function(.df,
     }
 
     if (any_na) {
-      .df <- dt(.df, ,
-                (not_na_cols) :=
-                  lapply(unique_vals, function(.x) as.integer(.x == !!col & !is.na(!!col)))
-                )
+      .df <- dt_j(
+        .df,
+        (not_na_cols) := lapply(unique_vals, function(.x) as.integer(.x == !!col & !is.na(!!col)))
+      )
     } else {
-      .df <- dt(.df, ,
-                (not_na_cols) :=
-                  lapply(unique_vals, function(.x) as.integer(.x == !!col))
-                )
+      .df <- dt_j(
+        .df,
+        (not_na_cols) := lapply(unique_vals, function(.x) as.integer(.x == !!col))
+      )
     }
 
     # Since the prior step doesn't recognize NAs,
     # an extra step is needed to flag NA vals
     if (dummify_na && any_na) {
       na_col <- new_names[na_loc]
-      .df <- dt(.df, , (na_col) := as.integer(is.na(!!col)))
+      .df <- dt_j(.df, (na_col) := as.integer(is.na(!!col)))
     }
   }
 
