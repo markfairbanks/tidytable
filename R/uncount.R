@@ -23,11 +23,15 @@ uncount..tidytable <- function(.df, weights, .remove = TRUE, .id = NULL) {
 
   .reps <- pull.(.df, !!weights)
 
-  result_df <- .df[vec_rep_each(1:.N, .reps)]
+  result_df <- dt(.df, vec_rep_each(1:.N, .reps))
 
-  if (!is.null(.id)) result_df <- mutate.(result_df, !!.id := sequence(.reps))
+  if (!is.null(.id)) {
+    result_df <- dt_j(result_df, !!.id := sequence(.reps))
+  }
 
-  if (.remove) result_df <- mutate.(result_df, !!weights := NULL)
+  if (.remove) {
+    result_df <- dt_j(result_df, !!weights := NULL)
+  }
 
   result_df
 }

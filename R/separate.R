@@ -68,15 +68,11 @@ separate..tidytable <- function(.df, col, into,
     .ns = "data.table"
   ))
 
-  .df <- fast_copy(.df, into)
+  .df <- dt_j(.df, (into) := !!t_str_split)
 
-  j <- call2(":=", into, t_str_split)
-
-  call <- call2_j(.df, j)
-
-  .df <- eval_tidy(call)
-
-  if (remove) .df <- mutate.(.df, !!col := NULL)
+  if (remove) {
+    .df <- dt_j(.df, !!col := NULL)
+  }
 
   .df[]
 }

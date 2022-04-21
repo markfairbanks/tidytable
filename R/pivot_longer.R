@@ -101,7 +101,9 @@ pivot_longer..tidytable <- function(.df,
 
       names_glue <- paste0("{", names_to, "}", collapse = "___")
       new_names <- glue_data(names_to_setup, names_glue)
-      setnames(.df, measure_vars, new_names)
+
+      .df <- setnames.(.df, measure_vars, new_names)
+
       measure_vars <- new_names
     } else {
       abort("If you use '.value' in `names_to` you must also supply
@@ -121,8 +123,7 @@ pivot_longer..tidytable <- function(.df,
     na_cols <- setdiff(glued, measure_vars)
 
     if (length(na_cols) > 0) {
-      .df <- fast_copy(.df, na_cols)
-      .df[, (na_cols) := NA]
+      .df <- dt_j(.df, (na_cols) := NA)
     }
 
     .value <- names_to_setup$.value
@@ -187,7 +188,7 @@ pivot_longer..tidytable <- function(.df,
     # Put new names before value column
     out <- relocate.(out, !!!syms(names_to), .before = !!sym(values_to))
   } else if (!multiple_names_to && uses_dot_value) {
-    out <- mutate.(out, !!variable_name := NULL)
+    out <- dt_j(out, !!variable_name := NULL)
   }
 
   out <- df_name_repair(out, .name_repair = names_repair)
