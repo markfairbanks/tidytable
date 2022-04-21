@@ -1,5 +1,5 @@
 test_that("doesn't modify by reference", {
-  df <- data.table(x = c(1,1,1,1), y = 1:4)
+  df <- data.table(x = 1:3, y = 1:3, z = 1:3)
 
   df %>%
     dt(, x := x * 2)
@@ -8,10 +8,16 @@ test_that("doesn't modify by reference", {
     dt(, x := 2)
 
   df %>%
-    dt(, double_x := 2)
+    dt(, double_x := x * 2)
 
-  expect_named(df, c("x", "y"))
-  expect_equal(df$x, c(1,1,1,1))
+  df %>%
+    dt(, x := NULL)
+
+  df %>%
+    dt(, c("x", "y") := NULL)
+
+  expect_named(df, c("x", "y", "z"))
+  expect_equal(df$x, 1:3)
 })
 
 test_that("can filter", {

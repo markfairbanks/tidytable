@@ -144,7 +144,7 @@ full_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., kee
       }
 
       result_df <- right_join.(x, step_df, by = by, suffix = suffix, keep = TRUE)
-      result_df <- shallow(result_df)[, (drop_cols) := NULL]
+      result_df <- dt_j(result_df, (drop_cols) := NULL)
       result_df <- rename_with.(result_df, ~ temp_names_fix(.x, by_x, suffix[[2]]), ends_with("__temp__"))
     }
 

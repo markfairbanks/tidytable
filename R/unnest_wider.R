@@ -53,12 +53,12 @@ unnest_wider..tidytable <- function(.df, col, names_sep = NULL,
     out_names <- names(out)
     new_names <- paste(as_name(.col), out_names, sep = names_sep)
 
-    setnames(out, out_names, new_names)
+    out <- setnames.(out, out_names, new_names)
   } else {
     out <- df_name_repair(out, .name_repair = "universal")
   }
 
-  .df <- mutate.(.df, !!.col := NULL)
+  .df <- dt_j(.df, !!.col := NULL)
 
   if (ncol(.df) > 0) {
     out <- bind_cols.(.df, out, .name_repair = names_repair)

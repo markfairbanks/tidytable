@@ -55,18 +55,20 @@ extract..tidytable <- function(.df, col, into, regex = "([[:alnum:]]+)",
   groups <- groups[keep_group]
   into <- into[keep_group]
 
-  if(anyDuplicated(into) > 0){
+  if (anyDuplicated(into) > 0) {
     groups <- lapply(split(groups, into), pmap_chr., paste0)
     into <- names(groups)
   }
 
-  if(convert) groups <- lapply(groups, type.convert, as.is = TRUE)
+  if (convert) {
+    groups <- lapply(groups, type.convert, as.is = TRUE)
+  }
 
-  .df <- fast_copy(.df, into)
+  .df <- dt_j(.df, (into) := ..groups)
 
-  .df[, (into) := ..groups]
-
-  if (remove) .df[, (col) := NULL]
+  if (remove) {
+    .df <- dt_j(.df, (col) := NULL)
+  }
 
   .df[]
 }

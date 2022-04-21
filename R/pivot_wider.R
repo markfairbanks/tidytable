@@ -132,12 +132,14 @@ pivot_wider..tidytable <- function(.df,
 
   .df <- eval_tidy(dcast_call)
 
-  if (no_id) .df[, . := NULL]
+  if (no_id) {
+    .df <- dt_j(.df, . := NULL)
+  }
 
   if (uses_dot_value) {
     new_vars <- setdiff(names(.df), id_cols)
 
-    setnames(.df, new_vars, glue_vars)
+    .df <- setnames.(.df, new_vars, glue_vars)
   }
 
   .df <- df_name_repair(.df, .name_repair = names_repair)
