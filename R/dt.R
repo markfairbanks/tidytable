@@ -68,6 +68,7 @@ dt.tidytable <- function(.df, ...) {
         # .df[, let(x = 1, double_y = y * 2)]
         use_walrus <- map_lgl.(mut_exprs, is_call, ":=")
         if (any(use_walrus)) {
+          # .df %>% dt(, let(!!col := !!col * 2))
           j <- prep_j_expr(mut_exprs, use_walrus, ":=")
           dots <- replace_j_dot(dots, dots_names, j)
         }
@@ -78,6 +79,7 @@ dt.tidytable <- function(.df, ...) {
       summarize_exprs <- as.list(j[-1])
       use_walrus <- map_lgl.(summarize_exprs, is_call, ":=")
       if (any(use_walrus)) {
+        # .df %>% dt(, .(!!col := mean(!!col)))
         j <- prep_j_expr(summarize_exprs, use_walrus, ".")
         dots <- replace_j_dot(dots, dots_names, j)
       }
