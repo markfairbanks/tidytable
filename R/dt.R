@@ -52,7 +52,10 @@ dt.tidytable <- function(.df, ...) {
       mut_exprs <- as.list(j[-1])
       if (length(mut_exprs) == 2 && is.null(names(mut_exprs))) {
         col_name <- mut_exprs[[1]]
-        if (is_call(col_name, "(")) {
+        if (is.null(mut_exprs[[2]])) {
+          # .df[, col := NULL]
+          col_name <- character()
+        } else if (is_call(col_name, "(")) {
           # .df[, (new_col) := x * 2]
           col_name <- eval_tidy(col_name[[-1]], env = dt_env)
         } else if (is.symbol(col_name)) {
