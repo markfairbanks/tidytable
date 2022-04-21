@@ -11,6 +11,7 @@
 #### Functions with notable speed improvements
 * `dt()`: Faster when adding new columns or updating existing columns
 * `as_tidytable()`: Faster when converting `data.frame` or `list` objects to a tidytable
+* `get_dummies.()`
 
 #### Bug fixes
 * `across.()`: `.cols` arg can find environment variables in custom functions (#389)
