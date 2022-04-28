@@ -43,19 +43,17 @@ as_tidytable.data.table <- function(x, ...,
 as_tidytable.data.frame <- function(x, ...,
                                     .name_repair = "unique",
                                     .keep_rownames = FALSE) {
+  out <- fast_copy(new_tidytable(x))
+
   if (!is_false(.keep_rownames)) {
     if (is.character(.keep_rownames)) {
       col_name <- .keep_rownames
-      .keep_rownames <- TRUE
     } else {
       col_name <- "rn"
     }
-  }
 
-  out <- shallow(new_tidytable(x))
-
-  if (.keep_rownames) {
     row_names <- new_tidytable(list2(!!col_name := rownames(x)))
+
     out <- vec_cbind(row_names, out)
   }
 
