@@ -95,6 +95,14 @@ num_range	reexports
 n_distinct.	n_distinct.
 pivot_longer.	pivot_longer.
 pivot_wider.	pivot_wider.
+pmap.	map.
+pmap_chr.	map.
+pmap_dbl.	map.
+pmap_df.	map.
+pmap_dfc.	map.
+pmap_dfr.	map.
+pmap_int.	map.
+pmap_lgl.	map.
 pull.	pull.
 quo	reexports
 quos	reexports
