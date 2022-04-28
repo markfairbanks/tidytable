@@ -1,4 +1,4 @@
-# tidytable 0.7.2 (in development)
+# tidytable 0.7.2
 
 #### New functions
 * `pmap.()`
