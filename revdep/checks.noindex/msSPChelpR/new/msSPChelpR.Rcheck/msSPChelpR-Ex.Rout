@@ -1,6 +1,6 @@
 
-R version 4.1.2 (2021-11-01) -- "Bird Hippie"
-Copyright (C) 2021 The R Foundation for Statistical Computing
+R version 4.2.0 (2022-04-22) -- "Vigorous Calisthenics"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-apple-darwin17.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -299,13 +299,13 @@ Warning in max(p_futimeyrs, na.rm = TRUE) :
 # A tidytable: 7 × 5
   p_status mean_futime min_futime max_futime median_futime
      <dbl>       <dbl>      <dbl>      <dbl>         <dbl>
-1        2        8.94     0            26.9          7.83
-2        3        8.60     0            25.8          7.55
-3        4        6.46     0            26.5          5.25
-4        1        9.23     0.0438       27.0          8.04
-5       98      NaN      Inf          -Inf           NA   
+1       NA      NaN      Inf          -Inf           NA   
+2        1        9.23     0.0438       27.0          8.04
+3        2        8.94     0            26.9          7.83
+4        3        8.60     0            25.8          7.55
+5        4        6.46     0            26.5          5.25
 6       97      NaN      Inf          -Inf           NA   
-7       NA      NaN      Inf          -Inf           NA   
+7       98      NaN      Inf          -Inf           NA   
 # A tidytable: 68,060 × 122
    fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1
    <chr>   <chr>      <chr> <chr>  <date>      <date>       <chr>        <chr>  
@@ -748,27 +748,27 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 # A tidytable: 11 × 3
    p_alive.1 p_status     N
    <chr>        <dbl> <int>
- 1 Alive            2 17609
- 2 Dead             3 18358
- 3 Dead             4  8822
- 4 Alive            1 15884
- 5 Alive           98  2488
+ 1 Alive            1 15884
+ 2 Alive            2 17609
+ 3 Alive           97    19
+ 4 Alive           98  2488
+ 5 Dead            NA     5
  6 Dead             1  2544
  7 Dead             2  2147
- 8 Dead            98   182
- 9 Alive           97    19
+ 8 Dead             3 18358
+ 9 Dead             4  8822
 10 Dead            97     2
-11 Dead            NA     5
+11 Dead            98   182
 # A tidytable: 7 × 2
   p_status     N
      <dbl> <int>
-1        2 19756
-2        3 18358
-3        4  8822
-4        1 18428
-5       98  2670
+1       NA     5
+2        1 18428
+3        2 19756
+4        3 18358
+5        4  8822
 6       97    21
-7       NA     5
+7       98  2670
 # A tidytable: 68,060 × 121
    fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1
    <chr>   <chr>      <chr> <chr>  <date>      <date>       <chr>        <chr>  
@@ -43675,7 +43675,7 @@ detaching ‘package:dplyr’
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  12.847 2.03 15.068 0.002 0.005 
+Time elapsed:  22.493 4.047 28.784 0.003 0.005 
 > grDevices::dev.off()
 null device 
           1 

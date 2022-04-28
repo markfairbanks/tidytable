@@ -1,5 +1,6 @@
 %notin%                 notin operator
 across.                 Apply a function across a selection of columns
+add_count.              Add a count column to the data frame
 arrange.                Arrange/reorder rows
 arrange_across.         Arrange by a selection of variables
 as_tidytable            Coerce an object to a data.table/tidytable
@@ -12,10 +13,10 @@ case_when.              Case when
 coalesce.               Coalesce missing values
 complete.               Complete a data.table with missing combinations
                         of data
+context                 Context functions
 count.                  Count observations by group
 crossing.               Create a data.table from all unique
                         combinations of inputs
-cur_group_id.           Current group context
 desc.                   Descending order
 distinct.               Select distinct/unique rows
 drop_na.                Drop rows containing missing values
