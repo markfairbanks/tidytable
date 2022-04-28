@@ -108,6 +108,8 @@ get_dummies..tidytable <- function(.df,
   .df
 }
 
+globalVariables("..not_na")
+
 #' @export
 get_dummies..data.frame <- function(.df,
                                     cols = c(where(is.character), where(is.factor)),
