@@ -72,33 +72,26 @@ get_dummies..tidytable <- function(.df,
 
     unique_vals <- f_sort(unique_vals)
 
-    # If NAs need dummies, convert to character string "NA" for col name creation
-    na_loc <- is.na(unique_vals)
-    any_na <- any(na_loc)
-    if (dummify_na && any_na) {
-      unique_vals[na_loc] <- "NA"
-    } else if (any_na) {
-      unique_vals <- unique_vals[!na_loc]
+    # Due to above f_sort NA will be the first value if it exists
+    any_na <- is.na(unique_vals[1])
+
+    if (any_na) {
+      unique_vals <- unique_vals[-1]
     }
 
     if (prefix) {
-      new_names <- paste(col_name, unique_vals, sep = prefix_sep)
+      not_na_cols <- paste(col_name, unique_vals, sep = prefix_sep)
+      na_col <- paste(col_name, "NA", sep = prefix_sep)
     } else {
-      new_names <- unique_vals
-    }
-
-    # Remove "NA" from unique vals after new_names columns are made
-    if (dummify_na && any_na) {
-      not_na_cols <- new_names[!na_loc]
-      unique_vals <- unique_vals[!na_loc]
-    } else {
-      not_na_cols <- new_names
+      not_na_cols <- unique_vals
+      na_col <- "NA"
     }
 
     if (any_na) {
+      not_na <- !is.na(.df[[col_name]])
       .df <- dt_j(
         .df,
-        (not_na_cols) := lapply(unique_vals, function(.x) as.integer(.x == !!col & !is.na(!!col)))
+        (not_na_cols) := lapply(unique_vals, function(.x) as.integer(.x == !!col & ..not_na))
       )
     } else {
       .df <- dt_j(
@@ -107,11 +100,8 @@ get_dummies..tidytable <- function(.df,
       )
     }
 
-    # Since the prior step doesn't recognize NAs,
-    # an extra step is needed to flag NA vals
     if (dummify_na && any_na) {
-      na_col <- new_names[na_loc]
-      .df <- dt_j(.df, (na_col) := as.integer(is.na(!!col)))
+      .df <- dt_j(.df, (na_col) := as.integer(!not_na))
     }
   }
 
