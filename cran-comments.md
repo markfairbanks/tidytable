@@ -1,5 +1,5 @@
 ## Test environments
-* local macOS Catalina install, R 4.1.0
+* local macOS Monterey install, R 4.2.0
 * win-builder (devel and release)
 
 ## R CMD check results
