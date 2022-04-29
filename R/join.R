@@ -124,7 +124,7 @@ full_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., kee
 
       col_order <- suffix_join_names(names(x), names(y), suffix, keep, get_bys(x, y, by), "full")
 
-      setcolorder(result_df, col_order)
+      result_df <- df_col_order(result_df, col_order)
       setkey(result_df, NULL)
     } else {
       bys <- get_bys(x, y, by)

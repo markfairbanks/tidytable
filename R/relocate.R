@@ -32,8 +32,6 @@ relocate. <- function(.df, ..., .before = NULL, .after = NULL) {
 
 #' @export
 relocate..tidytable <- function(.df, ..., .before = NULL, .after = NULL) {
-  .df <- shallow(.df)
-
   .before <- enquo(.before)
   .after <- enquo(.after)
 
@@ -65,7 +63,7 @@ relocate..tidytable <- function(.df, ..., .before = NULL, .after = NULL) {
   start_cols <- start_cols[start_cols %notin% selected_cols]
   final_order <- vec_unique(c(start_cols, selected_cols, all_cols))
 
-  setcolorder(.df, final_order)
+  .df <- df_col_order(.df, final_order)
 
   .df
 }

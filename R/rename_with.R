@@ -43,7 +43,7 @@ rename_with..tidytable <- function(.df, .fn = NULL, .cols = everything(), ...) {
 
   new_names <- .fn(.cols, ...)
 
-  .df <- setnames.(.df, .cols, new_names)
+  .df <- df_set_names(.df, .cols, new_names)
 
   .df
 }
