@@ -39,7 +39,7 @@ separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert =
 
   cols <- tidyselect_syms(.df, !!!dots)
 
-  .df <- mutate.(.df, .separate_id = .I)
+  .df <- dt_j(.df, .separate_id := .I)
 
   col_names <- as.character(cols)
   other_col_names <- setdiff(names(.df), col_names)
@@ -63,9 +63,9 @@ separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert =
 
   .df <- eval_tidy(dt_expr, env = dt_env)
 
-  .df <- mutate.(.df, .separate_id = NULL)
+  .df <- dt_j(.df, .separate_id := NULL)
 
-  setcolorder(.df, col_order)
+  .df <- df_col_order(.df, col_order)
 
   if (convert) {
     .df <- mutate.(.df, across.(all_of(col_names), ~ type.convert(.x, as.is = TRUE)))
