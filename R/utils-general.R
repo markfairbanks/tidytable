@@ -1,43 +1,4 @@
-# Creates a shallow copy
-# Can add new columns or rename columns without modify-by-reference
-shallow <- function(x) {
-  x[TRUE]
-}
-
-# Copy columns that are being overwritten
-# If columns are all new uses shallow copy
-# Faster than running `copy()` on an entire dataset
-fast_copy <- function(x, new_cols = character()) {
-  if (length(new_cols) == 0) return(shallow(x))
-
-  x_names <- copy(names(x))
-  needs_copy <- new_cols %chin% x_names
-  if (any(needs_copy)) {
-    copy_cols <- new_cols[needs_copy]
-  } else {
-    copy_cols <- character()
-  }
-
-  if (length(copy_cols) == 0) {
-    out <- shallow(x)
-  } else {
-    out <- vector("list", length(x_names))
-    setattr(out, "names", x_names)
-    for (col in x_names) {
-      if (col %chin% copy_cols) {
-        out[[col]] <- copy(x[[col]])
-      } else {
-        out[[col]] <- x[[col]]
-      }
-    }
-    setDT(out)
-    class <- copy(class(x))
-    setattr(out, "class", class)
-  }
-  out[]
-}
-
-# dt call starting with the j position
+# dt starting with the j position
 dt_j <- function(.df, j, ...) {
   j <- enquo(j)
   dt(.df, , !!j, ...)
@@ -74,9 +35,26 @@ call2_fast_by_i <- function(.df, j, .by) {
 }
 
 # setnames without modify-by-reference
-setnames. <- function(x, old, new) {
-  x <- shallow(x)
-  setnames(x, old, new)
+df_set_names <- function(.df, old, new) {
+  .df <- shallow(.df)
+  setnames(.df, old, new)
+  .df
+}
+
+# setcolorder without modify-by-reference
+df_col_order <- function(.df, new_order = names(x)) {
+  .df <- shallow(.df)
+  setcolorder(.df, new_order)
+  .df
+}
+
+# Repair names of a data.table
+df_name_repair <- function(.df, .name_repair = "unique") {
+  names(.df) <- vec_as_names(
+    names(.df),
+    repair = .name_repair
+  )
+  .df
 }
 
 # Extract environment from quosures to build the evaluation environment
@@ -100,15 +78,6 @@ get_dt_env <- function(x, ...) {
   }
 
   env(dt_env, ...)
-}
-
-# Repair names of a data.table
-df_name_repair <- function(.df, .name_repair = "unique") {
-  names(.df) <- vec_as_names(
-    names(.df),
-    repair = .name_repair
-  )
-  .df
 }
 
 # Reduce a list of calls to a single combined call
@@ -163,17 +132,3 @@ change_types <- function(.df, .to, .list, .ptypes_transform) {
   }
   .df
 }
-
-# deprecated shallow() ------------------------------------------------
-# shallow <- function(x, cols = names(x), reset_class = FALSE) {
-#   stopifnot(is.data.table(x), all(cols %in% names(x)))
-#   ans <- vector("list", length(cols))
-#   setattr(ans, 'names', copy(cols))
-#   for (col in cols) {
-#     ans[[col]] = x[[col]]
-#   }
-#   setDT(ans)
-#   class  <- if (!reset_class) copy(class(x)) else c("data.table", "data.frame")
-#   setattr(ans, 'class', class)
-#   ans[]
-# }
