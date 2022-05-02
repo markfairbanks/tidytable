@@ -102,6 +102,11 @@ f_sort <- function(x) {
   }
 }
 
+# Is object a vector and not a matrix
+is_simple_vector <- function(x) {
+  is.atomic(x) && !is.matrix(x)
+}
+
 # Restore user defined attributes
 tidytable_restore <- function(x, to) {
   # Make sure auto-index is reset since vec_restore reapplies the original index
