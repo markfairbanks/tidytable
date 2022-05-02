@@ -13,7 +13,7 @@
 #' @param sort If `TRUE`, will show the largest groups at the top.
 #' @param name The name of the new column in the output.
 #'
-#'   If omitted, it will default to `N`.
+#'   If omitted, it will default to `n`.
 #' @export
 #' @md
 #'
@@ -48,7 +48,9 @@ count..tidytable <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   wt <- enquo(wt)
 
   if (is.null(name)) {
-    name <- "N"
+    warn("As of tidytable v0.7.3 the default name for `count.()` is `n` to match
+         dplyr semantics.", .frequency = "once", .frequency_id = "tidytable_count")
+    name <- "n"
   }
 
   if (quo_is_null(wt)) {
