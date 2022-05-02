@@ -1,5 +1,8 @@
 # tidytable 0.7.3 (in development)
 
+#### Breaking changes
+* `count.()`: Default name is now `n` instead of `N` to match dplyr semantics
+
 # tidytable 0.7.2
 
 #### New functions
@@ -41,10 +44,6 @@ regardless of order provided.
 
 #### New functions
 * `new_tidytable()`
-
-#### Breaking changes
-* `unite.()`: If `col` isn't provided, the new column is
-auto-named `.united` to reduce the chance of naming conflicts
 
 # tidytable 0.6.7
 
