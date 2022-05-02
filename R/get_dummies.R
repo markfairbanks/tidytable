@@ -108,7 +108,7 @@ get_dummies..tidytable <- function(.df,
   .df
 }
 
-globalVariables("..not_na")
+globalVariables(c("..not_na", "where"))
 
 #' @export
 get_dummies..data.frame <- function(.df,
@@ -120,5 +120,3 @@ get_dummies..data.frame <- function(.df,
   .df <- as_tidytable(.df)
   get_dummies.(.df, {{ cols }}, prefix, prefix_sep, drop_first, dummify_na)
 }
-
-globalVariables("where")

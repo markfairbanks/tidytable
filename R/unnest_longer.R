@@ -37,7 +37,7 @@ unnest_longer..tidytable <- function(.df, col, values_to = NULL, indices_to = NU
 
   x <- pull.(.df, !!.col)
 
-  if (!is.atomic(x[[1]])) {
+  if (!is_simple_vector(x[[1]])) {
     abort("Only vectors are currently supported")
   }
 

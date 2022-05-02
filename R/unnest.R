@@ -120,7 +120,7 @@ unnest_col <- function(.df, col = NULL, names_sep = NULL) {
   .l <- list_drop_empty(.l)
 
   .check_data <- .l[[1]]
-  is_vec <- is.atomic(.check_data) && !is.matrix(.check_data)
+  is_vec <- is_simple_vector(.check_data)
 
   if (is_vec) {
     # Use do.call so lists of dates are not unclassed by unlist
@@ -142,7 +142,7 @@ keep_empty_prep <- function(.l) {
   if (!any(null_bool)) return(.l)
 
   .check_data <- .l[!null_bool][[1]]
-  is_vec <- is.atomic(.check_data) && !is.matrix(.check_data)
+  is_vec <- is_simple_vector(.check_data)
 
   if (is_vec) {
     .replace <- NA
