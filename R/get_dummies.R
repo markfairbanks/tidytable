@@ -64,7 +64,7 @@ get_dummies..tidytable <- function(.df,
   for (col in cols) {
     col_name <- as.character(col)
 
-    unique_vals <- vec_unique(as.character(.df[[col_name]]))
+    unique_vals <- as.character(vec_unique(.df[[col_name]]))
 
     if (drop_first) {
       unique_vals <- unique_vals[-1]
