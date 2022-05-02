@@ -35,9 +35,12 @@ call2_fast_by_i <- function(.df, j, .by) {
 }
 
 # setnames without modify-by-reference
-df_set_names <- function(.df, old, new) {
-  .df <- shallow(.df)
-  setnames(.df, old, new)
+df_set_names <- function(.df, new_names = NULL, old_names = NULL) {
+  if (is.null(old_names)) {
+    names(.df) <- new_names
+  } else {
+    names(.df)[names(.df) %chin% old_names] <- new_names
+  }
   .df
 }
 
