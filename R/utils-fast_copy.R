@@ -1,10 +1,11 @@
-# Copy columns that are being overwritten
-# If columns are all new uses shallow copy
-# Faster than running `copy()` on an entire dataset
+# Fast copying
+# Deep copy of columns that are being overwritten,
+#   and only does a shallow copy of the other columns.
+#   Faster than running `copy()` on an entire data frame.
 fast_copy <- function(x, new_cols = character()) {
   if (length(new_cols) == 0) return(shallow(x))
 
-  x_names <- copy(names(x))
+  x_names <- names(x)
   needs_copy <- new_cols %chin% x_names
   if (any(needs_copy)) {
     copy_cols <- new_cols[needs_copy]
@@ -15,6 +16,7 @@ fast_copy <- function(x, new_cols = character()) {
   if (length(copy_cols) == 0) {
     out <- shallow(x)
   } else {
+    x_names <- copy(x_names)
     out <- vector("list", length(x_names))
     setattr(out, "names", x_names)
     for (col in x_names) {

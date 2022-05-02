@@ -51,7 +51,7 @@ nest..tidytable <- function(.df, ..., .names_sep = NULL) {
 
     new_names <- paste(.key, nest_cols, sep = .names_sep)
 
-    .df <- df_set_names(.df, nest_cols, new_names)
+    .df <- df_set_names(.df, new_names, nest_cols)
 
     dots <- syms(new_names)
   }
