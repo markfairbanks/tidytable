@@ -22,7 +22,7 @@ Can be \code{NULL} or a variable:
 
 \item{name}{The name of the new column in the output.
 
-If omitted, it will default to \code{N}.}
+If omitted, it will default to \code{n}.}
 }
 \description{
 Returns row counts of the dataset. If bare column names are provided, \code{count.()} returns counts by group.

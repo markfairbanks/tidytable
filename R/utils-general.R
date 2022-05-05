@@ -45,7 +45,7 @@ df_set_names <- function(.df, new_names = NULL, old_names = NULL) {
 }
 
 # setcolorder without modify-by-reference
-df_col_order <- function(.df, new_order = names(x)) {
+df_col_order <- function(.df, new_order) {
   .df <- shallow(.df)
   setcolorder(.df, new_order)
   .df

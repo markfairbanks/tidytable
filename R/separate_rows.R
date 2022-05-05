@@ -39,10 +39,14 @@ separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert =
 
   cols <- tidyselect_syms(.df, !!!dots)
 
-  .df <- dt_j(.df, .separate_id := .I)
+  # If all cols are being selected, need to create a `.separate_id` column
+  needs_separate_id <- length(cols) == ncol(.df)
+  if (needs_separate_id) {
+    .df <- dt_j(.df, .separate_id := .I)
+  }
 
   col_names <- as.character(cols)
-  other_col_names <- setdiff(names(.df), col_names)
+  .other_col_names <- setdiff(names(.df), col_names)
 
   if (nchar(sep) == 1) {
     fixed_bool <- TRUE
@@ -59,19 +63,19 @@ separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert =
 
   j <- expr(c(!!!split_calls))
 
-  dt_expr <- call2_j(.df, j, .by = other_col_names)
+  out <- dt_j(.df, !!j, by = .other_col_names)
 
-  .df <- eval_tidy(dt_expr, env = dt_env)
-
-  .df <- dt_j(.df, .separate_id := NULL)
-
-  .df <- df_col_order(.df, col_order)
-
-  if (convert) {
-    .df <- mutate.(.df, across.(all_of(col_names), ~ type.convert(.x, as.is = TRUE)))
+  if (needs_separate_id) {
+    out <- dt_j(out, .separate_id := NULL)
   }
 
-  .df[]
+  out <- df_col_order(out, col_order)
+
+  if (convert) {
+    out <- mutate.(out, across.(all_of(col_names), ~ type.convert(.x, as.is = TRUE)))
+  }
+
+  out
 }
 
 #' @export
@@ -80,4 +84,4 @@ separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert 
   separate_rows.(.df, ..., sep = sep, convert = convert)
 }
 
-globalVariables(".id")
+globalVariables(".separate_id")
