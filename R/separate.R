@@ -62,11 +62,11 @@ separate..tidytable <- function(.df, col, into,
   keep <- seq_along(into)[not_na_into]
   into <- into[not_na_into]
 
-  t_str_split <- quo_squash(call2(
+  t_str_split <- call2(
     "tstrsplit", col, split = sep, fixed = fixed,
     keep = keep, type.convert = convert,
     .ns = "data.table"
-  ))
+  )
 
   .df <- dt_j(.df, (into) := !!t_str_split)
 
