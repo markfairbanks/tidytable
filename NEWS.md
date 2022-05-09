@@ -1,5 +1,8 @@
 # tidytable 0.7.3 (in development)
 
+#### Functionality improvements
+* `mutate_rowwise.()`: Gains `.keep`, `.before`, and `.after` args
+
 #### Breaking changes
 * `count.()`: Default name is now `n` instead of `N` to match dplyr semantics
 
