@@ -3,6 +3,9 @@
 #### Breaking changes
 * `count.()`: Default name is now `n` instead of `N` to match dplyr semantics
 
+#### Functions with notable speed improvements
+* `case.()`: Faster when conditions evaluate to `NA`
+
 # tidytable 0.7.2
 
 #### New functions
