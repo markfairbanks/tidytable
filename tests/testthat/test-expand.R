@@ -51,7 +51,7 @@ test_that("expand_grid works with splicing", {
   expect_equal(nrow(out), 4)
 })
 
-test_that("crossing work with data.frame inputs", {
+test_that("crossing works when only input is a data frame", {
   test_df <- tidytable(a = c("a", "a", "b"), b = c("a", "a", "b"))
   crossing_df <- crossing.(test_df)
   unique_df <- unique(test_df)
@@ -59,7 +59,7 @@ test_that("crossing work with data.frame inputs", {
   expect_equal(crossing_df, unique_df)
 })
 
-test_that("crossing works when only input is a data frame", {
+test_that("crossing works with data.frame inputs", {
   test_df <- tidytable(a = c("a", "b"), b = c("a", "b"))
   crossing_df <- crossing.(test_df, x = 1:2)
 
@@ -67,6 +67,16 @@ test_that("crossing works when only input is a data frame", {
   expect_equal(crossing_df$a, c("a", "a", "b", "b"))
   expect_equal(crossing_df$b, c("a", "a", "b", "b"))
   expect_equal(crossing_df$x, rep(1:2, 2))
+})
+
+test_that("expand_grid works with data.frame inputs", {
+  test_df <- tidytable(a = c("b", "a"), b = c("b", "a"))
+  expand_df <- expand_grid.(test_df, x = 1:2)
+
+  expect_named(expand_df, c("a", "b", "x"))
+  expect_equal(expand_df$a, c("b", "b", "a", "a"))
+  expect_equal(expand_df$b, c("b", "b", "a", "a"))
+  expect_equal(expand_df$x, rep(1:2, 2))
 })
 
 test_that("preserves ordered factors", {
