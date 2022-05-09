@@ -6,7 +6,6 @@
 #' @param ... Variables to get unique combinations of
 #' @param .name_repair Treatment of problematic names. See `?vctrs::vec_as_names` for options/details
 #'
-#' @md
 #' @export
 #'
 #' @examples
@@ -18,47 +17,9 @@
 #' crossing.(stuff = x, y)
 crossing. <- function(..., .name_repair = "check_unique") {
   dots <- dots_list(..., .named = TRUE)
+  dots <- map.(dots, sort_unique)
 
-  if (any(map_lgl.(dots, is.data.frame))) {
-    crossing_df(!!!dots, .name_repair = .name_repair)
-  } else {
-    crossing_vec(!!!dots, .name_repair = .name_repair)
-  }
-}
-
-crossing_vec <- function(..., .name_repair = "check_unique") {
-  dots <- list2(...)
-
-  result_df <- exec("CJ", !!!dots, unique = TRUE, sorted = TRUE)
-
-  setkey(result_df, NULL)
-
-  result_df <- df_name_repair(result_df, .name_repair = .name_repair)
-
-  as_tidytable(result_df)
-}
-
-crossing_df <- function(..., .name_repair = "check_unique") {
-  l <- list2(...)
-  l <- map.(l, sort_unique)
-  lgs <- map_int.(l, vec_size)
-
-  lg <- prod(lgs)
-
-  if (lg == 0) {
-    out <- map.(l, vec_slice, integer())
-  } else {
-    each <- lg / cumprod(lgs)
-    times <- lg / each / lgs
-    l_names <- names(l) %||% as.character(seq_along(l))
-
-    out <- pmap.(
-      list(x = l, each = each, times = times, x_name = l_names),
-      make_cj_tidytable
-    )
-  }
-
-  bind_cols.(out, .name_repair = .name_repair)
+  expand_grid.(!!!dots, .name_repair = .name_repair)
 }
 
 sort_unique <- function(x) {
@@ -71,13 +32,5 @@ sort_unique <- function(x) {
     setorderv(unique(as_tidytable(x)))[]
   } else {
     f_sort(vec_unique(x))
-  }
-}
-
-make_cj_tidytable <- function(x, each, times, x_name) {
-  if (is.data.frame(x)) {
-    x[vec_rep(vec_rep_each(1:.N, each), times = times)]
-  } else {
-    tidytable(!!x_name := vec_rep(vec_rep_each(x, each), times))
   }
 }
