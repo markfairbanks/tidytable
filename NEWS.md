@@ -1,6 +1,7 @@
 # tidytable 0.7.3 (in development)
 
 #### Functionality improvements
+* `expand_grid.()`: Works with data frame inputs
 * `mutate_rowwise.()`: Gains `.keep`, `.before`, and `.after` args
 
 #### Breaking changes
