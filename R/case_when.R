@@ -26,51 +26,21 @@ case_when. <- function(...) {
   # Extract default value
   default_bool <- map_lgl.(dots, ~ is_true(f_lhs(.x)))
 
-  if (all(default_bool == FALSE)) default_val <- TRUE ~ NA
-  else default_val <- dots[default_bool][[1]]
-
-  default_env <- caller_env()
-  default_val <- new_quosure(f_rhs(default_val), env = f_env(default_val) %||% default_env)
+  if (all(default_bool == FALSE)) {
+    default_val <- NA
+  } else {
+    default_val <- dots[default_bool][[1]]
+    default_val <- eval_tidy(f_rhs(default_val), env = caller_env())
+  }
 
   # Remove default value from queries
   dots <- dots[!default_bool]
 
-  dots_length <- length(dots)
+  conditions <- map.(dots, f_lhs)
+  values <- map.(dots, f_rhs)
 
-  conditions <- vector("list", dots_length)
-  values <- vector("list", dots_length)
+  pairs <- vec_interleave(conditions, values)
+  pairs <- map.(pairs, eval_tidy, env = caller_env())
 
-  quos_pairs <- map.(dots, validate_formula, default_env)
-
-  for (i in seq_len(dots_length)) {
-    pair <- quos_pairs[[i]]
-
-    conditions[[i]] <- pair$lhs
-    values[[i]] <- pair$rhs
-  }
-
-  case_call <- vector("list", dots_length * 2)
-
-  odd_index <- as.logical(seq_along(case_call) %% 2)
-  even_index <- !odd_index
-
-  case_call[odd_index] <- conditions
-  case_call[even_index] <- values
-
-  case.(!!!case_call, default = default_val)
-}
-
-validate_formula <- function(x, default_env) {
-
-  if (!is_formula(x)) {
-    abort("input must be a formula")
-  }
-  if (is_null(f_lhs(x))) {
-    abort("formulas must be two-sided")
-  }
-
-  list(
-    lhs = new_quosure(f_lhs(x), default_env),
-    rhs = new_quosure(f_rhs(x), default_env)
-  )
+  case.(!!!pairs, default = default_val)
 }
