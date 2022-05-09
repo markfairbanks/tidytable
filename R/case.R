@@ -22,29 +22,30 @@ case. <- function(..., default = NA) {
   dots <- list2(...)
   dots_length <- length(dots)
 
-  odd_index <- as.logical(seq_len(dots_length) %% 2)
-  even_index <- !odd_index
-
-  conditions <- dots[odd_index]
-  values <- dots[even_index]
-
-  if (length(conditions) == 0) abort("No conditions supplied")
-  if (length(values) == 0) abort("No values supplied")
-
-  if (length(conditions) != length(values)) {
+  if (dots_length %% 2 != 0) {
     abort("The length of conditions does not equal the length of values")
   }
 
-  calls <- default
+  conditions_locs <- as.logical(seq_len(dots_length) %% 2)
 
-  for (i in rev(seq_along(conditions))) {
-    calls <- call2(
-      "ifelse.",
-      call2('%|%', conditions[[i]], FALSE, .ns = "rlang"),
-      values[[i]],
-      calls
-    )
+  conditions <- dots[conditions_locs]
+  size <- vec_size_common(!!!conditions)
+  conditions <- vec_recycle_common(!!!conditions, .size = size)
+
+  values <- dots[!conditions_locs]
+  ptype <- vec_ptype_common(!!!values)
+  values <- vec_cast_common(!!!values, .to = ptype)
+
+  pairs <- vec_interleave(conditions, values)
+
+  if (length(default) == 1) {
+    out <- exec("fcase", !!!pairs, default = default)
+  } else {
+    .default_condition <- vec_recycle(TRUE, size)
+    .default_value <- vec_cast(default, ptype)
+
+    out <- exec("fcase", !!!pairs, .default_condition, .default_value)
   }
 
-  eval_tidy(calls)
+  out
 }
