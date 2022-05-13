@@ -2,10 +2,10 @@ start_df <- tidytable(
   a = 1:5,
   b = 11:15,
   c = c(rep("a", 3), rep("b", 2)),
-  d = c(rep("a", 2), rep("b", 3)))
+  d = c(rep("a", 2), rep("b", 3))
+)
 
 test_that("unnesting works with nested data.table", {
-
   nest_df <- start_df %>%
     nest_by.(c, d)
 
@@ -17,7 +17,6 @@ test_that("unnesting works with nested data.table", {
 })
 
 test_that("names_sep works", {
-
   nest_df <- start_df %>%
     nest_by.(c, d)
 
@@ -29,7 +28,6 @@ test_that("names_sep works", {
 })
 
 test_that("unnesting works with multiple columns", {
-
   nest_df <- start_df %>%
     nest_by.(c, d) %>%
     mutate.(pulled_vec = map.(data, ~ pull.(.x, a)))
@@ -43,7 +41,6 @@ test_that("unnesting works with multiple columns", {
 })
 
 test_that("automatically unnests all list_cols", {
-
   nest_df <- start_df %>%
     nest_by.(c, d) %>%
     mutate.(pulled_vec = map.(data, ~ pull.(.x, a)))
@@ -57,7 +54,6 @@ test_that("automatically unnests all list_cols", {
 })
 
 test_that("unnesting works with nested vector", {
-
   nest_df <- start_df %>%
     nest_by.(c, d) %>%
     mutate.(vec_col = map.(data, ~ .x %>% pull.(a)))
@@ -71,23 +67,9 @@ test_that("unnesting works with nested vector", {
 })
 
 test_that("unnesting works with nested data.frames", {
-
   nest_df <- start_df %>%
     nest_by.(c, d) %>%
     mutate.(data = map.(data, as.data.frame))
-
-  unnest_df <- nest_df %>%
-    unnest.(data)
-
-  expect_named(unnest_df, c("c","d","a","b"))
-  expect_equal(unnest_df$a, start_df$a)
-})
-
-test_that("unnesting works with nested matrices", {
-
-  nest_df <- start_df %>%
-    nest_by.(c, d) %>%
-    mutate.(data = map.(data, as.matrix))
 
   unnest_df <- nest_df %>%
     unnest.(data)
