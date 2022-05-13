@@ -7,6 +7,9 @@
 #### Breaking changes
 * `count.()`: Default name is now `n` instead of `N` to match dplyr semantics
 
+#### Bug fixes
+* `bind_cols.()`: Correctly handles lists (#446)
+
 #### Functions with notable speed improvements
 * `case.()`: Faster when conditions evaluate to `NA`
 
