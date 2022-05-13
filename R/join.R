@@ -36,10 +36,28 @@ left_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., kee
   on <- by$x
   names(on) <- by$y
 
-  selection <- join_selection(x, y, by, keep, suffix, "left")
+  if (keep) {
+    selection <- join_selection(x, y, by, keep, suffix, "left")
+    result_df <- dt(y, x, !!selection, on = on, allow.cartesian = TRUE)
+  } else {
+    y <- df_set_names(y, by$x, by$y)
 
-  dt_expr <- call2("[", quo(y), quo(x), selection, on = on, allow.cartesian = TRUE)
-  result_df <- eval_tidy(dt_expr)
+    x_names <- names(x)
+    y_names <- setdiff(names(y), by$x)
+
+    suffix_names <- intersect(setdiff(x_names, by$x), y_names)
+
+    if (length(suffix_names) > 0) {
+      x <- df_set_names(x, paste0(suffix_names, suffix[[1]]), suffix_names)
+      y <- df_set_names(y, paste0(suffix_names, suffix[[2]]), suffix_names)
+      x_names <- names(x)
+      y_names <- setdiff(names(y), by$x)
+    }
+
+    result_df <- y[x, on = by$x, allow.cartesian = TRUE]
+
+    result_df <- df_col_order(result_df, c(x_names, y_names))
+  }
 
   tidytable_restore(result_df, x)
 }
@@ -67,8 +85,7 @@ right_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., ke
   } else {
     selection <- join_selection(x, y, by, keep, suffix, "right")
 
-    dt_expr <- call2("[", quo(x), quo(y), selection, on = on, allow.cartesian = TRUE)
-    result_df <- eval_tidy(dt_expr)
+    result_df <- dt(x, y, !!selection, on = on, allow.cartesian = TRUE)
   }
 
   tidytable_restore(result_df, x)
@@ -97,8 +114,7 @@ inner_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., ke
   } else {
     selection <- join_selection(x, y, by, keep, suffix, "inner")
 
-    dt_expr <- call2("[", quo(x), quo(y), selection, on = on, allow.cartesian = TRUE, nomatch = 0)
-    result_df <- eval_tidy(dt_expr)
+    result_df <- dt(x, y, !!selection, on = on, allow.cartesian = TRUE, nomatch = 0)
   }
 
   tidytable_restore(result_df, x)
@@ -154,7 +170,7 @@ full_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., kee
 temp_names_fix <- function(names, by_x, y_suffix) {
   new_names <- str_replace.(names, "__temp__", "")
 
-  map_chr.(new_names, ~ if (.x %in% by_x) paste0(.x, y_suffix) else .x)
+  map_chr.(new_names, function(.x) if (.x %in% by_x) paste0(.x, y_suffix) else .x)
 }
 
 globalVariables(c("..by_x", "..by_y"))
