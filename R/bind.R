@@ -38,17 +38,15 @@ bind_cols. <- function(..., .name_repair = "unique") {
   dots <- list2(...)
   dots <- squash(dots)
 
-  not_tt <- !map_lgl.(dots, is_tidytable)
-
-  if (any(not_tt)) {
-    dots[not_tt] <- map.(dots[not_tt], as_tidytable)
-  }
+  out <- vec_cbind(!!!dots, .ptype = tidytable(), .name_repair = .name_repair)
 
   first <- dots[[1]]
 
-  out <- vec_cbind(!!!dots, .ptype = tidytable(), .name_repair = .name_repair)
+  if (is_tidytable(first)) {
+    out <- tidytable_restore(out, first)
+  }
 
-  tidytable_restore(out, first)
+  out
 }
 
 #' @export
@@ -57,16 +55,14 @@ bind_rows. <- function(..., .id = NULL) {
   dots <- list2(...)
   dots <- squash(dots)
 
-  not_tt <- !map_lgl.(dots, is_tidytable)
-
-  if (any(not_tt)) {
-    dots[not_tt] <- map.(dots[not_tt], as_tidytable)
-  }
+  out <- as_tidytable(rbindlist(dots, idcol = .id, use.names = TRUE, fill = TRUE))
 
   first <- dots[[1]]
 
-  out <- rbindlist(dots, idcol = .id, use.names = TRUE, fill = TRUE)
+  if (is_tidytable(first)) {
+    out <- tidytable_restore(out, first)
+  }
 
-  tidytable_restore(out, first)
+  out
 }
 
