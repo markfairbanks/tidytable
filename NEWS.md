@@ -12,6 +12,7 @@
 
 #### Functions with notable speed improvements
 * `case.()`: Faster when conditions evaluate to `NA`
+* `left_join.()`: Faster when `keep = FALSE`
 
 # tidytable 0.7.2
 
