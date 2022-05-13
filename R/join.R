@@ -31,32 +31,17 @@ left_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., kee
   if (!is_tidytable(x)) x <- as_tidytable(x)
   if (!is_tidytable(y)) y <- as_tidytable(y)
 
-  by <- get_bys(x, y, by)
-
-  on <- by$x
-  names(on) <- by$y
-
   if (keep) {
-    selection <- join_selection(x, y, by, keep, suffix, "left")
-    result_df <- dt(y, x, !!selection, on = on, allow.cartesian = TRUE)
+    .args <- join_prep(x, y, by, keep, suffix, "left")
+
+    result_df <- dt(.args$y, .args$x, !!.args$selection, on = .args$on, allow.cartesian = TRUE)
   } else {
-    y <- df_set_names(y, by$x, by$y)
+    .args <- join_prep(x, y, by, keep, suffix, "left")
 
-    x_names <- names(x)
-    y_names <- setdiff(names(y), by$x)
+    result_df <- .args$y[.args$x, on = .args$on, allow.cartesian = TRUE]
 
-    suffix_names <- intersect(setdiff(x_names, by$x), y_names)
-
-    if (length(suffix_names) > 0) {
-      x <- df_set_names(x, paste0(suffix_names, suffix[[1]]), suffix_names)
-      y <- df_set_names(y, paste0(suffix_names, suffix[[2]]), suffix_names)
-      x_names <- names(x)
-      y_names <- setdiff(names(y), by$x)
-    }
-
-    result_df <- y[x, on = by$x, allow.cartesian = TRUE]
-
-    result_df <- df_col_order(result_df, c(x_names, y_names))
+    result_df <- df_set_names(result_df, .args$by_x, .args$by_y)
+    result_df <- df_col_order(result_df, c(.args$x_names, .args$y_names))
   }
 
   tidytable_restore(result_df, x)
@@ -74,18 +59,14 @@ right_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., ke
   if (!is_tidytable(x)) x <- as_tidytable(x)
   if (!is_tidytable(y)) y <- as_tidytable(y)
 
-  by <- get_bys(x, y, by)
-
-  on <- by$y
-  names(on) <- by$x
-
   if (!keep) {
-    result_df <- x[y, on = on, allow.cartesian = TRUE]
-    names(result_df) <- suffix_join_names(names(x), names(y), suffix, keep, by, "right")
-  } else {
-    selection <- join_selection(x, y, by, keep, suffix, "right")
+    .args <- join_prep(x, y, by, keep, suffix, "right")
 
-    result_df <- dt(x, y, !!selection, on = on, allow.cartesian = TRUE)
+    result_df <- .args$x[.args$y, on = .args$on, allow.cartesian = TRUE]
+  } else {
+    .args <- join_prep(x, y, by, keep, suffix, "right")
+
+    result_df <- dt(.args$x, .args$y, !!.args$selection, on = .args$on, allow.cartesian = TRUE)
   }
 
   tidytable_restore(result_df, x)
@@ -103,18 +84,16 @@ inner_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., ke
   if (!is_tidytable(x)) x <- as_tidytable(x)
   if (!is_tidytable(y)) y <- as_tidytable(y)
 
-  by <- get_bys(x, y, by)
-
-  on <- by$y
-  names(on) <- by$x
-
   if (!keep) {
-    result_df <- x[y, on = on, allow.cartesian = TRUE, nomatch = 0]
-    names(result_df) <- suffix_join_names(names(x), names(y), suffix, keep, by, "inner")
-  } else {
-    selection <- join_selection(x, y, by, keep, suffix, "inner")
+    .args <- join_prep(x, y, by, keep, suffix, "inner")
 
-    result_df <- dt(x, y, !!selection, on = on, allow.cartesian = TRUE, nomatch = 0)
+    result_df <- .args$x[.args$y, on = .args$on, allow.cartesian = TRUE, nomatch = 0]
+  } else {
+    .args <- join_prep(x, y, by, keep, suffix, "inner")
+
+    result_df <- dt(.args$x, .args$y, !!.args$selection,
+                    on = .args$on, allow.cartesian = TRUE,
+                    nomatch = 0)
   }
 
   tidytable_restore(result_df, x)
@@ -141,7 +120,6 @@ full_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., kee
       col_order <- suffix_join_names(names(x), names(y), suffix, keep, get_bys(x, y, by), "full")
 
       result_df <- df_col_order(result_df, col_order)
-      setkey(result_df, NULL)
     } else {
       bys <- get_bys(x, y, by)
       by_x <- bys$x
@@ -241,6 +219,73 @@ get_bys <- function(x, y, by = NULL) {
   list(x = by_x, y = by_y)
 }
 
+join_prep <- function(x, y, by, keep, suffix, type) {
+  x_names <- names(x)
+  y_names <- names(y)
+
+  by <- get_bys(x, y, by)
+  by_x <- by$x
+  by_y <- by$y
+
+  if (!keep) {
+    y_names <- setdiff(y_names, by_y)
+    suffix_names <- intersect(setdiff(x_names, by_x), y_names)
+  } else {
+    suffix_names <- intersect(x_names, y_names)
+  }
+
+  if (length(suffix_names) > 0) {
+    x <- df_set_names(x, paste0(suffix_names, suffix[[1]]), suffix_names)
+    y <- df_set_names(y, paste0(suffix_names, suffix[[2]]), suffix_names)
+
+    x_names <- names(x)
+    y_names <- names(y)
+
+    by_x_suffix <- by_x %in% suffix_names
+    by_y_suffix <- by_y %in% suffix_names
+
+    if (by_x_suffix || by_y_suffix) {
+      by_x[by_x_suffix] <- paste0(by_x[by_x_suffix], suffix[[1]])
+      by_y[by_y_suffix] <- paste0(by_y[by_y_suffix], suffix[[2]])
+    }
+
+    if (!keep) {
+      y_names <- setdiff(y_names, by_y)
+    }
+  }
+
+  if (type == "left") {
+    on <- by_x
+    names(on) <- by_y
+  } else {
+    on <- by_y
+    names(on) <- by_x
+  }
+
+  if (keep) {
+    if (type == "left") {
+      x_prefix <- "i."
+      y_prefix <- "x."
+    } else if (type %in% c("inner", "right")) {
+      x_prefix <- "x."
+      y_prefix <- "i."
+    } else {
+      abort("Unsupported join type")
+    }
+    selection <- c(paste0(x_prefix, x_names), paste0(y_prefix, y_names))
+    names(selection) <- c(x_names, y_names)
+    selection <- call2(".", !!!syms(selection))
+  } else {
+    selection <- NULL
+  }
+
+  list(x = x, y = y,
+       x_names = x_names, y_names = y_names,
+       by_x = by_x, by_y = by_y,
+       on = on,
+       selection = selection)
+}
+
 join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
   if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
   if (!is_tidytable(x)) x <- as_tidytable(x)
@@ -256,46 +301,6 @@ join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
   setkey(result_df, NULL)
 
   result_df
-}
-
-join_selection <- function(x, y, by, keep, suffix, type = "left") {
-  x_names <- names(x)
-  y_names <- names(y)
-
-  if (!keep) {
-    if (type == "left") {
-      y_names <- setdiff(y_names, c(by$x, by$y))
-    } else if (type %in% c("inner", "right")) {
-      x_names <- setdiff(x_names, c(by$x, by$y))
-    }
-  }
-
-  result_names <- suffix_join_names(x_names, y_names, suffix, keep, by, type)
-
-  if (type == "left") {
-    x_prefix <- "i."
-    y_prefix <- "x."
-  } else if (type %in% c("inner", "right")) {
-    x_prefix <- "x."
-    y_prefix <- "i."
-  } else {
-    abort("Unsupported join type")
-  }
-
-  if (length(x_names) > 0) {
-    x_names <- paste0(x_prefix, x_names)
-  }
-
-  if (length(y_names) > 0) {
-    y_names <- paste0(y_prefix, y_names)
-  }
-
-  selection <- c(x_names, y_names)
-
-  selection <- syms(selection)
-  names(selection) <- result_names
-
-  call2(".", !!!selection)
 }
 
 suffix_join_names <- function(x_names, y_names, suffix, keep, by = NULL, type) {
