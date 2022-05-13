@@ -7,6 +7,7 @@ test_that("bind_rows.() works with data.tables", {
   bind_df <- df1 %>%
     bind_rows.(df2)
 
+  expect_true(is_tidytable(bind_df))
   expect_named(bind_df, c("x","y"))
   expect_equal(bind_df$x, c(1,2,3,1,2,3))
   expect_equal(bind_df$y, c(3,4,5,3,4,5))
@@ -96,6 +97,7 @@ test_that("bind_cols.() works with data.frames", {
   bind_df <- df1 %>%
     bind_cols.(df2)
 
+  expect_true(is_tidytable(bind_df))
   expect_named(bind_df, c("x","y","a","b"))
   expect_equal(bind_df$x, c(1,2,3))
   expect_equal(bind_df$y, c(3,4,5))
@@ -118,7 +120,7 @@ test_that("bind_cols.() works with a list", {
   expect_equal(bind_df$b, c(3,4,5))
 })
 
-test_that("bind_cols.() works with list splicing", {
+test_that("bind_cols - works with list splicing", {
   df1 <- data.table(x = c(1,2,3), y = c(3,4,5))
   df2 <- data.table(a = c(1,2,3), b = c(3,4,5))
 
@@ -133,7 +135,7 @@ test_that("bind_cols.() works with list splicing", {
   expect_equal(bind_df$b, c(3,4,5))
 })
 
-test_that("duplicate names are fixed", {
+test_that("bind_cols - duplicate names are fixed", {
   df1 <- data.table(x = c(1,2,3), y = c(3,4,5))
   df2 <- data.table(x = c(1,2,3), y = c(3,4,5))
 
@@ -146,4 +148,11 @@ test_that("duplicate names are fixed", {
   expect_equal(bind_df$y...2, c(3,4,5))
   expect_equal(bind_df$x...3, c(1,2,3))
   expect_equal(bind_df$y...4, c(3,4,5))
+})
+
+test_that("bind_cols - correctly handles list inputs, (#446)", {
+  df <- tidytable(a = 1:3, b = 1:3)
+  out <- map_dfc.(df, identity)
+  expect_true(is_tidytable(out))
+  expect_equal(out, df)
 })
