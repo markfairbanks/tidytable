@@ -34,9 +34,6 @@ semi_join.(x, y, by = NULL)
 
 \item{keep}{Should the join keys from both \code{x} and \code{y} be preserved in the output?}
 }
-\value{
-A data.table
-}
 \description{
 Join two data.tables together
 }

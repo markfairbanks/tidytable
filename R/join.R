@@ -9,7 +9,6 @@
 #' @param ... Other parameters passed on to methods
 #' @param keep Should the join keys from both `x` and `y` be preserved in the output?
 #'
-#' @return A data.table
 #' @export
 #'
 #' @examples
@@ -27,25 +26,26 @@ left_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALS
 
 #' @export
 left_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-  if (!is_tidytable(x)) x <- as_tidytable(x)
-  if (!is_tidytable(y)) y <- as_tidytable(y)
+  c(x, y, x_names, y_names, by_x, by_y, on, selection) %<-%
+    join_prep(x, y, by, keep, suffix, "left")
 
   if (keep) {
-    .args <- join_prep(x, y, by, keep, suffix, "left")
-
-    result_df <- dt(.args$y, .args$x, !!.args$selection, on = .args$on, allow.cartesian = TRUE)
+    result_df <- dt(y, x, !!selection, on = on, allow.cartesian = TRUE)
   } else {
-    .args <- join_prep(x, y, by, keep, suffix, "left")
+    result_df <- y[x, on = on, allow.cartesian = TRUE]
 
-    result_df <- .args$y[.args$x, on = .args$on, allow.cartesian = TRUE]
-
-    result_df <- df_set_names(result_df, .args$by_x, .args$by_y)
-    result_df <- df_col_order(result_df, c(.args$x_names, .args$y_names))
+    result_df <- df_set_names(result_df, by_x, by_y)
+    result_df <- df_col_order(result_df, c(x_names, y_names))
   }
 
   tidytable_restore(result_df, x)
 }
+
+# list(x = x, y = y,
+#      x_names = x_names, y_names = y_names,
+#      by_x = by_x, by_y = by_y,
+#      on = on,
+#      selection = selection)
 
 #' @export
 #' @rdname left_join.
@@ -55,18 +55,13 @@ right_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FAL
 
 #' @export
 right_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-  if (!is_tidytable(x)) x <- as_tidytable(x)
-  if (!is_tidytable(y)) y <- as_tidytable(y)
+  c(x, y, x_names, y_names, by_x, by_y, on, selection) %<-%
+    join_prep(x, y, by, keep, suffix, "right")
 
-  if (!keep) {
-    .args <- join_prep(x, y, by, keep, suffix, "right")
-
-    result_df <- .args$x[.args$y, on = .args$on, allow.cartesian = TRUE]
+  if (keep) {
+    result_df <- dt(x, y, !!selection, on = on, allow.cartesian = TRUE)
   } else {
-    .args <- join_prep(x, y, by, keep, suffix, "right")
-
-    result_df <- dt(.args$x, .args$y, !!.args$selection, on = .args$on, allow.cartesian = TRUE)
+    result_df <- x[y, on = on, allow.cartesian = TRUE]
   }
 
   tidytable_restore(result_df, x)
@@ -80,20 +75,15 @@ inner_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FAL
 
 #' @export
 inner_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-  if (!is_tidytable(x)) x <- as_tidytable(x)
-  if (!is_tidytable(y)) y <- as_tidytable(y)
+  c(x, y, x_names, y_names, by_x, by_y, on, selection) %<-%
+    join_prep(x, y, by, keep, suffix, "inner")
 
-  if (!keep) {
-    .args <- join_prep(x, y, by, keep, suffix, "inner")
-
-    result_df <- .args$x[.args$y, on = .args$on, allow.cartesian = TRUE, nomatch = 0]
-  } else {
-    .args <- join_prep(x, y, by, keep, suffix, "inner")
-
-    result_df <- dt(.args$x, .args$y, !!.args$selection,
-                    on = .args$on, allow.cartesian = TRUE,
+  if (keep) {
+    result_df <- dt(x, y, !!selection,
+                    on = on, allow.cartesian = TRUE,
                     nomatch = 0)
+  } else {
+    result_df <- x[y, on = on, allow.cartesian = TRUE, nomatch = 0]
   }
 
   tidytable_restore(result_df, x)
@@ -161,14 +151,8 @@ anti_join. <- function(x, y, by = NULL) {
 
 #' @export
 anti_join..default <- function(x, y, by = NULL) {
-  if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-  if (!is_tidytable(x)) x <- as_tidytable(x)
-  if (!is_tidytable(y)) y <- as_tidytable(y)
-
-  by <- get_bys(x, y, by)
-
-  on <- by$y
-  names(on) <- by$x
+  c(x, y, x_names, y_names, by_x, by_y, on, selection) %<-%
+    join_prep(x, y, by, keep = FALSE, suffix = NULL, "anti")
 
   result_df <- x[!y, on = on, allow.cartesian = TRUE]
 
@@ -183,14 +167,8 @@ semi_join. <- function(x, y, by = NULL) {
 
 #' @export
 semi_join..default <- function(x, y, by = NULL) {
-  if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-  if (!is_tidytable(x)) x <- as_tidytable(x)
-  if (!is_tidytable(y)) y <- as_tidytable(y)
-
-  by <- get_bys(x, y, by)
-
-  on <- by$y
-  names(on) <- by$x
+  c(x, y, x_names, y_names, by_x, by_y, on, selection) %<-%
+    join_prep(x, y, by, keep = FALSE, suffix = NULL, "semi")
 
   result_df <- fsetdiff(x, x[!y, on = on], all=TRUE)
 
@@ -220,6 +198,12 @@ get_bys <- function(x, y, by = NULL) {
 }
 
 join_prep <- function(x, y, by, keep, suffix, type) {
+  if (!is.data.frame(x) | !is.data.frame(y)) {
+    abort("x & y must be a data.frame or data.table")
+  }
+  if (!is_tidytable(x)) x <- as_tidytable(x)
+  if (!is_tidytable(y)) y <- as_tidytable(y)
+
   x_names <- names(x)
   y_names <- names(y)
 
@@ -266,11 +250,9 @@ join_prep <- function(x, y, by, keep, suffix, type) {
     if (type == "left") {
       x_prefix <- "i."
       y_prefix <- "x."
-    } else if (type %in% c("inner", "right")) {
+    } else {
       x_prefix <- "x."
       y_prefix <- "i."
-    } else {
-      abort("Unsupported join type")
     }
     selection <- c(paste0(x_prefix, x_names), paste0(y_prefix, y_names))
     names(selection) <- c(x_names, y_names)
@@ -279,11 +261,7 @@ join_prep <- function(x, y, by, keep, suffix, type) {
     selection <- NULL
   }
 
-  list(x = x, y = y,
-       x_names = x_names, y_names = y_names,
-       by_x = by_x, by_y = by_y,
-       on = on,
-       selection = selection)
+  list(x, y, x_names, y_names, by_x, by_y, on, selection)
 }
 
 join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
