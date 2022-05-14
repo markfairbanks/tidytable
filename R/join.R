@@ -226,9 +226,9 @@ join_prep <- function(x, y, by, keep, suffix, type) {
     y_names <- names(y)
 
     by_x_suffix <- by_x %in% suffix_names
-    by_y_suffix <- by_y %in% suffix_names
 
-    if (by_x_suffix || by_y_suffix) {
+    if (any(by_x_suffix)) {
+      by_y_suffix <- by_y %in% suffix_names
       by_x[by_x_suffix] <- paste0(by_x[by_x_suffix], suffix[[1]])
       by_y[by_y_suffix] <- paste0(by_y[by_y_suffix], suffix[[2]])
     }

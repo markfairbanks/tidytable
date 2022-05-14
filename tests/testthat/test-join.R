@@ -182,6 +182,19 @@ test_that("joins matches NAs by default", {
   expect_equal(full_out, full_check)
 })
 
+test_that("multiple join keys are suffixed", {
+  df1 <- tidytable(a = c("a", "a", "b", "c"),
+                   b = c("a", "a", "b", "c"),
+                   c = 1:4)
+  df2 <- data.table(a = c("a", "b"),
+                    b = c("a", "b"),
+                    d = 5:6)
+
+  out <- df1 %>% left_join.(df2, keep = TRUE)
+
+  expect_named(out, c("a.x", "b.x", "c", "a.y", "b.y", "d"))
+})
+
 
 
 # Some dplyr tests ----------------------------------------------------------------
