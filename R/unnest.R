@@ -65,12 +65,6 @@ unnest..tidytable <- function(.df,
     dots <- tidyselect_syms(.df, ...)
   }
 
-  if (.drop) {
-    keep_cols <- data_names[!list_bool]
-  } else {
-    keep_cols <- data_names[data_names %notin% as.character(dots)]
-  }
-
   if (keep_empty) {
     dots_chr <- as.character(dots)
     .df <- mutate.(.df, across.(all_of(dots_chr), keep_empty_prep))
@@ -84,13 +78,19 @@ unnest..tidytable <- function(.df,
     abort("unnested data contains different row counts")
   }
 
-  # Get number of repeats for keep cols
-  rep_vec <- list_sizes(pull.(.df, !!dots[[1]]))
+  if (.drop) {
+    keep_cols <- data_names[!list_bool]
+  } else {
+    keep_cols <- data_names[data_names %notin% as.character(dots)]
+  }
 
   if (length(keep_cols) > 0) {
+    # Get number of repeats for keep cols
+    rep_vec <- list_sizes(pull.(.df, !!dots[[1]]))
+
     keep_df <- .df[, ..keep_cols]
 
-    keep_df <- keep_df[vec_rep_each(1:.N, rep_vec)]
+    keep_df <- vec_rep_each(keep_df, rep_vec)
 
     result_df <- bind_cols.(keep_df, unnest_data, .name_repair = names_repair)
   } else {
