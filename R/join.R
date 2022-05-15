@@ -41,12 +41,6 @@ left_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., kee
   tidytable_restore(result_df, x)
 }
 
-# list(x = x, y = y,
-#      x_names = x_names, y_names = y_names,
-#      by_x = by_x, by_y = by_y,
-#      on = on,
-#      selection = selection)
-
 #' @export
 #' @rdname left_join.
 right_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
@@ -189,10 +183,10 @@ get_bys <- function(x, y, by = NULL) {
     }
   }
 
-  if (any(by_x[by_x != ""] %notin% names_x)) stop("by.x columns not in x")
-  if (any(by_y[by_y != ""] %notin% names_y)) stop("by.y columns not in y")
-
   by_x[by_x == ""] <- by_y[by_x == ""]
+
+  if (any(by_x %notin% names_x)) abort("by.x columns not in x")
+  if (any(by_y %notin% names_y)) abort("by.y columns not in y")
 
   list(x = by_x, y = by_y)
 }
