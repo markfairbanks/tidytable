@@ -88,7 +88,7 @@ unnest..tidytable <- function(.df,
     # Get number of repeats for keep cols
     rep_vec <- list_sizes(pull.(.df, !!dots[[1]]))
 
-    keep_df <- .df[, ..keep_cols]
+    keep_df <- select.(.df, any_of(keep_cols))
 
     keep_df <- vec_rep_each(keep_df, rep_vec)
 
@@ -155,5 +155,3 @@ keep_empty_prep <- function(.l) {
 
   replace_na.(.l, .replace)
 }
-
-globalVariables("..keep_cols")
