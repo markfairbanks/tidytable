@@ -64,7 +64,10 @@ get_dummies..tidytable <- function(.df,
   for (col in cols) {
     col_name <- as.character(col)
 
-    unique_vals <- as.character(vec_unique(.df[[col_name]]))
+    unique_vals <- vec_unique(.df[[col_name]])
+    if (is.factor(unique_vals)) {
+      unique_vals <- as.character(unique_vals)
+    }
 
     if (drop_first) {
       unique_vals <- unique_vals[-1]
@@ -83,7 +86,7 @@ get_dummies..tidytable <- function(.df,
       not_na_cols <- paste(col_name, unique_vals, sep = prefix_sep)
       na_col <- paste(col_name, "NA", sep = prefix_sep)
     } else {
-      not_na_cols <- unique_vals
+      not_na_cols <- as.character(unique_vals)
       na_col <- "NA"
     }
 
