@@ -52,24 +52,24 @@ unite..tidytable <- function(.df, col = ".united", ..., sep = "_", remove = TRUE
   }
 
   if (is_true(na.rm)) {
-    cols <- unname(map.(.df[, ..unite_cols], as.character))
+    cols <- unname(map.(select.(.df, any_of(unite_cols)), as.character))
     rows <- transpose(cols)
 
     .united <- map_chr.(rows, ~ paste0(.x[!is.na(.x)], collapse = sep))
 
-    .df <- mutate.(.df, !!col := .env$.united)
+    out <- mutate.(.df, !!col := .env$.united)
   } else {
-    .df <- mutate.(.df, !!col := paste(!!!syms(unite_cols), sep = sep))
+    out <- mutate.(.df, !!col := paste(!!!syms(unite_cols), sep = sep))
   }
 
-  .df <- relocate.(.df, !!col, .before = min(locs))
+  out <- relocate.(out, !!col, .before = min(locs))
 
   if (is_true(remove)) {
     drop_cols <- setdiff(unite_cols, col)
-    .df <- .df[, -..drop_cols]
+    out <- select.(out, -any_of(drop_cols))
   }
 
-  .df
+  out
 }
 
 #' @export
@@ -77,5 +77,3 @@ unite..data.frame <- function(.df, col = ".united", ..., sep = "_", remove = TRU
   .df <- as_tidytable(.df)
   unite.(.df, {{ col }}, ..., sep = sep, remove = remove, na.rm = na.rm)
 }
-
-globalVariables(c("..drop_cols", "..unite_cols"))

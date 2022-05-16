@@ -109,9 +109,11 @@ full_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., kee
       by_x <- bys$x
       by_y <- bys$y
 
-      unique_keys_df <- x[, ..by_x] %>%
+      unique_keys_df <- select.(x, any_of(by_x)) %>%
         set_names(by_y) %>%
-        bind_rows.(y[, ..by_y]) %>%
+        bind_rows.(
+          select.(y, any_of(by_y))
+        ) %>%
         distinct.()
 
       step_df <- right_join.(y, unique_keys_df, keep = TRUE, suffix = c("__temp__", ""))
@@ -290,5 +292,5 @@ suffix_join_names <- function(x_names, y_names, suffix, keep, by = NULL, type) {
 }
 
 globalVariables(
-  c("x_names", "y_names", "by_x", "by_y", "on", "selection", "..by_x", "..by_y")
+  c("x_names", "y_names", "by_x", "by_y", "on", "selection")
 )

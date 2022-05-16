@@ -48,3 +48,12 @@ test_that("can rename columns & doesn't modify by reference", {
   expect_named(df, c("x", "y", "z"))
   expect_named(new_df, c("new", "y", "stuff"))
 })
+
+test_that("doesn't modify by reference", {
+  df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
+  new_df <- df %>%
+    select.(x, y)
+
+  expect_named(df, c("x", "y", "z"))
+  expect_named(new_df, c("x", "y"))
+})

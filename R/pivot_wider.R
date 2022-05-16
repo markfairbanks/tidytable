@@ -102,7 +102,7 @@ pivot_wider..tidytable <- function(.df,
   } else if (!is.null(names_glue)) {
     .df <- mutate.(.df, .names_from = glue(.env$names_glue))
     .df <- relocate.(.df, .names_from, .before = !!sym(names_from[[1]]))
-    .df <- .df[, -..names_from]
+    .df <- dt_j(.df, (names_from) := NULL)
 
     names_from <- ".names_from"
   }

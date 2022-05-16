@@ -131,10 +131,8 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
     }
 
     if (any_null) {
-      j <- call2(":=", !!!null_dots)
-      dt_expr <- call2_j(.df, j)
-
-      .df <- eval_tidy(dt_expr, .df, dt_env)
+      drop_cols <- names(null_dots)
+      .df <- dt_j(.df, (drop_cols) := NULL)
     }
   }
 
@@ -145,8 +143,8 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
 
   .keep <- arg_match(.keep)
   if (.keep != "all") {
-    keep <- get_keep_vars(.df, dots, .by, .keep)
-    .df <- .df[, ..keep]
+    cols_keep <- get_keep_vars(.df, dots, .by, .keep)
+    .df <- select.(.df, any_of(cols_keep))
   }
 
   .df[]
@@ -204,5 +202,3 @@ extract_used <- function(x) {
     unique(unlist(lapply(x[-1], extract_used)))
   }
 }
-
-globalVariables("..keep")

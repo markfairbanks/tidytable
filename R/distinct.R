@@ -37,24 +37,27 @@ distinct..tidytable <- function(.df, ..., .keep_all = FALSE) {
   across_check(dots)
 
   if (length(dots) == 0) {
-    .df <- unique(.df)
+    out <- unique(.df)
   } else {
     cols <- tidyselect_locs(.df, ...)
 
-    .df <- unique(.df, by = cols)
+    out <- unique(.df, by = cols)
 
-    if (!.keep_all) .df <- .df[, ..cols]
+    if (!.keep_all) {
+      cols_keep <- unname(cols)
+      out <- select.(out, any_of(cols_keep))
+    }
 
     named_bool <- have_name(dots)
 
     if (any(named_bool)) {
       named_dots <- dots[named_bool]
 
-      .df <- rename.(.df, !!!named_dots)
+      out <- rename.(out, !!!named_dots)
     }
   }
 
-  .df
+  out
 }
 
 #' @export
@@ -77,5 +80,3 @@ across_check <- function(dots) {
     )
   }
 }
-
-globalVariables("..cols")
