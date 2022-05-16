@@ -135,8 +135,6 @@ temp_names_fix <- function(names, by_x, y_suffix) {
   map_chr.(new_names, function(.x) if (.x %f_in% by_x) paste0(.x, y_suffix) else .x)
 }
 
-globalVariables(c("..by_x", "..by_y"))
-
 #' @export
 #' @rdname left_join.
 anti_join. <- function(x, y, by = NULL) {
@@ -290,3 +288,7 @@ suffix_join_names <- function(x_names, y_names, suffix, keep, by = NULL, type) {
   }
   df_names
 }
+
+globalVariables(
+  c("x_names", "y_names", "by_x", "by_y", "on", "selection", "..by_x", "..by_y")
+)
