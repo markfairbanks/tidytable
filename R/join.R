@@ -132,7 +132,7 @@ full_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., kee
 temp_names_fix <- function(names, by_x, y_suffix) {
   new_names <- str_replace.(names, "__temp__", "")
 
-  map_chr.(new_names, function(.x) if (.x %in% by_x) paste0(.x, y_suffix) else .x)
+  map_chr.(new_names, function(.x) if (.x %f_in% by_x) paste0(.x, y_suffix) else .x)
 }
 
 globalVariables(c("..by_x", "..by_y"))
@@ -219,10 +219,10 @@ join_prep <- function(x, y, by, keep, suffix, type) {
     x_names <- names(x)
     y_names <- names(y)
 
-    by_x_suffix <- by_x %in% suffix_names
+    by_x_suffix <- by_x %f_in% suffix_names
 
     if (any(by_x_suffix)) {
-      by_y_suffix <- by_y %in% suffix_names
+      by_y_suffix <- by_y %f_in% suffix_names
       by_x[by_x_suffix] <- paste0(by_x[by_x_suffix], suffix[[1]])
       by_y[by_y_suffix] <- paste0(by_y[by_y_suffix], suffix[[2]])
     }

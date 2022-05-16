@@ -167,7 +167,7 @@ mutate..data.frame <- function(.df, ..., .by = NULL,
 # Fixes case when user supplies a single value ex. 1, -1, "a"
 # !is_null(val) allows for columns to be deleted using mutate.(.df, col = NULL)
 mutate_prep <- function(data, dot, dot_name) {
-  if (dot_name %in% names(data) && !is_null(dot)) {
+  if (dot_name %f_in% names(data) && !is_null(dot)) {
     dot <- call2("vec_recycle", dot, expr(.N), .ns = "vctrs")
   }
   dot
@@ -182,7 +182,7 @@ get_keep_vars <- function(df, dots, .by, .keep = "all") {
   df_names <- names(df)
   dots_names <- names(dots)
   used <- unlist(map.(dots, extract_used)) %||% character()
-  used <- used[used %in% df_names]
+  used <- used[used %f_in% df_names]
 
   if (.keep == "used") {
     keep <- c(.by, used, dots_names)
@@ -194,7 +194,7 @@ get_keep_vars <- function(df, dots, .by, .keep = "all") {
   }
 
   keep <- unique(keep)
-  df_names[df_names %in% keep] # Preserve column order
+  df_names[df_names %f_in% keep] # Preserve column order
 }
 
 extract_used <- function(x) {
