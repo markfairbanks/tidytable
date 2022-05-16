@@ -13,10 +13,14 @@
 #'
 #' df %>%
 #'   filter.(x %notin% c(2, 4))
-'%notin%' <- function(x, y){
-  if (is.character(x) && is.character(y)) {
-    !x %chin% y
+'%notin%' <- function(x, y) {
+  !x %f_in% y
+}
+
+'%f_in%' <- function(x, y) {
+  if (is.character(x)) {
+    x %chin% y
   } else {
-    !vec_in(x, y)
+    vec_in(x, y)
   }
 }

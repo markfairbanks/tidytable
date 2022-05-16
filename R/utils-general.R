@@ -39,7 +39,7 @@ df_set_names <- function(.df, new_names = NULL, old_names = NULL) {
   if (is.null(old_names)) {
     names(.df) <- new_names
   } else {
-    names(.df)[names(.df) %chin% old_names] <- new_names
+    names(.df)[names(.df) %f_in% old_names] <- new_names
   }
   .df
 }
