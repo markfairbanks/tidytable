@@ -4,7 +4,6 @@
 #' @import vctrs
 #' @rawNamespace import(rlang, except = `:=`)
 #' @importFrom glue glue glue_data
-#' @importFrom lifecycle deprecate_warn deprecate_stop
 #' @importFrom pillar glimpse dim_desc tbl_sum
 #' @importFrom stats na.omit
 #' @importFrom utils head tail type.convert

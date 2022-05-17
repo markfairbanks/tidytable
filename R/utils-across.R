@@ -87,6 +87,10 @@ get_across_cols <- function(data, call_cols, .by = NULL, .env = caller_env()) {
 }
 
 replace_cur_column <- function(x, x_name) {
+  if (is_quosure(x)) {
+    x <- quo_get_expr(x)
+  }
+
   if (is_symbol(x) || is_atomic(x) || is_null(x)) {
     x
   } else if (is_call(x, c("cur_column", "cur_column."))) {
