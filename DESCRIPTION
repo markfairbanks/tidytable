@@ -40,4 +40,5 @@ Suggests:
     testthat (>= 2.1.0),
     bit64,
     knitr,
-    rmarkdown
+    rmarkdown,
+    crayon
