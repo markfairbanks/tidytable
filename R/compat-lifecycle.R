@@ -108,7 +108,7 @@ warn_deprecated <- function(msg, id = msg) {
 }
 .rlang_lifecycle_deprecation_env <- new.env(parent = emptyenv())
 
-stop_deprecated <- function(msg) {
+stop_defunct <- function(msg) {
   msg <- .rlang_lifecycle_validate_message(msg)
   err <- rlang::cnd(
     c("defunctError", "error", "condition"),
