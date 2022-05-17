@@ -26,7 +26,7 @@ left_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALS
 
 #' @export
 left_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  c(x, y, x_names, y_names, by_x, by_y, on, selection) %<-%
+  c(x, y, x_names, y_names, by, on, selection) %<-%
     join_prep(x, y, by, keep, suffix, "left")
 
   if (keep) {
@@ -34,7 +34,7 @@ left_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., kee
   } else {
     result_df <- y[x, on = on, allow.cartesian = TRUE]
 
-    result_df <- df_set_names(result_df, by_x, by_y)
+    result_df <- df_set_names(result_df, by$x, by$y)
     result_df <- df_col_order(result_df, c(x_names, y_names))
   }
 
@@ -49,7 +49,7 @@ right_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FAL
 
 #' @export
 right_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  c(x, y, x_names, y_names, by_x, by_y, on, selection) %<-%
+  c(x, y, x_names, y_names, by, on, selection) %<-%
     join_prep(x, y, by, keep, suffix, "right")
 
   if (keep) {
@@ -69,7 +69,7 @@ inner_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FAL
 
 #' @export
 inner_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  c(x, y, x_names, y_names, by_x, by_y, on, selection) %<-%
+  c(x, y, x_names, y_names, by, on, selection) %<-%
     join_prep(x, y, by, keep, suffix, "inner")
 
   if (keep) {
@@ -145,7 +145,7 @@ anti_join. <- function(x, y, by = NULL) {
 
 #' @export
 anti_join..default <- function(x, y, by = NULL) {
-  c(x, y, x_names, y_names, by_x, by_y, on, selection) %<-%
+  c(x, y, x_names, y_names, by, on, selection) %<-%
     join_prep(x, y, by, keep = FALSE, suffix = NULL, "anti")
 
   result_df <- x[!y, on = on, allow.cartesian = TRUE]
@@ -161,7 +161,7 @@ semi_join. <- function(x, y, by = NULL) {
 
 #' @export
 semi_join..default <- function(x, y, by = NULL) {
-  c(x, y, x_names, y_names, by_x, by_y, on, selection) %<-%
+  c(x, y, x_names, y_names, by, on, selection) %<-%
     join_prep(x, y, by, keep = FALSE, suffix = NULL, "semi")
 
   result_df <- fsetdiff(x, x[!y, on = on], all=TRUE)
@@ -202,12 +202,10 @@ join_prep <- function(x, y, by, keep, suffix, type) {
   y_names <- names(y)
 
   by <- get_bys(x, y, by)
-  by_x <- by$x
-  by_y <- by$y
 
   if (!keep) {
-    y_names <- setdiff(y_names, by_y)
-    suffix_names <- intersect(setdiff(x_names, by_x), y_names)
+    y_names <- setdiff(y_names, by$y)
+    suffix_names <- intersect(setdiff(x_names, by$x), y_names)
   } else {
     suffix_names <- intersect(x_names, y_names)
   }
@@ -219,25 +217,24 @@ join_prep <- function(x, y, by, keep, suffix, type) {
     x_names <- names(x)
     y_names <- names(y)
 
-    by_x_suffix <- by_x %f_in% suffix_names
-
+    by_x_suffix <- by$x %f_in% suffix_names
     if (any(by_x_suffix)) {
-      by_y_suffix <- by_y %f_in% suffix_names
-      by_x[by_x_suffix] <- paste0(by_x[by_x_suffix], suffix[[1]])
-      by_y[by_y_suffix] <- paste0(by_y[by_y_suffix], suffix[[2]])
+      by_y_suffix <- by$y %f_in% suffix_names
+      by$x[by_x_suffix] <- paste0(by$x[by_x_suffix], suffix[[1]])
+      by$y[by_y_suffix] <- paste0(by$y[by_y_suffix], suffix[[2]])
     }
 
     if (!keep) {
-      y_names <- setdiff(y_names, by_y)
+      y_names <- setdiff(y_names, by$y)
     }
   }
 
   if (type == "left") {
-    on <- by_x
-    names(on) <- by_y
+    on <- by$x
+    names(on) <- by$y
   } else {
-    on <- by_y
-    names(on) <- by_x
+    on <- by$y
+    names(on) <- by$x
   }
 
   if (keep) {
@@ -255,7 +252,7 @@ join_prep <- function(x, y, by, keep, suffix, type) {
     selection <- NULL
   }
 
-  list(x, y, x_names, y_names, by_x, by_y, on, selection)
+  list(x, y, x_names, y_names, by, on, selection)
 }
 
 join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
@@ -292,5 +289,5 @@ suffix_join_names <- function(x_names, y_names, suffix, keep, by = NULL, type) {
 }
 
 globalVariables(
-  c("x_names", "y_names", "by_x", "by_y", "on", "selection")
+  c("x_names", "y_names", "on", "selection")
 )
