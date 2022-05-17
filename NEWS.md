@@ -16,6 +16,9 @@
 * `select.()`
 * `uncount.()`
 
+#### Other notes
+* `tidytable` no longer directly depends on `lifecycle`
+
 # tidytable 0.7.2
 
 #### New functions
