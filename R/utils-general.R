@@ -116,10 +116,10 @@ tidytable_restore <- function(x, to) {
 }
 
 deprecate_old_across <- function(fn) {
-  .what <- glue("tidytable::{fn}_across.()")
-  .details <- glue("Please use `{fn}.(across.())`")
+  msg <- glue("`{fn}_across.()` was deprecated in tidytable 0.6.4.
+              Please use `{fn}.(across.())`")
 
-  deprecate_warn("0.6.4", what = .what, details = .details, id = fn)
+  warn_deprecated(msg = msg, id = fn)
 }
 
 # Does type changes with either ptype or transform logic
