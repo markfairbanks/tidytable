@@ -57,3 +57,14 @@ test_that("doesn't modify by reference", {
   expect_named(df, c("x", "y", "z"))
   expect_named(new_df, c("x", "y"))
 })
+
+test_that("can select all cols and can reorder", {
+  df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
+  new_df <- df %>%
+    select.(y, new_z = z, x)
+
+  expect_named(new_df, c("y", "new_z", "x"))
+  expect_equal(new_df$y, rep(2, 3))
+  expect_equal(new_df$new_z, c("a", "a", "b"))
+  expect_equal(new_df$x, rep(1, 3))
+})
