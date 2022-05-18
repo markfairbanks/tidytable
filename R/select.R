@@ -41,10 +41,20 @@ select. <- function(.df, ...) {
 
 #' @export
 select..tidytable <- function(.df, ...) {
-  cols <- tidyselect_locs(.df, ...)
-  drop_cols <- setdiff(seq_along(.df), cols)
-  out <- fast_copy(.df)[, (drop_cols) := NULL]
-  df_set_names(out, names(cols))
+  locs <- tidyselect_locs(.df, ...)
+
+  drop_locs <- setdiff(seq_along(.df), locs)
+  if (length(drop_locs) == 0) {
+    out <- fast_copy(.df)
+  } else {
+    out <- dt_j(.df, (drop_locs) := NULL)
+  }
+
+  col_order <- names(.df)[locs]
+
+  out <- df_col_order(out, col_order)
+
+  df_set_names(out, names(locs))
 }
 
 #' @export
