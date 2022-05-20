@@ -68,3 +68,18 @@ test_that("can select all cols and can reorder", {
   expect_equal(new_df$new_z, c("a", "a", "b"))
   expect_equal(new_df$x, rep(1, 3))
 })
+
+test_that("correctly handles duplicate selection, #468", {
+  df <- tidytable(x = 1, y = 2, z = 3)
+
+  dupe1 <- df %>%
+    select.(x, y, new_x = x, z)
+
+  expect_named(dupe1, c("new_x", "y", "z"))
+
+  dupe2 <- df %>%
+    select.(x = x, y = y, new_x = x, z)
+
+  expect_named(dupe2, c("x", "y", "new_x", "z"))
+  expect_equal(dupe2$new_x, 1)
+})
