@@ -44,10 +44,9 @@ select..tidytable <- function(.df, ...) {
   locs <- tidyselect_locs(.df, ...)
 
   loc_dupes <- vec_duplicate_detect(locs)
-  name_dupes <- vec_duplicate_detect(names(locs))
 
-  if (any(loc_dupes != name_dupes)) {
-    # Issue 468
+  if (any(loc_dupes)) {
+    # Issue #468
     out <- dt_j(.df, ..locs)
   } else {
     drop_locs <- setdiff(seq_along(.df), locs)
