@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' tidytable(x = 1:3, y = c("a", "a", "b"))
-tidytable <- function(..., .name_repair = c("check_unique", "unique", "universal", "minimal")) {
+tidytable <- function(..., .name_repair = "unique") {
   if (missing(...)) {
     dots <- list()
   } else {
