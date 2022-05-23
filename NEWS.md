@@ -11,6 +11,7 @@
 * `bind_cols.()`: Correctly handles lists (#446)
 
 #### Functions with notable speed improvements
+* `arrange.()`
 * `case.()`: Faster when conditions evaluate to `NA`
 * `left_join.()`: Faster when `keep = FALSE`
 * `select.()`
