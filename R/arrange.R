@@ -36,11 +36,13 @@ arrange..tidytable <- function(.df, ...) {
 
   dots <- prep_exprs(dots, .df, dt_env = dt_env)
 
-  i <- expr(order(!!!dots))
+  out <- copy(.df)
 
-  dt_expr <- call2_i(.df, i)
+  dt_expr <- call2("setorder", quo(out), !!!dots, .ns = "data.table")
 
   eval_tidy(dt_expr)
+
+  out
 }
 
 #' @export
