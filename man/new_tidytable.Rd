@@ -4,13 +4,11 @@
 \alias{new_tidytable}
 \title{Create a tidytable from a list}
 \usage{
-new_tidytable(x = list(), n = NULL)
+new_tidytable(x = list())
 }
 \arguments{
 \item{x}{A named list of equal-length vectors. The lengths are not checked; it is the responsibility
 of the caller to make sure they are equal.}
-
-\item{n}{Number of rows. If \code{NULL}, will be computed from the length of the first element of \code{x}.}
 }
 \description{
 Create a tidytable from a list
