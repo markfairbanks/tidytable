@@ -40,7 +40,7 @@ arrange..tidytable <- function(.df, ...) {
 
   dt_expr <- call2("setorder", quo(out), !!!dots, .ns = "data.table")
 
-  eval_tidy(dt_expr)
+  out <- eval_tidy(dt_expr)
 
   out
 }
