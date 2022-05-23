@@ -3,6 +3,7 @@
 #### Functionality improvements
 * `expand_grid.()`: Works with data frame inputs
 * `mutate_rowwise.()`: Gains `.keep`, `.before`, and `.after` args
+* `tidytable()`: Auto-unpacks unnamed data frame inputs
 
 #### Breaking changes
 * `count.()`: Default name is now `n` instead of `N` to match dplyr semantics

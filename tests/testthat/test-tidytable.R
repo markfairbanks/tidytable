@@ -31,3 +31,11 @@ test_that("can splice quosures", {
 
   expect_equal(df, tidytable(x = 1, y = 2))
 })
+
+test_that("works with data frame inputs, #471", {
+  df <- tidytable(x = 1, y = 2)
+  expect_equal(tidytable(df), tidytable(x = 1, y = 2))
+
+  # Errors on named data frame inputs
+  expect_error(tidytable(df = df))
+})
