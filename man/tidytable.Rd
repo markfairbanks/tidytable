@@ -4,10 +4,7 @@
 \alias{tidytable}
 \title{Build a data.table/tidytable}
 \usage{
-tidytable(
-  ...,
-  .name_repair = c("check_unique", "unique", "universal", "minimal")
-)
+tidytable(..., .name_repair = "unique")
 }
 \arguments{
 \item{...}{A set of name-value pairs}
