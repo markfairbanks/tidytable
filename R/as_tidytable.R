@@ -63,14 +63,8 @@ as_tidytable.data.frame <- function(x, ...,
 #' @export
 as_tidytable.list <- function(x, ...,
                               .name_repair = "unique") {
-  x <- x[!map_lgl.(x, is.null)]
-  x <- vec_recycle_common(!!!x)
-  if (is.null(names(x))) {
-    names(x) <- vec_rep("", length(x))
-  }
-  x <- new_tidytable(x)
-
-  df_name_repair(x, .name_repair = .name_repair)
+  x <- df_list(!!!x, .name_repair = .name_repair)
+  new_tidytable(x)
 }
 
 #' @export
