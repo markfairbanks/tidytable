@@ -10,16 +10,14 @@
 #'
 #' @examples
 #' tidytable(x = 1:3, y = c("a", "a", "b"))
-tidytable <- function(..., .name_repair = "unique") {
+tidytable <- function(..., .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   if (missing(...)) {
-    df <- new_tidytable()
+    dots <- list()
   } else {
     dots <- dots_list(..., .named = TRUE)
     dots <- map.(dots, eval_tidy)
     dots <- df_list(!!!dots, .name_repair = .name_repair)
-
-    df <- new_tidytable(dots)
   }
 
-  df
+  new_tidytable(dots)
 }
