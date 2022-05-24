@@ -1,5 +1,8 @@
 # tidytable 0.7.3 (in development)
 
+#### New functions
+* `na_if.()`
+
 #### Functionality improvements
 * `expand_grid.()`: Works with data frame inputs
 * `mutate_rowwise.()`: Gains `.keep`, `.before`, and `.after` args
@@ -14,7 +17,7 @@
 #### Functions with notable speed improvements
 * `arrange.()`
 * `case.()`: Faster when conditions evaluate to `NA`
-* `left_join.()`: Faster when `keep = FALSE`
+* `left_join.()`: Faster when `keep = FALSE` (the default)
 * `select.()`
 * `uncount.()`
 
