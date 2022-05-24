@@ -38,6 +38,7 @@ reference:
   - mutate_rowwise.
   - n.
   - n_distinct.
+  - na_if.
   - nest_by.
   - pull.
   - relocate.
