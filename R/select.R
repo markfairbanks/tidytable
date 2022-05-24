@@ -43,9 +43,9 @@ select. <- function(.df, ...) {
 select..tidytable <- function(.df, ...) {
   locs <- tidyselect_locs(.df, ...)
 
-  loc_dupes <- vec_duplicate_detect(locs)
+  dupes <- vec_duplicate_detect(locs)
 
-  if (any(loc_dupes)) {
+  if (any(dupes)) {
     # Issue #468
     out <- dt_j(.df, ..locs)
   } else {
@@ -69,3 +69,5 @@ select..data.frame <- function(.df, ...) {
   .df <- as_tidytable(.df)
   select.(.df, ...)
 }
+
+globalVariables("..locs")
