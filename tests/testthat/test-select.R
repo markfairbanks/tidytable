@@ -83,3 +83,13 @@ test_that("correctly handles duplicate selection, #468", {
   expect_named(dupe2, c("x", "y", "new_x", "z"))
   expect_equal(dupe2$new_x, 1)
 })
+
+test_that("preserves attributes", {
+  df <- data.table(x = 1, y = 2, z = 3)
+
+  attr(df, "test_attr") <- "test"
+
+  res <- select.(df, x, y)
+
+  expect_equal(attr(res, "test_attr"), "test")
+})

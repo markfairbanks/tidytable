@@ -43,25 +43,11 @@ select. <- function(.df, ...) {
 select..tidytable <- function(.df, ...) {
   locs <- tidyselect_locs(.df, ...)
 
-  dupes <- vec_duplicate_detect(locs)
+  out <- new_data_frame(.df)[locs]
 
-  if (any(dupes)) {
-    # Issue #468
-    out <- dt_j(.df, ..locs)
-  } else {
-    drop_locs <- setdiff(seq_along(.df), locs)
-    if (length(drop_locs) == 0) {
-      out <- fast_copy(.df)
-    } else {
-      out <- dt_j(.df, (drop_locs) := NULL)
-    }
+  out <- df_set_names(out, names(locs))
 
-    col_order <- names(.df)[locs]
-
-    out <- df_col_order(out, col_order)
-  }
-
-  df_set_names(out, names(locs))
+  tidytable_restore(out, .df)
 }
 
 #' @export
@@ -69,5 +55,3 @@ select..data.frame <- function(.df, ...) {
   .df <- as_tidytable(.df)
   select.(.df, ...)
 }
-
-globalVariables("..locs")
