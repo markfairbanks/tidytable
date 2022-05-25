@@ -27,6 +27,5 @@ test_that("doesn't modify-by-reference", {
 
 test_that("empty selection returns original df", {
   df <- data.table(x = 1, y = 2)
-  relocate.(df)
-  expect_named(df, c("x", "y"))
+  expect_named(relocate.(df), c("x", "y"))
 })
