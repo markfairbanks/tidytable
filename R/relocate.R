@@ -46,26 +46,27 @@ relocate..tidytable <- function(.df, ..., .before = NULL, .after = NULL) {
     .before <- quo(1)
   }
 
-  data_names <- names(.df)
-  all_cols <- seq_along(data_names)
-  selected_cols <- tidyselect_locs(.df, ...)
+  all_locs <- seq_along(.df)
+  relocate_locs <- tidyselect_locs(.df, ...)
+
+  if (length(relocate_locs) == 0) {
+    return(.df)
+  }
 
   if (!before_is_null) {
     before <- tidyselect_locs(.df, !!.before)
 
-    start_cols <- all_cols[all_cols < before]
+    start_locs <- all_locs[all_locs < before]
   } else {
     after <- tidyselect_locs(.df, !!.after)
 
-    start_cols <- all_cols[all_cols <= after]
+    start_locs <- all_locs[all_locs <= after]
   }
 
-  start_cols <- start_cols[start_cols %notin% selected_cols]
-  final_order <- vec_unique(c(start_cols, selected_cols, all_cols))
+  start_locs <- setdiff(start_locs, relocate_locs)
+  final_order <- vec_unique(c(start_locs, relocate_locs, all_locs))
 
-  .df <- df_col_order(.df, final_order)
-
-  .df
+  df_col_order(.df, final_order)
 }
 
 #' @export
