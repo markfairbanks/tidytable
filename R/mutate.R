@@ -88,7 +88,9 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
       .df <- eval_tidy(dt_expr, .df, dt_env)
     }
   } else {
-    if (length(dots) > 1) {
+    one_dot <- length(dots) == 1
+
+    if (!one_dot) {
       across_bool <- map_lgl.(dots[-1], quo_is_call, "across.")
 
       if (any(across_bool)) {
@@ -118,14 +120,23 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
       dots <- exprs_auto_name(dots)
       dots_names <- names(dots)
 
-      .df <- fast_copy(.df, dots_names)
+      .df <- fast_copy(.df, vec_unique(dots_names))
 
-      assign <- map2.(syms(dots_names), dots, ~ call2("=", .x, .y))
-      dots_names <- unique(dots_names)
-      output <- call2("list", !!!syms(dots_names))
-      expr <- call2("{", !!!assign, output)
-      j <- call2(":=", call2("c", !!!dots_names), expr)
-      dt_expr <- call2_j(.df, j, .by)
+      needs_sequential <- sequential_check(dots)
+
+      if (one_dot || !needs_sequential) {
+        j <- expr(':='(!!!dots))
+
+        dt_expr <- call2_j(.df, j, .by)
+      } else {
+        assign <- map2.(syms(dots_names), dots, ~ call2("=", .x, .y))
+        dots_names <- unique(dots_names)
+        output <- call2("list", !!!syms(dots_names))
+        expr <- call2("{", !!!assign, output)
+        j <- call2(":=", call2("c", !!!dots_names), expr)
+
+        dt_expr <- call2_j(.df, j, .by)
+      }
 
       .df <- eval_tidy(dt_expr, .df, dt_env)
     }
@@ -169,6 +180,14 @@ mutate_prep <- function(data, dot, dot_name) {
     dot <- call2("vec_recycle", dot, expr(.N), .ns = "vctrs")
   }
   dot
+}
+
+sequential_check <- function(dots) {
+  dots_names <- names(dots)
+
+  used_vars <- unique(unlist(map.(dots[-1], extract_used)))
+
+  any(dots_names %f_in% used_vars) || any(vec_duplicate_detect(dots_names))
 }
 
 get_keep_vars <- function(df, dots, .by, .keep = "all") {
