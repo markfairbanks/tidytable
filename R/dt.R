@@ -55,16 +55,14 @@ dt.tidytable <- function(.df, ...) {
         if (is.null(mut_exprs[[2]])) {
           # .df[, col := NULL]
           col_name <- character()
-        } else if (is_call(col_name, "(")) {
-          # .df[, (new_col) := x * 2]
-          col_name <- eval_tidy(col_name[[-1]], env = dt_env)
         } else if (is.symbol(col_name)) {
           # .df[, x := x * 2]
           col_name <- as.character(col_name)
         } else {
           # .df[, "double_x" := x * 2]
+          # .df[, (new_col) := x * 2] # Note: needs dt_env
           # .df[, c("x", "y") := lapply(.SD, \(x) x + 1), .SDcols = c("x", "y")]
-          col_name <- eval_tidy(col_name)
+          col_name <- eval_tidy(col_name, env = dt_env)
         }
         .df <- fast_copy(.df, col_name)
       } else {
