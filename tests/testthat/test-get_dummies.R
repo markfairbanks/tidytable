@@ -67,18 +67,19 @@ test_that("works with NAs", {
 
 test_that("no prefix works, even with numeric", {
   dummy_df <- df1 %>%
-    mutate.(col2 = c(1, 1, 1, 2, 2, 2)) %>%
+    mutate.(col2 = c(1, 1, 1, 2, NA, 2)) %>%
     get_dummies.(cols = c(col1, col2), prefix = FALSE)
 
   expect_named(dummy_df, c("col1", "col2", "var1",
                            "a", "b", "c",
-                           "1", "2"))
+                           "1", "2", "NA"))
 
   expect_equal(dummy_df$a, c(1, 0, 0, 1, 0, 0))
   expect_equal(dummy_df$b, c(0, 1, 0, 0, 1, 0))
   expect_equal(dummy_df$c, c(0, 0, 1, 0, 0, 1))
   expect_equal(dummy_df$`1`, c(1, 1, 1, 0, 0, 0))
-  expect_equal(dummy_df$`2`, c(0, 0, 0, 1, 1, 1))
+  expect_equal(dummy_df$`2`, c(0, 0, 0, 1, 0, 1))
+  expect_equal(dummy_df$`NA`, c(0, 0, 0, 0, 1, 0))
 })
 
 test_that("prefix_sep works", {
