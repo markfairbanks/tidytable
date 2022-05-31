@@ -98,7 +98,7 @@ f_sort <- function(x) {
       fsort(x)
     )
   } else {
-    vec_sort(x)
+    vec_sort(x, na_value = "smallest")
   }
 }
 
