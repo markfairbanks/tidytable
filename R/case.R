@@ -39,12 +39,12 @@ case. <- function(..., default = NA) {
   pairs <- vec_interleave(conditions, values)
 
   if (length(default) == 1) {
-    out <- exec("fcase", !!!pairs, default = default)
+    out <- exec(fcase, !!!pairs, default = default)
   } else {
     .default_condition <- vec_recycle(TRUE, size)
     .default_value <- vec_cast(default, ptype)
 
-    out <- exec("fcase", !!!pairs, .default_condition, .default_value)
+    out <- exec(fcase, !!!pairs, .default_condition, .default_value)
   }
 
   out

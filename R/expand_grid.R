@@ -29,7 +29,7 @@ expand_grid. <- function(..., .name_repair = "check_unique") {
 expand_grid_vec <- function(..., .name_repair = "check_unique") {
   dots <- list2(...)
 
-  result_df <- exec("CJ", !!!dots, unique = FALSE, sorted = FALSE)
+  result_df <- exec(CJ, !!!dots, unique = FALSE, sorted = FALSE)
 
   setkey(result_df, NULL)
 
