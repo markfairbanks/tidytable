@@ -17,6 +17,7 @@
 #### Functions with notable speed improvements
 * `arrange.()`
 * `case.()`: Faster when conditions evaluate to `NA`
+* `group_split.()`
 * `left_join.()`: Faster when `keep = FALSE` (the default)
 * `select.()`
 * `uncount.()`
