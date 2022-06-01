@@ -140,3 +140,8 @@ change_types <- function(.df, .to, .list, .ptypes_transform) {
   }
   .df
 }
+
+# For internal testing
+sample. <- function(x, size, replace = TRUE) {
+  sample(x, size, replace)
+}
