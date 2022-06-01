@@ -202,12 +202,9 @@ pivot_longer..tidytable <- function(.df,
   out <- change_types(out, values_to, values_transform, "transform")
 
   # data.table::melt() drops NAs using "&" logic, not "|"
-  # Example in tidytable #186 shows why this is necessary
+  # See issue #186
   if (values_drop_na && multiple_names_to) {
-    filter_calls <- map.(syms(values_to), ~ call2("!", call2("is.na", .x)))
-    filter_expr <- call_reduce(filter_calls, "|")
-
-    out <- filter.(out, !!filter_expr)
+    out <- filter.(out, if_any.(any_of(values_to), ~ !is.na(.x)))
   }
 
   as_tidytable(out)
