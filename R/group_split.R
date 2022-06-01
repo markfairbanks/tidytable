@@ -32,26 +32,22 @@ group_split. <- function(.df, ..., .keep = TRUE, .named = FALSE) {
 
 #' @export
 group_split..tidytable <- function(.df, ..., .keep = TRUE, .named = FALSE) {
-  vec_assert(.keep, logical(), 1)
-  vec_assert(.named, logical(), 1)
+  by <- select.(.df, ...)
 
-  dots <- enquos(...)
-
-  if (length(dots) == 0) {
-    list(.df)
-  } else {
-    by <- tidyselect_names(.df, !!!dots)
-
-    dots <- split(.df, by = by, keep.by = .keep)
-
-    if (.named) {
-      names(dots) <- str_replace_all.(names(dots), ".", "_", fixed = TRUE)
-    } else {
-      dots <- unname(dots)
-    }
-
-    map.(dots, tidytable_restore, .df)
+  if (is_false(.keep)) {
+    .df <- select.(.df, -all_of(names(by)))
   }
+
+  split <- vec_split(.df, by)
+
+  out <- split$val
+
+  if (is_true(.named)) {
+    names <- exec(paste, !!!split$key, sep = "_")
+    names(out) <- names
+  }
+
+  out
 }
 
 #' @export
