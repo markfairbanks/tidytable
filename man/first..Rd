@@ -6,16 +6,18 @@
 \alias{nth.}
 \title{Extract the first, last, or nth value from a vector}
 \usage{
-first.(x, default = NA)
+first.(x, default = NA, na_rm = FALSE)
 
-last.(x, default = NA)
+last.(x, default = NA, na_rm = FALSE)
 
-nth.(x, n, default = NA)
+nth.(x, n, default = NA, na_rm = FALSE)
 }
 \arguments{
 \item{x}{A vector}
 
 \item{default}{The default value if the value doesn't exist.}
+
+\item{na_rm}{If \code{TRUE} ignores missing values.}
 
 \item{n}{For \code{nth.()}, a number specifying the position to grab.}
 }

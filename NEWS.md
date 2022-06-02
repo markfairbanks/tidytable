@@ -5,6 +5,7 @@
 
 #### Functionality improvements
 * `expand_grid.()`: Works with data frame inputs
+* `first.()`/`last.()`/`nth.()`: Gain `na_rm` arg
 * `mutate_rowwise.()`: Gains `.keep`, `.before`, and `.after` args
 * `tidytable()`: Auto-unpacks unnamed data frame inputs
 

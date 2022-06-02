@@ -15,11 +15,10 @@ downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=blue)](h
 
 #### Why `tidytable`?
 
--   `tidyverse`-like syntax built on top of the fast `data.table`
-    package
+-   `tidyverse`-like syntax
+-   Fast functions built using two high performance packages:
+    `data.table` and the `tidyverse`’s `vctrs`
 -   Compatibility with the tidy evaluation framework
--   Includes functions that `dtplyr` is missing, including many `tidyr`
-    functions
 
 ## Installation
 
