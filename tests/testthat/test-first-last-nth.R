@@ -3,8 +3,13 @@ test_that("work on vectors", {
   expect_equal(last.(letters), "z")
   expect_equal(nth.(letters, 3), "c")
   expect_equal(nth.(letters, -1), "z")
+
+  # Returns default when out of bounds
   expect_equal(nth.(letters, 27), NA_character_)
-  expect_equal(nth.(letters, 0), NA_character_)
+  expect_equal(nth.(letters, 0, "test"), "test")
+
+  # na_rm works
+  expect_equal(first.(c(NA, 1), na_rm = TRUE), 1)
 })
 
 test_that("work on data frames", {
