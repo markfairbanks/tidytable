@@ -27,5 +27,5 @@ coalesce. <- function(...) {
   values <- list2(...)
   values <- vec_cast_common(!!!values)
 
-  do.call("fcoalesce", values)
+  do.call(fcoalesce, values)
 }
