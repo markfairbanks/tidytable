@@ -103,3 +103,11 @@ test_that("can use .data", {
 
   expect_equal(df$x, c(3,4,7,9))
 })
+
+test_that("can use a mutate expression", {
+  df <- data.table(x = 1:3, y = 1:3, z = 3:1)
+  res <- df %>%
+    arrange.(x - y, z)
+
+  expect_equal(res$x, 3:1)
+})

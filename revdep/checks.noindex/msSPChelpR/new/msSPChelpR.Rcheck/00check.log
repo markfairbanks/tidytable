@@ -1,4 +1,4 @@
-* using log directory ‘/Users/mfairbanks/Desktop/NU/R/R_Packages/tidytable/revdep/checks.noindex/msSPChelpR/new/msSPChelpR.Rcheck’
+* using log directory ‘/Users/fairbmx/Desktop/NU/R/R_Packages/tidytable/revdep/checks.noindex/msSPChelpR/new/msSPChelpR.Rcheck’
 * using R version 4.2.0 (2022-04-22)
 * using platform: x86_64-apple-darwin17.0 (64-bit)
 * using session charset: UTF-8
@@ -30,7 +30,6 @@
 * checking whether the package can be unloaded cleanly ... OK
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
-* checking loading without being on the library search path ... OK
 * checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK

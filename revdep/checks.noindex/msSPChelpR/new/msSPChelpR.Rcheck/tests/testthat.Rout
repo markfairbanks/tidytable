@@ -48,4 +48,4 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 > 
 > proc.time()
    user  system elapsed 
-  3.904   0.429   4.931 
+  3.454   0.445   4.240 

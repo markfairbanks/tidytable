@@ -36,13 +36,21 @@ arrange..tidytable <- function(.df, ...) {
 
   dots <- prep_exprs(dots, .df, dt_env = dt_env)
 
-  out <- copy(.df)
+  is_expr <- map_lgl.(dots, ~ !is_symbol(.x) || !is_call(.x, "-", 1))
 
-  dt_expr <- call2("setorder", quo(out), !!!dots, .ns = "data.table")
+  if (any(is_expr)) {
+    i <- expr(order(!!!dots))
 
-  out <- eval_tidy(dt_expr)
+    dt_expr <- call2_i(.df, i)
+  } else {
+    .df <- copy(.df)
 
-  out
+    dt_expr <- call2("setorder", quo(.df), !!!dots, .ns = "data.table")
+
+    dt_expr <- call2("[", dt_expr)
+  }
+
+  eval_tidy(dt_expr)
 }
 
 #' @export
