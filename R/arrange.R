@@ -36,7 +36,7 @@ arrange..tidytable <- function(.df, ...) {
 
   dots <- prep_exprs(dots, .df, dt_env = dt_env)
 
-  is_expr <- map_lgl.(dots, ~ !is_symbol(.x) || !is_call(.x, "-", 1))
+  is_expr <- map_lgl.(dots, ~ !is_symbol(.x) && !is_call(.x, "-", 1))
 
   if (any(is_expr)) {
     i <- expr(order(!!!dots))
