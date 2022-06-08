@@ -1,3 +1,31 @@
+# tidytable 0.8.0
+
+#### New functions
+* `na_if.()`
+
+#### Functionality improvements
+* `expand_grid.()`: Works with data frame inputs
+* `first.()`/`last.()`/`nth.()`: Gain `na_rm` arg
+* `mutate_rowwise.()`: Gains `.keep`, `.before`, and `.after` args
+* `tidytable()`: Auto-unpacks unnamed data frame inputs
+
+#### Breaking changes
+* `count.()`: Default name is now `n` instead of `N` to match dplyr semantics
+
+#### Bug fixes
+* `bind_cols.()`: Correctly handles lists (#446)
+
+#### Functions with notable speed improvements
+* `arrange.()`
+* `case.()`: Faster when conditions evaluate to `NA`
+* `group_split.()`
+* `left_join.()`: Faster when `keep = FALSE` (the default)
+* `select.()`
+* `uncount.()`
+
+#### Other notes
+* `tidytable` no longer directly depends on `lifecycle`
+
 # tidytable 0.7.2
 
 #### New functions
@@ -39,10 +67,6 @@ regardless of order provided.
 
 #### New functions
 * `new_tidytable()`
-
-#### Breaking changes
-* `unite.()`: If `col` isn't provided, the new column is
-auto-named `.united` to reduce the chance of naming conflicts
 
 # tidytable 0.6.7
 

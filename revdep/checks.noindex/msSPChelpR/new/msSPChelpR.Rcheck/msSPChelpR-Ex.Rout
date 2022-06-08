@@ -745,8 +745,11 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 +                        use_lifedatmin = FALSE, 
 +                        check = TRUE, 
 +                        as_labelled_factor = FALSE)
+Warning: As of tidytable v0.8.0 the default name for `count.()` is `n` to match
+         dplyr semantics. Set the `name` arg to avoid this warning message.
+This warning is displayed once per session.
 # A tidytable: 11 × 3
-   p_alive.1 p_status     N
+   p_alive.1 p_status     n
    <chr>        <dbl> <int>
  1 Alive            1 15884
  2 Alive            2 17609
@@ -760,7 +763,7 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 10 Dead            97     2
 11 Dead            98   182
 # A tidytable: 7 × 2
-  p_status     N
+  p_status     n
      <dbl> <int>
 1       NA     5
 2        1 18428
@@ -43675,7 +43678,7 @@ detaching ‘package:dplyr’
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  22.493 4.047 28.784 0.003 0.005 
+Time elapsed:  17.303 3.499 21.832 0.002 0.007 
 > grDevices::dev.off()
 null device 
           1 

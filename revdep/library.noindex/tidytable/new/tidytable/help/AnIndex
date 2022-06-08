@@ -86,6 +86,7 @@ mutate.	mutate.
 mutate_across.	mutate_across.
 mutate_rowwise.	mutate_rowwise.
 n.	n.
+na_if.	na_if.
 nest.	nest.
 nesting.	expand.
 nest_by.	nest_by.

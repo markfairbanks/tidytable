@@ -50,6 +50,7 @@ mutate_across.          Mutate multiple columns simultaneously
 mutate_rowwise.         Add/modify columns by row
 n.                      Number of observations in each group
 n_distinct.             Count the number of unique values in a vector
+na_if.                  Convert values to NA
 nest.                   Nest data.tables
 nest_by.                Nest data.tables
 new_tidytable           Create a tidytable from a list
