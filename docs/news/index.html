@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
       </span>
     </div>
 
@@ -58,7 +58,53 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.7.2" id="tidytable-072">tidytable 0.7.2<a class="anchor" aria-label="anchor" href="#tidytable-072"></a></h2>
+<h2 class="page-header" data-toc-text="0.8.0" id="tidytable-080">tidytable 0.8.0<a class="anchor" aria-label="anchor" href="#tidytable-080"></a></h2>
+<div class="section level5">
+<h5 id="new-functions-0-8-0">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-8-0"></a></h5>
+<ul><li><code><a href="../reference/na_if..Rd.html">na_if.()</a></code></li>
+</ul></div>
+<div class="section level5">
+<h5 id="functionality-improvements-0-8-0">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-8-0"></a></h5>
+<ul><li>
+<code><a href="../reference/expand_grid..Rd.html">expand_grid.()</a></code>: Works with data frame inputs</li>
+<li>
+<code><a href="../reference/first..Rd.html">first.()</a></code>/<code><a href="../reference/first..Rd.html">last.()</a></code>/<code><a href="../reference/first..Rd.html">nth.()</a></code>: Gain <code>na_rm</code> arg</li>
+<li>
+<code><a href="../reference/mutate_rowwise..Rd.html">mutate_rowwise.()</a></code>: Gains <code>.keep</code>, <code>.before</code>, and <code>.after</code> args</li>
+<li>
+<code><a href="../reference/tidytable.html">tidytable()</a></code>: Auto-unpacks unnamed data frame inputs</li>
+</ul></div>
+<div class="section level5">
+<h5 id="breaking-changes-0-8-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-8-0"></a></h5>
+<ul><li>
+<code><a href="../reference/count..Rd.html">count.()</a></code>: Default name is now <code>n</code> instead of <code>N</code> to match dplyr semantics</li>
+</ul></div>
+<div class="section level5">
+<h5 id="bug-fixes-0-8-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-8-0"></a></h5>
+<ul><li>
+<code><a href="../reference/bind_cols..Rd.html">bind_cols.()</a></code>: Correctly handles lists (<a href="https://github.com/markfairbanks/tidytable/issues/446" class="external-link">#446</a>)</li>
+</ul></div>
+<div class="section level5">
+<h5 id="functions-with-notable-speed-improvements-0-8-0">Functions with notable speed improvements<a class="anchor" aria-label="anchor" href="#functions-with-notable-speed-improvements-0-8-0"></a></h5>
+<ul><li><code><a href="../reference/arrange..Rd.html">arrange.()</a></code></li>
+<li>
+<code><a href="../reference/case..Rd.html">case.()</a></code>: Faster when conditions evaluate to <code>NA</code>
+</li>
+<li><code><a href="../reference/group_split..Rd.html">group_split.()</a></code></li>
+<li>
+<code><a href="../reference/left_join..Rd.html">left_join.()</a></code>: Faster when <code>keep = FALSE</code> (the default)</li>
+<li><code><a href="../reference/select..Rd.html">select.()</a></code></li>
+<li><code><a href="../reference/uncount..Rd.html">uncount.()</a></code></li>
+</ul></div>
+<div class="section level5">
+<h5 id="other-notes-0-8-0">Other notes<a class="anchor" aria-label="anchor" href="#other-notes-0-8-0"></a></h5>
+<ul><li>
+<code>tidytable</code> no longer directly depends on <code>lifecycle</code>
+</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.7.2" id="tidytable-072">tidytable 0.7.2<small>2022-04-28</small><a class="anchor" aria-label="anchor" href="#tidytable-072"></a></h2>
 <div class="section level5">
 <h5 id="new-functions-0-7-2">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-7-2"></a></h5>
 <ul><li><code><a href="../reference/map..Rd.html">pmap.()</a></code></li>
@@ -117,11 +163,6 @@
 <div class="section level5">
 <h5 id="new-functions-0-7-0">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-7-0"></a></h5>
 <ul><li><code><a href="../reference/new_tidytable.html">new_tidytable()</a></code></li>
-</ul></div>
-<div class="section level5">
-<h5 id="breaking-changes-0-7-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-7-0"></a></h5>
-<ul><li>
-<code><a href="../reference/unite..Rd.html">unite.()</a></code>: If <code>col</code> isn’t provided, the new column is auto-named <code>.united</code> to reduce the chance of naming conflicts</li>
 </ul></div>
 </div>
     <div class="section level2">

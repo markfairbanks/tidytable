@@ -1,4 +1,4 @@
-# tidytable 0.7.3 (in development)
+# tidytable 0.8.0
 
 #### New functions
 * `na_if.()`
