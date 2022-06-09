@@ -36,19 +36,20 @@ call2_fast_by_i <- function(.df, j, .by) {
 
 # setnames without modify-by-reference
 df_set_names <- function(.df, new_names = NULL, old_names = NULL) {
-  out <- shallow(.df)
   if (is.null(old_names)) {
-    old_names <- names(.df)
+    names(.df) <- new_names
+  } else {
+    .df <- shallow(.df)
+    setnames(.df, old_names, new_names)
   }
-  setnames(out, old_names, new_names)
-  out
+  .df
 }
 
 # setcolorder without modify-by-reference
 df_col_order <- function(.df, new_order) {
-  out <- shallow(.df)
-  setcolorder(out, new_order)
-  out
+  .df <- shallow(.df)
+  setcolorder(.df, new_order)
+  .df
 }
 
 # Repair names of a data.table
