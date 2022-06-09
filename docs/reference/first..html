@@ -18,7 +18,7 @@ Note: These are simple wrappers around vctrs::vec_slice()."><meta property="og:i
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
       </span>
     </div>
 
@@ -65,11 +65,11 @@ Note: These are simple wrappers around vctrs::vec_slice()."><meta property="og:i
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">first.</span><span class="op">(</span><span class="va">x</span>, default <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">first.</span><span class="op">(</span><span class="va">x</span>, default <span class="op">=</span> <span class="cn">NA</span>, na_rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
-<span class="fu">last.</span><span class="op">(</span><span class="va">x</span>, default <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>
+<span class="fu">last.</span><span class="op">(</span><span class="va">x</span>, default <span class="op">=</span> <span class="cn">NA</span>, na_rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
-<span class="fu">nth.</span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, default <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
+<span class="fu">nth.</span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, default <span class="op">=</span> <span class="cn">NA</span>, na_rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -78,6 +78,8 @@ Note: These are simple wrappers around vctrs::vec_slice()."><meta property="og:i
 <dd><p>A vector</p></dd>
 <dt>default</dt>
 <dd><p>The default value if the value doesn't exist.</p></dd>
+<dt>na_rm</dt>
+<dd><p>If <code>TRUE</code> ignores missing values.</p></dd>
 <dt>n</dt>
 <dd><p>For <code>nth.()</code>, a number specifying the position to grab.</p></dd>
 </dl></div>
