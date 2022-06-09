@@ -195,7 +195,18 @@ test_that("multiple join keys are suffixed", {
   expect_named(out, c("a.x", "b.x", "c", "a.y", "b.y", "d"))
 })
 
+test_that("different order join keys are returned correctly, #495", {
+  df1 <- tidytable(chr1 = c("a", "a", "b"), chr2 = c("c", "c", "d"), int1 = 1:3)
+  df2 <- tidytable(chr1 = c("a", "b"), chr2 = c("c", "d"), int2 = 1:2)
 
+  res <- df1 %>%
+    left_join.(df2, by = c("chr2", "chr1"))
+
+  expect_named(res, c("chr1", "chr2", "int1", "int2"))
+  expect_equal(res$chr1, df1$chr1)
+  expect_equal(res$chr2, df1$chr2)
+  expect_equal(res$int1, df1$int1)
+})
 
 # Some dplyr tests ----------------------------------------------------------------
 test_that("when keep = TRUE, left_join.() preserves both sets of keys", {
