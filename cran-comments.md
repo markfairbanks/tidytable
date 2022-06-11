@@ -4,5 +4,9 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes 
+0 errors | 0 warnings | 0 notes
+
+## Important reverse dependency check notes
+
+* msSPChelpR: A new CRAN version was just released to fix issues found by last submission
 
