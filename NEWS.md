@@ -1,3 +1,9 @@
+# tidytable 0.8.1 (in development)
+
+#### New Functions
+* `if_else.()`
+  * Note: Alternate syntax `ifelse.()` (introduced in v0.4.0) will remain in the package
+
 # tidytable 0.8.0
 
 #### New functions
@@ -17,7 +23,7 @@
 
 #### Functions with notable speed improvements
 * `arrange.()`
-* `case.()`: Faster when conditions evaluate to `NA`
+* `case_when.()`: Faster when conditions evaluate to `NA`
 * `group_split.()`
 * `left_join.()`: Faster when `keep = FALSE` (the default)
 * `select.()`

@@ -53,12 +53,12 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env()
     quote(.SD)
   } else if (is_call(x, c("ifelse", "if_else"))) {
     if (is_call(x, "if_else")) {
-      x <- call_match(x, internal_if_else)
+      x <- call_match(x, tidytable::if_else.)
     } else {
       x <- call_match(x, base::ifelse)
     }
     x <- unname(x)
-    x[[1]] <- quote(tidytable::ifelse.)
+    x[[1]] <- quote(tidytable::if_else.)
     x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }}, j, dt_env, is_top_across)
     x
   } else if (is_call(x, "case_when", ns = "")) {
@@ -121,8 +121,4 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env()
 
 is_data_pronoun <- function(x) {
   is_call(x, c("$", "[["), n = 2) && is_symbol(x[[2]], ".data")
-}
-
-internal_if_else <- function(condition, true, false, missing = NULL) {
-  abort("Only for use in prep_exprs")
 }

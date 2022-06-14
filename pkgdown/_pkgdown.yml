@@ -32,7 +32,7 @@ reference:
   - group_split.
   - first.
   - if_all.
-  - ifelse.
+  - if_else.
   - lags.
   - left_join.
   - mutate_rowwise.
