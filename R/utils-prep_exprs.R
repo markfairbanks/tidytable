@@ -111,6 +111,7 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env()
     }
     var
   } else if (is_call(x, "function")) {
+    x[[3]] <- prep_expr(x[[3]], data, {{ .by }}, j, dt_env, is_top_across)
     x
   } else {
     # Catches case when "$" or "[[" is used but is not using .data pronoun
