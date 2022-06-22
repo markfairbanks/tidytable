@@ -3,6 +3,9 @@
 #### New Functions
 * `if_else.()`
   * Note: Alternate syntax `ifelse.()` (introduced in v0.4.0) will remain in the package
+  
+#### Bug Fixes
+* Nested calls to `across.()` are handled properly (#505)
 
 # tidytable 0.8.0
 
