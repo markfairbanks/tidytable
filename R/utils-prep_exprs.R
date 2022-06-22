@@ -14,6 +14,9 @@ prep_expr <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env(), is_
 
   if (is_symbol(x) || is_atomic(x) || is_null(x)) {
     x
+  } else if (is_call(x, tidytable_fns)) {
+    # Ignore nested calls to tidytable functions, #505
+    x
   } else if (is_call(x, call_fns)) {
     prep_expr_call(x, data, {{ .by }}, j, dt_env, is_top_across)
   } else {
@@ -21,6 +24,14 @@ prep_expr <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env(), is_
     x
   }
 }
+
+tidytable_fns <- c(
+  "arrange.",
+  "filter.",
+  "mutate.",
+  "slice.",
+  "summarise.", "summarize."
+)
 
 call_fns <- c(
   "$", "[[",
