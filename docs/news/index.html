@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0.9</span>
       </span>
     </div>
 
@@ -58,43 +58,57 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.8.0" id="tidytable-080">tidytable 0.8.0<a class="anchor" aria-label="anchor" href="#tidytable-080"></a></h2>
+<h2 class="page-header" data-toc-text="0.8.1" id="tidytable-081-in-development">tidytable 0.8.1 (in development)<a class="anchor" aria-label="anchor" href="#tidytable-081-in-development"></a></h2>
+<div class="section level5">
+<h5 id="new-functions-0-8-1">New Functions<a class="anchor" aria-label="anchor" href="#new-functions-0-8-1"></a></h5>
+<ul><li>
+<code><a href="../reference/if_else..html">if_else.()</a></code>
+<ul><li>Note: Alternate syntax <code><a href="../reference/ifelse..html">ifelse.()</a></code> (introduced in v0.4.0) will remain in the package</li>
+</ul></li>
+</ul></div>
+<div class="section level5">
+<h5 id="bug-fixes-0-8-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-8-1"></a></h5>
+<ul><li>Nested calls to <code><a href="../reference/across..html">across.()</a></code> are handled properly (<a href="https://github.com/markfairbanks/tidytable/issues/505" class="external-link">#505</a>)</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.8.0" id="tidytable-080">tidytable 0.8.0<small>2022-06-11</small><a class="anchor" aria-label="anchor" href="#tidytable-080"></a></h2>
 <div class="section level5">
 <h5 id="new-functions-0-8-0">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-8-0"></a></h5>
-<ul><li><code><a href="../reference/na_if..Rd.html">na_if.()</a></code></li>
+<ul><li><code><a href="../reference/na_if..html">na_if.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="functionality-improvements-0-8-0">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-8-0"></a></h5>
 <ul><li>
-<code><a href="../reference/expand_grid..Rd.html">expand_grid.()</a></code>: Works with data frame inputs</li>
+<code><a href="../reference/expand_grid..html">expand_grid.()</a></code>: Works with data frame inputs</li>
 <li>
-<code><a href="../reference/first..Rd.html">first.()</a></code>/<code><a href="../reference/first..Rd.html">last.()</a></code>/<code><a href="../reference/first..Rd.html">nth.()</a></code>: Gain <code>na_rm</code> arg</li>
+<code><a href="../reference/first..html">first.()</a></code>/<code><a href="../reference/first..html">last.()</a></code>/<code><a href="../reference/first..html">nth.()</a></code>: Gain <code>na_rm</code> arg</li>
 <li>
-<code><a href="../reference/mutate_rowwise..Rd.html">mutate_rowwise.()</a></code>: Gains <code>.keep</code>, <code>.before</code>, and <code>.after</code> args</li>
+<code><a href="../reference/mutate_rowwise..html">mutate_rowwise.()</a></code>: Gains <code>.keep</code>, <code>.before</code>, and <code>.after</code> args</li>
 <li>
 <code><a href="../reference/tidytable.html">tidytable()</a></code>: Auto-unpacks unnamed data frame inputs</li>
 </ul></div>
 <div class="section level5">
 <h5 id="breaking-changes-0-8-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-8-0"></a></h5>
 <ul><li>
-<code><a href="../reference/count..Rd.html">count.()</a></code>: Default name is now <code>n</code> instead of <code>N</code> to match dplyr semantics</li>
+<code><a href="../reference/count..html">count.()</a></code>: Default name is now <code>n</code> instead of <code>N</code> to match dplyr semantics</li>
 </ul></div>
 <div class="section level5">
 <h5 id="bug-fixes-0-8-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-8-0"></a></h5>
 <ul><li>
-<code><a href="../reference/bind_cols..Rd.html">bind_cols.()</a></code>: Correctly handles lists (<a href="https://github.com/markfairbanks/tidytable/issues/446" class="external-link">#446</a>)</li>
+<code><a href="../reference/bind_cols..html">bind_cols.()</a></code>: Correctly handles lists (<a href="https://github.com/markfairbanks/tidytable/issues/446" class="external-link">#446</a>)</li>
 </ul></div>
 <div class="section level5">
 <h5 id="functions-with-notable-speed-improvements-0-8-0">Functions with notable speed improvements<a class="anchor" aria-label="anchor" href="#functions-with-notable-speed-improvements-0-8-0"></a></h5>
-<ul><li><code><a href="../reference/arrange..Rd.html">arrange.()</a></code></li>
+<ul><li><code><a href="../reference/arrange..html">arrange.()</a></code></li>
 <li>
-<code><a href="../reference/case..Rd.html">case.()</a></code>: Faster when conditions evaluate to <code>NA</code>
+<code><a href="../reference/case_when..html">case_when.()</a></code>: Faster when conditions evaluate to <code>NA</code>
 </li>
-<li><code><a href="../reference/group_split..Rd.html">group_split.()</a></code></li>
+<li><code><a href="../reference/group_split..html">group_split.()</a></code></li>
 <li>
-<code><a href="../reference/left_join..Rd.html">left_join.()</a></code>: Faster when <code>keep = FALSE</code> (the default)</li>
-<li><code><a href="../reference/select..Rd.html">select.()</a></code></li>
-<li><code><a href="../reference/uncount..Rd.html">uncount.()</a></code></li>
+<code><a href="../reference/left_join..html">left_join.()</a></code>: Faster when <code>keep = FALSE</code> (the default)</li>
+<li><code><a href="../reference/select..html">select.()</a></code></li>
+<li><code><a href="../reference/uncount..html">uncount.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="other-notes-0-8-0">Other notes<a class="anchor" aria-label="anchor" href="#other-notes-0-8-0"></a></h5>
@@ -107,12 +121,12 @@
 <h2 class="page-header" data-toc-text="0.7.2" id="tidytable-072">tidytable 0.7.2<small>2022-04-28</small><a class="anchor" aria-label="anchor" href="#tidytable-072"></a></h2>
 <div class="section level5">
 <h5 id="new-functions-0-7-2">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-7-2"></a></h5>
-<ul><li><code><a href="../reference/map..Rd.html">pmap.()</a></code></li>
+<ul><li><code><a href="../reference/map..html">pmap.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="functionality-improvements-0-7-2">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-7-2"></a></h5>
 <ul><li>
-<code><a href="../reference/summarize..Rd.html">summarize.()</a></code>: Now sorts by the grouping variables when <code>.by</code> is used.</li>
+<code><a href="../reference/summarize..html">summarize.()</a></code>: Now sorts by the grouping variables when <code>.by</code> is used.</li>
 <li>
 <code><a href="../reference/dt.html">dt()</a></code>: Experimental support for tidy evaluation</li>
 <li>
@@ -124,29 +138,29 @@
 <code><a href="../reference/dt.html">dt()</a></code>: Faster when adding new columns or updating existing columns</li>
 <li>
 <code><a href="../reference/as_tidytable.html">as_tidytable()</a></code>: Faster when converting <code>data.frame</code> or <code>list</code> objects to a tidytable</li>
-<li><code><a href="../reference/get_dummies..Rd.html">get_dummies.()</a></code></li>
+<li><code><a href="../reference/get_dummies..html">get_dummies.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="bug-fixes-0-7-2">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-7-2"></a></h5>
 <ul><li>
-<code><a href="../reference/across..Rd.html">across.()</a></code>: <code>.cols</code> arg can find environment variables in custom functions (<a href="https://github.com/markfairbanks/tidytable/issues/389" class="external-link">#389</a>)</li>
+<code><a href="../reference/across..html">across.()</a></code>: <code>.cols</code> arg can find environment variables in custom functions (<a href="https://github.com/markfairbanks/tidytable/issues/389" class="external-link">#389</a>)</li>
 <li>Joins: Duplicate columns are treated properly when <code>keep = FALSE</code> (<a href="https://github.com/markfairbanks/tidytable/issues/397" class="external-link">#397</a>)</li>
-<li>Can use anonymous functions inside <code>map</code> functions inside <code><a href="../reference/mutate..Rd.html">mutate.()</a></code> (<a href="https://github.com/markfairbanks/tidytable/issues/402" class="external-link">#402</a>)</li>
+<li>Can use anonymous functions inside <code>map</code> functions inside <code><a href="../reference/mutate..html">mutate.()</a></code> (<a href="https://github.com/markfairbanks/tidytable/issues/402" class="external-link">#402</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.7.1" id="tidytable-071">tidytable 0.7.1<small>2022-03-22</small><a class="anchor" aria-label="anchor" href="#tidytable-071"></a></h2>
 <div class="section level5">
 <h5 id="new-functions-0-7-1">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-7-1"></a></h5>
-<ul><li><code><a href="../reference/add_count..Rd.html">add_count.()</a></code></li>
+<ul><li><code><a href="../reference/add_count..html">add_count.()</a></code></li>
 <li><code><a href="../reference/context.html">cur_column.()</a></code></li>
 <li><code><a href="../reference/context.html">cur_data.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="bug-fixes-0-7-1">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-7-1"></a></h5>
 <ul><li>
-<code><a href="../reference/unite..Rd.html">unite.()</a></code>: New column is always placed before the first united column in the data frame, regardless of order provided.</li>
-<li>Can use <code>.data</code> pronoun inside <code><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc()</a></code> in <code><a href="../reference/arrange..Rd.html">arrange.()</a></code> (<a href="https://github.com/markfairbanks/tidytable/issues/371" class="external-link">#371</a>)</li>
+<code><a href="../reference/unite..html">unite.()</a></code>: New column is always placed before the first united column in the data frame, regardless of order provided.</li>
+<li>Can use <code>.data</code> pronoun inside <code><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc()</a></code> in <code><a href="../reference/arrange..html">arrange.()</a></code> (<a href="https://github.com/markfairbanks/tidytable/issues/371" class="external-link">#371</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -156,9 +170,9 @@
 <ul><li>
 <code>left</code>/<code>right</code>/<code>inner</code>/<code>full</code> joins gain <code>suffix</code> and <code>keep</code> args (<a href="https://github.com/markfairbanks/tidytable/issues/354" class="external-link">#354</a>)</li>
 <li>
-<code><a href="../reference/rename..Rd.html">rename.()</a></code>: Can now rename columns by position (<a href="https://github.com/markfairbanks/tidytable/issues/361" class="external-link">#361</a>)</li>
+<code><a href="../reference/rename..html">rename.()</a></code>: Can now rename columns by position (<a href="https://github.com/markfairbanks/tidytable/issues/361" class="external-link">#361</a>)</li>
 <li>
-<code><a href="../reference/unite..Rd.html">unite.()</a></code>: The new column is placed before united columns to match tidyr behavior</li>
+<code><a href="../reference/unite..html">unite.()</a></code>: The new column is placed before united columns to match tidyr behavior</li>
 </ul></div>
 <div class="section level5">
 <h5 id="new-functions-0-7-0">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-7-0"></a></h5>
@@ -172,23 +186,23 @@
 <ul><li>
 <code>.data</code> and <code>.env</code> pronouns now work in <code>tidytable</code> functions</li>
 <li>
-<code><a href="../reference/across..Rd.html">across.()</a></code>: Works inside of a named <code><a href="../reference/mutate..Rd.html">mutate.()</a></code>. Useful with <code>rowSums</code>/<code>rowMeans</code> (<a href="https://github.com/markfairbanks/tidytable/issues/346" class="external-link">#346</a>)</li>
+<code><a href="../reference/across..html">across.()</a></code>: Works inside of a named <code><a href="../reference/mutate..html">mutate.()</a></code>. Useful with <code>rowSums</code>/<code>rowMeans</code> (<a href="https://github.com/markfairbanks/tidytable/issues/346" class="external-link">#346</a>)</li>
 <li>
-<code><a href="../reference/first..Rd.html">first.()</a></code>/<code><a href="../reference/first..Rd.html">last.()</a></code>: Gain a <code>default</code> arg</li>
+<code><a href="../reference/first..html">first.()</a></code>/<code><a href="../reference/first..html">last.()</a></code>: Gain a <code>default</code> arg</li>
 <li>
-<code><a href="../reference/mutate..Rd.html">mutate.()</a></code>: Can use <code><a href="https://stringr.tidyverse.org/reference/str_glue.html" class="external-link">stringr::str_glue()</a></code> without specifying <code>.envir</code>
+<code><a href="../reference/mutate..html">mutate.()</a></code>: Can use <code><a href="https://stringr.tidyverse.org/reference/str_glue.html" class="external-link">stringr::str_glue()</a></code> without specifying <code>.envir</code>
 </li>
 <li>
-<code><a href="../reference/replace_na..Rd.html">replace_na.()</a></code>: Checks that <code>replace</code> arg only uses columns that exist in the data frame</li>
+<code><a href="../reference/replace_na..html">replace_na.()</a></code>: Checks that <code>replace</code> arg only uses columns that exist in the data frame</li>
 </ul></div>
 <div class="section level5">
 <h5 id="new-functions-0-6-7">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-6-7"></a></h5>
-<ul><li><code><a href="../reference/first..Rd.html">nth.()</a></code></li>
+<ul><li><code><a href="../reference/first..html">nth.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="bug-fixes-0-6-7">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-6-7"></a></h5>
 <ul><li>
-<code><a href="../reference/mutate..Rd.html">mutate.()</a></code>: Can assign to the same column when <code>.by = character(0)</code> (<a href="https://github.com/markfairbanks/tidytable/issues/332" class="external-link">#332</a>)</li>
+<code><a href="../reference/mutate..html">mutate.()</a></code>: Can assign to the same column when <code>.by = character(0)</code> (<a href="https://github.com/markfairbanks/tidytable/issues/332" class="external-link">#332</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -196,22 +210,22 @@
 <div class="section level5">
 <h5 id="functionality-improvements-0-6-6">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-6-6"></a></h5>
 <ul><li>
-<code><a href="https://dplyr.tidyverse.org/reference/between.html" class="external-link">between()</a></code> is now auto-translated to <code><a href="../reference/between..Rd.html">between.()</a></code> when used inside <code>tidytable</code> functions</li>
+<code><a href="https://dplyr.tidyverse.org/reference/between.html" class="external-link">between()</a></code> is now auto-translated to <code><a href="../reference/between..html">between.()</a></code> when used inside <code>tidytable</code> functions</li>
 <li>
 <code>%notin%</code> now uses <code>%chin%</code> on character vectors</li>
 </ul></div>
 <div class="section level5">
 <h5 id="bug-fixes-0-6-6">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-6-6"></a></h5>
 <ul><li>
-<code><a href="../reference/across..Rd.html">across.()</a></code>: Can pass extra arguments to a list of functions (<a href="https://github.com/markfairbanks/tidytable/issues/319" class="external-link">#319</a>)</li>
+<code><a href="../reference/across..html">across.()</a></code>: Can pass extra arguments to a list of functions (<a href="https://github.com/markfairbanks/tidytable/issues/319" class="external-link">#319</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.6.5" id="tidytable-065">tidytable 0.6.5<small>2021-09-03</small><a class="anchor" aria-label="anchor" href="#tidytable-065"></a></h2>
 <div class="section level5">
 <h5 id="new-functions-0-6-5">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-6-5"></a></h5>
-<ul><li><code><a href="../reference/fread..Rd.html">fread.()</a></code></li>
-<li><code><a href="../reference/fread..Rd.html">fwrite.()</a></code></li>
+<ul><li><code><a href="../reference/fread..html">fread.()</a></code></li>
+<li><code><a href="../reference/fread..html">fwrite.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="bug-fixes-0-6-5">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-6-5"></a></h5>
@@ -222,35 +236,35 @@
 <h2 class="page-header" data-toc-text="0.6.4" id="tidytable-064">tidytable 0.6.4<small>2021-07-31</small><a class="anchor" aria-label="anchor" href="#tidytable-064"></a></h2>
 <div class="section level5">
 <h5 id="new-functions-0-6-4">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-6-4"></a></h5>
-<ul><li><code><a href="../reference/unnest_longer..Rd.html">unnest_longer.()</a></code></li>
-<li><code><a href="../reference/unnest_wider..Rd.html">unnest_wider.()</a></code></li>
+<ul><li><code><a href="../reference/unnest_longer..html">unnest_longer.()</a></code></li>
+<li><code><a href="../reference/unnest_wider..html">unnest_wider.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="functionality-improvements-0-6-4">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-6-4"></a></h5>
 <ul><li>
-<code><a href="../reference/bind_cols..Rd.html">bind_rows.()</a></code>/<code><a href="../reference/bind_cols..Rd.html">bind_cols.()</a></code>
+<code><a href="../reference/bind_cols..html">bind_rows.()</a></code>/<code><a href="../reference/bind_cols..html">bind_cols.()</a></code>
 <ul><li>Can splice lists of data frames using <code>!!!</code>
 </li>
 </ul></li>
 <li>
-<code><a href="../reference/mutate..Rd.html">mutate.()</a></code>: Can use <code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue::glue()</a></code> without specifying <code>.envir</code>
+<code><a href="../reference/mutate..html">mutate.()</a></code>: Can use <code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue::glue()</a></code> without specifying <code>.envir</code>
 </li>
 <li>
-<code><a href="../reference/pull..Rd.html">pull.()</a></code>: Added a <code>name</code> argument</li>
+<code><a href="../reference/pull..html">pull.()</a></code>: Added a <code>name</code> argument</li>
 <li>
-<code><a href="../reference/separate..Rd.html">separate.()</a></code>: Can omit output columns by using <code>NA</code> in <code>into</code>
+<code><a href="../reference/separate..html">separate.()</a></code>: Can omit output columns by using <code>NA</code> in <code>into</code>
 </li>
 <li>
 <code><a href="../reference/tidytable.html">tidytable()</a></code>: Can splice quosures</li>
 <li>
-<code><a href="../reference/unnest..Rd.html">unnest.()</a></code>: Added <code>keep_empty</code> arg</li>
+<code><a href="../reference/unnest..html">unnest.()</a></code>: Added <code>keep_empty</code> arg</li>
 </ul></div>
 <div class="section level5">
 <h5 id="deprecations-0-6-4">Deprecations<a class="anchor" aria-label="anchor" href="#deprecations-0-6-4"></a></h5>
-<ul><li>The following functions have all been deprecated due to the addition of <code><a href="../reference/across..Rd.html">across.()</a></code> in v0.6.1
-<ul><li><code><a href="../reference/arrange_across..Rd.html">arrange_across.()</a></code></li>
-<li><code><a href="../reference/mutate_across..Rd.html">mutate_across.()</a></code></li>
-<li><code><a href="../reference/summarize_across..Rd.html">summarize_across.()</a></code></li>
+<ul><li>The following functions have all been deprecated due to the addition of <code><a href="../reference/across..html">across.()</a></code> in v0.6.1
+<ul><li><code><a href="../reference/arrange_across..html">arrange_across.()</a></code></li>
+<li><code><a href="../reference/mutate_across..html">mutate_across.()</a></code></li>
+<li><code><a href="../reference/summarize_across..html">summarize_across.()</a></code></li>
 </ul></li>
 </ul></div>
 </div>
@@ -258,26 +272,26 @@
 <h2 class="page-header" data-toc-text="0.6.3" id="tidytable-063">tidytable 0.6.3<small>2021-06-22</small><a class="anchor" aria-label="anchor" href="#tidytable-063"></a></h2>
 <div class="section level5">
 <h5 id="new-functions-0-6-3">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-6-3"></a></h5>
-<ul><li><code><a href="../reference/enframe..Rd.html">enframe.()</a></code></li>
-<li><code><a href="../reference/first..Rd.html">first.()</a></code></li>
-<li><code><a href="../reference/first..Rd.html">last.()</a></code></li>
+<ul><li><code><a href="../reference/enframe..html">enframe.()</a></code></li>
+<li><code><a href="../reference/first..html">first.()</a></code></li>
+<li><code><a href="../reference/first..html">last.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="functionality-improvements-0-6-3">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-6-3"></a></h5>
 <ul><li>Subclasses and attributes are now preserved when using <code>bind_cols</code>, <code>bind_rows</code>, <code>group_split</code>, or joins.</li>
 <li>
-<code><a href="../reference/complete..Rd.html">complete.()</a></code>: Added a <code>.by</code> argument</li>
+<code><a href="../reference/complete..html">complete.()</a></code>: Added a <code>.by</code> argument</li>
 <li>
-<code><a href="../reference/expand..Rd.html">expand.()</a></code>: Added a <code>.by</code> argument</li>
+<code><a href="../reference/expand..html">expand.()</a></code>: Added a <code>.by</code> argument</li>
 <li>
-<code><a href="../reference/mutate..Rd.html">mutate.()</a></code>: Auto-names unnamed inputs</li>
+<code><a href="../reference/mutate..html">mutate.()</a></code>: Auto-names unnamed inputs</li>
 <li>
-<code><a href="../reference/transmute..Rd.html">transmute.()</a></code>: Auto-names unnamed inputs</li>
+<code><a href="../reference/transmute..html">transmute.()</a></code>: Auto-names unnamed inputs</li>
 </ul></div>
 <div class="section level5">
 <h5 id="bug-fixes-0-6-3">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-6-3"></a></h5>
 <ul><li>
-<code><a href="../reference/expand..Rd.html">expand.()</a></code> with <code><a href="../reference/expand..Rd.html">nesting.()</a></code>
+<code><a href="../reference/expand..html">expand.()</a></code> with <code><a href="../reference/expand..html">nesting.()</a></code>
 <ul><li>Additional double vectors can have negative values (<a href="https://github.com/markfairbanks/tidytable/issues/282" class="external-link">#282</a>)</li>
 </ul></li>
 </ul></div>
@@ -289,13 +303,13 @@
 <ul><li>
 <code><a href="../reference/context.html">cur_group_id.()</a></code>/<code><a href="../reference/context.html">cur_group_rows.()</a></code>
 </li>
-<li><code><a href="../reference/n_distinct..Rd.html">n_distinct.()</a></code></li>
-<li><code><a href="../reference/expand..Rd.html">nesting.()</a></code></li>
+<li><code><a href="../reference/n_distinct..html">n_distinct.()</a></code></li>
+<li><code><a href="../reference/expand..html">nesting.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="functionality-improvements-0-6-2">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-6-2"></a></h5>
 <ul><li>
-<code><a href="../reference/mutate..Rd.html">mutate.()</a></code>:
+<code><a href="../reference/mutate..html">mutate.()</a></code>:
 <ul><li>Added <code>.keep</code> argument</li>
 <li>Added <code>.before</code>/<code>.after</code> arguments</li>
 </ul></li>
@@ -305,32 +319,32 @@
 <div class="section level5">
 <h5 id="functions-with-notable-speed-improvements-0-6-2">Functions with notable speed improvements<a class="anchor" aria-label="anchor" href="#functions-with-notable-speed-improvements-0-6-2"></a></h5>
 <ul><li>
-<code><a href="../reference/filter..Rd.html">filter.()</a></code> when <code>.by</code> is used</li>
+<code><a href="../reference/filter..html">filter.()</a></code> when <code>.by</code> is used</li>
 </ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.6.1" id="tidytable-061">tidytable 0.6.1<small>2021-04-16</small><a class="anchor" aria-label="anchor" href="#tidytable-061"></a></h2>
 <div class="section level5">
 <h5 id="new-functions-0-6-1">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-6-1"></a></h5>
-<ul><li><code><a href="../reference/across..Rd.html">across.()</a></code></li>
-<li><code><a href="../reference/coalesce..Rd.html">coalesce.()</a></code></li>
+<ul><li><code><a href="../reference/across..html">across.()</a></code></li>
+<li><code><a href="../reference/coalesce..html">coalesce.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="functionality-improvements-0-6-1">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-6-1"></a></h5>
 <ul><li>
-<code><a href="../reference/group_split..Rd.html">group_split.()</a></code>: Added a <code>.named</code> argument. If <code>.named = TRUE</code>, the resulting list will have names that indicate the group they are a part of.</li>
+<code><a href="../reference/group_split..html">group_split.()</a></code>: Added a <code>.named</code> argument. If <code>.named = TRUE</code>, the resulting list will have names that indicate the group they are a part of.</li>
 <li>
-<code><a href="../reference/pivot_longer..Rd.html">pivot_longer.()</a></code>: Can now use <code>names_to = c(".value", NA)</code> to drop the id column.</li>
+<code><a href="../reference/pivot_longer..html">pivot_longer.()</a></code>: Can now use <code>names_to = c(".value", NA)</code> to drop the id column.</li>
 </ul></div>
 <div class="section level5">
 <h5 id="bug-fixes-0-6-1">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-6-1"></a></h5>
 <ul><li>
-<code><a href="../reference/if_all..Rd.html">if_all.()</a></code>/<code><a href="../reference/if_all..Rd.html">if_any.()</a></code>
+<code><a href="../reference/if_all..html">if_all.()</a></code>/<code><a href="../reference/if_all..html">if_any.()</a></code>
 <ul><li>No longer try to use <code>.by</code> columns (<a href="https://github.com/markfairbanks/tidytable/issues/225" class="external-link">#225</a>)</li>
 <li>Can use <code><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n()</a></code> in filtering (<a href="https://github.com/markfairbanks/tidytable/issues/226" class="external-link">#226</a>)</li>
 </ul></li>
 <li>
-<code><a href="../reference/pivot_longer..Rd.html">pivot_longer.()</a></code>
+<code><a href="../reference/pivot_longer..html">pivot_longer.()</a></code>
 <ul><li>No longer converts factor values to character (<a href="https://github.com/markfairbanks/tidytable/issues/202" class="external-link">#202</a>, <a href="https://github.com/markfairbanks/tidytable/issues/234" class="external-link">#234</a>)</li>
 <li>Preserves column order when using <code>names_to = c(".value", "id")</code> (<a href="https://github.com/markfairbanks/tidytable/issues/235" class="external-link">#235</a>)</li>
 </ul></li>
@@ -341,14 +355,14 @@
 <div class="section level5">
 <h5 id="new-functions-0-6-0">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-6-0"></a></h5>
 <ul><li>
-<code><a href="../reference/if_all..Rd.html">if_all.()</a></code>/<code><a href="../reference/if_all..Rd.html">if_any.()</a></code>
+<code><a href="../reference/if_all..html">if_all.()</a></code>/<code><a href="../reference/if_all..html">if_any.()</a></code>
 </li>
 </ul></div>
 <div class="section level5">
 <h5 id="functionality-improvements-0-6-0">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-6-0"></a></h5>
 <ul><li>
-<code><a href="../reference/replace_na..Rd.html">replace_na.()</a></code>: Can now replace <code>NULL</code> values in list-columns</li>
-<li>Splicing lists using <code>!!!</code> now works in <code><a href="../reference/crossing..Rd.html">crossing.()</a></code> and <code><a href="../reference/expand_grid..Rd.html">expand_grid.()</a></code>
+<code><a href="../reference/replace_na..html">replace_na.()</a></code>: Can now replace <code>NULL</code> values in list-columns</li>
+<li>Splicing lists using <code>!!!</code> now works in <code><a href="../reference/crossing..html">crossing.()</a></code> and <code><a href="../reference/expand_grid..html">expand_grid.()</a></code>
 </li>
 <li>The following tidyverse functions are now automatically converted to their tidytable <code>verb.()</code> equivalents when used inside of tidytable’s mutate/arrange/filter/summarize/slice.
 <ul><li>Functions that previously failed but now work:
@@ -368,15 +382,15 @@
 <div class="section level5">
 <h5 id="bug-fixes-0-6-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-6-0"></a></h5>
 <ul><li>
-<code><a href="../reference/pivot_longer..Rd.html">pivot_longer.()</a></code>: Correctly pivots unbalanced datasets when <code>".value"</code> is used in <code>names_to</code> (<a href="https://github.com/moutikabdessabour" class="external-link">@moutikabdessabour</a>, <a href="https://github.com/markfairbanks/tidytable/issues/212" class="external-link">#212</a>)</li>
+<code><a href="../reference/pivot_longer..html">pivot_longer.()</a></code>: Correctly pivots unbalanced datasets when <code>".value"</code> is used in <code>names_to</code> (<a href="https://github.com/moutikabdessabour" class="external-link">@moutikabdessabour</a>, <a href="https://github.com/markfairbanks/tidytable/issues/212" class="external-link">#212</a>)</li>
 </ul></div>
 <div class="section level5">
 <h5 id="functions-with-notable-speed-improvements-0-6-0">Functions with notable speed improvements<a class="anchor" aria-label="anchor" href="#functions-with-notable-speed-improvements-0-6-0"></a></h5>
-<ul><li><code><a href="../reference/mutate_across..Rd.html">mutate_across.()</a></code></li>
+<ul><li><code><a href="../reference/mutate_across..html">mutate_across.()</a></code></li>
 <li>
-<code><a href="../reference/mutate_rowwise..Rd.html">mutate_rowwise.()</a></code> when <code><a href="../reference/c_across..Rd.html">c_across.()</a></code> is used</li>
+<code><a href="../reference/mutate_rowwise..html">mutate_rowwise.()</a></code> when <code><a href="../reference/c_across..html">c_across.()</a></code> is used</li>
 <li>
-<code><a href="../reference/slice..Rd.html">slice.()</a></code>/<code><a href="../reference/slice..Rd.html">slice_head.()</a></code>/<code><a href="../reference/slice..Rd.html">slice_tail.()</a></code>/<code><a href="../reference/slice..Rd.html">slice_min.()</a></code>/<code><a href="../reference/slice..Rd.html">slice_max.()</a></code>
+<code><a href="../reference/slice..html">slice.()</a></code>/<code><a href="../reference/slice..html">slice_head.()</a></code>/<code><a href="../reference/slice..html">slice_tail.()</a></code>/<code><a href="../reference/slice..html">slice_min.()</a></code>/<code><a href="../reference/slice..html">slice_max.()</a></code>
 </li>
 </ul></div>
 <div class="section level5">
@@ -389,29 +403,29 @@
 <h2 class="page-header" data-toc-text="0.5.9" id="tidytable-059">tidytable 0.5.9<small>2021-03-04</small><a class="anchor" aria-label="anchor" href="#tidytable-059"></a></h2>
 <div class="section level5">
 <h5 id="new-functions-0-5-9">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-5-9"></a></h5>
-<ul><li><code><a href="../reference/between..Rd.html">between.()</a></code></li>
+<ul><li><code><a href="../reference/between..html">between.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="functionality-improvements-0-5-9">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-5-9"></a></h5>
 <ul><li>
 <code><a href="../reference/as_tidytable.html">as_tidytable()</a></code>: Gains <code>.name_repair</code> and <code>.keep_rownames</code> args</li>
 <li>
-<code><a href="../reference/count..Rd.html">count.()</a></code>: Added <code>wt</code>, <code>sort</code> and <code>name</code> args. (<a href="https://github.com/moutikabdessabour" class="external-link">@moutikabdessabour</a>, <a href="https://github.com/markfairbanks/tidytable/issues/196" class="external-link">#196</a>)</li>
+<code><a href="../reference/count..html">count.()</a></code>: Added <code>wt</code>, <code>sort</code> and <code>name</code> args. (<a href="https://github.com/moutikabdessabour" class="external-link">@moutikabdessabour</a>, <a href="https://github.com/markfairbanks/tidytable/issues/196" class="external-link">#196</a>)</li>
 <li>
-<code><a href="../reference/mutate..Rd.html">mutate.()</a></code>: Variables are now updated in order when using “.by” (<a href="https://github.com/markfairbanks/tidytable/issues/166" class="external-link">#166</a>)</li>
+<code><a href="../reference/mutate..html">mutate.()</a></code>: Variables are now updated in order when using “.by” (<a href="https://github.com/markfairbanks/tidytable/issues/166" class="external-link">#166</a>)</li>
 <li>
-<code><a href="../reference/pivot_longer..Rd.html">pivot_longer.()</a></code>
+<code><a href="../reference/pivot_longer..html">pivot_longer.()</a></code>
 <ul><li>Added <code>names_prefix</code> arg</li>
 <li>Can now use <code>".value"</code> in <code>names_to</code>
 </li>
 </ul></li>
 <li>
-<code><a href="../reference/pivot_wider..Rd.html">pivot_wider.()</a></code>: Can now use <code>".value"</code> in <code>names_glue</code>
+<code><a href="../reference/pivot_wider..html">pivot_wider.()</a></code>: Can now use <code>".value"</code> in <code>names_glue</code>
 </li>
 <li>
-<code><a href="../reference/separate..Rd.html">separate.()</a></code>: Added <code>convert</code> arg</li>
+<code><a href="../reference/separate..html">separate.()</a></code>: Added <code>convert</code> arg</li>
 <li>
-<code><a href="../reference/summarize..Rd.html">summarize.()</a></code>: Variables are now created in order (<a href="https://github.com/markfairbanks/tidytable/issues/188" class="external-link">#188</a>)</li>
+<code><a href="../reference/summarize..html">summarize.()</a></code>: Variables are now created in order (<a href="https://github.com/markfairbanks/tidytable/issues/188" class="external-link">#188</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -419,29 +433,29 @@
 <div class="section level5">
 <h5 id="breaking-changes-0-5-8">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-5-8"></a></h5>
 <ul><li>
-<code><a href="../reference/pivot_longer..Rd.html">pivot_longer.()</a></code>: <code>values_drop_na</code> is no longer the 5th argument in the function</li>
+<code><a href="../reference/pivot_longer..html">pivot_longer.()</a></code>: <code>values_drop_na</code> is no longer the 5th argument in the function</li>
 <li>
-<code><a href="../reference/pivot_wider..Rd.html">pivot_wider.()</a></code>: <code>values_fn</code> &amp; <code>values_fill</code> args are no longer the 6th &amp; 7th args</li>
+<code><a href="../reference/pivot_wider..html">pivot_wider.()</a></code>: <code>values_fn</code> &amp; <code>values_fill</code> args are no longer the 6th &amp; 7th args</li>
 </ul></div>
 <div class="section level5">
 <h5 id="new-functions-0-5-8">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-5-8"></a></h5>
-<ul><li><code><a href="../reference/c_across..Rd.html">c_across.()</a></code></li>
-<li><code><a href="../reference/extract..Rd.html">extract.()</a></code></li>
-<li><code><a href="../reference/mutate_rowwise..Rd.html">mutate_rowwise.()</a></code></li>
-<li><code><a href="../reference/nest..Rd.html">nest.()</a></code></li>
-<li><code><a href="../reference/slice..Rd.html">slice_sample.()</a></code></li>
+<ul><li><code><a href="../reference/c_across..html">c_across.()</a></code></li>
+<li><code><a href="../reference/extract..html">extract.()</a></code></li>
+<li><code><a href="../reference/mutate_rowwise..html">mutate_rowwise.()</a></code></li>
+<li><code><a href="../reference/nest..html">nest.()</a></code></li>
+<li><code><a href="../reference/slice..html">slice_sample.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="functionality-improvements-0-5-8">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-5-8"></a></h5>
 <ul><li>
-<code><a href="../reference/pivot_longer..Rd.html">pivot_longer.()</a></code>
+<code><a href="../reference/pivot_longer..html">pivot_longer.()</a></code>
 <ul><li>New args: <code>names_sep</code>, <code>names_pattern</code>, <code>names_ptypes</code>, <code>names_transform</code>, <code>names_repair</code>, <code>values_ptypes</code>, <code>values_transform</code>, <code>fast_pivot</code>
 </li>
 <li>
 <code>fast_pivot</code> arg: Faster pivoting. The “names” column will be a factor instead of character. Default is set to <code>FALSE</code> to match tidyverse semantics. Note: This option sets <code>variable.factor = TRUE</code> in <code><a href="https://Rdatatable.gitlab.io/data.table/reference/melt.data.table.html" class="external-link">data.table::melt()</a></code>, which is what leads to it being faster.</li>
 </ul></li>
 <li>
-<code><a href="../reference/pivot_wider..Rd.html">pivot_wider.()</a></code>
+<code><a href="../reference/pivot_wider..html">pivot_wider.()</a></code>
 <ul><li>New args: <code>names_prefix</code>, <code>names_glue</code>, <code>names_sort</code>, <code>names_repair</code>
 </li>
 </ul></li>
@@ -456,30 +470,30 @@
 <div class="section level5">
 <h5 id="functionality-improvements-0-5-7">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-5-7"></a></h5>
 <ul><li>
-<code><a href="../reference/crossing..Rd.html">crossing.()</a></code>: Now works with data frame inputs (<a href="https://github.com/moutikabdessabour" class="external-link">@moutikabdessabour</a>, <a href="https://github.com/markfairbanks/tidytable/issues/143" class="external-link">#143</a>)</li>
+<code><a href="../reference/crossing..html">crossing.()</a></code>: Now works with data frame inputs (<a href="https://github.com/moutikabdessabour" class="external-link">@moutikabdessabour</a>, <a href="https://github.com/markfairbanks/tidytable/issues/143" class="external-link">#143</a>)</li>
 <li>
-<code><a href="../reference/distinct..Rd.html">distinct.()</a></code>: Can rename columns (<a href="https://github.com/markfairbanks/tidytable/issues/153" class="external-link">#153</a>)</li>
+<code><a href="../reference/distinct..html">distinct.()</a></code>: Can rename columns (<a href="https://github.com/markfairbanks/tidytable/issues/153" class="external-link">#153</a>)</li>
 <li>
-<code><a href="../reference/get_dummies..Rd.html">get_dummies.()</a></code>: Dummy columns are now sorted in alphabetical order</li>
+<code><a href="../reference/get_dummies..html">get_dummies.()</a></code>: Dummy columns are now sorted in alphabetical order</li>
 <li>
-<code><a href="../reference/pivot_wider..Rd.html">pivot_wider.()</a></code>: Added <code>values_fill</code> argument</li>
+<code><a href="../reference/pivot_wider..html">pivot_wider.()</a></code>: Added <code>values_fill</code> argument</li>
 </ul></div>
 <div class="section level5">
 <h5 id="functions-with-notable-speed-improvements-0-5-7">Functions with notable speed improvements<a class="anchor" aria-label="anchor" href="#functions-with-notable-speed-improvements-0-5-7"></a></h5>
-<ul><li><code><a href="../reference/get_dummies..Rd.html">get_dummies.()</a></code></li>
-<li><code><a href="../reference/fill..Rd.html">fill.()</a></code></li>
-<li><code><a href="../reference/slice..Rd.html">slice.()</a></code></li>
+<ul><li><code><a href="../reference/get_dummies..html">get_dummies.()</a></code></li>
+<li><code><a href="../reference/fill..html">fill.()</a></code></li>
+<li><code><a href="../reference/slice..html">slice.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="bug-fixes-0-5-7">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-5-7"></a></h5>
 <ul><li>
-<code><a href="../reference/mutate..Rd.html">mutate.()</a></code>: Can delete a column using <code>NULL</code> when <code>.by</code> is provided (<a href="https://github.com/markfairbanks/tidytable/issues/151" class="external-link">#151</a>)</li>
+<code><a href="../reference/mutate..html">mutate.()</a></code>: Can delete a column using <code>NULL</code> when <code>.by</code> is provided (<a href="https://github.com/markfairbanks/tidytable/issues/151" class="external-link">#151</a>)</li>
 <li>
-<code><a href="../reference/mutate_across..Rd.html">mutate_across.()</a></code>: Can reference other columns in .fns call (<a href="https://github.com/markfairbanks/tidytable/issues/145" class="external-link">#145</a>)</li>
+<code><a href="../reference/mutate_across..html">mutate_across.()</a></code>: Can reference other columns in .fns call (<a href="https://github.com/markfairbanks/tidytable/issues/145" class="external-link">#145</a>)</li>
 <li>
-<code><a href="../reference/slice..Rd.html">slice.()</a></code>: Works when <code>.by</code> contains all columns (<a href="https://github.com/markfairbanks/tidytable/issues/158" class="external-link">#158</a>)</li>
+<code><a href="../reference/slice..html">slice.()</a></code>: Works when <code>.by</code> contains all columns (<a href="https://github.com/markfairbanks/tidytable/issues/158" class="external-link">#158</a>)</li>
 <li>
-<code><a href="../reference/unnest..Rd.html">unnest.()</a></code>: Works when the only column is the list column (<a href="https://github.com/markfairbanks/tidytable/issues/144" class="external-link">#144</a>)</li>
+<code><a href="../reference/unnest..html">unnest.()</a></code>: Works when the only column is the list column (<a href="https://github.com/markfairbanks/tidytable/issues/144" class="external-link">#144</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -487,40 +501,40 @@
 <div class="section level5">
 <h5 id="breaking-changes-0-5-6">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-5-6"></a></h5>
 <ul><li>
-<code><a href="../reference/bind_cols..Rd.html">bind_cols.()</a></code>: Name repair uses <code>vec_as_names()</code> instead of <code>vec_as_names_legacy()</code>
+<code><a href="../reference/bind_cols..html">bind_cols.()</a></code>: Name repair uses <code>vec_as_names()</code> instead of <code>vec_as_names_legacy()</code>
 </li>
 </ul></div>
 <div class="section level5">
 <h5 id="functionality-improvements-0-5-6">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-5-6"></a></h5>
 <ul><li>
-<code><a href="../reference/bind_cols..Rd.html">bind_cols.()</a></code>: Added <code>.name_repair</code> arg</li>
+<code><a href="../reference/bind_cols..html">bind_cols.()</a></code>: Added <code>.name_repair</code> arg</li>
 <li>
-<code><a href="../reference/unnest..Rd.html">unnest.()</a></code>: Added <code>names_sep</code> and <code>names_repair</code> args</li>
+<code><a href="../reference/unnest..html">unnest.()</a></code>: Added <code>names_sep</code> and <code>names_repair</code> args</li>
 <li>
 <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code>
 <ul><li>Added <code>n</code>, <code>width</code>, and <code>n_extra</code> args</li>
 <li>Now prints like tibbles in all cases (special thanks to <a href="https://github.com/moutikabdessabour" class="external-link">@moutikabdessabour</a>)</li>
 </ul></li>
 <li>
-<code><a href="../reference/slice..Rd.html">slice.()</a></code>: Can now drop specified rows with negative numbers</li>
+<code><a href="../reference/slice..html">slice.()</a></code>: Can now drop specified rows with negative numbers</li>
 </ul></div>
 <div class="section level5">
 <h5 id="new-functions-0-5-6">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-5-6"></a></h5>
-<ul><li><code><a href="../reference/arrange_across..Rd.html">arrange_across.()</a></code></li>
+<ul><li><code><a href="../reference/arrange_across..html">arrange_across.()</a></code></li>
 <li>
-<code><a href="../reference/case_when..Rd.html">case_when.()</a></code>
-<ul><li>The old “case when” translation <code><a href="../reference/case..Rd.html">case.()</a></code> will remain in the package, as it is called like <code><a href="https://Rdatatable.gitlab.io/data.table/reference/fcase.html" class="external-link">data.table::fcase()</a></code> but allows for the <code>default</code> to be a vector.</li>
+<code><a href="../reference/case_when..html">case_when.()</a></code>
+<ul><li>The old “case when” translation <code><a href="../reference/case..html">case.()</a></code> will remain in the package, as it is called like <code><a href="https://Rdatatable.gitlab.io/data.table/reference/fcase.html" class="external-link">data.table::fcase()</a></code> but allows for the <code>default</code> to be a vector.</li>
 </ul></li>
-<li><code><a href="../reference/desc..Rd.html">desc.()</a></code></li>
+<li><code><a href="../reference/desc..html">desc.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="functions-with-notable-speed-improvements-0-5-6">Functions with notable speed improvements<a class="anchor" aria-label="anchor" href="#functions-with-notable-speed-improvements-0-5-6"></a></h5>
-<ul><li><code><a href="../reference/slice..Rd.html">slice.()</a></code></li>
+<ul><li><code><a href="../reference/slice..html">slice.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="deprecations-0-5-6">Deprecations<a class="anchor" aria-label="anchor" href="#deprecations-0-5-6"></a></h5>
 <ul><li>
-<code><a href="../reference/unnest..Rd.html">unnest.()</a></code>: <code>.keep_all</code> arg changed to <code>.drop</code>
+<code><a href="../reference/unnest..html">unnest.()</a></code>: <code>.keep_all</code> arg changed to <code>.drop</code>
 </li>
 </ul></div>
 </div>
@@ -529,70 +543,70 @@
 <div class="section level5">
 <h5 id="breaking-changes-0-5-5">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-5-5"></a></h5>
 <ul><li>
-<code><a href="../reference/bind_cols..Rd.html">bind_rows.()</a></code>: Removed <code>.use_names</code> and <code>.fill</code> args
+<code><a href="../reference/bind_cols..html">bind_rows.()</a></code>: Removed <code>.use_names</code> and <code>.fill</code> args
 <ul><li>These are now assumed to be <code>TRUE</code>, which matches <code>dplyr</code> semantics.</li>
 </ul></li>
 <li>
-<code><a href="../reference/complete..Rd.html">complete.()</a></code>: <code>.fill</code> arg renamed to <code>fill</code>
+<code><a href="../reference/complete..html">complete.()</a></code>: <code>.fill</code> arg renamed to <code>fill</code>
 </li>
 <li>
-<code><a href="../reference/pull..Rd.html">pull.()</a></code>: defaults to <code>var = -1</code> instead of <code>var = NULL</code>
+<code><a href="../reference/pull..html">pull.()</a></code>: defaults to <code>var = -1</code> instead of <code>var = NULL</code>
 <ul><li>The result is the same when using the default value, but will break cases where <code>var = NULL</code> was explicitly called.</li>
 </ul></li>
 <li>
-<code><a href="../reference/slice..Rd.html">slice.()</a></code>: <code>.by</code> must be named when slicing by group</li>
+<code><a href="../reference/slice..html">slice.()</a></code>: <code>.by</code> must be named when slicing by group</li>
 </ul></div>
 <div class="section level5">
 <h5 id="functionality-improvements-0-5-5">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-5-5"></a></h5>
 <ul><li>
 <code>tidytable</code> now integrates better with tidyverse functions through <code>vctrs</code>. This means code such as <code>vec_cbind(tibble::tibble(x = 1:3), tidytable(y = "foo"))</code> will bind the results into a tidytable.</li>
 <li>
-<code><a href="../reference/complete..Rd.html">complete.()</a></code>: Can now append extra values</li>
+<code><a href="../reference/complete..html">complete.()</a></code>: Can now append extra values</li>
 <li>
-<code><a href="../reference/pull..Rd.html">pull.()</a></code>: Numerical selection now works</li>
+<code><a href="../reference/pull..html">pull.()</a></code>: Numerical selection now works</li>
 <li>
-<code><a href="../reference/slice..Rd.html">slice.()</a></code>: Now uses <code>...</code> to select which rows to slice</li>
+<code><a href="../reference/slice..html">slice.()</a></code>: Now uses <code>...</code> to select which rows to slice</li>
 </ul></div>
 <div class="section level5">
 <h5 id="new-functions-0-5-5">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-5-5"></a></h5>
-<ul><li><code><a href="../reference/left_join..Rd.html">semi_join.()</a></code></li>
+<ul><li><code><a href="../reference/left_join..html">semi_join.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="bug-fixes-0-5-5">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-5-5"></a></h5>
 <ul><li>
-<code><a href="../reference/rename..Rd.html">rename.()</a></code>: Works when there are spaces in the column names (<a href="https://github.com/markfairbanks/tidytable/issues/109" class="external-link">#109</a>)</li>
+<code><a href="../reference/rename..html">rename.()</a></code>: Works when there are spaces in the column names (<a href="https://github.com/markfairbanks/tidytable/issues/109" class="external-link">#109</a>)</li>
 </ul></div>
 <div class="section level5">
 <h5 id="functions-with-notable-speed-improvements-0-5-5">Functions with notable speed improvements<a class="anchor" aria-label="anchor" href="#functions-with-notable-speed-improvements-0-5-5"></a></h5>
-<ul><li><code><a href="../reference/replace_na..Rd.html">replace_na.()</a></code></li>
+<ul><li><code><a href="../reference/replace_na..html">replace_na.()</a></code></li>
 </ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.5.4" id="tidytable-054">tidytable 0.5.4<small>2020-08-10</small><a class="anchor" aria-label="anchor" href="#tidytable-054"></a></h2>
 <div class="section level5">
 <h5 id="breaking-changes-0-5-4">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-5-4"></a></h5>
-<ul><li>Column names auto-generated by <code><a href="../reference/summarize_across..Rd.html">summarize_across.()</a></code> now use a suffix instead of a prefix</li>
+<ul><li>Column names auto-generated by <code><a href="../reference/summarize_across..html">summarize_across.()</a></code> now use a suffix instead of a prefix</li>
 </ul></div>
 <div class="section level5">
 <h5 id="functionality-improvements-0-5-4">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-5-4"></a></h5>
 <ul><li>
-<code><a href="../reference/mutate_across..Rd.html">mutate_across.()</a></code>: Added <code>.names</code> arg to help with naming newly created columns</li>
+<code><a href="../reference/mutate_across..html">mutate_across.()</a></code>: Added <code>.names</code> arg to help with naming newly created columns</li>
 <li>
-<code><a href="../reference/summarize_across..Rd.html">summarize_across.()</a></code>: Added <code>.names</code> arg to help with naming newly created columns</li>
+<code><a href="../reference/summarize_across..html">summarize_across.()</a></code>: Added <code>.names</code> arg to help with naming newly created columns</li>
 <li>
-<code><a href="../reference/summarize..Rd.html">summarize.()</a></code>: Added <code>.sort</code> arg to optionally sort the resulting data.table</li>
+<code><a href="../reference/summarize..html">summarize.()</a></code>: Added <code>.sort</code> arg to optionally sort the resulting data.table</li>
 </ul></div>
 <div class="section level5">
 <h5 id="bug-fixes-0-5-4">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-5-4"></a></h5>
 <ul><li>
-<code><a href="../reference/transmute..Rd.html">transmute.()</a></code>: Doesn’t drop “by” columns (<a href="https://github.com/markfairbanks/tidytable/issues/98" class="external-link">#98</a>)</li>
+<code><a href="../reference/transmute..html">transmute.()</a></code>: Doesn’t drop “by” columns (<a href="https://github.com/markfairbanks/tidytable/issues/98" class="external-link">#98</a>)</li>
 <li>
-<code><a href="../reference/slice..Rd.html">slice.()</a></code>
+<code><a href="../reference/slice..html">slice.()</a></code>
 <ul><li>Allows gaps in <code>rows</code> arg (<a href="https://github.com/markfairbanks/tidytable/issues/99" class="external-link">#99</a>)</li>
 <li>Doesn’t reorder columns when using <code>.by</code> (<a href="https://github.com/markfairbanks/tidytable/issues/101" class="external-link">#101</a>)</li>
 </ul></li>
 <li>
-<code><a href="../reference/left_join..Rd.html">full_join.()</a></code>: No longer returns a keyed data.table (<a href="https://github.com/markfairbanks/tidytable/issues/102" class="external-link">#102</a>)</li>
+<code><a href="../reference/left_join..html">full_join.()</a></code>: No longer returns a keyed data.table (<a href="https://github.com/markfairbanks/tidytable/issues/102" class="external-link">#102</a>)</li>
 </ul></div>
 <div class="section level5">
 <h5 id="internal-0-5-4">Internal<a class="anchor" aria-label="anchor" href="#internal-0-5-4"></a></h5>
@@ -609,7 +623,7 @@
 <div class="section level5">
 <h5 id="breaking-changes-0-5-3">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-5-3"></a></h5>
 <ul><li>
-<code><a href="../reference/bind_cols..Rd.html">bind_rows.()</a></code>
+<code><a href="../reference/bind_cols..html">bind_rows.()</a></code>
 <ul><li>
 <code>use.names</code> arg renamed to <code>.use_names</code>
 </li>
@@ -620,21 +634,21 @@
 </ul></div>
 <div class="section level5">
 <h5 id="new-functions-0-5-3">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-5-3"></a></h5>
-<ul><li><code><a href="../reference/complete..Rd.html">complete.()</a></code></li>
-<li><code><a href="../reference/crossing..Rd.html">crossing.()</a></code></li>
-<li><code><a href="../reference/expand..Rd.html">expand.()</a></code></li>
-<li><code><a href="../reference/expand_grid..Rd.html">expand_grid.()</a></code></li>
-<li><code><a href="../reference/uncount..Rd.html">uncount.()</a></code></li>
+<ul><li><code><a href="../reference/complete..html">complete.()</a></code></li>
+<li><code><a href="../reference/crossing..html">crossing.()</a></code></li>
+<li><code><a href="../reference/expand..html">expand.()</a></code></li>
+<li><code><a href="../reference/expand_grid..html">expand_grid.()</a></code></li>
+<li><code><a href="../reference/uncount..html">uncount.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="functionality-improvements-0-5-3">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-5-3"></a></h5>
 <ul><li>
-<code><a href="../reference/replace_na..Rd.html">replace_na.()</a></code>: Now works on <code>data.frame</code>/<code>data.table</code> inputs as well as vectors</li>
+<code><a href="../reference/replace_na..html">replace_na.()</a></code>: Now works on <code>data.frame</code>/<code>data.table</code> inputs as well as vectors</li>
 </ul></div>
 <div class="section level5">
 <h5 id="deprecations-0-5-3">Deprecations<a class="anchor" aria-label="anchor" href="#deprecations-0-5-3"></a></h5>
 <ul><li>
-<code><a href="../reference/desc..Rd.html">desc.()</a></code> has been deprecated due to incompatibility with character columns</li>
+<code><a href="../reference/desc..html">desc.()</a></code> has been deprecated due to incompatibility with character columns</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -642,17 +656,17 @@
 <ul><li>This version contains general performance improvements</li>
 </ul><div class="section level5">
 <h5 id="deprecations-0-5-2">Deprecations<a class="anchor" aria-label="anchor" href="#deprecations-0-5-2"></a></h5>
-<ul><li>Group by arg <code>by</code> has been deprecated for <code>.by</code>. This will allow “by” to be used as a column name in <code><a href="../reference/mutate..Rd.html">mutate.()</a></code> &amp; <code><a href="../reference/summarize..Rd.html">summarize.()</a></code> in future releases.</li>
+<ul><li>Group by arg <code>by</code> has been deprecated for <code>.by</code>. This will allow “by” to be used as a column name in <code><a href="../reference/mutate..html">mutate.()</a></code> &amp; <code><a href="../reference/summarize..html">summarize.()</a></code> in future releases.</li>
 <li>All <code>dt_verb()</code> functions are soft deprecated</li>
 </ul></div>
 <div class="section level5">
 <h5 id="new-functions-0-5-2">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-5-2"></a></h5>
-<ul><li><code><a href="../reference/separate_rows..Rd.html">separate_rows.()</a></code></li>
+<ul><li><code><a href="../reference/separate_rows..html">separate_rows.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="functionality-improvements-0-5-2">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-5-2"></a></h5>
 <ul><li>
-<code><a href="../reference/unnest..Rd.html">unnest.()</a></code>: Added <code>.keep_all</code> arg to keep all list columns that were not unnested</li>
+<code><a href="../reference/unnest..html">unnest.()</a></code>: Added <code>.keep_all</code> arg to keep all list columns that were not unnested</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -660,12 +674,12 @@
 <div class="section level5">
 <h5 id="new-functions-0-5-1">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-5-1"></a></h5>
 <ul><li>
-<code><a href="../reference/summarize_across..Rd.html">summarize_across.()</a></code> &amp; <code><a href="../reference/summarize_across..Rd.html">summarise_across.()</a></code>
+<code><a href="../reference/summarize_across..html">summarize_across.()</a></code> &amp; <code><a href="../reference/summarize_across..html">summarise_across.()</a></code>
 </li>
 </ul></div>
 <div class="section level5">
 <h5 id="bug-fixes-0-5-1">Bug fixes:<a class="anchor" aria-label="anchor" href="#bug-fixes-0-5-1"></a></h5>
-<ul><li>Fixed <code><a href="../reference/distinct..Rd.html">distinct.()</a></code> bug where it wasn’t returning unique rows</li>
+<ul><li>Fixed <code><a href="../reference/distinct..html">distinct.()</a></code> bug where it wasn’t returning unique rows</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -678,31 +692,31 @@
 </ul><div class="section level5">
 <h5 id="functionality-improvements-0-5-0">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-5-0"></a></h5>
 <ul><li>
-<code><a href="../reference/nest_by..Rd.html">nest_by.()</a></code>: Added <code>.keep</code> arg</li>
+<code><a href="../reference/nest_by..html">nest_by.()</a></code>: Added <code>.keep</code> arg</li>
 </ul></div>
 <div class="section level5">
 <h5 id="deprecations-0-5-0">Deprecations<a class="anchor" aria-label="anchor" href="#deprecations-0-5-0"></a></h5>
 <ul><li>Old select helpers like <code>everything.()</code> are now replaced by normal helpers like <code><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything()</a></code>
 </li>
 <li>
-<code>rename_across/_if/_at/_all</code> have been superseded by <code><a href="../reference/rename_with..Rd.html">rename_with.()</a></code>
+<code>rename_across/_if/_at/_all</code> have been superseded by <code><a href="../reference/rename_with..html">rename_with.()</a></code>
 </li>
 </ul></div>
 <div class="section level5">
 <h5 id="breaking-changes-0-5-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-5-0"></a></h5>
 <ul><li>
-<code><a href="../reference/group_split..Rd.html">group_split.()</a></code>: <code>keep</code> arg renamed to <code>.keep</code>
+<code><a href="../reference/group_split..html">group_split.()</a></code>: <code>keep</code> arg renamed to <code>.keep</code>
 </li>
 </ul></div>
 <div class="section level5">
 <h5 id="new-functions-0-5-0">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-5-0"></a></h5>
 <ul><li>
-<code><a href="../reference/lags..Rd.html">lags.()</a></code> &amp; <code><a href="../reference/lags..Rd.html">leads.()</a></code>
+<code><a href="../reference/lags..html">lags.()</a></code> &amp; <code><a href="../reference/lags..html">leads.()</a></code>
 </li>
 </ul></div>
 <div class="section level5">
 <h5 id="functions-with-notable-speed-improvements-0-5-0">Functions with notable speed improvements<a class="anchor" aria-label="anchor" href="#functions-with-notable-speed-improvements-0-5-0"></a></h5>
-<ul><li><code><a href="../reference/case..Rd.html">case.()</a></code></li>
+<ul><li><code><a href="../reference/case..html">case.()</a></code></li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -713,48 +727,48 @@
 </ul><div class="section level5">
 <h5 id="breaking-changes-0-4-1">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-4-1"></a></h5>
 <ul><li>
-<code><a href="../reference/get_dummies..Rd.html">get_dummies.()</a></code>: <code>cols</code> arg defaults to <code>c(is.character, is.factor)</code>. The result is the same, but is more consistent with other enhanced selection functions</li>
+<code><a href="../reference/get_dummies..html">get_dummies.()</a></code>: <code>cols</code> arg defaults to <code>c(is.character, is.factor)</code>. The result is the same, but is more consistent with other enhanced selection functions</li>
 <li>
-<code><a href="../reference/mutate_across..Rd.html">mutate_across.()</a></code>: <code>.funs</code> argument renamed to <code>.fns</code> to match dplyr 1.0</li>
+<code><a href="../reference/mutate_across..html">mutate_across.()</a></code>: <code>.funs</code> argument renamed to <code>.fns</code> to match dplyr 1.0</li>
 </ul></div>
 <div class="section level5">
 <h5 id="new-functions-0-4-1">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-4-1"></a></h5>
-<ul><li><code><a href="../reference/desc..Rd.html">desc.()</a></code></li>
-<li><code><a href="../reference/unite..Rd.html">unite.()</a></code></li>
+<ul><li><code><a href="../reference/desc..html">desc.()</a></code></li>
+<li><code><a href="../reference/unite..html">unite.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="functionality-improvements-0-4-1">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-4-1"></a></h5>
 <ul><li>Paged printing now works in Rmarkdown</li>
 <li>
-<code><a href="../reference/bind_cols..Rd.html">bind_rows.()</a></code>: Does name checking and fills missing</li>
+<code><a href="../reference/bind_cols..html">bind_rows.()</a></code>: Does name checking and fills missing</li>
 <li>
-<code><a href="../reference/distinct..Rd.html">distinct.()</a></code>: Added <code>.keep_all</code> argument</li>
+<code><a href="../reference/distinct..html">distinct.()</a></code>: Added <code>.keep_all</code> argument</li>
 <li>
-<code><a href="../reference/fill..Rd.html">fill.()</a></code>: Preserves column order when using “by”</li>
+<code><a href="../reference/fill..html">fill.()</a></code>: Preserves column order when using “by”</li>
 <li>
-<code><a href="../reference/group_split..Rd.html">group_split.()</a></code>: Added <code>keep</code> arg</li>
+<code><a href="../reference/group_split..html">group_split.()</a></code>: Added <code>keep</code> arg</li>
 <li>
-<code><a href="../reference/nest_by..Rd.html">nest_by.()</a></code>
+<code><a href="../reference/nest_by..html">nest_by.()</a></code>
 <ul><li>Can now unnest multiple columns in one call</li>
 <li>data.tables in a list column can now have different ncols and different column order</li>
 </ul></li>
 <li>
-<code><a href="../reference/select..Rd.html">select.()</a></code>: Now allows column renaming</li>
+<code><a href="../reference/select..html">select.()</a></code>: Now allows column renaming</li>
 <li>
-<code><a href="../reference/transmute..Rd.html">transmute.()</a></code>: Summary functions (<code>mean</code>/<code>max</code>/etc.) can now be used</li>
+<code><a href="../reference/transmute..html">transmute.()</a></code>: Summary functions (<code>mean</code>/<code>max</code>/etc.) can now be used</li>
 </ul></div>
 <div class="section level5">
 <h5 id="functions-with-notable-speed-improvements-0-4-1">Functions with notable speed improvements<a class="anchor" aria-label="anchor" href="#functions-with-notable-speed-improvements-0-4-1"></a></h5>
-<ul><li><code><a href="../reference/distinct..Rd.html">distinct.()</a></code></li>
-<li><code><a href="../reference/drop_na..Rd.html">drop_na.()</a></code></li>
-<li><code><a href="../reference/relocate..Rd.html">relocate.()</a></code></li>
+<ul><li><code><a href="../reference/distinct..html">distinct.()</a></code></li>
+<li><code><a href="../reference/drop_na..html">drop_na.()</a></code></li>
+<li><code><a href="../reference/relocate..html">relocate.()</a></code></li>
 </ul></div>
 <div class="section level5">
 <h5 id="bug-fixes-0-4-1">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-1"></a></h5>
 <ul><li>
-<code><a href="../reference/group_split..Rd.html">group_split.()</a></code>: Now returns a list of tidytables instead of data.tables</li>
+<code><a href="../reference/group_split..html">group_split.()</a></code>: Now returns a list of tidytables instead of data.tables</li>
 <li>
-<code><a href="../reference/left_join..Rd.html">left_join.()</a></code>: Now works with “by” columns of different names</li>
+<code><a href="../reference/left_join..html">left_join.()</a></code>: Now works with “by” columns of different names</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -770,32 +784,32 @@
 <h5 id="functionality-improvements-0-4-0">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-4-0"></a></h5>
 <ul><li>Enhanced selection now works in “by” calls</li>
 <li>
-<code><a href="../reference/filter..Rd.html">filter.()</a></code> now works with “by”</li>
+<code><a href="../reference/filter..html">filter.()</a></code> now works with “by”</li>
 <li>
-<code><a href="../reference/pivot_wider..Rd.html">pivot_wider.()</a></code> can now be used with an aggregation function</li>
+<code><a href="../reference/pivot_wider..html">pivot_wider.()</a></code> can now be used with an aggregation function</li>
 <li>
-<code><a href="../reference/pull..Rd.html">pull.()</a></code> defaults to last column in a data.table</li>
+<code><a href="../reference/pull..html">pull.()</a></code> defaults to last column in a data.table</li>
 </ul></div>
 <div class="section level5">
 <h5 id="new-functions-0-4-0">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-4-0"></a></h5>
-<ul><li><code><a href="../reference/ifelse..Rd.html">ifelse.()</a></code></li>
-<li><code><a href="../reference/n..Rd.html">n.()</a></code></li>
+<ul><li><code><a href="../reference/ifelse..html">ifelse.()</a></code></li>
+<li><code><a href="../reference/n..html">n.()</a></code></li>
 <li>
-<code><a href="../reference/nest_by..Rd.html">nest_by.()</a></code> replaces <code>dt_group_nest()</code>
+<code><a href="../reference/nest_by..html">nest_by.()</a></code> replaces <code>dt_group_nest()</code>
 </li>
-<li><code><a href="../reference/row_number..Rd.html">row_number.()</a></code></li>
-<li><code><a href="../reference/transmute..Rd.html">transmute.()</a></code></li>
+<li><code><a href="../reference/row_number..html">row_number.()</a></code></li>
+<li><code><a href="../reference/transmute..html">transmute.()</a></code></li>
 <li>
-<code><a href="../reference/unnest..Rd.html">unnest.()</a></code> replaces <code>dt_unnest_legacy()</code>
+<code><a href="../reference/unnest..html">unnest.()</a></code> replaces <code>dt_unnest_legacy()</code>
 </li>
 <li>Select helper <code>any_of.()</code>
 </li>
 </ul></div>
 <div class="section level5">
 <h5 id="functions-with-notable-speed-improvements-0-4-0">Functions with notable speed improvements<a class="anchor" aria-label="anchor" href="#functions-with-notable-speed-improvements-0-4-0"></a></h5>
-<ul><li><code><a href="../reference/fill..Rd.html">fill.()</a></code></li>
-<li><code><a href="../reference/pivot_longer..Rd.html">pivot_longer.()</a></code></li>
-<li><code><a href="../reference/unnest..Rd.html">unnest.()</a></code></li>
+<ul><li><code><a href="../reference/fill..html">fill.()</a></code></li>
+<li><code><a href="../reference/pivot_longer..html">pivot_longer.()</a></code></li>
+<li><code><a href="../reference/unnest..html">unnest.()</a></code></li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -870,7 +884,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
 </div>
 
       </footer></div>
