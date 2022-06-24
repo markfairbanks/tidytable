@@ -49,7 +49,7 @@ expand_across <- function(.fns, .cols, .names, dots) {
 
 # Generate expression from function call
 fn_to_expr <- function(.fn, .col, ...) {
-  if (is_symbol(.fn) || is_string(.fn) || is_call(.fn, "function")) {
+  if (is_symbol(.fn) || is_string(.fn) || is_call(.fn, c("function", "::"))) {
     call2(.fn, sym(.col), ...)
   } else if (is_call(.fn, "~")) {
     call <- f_rhs(.fn)
