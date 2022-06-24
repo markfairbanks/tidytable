@@ -202,6 +202,16 @@ test_that(".cols detects environment variables in custom functions, #389", {
   expect_equal(out$y, c("1", "2", "3"))
 })
 
+test_that("can namespace functions, #511", {
+  df <- tidytable(x = 1:3, y = 1:3)
+
+  res <- df %>%
+    summarize.(across.(.fns = base::mean))
+
+  expect_equal(res$x, 2)
+  expect_equal(res$y, 2)
+})
+
 # summarize -----------------------------------------------------
 test_that("single function works", {
   test_df <- tidytable(a = c(1:2, NA), b = 4:6, z = c("a", "a", "b"))

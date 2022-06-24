@@ -6,6 +6,7 @@
   
 #### Bug Fixes
 * Nested calls to `across.()` are handled properly (#505)
+* Can namespace functions in `.fns` arg (#511)
 
 # tidytable 0.8.0
 
