@@ -56,13 +56,9 @@ expand..data.frame <- function(.df, ..., .name_repair = "check_unique", .by = NU
 expand_df <- function(.df, ..., .name_repair = .name_repair) {
   dots <- enquos(...)
 
-  dt_env <- get_dt_env(dots)
+  expr <- call2("crossing.", !!!dots, .name_repair = .name_repair, .ns = "tidytable")
 
-  dots <- map.(dots, quo_squash)
-
-  out <- call2("crossing.", !!!dots, .name_repair = .name_repair, .ns = "tidytable")
-
-  eval_tidy(out, .df, dt_env)
+  eval_tidy(expr, .df)
 }
 
 #' @export
