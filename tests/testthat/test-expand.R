@@ -116,6 +116,13 @@ test_that("Works with .by", {
 
 # nesting() ---------------------------------------------------
 test_that("nesting works", {
+  out <- nesting.(x = c(2, 1, 1), y = c(2, 1, 1))
+  expect_named(out, c("x", "y"))
+  expect_equal(out$x, c(1, 2))
+  expect_equal(out$y, c(1, 2))
+})
+
+test_that("nesting works in expand", {
   df <- tidytable(x = c(1, 1, 2), y = c(1, 1, 2))
   out <- expand.(df, nesting.(x, y))
   expect_equal(out$x, c(1, 2))
