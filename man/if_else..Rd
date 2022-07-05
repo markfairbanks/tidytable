@@ -4,7 +4,7 @@
 \alias{if_else.}
 \title{Fast if_else}
 \usage{
-if_else.(condition, true, false, missing = NA)
+if_else.(condition, true, false, missing = NA, ..., ptype = NULL, size = NULL)
 }
 \arguments{
 \item{condition}{Conditions to test on}
@@ -14,10 +14,15 @@ if_else.(condition, true, false, missing = NA)
 \item{false}{Values to return if conditions evaluate to \code{FALSE}}
 
 \item{missing}{Value to return if an element of test is \code{NA}}
+
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{ptype}{Optional ptype to override output type}
+
+\item{size}{Optional size to override output size}
 }
 \description{
-\code{if_else.()} utilizes \code{data.table::fifelse()} in the background, but automatically
-converts \code{NA}s to their proper type.
+Fast version of \code{base::ifelse()}.
 }
 \examples{
 x <- 1:5

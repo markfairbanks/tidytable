@@ -1,13 +1,15 @@
 #' Fast if_else
 #'
 #' @description
-#' `if_else.()` utilizes `data.table::fifelse()` in the background, but automatically
-#' converts `NA`s to their proper type.
+#' Fast version of `base::ifelse()`.
 #'
 #' @param condition Conditions to test on
 #' @param true Values to return if conditions evaluate to `TRUE`
 #' @param false Values to return if conditions evaluate to `FALSE`
 #' @param missing Value to return if an element of test is `NA`
+#' @inheritParams rlang::args_dots_empty
+#' @param ptype Optional ptype to override output type
+#' @param size Optional size to override output size
 #'
 #' @export
 #'
@@ -20,19 +22,22 @@
 #'
 #' df %>%
 #'   mutate.(new_col = if_else.(x < 3, 1, 0))
-if_else. <- function(condition, true, false, missing = NA) {
-  ptype <- vec_ptype_common(true, false, missing)
-
+if_else. <- function(condition, true, false, missing = NA, ..., ptype = NULL, size = NULL) {
   args <- vec_cast_common(true = true, false = false, missing = missing, .to = ptype)
 
-  fifelse(condition, args$true, args$false, args$missing)
+  out <- fifelse(condition, args$true, args$false, args$missing)
+
+  if (!is.null(size)) {
+    out <- vec_recycle(out, size)
+  }
+
+  out
 }
 
 #' Fast ifelse
 #'
 #' @description
-#' `ifelse.()` utilizes `data.table::fifelse()` in the background, but automatically
-#' converts `NA`s to their proper type.
+#' Fast version of `base::ifelse()`.
 #'
 #' @param conditions Conditions to test on
 #' @param true Values to return if conditions evaluate to `TRUE`
