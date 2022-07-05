@@ -1,5 +1,8 @@
 # tidytable 0.8.1 (in development)
 
+#### Functionality improvements
+* `case_when.()`: Gains `.default`/`.ptype`/`.size` args
+
 #### New Functions
 * `if_else.()`
   * Note: Alternate syntax `ifelse.()` (introduced in v0.4.0) will remain in the package
