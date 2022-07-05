@@ -16,8 +16,7 @@ ifelse.(conditions, true, false, na = NA)
 \item{na}{Value to return if an element of test is \code{NA}}
 }
 \description{
-\code{ifelse.()} utilizes \code{data.table::fifelse()} in the background, but automatically
-converts \code{NA}s to their proper type.
+Fast version of \code{base::ifelse()}.
 }
 \examples{
 x <- 1:5
