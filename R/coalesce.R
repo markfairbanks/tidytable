@@ -4,12 +4,14 @@
 #' Fill in missing values in a vector by pulling successively from other vectors.
 #'
 #' @param ... Input vectors. Supports dynamic dots.
+#' @param .ptype Optional ptype to override output type
+#' @param .size Optional size to override output size
 #'
 #' @export
 #'
 #' @examples
 #' # Use a single value to replace all missing values
-#' x <- sample(c(1:5, NA, NA, NA))
+#' x <- c(1:3, NA, NA)
 #' coalesce.(x, 0)
 #'
 #' # Or match together a complete vector from missing pieces
@@ -23,9 +25,15 @@
 #'   c(NA, NA, 3, 4, 5)
 #' )
 #' coalesce.(!!!vecs)
-coalesce. <- function(...) {
-  values <- list2(...)
-  values <- vec_cast_common(!!!values)
+coalesce. <- function(..., .ptype = NULL, .size = NULL) {
+  args <- list2(...)
+  args <- vec_cast_common(!!!args, .to = .ptype)
 
-  do.call(fcoalesce, values)
+  out <- do.call(fcoalesce, args)
+
+  if (!is.null(.size)) {
+    out <- vec_recycle(out, .size)
+  }
+
+  out
 }
