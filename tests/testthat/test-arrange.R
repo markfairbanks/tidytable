@@ -111,3 +111,12 @@ test_that("can use a mutate expression", {
 
   expect_equal(res$x, 3:1)
 })
+
+test_that("can use `.env`", {
+  df <- data.table(x = c(4,3,9,7))
+  y <- 1
+  res <- df %>%
+    arrange.(x + .env$y)
+
+  expect_equal(res$x, c(3,4,7,9))
+})

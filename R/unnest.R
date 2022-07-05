@@ -147,8 +147,7 @@ keep_empty_prep <- function(.l) {
   if (is_vec) {
     .replace <- NA
   } else {
-    null_df <- vec_slice(.check_data, 1)
-    null_df <- vec_assign(null_df, 1, NA)
+    null_df <- vec_init(.check_data, 1)
 
     .replace <- list(null_df)
   }

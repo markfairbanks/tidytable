@@ -1,6 +1,7 @@
 # tidytable 0.8.1 (in development)
 
 #### Functionality improvements
+* `arrange.()`: Can use `.env` inside arrange expressions
 * `case_when.()`: Gains `.default`/`.ptype`/`.size` args
 
 #### New Functions
