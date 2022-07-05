@@ -7,7 +7,7 @@ test_that("case_when. works", {
     TRUE ~ 3
   )
 
-  expect_equal(case_x, c(1,1,2,3,3))
+  expect_equal(case_x, c(1, 1, 2, 3, 3))
 })
 
 test_that("case_when. isn't tripped up by NA results v1", {
@@ -18,7 +18,7 @@ test_that("case_when. isn't tripped up by NA results v1", {
                                x < 2 ~  2,
                                TRUE ~ 0))
 
-  expect_equal(case_df$check, c(2,1,2,0))
+  expect_equal(case_df$check, c(2, 1, 2, 0))
 })
 
 test_that("case_when. isn't tripped up by NA results v2", {
@@ -29,7 +29,7 @@ test_that("case_when. isn't tripped up by NA results v2", {
                                is.na(x) ~ 1,
                                TRUE ~ 0))
 
-  expect_equal(case_df$check, c(2,1,2,0))
+  expect_equal(case_df$check, c(2, 1, 2, 0))
 })
 
 test_that("dplyr::case_when() is replaced by tidytable::case_when.()", {
@@ -41,26 +41,36 @@ test_that("dplyr::case_when() is replaced by tidytable::case_when.()", {
                               is.na(x) ~ 1,
                               TRUE ~ 0))
 
-  expect_equal(case_df$check, c(2,1,2,0))
+  expect_equal(case_df$check, c(2, 1, 2, 0))
 })
 
 test_that("lower conditions don't overwrite prior conditions", {
-  x <- 1:10
+  x <- 1:5
 
-  new_x <- case_when.(x < 5 ~ 1,
-                      x < 9 ~ 2,
-                      TRUE ~ 3)
+  new_x <- case_when.(x < 2 ~ 1,
+                      x < 4 ~ 2,
+                      .default = 3)
 
-  expect_equal(new_x, c(1,1,1,1,2,2,2,2,3,3))
+  expect_equal(new_x, c(1, 2, 2, 3, 3))
 })
 
 test_that("multiple NAs can be used as inputs", {
-  x <- 1:10
+  x <- 1:5
 
-  new_x <- case_when.(x < 3 ~ 1,
-                      x < 6 ~ 2,
-                      x < 10 ~ NA,
-                      TRUE ~ NA)
+  new_x <- case_when.(x < 2 ~ 1,
+                      x < 4 ~ 2,
+                      x < 5 ~ NA,
+                      .default = NA)
 
-  expect_equal(new_x, c(1,1,2,2,2,NA,NA,NA,NA,NA))
+  expect_equal(new_x, c(1, 2, 2, NA, NA))
+})
+
+test_that("passes through `.ptype` correctly", {
+  res <- case_when.(TRUE ~ 1, .ptype = integer())
+  expect_identical(res, 1L)
+})
+
+test_that("passes through `.size` correctly", {
+  res <- case_when.(TRUE ~ 1, .size = 2)
+  expect_identical(res, c(1, 1))
 })
