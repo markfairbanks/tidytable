@@ -4,17 +4,21 @@
 \alias{coalesce.}
 \title{Coalesce missing values}
 \usage{
-coalesce.(...)
+coalesce.(..., .ptype = NULL, .size = NULL)
 }
 \arguments{
 \item{...}{Input vectors. Supports dynamic dots.}
+
+\item{.ptype}{Optional ptype to override output type}
+
+\item{.size}{Optional size to override output size}
 }
 \description{
 Fill in missing values in a vector by pulling successively from other vectors.
 }
 \examples{
 # Use a single value to replace all missing values
-x <- sample(c(1:5, NA, NA, NA))
+x <- c(1:3, NA, NA)
 coalesce.(x, 0)
 
 # Or match together a complete vector from missing pieces

@@ -3,6 +3,7 @@
 #### Functionality improvements
 * `arrange.()`: Can use `.env` inside arrange expressions
 * `case_when.()`: Gains `.default`/`.ptype`/`.size` args
+* `coalesce.()`: Gains `.ptype`/`.size` args
 
 #### New Functions
 * `if_else.()`
