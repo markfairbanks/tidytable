@@ -4,11 +4,17 @@
 \alias{case_when.}
 \title{Case when}
 \usage{
-case_when.(...)
+case_when.(..., .default = NA, .ptype = NULL, .size = NULL)
 }
 \arguments{
 \item{...}{A sequence of two-sided formulas. The left hand side gives the conditions,
 the right hand side gives the values.}
+
+\item{.default}{The default value if all conditions evaluate to \code{FALSE}.}
+
+\item{.ptype}{Optional ptype to specify the output type.}
+
+\item{.size}{Optional size to specify the output size.}
 }
 \description{
 This function allows you to use multiple if/else statements in one call.
