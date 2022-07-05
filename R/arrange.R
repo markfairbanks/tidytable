@@ -50,7 +50,7 @@ arrange..tidytable <- function(.df, ...) {
     dt_expr <- call2("[", dt_expr)
   }
 
-  eval_tidy(dt_expr)
+  eval_tidy(dt_expr, .df, dt_env)
 }
 
 #' @export
