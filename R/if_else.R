@@ -23,6 +23,8 @@
 #' df %>%
 #'   mutate.(new_col = if_else.(x < 3, 1, 0))
 if_else. <- function(condition, true, false, missing = NA, ..., ptype = NULL, size = NULL) {
+  check_dots_empty0(...)
+
   args <- vec_cast_common(true = true, false = false, missing = missing, .to = ptype)
 
   out <- fifelse(condition, args$true, args$false, args$missing)
