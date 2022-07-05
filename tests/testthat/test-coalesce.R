@@ -17,3 +17,13 @@ test_that("finds non-missing values in multiple positions", {
 
   expect_equal(coalesce.(x1, x2, x3), 1:3)
 })
+
+test_that("can specify ptype", {
+  x <- NA
+  expect_equal(coalesce.(x, 1, .ptype = integer()), 1L)
+})
+
+test_that("can specify output size", {
+  x <- NA
+  expect_equal(coalesce.(x, 1, .size = 2), c(1, 1))
+})
