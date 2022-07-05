@@ -39,6 +39,7 @@ case. <- function(..., default = NA) {
   pairs <- vec_interleave(conditions, values)
 
   if (length(default) == 1) {
+    default <- vec_cast(default, ptype)
     out <- exec(fcase, !!!pairs, default = default)
   } else {
     .default_condition <- vec_recycle(TRUE, size)
