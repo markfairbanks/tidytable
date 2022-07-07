@@ -54,24 +54,11 @@ slice..tidytable <- function(.df, ..., .by = NULL) {
 
   dots <- prep_exprs(dots)
 
-  .by <- enquo(.by)
+  .by <- tidyselect_names(.df, {{ .by }})
 
-  by_is_null <- quo_is_null(.by)
+  i <- expr({.rows = c(!!!dots); .rows[data.table::between(.rows, -.N, .N)]})
 
-  if (by_is_null) {
-    i <- expr({.rows = c(!!!dots); .rows[data.table::between(.rows, -.N, .N)]})
-    dt_expr <- call2_i(.df, i)
-  } else {
-    .by <- tidyselect_names(.df, !!.by)
-
-    j <- expr(
-      {.rows = c(!!!dots);
-      .rows = .rows[data.table::between(.rows, -.N, .N)];
-      .I[.rows]}
-    )
-
-    dt_expr <- call2_fast_by_i(.df, j, .by)
-  }
+  dt_expr <- call2_i(.df, i, .by)
 
   eval_tidy(dt_expr, env = dt_env)
 }
@@ -98,13 +85,11 @@ slice_head..tidytable <- function(.df, n = 5, .by = NULL) {
 
   .by <- tidyselect_names(.df, {{ .by }})
 
-  j <- expr(.I[seq.int(min(!!n, .N))])
+  i <- expr(seq.int(min(!!n, .N)))
 
-  dt_expr <- call2_fast_by_i(.df, j, .by)
+  dt_expr <- call2_i(.df, i, .by)
 
-  .df <- eval_tidy(dt_expr, env = dt_env)
-
-  .df
+  eval_tidy(dt_expr, env = dt_env)
 }
 
 #' @export
@@ -129,13 +114,11 @@ slice_tail..tidytable <- function(.df, n = 5, .by = NULL) {
 
   .by <- tidyselect_names(.df, {{ .by }})
 
-  j <- expr(.I[seq.int(.N - min(!!n, .N) + 1, .N)])
+  i <- expr(seq.int(.N - min(!!n, .N) + 1, .N))
 
-  dt_expr <- call2_fast_by_i(.df, j, .by)
+  dt_expr <- call2_i(.df, i, .by)
 
-  .df <- eval_tidy(dt_expr, env = dt_env)
-
-  .df
+  eval_tidy(dt_expr, env = dt_env)
 }
 
 #' @export
