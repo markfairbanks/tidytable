@@ -4,15 +4,11 @@ dt_j <- function(.df, j, ...) {
   dt(.df, , !!j, ...)
 }
 
-# Create a call to `[.data.table` (i position)
-call2_i <- function(.df, i = NULL) {
-  # Use enquo(.df) to clean up error messages, #305
-  call2("[", enquo(.df), i)
-}
-
 # Create a call to `[.data.table` (j position)
 call2_j <- function(.df, j = NULL, .by = NULL, .keyby = NULL, ...) {
-  if (is.null(.keyby)) {
+  if (length(.by) == 0 && length(.keyby) == 0) {
+    dt_expr <- call2("[", enquo(.df), , j, ...)
+  } else if (is.null(.keyby)) {
     dt_expr <- call2("[", enquo(.df), , j, by = .by, ...)
   } else {
     dt_expr <- call2("[", enquo(.df), , j, keyby = .keyby, ...)
@@ -25,9 +21,20 @@ call2_j <- function(.df, j = NULL, .by = NULL, .keyby = NULL, ...) {
   dt_expr
 }
 
+# Create a call to `[.data.table` (i position)
+call2_i <- function(.df, i = NULL, .by = NULL) {
+  if (length(.by) == 0) {
+    # Use enquo(.df) to clean up error messages, #305
+    call2("[", enquo(.df), i)
+  } else {
+    call2_i_by(.df, i, .by)
+  }
+}
+
 # Uses fast by trick for i position using .I
 # For use in slice/filter
-call2_fast_by_i <- function(.df, j, .by) {
+call2_i_by <- function(.df, i, .by) {
+  j <- expr(.I[!!i])
   dt_expr <- call2_j(.df, j, .by)
   dt_expr <- call2("$", dt_expr, expr(V1))
   dt_expr <- call2_i(.df, dt_expr)
