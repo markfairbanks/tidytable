@@ -40,15 +40,9 @@ filter..tidytable <- function(.df, ..., .by = NULL) {
 
   i <- call_reduce(dots, "&")
 
-  if (quo_is_null(.by)) {
-    dt_expr <- call2_i(.df, i)
-  } else {
-    .by <- tidyselect_names(.df, !!.by)
+  .by <- tidyselect_names(.df, !!.by)
 
-    j <- expr(.I[!!i])
-
-    dt_expr <- call2_fast_by_i(.df, j, .by)
-  }
+  dt_expr <- call2_i(.df, i, .by)
 
   eval_tidy(dt_expr, .df, dt_env)
 }
