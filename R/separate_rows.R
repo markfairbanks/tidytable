@@ -30,12 +30,10 @@ separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert =
   vec_assert(sep, character(), 1)
   vec_assert(convert, logical(), 1)
 
-  col_order <- copy(names(.df))
+  col_order <- names(.df)
 
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
-
-  dt_env <- get_dt_env(dots)
 
   cols <- tidyselect_syms(.df, !!!dots)
 
