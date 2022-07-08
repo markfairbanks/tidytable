@@ -5,13 +5,13 @@ dt_j <- function(.df, j, ...) {
 }
 
 # Create a call to `[.data.table` (j position)
-call2_j <- function(.df, j = NULL, .by = NULL, .keyby = NULL, ...) {
-  if (length(.by) == 0 && length(.keyby) == 0) {
+call2_j <- function(.df, j = NULL, .by = NULL, .keyby = FALSE, ...) {
+  if (length(.by) == 0) {
     dt_expr <- call2("[", enquo(.df), , j, ...)
-  } else if (is.null(.keyby)) {
-    dt_expr <- call2("[", enquo(.df), , j, by = .by, ...)
+  } else if (.keyby) {
+    dt_expr <- call2("[", enquo(.df), , j, keyby = .by, ...)
   } else {
-    dt_expr <- call2("[", enquo(.df), , j, keyby = .keyby, ...)
+    dt_expr <- call2("[", enquo(.df), , j, by = .by, ...)
   }
 
   if (is_call(j, c(":=", "let"))) {
