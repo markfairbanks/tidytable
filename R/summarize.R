@@ -53,13 +53,9 @@ summarize..tidytable <- function(.df, ..., .by = NULL, .sort = TRUE) {
 
     .by <- tidyselect_names(.df, !!.by)
 
-    j <- expr(list(!!!dots))
+    j <- expr(.(!!!dots))
 
-    if (.sort) {
-      dt_expr <- call2_j(.df, j, .keyby = .by)
-    } else {
-      dt_expr <- call2_j(.df, j, .by = .by)
-    }
+    dt_expr <- call2_j(.df, j, .by, .sort)
 
     out <- eval_tidy(dt_expr, .df, dt_env)
 
