@@ -23,7 +23,7 @@ fast_copy <- function(x, new_cols = character()) {
         out[[col]] <- x[[col]]
       }
     }
-    out <- new_tidytable(out)
+    setDT(out)
     class <- copy(class(x))
     setattr(out, "class", class)
   } else {
