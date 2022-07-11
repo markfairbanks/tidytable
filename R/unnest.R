@@ -52,6 +52,10 @@ unnest..tidytable <- function(.df,
                               names_sep = NULL,
                               names_repair = "unique") {
   vec_assert(.drop, logical(), 1)
+  
+  if (vec_is_empty(.df)) {
+    return(.df)
+  }
 
   dots <- enquos(...)
 
