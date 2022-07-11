@@ -11,7 +11,8 @@
   
 #### Bug Fixes
 * Nested calls to `across.()` are handled properly (#505)
-* Can namespace functions in `.fns` arg (#511)
+* `across.()`: Can namespace functions in `.fns` arg (#511)
+* `as_tidytable()`: Can keep row names when converting a matrix (#527)
 
 # tidytable 0.8.0
 
