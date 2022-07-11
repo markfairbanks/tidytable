@@ -9,7 +9,7 @@
 #' @param x An R object
 #' @param .name_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details.
 #' @param .keep_rownames Default is `FALSE`. If `TRUE`, adds the input object's names as a separate
-#' column named `"rn"`. `.keep_rownames = "id"` names the column "id" instead.
+#'   column named `"rn"`. `.keep_rownames = "id"` names the column "id" instead.
 #' @param ... Additional arguments to be passed to or from other methods.
 #'
 #' @export
@@ -68,8 +68,12 @@ as_tidytable.list <- function(x, ...,
 }
 
 #' @export
-as_tidytable.default <- function(x, ...) {
-  add_tidytable_class(as.data.table(x))
+as_tidytable.default <- function(x, ...,
+                                 .name_repair = "unique",
+                                 .keep_rownames = FALSE) {
+  out <- as.data.table(x, .keep_rownames)
+  out <- add_tidytable_class(out)
+  df_name_repair(out, .name_repair = .name_repair)
 }
 
 add_tidytable_class <- function(x) {
