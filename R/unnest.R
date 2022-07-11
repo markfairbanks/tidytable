@@ -52,10 +52,6 @@ unnest..tidytable <- function(.df,
                               names_sep = NULL,
                               names_repair = "unique") {
   vec_assert(.drop, logical(), 1)
-  
-  if (vec_is_empty(.df)) {
-    return(.df)
-  }
 
   dots <- enquos(...)
 
@@ -122,6 +118,10 @@ unnest_col <- function(.df, col = NULL, names_sep = NULL) {
   .l <- pull.(.df, !!col)
 
   .l <- list_drop_empty(.l)
+
+  if (length(.l) == 0) {
+    .l <- list(logical())
+  }
 
   .check_data <- .l[[1]]
   is_vec <- is_simple_vector(.check_data)
