@@ -150,7 +150,7 @@ test_that("keep_empty", {
   expect_equal(out$vecs, c(NA, 1, 2))
 })
 
-test_that("handles empty tibble", {
-  expect_equal(unnest.(tibble::tibble(x = list()), x),
-	       tidytable(x = as.logical(list())))
+test_that("handles empty data frames", {
+  empty_df <- tidytable(x = as.logical(list()))
+  expect_equal(unnest.(tidytable(x = list()), x), empty_df)
 })
