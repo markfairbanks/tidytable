@@ -55,12 +55,12 @@ unnest..tidytable <- function(.df,
 
   dots <- enquos(...)
 
-  data_names <- names(.df)
+  df_names <- names(.df)
 
-  list_bool <- map_lgl.(.df, is.list)
+  .is_list <- map_lgl.(.df, is.list)
 
   if (length(dots) == 0) {
-    dots <- syms(data_names[list_bool])
+    dots <- syms(df_names[.is_list])
   } else {
     dots <- tidyselect_syms(.df, ...)
   }
@@ -70,34 +70,34 @@ unnest..tidytable <- function(.df,
     .df <- mutate.(.df, across.(all_of(dots_chr), keep_empty_prep))
   }
 
-  unnest_data <- map.(dots, ~ unnest_col(.df, .x, names_sep))
+  unnested <- map.(dots, ~ unnest_col(.df, .x, names_sep))
 
-  unnest_nrow <- list_sizes(unnest_data)
+  unnested_sizes <- list_sizes(unnested)
 
-  if (!length(vec_unique(unnest_nrow)) == 1) {
+  if (!length(vec_unique(unnested_sizes)) == 1) {
     abort("unnested data contains different row counts")
   }
 
   if (.drop) {
-    keep_cols <- data_names[!list_bool]
+    cols_keep <- df_names[!.is_list]
   } else {
-    keep_cols <- data_names[data_names %notin% as.character(dots)]
+    cols_keep <- setdiff(df_names, as.character(dots))
   }
 
-  if (length(keep_cols) > 0) {
+  if (length(cols_keep) > 0) {
     # Get number of repeats for keep cols
-    rep_vec <- list_sizes(pull.(.df, !!dots[[1]]))
+    reps <- list_sizes(pull.(.df, !!dots[[1]]))
 
-    keep_df <- select.(.df, any_of(keep_cols))
+    keep_df <- select.(.df, any_of(cols_keep))
 
-    keep_df <- vec_rep_each(keep_df, rep_vec)
+    keep_df <- vec_rep_each(keep_df, reps)
 
-    result_df <- bind_cols.(keep_df, unnest_data, .name_repair = names_repair)
+    out_df <- bind_cols.(keep_df, unnested, .name_repair = names_repair)
   } else {
-    result_df <- bind_cols.(unnest_data, .name_repair = names_repair)
+    out_df <- bind_cols.(unnested, .name_repair = names_repair)
   }
 
-  result_df
+  out_df
 }
 
 #' @export
@@ -123,35 +123,37 @@ unnest_col <- function(.df, col = NULL, names_sep = NULL) {
     .l <- list(logical())
   }
 
-  .check_data <- .l[[1]]
-  is_vec <- is_simple_vector(.check_data)
+  first <- .l[[1]]
+  is_vec <- is_simple_vector(first)
 
   if (is_vec) {
     # Use do.call so lists of dates are not unclassed by unlist
-    result_df <- tidytable(!!col := do.call("c", .l))
+    out_df <- tidytable(!!col := do.call("c", .l))
   } else {
-    result_df <- bind_rows.(.l)
+    out_df <- bind_rows.(.l)
   }
 
   if (!is.null(names_sep)) {
-    names(result_df) <- paste(as_name(col), names(result_df), sep = names_sep)
+    names(out_df) <- paste(as_name(col), names(out_df), sep = names_sep)
   }
 
-  result_df
+  out_df
 }
 
 keep_empty_prep <- function(.l) {
-  null_bool <- map_lgl.(.l, is.null)
+  .is_null <- map_lgl.(.l, is.null)
 
-  if (!any(null_bool)) return(.l)
+  if (!any(.is_null)) {
+    return(.l)
+  }
 
-  .check_data <- .l[!null_bool][[1]]
-  is_vec <- is_simple_vector(.check_data)
+  first <- .l[!.is_null][[1]]
+  is_vec <- is_simple_vector(first)
 
   if (is_vec) {
     .replace <- NA
   } else {
-    null_df <- vec_init(.check_data, 1)
+    null_df <- vec_init(first, 1)
 
     .replace <- list(null_df)
   }
