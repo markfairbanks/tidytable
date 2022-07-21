@@ -14,6 +14,7 @@
 * `across.()`: Can namespace functions in `.fns` arg (#511)
 * `as_tidytable()`: Can keep row names when converting a matrix (#527)
 * `unnest.()`: Handles empty data frames (@roboton, #530)
+* `nth.()`: Extracts list elements (#534)
 
 # tidytable 0.8.0
 

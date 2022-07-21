@@ -17,3 +17,10 @@ test_that("work on data frames", {
   expect_equal(first.(df), head(df, 1))
   expect_equal(last.(df), tail(df, 1))
 })
+
+test_that("work on lists", {
+  l <- list(x = "x", y = "y")
+  expect_equal(first.(l), "x")
+  expect_equal(last.(l), "y")
+  expect_equal(nth.(l, 3), NULL)
+})

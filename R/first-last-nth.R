@@ -18,19 +18,19 @@
 #' first.(vec)
 #' last.(vec)
 #' nth.(vec, 4)
-first. <- function(x, default = NA, na_rm = FALSE) {
+first. <- function(x, default = NULL, na_rm = FALSE) {
   nth.(x, 1L, default, na_rm)
 }
 
 #' @rdname first.
 #' @export
-last. <- function(x, default = NA, na_rm = FALSE) {
+last. <- function(x, default = NULL, na_rm = FALSE) {
   nth.(x, -1L, default, na_rm)
 }
 
 #' @rdname first.
 #' @export
-nth. <- function(x, n, default = NA, na_rm = FALSE) {
+nth. <- function(x, n, default = NULL, na_rm = FALSE) {
   if (na_rm) {
     x <- x[!vec_equal_na(x)]
   }
@@ -41,7 +41,27 @@ nth. <- function(x, n, default = NA, na_rm = FALSE) {
   }
 
   if (n > size || n == 0) {
-    vec_cast(default, vec_ptype(x))
+    nth_default(x, default)
+  } else {
+    vec_slice2(x, n)
+  }
+}
+
+nth_default <- function(x, default) {
+  if (vec_is_list(x)) {
+    out <- default
+  } else {
+    if (is.null(default)) {
+      default <- NA
+    }
+    out <- vec_cast(default, vec_ptype(x))
+  }
+  out
+}
+
+vec_slice2 <- function(x, n) {
+  if (vec_is_list(x)) {
+    .subset2(x, n)
   } else {
     vec_slice(x, n)
   }
