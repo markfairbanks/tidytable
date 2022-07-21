@@ -6,11 +6,11 @@
 \alias{nth.}
 \title{Extract the first, last, or nth value from a vector}
 \usage{
-first.(x, default = NA, na_rm = FALSE)
+first.(x, default = NULL, na_rm = FALSE)
 
-last.(x, default = NA, na_rm = FALSE)
+last.(x, default = NULL, na_rm = FALSE)
 
-nth.(x, n, default = NA, na_rm = FALSE)
+nth.(x, n, default = NULL, na_rm = FALSE)
 }
 \arguments{
 \item{x}{A vector}
