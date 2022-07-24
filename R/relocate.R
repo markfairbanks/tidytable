@@ -35,15 +35,16 @@ relocate..tidytable <- function(.df, ..., .before = NULL, .after = NULL) {
   .before <- enquo(.before)
   .after <- enquo(.after)
 
-  before_is_null <- quo_is_null(.before)
-  after_is_null <- quo_is_null(.after)
+  uses_before <- !quo_is_null(.before)
+  uses_after <- !quo_is_null(.after)
 
-  if  (!before_is_null && !after_is_null) {
+  if  (uses_before && uses_after) {
     stop("Must supply only one of `.before` and `.after`")
   }
 
-  if (before_is_null && after_is_null) {
+  if (!uses_before && !uses_after) {
     .before <- quo(1)
+    uses_before <- TRUE
   }
 
   all_locs <- seq_along(.df)
@@ -53,12 +54,12 @@ relocate..tidytable <- function(.df, ..., .before = NULL, .after = NULL) {
     return(.df)
   }
 
-  if (!before_is_null) {
-    before <- tidyselect_locs(.df, !!.before)
+  if (uses_before) {
+    before <- min(tidyselect_locs(.df, !!.before))
 
     start_locs <- all_locs[all_locs < before]
   } else {
-    after <- tidyselect_locs(.df, !!.after)
+    after <- max(tidyselect_locs(.df, !!.after))
 
     start_locs <- all_locs[all_locs <= after]
   }
