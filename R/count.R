@@ -48,9 +48,6 @@ count..tidytable <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   wt <- enquo(wt)
 
   if (is.null(name)) {
-    warn("As of tidytable v0.8.0 the default name for `count.()` is `n` to match
-         dplyr semantics. Set the `name` arg to avoid this warning message.",
-         .frequency = "once", .frequency_id = "tidytable_count")
     name <- "n"
   }
 

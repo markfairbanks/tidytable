@@ -1,8 +1,7 @@
 test_that("empty count.() returns number of rows", {
   df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
   out <- df %>%
-    count.() %>%
-    suppressWarnings()
+    count.()
 
   expect_named(out, c("n"))
   expect_equal(out$n, nrow(df))
