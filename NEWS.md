@@ -4,6 +4,7 @@
 * `arrange.()`: Can use `.env` inside arrange expressions
 * `case_when.()`: Gains `.default`/`.ptype`/`.size` args
 * `coalesce.()`: Gains `.ptype`/`.size` args
+* `relocate.()`: Now properly handles multiple columns selected in `.before` or `.after`
 
 #### New Functions
 * `if_else.()`
