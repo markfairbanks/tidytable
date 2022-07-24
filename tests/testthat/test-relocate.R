@@ -29,3 +29,9 @@ test_that("empty selection returns original df", {
   df <- data.table(x = 1, y = 2)
   expect_named(relocate.(df), c("x", "y"))
 })
+
+test_that("multiple before/after works", {
+  df <- data.table(x = 1, y = 2, z = 3)
+  expect_named(relocate.(df, x, .after = c(y, z)), c("y", "z", "x"))
+  expect_named(relocate.(df, y, .before = c(x, z)), c("y", "x", "z"))
+})
