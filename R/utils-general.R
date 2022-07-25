@@ -110,6 +110,11 @@ f_sort <- function(x) {
   }
 }
 
+# imap implementation - for internal use only
+imap. <- function(.x, .f, ...) {
+  map2.(.x, names(.x) %||% seq_along(.x), .f, ...)
+}
+
 # Is object a vector and not a matrix
 is_simple_vector <- function(x) {
   is.atomic(x) && !is.matrix(x)
