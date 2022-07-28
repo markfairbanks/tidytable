@@ -16,6 +16,7 @@
 * `as_tidytable()`: Can keep row names when converting a matrix (#527)
 * `unnest.()`: Handles empty data frames (@roboton, #530)
 * `nth.()`: Extracts list elements (#534)
+* `arrange.()`: Properly sorts `NA`s (#541)
 
 # tidytable 0.8.0
 
