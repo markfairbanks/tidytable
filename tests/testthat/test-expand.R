@@ -86,9 +86,9 @@ test_that("preserves ordered factors", {
 })
 
 test_that("preserves NAs", {
-  x <- c(NA, "A", "B")
-  expect_equal(crossing.(x)$x, x)
-  expect_equal(nesting.(x)$x, x)
+  x <- c(NA, "B", "A")
+  expect_equal(crossing.(x)$x, c("A", "B", NA))
+  expect_equal(nesting.(x)$x, c("A", "B", NA))
 })
 
 test_that("zero length input gives zero length output", {
