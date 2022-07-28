@@ -103,10 +103,10 @@ f_sort <- function(x) {
   # See: https://github.com/Rdatatable/data.table/issues/5051
   if (is.character(x)) {
     suppressWarnings(
-      fsort(x)
+      fsort(x, na.last = TRUE)
     )
   } else {
-    vec_sort(x, na_value = "smallest")
+    vec_sort(x)
   }
 }
 

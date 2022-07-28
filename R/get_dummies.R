@@ -75,11 +75,13 @@ get_dummies..tidytable <- function(.df,
 
     unique_vals <- f_sort(unique_vals)
 
-    # Due to above f_sort NA will be the first value if it exists
-    any_na <- is.na(unique_vals[1])
+    len <- length(unique_vals)
+
+    # Due to above f_sort NA will be the last value if it exists
+    any_na <- is.na(unique_vals[len])
 
     if (any_na) {
-      unique_vals <- unique_vals[-1]
+      unique_vals <- unique_vals[-len]
     }
 
     if (prefix) {

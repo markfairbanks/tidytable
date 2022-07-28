@@ -67,6 +67,6 @@ nesting. <- function(..., .name_repair = "check_unique") {
   cols <- dots_list(..., .named = TRUE)
   out <- df_name_repair(new_tidytable(cols), .name_repair)
   out <- distinct.(out)
-  setorder(out)
+  setorder(out, na.last = TRUE)
   out
 }
