@@ -40,9 +40,12 @@ The default (\code{NULL}) is equivalent to \code{"{.col}"} for a single function
 when a list is used for \code{.fns}.}
 }
 \description{
+\emph{Deprecated}
+
 Summarize multiple columns simultaneously
 }
 \examples{
+\dontrun{
 df <- data.table(
   a = 1:3,
   b = 4:6,
@@ -75,4 +78,5 @@ df \%>\%
                          max = ~ max(.x)),
                     .by = z,
                     .names = "{.col}_test_{.fn}")
+}
 }

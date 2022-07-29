@@ -1,6 +1,9 @@
 #' Mutate multiple columns simultaneously
 #'
 #' @description
+#'
+#' *Deprecated*
+#'
 #' Mutate multiple columns simultaneously.
 #'
 #' @param .df A data.frame or data.table
@@ -16,6 +19,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' df <- data.table(
 #'   x = rep(1, 3),
 #'   y = rep(2, 3),
@@ -40,6 +44,7 @@
 #'     .fns = list(new = ~ .x * 2, another = ~ .x + 7),
 #'     .names = "{.col}_test_{.fn}"
 #'   )
+#' }
 mutate_across. <- function(.df, .cols = everything(), .fns = NULL, ...,
                            .by = NULL, .names = NULL) {
   UseMethod("mutate_across.")

@@ -18,6 +18,11 @@
 * `nth.()`: Extracts list elements (#534)
 * `arrange.()`: Properly sorts `NA`s (#541)
 
+#### Deprecations
+* `arrange_across.`/`mutate_across.`/`summarize_across.` are now defunct. They have been
+  deprecated with warnings since v0.6.4 (Jul 2021). Users must now use `across.()` inside
+  `arrange.()`/`mutate.()`/`summarize.()`.
+
 # tidytable 0.8.0
 
 #### New functions
