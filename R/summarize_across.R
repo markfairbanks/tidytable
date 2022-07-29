@@ -1,6 +1,9 @@
 #' Summarize multiple columns
 #'
 #' @description
+#'
+#' *Deprecated*
+#'
 #' Summarize multiple columns simultaneously
 #'
 #' @param .df A data.frame or data.table
@@ -16,6 +19,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' df <- data.table(
 #'   a = 1:3,
 #'   b = 4:6,
@@ -48,6 +52,7 @@
 #'                          max = ~ max(.x)),
 #'                     .by = z,
 #'                     .names = "{.col}_test_{.fn}")
+#' }
 summarize_across. <- function(.df, .cols = everything(), .fns = NULL, ...,
                               .by = NULL, .names = NULL) {
   UseMethod("summarize_across.")

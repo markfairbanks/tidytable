@@ -30,9 +30,12 @@ The default (\code{NULL}) is equivalent to \code{"{.col}"} for a single function
 when a list is used for \code{.fns}.}
 }
 \description{
+\emph{Deprecated}
+
 Mutate multiple columns simultaneously.
 }
 \examples{
+\dontrun{
 df <- data.table(
   x = rep(1, 3),
   y = rep(2, 3),
@@ -57,4 +60,5 @@ df \%>\%
     .fns = list(new = ~ .x * 2, another = ~ .x + 7),
     .names = "{.col}_test_{.fn}"
   )
+}
 }

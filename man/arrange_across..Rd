@@ -14,9 +14,13 @@ arrange_across.(.df, .cols = everything(), .fns = NULL)
 \item{.fns}{Function to apply. If \code{desc} it arranges in descending order}
 }
 \description{
+\emph{Deprecated}
+}
+\details{
 Arrange all rows in either ascending or descending order by a selection of variables.
 }
 \examples{
+\dontrun{
 df <- tidytable(a = c("a", "b", "a"), b = 3:1)
 
 df \%>\%
@@ -24,4 +28,5 @@ df \%>\%
 
 df \%>\%
   arrange_across.(a, desc.)
+}
 }

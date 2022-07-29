@@ -1,5 +1,7 @@
 #' Arrange by a selection of variables
 #'
+#' *Deprecated*
+#'
 #' Arrange all rows in either ascending or descending order by a selection of variables.
 #'
 #' @param .df A data.table or data.frame
@@ -9,6 +11,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' df <- tidytable(a = c("a", "b", "a"), b = 3:1)
 #'
 #' df %>%
@@ -16,6 +19,7 @@
 #'
 #' df %>%
 #'   arrange_across.(a, desc.)
+#' }
 arrange_across. <- function(.df, .cols = everything(), .fns = NULL) {
   UseMethod("arrange_across.")
 }
