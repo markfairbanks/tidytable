@@ -18,7 +18,7 @@ the number of columns.'><meta property="og:image" content="/logo.png"><!-- mathj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
       </span>
     </div>
 
@@ -65,70 +65,95 @@ the number of columns.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">pivot_longer.</span><span class="op">(</span>
-  <span class="va">.df</span>,
-  cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,
-  names_to <span class="op">=</span> <span class="st">"name"</span>,
-  values_to <span class="op">=</span> <span class="st">"value"</span>,
-  names_prefix <span class="op">=</span> <span class="cn">NULL</span>,
-  names_sep <span class="op">=</span> <span class="cn">NULL</span>,
-  names_pattern <span class="op">=</span> <span class="cn">NULL</span>,
-  names_ptypes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  names_transform <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  names_repair <span class="op">=</span> <span class="st">"check_unique"</span>,
-  values_drop_na <span class="op">=</span> <span class="cn">FALSE</span>,
-  values_ptypes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  values_transform <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  fast_pivot <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pivot_longer.</span><span class="op">(</span></span>
+<span>  <span class="va">.df</span>,</span>
+<span>  cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  names_to <span class="op">=</span> <span class="st">"name"</span>,</span>
+<span>  values_to <span class="op">=</span> <span class="st">"value"</span>,</span>
+<span>  names_prefix <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  names_sep <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  names_pattern <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  names_ptypes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  names_transform <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  names_repair <span class="op">=</span> <span class="st">"check_unique"</span>,</span>
+<span>  values_drop_na <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  values_ptypes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  values_transform <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  fast_pivot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>.df</dt>
 <dd><p>A data.table or data.frame</p></dd>
+
+
 <dt>cols</dt>
 <dd><p>Columns to pivot. <code>tidyselect</code> compatible.</p></dd>
+
+
 <dt>names_to</dt>
 <dd><p>Name of the new "names" column. Must be a string.</p></dd>
+
+
 <dt>values_to</dt>
 <dd><p>Name of the new "values" column. Must be a string.</p></dd>
+
+
 <dt>names_prefix</dt>
 <dd><p>Remove matching text from the start of selected columns using regex.</p></dd>
+
+
 <dt>names_sep</dt>
 <dd><p>If <code>names_to</code> contains multiple values, <code>names_sep</code> takes
-the same specification as <code><a href="separate..Rd.html">separate.()</a></code>.</p></dd>
+the same specification as <code><a href="separate..html">separate.()</a></code>.</p></dd>
+
+
 <dt>names_pattern</dt>
 <dd><p>If <code>names_to</code> contains multiple values, <code>names_pattern</code> takes
-the same specification as <code><a href="extract..Rd.html">extract.()</a></code>, a regular expression containing matching groups.</p></dd>
+the same specification as <code><a href="extract..html">extract.()</a></code>, a regular expression containing matching groups.</p></dd>
+
+
 <dt>names_ptypes, values_ptypes</dt>
 <dd><p>A list of column name-prototype pairs. See ``?vctrs::`theory-faq-coercion```
 for more info on vctrs coercion.</p></dd>
+
+
 <dt>names_transform, values_transform</dt>
 <dd><p>A list of column name-function pairs. Use these arguments
 if you need to change the types of specific columns.</p></dd>
+
+
 <dt>names_repair</dt>
 <dd><p>Treatment of duplicate names. See <code><a href="https://vctrs.r-lib.org/reference/vec_as_names.html" class="external-link">?vctrs::vec_as_names</a></code> for options/details.</p></dd>
+
+
 <dt>values_drop_na</dt>
 <dd><p>If TRUE, rows will be dropped that contain NAs.</p></dd>
+
+
 <dt>fast_pivot</dt>
 <dd><p><em>experimental</em>: Fast pivoting. If <code>TRUE</code>, the <code>names_to</code> column will be returned as a <code>factor</code>,
 otherwise it will be a <code>character</code> column. Defaults to <code>FALSE</code> to match tidyverse semantics.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments to passed on to methods.</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span></span>
-<span class="r-in">  x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span>
-<span class="r-in">  y <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span>,</span>
-<span class="r-in">  z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">pivot_longer.</span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span></span>
+<span class="r-in"><span>  y <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span>,</span></span>
+<span class="r-in"><span>  z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">pivot_longer.</span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 6 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   z     name  value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
@@ -138,9 +163,9 @@ otherwise it will be a <code>character</code> column. Defaults to <code>FALSE</c
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> a     y         4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> b     y         5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> c     y         6</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">pivot_longer.</span><span class="op">(</span>cols <span class="op">=</span> <span class="op">-</span><span class="va">z</span>, names_to <span class="op">=</span> <span class="st">"stuff"</span>, values_to <span class="op">=</span> <span class="st">"things"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">pivot_longer.</span><span class="op">(</span>cols <span class="op">=</span> <span class="op">-</span><span class="va">z</span>, names_to <span class="op">=</span> <span class="st">"stuff"</span>, values_to <span class="op">=</span> <span class="st">"things"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 6 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   z     stuff things</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
@@ -164,7 +189,7 @@ otherwise it will be a <code>character</code> column. Defaults to <code>FALSE</c
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

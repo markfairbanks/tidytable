@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
       </span>
     </div>
 
@@ -161,9 +161,9 @@
         </td>
         <td><p>Create conditions on a selection of columns</p></td>
       </tr><tr><td>
-          <p><code><a href="ifelse..html">ifelse.()</a></code> </p>
+          <p><code><a href="if_else..html">if_else.()</a></code> </p>
         </td>
-        <td><p>Fast ifelse</p></td>
+        <td><p>Fast if_else</p></td>
       </tr><tr><td>
           <p><code><a href="lags..html">lags.()</a></code> <code><a href="lags..html">leads.()</a></code> </p>
         </td>
@@ -309,7 +309,7 @@
           <p class="section-desc"></p><p>These functions are reexported from <code>data.table</code>, <code>rlang</code>, and <code>tidyselect</code> for easier access.</p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="reexports.html">reexports</a></code> </p>
+          <p><code><a href="reexports.html">reexports</a></code> <code><a href="reexports.html">starts_with</a></code> <code><a href="reexports.html">contains</a></code> <code><a href="reexports.html">ends_with</a></code> <code><a href="reexports.html">everything</a></code> <code><a href="reexports.html">any_of</a></code> <code><a href="reexports.html">all_of</a></code> <code><a href="reexports.html">matches</a></code> <code><a href="reexports.html">num_range</a></code> <code><a href="reexports.html">last_col</a></code> <code><a href="reexports.html">%between%</a></code> <code><a href="reexports.html">data.table</a></code> <code><a href="reexports.html">%like%</a></code> <code><a href="reexports.html">getDTthreads</a></code> <code><a href="reexports.html">setDTthreads</a></code> <code><a href="reexports.html">%chin%</a></code> <code><a href="reexports.html">enexpr</a></code> <code><a href="reexports.html">enexprs</a></code> <code><a href="reexports.html">enquo</a></code> <code><a href="reexports.html">enquos</a></code> <code><a href="reexports.html">expr</a></code> <code><a href="reexports.html">exprs</a></code> <code><a href="reexports.html">quo</a></code> <code><a href="reexports.html">quos</a></code> <code><a href="reexports.html">sym</a></code> <code><a href="reexports.html">syms</a></code> <code><a href="reexports.html">glimpse</a></code> </p>
         </td>
         <td><p>Objects exported from other packages</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
@@ -340,6 +340,38 @@
           <p><code><a href="fread..html">fread.()</a></code> <code><a href="fread..html">fwrite.()</a></code> </p>
         </td>
         <td><p>Read/write files</p></td>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="arrange_across..html">arrange_across.()</a></code> </p>
+        </td>
+        <td><p>Arrange by a selection of variables</p></td>
+      </tr><tr><td>
+          <p><code><a href="mutate_across..html">mutate_across.()</a></code> </p>
+        </td>
+        <td><p>Mutate multiple columns simultaneously</p></td>
+      </tr><tr><td>
+          <p><code><a href="summarize_across..html">summarize_across.()</a></code> <code><a href="summarize_across..html">summarise_across.()</a></code> </p>
+        </td>
+        <td><p>Summarize multiple columns</p></td>
+      </tr><tr><td>
+          <p><code><a href="case..html">case.()</a></code> </p>
+        </td>
+        <td><p>data.table::fcase() with vectorized default</p></td>
+      </tr><tr><td>
+          <p><code><a href="get_dummies..html">get_dummies.()</a></code> </p>
+        </td>
+        <td><p>Convert character and factor columns to dummy variables</p></td>
+      </tr><tr><td>
+          <p><code><a href="ifelse..html">ifelse.()</a></code> </p>
+        </td>
+        <td><p>Fast ifelse</p></td>
+      </tr><tr><td>
+          <p><code><a href="inv_gc.html">inv_gc()</a></code> </p>
+        </td>
+        <td><p>Run invisible garbage collection</p></td>
+      </tr><tr><td>
+          <p><code><a href="top_n..html">top_n.()</a></code> </p>
+        </td>
+        <td><p>Select top (or bottom) n rows (by value)</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -353,7 +385,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

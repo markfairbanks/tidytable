@@ -18,7 +18,7 @@ decreasing the number of rows.'><meta property="og:image" content="/logo.png"><!
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
       </span>
     </div>
 
@@ -65,76 +65,97 @@ decreasing the number of rows.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">pivot_wider.</span><span class="op">(</span>
-  <span class="va">.df</span>,
-  names_from <span class="op">=</span> <span class="va">name</span>,
-  values_from <span class="op">=</span> <span class="va">value</span>,
-  id_cols <span class="op">=</span> <span class="cn">NULL</span>,
-  names_sep <span class="op">=</span> <span class="st">"_"</span>,
-  names_prefix <span class="op">=</span> <span class="st">""</span>,
-  names_glue <span class="op">=</span> <span class="cn">NULL</span>,
-  names_sort <span class="op">=</span> <span class="cn">FALSE</span>,
-  names_repair <span class="op">=</span> <span class="st">"check_unique"</span>,
-  values_fill <span class="op">=</span> <span class="cn">NULL</span>,
-  values_fn <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pivot_wider.</span><span class="op">(</span></span>
+<span>  <span class="va">.df</span>,</span>
+<span>  names_from <span class="op">=</span> <span class="va">name</span>,</span>
+<span>  values_from <span class="op">=</span> <span class="va">value</span>,</span>
+<span>  id_cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  names_sep <span class="op">=</span> <span class="st">"_"</span>,</span>
+<span>  names_prefix <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  names_glue <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  names_sort <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  names_repair <span class="op">=</span> <span class="st">"check_unique"</span>,</span>
+<span>  values_fill <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  values_fn <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>.df</dt>
 <dd><p>A data.frame or data.table</p></dd>
+
+
 <dt>names_from</dt>
 <dd><p>A pair of arguments describing which column (or columns) to get the name of the output column <code>name_from</code>,
 and which column (or columns) to get the cell values from <code>values_from</code>).
 <code>tidyselect</code> compatible.</p></dd>
+
+
 <dt>values_from</dt>
 <dd><p>A pair of arguments describing which column (or columns) to get the name of the output column <code>name_from</code>,
 and which column (or columns) to get the cell values from <code>values_from</code>.
 <code>tidyselect</code> compatible.</p></dd>
+
+
 <dt>id_cols</dt>
 <dd><p>A set of columns that uniquely identifies each observation.
 Defaults to all columns in the data table except for the columns specified in <code>names_from</code> and <code>values_from</code>.
 Typically used when you have additional variables that is directly related.
 <code>tidyselect</code> compatible.</p></dd>
+
+
 <dt>names_sep</dt>
 <dd><p>the separator between the names of the columns</p></dd>
+
+
 <dt>names_prefix</dt>
 <dd><p>prefix to add to the names of the new columns</p></dd>
+
+
 <dt>names_glue</dt>
 <dd><p>Instead of using <code>names_sep</code> and <code>names_prefix</code>, you can supply a
 glue specification that uses the <code>names_from</code> columns (and special <code>.value</code>) to create custom column names</p></dd>
+
+
 <dt>names_sort</dt>
 <dd><p>Should the resulting new columns be sorted</p></dd>
+
+
 <dt>names_repair</dt>
 <dd><p>Treatment of duplicate names. See <code><a href="https://vctrs.r-lib.org/reference/vec_as_names.html" class="external-link">?vctrs::vec_as_names</a></code> for options/details.</p></dd>
+
+
 <dt>values_fill</dt>
 <dd><p>If values are missing, what value should be filled in</p></dd>
+
+
 <dt>values_fn</dt>
 <dd><p>Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span></span>
-<span class="r-in">  a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">  b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  vals <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">pivot_wider.</span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">b</span>, values_from <span class="op">=</span> <span class="va">vals</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  vals <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">pivot_wider.</span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">b</span>, values_from <span class="op">=</span> <span class="va">vals</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   a         x     y</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> a         1     4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> b         2     5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> c         3     6</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">pivot_wider.</span><span class="op">(</span></span>
-<span class="r-in">    names_from <span class="op">=</span> <span class="va">b</span>, values_from <span class="op">=</span> <span class="va">vals</span>, names_prefix <span class="op">=</span> <span class="st">"new_"</span></span>
-<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">pivot_wider.</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    names_from <span class="op">=</span> <span class="va">b</span>, values_from <span class="op">=</span> <span class="va">vals</span>, names_prefix <span class="op">=</span> <span class="st">"new_"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   a     new_x new_y</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
@@ -155,7 +176,7 @@ glue specification that uses the <code>names_from</code> columns (and special <c
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

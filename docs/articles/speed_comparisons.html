@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
       </span>
     </div>
 
@@ -108,11 +108,11 @@ different dataset from <code><a href="https://dplyr.tidyverse.org/reference/case
 <code>setDTthreads(4)</code> was used for <code>data.table</code>
 &amp; <code>tidytable</code> timings.</li>
 <li>Modify-by-reference was used in <code>data.table</code> when being
-compared to <code><a href="../reference/mutate..Rd.html">mutate.()</a></code> &amp;
+compared to <code><a href="../reference/mutate..html">mutate.()</a></code> &amp;
 <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code>
 </li>
 <li>
-<code><a href="../reference/fill..Rd.html">fill.()</a></code> &amp; <code><a href="https://tidyr.tidyverse.org/reference/fill.html" class="external-link">tidyr::fill()</a></code> both work with
+<code><a href="../reference/fill..html">fill.()</a></code> &amp; <code><a href="https://tidyr.tidyverse.org/reference/fill.html" class="external-link">tidyr::fill()</a></code> both work with
 character/factor/logical columns, whereas
 <code><a href="https://Rdatatable.gitlab.io/data.table/reference/nafill.html" class="external-link">data.table::nafill()</a></code> does not. Testing only included
 numeric columns due to this constraint.</li>
@@ -144,23 +144,23 @@ datasets).</li>
 created to cover all angles equally. They are just meant to be used as
 general insight into the performance of these packages.</li>
 </ul>
-<pre><code><span class="co">#&gt; Date last run: 2022-06-09</span></code></pre>
-<pre><code><span class="co">#&gt; <span style="color: #949494;"># A tidytable: 13 × 6</span></span>
-<span class="co">#&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> arrange            49.9      33.7   59.6    <span style="text-decoration: underline;">1</span>599.   716. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> case_when          13.6      14     <span style="color: #BB0000;">NA</span>        94.2   64.4</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> distinct           27.8      33.1   26.3      65    309. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> fill               37.8      47.2   46.6      91.8  724  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> filter            134.      176.   153.      175.   904. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> inner_join         32.9      32.2   40        74.4   <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> left_join          66.3      57.9   91.8      88.7   <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> mutate             46.6      47.8  263.       59.5  780. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> nest               21.6      21.8   93        66.1   <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> pivot_longer       54.3      35     67.4     254.    <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> pivot_wider        47.8      60.5  137.      131.    <span style="color: #BB0000;">NA</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> summarize         459.      412.   412.      712.  <span style="text-decoration: underline;">3</span>080. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> unnest            257.       66.6   <span style="color: #BB0000;">NA</span>        81.1   <span style="color: #BB0000;">NA</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Date last run: 2022-08-01</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tidytable: 13 × 6</span></span></span>
+<span><span class="co">#&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> arrange            48.4      29.6   49.1    <span style="text-decoration: underline;">1</span>644.   716. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> case_when           8.5      12.1   <span style="color: #BB0000;">NA</span>        90.5   64.4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> distinct           21.7      21.3   23        60.2  309. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> fill               28.6      40.7   43.6      83    724  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> filter            135       136.   146.      179.   904. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> inner_join         29.8      29.8   36.5      67.9   <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> left_join          47.5      46.8   56.9      75.4   <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> mutate             45.5      50.7  226.       56.9  780. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> nest               16.4      17.8   72.5      50.6   <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> pivot_longer       47.5      27     47.7     189     <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> pivot_wider        48.5      59.4  136.      105.    <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> summarize         387       359    354.      645.  <span style="text-decoration: underline;">3</span>080. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> unnest            212.       58.6   <span style="color: #BB0000;">NA</span>        67.8   <span style="color: #BB0000;">NA</span></span></span></code></pre>
 </div>
   </div>
 
@@ -179,7 +179,7 @@ general insight into the performance of these packages.</li>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer>

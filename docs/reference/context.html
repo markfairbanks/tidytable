@@ -24,7 +24,7 @@ Can be used inside summarize.(), mutate.(), &amp;amp; filter.()'><meta property=
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
       </span>
     </div>
 
@@ -67,34 +67,34 @@ Can be used inside summarize.(), mutate.(), &amp;amp; filter.()'><meta property=
 
     <div class="ref-description">
     <p>These functions give information about the "current" group.</p><ul><li><p><code>cur_data.()</code> gives the current data for the current group</p></li>
-<li><p><code>cur_column.()</code> gives the name of the current column (for use in <code><a href="across..Rd.html">across.()</a></code> only)</p></li>
+<li><p><code>cur_column.()</code> gives the name of the current column (for use in <code><a href="across..html">across.()</a></code> only)</p></li>
 <li><p><code>cur_group_id.()</code> gives a group identification number</p></li>
 <li><p><code>cur_group_rows.()</code> gives the row indices for each group</p></li>
-</ul><p>Can be used inside <code><a href="summarize..Rd.html">summarize.()</a></code>, <code><a href="mutate..Rd.html">mutate.()</a></code>, &amp; <code><a href="filter..Rd.html">filter.()</a></code></p>
+</ul><p>Can be used inside <code><a href="summarize..html">summarize.()</a></code>, <code><a href="mutate..html">mutate.()</a></code>, &amp; <code><a href="filter..html">filter.()</a></code></p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cur_column.</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">cur_data.</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">cur_group_id.</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">cur_group_rows.</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cur_column.</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">cur_data.</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">cur_group_id.</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">cur_group_rows.</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
     </div>
 
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span></span>
-<span class="r-in">  x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,</span>
-<span class="r-in">  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"b"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="mutate..Rd.html">mutate.</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="fu"><a href="across..Rd.html">across.</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu">cur_column.</span><span class="op">(</span><span class="op">)</span>, <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,</span></span>
+<span class="r-in"><span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"b"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="mutate..html">mutate.</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="across..html">across.</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu">cur_column.</span><span class="op">(</span><span class="op">)</span>, <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 5 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   x     y    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
@@ -103,19 +103,19 @@ Can be used inside summarize.(), mutate.(), &amp;amp; filter.()'><meta property=
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> x 3   y a  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> x 4   y b  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> x 5   y b  </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="summarize..Rd.html">summarize.</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">cur_data.</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">             .by <span class="op">=</span> <span class="va">y</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="summarize..html">summarize.</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">cur_data.</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>             .by <span class="op">=</span> <span class="va">y</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 2 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   y     data               </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> a     <span style="color: #949494;">&lt;tidytable [3 × 1]&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> b     <span style="color: #949494;">&lt;tidytable [2 × 1]&gt;</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="mutate..Rd.html">mutate.</a></span><span class="op">(</span>group_id <span class="op">=</span> <span class="fu">cur_group_id.</span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">          .by <span class="op">=</span> <span class="va">y</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="mutate..html">mutate.</a></span><span class="op">(</span>group_id <span class="op">=</span> <span class="fu">cur_group_id.</span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>          .by <span class="op">=</span> <span class="va">y</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 5 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       x y     group_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
@@ -124,10 +124,10 @@ Can be used inside summarize.(), mutate.(), &amp;amp; filter.()'><meta property=
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3 a            1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>     4 b            2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>     5 b            2</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="mutate..Rd.html">mutate.</a></span><span class="op">(</span>group_rows <span class="op">=</span> <span class="fu">cur_group_rows.</span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">          .by <span class="op">=</span> <span class="va">y</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="mutate..html">mutate.</a></span><span class="op">(</span>group_rows <span class="op">=</span> <span class="fu">cur_group_rows.</span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>          .by <span class="op">=</span> <span class="va">y</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 5 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       x y     group_rows</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
@@ -150,7 +150,7 @@ Can be used inside summarize.(), mutate.(), &amp;amp; filter.()'><meta property=
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

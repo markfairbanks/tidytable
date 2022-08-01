@@ -18,7 +18,7 @@ Note: These are simple wrappers around vctrs::vec_slice()."><meta property="og:i
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
       </span>
     </div>
 
@@ -65,34 +65,41 @@ Note: These are simple wrappers around vctrs::vec_slice()."><meta property="og:i
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">first.</span><span class="op">(</span><span class="va">x</span>, default <span class="op">=</span> <span class="cn">NA</span>, na_rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">last.</span><span class="op">(</span><span class="va">x</span>, default <span class="op">=</span> <span class="cn">NA</span>, na_rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">nth.</span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, default <span class="op">=</span> <span class="cn">NA</span>, na_rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">first.</span><span class="op">(</span><span class="va">x</span>, default <span class="op">=</span> <span class="cn">NULL</span>, na_rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">last.</span><span class="op">(</span><span class="va">x</span>, default <span class="op">=</span> <span class="cn">NULL</span>, na_rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">nth.</span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, default <span class="op">=</span> <span class="cn">NULL</span>, na_rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A vector</p></dd>
+
+
 <dt>default</dt>
 <dd><p>The default value if the value doesn't exist.</p></dd>
+
+
 <dt>na_rm</dt>
 <dd><p>If <code>TRUE</code> ignores missing values.</p></dd>
+
+
 <dt>n</dt>
 <dd><p>For <code>nth.()</code>, a number specifying the position to grab.</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">vec</span> <span class="op">&lt;-</span> <span class="va">letters</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">first.</span><span class="op">(</span><span class="va">vec</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">vec</span> <span class="op">&lt;-</span> <span class="va">letters</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">first.</span><span class="op">(</span><span class="va">vec</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "a"</span>
-<span class="r-in"><span class="fu">last.</span><span class="op">(</span><span class="va">vec</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">last.</span><span class="op">(</span><span class="va">vec</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "z"</span>
-<span class="r-in"><span class="fu">nth.</span><span class="op">(</span><span class="va">vec</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">nth.</span><span class="op">(</span><span class="va">vec</span>, <span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "d"</span>
 </code></pre></div>
     </div>
@@ -108,7 +115,7 @@ Note: These are simple wrappers around vctrs::vec_slice()."><meta property="og:i
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

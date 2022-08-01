@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
       </span>
     </div>
 
@@ -58,7 +58,7 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.8.1" id="tidytable-081-in-development">tidytable 0.8.1 (in development)<a class="anchor" aria-label="anchor" href="#tidytable-081-in-development"></a></h2>
+<h2 class="page-header" data-toc-text="0.8.1" id="tidytable-081">tidytable 0.8.1<a class="anchor" aria-label="anchor" href="#tidytable-081"></a></h2>
 <div class="section level5">
 <h5 id="new-functions-0-8-1">New Functions<a class="anchor" aria-label="anchor" href="#new-functions-0-8-1"></a></h5>
 <ul><li>
@@ -67,8 +67,35 @@
 </ul></li>
 </ul></div>
 <div class="section level5">
+<h5 id="functionality-improvements-0-8-1">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-8-1"></a></h5>
+<ul><li>
+<code><a href="../reference/arrange..html">arrange.()</a></code>: Can use <code>.env</code> inside arrange expressions</li>
+<li>
+<code><a href="../reference/case_when..html">case_when.()</a></code>: Gains <code>.default</code>/<code>.ptype</code>/<code>.size</code> args</li>
+<li>
+<code><a href="../reference/coalesce..html">coalesce.()</a></code>: Gains <code>.ptype</code>/<code>.size</code> args</li>
+<li>
+<code><a href="../reference/relocate..html">relocate.()</a></code>: Now properly handles multiple columns selected in <code>.before</code> or <code>.after</code>
+</li>
+</ul></div>
+<div class="section level5">
 <h5 id="bug-fixes-0-8-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-8-1"></a></h5>
 <ul><li>Nested calls to <code><a href="../reference/across..html">across.()</a></code> are handled properly (<a href="https://github.com/markfairbanks/tidytable/issues/505" class="external-link">#505</a>)</li>
+<li>
+<code><a href="../reference/across..html">across.()</a></code>: Can namespace functions in <code>.fns</code> arg (<a href="https://github.com/markfairbanks/tidytable/issues/511" class="external-link">#511</a>)</li>
+<li>
+<code><a href="../reference/as_tidytable.html">as_tidytable()</a></code>: Can keep row names when converting a matrix (<a href="https://github.com/markfairbanks/tidytable/issues/527" class="external-link">#527</a>)</li>
+<li>
+<code><a href="../reference/unnest..html">unnest.()</a></code>: Handles empty data frames (<a href="https://github.com/roboton" class="external-link">@roboton</a>, <a href="https://github.com/markfairbanks/tidytable/issues/530" class="external-link">#530</a>)</li>
+<li>
+<code><a href="../reference/first..html">nth.()</a></code>: Extracts list elements (<a href="https://github.com/markfairbanks/tidytable/issues/534" class="external-link">#534</a>)</li>
+<li>
+<code><a href="../reference/arrange..html">arrange.()</a></code>: Properly sorts <code>NA</code>s (<a href="https://github.com/markfairbanks/tidytable/issues/541" class="external-link">#541</a>)</li>
+</ul></div>
+<div class="section level5">
+<h5 id="deprecations-0-8-1">Deprecations<a class="anchor" aria-label="anchor" href="#deprecations-0-8-1"></a></h5>
+<ul><li>
+<code>arrange_across.</code>/<code>mutate_across.</code>/<code>summarize_across.</code> are now defunct. They have been deprecated with warnings since v0.6.4 (Jul 2021). Users must now use <code><a href="../reference/across..html">across.()</a></code> inside <code><a href="../reference/arrange..html">arrange.()</a></code>/<code><a href="../reference/mutate..html">mutate.()</a></code>/<code><a href="../reference/summarize..html">summarize.()</a></code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -884,7 +911,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>
