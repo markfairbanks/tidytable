@@ -1,6 +1,6 @@
 Package: tidytable
 Title: Tidy Interface to 'data.table'
-Version: 0.8.0
+Version: 0.8.1
 Authors@R: 
     c(person(given = "Mark",
              family = "Fairbanks",
@@ -35,11 +35,11 @@ Suggests: testthat (>= 2.1.0), bit64, knitr, rmarkdown, crayon
 RemoteType: local
 RemoteUrl: /Users/fairbmx/Desktop/NU/R/R_Packages/tidytable
 NeedsCompilation: no
-Packaged: 2022-06-08 16:39:17 UTC; fairbmx
+Packaged: 2022-08-01 15:10:04 UTC; fairbmx
 Author: Mark Fairbanks [aut, cre],
   Abdessabour Moutik [ctb],
   Matt Carlson [ctb],
   Ivan Leung [ctb],
   Ross Kennedy [ctb]
 Maintainer: Mark Fairbanks <mark.t.fairbanks@gmail.com>
-Built: R 4.2.0; ; 2022-06-08 16:39:18 UTC; unix
+Built: R 4.2.0; ; 2022-08-01 15:10:04 UTC; unix

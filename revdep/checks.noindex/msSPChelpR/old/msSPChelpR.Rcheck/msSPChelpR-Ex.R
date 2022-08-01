@@ -159,6 +159,33 @@ msSPChelpR::calc_futime_tt(usdata_wide,
 
 
 cleanEx()
+nameEx("calc_refrates")
+### * calc_refrates
+
+flush(stderr()); flush(stdout())
+
+### Name: calc_refrates
+### Title: Calculate age-, sex-, cohort-, region-specific incidence rates
+###   from a cohort
+### Aliases: calc_refrates
+
+### ** Examples
+
+#load sample data
+data("us_second_cancer")
+data("population_us")
+
+us_second_cancer %>%
+  #create variable to indicate to be counted as case
+  dplyr::mutate(is_case = 1) %>%
+  #calculate refrates - warning: these are not realistic numbers, just showing functionality
+  calc_refrates(dattype = "seer", , count_var = "is_case", refpop_df = population_us,
+               region_var = "registry", age_var = "fc_agegroup", sex_var = "sex", 
+               site_var = "t_site_icd")
+
+
+
+cleanEx()
 nameEx("ir_crosstab")
 ### * ir_crosstab
 

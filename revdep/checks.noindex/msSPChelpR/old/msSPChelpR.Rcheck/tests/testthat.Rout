@@ -44,8 +44,8 @@ Type 'q()' to quit R.
 6             98  2670
 7             NA     5
 Long dataset had too many cases per patient. Wide dataset is limited to  2  cases per id as defined in timevar_max option.
-[ FAIL 0 | WARN 0 | SKIP 0 | PASS 4 ]
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 5 ]
 > 
 > proc.time()
    user  system elapsed 
-  3.440   0.439   4.238 
+  2.677   0.329   3.078 
