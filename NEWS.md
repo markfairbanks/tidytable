@@ -1,14 +1,14 @@
-# tidytable 0.8.1 (in development)
+# tidytable 0.8.1
+
+#### New Functions
+* `if_else.()`
+  * Note: Alternate syntax `ifelse.()` (introduced in v0.4.0) will remain in the package
 
 #### Functionality improvements
 * `arrange.()`: Can use `.env` inside arrange expressions
 * `case_when.()`: Gains `.default`/`.ptype`/`.size` args
 * `coalesce.()`: Gains `.ptype`/`.size` args
 * `relocate.()`: Now properly handles multiple columns selected in `.before` or `.after`
-
-#### New Functions
-* `if_else.()`
-  * Note: Alternate syntax `ifelse.()` (introduced in v0.4.0) will remain in the package
   
 #### Bug Fixes
 * Nested calls to `across.()` are handled properly (#505)

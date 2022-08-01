@@ -57,6 +57,7 @@ group_split.	group_split.
 ifelse.	ifelse.
 if_all.	if_all.
 if_any.	if_all.
+if_else.	if_else.
 inner_join.	left_join.
 inv_gc	inv_gc
 is_tidytable	is_tidytable

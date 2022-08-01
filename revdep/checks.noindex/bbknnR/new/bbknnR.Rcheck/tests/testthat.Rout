@@ -31,4 +31,4 @@ Running PCA...
 > 
 > proc.time()
    user  system elapsed 
- 10.240   0.802  11.278 
+  8.948   0.563   9.742 

@@ -10,7 +10,7 @@
 |collate  |en_US.UTF-8                                                                     |
 |ctype    |en_US.UTF-8                                                                     |
 |tz       |America/Denver                                                                  |
-|date     |2022-06-08                                                                      |
+|date     |2022-08-01                                                                      |
 |rstudio  |2022.02.3+492 Prairie Trillium (desktop)                                        |
 |pandoc   |2.17.1.1 @ /Applications/RStudio.app/Contents/MacOS/quarto/bin/ (via rmarkdown) |
 
@@ -18,7 +18,7 @@
 
 |package   |old   |new   |Δ  |
 |:---------|:-----|:-----|:--|
-|tidytable |0.7.2 |0.8.0 |*  |
+|tidytable |0.8.0 |0.8.1 |*  |
 
 # Revdeps
 

@@ -23,7 +23,7 @@ nesting.() is a helper that only finds combinations already present in the datas
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
       </span>
     </div>
 
@@ -66,35 +66,42 @@ nesting.() is a helper that only finds combinations already present in the datas
 
     <div class="ref-description">
     <p>Generates all combinations of variables found in a dataset.</p>
-<p><code>expand.()</code> is useful in conjunction with joins:</p><ul><li><p>use with <code><a href="left_join..Rd.html">right_join.()</a></code> to convert implicit missing values to explicit missing values</p></li>
-<li><p>use with <code><a href="left_join..Rd.html">anti_join.()</a></code> to find out which combinations are missing</p></li>
+<p><code>expand.()</code> is useful in conjunction with joins:</p><ul><li><p>use with <code><a href="left_join..html">right_join.()</a></code> to convert implicit missing values to explicit missing values</p></li>
+<li><p>use with <code><a href="left_join..html">anti_join.()</a></code> to find out which combinations are missing</p></li>
 </ul><p><code>nesting.()</code> is a helper that only finds combinations already present in the dataset.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">expand.</span><span class="op">(</span><span class="va">.df</span>, <span class="va">...</span>, .name_repair <span class="op">=</span> <span class="st">"check_unique"</span>, .by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
-
-<span class="fu">nesting.</span><span class="op">(</span><span class="va">...</span>, .name_repair <span class="op">=</span> <span class="st">"check_unique"</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">expand.</span><span class="op">(</span><span class="va">.df</span>, <span class="va">...</span>, .name_repair <span class="op">=</span> <span class="st">"check_unique"</span>, .by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">nesting.</span><span class="op">(</span><span class="va">...</span>, .name_repair <span class="op">=</span> <span class="st">"check_unique"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>.df</dt>
 <dd><p>A data.frame or data.table</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Columns to get combinations of</p></dd>
+
+
 <dt>.name_repair</dt>
 <dd><p>Treatment of duplicate names. See <code><a href="https://vctrs.r-lib.org/reference/vec_as_names.html" class="external-link">?vctrs::vec_as_names</a></code> for options/details</p></dd>
+
+
 <dt>.by</dt>
 <dd><p>Columns to group by</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="tidytable.html">tidytable</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">expand.</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="tidytable.html">tidytable</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">expand.</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 4 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       x     y</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -102,9 +109,9 @@ nesting.() is a helper that only finds combinations already present in the datas
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     1     2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     2     1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>     2     2</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">expand.</span><span class="op">(</span><span class="fu">nesting.</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">expand.</span><span class="op">(</span><span class="fu">nesting.</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 2 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       x     y</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -124,7 +131,7 @@ nesting.() is a helper that only finds combinations already present in the datas
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

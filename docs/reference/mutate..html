@@ -22,7 +22,7 @@ Delete columns
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1</span>
       </span>
     </div>
 
@@ -70,24 +70,30 @@ Delete columns
 </ul></div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mutate.</span><span class="op">(</span>
-  <span class="va">.df</span>,
-  <span class="va">...</span>,
-  .by <span class="op">=</span> <span class="cn">NULL</span>,
-  .keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"used"</span>, <span class="st">"unused"</span>, <span class="st">"none"</span><span class="op">)</span>,
-  .before <span class="op">=</span> <span class="cn">NULL</span>,
-  .after <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mutate.</span><span class="op">(</span></span>
+<span>  <span class="va">.df</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  .by <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"used"</span>, <span class="st">"unused"</span>, <span class="st">"none"</span><span class="op">)</span>,</span>
+<span>  .before <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .after <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>.df</dt>
 <dd><p>A data.frame or data.table</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Columns to add/modify</p></dd>
+
+
 <dt>.by</dt>
 <dd><p>Columns to group by</p></dd>
+
+
 <dt>.keep</dt>
 <dd><p><em>experimental</em>:
 This is an experimental argument that allows you to control which columns
@@ -96,53 +102,56 @@ from <code>.df</code> are retained in the output:</p><ul><li><p><code>"all"</cod
 for checking your work as it displays inputs and outputs side-by-side.</p></li>
 <li><p><code>"unused"</code> keeps only existing variables <strong>not</strong> used to make new
 variables.</p></li>
-<li><p><code>"none"</code>, only keeps grouping keys (like <code><a href="transmute..Rd.html">transmute.()</a></code>).</p></li>
+<li><p><code>"none"</code>, only keeps grouping keys (like <code><a href="transmute..html">transmute.()</a></code>).</p></li>
 </ul></dd>
+
+
 <dt>.before, .after</dt>
 <dd><p>Optionally indicate where new columns should be placed.
 Defaults to the right side of the data frame.</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span></span>
-<span class="r-in">  a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span>
-<span class="r-in">  b <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span>,</span>
-<span class="r-in">  c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">mutate.</span><span class="op">(</span>double_a <span class="op">=</span> <span class="va">a</span> <span class="op">*</span> <span class="fl">2</span>,</span>
-<span class="r-in">          a_plus_b <span class="op">=</span> <span class="va">a</span> <span class="op">+</span> <span class="va">b</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span></span>
+<span class="r-in"><span>  b <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span>,</span></span>
+<span class="r-in"><span>  c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">mutate.</span><span class="op">(</span>double_a <span class="op">=</span> <span class="va">a</span> <span class="op">*</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>          a_plus_b <span class="op">=</span> <span class="va">a</span> <span class="op">+</span> <span class="va">b</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 3 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       a     b c     double_a a_plus_b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1     4 a            2        5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     2     5 a            4        7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3     6 b            6        9</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">mutate.</span><span class="op">(</span>double_a <span class="op">=</span> <span class="va">a</span> <span class="op">*</span> <span class="fl">2</span>,</span>
-<span class="r-in">          avg_a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span>,</span>
-<span class="r-in">          .by <span class="op">=</span> <span class="va">c</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">mutate.</span><span class="op">(</span>double_a <span class="op">=</span> <span class="va">a</span> <span class="op">*</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>          avg_a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>          .by <span class="op">=</span> <span class="va">c</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 3 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       a     b c     double_a avg_a</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1     4 a            2   1.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     2     5 a            4   1.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3     6 b            6   3  </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">mutate.</span><span class="op">(</span>double_a <span class="op">=</span> <span class="va">a</span> <span class="op">*</span> <span class="fl">2</span>, .keep <span class="op">=</span> <span class="st">"used"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">mutate.</span><span class="op">(</span>double_a <span class="op">=</span> <span class="va">a</span> <span class="op">*</span> <span class="fl">2</span>, .keep <span class="op">=</span> <span class="st">"used"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 3 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       a double_a</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1        2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     2        4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3        6</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">mutate.</span><span class="op">(</span>double_a <span class="op">=</span> <span class="va">a</span> <span class="op">*</span> <span class="fl">2</span>, .after <span class="op">=</span> <span class="va">a</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">mutate.</span><span class="op">(</span>double_a <span class="op">=</span> <span class="va">a</span> <span class="op">*</span> <span class="fl">2</span>, .after <span class="op">=</span> <span class="va">a</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 3 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       a double_a     b c    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
@@ -163,7 +172,7 @@ Defaults to the right side of the data frame.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

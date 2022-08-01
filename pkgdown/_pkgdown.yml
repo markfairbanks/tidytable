@@ -96,3 +96,14 @@ reference:
 - contents:
   - fread.
 
+- title: internal
+- contents:
+  - arrange_across.
+  - mutate_across.
+  - summarize_across.
+  - case.
+  - get_dummies.
+  - ifelse.
+  - inv_gc
+  - top_n.
+
