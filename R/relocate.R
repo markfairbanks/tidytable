@@ -38,8 +38,8 @@ relocate..tidytable <- function(.df, ..., .before = NULL, .after = NULL) {
   uses_before <- !quo_is_null(.before)
   uses_after <- !quo_is_null(.after)
 
-  if  (uses_before && uses_after) {
-    stop("Must supply only one of `.before` and `.after`")
+  if (uses_before && uses_after) {
+    abort("Must supply only one of `.before` and `.after`")
   }
 
   if (!uses_before && !uses_after) {
