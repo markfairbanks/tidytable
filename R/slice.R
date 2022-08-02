@@ -132,13 +132,12 @@ slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
 #' @export
 #' @rdname slice.
 slice_max. <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
+  check_required(order_by)
   UseMethod("slice_max.")
 }
 
 #' @export
 slice_max..tidytable <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
-  if (missing(order_by)) abort("order_by must be supplied")
-
   if (is_true(with_ties)) {
     .df %>%
       filter.(
@@ -156,22 +155,18 @@ slice_max..tidytable <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .b
 #' @export
 slice_max..data.frame <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   .df <- as_tidytable(.df)
-
-  if (missing(order_by)) abort("order_by must be supplied")
-
   slice_max.(.df, {{ order_by }}, n = n, with_ties = with_ties, .by = {{ .by }})
 }
 
 #' @export
 #' @rdname slice.
 slice_min. <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
+  check_required(order_by)
   UseMethod("slice_min.")
 }
 
 #' @export
 slice_min..tidytable <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
-  if (missing(order_by)) abort("order_by must be supplied")
-
   if (is_true(with_ties)) {
     .df %>%
       filter.(

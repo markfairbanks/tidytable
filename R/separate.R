@@ -33,6 +33,8 @@ separate. <- function(.df, col, into,
                       remove = TRUE,
                       convert = FALSE,
                       ...) {
+  check_required(col)
+  check_required(into)
   UseMethod("separate.")
 }
 
@@ -42,9 +44,6 @@ separate..tidytable <- function(.df, col, into,
                                 remove = TRUE,
                                 convert = FALSE,
                                 ...) {
-  if (missing(col)) abort("col is missing and must be supplied")
-  if (missing(into)) abort("into is missing and must be supplied")
-
   vec_assert(into, character())
 
   if (nchar(sep) == 1) {
@@ -74,7 +73,7 @@ separate..tidytable <- function(.df, col, into,
     .df <- dt_j(.df, !!col := NULL)
   }
 
-  .df[]
+  .df
 }
 
 #' @export

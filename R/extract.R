@@ -32,14 +32,14 @@
 #' df %>% extract.(x, c("A", "B", "A"), "([a-d]+)-([a-d]+)-(\\d+)")
 extract. <- function(.df, col, into, regex = "([[:alnum:]]+)",
                      remove = TRUE, convert = FALSE, ...) {
+  check_required(col)
+  check_required(into)
   UseMethod("extract.")
 }
 
 #' @export
 extract..tidytable <- function(.df, col, into, regex = "([[:alnum:]]+)",
                                remove = TRUE, convert = FALSE, ...) {
-  if (missing(col)) abort("col is missing and must be supplied")
-  if (missing(into)) abort("into is missing and must be supplied")
 
   col <- tidyselect_locs(.df, {{ col }})
 
@@ -55,7 +55,7 @@ extract..tidytable <- function(.df, col, into, regex = "([[:alnum:]]+)",
   groups <- groups[keep_group]
   into <- into[keep_group]
 
-  if (anyDuplicated(into) > 0) {
+  if (vec_duplicate_any(into)) {
     groups <- lapply(split(groups, into), pmap_chr., paste0)
     into <- names(groups)
   }
@@ -70,7 +70,7 @@ extract..tidytable <- function(.df, col, into, regex = "([[:alnum:]]+)",
     .df <- dt_j(.df, (col) := NULL)
   }
 
-  .df[]
+  .df
 }
 
 #' @export
