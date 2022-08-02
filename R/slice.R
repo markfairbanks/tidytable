@@ -159,7 +159,7 @@ slice_max..data.frame <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .
 
   if (missing(order_by)) abort("order_by must be supplied")
 
-  slice_max.(.df, {{ order_by }}, n = 1, with_ties = with_ties, .by = {{ .by }})
+  slice_max.(.df, {{ order_by }}, n = n, with_ties = with_ties, .by = {{ .by }})
 }
 
 #' @export
@@ -189,7 +189,7 @@ slice_min..tidytable <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .b
 #' @export
 slice_min..data.frame <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   .df <- as_tidytable(.df)
-  slice_min.(.df, {{ order_by }}, n = 1, with_ties = with_ties, .by = {{ .by }})
+  slice_min.(.df, {{ order_by }}, n = n, with_ties = with_ties, .by = {{ .by }})
 }
 
 #' @export
