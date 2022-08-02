@@ -11,6 +11,8 @@
 #' @param prop The proportion of rows to select
 #' @param weight_by Sampling weights
 #' @param replace Should sampling be performed with (`TRUE`) or without (`FALSE`, default) replacement
+#' @param with_ties Should ties be kept together. The default `TRUE` may return
+#'   can return multiple rows if they are equal. Use `FALSE` to ignore ties.
 #'
 #' @export
 #'
@@ -129,47 +131,65 @@ slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
 
 #' @export
 #' @rdname slice.
-slice_max. <- function(.df, order_by, n = 1, .by = NULL) {
+slice_max. <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   UseMethod("slice_max.")
 }
 
 #' @export
-slice_max..tidytable <- function(.df, order_by, n = 1, .by = NULL) {
+slice_max..tidytable <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   if (missing(order_by)) abort("order_by must be supplied")
 
-  .df %>%
-    arrange.(-{{ order_by }}) %>%
-    slice_head.(n, .by = {{ .by }})
+  if (is_true(with_ties)) {
+    .df %>%
+      filter.(
+        frank({{ order_by }}, ties.method = "max") > (.N - .env$n),
+        .by = {{ .by }}
+      ) %>%
+      arrange.(-{{ order_by }})
+  } else {
+    .df %>%
+      arrange.(-{{ order_by }}) %>%
+      slice_head.(n, .by = {{ .by }})
+  }
 }
 
 #' @export
-slice_max..data.frame <- function(.df, order_by, n = 1, .by = NULL) {
+slice_max..data.frame <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   .df <- as_tidytable(.df)
 
   if (missing(order_by)) abort("order_by must be supplied")
 
-  slice_max.(.df, {{ order_by }}, n = 1, .by = {{ .by }})
+  slice_max.(.df, {{ order_by }}, n = n, with_ties = with_ties, .by = {{ .by }})
 }
 
 #' @export
 #' @rdname slice.
-slice_min. <- function(.df, order_by, n = 1, .by = NULL) {
+slice_min. <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   UseMethod("slice_min.")
 }
 
 #' @export
-slice_min..tidytable <- function(.df, order_by, n = 1, .by = NULL) {
+slice_min..tidytable <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   if (missing(order_by)) abort("order_by must be supplied")
 
-  .df %>%
-    arrange.({{ order_by }}) %>%
-    slice_head.(n, .by = {{ .by }})
+  if (is_true(with_ties)) {
+    .df %>%
+      filter.(
+        frank({{ order_by }}, ties.method = "min") <= .env$n,
+        .by = {{ .by }}
+      ) %>%
+      arrange.({{ order_by }})
+  } else {
+    .df %>%
+      arrange.({{ order_by }}) %>%
+      slice_head.(n, .by = {{ .by }})
+  }
 }
 
 #' @export
-slice_min..data.frame <- function(.df, order_by, n = 1, .by = NULL) {
+slice_min..data.frame <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   .df <- as_tidytable(.df)
-  slice_min.(.df, {{ order_by }}, n = 1, .by = {{ .by }})
+  slice_min.(.df, {{ order_by }}, n = n, with_ties = with_ties, .by = {{ .by }})
 }
 
 #' @export
