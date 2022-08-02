@@ -284,7 +284,7 @@ test_that("can slice_tail when all cols are in .by", {
   expect_equal(sliced_df$x, c("a", "b"))
 })
 
-# slice_min.() ----------------------------------------------------
+# slice_min/slice_max ----------------------------------------------------
 
 test_that("_min.() works", {
   test_df <- tidytable(x = 1:10, y = 20:11, z = c(rep("a", 6), rep("b", 4)))
@@ -327,4 +327,13 @@ test_that("_max.() works with custom function with quosures", {
 
   expect_equal(sliced_df$a, 3)
   expect_equal(sliced_df$b, 6)
+})
+
+test_that("min and max return ties by default", {
+  df <- tidytable(x = c(1, 2, 1, 2, 1))
+  expect_equal(df %>% slice_min.(x) %>% pull.(), c(1, 1, 1))
+  expect_equal(df %>% slice_max.(x) %>% pull.(), c(2, 2))
+
+  expect_equal(df %>% slice_min.(x, with_ties = FALSE) %>% pull.(), 1)
+  expect_equal(df %>% slice_max.(x, with_ties = FALSE) %>% pull.(), 2)
 })
