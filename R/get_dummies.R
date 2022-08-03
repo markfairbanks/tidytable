@@ -78,7 +78,7 @@ get_dummies..tidytable <- function(.df,
     len <- length(unique_vals)
 
     # Due to above f_sort NA will be the last value if it exists
-    any_na <- is.na(unique_vals[len])
+    any_na <- vec_equal_na(unique_vals[len])
 
     if (any_na) {
       unique_vals <- unique_vals[-len]
@@ -93,10 +93,10 @@ get_dummies..tidytable <- function(.df,
     }
 
     if (any_na) {
-      not_na <- !is.na(.df[[col_name]])
+      complete <- vec_detect_complete(.df[[col_name]])
       .df <- dt_j(
         .df,
-        (not_na_cols) := lapply(unique_vals, function(.x) as.integer(.x == !!col & ..not_na))
+        (not_na_cols) := lapply(unique_vals, function(.x) as.integer(.x == !!col & ..complete))
       )
     } else {
       .df <- dt_j(
@@ -106,7 +106,7 @@ get_dummies..tidytable <- function(.df,
     }
 
     if (dummify_na && any_na) {
-      .df <- dt_j(.df, (na_col) := as.integer(!not_na))
+      .df <- dt_j(.df, (na_col) := as.integer(!..complete))
     }
   }
 
