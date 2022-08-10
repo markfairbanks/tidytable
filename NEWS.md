@@ -1,6 +1,7 @@
 # tidytable 0.8.1 (in development)
 
 #### New Functions
+* `consecutive_id.()`
 * `if_else.()`
   * Note: Alternate syntax `ifelse.()` (introduced in v0.4.0) will remain in the package
 
