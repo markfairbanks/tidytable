@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-#' vec <- c(1, 1, 2, 2, 1, 1)
+#' x <- c(1, 1, 2, 2, 1, 1)
 #' consecutive_id.(x)
 consecutive_id. <- function(...) {
   check_dots_unnamed()

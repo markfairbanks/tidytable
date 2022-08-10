@@ -13,6 +13,6 @@ consecutive_id.(...)
 Generate a unique id for runs of consecutive values
 }
 \examples{
-vec <- c(1, 1, 2, 2, 1, 1)
+x <- c(1, 1, 2, 2, 1, 1)
 consecutive_id.(x)
 }
