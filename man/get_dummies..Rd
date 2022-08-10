@@ -6,7 +6,7 @@
 \usage{
 get_dummies.(
   .df,
-  cols = c(where(is.character), where(is.factor)),
+  cols = where(~is.character(.x) | is.factor(.x)),
   prefix = TRUE,
   prefix_sep = "_",
   drop_first = FALSE,
@@ -33,30 +33,21 @@ Convert character and factor columns to dummy variables
 }
 \examples{
 df <- tidytable(
-  col1 = c("a", "b", "c", NA),
-  col2 = as.factor(c("a", "b", NA, "d")),
-  var1 = rnorm(4, 0, 1)
+  chr = c("a", "b", NA),
+  fct = as.factor(c("a", NA, "c")),
+  num = 1:3
 )
 
 # Automatically does all character/factor columns
 df \%>\%
   get_dummies.()
 
-# Can select one column
 df \%>\%
-  get_dummies.(col1)
-
-# Can select one or multiple columns in a vector of unquoted column names
-df \%>\%
-  get_dummies.(c(col1, col2))
-
-# Can drop certain columns using
-df \%>\%
-  get_dummies.(c(where(is.character), -col2))
+  get_dummies.(cols = chr)
 
 df \%>\%
-  get_dummies.(prefix_sep = ".", drop_first = TRUE)
+  get_dummies.(cols = c(chr, fct), drop_first = TRUE)
 
 df \%>\%
-  get_dummies.(c(col1, col2), dummify_na = FALSE)
+  get_dummies.(prefix_sep = ".", dummify_na = FALSE)
 }
