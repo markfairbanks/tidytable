@@ -42,7 +42,7 @@ dt.tidytable <- function(.df, ...) {
   dots_names <- names(dots)
 
   if (length(dots) > 1 || "j" %chin% dots_names) {
-    if ("j" %f_in% dots_names) {
+    if ("j" %in% dots_names) {
       j <- dots[["j"]]
     } else {
       j <- dots[[2]]
@@ -110,7 +110,7 @@ prep_j_expr <- function(j_exprs, use_walrus, j_call) {
 }
 
 replace_j_dot <- function(dots, dots_names, j) {
-  if ("j" %f_in% dots_names) {
+  if ("j" %in% dots_names) {
     dots[["j"]] <- j
   } else {
     dots[[2]] <- j

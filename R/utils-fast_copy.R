@@ -9,7 +9,7 @@ fast_copy <- function(x, new_cols = character()) {
 
   x_names <- names(x)
 
-  needs_copy <- x_names %f_in% new_cols
+  needs_copy <- x_names %in% new_cols
 
   if (any(needs_copy)) {
     x_names <- copy(x_names)
@@ -41,7 +41,7 @@ shallow <- function(x) {
 
 # deprecated shallow() ------------------------------------------------
 # shallow <- function(x, cols = names(x), reset_class = FALSE) {
-#   stopifnot(is.data.table(x), all(cols %f_in% names(x)))
+#   stopifnot(is.data.table(x), all(cols %in% names(x)))
 #   ans <- vector("list", length(cols))
 #   setattr(ans, 'names', copy(cols))
 #   for (col in cols) {

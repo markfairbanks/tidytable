@@ -15,6 +15,6 @@ na_if. <- function(x, y) {
   if (length(y) == 1) {
     vec_assign(x, x == y, NA)
   } else {
-    vec_assign(x, x %f_in% y, NA)
+    vec_assign(x, x %in% y, NA)
   }
 }

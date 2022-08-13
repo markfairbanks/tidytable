@@ -56,7 +56,7 @@ fill..data.frame <- function(.df, ...,
 
 fill_na <- function(x, direction) {
   if (is.numeric(x)) {
-    if (direction %f_in% c("down", "up")) {
+    if (direction %in% c("down", "up")) {
       type <- switch(direction, "down" = "locf", "up" = "nocb")
 
       nafill(x, type = type)

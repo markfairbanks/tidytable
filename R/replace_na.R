@@ -49,7 +49,7 @@ replace_na..tidytable <- function(.x, replace = list()) {
 
   if (length(replace) == 0) return(.x)
 
-  keep_bool <- names(replace) %f_in% names(.x)
+  keep_bool <- names(replace) %in% names(.x)
 
   replace <- replace[keep_bool]
 
