@@ -79,7 +79,7 @@ pivot_wider..tidytable <- function(.df,
 
   if (quo_is_null(id_cols)) {
     data_names <- names(.df)
-    id_cols <- data_names[!data_names %f_in% c(names_from, values_from)]
+    id_cols <- data_names[!data_names %in% c(names_from, values_from)]
   } else {
     id_cols <- tidyselect_names(.df, !!id_cols)
   }

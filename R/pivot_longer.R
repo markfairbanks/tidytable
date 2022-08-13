@@ -77,10 +77,10 @@ pivot_longer..tidytable <- function(.df,
 
   if (length(measure_vars) == 0) abort("At least one column must be supplied to cols")
 
-  id_vars <- names[!names %f_in% measure_vars]
+  id_vars <- names[!names %in% measure_vars]
 
   multiple_names_to <- length(names_to) > 1
-  uses_dot_value <- ".value" %f_in% names_to
+  uses_dot_value <- ".value" %in% names_to
   na_in_names_to <- is.na(names_to)
 
   variable_name <- "variable"
