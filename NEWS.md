@@ -4,6 +4,7 @@
 * `consecutive_id.()`
 * `if_else.()`
   * Note: Alternate syntax `ifelse.()` (introduced in v0.4.0) will remain in the package
+* `%in%`
 
 #### Functionality improvements
 * `arrange.()`: Can use `.env` inside arrange expressions
