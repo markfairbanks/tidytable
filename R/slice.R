@@ -197,14 +197,19 @@ slice_sample. <- function(.df, n, prop, weight_by = NULL,
 #' @export
 slice_sample..tidytable <- function(.df, n, prop, weight_by = NULL,
                                      replace = FALSE, .by = NULL) {
-  size <- check_slice_size(n, prop, "slice_sample")
+  if (missing(n) && missing(prop)) {
+    abort("Must supply either `n` or `prop`")
+  } else if (missing(prop)) {
+    prop <- 1
+  } else {
+    n <- expr(.N)
+  }
 
-  idx <- switch(size$type,
-                n =    function(x, n) sample_int(n, size$n, replace = replace, wt = x),
-                prop = function(x, n) sample_int(n, size$prop * n, replace = replace, wt = x),
+  slice.(
+    .df,
+    sample_int(.N, !!n * !!prop, replace, wt = {{ weight_by }}),
+    .by = {{ .by }}
   )
-
-  slice.(.df, idx({{ weight_by }}, .N), .by = {{ .by }})
 }
 
 #' @export
