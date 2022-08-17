@@ -26,7 +26,7 @@ Encoding: UTF-8
 Imports: data.table (>= 1.14.0), glue (>= 1.4.0), magrittr (>= 2.0.3),
         pillar (>= 1.5.0), rlang (>= 1.0.2), tidyselect (>= 1.1.0),
         vctrs (>= 0.4.1)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
 URL: https://github.com/markfairbanks/tidytable
@@ -35,11 +35,11 @@ Suggests: testthat (>= 2.1.0), bit64, knitr, rmarkdown, crayon
 RemoteType: local
 RemoteUrl: /Users/fairbmx/Desktop/NU/R/R_Packages/tidytable
 NeedsCompilation: no
-Packaged: 2022-08-01 15:10:04 UTC; fairbmx
+Packaged: 2022-08-17 21:22:09 UTC; fairbmx
 Author: Mark Fairbanks [aut, cre],
   Abdessabour Moutik [ctb],
   Matt Carlson [ctb],
   Ivan Leung [ctb],
   Ross Kennedy [ctb]
 Maintainer: Mark Fairbanks <mark.t.fairbanks@gmail.com>
-Built: R 4.2.0; ; 2022-08-01 15:10:04 UTC; unix
+Built: R 4.2.0; ; 2022-08-17 21:22:10 UTC; unix

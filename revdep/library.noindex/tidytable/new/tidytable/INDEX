@@ -1,4 +1,4 @@
-%notin%                 notin operator
+%in%                    '%in%' and %notin% operators
 across.                 Apply a function across a selection of columns
 add_count.              Add a count column to the data frame
 arrange.                Arrange/reorder rows
@@ -13,6 +13,7 @@ case_when.              Case when
 coalesce.               Coalesce missing values
 complete.               Complete a data.table with missing combinations
                         of data
+consecutive_id.         Generate a unique id for consecutive values
 context                 Context functions
 count.                  Count observations by group
 crossing.               Create a data.table from all unique

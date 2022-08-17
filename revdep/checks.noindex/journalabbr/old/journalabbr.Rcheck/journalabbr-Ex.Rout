@@ -1,0 +1,219 @@
+
+R version 4.2.0 (2022-04-22) -- "Vigorous Calisthenics"
+Copyright (C) 2022 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "journalabbr"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('journalabbr')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("abbr_bib")
+> ### * abbr_bib
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: abbr_bib
+> ### Title: Journal field abbreviation of BibTeX file.
+> ### Aliases: abbr_bib abbr_bib_only_journal
+> 
+> ### ** Examples
+> 
+> require(journalabbr)
+> path <- system.file("extdata", "testfile_2.bib", package = "journalabbr", mustWork = TRUE)
+> temptab <- abbr_bib(file = path, out.file = tempfile(fileext = ".bib"))
+Warning in read_bib2dt(file) :
+  
+====== Duplicate key in uploaded Bib file =======:
+meenakshi2019fuzzy
+xu2014ordinal
+===============================================
+
+> 
+> # add user csv
+> csvpath <- system.file("extdata", "myabbr.csv", package = "journalabbr", mustWork = TRUE)
+> temptab1 <- abbr_bib(file = path, out.file = tempfile(fileext = ".bib"), user.csv = csvpath)
+Warning in read_bib2dt(file) :
+  
+====== Duplicate key in uploaded Bib file =======:
+meenakshi2019fuzzy
+xu2014ordinal
+===============================================
+
+> 
+> # no return value
+> abbr_bib_only_journal(file = path, out.file = tempfile(fileext = ".bib"), user.csv = csvpath)
+NULL
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("add_abbrtable")
+> ### * add_abbrtable
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: add_abbrtable
+> ### Title: Add user's journal abbreviation table
+> ### Aliases: add_abbrtable
+> 
+> ### ** Examples
+> 
+> csvpath <- system.file("extdata", "myabbr.csv", package = "journalabbr", mustWork = TRUE)
+> abbrtable_user <- add_abbrtable(file = csvpath, header = FALSE, sep = ";")
+> colnames(abbrtable_user)
+[1] "journal_lower" "journal_abbr"  "originFile"   
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("read_bib2dt")
+> ### * read_bib2dt
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: read_bib2dt
+> ### Title: Parse a BibTeX file to a 'data.table'.
+> ### Aliases: read_bib2dt
+> 
+> ### ** Examples
+> 
+> # Read from .bib file:
+> file1 <- system.file("extdata", "testfile_1.bib", package = "journalabbr", mustWork = TRUE)
+> dt1 <- read_bib2dt(file1)
+Warning in read_bib2dt(file1) :
+  NA value exists in Citation Key, please check the bib file
+Warning in read_bib2dt(file1) :
+  
+====== Duplicate key in uploaded Bib file =======:
+Binmore2008
+Binmore2008
+BrandenburgerDekel1989
+Osborne1994
+===============================================
+
+> colnames(dt1)
+ [1] "fz_id"        "fz_rawchar"   "fz_char"      "CKEY"         "ITYPE"       
+ [6] "TITLE"        "AUTHOR"       "ORGANIZATION" "ADDRESS"      "YEAR"        
+[11] "URL"          "ABSTRACT"     "NOTE"         "JOURNAL"      "VOLUME"      
+[16] "NUMBER"       "PAGES"        "MONTH"        "PUBLISHER"    "BOOKTITLE"   
+[21] "CHAPTER"      "EDITOR"       "SHORTTITLE"   "DOI"          "EDITION"     
+[26] "SCHOOL"       "TYPE"         "INSTITUTION" 
+> 
+> file2 <- system.file("extdata", "testfile_2.bib", package = "journalabbr", mustWork = TRUE)
+> dt2 <- read_bib2dt(file2)
+Warning in read_bib2dt(file2) :
+  
+====== Duplicate key in uploaded Bib file =======:
+meenakshi2019fuzzy
+xu2014ordinal
+===============================================
+
+> colnames(dt2)
+ [1] "fz_id"      "fz_rawchar" "fz_char"    "CKEY"       "ITYPE"     
+ [6] "TITLE"      "AUTHOR"     "PUBLISHER"  "YEAR"       "SHORTTITLE"
+[11] "VOLUME"     "PAGES"      "JOURNAL"    "LANGUAGE"   "NUMBER"    
+[16] "MONTH"      "URL"       
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("replace_field")
+> ### * replace_field
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: replace_field_journal
+> ### Title: Replace field 'journal' with built-in data sets and user
+> ###   provided data sets.
+> ### Aliases: replace_field_journal replace_field_author
+> 
+> ### ** Examples
+> 
+> csvpath <- system.file("extdata", "myabbr.csv", package = "journalabbr", mustWork = TRUE)
+> abbrtable_user <- add_abbrtable(file = csvpath, header = FALSE, sep = ";")
+> colnames(abbrtable_user)
+[1] "journal_lower" "journal_abbr"  "originFile"   
+> 
+> file <- system.file("extdata", "testfile_2.bib", package = "journalabbr", mustWork = TRUE)
+> dt <- read_bib2dt(file)
+Warning in read_bib2dt(file) :
+  
+====== Duplicate key in uploaded Bib file =======:
+meenakshi2019fuzzy
+xu2014ordinal
+===============================================
+
+> 
+> newdt <- replace_field_journal(dt, abbrtable_user)
+> newdt1 <- replace_field_author(dt, author.connect = "and")
+> newdt2 <- replace_field_author(dt, author.connect = "&")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("write_dt2bib")
+> ### * write_dt2bib
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: write_dt2bib
+> ### Title: Export a BibTeX 'data.table' to a .bib file.
+> ### Aliases: write_dt2bib
+> 
+> ### ** Examples
+> 
+> # Read from .bib file:
+> require(journalabbr)
+> file <- system.file("extdata", "testfile_2.bib", package = "journalabbr", mustWork = TRUE)
+> bib <- read_bib2dt(file)
+Warning in read_bib2dt(file) :
+  
+====== Duplicate key in uploaded Bib file =======:
+meenakshi2019fuzzy
+xu2014ordinal
+===============================================
+
+> 
+> # Write to .bib file:
+> write_dt2bib(bib, file = tempfile(fileext = ".bib"))
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  2.206 0.171 2.391 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

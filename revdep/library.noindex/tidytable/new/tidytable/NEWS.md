@@ -1,14 +1,17 @@
 # tidytable 0.8.1
 
 #### New Functions
+* `consecutive_id.()`
 * `if_else.()`
   * Note: Alternate syntax `ifelse.()` (introduced in v0.4.0) will remain in the package
+* `%in%`
 
 #### Functionality improvements
 * `arrange.()`: Can use `.env` inside arrange expressions
 * `case_when.()`: Gains `.default`/`.ptype`/`.size` args
 * `coalesce.()`: Gains `.ptype`/`.size` args
 * `relocate.()`: Now properly handles multiple columns selected in `.before` or `.after`
+* `slice_min.()`/`slice_max.()`: Gain `with_ties` argument
   
 #### Bug Fixes
 * Nested calls to `across.()` are handled properly (#505)

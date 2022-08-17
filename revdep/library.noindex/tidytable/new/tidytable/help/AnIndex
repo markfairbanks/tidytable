@@ -1,8 +1,9 @@
 %>%	pipe
 %between%	reexports
 %chin%	reexports
+%in%	in-notin
 %like%	reexports
-%notin%	grapes-notin-grapes
+%notin%	in-notin
 across.	across.
 add_count.	add_count.
 all_of	reexports
@@ -18,6 +19,7 @@ case.	case.
 case_when.	case_when.
 coalesce.	coalesce.
 complete.	complete.
+consecutive_id.	consecutive_id.
 contains	reexports
 context	context
 count.	count.
