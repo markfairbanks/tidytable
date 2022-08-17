@@ -229,40 +229,4 @@ sample_int <- function(n, size, replace = FALSE, wt = NULL) {
   }
 }
 
-check_constant <- function(x, name, fn) {
-  withCallingHandlers(force(x), error = function(e) {
-    abort(c(
-      glue("`{name}` must be a constant in `{fn}()`."),
-      x = conditionMessage(e)
-    ), parent = e)
-  })
-}
-
-check_slice_size <- function(n, prop, .slice_fn = "check_slice_size") {
-  if (missing(n) && missing(prop)) {
-    list(type = "n", n = 1L)
-  } else if (!missing(n) && missing(prop)) {
-    n <- check_constant(n, "n", .slice_fn)
-    if (!is.numeric(n) || length(n) != 1) {
-      abort("`n` must be a single number.")
-    }
-    if (is.na(n) || n < 0) {
-      abort("`n` must be a non-missing positive number.")
-    }
-
-    list(type = "n", n = n)
-  } else if (!missing(prop) && missing(n)) {
-    prop <- check_constant(prop, "prop", .slice_fn)
-    if (!is.numeric(prop) || length(prop) != 1) {
-      abort("`prop` must be a single number")
-    }
-    if (is.na(prop) || prop < 0) {
-      abort("`prop` must be a non-missing positive number.")
-    }
-    list(type = "prop", prop = prop)
-  } else {
-    abort("Must supply exactly one of `n` and `prop` arguments.")
-  }
-}
-
 globalVariables("V1")
