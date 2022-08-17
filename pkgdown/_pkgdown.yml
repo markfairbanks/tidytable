@@ -24,6 +24,7 @@ reference:
   - c_across.
   - case_when.
   - coalesce.
+  - consecutive_id.
   - count.
   - context
   - desc.

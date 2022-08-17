@@ -1,4 +1,4 @@
-# tidytable 0.8.1 (in development)
+# tidytable 0.8.1
 
 #### New Functions
 * `consecutive_id.()`

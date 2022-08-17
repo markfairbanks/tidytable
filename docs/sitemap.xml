@@ -70,6 +70,9 @@
     <loc>/reference/complete..html</loc>
   </url>
   <url>
+    <loc>/reference/consecutive_id..html</loc>
+  </url>
+  <url>
     <loc>/reference/context.html</loc>
   </url>
   <url>
@@ -137,6 +140,9 @@
   </url>
   <url>
     <loc>/reference/ifelse..html</loc>
+  </url>
+  <url>
+    <loc>/reference/in-notin.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
