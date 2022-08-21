@@ -1,3 +1,8 @@
+# tidytable 0.8.2 (in development)
+
+#### Bug fixes
+* `tidytable::'%in%'` dispatches to `base::'%in%'` when comparing with a list (#563)
+
 # tidytable 0.8.1
 
 #### New Functions

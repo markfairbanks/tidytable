@@ -22,6 +22,9 @@
 '%in%' <- function(x, y) {
   if (is.character(x) && is.character(y)) {
     x %chin% y
+  } else if (is.list(y)) {
+    # https://github.com/markfairbanks/tidytable/issues/565
+    base::'%in%'(x, y)
   } else {
     vec_in(x, y)
   }
