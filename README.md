@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidytable <img id="logo" src="man/figures/logo.png" align="right" width="17%" height="17%" />
+# tidytable <img id="logo" src="man/figures/logo.png" align="right" width="15%" height="15%" />
 
 <!-- badges: start -->
 
@@ -16,10 +16,14 @@ downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=blue)](h
 
 #### Why `tidytable`?
 
--   `tidyverse`-like syntax
--   Fast functions built using two high performance packages:
-    `data.table` and the `tidyverse`’s `vctrs`
--   Compatibility with the tidy evaluation framework
+-   [`tidyverse`-like
+    syntax](https://markfairbanks.github.io/tidytable/#general-syntax)
+-   [Fast
+    functions](https://markfairbanks.github.io/tidytable/articles/speed_comparisons.html)
+    built using two high performance packages: `data.table` and the
+    `tidyverse`’s `vctrs`
+-   [Compatibility with tidy
+    evaluation](https://markfairbanks.github.io/tidytable/#tidy-evaluation-compatibility)
 
 ## Installation
 
