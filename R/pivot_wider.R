@@ -46,7 +46,7 @@ pivot_wider. <- function(.df,
                          names_prefix = "",
                          names_glue = NULL,
                          names_sort = FALSE,
-                         names_repair = "check_unique",
+                         names_repair = "unique",
                          values_fill = NULL,
                          values_fn = NULL) {
   UseMethod("pivot_wider.")
@@ -61,7 +61,7 @@ pivot_wider..tidytable <- function(.df,
                                   names_prefix = "",
                                   names_glue = NULL,
                                   names_sort = FALSE,
-                                  names_repair = "check_unique",
+                                  names_repair = "unique",
                                   values_fill = NULL,
                                   values_fn = NULL) {
   id_cols <- enquo(id_cols)
@@ -112,10 +112,10 @@ pivot_wider..tidytable <- function(.df,
   if (no_id) {
     lhs <- "..."
   } else {
-    lhs <- paste(id_cols, collapse = " + ")
+    lhs <- paste(glue("`{id_cols}`"), collapse = " + ")
   }
 
-  rhs <- paste(names_from, collapse = " + ")
+  rhs <- paste(glue("`{names_from}`"), collapse = " + ")
 
   dcast_form <- paste(lhs, rhs, sep = " ~ ")
 
@@ -156,7 +156,7 @@ pivot_wider..data.frame <- function(.df,
                                     names_prefix = "",
                                     names_glue = NULL,
                                     names_sort = FALSE,
-                                    names_repair = "check_unique",
+                                    names_repair = "unique",
                                     values_fill = NULL,
                                     values_fn = NULL) {
   .df <- as_tidytable(.df)
