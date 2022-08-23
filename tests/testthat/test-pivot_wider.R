@@ -184,7 +184,7 @@ test_that("can pivot data frames with spaced names, #569", {
   df <- tidytable("a a" = 1,
                   "names" = c("a", "b"),
                   "vals" = 1:2)
-  out <- pivot_wider.(df, names_from = col, values_from = vals)
+  out <- pivot_wider.(df, names_from = names, values_from = vals)
   expect_named(out, c("a a", "a", "b"))
 })
 
