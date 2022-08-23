@@ -78,7 +78,7 @@ reference:
   desc: >
     These functions are reexported from `data.table`, `rlang`, and `tidyselect`
     for easier access.
-- contents:
+  contents:
   - reexports
 
 - title: tidytable constructors
@@ -98,7 +98,7 @@ reference:
   - fread.
 
 - title: internal
-- contents:
+  contents:
   - arrange_across.
   - mutate_across.
   - summarize_across.
