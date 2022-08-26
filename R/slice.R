@@ -66,6 +66,14 @@ slice..tidytable <- function(.df, ..., .by = NULL) {
 }
 
 #' @export
+slice..grouped_tt <- function(.df, ..., .by = NULL) {
+  .by <- grouped_dot_by(.df, {{ .by }})
+  out <- ungroup.(.df)
+  out <- slice.(out, ..., .by = all_of(.by))
+  group_by.(out, all_of(.by))
+}
+
+#' @export
 slice..data.frame <- function(.df, ..., .by = NULL) {
   .df <- as_tidytable(.df)
   slice.(.df, ..., .by = {{ .by }})
@@ -95,9 +103,17 @@ slice_head..tidytable <- function(.df, n = 5, .by = NULL) {
 }
 
 #' @export
+slice_head..grouped_tt <- function(.df, n = 5, .by = NULL) {
+  .by <- grouped_dot_by(.df, {{ .by }})
+  out <- ungroup.(.df)
+  out <- slice_head.(out, {{ n }}, .by = all_of(.by))
+  group_by.(out, all_of(.by))
+}
+
+#' @export
 slice_head..data.frame <- function(.df, n = 5, .by = NULL) {
   .df <- as_tidytable(.df)
-  slice_head.(.df, {{ n }}, {{ .by }})
+  slice_head.(.df, {{ n }}, .by = {{ .by }})
 }
 
 #' @export
@@ -121,6 +137,14 @@ slice_tail..tidytable <- function(.df, n = 5, .by = NULL) {
   dt_expr <- call2_i(.df, i, .by)
 
   eval_tidy(dt_expr, env = dt_env)
+}
+
+#' @export
+slice_tail..grouped_tt <- function(.df, n = 5, .by = NULL) {
+  .by <- grouped_dot_by(.df, {{ .by }})
+  out <- ungroup.(.df)
+  out <- slice_tail.(out, n, .by = all_of(.by))
+  group_by.(out, all_of(.by))
 }
 
 #' @export
@@ -153,9 +177,17 @@ slice_max..tidytable <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .b
 }
 
 #' @export
+slice_max..grouped_tt <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
+  .by <- grouped_dot_by(.df, {{ .by }})
+  out <- ungroup.(.df)
+  out <- slice_max.(out, {{ order_by }}, {{ n }}, with_ties = with_ties, .by = all_of(.by))
+  group_by.(out, all_of(.by))
+}
+
+#' @export
 slice_max..data.frame <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   .df <- as_tidytable(.df)
-  slice_max.(.df, {{ order_by }}, n = n, with_ties = with_ties, .by = {{ .by }})
+  slice_max.(.df, {{ order_by }}, {{ n }}, with_ties = with_ties, .by = {{ .by }})
 }
 
 #' @export
@@ -179,6 +211,14 @@ slice_min..tidytable <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .b
       arrange.({{ order_by }}) %>%
       slice_head.(n, .by = {{ .by }})
   }
+}
+
+#' @export
+slice_min..grouped_tt <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
+  .by <- grouped_dot_by(.df, {{ .by }})
+  out <- ungroup.(.df)
+  out <- slice_min.(out, {{ order_by }}, n = n, with_ties = with_ties, .by = all_of(.by))
+  group_by.(out, all_of(.by))
 }
 
 #' @export
@@ -213,11 +253,22 @@ slice_sample..tidytable <- function(.df, n, prop, weight_by = NULL,
 }
 
 #' @export
+slice_sample..grouped_tt <- function(.df, n, prop, weight_by = NULL,
+                                    replace = FALSE, .by = NULL) {
+  .by <- grouped_dot_by(.df, {{ .by }})
+  out <- ungroup.(.by)
+  out <- slice_sample.(
+    .df, n, prop, {{ weight_by }}, replace, .by = all_of(.by)
+  )
+  group_by.(out, all_of(.by))
+}
+
+#' @export
 slice_sample..data.frame <- function(.df, n, prop, weight_by = NULL,
                                      replace = FALSE, .by = NULL) {
   .df <- as_tidytable(.df)
   slice_sample.(
-    .df, n, prop, {{ weight_by }}, replace, {{ .by }}
+    .df, n, prop, {{ weight_by }}, replace, .by = {{ .by }}
   )
 }
 

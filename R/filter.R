@@ -48,6 +48,14 @@ filter..tidytable <- function(.df, ..., .by = NULL) {
 }
 
 #' @export
+filter..grouped_tt <- function(.df, ..., .by = NULL) {
+  .by <- grouped_dot_by(.df, {{ .by }})
+  out <- ungroup.(.df)
+  out <- filter.(out, ..., .by = all_of(.by))
+  group_by.(out, all_of(.by))
+}
+
+#' @export
 filter..data.frame <- function(.df, ..., .by = NULL) {
   .df <- as_tidytable(.df)
   filter.(.df, ..., .by = {{ .by }})

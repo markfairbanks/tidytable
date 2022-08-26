@@ -56,3 +56,13 @@ test_that("c_across works with space named columns", {
 
   expect_equal(result_df$sum, c(2, 3, 4))
 })
+
+test_that("overrides grouped_tt", {
+  test_df <- tidytable(x = 1:3, y = 1:3, z = c("a", "a", "b"))
+
+  results_df <- test_df %>%
+    group_by.(z) %>%
+    mutate_rowwise.(row_mean = mean(c(x, y)))
+
+  expect_equal(results_df$row_mean, 1:3)
+})

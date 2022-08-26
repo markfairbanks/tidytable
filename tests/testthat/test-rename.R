@@ -80,7 +80,6 @@ test_that("rename_with.() works with predicate", {
   expect_named(df, c("x","y","z_character"))
 })
 
-# twiddle testing -----------------------------------
 test_that("rename_with.() works with twiddle", {
   df <- data.table(x_start = c(1,1,1), end_x = c(2,2,2), z = c("a", "a", "b"))
   anon_df <- df %>%
@@ -103,4 +102,17 @@ test_that("can make a custom function with quosures", {
     rename_fn(new_x, x)
 
   expect_named(df, c("new_x", "y", "z"))
+})
+
+test_that("works with a grouped_tt", {
+  df <- tidytable(x = 1, y = 2, z = 3) %>%
+    group_by.(x)
+
+  res <- df %>%
+    rename.(new_x = x,
+            new_y = y)
+
+  expect_named(res, c("new_x", "new_y", "z"))
+  expect_equal(group_vars.(res), "new_x")
+  expect_true(is_grouped_df.(res))
 })

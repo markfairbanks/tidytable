@@ -48,6 +48,14 @@ expand..tidytable <- function(.df, ..., .name_repair = "check_unique", .by = NUL
 }
 
 #' @export
+expand..grouped_tt <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
+  .by <- grouped_dot_by(.df, {{ .by }})
+  out <- ungroup.(.df)
+  out <- expand.(out, ..., .name_repair = .name_repair, .by = all_of(.by))
+  group_by.(out, all_of(.by))
+}
+
+#' @export
 expand..data.frame <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
   .df <- as_tidytable(.df)
   expand.(.df, ..., .name_repair = .name_repair, .by = {{ .by }})

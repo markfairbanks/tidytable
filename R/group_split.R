@@ -51,6 +51,13 @@ group_split..tidytable <- function(.df, ..., .keep = TRUE, .named = FALSE) {
 }
 
 #' @export
+group_split..grouped_tt <- function(.df, ..., .keep = TRUE, .named = FALSE) {
+  .by <- group_vars.(.df)
+  out <- ungroup.(.df)
+  group_split.(out, all_of(.by), .keep = .keep, .named = .named)
+}
+
+#' @export
 group_split..data.frame <- function(.df, ..., .keep = TRUE, .named = FALSE) {
   .df <- as_tidytable(.df)
   group_split.(.df, ..., .keep = .keep, .named = .named)

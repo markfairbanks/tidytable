@@ -14,6 +14,10 @@
 #'   + A combination of predicates and column names: `.by = c(where(is.character), b)`
 #' @param .sort _experimental_: Default TRUE.
 #'   If FALSE the original order of the grouping variables will be preserved.
+#' @param .groups Grouping structure of the result
+#'   * "drop_last": Drop the last level of grouping
+#'   * "drop": Drop all groups
+#'   * "keep": Keep all groups
 #'
 #' @export
 #' @md
@@ -33,7 +37,10 @@
 #' df %>%
 #'   summarize.(avg_a = mean(a),
 #'              .by = c(c, d))
-summarize. <- function(.df, ..., .by = NULL, .sort = TRUE) {
+summarize. <- function(.df, ...,
+                       .by = NULL,
+                       .sort = TRUE,
+                       .groups = "drop_last") {
   UseMethod("summarize.")
 }
 
@@ -68,7 +75,29 @@ summarize..tidytable <- function(.df, ..., .by = NULL, .sort = TRUE) {
 }
 
 #' @export
-summarize..data.frame <- function(.df, ..., .by = NULL, .sort = TRUE) {
+summarize..grouped_tt <- function(.df, ...,
+                                  .by = NULL,
+                                  .sort = TRUE,
+                                  .groups = "drop_last") {
+  .by <- grouped_dot_by(.df, {{ .by }})
+  out <- ungroup.(.df)
+  out <- summarize.(out, ..., .by = all_of(.by), .sort = .sort)
+
+  .groups <- arg_match0(.groups, c("drop_last", "drop", "keep"))
+  if (.groups == "drop_last") {
+    .by <- .by[-length(.by)]
+  } else if (.groups == "drop") {
+    .by <- character()
+  }
+
+  # summarize drop attributes in data.table - need to regroup at the end
+  group_by.(out, all_of(.by))
+}
+
+#' @export
+summarize..data.frame <- function(.df, ...,
+                                  .by = NULL,
+                                  .sort = TRUE) {
   .df <- as_tidytable(.df)
   summarize.(.df, ..., .by = {{ .by }}, .sort = .sort)
 }

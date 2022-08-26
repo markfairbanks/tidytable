@@ -135,10 +135,24 @@ test_that("can use .by", {
   tidytable_df <- df %>%
     mutate.(z = mean(x), .by = y)
 
-  datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y]
+  datatable_df <- copy(df)[, ':='(z = mean(x)), by = y]
 
   expect_equal(tidytable_df, datatable_df)
+})
 
+test_that("works on grouped_tt", {
+  df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
+
+  res <- df %>%
+    group_by.(y) %>%
+    mutate.(z = mean(x))
+
+  check <- df %>%
+    mutate.(z = mean(x), .by = y)
+
+  expect_equal(ungroup.(res), check)
+  expect_equal(group_vars.(res), "y")
+  expect_true(is_grouped_df.(res))
 })
 
 test_that("can mutate in order with .by", {
@@ -157,30 +171,6 @@ test_that("modify-by-reference doesn't occur with single val with .by", {
 
   expect_named(df, c("x", "y"))
   expect_equal(df$x, c(1,2,3))
-})
-
-test_that("can use .by with enhanced selection", {
-  df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
-
-  tidytable_df <- df %>%
-    mutate.(z = mean(x), .by = where(is.character))
-
-  datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y]
-
-  expect_equal(tidytable_df, datatable_df)
-
-})
-
-test_that("can use .by with vector", {
-  df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
-
-  tidytable_df <- df %>%
-    mutate.(z = mean(x), .by = c(where(is.character)))
-
-  datatable_df <- shallow(df)[, ':='(z = mean(x)), by = y]
-
-  expect_equal(tidytable_df, datatable_df)
-
 })
 
 test_that("can use .N", {

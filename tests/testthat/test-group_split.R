@@ -31,3 +31,13 @@ test_that("preserves attributes", {
   expect_equal(map_chr.(out, attr, "test"), rep("foo", 2))
   expect_true(all(map_lgl.(out, is_tidytable)))
 })
+
+test_that("works on a grouped_tt", {
+  out <- test_df %>%
+    group_by.(y) %>%
+    group_split.(y)
+
+  expect_equal(out[[1]], slice.(test_df, 1:2))
+  expect_equal(out[[2]], slice.(test_df, 3))
+  expect_equal(names(out), NULL)
+})

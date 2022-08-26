@@ -68,6 +68,15 @@ df_name_repair <- function(.df, .name_repair = "unique") {
   .df
 }
 
+grouped_dot_by <- function(.df, .by = NULL) {
+  .by <- enquo(.by)
+  if (!quo_is_null(.by)) {
+    tidyselect_names(.df, !!.by)
+  } else {
+    group_vars.(.df)
+  }
+}
+
 # Extract environment from quosures to build the evaluation environment
 get_dt_env <- function(x, ...) {
   .default <- caller_env(2)
