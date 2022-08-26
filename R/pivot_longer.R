@@ -1,7 +1,7 @@
 #' Pivot data from wide to long
 #'
 #' @description
-#' `pivot_longer.()` "lengthens" the data, increasing the number of rows and decreasing
+#' `pivot_longer()` "lengthens" the data, increasing the number of rows and decreasing
 #' the number of columns.
 #'
 #' @param .df A data.table or data.frame
@@ -10,9 +10,9 @@
 #' @param values_to Name of the new "values" column. Must be a string.
 #' @param names_prefix Remove matching text from the start of selected columns using regex.
 #' @param names_sep If `names_to` contains multiple values, `names_sep` takes
-#' the same specification as `separate.()`.
+#' the same specification as `separate()`.
 #' @param names_pattern If `names_to` contains multiple values, `names_pattern` takes
-#' the same specification as `extract.()`, a regular expression containing matching groups.
+#' the same specification as `extract()`, a regular expression containing matching groups.
 #' @param names_ptypes,values_ptypes A list of column name-prototype pairs. See ``?vctrs::`theory-faq-coercion```
 #' for more info on vctrs coercion.
 #' @param names_transform,values_transform A list of column name-function pairs. Use these arguments
@@ -33,11 +33,11 @@
 #' )
 #'
 #' df %>%
-#'   pivot_longer.(cols = c(x, y))
+#'   pivot_longer(cols = c(x, y))
 #'
 #' df %>%
-#'   pivot_longer.(cols = -z, names_to = "stuff", values_to = "things")
-pivot_longer. <- function(.df,
+#'   pivot_longer(cols = -z, names_to = "stuff", values_to = "things")
+pivot_longer <- function(.df,
                           cols = everything(),
                           names_to = "name",
                           values_to = "value",
@@ -52,25 +52,25 @@ pivot_longer. <- function(.df,
                           values_transform = list(),
                           fast_pivot = FALSE,
                           ...) {
-  UseMethod("pivot_longer.")
+  UseMethod("pivot_longer")
 }
 
 #' @export
-pivot_longer..tidytable <- function(.df,
-                                    cols = everything(),
-                                    names_to = "name",
-                                    values_to = "value",
-                                    names_prefix = NULL,
-                                    names_sep = NULL,
-                                    names_pattern = NULL,
-                                    names_ptypes = list(),
-                                    names_transform = list(),
-                                    names_repair = "check_unique",
-                                    values_drop_na = FALSE,
-                                    values_ptypes = list(),
-                                    values_transform = list(),
-                                    fast_pivot = FALSE,
-                                    ...) {
+pivot_longer.tidytable <- function(.df,
+                                   cols = everything(),
+                                   names_to = "name",
+                                   values_to = "value",
+                                   names_prefix = NULL,
+                                   names_sep = NULL,
+                                   names_pattern = NULL,
+                                   names_ptypes = list(),
+                                   names_transform = list(),
+                                   names_repair = "check_unique",
+                                   values_drop_na = FALSE,
+                                   values_ptypes = list(),
+                                   values_transform = list(),
+                                   fast_pivot = FALSE,
+                                   ...) {
   names <- names(.df)
 
   measure_vars <- tidyselect_names(.df, {{ cols }})
@@ -93,11 +93,11 @@ pivot_longer..tidytable <- function(.df,
     }
 
     if (!is.null(names_sep)) {
-      names_to_setup <- str_separate(measure_vars, into = names_to, sep = names_sep)
+      names_to_setup <- pivot_str_separate(measure_vars, into = names_to, sep = names_sep)
 
       names_glue <- paste0("{", names_to, "}", collapse = names_sep)
     } else if (!is.null(names_pattern)) {
-      names_to_setup <- str_extract(measure_vars, into = names_to, names_pattern)
+      names_to_setup <- pivot_str_extract(measure_vars, into = names_to, names_pattern)
 
       names_glue <- paste0("{", names_to, "}", collapse = "___")
       new_names <- glue_data(names_to_setup, names_glue)
@@ -115,7 +115,7 @@ pivot_longer..tidytable <- function(.df,
     if (multiple_names_to) {
       variable_name <- names_to[!names_to == ".value"]
       .value_ids <- f_sort(unique(names_to_setup[[variable_name]]))
-      names_to_setup <- expand_grid.(.value = .value, !!variable_name := .value_ids)
+      names_to_setup <- expand_grid(.value = .value, !!variable_name := .value_ids)
     }
 
     glued <- glue_data(names_to_setup, names_glue)
@@ -169,7 +169,7 @@ pivot_longer..tidytable <- function(.df,
   ))
 
   if (!is.null(names_prefix)) {
-    out <- mutate.(out, !!variable_name := gsub(paste0("^", .env$names_prefix), "", !!sym(variable_name)))
+    out <- mutate(out, !!variable_name := gsub(paste0("^", .env$names_prefix), "", !!sym(variable_name)))
   }
 
   if (multiple_names_to && uses_dot_value) {
@@ -177,16 +177,16 @@ pivot_longer..tidytable <- function(.df,
       .value_ids <- NULL
     }
 
-    out <- mutate.(out, !!variable_name := .env$.value_ids)
+    out <- mutate(out, !!variable_name := .env$.value_ids)
   } else if (multiple_names_to && !uses_dot_value) {
     if (!is.null(names_sep)) {
-      out <- separate.(out, !!sym(variable_name), into = names_to, sep = names_sep)
+      out <- separate(out, !!sym(variable_name), into = names_to, sep = names_sep)
     } else {
-      out <- extract.(out, !!sym(variable_name), into = names_to, regex = names_pattern)
+      out <- extract(out, !!sym(variable_name), into = names_to, regex = names_pattern)
     }
 
     # Put new names before value column
-    out <- relocate.(out, !!!syms(names_to), .before = !!sym(values_to))
+    out <- relocate(out, !!!syms(names_to), .before = !!sym(values_to))
   } else if (!multiple_names_to && uses_dot_value) {
     out <- dt_j(out, !!variable_name := NULL)
   }
@@ -204,30 +204,30 @@ pivot_longer..tidytable <- function(.df,
   # data.table::melt() drops NAs using "&" logic, not "|"
   # See issue #186
   if (values_drop_na && multiple_names_to) {
-    out <- filter.(out, if_any.(any_of(values_to), ~ !is.na(.x)))
+    out <- filter(out, if_any(any_of(values_to), ~ !is.na(.x)))
   }
 
   as_tidytable(out)
 }
 
 #' @export
-pivot_longer..data.frame <- function(.df,
-                                     cols = everything(),
-                                     names_to = "name",
-                                     values_to = "value",
-                                     names_prefix = NULL,
-                                     names_sep = NULL,
-                                     names_pattern = NULL,
-                                     names_ptypes = list(),
-                                     names_transform = list(),
-                                     names_repair = "check_unique",
-                                     values_drop_na = FALSE,
-                                     values_ptypes = list(),
-                                     values_transform = list(),
-                                     fast_pivot = FALSE,
-                                     ...) {
+pivot_longer.data.frame <- function(.df,
+                                    cols = everything(),
+                                    names_to = "name",
+                                    values_to = "value",
+                                    names_prefix = NULL,
+                                    names_sep = NULL,
+                                    names_pattern = NULL,
+                                    names_ptypes = list(),
+                                    names_transform = list(),
+                                    names_repair = "check_unique",
+                                    values_drop_na = FALSE,
+                                    values_ptypes = list(),
+                                    values_transform = list(),
+                                    fast_pivot = FALSE,
+                                    ...) {
   .df <- as_tidytable(.df)
-  pivot_longer.(
+  pivot_longer(
     .df, cols = {{ cols }}, names_to = names_to,
     values_to = values_to, names_prefix = names_prefix,
     names_sep = names_sep, names_pattern = names_pattern,
@@ -238,17 +238,24 @@ pivot_longer..data.frame <- function(.df,
   )
 }
 
-str_extract <- function(x, into, regex, convert = FALSE) {
+#' @export
+#' @keywords internal
+#' @rdname pivot_longer
+pivot_longer. <- pivot_longer
+
+pivot_str_extract <- function(x, into, regex, convert = FALSE) {
   out <- str_extract_groups(x, pattern = regex, convert = convert)
   names(out) <- into
   out <- new_tidytable(out)
   out
 }
 
-str_separate <- function(x, into, sep, convert = FALSE) {
+pivot_str_separate <- function(x, into, sep, convert = FALSE) {
   out <- data.table::tstrsplit(x, sep, fixed = TRUE, names = TRUE, type.convert = convert)
   names(out) <- as_utf8_character(into)
   out <- new_tidytable(out)
   out
 }
+
+
 

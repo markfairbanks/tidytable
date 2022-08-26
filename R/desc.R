@@ -1,7 +1,7 @@
 #' Descending order
 #'
 #' @description
-#' Arrange in descending order. Can be used inside of `arrange.()`
+#' Arrange in descending order. Can be used inside of `arrange()`
 #'
 #' @param x  Variable to arrange in descending order
 #'
@@ -16,7 +16,12 @@
 #' )
 #'
 #' df %>%
-#'   arrange.(c, desc.(a))
-desc. <- function(x) {
+#'   arrange(c, desc(a))
+desc <- function(x) {
   -xtfrm(x)
 }
+
+#' @export
+#' @keywords internal
+#' @rdname desc
+desc. <- desc

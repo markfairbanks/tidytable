@@ -1,7 +1,7 @@
 #' Count observations by group
 #'
 #' @description
-#' Returns row counts of the dataset. If bare column names are provided, `count.()` returns counts by group.
+#' Returns row counts of the dataset. If bare column names are provided, `count()` returns counts by group.
 #'
 #' @param .df A data.frame or data.table
 #' @param ... Columns to group by. `tidyselect` compatible.
@@ -25,25 +25,25 @@
 #' )
 #'
 #' df %>%
-#'   count.()
+#'   count()
 #'
 #' df %>%
-#'   count.(z)
+#'   count(z)
 #'
 #' df %>%
-#'   count.(where(is.character))
+#'   count(where(is.character))
 #'
 #' df %>%
-#'   count.(z, wt = y, name = "y_sum")
+#'   count(z, wt = y, name = "y_sum")
 #'
 #' df %>%
-#'   count.(z, sort = TRUE)
-count. <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
-  UseMethod("count.")
+#'   count(z, sort = TRUE)
+count <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+  UseMethod("count")
 }
 
 #' @export
-count..tidytable <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+count.tidytable <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   .by <- enquos(...)
   wt <- enquo(wt)
 
@@ -52,20 +52,20 @@ count..tidytable <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   }
 
   if (quo_is_null(wt)) {
-    out <- summarize.(.df, !!name := .N, .by = c(!!!.by))
+    out <- summarize(.df, !!name := .N, .by = c(!!!.by))
   } else {
-    out <- summarize.(.df, !!name := sum(!!wt, na.rm = TRUE), .by = c(!!!.by))
+    out <- summarize(.df, !!name := sum(!!wt, na.rm = TRUE), .by = c(!!!.by))
   }
 
   if (sort) {
-    out <- arrange.(out, -!!sym(name))
+    out <- arrange(out, -!!sym(name))
   }
 
   out
 }
 
 #' @export
-count..grouped_tt <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+count.grouped_tt <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   wt <- enquo(wt)
 
   if (is.null(name)) {
@@ -73,20 +73,25 @@ count..grouped_tt <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   }
 
   if (quo_is_null(wt)) {
-    out <- summarize.(.df, !!name := .N, .groups = "keep")
+    out <- summarize(.df, !!name := .N, .groups = "keep")
   } else {
-    out <- summarize.(.df, !!name := sum(!!wt, na.rm = TRUE), .groups = "keep")
+    out <- summarize(.df, !!name := sum(!!wt, na.rm = TRUE), .groups = "keep")
   }
 
   if (sort) {
-    out <- arrange.(out, -!!sym(name))
+    out <- arrange(out, -!!sym(name))
   }
 
   out
 }
 
 #' @export
-count..data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+count.data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   .df <- as_tidytable(.df)
-  count.(.df, ..., wt = {{ wt }}, sort = sort, name = name)
+  count(.df, ..., wt = {{ wt }}, sort = sort, name = name)
 }
+
+#' @export
+#' @keywords internal
+#' @rdname count
+count. <- count

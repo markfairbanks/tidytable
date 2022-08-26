@@ -24,27 +24,27 @@
 #'
 #' # Automatically does all character/factor columns
 #' df %>%
-#'   get_dummies.()
+#'   get_dummies()
 #'
 #' df %>%
-#'   get_dummies.(cols = chr)
+#'   get_dummies(cols = chr)
 #'
 #' df %>%
-#'   get_dummies.(cols = c(chr, fct), drop_first = TRUE)
+#'   get_dummies(cols = c(chr, fct), drop_first = TRUE)
 #'
 #' df %>%
-#'   get_dummies.(prefix_sep = ".", dummify_na = FALSE)
-get_dummies. <- function(.df,
+#'   get_dummies(prefix_sep = ".", dummify_na = FALSE)
+get_dummies <- function(.df,
                          cols = where(~ is.character(.x) | is.factor(.x)),
                          prefix = TRUE,
                          prefix_sep = "_",
                          drop_first = FALSE,
                          dummify_na = TRUE) {
-  UseMethod("get_dummies.")
+  UseMethod("get_dummies")
 }
 
 #' @export
-get_dummies..tidytable <- function(.df,
+get_dummies.tidytable <- function(.df,
                                    cols = where(~ is.character(.x) | is.factor(.x)),
                                    prefix = TRUE,
                                    prefix_sep = "_",
@@ -107,12 +107,17 @@ get_dummies..tidytable <- function(.df,
 globalVariables(c("..complete", "where"))
 
 #' @export
-get_dummies..data.frame <- function(.df,
+get_dummies.data.frame <- function(.df,
                                     cols = where(~ is.character(.x) | is.factor(.x)),
                                     prefix = TRUE,
                                     prefix_sep = "_",
                                     drop_first = FALSE,
                                     dummify_na = TRUE) {
   .df <- as_tidytable(.df)
-  get_dummies.(.df, {{ cols }}, prefix, prefix_sep, drop_first, dummify_na)
+  get_dummies(.df, {{ cols }}, prefix, prefix_sep, drop_first, dummify_na)
 }
+
+#' @export
+#' @keywords internal
+#' @rdname get_dummies
+get_dummies. <- get_dummies

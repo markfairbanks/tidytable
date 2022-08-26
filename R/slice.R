@@ -24,31 +24,31 @@
 #' )
 #'
 #' df %>%
-#'   slice.(1:3)
+#'   slice(1:3)
 #'
 #' df %>%
-#'   slice.(1, 3)
+#'   slice(1, 3)
 #'
 #' df %>%
-#'   slice.(1:2, .by = z)
+#'   slice(1:2, .by = z)
 #'
 #' df %>%
-#'   slice_head.(1, .by = z)
+#'   slice_head(1, .by = z)
 #'
 #' df %>%
-#'   slice_tail.(1, .by = z)
+#'   slice_tail(1, .by = z)
 #'
 #' df %>%
-#'   slice_max.(order_by = x, .by = z)
+#'   slice_max(order_by = x, .by = z)
 #'
 #' df %>%
-#'   slice_min.(order_by = y, .by = z)
-slice. <- function(.df, ..., .by = NULL) {
-  UseMethod("slice.")
+#'   slice_min(order_by = y, .by = z)
+slice <- function(.df, ..., .by = NULL) {
+  UseMethod("slice")
 }
 
 #' @export
-slice..tidytable <- function(.df, ..., .by = NULL) {
+slice.tidytable <- function(.df, ..., .by = NULL) {
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
 
@@ -66,27 +66,32 @@ slice..tidytable <- function(.df, ..., .by = NULL) {
 }
 
 #' @export
-slice..grouped_tt <- function(.df, ..., .by = NULL) {
+slice.grouped_tt <- function(.df, ..., .by = NULL) {
   .by <- grouped_dot_by(.df, {{ .by }})
-  out <- ungroup.(.df)
-  out <- slice.(out, ..., .by = all_of(.by))
-  group_by.(out, all_of(.by))
+  out <- ungroup(.df)
+  out <- slice(out, ..., .by = all_of(.by))
+  group_by(out, all_of(.by))
 }
 
 #' @export
-slice..data.frame <- function(.df, ..., .by = NULL) {
+slice.data.frame <- function(.df, ..., .by = NULL) {
   .df <- as_tidytable(.df)
-  slice.(.df, ..., .by = {{ .by }})
+  slice(.df, ..., .by = {{ .by }})
 }
 
 #' @export
-#' @rdname slice.
-slice_head. <- function(.df, n = 5, .by = NULL) {
-  UseMethod("slice_head.")
+#' @keywords internal
+#' @rdname slice
+slice. <- slice
+
+#' @export
+#' @rdname slice
+slice_head <- function(.df, n = 5, .by = NULL) {
+  UseMethod("slice_head")
 }
 
 #' @export
-slice_head..tidytable <- function(.df, n = 5, .by = NULL) {
+slice_head.tidytable <- function(.df, n = 5, .by = NULL) {
   n <- enquo(n)
 
   dt_env <- get_dt_env(n)
@@ -103,27 +108,32 @@ slice_head..tidytable <- function(.df, n = 5, .by = NULL) {
 }
 
 #' @export
-slice_head..grouped_tt <- function(.df, n = 5, .by = NULL) {
+slice_head.grouped_tt <- function(.df, n = 5, .by = NULL) {
   .by <- grouped_dot_by(.df, {{ .by }})
-  out <- ungroup.(.df)
-  out <- slice_head.(out, {{ n }}, .by = all_of(.by))
-  group_by.(out, all_of(.by))
+  out <- ungroup(.df)
+  out <- slice_head(out, {{ n }}, .by = all_of(.by))
+  group_by(out, all_of(.by))
 }
 
 #' @export
-slice_head..data.frame <- function(.df, n = 5, .by = NULL) {
+slice_head.data.frame <- function(.df, n = 5, .by = NULL) {
   .df <- as_tidytable(.df)
-  slice_head.(.df, {{ n }}, .by = {{ .by }})
+  slice_head(.df, {{ n }}, .by = {{ .by }})
 }
 
 #' @export
-#' @rdname slice.
-slice_tail. <- function(.df, n = 5, .by = NULL) {
-  UseMethod("slice_tail.")
+#' @keywords internal
+#' @rdname slice
+slice_head. <- slice_head
+
+#' @export
+#' @rdname slice
+slice_tail <- function(.df, n = 5, .by = NULL) {
+  UseMethod("slice_tail")
 }
 
 #' @export
-slice_tail..tidytable <- function(.df, n = 5, .by = NULL) {
+slice_tail.tidytable <- function(.df, n = 5, .by = NULL) {
   n <- enquo(n)
 
   dt_env <- get_dt_env(n)
@@ -140,102 +150,117 @@ slice_tail..tidytable <- function(.df, n = 5, .by = NULL) {
 }
 
 #' @export
-slice_tail..grouped_tt <- function(.df, n = 5, .by = NULL) {
+slice_tail.grouped_tt <- function(.df, n = 5, .by = NULL) {
   .by <- grouped_dot_by(.df, {{ .by }})
-  out <- ungroup.(.df)
-  out <- slice_tail.(out, n, .by = all_of(.by))
-  group_by.(out, all_of(.by))
+  out <- ungroup(.df)
+  out <- slice_tail(out, n, .by = all_of(.by))
+  group_by(out, all_of(.by))
 }
 
 #' @export
-slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
+slice_tail.data.frame <- function(.df, n = 5, .by = NULL) {
   .df <- as_tidytable(.df)
-  slice_tail.(.df, {{ n }}, {{ .by }})
+  slice_tail(.df, {{ n }}, {{ .by }})
 }
 
 #' @export
-#' @rdname slice.
-slice_max. <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
+#' @keywords internal
+#' @rdname slice
+slice_tail. <- slice_tail
+
+#' @export
+#' @rdname slice
+slice_max <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   check_required(order_by)
-  UseMethod("slice_max.")
+  UseMethod("slice_max")
 }
 
 #' @export
-slice_max..tidytable <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
+slice_max.tidytable <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   if (is_true(with_ties)) {
     .df %>%
-      filter.(
+      filter(
         frank({{ order_by }}, ties.method = "max") > (.N - .env$n),
         .by = {{ .by }}
       ) %>%
-      arrange.(-{{ order_by }})
+      arrange(-{{ order_by }})
   } else {
     .df %>%
-      arrange.(-{{ order_by }}) %>%
-      slice_head.(n, .by = {{ .by }})
+      arrange(-{{ order_by }}) %>%
+      slice_head(n, .by = {{ .by }})
   }
 }
 
 #' @export
-slice_max..grouped_tt <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
+slice_max.grouped_tt <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   .by <- grouped_dot_by(.df, {{ .by }})
-  out <- ungroup.(.df)
-  out <- slice_max.(out, {{ order_by }}, {{ n }}, with_ties = with_ties, .by = all_of(.by))
-  group_by.(out, all_of(.by))
+  out <- ungroup(.df)
+  out <- slice_max(out, {{ order_by }}, {{ n }}, with_ties = with_ties, .by = all_of(.by))
+  group_by(out, all_of(.by))
 }
 
 #' @export
-slice_max..data.frame <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
+slice_max.data.frame <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   .df <- as_tidytable(.df)
-  slice_max.(.df, {{ order_by }}, {{ n }}, with_ties = with_ties, .by = {{ .by }})
+  slice_max(.df, {{ order_by }}, {{ n }}, with_ties = with_ties, .by = {{ .by }})
 }
 
 #' @export
-#' @rdname slice.
-slice_min. <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
+#' @keywords internal
+#' @rdname slice
+slice_max. <- slice_max
+
+#' @export
+#' @rdname slice
+slice_min <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   check_required(order_by)
-  UseMethod("slice_min.")
+  UseMethod("slice_min")
 }
 
 #' @export
-slice_min..tidytable <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
+slice_min.tidytable <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   if (is_true(with_ties)) {
     .df %>%
-      filter.(
+      filter(
         frank({{ order_by }}, ties.method = "min") <= .env$n,
         .by = {{ .by }}
       ) %>%
-      arrange.({{ order_by }})
+      arrange({{ order_by }})
   } else {
     .df %>%
-      arrange.({{ order_by }}) %>%
-      slice_head.(n, .by = {{ .by }})
+      arrange({{ order_by }}) %>%
+      slice_head(n, .by = {{ .by }})
   }
 }
 
 #' @export
-slice_min..grouped_tt <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
+slice_min.grouped_tt <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   .by <- grouped_dot_by(.df, {{ .by }})
-  out <- ungroup.(.df)
-  out <- slice_min.(out, {{ order_by }}, n = n, with_ties = with_ties, .by = all_of(.by))
-  group_by.(out, all_of(.by))
+  out <- ungroup(.df)
+  out <- slice_min(out, {{ order_by }}, n = n, with_ties = with_ties, .by = all_of(.by))
+  group_by(out, all_of(.by))
 }
 
 #' @export
-slice_min..data.frame <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
+slice_min.data.frame <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   .df <- as_tidytable(.df)
-  slice_min.(.df, {{ order_by }}, n = n, with_ties = with_ties, .by = {{ .by }})
+  slice_min(.df, {{ order_by }}, n = n, with_ties = with_ties, .by = {{ .by }})
 }
 
 #' @export
-#' @rdname slice.
-slice_sample. <- function(.df, n, prop, weight_by = NULL,
+#' @keywords internal
+#' @rdname slice
+slice_min. <- slice_min
+
+#' @export
+#' @rdname slice
+slice_sample <- function(.df, n, prop, weight_by = NULL,
                           replace = FALSE, .by = NULL) {
-  UseMethod("slice_sample.")
+  UseMethod("slice_sample")
 }
 
 #' @export
-slice_sample..tidytable <- function(.df, n, prop, weight_by = NULL,
+slice_sample.tidytable <- function(.df, n, prop, weight_by = NULL,
                                      replace = FALSE, .by = NULL) {
   if (missing(n) && missing(prop)) {
     abort("Must supply either `n` or `prop`")
@@ -245,7 +270,7 @@ slice_sample..tidytable <- function(.df, n, prop, weight_by = NULL,
     n <- expr(.N)
   }
 
-  slice.(
+  slice(
     .df,
     sample_int(.N, !!n * !!prop, replace, wt = {{ weight_by }}),
     .by = {{ .by }}
@@ -253,24 +278,29 @@ slice_sample..tidytable <- function(.df, n, prop, weight_by = NULL,
 }
 
 #' @export
-slice_sample..grouped_tt <- function(.df, n, prop, weight_by = NULL,
+slice_sample.grouped_tt <- function(.df, n, prop, weight_by = NULL,
                                     replace = FALSE, .by = NULL) {
   .by <- grouped_dot_by(.df, {{ .by }})
-  out <- ungroup.(.by)
-  out <- slice_sample.(
+  out <- ungroup(.by)
+  out <- slice_sample(
     .df, n, prop, {{ weight_by }}, replace, .by = all_of(.by)
   )
-  group_by.(out, all_of(.by))
+  group_by(out, all_of(.by))
 }
 
 #' @export
-slice_sample..data.frame <- function(.df, n, prop, weight_by = NULL,
+slice_sample.data.frame <- function(.df, n, prop, weight_by = NULL,
                                      replace = FALSE, .by = NULL) {
   .df <- as_tidytable(.df)
-  slice_sample.(
+  slice_sample(
     .df, n, prop, {{ weight_by }}, replace, .by = {{ .by }}
   )
 }
+
+#' @export
+#' @keywords internal
+#' @rdname slice
+slice_sample. <- slice_sample
 
 sample_int <- function(n, size, replace = FALSE, wt = NULL) {
   if (replace) {
@@ -279,5 +309,3 @@ sample_int <- function(n, size, replace = FALSE, wt = NULL) {
     sample.int(n, min(size, n), prob = wt)
   }
 }
-
-globalVariables("V1")

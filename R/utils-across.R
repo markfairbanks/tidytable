@@ -42,7 +42,7 @@ expand_across <- function(.fns, .cols, .names, dots) {
     )
   }
 
-  call_list <- imap.(call_list, replace_cur_column)
+  call_list <- imap(call_list, replace_cur_column)
 
   call_list
 }

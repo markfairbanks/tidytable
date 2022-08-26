@@ -20,19 +20,19 @@
 #' )
 #'
 #' df %>%
-#'   rename_with.(toupper)
+#'   rename_with(toupper)
 #'
 #' df %>%
-#'   rename_with.(~ toupper(.x))
+#'   rename_with(~ toupper(.x))
 #'
 #' df %>%
-#'   rename_with.(~ toupper(.x), .cols = c(x, double_x))
-rename_with. <- function(.df, .fn = NULL, .cols = everything(), ...) {
-  UseMethod("rename_with.")
+#'   rename_with(~ toupper(.x), .cols = c(x, double_x))
+rename_with <- function(.df, .fn = NULL, .cols = everything(), ...) {
+  UseMethod("rename_with")
 }
 
 #' @export
-rename_with..tidytable <- function(.df, .fn = NULL, .cols = everything(), ...) {
+rename_with.tidytable <- function(.df, .fn = NULL, .cols = everything(), ...) {
   if (is.null(.fn)) return(.df)
 
   .cols <- tidyselect_names(.df, {{ .cols }})
@@ -49,7 +49,12 @@ rename_with..tidytable <- function(.df, .fn = NULL, .cols = everything(), ...) {
 }
 
 #' @export
-rename_with..data.frame <- function(.df, .fn = NULL, .cols = everything(), ...) {
+rename_with.data.frame <- function(.df, .fn = NULL, .cols = everything(), ...) {
   .df <- as_tidytable(.df)
-  rename_with.(.df, .fn, {{ .cols }}, ...)
+  rename_with(.df, .fn, {{ .cols }}, ...)
 }
+
+#' @export
+#' @keywords internal
+#' @rdname rename_with
+rename_with. <- rename_with

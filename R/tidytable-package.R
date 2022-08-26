@@ -1,7 +1,7 @@
 # Suppress R CMD check note
-#' @import data.table
 #' @import tidyselect
 #' @import vctrs
+#' @rawNamespace import(data.table, except = c(between, fread))
 #' @rawNamespace import(rlang, except = `:=`)
 #' @importFrom glue glue glue_data
 #' @importFrom pillar glimpse dim_desc tbl_sum
@@ -43,19 +43,22 @@ tidyselect::last_col
 
 # data.table ------------------------
 #' @export
-data.table::`%between%`
-
-#' @export
 data.table::data.table
 
 #' @export
-data.table::`%like%`
+data.table::fwrite
 
 #' @export
 data.table::getDTthreads
 
 #' @export
 data.table::setDTthreads
+
+#' @export
+data.table::`%between%`
+
+#' @export
+data.table::`%like%`
 
 #' @export
 data.table::`%chin%`

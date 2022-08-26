@@ -11,22 +11,32 @@
 #' @examples
 #' x <- 1:5
 #'
-#' leads.(x, 1)
-#' lags.(x, 1)
+#' leads(x, 1)
+#' lags(x, 1)
 #'
-#' # Also works inside of `mutate.()`
+#' # Also works inside of `mutate()`
 #' df <- tidytable(x = 1:5)
 #'
 #' df %>%
-#'   mutate.(lag_x = lags.(x))
+#'   mutate(lag_x = lags(x))
 #'
 #' @export
-lags. <- function(x, n = 1L, default = NA) {
+lag <- function(x, n = 1L, default = NA) {
   shift(x = x, n = n, fill = default, type = "lag", give.names = FALSE)
 }
 
 #' @export
-#' @rdname lags.
-leads. <- function(x, n = 1L, default = NA) {
+#' @rdname lag
+lead <- function(x, n = 1L, default = NA) {
   shift(x = x, n = n, fill = default, type = "lead", give.names = FALSE)
 }
+
+#' @export
+#' @keywords internal
+#' @rdname lag
+lags. <- lag
+
+#' @export
+#' @keywords internal
+#' @rdname lag
+leads. <- lead

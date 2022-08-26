@@ -18,15 +18,15 @@
 #'   z = c("1", "2,3,4", "5,6")
 #' )
 #'
-#' separate_rows.(df, y, z)
+#' separate_rows(df, y, z)
 #'
-#' separate_rows.(df, y, z, convert = TRUE)
-separate_rows. <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
-  UseMethod("separate_rows.")
+#' separate_rows(df, y, z, convert = TRUE)
+separate_rows <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
+  UseMethod("separate_rows")
 }
 
 #' @export
-separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
+separate_rows.tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
   vec_assert(sep, character(), 1)
   vec_assert(convert, logical(), 1)
 
@@ -56,7 +56,7 @@ separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert =
   # Can't use a for loop - all columns selected must be in the same data.table call
   # Reason: Using df %>% separate_rows(col1) %>% separate_rows(col2)
   # is different than df %>% separate_rows(col1, col2)
-  split_calls <- map.(cols, ~ call2('strsplit', .x, split = sep, fixed = fixed_bool))
+  split_calls <- map(cols, ~ call2('strsplit', .x, split = sep, fixed = fixed_bool))
   names(split_calls) <- col_names
 
   j <- expr(c(!!!split_calls))
@@ -70,16 +70,21 @@ separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert =
   out <- df_col_order(out, col_order)
 
   if (convert) {
-    out <- mutate.(out, across.(all_of(col_names), ~ type.convert(.x, as.is = TRUE)))
+    out <- mutate(out, across(all_of(col_names), ~ type.convert(.x, as.is = TRUE)))
   }
 
   out
 }
 
 #' @export
-separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
+separate_rows.data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
   .df <- as_tidytable(.df)
-  separate_rows.(.df, ..., sep = sep, convert = convert)
+  separate_rows(.df, ..., sep = sep, convert = convert)
 }
+
+#' @export
+#' @keywords internal
+#' @rdname separate_rows
+separate_rows. <- separate_rows
 
 globalVariables(".separate_id")

@@ -20,21 +20,21 @@
 #'
 #' # Grab column by name
 #' df %>%
-#'   pull.(y)
+#'   pull(y)
 #'
 #' # Grab column by position
 #' df %>%
-#'   pull.(1)
+#'   pull(1)
 #'
 #' # Defaults to last column
 #' df %>%
-#'   pull.()
-pull. <- function(.df, var = -1, name = NULL) {
-  UseMethod("pull.")
+#'   pull()
+pull <- function(.df, var = -1, name = NULL) {
+  UseMethod("pull")
 }
 
 #' @export
-pull..data.frame <- function(.df, var = -1, name = NULL) {
+pull.data.frame <- function(.df, var = -1, name = NULL) {
   vec <- .pull(.df, {{ var }})
 
   name <- enquo(name)
@@ -44,6 +44,11 @@ pull..data.frame <- function(.df, var = -1, name = NULL) {
 
   vec
 }
+
+#' @export
+#' @keywords internal
+#' @rdname pull
+pull. <- pull
 
 .pull <- function(.df, var) {
   var_list <- as.list(seq_along(.df))

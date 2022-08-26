@@ -9,11 +9,16 @@
 #'
 #' @examples
 #' x <- c(1, 1, 2, 2, 1, 1)
-#' consecutive_id.(x)
-consecutive_id. <- function(...) {
+#' consecutive_id(x)
+consecutive_id <- function(...) {
   check_dots_unnamed()
 
   data <- data_frame(..., .name_repair = "minimal")
 
   rleidv(data)
 }
+
+#' @export
+#' @keywords internal
+#' @rdname consecutive_id
+consecutive_id. <- consecutive_id

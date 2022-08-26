@@ -14,8 +14,8 @@
 #' vec <- 1:3
 #' names(vec) <- letters[1:3]
 #'
-#' enframe.(vec)
-enframe. <- function(x, name = "name", value = "value") {
+#' enframe(vec)
+enframe <- function(x, name = "name", value = "value") {
   if (is.null(x)) x <- logical()
 
   if (is.null(value)) abort("`value` can't be NULL")
@@ -32,3 +32,8 @@ enframe. <- function(x, name = "name", value = "value") {
 
   new_tidytable(l)
 }
+
+#' @export
+#' @keywords internal
+#' @rdname mutate
+enframe. <- enframe

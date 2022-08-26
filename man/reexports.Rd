@@ -12,11 +12,12 @@
 \alias{matches}
 \alias{num_range}
 \alias{last_col}
-\alias{\%between\%}
 \alias{data.table}
-\alias{\%like\%}
+\alias{fwrite}
 \alias{getDTthreads}
 \alias{setDTthreads}
+\alias{\%between\%}
+\alias{\%like\%}
 \alias{\%chin\%}
 \alias{enexpr}
 \alias{enexprs}
@@ -36,7 +37,7 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{data.table}{\code{\link[data.table:between]{\%between\%}}, \code{\link[data.table:chmatch]{\%chin\%}}, \code{\link[data.table:like]{\%like\%}}, \code{\link[data.table]{data.table}}, \code{\link[data.table:openmp-utils]{getDTthreads}}, \code{\link[data.table:openmp-utils]{setDTthreads}}}
+  \item{data.table}{\code{\link[data.table:between]{\%between\%}}, \code{\link[data.table:chmatch]{\%chin\%}}, \code{\link[data.table:like]{\%like\%}}, \code{\link[data.table]{data.table}}, \code{\link[data.table]{fwrite}}, \code{\link[data.table:openmp-utils]{getDTthreads}}, \code{\link[data.table:openmp-utils]{setDTthreads}}}
 
   \item{pillar}{\code{\link[pillar]{glimpse}}}
 

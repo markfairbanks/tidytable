@@ -18,15 +18,15 @@
 #' df <- tidytable(x = 1:10)
 #'
 #' df %>%
-#'   mutate.(case_x = case_when.(x < 5 ~ 1,
-#'                               x < 7 ~ 2,
-#'                               TRUE ~ 3))
-case_when. <- function(..., .default = NA, .ptype = NULL, .size = NULL) {
+#'   mutate(case_x = case_when(x < 5 ~ 1,
+#'                             x < 7 ~ 2,
+#'                             TRUE ~ 3))
+case_when <- function(..., .default = NA, .ptype = NULL, .size = NULL) {
   dots <- list2(...)
   dots_length <- length(dots)
   if (dots_length == 0) abort("No cases provided.")
 
-  is_default <- map_lgl.(dots, ~ is_true(f_lhs(.x)))
+  is_default <- map_lgl(dots, ~ is_true(f_lhs(.x)))
   if (any(is_default) && dots_length > 1) {
     .default <- dots[is_default][[1]]
     .default <- eval_tidy(f_rhs(.default), env = caller_env())
@@ -34,11 +34,11 @@ case_when. <- function(..., .default = NA, .ptype = NULL, .size = NULL) {
     dots <- dots[!is_default]
   }
 
-  conditions <- map.(dots, f_lhs)
-  conditions <- map.(conditions, eval_tidy, env = caller_env())
+  conditions <- map(dots, f_lhs)
+  conditions <- map(conditions, eval_tidy, env = caller_env())
 
-  values <- map.(dots, f_rhs)
-  values <- map.(values, eval_tidy, env = caller_env())
+  values <- map(dots, f_rhs)
+  values <- map(values, eval_tidy, env = caller_env())
 
   if (!is.null(.ptype)) {
     values <- vec_cast_common(!!!values, .to = .ptype)
@@ -46,7 +46,7 @@ case_when. <- function(..., .default = NA, .ptype = NULL, .size = NULL) {
 
   pairs <- vec_interleave(conditions, values)
 
-  out <- case.(!!!pairs, default = .default)
+  out <- case(!!!pairs, default = .default)
 
   if (!is.null(.size)) {
     out <- vec_recycle(out, .size)
@@ -54,3 +54,8 @@ case_when. <- function(..., .default = NA, .ptype = NULL, .size = NULL) {
 
   out
 }
+
+#' @export
+#' @keywords internal
+#' @rdname case_when
+case_when. <- case_when

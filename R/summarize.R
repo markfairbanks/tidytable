@@ -30,29 +30,29 @@
 #' )
 #'
 #' df %>%
-#'   summarize.(avg_a = mean(a),
-#'              max_b = max(b),
-#'              .by = c)
+#'   summarize(avg_a = mean(a),
+#'             max_b = max(b),
+#'             .by = c)
 #'
 #' df %>%
-#'   summarize.(avg_a = mean(a),
-#'              .by = c(c, d))
-summarize. <- function(.df, ...,
+#'   summarize(avg_a = mean(a),
+#'             .by = c(c, d))
+summarize <- function(.df, ...,
                        .by = NULL,
                        .sort = TRUE,
                        .groups = "drop_last") {
-  UseMethod("summarize.")
+  UseMethod("summarize")
 }
 
 #' @export
-summarize..tidytable <- function(.df, ..., .by = NULL, .sort = TRUE) {
+summarize.tidytable <- function(.df, ..., .by = NULL, .sort = TRUE) {
   dots <- enquos(...)
 
   .by <- enquo(.by)
 
   if (length(dots) == 0) {
     # Issue #379
-    out <- distinct.(.df, !!.by)
+    out <- distinct(.df, !!.by)
   } else {
     dt_env <- get_dt_env(dots)
 
@@ -75,13 +75,13 @@ summarize..tidytable <- function(.df, ..., .by = NULL, .sort = TRUE) {
 }
 
 #' @export
-summarize..grouped_tt <- function(.df, ...,
+summarize.grouped_tt <- function(.df, ...,
                                   .by = NULL,
                                   .sort = TRUE,
                                   .groups = "drop_last") {
   .by <- grouped_dot_by(.df, {{ .by }})
-  out <- ungroup.(.df)
-  out <- summarize.(out, ..., .by = all_of(.by), .sort = .sort)
+  out <- ungroup(.df)
+  out <- summarize(out, ..., .by = all_of(.by), .sort = .sort)
 
   .groups <- arg_match0(.groups, c("drop_last", "drop", "keep"))
   if (.groups == "drop_last") {
@@ -91,17 +91,27 @@ summarize..grouped_tt <- function(.df, ...,
   }
 
   # summarize drop attributes in data.table - need to regroup at the end
-  group_by.(out, all_of(.by))
+  group_by(out, all_of(.by))
 }
 
 #' @export
-summarize..data.frame <- function(.df, ...,
+summarize.data.frame <- function(.df, ...,
                                   .by = NULL,
                                   .sort = TRUE) {
   .df <- as_tidytable(.df)
-  summarize.(.df, ..., .by = {{ .by }}, .sort = .sort)
+  summarize(.df, ..., .by = {{ .by }}, .sort = .sort)
 }
 
 #' @export
-#' @rdname summarize.
-summarise. <- summarize.
+#' @rdname summarize
+summarise <- summarize
+
+#' @export
+#' @keywords internal
+#' @rdname summarize
+summarize. <- summarize
+
+#' @export
+#' @keywords internal
+#' @rdname summarize
+summarise. <- summarize
