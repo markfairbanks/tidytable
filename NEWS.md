@@ -1,5 +1,10 @@
 # tidytable 0.8.2 (in development)
 
+#### New functions
+* `group_by.()`/`ungroup.()`
+* `group_vars.()`
+* `is_grouped_df.()`
+
 #### Bug fixes
 * `tidytable::'%in%'` dispatches to `base::'%in%'` when comparing with a list (#563)
 * `pivot_wider.()`: Works with column names with spaces (#569)
