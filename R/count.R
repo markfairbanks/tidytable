@@ -14,8 +14,8 @@
 #' @param name The name of the new column in the output.
 #'
 #'   If omitted, it will default to `n`.
+#'
 #' @export
-#' @md
 #'
 #' @examples
 #' df <- data.table(
@@ -52,16 +52,37 @@ count..tidytable <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   }
 
   if (quo_is_null(wt)) {
-    .df <- summarize.(.df, !!name := .N, .by = c(!!!.by))
+    out <- summarize.(.df, !!name := .N, .by = c(!!!.by))
   } else {
-    .df <- summarize.(.df, !!name := sum(!!wt, na.rm = TRUE), .by = c(!!!.by))
+    out <- summarize.(.df, !!name := sum(!!wt, na.rm = TRUE), .by = c(!!!.by))
   }
 
   if (sort) {
-    .df <- arrange.(.df, -!!sym(name))
+    out <- arrange.(out, -!!sym(name))
   }
 
-  .df
+  out
+}
+
+#' @export
+count..grouped_tt <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+  wt <- enquo(wt)
+
+  if (is.null(name)) {
+    name <- "n"
+  }
+
+  if (quo_is_null(wt)) {
+    out <- summarize.(.df, !!name := .N, .groups = "keep")
+  } else {
+    out <- summarize.(.df, !!name := sum(!!wt, na.rm = TRUE), .groups = "keep")
+  }
+
+  if (sort) {
+    out <- arrange.(out, -!!sym(name))
+  }
+
+  out
 }
 
 #' @export

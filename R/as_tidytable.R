@@ -68,6 +68,13 @@ as_tidytable.list <- function(x, ...,
 }
 
 #' @export
+as_tidytable.grouped_tt <- function(x, ...,
+                                   .name_repair = "unique") {
+  out <- add_tidytable_class(x)
+  df_name_repair(out, .name_repair = .name_repair)
+}
+
+#' @export
 as_tidytable.default <- function(x, ...,
                                  .name_repair = "unique",
                                  .keep_rownames = FALSE) {

@@ -157,6 +157,20 @@ test_that("preserves column order when .by is used", {
   expect_named(test_df, c("x", "y"))
 })
 
+test_that("works on grouped_tt", {
+  test_df <- tidytable(x = c(1,2,3,4), y = c(4,5,6,7), z = c("a", "a", "a", "b"))
+  sliced_df <- test_df %>%
+    group_by.(z) %>%
+    slice.(1)
+
+  expect_named(sliced_df, names(test_df))
+  expect_equal(sliced_df$z, c("a", "b"))
+  expect_equal(sliced_df$x, c(1, 4))
+  expect_equal(sliced_df$y, c(4, 7))
+  expect_equal(group_vars.(sliced_df), "z")
+  expect_true(is_grouped_df.(sliced_df))
+})
+
 # slice_head.() ----------------------------------------------------
 
 test_that("_head.() works when empty", {
@@ -218,6 +232,19 @@ test_that("can slice_head when all cols are in .by", {
 
   expect_named(sliced_df, c("x"))
   expect_equal(sliced_df$x, c("a", "b"))
+})
+
+test_that("works with grouped_tt", {
+  test_df <- tidytable(x = c("a", "a", "b"), y = 1:3)
+
+  sliced_df <- test_df %>%
+    group_by.(x) %>%
+    slice_head.(1)
+
+  expect_named(sliced_df, c("x", "y"))
+  expect_equal(sliced_df$y, c(1, 3))
+  expect_equal(group_vars.(sliced_df), "x")
+  expect_true(is_grouped_df.(sliced_df))
 })
 
 # slice_tail.() ----------------------------------------------------
@@ -284,6 +311,19 @@ test_that("can slice_tail when all cols are in .by", {
   expect_equal(sliced_df$x, c("a", "b"))
 })
 
+test_that("works with grouped_tt", {
+  test_df <- tidytable(x = c("a", "a", "b"), y = 1:3)
+
+  sliced_df <- test_df %>%
+    group_by.(x) %>%
+    slice_tail.(1)
+
+  expect_named(sliced_df, c("x", "y"))
+  expect_equal(sliced_df$y, c(2, 3))
+  expect_equal(group_vars.(sliced_df), "x")
+  expect_true(is_grouped_df.(sliced_df))
+})
+
 # slice_min/slice_max ----------------------------------------------------
 
 test_that("_min.() works", {
@@ -336,6 +376,32 @@ test_that("min and max return ties by default", {
 
   expect_equal(df %>% slice_min.(x, with_ties = FALSE) %>% pull.(), 1)
   expect_equal(df %>% slice_max.(x, with_ties = FALSE) %>% pull.(), 2)
+})
+
+test_that("_max works with grouped_tt", {
+  test_df <- tidytable(x = c("a", "a", "b"), y = 1:3)
+
+  sliced_df <- test_df %>%
+    group_by.(x) %>%
+    slice_max.(order_by = y)
+
+  expect_named(sliced_df, c("x", "y"))
+  expect_equal(sliced_df$y, c(3, 2))
+  expect_equal(group_vars.(sliced_df), "x")
+  expect_true(is_grouped_df.(sliced_df))
+})
+
+test_that("_min works with grouped_tt", {
+  test_df <- tidytable(x = c("a", "a", "b"), y = c(2, 1, 3))
+
+  sliced_df <- test_df %>%
+    group_by.(x) %>%
+    slice_min.(order_by = y)
+
+  expect_named(sliced_df, c("x", "y"))
+  expect_equal(sliced_df$y, c(1, 3))
+  expect_equal(group_vars.(sliced_df), "x")
+  expect_true(is_grouped_df.(sliced_df))
 })
 
 # slice_sample ------------------------------------------------------------

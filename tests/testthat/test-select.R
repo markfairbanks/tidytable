@@ -93,3 +93,19 @@ test_that("preserves attributes", {
 
   expect_equal(attr(res, "test_attr"), "test")
 })
+
+test_that("works on grouped_tt", {
+  df <- data.table(x = "x", y = "y", z = "z")
+  new_df <- df %>%
+    group_by.(x) %>%
+    select.(z)
+
+  expect_named(new_df, c("z", "x"))
+
+  # Can rename on grouped_tt
+  new_df <- df %>%
+    group_by.(x) %>%
+    select.(new_z = z)
+
+  expect_named(new_df, c("new_z", "x"))
+})

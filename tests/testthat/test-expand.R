@@ -114,6 +114,21 @@ test_that("Works with .by", {
   expect_equal(result_df$start, c(2,2,3))
 })
 
+test_that("Works on grouped_tt", {
+  test_df <- tidytable(id = c(1, 2), start = c(2, 3))
+
+  result_df <- test_df %>%
+    group_by.(id) %>%
+    expand.(start_end = start:3, start)
+
+  expect_named(result_df, c("id", "start_end", "start"))
+
+  expect_equal(result_df$id, c(1,1,2))
+  expect_equal(result_df$start_end, c(2,3,3))
+  expect_equal(result_df$start, c(2,2,3))
+  expect_equal(group_vars.(result_df), "id")
+})
+
 # nesting() ---------------------------------------------------
 test_that("nesting works", {
   out <- nesting.(x = c(2, 1, 1), y = c(2, 1, 1))

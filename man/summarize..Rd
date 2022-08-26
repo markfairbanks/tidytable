@@ -5,9 +5,9 @@
 \alias{summarise.}
 \title{Aggregate data using summary statistics}
 \usage{
-summarize.(.df, ..., .by = NULL, .sort = TRUE)
+summarize.(.df, ..., .by = NULL, .sort = TRUE, .groups = "drop_last")
 
-summarise.(.df, ..., .by = NULL, .sort = TRUE)
+summarise.(.df, ..., .by = NULL, .sort = TRUE, .groups = "drop_last")
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -28,6 +28,13 @@ summarise.(.df, ..., .by = NULL, .sort = TRUE)
 
 \item{.sort}{\emph{experimental}: Default TRUE.
 If FALSE the original order of the grouping variables will be preserved.}
+
+\item{.groups}{Grouping structure of the result
+\itemize{
+\item "drop_last": Drop the last level of grouping
+\item "drop": Drop all groups
+\item "keep": Keep all groups
+}}
 }
 \description{
 Aggregate data using summary statistics such as mean or median. Can be calculated by group.

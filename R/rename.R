@@ -20,16 +20,29 @@ rename. <- function(.df, ...) {
 
 #' @export
 rename..tidytable <- function(.df, ...) {
-  locs <- eval_rename(expr(c(...)), .df)
+  tidytable_rename(.df, ...)
+}
 
-  names <- names(.df)
-  names[locs] <- names(locs)
-
-  set_names(.df, names)
+#' @export
+rename..grouped_tt <- function(.df, ...) {
+  .groups <- group_vars.(.df)
+  .groups <- select.(.df, all_of(.groups))
+  .groups <- names(tidytable_rename(.groups, ..., .strict = FALSE))
+  out <- tidytable_rename(.df, ...)
+  group_by.(out, all_of(.groups))
 }
 
 #' @export
 rename..data.frame <- function(.df, ...) {
   .df <- as_tidytable(.df)
   rename.(.df, ...)
+}
+
+tidytable_rename <- function(.df, ..., .strict = TRUE) {
+  locs <- eval_rename(expr(c(...)), .df, strict = .strict)
+
+  names <- names(.df)
+  names[locs] <- names(locs)
+
+  set_names(.df, names)
 }

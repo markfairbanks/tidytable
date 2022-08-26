@@ -39,6 +39,14 @@ complete..tidytable <- function(.df, ..., fill = list(), .by = NULL) {
 }
 
 #' @export
+complete..grouped_tt <- function(.df, ..., fill = list(), .by = NULL) {
+  .by <- grouped_dot_by(.df, {{ .by }})
+  out <- ungroup.(.df)
+  out <- complete.(.df, ..., fill = fill, .by = all_of(.by))
+  group_by.(out, all_of(.by))
+}
+
+#' @export
 complete..data.frame <- function(.df, ..., fill = list(), .by = NULL) {
   .df <- as_tidytable(.df)
   complete.(.df, ..., fill = fill, .by = {{ .by }})

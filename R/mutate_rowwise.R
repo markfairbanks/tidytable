@@ -55,11 +55,25 @@ mutate_rowwise..tidytable <- function(.df, ...,
 }
 
 #' @export
+mutate_rowwise..grouped_tt <- function(.df, ...,
+                                      .keep = c("all", "used", "unused", "none"),
+                                      .before = NULL, .after = NULL) {
+  out <- ungroup.(.df)
+  mutate_rowwise.(out, ...,
+                  .keep = .keep,
+                  .before = {{ .before }},
+                  .after = {{ .after }})
+}
+
+#' @export
 mutate_rowwise..data.frame <- function(.df, ...,
                                        .keep = c("all", "used", "unused", "none"),
                                        .before = NULL, .after = NULL) {
   .df <- as_tidytable(.df)
-  mutate_rowwise.(.df, ..., .keep = .keep, .before = {{ .before }}, .after = {{ .after }})
+  mutate_rowwise.(.df, ...,
+                  .keep = .keep,
+                  .before = {{ .before }},
+                  .after = {{ .after }})
 }
 
 globalVariables(".rowwise_id")

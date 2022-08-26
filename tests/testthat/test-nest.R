@@ -59,3 +59,18 @@ test_that("can nest by group with quosure function", {
 
   expect_named(result_df, c("c", "data"))
 })
+
+test_that("works on grouped_tt", {
+  df <- data.table(a = 1:3,
+                   b = 4:6,
+                   c = c("a", "a", "b"))
+
+  res <- df %>%
+    group_by.(c) %>%
+    nest.()
+
+  expect_named(res, c("c", "data"))
+  expect_true(is.list(res$data))
+  expect_equal(group_vars.(res), "c")
+  expect_true(is_grouped_df.(res))
+})

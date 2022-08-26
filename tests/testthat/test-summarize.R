@@ -164,3 +164,39 @@ test_that("empty dots with .by returns distinct, #379", {
 
   expect_equal(result_df, check_df)
 })
+
+test_that("works with grouped_tt", {
+  df <- tidytable(x = c("a", "a", "b"), y = c("a", "a", "b"), z = 1:3)
+
+  tidytable_df <- df %>%
+    group_by.(x, y) %>%
+    summarize.(avg_z = mean(z))
+
+  check_df <- tidytable(x = c("a", "b"), y = c("a", "b"), avg_z = c(1.5, 3)) %>%
+    group_by.(x)
+
+  expect_equal(tidytable_df, check_df)
+})
+
+test_that("works with grouped_tt & .groups", {
+  df <- tidytable(x = c("a", "a", "b"), y = c("a", "a", "b"), z = 1:3)
+
+  tidytable_df <- df %>%
+    group_by.(x, y) %>%
+    summarize.(avg_z = mean(z),
+               .groups = "drop")
+
+  check_df <- tidytable(x = c("a", "b"), y = c("a", "b"), avg_z = c(1.5, 3))
+
+  expect_equal(tidytable_df, check_df)
+
+  tidytable_df <- df %>%
+    group_by.(x, y) %>%
+    summarize.(avg_z = mean(z),
+               .groups = "keep")
+
+  check_df <- tidytable(x = c("a", "b"), y = c("a", "b"), avg_z = c(1.5, 3)) %>%
+    group_by.(x, y)
+
+  expect_equal(tidytable_df, check_df)
+})

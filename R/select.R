@@ -51,6 +51,14 @@ select..tidytable <- function(.df, ...) {
 }
 
 #' @export
+select..grouped_tt <- function(.df, ...) {
+  .by <- group_vars.(.df)
+  out <- ungroup.(.df)
+  out <- select.(out, ..., all_of(.by))
+  group_by.(out, all_of(.by))
+}
+
+#' @export
 select..data.frame <- function(.df, ...) {
   .df <- as_tidytable(.df)
   select.(.df, ...)

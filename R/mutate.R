@@ -156,7 +156,21 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
     .df <- select.(.df, any_of(cols_keep))
   }
 
-  .df[]
+  .df
+}
+
+#' @export
+mutate..grouped_tt <- function(.df, ..., .by = NULL,
+                               .keep = c("all", "used", "unused", "none"),
+                               .before = NULL, .after = NULL) {
+  .by <- grouped_dot_by(.df, {{ .by }})
+  out <- ungroup.(.df)
+  out <- mutate.(
+    out, ..., .by = all_of(.by),
+    .keep = .keep,
+    .before = {{ .before }}, .after = {{ .after }}
+  )
+  group_by.(out, all_of(.by))
 }
 
 #' @export
@@ -165,7 +179,8 @@ mutate..data.frame <- function(.df, ..., .by = NULL,
                                .before = NULL, .after = NULL) {
   .df <- as_tidytable(.df)
   mutate.(
-    .df, ..., .by = {{ .by }}, .keep = .keep,
+    .df, ..., .by = {{ .by }},
+    .keep = .keep,
     .before = {{ .before }}, .after = {{ .after }}
   )
 }

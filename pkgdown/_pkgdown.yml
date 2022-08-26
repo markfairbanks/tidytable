@@ -30,10 +30,12 @@ reference:
   - desc.
   - distinct.
   - enframe.
+  - group_by.
   - group_split.
   - first.
   - if_all.
   - if_else.
+  - is_grouped_df.
   - lags.
   - left_join.
   - mutate_rowwise.
@@ -48,6 +50,7 @@ reference:
   - row_number.
   - slice.
   - transmute.
+  - ungroups.
 
 - title: tidyr
 - contents:
