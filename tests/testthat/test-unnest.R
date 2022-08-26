@@ -7,7 +7,18 @@ start_df <- tidytable(
 
 test_that("unnesting works with nested data.table", {
   nest_df <- start_df %>%
-    nest_by.(c, d)
+    nest_by(c, d)
+
+  unnest_df <- nest_df %>%
+    unnest(data)
+
+  expect_named(unnest_df, c("c","d","a","b"))
+  expect_equal(unnest_df$a, start_df$a)
+})
+
+test_that("unnest. works", {
+  nest_df <- start_df %>%
+    nest_by(c, d)
 
   unnest_df <- nest_df %>%
     unnest.(data)
@@ -18,10 +29,10 @@ test_that("unnesting works with nested data.table", {
 
 test_that("names_sep works", {
   nest_df <- start_df %>%
-    nest_by.(c, d)
+    nest_by(c, d)
 
   unnest_df <- nest_df %>%
-    unnest.(data, names_sep = "_")
+    unnest(data, names_sep = "_")
 
   expect_named(unnest_df, c("c","d","data_a","data_b"))
   expect_equal(unnest_df$data_a, start_df$a)
@@ -29,11 +40,11 @@ test_that("names_sep works", {
 
 test_that("unnesting works with multiple columns", {
   nest_df <- start_df %>%
-    nest_by.(c, d) %>%
-    mutate.(pulled_vec = map.(data, ~ pull.(.x, a)))
+    nest_by(c, d) %>%
+    mutate(pulled_vec = map(data, ~ pull(.x, a)))
 
   unnest_df <- nest_df %>%
-    unnest.(data, pulled_vec)
+    unnest(data, pulled_vec)
 
   expect_named(unnest_df, c("c","d","a","b", "pulled_vec"))
   expect_equal(unnest_df$a, start_df$a)
@@ -42,11 +53,11 @@ test_that("unnesting works with multiple columns", {
 
 test_that("automatically unnests all list_cols", {
   nest_df <- start_df %>%
-    nest_by.(c, d) %>%
-    mutate.(pulled_vec = map.(data, ~ pull.(.x, a)))
+    nest_by(c, d) %>%
+    mutate(pulled_vec = map(data, ~ pull(.x, a)))
 
   unnest_df <- nest_df %>%
-    unnest.()
+    unnest()
 
   expect_named(unnest_df, c("c","d","a","b","pulled_vec"))
   expect_equal(unnest_df$a, start_df$a)
@@ -55,12 +66,12 @@ test_that("automatically unnests all list_cols", {
 
 test_that("unnesting works with nested vector", {
   nest_df <- start_df %>%
-    nest_by.(c, d) %>%
-    mutate.(vec_col = map.(data, ~ .x %>% pull.(a)))
+    nest_by(c, d) %>%
+    mutate(vec_col = map(data, ~ .x %>% pull(a)))
 
 
   unnest_df <- nest_df %>%
-    unnest.(vec_col)
+    unnest(vec_col)
 
   expect_named(unnest_df, c("c","d","vec_col"))
   expect_equal(unnest_df$vec_col, c(1,2,3,4,5))
@@ -68,11 +79,11 @@ test_that("unnesting works with nested vector", {
 
 test_that("unnesting works with nested data.frames", {
   nest_df <- start_df %>%
-    nest_by.(c, d) %>%
-    mutate.(data = map.(data, as.data.frame))
+    nest_by(c, d) %>%
+    mutate(data = map(data, as.data.frame))
 
   unnest_df <- nest_df %>%
-    unnest.(data)
+    unnest(data)
 
   expect_named(unnest_df, c("c","d","a","b"))
   expect_equal(unnest_df$a, start_df$a)
@@ -86,7 +97,7 @@ test_that("unnesting works with different ordered/different # of columns", {
                           list_col = list(df1, df2))
 
   unnest_df <- nested_df %>%
-    unnest.(list_col)
+    unnest(list_col)
 
   expect_named(unnest_df, c("id","a","b","c"))
   expect_equal(unnest_df$b, c(1, 1:3))
@@ -95,10 +106,10 @@ test_that("unnesting works with different ordered/different # of columns", {
 test_that("unnesting works with nested data.table with quosure function", {
 
   nest_df <- start_df %>%
-    nest_by.(c, d)
+    nest_by(c, d)
 
   unnest_fn <- function(.df, col) {
-    unnest.(.df, {{ col }})
+    unnest(.df, {{ col }})
   }
 
   unnest_df <- nest_df %>%
@@ -113,10 +124,10 @@ test_that("unnesting works with nested data.table with quosure function", {
   list_df <- data.table(test = 1:data_size)
   test_df <- data.table(x = 1:data_size,
                         y = replicate(data_size, list_df, simplify = FALSE)) %>%
-    mutate.(z = y)
+    mutate(z = y)
 
   result_df <- test_df %>%
-    unnest.(y, .drop = FALSE)
+    unnest(y, .drop = FALSE)
 
   expect_named(result_df, c("x","z","test"))
   expect_true(is.list(result_df$z))
@@ -127,7 +138,7 @@ test_that("works when the only column is a list column", {
   list_df <- tidytable(x = 1:3)
   test_df <- tidytable(list_col = list(list_df, list_df, list_df))
 
-  result_df <- unnest.(test_df, list_col)
+  result_df <- unnest(test_df, list_col)
 
   expect_equal(result_df$x, rep(1:3, 3))
 })
@@ -142,7 +153,7 @@ test_that("keep_empty", {
 
   )
 
-  out <- unnest.(test_df, df_list, vecs, keep_empty = TRUE)
+  out <- unnest(test_df, df_list, vecs, keep_empty = TRUE)
 
   expect_named(out, c("groups", "x", "y", "vecs"))
   expect_equal(out$x, c(NA, 1, 1))
@@ -152,5 +163,5 @@ test_that("keep_empty", {
 
 test_that("handles empty data frames", {
   empty_df <- tidytable(x = as.logical(list()))
-  expect_equal(unnest.(tidytable(x = list()), x), empty_df)
+  expect_equal(unnest(tidytable(x = list()), x), empty_df)
 })

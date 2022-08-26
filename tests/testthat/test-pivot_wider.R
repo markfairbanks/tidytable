@@ -2,6 +2,14 @@
 
 test_that("can pivot all cols to wide", {
   df <- data.table(label = c("x", "y", "z"), val = 1:3)
+  pivot_df <- pivot_wider(df, names_from = label, values_from = val)
+
+  expect_named(pivot_df, c("x", "y", "z"))
+  expect_equal(nrow(pivot_df), 1)
+})
+
+test_that("pivot_wider. works", {
+  df <- data.table(label = c("x", "y", "z"), val = 1:3)
   pivot_df <- pivot_wider.(df, names_from = label, values_from = val)
 
   expect_named(pivot_df, c("x", "y", "z"))
@@ -10,7 +18,7 @@ test_that("can pivot all cols to wide", {
 
 test_that("non-pivoted cols are preserved", {
   df <- data.table(a = 1, label = c("x", "y"), val = 1:2)
-  pivot_df <- pivot_wider.(df, names_from = label, values_from = val)
+  pivot_df <- pivot_wider(df, names_from = label, values_from = val)
 
   expect_named(pivot_df, c("a", "x", "y"))
   expect_equal(nrow(pivot_df), 1)
@@ -18,7 +26,7 @@ test_that("non-pivoted cols are preserved", {
 
 test_that("implicit missings turn into explicit missings", {
   df <- data.table(a = 1:2, label = c("x", "y"), val = 1:2)
-  pivot_df <- pivot_wider.(df, names_from = label, values_from = val)
+  pivot_df <- pivot_wider(df, names_from = label, values_from = val)
 
   expect_equal(pivot_df$a, c(1, 2))
   expect_equal(pivot_df$x, c(1, NA))
@@ -31,7 +39,7 @@ test_that("can override default keys", {
                    var = c("age", "height", "age"),
                    value = c(10, 1.5, 20))
 
-  pv <- pivot_wider.(df, id_cols = name, names_from = var, values_from = value)
+  pv <- pivot_wider(df, id_cols = name, names_from = var, values_from = value)
   expect_equal(nrow(pv), 2)
 })
 
@@ -39,7 +47,7 @@ test_that("can override default keys", {
 
 test_that("can pivot from multiple measure cols", {
   df <- data.table(row = 1, var = c("x", "y"), a = 1:2, b = 3:4)
-  pv <- pivot_wider.(df, names_from = var, values_from = c(a, b))
+  pv <- pivot_wider(df, names_from = var, values_from = c(a, b))
 
   expect_named(pv, c("row", "a_x", "a_y", "b_x", "b_y"))
   expect_equal(pv$a_x, 1)
@@ -48,7 +56,7 @@ test_that("can pivot from multiple measure cols", {
 
 test_that("can pivot from multiple measure cols using all keys", {
   df <- data.table(var = c("x", "y"), a = 1:2, b = 3:4)
-  pv <- pivot_wider.(df, names_from = var, values_from = c(a, b))
+  pv <- pivot_wider(df, names_from = var, values_from = c(a, b))
 
   expect_named(pv, c("a_x", "a_y", "b_x", "b_y"))
   expect_equal(pv$a_x, 1)
@@ -59,7 +67,7 @@ test_that("can pivot from multiple measure cols using all keys", {
 
 test_that("can pivot from multiple measure cols using helpers", {
   df <- data.table(row = 1, var = c("x", "y"), a = 1:2, b = 3:4)
-  pv <- pivot_wider.(
+  pv <- pivot_wider(
     df,
     names_from = var,
     values_from = c(starts_with("a"), ends_with("b"))
@@ -73,7 +81,7 @@ test_that("can pivot from multiple measure cols using helpers", {
 # names args ----------------------------------------------------------
 test_that("can add a prefix", {
   df <- data.table(label = c("x", "y", "z"), val = 1:3)
-  pivot_df <- pivot_wider.(
+  pivot_df <- pivot_wider(
     df, names_from = label, values_from = val, names_prefix = "test_"
   )
 
@@ -83,7 +91,7 @@ test_that("can add a prefix", {
 
 test_that("can add a prefix - multiple names_from", {
   df <- data.table(label1 = c("x", "y", "z"), label2 = c("x", "y", "z"), val = 1:3)
-  pivot_df <- pivot_wider.(
+  pivot_df <- pivot_wider(
     df, names_from = c(label1, label2),
     values_from = val,
     names_prefix = "test_"
@@ -95,7 +103,7 @@ test_that("can add a prefix - multiple names_from", {
 
 test_that("can use names_glue", {
   df <- data.table(label = c("x", "y", "z"), val = 1:3)
-  pivot_df <- pivot_wider.(
+  pivot_df <- pivot_wider(
     df, names_from = label, values_from = val, names_glue = "test_{label}"
   )
 
@@ -105,7 +113,7 @@ test_that("can use names_glue", {
 
 test_that("can use names_glue - multiple names_from", {
   df <- data.table(label1 = c("x", "y", "z"), label2 = c("x", "y", "z"), val = 1:3)
-  pivot_df <- pivot_wider.(
+  pivot_df <- pivot_wider(
     df, names_from = c(label1, label2), values_from = val,
     names_glue = "test_{label1}_{label2}"
   )
@@ -122,13 +130,13 @@ test_that("names_glue works with .value", {
     b = 1:2
   )
 
-  out <- pivot_wider.(df, names_from = x:y, values_from = a:b, names_glue = "{x}{y}_{.value}")
+  out <- pivot_wider(df, names_from = x:y, values_from = a:b, names_glue = "{x}{y}_{.value}")
   expect_named(out, c("X1_a", "Y2_a", "X1_b", "Y2_b"))
 })
 
 test_that("can sort names", {
   df <- data.table(label = c("z", "y", "x"), val = 1:3)
-  pivot_df <- pivot_wider.(
+  pivot_df <- pivot_wider(
     df, names_from = label, values_from = val,
     names_glue = "test_{label}", names_sort = TRUE
   )
@@ -143,7 +151,7 @@ df <- data.table(a = c(1, 1, 2), stuff = c("x", "x", "x"), val = c(1, 10, 100))
 test_that("works with is.numeric helper", {
   df <- data.table(a = c(1, 1, 2), stuff = c("x", "x", "x"), val = c(1, 10, 100))
 
-  pivot_df <- pivot_wider.(df, names_from = stuff, values_from = val, values_fn = sum)
+  pivot_df <- pivot_wider(df, names_from = stuff, values_from = val, values_fn = sum)
 
   expect_equal(pivot_df$a, c(1, 2))
   expect_equal(pivot_df$x, c(11, 100))
@@ -153,7 +161,7 @@ test_that("can pivot all cols to wide with quosure function", {
   df <- data.table(label = c("x", "y", "z"), val = 1:3)
 
   pivot_wider_fn <- function(.df, names, values) {
-    pivot_wider.(df, names_from = {{ names }}, values_from = {{ values }})
+    pivot_wider(df, names_from = {{ names }}, values_from = {{ values }})
   }
 
   pivot_df <- pivot_wider_fn(df, names = label, values = val)
@@ -166,7 +174,7 @@ test_that("can fill in missing cells", {
   df <- data.table(g = c(1, 2), var = c("x", "y"), val = c(1, 2))
 
   widen <- function(...) {
-    df %>% pivot_wider.(names_from = var, values_from = val, ...)
+    df %>% pivot_wider(names_from = var, values_from = val, ...)
   }
 
   expect_equal(widen()$x, c(1, NA))
@@ -176,7 +184,7 @@ test_that("can fill in missing cells", {
 
 test_that("values_fill only affects missing cells", {
   df <- tidytable(g = c(1, 2), names = c("x", "y"), value = c(1, NA))
-  out <- pivot_wider.(df, names_from = names, values_from = value, values_fill = 0)
+  out <- pivot_wider(df, names_from = names, values_from = value, values_fill = 0)
   expect_equal(out$y, c(0, NA))
 })
 
@@ -184,7 +192,7 @@ test_that("can pivot data frames with spaced names, #569", {
   df <- tidytable("a a" = 1,
                   "names" = c("a", "b"),
                   "vals" = 1:2)
-  out <- pivot_wider.(df, names_from = names, values_from = vals)
+  out <- pivot_wider(df, names_from = names, values_from = vals)
   expect_named(out, c("a a", "a", "b"))
 })
 

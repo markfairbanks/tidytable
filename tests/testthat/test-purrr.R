@@ -1,4 +1,55 @@
 test_that("map works", {
+  .list <- map(1:3, ~ .x + 1)
+  expect_equal(.list, list(2, 3, 4))
+  .lgl <- map_lgl(1:3, ~ .x == 1)
+  expect_equal(.lgl, c(TRUE, FALSE, FALSE))
+  .int <- map_int(1:3, ~ as.integer(.x + 1))
+  expect_equal(.int, as.integer(2:4))
+  .dbl <- map_dbl(1:3, ~ .x + 1)
+  expect_equal(.dbl, 2:4)
+  .chr <- map_chr(1:3, as.character)
+  expect_equal(.chr, as.character(1:3))
+  .dfc <- map_dfc(c("a", "b", "c"), ~ tidytable(!!.x := 1:3))
+  expect_equal(.dfc, tidytable(a = 1:3, b = 1:3, c = 1:3))
+  .dfr <- map_dfr(1:3, ~ tidytable(x = .x))
+  expect_equal(.dfr, tidytable(x = 1:3))
+})
+
+test_that("map2 works", {
+  .list <- map2(1:3, 1:3, ~ .x + .y)
+  expect_equal(.list, list(2, 4, 6))
+  .lgl <- map2_lgl(1:3, 1:3, ~ .x == .y)
+  expect_equal(.lgl, c(TRUE, TRUE, TRUE))
+  .int <- map2_int(1:3, 1:3, ~ as.integer(.x + .y))
+  expect_equal(.int, c(2L, 4L, 6L))
+  .dbl <- map2_dbl(1:3, 1:3, ~ .x + .y)
+  expect_equal(.dbl, c(2, 4, 6))
+  .chr <- map2_chr(letters[1:3], letters[1:3], ~ paste0(.x, .y))
+  expect_equal(.chr, c("aa", "bb", "cc"))
+  .dfc <- map2_dfc(letters[1:3], letters[1:3], ~ tidytable(!!.x := .y))
+  expect_equal(.dfc, tidytable(a = "a", b = "b", c = "c"))
+  .dfr <- map2_dfr(1:3, 1:3, ~ tidytable(x = .x, y = .y))
+  expect_equal(.dfr, tidytable(x = 1:3, y = 1:3))
+})
+
+test_that("pmap works", {
+  .list <- pmap(list(1:3, 1:3), ~ .x + .y)
+  expect_equal(.list, list(2, 4, 6))
+  .lgl <- pmap_lgl(list(1:3, 1:3), ~ .x == .y)
+  expect_equal(.lgl, c(TRUE, TRUE, TRUE))
+  .int <- pmap_int(list(1:3, 1:3), ~ as.integer(.x + .y))
+  expect_equal(.int, c(2L, 4L, 6L))
+  .dbl <- pmap_dbl(list(1:3, 1:3), ~ .x + .y)
+  expect_equal(.dbl, c(2, 4, 6))
+  .chr <- pmap_chr(list(letters[1:3], letters[1:3]), ~ paste0(.x, .y))
+  expect_equal(.chr, c("aa", "bb", "cc"))
+  .dfc <- pmap_dfc(list(letters[1:3], letters[1:3]), ~ tidytable(!!.x := .y))
+  expect_equal(.dfc, tidytable(a = "a", b = "b", c = "c"))
+  .dfr <- pmap_dfr(list(1:3, 1:3), ~ tidytable(x = .x, y = .y))
+  expect_equal(.dfr, tidytable(x = 1:3, y = 1:3))
+})
+
+test_that("map. works", {
   .list <- map.(1:3, ~ .x + 1)
   expect_equal(.list, list(2, 3, 4))
   .lgl <- map_lgl.(1:3, ~ .x == 1)
@@ -15,7 +66,7 @@ test_that("map works", {
   expect_equal(.dfr, tidytable(x = 1:3))
 })
 
-test_that("map2 works", {
+test_that("map2. works", {
   .list <- map2.(1:3, 1:3, ~ .x + .y)
   expect_equal(.list, list(2, 4, 6))
   .lgl <- map2_lgl.(1:3, 1:3, ~ .x == .y)
@@ -32,7 +83,7 @@ test_that("map2 works", {
   expect_equal(.dfr, tidytable(x = 1:3, y = 1:3))
 })
 
-test_that("pmap works", {
+test_that("pmap. works", {
   .list <- pmap.(list(1:3, 1:3), ~ .x + .y)
   expect_equal(.list, list(2, 4, 6))
   .lgl <- pmap_lgl.(list(1:3, 1:3), ~ .x == .y)

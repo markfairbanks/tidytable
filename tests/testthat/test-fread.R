@@ -1,5 +1,5 @@
 test_that("returns a tidytable", {
-  out <- fread.(
+  out <- fread(
     "A,B
     1,2
     3,4"

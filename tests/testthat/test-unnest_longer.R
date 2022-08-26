@@ -1,5 +1,12 @@
 test_that("uses input for default column names", {
   df <- tidytable(x = 1:2, y = list(1, 1:2))
+  out <- df %>% unnest_longer(y)
+
+  expect_named(out, c("x", "y"))
+})
+
+test_that("unnest_longer. works", {
+  df <- tidytable(x = 1:2, y = list(1, 1:2))
   out <- df %>% unnest_longer.(y)
 
   expect_named(out, c("x", "y"))
@@ -7,17 +14,17 @@ test_that("uses input for default column names", {
 
 test_that("automatically adds id col if named", {
   df <- tidytable(x = 1:2, y = list(c(a = 1), c(b = 2)))
-  out <- df %>% unnest_longer.(y)
+  out <- df %>% unnest_longer(y)
 
   expect_named(out, c("x", "y", "y_id"))
 })
 
 test_that("can force integer indexes", {
   df <- tidytable(x = 1:2, y = list(1, 2))
-  out <- df %>% unnest_longer.(y, indices_include = TRUE)
+  out <- df %>% unnest_longer(y, indices_include = TRUE)
   expect_named(out, c("x", "y", "y_id"))
 
-  out <- df %>% unnest_longer.(y, indices_to = "y2")
+  out <- df %>% unnest_longer(y, indices_to = "y2")
   expect_named(out, c("x", "y", "y2"))
 })
 
@@ -26,7 +33,7 @@ test_that("preserves empty rows", {
     x = 1:3,
     y = list(NULL, NULL, 1)
   )
-  out <- df %>% unnest_longer.(y)
+  out <- df %>% unnest_longer(y)
   expect_equal(nrow(out), 3)
 })
 
@@ -41,7 +48,7 @@ test_that("preserves empty rows", {
 test_that("can unnest dates", {
   x <- as.Date(c("2019-08-01", "2019-12-01"))
   df <- tidytable(x = as.list(x))
-  out <- df %>% unnest_longer.(x)
+  out <- df %>% unnest_longer(x)
   expect_equal(out$x, x)
 })
 
@@ -57,12 +64,12 @@ test_that("ptype and transform work", {
   )
 
   ptype_df <- df %>%
-    unnest_longer.(y, ptype = list(y = int()))
+    unnest_longer(y, ptype = list(y = int()))
 
   expect_true(is.integer(ptype_df$y))
 
   transform_df <- df %>%
-    unnest_longer.(y, transform = list(y = as.integer))
+    unnest_longer(y, transform = list(y = as.integer))
 
   expect_true(is.integer(transform_df$y))
 })
