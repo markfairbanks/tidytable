@@ -1,9 +1,17 @@
-# tidytable 0.8.2 (in development)
+# tidytable 0.9.0 (in development)
+
+#### Dotless functions!
+* `tidytable` now exports dotless versions of all functions (e.g. `arrange()`/`mutate()`/etc.).
+  The `verb.()` versions are still exported as well.
+  * The `verb.()` syntax will remain in the package.
+  * This will also allow users to use both `tidytable` and `dplyr` by simply loading
+    `dplyr` _after_ `tidytable`, as the `verb.()` functions won't be overwritten by `dplyr.
 
 #### New functions
-* `group_by.()`/`ungroup.()`
-* `group_vars.()`
-* `is_grouped_df.()`
+* `dplyr`-style interface to grouping
+  * `group_by()`/`ungroup()`
+  * `group_vars()`
+  * `is_grouped_df()`
 
 #### Bug fixes
 * `tidytable::'%in%'` dispatches to `base::'%in%'` when comparing with a list (#563)
