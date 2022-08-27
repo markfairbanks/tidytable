@@ -22,7 +22,7 @@
 #' nested_df <-
 #'   data.table(
 #'     a = c("a", "b"),
-#'     frame_list = list(df1, df2)
+#'     frame_list = list(df1, df2),
 #'     vec_list = list(4:6, 7:8)
 #'   )
 #'

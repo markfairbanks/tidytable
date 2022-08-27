@@ -29,14 +29,14 @@ Useful for comparing values behind or ahead of the current values.
 \examples{
 x <- 1:5
 
-leads(x, 1)
-lags(x, 1)
+lag(x, 1)
+lead(x, 1)
 
 # Also works inside of `mutate()`
 df <- tidytable(x = 1:5)
 
 df \%>\%
-  mutate(lag_x = lags(x))
+  mutate(lag_x = lag(x))
 
 }
 \keyword{internal}
