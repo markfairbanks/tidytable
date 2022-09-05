@@ -70,12 +70,7 @@ pivot_wider..tidytable <- function(.df,
   names_from <- tidyselect_names(.df, {{ names_from }})
   values_from <- tidyselect_names(.df, {{ values_from }})
 
-  uses_dot_value <- FALSE
-  if (!is.null(names_glue)) {
-    if (str_detect.(names_glue, ".value")) {
-      uses_dot_value <- TRUE
-    }
-  }
+  uses_dot_value <- !is.null(names_glue) && str_detect.(names_glue, ".value")
 
   if (quo_is_null(id_cols)) {
     data_names <- names(.df)
