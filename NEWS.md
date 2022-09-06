@@ -8,7 +8,7 @@
 #### Bug fixes
 * `tidytable::'%in%'` dispatches to `base::'%in%'` when comparing with a list (#563)
 * `pivot_wider.()`: Works with column names with spaces (#569)
-* `pivot_wider.()`: `names_glue="{.value}_{somecolumn}"` assigns column names in correct order (#579)
+* `pivot_wider.()`: `names_glue="{.value}_{somecolumn}"` assigns column names in correct order (@Darxor, #579)
 
 # tidytable 0.8.1
 
