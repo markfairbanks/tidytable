@@ -98,9 +98,9 @@ pivot_wider..tidytable <- function(.df,
     glue_vars <- as.character(glue_data(glue_df, names_glue))
     # mimic column names assigned by data.table::dcast()
     if (length(values_from) <= 1) {
-      glue_df[[".value"]] <- NULL
+      glue_df <- dt_j(glue_df, .value := NULL)
     }
-    names(glue_vars) <- do.call(paste, c(glue_df, list(sep = names_sep)))
+    names(glue_vars) <- exec(paste, !!!glue_df, sep = names_sep)
   } else if (!is.null(names_glue)) {
     .df <- mutate.(.df, .names_from = glue(.env$names_glue))
     .df <- relocate.(.df, .names_from, .before = !!sym(names_from[[1]]))
