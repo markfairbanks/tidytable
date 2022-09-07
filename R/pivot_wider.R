@@ -177,4 +177,4 @@ pivot_wider.data.frame <- function(.df,
 #' @rdname pivot_wider
 pivot_wider. <- pivot_wider
 
-globalVariables(c(".", ".names_from", "name", "value"))
+globalVariables(c(".", ".names_from", "name", "value", ".value"))
