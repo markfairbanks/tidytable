@@ -70,7 +70,7 @@ pivot_wider.tidytable <- function(.df,
   names_from <- tidyselect_names(.df, {{ names_from }})
   values_from <- tidyselect_names(.df, {{ values_from }})
 
-  uses_dot_value <- !is.null(names_glue) && str_detect.(names_glue, ".value")
+  uses_dot_value <- !is.null(names_glue) && str_detect(names_glue, "{.value}", fixed = TRUE)
 
   if (quo_is_null(id_cols)) {
     data_names <- names(.df)
@@ -88,22 +88,23 @@ pivot_wider.tidytable <- function(.df,
 
     .df <- mutate(.df, !!.first_name := paste0(!!names_prefix, !!.first_name))
   } else if (uses_dot_value) {
-    glue_df <- distinct(.df, !!!syms(names_from))
+    glue_df <- distinct(.df, all_of(names_from))
     values_from_reps <- nrow(glue_df)
     glue_df <- vec_rep(glue_df, length(values_from))
     glue_df <- mutate.(glue_df,
-                       .value = vec_rep_each(values_from, values_from_reps),
+                       .value = vec_rep_each(.env$values_from, .env$values_from_reps),
                        .before = 1)
 
-    glue_vars <- as.character(glue_data(glue_df, names_glue))
+    glue_vars <- glue_data(glue_df, names_glue)
     # mimic column names assigned by data.table::dcast()
     if (length(values_from) <= 1) {
       glue_df <- dt_j(glue_df, .value := NULL)
     }
     names(glue_vars) <- exec(paste, !!!glue_df, sep = names_sep)
   } else if (!is.null(names_glue)) {
-    .df <- mutate(.df, .names_from = glue(.env$names_glue))
-    .df <- relocate(.df, .names_from, .before = !!sym(names_from[[1]]))
+    .df <- mutate(.df,
+                  .names_from = glue(.env$names_glue),
+                  .before = all_of(names_from[1]))
     .df <- dt_j(.df, (names_from) := NULL)
 
     names_from <- ".names_from"
@@ -119,7 +120,7 @@ pivot_wider.tidytable <- function(.df,
 
   rhs <- paste(glue("`{names_from}`"), collapse = " + ")
 
-  dcast_form <- paste(lhs, rhs, sep = " ~ ")
+  dcast_form <- glue("{lhs} ~ {rhs}")
 
   dcast_call <- call2(
     "dcast",
@@ -132,21 +133,21 @@ pivot_wider.tidytable <- function(.df,
     .ns = "data.table"
   )
 
-  .df <- eval_tidy(dcast_call)
+  out <- eval_tidy(dcast_call)
 
   if (no_id) {
-    .df <- dt_j(.df, . := NULL)
+    out <- dt_j(out, . := NULL)
   }
 
   if (uses_dot_value) {
-    new_vars <- setdiff(names(.df), id_cols)
+    new_vars <- setdiff(names(out), id_cols)
 
-    .df <- df_set_names(.df, glue_vars[new_vars], new_vars)
+    out <- df_set_names(out, glue_vars[new_vars], new_vars)
   }
 
-  .df <- df_name_repair(.df, .name_repair = names_repair)
+  out <- df_name_repair(out, .name_repair = names_repair)
 
-  as_tidytable(.df)
+  as_tidytable(out)
 }
 
 #' @export
