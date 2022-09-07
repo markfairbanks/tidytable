@@ -70,12 +70,7 @@ pivot_wider.tidytable <- function(.df,
   names_from <- tidyselect_names(.df, {{ names_from }})
   values_from <- tidyselect_names(.df, {{ values_from }})
 
-  uses_dot_value <- FALSE
-  if (!is.null(names_glue)) {
-    if (str_detect(names_glue, ".value")) {
-      uses_dot_value <- TRUE
-    }
-  }
+  uses_dot_value <- !is.null(names_glue) && str_detect.(names_glue, ".value")
 
   if (quo_is_null(id_cols)) {
     data_names <- names(.df)
@@ -96,9 +91,16 @@ pivot_wider.tidytable <- function(.df,
     glue_df <- distinct(.df, !!!syms(names_from))
     values_from_reps <- nrow(glue_df)
     glue_df <- vec_rep(glue_df, length(values_from))
-    glue_df$.value <- vec_rep_each(values_from, values_from_reps)
+    glue_df <- mutate.(glue_df,
+                       .value = vec_rep_each(values_from, values_from_reps),
+                       .before = 1)
 
     glue_vars <- as.character(glue_data(glue_df, names_glue))
+    # mimic column names assigned by data.table::dcast()
+    if (length(values_from) <= 1) {
+      glue_df <- dt_j(glue_df, .value := NULL)
+    }
+    names(glue_vars) <- exec(paste, !!!glue_df, sep = names_sep)
   } else if (!is.null(names_glue)) {
     .df <- mutate(.df, .names_from = glue(.env$names_glue))
     .df <- relocate(.df, .names_from, .before = !!sym(names_from[[1]]))
@@ -139,7 +141,7 @@ pivot_wider.tidytable <- function(.df,
   if (uses_dot_value) {
     new_vars <- setdiff(names(.df), id_cols)
 
-    .df <- df_set_names(.df, glue_vars, new_vars)
+    .df <- df_set_names(.df, glue_vars[new_vars], new_vars)
   }
 
   .df <- df_name_repair(.df, .name_repair = names_repair)

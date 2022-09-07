@@ -196,3 +196,38 @@ test_that("can pivot data frames with spaced names, #569", {
   expect_named(out, c("a a", "a", "b"))
 })
 
+# names_glue column order ----------------------------------------------------------
+test_that("correctly labels columns when `names_glue` is used, #579", {
+  # length(values_from) == 1
+  df1 <- tidytable(
+    lettr = c("b", "a", "c"),
+    v1 = c("b", "a", "c")
+  )
+
+  result1 <- pivot_wider.(
+    df1,
+    names_from = lettr,
+    values_from = v1,
+    names_glue = "{.value}_{lettr}"
+  )
+
+  expect_named(result1, c("v1_a", "v1_b", "v1_c"))
+  expect_equal(unname(unlist(result1)), c("a", "b", "c"))
+
+  # length(values_from) > 1
+  df2 <- tidytable(
+    lettr = c("b", "a", "c"),
+    v1 = c("b", "a", "c"),
+    v2 = c("b", "a", "c")
+  )
+
+  result2 <- pivot_wider.(
+    df2,
+    names_from = lettr,
+    values_from = c(v1, v2),
+    names_glue = "{.value}_{lettr}"
+  )
+
+  expect_named(result2, c("v1_a", "v1_b", "v1_c", "v2_a", "v2_b", "v2_c"))
+  expect_equal(unname(unlist(result2)), c("a", "b", "c", "a", "b", "c"))
+})
