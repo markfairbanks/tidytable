@@ -4,7 +4,7 @@
 #' Rename variables from a data.table.
 #'
 #' @param .df A data.frame or data.table
-#' @param ...
+#' @param ... `new_name = old_name` pairs to rename columns
 #'
 #' @export
 #'
@@ -25,10 +25,14 @@ rename.tidytable <- function(.df, ...) {
 
 #' @export
 rename.grouped_tt <- function(.df, ...) {
+  # Ensure "groups" attribute has new names
   .groups <- group_vars(.df)
   .groups <- select(.df, all_of(.groups))
   .groups <- names(.rename(.groups, ..., .strict = FALSE))
-  out <- .rename(.df, ...)
+
+  out <-  ungroup(.df)
+  out <- .rename(out, ...)
+
   group_by(out, all_of(.groups))
 }
 
@@ -38,11 +42,6 @@ rename.data.frame <- function(.df, ...) {
   rename(.df, ...)
 }
 
-#' @export
-#' @keywords internal
-#' @rdname rename
-rename. <- rename
-
 .rename <- function(.df, ..., .strict = TRUE) {
   locs <- eval_rename(expr(c(...)), .df, strict = .strict)
 
@@ -51,5 +50,21 @@ rename. <- rename
 
   set_names(.df, names)
 }
+
+#' @export rename.
+#' @keywords internal
+#' @usage
+#' rename(.df, ...)
+#' @inherit rename title description params examples
+rename. <- function(.df, ...) {
+  UseMethod("rename.")
+}
+
+#' @exportS3Method rename. data.frame
+rename..data.frame <- function(.df, ...) {
+  rename(.df, ...)
+}
+
+
 
 

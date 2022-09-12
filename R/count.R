@@ -91,7 +91,15 @@ count.data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   count(.df, ..., wt = {{ wt }}, sort = sort, name = name)
 }
 
-#' @export
+#' @export count.
 #' @keywords internal
-#' @rdname count
-count. <- count
+#' @usage count(.df, ..., wt = NULL, sort = FALSE, name = NULL)
+#' @inherit count title description params examples
+count. <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+  UseMethod("count.")
+}
+
+#' @exportS3Method count. data.frame
+count..data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+  count(.df, ..., wt = {{ wt }}, sort = sort, name = name)
+}

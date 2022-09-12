@@ -2,22 +2,9 @@
 % Please edit documentation in R/unnest_longer.R
 \name{unnest_longer}
 \alias{unnest_longer}
-\alias{unnest_longer.}
 \title{Unnest a list-column of vectors into regular columns}
 \usage{
 unnest_longer(
-  .df,
-  col,
-  values_to = NULL,
-  indices_to = NULL,
-  indices_include = NULL,
-  names_repair = "check_unique",
-  simplify = NULL,
-  ptype = list(),
-  transform = list()
-)
-
-unnest_longer.(
   .df,
   col,
   values_to = NULL,
@@ -60,4 +47,3 @@ df <- tidytable(
 
 df \%>\% unnest_longer(y)
 }
-\keyword{internal}

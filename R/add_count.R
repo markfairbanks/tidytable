@@ -67,7 +67,15 @@ add_count.data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL)
   add_count(.df, ..., wt = {{ wt }}, sort = sort, name = name)
 }
 
-#' @export
+#' @export add_count.
 #' @keywords internal
-#' @rdname add_count
-add_count. <- add_count
+#' @usage add_count(.df, ..., wt = NULL, sort = FALSE, name = NULL)
+#' @inherit add_count title description params examples
+add_count. <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+  UseMethod("add_count.")
+}
+
+#' @exportS3Method add_count. data.frame
+add_count..data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+  add_count(.df, ..., wt = {{ wt }}, sort = sort, name = name)
+}

@@ -66,7 +66,15 @@ distinct.data.frame <- function(.df, ..., .keep_all = FALSE) {
   distinct(.df, ..., .keep_all = .keep_all)
 }
 
-#' @export
+#' @export distinct.
 #' @keywords internal
-#' @rdname distinct
-distinct. <- distinct
+#' @usage distinct(.df, ..., .keep_all = FALSE)
+#' @inherit distinct title description params examples
+distinct. <- function(.df, ..., .keep_all = FALSE) {
+  UseMethod("distinct.")
+}
+
+#' @exportS3Method distinct. data.frame
+distinct..data.frame <- function(.df, ..., .keep_all = FALSE) {
+  distinct(.df, ..., .keep_all = .keep_all)
+}

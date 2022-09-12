@@ -89,7 +89,33 @@ separate.data.frame <- function(.df, col, into,
   )
 }
 
-#' @export
+#' @export separate.
 #' @keywords internal
-#' @rdname separate
-separate. <- separate
+#' @usage
+#' separate(
+#'   .df, col, into,
+#'   sep = "[^[:alnum:]]+",
+#'   remove = TRUE,
+#'   convert = FALSE,
+#'   ...
+#' )
+#' @inherit separate title description params examples
+separate. <- function(.df, col, into,
+                      sep = "[^[:alnum:]]+",
+                      remove = TRUE,
+                      convert = FALSE,
+                      ...) {
+  UseMethod("separate.")
+}
+
+#' @exportS3Method separate. data.frame
+separate..data.frame <- function(.df, col, into,
+                                 sep = "[^[:alnum:]]+",
+                                 remove = TRUE,
+                                 convert = FALSE,
+                                 ...) {
+  separate(
+    .df, col = {{ col }}, into = into, sep = sep,
+    remove = remove, convert = convert, ...
+  )
+}

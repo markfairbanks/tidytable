@@ -45,19 +45,30 @@ pull.data.frame <- function(.df, var = -1, name = NULL) {
   vec
 }
 
-#' @export
+#' @export pull.
 #' @keywords internal
-#' @rdname pull
-pull. <- pull
+#' @usage
+#' pull(.df, var = -1, name = NULL)
+#' @inherit pull title description params examples
+pull. <- function(.df, var = -1, name = NULL) {
+  UseMethod("pull.")
+}
+
+#' @exportS3Method pull. data.frame
+pull..data.frame <- function(.df, var = -1, name = NULL) {
+  pull(.df, {{ var }}, {{ name }})
+}
 
 .pull <- function(.df, var) {
-  var_list <- as.list(seq_along(.df))
+  vars <- as.list(seq_along(.df))
 
-  names(var_list) <- names(.df)
+  names(vars) <- names(.df)
 
-  .var <- eval_tidy(enquo(var), var_list)
+  var <- eval_tidy(enquo(var), vars)
 
-  if (.var < 0) .var <- length(var_list) + .var + 1
+  if (var < 0) {
+    var <- length(vars) + var + 1
+  }
 
-  .df[[.var]]
+  .df[[var]]
 }

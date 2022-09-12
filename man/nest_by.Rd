@@ -2,12 +2,9 @@
 % Please edit documentation in R/nest_by.R
 \name{nest_by}
 \alias{nest_by}
-\alias{nest_by.}
 \title{Nest data.tables}
 \usage{
 nest_by(.df, ..., .key = "data", .keep = FALSE)
-
-nest_by.(.df, ..., .key = "data", .keep = FALSE)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -42,4 +39,3 @@ df \%>\%
 df \%>\%
   nest_by(c, d, .keep = TRUE)
 }
-\keyword{internal}

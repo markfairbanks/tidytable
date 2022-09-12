@@ -113,10 +113,39 @@ unnest.data.frame <- function(.df,
   )
 }
 
-#' @export
+#' @export unnest.
 #' @keywords internal
-#' @rdname unnest
-unnest. <- unnest
+#' @usage
+#' unnest(
+#'   .df,
+#'   ...,
+#'   keep_empty = FALSE,
+#'   .drop = TRUE,
+#'   names_sep = NULL,
+#'   names_repair = "unique"
+#' )
+#' @inherit unnest title description params examples
+unnest. <- function(.df,
+                    ...,
+                    keep_empty = FALSE,
+                    .drop = TRUE,
+                    names_sep = NULL,
+                    names_repair = "unique") {
+  UseMethod("unnest.")
+}
+
+#' @exportS3Method unnest. data.frame
+unnest..data.frame <- function(.df,
+                               ...,
+                               keep_empty = FALSE,
+                               .drop = TRUE,
+                               names_sep = NULL,
+                               names_repair = "unique") {
+  unnest(
+    .df, ..., keep_empty = keep_empty, .drop = .drop,
+    names_sep = names_sep, names_repair = names_repair
+  )
+}
 
 unnest_col <- function(.df, col = NULL, names_sep = NULL) {
   .l <- pull(.df, !!col)

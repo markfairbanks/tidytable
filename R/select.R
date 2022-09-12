@@ -64,7 +64,16 @@ select.data.frame <- function(.df, ...) {
   select(.df, ...)
 }
 
-#' @export
+#' @export select.
 #' @keywords internal
-#' @rdname select
-select. <- select
+#' @usage
+#' select(.df, ...)
+#' @inherit select title description params examples
+select. <- function(.df, ...) {
+  UseMethod("select.")
+}
+
+#' @exportS3Method select. data.frame
+select..data.frame <- function(.df, ...) {
+  select(.df, ...)
+}

@@ -52,7 +52,15 @@ complete.data.frame <- function(.df, ..., fill = list(), .by = NULL) {
   complete(.df, ..., fill = fill, .by = {{ .by }})
 }
 
-#' @export
+#' @export complete.
 #' @keywords internal
-#' @rdname complete
-complete. <- complete
+#' @usage complete(.df, ..., fill = list(), .by = NULL)
+#' @inherit complete title description params examples
+complete. <- function(.df, ..., fill = list(), .by = NULL) {
+  UseMethod("complete.")
+}
+
+#' @exportS3Method complete. data.frame
+complete..data.frame <- function(.df, ..., fill = list(), .by = NULL) {
+  complete(.df, ..., fill = fill, .by = {{ .by }})
+}

@@ -56,10 +56,18 @@ group_by.data.frame <- function(.df, ...) {
   group_by(.df, ...)
 }
 
-#' @export
+#' @export group_by.
 #' @keywords internal
-#' @rdname group_by
-group_by. <- group_by
+#' @usage group_by(.df, ...)
+#' @inherit group_by title description params examples
+group_by. <- function(.df, ...) {
+  UseMethod("group_by.")
+}
+
+#' @exportS3Method group_by. data.frame
+group_by..data.frame <- function(.df, ...) {
+  group_by(.df, ...)
+}
 
 #' @export
 #' @rdname group_by
@@ -73,10 +81,18 @@ ungroup.data.frame <- function(.df) {
   as_tidytable(.df)
 }
 
-#' @export
+#' @export ungroup.
 #' @keywords internal
-#' @rdname group_by
-ungroup. <- ungroup
+#' @usage ungroup(.df)
+#' @inherit ungroup title description params examples
+ungroup. <- function(.df) {
+  UseMethod("ungroup.")
+}
+
+#' @exportS3Method ungroup. data.frame
+ungroup..data.frame <- function(.df) {
+  ungroup(.df)
+}
 
 #' Get the grouping variables
 #'

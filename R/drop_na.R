@@ -46,7 +46,15 @@ drop_na.data.frame <- function(.df, ...) {
   drop_na(.df, ...)
 }
 
-#' @export
+#' @export drop_na.
 #' @keywords internal
-#' @rdname drop_na
-drop_na. <- drop_na
+#' @usage drop_na(.df, ...)
+#' @inherit drop_na title description params examples
+drop_na. <- function(.df, ...) {
+  UseMethod("drop_na.")
+}
+
+#' @exportS3Method drop_na. data.frame
+drop_na..data.frame <- function(.df, ...) {
+  drop_na(.df, ...)
+}

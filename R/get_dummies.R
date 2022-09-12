@@ -35,21 +35,21 @@
 #' df %>%
 #'   get_dummies(prefix_sep = ".", dummify_na = FALSE)
 get_dummies <- function(.df,
-                         cols = where(~ is.character(.x) | is.factor(.x)),
-                         prefix = TRUE,
-                         prefix_sep = "_",
-                         drop_first = FALSE,
-                         dummify_na = TRUE) {
+                        cols = where(~ is.character(.x) | is.factor(.x)),
+                        prefix = TRUE,
+                        prefix_sep = "_",
+                        drop_first = FALSE,
+                        dummify_na = TRUE) {
   UseMethod("get_dummies")
 }
 
 #' @export
 get_dummies.tidytable <- function(.df,
-                                   cols = where(~ is.character(.x) | is.factor(.x)),
-                                   prefix = TRUE,
-                                   prefix_sep = "_",
-                                   drop_first = FALSE,
-                                   dummify_na = TRUE) {
+                                  cols = where(~ is.character(.x) | is.factor(.x)),
+                                  prefix = TRUE,
+                                  prefix_sep = "_",
+                                  drop_first = FALSE,
+                                  dummify_na = TRUE) {
   cols <- tidyselect_syms(.df, {{ cols }})
 
   for (col in cols) {
@@ -117,7 +117,34 @@ get_dummies.data.frame <- function(.df,
   get_dummies(.df, {{ cols }}, prefix, prefix_sep, drop_first, dummify_na)
 }
 
-#' @export
+#' @export get_dummies.
 #' @keywords internal
-#' @rdname get_dummies
-get_dummies. <- get_dummies
+#' @usage
+#' get_dummies(
+#'   .df,
+#'   cols = where(~ is.character(.x) | is.factor(.x)),
+#'   prefix = TRUE,
+#'   prefix_sep = "_",
+#'   drop_first = FALSE,
+#'   dummify_na = TRUE
+#' )
+#' @inherit get_dummies title description params examples
+get_dummies. <- function(.df,
+                         cols = where(~ is.character(.x) | is.factor(.x)),
+                         prefix = TRUE,
+                         prefix_sep = "_",
+                         drop_first = FALSE,
+                         dummify_na = TRUE) {
+  UseMethod("get_dummies.")
+}
+
+#' @exportS3Method get_dummies. data.frame
+get_dummies..data.frame <- function(.df,
+                                    cols = where(~ is.character(.x) | is.factor(.x)),
+                                    prefix = TRUE,
+                                    prefix_sep = "_",
+                                    drop_first = FALSE,
+                                    dummify_na = TRUE) {
+  get_dummies(.df, {{ cols }}, prefix, prefix_sep, drop_first, dummify_na)
+}
+

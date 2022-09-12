@@ -43,7 +43,16 @@ top_n.data.frame <- function(.df, n = 5, wt = NULL, .by = NULL) {
   top_n(.df, {{ n }}, {{ wt }}, .by = {{ .by }})
 }
 
-#' @export
+#' @export top_n.
 #' @keywords internal
-#' @rdname top_n
-top_n. <- top_n
+#' @usage
+#' top_n(.df, n = 5, wt = NULL, .by = NULL)
+#' @inherit top_n title description params examples
+top_n. <- function(.df, n = 5, wt = NULL, .by = NULL) {
+  UseMethod("top_n.")
+}
+
+#' @exportS3Method top_n. data.frame
+top_n..data.frame <- function(.df, n = 5, wt = NULL, .by = NULL) {
+  top_n(.df, {{ n }}, {{ wt }}, .by = {{ .by }})
+}

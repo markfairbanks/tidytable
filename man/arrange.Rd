@@ -2,12 +2,9 @@
 % Please edit documentation in R/arrange.R
 \name{arrange}
 \alias{arrange}
-\alias{arrange.}
 \title{Arrange/reorder rows}
 \usage{
 arrange(.df, ...)
-
-arrange.(.df, ...)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -33,4 +30,3 @@ df \%>\%
 df \%>\%
   arrange(c, desc(a))
 }
-\keyword{internal}

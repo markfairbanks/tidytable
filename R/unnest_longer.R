@@ -88,7 +88,28 @@ unnest_longer.data.frame <- function(.df, col, values_to = NULL, indices_to = NU
   )
 }
 
-#' @export
+#' @export unnest_longer.
 #' @keywords internal
-#' @rdname unnest_longer
-unnest_longer. <- unnest_longer
+#' @usage
+#' unnest_longer(
+#'   .df, col, values_to = NULL, indices_to = NULL,
+#'   indices_include = NULL, names_repair = "check_unique",
+#'   simplify = NULL, ptype = list(), transform = list()
+#' )
+#' @inherit unnest_longer title description params examples
+unnest_longer. <- function(.df, col, values_to = NULL, indices_to = NULL,
+                           indices_include = NULL, names_repair = "check_unique",
+                           simplify = NULL, ptype = list(), transform = list()) {
+  UseMethod("unnest_longer.")
+}
+
+#' @exportS3Method unnest_longer. data.frame
+unnest_longer..data.frame <- function(.df, col, values_to = NULL, indices_to = NULL,
+                                      indices_include = NULL, names_repair = "check_unique",
+                                      simplify = NULL, ptype = list(), transform = list()) {
+  unnest_longer(
+    .df, col = {{ col }}, values_to = values_to, indices_to = indices_to,
+    indices_include = indices_include, names_repair = names_repair, simplify = simplify,
+    ptype = ptype, transform = transform
+  )
+}

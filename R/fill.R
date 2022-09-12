@@ -48,16 +48,33 @@ fill.tidytable <- function(.df, ...,
 
 #' @export
 fill.data.frame <- function(.df, ...,
-                             .direction = c("down", "up", "downup", "updown"),
-                             .by = NULL) {
+                            .direction = c("down", "up", "downup", "updown"),
+                            .by = NULL) {
   .df <- as_tidytable(.df)
   fill(.df, ..., .direction = .direction, .by = {{ .by }})
 }
 
-#' @export
+#' @export fill.
 #' @keywords internal
-#' @rdname fill
-fill. <- fill
+#' @usage
+#' fill(
+#'   .df, ...,
+#'   .direction = c("down", "up", "downup", "updown"),
+#'   .by = NULL
+#' )
+#' @inherit fill title description params examples
+fill. <- function(.df, ...,
+                  .direction = c("down", "up", "downup", "updown"),
+                  .by = NULL) {
+  UseMethod("fill.")
+}
+
+#' @exportS3Method fill. data.frame
+fill..data.frame <- function(.df, ...,
+                             .direction = c("down", "up", "downup", "updown"),
+                             .by = NULL) {
+  fill(.df, ..., .direction = .direction, .by = {{ .by }})
+}
 
 fill_na <- function(x, direction) {
   if (is.numeric(x)) {

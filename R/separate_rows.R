@@ -82,9 +82,18 @@ separate_rows.data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert =
   separate_rows(.df, ..., sep = sep, convert = convert)
 }
 
-#' @export
+#' @export separate_rows.
 #' @keywords internal
-#' @rdname separate_rows
-separate_rows. <- separate_rows
+#' @usage
+#' separate_rows(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE)
+#' @inherit separate_rows title description params examples
+separate_rows. <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
+  UseMethod("separate_rows.")
+}
+
+#' @exportS3Method separate_rows. data.frame
+separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
+  separate_rows(.df, ..., sep = sep, convert = convert)
+}
 
 globalVariables(".separate_id")

@@ -54,7 +54,16 @@ rename_with.data.frame <- function(.df, .fn = NULL, .cols = everything(), ...) {
   rename_with(.df, .fn, {{ .cols }}, ...)
 }
 
-#' @export
+#' @export rename_with.
 #' @keywords internal
-#' @rdname rename_with
-rename_with. <- rename_with
+#' @usage
+#' rename_with(.df, .fn = NULL, .cols = everything(), ...)
+#' @inherit rename_with title description params examples
+rename_with. <- function(.df, .fn = NULL, .cols = everything(), ...) {
+  UseMethod("rename_with.")
+}
+
+#' @exportS3Method rename_with. data.frame
+rename_with..data.frame <- function(.df, .fn = NULL, .cols = everything(), ...) {
+  rename_with(.df, .fn, {{ .cols }}, ...)
+}

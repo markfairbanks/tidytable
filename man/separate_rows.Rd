@@ -2,12 +2,9 @@
 % Please edit documentation in R/separate_rows.R
 \name{separate_rows}
 \alias{separate_rows}
-\alias{separate_rows.}
 \title{Separate a collapsed column into multiple rows}
 \usage{
 separate_rows(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE)
-
-separate_rows.(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -33,4 +30,3 @@ separate_rows(df, y, z)
 
 separate_rows(df, y, z, convert = TRUE)
 }
-\keyword{internal}

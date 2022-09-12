@@ -75,7 +75,16 @@ nest.data.frame <- function(.df, ..., .names_sep = NULL) {
   nest(.df, ..., .names_sep = .names_sep)
 }
 
-#' @export
+#' @export nest.
 #' @keywords internal
-#' @rdname nest
-nest. <- nest
+#' @usage
+#' nest(.df, ..., .names_sep = NULL)
+#' @inherit nest title description params examples
+nest. <- function(.df, ..., .names_sep = NULL) {
+  UseMethod("nest.")
+}
+
+#' @exportS3Method nest. data.frame
+nest..data.frame <- function(.df, ..., .names_sep = NULL) {
+  nest(.df, ..., .names_sep = .names_sep)
+}

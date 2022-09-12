@@ -59,7 +59,15 @@ arrange.data.frame <- function(.df, ...) {
   arrange(.df, ...)
 }
 
-#' @export
+#' @export arrange.
 #' @keywords internal
-#' @rdname arrange
-arrange. <- arrange
+#' @usage arrange(.df, ...)
+#' @inherit arrange title description params examples
+arrange. <- function(.df, ...) {
+  UseMethod("arrange.")
+}
+
+#' @exportS3Method arrange. data.frame
+arrange..data.frame <- function(.df, ...) {
+  arrange(.df, ...)
+}

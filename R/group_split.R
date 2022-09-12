@@ -63,8 +63,16 @@ group_split.data.frame <- function(.df, ..., .keep = TRUE, .named = FALSE) {
   group_split(.df, ..., .keep = .keep, .named = .named)
 }
 
-#' @export
+#' @export group_split.
 #' @keywords internal
-#' @rdname group_split
-group_split. <- group_split
+#' @usage group_split(.df, ..., .keep = TRUE, .named = FALSE)
+#' @inherit group_split title description params examples
+group_split. <- function(.df, ..., .keep = TRUE, .named = FALSE) {
+  UseMethod("group_split.")
+}
+
+#' @exportS3Method group_split. data.frame
+group_split..data.frame <- function(.df, ..., .keep = TRUE, .named = FALSE) {
+  group_split(.df, ..., .keep = .keep, .named = .named)
+}
 

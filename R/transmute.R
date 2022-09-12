@@ -33,7 +33,16 @@ transmute.data.frame <- function(.df, ..., .by = NULL) {
   transmute(.df, ..., .by = {{ .by }})
 }
 
-#' @export
+#' @export transmute.
 #' @keywords internal
-#' @rdname transmute
-transmute. <- transmute
+#' @usage
+#' transmute(.df, ..., .by = NULL)
+#' @inherit transmute title description params examples
+transmute. <- function(.df, ..., .by = NULL) {
+  UseMethod("transmute.")
+}
+
+#' @exportS3Method transmute. data.frame
+transmute..data.frame <- function(.df, ..., .by = NULL) {
+  transmute(.df, ..., .by = {{ .by }})
+}

@@ -2,20 +2,9 @@
 % Please edit documentation in R/unnest_wider.R
 \name{unnest_wider}
 \alias{unnest_wider}
-\alias{unnest_wider.}
 \title{Unnest a list-column of vectors into a wide data frame}
 \usage{
 unnest_wider(
-  .df,
-  col,
-  names_sep = NULL,
-  simplify = NULL,
-  names_repair = "check_unique",
-  ptype = list(),
-  transform = list()
-)
-
-unnest_wider.(
   .df,
   col,
   names_sep = NULL,
@@ -57,4 +46,3 @@ df \%>\% unnest_wider(y)
 # But you can provide names_sep for increased naming control
 df \%>\% unnest_wider(y, names_sep = "_")
 }
-\keyword{internal}

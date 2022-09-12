@@ -61,7 +61,16 @@ nest_by.data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
   nest_by(.df, ..., .key = .key, .keep = .keep)
 }
 
-#' @export
+#' @export nest_by.
 #' @keywords internal
-#' @rdname nest_by
-nest_by. <- nest_by
+#' @usage
+#' nest_by(.df, ..., .key = "data", .keep = FALSE)
+#' @inherit nest_by title description params examples
+nest_by. <- function(.df, ..., .key = "data", .keep = FALSE) {
+  UseMethod("nest_by.")
+}
+
+#' @exportS3Method nest_by. data.frame
+nest_by..data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
+  nest_by(.df, ..., .key = .key, .keep = .keep)
+}

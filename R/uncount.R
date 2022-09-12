@@ -42,7 +42,16 @@ uncount.data.frame <- function(.df, weights, .remove = TRUE, .id = NULL) {
   uncount(.df, {{ weights }}, .remove, .id)
 }
 
-#' @export
+#' @export uncount.
 #' @keywords internal
-#' @rdname uncount
-uncount. <- uncount
+#' @usage
+#' uncount(.df, weights, .remove = TRUE, .id = NULL)
+#' @inherit uncount title description params examples
+uncount. <- function(.df, weights, .remove = TRUE, .id = NULL) {
+  UseMethod("uncount.")
+}
+
+#' @exportS3Method uncount. data.frame
+uncount..data.frame <- function(.df, weights, .remove = TRUE, .id = NULL) {
+  uncount(.df, {{ weights }}, .remove, .id)
+}

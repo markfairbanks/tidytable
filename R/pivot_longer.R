@@ -238,10 +238,71 @@ pivot_longer.data.frame <- function(.df,
   )
 }
 
-#' @export
+#' @export pivot_longer.
 #' @keywords internal
-#' @rdname pivot_longer
-pivot_longer. <- pivot_longer
+#' @usage
+#' pivot_longer(
+#'   .df,
+#'   cols = everything(),
+#'   names_to = "name",
+#'   values_to = "value",
+#'   names_prefix = NULL,
+#'   names_sep = NULL,
+#'   names_pattern = NULL,
+#'   names_ptypes = list(),
+#'   names_transform = list(),
+#'   names_repair = "check_unique",
+#'   values_drop_na = FALSE,
+#'   values_ptypes = list(),
+#'   values_transform = list(),
+#'   fast_pivot = FALSE,
+#'   ...
+#' )
+#' @inherit pivot_longer title description params examples
+pivot_longer. <- function(.df,
+                          cols = everything(),
+                          names_to = "name",
+                          values_to = "value",
+                          names_prefix = NULL,
+                          names_sep = NULL,
+                          names_pattern = NULL,
+                          names_ptypes = list(),
+                          names_transform = list(),
+                          names_repair = "check_unique",
+                          values_drop_na = FALSE,
+                          values_ptypes = list(),
+                          values_transform = list(),
+                          fast_pivot = FALSE,
+                          ...) {
+  UseMethod("pivot_longer.")
+}
+
+#' @exportS3Method pivot_longer. data.frame
+pivot_longer..data.frame <- function(.df,
+                                     cols = everything(),
+                                     names_to = "name",
+                                     values_to = "value",
+                                     names_prefix = NULL,
+                                     names_sep = NULL,
+                                     names_pattern = NULL,
+                                     names_ptypes = list(),
+                                     names_transform = list(),
+                                     names_repair = "check_unique",
+                                     values_drop_na = FALSE,
+                                     values_ptypes = list(),
+                                     values_transform = list(),
+                                     fast_pivot = FALSE,
+                                     ...) {
+  pivot_longer(
+    .df, cols = {{ cols }}, names_to = names_to,
+    values_to = values_to, names_prefix = names_prefix,
+    names_sep = names_sep, names_pattern = names_pattern,
+    names_ptypes = names_ptypes, names_transform = names_transform,
+    names_repair = names_repair, values_drop_na = values_drop_na,
+    values_ptypes = values_ptypes, values_transform = values_transform,
+    fast_pivot = fast_pivot
+  )
+}
 
 pivot_str_extract <- function(x, into, regex, convert = FALSE) {
   out <- str_extract_groups(x, pattern = regex, convert = convert)

@@ -91,9 +91,9 @@ pivot_wider.tidytable <- function(.df,
     glue_df <- distinct(.df, all_of(names_from))
     values_from_reps <- nrow(glue_df)
     glue_df <- vec_rep(glue_df, length(values_from))
-    glue_df <- mutate.(glue_df,
-                       .value = vec_rep_each(.env$values_from, .env$values_from_reps),
-                       .before = 1)
+    glue_df <- mutate(glue_df,
+                      .value = vec_rep_each(.env$values_from, .env$values_from_reps),
+                      .before = 1)
 
     glue_vars <- glue_data(glue_df, names_glue)
     # mimic column names assigned by data.table::dcast()
@@ -172,9 +172,56 @@ pivot_wider.data.frame <- function(.df,
   )
 }
 
-#' @export
+#' @export pivot_wider.
 #' @keywords internal
-#' @rdname pivot_wider
-pivot_wider. <- pivot_wider
+#' @usage
+#' pivot_wider(
+#'   .df,
+#'   names_from = name,
+#'   values_from = value,
+#'   id_cols = NULL,
+#'   names_sep = "_",
+#'   names_prefix = "",
+#'   names_glue = NULL,
+#'   names_sort = FALSE,
+#'   names_repair = "unique",
+#'   values_fill = NULL,
+#'   values_fn = NULL
+#' )
+#' @inherit pivot_wider title description params examples
+pivot_wider. <- function(.df,
+                         names_from = name,
+                         values_from = value,
+                         id_cols = NULL,
+                         names_sep = "_",
+                         names_prefix = "",
+                         names_glue = NULL,
+                         names_sort = FALSE,
+                         names_repair = "unique",
+                         values_fill = NULL,
+                         values_fn = NULL) {
+  UseMethod("pivot_wider.")
+}
+
+#' @exportS3Method pivot_wider. data.frame
+pivot_wider..data.frame <- function(.df,
+                                    names_from = name,
+                                    values_from = value,
+                                    id_cols = NULL,
+                                    names_sep = "_",
+                                    names_prefix = "",
+                                    names_glue = NULL,
+                                    names_sort = FALSE,
+                                    names_repair = "unique",
+                                    values_fill = NULL,
+                                    values_fn = NULL) {
+  pivot_wider(
+    .df, names_from = {{ names_from }}, values_from = {{ values_from }},
+    id_cols = {{ id_cols }}, names_sep = names_sep,
+    names_prefix = names_prefix, names_glue = names_glue,
+    names_sort = names_sort, names_repair = names_repair,
+    values_fill = values_fill, values_fn = {{ values_fn }}
+  )
+}
 
 globalVariables(c(".", ".names_from", "name", "value", ".value"))

@@ -76,8 +76,17 @@ relocate.data.frame <- function(.df, ..., .before = NULL, .after = NULL) {
   relocate(.df, ..., .before = {{ .before }}, .after = {{ .after }})
 }
 
-#' @export
+#' @export relocate.
 #' @keywords internal
-#' @rdname relocate
-relocate. <- relocate
+#' @usage
+#' relocate(.df, ..., .before = NULL, .after = NULL)
+#' @inherit relocate title description params examples
+relocate. <- function(.df, ..., .before = NULL, .after = NULL) {
+  UseMethod("relocate.")
+}
+
+#' @exportS3Method relocate. data.frame
+relocate..data.frame <- function(.df, ..., .before = NULL, .after = NULL) {
+  relocate(.df, ..., .before = {{ .before }}, .after = {{ .after }})
+}
 

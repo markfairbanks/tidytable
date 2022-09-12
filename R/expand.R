@@ -61,10 +61,18 @@ expand.data.frame <- function(.df, ..., .name_repair = "check_unique", .by = NUL
   expand(.df, ..., .name_repair = .name_repair, .by = {{ .by }})
 }
 
-#' @export
+#' @export expand.
 #' @keywords internal
-#' @rdname expand
-expand. <- expand
+#' @usage expand(.df, ..., .name_repair = "check_unique", .by = NULL)
+#' @inherit expand title description params examples
+expand. <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
+  UseMethod("expand.")
+}
+
+#' @exportS3Method expand. data.frame
+expand..data.frame <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
+  expand(.df, ..., .name_repair = .name_repair, .by = {{ .by }})
+}
 
 df_expand <- function(.df, ..., .name_repair = .name_repair) {
   dots <- enquos(...)

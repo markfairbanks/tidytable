@@ -46,10 +46,10 @@ mutate_rowwise.tidytable <- function(.df, ...,
   .df <- mutate(.df, .rowwise_id = .I)
 
   .df <- mutate(.df, !!!dots,
-                 .by = .rowwise_id,
-                 .keep = .keep,
-                 .before = {{ .before }},
-                 .after = {{ .after }})
+                .by = .rowwise_id,
+                .keep = .keep,
+                .before = {{ .before }},
+                .after = {{ .after }})
 
   mutate(.df, .rowwise_id = NULL)
 }
@@ -76,9 +76,30 @@ mutate_rowwise.data.frame <- function(.df, ...,
                  .after = {{ .after }})
 }
 
-#' @export
+#' @export mutate_rowwise.
 #' @keywords internal
-#' @rdname mutate_rowwise
-mutate_rowwise. <- mutate_rowwise
+#' @usage
+#' mutate_rowwise(
+#'   .df, ...,
+#'   .keep = c("all", "used", "unused", "none"),
+#'   .before = NULL, .after = NULL
+#' )
+#' @inherit mutate_rowwise title description params examples
+mutate_rowwise. <- function(.df, ...,
+                            .keep = c("all", "used", "unused", "none"),
+                            .before = NULL, .after = NULL) {
+  UseMethod("mutate_rowwise.")
+}
+
+#' @exportS3Method get_dummies. data.frame
+mutate_rowwise..data.frame <- function(.df, ...,
+                                       .keep = c("all", "used", "unused", "none"),
+                                       .before = NULL, .after = NULL) {
+  .df <- as_tidytable(.df)
+  mutate_rowwise(.df, ...,
+                 .keep = .keep,
+                 .before = {{ .before }},
+                 .after = {{ .after }})
+}
 
 globalVariables(".rowwise_id")

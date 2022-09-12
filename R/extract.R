@@ -80,10 +80,20 @@ extract.data.frame <- function(.df, col, into, regex = "([[:alnum:]]+)",
   extract(.df, {{ col }}, into, regex, remove, convert, ...)
 }
 
-#' @export
+#' @export extract.
 #' @keywords internal
-#' @rdname extract
-extract. <- extract
+#' @usage extract(.df, col, into, regex = "([[:alnum:]]+)", remove = TRUE, convert = FALSE, ...)
+#' @inherit extract title description params examples
+extract. <- function(.df, col, into, regex = "([[:alnum:]]+)",
+                     remove = TRUE, convert = FALSE, ...) {
+  UseMethod("extract.")
+}
+
+#' @exportS3Method extract. data.frame
+extract..data.frame <- function(.df, col, into, regex = "([[:alnum:]]+)",
+                                remove = TRUE, convert = FALSE, ...) {
+  extract(.df, {{ col }}, into, regex, remove, convert, ...)
+}
 
 str_extract_groups <- function(string, pattern, convert = FALSE){
   groups <- regexpr(pattern, string, perl = TRUE)

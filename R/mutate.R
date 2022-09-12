@@ -186,10 +186,31 @@ mutate.data.frame <- function(.df, ..., .by = NULL,
   )
 }
 
-#' @export
+#' @export mutate.
 #' @keywords internal
-#' @rdname mutate
-mutate. <- mutate
+#' @usage
+#' mutate(
+#'   .df, ..., .by = NULL,
+#'   .keep = c("all", "used", "unused", "none"),
+#'   .before = NULL, .after = NULL
+#' )
+#' @inherit mutate title description params examples
+mutate. <- function(.df, ..., .by = NULL,
+                    .keep = c("all", "used", "unused", "none"),
+                    .before = NULL, .after = NULL) {
+  UseMethod("mutate.")
+}
+
+#' @exportS3Method mutate. data.frame
+mutate..data.frame <- function(.df, ..., .by = NULL,
+                               .keep = c("all", "used", "unused", "none"),
+                               .before = NULL, .after = NULL) {
+  mutate(
+    .df, ..., .by = {{ .by }},
+    .keep = .keep,
+    .before = {{ .before }}, .after = {{ .after }}
+  )
+}
 
 # vec_recycle() prevents modify-by-reference if the column already exists in the data.table
 # Fixes case when user supplies a single value ex. 1, -1, "a"

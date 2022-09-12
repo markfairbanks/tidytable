@@ -78,7 +78,16 @@ unite.data.frame <- function(.df, col = ".united", ..., sep = "_", remove = TRUE
   unite(.df, {{ col }}, ..., sep = sep, remove = remove, na.rm = na.rm)
 }
 
-#' @export
+#' @export unite.
 #' @keywords internal
-#' @rdname unite
-unite. <- unite
+#' @usage
+#' unite(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE)
+#' @inherit unite title description params examples
+unite. <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
+  UseMethod("unite.")
+}
+
+#' @exportS3Method unite. data.frame
+unite..data.frame <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
+  unite(.df, {{ col }}, ..., sep = sep, remove = remove, na.rm = na.rm)
+}

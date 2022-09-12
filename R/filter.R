@@ -61,10 +61,18 @@ filter.data.frame <- function(.df, ..., .by = NULL) {
   filter(.df, ..., .by = {{ .by }})
 }
 
-#' @export
+#' @export filter.
 #' @keywords internal
-#' @rdname filter
-filter. <- filter
+#' @usage filter(.df, ..., .by = NULL)
+#' @inherit filter title description params examples
+filter. <- function(.df, ..., .by = NULL) {
+  UseMethod("filter.")
+}
+
+#' @exportS3Method filter. data.frame
+filter..data.frame <- function(.df, ..., .by = NULL) {
+  filter(.df, ..., .by = {{ .by }})
+}
 
 check_filter <- function(dots) {
   .is_named <- have_name(dots)
