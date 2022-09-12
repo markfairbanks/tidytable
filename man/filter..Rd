@@ -4,7 +4,7 @@
 \alias{filter.}
 \title{Filter rows on one or more conditions}
 \usage{
-filter.(.df, ..., .by = NULL)
+filter(.df, ..., .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -24,8 +24,9 @@ df <- tidytable(
 )
 
 df \%>\%
-  filter.(a >= 2, b >= 4)
+  filter(a >= 2, b >= 4)
 
 df \%>\%
-  filter.(b <= mean(b), .by = c)
+  filter(b <= mean(b), .by = c)
 }
+\keyword{internal}

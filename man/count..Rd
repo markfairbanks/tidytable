@@ -4,7 +4,7 @@
 \alias{count.}
 \title{Count observations by group}
 \usage{
-count.(.df, ..., wt = NULL, sort = FALSE, name = NULL)
+count(.df, ..., wt = NULL, sort = FALSE, name = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -25,7 +25,7 @@ Can be \code{NULL} or a variable:
 If omitted, it will default to \code{n}.}
 }
 \description{
-Returns row counts of the dataset. If bare column names are provided, \code{count.()} returns counts by group.
+Returns row counts of the dataset. If bare column names are provided, \code{count()} returns counts by group.
 }
 \examples{
 df <- data.table(
@@ -35,17 +35,18 @@ df <- data.table(
 )
 
 df \%>\%
-  count.()
+  count()
 
 df \%>\%
-  count.(z)
+  count(z)
 
 df \%>\%
-  count.(where(is.character))
+  count(where(is.character))
 
 df \%>\%
-  count.(z, wt = y, name = "y_sum")
+  count(z, wt = y, name = "y_sum")
 
 df \%>\%
-  count.(z, sort = TRUE)
+  count(z, sort = TRUE)
 }
+\keyword{internal}

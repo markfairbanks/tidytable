@@ -4,7 +4,7 @@
 \alias{nest_by.}
 \title{Nest data.tables}
 \usage{
-nest_by.(.df, ..., .key = "data", .keep = FALSE)
+nest_by(.df, ..., .key = "data", .keep = FALSE)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -28,14 +28,15 @@ df <- data.table(
 )
 
 df \%>\%
-  nest_by.()
+  nest_by()
 
 df \%>\%
-  nest_by.(c, d)
+  nest_by(c, d)
 
 df \%>\%
-  nest_by.(where(is.character))
+  nest_by(where(is.character))
 
 df \%>\%
-  nest_by.(c, d, .keep = TRUE)
+  nest_by(c, d, .keep = TRUE)
 }
+\keyword{internal}

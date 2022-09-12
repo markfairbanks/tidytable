@@ -21,25 +21,25 @@
 #' )
 #'
 #' df %>%
-#'   unite.("new_col", b, c)
+#'   unite("new_col", b, c)
 #'
 #' df %>%
-#'   unite.("new_col", where(is.character))
+#'   unite("new_col", where(is.character))
 #'
 #' df %>%
-#'   unite.("new_col", b, c, remove = FALSE)
+#'   unite("new_col", b, c, remove = FALSE)
 #'
 #' df %>%
-#'   unite.("new_col", b, c, na.rm = TRUE)
+#'   unite("new_col", b, c, na.rm = TRUE)
 #'
 #' df %>%
-#'   unite.()
-unite. <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
-  UseMethod("unite.")
+#'   unite()
+unite <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
+  UseMethod("unite")
 }
 
 #' @export
-unite..tidytable <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
+unite.tidytable <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
   col <- as_name(enquo(col))
 
   dots <- enquos(...)
@@ -52,28 +52,42 @@ unite..tidytable <- function(.df, col = ".united", ..., sep = "_", remove = TRUE
   }
 
   if (is_true(na.rm)) {
-    cols <- unname(map.(select.(.df, any_of(unite_cols)), as.character))
+    cols <- unname(map(select(.df, any_of(unite_cols)), as.character))
     rows <- transpose(cols)
 
-    .united <- map_chr.(rows, ~ paste0(.x[!is.na(.x)], collapse = sep))
+    .united <- map_chr(rows, ~ paste0(.x[!is.na(.x)], collapse = sep))
 
-    out <- mutate.(.df, !!col := .env$.united)
+    out <- mutate(.df, !!col := .env$.united)
   } else {
-    out <- mutate.(.df, !!col := paste(!!!syms(unite_cols), sep = sep))
+    out <- mutate(.df, !!col := paste(!!!syms(unite_cols), sep = sep))
   }
 
-  out <- relocate.(out, !!col, .before = min(locs))
+  out <- relocate(out, !!col, .before = min(locs))
 
   if (is_true(remove)) {
     drop_cols <- setdiff(unite_cols, col)
-    out <- select.(out, -any_of(drop_cols))
+    out <- select(out, -any_of(drop_cols))
   }
 
   out
 }
 
 #' @export
-unite..data.frame <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
+unite.data.frame <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
   .df <- as_tidytable(.df)
-  unite.(.df, {{ col }}, ..., sep = sep, remove = remove, na.rm = na.rm)
+  unite(.df, {{ col }}, ..., sep = sep, remove = remove, na.rm = na.rm)
+}
+
+#' @export unite.
+#' @keywords internal
+#' @usage
+#' unite(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE)
+#' @inherit unite title description params examples
+unite. <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
+  UseMethod("unite.")
+}
+
+#' @exportS3Method unite. data.frame
+unite..data.frame <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
+  unite(.df, {{ col }}, ..., sep = sep, remove = remove, na.rm = na.rm)
 }

@@ -1,8 +1,8 @@
 #' Apply a function across a selection of columns
 #'
 #' @description
-#' Apply a function across a selection of columns. For use in `arrange.()`,
-#' `mutate.()`, and `summarize.()`.
+#' Apply a function across a selection of columns. For use in `arrange()`,
+#' `mutate()`, and `summarize()`.
 #'
 #' @param .cols vector `c()` of unquoted column names. `tidyselect` compatible.
 #' @param .fns Functions to pass. Can pass a list of functions.
@@ -22,13 +22,19 @@
 #' )
 #'
 #' df %>%
-#'   mutate.(across.(c(x, y), ~ .x * 2))
+#'   mutate(across(c(x, y), ~ .x * 2))
 #'
 #' df %>%
-#'   summarize.(across.(c(x, y), ~ mean(.x, na.rm = TRUE)), .by = z)
+#'   summarize(across(c(x, y), ~ mean(.x, na.rm = TRUE)),
+#'             .by = z)
 #'
 #' df %>%
-#'   arrange.(across.(c(y, z)))
-across. <- function(.cols = everything(), .fns = NULL, ..., .names = NULL) {
-  abort("across.() can only work inside of tidytable verbs")
+#'   arrange(across(c(y, z)))
+across <- function(.cols = everything(), .fns = NULL, ..., .names = NULL) {
+  abort("`across()` can only work inside of tidytable verbs")
 }
+
+#' @export
+#' @keywords internal
+#' @rdname across
+across. <- across

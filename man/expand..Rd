@@ -2,12 +2,9 @@
 % Please edit documentation in R/expand.R
 \name{expand.}
 \alias{expand.}
-\alias{nesting.}
 \title{Expand a data.table to use all combinations of values}
 \usage{
-expand.(.df, ..., .name_repair = "check_unique", .by = NULL)
-
-nesting.(..., .name_repair = "check_unique")
+expand(.df, ..., .name_repair = "check_unique", .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -21,20 +18,21 @@ nesting.(..., .name_repair = "check_unique")
 \description{
 Generates all combinations of variables found in a dataset.
 
-\code{expand.()} is useful in conjunction with joins:
+\code{expand()} is useful in conjunction with joins:
 \itemize{
-\item use with \code{right_join.()} to convert implicit missing values to explicit missing values
-\item use with \code{anti_join.()} to find out which combinations are missing
+\item use with \code{right_join()} to convert implicit missing values to explicit missing values
+\item use with \code{anti_join()} to find out which combinations are missing
 }
 
-\code{nesting.()} is a helper that only finds combinations already present in the dataset.
+\code{nesting()} is a helper that only finds combinations already present in the dataset.
 }
 \examples{
 df <- tidytable(x = c(1, 1, 2), y = c(1, 1, 2))
 
 df \%>\%
-  expand.(x, y)
+  expand(x, y)
 
 df \%>\%
-  expand.(nesting.(x, y))
+  expand(nesting(x, y))
 }
+\keyword{internal}

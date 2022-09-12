@@ -41,6 +41,8 @@ call2_i_by <- function(.df, i, .by) {
   dt_expr
 }
 
+globalVariables("V1")
+
 # setnames without modify-by-reference
 df_set_names <- function(.df, new_names = NULL, old_names = NULL) {
   if (is.null(old_names)) {
@@ -73,7 +75,7 @@ grouped_dot_by <- function(.df, .by = NULL) {
   if (!quo_is_null(.by)) {
     tidyselect_names(.df, !!.by)
   } else {
-    group_vars.(.df)
+    group_vars(.df)
   }
 }
 
@@ -120,8 +122,8 @@ f_sort <- function(x) {
 }
 
 # imap implementation - for internal use only
-imap. <- function(.x, .f, ...) {
-  map2.(.x, names(.x) %||% seq_along(.x), .f, ...)
+imap <- function(.x, .f, ...) {
+  map2(.x, names(.x) %||% seq_along(.x), .f, ...)
 }
 
 # Is object a vector and not a matrix
@@ -135,6 +137,19 @@ tidytable_restore <- function(x, to) {
   # https://github.com/Rdatatable/data.table/issues/5042
   attr(to, "index") <- NULL
   vec_restore(x, to)
+}
+
+across_check <- function(dots, .fn) {
+  use_across <- map_lgl(dots, quo_is_call, c("across", "across."))
+
+  if (any(use_across)) {
+    abort(
+      glue(
+      "`across()` is unnecessary in `{.fn}()`.
+      Please directly use tidyselect.
+      Ex: df %>% {.fn}(where(is.numeric))")
+    )
+  }
 }
 
 deprecate_old_across <- function(fn) {

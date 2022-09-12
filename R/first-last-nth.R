@@ -6,7 +6,7 @@
 #' Note: These are simple wrappers around `vctrs::vec_slice()`.
 #'
 #' @param x A vector
-#' @param n For `nth.()`, a number specifying the position to grab.
+#' @param n For `nth()`, a number specifying the position to grab.
 #' @param default The default value if the value doesn't exist.
 #' @param na_rm If `TRUE` ignores missing values.
 #'
@@ -15,24 +15,34 @@
 #' @examples
 #' vec <- letters
 #'
-#' first.(vec)
-#' last.(vec)
-#' nth.(vec, 4)
-first. <- function(x, default = NULL, na_rm = FALSE) {
-  nth.(x, 1L, default, na_rm)
+#' first(vec)
+#' last(vec)
+#' nth(vec, 4)
+first <- function(x, default = NULL, na_rm = FALSE) {
+  nth(x, 1L, default, na_rm)
 }
 
-#' @rdname first.
 #' @export
-last. <- function(x, default = NULL, na_rm = FALSE) {
-  nth.(x, -1L, default, na_rm)
+#' @keywords internal
+#' @rdname first
+first. <- first
+
+#' @export
+#' @rdname first
+last <- function(x, default = NULL, na_rm = FALSE) {
+  nth(x, -1L, default, na_rm)
 }
 
-#' @rdname first.
 #' @export
-nth. <- function(x, n, default = NULL, na_rm = FALSE) {
+#' @keywords internal
+#' @rdname first
+last. <- last
+
+#' @export
+#' @rdname first
+nth <- function(x, n, default = NULL, na_rm = FALSE) {
   if (na_rm) {
-    x <- x[!vec_equal_na(x)]
+    x <- x[vec_detect_complete(x)]
   }
 
   size <- vec_size(x)
@@ -46,6 +56,11 @@ nth. <- function(x, n, default = NULL, na_rm = FALSE) {
     vec_slice2(x, n)
   }
 }
+
+#' @export
+#' @keywords internal
+#' @rdname first
+nth. <- nth
 
 nth_default <- function(x, default) {
   if (vec_is_list(x)) {

@@ -4,7 +4,7 @@
 #' Unnest list-columns.
 #'
 #' @param .df A data.table
-#' @param ... Columns to unnest. If empty, unnests all list columns. `tidyselect` compatible.
+#' @param ... Columns to unnest If empty, unnests all list columns. `tidyselect` compatible.
 #' @param keep_empty Return `NA` for any `NULL` elements of the list column
 #' @param .drop Should list columns that were not unnested be dropped
 #' @param names_sep If NULL, the default, the inner column names will become the new outer column names.
@@ -17,47 +17,46 @@
 #' @export
 #'
 #' @examples
+#' df1 <- tidytable(x = 1:3, y = 1:3)
+#' df2 <- tidytable(x = 1:2, y = 1:2)
 #' nested_df <-
 #'   data.table(
-#'     a = 1:10,
-#'     b = 11:20,
-#'     c = c(rep("a", 6), rep("b", 4)),
-#'     d = c(rep("a", 4), rep("b", 6))
-#'   ) %>%
-#'   nest_by.(c, d) %>%
-#'   mutate.(pulled_vec = map.(data, ~ pull.(.x, a)))
+#'     a = c("a", "b"),
+#'     frame_list = list(df1, df2),
+#'     vec_list = list(4:6, 7:8)
+#'   )
 #'
 #' nested_df %>%
-#'   unnest.(data)
+#'   unnest(frame_list)
 #'
 #' nested_df %>%
-#'   unnest.(data, names_sep = "_")
+#'   unnest(frame_list, names_sep = "_")
 #'
 #' nested_df %>%
-#'   unnest.(data, pulled_vec)
-unnest. <- function(.df,
-                    ...,
-                    keep_empty = FALSE,
-                    .drop = TRUE,
-                    names_sep = NULL,
-                    names_repair = "unique") {
-  UseMethod("unnest.")
+#'   unnest(frame_list, vec_list)
+unnest <- function(.df,
+                   ...,
+                   keep_empty = FALSE,
+                   .drop = TRUE,
+                   names_sep = NULL,
+                   names_repair = "unique") {
+  UseMethod("unnest")
 }
 
 #' @export
-unnest..tidytable <- function(.df,
-                              ...,
-                              keep_empty = FALSE,
-                              .drop = TRUE,
-                              names_sep = NULL,
-                              names_repair = "unique") {
+unnest.tidytable <- function(.df,
+                             ...,
+                             keep_empty = FALSE,
+                             .drop = TRUE,
+                             names_sep = NULL,
+                             names_repair = "unique") {
   vec_assert(.drop, logical(), 1)
 
   dots <- enquos(...)
 
   df_names <- names(.df)
 
-  .is_list <- map_lgl.(.df, is.list)
+  .is_list <- map_lgl(.df, is.list)
 
   if (length(dots) == 0) {
     dots <- syms(df_names[.is_list])
@@ -67,10 +66,10 @@ unnest..tidytable <- function(.df,
 
   if (keep_empty) {
     dots_chr <- as.character(dots)
-    .df <- mutate.(.df, across.(all_of(dots_chr), keep_empty_prep))
+    .df <- mutate(.df, across(all_of(dots_chr), keep_empty_prep))
   }
 
-  unnested <- map.(dots, ~ unnest_col(.df, .x, names_sep))
+  unnested <- map(dots, ~ unnest_col(.df, .x, names_sep))
 
   unnested_sizes <- list_sizes(unnested)
 
@@ -86,36 +85,70 @@ unnest..tidytable <- function(.df,
 
   if (length(cols_keep) > 0) {
     # Get number of repeats for keep cols
-    reps <- list_sizes(pull.(.df, !!dots[[1]]))
+    reps <- list_sizes(pull(.df, !!dots[[1]]))
 
-    keep_df <- select.(.df, any_of(cols_keep))
+    keep_df <- select(.df, any_of(cols_keep))
 
     keep_df <- vec_rep_each(keep_df, reps)
 
-    out_df <- bind_cols.(keep_df, unnested, .name_repair = names_repair)
+    out_df <- bind_cols(keep_df, unnested, .name_repair = names_repair)
   } else {
-    out_df <- bind_cols.(unnested, .name_repair = names_repair)
+    out_df <- bind_cols(unnested, .name_repair = names_repair)
   }
 
   out_df
 }
 
 #' @export
+unnest.data.frame <- function(.df,
+                              ...,
+                              keep_empty = FALSE,
+                              .drop = TRUE,
+                              names_sep = NULL,
+                              names_repair = "unique") {
+  .df <- as_tidytable(.df)
+  unnest(
+    .df, ..., keep_empty = keep_empty, .drop = .drop,
+    names_sep = names_sep, names_repair = names_repair
+  )
+}
+
+#' @export unnest.
+#' @keywords internal
+#' @usage
+#' unnest(
+#'   .df,
+#'   ...,
+#'   keep_empty = FALSE,
+#'   .drop = TRUE,
+#'   names_sep = NULL,
+#'   names_repair = "unique"
+#' )
+#' @inherit unnest title description params examples
+unnest. <- function(.df,
+                    ...,
+                    keep_empty = FALSE,
+                    .drop = TRUE,
+                    names_sep = NULL,
+                    names_repair = "unique") {
+  UseMethod("unnest.")
+}
+
+#' @exportS3Method unnest. data.frame
 unnest..data.frame <- function(.df,
                                ...,
                                keep_empty = FALSE,
                                .drop = TRUE,
                                names_sep = NULL,
                                names_repair = "unique") {
-  .df <- as_tidytable(.df)
-  unnest.(
+  unnest(
     .df, ..., keep_empty = keep_empty, .drop = .drop,
     names_sep = names_sep, names_repair = names_repair
   )
 }
 
 unnest_col <- function(.df, col = NULL, names_sep = NULL) {
-  .l <- pull.(.df, !!col)
+  .l <- pull(.df, !!col)
 
   .l <- list_drop_empty(.l)
 
@@ -130,7 +163,7 @@ unnest_col <- function(.df, col = NULL, names_sep = NULL) {
     # Use do.call so lists of dates are not unclassed by unlist
     out_df <- tidytable(!!col := do.call("c", .l))
   } else {
-    out_df <- bind_rows.(.l)
+    out_df <- bind_rows(.l)
   }
 
   if (!is.null(names_sep)) {
@@ -141,7 +174,7 @@ unnest_col <- function(.df, col = NULL, names_sep = NULL) {
 }
 
 keep_empty_prep <- function(.l) {
-  .is_null <- map_lgl.(.l, is.null)
+  .is_null <- map_lgl(.l, is.null)
 
   if (!any(.is_null)) {
     return(.l)
@@ -158,5 +191,5 @@ keep_empty_prep <- function(.l) {
     .replace <- list(null_df)
   }
 
-  replace_na.(.l, .replace)
+  replace_na(.l, .replace)
 }

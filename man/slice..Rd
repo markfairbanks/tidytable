@@ -2,24 +2,9 @@
 % Please edit documentation in R/slice.R
 \name{slice.}
 \alias{slice.}
-\alias{slice_head.}
-\alias{slice_tail.}
-\alias{slice_max.}
-\alias{slice_min.}
-\alias{slice_sample.}
 \title{Choose rows in a data.table}
 \usage{
-slice.(.df, ..., .by = NULL)
-
-slice_head.(.df, n = 5, .by = NULL)
-
-slice_tail.(.df, n = 5, .by = NULL)
-
-slice_max.(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL)
-
-slice_min.(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL)
-
-slice_sample.(.df, n, prop, weight_by = NULL, replace = FALSE, .by = NULL)
+slice(.df, ..., .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -27,19 +12,6 @@ slice_sample.(.df, n, prop, weight_by = NULL, replace = FALSE, .by = NULL)
 \item{...}{Integer row values}
 
 \item{.by}{Columns to group by}
-
-\item{n}{Number of rows to grab}
-
-\item{order_by}{Variable to arrange by}
-
-\item{with_ties}{Should ties be kept together. The default \code{TRUE} may return
-can return multiple rows if they are equal. Use \code{FALSE} to ignore ties.}
-
-\item{prop}{The proportion of rows to select}
-
-\item{weight_by}{Sampling weights}
-
-\item{replace}{Should sampling be performed with (\code{TRUE}) or without (\code{FALSE}, default) replacement}
 }
 \description{
 Choose rows in a data.table.
@@ -53,23 +25,24 @@ df <- data.table(
 )
 
 df \%>\%
-  slice.(1:3)
+  slice(1:3)
 
 df \%>\%
-  slice.(1, 3)
+  slice(1, 3)
 
 df \%>\%
-  slice.(1:2, .by = z)
+  slice(1:2, .by = z)
 
 df \%>\%
-  slice_head.(1, .by = z)
+  slice_head(1, .by = z)
 
 df \%>\%
-  slice_tail.(1, .by = z)
+  slice_tail(1, .by = z)
 
 df \%>\%
-  slice_max.(order_by = x, .by = z)
+  slice_max(order_by = x, .by = z)
 
 df \%>\%
-  slice_min.(order_by = y, .by = z)
+  slice_min(order_by = y, .by = z)
 }
+\keyword{internal}

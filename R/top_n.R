@@ -18,27 +18,41 @@
 #' )
 #'
 #' df %>%
-#'   top_n.(2, wt = y)
+#'   top_n(2, wt = y)
 #'
 #' df %>%
-#'   top_n.(2, wt = y, .by = z)
-top_n. <- function(.df, n = 5, wt = NULL, .by = NULL) {
-  UseMethod("top_n.")
+#'   top_n(2, wt = y, .by = z)
+top_n <- function(.df, n = 5, wt = NULL, .by = NULL) {
+  UseMethod("top_n")
 }
 
 #' @export
-top_n..tidytable <- function(.df, n = 5, wt = NULL, .by = NULL) {
+top_n.tidytable <- function(.df, n = 5, wt = NULL, .by = NULL) {
   wt <- enquo(wt)
 
   if (quo_is_null(wt)) {
-    slice_head.(.df, {{ n }}, {{ .by }})
+    slice_head(.df, {{ n }}, {{ .by }})
   } else {
-    slice_max.(.df, order_by = !!wt, {{ n }}, .by = {{ .by }})
+    slice_max(.df, order_by = !!wt, {{ n }}, .by = {{ .by }})
   }
 }
 
 #' @export
-top_n..data.frame <- function(.df, n = 5, wt = NULL, .by = NULL) {
+top_n.data.frame <- function(.df, n = 5, wt = NULL, .by = NULL) {
   .df <- as_tidytable(.df)
-  top_n.(.df, {{ n }}, {{ wt }}, .by = {{ .by }})
+  top_n(.df, {{ n }}, {{ wt }}, .by = {{ .by }})
+}
+
+#' @export top_n.
+#' @keywords internal
+#' @usage
+#' top_n(.df, n = 5, wt = NULL, .by = NULL)
+#' @inherit top_n title description params examples
+top_n. <- function(.df, n = 5, wt = NULL, .by = NULL) {
+  UseMethod("top_n.")
+}
+
+#' @exportS3Method top_n. data.frame
+top_n..data.frame <- function(.df, n = 5, wt = NULL, .by = NULL) {
+  top_n(.df, {{ n }}, {{ wt }}, .by = {{ .by }})
 }

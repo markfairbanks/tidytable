@@ -17,16 +17,16 @@
 #' )
 #'
 #' df %>%
-#'   filter.(a >= 2, b >= 4)
+#'   filter(a >= 2, b >= 4)
 #'
 #' df %>%
-#'   filter.(b <= mean(b), .by = c)
-filter. <- function(.df, ..., .by = NULL) {
-  UseMethod("filter.")
+#'   filter(b <= mean(b), .by = c)
+filter <- function(.df, ..., .by = NULL) {
+  UseMethod("filter")
 }
 
 #' @export
-filter..tidytable <- function(.df, ..., .by = NULL) {
+filter.tidytable <- function(.df, ..., .by = NULL) {
   .by <- enquo(.by)
 
   dots <- enquos(...)
@@ -48,31 +48,44 @@ filter..tidytable <- function(.df, ..., .by = NULL) {
 }
 
 #' @export
-filter..grouped_tt <- function(.df, ..., .by = NULL) {
+filter.grouped_tt <- function(.df, ..., .by = NULL) {
   .by <- grouped_dot_by(.df, {{ .by }})
-  out <- ungroup.(.df)
-  out <- filter.(out, ..., .by = all_of(.by))
-  group_by.(out, all_of(.by))
+  out <- ungroup(.df)
+  out <- filter(out, ..., .by = all_of(.by))
+  group_by(out, all_of(.by))
 }
 
 #' @export
-filter..data.frame <- function(.df, ..., .by = NULL) {
+filter.data.frame <- function(.df, ..., .by = NULL) {
   .df <- as_tidytable(.df)
-  filter.(.df, ..., .by = {{ .by }})
+  filter(.df, ..., .by = {{ .by }})
+}
+
+#' @export filter.
+#' @keywords internal
+#' @usage filter(.df, ..., .by = NULL)
+#' @inherit filter title description params examples
+filter. <- function(.df, ..., .by = NULL) {
+  UseMethod("filter.")
+}
+
+#' @exportS3Method filter. data.frame
+filter..data.frame <- function(.df, ..., .by = NULL) {
+  filter(.df, ..., .by = {{ .by }})
 }
 
 check_filter <- function(dots) {
-  named_bool <- have_name(dots)
+  .is_named <- have_name(dots)
 
-  if (any(named_bool)) {
-    named_dots <- dots[named_bool]
+  if (any(.is_named)) {
+    named_dots <- dots[.is_named]
 
-    i <- which(named_bool)[[1]]
+    i <- which(.is_named)[[1]]
     dot <- as_label(quo_get_expr(named_dots[[1]]))
     dot_name <- names(named_dots[1])
 
     abort(c(
-      glue("Problem with `filter.()` input `..{i}`."),
+      glue("Problem with `filter()` input `..{i}`."),
       x = glue("Input `..{i}` is named."),
       i = glue("This usually means that you've used `=` instead of `==`."),
       i = glue("Did you mean `{dot_name} == {dot}`?")

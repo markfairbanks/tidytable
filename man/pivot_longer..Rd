@@ -4,7 +4,7 @@
 \alias{pivot_longer.}
 \title{Pivot data from wide to long}
 \usage{
-pivot_longer.(
+pivot_longer(
   .df,
   cols = everything(),
   names_to = "name",
@@ -34,10 +34,10 @@ pivot_longer.(
 \item{names_prefix}{Remove matching text from the start of selected columns using regex.}
 
 \item{names_sep}{If \code{names_to} contains multiple values, \code{names_sep} takes
-the same specification as \code{separate.()}.}
+the same specification as \code{separate()}.}
 
 \item{names_pattern}{If \code{names_to} contains multiple values, \code{names_pattern} takes
-the same specification as \code{extract.()}, a regular expression containing matching groups.}
+the same specification as \code{extract()}, a regular expression containing matching groups.}
 
 \item{names_ptypes, values_ptypes}{A list of column name-prototype pairs. See ``?vctrs::`theory-faq-coercion```
 for more info on vctrs coercion.}
@@ -55,7 +55,7 @@ otherwise it will be a \code{character} column. Defaults to \code{FALSE} to matc
 \item{...}{Additional arguments to passed on to methods.}
 }
 \description{
-\code{pivot_longer.()} "lengthens" the data, increasing the number of rows and decreasing
+\code{pivot_longer()} "lengthens" the data, increasing the number of rows and decreasing
 the number of columns.
 }
 \examples{
@@ -66,8 +66,9 @@ df <- data.table(
 )
 
 df \%>\%
-  pivot_longer.(cols = c(x, y))
+  pivot_longer(cols = c(x, y))
 
 df \%>\%
-  pivot_longer.(cols = -z, names_to = "stuff", values_to = "things")
+  pivot_longer(cols = -z, names_to = "stuff", values_to = "things")
 }
+\keyword{internal}

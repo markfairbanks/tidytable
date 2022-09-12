@@ -10,8 +10,8 @@
 #'
 #' @examples
 #' x <- sample(1:10, 1e5, rep = TRUE)
-#' n_distinct.(x)
-n_distinct. <- function(..., na.rm = FALSE) {
+#' n_distinct(x)
+n_distinct <- function(..., na.rm = FALSE) {
   dots <- list2(...)
 
   if (length(dots) == 1) {
@@ -22,3 +22,8 @@ n_distinct. <- function(..., na.rm = FALSE) {
 
   uniqueN(x, na.rm = na.rm)
 }
+
+#' @export
+#' @keywords internal
+#' @rdname n_distinct
+n_distinct. <- n_distinct

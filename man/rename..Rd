@@ -4,12 +4,12 @@
 \alias{rename.}
 \title{Rename variables by name}
 \usage{
-rename.(.df, ...)
+rename(.df, ...)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
 
-\item{...}{Rename expression like \code{dplyr::rename()}}
+\item{...}{\code{new_name = old_name} pairs to rename columns}
 }
 \description{
 Rename variables from a data.table.
@@ -18,6 +18,7 @@ Rename variables from a data.table.
 df <- data.table(x = 1:3, y = 4:6)
 
 df \%>\%
-  rename.(new_x = x,
-          new_y = y)
+  rename(new_x = x,
+         new_y = y)
 }
+\keyword{internal}

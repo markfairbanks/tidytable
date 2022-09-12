@@ -16,25 +16,29 @@
 #'   y = c(NA, 1, 2)
 #' )
 #'
-#' # Using replace_na.() inside mutate.()
+#' # Using replace_na() inside mutate()
 #' df %>%
-#'   mutate.(x = replace_na.(x, 5))
+#'   mutate(x = replace_na(x, 5))
 #'
-#' # Using replace_na.() on a data frame
+#' # Using replace_na() on a data frame
 #' df %>%
-#'   replace_na.(list(x = 5, y = 0))
-replace_na. <- function(.x, replace = NA) {
-  UseMethod("replace_na.")
+#'   replace_na(list(x = 5, y = 0))
+replace_na <- function(.x, replace) {
+  UseMethod("replace_na")
 }
 
 #' @export
-replace_na..default <- function(.x, replace = NA) {
+replace_na.default <- function(.x, replace) {
+  if (missing(replace)) {
+    return(.x)
+  }
+
   vec_assert(replace, size = 1)
 
   if (is.integer(.x) || is.double(.x)) {
     nafill(.x, "const", fill = replace)
   } else if (vec_is_list(.x)) {
-    null_bool <- map_lgl.(.x, is.null)
+    null_bool <- map_lgl(.x, is.null)
     .x[null_bool] <- replace
     .x
   } else {
@@ -44,10 +48,12 @@ replace_na..default <- function(.x, replace = NA) {
 }
 
 #' @export
-replace_na..tidytable <- function(.x, replace = list()) {
-  stopifnot(vec_is_list(replace))
+replace_na.tidytable <- function(.x, replace) {
+  if (missing(replace)) {
+    return(.x)
+  }
 
-  if (length(replace) == 0) return(.x)
+  stopifnot(vec_is_list(replace))
 
   keep_bool <- names(replace) %in% names(.x)
 
@@ -55,18 +61,32 @@ replace_na..tidytable <- function(.x, replace = list()) {
 
   replace_vars <- names(replace)[keep_bool]
 
-  calls <- map2.(syms(replace_vars), replace, ~ call2("replace_na.", .x, .y, .ns = "tidytable"))
+  calls <- map2(syms(replace_vars), replace, ~ call2("replace_na", .x, .y, .ns = "tidytable"))
 
   names(calls) <- replace_vars
 
-  .x <- mutate.(.x, !!!calls)
+  .x <- mutate(.x, !!!calls)
 
   .x
 }
 
 #' @export
-replace_na..data.frame <- function(.x, replace = list()) {
+replace_na.data.frame <- function(.x, replace) {
   .x <- as_tidytable(.x)
-  replace_na.(.x, replace = replace)
+  replace_na(.x, replace = replace)
+}
+
+#' @export replace_na.
+#' @keywords internal
+#' @usage
+#' replace_na(.x, replace)
+#' @inherit replace_na title description params examples
+replace_na. <- function(.x, replace) {
+  UseMethod("replace_na.")
+}
+
+#' @exportS3Method replace_na. default
+replace_na..default <- function(.x, replace) {
+  replace_na(.x, replace)
 }
 

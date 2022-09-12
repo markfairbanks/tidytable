@@ -4,7 +4,7 @@
 \alias{complete.}
 \title{Complete a data.table with missing combinations of data}
 \usage{
-complete.(.df, ..., fill = list(), .by = NULL)
+complete(.df, ..., fill = list(), .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -22,8 +22,9 @@ Turns implicit missing values into explicit missing values.
 df <- data.table(x = 1:2, y = 1:2, z = 3:4)
 
 df \%>\%
-  complete.(x, y)
+  complete(x, y)
 
 df \%>\%
-  complete.(x, y, fill = list(z = 10))
+  complete(x, y, fill = list(z = 10))
 }
+\keyword{internal}

@@ -4,10 +4,8 @@
 \alias{separate.}
 \title{Separate a character column into multiple columns}
 \usage{
-separate.(
-  .df,
-  col,
-  into,
+separate(
+  .df, col, into,
   sep = "[^[:alnum:]]+",
   remove = TRUE,
   convert = FALSE,
@@ -42,9 +40,10 @@ df <- data.table(x = c("a", "a.b", "a.b", NA))
 
 # "sep" can be automatically detected (slower)
 df \%>\%
-  separate.(x, into = c("c1", "c2"))
+  separate(x, into = c("c1", "c2"))
 
 # Faster if "sep" is provided
 df \%>\%
-  separate.(x, into = c("c1", "c2"), sep = ".")
+  separate(x, into = c("c1", "c2"), sep = ".")
 }
+\keyword{internal}

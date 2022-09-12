@@ -4,7 +4,7 @@
 \alias{add_count.}
 \title{Add a count column to the data frame}
 \usage{
-add_count.(.df, ..., wt = NULL, sort = FALSE, name = NULL)
+add_count(.df, ..., wt = NULL, sort = FALSE, name = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -27,7 +27,7 @@ If omitted, it will default to \code{n}.}
 \description{
 Add a count column to the data frame.
 
-\code{df \%>\% add_count.(a, b)} is equivalent to using \code{df \%>\% mutate.(n = n(), .by = c(a, b))}
+\code{df \%>\% add_count(a, b)} is equivalent to using \code{df \%>\% mutate(n = n(), .by = c(a, b))}
 }
 \examples{
 df <- data.table(
@@ -36,5 +36,6 @@ df <- data.table(
 )
 
 df \%>\%
-  add_count.(a)
+  add_count(a)
 }
+\keyword{internal}

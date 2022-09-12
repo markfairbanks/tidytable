@@ -4,13 +4,10 @@
 \alias{mutate.}
 \title{Add/modify/delete columns}
 \usage{
-mutate.(
-  .df,
-  ...,
-  .by = NULL,
+mutate(
+  .df, ..., .by = NULL,
   .keep = c("all", "used", "unused", "none"),
-  .before = NULL,
-  .after = NULL
+  .before = NULL, .after = NULL
 )
 }
 \arguments{
@@ -29,14 +26,14 @@ from \code{.df} are retained in the output:
 for checking your work as it displays inputs and outputs side-by-side.
 \item \code{"unused"} keeps only existing variables \strong{not} used to make new
 variables.
-\item \code{"none"}, only keeps grouping keys (like \code{\link[=transmute.]{transmute.()}}).
+\item \code{"none"}, only keeps grouping keys (like \code{\link[=transmute]{transmute()}}).
 }}
 
 \item{.before, .after}{Optionally indicate where new columns should be placed.
 Defaults to the right side of the data frame.}
 }
 \description{
-With \code{mutate.()} you can do 3 things:
+With \code{mutate()} you can do 3 things:
 \itemize{
 \item Add new columns
 \item Modify existing columns
@@ -51,17 +48,18 @@ df <- data.table(
 )
 
 df \%>\%
-  mutate.(double_a = a * 2,
-          a_plus_b = a + b)
+  mutate(double_a = a * 2,
+         a_plus_b = a + b)
 
 df \%>\%
-  mutate.(double_a = a * 2,
-          avg_a = mean(a),
-          .by = c)
+  mutate(double_a = a * 2,
+         avg_a = mean(a),
+         .by = c)
 
 df \%>\%
-  mutate.(double_a = a * 2, .keep = "used")
+  mutate(double_a = a * 2, .keep = "used")
 
 df \%>\%
-  mutate.(double_a = a * 2, .after = a)
+  mutate(double_a = a * 2, .after = a)
 }
+\keyword{internal}

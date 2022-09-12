@@ -4,7 +4,7 @@
 \alias{drop_na.}
 \title{Drop rows containing missing values}
 \usage{
-drop_na.(.df, ...)
+drop_na(.df, ...)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -22,11 +22,12 @@ df <- data.table(
 )
 
 df \%>\%
-  drop_na.()
+  drop_na()
 
 df \%>\%
-  drop_na.(x)
+  drop_na(x)
 
 df \%>\%
-  drop_na.(where(is.numeric))
+  drop_na(where(is.numeric))
 }
+\keyword{internal}

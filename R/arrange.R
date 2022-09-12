@@ -18,16 +18,16 @@
 #' )
 #'
 #' df %>%
-#'   arrange.(c, -a)
+#'   arrange(c, -a)
 #'
 #' df %>%
-#'   arrange.(c, desc(a))
-arrange. <- function(.df, ...) {
-  UseMethod("arrange.")
+#'   arrange(c, desc(a))
+arrange <- function(.df, ...) {
+  UseMethod("arrange")
 }
 
 #' @export
-arrange..tidytable <- function(.df, ...) {
+arrange.tidytable <- function(.df, ...) {
   dots <- enquos(...)
 
   if (length(dots) == 0) return(.df)
@@ -36,7 +36,7 @@ arrange..tidytable <- function(.df, ...) {
 
   dots <- prep_exprs(dots, .df, dt_env = dt_env)
 
-  is_expr <- map_lgl.(dots, ~ !is_symbol(.x) && !is_call(.x, "-", 1))
+  is_expr <- map_lgl(dots, ~ !is_symbol(.x) && !is_call(.x, "-", 1))
 
   if (any(is_expr)) {
     i <- expr(order(!!!dots))
@@ -54,7 +54,20 @@ arrange..tidytable <- function(.df, ...) {
 }
 
 #' @export
-arrange..data.frame <- function(.df, ...) {
+arrange.data.frame <- function(.df, ...) {
   .df <- as_tidytable(.df)
-  arrange.(.df, ...)
+  arrange(.df, ...)
+}
+
+#' @export arrange.
+#' @keywords internal
+#' @usage arrange(.df, ...)
+#' @inherit arrange title description params examples
+arrange. <- function(.df, ...) {
+  UseMethod("arrange.")
+}
+
+#' @exportS3Method arrange. data.frame
+arrange..data.frame <- function(.df, ...) {
+  arrange(.df, ...)
 }

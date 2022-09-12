@@ -4,7 +4,7 @@
 \alias{unite.}
 \title{Unite multiple columns by pasting strings together}
 \usage{
-unite.(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE)
+unite(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -31,17 +31,18 @@ df <- tidytable(
 )
 
 df \%>\%
-  unite.("new_col", b, c)
+  unite("new_col", b, c)
 
 df \%>\%
-  unite.("new_col", where(is.character))
+  unite("new_col", where(is.character))
 
 df \%>\%
-  unite.("new_col", b, c, remove = FALSE)
+  unite("new_col", b, c, remove = FALSE)
 
 df \%>\%
-  unite.("new_col", b, c, na.rm = TRUE)
+  unite("new_col", b, c, na.rm = TRUE)
 
 df \%>\%
-  unite.()
+  unite()
 }
+\keyword{internal}

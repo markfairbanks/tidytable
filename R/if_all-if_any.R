@@ -11,16 +11,26 @@
 #'
 #' @examples
 #' iris %>%
-#'   filter.(if_any.(ends_with("Width"), ~ .x > 4))
+#'   filter(if_any(ends_with("Width"), ~ .x > 4))
 #'
 #' iris %>%
-#'   filter.(if_all.(ends_with("Width"), ~ .x > 2))
-if_all. <- function(.cols = everything(), .fns = NULL, ...) {
-  abort("if_all.() can only work inside of tidytable verbs")
+#'   filter(if_all(ends_with("Width"), ~ .x > 2))
+if_all <- function(.cols = everything(), .fns = NULL, ...) {
+  abort("if_all() can only work inside of tidytable verbs")
 }
 
 #' @export
-#' @rdname if_all.
-if_any. <- function(.cols = everything(), .fns = NULL, ...) {
-  abort("if_any.() can only work inside of tidytable verbs")
+#' @rdname if_all
+if_any <- function(.cols = everything(), .fns = NULL, ...) {
+  abort("if_any() can only work inside of tidytable verbs")
 }
+
+#' @export
+#' @keywords internal
+#' @rdname if_all
+if_all. <- if_all
+
+#' @export
+#' @keywords internal
+#' @rdname if_all
+if_any. <- if_any

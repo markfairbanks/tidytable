@@ -19,23 +19,23 @@
 #' )
 #'
 #' # Automatically creates names
-#' df %>% unnest_wider.(y)
+#' df %>% unnest_wider(y)
 #'
 #' # But you can provide names_sep for increased naming control
-#' df %>% unnest_wider.(y, names_sep = "_")
-unnest_wider. <- function(.df, col, names_sep = NULL,
-                          simplify = NULL, names_repair = "check_unique",
-                          ptype = list(), transform = list()) {
-  UseMethod("unnest_wider.")
+#' df %>% unnest_wider(y, names_sep = "_")
+unnest_wider <- function(.df, col, names_sep = NULL,
+                         simplify = NULL, names_repair = "check_unique",
+                         ptype = list(), transform = list()) {
+  UseMethod("unnest_wider")
 }
 
 #' @export
-unnest_wider..tidytable <- function(.df, col, names_sep = NULL,
-                                    simplify = NULL, names_repair = "check_unique",
-                                    ptype = list(), transform = list()) {
+unnest_wider.tidytable <- function(.df, col, names_sep = NULL,
+                                   simplify = NULL, names_repair = "check_unique",
+                                   ptype = list(), transform = list()) {
   .col <- enquo(col)
 
-  .l <- pull.(.df, !!.col)
+  .l <- pull(.df, !!.col)
 
   if (!is_simple_vector(.l[[1]])) {
     abort("Only vectors are currently supported")
@@ -45,9 +45,9 @@ unnest_wider..tidytable <- function(.df, col, names_sep = NULL,
     abort("The simplify argument is not currently supported")
   }
 
-  .l <- map.(.l, ~ unnest_wider_tidytable(!!!.x))
+  .l <- map(.l, ~ unnest_wider_tidytable(!!!.x))
 
-  out <- bind_rows.(.l)
+  out <- bind_rows(.l)
 
   if (!is.null(names_sep)) {
     out_names <- names(out)
@@ -61,7 +61,7 @@ unnest_wider..tidytable <- function(.df, col, names_sep = NULL,
   .df <- dt_j(.df, !!.col := NULL)
 
   if (ncol(.df) > 0) {
-    out <- bind_cols.(.df, out, .name_repair = names_repair)
+    out <- bind_cols(.df, out, .name_repair = names_repair)
   }
 
   out <- change_types(out, names(out), ptype, "ptypes")
@@ -71,11 +71,36 @@ unnest_wider..tidytable <- function(.df, col, names_sep = NULL,
 }
 
 #' @export
+unnest_wider.data.frame <- function(.df, col, names_sep = NULL,
+                                    simplify = NULL, names_repair = "check_unique",
+                                    ptype = list(), transform = list()) {
+  .df <- as_tidytable(.df)
+  unnest_wider(
+    .df, col = {{ col }}, names_sep = names_sep, simplify = simplify,
+    names_repair = names_repair, ptype = ptype, transform = transform
+  )
+}
+
+#' @export unnest_wider.
+#' @keywords internal
+#' @usage
+#' unnest_wider(
+#'   .df, col, names_sep = NULL,
+#'   simplify = NULL, names_repair = "check_unique",
+#'   ptype = list(), transform = list()
+#' )
+#' @inherit unnest_wider title description params examples
+unnest_wider. <- function(.df, col, names_sep = NULL,
+                          simplify = NULL, names_repair = "check_unique",
+                          ptype = list(), transform = list()) {
+  UseMethod("unnest_wider.")
+}
+
+#' @exportS3Method unnest_wider. data.frame
 unnest_wider..data.frame <- function(.df, col, names_sep = NULL,
                                      simplify = NULL, names_repair = "check_unique",
                                      ptype = list(), transform = list()) {
-  .df <- as_tidytable(.df)
-  unnest_wider.(
+  unnest_wider(
     .df, col = {{ col }}, names_sep = names_sep, simplify = simplify,
     names_repair = names_repair, ptype = ptype, transform = transform
   )

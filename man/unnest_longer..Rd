@@ -4,16 +4,10 @@
 \alias{unnest_longer.}
 \title{Unnest a list-column of vectors into regular columns}
 \usage{
-unnest_longer.(
-  .df,
-  col,
-  values_to = NULL,
-  indices_to = NULL,
-  indices_include = NULL,
-  names_repair = "check_unique",
-  simplify = NULL,
-  ptype = list(),
-  transform = list()
+unnest_longer(
+  .df, col, values_to = NULL, indices_to = NULL,
+  indices_include = NULL, names_repair = "check_unique",
+  simplify = NULL, ptype = list(), transform = list()
 )
 }
 \arguments{
@@ -45,5 +39,6 @@ df <- tidytable(
   y = list(0, 1:3, 4:5)
 )
 
-df \%>\% unnest_longer.(y)
+df \%>\% unnest_longer(y)
 }
+\keyword{internal}

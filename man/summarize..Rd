@@ -2,12 +2,9 @@
 % Please edit documentation in R/summarize.R
 \name{summarize.}
 \alias{summarize.}
-\alias{summarise.}
 \title{Aggregate data using summary statistics}
 \usage{
-summarize.(.df, ..., .by = NULL, .sort = TRUE, .groups = "drop_last")
-
-summarise.(.df, ..., .by = NULL, .sort = TRUE, .groups = "drop_last")
+summarize(.df, ..., .by = NULL, .sort = TRUE, .groups = "drop_last")
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -48,11 +45,12 @@ df <- data.table(
 )
 
 df \%>\%
-  summarize.(avg_a = mean(a),
-             max_b = max(b),
-             .by = c)
+  summarize(avg_a = mean(a),
+            max_b = max(b),
+            .by = c)
 
 df \%>\%
-  summarize.(avg_a = mean(a),
-             .by = c(c, d))
+  summarize(avg_a = mean(a),
+            .by = c(c, d))
 }
+\keyword{internal}

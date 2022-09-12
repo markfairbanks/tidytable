@@ -4,7 +4,7 @@
 \alias{rename_with.}
 \title{Rename multiple columns}
 \usage{
-rename_with.(.df, .fn = NULL, .cols = everything(), ...)
+rename_with(.df, .fn = NULL, .cols = everything(), ...)
 }
 \arguments{
 \item{.df}{A data.table or data.frame}
@@ -27,11 +27,12 @@ df <- data.table(
 )
 
 df \%>\%
-  rename_with.(toupper)
+  rename_with(toupper)
 
 df \%>\%
-  rename_with.(~ toupper(.x))
+  rename_with(~ toupper(.x))
 
 df \%>\%
-  rename_with.(~ toupper(.x), .cols = c(x, double_x))
+  rename_with(~ toupper(.x), .cols = c(x, double_x))
 }
+\keyword{internal}

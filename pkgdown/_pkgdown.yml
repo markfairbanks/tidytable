@@ -10,72 +10,72 @@ reference:
 - title: dplyr
 - subtitle: Core dplyr verbs
 - contents:
-  - arrange.
-  - filter.
-  - mutate.
-  - select.
-  - summarize.
+  - arrange
+  - filter
+  - mutate
+  - select
+  - summarize
 - subtitle: Other dplyr functions
 - contents:
-  - across.
-  - add_count.
-  - between.
+  - across
+  - add_count
+  - between
   - starts_with("bind")
-  - c_across.
-  - case_when.
-  - coalesce.
-  - consecutive_id.
-  - count.
+  - c_across
+  - case_when
+  - coalesce
+  - consecutive_id
+  - count
   - context
-  - desc.
-  - distinct.
-  - enframe.
-  - group_by.
-  - group_split.
-  - first.
-  - if_all.
-  - if_else.
-  - is_grouped_df.
-  - lags.
-  - left_join.
-  - mutate_rowwise.
-  - n.
-  - n_distinct.
-  - na_if.
-  - nest_by.
-  - pull.
-  - relocate.
-  - rename.
-  - rename_with.
-  - row_number.
-  - slice.
-  - transmute.
-  - ungroups.
+  - desc
+  - distinct
+  - enframe
+  - group_by
+  - group_split
+  - first
+  - if_all
+  - if_else
+  - is_grouped_df
+  - lags
+  - left_join
+  - mutate_rowwise
+  - n
+  - n_distinct
+  - na_if
+  - nest_by
+  - pull
+  - relocate
+  - rename
+  - rename_with
+  - row_number
+  - slice
+  - transmute
+  - ungroups
 
 - title: tidyr
 - contents:
-  - complete.
-  - crossing.
-  - drop_na.
-  - expand.
-  - expand_grid.
-  - extract.
-  - fill.
-  - nest.
-  - pivot_longer.
-  - pivot_wider.
-  - replace_na.
-  - separate.
-  - separate_rows.
-  - uncount.
-  - unite.
-  - unnest.
-  - unnest_longer.
-  - unnest_wider.
+  - complete
+  - crossing
+  - drop_na
+  - expand
+  - expand_grid
+  - extract
+  - fill
+  - nest
+  - pivot_longer
+  - pivot_wider
+  - replace_na
+  - separate
+  - separate_rows
+  - uncount
+  - unite
+  - unnest
+  - unnest_longer
+  - unnest_wider
 
 - title: purrr
 - contents:
-  - map.
+  - map
 
 - title: reexports
   desc: >
@@ -98,16 +98,16 @@ reference:
 
 - title: Read/write files
 - contents:
-  - fread.
+  - fread
 
 - title: internal
   contents:
   - arrange_across.
   - mutate_across.
   - summarize_across.
-  - case.
-  - get_dummies.
-  - ifelse.
+  - case
+  - get_dummies
+  - ifelse
   - inv_gc
-  - top_n.
+  - top_n
 

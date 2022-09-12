@@ -23,27 +23,27 @@
 #'
 #' # "sep" can be automatically detected (slower)
 #' df %>%
-#'   separate.(x, into = c("c1", "c2"))
+#'   separate(x, into = c("c1", "c2"))
 #'
 #' # Faster if "sep" is provided
 #' df %>%
-#'   separate.(x, into = c("c1", "c2"), sep = ".")
-separate. <- function(.df, col, into,
-                      sep = "[^[:alnum:]]+",
-                      remove = TRUE,
-                      convert = FALSE,
-                      ...) {
+#'   separate(x, into = c("c1", "c2"), sep = ".")
+separate <- function(.df, col, into,
+                     sep = "[^[:alnum:]]+",
+                     remove = TRUE,
+                     convert = FALSE,
+                     ...) {
   check_required(col)
   check_required(into)
-  UseMethod("separate.")
+  UseMethod("separate")
 }
 
 #' @export
-separate..tidytable <- function(.df, col, into,
-                                sep = "[^[:alnum:]]+",
-                                remove = TRUE,
-                                convert = FALSE,
-                                ...) {
+separate.tidytable <- function(.df, col, into,
+                               sep = "[^[:alnum:]]+",
+                               remove = TRUE,
+                               convert = FALSE,
+                               ...) {
   vec_assert(into, character())
 
   if (nchar(sep) == 1) {
@@ -77,13 +77,44 @@ separate..tidytable <- function(.df, col, into,
 }
 
 #' @export
+separate.data.frame <- function(.df, col, into,
+                                sep = "[^[:alnum:]]+",
+                                remove = TRUE,
+                                convert = FALSE,
+                                ...) {
+  .df <- as_tidytable(.df)
+  separate(
+    .df, col = {{ col }}, into = into, sep = sep,
+    remove = remove, convert = convert, ...
+  )
+}
+
+#' @export separate.
+#' @keywords internal
+#' @usage
+#' separate(
+#'   .df, col, into,
+#'   sep = "[^[:alnum:]]+",
+#'   remove = TRUE,
+#'   convert = FALSE,
+#'   ...
+#' )
+#' @inherit separate title description params examples
+separate. <- function(.df, col, into,
+                      sep = "[^[:alnum:]]+",
+                      remove = TRUE,
+                      convert = FALSE,
+                      ...) {
+  UseMethod("separate.")
+}
+
+#' @exportS3Method separate. data.frame
 separate..data.frame <- function(.df, col, into,
                                  sep = "[^[:alnum:]]+",
                                  remove = TRUE,
                                  convert = FALSE,
                                  ...) {
-  .df <- as_tidytable(.df)
-  separate.(
+  separate(
     .df, col = {{ col }}, into = into, sep = sep,
     remove = remove, convert = convert, ...
   )

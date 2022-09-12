@@ -4,12 +4,10 @@
 \alias{mutate_rowwise.}
 \title{Add/modify columns by row}
 \usage{
-mutate_rowwise.(
-  .df,
-  ...,
+mutate_rowwise(
+  .df, ...,
   .keep = c("all", "used", "unused", "none"),
-  .before = NULL,
-  .after = NULL
+  .before = NULL, .after = NULL
 )
 }
 \arguments{
@@ -24,9 +22,9 @@ from \code{.df} are retained in the output:
 \item \code{"all"}, the default, retains all variables.
 \item \code{"used"} keeps any variables used to make new variables; it's useful
 for checking your work as it displays inputs and outputs side-by-side.
-\item \code{"unused"} keeps only existing variables \strong{not} used to make new
+\item \code{"unused"} keeps only existing variables \emph{\strong{not}} used to make new
 variables.
-\item \code{"none"}, only keeps grouping keys (like \code{\link[=transmute.]{transmute.()}}).
+\item \code{"none"}, only keeps grouping keys (like \code{\link[=transmute]{transmute()}}).
 }}
 
 \item{.before, .after}{Optionally indicate where new columns should be placed.
@@ -40,9 +38,10 @@ df <- data.table(x = 1:3, y = 1:3 * 2, z = 1:3 * 3)
 
 # Compute the mean of x, y, z in each row
 df \%>\%
-  mutate_rowwise.(row_mean = mean(c(x, y, z)))
+  mutate_rowwise(row_mean = mean(c(x, y, z)))
 
-# Use c_across.() to more easily select many variables
+# Use c_across() to more easily select many variables
 df \%>\%
-  mutate_rowwise.(row_mean = mean(c_across.(x:z)))
+  mutate_rowwise(row_mean = mean(c_across(x:z)))
 }
+\keyword{internal}

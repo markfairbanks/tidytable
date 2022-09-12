@@ -4,7 +4,7 @@
 \alias{nest.}
 \title{Nest data.tables}
 \usage{
-nest.(.df, ..., .names_sep = NULL)
+nest(.df, ..., .names_sep = NULL)
 }
 \arguments{
 \item{.df}{A data.table or data.frame}
@@ -27,8 +27,9 @@ df <- data.table(
 )
 
 df \%>\%
-  nest.(data = c(a, b))
+  nest(data = c(a, b))
 
 df \%>\%
-  nest.(data = where(is.numeric))
+  nest(data = where(is.numeric))
 }
+\keyword{internal}

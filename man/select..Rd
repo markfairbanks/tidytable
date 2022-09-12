@@ -4,7 +4,7 @@
 \alias{select.}
 \title{Select or drop columns}
 \usage{
-select.(.df, ...)
+select(.df, ...)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -25,20 +25,21 @@ df <- data.table(
 )
 
 df \%>\%
-  select.(x1, y)
+  select(x1, y)
 
 df \%>\%
-  select.(x1:y)
+  select(x1:y)
 
 df \%>\%
-  select.(-y, -z)
+  select(-y, -z)
 
 df \%>\%
-  select.(starts_with("x"), z)
+  select(starts_with("x"), z)
 
 df \%>\%
-  select.(where(is.character), x1)
+  select(where(is.character), x1)
 
 df \%>\%
-  select.(new = x1, y)
+  select(new = x1, y)
 }
+\keyword{internal}

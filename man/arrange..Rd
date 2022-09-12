@@ -4,7 +4,7 @@
 \alias{arrange.}
 \title{Arrange/reorder rows}
 \usage{
-arrange.(.df, ...)
+arrange(.df, ...)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -25,8 +25,9 @@ df <- data.table(
 )
 
 df \%>\%
-  arrange.(c, -a)
+  arrange(c, -a)
 
 df \%>\%
-  arrange.(c, desc(a))
+  arrange(c, desc(a))
 }
+\keyword{internal}

@@ -5,7 +5,7 @@
 #' @param x A data.frame or data.table
 #' @param y A data.frame or data.table
 #' @param by A character vector of variables to join by. If NULL, the default, the join will do a natural join, using all variables with common names across the two tables.
-#' @param suffix Append created for duplicated column names when using `full_join.()`
+#' @param suffix Append created for duplicated column names when using `full_join()`
 #' @param ... Other parameters passed on to methods
 #' @param keep Should the join keys from both `x` and `y` be preserved in the output?
 #'
@@ -15,17 +15,12 @@
 #' df1 <- data.table(x = c("a", "a", "b", "c"), y = 1:4)
 #' df2 <- data.table(x = c("a", "b"), z = 5:6)
 #'
-#' df1 %>% left_join.(df2)
-#' df1 %>% inner_join.(df2)
-#' df1 %>% right_join.(df2)
-#' df1 %>% full_join.(df2)
-#' df1 %>% anti_join.(df2)
-left_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  UseMethod("left_join.")
-}
-
-#' @export
-left_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
+#' df1 %>% left_join(df2)
+#' df1 %>% inner_join(df2)
+#' df1 %>% right_join(df2)
+#' df1 %>% full_join(df2)
+#' df1 %>% anti_join(df2)
+left_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
   c(x, y, x_names, y_names, by, on, selection) %<-%
     join_prep(x, y, by, keep, suffix, "left")
 
@@ -42,13 +37,13 @@ left_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., kee
 }
 
 #' @export
-#' @rdname left_join.
-right_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  UseMethod("right_join.")
-}
+#' @keywords internal
+#' @rdname left_join
+left_join. <- left_join
 
 #' @export
-right_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
+#' @rdname left_join
+right_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
   c(x, y, x_names, y_names, by, on, selection) %<-%
     join_prep(x, y, by, keep, suffix, "right")
 
@@ -62,13 +57,13 @@ right_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., ke
 }
 
 #' @export
-#' @rdname left_join.
-inner_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  UseMethod("inner_join.")
-}
+#' @keywords internal
+#' @rdname left_join
+right_join. <- right_join
 
 #' @export
-inner_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
+#' @rdname left_join
+inner_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
   c(x, y, x_names, y_names, by, on, selection) %<-%
     join_prep(x, y, by, keep, suffix, "inner")
 
@@ -84,67 +79,67 @@ inner_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., ke
 }
 
 #' @export
-#' @rdname left_join.
-full_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  UseMethod("full_join.")
-}
+#' @keywords internal
+#' @rdname left_join
+inner_join. <- inner_join
 
 #' @export
-full_join..default <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-    if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
-    if (!is_tidytable(x)) x <- as_tidytable(x)
-    if (!is_tidytable(y)) y <- as_tidytable(y)
+#' @rdname left_join
+full_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
+  if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
+  if (!is_tidytable(x)) x <- as_tidytable(x)
+  if (!is_tidytable(y)) y <- as_tidytable(y)
 
-    if (!keep) {
-      result_df <- join_mold(
-        x, y, by = by, suffix = suffix,
-        all_x = TRUE, all_y = TRUE
-      )
+  if (!keep) {
+    result_df <- join_mold(
+      x, y, by = by, suffix = suffix,
+      all_x = TRUE, all_y = TRUE
+    )
 
-      col_order <- suffix_join_names(names(x), names(y), suffix, keep, get_bys(x, y, by), "full")
+    col_order <- suffix_join_names(names(x), names(y), suffix, keep, get_bys(x, y, by), "full")
 
-      result_df <- df_col_order(result_df, col_order)
-    } else {
-      bys <- get_bys(x, y, by)
-      by_x <- bys$x
-      by_y <- bys$y
+    result_df <- df_col_order(result_df, col_order)
+  } else {
+    bys <- get_bys(x, y, by)
+    by_x <- bys$x
+    by_y <- bys$y
 
-      unique_keys_df <- select.(x, any_of(by_x)) %>%
-        set_names(by_y) %>%
-        bind_rows.(
-          select.(y, any_of(by_y))
-        ) %>%
-        distinct.()
+    unique_keys_df <- select(x, any_of(by_x)) %>%
+      set_names(by_y) %>%
+      bind_rows(
+        select(y, any_of(by_y))
+      ) %>%
+      distinct()
 
-      step_df <- right_join.(y, unique_keys_df, keep = TRUE, suffix = c("__temp__", ""))
+    step_df <- right_join(y, unique_keys_df, keep = TRUE, suffix = c("__temp__", ""))
 
-      drop_cols <- by_y[by_x != by_y]
-      if (length(by_y[by_x == by_y]) > 0) {
-        drop_cols <- c(drop_cols, paste0(by_y[by_x == by_y], suffix[[2]]))
-      }
-
-      result_df <- right_join.(x, step_df, by = by, suffix = suffix, keep = TRUE)
-      result_df <- dt_j(result_df, (drop_cols) := NULL)
-      result_df <- rename_with.(result_df, ~ temp_names_fix(.x, by_x, suffix[[2]]), ends_with("__temp__"))
+    drop_cols <- by_y[by_x != by_y]
+    if (length(by_y[by_x == by_y]) > 0) {
+      drop_cols <- c(drop_cols, paste0(by_y[by_x == by_y], suffix[[2]]))
     }
 
-    tidytable_restore(result_df, x)
+    result_df <- right_join(x, step_df, by = by, suffix = suffix, keep = TRUE)
+    result_df <- dt_j(result_df, (drop_cols) := NULL)
+    result_df <- rename_with(result_df, ~ temp_names_fix(.x, by_x, suffix[[2]]), ends_with("__temp__"))
+  }
+
+  tidytable_restore(result_df, x)
 }
+
+#' @export
+#' @keywords internal
+#' @rdname left_join
+full_join. <- full_join
 
 temp_names_fix <- function(names, by_x, y_suffix) {
-  new_names <- str_replace.(names, "__temp__", "")
+  new_names <- str_replace(names, "__temp__", "")
 
-  map_chr.(new_names, function(.x) if (.x %in% by_x) paste0(.x, y_suffix) else .x)
+  map_chr(new_names, function(.x) if (.x %in% by_x) paste0(.x, y_suffix) else .x)
 }
 
 #' @export
-#' @rdname left_join.
-anti_join. <- function(x, y, by = NULL) {
-  UseMethod("anti_join.")
-}
-
-#' @export
-anti_join..default <- function(x, y, by = NULL) {
+#' @rdname left_join
+anti_join <- function(x, y, by = NULL) {
   c(x, y, x_names, y_names, by, on, selection) %<-%
     join_prep(x, y, by, keep = FALSE, suffix = NULL, "anti")
 
@@ -154,13 +149,13 @@ anti_join..default <- function(x, y, by = NULL) {
 }
 
 #' @export
-#' @rdname left_join.
-semi_join. <- function(x, y, by = NULL) {
-  UseMethod("semi_join.")
-}
+#' @keywords internal
+#' @rdname left_join
+anti_join. <- anti_join
 
 #' @export
-semi_join..default <- function(x, y, by = NULL) {
+#' @rdname left_join
+semi_join <- function(x, y, by = NULL) {
   c(x, y, x_names, y_names, by, on, selection) %<-%
     join_prep(x, y, by, keep = FALSE, suffix = NULL, "semi")
 
@@ -168,6 +163,11 @@ semi_join..default <- function(x, y, by = NULL) {
 
   tidytable_restore(result_df, x)
 }
+
+#' @export
+#' @keywords internal
+#' @rdname left_join
+semi_join. <- semi_join
 
 get_bys <- function(x, y, by = NULL) {
   names_x <- names(x)

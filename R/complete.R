@@ -14,40 +14,53 @@
 #' df <- data.table(x = 1:2, y = 1:2, z = 3:4)
 #'
 #' df %>%
-#'   complete.(x, y)
+#'   complete(x, y)
 #'
 #' df %>%
-#'   complete.(x, y, fill = list(z = 10))
-complete. <- function(.df, ..., fill = list(), .by = NULL) {
-  UseMethod("complete.")
+#'   complete(x, y, fill = list(z = 10))
+complete <- function(.df, ..., fill = list(), .by = NULL) {
+  UseMethod("complete")
 }
 
 #' @export
-complete..tidytable <- function(.df, ..., fill = list(), .by = NULL) {
+complete.tidytable <- function(.df, ..., fill = list(), .by = NULL) {
   dots <- enquos(...)
-  dots <- dots[!map_lgl.(dots, quo_is_null)]
+  dots <- dots[!map_lgl(dots, quo_is_null)]
   if (length(dots) == 0) return(.df)
 
-  full_df <- expand.(.df, !!!dots, .by = {{ .by }})
+  full_df <- expand(.df, !!!dots, .by = {{ .by }})
 
   if (is_empty(full_df)) return(.df)
 
-  full_df <- full_join.(full_df, .df, by = names(full_df))
-  full_df <- replace_na.(full_df, replace = fill)
+  full_df <- full_join(full_df, .df, by = names(full_df))
+  full_df <- replace_na(full_df, replace = fill)
 
   full_df
 }
 
 #' @export
-complete..grouped_tt <- function(.df, ..., fill = list(), .by = NULL) {
+complete.grouped_tt <- function(.df, ..., fill = list(), .by = NULL) {
   .by <- grouped_dot_by(.df, {{ .by }})
-  out <- ungroup.(.df)
-  out <- complete.(.df, ..., fill = fill, .by = all_of(.by))
-  group_by.(out, all_of(.by))
+  out <- ungroup(.df)
+  out <- complete(.df, ..., fill = fill, .by = all_of(.by))
+  group_by(out, all_of(.by))
 }
 
 #' @export
-complete..data.frame <- function(.df, ..., fill = list(), .by = NULL) {
+complete.data.frame <- function(.df, ..., fill = list(), .by = NULL) {
   .df <- as_tidytable(.df)
-  complete.(.df, ..., fill = fill, .by = {{ .by }})
+  complete(.df, ..., fill = fill, .by = {{ .by }})
+}
+
+#' @export complete.
+#' @keywords internal
+#' @usage complete(.df, ..., fill = list(), .by = NULL)
+#' @inherit complete title description params examples
+complete. <- function(.df, ..., fill = list(), .by = NULL) {
+  UseMethod("complete.")
+}
+
+#' @exportS3Method complete. data.frame
+complete..data.frame <- function(.df, ..., fill = list(), .by = NULL) {
+  complete(.df, ..., fill = fill, .by = {{ .by }})
 }

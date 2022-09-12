@@ -4,7 +4,7 @@
 \alias{replace_na.}
 \title{Replace missing values}
 \usage{
-replace_na.(.x, replace = NA)
+replace_na(.x, replace)
 }
 \arguments{
 \item{.x}{A data.frame/data.table or a vector}
@@ -21,11 +21,12 @@ df <- data.table(
   y = c(NA, 1, 2)
 )
 
-# Using replace_na.() inside mutate.()
+# Using replace_na() inside mutate()
 df \%>\%
-  mutate.(x = replace_na.(x, 5))
+  mutate(x = replace_na(x, 5))
 
-# Using replace_na.() on a data frame
+# Using replace_na() on a data frame
 df \%>\%
-  replace_na.(list(x = 5, y = 0))
+  replace_na(list(x = 5, y = 0))
 }
+\keyword{internal}

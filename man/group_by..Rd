@@ -2,12 +2,9 @@
 % Please edit documentation in R/group_by.R
 \name{group_by.}
 \alias{group_by.}
-\alias{ungroup.}
 \title{Grouping}
 \usage{
-group_by.(.df, ...)
-
-ungroup.(.df)
+group_by(.df, ...)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -16,8 +13,8 @@ ungroup.(.df)
 }
 \description{
 \itemize{
-\item \code{group_by.()} adds a grouping structure to a tidytable. Can use tidyselect syntax.
-\item \code{ungroup.()} removes grouping.
+\item \code{group_by()} adds a grouping structure to a tidytable. Can use tidyselect syntax.
+\item \code{ungroup()} removes grouping.
 }
 }
 \examples{
@@ -29,13 +26,14 @@ df <- data.table(
 )
 
 df \%>\%
-  group_by.(c, d) \%>\%
+  group_by(c, d) \%>\%
   summarize.(mean_a = mean(a)) \%>\%
-  ungroup.()
+  ungroup()
 
 # Can also use tidyselect
 df \%>\%
-  group_by.(where(is.character)) \%>\%
+  group_by(where(is.character)) \%>\%
   summarize.(mean_a = mean(a)) \%>\%
-  ungroup.()
+  ungroup()
 }
+\keyword{internal}

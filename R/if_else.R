@@ -15,14 +15,14 @@
 #'
 #' @examples
 #' x <- 1:5
-#' if_else.(x < 3, 1, 0)
+#' if_else(x < 3, 1, 0)
 #'
-#' # Can also be used inside of mutate.()
+#' # Can also be used inside of mutate()
 #' df <- data.table(x = x)
 #'
 #' df %>%
-#'   mutate.(new_col = if_else.(x < 3, 1, 0))
-if_else. <- function(condition, true, false, missing = NA, ..., ptype = NULL, size = NULL) {
+#'   mutate(new_col = if_else(x < 3, 1, 0))
+if_else <- function(condition, true, false, missing = NA, ..., ptype = NULL, size = NULL) {
   check_dots_empty0(...)
 
   args <- vec_cast_common(true = true, false = false, missing = missing, .to = ptype)
@@ -35,6 +35,11 @@ if_else. <- function(condition, true, false, missing = NA, ..., ptype = NULL, si
 
   out
 }
+
+#' @export
+#' @keywords internal
+#' @rdname if_else
+if_else. <- if_else
 
 #' Fast ifelse
 #'
@@ -50,13 +55,18 @@ if_else. <- function(condition, true, false, missing = NA, ..., ptype = NULL, si
 #'
 #' @examples
 #' x <- 1:5
-#' ifelse.(x < 3, 1, 0)
+#' ifelse(x < 3, 1, 0)
 #'
-#' # Can also be used inside of mutate.()
+#' # Can also be used inside of mutate()
 #' df <- data.table(x = x)
 #'
 #' df %>%
-#'   mutate.(new_col = ifelse.(x < 3, 1, 0))
-ifelse. <- function(conditions, true, false, na = NA) {
-  if_else.(conditions, true, false, na)
+#'   mutate(new_col = ifelse(x < 3, 1, 0))
+ifelse <- function(conditions, true, false, na = NA) {
+  if_else(conditions, true, false, na)
 }
+
+#' @export
+#' @keywords internal
+#' @rdname ifelse
+ifelse. <- ifelse

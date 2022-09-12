@@ -4,7 +4,7 @@
 \alias{relocate.}
 \title{Relocate a column to a new position}
 \usage{
-relocate.(.df, ..., .before = NULL, .after = NULL)
+relocate(.df, ..., .before = NULL, .after = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -27,11 +27,12 @@ df <- data.table(
 )
 
 df \%>\%
-  relocate.(c, .before = b)
+  relocate(c, .before = b)
 
 df \%>\%
-  relocate.(a, b, .after = c)
+  relocate(a, b, .after = c)
 
 df \%>\%
-  relocate.(where(is.numeric), .after = c)
+  relocate(where(is.numeric), .after = c)
 }
+\keyword{internal}

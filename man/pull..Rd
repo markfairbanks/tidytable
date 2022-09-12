@@ -4,7 +4,7 @@
 \alias{pull.}
 \title{Pull out a single variable}
 \usage{
-pull.(.df, var = -1, name = NULL)
+pull(.df, var = -1, name = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -29,13 +29,14 @@ df <- data.table(
 
 # Grab column by name
 df \%>\%
-  pull.(y)
+  pull(y)
 
 # Grab column by position
 df \%>\%
-  pull.(1)
+  pull(1)
 
 # Defaults to last column
 df \%>\%
-  pull.()
+  pull()
 }
+\keyword{internal}

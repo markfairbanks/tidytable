@@ -2,30 +2,42 @@
 % Please edit documentation in R/cur-context.R
 \name{context}
 \alias{context}
+\alias{cur_column}
 \alias{cur_column.}
+\alias{cur_data}
 \alias{cur_data.}
+\alias{cur_group_id}
 \alias{cur_group_id.}
+\alias{cur_group_rows}
 \alias{cur_group_rows.}
 \title{Context functions}
 \usage{
+cur_column()
+
 cur_column.()
+
+cur_data()
 
 cur_data.()
 
+cur_group_id()
+
 cur_group_id.()
+
+cur_group_rows()
 
 cur_group_rows.()
 }
 \description{
 These functions give information about the "current" group.
 \itemize{
-\item \code{cur_data.()} gives the current data for the current group
-\item \code{cur_column.()} gives the name of the current column (for use in \code{across.()} only)
-\item \code{cur_group_id.()} gives a group identification number
-\item \code{cur_group_rows.()} gives the row indices for each group
+\item \code{cur_data()} gives the current data for the current group
+\item \code{cur_column()} gives the name of the current column (for use in \code{across()} only)
+\item \code{cur_group_id()} gives a group identification number
+\item \code{cur_group_rows()} gives the row indices for each group
 }
 
-Can be used inside \code{summarize.()}, \code{mutate.()}, & \code{filter.()}
+Can be used inside \code{summarize()}, \code{mutate()}, & \code{filter()}
 }
 \examples{
 df <- data.table(
@@ -34,19 +46,20 @@ df <- data.table(
 )
 
 df \%>\%
-  mutate.(
-    across.(c(x, y), ~ paste(cur_column.(), .x))
+  mutate(
+    across(c(x, y), ~ paste(cur_column(), .x))
   )
 
 df \%>\%
-  summarize.(data = list(cur_data.()),
-             .by = y)
+  summarize(data = list(cur_data()),
+            .by = y)
 
 df \%>\%
-  mutate.(group_id = cur_group_id.(),
-          .by = y)
+  mutate(group_id = cur_group_id(),
+         .by = y)
 
 df \%>\%
-  mutate.(group_rows = cur_group_rows.(),
-          .by = y)
+  mutate(group_rows = cur_group_rows(),
+         .by = y)
 }
+\keyword{internal}

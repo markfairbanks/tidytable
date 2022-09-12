@@ -3,7 +3,7 @@
 #' @description
 #' Helper function that can be used to find counts by group.
 #'
-#' Can be used inside `summarize.()`, `mutate.()`, & `filter.()`
+#' Can be used inside `summarize()`, `mutate()`, & `filter()`
 #'
 #' @export
 #'
@@ -15,11 +15,12 @@
 #'  )
 #'
 #' df %>%
-#'   summarize.(count = n.(), .by = z)
-#'
-#' # The dplyr version `n()` also works
-#' df %>%
-#'   summarize.(count = n(), .by = z)
-n. <- function() {
-  abort("n.() should only be used inside tidytable verbs")
+#'   summarize(count = n(), .by = z)
+n <- function() {
+  abort("n() should only be used inside tidytable verbs")
 }
+
+#' @export
+#' @keywords internal
+#' @rdname n
+n. <- n

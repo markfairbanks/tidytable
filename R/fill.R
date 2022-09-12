@@ -22,36 +22,58 @@
 #' )
 #'
 #' df %>%
-#'   fill.(a, b)
+#'   fill(a, b)
 #'
 #' df %>%
-#'   fill.(a, b, .by = groups)
+#'   fill(a, b, .by = groups)
 #'
 #' df %>%
-#'   fill.(a, b, .direction = "downup", .by = groups)
-fill. <- function(.df, ...,
+#'   fill(a, b, .direction = "downup", .by = groups)
+fill <- function(.df, ...,
                   .direction = c("down", "up", "downup", "updown"),
                   .by = NULL) {
-  UseMethod("fill.")
+  UseMethod("fill")
 }
 
 #' @export
-fill..tidytable <- function(.df, ...,
+fill.tidytable <- function(.df, ...,
                             .direction = c("down", "up", "downup", "updown"),
                             .by = NULL) {
   .direction <- arg_match(.direction)
 
   dots <- enquos(...)
 
-  mutate.(.df, across.(c(!!!dots), fill_na, .direction), .by = {{ .by }})
+  mutate(.df, across(c(!!!dots), fill_na, .direction), .by = {{ .by }})
 }
 
 #' @export
+fill.data.frame <- function(.df, ...,
+                            .direction = c("down", "up", "downup", "updown"),
+                            .by = NULL) {
+  .df <- as_tidytable(.df)
+  fill(.df, ..., .direction = .direction, .by = {{ .by }})
+}
+
+#' @export fill.
+#' @keywords internal
+#' @usage
+#' fill(
+#'   .df, ...,
+#'   .direction = c("down", "up", "downup", "updown"),
+#'   .by = NULL
+#' )
+#' @inherit fill title description params examples
+fill. <- function(.df, ...,
+                  .direction = c("down", "up", "downup", "updown"),
+                  .by = NULL) {
+  UseMethod("fill.")
+}
+
+#' @exportS3Method fill. data.frame
 fill..data.frame <- function(.df, ...,
                              .direction = c("down", "up", "downup", "updown"),
                              .by = NULL) {
-  .df <- as_tidytable(.df)
-  fill.(.df, ..., .direction = .direction, .by = {{ .by }})
+  fill(.df, ..., .direction = .direction, .by = {{ .by }})
 }
 
 fill_na <- function(x, direction) {

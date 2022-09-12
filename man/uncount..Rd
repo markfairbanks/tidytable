@@ -4,7 +4,7 @@
 \alias{uncount.}
 \title{Uncount a data.table}
 \usage{
-uncount.(.df, weights, .remove = TRUE, .id = NULL)
+uncount(.df, weights, .remove = TRUE, .id = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -21,7 +21,8 @@ Uncount a data.table
 \examples{
 df <- data.table(x = c("a", "b"), n = c(1, 2))
 
-uncount.(df, n)
+uncount(df, n)
 
-uncount.(df, n, .id = "id")
+uncount(df, n, .id = "id")
 }
+\keyword{internal}

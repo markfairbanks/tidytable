@@ -4,7 +4,7 @@
 \alias{unnest.}
 \title{Unnest list-columns}
 \usage{
-unnest.(
+unnest(
   .df,
   ...,
   keep_empty = FALSE,
@@ -16,7 +16,7 @@ unnest.(
 \arguments{
 \item{.df}{A data.table}
 
-\item{...}{Columns to unnest. If empty, unnests all list columns. \code{tidyselect} compatible.}
+\item{...}{Columns to unnest If empty, unnests all list columns. \code{tidyselect} compatible.}
 
 \item{keep_empty}{Return \code{NA} for any \code{NULL} elements of the list column}
 
@@ -33,22 +33,22 @@ with \code{names_sep} used as a separator.}
 Unnest list-columns.
 }
 \examples{
+df1 <- tidytable(x = 1:3, y = 1:3)
+df2 <- tidytable(x = 1:2, y = 1:2)
 nested_df <-
   data.table(
-    a = 1:10,
-    b = 11:20,
-    c = c(rep("a", 6), rep("b", 4)),
-    d = c(rep("a", 4), rep("b", 6))
-  ) \%>\%
-  nest_by.(c, d) \%>\%
-  mutate.(pulled_vec = map.(data, ~ pull.(.x, a)))
+    a = c("a", "b"),
+    frame_list = list(df1, df2),
+    vec_list = list(4:6, 7:8)
+  )
 
 nested_df \%>\%
-  unnest.(data)
+  unnest(frame_list)
 
 nested_df \%>\%
-  unnest.(data, names_sep = "_")
+  unnest(frame_list, names_sep = "_")
 
 nested_df \%>\%
-  unnest.(data, pulled_vec)
+  unnest(frame_list, vec_list)
 }
+\keyword{internal}

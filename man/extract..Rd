@@ -4,15 +4,7 @@
 \alias{extract.}
 \title{Extract a character column into multiple columns using regex}
 \usage{
-extract.(
-  .df,
-  col,
-  into,
-  regex = "([[:alnum:]]+)",
-  remove = TRUE,
-  convert = FALSE,
-  ...
-)
+extract(.df, col, into, regex = "([[:alnum:]]+)", remove = TRUE, convert = FALSE, ...)
 }
 \arguments{
 \item{.df}{A data.table or data.frame}
@@ -40,13 +32,14 @@ from the resulting \code{tidytable}
 }
 \examples{
 df <- data.table(x = c(NA, "a-b-1", "a-d-3", "b-c-2", "d-e-7"))
-df \%>\% extract.(x, "A")
-df \%>\% extract.(x, c("A", "B"), "([[:alnum:]]+)-([[:alnum:]]+)")
+df \%>\% extract(x, "A")
+df \%>\% extract(x, c("A", "B"), "([[:alnum:]]+)-([[:alnum:]]+)")
 
 # If no match, NA:
-df \%>\% extract.(x, c("A", "B"), "([a-d]+)-([a-d]+)")
+df \%>\% extract(x, c("A", "B"), "([a-d]+)-([a-d]+)")
 # drop columns by passing NA
-df \%>\% extract.(x, c("A", NA, "B"), "([a-d]+)-([a-d]+)-(\\\\d+)")
+df \%>\% extract(x, c("A", NA, "B"), "([a-d]+)-([a-d]+)-(\\\\d+)")
 # merge groups by passing same name
-df \%>\% extract.(x, c("A", "B", "A"), "([a-d]+)-([a-d]+)-(\\\\d+)")
+df \%>\% extract(x, c("A", "B", "A"), "([a-d]+)-([a-d]+)-(\\\\d+)")
 }
+\keyword{internal}

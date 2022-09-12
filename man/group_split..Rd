@@ -4,7 +4,7 @@
 \alias{group_split.}
 \title{Split data frame by groups}
 \usage{
-group_split.(.df, ..., .keep = TRUE, .named = FALSE)
+group_split(.df, ..., .keep = TRUE, .named = FALSE)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -27,11 +27,12 @@ df <- tidytable(
 )
 
 df \%>\%
-  group_split.(c, d)
+  group_split(c, d)
 
 df \%>\%
-  group_split.(c, d, .keep = FALSE)
+  group_split(c, d, .keep = FALSE)
 
 df \%>\%
-  group_split.(c, d, .named = TRUE)
+  group_split(c, d, .named = TRUE)
 }
+\keyword{internal}

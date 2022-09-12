@@ -1,7 +1,7 @@
-test_that("empty count.() returns number of rows", {
+test_that("empty count() returns number of rows", {
   df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
   out <- df %>%
-    count.()
+    count()
 
   expect_named(out, c("n"))
   expect_equal(out$n, nrow(df))
@@ -10,16 +10,16 @@ test_that("empty count.() returns number of rows", {
 test_that("works on data.frame", {
   df <- data.frame(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
   out <- df %>%
-    count.()
+    count()
 
   expect_named(out, c("n"))
   expect_equal(out$n, nrow(df))
 })
 
-test_that("count.(group) returns group results", {
+test_that("count(group) returns group results", {
   df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
   out <- df %>%
-    count.(d)
+    count(d)
 
   expect_named(out, c("d", "n"))
   expect_equal(out$d, c("a", "b"))
@@ -29,7 +29,7 @@ test_that("count.(group) returns group results", {
 test_that("works with tidyselect", {
   df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
   out <- df %>%
-    count.(where(is.character))
+    count(where(is.character))
 
   expect_named(out, c("c", "d", "n"))
   expect_equal(out$c, c("a", "a"))
@@ -40,7 +40,7 @@ test_that("works with tidyselect", {
 test_that("can specify the name", {
   df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
   out <- df %>%
-    count.(name = "N")
+    count(name = "N")
 
   expect_named(out, c("N"))
 })
@@ -49,7 +49,7 @@ test_that("can make a function with quosures", {
   df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
 
   count_fn <- function(.df, col) {
-    count.(.df, {{ col }})
+    count(.df, {{ col }})
   }
 
   out <- df %>%
@@ -63,11 +63,20 @@ test_that("can make a function with quosures", {
 test_that("works on grouped_tt", {
   df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
   out <- df %>%
-    group_by.(c, d) %>%
-    count.()
+    group_by(c, d) %>%
+    count()
 
   expect_named(out, c("c", "d", "n"))
   expect_equal(out$d, c("a", "b"))
   expect_equal(out$n, c(2, 1))
-  expect_equal(group_vars.(out), c("c", "d"))
+  expect_equal(group_vars(out), c("c", "d"))
+})
+
+test_that("count. works", {
+  df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
+  out <- df %>%
+    count.()
+
+  expect_named(out, c("n"))
+  expect_equal(out$n, nrow(df))
 })

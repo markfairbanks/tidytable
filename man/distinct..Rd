@@ -4,7 +4,7 @@
 \alias{distinct.}
 \title{Select distinct/unique rows}
 \usage{
-distinct.(.df, ..., .keep_all = FALSE)
+distinct(.df, ..., .keep_all = FALSE)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -27,8 +27,9 @@ df <- tidytable(
 )
 
 df \%>\%
-  distinct.()
+  distinct()
 
 df \%>\%
-  distinct.(z)
+  distinct(z)
 }
+\keyword{internal}

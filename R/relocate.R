@@ -19,19 +19,19 @@
 #' )
 #'
 #' df %>%
-#'   relocate.(c, .before = b)
+#'   relocate(c, .before = b)
 #'
 #' df %>%
-#'   relocate.(a, b, .after = c)
+#'   relocate(a, b, .after = c)
 #'
 #' df %>%
-#'   relocate.(where(is.numeric), .after = c)
-relocate. <- function(.df, ..., .before = NULL, .after = NULL) {
-  UseMethod("relocate.")
+#'   relocate(where(is.numeric), .after = c)
+relocate <- function(.df, ..., .before = NULL, .after = NULL) {
+  UseMethod("relocate")
 }
 
 #' @export
-relocate..tidytable <- function(.df, ..., .before = NULL, .after = NULL) {
+relocate.tidytable <- function(.df, ..., .before = NULL, .after = NULL) {
   .before <- enquo(.before)
   .after <- enquo(.after)
 
@@ -71,8 +71,22 @@ relocate..tidytable <- function(.df, ..., .before = NULL, .after = NULL) {
 }
 
 #' @export
-relocate..data.frame <- function(.df, ..., .before = NULL, .after = NULL) {
+relocate.data.frame <- function(.df, ..., .before = NULL, .after = NULL) {
   .df <- as_tidytable(.df)
-  relocate.(.df, ..., .before = {{ .before }}, .after = {{ .after }})
+  relocate(.df, ..., .before = {{ .before }}, .after = {{ .after }})
+}
+
+#' @export relocate.
+#' @keywords internal
+#' @usage
+#' relocate(.df, ..., .before = NULL, .after = NULL)
+#' @inherit relocate title description params examples
+relocate. <- function(.df, ..., .before = NULL, .after = NULL) {
+  UseMethod("relocate.")
+}
+
+#' @exportS3Method relocate. data.frame
+relocate..data.frame <- function(.df, ..., .before = NULL, .after = NULL) {
+  relocate(.df, ..., .before = {{ .before }}, .after = {{ .after }})
 }
 

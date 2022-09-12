@@ -1,7 +1,7 @@
 #' Add new variables and drop all others
 #'
 #' @description
-#' Unlike `mutate.()`, `transmute.()` keeps only the variables that you create
+#' Unlike `mutate()`, `transmute()` keeps only the variables that you create
 #'
 #' @param .df A data.frame or data.table
 #' @param ... Columns to create/modify
@@ -17,18 +17,32 @@
 #' )
 #'
 #' df %>%
-#'   transmute.(double_a = a * 2)
+#'   transmute(double_a = a * 2)
+transmute <- function(.df, ..., .by = NULL) {
+  UseMethod("transmute")
+}
+
+#' @export
+transmute.tidytable <- function(.df, ..., .by = NULL) {
+  mutate(.df, ..., .by = {{ .by }}, .keep = "none")
+}
+
+#' @export
+transmute.data.frame <- function(.df, ..., .by = NULL) {
+  .df <- as_tidytable(.df)
+  transmute(.df, ..., .by = {{ .by }})
+}
+
+#' @export transmute.
+#' @keywords internal
+#' @usage
+#' transmute(.df, ..., .by = NULL)
+#' @inherit transmute title description params examples
 transmute. <- function(.df, ..., .by = NULL) {
   UseMethod("transmute.")
 }
 
-#' @export
-transmute..tidytable <- function(.df, ..., .by = NULL) {
-  mutate.(.df, ..., .by = {{ .by }}, .keep = "none")
-}
-
-#' @export
+#' @exportS3Method transmute. data.frame
 transmute..data.frame <- function(.df, ..., .by = NULL) {
-  .df <- as_tidytable(.df)
-  transmute.(.df, ..., .by = {{ .by }})
+  transmute(.df, ..., .by = {{ .by }})
 }

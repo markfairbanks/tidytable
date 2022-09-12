@@ -4,7 +4,7 @@
 \alias{top_n.}
 \title{Select top (or bottom) n rows (by value)}
 \usage{
-top_n.(.df, n = 5, wt = NULL, .by = NULL)
+top_n(.df, n = 5, wt = NULL, .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -26,8 +26,9 @@ df <- data.table(
 )
 
 df \%>\%
-  top_n.(2, wt = y)
+  top_n(2, wt = y)
 
 df \%>\%
-  top_n.(2, wt = y, .by = z)
+  top_n(2, wt = y, .by = z)
 }
+\keyword{internal}

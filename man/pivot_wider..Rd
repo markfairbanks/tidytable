@@ -4,7 +4,7 @@
 \alias{pivot_wider.}
 \title{Pivot data from long to wide}
 \usage{
-pivot_wider.(
+pivot_wider(
   .df,
   names_from = name,
   values_from = value,
@@ -61,10 +61,11 @@ df <- data.table(
 )
 
 df \%>\%
-  pivot_wider.(names_from = b, values_from = vals)
+  pivot_wider(names_from = b, values_from = vals)
 
 df \%>\%
-  pivot_wider.(
+  pivot_wider(
     names_from = b, values_from = vals, names_prefix = "new_"
   )
 }
+\keyword{internal}
