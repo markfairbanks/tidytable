@@ -5,21 +5,19 @@
   The `verb.()` versions are still exported as well.
   * The `verb.()` syntax will remain in the package.
   * This will also allow users to use both `tidytable` and `dplyr` by simply loading
-    `dplyr` _after_ `tidytable`, as the `verb.()` functions won't be overwritten by `dplyr.
+    `dplyr` _after_ `tidytable`, as the `verb.()` functions won't be overwritten by `dplyr`.
 
 #### New functions
 * `dplyr`-style interface to grouping
   * `group_by()`/`ungroup()`
   * `group_vars()`
   * `is_grouped_df()`
-  
-#### Functionality improvements
-* `summarize()` auto-splices data frame inputs (#576)
 
 #### Bug fixes
 * `tidytable::'%in%'` dispatches to `base::'%in%'` when comparing with a list (#563)
 * `pivot_wider.()`: Works with column names with spaces (#569)
-* `pivot_wider.()`: `names_glue="{.value}_{somecolumn}"` assigns column names in correct order (@Darxor, #579)
+* `pivot_wider.()`: `names_glue="{.value}_{somecolumn}"` assigns column names in
+  correct order (@Darxor, #579)
 
 # tidytable 0.8.1
 
