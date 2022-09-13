@@ -26,7 +26,8 @@ slice_sample.tidytable <- function(.df, n, prop, weight_by = NULL,
 #' @export
 slice_sample.grouped_tt <- function(.df, n, prop, weight_by = NULL,
                                     replace = FALSE, .by = NULL) {
-  .by <- grouped_dot_by(.df, {{ .by }})
+  check_by({{ .by }})
+  .by <- group_vars(.df)
   out <- ungroup(.by)
   out <- slice_sample(
     .df, n, prop, {{ weight_by }}, replace, .by = all_of(.by)

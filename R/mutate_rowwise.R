@@ -58,6 +58,8 @@ mutate_rowwise.tidytable <- function(.df, ...,
 mutate_rowwise.grouped_tt <- function(.df, ...,
                                       .keep = c("all", "used", "unused", "none"),
                                       .before = NULL, .after = NULL) {
+  warn("Doing a rowwise operation on a grouped tidytable.
+       Note: the output will be ungrouped.")
   out <- ungroup(.df)
   mutate_rowwise(out, ...,
                  .keep = .keep,

@@ -70,12 +70,11 @@ df_name_repair <- function(.df, .name_repair = "unique") {
   .df
 }
 
-grouped_dot_by <- function(.df, .by = NULL) {
+check_by <- function(.by) {
   .by <- enquo(.by)
   if (!quo_is_null(.by)) {
-    tidyselect_names(.df, !!.by)
-  } else {
-    group_vars(.df)
+    msg <- "`.by` cannot be used on a grouped tidytable. Please `ungroup()` your data."
+    stop(msg, call. = FALSE)
   }
 }
 

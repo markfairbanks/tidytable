@@ -56,6 +56,14 @@ nest_by.tidytable <- function(.df, ..., .key = "data", .keep = FALSE) {
 }
 
 #' @export
+nest_by.grouped_tt <- function(.df, ..., .key = "data", .keep = FALSE) {
+  .by <- group_vars(.df)
+  out <- ungroup(.df)
+  out <- nest_by(.df, all_of(.by), .key = .key, .keep = .keep)
+  group_by(out, all_of(.by))
+}
+
+#' @export
 nest_by.data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
   .df <- as_tidytable(.df)
   nest_by(.df, ..., .key = .key, .keep = .keep)

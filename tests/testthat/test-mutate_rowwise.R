@@ -71,7 +71,8 @@ test_that("overrides grouped_tt", {
 
   results_df <- test_df %>%
     group_by(z) %>%
-    mutate_rowwise(row_mean = mean(c(x, y)))
+    mutate_rowwise(row_mean = mean(c(x, y))) %>%
+    suppressWarnings()
 
   expect_equal(results_df$row_mean, 1:3)
 })

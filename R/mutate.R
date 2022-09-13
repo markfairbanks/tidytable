@@ -164,7 +164,8 @@ mutate.tidytable <- function(.df, ..., .by = NULL,
 mutate.grouped_tt <- function(.df, ..., .by = NULL,
                               .keep = c("all", "used", "unused", "none"),
                               .before = NULL, .after = NULL) {
-  .by <- grouped_dot_by(.df, {{ .by }})
+  check_by({{ .by }})
+  .by <- group_vars(.df)
   out <- ungroup(.df)
   out <- mutate(
     out, ..., .by = all_of(.by),
