@@ -79,7 +79,8 @@ summarize.grouped_tt <- function(.df, ...,
                                  .by = NULL,
                                  .sort = TRUE,
                                  .groups = "drop_last") {
-  .by <- grouped_dot_by(.df, {{ .by }})
+  check_by({{ .by }})
+  .by <- group_vars(.df)
   out <- ungroup(.df)
   out <- summarize(out, ..., .by = all_of(.by), .sort = .sort)
 

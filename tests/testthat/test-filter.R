@@ -147,3 +147,26 @@ test_that("can use .data and .env with .by", {
 
   expect_equal(df$x, 3)
 })
+
+test_that("works on a grouped_tt", {
+  df <- data.table(x = c(1, 1, 2, 2), y = c("a", "a", "a", "b"))
+
+  res <- df %>%
+    group_by(y) %>%
+    filter(x == mean(x))
+
+  expect_named(res, c("x", "y"))
+  expect_equal(res$x, 2)
+  expect_equal(res$y, "b")
+  expect_equal(group_vars(res), "y")
+  expect_true(is_grouped_df(res))
+})
+
+test_that("errors when .by is used on a grouped_tt", {
+  df <- data.table(x = c(1, 1, 2, 2), y = c("a", "a", "a", "b")) %>%
+    group_by(y)
+
+  expect_error(
+    filter(df, x <= mean(x), .by = y)
+  )
+})

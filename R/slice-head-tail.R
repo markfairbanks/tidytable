@@ -23,7 +23,8 @@ slice_head.tidytable <- function(.df, n = 5, .by = NULL) {
 
 #' @export
 slice_head.grouped_tt <- function(.df, n = 5, .by = NULL) {
-  .by <- grouped_dot_by(.df, {{ .by }})
+  check_by({{ .by }})
+  .by <- group_vars(.df)
   out <- ungroup(.df)
   out <- slice_head(out, {{ n }}, .by = all_of(.by))
   group_by(out, all_of(.by))
@@ -74,7 +75,8 @@ slice_tail.tidytable <- function(.df, n = 5, .by = NULL) {
 
 #' @export
 slice_tail.grouped_tt <- function(.df, n = 5, .by = NULL) {
-  .by <- grouped_dot_by(.df, {{ .by }})
+  check_by({{ .by }})
+  .by <- group_vars(.df)
   out <- ungroup(.df)
   out <- slice_tail(out, n, .by = all_of(.by))
   group_by(out, all_of(.by))

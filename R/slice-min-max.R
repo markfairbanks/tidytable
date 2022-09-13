@@ -23,7 +23,8 @@ slice_max.tidytable <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by
 
 #' @export
 slice_max.grouped_tt <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
-  .by <- grouped_dot_by(.df, {{ .by }})
+  check_by({{ .by }})
+  .by <- group_vars(.df)
   out <- ungroup(.df)
   out <- slice_max(out, {{ order_by }}, {{ n }}, with_ties = with_ties, .by = all_of(.by))
   group_by(out, all_of(.by))
@@ -74,7 +75,8 @@ slice_min.tidytable <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by
 
 #' @export
 slice_min.grouped_tt <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
-  .by <- grouped_dot_by(.df, {{ .by }})
+  check_by({{ .by }})
+  .by <- group_vars(.df)
   out <- ungroup(.df)
   out <- slice_min(out, {{ order_by }}, n = n, with_ties = with_ties, .by = all_of(.by))
   group_by(out, all_of(.by))
