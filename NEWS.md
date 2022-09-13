@@ -12,6 +12,7 @@
   * `group_by()`/`ungroup()`
   * `group_vars()`
   * `is_grouped_df()`
+* `case_match()`
 
 #### Bug fixes
 * `tidytable::'%in%'` dispatches to `base::'%in%'` when comparing with a list (#563)
