@@ -12,6 +12,9 @@
   * `group_by()`/`ungroup()`
   * `group_vars()`
   * `is_grouped_df()`
+  
+#### Functionality improvements
+* `summarize()` auto-splices data frame inputs (#576)
 
 #### Bug fixes
 * `tidytable::'%in%'` dispatches to `base::'%in%'` when comparing with a list (#563)
