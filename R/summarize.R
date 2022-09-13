@@ -60,7 +60,7 @@ summarize.tidytable <- function(.df, ..., .by = NULL, .sort = TRUE) {
 
     .by <- tidyselect_names(.df, !!.by)
 
-    j <- call2("df_list", !!!dots, .ns = "vctrs")
+    j <- call2(".", !!!dots)
 
     dt_expr <- call2_j(.df, j, .by, .sort)
 
