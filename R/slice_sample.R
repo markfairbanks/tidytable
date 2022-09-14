@@ -28,9 +28,9 @@ slice_sample.grouped_tt <- function(.df, n, prop, weight_by = NULL,
                                     replace = FALSE, .by = NULL) {
   check_by({{ .by }})
   .by <- group_vars(.df)
-  out <- ungroup(.by)
+  out <- ungroup(.df)
   out <- slice_sample(
-    .df, n, prop, {{ weight_by }}, replace, .by = all_of(.by)
+    out, n, prop, {{ weight_by }}, replace, .by = all_of(.by)
   )
   group_by(out, all_of(.by))
 }
