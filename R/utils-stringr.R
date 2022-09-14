@@ -1,5 +1,4 @@
 # These functions are for internal use only
-# Functions must be named verb.() (#91)
 
 str_c <- function(..., sep = "", collapse = NULL) {
   paste(..., sep = sep, collapse = collapse)

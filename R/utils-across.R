@@ -1,7 +1,7 @@
 # Build across calls
 expand_across <- function(.fns, .cols, .names, dots) {
   if (!is_call(.fns, c("list", "list2"))) {
-    call_list <- map.(.cols, ~ fn_to_expr(.fns, .x, !!!dots))
+    call_list <- map(.cols, ~ fn_to_expr(.fns, .x, !!!dots))
 
     .names <- .names %||% "{.col}"
 

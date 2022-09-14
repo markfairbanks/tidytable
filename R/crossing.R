@@ -17,7 +17,7 @@
 #' crossing(stuff = x, y)
 crossing <- function(..., .name_repair = "check_unique") {
   dots <- dots_list(..., .named = TRUE)
-  dots <- map.(dots, sort_unique)
+  dots <- map(dots, sort_unique)
 
   expand_grid(!!!dots, .name_repair = .name_repair)
 }

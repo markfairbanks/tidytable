@@ -63,7 +63,7 @@ map2_chr. <- map2_chr
 #' @rdname map
 map2_dfc <- function(.x, .y, .f, ...) {
   result_list <- map2(.x, .y, .f, ...)
-  bind_cols.(result_list)
+  bind_cols(result_list)
 }
 
 #' @export
@@ -75,7 +75,7 @@ map2_dfc. <- map2_dfc
 #' @rdname map
 map2_dfr <- function(.x, .y, .f, ..., .id = NULL) {
   result_list <- map2(.x, .y, .f, ...)
-  bind_rows.(result_list, .id = .id)
+  bind_rows(result_list, .id = .id)
 }
 
 #' @export

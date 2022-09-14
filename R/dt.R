@@ -67,7 +67,7 @@ dt.tidytable <- function(.df, ...) {
         .df <- fast_copy(.df, col_name)
       } else {
         # .df[, let(x = 1, double_y = y * 2)]
-        use_walrus <- map_lgl.(mut_exprs, is_call, ":=")
+        use_walrus <- map_lgl(mut_exprs, is_call, ":=")
         if (any(use_walrus)) {
           # .df %>% dt(, let(!!col := !!col * 2))
           j <- prep_j_expr(mut_exprs, use_walrus, ":=")
@@ -78,7 +78,7 @@ dt.tidytable <- function(.df, ...) {
       }
     } else if (is_call(j, c(".", "list"))) {
       summarize_exprs <- as.list(j[-1])
-      use_walrus <- map_lgl.(summarize_exprs, is_call, ":=")
+      use_walrus <- map_lgl(summarize_exprs, is_call, ":=")
       if (any(use_walrus)) {
         # .df %>% dt(, .(!!col := mean(!!col)))
         j <- prep_j_expr(summarize_exprs, use_walrus, ".")
@@ -99,9 +99,9 @@ dt.tidytable <- function(.df, ...) {
 
 prep_j_expr <- function(j_exprs, use_walrus, j_call) {
   walrus_exprs <- j_exprs[use_walrus]
-  walrus_exprs <- map.(walrus_exprs, ~ as.list(.x[-1]))
-  walrus_names <- map_chr.(walrus_exprs, ~ as.character(.x[[1]]))
-  walrus_exprs <- map.(walrus_exprs, ~ .x[[2]])
+  walrus_exprs <- map(walrus_exprs, ~ as.list(.x[-1]))
+  walrus_names <- map_chr(walrus_exprs, ~ as.character(.x[[1]]))
+  walrus_exprs <- map(walrus_exprs, ~ .x[[2]])
   j_exprs[use_walrus] <- walrus_exprs
   names(j_exprs)[use_walrus] <- walrus_names
 

@@ -84,8 +84,8 @@ get_dt_env <- function(x, ...) {
   if (length(x) == 0) {
     dt_env <- .default
   } else if (is_quosures(x)) {
-    envs <- map.(x, get_env)
-    non_empty <- map_lgl.(envs, ~ !identical(.x, empty_env()))
+    envs <- map(x, get_env)
+    non_empty <- map_lgl(envs, ~ !identical(.x, empty_env()))
     if (any(non_empty)) {
       dt_env <- envs[non_empty][[1]]
     } else {
@@ -165,15 +165,15 @@ change_types <- function(.df, .to, .list, .ptypes_transform) {
   vars <- intersect(.to, names(.list))
   if (length(vars) > 0) {
     if (.ptypes_transform == "ptypes") {
-      calls <- map2.(syms(vars), .list, ~ call2("vec_cast", .x, .y))
+      calls <- map2(syms(vars), .list, ~ call2("vec_cast", .x, .y))
     } else if (.ptypes_transform == "transform") {
-      .list <- map.(.list, as_function)
-      calls <- map2.(.list, syms(vars), call2)
+      .list <- map(.list, as_function)
+      calls <- map2(.list, syms(vars), call2)
     } else {
       abort("Please specify ptypes or transform")
     }
     names(calls) <- vars
-    .df <- mutate.(.df, !!!calls)
+    .df <- mutate(.df, !!!calls)
   }
   .df
 }

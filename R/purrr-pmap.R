@@ -95,7 +95,7 @@ pmap_df <- pmap_dfr
 pmap_df. <- pmap_df
 
 .args_recycle <- function(args) {
-  lengths <- map_int.(args, length)
+  lengths <- map_int(args, length)
   n <- max(lengths)
 
   stopifnot(all(lengths == 1L | lengths == n))

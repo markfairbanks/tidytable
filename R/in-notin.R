@@ -14,10 +14,10 @@
 #' df <- tidytable(x = 1:4, y = 1:4)
 #'
 #' df %>%
-#'   filter.(x %in% c(2, 4))
+#'   filter(x %in% c(2, 4))
 #'
 #' df %>%
-#'   filter.(x %notin% c(2, 4))
+#'   filter(x %notin% c(2, 4))
 #' @rdname in-notin
 '%in%' <- function(x, y) {
   if (is.character(x) && is.character(y)) {
