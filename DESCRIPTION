@@ -7,6 +7,7 @@ Authors@R: c(
   person("Matt", "Carlson", role = "ctb"),
   person("Ivan", "Leung", role = "ctb"),
   person("Ross", "Kennedy", role = "ctb"),
+  person("Robert", "On", role = "ctb"),
   person("Alexander", "Sevostianov", role = "ctb")
   )
 Description: A tidy interface to 'data.table' that is 'rlang' compatible,
