@@ -19,13 +19,13 @@
 #'
 #' df %>%
 #'   group_by(c, d) %>%
-#'   summarize.(mean_a = mean(a)) %>%
+#'   summarize(mean_a = mean(a)) %>%
 #'   ungroup()
 #'
 #' # Can also use tidyselect
 #' df %>%
 #'   group_by(where(is.character)) %>%
-#'   summarize.(mean_a = mean(a)) %>%
+#'   summarize(mean_a = mean(a)) %>%
 #'   ungroup()
 group_by <- function(.df, ...) {
   UseMethod("group_by")

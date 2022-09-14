@@ -15,8 +15,8 @@ tidytable <- function(..., .name_repair = "unique") {
     dots <- list()
   } else {
     dots <- dots_list(...)
-    dots <- map.(dots, eval_tidy)
-    if (any(have_name(dots) & map_lgl.(dots, is.data.frame))) {
+    dots <- map(dots, eval_tidy)
+    if (any(have_name(dots) & map_lgl(dots, is.data.frame))) {
       abort("data frame inputs must be unnamed")
     }
     dots <- df_list(!!!dots, .name_repair = .name_repair)

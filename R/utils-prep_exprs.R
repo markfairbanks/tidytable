@@ -1,7 +1,7 @@
-# "Prepare" quosures/expressions for use in a "[.data.table" call
-# Allows the use of functions like n() and across.()
-# Replaces these functions with the necessary data.table translations
-# Adapted from dt_squash found here: https://github.com/tidyverse/dtplyr/blob/master/R/tidyeval.R
+# "Prepare" quosures/expressions for use in a `[.data.table` call
+#   Allows the use of functions like n() and across()
+#   Replaces these functions with the necessary data.table translations
+#   Adapted from dt_squash found here: https://github.com/tidyverse/dtplyr/blob/master/R/tidyeval.R
 prep_exprs <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env(), is_top_across = TRUE) {
   x <- lapply(x, prep_expr, data, {{ .by }}, j = j, dt_env = dt_env, is_top_across)
   squash(x)
@@ -72,7 +72,7 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env()
     call <- call_match(x, tidytable::if_all)
     if (is.null(call$.fns)) return(TRUE)
     .cols <- get_across_cols(data, call$.cols, {{ .by }}, dt_env)
-    call_list <- map.(.cols, ~ fn_to_expr(call$.fns, .x))
+    call_list <- map(.cols, ~ fn_to_expr(call$.fns, .x))
     reduce_fn <- if (is_call(x, c("if_all.", "if_all"))) "&" else "|"
     filter_expr <- call_reduce(call_list, reduce_fn)
     prep_expr(filter_expr, data, {{ .by }})
