@@ -14,6 +14,9 @@
   * `is_grouped_df()`
 * `case_match()`
 
+#### Functionality improvements
+* `summarize()`: Gains `.unpack` argument
+
 #### Bug fixes
 * `tidytable::'%in%'` dispatches to `base::'%in%'` when comparing with a list (#563)
 * `pivot_wider.()`: Works with column names with spaces (#569)
