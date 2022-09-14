@@ -23,8 +23,8 @@ Built using \verb{data.table::\%chin\%} and \code{vctrs::vec_in} for performance
 df <- tidytable(x = 1:4, y = 1:4)
 
 df \%>\%
-  filter.(x \%in\% c(2, 4))
+  filter(x \%in\% c(2, 4))
 
 df \%>\%
-  filter.(x \%notin\% c(2, 4))
+  filter(x \%notin\% c(2, 4))
 }

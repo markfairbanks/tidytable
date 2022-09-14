@@ -21,7 +21,7 @@ df <- tidytable(col1 = 1, col2 = 2)
 
 # Or can be used in the middle of a pipe chain (object is unaltered)
 df \%>\%
-  filter.(col1 < 2, col2 < 4) \%>\%
+  filter(col1 < 2, col2 < 4) \%>\%
   inv_gc() \%>\%
-  select.(col1)
+  select(col1)
 }
