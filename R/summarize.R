@@ -12,12 +12,14 @@
 #'   + Single predicate: `.by = where(is.character)`
 #'   + Multiple predicates: `.by = c(where(is.character), where(is.factor))`
 #'   + A combination of predicates and column names: `.by = c(where(is.character), b)`
-#' @param .sort _experimental_: Default TRUE.
+#' @param .sort _experimental_: Default `TRUE`.
 #'   If FALSE the original order of the grouping variables will be preserved.
 #' @param .groups Grouping structure of the result
 #'   * "drop_last": Drop the last level of grouping
 #'   * "drop": Drop all groups
 #'   * "keep": Keep all groups
+#' @param .unpack _experimental_: Default `FALSE`. Should unnamed data frame inputs be unpacked.
+#'   The user must opt in to this option as it can lead to a reduction in performance.
 #'
 #' @export
 #' @md
@@ -38,14 +40,19 @@
 #'   summarize(avg_a = mean(a),
 #'             .by = c(c, d))
 summarize <- function(.df, ...,
-                       .by = NULL,
-                       .sort = TRUE,
-                       .groups = "drop_last") {
+                      .by = NULL,
+                      .sort = TRUE,
+                      .groups = "drop_last",
+                      .unpack = FALSE) {
   UseMethod("summarize")
 }
 
 #' @export
-summarize.tidytable <- function(.df, ..., .by = NULL, .sort = TRUE) {
+summarize.tidytable <- function(.df, ...,
+                                .by = NULL,
+                                .sort = TRUE,
+                                .groups = "drop",
+                                .unpack = FALSE) {
   dots <- enquos(...)
 
   .by <- enquo(.by)
@@ -60,7 +67,12 @@ summarize.tidytable <- function(.df, ..., .by = NULL, .sort = TRUE) {
 
     .by <- tidyselect_names(.df, !!.by)
 
-    j <- call2(".", !!!dots)
+    if (is_true(.unpack)) {
+      # https://github.com/markfairbanks/tidytable/issues/576
+      j <- call2("df_list", !!!dots, .ns = "vctrs")
+    } else {
+      j <- call2(".", !!!dots)
+    }
 
     dt_expr <- call2_j(.df, j, .by, .sort)
 
@@ -78,11 +90,12 @@ summarize.tidytable <- function(.df, ..., .by = NULL, .sort = TRUE) {
 summarize.grouped_tt <- function(.df, ...,
                                  .by = NULL,
                                  .sort = TRUE,
-                                 .groups = "drop_last") {
+                                 .groups = "drop_last",
+                                 .unpack = FALSE) {
   check_by({{ .by }})
   .by <- group_vars(.df)
   out <- ungroup(.df)
-  out <- summarize(out, ..., .by = all_of(.by), .sort = .sort)
+  out <- summarize(out, ..., .by = all_of(.by), .sort = .sort, .unpack = .unpack)
 
   .groups <- arg_match0(.groups, c("drop_last", "drop", "keep"))
   if (.groups == "drop_last") {
@@ -91,14 +104,21 @@ summarize.grouped_tt <- function(.df, ...,
     .by <- character()
   }
 
-  # summarize drop attributes in data.table - need to regroup at the end
   group_by(out, all_of(.by))
 }
 
 #' @export
-summarize.data.frame <- function(.df, ..., .by = NULL, .sort = TRUE) {
+summarize.data.frame <- function(.df, ...,
+                                 .by = NULL,
+                                 .sort = TRUE,
+                                 .groups = "drop_last",
+                                 .unpack = FALSE) {
   .df <- as_tidytable(.df)
-  summarize(.df, ..., .by = {{ .by }}, .sort = .sort)
+  summarize(.df, ...,
+            .by = {{ .by }},
+            .sort = .sort,
+            .groups = .groups,
+            .unpack = .unpack)
 }
 
 #' @export
@@ -108,27 +128,63 @@ summarise <- summarize
 #' @export summarize.
 #' @keywords internal
 #' @usage
-#' summarize(.df, ..., .by = NULL, .sort = TRUE, .groups = "drop_last")
+#' summarize(
+#'   .df, ...,
+#'   .by = NULL,
+#'   .sort = TRUE,
+#'   .groups = "drop_last",
+#'   .unpack = FALSE
+#' )
 #' @inherit summarize title description params examples
-summarize. <- function(.df, ..., .by = NULL, .sort = TRUE, .groups = "drop_last") {
+summarize. <- function(.df, ...,
+                       .by = NULL,
+                       .sort = TRUE,
+                       .groups = "drop_last",
+                       .unpack = FALSE) {
   UseMethod("summarize.")
 }
 
 #' @exportS3Method summarize. data.frame
-summarize..data.frame <- function(.df, ..., .by = NULL, .sort = TRUE, .groups = "drop_last") {
-  summarize(.df, ..., .by = {{ .by }}, .sort = .sort)
+summarize..data.frame <- function(.df, ...,
+                                  .by = NULL,
+                                  .sort = TRUE,
+                                  .groups = "drop_last",
+                                  .unpack = FALSE) {
+  summarize(.df, ...,
+            .by = {{ .by }},
+            .sort = .sort,
+            .groups = .groups,
+            .unpack = .unpack)
 }
 
 #' @export summarise.
 #' @keywords internal
 #' @usage
-#' summarise(.df, ..., .by = NULL, .sort = TRUE, .groups = "drop_last")
+#' summarise(
+#'   .df, ...,
+#'   .by = NULL,
+#'   .sort = TRUE,
+#'   .groups = "drop_last",
+#'   .unpack = FALSE
+#' )
 #' @inherit summarise title description params examples
-summarise. <- function(.df, ..., .by = NULL, .sort = TRUE, .groups = "drop_last") {
+summarise. <- function(.df, ...,
+                       .by = NULL,
+                       .sort = TRUE,
+                       .groups = "drop_last",
+                       .unpack = FALSE) {
   UseMethod("summarise.")
 }
 
 #' @exportS3Method summarise. data.frame
-summarise..data.frame <- function(.df, ..., .by = NULL, .sort = TRUE, .groups = "drop_last") {
-  summarize(.df, ..., .by = {{ .by }}, .sort = .sort)
+summarise..data.frame <- function(.df, ...,
+                                  .by = NULL,
+                                  .sort = TRUE,
+                                  .groups = "drop_last",
+                                  .unpack = FALSE) {
+  summarize(.df, ...,
+            .by = {{ .by }},
+            .sort = .sort,
+            .groups = .groups,
+            .unpack = .unpack)
 }
