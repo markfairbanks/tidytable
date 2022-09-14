@@ -25,13 +25,13 @@ df <- data.table(
 
 df \%>\%
   group_by(c, d) \%>\%
-  summarize.(mean_a = mean(a)) \%>\%
+  summarize(mean_a = mean(a)) \%>\%
   ungroup()
 
 # Can also use tidyselect
 df \%>\%
   group_by(where(is.character)) \%>\%
-  summarize.(mean_a = mean(a)) \%>\%
+  summarize(mean_a = mean(a)) \%>\%
   ungroup()
 }
 \keyword{internal}
