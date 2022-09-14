@@ -458,3 +458,16 @@ test_that("_sample edge cases", {
   # Returns 0 rows
   expect_equal(nrow(slice_sample(df, n = 0)), 0)
 })
+
+test_that("_sample works on grouped_tt", {
+  df <- tidytable(x = 1:8, y = rep(c("a", "b"), each = 4))
+  res <- df %>%
+    group_by(y) %>%
+    slice_sample(n = 2)
+  expect_equal(res$y, c("a", "a", "b", "b"))
+
+  res <- df %>%
+    group_by(y) %>%
+    slice_sample(prop = .5)
+  expect_equal(res$y, c("a", "a", "b", "b"))
+})
