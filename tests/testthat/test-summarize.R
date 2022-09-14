@@ -212,3 +212,20 @@ test_that("works with grouped_tt & .groups", {
 
   expect_equal(tidytable_df, check_df)
 })
+
+test_that("can unpack data frame inputs, #576", {
+  df <- tidytable(group = c("a", "a", "b"), val = 1:3)
+
+  fun <- function(x) {
+    data.frame(mean = mean(x), max = max(x))
+  }
+
+  res <- df %>%
+    summarize(fun(val), .by = group, .unpack = TRUE)
+
+  expect_named(res, c("group", "mean", "max"))
+  expect_equal(res$mean, c(1.5, 3))
+
+  # Errors when `.unpack = FALSE`
+  expect_error(summarize(df, fun(val), .by = group))
+})
