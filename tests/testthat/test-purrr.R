@@ -13,6 +13,8 @@ test_that("map works", {
   expect_equal(.dfc, tidytable(a = 1:3, b = 1:3, c = 1:3))
   .dfr <- map_dfr(1:3, ~ tidytable(x = .x))
   expect_equal(.dfr, tidytable(x = 1:3))
+  .df <- map_df(1:3, ~ tidytable(x = .x))
+  expect_equal(.df, tidytable(x = 1:3))
 })
 
 test_that("map2 works", {
@@ -30,6 +32,8 @@ test_that("map2 works", {
   expect_equal(.dfc, tidytable(a = "a", b = "b", c = "c"))
   .dfr <- map2_dfr(1:3, 1:3, ~ tidytable(x = .x, y = .y))
   expect_equal(.dfr, tidytable(x = 1:3, y = 1:3))
+  .df <- map2_df(1:3, 1:3, ~ tidytable(x = .x, y = .y))
+  expect_equal(.df, tidytable(x = 1:3, y = 1:3))
 })
 
 test_that("pmap works", {
@@ -47,6 +51,8 @@ test_that("pmap works", {
   expect_equal(.dfc, tidytable(a = "a", b = "b", c = "c"))
   .dfr <- pmap_dfr(list(1:3, 1:3), ~ tidytable(x = .x, y = .y))
   expect_equal(.dfr, tidytable(x = 1:3, y = 1:3))
+  .df <- pmap_df(list(1:3, 1:3), ~ tidytable(x = .x, y = .y))
+  expect_equal(.df, tidytable(x = 1:3, y = 1:3))
 })
 
 test_that("map. works", {
@@ -64,6 +70,8 @@ test_that("map. works", {
   expect_equal(.dfc, tidytable(a = 1:3, b = 1:3, c = 1:3))
   .dfr <- map_dfr.(1:3, ~ tidytable(x = .x))
   expect_equal(.dfr, tidytable(x = 1:3))
+  .df <- map_df(1:3, ~ tidytable(x = .x))
+  expect_equal(.df, tidytable(x = 1:3))
 })
 
 test_that("map2. works", {
@@ -81,6 +89,8 @@ test_that("map2. works", {
   expect_equal(.dfc, tidytable(a = "a", b = "b", c = "c"))
   .dfr <- map2_dfr.(1:3, 1:3, ~ tidytable(x = .x, y = .y))
   expect_equal(.dfr, tidytable(x = 1:3, y = 1:3))
+  .df <- map2_df.(1:3, 1:3, ~ tidytable(x = .x, y = .y))
+  expect_equal(.df, tidytable(x = 1:3, y = 1:3))
 })
 
 test_that("pmap. works", {
@@ -98,4 +108,6 @@ test_that("pmap. works", {
   expect_equal(.dfc, tidytable(a = "a", b = "b", c = "c"))
   .dfr <- pmap_dfr.(list(1:3, 1:3), ~ tidytable(x = .x, y = .y))
   expect_equal(.dfr, tidytable(x = 1:3, y = 1:3))
+  .df <- pmap_df.(list(1:3, 1:3), ~ tidytable(x = .x, y = .y))
+  expect_equal(.df, tidytable(x = 1:3, y = 1:3))
 })
