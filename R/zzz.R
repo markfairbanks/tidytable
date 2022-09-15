@@ -1,8 +1,9 @@
 .onAttach <- function(...) {
-  packageStartupMessage(
-    "As of tidytable v0.9.0 dotless versions of functions are exported. ",
-    "You can now use `arrange()`/`mutate()`/etc. directly."
+  .msg <- glue::glue(
+    "As of tidytable v0.9.0 dotless versions of functions are exported.
+    You can now use `arrange()`/`mutate()`/etc. directly."
   )
+  packageStartupMessage(.msg)
   if (vctrs::vec_in("dplyr", .packages())) {
     .fn <- "dplyr"
     .load_msg <- glue::glue(
