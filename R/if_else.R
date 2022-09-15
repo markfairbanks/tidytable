@@ -62,11 +62,6 @@ if_else. <- if_else
 #'
 #' df %>%
 #'   mutate(new_col = ifelse(x < 3, 1, 0))
-ifelse <- function(conditions, true, false, na = NA) {
+ifelse. <- function(conditions, true, false, na = NA) {
   if_else(conditions, true, false, na)
 }
-
-#' @export
-#' @keywords internal
-#' @rdname ifelse
-ifelse. <- ifelse
