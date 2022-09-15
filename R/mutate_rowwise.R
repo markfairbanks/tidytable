@@ -93,7 +93,7 @@ mutate_rowwise. <- function(.df, ...,
   UseMethod("mutate_rowwise.")
 }
 
-#' @exportS3Method get_dummies. data.frame
+#' @exportS3Method mutate_rowwise. data.frame
 mutate_rowwise..data.frame <- function(.df, ...,
                                        .keep = c("all", "used", "unused", "none"),
                                        .before = NULL, .after = NULL) {

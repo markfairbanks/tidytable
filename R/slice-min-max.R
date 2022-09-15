@@ -97,7 +97,7 @@ slice_min. <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) 
   UseMethod("slice_min.")
 }
 
-#' @exportS3Method slice_max. data.frame
+#' @exportS3Method slice_min. data.frame
 slice_min..data.frame <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   slice_min(.df, {{ order_by }}, {{ n }}, with_ties = with_ties, .by = {{ .by }})
 }
