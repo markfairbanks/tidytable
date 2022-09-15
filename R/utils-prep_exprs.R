@@ -45,6 +45,7 @@ call_fns <- c(
   "glue",
   "if_all.",  "if_all",
   "if_any.", "if_any",
+  "ifelse",
   "n.", "n",
   "row_number.", "row_number",
   "str_glue"
@@ -63,6 +64,12 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env()
     quote(.GRP)
   } else if (is_call(x, c("cur_data.", "cur_data"))) {
     quote(.SD)
+  } else if (is_call(x, "ifelse", ns = "")) {
+    x <- call_match(x, base::ifelse)
+    x <- unname(x)
+    x[[1]] <- quote(tidytable::if_else)
+    x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }}, j, dt_env, is_top_across)
+    x
   } else if (is_call(x, c("c_across.", "c_across"))) {
     call <- call_match(x, tidytable::c_across.)
     cols <- get_across_cols(data, call$cols, {{ .by }}, dt_env)
