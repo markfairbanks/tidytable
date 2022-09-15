@@ -97,7 +97,7 @@ slice_tail. <- function(.df, n = 5, .by = NULL) {
   UseMethod("slice_tail.")
 }
 
-#' @exportS3Method slice_head. data.frame
+#' @exportS3Method slice_tail. data.frame
 slice_tail..data.frame <- function(.df, n = 5, .by = NULL) {
   slice_tail(.df, {{ n }}, .by = {{ .by }})
 }
