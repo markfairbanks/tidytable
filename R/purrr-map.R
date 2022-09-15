@@ -100,13 +100,18 @@ map_dfr <- function(.x, .f, ..., .id = NULL) {
 }
 
 #' @export
+#' @rdname map
+map_df <- map_dfr
+
+#' @export
 #' @keywords internal
 #' @rdname map
 map_dfr. <- map_dfr
 
 #' @export
+#' @keywords internal
 #' @rdname map
-map_df <- map_dfr
+map_df. <- map_dfr
 
 #' @export
 #' @rdname map

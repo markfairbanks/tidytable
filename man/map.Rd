@@ -14,8 +14,9 @@
 \alias{map_dfc}
 \alias{map_dfc.}
 \alias{map_dfr}
-\alias{map_dfr.}
 \alias{map_df}
+\alias{map_dfr.}
+\alias{map_df.}
 \alias{walk}
 \alias{map2}
 \alias{map2.}
@@ -77,9 +78,11 @@ map_dfc.(.x, .f, ...)
 
 map_dfr(.x, .f, ..., .id = NULL)
 
+map_df(.x, .f, ..., .id = NULL)
+
 map_dfr.(.x, .f, ..., .id = NULL)
 
-map_df(.x, .f, ..., .id = NULL)
+map_df.(.x, .f, ..., .id = NULL)
 
 walk(.x, .f, ...)
 
