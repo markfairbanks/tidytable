@@ -138,7 +138,7 @@ tidytable_restore <- function(x, to) {
   vec_restore(x, to)
 }
 
-across_check <- function(dots, .fn) {
+check_across <- function(dots, .fn) {
   use_across <- map_lgl(dots, quo_is_call, c("across", "across."))
 
   if (any(use_across)) {
