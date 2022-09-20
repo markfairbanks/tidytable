@@ -79,3 +79,27 @@ add_count. <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
 add_count..data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   add_count(.df, ..., wt = {{ wt }}, sort = sort, name = name)
 }
+
+#' @export
+#' @rdname add_count
+add_tally <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
+  UseMethod("add_tally")
+}
+
+#' @export
+add_tally.data.frame <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
+  add_count(.df, wt = {{ wt }}, sort = sort, name = name)
+}
+
+#' @export add_tally.
+#' @keywords internal
+#' @usage add_tally(.df, wt = NULL, sort = FALSE, name = NULL)
+#' @inherit add_count title description params examples
+add_tally. <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
+  UseMethod("add_tally.")
+}
+
+#' @exportS3Method tally. data.frame
+add_tally..data.frame <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
+  add_tally(.df, wt = {{ wt }}, sort = sort, name = name)
+}
