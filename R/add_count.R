@@ -99,7 +99,7 @@ add_tally. <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
   UseMethod("add_tally.")
 }
 
-#' @exportS3Method tally. data.frame
+#' @exportS3Method add_tally. data.frame
 add_tally..data.frame <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
   add_tally(.df, wt = {{ wt }}, sort = sort, name = name)
 }
