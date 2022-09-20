@@ -22,3 +22,10 @@ test_that("works", {
   expect_named(.m, c("id", "V1"))
   expect_true(is_tidytable(.m))
 })
+
+test_that("ungroups grouped_tt", {
+  df <- tidytable(x = c("a", "a", "b")) %>%
+    group_by(x)
+  res <- as_tidytable(df)
+  expect_false(is_grouped_df(res))
+})
