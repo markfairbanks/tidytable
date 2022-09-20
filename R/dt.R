@@ -97,6 +97,19 @@ dt.tidytable <- function(.df, ...) {
   eval_tidy(dt_expr, env = dt_env)
 }
 
+#' @export
+dt.grouped_tt <- function(.df, ...) {
+  warn("Output is ungrouped when using `dt()` on a grouped tidytable.")
+  .df <- ungroup(.df)
+  dt(.df, ...)
+}
+
+#' @export
+dt.data.frame <- function(.df, ...) {
+  .df <- as_tidytable(.df)
+  dt(.df, ...)
+}
+
 prep_j_expr <- function(j_exprs, use_walrus, j_call) {
   walrus_exprs <- j_exprs[use_walrus]
   walrus_exprs <- map(walrus_exprs, ~ as.list(.x[-1]))
@@ -116,10 +129,4 @@ replace_j_dot <- function(dots, dots_names, j) {
     dots[[2]] <- j
   }
   dots
-}
-
-#' @export
-dt.data.frame <- function(.df, ...) {
-  .df <- as_tidytable(.df)
-  dt(.df, ...)
 }

@@ -114,3 +114,13 @@ test_that("doesn't work on list input", {
   df <- list(x = c(4,3,9,7), y = 1:4)
   expect_error(df %>% dt(, x := 1))
 })
+
+test_that("Automatically ungroups grouped_tt", {
+  df <- tidytable(x = 1:3, y = c("a", "a", "b")) %>%
+    group_by(y)
+  res <- df %>%
+    dt(x == 1) %>%
+    suppressWarnings()
+  expect_false(is_grouped_df(res))
+  expect_equal(res$x, 1)
+})
