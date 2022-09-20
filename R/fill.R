@@ -12,7 +12,6 @@
 #' @param .by Columns to group by when filling should be done by group
 #'
 #' @export
-#' @md
 #'
 #' @examples
 #' df <- data.table(
@@ -30,13 +29,22 @@
 #' df %>%
 #'   fill(a, b, .direction = "downup", .by = groups)
 fill <- function(.df, ...,
-                  .direction = c("down", "up", "downup", "updown"),
-                  .by = NULL) {
-  UseMethod("fill")
+                 .direction = c("down", "up", "downup", "updown"),
+                 .by = NULL) {
+  fill.(.df, ..., .direction = .direction, .by = {{ .by }})
 }
 
 #' @export
-fill.tidytable <- function(.df, ...,
+#' @keywords internal
+#' @rdname fill
+fill. <- function(.df, ...,
+                  .direction = c("down", "up", "downup", "updown"),
+                  .by = NULL) {
+  UseMethod("fill.")
+}
+
+#' @export
+fill..tidytable <- function(.df, ...,
                             .direction = c("down", "up", "downup", "updown"),
                             .by = NULL) {
   .direction <- arg_match(.direction)
@@ -47,32 +55,10 @@ fill.tidytable <- function(.df, ...,
 }
 
 #' @export
-fill.data.frame <- function(.df, ...,
+fill..data.frame <- function(.df, ...,
                             .direction = c("down", "up", "downup", "updown"),
                             .by = NULL) {
   .df <- as_tidytable(.df)
-  fill(.df, ..., .direction = .direction, .by = {{ .by }})
-}
-
-#' @export fill.
-#' @keywords internal
-#' @usage
-#' fill(
-#'   .df, ...,
-#'   .direction = c("down", "up", "downup", "updown"),
-#'   .by = NULL
-#' )
-#' @inherit fill title description params examples
-fill. <- function(.df, ...,
-                  .direction = c("down", "up", "downup", "updown"),
-                  .by = NULL) {
-  UseMethod("fill.")
-}
-
-#' @exportS3Method fill. data.frame
-fill..data.frame <- function(.df, ...,
-                             .direction = c("down", "up", "downup", "updown"),
-                             .by = NULL) {
   fill(.df, ..., .direction = .direction, .by = {{ .by }})
 }
 
@@ -97,3 +83,4 @@ fill_na <- function(x, direction) {
     vec_fill_missing(x, direction = direction)
   }
 }
+

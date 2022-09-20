@@ -24,11 +24,18 @@
 #' df %>%
 #'   drop_na(where(is.numeric))
 drop_na <- function(.df, ...) {
-  UseMethod("drop_na")
+  drop_na.(.df, ...)
 }
 
 #' @export
-drop_na.tidytable <- function(.df, ...) {
+#' @keywords internal
+#' @rdname drop_na
+drop_na. <- function(.df, ...) {
+  UseMethod("drop_na.")
+}
+
+#' @export
+drop_na..tidytable <- function(.df, ...) {
   dots <- enquos(...)
 
   if (length(dots) == 0) {
@@ -41,20 +48,8 @@ drop_na.tidytable <- function(.df, ...) {
 }
 
 #' @export
-drop_na.data.frame <- function(.df, ...) {
+drop_na..data.frame <- function(.df, ...) {
   .df <- as_tidytable(.df)
   drop_na(.df, ...)
 }
 
-#' @export drop_na.
-#' @keywords internal
-#' @usage drop_na(.df, ...)
-#' @inherit drop_na title description params examples
-drop_na. <- function(.df, ...) {
-  UseMethod("drop_na.")
-}
-
-#' @exportS3Method drop_na. data.frame
-drop_na..data.frame <- function(.df, ...) {
-  drop_na(.df, ...)
-}

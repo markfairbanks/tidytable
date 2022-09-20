@@ -2,9 +2,12 @@
 % Please edit documentation in R/transmute.R
 \name{transmute}
 \alias{transmute}
+\alias{transmute.}
 \title{Add new variables and drop all others}
 \usage{
 transmute(.df, ..., .by = NULL)
+
+transmute.(.df, ..., .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -26,3 +29,4 @@ df <- data.table(
 df \%>\%
   transmute(double_a = a * 2)
 }
+\keyword{internal}

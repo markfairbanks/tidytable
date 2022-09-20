@@ -2,9 +2,20 @@
 % Please edit documentation in R/separate.R
 \name{separate}
 \alias{separate}
+\alias{separate.}
 \title{Separate a character column into multiple columns}
 \usage{
 separate(
+  .df,
+  col,
+  into,
+  sep = "[^[:alnum:]]+",
+  remove = TRUE,
+  convert = FALSE,
+  ...
+)
+
+separate.(
   .df,
   col,
   into,
@@ -48,3 +59,4 @@ df \%>\%
 df \%>\%
   separate(x, into = c("c1", "c2"), sep = ".")
 }
+\keyword{internal}

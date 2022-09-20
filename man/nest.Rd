@@ -2,9 +2,12 @@
 % Please edit documentation in R/nest.R
 \name{nest}
 \alias{nest}
+\alias{nest.}
 \title{Nest data.tables}
 \usage{
 nest(.df, ..., .names_sep = NULL)
+
+nest.(.df, ..., .names_sep = NULL)
 }
 \arguments{
 \item{.df}{A data.table or data.frame}
@@ -32,3 +35,4 @@ df \%>\%
 df \%>\%
   nest(data = where(is.numeric))
 }
+\keyword{internal}

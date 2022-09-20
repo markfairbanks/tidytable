@@ -15,16 +15,23 @@
 #'   rename(new_x = x,
 #'          new_y = y)
 rename <- function(.df, ...) {
-  UseMethod("rename")
+  rename.(.df, ...)
 }
 
 #' @export
-rename.tidytable <- function(.df, ...) {
+#' @keywords internal
+#' @rdname rename
+rename. <- function(.df, ...) {
+  UseMethod("rename.")
+}
+
+#' @export
+rename..tidytable <- function(.df, ...) {
   .rename(.df, ...)
 }
 
 #' @export
-rename.grouped_tt <- function(.df, ...) {
+rename..grouped_tt <- function(.df, ...) {
   # Ensure "groups" attribute has new names
   .groups <- group_vars(.df)
   .groups <- select(.df, all_of(.groups))
@@ -37,7 +44,7 @@ rename.grouped_tt <- function(.df, ...) {
 }
 
 #' @export
-rename.data.frame <- function(.df, ...) {
+rename..data.frame <- function(.df, ...) {
   .df <- as_tidytable(.df)
   rename(.df, ...)
 }
@@ -50,21 +57,5 @@ rename.data.frame <- function(.df, ...) {
 
   set_names(.df, names)
 }
-
-#' @export rename.
-#' @keywords internal
-#' @usage
-#' rename(.df, ...)
-#' @inherit rename title description params examples
-rename. <- function(.df, ...) {
-  UseMethod("rename.")
-}
-
-#' @exportS3Method rename. data.frame
-rename..data.frame <- function(.df, ...) {
-  rename(.df, ...)
-}
-
-
 
 

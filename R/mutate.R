@@ -48,11 +48,26 @@
 mutate <- function(.df, ..., .by = NULL,
                    .keep = c("all", "used", "unused", "none"),
                    .before = NULL, .after = NULL) {
-  UseMethod("mutate")
+  mutate.(
+    .df, ...,
+    .by = {{ .by }},
+    .keep = .keep,
+    .before = {{ .before }},
+    .after = {{ .after }}
+  )
 }
 
 #' @export
-mutate.tidytable <- function(.df, ..., .by = NULL,
+#' @keywords internal
+#' @rdname mutate
+mutate. <- function(.df, ..., .by = NULL,
+                    .keep = c("all", "used", "unused", "none"),
+                    .before = NULL, .after = NULL) {
+  UseMethod("mutate.")
+}
+
+#' @export
+mutate..tidytable <- function(.df, ..., .by = NULL,
                              .keep = c("all", "used", "unused", "none"),
                              .before = NULL, .after = NULL) {
   .df <- fast_copy(.df)
@@ -161,7 +176,7 @@ mutate.tidytable <- function(.df, ..., .by = NULL,
 }
 
 #' @export
-mutate.grouped_tt <- function(.df, ..., .by = NULL,
+mutate..grouped_tt <- function(.df, ..., .by = NULL,
                               .keep = c("all", "used", "unused", "none"),
                               .before = NULL, .after = NULL) {
   check_by({{ .by }})
@@ -176,36 +191,10 @@ mutate.grouped_tt <- function(.df, ..., .by = NULL,
 }
 
 #' @export
-mutate.data.frame <- function(.df, ..., .by = NULL,
-                               .keep = c("all", "used", "unused", "none"),
-                               .before = NULL, .after = NULL) {
-  .df <- as_tidytable(.df)
-  mutate(
-    .df, ..., .by = {{ .by }},
-    .keep = .keep,
-    .before = {{ .before }}, .after = {{ .after }}
-  )
-}
-
-#' @export mutate.
-#' @keywords internal
-#' @usage
-#' mutate(
-#'   .df, ..., .by = NULL,
-#'   .keep = c("all", "used", "unused", "none"),
-#'   .before = NULL, .after = NULL
-#' )
-#' @inherit mutate title description params examples
-mutate. <- function(.df, ..., .by = NULL,
-                    .keep = c("all", "used", "unused", "none"),
-                    .before = NULL, .after = NULL) {
-  UseMethod("mutate.")
-}
-
-#' @exportS3Method mutate. data.frame
 mutate..data.frame <- function(.df, ..., .by = NULL,
                                .keep = c("all", "used", "unused", "none"),
                                .before = NULL, .after = NULL) {
+  .df <- as_tidytable(.df)
   mutate(
     .df, ..., .by = {{ .by }},
     .keep = .keep,

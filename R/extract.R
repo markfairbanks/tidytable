@@ -31,15 +31,23 @@
 #' # merge groups by passing same name
 #' df %>% extract(x, c("A", "B", "A"), "([a-d]+)-([a-d]+)-(\\d+)")
 extract <- function(.df, col, into, regex = "([[:alnum:]]+)",
-                     remove = TRUE, convert = FALSE, ...) {
-  check_required(col)
-  check_required(into)
-  UseMethod("extract")
+                    remove = TRUE, convert = FALSE, ...) {
+  extract.(.df, {{ col }}, into, regex, remove, convert, ...)
 }
 
 #' @export
-extract.tidytable <- function(.df, col, into, regex = "([[:alnum:]]+)",
-                               remove = TRUE, convert = FALSE, ...) {
+#' @keywords internal
+#' @rdname extract
+extract. <- function(.df, col, into, regex = "([[:alnum:]]+)",
+                     remove = TRUE, convert = FALSE, ...) {
+  check_required(col)
+  check_required(into)
+  UseMethod("extract.")
+}
+
+#' @export
+extract..tidytable <- function(.df, col, into, regex = "([[:alnum:]]+)",
+                                remove = TRUE, convert = FALSE, ...) {
 
   col <- tidyselect_locs(.df, {{ col }})
 
@@ -74,25 +82,10 @@ extract.tidytable <- function(.df, col, into, regex = "([[:alnum:]]+)",
 }
 
 #' @export
-extract.data.frame <- function(.df, col, into, regex = "([[:alnum:]]+)",
-                                remove = TRUE, convert = FALSE, ...) {
-  .df <- as_tidytable(.df)
-  extract(.df, {{ col }}, into, regex, remove, convert, ...)
-}
-
-#' @export extract.
-#' @keywords internal
-#' @usage extract(.df, col, into, regex = "([[:alnum:]]+)", remove = TRUE, convert = FALSE, ...)
-#' @inherit extract title description params examples
-extract. <- function(.df, col, into, regex = "([[:alnum:]]+)",
-                     remove = TRUE, convert = FALSE, ...) {
-  UseMethod("extract.")
-}
-
-#' @exportS3Method extract. data.frame
 extract..data.frame <- function(.df, col, into, regex = "([[:alnum:]]+)",
                                 remove = TRUE, convert = FALSE, ...) {
-  extract(.df, {{ col }}, into, regex, remove, convert, ...)
+  .df <- as_tidytable(.df)
+  extract.(.df, {{ col }}, into, regex, remove, convert, ...)
 }
 
 str_extract_groups <- function(string, pattern, convert = FALSE){

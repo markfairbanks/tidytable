@@ -25,11 +25,18 @@
 #' df %>%
 #'   nest(data = where(is.numeric))
 nest <- function(.df, ..., .names_sep = NULL) {
-  UseMethod("nest")
+  nest.(.df, ..., .names_sep = .names_sep)
 }
 
 #' @export
-nest.tidytable <- function(.df, ..., .names_sep = NULL) {
+#' @keywords internal
+#' @rdname nest
+nest. <- function(.df, ..., .names_sep = NULL) {
+  UseMethod("nest.")
+}
+
+#' @export
+nest..tidytable <- function(.df, ..., .names_sep = NULL) {
   if (!is.null(.names_sep)) {
     vec_assert(.names_sep, character(), 1)
   }
@@ -62,7 +69,7 @@ nest.tidytable <- function(.df, ..., .names_sep = NULL) {
 }
 
 #' @export
-nest.grouped_tt <- function(.df, ..., .names_sep = NULL) {
+nest..grouped_tt <- function(.df, ..., .names_sep = NULL) {
   .groups <- group_vars(.df)
   out <- ungroup(.df)
   out <- nest(out, data = -all_of(.groups), .names_sep = .names_sep)
@@ -70,21 +77,8 @@ nest.grouped_tt <- function(.df, ..., .names_sep = NULL) {
 }
 
 #' @export
-nest.data.frame <- function(.df, ..., .names_sep = NULL) {
-  .df <- as_tidytable(.df)
-  nest(.df, ..., .names_sep = .names_sep)
-}
-
-#' @export nest.
-#' @keywords internal
-#' @usage
-#' nest(.df, ..., .names_sep = NULL)
-#' @inherit nest title description params examples
-nest. <- function(.df, ..., .names_sep = NULL) {
-  UseMethod("nest.")
-}
-
-#' @exportS3Method nest. data.frame
 nest..data.frame <- function(.df, ..., .names_sep = NULL) {
-  nest(.df, ..., .names_sep = .names_sep)
+  .df <- as_tidytable(.df)
+  nest.(.df, ..., .names_sep = .names_sep)
 }
+

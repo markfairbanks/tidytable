@@ -19,30 +19,18 @@
 #' df %>%
 #'   transmute(double_a = a * 2)
 transmute <- function(.df, ..., .by = NULL) {
-  UseMethod("transmute")
+  transmute.(.df, ..., .by = {{ .by }})
 }
 
 #' @export
-transmute.tidytable <- function(.df, ..., .by = NULL) {
-  mutate(.df, ..., .by = {{ .by }}, .keep = "none")
-}
-
-#' @export
-transmute.data.frame <- function(.df, ..., .by = NULL) {
-  .df <- as_tidytable(.df)
-  transmute(.df, ..., .by = {{ .by }})
-}
-
-#' @export transmute.
 #' @keywords internal
-#' @usage
-#' transmute(.df, ..., .by = NULL)
-#' @inherit transmute title description params examples
+#' @rdname transmute
 transmute. <- function(.df, ..., .by = NULL) {
   UseMethod("transmute.")
 }
 
-#' @exportS3Method transmute. data.frame
+#' @export
 transmute..data.frame <- function(.df, ..., .by = NULL) {
-  transmute(.df, ..., .by = {{ .by }})
+  mutate(.df, ..., .by = {{ .by }}, .keep = "none")
 }
+

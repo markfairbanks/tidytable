@@ -31,15 +31,27 @@
 #' df %>%
 #'   mutate_rowwise(row_mean = mean(c_across(x:z)))
 mutate_rowwise <- function(.df, ...,
-                            .keep = c("all", "used", "unused", "none"),
-                            .before = NULL, .after = NULL) {
-  UseMethod("mutate_rowwise")
+                           .keep = c("all", "used", "unused", "none"),
+                           .before = NULL, .after = NULL) {
+  mutate_rowwise.(.df, ...,
+                  .keep = .keep,
+                  .before = {{ .before }},
+                  .after = {{ .after }})
 }
 
 #' @export
-mutate_rowwise.tidytable <- function(.df, ...,
-                                     .keep = c("all", "used", "unused", "none"),
-                                     .before = NULL, .after = NULL) {
+#' @keywords internal
+#' @rdname mutate_rowwise
+mutate_rowwise. <- function(.df, ...,
+                            .keep = c("all", "used", "unused", "none"),
+                            .before = NULL, .after = NULL) {
+  UseMethod("mutate_rowwise.")
+}
+
+#' @export
+mutate_rowwise..tidytable <- function(.df, ...,
+                                      .keep = c("all", "used", "unused", "none"),
+                                      .before = NULL, .after = NULL) {
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
 
@@ -55,11 +67,11 @@ mutate_rowwise.tidytable <- function(.df, ...,
 }
 
 #' @export
-mutate_rowwise.grouped_tt <- function(.df, ...,
+mutate_rowwise..grouped_tt <- function(.df, ...,
                                       .keep = c("all", "used", "unused", "none"),
                                       .before = NULL, .after = NULL) {
   warn("Doing a rowwise operation on a grouped tidytable.
-       Note: the output will be ungrouped.")
+       The output will be ungrouped.")
   out <- ungroup(.df)
   mutate_rowwise(out, ...,
                  .keep = .keep,
@@ -68,32 +80,6 @@ mutate_rowwise.grouped_tt <- function(.df, ...,
 }
 
 #' @export
-mutate_rowwise.data.frame <- function(.df, ...,
-                                      .keep = c("all", "used", "unused", "none"),
-                                      .before = NULL, .after = NULL) {
-  .df <- as_tidytable(.df)
-  mutate_rowwise(.df, ...,
-                 .keep = .keep,
-                 .before = {{ .before }},
-                 .after = {{ .after }})
-}
-
-#' @export mutate_rowwise.
-#' @keywords internal
-#' @usage
-#' mutate_rowwise(
-#'   .df, ...,
-#'   .keep = c("all", "used", "unused", "none"),
-#'   .before = NULL, .after = NULL
-#' )
-#' @inherit mutate_rowwise title description params examples
-mutate_rowwise. <- function(.df, ...,
-                            .keep = c("all", "used", "unused", "none"),
-                            .before = NULL, .after = NULL) {
-  UseMethod("mutate_rowwise.")
-}
-
-#' @exportS3Method mutate_rowwise. data.frame
 mutate_rowwise..data.frame <- function(.df, ...,
                                        .keep = c("all", "used", "unused", "none"),
                                        .before = NULL, .after = NULL) {

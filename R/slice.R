@@ -44,11 +44,18 @@
 #' df %>%
 #'   slice_min(order_by = y, .by = z)
 slice <- function(.df, ..., .by = NULL) {
-  UseMethod("slice")
+  slice.(.df, ..., .by = {{ .by }})
 }
 
 #' @export
-slice.tidytable <- function(.df, ..., .by = NULL) {
+#' @keywords internal
+#' @rdname slice
+slice. <- function(.df, ..., .by = NULL) {
+  UseMethod("slice.")
+}
+
+#' @export
+slice..tidytable <- function(.df, ..., .by = NULL) {
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
 
@@ -66,7 +73,7 @@ slice.tidytable <- function(.df, ..., .by = NULL) {
 }
 
 #' @export
-slice.grouped_tt <- function(.df, ..., .by = NULL) {
+slice..grouped_tt <- function(.df, ..., .by = NULL) {
   check_by({{ .by }})
   .by <- group_vars(.df)
   out <- ungroup(.df)
@@ -75,22 +82,9 @@ slice.grouped_tt <- function(.df, ..., .by = NULL) {
 }
 
 #' @export
-slice.data.frame <- function(.df, ..., .by = NULL) {
+slice..data.frame <- function(.df, ..., .by = NULL) {
   .df <- as_tidytable(.df)
   slice(.df, ..., .by = {{ .by }})
 }
 
-#' @export slice.
-#' @keywords internal
-#' @usage
-#' slice(.df, ..., .by = NULL)
-#' @inherit slice title description params examples
-slice. <- function(.df, ..., .by = NULL) {
-  UseMethod("slice.")
-}
-
-#' @exportS3Method slice. data.frame
-slice..data.frame <- function(.df, ..., .by = NULL) {
-  slice(.df, ..., .by = {{ .by }})
-}
 

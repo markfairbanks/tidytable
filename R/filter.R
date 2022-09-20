@@ -22,11 +22,18 @@
 #' df %>%
 #'   filter(b <= mean(b), .by = c)
 filter <- function(.df, ..., .by = NULL) {
-  UseMethod("filter")
+  filter.(.df, ..., .by = {{ .by }})
 }
 
 #' @export
-filter.tidytable <- function(.df, ..., .by = NULL) {
+#' @keywords internal
+#' @rdname filter
+filter. <- function(.df, ..., .by = NULL) {
+  UseMethod("filter.")
+}
+
+#' @export
+filter..tidytable <- function(.df, ..., .by = NULL) {
   .by <- enquo(.by)
 
   dots <- enquos(...)
@@ -48,7 +55,7 @@ filter.tidytable <- function(.df, ..., .by = NULL) {
 }
 
 #' @export
-filter.grouped_tt <- function(.df, ..., .by = NULL) {
+filter..grouped_tt <- function(.df, ..., .by = NULL) {
   check_by({{ .by }})
   .by <- group_vars(.df)
   out <- ungroup(.df)
@@ -57,21 +64,8 @@ filter.grouped_tt <- function(.df, ..., .by = NULL) {
 }
 
 #' @export
-filter.data.frame <- function(.df, ..., .by = NULL) {
-  .df <- as_tidytable(.df)
-  filter(.df, ..., .by = {{ .by }})
-}
-
-#' @export filter.
-#' @keywords internal
-#' @usage filter(.df, ..., .by = NULL)
-#' @inherit filter title description params examples
-filter. <- function(.df, ..., .by = NULL) {
-  UseMethod("filter.")
-}
-
-#' @exportS3Method filter. data.frame
 filter..data.frame <- function(.df, ..., .by = NULL) {
+  .df <- as_tidytable(.df)
   filter(.df, ..., .by = {{ .by }})
 }
 

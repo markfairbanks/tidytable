@@ -44,15 +44,30 @@ summarize <- function(.df, ...,
                       .sort = TRUE,
                       .groups = "drop_last",
                       .unpack = FALSE) {
-  UseMethod("summarize")
+  summarize.(.df, ...,
+             .by = {{ .by }},
+             .sort = .sort,
+             .groups = .groups,
+             .unpack = .unpack)
 }
 
 #' @export
-summarize.tidytable <- function(.df, ...,
-                                .by = NULL,
-                                .sort = TRUE,
-                                .groups = "drop",
-                                .unpack = FALSE) {
+#' @keywords internal
+#' @rdname summarize
+summarize. <- function(.df, ...,
+                      .by = NULL,
+                      .sort = TRUE,
+                      .groups = "drop_last",
+                      .unpack = FALSE) {
+  UseMethod("summarize.")
+}
+
+#' @export
+summarize..tidytable <- function(.df, ...,
+                                 .by = NULL,
+                                 .sort = TRUE,
+                                 .groups = "drop",
+                                 .unpack = FALSE) {
   dots <- enquos(...)
 
   .by <- enquo(.by)
@@ -87,11 +102,11 @@ summarize.tidytable <- function(.df, ...,
 }
 
 #' @export
-summarize.grouped_tt <- function(.df, ...,
-                                 .by = NULL,
-                                 .sort = TRUE,
-                                 .groups = "drop_last",
-                                 .unpack = FALSE) {
+summarize..grouped_tt <- function(.df, ...,
+                                  .by = NULL,
+                                  .sort = TRUE,
+                                  .groups = "drop_last",
+                                  .unpack = FALSE) {
   check_by({{ .by }})
   .by <- group_vars(.df)
   out <- ungroup(.df)
@@ -108,11 +123,11 @@ summarize.grouped_tt <- function(.df, ...,
 }
 
 #' @export
-summarize.data.frame <- function(.df, ...,
-                                 .by = NULL,
-                                 .sort = TRUE,
-                                 .groups = "drop_last",
-                                 .unpack = FALSE) {
+summarize..data.frame <- function(.df, ...,
+                                  .by = NULL,
+                                  .sort = TRUE,
+                                  .groups = "drop_last",
+                                  .unpack = FALSE) {
   .df <- as_tidytable(.df)
   summarize(.df, ...,
             .by = {{ .by }},
@@ -125,66 +140,9 @@ summarize.data.frame <- function(.df, ...,
 #' @rdname summarize
 summarise <- summarize
 
-#' @export summarize.
+#' @export
 #' @keywords internal
-#' @usage
-#' summarize(
-#'   .df, ...,
-#'   .by = NULL,
-#'   .sort = TRUE,
-#'   .groups = "drop_last",
-#'   .unpack = FALSE
-#' )
-#' @inherit summarize title description params examples
-summarize. <- function(.df, ...,
-                       .by = NULL,
-                       .sort = TRUE,
-                       .groups = "drop_last",
-                       .unpack = FALSE) {
-  UseMethod("summarize.")
-}
+#' @rdname summarize
+summarise. <- summarize.
 
-#' @exportS3Method summarize. data.frame
-summarize..data.frame <- function(.df, ...,
-                                  .by = NULL,
-                                  .sort = TRUE,
-                                  .groups = "drop_last",
-                                  .unpack = FALSE) {
-  summarize(.df, ...,
-            .by = {{ .by }},
-            .sort = .sort,
-            .groups = .groups,
-            .unpack = .unpack)
-}
 
-#' @export summarise.
-#' @keywords internal
-#' @usage
-#' summarise(
-#'   .df, ...,
-#'   .by = NULL,
-#'   .sort = TRUE,
-#'   .groups = "drop_last",
-#'   .unpack = FALSE
-#' )
-#' @inherit summarise title description params examples
-summarise. <- function(.df, ...,
-                       .by = NULL,
-                       .sort = TRUE,
-                       .groups = "drop_last",
-                       .unpack = FALSE) {
-  UseMethod("summarise.")
-}
-
-#' @exportS3Method summarise. data.frame
-summarise..data.frame <- function(.df, ...,
-                                  .by = NULL,
-                                  .sort = TRUE,
-                                  .groups = "drop_last",
-                                  .unpack = FALSE) {
-  summarize(.df, ...,
-            .by = {{ .by }},
-            .sort = .sort,
-            .groups = .groups,
-            .unpack = .unpack)
-}

@@ -25,11 +25,18 @@
 #' df %>%
 #'   expand(nesting(x, y))
 expand <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
-  UseMethod("expand")
+  expand.(.df, ..., .name_repair = .name_repair, .by = {{ .by }})
 }
 
 #' @export
-expand.tidytable <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
+#' @keywords internal
+#' @rdname expand
+expand. <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
+  UseMethod("expand.")
+}
+
+#' @export
+expand..tidytable <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
   dots <- enquos(...)
   dots <- dots[!map_lgl(dots, quo_is_null)]
   if (length(dots) == 0) return(.df)
@@ -48,7 +55,7 @@ expand.tidytable <- function(.df, ..., .name_repair = "check_unique", .by = NULL
 }
 
 #' @export
-expand.grouped_tt <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
+expand..grouped_tt <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
   check_by({{ .by }})
   .by <- group_vars(.df)
   out <- ungroup(.df)
@@ -57,21 +64,8 @@ expand.grouped_tt <- function(.df, ..., .name_repair = "check_unique", .by = NUL
 }
 
 #' @export
-expand.data.frame <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
-  .df <- as_tidytable(.df)
-  expand(.df, ..., .name_repair = .name_repair, .by = {{ .by }})
-}
-
-#' @export expand.
-#' @keywords internal
-#' @usage expand(.df, ..., .name_repair = "check_unique", .by = NULL)
-#' @inherit expand title description params examples
-expand. <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
-  UseMethod("expand.")
-}
-
-#' @exportS3Method expand. data.frame
 expand..data.frame <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
+  .df <- as_tidytable(.df)
   expand(.df, ..., .name_repair = .name_repair, .by = {{ .by }})
 }
 

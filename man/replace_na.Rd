@@ -2,9 +2,12 @@
 % Please edit documentation in R/replace_na.R
 \name{replace_na}
 \alias{replace_na}
+\alias{replace_na.}
 \title{Replace missing values}
 \usage{
 replace_na(.x, replace)
+
+replace_na.(.x, replace)
 }
 \arguments{
 \item{.x}{A data.frame/data.table or a vector}
@@ -29,3 +32,4 @@ df \%>\%
 df \%>\%
   replace_na(list(x = 5, y = 0))
 }
+\keyword{internal}

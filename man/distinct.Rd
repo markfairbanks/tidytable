@@ -2,9 +2,12 @@
 % Please edit documentation in R/distinct.R
 \name{distinct}
 \alias{distinct}
+\alias{distinct.}
 \title{Select distinct/unique rows}
 \usage{
 distinct(.df, ..., .keep_all = FALSE)
+
+distinct.(.df, ..., .keep_all = FALSE)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -32,3 +35,4 @@ df \%>\%
 df \%>\%
   distinct(z)
 }
+\keyword{internal}

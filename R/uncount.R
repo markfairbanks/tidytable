@@ -14,11 +14,18 @@
 #'
 #' uncount(df, n, .id = "id")
 uncount <- function(.df, weights, .remove = TRUE, .id = NULL) {
-  UseMethod("uncount")
+  uncount.(.df, {{ weights }}, .remove, .id)
 }
 
 #' @export
-uncount.tidytable <- function(.df, weights, .remove = TRUE, .id = NULL) {
+#' @keywords internal
+#' @rdname uncount
+uncount. <- function(.df, weights, .remove = TRUE, .id = NULL) {
+  UseMethod("uncount.")
+}
+
+#' @export
+uncount..tidytable <- function(.df, weights, .remove = TRUE, .id = NULL) {
   weights <- enquo(weights)
 
   .reps <- pull(.df, !!weights)
@@ -37,21 +44,8 @@ uncount.tidytable <- function(.df, weights, .remove = TRUE, .id = NULL) {
 }
 
 #' @export
-uncount.data.frame <- function(.df, weights, .remove = TRUE, .id = NULL) {
+uncount..data.frame <- function(.df, weights, .remove = TRUE, .id = NULL) {
   .df <- as_tidytable(.df)
   uncount(.df, {{ weights }}, .remove, .id)
 }
 
-#' @export uncount.
-#' @keywords internal
-#' @usage
-#' uncount(.df, weights, .remove = TRUE, .id = NULL)
-#' @inherit uncount title description params examples
-uncount. <- function(.df, weights, .remove = TRUE, .id = NULL) {
-  UseMethod("uncount.")
-}
-
-#' @exportS3Method uncount. data.frame
-uncount..data.frame <- function(.df, weights, .remove = TRUE, .id = NULL) {
-  uncount(.df, {{ weights }}, .remove, .id)
-}

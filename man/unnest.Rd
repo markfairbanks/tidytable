@@ -2,9 +2,19 @@
 % Please edit documentation in R/unnest.R
 \name{unnest}
 \alias{unnest}
+\alias{unnest.}
 \title{Unnest list-columns}
 \usage{
 unnest(
+  .df,
+  ...,
+  keep_empty = FALSE,
+  .drop = TRUE,
+  names_sep = NULL,
+  names_repair = "unique"
+)
+
+unnest.(
   .df,
   ...,
   keep_empty = FALSE,
@@ -51,3 +61,4 @@ nested_df \%>\%
 nested_df \%>\%
   unnest(frame_list, vec_list)
 }
+\keyword{internal}

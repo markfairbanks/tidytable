@@ -28,11 +28,18 @@
 #'   summarize(mean_a = mean(a)) %>%
 #'   ungroup()
 group_by <- function(.df, ...) {
-  UseMethod("group_by")
+  group_by.(.df, ...)
 }
 
 #' @export
-group_by.tidytable <- function(.df, ...) {
+#' @keywords internal
+#' @rdname group_by
+group_by. <- function(.df, ...) {
+  UseMethod("group_by.")
+}
+
+#' @export
+group_by..tidytable <- function(.df, ...) {
   dots <- enquos(...)
   across_check(dots, "group_by")
   .groups <- tidyselect_names(.df, !!!dots)
@@ -45,53 +52,34 @@ group_by.tidytable <- function(.df, ...) {
 }
 
 #' @export
-group_by.grouped_tt <- function(.df, ...) {
+group_by..grouped_tt <- function(.df, ...) {
   out <- ungroup(.df)
   group_by(out, ...)
 }
 
 #' @export
-group_by.data.frame <- function(.df, ...) {
-  .df <- as_tidytable(.df)
-  group_by(.df, ...)
-}
-
-#' @export group_by.
-#' @keywords internal
-#' @usage group_by(.df, ...)
-#' @inherit group_by title description params examples
-group_by. <- function(.df, ...) {
-  UseMethod("group_by.")
-}
-
-#' @exportS3Method group_by. data.frame
 group_by..data.frame <- function(.df, ...) {
+  .df <- as_tidytable(.df)
   group_by(.df, ...)
 }
 
 #' @export
 #' @rdname group_by
 ungroup <- function(.df) {
-  UseMethod("ungroup")
+  ungroup.(.df)
 }
 
 #' @export
-ungroup.data.frame <- function(.df) {
-  attr(.df, "groups") <- NULL
-  as_tidytable(.df)
-}
-
-#' @export ungroup.
 #' @keywords internal
-#' @usage ungroup(.df)
-#' @inherit ungroup title description params examples
+#' @rdname group_by
 ungroup. <- function(.df) {
   UseMethod("ungroup.")
 }
 
-#' @exportS3Method ungroup. data.frame
+#' @export
 ungroup..data.frame <- function(.df) {
-  ungroup(.df)
+  attr(.df, "groups") <- NULL
+  as_tidytable(.df)
 }
 
 #' Get the grouping variables

@@ -28,11 +28,18 @@
 #' df %>%
 #'   add_count(a)
 add_count <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
-  UseMethod("add_count")
+  add_count.(.df, ..., wt = {{ wt }}, sort = sort, name = name)
 }
 
 #' @export
-add_count.tidytable <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+#' @keywords internal
+#' @rdname add_count
+add_count. <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+  UseMethod("add_count.")
+}
+
+#' @export
+add_count..tidytable <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   .by <- enquos(...)
   wt <- enquo(wt)
 
@@ -54,7 +61,7 @@ add_count.tidytable <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) 
 }
 
 #' @export
-add_count.grouped_tt <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+add_count..grouped_tt <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   .by <- group_vars(.df)
   out <- ungroup(.df)
   out <- add_count(out, all_of(.by), wt = {{ wt }}, sort = sort, name = name)
@@ -62,44 +69,25 @@ add_count.grouped_tt <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL)
 }
 
 #' @export
-add_count.data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
-  .df <- as_tidytable(.df)
-  add_count(.df, ..., wt = {{ wt }}, sort = sort, name = name)
-}
-
-#' @export add_count.
-#' @keywords internal
-#' @usage add_count(.df, ..., wt = NULL, sort = FALSE, name = NULL)
-#' @inherit add_count title description params examples
-add_count. <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
-  UseMethod("add_count.")
-}
-
-#' @exportS3Method add_count. data.frame
 add_count..data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+  .df <- as_tidytable(.df)
   add_count(.df, ..., wt = {{ wt }}, sort = sort, name = name)
 }
 
 #' @export
 #' @rdname add_count
 add_tally <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
-  UseMethod("add_tally")
+  add_tally.(.df, wt = {{ wt }}, sort = sort, name = name)
 }
 
 #' @export
-add_tally.data.frame <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
-  add_count(.df, wt = {{ wt }}, sort = sort, name = name)
-}
-
-#' @export add_tally.
 #' @keywords internal
-#' @usage add_tally(.df, wt = NULL, sort = FALSE, name = NULL)
-#' @inherit add_count title description params examples
+#' @rdname add_count
 add_tally. <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
   UseMethod("add_tally.")
 }
 
-#' @exportS3Method add_tally. data.frame
+#' @export
 add_tally..data.frame <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
-  add_tally(.df, wt = {{ wt }}, sort = sort, name = name)
+  add_count(.df, wt = {{ wt }}, sort = sort, name = name)
 }

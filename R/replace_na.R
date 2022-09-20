@@ -24,11 +24,18 @@
 #' df %>%
 #'   replace_na(list(x = 5, y = 0))
 replace_na <- function(.x, replace) {
-  UseMethod("replace_na")
+  replace_na.(.x, replace)
 }
 
 #' @export
-replace_na.default <- function(.x, replace) {
+#' @keywords internal
+#' @rdname replace_na
+replace_na. <- function(.x, replace) {
+  UseMethod("replace_na.")
+}
+
+#' @export
+replace_na..default <- function(.x, replace) {
   if (missing(replace)) {
     return(.x)
   }
@@ -48,7 +55,7 @@ replace_na.default <- function(.x, replace) {
 }
 
 #' @export
-replace_na.tidytable <- function(.x, replace) {
+replace_na..tidytable <- function(.x, replace) {
   if (missing(replace)) {
     return(.x)
   }
@@ -61,7 +68,8 @@ replace_na.tidytable <- function(.x, replace) {
 
   replace_vars <- names(replace)[keep_bool]
 
-  calls <- map2(syms(replace_vars), replace, ~ call2("replace_na", .x, .y, .ns = "tidytable"))
+  calls <- map2(syms(replace_vars), replace,
+                ~ call2("replace_na", .x, .y, .ns = "tidytable"))
 
   names(calls) <- replace_vars
 
@@ -71,22 +79,9 @@ replace_na.tidytable <- function(.x, replace) {
 }
 
 #' @export
-replace_na.data.frame <- function(.x, replace) {
+replace_na..data.frame <- function(.x, replace) {
   .x <- as_tidytable(.x)
   replace_na(.x, replace = replace)
 }
 
-#' @export replace_na.
-#' @keywords internal
-#' @usage
-#' replace_na(.x, replace)
-#' @inherit replace_na title description params examples
-replace_na. <- function(.x, replace) {
-  UseMethod("replace_na.")
-}
-
-#' @exportS3Method replace_na. default
-replace_na..default <- function(.x, replace) {
-  replace_na(.x, replace)
-}
 

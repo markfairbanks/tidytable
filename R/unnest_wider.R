@@ -26,13 +26,22 @@
 unnest_wider <- function(.df, col, names_sep = NULL,
                          simplify = NULL, names_repair = "check_unique",
                          ptype = list(), transform = list()) {
-  UseMethod("unnest_wider")
+  unnest_wider.(
+    .df, col = {{ col }}, names_sep = names_sep, simplify = simplify,
+    names_repair = names_repair, ptype = ptype, transform = transform
+  )
+}
+
+unnest_wider. <- function(.df, col, names_sep = NULL,
+                          simplify = NULL, names_repair = "check_unique",
+                          ptype = list(), transform = list()) {
+  UseMethod("unnest_wider.")
 }
 
 #' @export
-unnest_wider.tidytable <- function(.df, col, names_sep = NULL,
-                                   simplify = NULL, names_repair = "check_unique",
-                                   ptype = list(), transform = list()) {
+unnest_wider..tidytable <- function(.df, col, names_sep = NULL,
+                                    simplify = NULL, names_repair = "check_unique",
+                                    ptype = list(), transform = list()) {
   .col <- enquo(col)
 
   .l <- pull(.df, !!.col)
@@ -71,9 +80,9 @@ unnest_wider.tidytable <- function(.df, col, names_sep = NULL,
 }
 
 #' @export
-unnest_wider.data.frame <- function(.df, col, names_sep = NULL,
-                                    simplify = NULL, names_repair = "check_unique",
-                                    ptype = list(), transform = list()) {
+unnest_wider..data.frame <- function(.df, col, names_sep = NULL,
+                                     simplify = NULL, names_repair = "check_unique",
+                                     ptype = list(), transform = list()) {
   .df <- as_tidytable(.df)
   unnest_wider(
     .df, col = {{ col }}, names_sep = names_sep, simplify = simplify,
@@ -81,30 +90,6 @@ unnest_wider.data.frame <- function(.df, col, names_sep = NULL,
   )
 }
 
-#' @export unnest_wider.
-#' @keywords internal
-#' @usage
-#' unnest_wider(
-#'   .df, col, names_sep = NULL,
-#'   simplify = NULL, names_repair = "check_unique",
-#'   ptype = list(), transform = list()
-#' )
-#' @inherit unnest_wider title description params examples
-unnest_wider. <- function(.df, col, names_sep = NULL,
-                          simplify = NULL, names_repair = "check_unique",
-                          ptype = list(), transform = list()) {
-  UseMethod("unnest_wider.")
-}
-
-#' @exportS3Method unnest_wider. data.frame
-unnest_wider..data.frame <- function(.df, col, names_sep = NULL,
-                                     simplify = NULL, names_repair = "check_unique",
-                                     ptype = list(), transform = list()) {
-  unnest_wider(
-    .df, col = {{ col }}, names_sep = names_sep, simplify = simplify,
-    names_repair = names_repair, ptype = ptype, transform = transform
-  )
-}
 
 unnest_wider_tidytable <- function(...) {
   dots <- list2(...)

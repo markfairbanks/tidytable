@@ -36,11 +36,18 @@
 #' df %>%
 #'   select(new = x1, y)
 select <- function(.df, ...) {
-  UseMethod("select")
+  select.(.df, ...)
 }
 
 #' @export
-select.tidytable <- function(.df, ...) {
+#' @keywords internal
+#' @rdname select
+select. <- function(.df, ...) {
+  UseMethod("select.")
+}
+
+#' @export
+select..tidytable <- function(.df, ...) {
   locs <- tidyselect_locs(.df, ...)
 
   out <- new_data_frame(.df)[locs]
@@ -51,7 +58,7 @@ select.tidytable <- function(.df, ...) {
 }
 
 #' @export
-select.grouped_tt <- function(.df, ...) {
+select..grouped_tt <- function(.df, ...) {
   .by <- group_vars(.df)
   out <- ungroup(.df)
   out <- select(out, ..., all_of(.by))
@@ -59,21 +66,8 @@ select.grouped_tt <- function(.df, ...) {
 }
 
 #' @export
-select.data.frame <- function(.df, ...) {
+select..data.frame <- function(.df, ...) {
   .df <- as_tidytable(.df)
   select(.df, ...)
 }
 
-#' @export select.
-#' @keywords internal
-#' @usage
-#' select(.df, ...)
-#' @inherit select title description params examples
-select. <- function(.df, ...) {
-  UseMethod("select.")
-}
-
-#' @exportS3Method select. data.frame
-select..data.frame <- function(.df, ...) {
-  select(.df, ...)
-}
