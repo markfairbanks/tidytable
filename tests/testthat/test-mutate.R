@@ -415,3 +415,61 @@ test_that("nested across calls are handled properly, #505", {
   expect_equal(res$y[[1]]$a, "1")
   expect_equal(res$y[[1]]$b, "2")
 })
+
+# rowwise ----------------------------------------------------------
+test_that("works on rowwise_tt", {
+  df <- data.table(x = 1:3, y = 1:3, z = c("a", "a", "b"))
+
+  res <- df %>%
+    rowwise() %>%
+    mutate(row_mean = mean(c(x, y)))
+
+  expect_equal(res$row_mean, 1:3)
+  expect_true(inherits(res, "rowwise_tt"))
+})
+
+test_that("can use .keep and relocate", {
+  df <- data.table(x = 1:3, y = 1:3, z = c("a", "a", "b"))
+
+  res <- df %>%
+    rowwise() %>%
+    mutate(row_mean = mean(x),
+           .keep = "used",
+           .before = x)
+
+  expect_named(res, c("row_mean", "x"))
+  expect_equal(res$row_mean, 1:3)
+})
+
+test_that("c_across does all cols automatically", {
+  df <- data.table(x = 1:3, y = 4:6)
+
+  res <- df %>%
+    rowwise() %>%
+    mutate(row_mean = mean(c_across()))
+  res_check <- df %>%
+    rowwise() %>%
+    mutate(row_mean = mean(c_across(everything())))
+
+  expect_equal(res$row_mean, res_check$row_mean)
+})
+
+test_that("c_across cols selection works", {
+  df <- data.table(x = 1:3, y = 4:6, z = c("a", "a", "b"))
+
+  res <- df %>%
+    rowwise() %>%
+    mutate(row_mean = mean(c_across(cols = where(is.numeric)))) %>%
+    ungroup()
+
+  expect_equal(res$row_mean, c(2.5, 3.5, 4.5))
+})
+
+test_that("c_across works with space named columns", {
+  df <- data.table(`x y`= 1:3, `x z`= 1, y = 3)
+  res <- df %>%
+    rowwise() %>%
+    mutate(sum = sum(c_across(contains(" "))))
+
+  expect_equal(res$sum, c(2, 3, 4))
+})

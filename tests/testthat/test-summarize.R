@@ -229,3 +229,8 @@ test_that("can unpack data frame inputs, #576", {
   # Errors when `.unpack = FALSE`
   expect_error(summarize(df, fun(val), .by = group))
 })
+
+test_that("errors on rowwise_tt", {
+  df <- rowwise(tidytable(x = 1:3, y = 1:3))
+  expect_error(summarize(df, avg_x = mean(x)))
+})
