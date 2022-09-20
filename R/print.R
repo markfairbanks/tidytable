@@ -1,15 +1,8 @@
+# tidytable ---------------------------
 #' @export
 print.tidytable <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   y <- x
   class(y) <- c("paged_df", "tidytable_print", "tbl", "tidytable", "data.table", "data.frame")
-  print(y, ..., n = n, width = width, n_extra = n_extra)
-  invisible(x)
-}
-
-#' @export
-print.grouped_tt <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
-  y <- x
-  class(y) <- c("paged_df", "grouped_tt_print", "tbl", "tidytable", "data.table", "data.frame")
   print(y, ..., n = n, width = width, n_extra = n_extra)
   invisible(x)
 }
@@ -25,6 +18,20 @@ tbl_sum.tidytable_print <- function(x) {
 }
 
 #' @export
+vec_ptype_abbr.tidytable <- function(x) {
+  "tidytable"
+}
+
+# grouped_tt ---------------------------
+#' @export
+print.grouped_tt <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+  y <- x
+  class(y) <- c("paged_df", "grouped_tt_print", "tbl", "tidytable", "data.table", "data.frame")
+  print(y, ..., n = n, width = width, n_extra = n_extra)
+  invisible(x)
+}
+
+#' @export
 tbl_sum.grouped_tt_print <- function(x) {
   c("A grouped tidytable" = dim_desc(x))
 }
@@ -34,12 +41,23 @@ vec_ptype_abbr.grouped_tt <- function(x) {
   "grouped_tt"
 }
 
+# rowwise_tt ---------------------------
 #' @export
-vec_ptype_abbr.tidytable <- function(x) {
-  "tidytable"
+print.rowwise_tt <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+  y <- x
+  class(y) <- c("paged_df", "rowwise_tt_print", "tbl", "tidytable", "data.table", "data.frame")
+  print(y, ..., n = n, width = width, n_extra = n_extra)
+  invisible(x)
 }
 
 #' @export
-vec_ptype_abbr.tidytable_print <- function(x) {
-  "tidytable"
+tbl_sum.rowwise_tt_print <- function(x) {
+  c("A rowwise tidytable" = dim_desc(x))
 }
+
+#' @export
+vec_ptype_abbr.rowwise_tt <- function(x) {
+  "rowwise_tt"
+}
+
+

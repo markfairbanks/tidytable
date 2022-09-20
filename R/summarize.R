@@ -123,6 +123,15 @@ summarize..grouped_tt <- function(.df, ...,
 }
 
 #' @export
+summarize..rowwise_tt <- function(.df, ...,
+                                  .by = NULL,
+                                  .sort = TRUE,
+                                  .groups = "drop_last",
+                                  .unpack = FALSE) {
+  abort("`summarize()` is not yet supported on a rowwise tidytable.")
+}
+
+#' @export
 summarize..data.frame <- function(.df, ...,
                                   .by = NULL,
                                   .sort = TRUE,
