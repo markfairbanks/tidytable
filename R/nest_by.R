@@ -1,7 +1,9 @@
 #' Nest data.tables
 #'
 #' @description
-#' Nest data.tables by group
+#' Nest data.tables by group.
+#'
+#' Note: `nest_by()` _does not_ return a rowwise tidytable.
 #'
 #' @param .df A data.frame or data.table
 #' @param ... Columns to group by. If empty nests the entire data.table.

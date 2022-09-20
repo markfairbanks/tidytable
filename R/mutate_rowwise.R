@@ -70,13 +70,27 @@ mutate_rowwise..tidytable <- function(.df, ...,
 mutate_rowwise..grouped_tt <- function(.df, ...,
                                       .keep = c("all", "used", "unused", "none"),
                                       .before = NULL, .after = NULL) {
-  warn("Doing a rowwise operation on a grouped tidytable.
+  warn("Using `mutate_rowwise()` on a grouped tidytable.
        The output will be ungrouped.")
   out <- ungroup(.df)
   mutate_rowwise(out, ...,
                  .keep = .keep,
                  .before = {{ .before }},
                  .after = {{ .after }})
+}
+
+#' @export
+mutate_rowwise..rowwise_tt <- function(.df, ...,
+                                       .keep = c("all", "used", "unused", "none"),
+                                       .before = NULL, .after = NULL) {
+  warn("Using `mutate_rowwise()` on a rowwise tidytable.
+       You can use `mutate()` directly.")
+  out <- ungroup(.df)
+  out <- mutate_rowwise(out, ...,
+                        .keep = .keep,
+                        .before = {{ .before }},
+                        .after = {{ .after }})
+  rowwise(out)
 }
 
 #' @export

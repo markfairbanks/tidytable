@@ -202,6 +202,26 @@ mutate..data.frame <- function(.df, ..., .by = NULL,
   )
 }
 
+#' @export
+mutate..rowwise_tt <- function(.df, ..., .by = NULL,
+                               .keep = c("all", "used", "unused", "none"),
+                               .before = NULL, .after = NULL) {
+  check_by({{ .by }})
+  out <- ungroup(.df)
+
+  out <- mutate(out, .rowwise_id = .I)
+
+  out <- mutate(out, ...,
+                .by = .rowwise_id,
+                .keep = .keep,
+                .before = {{ .before }},
+                .after = {{ .after }})
+
+  out <- mutate(out, .rowwise_id = NULL)
+
+  rowwise(out)
+}
+
 # vec_recycle() prevents modify-by-reference if the column already exists in the data.table
 # Fixes case when user supplies a single value ex. 1, -1, "a"
 # !is_null(val) allows for columns to be deleted using mutate(.df, col = NULL)
