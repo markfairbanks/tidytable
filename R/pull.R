@@ -30,11 +30,18 @@
 #' df %>%
 #'   pull()
 pull <- function(.df, var = -1, name = NULL) {
-  UseMethod("pull")
+  pull.(.df, {{ var }}, {{ name }})
 }
 
 #' @export
-pull.data.frame <- function(.df, var = -1, name = NULL) {
+#' @keywords internal
+#' @rdname pull
+pull. <- function(.df, var = -1, name = NULL) {
+  UseMethod("pull.")
+}
+
+#' @export
+pull..data.frame <- function(.df, var = -1, name = NULL) {
   vec <- .pull(.df, {{ var }})
 
   name <- enquo(name)
@@ -43,20 +50,6 @@ pull.data.frame <- function(.df, var = -1, name = NULL) {
   }
 
   vec
-}
-
-#' @export pull.
-#' @keywords internal
-#' @usage
-#' pull(.df, var = -1, name = NULL)
-#' @inherit pull title description params examples
-pull. <- function(.df, var = -1, name = NULL) {
-  UseMethod("pull.")
-}
-
-#' @exportS3Method pull. data.frame
-pull..data.frame <- function(.df, var = -1, name = NULL) {
-  pull(.df, {{ var }}, {{ name }})
 }
 
 .pull <- function(.df, var) {

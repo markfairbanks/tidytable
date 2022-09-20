@@ -32,11 +32,18 @@
 #' df %>%
 #'   nest_by(c, d, .keep = TRUE)
 nest_by <- function(.df, ..., .key = "data", .keep = FALSE) {
-  UseMethod("nest_by")
+  nest_by.(.df, ..., .key = .key, .keep = .keep)
 }
 
 #' @export
-nest_by.tidytable <- function(.df, ..., .key = "data", .keep = FALSE) {
+#' @keywords internal
+#' @rdname nest_by
+nest_by. <- function(.df, ..., .key = "data", .keep = FALSE) {
+  UseMethod("nest_by.")
+}
+
+#' @export
+nest_by..tidytable <- function(.df, ..., .key = "data", .keep = FALSE) {
   vec_assert(.key, character(), 1)
   vec_assert(.keep, logical(), 1)
 
@@ -56,7 +63,7 @@ nest_by.tidytable <- function(.df, ..., .key = "data", .keep = FALSE) {
 }
 
 #' @export
-nest_by.grouped_tt <- function(.df, ..., .key = "data", .keep = FALSE) {
+nest_by..grouped_tt <- function(.df, ..., .key = "data", .keep = FALSE) {
   .by <- group_vars(.df)
   out <- ungroup(.df)
   out <- nest_by(.df, all_of(.by), .key = .key, .keep = .keep)
@@ -64,21 +71,8 @@ nest_by.grouped_tt <- function(.df, ..., .key = "data", .keep = FALSE) {
 }
 
 #' @export
-nest_by.data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
+nest_by..data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
   .df <- as_tidytable(.df)
   nest_by(.df, ..., .key = .key, .keep = .keep)
 }
 
-#' @export nest_by.
-#' @keywords internal
-#' @usage
-#' nest_by(.df, ..., .key = "data", .keep = FALSE)
-#' @inherit nest_by title description params examples
-nest_by. <- function(.df, ..., .key = "data", .keep = FALSE) {
-  UseMethod("nest_by.")
-}
-
-#' @exportS3Method nest_by. data.frame
-nest_by..data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
-  nest_by(.df, ..., .key = .key, .keep = .keep)
-}

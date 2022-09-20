@@ -3,11 +3,21 @@
 \name{enframe.}
 \alias{enframe.}
 \alias{mutate}
+\alias{mutate.}
 \title{Add/modify/delete columns}
 \usage{
 enframe.(x, name = "name", value = "value")
 
 mutate(
+  .df,
+  ...,
+  .by = NULL,
+  .keep = c("all", "used", "unused", "none"),
+  .before = NULL,
+  .after = NULL
+)
+
+mutate.(
   .df,
   ...,
   .by = NULL,

@@ -40,16 +40,32 @@ unnest <- function(.df,
                    .drop = TRUE,
                    names_sep = NULL,
                    names_repair = "unique") {
-  UseMethod("unnest")
+  unnest.(
+    .df, ..., keep_empty = keep_empty, .drop = .drop,
+    names_sep = names_sep, names_repair = names_repair
+  )
+}
+
+
+#' @export
+#' @keywords internal
+#' @rdname unnest
+unnest. <- function(.df,
+                    ...,
+                    keep_empty = FALSE,
+                    .drop = TRUE,
+                    names_sep = NULL,
+                    names_repair = "unique") {
+  UseMethod("unnest.")
 }
 
 #' @export
-unnest.tidytable <- function(.df,
-                             ...,
-                             keep_empty = FALSE,
-                             .drop = TRUE,
-                             names_sep = NULL,
-                             names_repair = "unique") {
+unnest..tidytable <- function(.df,
+                              ...,
+                              keep_empty = FALSE,
+                              .drop = TRUE,
+                              names_sep = NULL,
+                              names_repair = "unique") {
   vec_assert(.drop, logical(), 1)
 
   dots <- enquos(...)
@@ -100,47 +116,13 @@ unnest.tidytable <- function(.df,
 }
 
 #' @export
-unnest.data.frame <- function(.df,
-                              ...,
-                              keep_empty = FALSE,
-                              .drop = TRUE,
-                              names_sep = NULL,
-                              names_repair = "unique") {
-  .df <- as_tidytable(.df)
-  unnest(
-    .df, ..., keep_empty = keep_empty, .drop = .drop,
-    names_sep = names_sep, names_repair = names_repair
-  )
-}
-
-#' @export unnest.
-#' @keywords internal
-#' @usage
-#' unnest(
-#'   .df,
-#'   ...,
-#'   keep_empty = FALSE,
-#'   .drop = TRUE,
-#'   names_sep = NULL,
-#'   names_repair = "unique"
-#' )
-#' @inherit unnest title description params examples
-unnest. <- function(.df,
-                    ...,
-                    keep_empty = FALSE,
-                    .drop = TRUE,
-                    names_sep = NULL,
-                    names_repair = "unique") {
-  UseMethod("unnest.")
-}
-
-#' @exportS3Method unnest. data.frame
 unnest..data.frame <- function(.df,
                                ...,
                                keep_empty = FALSE,
                                .drop = TRUE,
                                names_sep = NULL,
                                names_repair = "unique") {
+  .df <- as_tidytable(.df)
   unnest(
     .df, ..., keep_empty = keep_empty, .drop = .drop,
     names_sep = names_sep, names_repair = names_repair

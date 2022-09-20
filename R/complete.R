@@ -19,11 +19,18 @@
 #' df %>%
 #'   complete(x, y, fill = list(z = 10))
 complete <- function(.df, ..., fill = list(), .by = NULL) {
-  UseMethod("complete")
+  complete.(.df, ..., fill = fill, .by = {{ .by }})
 }
 
 #' @export
-complete.tidytable <- function(.df, ..., fill = list(), .by = NULL) {
+#' @keywords internal
+#' @rdname complete
+complete. <- function(.df, ..., fill = list(), .by = NULL) {
+  UseMethod("complete.")
+}
+
+#' @export
+complete..tidytable <- function(.df, ..., fill = list(), .by = NULL) {
   dots <- enquos(...)
   dots <- dots[!map_lgl(dots, quo_is_null)]
   if (length(dots) == 0) return(.df)
@@ -39,7 +46,7 @@ complete.tidytable <- function(.df, ..., fill = list(), .by = NULL) {
 }
 
 #' @export
-complete.grouped_tt <- function(.df, ..., fill = list(), .by = NULL) {
+complete..grouped_tt <- function(.df, ..., fill = list(), .by = NULL) {
   check_by({{ .by }})
   .by <- group_vars(.df)
   out <- ungroup(.df)
@@ -48,20 +55,9 @@ complete.grouped_tt <- function(.df, ..., fill = list(), .by = NULL) {
 }
 
 #' @export
-complete.data.frame <- function(.df, ..., fill = list(), .by = NULL) {
+complete..data.frame <- function(.df, ..., fill = list(), .by = NULL) {
   .df <- as_tidytable(.df)
   complete(.df, ..., fill = fill, .by = {{ .by }})
 }
 
-#' @export complete.
-#' @keywords internal
-#' @usage complete(.df, ..., fill = list(), .by = NULL)
-#' @inherit complete title description params examples
-complete. <- function(.df, ..., fill = list(), .by = NULL) {
-  UseMethod("complete.")
-}
 
-#' @exportS3Method complete. data.frame
-complete..data.frame <- function(.df, ..., fill = list(), .by = NULL) {
-  complete(.df, ..., fill = fill, .by = {{ .by }})
-}

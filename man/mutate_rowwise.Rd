@@ -2,9 +2,18 @@
 % Please edit documentation in R/mutate_rowwise.R
 \name{mutate_rowwise}
 \alias{mutate_rowwise}
+\alias{mutate_rowwise.}
 \title{Add/modify columns by row}
 \usage{
 mutate_rowwise(
+  .df,
+  ...,
+  .keep = c("all", "used", "unused", "none"),
+  .before = NULL,
+  .after = NULL
+)
+
+mutate_rowwise.(
   .df,
   ...,
   .keep = c("all", "used", "unused", "none"),
@@ -46,3 +55,4 @@ df \%>\%
 df \%>\%
   mutate_rowwise(row_mean = mean(c_across(x:z)))
 }
+\keyword{internal}

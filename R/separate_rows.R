@@ -22,11 +22,18 @@
 #'
 #' separate_rows(df, y, z, convert = TRUE)
 separate_rows <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
-  UseMethod("separate_rows")
+  separate_rows.(.df, ..., sep = sep, convert = convert)
 }
 
 #' @export
-separate_rows.tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
+#' @keywords internal
+#' @rdname separate_rows
+separate_rows. <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
+  UseMethod("separate_rows.")
+}
+
+#' @export
+separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
   vec_assert(sep, character(), 1)
   vec_assert(convert, logical(), 1)
 
@@ -77,22 +84,8 @@ separate_rows.tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert = 
 }
 
 #' @export
-separate_rows.data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
-  .df <- as_tidytable(.df)
-  separate_rows(.df, ..., sep = sep, convert = convert)
-}
-
-#' @export separate_rows.
-#' @keywords internal
-#' @usage
-#' separate_rows(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE)
-#' @inherit separate_rows title description params examples
-separate_rows. <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
-  UseMethod("separate_rows.")
-}
-
-#' @exportS3Method separate_rows. data.frame
 separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
+  .df <- as_tidytable(.df)
   separate_rows(.df, ..., sep = sep, convert = convert)
 }
 

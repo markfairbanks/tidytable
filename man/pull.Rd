@@ -2,9 +2,12 @@
 % Please edit documentation in R/pull.R
 \name{pull}
 \alias{pull}
+\alias{pull.}
 \title{Pull out a single variable}
 \usage{
 pull(.df, var = -1, name = NULL)
+
+pull.(.df, var = -1, name = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -39,3 +42,4 @@ df \%>\%
 df \%>\%
   pull()
 }
+\keyword{internal}

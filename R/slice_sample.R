@@ -1,12 +1,22 @@
 #' @export
 #' @rdname slice
 slice_sample <- function(.df, n, prop, weight_by = NULL,
-                         replace = FALSE, .by = NULL) {
-  UseMethod("slice_sample")
+                                     replace = FALSE, .by = NULL) {
+  slice_sample.(
+    .df, n, prop, {{ weight_by }}, replace, .by = {{ .by }}
+  )
 }
 
 #' @export
-slice_sample.tidytable <- function(.df, n, prop, weight_by = NULL,
+#' @keywords internal
+#' @rdname slice
+slice_sample. <- function(.df, n, prop, weight_by = NULL,
+                         replace = FALSE, .by = NULL) {
+  UseMethod("slice_sample.")
+}
+
+#' @export
+slice_sample..tidytable <- function(.df, n, prop, weight_by = NULL,
                                    replace = FALSE, .by = NULL) {
   if (missing(n) && missing(prop)) {
     abort("Must supply either `n` or `prop`")
@@ -24,7 +34,7 @@ slice_sample.tidytable <- function(.df, n, prop, weight_by = NULL,
 }
 
 #' @export
-slice_sample.grouped_tt <- function(.df, n, prop, weight_by = NULL,
+slice_sample..grouped_tt <- function(.df, n, prop, weight_by = NULL,
                                     replace = FALSE, .by = NULL) {
   check_by({{ .by }})
   .by <- group_vars(.df)
@@ -36,30 +46,9 @@ slice_sample.grouped_tt <- function(.df, n, prop, weight_by = NULL,
 }
 
 #' @export
-slice_sample.data.frame <- function(.df, n, prop, weight_by = NULL,
+slice_sample..data.frame <- function(.df, n, prop, weight_by = NULL,
                                     replace = FALSE, .by = NULL) {
   .df <- as_tidytable(.df)
-  slice_sample(
-    .df, n, prop, {{ weight_by }}, replace, .by = {{ .by }}
-  )
-}
-
-#' @export slice_sample.
-#' @keywords internal
-#' @usage
-#' slice_sample(
-#'   .df, n, prop, weight_by = NULL,
-#'   replace = FALSE, .by = NULL
-#' )
-#' @inherit slice_sample title description params examples
-slice_sample. <- function(.df, n, prop, weight_by = NULL,
-                          replace = FALSE, .by = NULL) {
-  UseMethod("slice_sample.")
-}
-
-#' @exportS3Method slice_sample. data.frame
-slice_sample..data.frame <- function(.df, n, prop, weight_by = NULL,
-                                     replace = FALSE, .by = NULL) {
   slice_sample(
     .df, n, prop, {{ weight_by }}, replace, .by = {{ .by }}
   )

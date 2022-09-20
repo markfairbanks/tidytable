@@ -35,11 +35,18 @@
 #' df %>%
 #'   unite()
 unite <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
-  UseMethod("unite")
+  unite.(.df, {{ col }}, ..., sep = sep, remove = remove, na.rm = na.rm)
 }
 
 #' @export
-unite.tidytable <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
+#' @keywords internal
+#' @rdname unite
+unite. <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
+  UseMethod("unite.")
+}
+
+#' @export
+unite..tidytable <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
   col <- as_name(enquo(col))
 
   dots <- enquos(...)
@@ -73,21 +80,8 @@ unite.tidytable <- function(.df, col = ".united", ..., sep = "_", remove = TRUE,
 }
 
 #' @export
-unite.data.frame <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
+unite..data.frame <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
   .df <- as_tidytable(.df)
   unite(.df, {{ col }}, ..., sep = sep, remove = remove, na.rm = na.rm)
 }
 
-#' @export unite.
-#' @keywords internal
-#' @usage
-#' unite(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE)
-#' @inherit unite title description params examples
-unite. <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
-  UseMethod("unite.")
-}
-
-#' @exportS3Method unite. data.frame
-unite..data.frame <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
-  unite(.df, {{ col }}, ..., sep = sep, remove = remove, na.rm = na.rm)
-}

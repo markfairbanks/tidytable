@@ -2,9 +2,12 @@
 % Please edit documentation in R/filter.R
 \name{filter}
 \alias{filter}
+\alias{filter.}
 \title{Filter rows on one or more conditions}
 \usage{
 filter(.df, ..., .by = NULL)
+
+filter.(.df, ..., .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -29,3 +32,4 @@ df \%>\%
 df \%>\%
   filter(b <= mean(b), .by = c)
 }
+\keyword{internal}

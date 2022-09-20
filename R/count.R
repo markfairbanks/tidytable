@@ -51,66 +51,55 @@
 #'   group_by(x) %>%
 #'   tally()
 count <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
-  UseMethod("count")
+  count.(.df, ..., wt = {{ wt }}, sort = sort, name = name)
 }
 
 #' @export
-count.tidytable <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+#' @keywords internal
+#' @rdname count
+count. <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+  UseMethod("count.")
+}
+
+#' @export
+count..tidytable <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   .by <- quo(c(...))
   count_tally(.df, {{ wt }}, sort, name, .by = !!.by, .groups = "drop")
 }
 
 #' @export
-count.grouped_tt <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+count..grouped_tt <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   count_tally(.df, {{ wt }}, sort, name, .by = NULL, .groups = "keep")
 }
 
 #' @export
-count.data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+count..data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   .df <- as_tidytable(.df)
   count(.df, ..., wt = {{ wt }}, sort = sort, name = name)
 }
 
-#' @export count.
-#' @keywords internal
-#' @usage count(.df, ..., wt = NULL, sort = FALSE, name = NULL)
-#' @inherit count title description params examples
-count. <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
-  UseMethod("count.")
-}
-
-#' @exportS3Method count. data.frame
-count..data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
-  count(.df, ..., wt = {{ wt }}, sort = sort, name = name)
-}
 
 #' @export
 #' @rdname count
 tally <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
-  UseMethod("tally")
+  tally.(.df, wt = {{ wt }}, sort = sort, name = name)
 }
 
 #' @export
-tally.tidytable <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
-  count_tally(.df, {{ wt }}, sort, name)
-}
-
-#' @export
-tally.data.frame <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
-  .df <- as_tidytable(.df)
-  tally(.df, wt = {{ wt }}, sort = sort, name = name)
-}
-
-#' @export tally.
 #' @keywords internal
-#' @usage tally(.df, wt = NULL, sort = FALSE, name = NULL)
-#' @inherit count title description params examples
+#' @rdname count
 tally. <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
   UseMethod("tally.")
 }
 
-#' @exportS3Method tally. data.frame
+#' @export
+tally..tidytable <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
+  count_tally(.df, {{ wt }}, sort, name)
+}
+
+#' @export
 tally..data.frame <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
+  .df <- as_tidytable(.df)
   tally(.df, wt = {{ wt }}, sort = sort, name = name)
 }
 

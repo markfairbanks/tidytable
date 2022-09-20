@@ -2,9 +2,12 @@
 % Please edit documentation in R/top_n.R
 \name{top_n}
 \alias{top_n}
+\alias{top_n.}
 \title{Select top (or bottom) n rows (by value)}
 \usage{
 top_n(.df, n = 5, wt = NULL, .by = NULL)
+
+top_n.(.df, n = 5, wt = NULL, .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -31,3 +34,4 @@ df \%>\%
 df \%>\%
   top_n(2, wt = y, .by = z)
 }
+\keyword{internal}

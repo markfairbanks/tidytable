@@ -49,21 +49,44 @@ pivot_wider <- function(.df,
                         names_repair = "unique",
                         values_fill = NULL,
                         values_fn = NULL) {
-  UseMethod("pivot_wider")
+  pivot_wider.(
+    .df, names_from = {{ names_from }}, values_from = {{ values_from }},
+    id_cols = {{ id_cols }}, names_sep = names_sep,
+    names_prefix = names_prefix, names_glue = names_glue,
+    names_sort = names_sort, names_repair = names_repair,
+    values_fill = values_fill, values_fn = {{ values_fn }}
+  )
 }
 
 #' @export
-pivot_wider.tidytable <- function(.df,
-                                  names_from = name,
-                                  values_from = value,
-                                  id_cols = NULL,
-                                  names_sep = "_",
-                                  names_prefix = "",
-                                  names_glue = NULL,
-                                  names_sort = FALSE,
-                                  names_repair = "unique",
-                                  values_fill = NULL,
-                                  values_fn = NULL) {
+#' @keywords internal
+#' @rdname pivot_wider
+pivot_wider. <- function(.df,
+                         names_from = name,
+                         values_from = value,
+                         id_cols = NULL,
+                         names_sep = "_",
+                         names_prefix = "",
+                         names_glue = NULL,
+                         names_sort = FALSE,
+                         names_repair = "unique",
+                         values_fill = NULL,
+                         values_fn = NULL) {
+  UseMethod("pivot_wider.")
+}
+
+#' @export
+pivot_wider..tidytable <- function(.df,
+                                   names_from = name,
+                                   values_from = value,
+                                   id_cols = NULL,
+                                   names_sep = "_",
+                                   names_prefix = "",
+                                   names_glue = NULL,
+                                   names_sort = FALSE,
+                                   names_repair = "unique",
+                                   values_fill = NULL,
+                                   values_fn = NULL) {
   id_cols <- enquo(id_cols)
   values_fn <- quo_squash(enquo(values_fn))
 
@@ -151,59 +174,6 @@ pivot_wider.tidytable <- function(.df,
 }
 
 #' @export
-pivot_wider.data.frame <- function(.df,
-                                   names_from = name,
-                                   values_from = value,
-                                   id_cols = NULL,
-                                   names_sep = "_",
-                                   names_prefix = "",
-                                   names_glue = NULL,
-                                   names_sort = FALSE,
-                                   names_repair = "unique",
-                                   values_fill = NULL,
-                                   values_fn = NULL) {
-  .df <- as_tidytable(.df)
-  pivot_wider(
-    .df, names_from = {{ names_from }}, values_from = {{ values_from }},
-    id_cols = {{ id_cols }}, names_sep = names_sep,
-    names_prefix = names_prefix, names_glue = names_glue,
-    names_sort = names_sort, names_repair = names_repair,
-    values_fill = values_fill, values_fn = {{ values_fn }}
-  )
-}
-
-#' @export pivot_wider.
-#' @keywords internal
-#' @usage
-#' pivot_wider(
-#'   .df,
-#'   names_from = name,
-#'   values_from = value,
-#'   id_cols = NULL,
-#'   names_sep = "_",
-#'   names_prefix = "",
-#'   names_glue = NULL,
-#'   names_sort = FALSE,
-#'   names_repair = "unique",
-#'   values_fill = NULL,
-#'   values_fn = NULL
-#' )
-#' @inherit pivot_wider title description params examples
-pivot_wider. <- function(.df,
-                         names_from = name,
-                         values_from = value,
-                         id_cols = NULL,
-                         names_sep = "_",
-                         names_prefix = "",
-                         names_glue = NULL,
-                         names_sort = FALSE,
-                         names_repair = "unique",
-                         values_fill = NULL,
-                         values_fn = NULL) {
-  UseMethod("pivot_wider.")
-}
-
-#' @exportS3Method pivot_wider. data.frame
 pivot_wider..data.frame <- function(.df,
                                     names_from = name,
                                     values_from = value,
@@ -215,6 +185,7 @@ pivot_wider..data.frame <- function(.df,
                                     names_repair = "unique",
                                     values_fill = NULL,
                                     values_fn = NULL) {
+  .df <- as_tidytable(.df)
   pivot_wider(
     .df, names_from = {{ names_from }}, values_from = {{ values_from }},
     id_cols = {{ id_cols }}, names_sep = names_sep,

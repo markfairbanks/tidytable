@@ -25,11 +25,18 @@
 #' df %>%
 #'   distinct(z)
 distinct <- function(.df, ..., .keep_all = FALSE) {
-  UseMethod("distinct")
+  distinct.(.df, ..., .keep_all = .keep_all)
 }
 
 #' @export
-distinct.tidytable <- function(.df, ..., .keep_all = FALSE) {
+#' @keywords internal
+#' @rdname distinct
+distinct. <- function(.df, ..., .keep_all = FALSE) {
+  UseMethod("distinct.")
+}
+
+#' @export
+distinct..tidytable <- function(.df, ..., .keep_all = FALSE) {
   vec_assert(.keep_all, logical(), 1)
 
   dots <- enquos(...)
@@ -61,20 +68,7 @@ distinct.tidytable <- function(.df, ..., .keep_all = FALSE) {
 }
 
 #' @export
-distinct.data.frame <- function(.df, ..., .keep_all = FALSE) {
-  .df <- as_tidytable(.df)
-  distinct(.df, ..., .keep_all = .keep_all)
-}
-
-#' @export distinct.
-#' @keywords internal
-#' @usage distinct(.df, ..., .keep_all = FALSE)
-#' @inherit distinct title description params examples
-distinct. <- function(.df, ..., .keep_all = FALSE) {
-  UseMethod("distinct.")
-}
-
-#' @exportS3Method distinct. data.frame
 distinct..data.frame <- function(.df, ..., .keep_all = FALSE) {
+  .df <- as_tidytable(.df)
   distinct(.df, ..., .keep_all = .keep_all)
 }
