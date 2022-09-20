@@ -1,3 +1,4 @@
+# count() ----------------------------------------------
 test_that("empty count() returns number of rows", {
   df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
   out <- df %>%
@@ -76,6 +77,45 @@ test_that("count. works", {
   df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
   out <- df %>%
     count.()
+
+  expect_named(out, c("n"))
+  expect_equal(out$n, nrow(df))
+})
+
+# tally() ----------------------------------------------
+test_that("empty tally returns number of rows", {
+  df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
+  out <- df %>%
+    tally()
+
+  expect_named(out, c("n"))
+  expect_equal(out$n, nrow(df))
+})
+
+test_that("works on data.frame", {
+  df <- data.frame(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
+  out <- df %>%
+    tally()
+
+  expect_named(out, c("n"))
+  expect_equal(out$n, nrow(df))
+})
+
+test_that("works on grouped_tt", {
+  df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
+  out <- df %>%
+    group_by(d) %>%
+    tally()
+
+  expect_named(out, c("d", "n"))
+  expect_equal(out$d, c("a", "b"))
+  expect_equal(out$n, c(2, 1))
+})
+
+test_that("tally. works", {
+  df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
+  out <- df %>%
+    tally..data.frame()
 
   expect_named(out, c("n"))
   expect_equal(out$n, nrow(df))
