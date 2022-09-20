@@ -9,7 +9,7 @@ count(.df, ..., wt = NULL, sort = FALSE, name = NULL)
 \arguments{
 \item{.df}{A data.frame or data.table}
 
-\item{...}{Columns to group by. \code{tidyselect} compatible.}
+\item{...}{Columns to group by in \code{count()}. \code{tidyselect} compatible.}
 
 \item{wt}{Frequency weights.  \code{tidyselect} compatible.
 Can be \code{NULL} or a variable:
@@ -25,28 +25,40 @@ Can be \code{NULL} or a variable:
 If omitted, it will default to \code{n}.}
 }
 \description{
-Returns row counts of the dataset. If bare column names are provided, \code{count()} returns counts by group.
+Returns row counts of the dataset.
+
+\code{tally()} returns counts by group on a grouped tidytable.
+
+\code{count()} returns counts by group on a grouped tidytable, or column names can be specified
+to return counts by group.
 }
 \examples{
 df <- data.table(
-  x = 1:3,
-  y = 4:6,
-  z = c("a", "a", "b")
+  x = c("a", "a", "b"),
+  y = c("a", "a", "b"),
+  z = 1:3
 )
 
 df \%>\%
   count()
 
 df \%>\%
-  count(z)
+  count(x)
 
 df \%>\%
   count(where(is.character))
 
 df \%>\%
-  count(z, wt = y, name = "y_sum")
+  count(x, wt = z, name = "x_sum")
 
 df \%>\%
-  count(z, sort = TRUE)
+  count(x, sort = TRUE)
+
+df \%>\%
+  tally()
+
+df \%>\%
+  group_by(x) \%>\%
+  tally()
 }
 \keyword{internal}

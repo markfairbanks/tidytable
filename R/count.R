@@ -1,10 +1,15 @@
 #' Count observations by group
 #'
 #' @description
-#' Returns row counts of the dataset. If bare column names are provided, `count()` returns counts by group.
+#' Returns row counts of the dataset.
+#'
+#' `tally()` returns counts by group on a grouped tidytable.
+#'
+#' `count()` returns counts by group on a grouped tidytable, or column names can be specified
+#' to return counts by group.
 #'
 #' @param .df A data.frame or data.table
-#' @param ... Columns to group by. `tidyselect` compatible.
+#' @param ... Columns to group by in `count()`. `tidyselect` compatible.
 #' @param wt Frequency weights.  `tidyselect` compatible.
 #'   Can be `NULL` or a variable:
 #'
@@ -19,70 +24,45 @@
 #'
 #' @examples
 #' df <- data.table(
-#'   x = 1:3,
-#'   y = 4:6,
-#'   z = c("a", "a", "b")
+#'   x = c("a", "a", "b"),
+#'   y = c("a", "a", "b"),
+#'   z = 1:3
 #' )
 #'
 #' df %>%
 #'   count()
 #'
 #' df %>%
-#'   count(z)
+#'   count(x)
 #'
 #' df %>%
 #'   count(where(is.character))
 #'
 #' df %>%
-#'   count(z, wt = y, name = "y_sum")
+#'   count(x, wt = z, name = "x_sum")
 #'
 #' df %>%
-#'   count(z, sort = TRUE)
+#'   count(x, sort = TRUE)
+#'
+#' df %>%
+#'   tally()
+#'
+#' df %>%
+#'   group_by(x) %>%
+#'   tally()
 count <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   UseMethod("count")
 }
 
 #' @export
 count.tidytable <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
-  .by <- enquos(...)
-  wt <- enquo(wt)
-
-  if (is.null(name)) {
-    name <- "n"
-  }
-
-  if (quo_is_null(wt)) {
-    out <- summarize(.df, !!name := .N, .by = c(!!!.by))
-  } else {
-    out <- summarize(.df, !!name := sum(!!wt, na.rm = TRUE), .by = c(!!!.by))
-  }
-
-  if (sort) {
-    out <- arrange(out, -!!sym(name))
-  }
-
-  out
+  .by <- quo(c(...))
+  count_tally(.df, {{ wt }}, sort, name, .by = !!.by, .groups = "drop")
 }
 
 #' @export
 count.grouped_tt <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
-  wt <- enquo(wt)
-
-  if (is.null(name)) {
-    name <- "n"
-  }
-
-  if (quo_is_null(wt)) {
-    out <- summarize(.df, !!name := .N, .groups = "keep")
-  } else {
-    out <- summarize(.df, !!name := sum(!!wt, na.rm = TRUE), .groups = "keep")
-  }
-
-  if (sort) {
-    out <- arrange(out, -!!sym(name))
-  }
-
-  out
+  count_tally(.df, {{ wt }}, sort, name, .by = NULL, .groups = "keep")
 }
 
 #' @export
@@ -102,4 +82,55 @@ count. <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
 #' @exportS3Method count. data.frame
 count..data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   count(.df, ..., wt = {{ wt }}, sort = sort, name = name)
+}
+
+#' @export
+#' @rdname count
+tally <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
+  UseMethod("tally")
+}
+
+#' @export
+tally.tidytable <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
+  count_tally(.df, {{ wt }}, sort, name)
+}
+
+#' @export
+tally.data.frame <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
+  .df <- as_tidytable(.df)
+  tally(.df, wt = {{ wt }}, sort = sort, name = name)
+}
+
+#' @export tally.
+#' @keywords internal
+#' @usage tally(.df, wt = NULL, sort = FALSE, name = NULL)
+#' @inherit count title description params examples
+tally. <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
+  UseMethod("tally.")
+}
+
+#' @exportS3Method tally. data.frame
+tally..data.frame <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
+  tally(.df, wt = {{ wt }}, sort = sort, name = name)
+}
+
+count_tally <- function(.df, wt = NULL, sort = FALSE, name = NULL,
+                        .by = NULL, .groups = "drop_last") {
+  wt <- enquo(wt)
+
+  if (is.null(name)) {
+    name <- "n"
+  }
+
+  if (quo_is_null(wt)) {
+    out <- summarize(.df, !!name := .N, .by = {{ .by }}, .groups = .groups)
+  } else {
+    out <- summarize(.df, !!name := sum(!!wt, na.rm = TRUE), .by = {{ .by }}, .groups = .groups)
+  }
+
+  if (sort) {
+    out <- arrange(out, -!!sym(name))
+  }
+
+  out
 }
