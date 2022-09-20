@@ -41,7 +41,7 @@ distinct..tidytable <- function(.df, ..., .keep_all = FALSE) {
 
   dots <- enquos(...)
 
-  across_check(dots, "distinct")
+  check_across(dots, "distinct")
 
   if (length(dots) == 0) {
     out <- unique(.df)
