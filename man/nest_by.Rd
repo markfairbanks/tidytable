@@ -20,7 +20,9 @@ nest_by.(.df, ..., .key = "data", .keep = FALSE)
 \item{.keep}{Should the grouping columns be kept in the list column.}
 }
 \description{
-Nest data.tables by group
+Nest data.tables by group.
+
+Note: \code{nest_by()} \emph{does not} return a rowwise tidytable.
 }
 \examples{
 df <- data.table(
