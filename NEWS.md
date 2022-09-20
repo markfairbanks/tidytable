@@ -12,6 +12,7 @@
   * `group_by()`/`ungroup()`
   * `group_vars()`
   * `is_grouped_df()`
+* `add_tally()`/`tally()`
 * `case_match()`
 
 #### Functionality improvements
