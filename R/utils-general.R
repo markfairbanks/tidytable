@@ -130,6 +130,13 @@ is_simple_vector <- function(x) {
   is.atomic(x) && !is.matrix(x)
 }
 
+# Set the class attribute of an object
+# Defaults to a basic tidytable
+set_class <- function(x, .class = c("tidytable", "data.table", "data.frame")) {
+  class(x) <- .class
+  x
+}
+
 # Restore user defined attributes
 tidytable_restore <- function(x, to) {
   # Make sure auto-index is reset since vec_restore reapplies the original index
