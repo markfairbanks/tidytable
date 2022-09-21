@@ -38,7 +38,7 @@ cj_expand_grid <- function(..., .name_repair = "check_unique") {
 
   setkey(result_df, NULL)
 
-  result_df <- df_name_repair(result_df, .name_repair = .name_repair)
+  result_df <- df_name_repair(result_df, .name_repair)
 
   as_tidytable(result_df)
 }

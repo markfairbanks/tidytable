@@ -220,15 +220,15 @@ pivot_longer..tidytable <- function(.df,
     out <- dt_j(out, !!variable_name := NULL)
   }
 
-  out <- df_name_repair(out, .name_repair = names_repair)
+  out <- df_name_repair(out, names_repair)
 
   # names_ptype & names_transform
-  out <- change_types(out, names_to, names_ptypes, "ptypes")
-  out <- change_types(out, names_to, names_transform, "transform")
+  out <- change_types(out, names_to, .ptypes = names_ptypes)
+  out <- change_types(out, names_to, .transform = names_transform)
 
   # values_ptype & values_transform
-  out <- change_types(out, values_to, values_ptypes, "ptypes")
-  out <- change_types(out, values_to, values_transform, "transform")
+  out <- change_types(out, values_to, .ptypes = values_ptypes)
+  out <- change_types(out, values_to, .transform = values_transform)
 
   # data.table::melt() drops NAs using "&" logic, not "|"
   # See issue #186

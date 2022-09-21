@@ -46,28 +46,25 @@ globalVariables("V1")
 # setnames without modify-by-reference
 df_set_names <- function(.df, new_names = NULL, old_names = NULL) {
   if (is.null(old_names)) {
-    names(.df) <- new_names
+    out <- set_names(.df, new_names)
   } else {
-    .df <- shallow(.df)
-    setnames(.df, old_names, new_names)
+    out <- fast_copy(.df)
+    setnames(out, old_names, new_names)
   }
-  .df
+  out
 }
 
 # setcolorder without modify-by-reference
 df_col_order <- function(.df, new_order) {
-  .df <- shallow(.df)
-  setcolorder(.df, new_order)
-  .df
+  out <- fast_copy(.df)
+  setcolorder(out, new_order)
+  out
 }
 
 # Repair names of a data.table
 df_name_repair <- function(.df, .name_repair = "unique") {
-  names(.df) <- vec_as_names(
-    names(.df),
-    repair = .name_repair
-  )
-  .df
+  new_names <- vec_as_names(names(.df), repair = .name_repair)
+  df_set_names(.df, new_names)
 }
 
 check_by <- function(.by) {
@@ -101,9 +98,11 @@ get_dt_env <- function(x, ...) {
   env(dt_env, ...)
 }
 
-# Reduce a list of calls to a single combined call
-call_reduce <- function(x, fun) {
-  Reduce(function(x, y) call2(fun, x, y), x)
+# Set the class attribute of an object
+# Defaults to a basic tidytable
+set_class <- function(x, .class = c("tidytable", "data.table", "data.frame")) {
+  class(x) <- .class
+  x
 }
 
 # radix sort
@@ -130,11 +129,9 @@ is_simple_vector <- function(x) {
   is.atomic(x) && !is.matrix(x)
 }
 
-# Set the class attribute of an object
-# Defaults to a basic tidytable
-set_class <- function(x, .class = c("tidytable", "data.table", "data.frame")) {
-  class(x) <- .class
-  x
+# Reduce a list of calls to a single combined call
+call_reduce <- function(x, fun) {
+  Reduce(function(x, y) call2(fun, x, y), x)
 }
 
 # Restore user defined attributes
@@ -168,21 +165,19 @@ deprecate_old_across <- function(fn) {
 
 # Does type changes with either ptype or transform logic
 # For use in pivot_longer/unnest_longer/unnest_wider
-change_types <- function(.df, .to, .list, .ptypes_transform) {
-  vars <- intersect(.to, names(.list))
-  if (length(vars) > 0) {
-    if (.ptypes_transform == "ptypes") {
-      calls <- map2(syms(vars), .list, ~ call2("vec_cast", .x, .y))
-    } else if (.ptypes_transform == "transform") {
-      .list <- map(.list, as_function)
-      calls <- map2(.list, syms(vars), call2)
-    } else {
-      abort("Please specify ptypes or transform")
-    }
-    names(calls) <- vars
-    .df <- mutate(.df, !!!calls)
+change_types <- function(.df, .cols, .ptypes = NULL, .transform = NULL) {
+  if (!is.null(.ptypes)) {
+    .cols <- intersect(.cols, names(.ptypes))
+    calls <- map2(syms(.cols), .ptypes, ~ call2("vec_cast", .x, .y))
+  } else if (!is.null(.transform)) {
+    .cols <- intersect(.cols, names(.transform))
+    .transform <- map(.transform, as_function)
+    calls <- map2(.transform, syms(.cols), call2)
+  } else {
+    abort("Please provide ptypes or transforms")
   }
-  .df
+  names(calls) <- .cols
+  mutate(.df, !!!calls)
 }
 
 # For internal testing
