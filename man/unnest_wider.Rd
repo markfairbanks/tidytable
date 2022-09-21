@@ -10,8 +10,8 @@ unnest_wider(
   names_sep = NULL,
   simplify = NULL,
   names_repair = "check_unique",
-  ptype = list(),
-  transform = list()
+  ptype = NULL,
+  transform = NULL
 )
 }
 \arguments{

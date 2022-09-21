@@ -13,8 +13,8 @@ unnest_longer(
   indices_include = NULL,
   names_repair = "check_unique",
   simplify = NULL,
-  ptype = list(),
-  transform = list()
+  ptype = NULL,
+  transform = NULL
 )
 
 unnest_longer.(
@@ -25,8 +25,8 @@ unnest_longer.(
   indices_include = NULL,
   names_repair = "check_unique",
   simplify = NULL,
-  ptype = list(),
-  transform = list()
+  ptype = NULL,
+  transform = NULL
 )
 }
 \arguments{

@@ -25,7 +25,7 @@
 #' df %>% unnest_wider(y, names_sep = "_")
 unnest_wider <- function(.df, col, names_sep = NULL,
                          simplify = NULL, names_repair = "check_unique",
-                         ptype = list(), transform = list()) {
+                         ptype = NULL, transform = NULL) {
   unnest_wider.(
     .df, col = {{ col }}, names_sep = names_sep, simplify = simplify,
     names_repair = names_repair, ptype = ptype, transform = transform
@@ -34,14 +34,14 @@ unnest_wider <- function(.df, col, names_sep = NULL,
 
 unnest_wider. <- function(.df, col, names_sep = NULL,
                           simplify = NULL, names_repair = "check_unique",
-                          ptype = list(), transform = list()) {
+                          ptype = NULL, transform = NULL) {
   UseMethod("unnest_wider.")
 }
 
 #' @export
 unnest_wider..tidytable <- function(.df, col, names_sep = NULL,
                                     simplify = NULL, names_repair = "check_unique",
-                                    ptype = list(), transform = list()) {
+                                    ptype = NULL, transform = NULL) {
   .col <- enquo(col)
 
   .l <- pull(.df, !!.col)
@@ -58,6 +58,8 @@ unnest_wider..tidytable <- function(.df, col, names_sep = NULL,
 
   out <- bind_rows(.l)
 
+  new_names <- names(out)
+
   if (!is.null(names_sep)) {
     out_names <- names(out)
     new_names <- paste(as_name(.col), out_names, sep = names_sep)
@@ -73,8 +75,7 @@ unnest_wider..tidytable <- function(.df, col, names_sep = NULL,
     out <- bind_cols(.df, out, .name_repair = names_repair)
   }
 
-  out <- change_types(out, names(out), .ptypes = ptype)
-  out <- change_types(out, names(out), .transform = transform)
+  out <- change_types(out, new_names, ptype, transform)
 
   out
 }
@@ -82,7 +83,7 @@ unnest_wider..tidytable <- function(.df, col, names_sep = NULL,
 #' @export
 unnest_wider..data.frame <- function(.df, col, names_sep = NULL,
                                      simplify = NULL, names_repair = "check_unique",
-                                     ptype = list(), transform = list()) {
+                                     ptype = NULL, transform = NULL) {
   .df <- as_tidytable(.df)
   unnest_wider(
     .df, col = {{ col }}, names_sep = names_sep, simplify = simplify,
