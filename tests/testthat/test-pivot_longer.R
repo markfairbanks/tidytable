@@ -47,11 +47,22 @@ test_that("can pivot all cols (specified) to long", {
 
 test_that("can coerce names with names_transform", {
   df <- data.table("1"=10, "2"=20)
+  # transform in a list
   pivot_df <- df %>%
     pivot_longer(1:2, names_to = "int", names_transform = list(int = as.integer))
 
   expect_named(pivot_df, c("int", "value"))
   expect_equal(pivot_df$int, c(1, 2))
+  expect_true(is.integer(pivot_df$int))
+  expect_equal(pivot_df$value, c(10, 20))
+
+  # Can pass single transform
+  pivot_df <- df %>%
+    pivot_longer(1:2, names_to = "int", names_transform = as.integer)
+
+  expect_named(pivot_df, c("int", "value"))
+  expect_equal(pivot_df$int, c(1, 2))
+  expect_true(is.integer(pivot_df$int))
   expect_equal(pivot_df$value, c(10, 20))
 })
 
@@ -59,6 +70,13 @@ test_that("can coerce names with names_ptype", {
   df <- data.table("1"=10, "2"=20)
   pivot_df <- df %>%
     pivot_longer(1:2, names_to = "int", names_ptype = list(int = factor()))
+
+  expect_named(pivot_df, c("int", "value"))
+  expect_equal(pivot_df$int, as.factor(c(1, 2)))
+  expect_equal(pivot_df$value, c(10, 20))
+
+  pivot_df <- df %>%
+    pivot_longer(1:2, names_to = "int", names_ptype = factor())
 
   expect_named(pivot_df, c("int", "value"))
   expect_equal(pivot_df$int, as.factor(c(1, 2)))
@@ -74,12 +92,25 @@ test_that("can coerce values with values_transform", {
   expect_named(pivot_df, c("name", "value"))
   expect_equal(pivot_df$name, c("x","x","y","y"))
   expect_equal(pivot_df$value, as.character(c(1,2,3,4)))
+
+  # Passing a single function
+  pivot_df <- df %>%
+    pivot_longer(cols = c(x,y), values_transform = as.character) %>%
+    arrange(name, value)
+
+  expect_named(pivot_df, c("name", "value"))
+  expect_equal(pivot_df$name, c("x","x","y","y"))
+  expect_equal(pivot_df$value, as.character(c(1,2,3,4)))
 })
 
 test_that("can coerce values with values_ptypes", {
   df <- data.table(x = 1:2, y = 3:4)
   pivot_df <- df %>%
     pivot_longer(cols = c(x,y), values_ptype = list(value = int())) %>%
+    arrange(name, value)
+
+  pivot_df <- df %>%
+    pivot_longer(cols = c(x,y), values_ptype = int()) %>%
     arrange(name, value)
 
   expect_named(pivot_df, c("name", "value"))

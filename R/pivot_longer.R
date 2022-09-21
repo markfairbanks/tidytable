@@ -44,12 +44,12 @@ pivot_longer <- function(.df,
                          names_prefix = NULL,
                          names_sep = NULL,
                          names_pattern = NULL,
-                         names_ptypes = list(),
-                         names_transform = list(),
+                         names_ptypes = NULL,
+                         names_transform = NULL,
                          names_repair = "check_unique",
                          values_drop_na = FALSE,
-                         values_ptypes = list(),
-                         values_transform = list(),
+                         values_ptypes = NULL,
+                         values_transform = NULL,
                          fast_pivot = FALSE,
                          ...) {
   pivot_longer.(
@@ -73,12 +73,12 @@ pivot_longer. <- function(.df,
                           names_prefix = NULL,
                           names_sep = NULL,
                           names_pattern = NULL,
-                          names_ptypes = list(),
-                          names_transform = list(),
+                          names_ptypes = NULL,
+                          names_transform = NULL,
                           names_repair = "check_unique",
                           values_drop_na = FALSE,
-                          values_ptypes = list(),
-                          values_transform = list(),
+                          values_ptypes = NULL,
+                          values_transform = NULL,
                           fast_pivot = FALSE,
                           ...) {
   UseMethod("pivot_longer.")
@@ -92,12 +92,12 @@ pivot_longer..tidytable <- function(.df,
                                     names_prefix = NULL,
                                     names_sep = NULL,
                                     names_pattern = NULL,
-                                    names_ptypes = list(),
-                                    names_transform = list(),
+                                    names_ptypes = NULL,
+                                    names_transform = NULL,
                                     names_repair = "check_unique",
                                     values_drop_na = FALSE,
-                                    values_ptypes = list(),
-                                    values_transform = list(),
+                                    values_ptypes = NULL,
+                                    values_transform = NULL,
                                     fast_pivot = FALSE,
                                     ...) {
   names <- names(.df)
@@ -222,13 +222,11 @@ pivot_longer..tidytable <- function(.df,
 
   out <- df_name_repair(out, names_repair)
 
-  # names_ptype & names_transform
-  out <- change_types(out, names_to, .ptypes = names_ptypes)
-  out <- change_types(out, names_to, .transform = names_transform)
+  # names types
+  out <- change_types(out, names_to, names_ptypes, names_transform)
 
-  # values_ptype & values_transform
-  out <- change_types(out, values_to, .ptypes = values_ptypes)
-  out <- change_types(out, values_to, .transform = values_transform)
+  # values types
+  out <- change_types(out, values_to, values_ptypes, values_transform)
 
   # data.table::melt() drops NAs using "&" logic, not "|"
   # See issue #186
@@ -247,12 +245,12 @@ pivot_longer..data.frame <- function(.df,
                                      names_prefix = NULL,
                                      names_sep = NULL,
                                      names_pattern = NULL,
-                                     names_ptypes = list(),
-                                     names_transform = list(),
+                                     names_ptypes = NULL,
+                                     names_transform = NULL,
                                      names_repair = "check_unique",
                                      values_drop_na = FALSE,
-                                     values_ptypes = list(),
-                                     values_transform = list(),
+                                     values_ptypes = NULL,
+                                     values_transform = NULL,
                                      fast_pivot = FALSE,
                                      ...) {
   .df <- as_tidytable(.df)

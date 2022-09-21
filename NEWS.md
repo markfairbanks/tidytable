@@ -18,6 +18,10 @@
 
 #### Functionality improvements
 * `summarize()`: Gains `.unpack` argument
+* `pivot_longer()`: Can pass a single ptype or function to
+  `values_ptypes`/`values_transform`/`names_ptypes`/`names_transform` args.
+* `unnest_longer()`/`unnest_wider()`: Can pass a single ptype or function to
+  `ptype`/`transform` args.
 
 #### Bug fixes
 * `tidytable::'%in%'` dispatches to `base::'%in%'` when comparing with a list (#563)

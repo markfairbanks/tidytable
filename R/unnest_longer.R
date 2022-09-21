@@ -25,7 +25,7 @@
 #' df %>% unnest_longer(y)
 unnest_longer <- function(.df, col, values_to = NULL, indices_to = NULL,
                           indices_include = NULL, names_repair = "check_unique",
-                          simplify = NULL, ptype = list(), transform = list()) {
+                          simplify = NULL, ptype = NULL, transform = NULL) {
   unnest_longer.(
     .df, col = {{ col }}, values_to = values_to, indices_to = indices_to,
     indices_include = indices_include, names_repair = names_repair, simplify = simplify,
@@ -38,14 +38,14 @@ unnest_longer <- function(.df, col, values_to = NULL, indices_to = NULL,
 #' @rdname unnest_longer
 unnest_longer. <- function(.df, col, values_to = NULL, indices_to = NULL,
                           indices_include = NULL, names_repair = "check_unique",
-                          simplify = NULL, ptype = list(), transform = list()) {
+                          simplify = NULL, ptype = NULL, transform = NULL) {
   UseMethod("unnest_longer.")
 }
 
 #' @export
 unnest_longer..tidytable <- function(.df, col, values_to = NULL, indices_to = NULL,
                                      indices_include = NULL, names_repair = "check_unique",
-                                     simplify = NULL, ptype = list(), transform = list()) {
+                                     simplify = NULL, ptype = NULL, transform = NULL) {
   .col <- enquo(col)
 
   x <- pull(.df, !!.col)
@@ -83,8 +83,7 @@ unnest_longer..tidytable <- function(.df, col, values_to = NULL, indices_to = NU
     .drop = FALSE
   )
 
-  .df <- change_types(.df, to_vec, .ptype = ptype)
-  .df <- change_types(.df, to_vec, .transform = transform)
+  .df <- change_types(.df, to_vec, ptype, transform)
 
   .df
 }

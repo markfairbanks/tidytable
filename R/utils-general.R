@@ -163,21 +163,35 @@ deprecate_old_across <- function(fn) {
   stop_defunct(msg)
 }
 
-# Does type changes with either ptype or transform logic
+# Does type changes with ptype & transform logic
 # For use in pivot_longer/unnest_longer/unnest_wider
 change_types <- function(.df, .cols, .ptypes = NULL, .transform = NULL) {
   if (!is.null(.ptypes)) {
+    if (!vec_is_list(.ptypes)) {
+      # Allow providing a single ptype for all cols
+      .ptypes <- vec_rep(list(.ptypes), length(.cols))
+      .ptypes <- set_names(.ptypes, .cols)
+    }
     .cols <- intersect(.cols, names(.ptypes))
-    calls <- map2(syms(.cols), .ptypes, ~ call2("vec_cast", .x, .y))
-  } else if (!is.null(.transform)) {
+    ptype_exprs <- map2(syms(.cols), .ptypes, ~ call2("vec_cast", .x, .y, .ns = "vctrs"))
+    names(ptype_exprs) <- .cols
+    .df <- mutate(.df, !!!ptype_exprs)
+  }
+
+  if (!is.null(.transform)) {
+    if (!vec_is_list(.transform)) {
+      # Allow providing a single transform for all cols
+      .transform <- vec_rep(list(.transform), length(.cols))
+      .transform <- set_names(.transform, .cols)
+    }
     .cols <- intersect(.cols, names(.transform))
     .transform <- map(.transform, as_function)
-    calls <- map2(.transform, syms(.cols), call2)
-  } else {
-    abort("Please provide ptypes or transforms")
+    transform_exprs <- map2(.transform, syms(.cols), call2)
+    names(transform_exprs) <- .cols
+    .df <- mutate(.df, !!!transform_exprs)
   }
-  names(calls) <- .cols
-  mutate(.df, !!!calls)
+
+  .df
 }
 
 # For internal testing
