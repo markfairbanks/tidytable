@@ -46,9 +46,9 @@ group_by..tidytable <- function(.df, ...) {
   if (length(.groups) == 0) {
     return(.df)
   }
-  class(.df) <- c("grouped_tt", class(.df))
-  attr(.df, "groups") <- .groups
-  .df
+  out <- set_class(.df, c("grouped_tt", class(.df)))
+  attr(out, "groups") <- .groups
+  out
 }
 
 #' @export

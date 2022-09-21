@@ -26,16 +26,13 @@ as_tidytable <- function(x, ...,
 }
 
 #' @export
-as_tidytable.tidytable <- function(x, ...,
-                                   .name_repair = "unique") {
+as_tidytable.tidytable <- function(x, ..., .name_repair = "unique") {
   x
 }
 
 #' @export
-as_tidytable.data.table <- function(x, ...,
-                                    .name_repair = "unique") {
-  x <- add_tidytable_class(x)
-
+as_tidytable.data.table <- function(x, ..., .name_repair = "unique") {
+  x <- set_class(x)
   df_name_repair(x, .name_repair = .name_repair)
 }
 
@@ -61,24 +58,19 @@ as_tidytable.data.frame <- function(x, ...,
 }
 
 #' @export
-as_tidytable.list <- function(x, ...,
-                              .name_repair = "unique") {
+as_tidytable.list <- function(x, ..., .name_repair = "unique") {
   x <- df_list(!!!x, .name_repair = .name_repair)
   new_tidytable(x)
 }
 
 #' @export
-as_tidytable.grouped_tt <- function(x, ...,
-                                   .name_repair = "unique") {
-  out <- add_tidytable_class(x)
-  df_name_repair(out, .name_repair = .name_repair)
+as_tidytable.grouped_tt <- function(x, ...) {
+  new_tidytable(x)
 }
 
 #' @export
-as_tidytable.rowwise_tt <- function(x, ...,
-                                    .name_repair = "unique") {
-  out <- add_tidytable_class(x)
-  df_name_repair(out, .name_repair = .name_repair)
+as_tidytable.rowwise_tt <- function(x, ...) {
+  new_tidytable(x)
 }
 
 #' @export
@@ -86,11 +78,6 @@ as_tidytable.default <- function(x, ...,
                                  .name_repair = "unique",
                                  .keep_rownames = FALSE) {
   out <- as.data.table(x, .keep_rownames)
-  out <- add_tidytable_class(out)
+  out <- set_class(out)
   df_name_repair(out, .name_repair = .name_repair)
-}
-
-add_tidytable_class <- function(x) {
-  class(x) <- c("tidytable", "data.table", "data.frame")
-  x
 }
