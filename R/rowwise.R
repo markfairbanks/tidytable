@@ -20,30 +20,30 @@
 #'   rowwise() %>%
 #'   mutate(row_mean = mean(c_across(x:z))) %>%
 #'   ungroup()
-rowwise <- function(.df, ...) {
-  rowwise.(.df, ...)
+rowwise <- function(.df) {
+  rowwise.(.df)
 }
 
 #' @export
 #' @keywords internal
 #' @rdname rowwise
-rowwise. <- function(.df, ...) {
+rowwise. <- function(.df) {
   UseMethod("rowwise.")
 }
 
 #' @export
-rowwise..tidytable <- function(.df, ...) {
+rowwise..tidytable <- function(.df) {
   set_class(.df, c("rowwise_tt", class(.df)))
 }
 
 #' @export
-rowwise..grouped_tt <- function(.df, ...) {
+rowwise..grouped_tt <- function(.df) {
   out <- ungroup(.df)
-  rowwise(out, ...)
+  rowwise(out)
 }
 
 #' @export
-rowwise..data.frame <- function(.df, ...) {
+rowwise..data.frame <- function(.df) {
   .df <- as_tidytable(.df)
-  rowwise(.df, ...)
+  rowwise(.df)
 }

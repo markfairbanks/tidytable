@@ -5,9 +5,9 @@
 \alias{rowwise.}
 \title{Convert to a rowwise tidytable}
 \usage{
-rowwise(.df, ...)
+rowwise(.df)
 
-rowwise.(.df, ...)
+rowwise.(.df)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
