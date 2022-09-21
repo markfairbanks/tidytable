@@ -50,7 +50,7 @@ expand..tidytable <- function(.df, ..., .name_repair = "check_unique", .by = NUL
 
     out <- .df[, df_expand(.SD, !!!dots, .name_repair = "minimal"), by = .by]
 
-    df_name_repair(out, .name_repair = .name_repair)
+    df_name_repair(out, .name_repair)
   }
 }
 

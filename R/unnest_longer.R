@@ -83,8 +83,8 @@ unnest_longer..tidytable <- function(.df, col, values_to = NULL, indices_to = NU
     .drop = FALSE
   )
 
-  .df <- change_types(.df, to_vec, ptype, "ptypes")
-  .df <- change_types(.df, to_vec, transform, "transform")
+  .df <- change_types(.df, to_vec, .ptype = ptype)
+  .df <- change_types(.df, to_vec, .transform = transform)
 
   .df
 }

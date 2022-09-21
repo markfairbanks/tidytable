@@ -168,7 +168,7 @@ pivot_wider..tidytable <- function(.df,
     out <- df_set_names(out, glue_vars[new_vars], new_vars)
   }
 
-  out <- df_name_repair(out, .name_repair = names_repair)
+  out <- df_name_repair(out, names_repair)
 
   as_tidytable(out)
 }

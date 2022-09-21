@@ -95,7 +95,7 @@ summarize..tidytable <- function(.df, ...,
 
     setkey(out, NULL)
 
-    out <- df_name_repair(out, .name_repair = "unique")
+    out <- df_name_repair(out, "unique")
   }
 
   out
