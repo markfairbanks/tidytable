@@ -21,7 +21,7 @@
 #' df1 %>% full_join(df2)
 #' df1 %>% anti_join(df2)
 left_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  c(x, y, x_names, y_names, by, on, selection) %<-%
+  c(x, y, on, selection) %<-%
     join_prep(x, y, by, keep, suffix, "left")
 
   if (keep) {
@@ -29,8 +29,7 @@ left_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE
   } else {
     result_df <- y[x, on = on, allow.cartesian = TRUE]
 
-    result_df <- df_set_names(result_df, by$x, by$y)
-    result_df <- df_col_order(result_df, c(x_names, y_names))
+    result_df <- df_col_order(result_df, selection)
   }
 
   tidytable_restore(result_df, x)
@@ -44,7 +43,7 @@ left_join. <- left_join
 #' @export
 #' @rdname left_join
 right_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  c(x, y, x_names, y_names, by, on, selection) %<-%
+  c(x, y, on, selection) %<-%
     join_prep(x, y, by, keep, suffix, "right")
 
   if (keep) {
@@ -64,7 +63,7 @@ right_join. <- right_join
 #' @export
 #' @rdname left_join
 inner_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  c(x, y, x_names, y_names, by, on, selection) %<-%
+  c(x, y, on, selection) %<-%
     join_prep(x, y, by, keep, suffix, "inner")
 
   if (keep) {
@@ -140,7 +139,7 @@ temp_names_fix <- function(names, by_x, y_suffix) {
 #' @export
 #' @rdname left_join
 anti_join <- function(x, y, by = NULL) {
-  c(x, y, x_names, y_names, by, on, selection) %<-%
+  c(x, y, on, selection) %<-%
     join_prep(x, y, by, keep = FALSE, suffix = NULL, "anti")
 
   result_df <- x[!y, on = on, allow.cartesian = TRUE]
@@ -156,7 +155,7 @@ anti_join. <- anti_join
 #' @export
 #' @rdname left_join
 semi_join <- function(x, y, by = NULL) {
-  c(x, y, x_names, y_names, by, on, selection) %<-%
+  c(x, y, on, selection) %<-%
     join_prep(x, y, by, keep = FALSE, suffix = NULL, "semi")
 
   result_df <- fsetdiff(x, x[!y, on = on], all=TRUE)
@@ -249,11 +248,24 @@ join_prep <- function(x, y, by, keep, suffix, type) {
     names(selection) <- c(x_names, y_names)
     selection <- call2(".", !!!syms(selection))
   } else {
-    selection <- NULL
+    if (type == "left") {
+      # Rename y's by cols before join
+      # https://github.com/markfairbanks/tidytable/issues/625
+      y <- df_set_names(y, by$x, by$y)
+      on <- by$x
+      # For use in `left_join` for column order
+      #   x_names contains by cols and x cols
+      #   y_names only contains new cols
+      selection <- c(x_names, y_names)
+    } else {
+      selection <- NULL
+    }
   }
 
-  list(x, y, x_names, y_names, by, on, selection)
+  list(x, y, on, selection)
 }
+
+globalVariables(c("on", "selection"))
 
 join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
   if (!is.data.frame(x) | !is.data.frame(y)) stop("x & y must be a data.frame or data.table")
@@ -287,7 +299,3 @@ suffix_join_names <- function(x_names, y_names, suffix, keep, by = NULL, type) {
   }
   df_names
 }
-
-globalVariables(
-  c("x_names", "y_names", "on", "selection")
-)
