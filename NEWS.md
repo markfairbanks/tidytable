@@ -28,6 +28,7 @@
 * `pivot_wider.()`: Works with column names with spaces (#569)
 * `pivot_wider.()`: `names_glue="{.value}_{somecolumn}"` assigns column names in
   correct order (@Darxor, #579)
+* `left_join()`: Correctly handles when x contains a duplicate of a y by column (#625)
 
 # tidytable 0.8.1
 
