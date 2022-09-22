@@ -21,8 +21,7 @@
 #' df1 %>% full_join(df2)
 #' df1 %>% anti_join(df2)
 left_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  c(x, y, on, selection) %<-%
-    join_prep(x, y, by, keep, suffix, "left")
+  c(x, y, on, selection) %<-% join_prep(x, y, by, keep, suffix, "left")
 
   if (keep) {
     result_df <- dt(y, x, !!selection, on = on, allow.cartesian = TRUE)
@@ -43,8 +42,7 @@ left_join. <- left_join
 #' @export
 #' @rdname left_join
 right_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  c(x, y, on, selection) %<-%
-    join_prep(x, y, by, keep, suffix, "right")
+  c(x, y, on, selection) %<-% join_prep(x, y, by, keep, suffix, "right")
 
   if (keep) {
     result_df <- dt(x, y, !!selection, on = on, allow.cartesian = TRUE)
@@ -63,8 +61,7 @@ right_join. <- right_join
 #' @export
 #' @rdname left_join
 inner_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  c(x, y, on, selection) %<-%
-    join_prep(x, y, by, keep, suffix, "inner")
+  c(x, y, on, selection) %<-% join_prep(x, y, by, keep, suffix, "inner")
 
   if (keep) {
     result_df <- dt(x, y, !!selection,
@@ -139,8 +136,7 @@ temp_names_fix <- function(names, by_x, y_suffix) {
 #' @export
 #' @rdname left_join
 anti_join <- function(x, y, by = NULL) {
-  c(x, y, on, selection) %<-%
-    join_prep(x, y, by, keep = FALSE, suffix = NULL, "anti")
+  c(x, y, on, selection) %<-% join_prep(x, y, by, keep = FALSE, suffix = NULL, "anti")
 
   result_df <- x[!y, on = on, allow.cartesian = TRUE]
 
@@ -155,8 +151,7 @@ anti_join. <- anti_join
 #' @export
 #' @rdname left_join
 semi_join <- function(x, y, by = NULL) {
-  c(x, y, on, selection) %<-%
-    join_prep(x, y, by, keep = FALSE, suffix = NULL, "semi")
+  c(x, y, on, selection) %<-% join_prep(x, y, by, keep = FALSE, suffix = NULL, "semi")
 
   result_df <- fsetdiff(x, x[!y, on = on], all=TRUE)
 
