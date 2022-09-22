@@ -233,6 +233,20 @@ test_that("different order join keys are returned correctly, #495", {
   expect_equal(res$int1, df1$int1)
 })
 
+test_that("joining on x column matched in y by col works, #625", {
+  x <- tidytable(letters = c("a", "b", "c"),
+                 letters2 = c("A", "B", "C"),
+                 val_x = 1:3)
+
+  y <- tidytable(letters = c("A", "B", "C"), val_y = 4:6)
+
+  res <- left_join(x, y, by = c("letters2" = "letters"))
+
+  expect_named(res, c("letters", "letters2", "val_x", "val_y"))
+  expect_equal(res$letters, c("a", "b", "c"))
+  expect_equal(res$val_y, 4:6)
+})
+
 # Some dplyr tests ----------------------------------------------------------------
 test_that("when keep = TRUE, left_join() preserves both sets of keys", {
   # when keys have different names
