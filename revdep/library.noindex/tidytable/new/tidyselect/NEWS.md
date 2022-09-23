@@ -1,62 +1,77 @@
 # tidyselect (development version)
 
+## New features
+
+* New `tidyselect_data_proxy()` and `tidyselect_data_has_predicates()`
+  allows tidyselect to work with custom input types (#242).
+
 * New `eval_relocate()` for moving a selection. This powers `dplyr::relocate()`
   (#232).
+
+## Lifecycle changes
+
+* Using `all_of()` outside of a tidyselect context is now deprecated (#269).
+  In the future it will error to be consistent with `any_of()`.
+
+* Use of `.data` in tidyselect expressions is now deprecated to more cleanly
+  separate tidy-select from data-masking. Replace `.data$x` with `"x"` and
+  `.data[[var]]` with `any_of(var)` or `all_of(var)` (#169).
+
+* Use of bare predicates (not wrapped in `where()`) and indirection (without
+  using `all_of()`) have been formally deprecated (#317).
+
+## Minor improvements and bug fixes
+
+* Selection language:
+
+  * `any_of()` generates a more informative error if you supply too many
+    arguments (#241).
+  
+  * `all_of()` (like `any_of()`) returns an integer vector to make it easier 
+    to combine in functions (#270, #294). It also fails when it can't find 
+    variables even when `strict = FALSE`.
+  
+  * `matches()` recognises and correctly uses stringr pattern objects
+    (`stringr::regex()`, `stringr::fixed()`, etc) (#238). It also now
+    works with named vectors (#250).
+  
+  * `num_range()` gains a `suffix` argument (#229).
+  
+  * `where()` is now exported, like all other select helpers (#201),
+    and gives more informative errors (#236).
 
 * `eval_select()` with `include` now preserves the order of the variables
   if they're present in the selection (#224).
 
-* `all_of()` now returns an integer vector to make it easier to
-  combine in functions (#270, #294).
-
-* `all_of()` now fails even when `strict` is set to `FALSE`.
-
-* `peek_var()` error now generates hyperlink to docs with recent RStudio (#289).
-
-* `all_of()` (like `any_of()`) now fails when used outside of a
-  tidyselect context (#269).
-
-* `num_range()` gains a `suffix` argument (#229).
-
 * `eval_select()` always returns a named vector, even when renaming is not
   permitted (#220).
 
-* `eval_select()` gains new `allow_empty` argument which allows you to prevent
-  empty selections with `allow_empty = FALSE` (#252).
-
-* `any_of()` generates more informative error if you supply too many
-  arguments (#241).
-
-* `vars_pull()` generates more informative error messages (#234, #258).
-
-* `matches()` recognises and correctly uses stringr pattern objects
-  (`stringr::regexp()`, `stringr::fixed()`, etc) (#238). 
+* `eval_select()` and `eval_relocate()` gain new `allow_empty` argument which 
+  makes it possible to forbid empty selections with `allow_empty = FALSE` (#252).
 
 * `eval_select(allow_rename = FALSE)` no longer fails with empty
-  selections (#221, @eutwt).
+  selections (#221, @eutwt) or with predicate functions (#225). It now properly 
+  fails with partial renaming (#305).
 
-* `where()` is now exported, like all other select helpers (#201).
-  It also gives more informative errors (#236).
+* `peek_var()` error now generates hyperlink to docs with recent RStudio (#289).
 
-* Fixed error when selecting with predicates and `allow_rename =
-  FALSE` (#225).
+* `vars_pull()` generates more informative error messages (#234, #258, #318)
+  and gains `error_call` and `error_arg` arguments.
 
-* Evaluation errors are now chained. The child error call is set to
-  the `error_call` argument of `eval_select()` and `eval_rename()`.
+* Errors produced by tidyselect should now be more informative. Evaluation 
+  errors are now chained, with the child error call is set to the `error_call` 
+  argument of `eval_select()` and `eval_rename()`. We've also improved 
+  backtraces of base errors, and done better at propagating the root 
+  `error_call` to vctrs input checkers.
 
-* `vars_pull()` gains an `error_call` argument.
-
-* Improved backtraces of base errors.
-
-* Improved propagation of `error_call` to vctrs input checkers.
-
-
+* `tidyselect_verbosity` is no longer used; deprecation messaging is now
+  controlled by `lifecycle_verbosity` like all other packages (#317).
+  
 # tidyselect 1.1.2
 
 * Fix for CRAN checks.
 
 * Better compatibility with rlang 1.0.0 errors. More to come soon.
-
 
 # tidyselect 1.1.1
 

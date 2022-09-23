@@ -1,6 +1,6 @@
 Package: tidytable
 Title: Tidy Interface to 'data.table'
-Version: 0.8.0
+Version: 0.8.1
 Authors@R: 
     c(person(given = "Mark",
              family = "Fairbanks",
@@ -26,13 +26,13 @@ Encoding: UTF-8
 Imports: data.table (>= 1.14.0), glue (>= 1.4.0), magrittr (>= 2.0.3),
         pillar (>= 1.5.0), rlang (>= 1.0.2), tidyselect (>= 1.1.0),
         vctrs (>= 0.4.1)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 Config/testthat/edition: 3
 URL: https://github.com/markfairbanks/tidytable
 BugReports: https://github.com/markfairbanks/tidytable/issues
 Suggests: testthat (>= 2.1.0), bit64, knitr, rmarkdown, crayon
 NeedsCompilation: no
-Packaged: 2022-06-11 13:06:38 UTC; fairbmx
+Packaged: 2022-08-17 21:49:24 UTC; fairbmx
 Author: Mark Fairbanks [aut, cre],
   Abdessabour Moutik [ctb],
   Matt Carlson [ctb],
@@ -40,5 +40,5 @@ Author: Mark Fairbanks [aut, cre],
   Ross Kennedy [ctb]
 Maintainer: Mark Fairbanks <mark.t.fairbanks@gmail.com>
 Repository: CRAN
-Date/Publication: 2022-06-11 13:30:02 UTC
-Built: R 4.2.0; ; 2022-06-12 11:33:52 UTC; unix
+Date/Publication: 2022-08-17 22:10:08 UTC
+Built: R 4.2.0; ; 2022-08-18 12:11:49 UTC; unix

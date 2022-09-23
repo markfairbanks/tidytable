@@ -27,6 +27,8 @@ scoped_vars	poke_vars
 select_helpers	language
 starts_with	starts_with
 tidyselect	tidyselect-package
+tidyselect_data_has_predicates	tidyselect_data_proxy
+tidyselect_data_proxy	tidyselect_data_proxy
 vars_pull	vars_pull
 vars_rename	vars_select
 vars_select	vars_select

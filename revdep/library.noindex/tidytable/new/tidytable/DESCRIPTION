@@ -1,30 +1,21 @@
 Package: tidytable
 Title: Tidy Interface to 'data.table'
-Version: 0.8.1
-Authors@R: 
-    c(person(given = "Mark",
-             family = "Fairbanks",
-             role = c("aut", "cre"),
-             email = "mark.t.fairbanks@gmail.com"),
-      person(given = "Abdessabour",
-             family = "Moutik",
-             role = "ctb"),
-      person(given = "Matt",
-             family = "Carlson",
-             role = "ctb"),
-      person(given = "Ivan",
-             family = "Leung",
-             role = "ctb"),
-      person(given = "Ross",
-             family = "Kennedy",
-             role = "ctb")
-             )
+Version: 0.8.1.9
+Authors@R: c(
+  person("Mark", "Fairbanks", role = c("aut", "cre"), email = "mark.t.fairbanks@gmail.com"),
+  person("Abdessabour", "Moutik", role = "ctb"),
+  person("Matt", "Carlson", role = "ctb"),
+  person("Ivan", "Leung", role = "ctb"),
+  person("Ross", "Kennedy", role = "ctb"),
+  person("Robert", "On", role = "ctb"),
+  person("Alexander", "Sevostianov", role = "ctb")
+  )
 Description: A tidy interface to 'data.table' that is 'rlang' compatible,
   giving users the speed of 'data.table' with the clean syntax of the tidyverse.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Imports: data.table (>= 1.14.0), glue (>= 1.4.0), magrittr (>= 2.0.3),
-        pillar (>= 1.5.0), rlang (>= 1.0.2), tidyselect (>= 1.1.0),
+        pillar (>= 1.5.0), rlang (>= 1.0.5), tidyselect (>= 1.1.0),
         vctrs (>= 0.4.1)
 RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
@@ -35,11 +26,13 @@ Suggests: testthat (>= 2.1.0), bit64, knitr, rmarkdown, crayon
 RemoteType: local
 RemoteUrl: /Users/fairbmx/Desktop/NU/R/R_Packages/tidytable
 NeedsCompilation: no
-Packaged: 2022-08-17 21:22:09 UTC; fairbmx
+Packaged: 2022-09-23 03:58:54 UTC; fairbmx
 Author: Mark Fairbanks [aut, cre],
   Abdessabour Moutik [ctb],
   Matt Carlson [ctb],
   Ivan Leung [ctb],
-  Ross Kennedy [ctb]
+  Ross Kennedy [ctb],
+  Robert On [ctb],
+  Alexander Sevostianov [ctb]
 Maintainer: Mark Fairbanks <mark.t.fairbanks@gmail.com>
-Built: R 4.2.0; ; 2022-08-17 21:22:10 UTC; unix
+Built: R 4.2.0; ; 2022-09-23 03:58:55 UTC; unix

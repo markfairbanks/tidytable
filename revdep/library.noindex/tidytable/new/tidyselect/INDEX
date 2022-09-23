@@ -10,4 +10,5 @@ faq-selection-context   FAQ - Error: Must be used within a _selecting_
 language                Selection language
 peek_vars               Peek at variables in the selection context
 starts_with             Select variables that match a pattern
+tidyselect_data_proxy   tidyselect methods for custom types
 where                   Select variables with a function
