@@ -1,3 +1,31 @@
+# tidytable 0.8.1
+
+#### New Functions
+* `consecutive_id.()`
+* `if_else.()`
+  * Note: Alternate syntax `ifelse.()` (introduced in v0.4.0) will remain in the package
+* `%in%`
+
+#### Functionality improvements
+* `arrange.()`: Can use `.env` inside arrange expressions
+* `case_when.()`: Gains `.default`/`.ptype`/`.size` args
+* `coalesce.()`: Gains `.ptype`/`.size` args
+* `relocate.()`: Now properly handles multiple columns selected in `.before` or `.after`
+* `slice_min.()`/`slice_max.()`: Gain `with_ties` argument
+  
+#### Bug Fixes
+* Nested calls to `across.()` are handled properly (#505)
+* `across.()`: Can namespace functions in `.fns` arg (#511)
+* `as_tidytable()`: Can keep row names when converting a matrix (#527)
+* `unnest.()`: Handles empty data frames (@roboton, #530)
+* `nth.()`: Extracts list elements (#534)
+* `arrange.()`: Properly sorts `NA`s (#541)
+
+#### Deprecations
+* `arrange_across.`/`mutate_across.`/`summarize_across.` are now defunct. They have been
+  deprecated with warnings since v0.6.4 (Jul 2021). Users must now use `across.()` inside
+  `arrange.()`/`mutate.()`/`summarize.()`.
+
 # tidytable 0.8.0
 
 #### New functions
@@ -17,7 +45,7 @@
 
 #### Functions with notable speed improvements
 * `arrange.()`
-* `case.()`: Faster when conditions evaluate to `NA`
+* `case_when.()`: Faster when conditions evaluate to `NA`
 * `group_split.()`
 * `left_join.()`: Faster when `keep = FALSE` (the default)
 * `select.()`

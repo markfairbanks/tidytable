@@ -95,7 +95,6 @@ The following regions, age groups, years, sexes and ICD codes are considered:  S
 # … with 310 more rows, 6 more variables: asir_copy <dbl>, asir_lci <dbl>,
 #   asir_lci_gam <dbl>, asir_uci <dbl>, asir_uci_gam <dbl>, asir_e6 <dbl>, and
 #   abbreviated variable names ¹​observed, ²​abs_ir_lci, ³​abs_ir_uci
-# ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
 > 
 > 
 > 
@@ -212,7 +211,6 @@ Warning in max(.data[["p_futimeyrs"]], na.rm = TRUE) :
 #   fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
 #   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, registry.3 <chr>, sex.3 <chr>,
 #   race.3 <chr>, datebirth.3 <date>, t_datediag.3 <date>, …
-# ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
 > 
 > 
 > 
@@ -328,7 +326,6 @@ Warning in max(p_futimeyrs, na.rm = TRUE) :
 #   fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
 #   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, registry.3 <chr>, sex.3 <chr>,
 #   race.3 <chr>, datebirth.3 <date>, t_datediag.3 <date>, …
-# ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
 > 
 > 
 > 
@@ -377,7 +374,6 @@ Warning in max(p_futimeyrs, na.rm = TRUE) :
 10 C14    SEER Reg 01 - San F… 1990… Male  25 -…       1   0.113  881328 176266.
 # … with 6,171 more rows, and abbreviated variable names ¹​incidence_cases,
 #   ²​incidence_crude_rate, ³​population_pyar, ⁴​population_n_per_year
-# ℹ Use `print(n = ...)` to see more rows
 > 
 > 
 > 
@@ -752,7 +748,6 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 #   fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
 #   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, registry.3 <chr>, sex.3 <chr>,
 #   race.3 <chr>, datebirth.3 <date>, t_datediag.3 <date>, …
-# ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
 >                        
 > 
 > 
@@ -842,7 +837,6 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 #   fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
 #   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, registry.3 <chr>, sex.3 <chr>,
 #   race.3 <chr>, datebirth.3 <date>, t_datediag.3 <date>, …
-# ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
 >                        
 > 
 > 
@@ -883,7 +877,6 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 # … with 9,990 more rows, 7 more variables: fc_age <int>, datedeath <date>,
 #   p_alive <chr>, p_dodmin <date>, fc_agegroup <chr>, t_yeardiag <chr>,
 #   t_tumid <int>, and abbreviated variable name ¹​t_site_icd
-# ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
 >                              
 > 
 > 
@@ -925,7 +918,6 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 # … with 9,990 more rows, 7 more variables: fc_age <int>, datedeath <date>,
 #   p_alive <chr>, p_dodmin <date>, fc_agegroup <chr>, t_yeardiag <chr>,
 #   t_tumid <int>, and abbreviated variable name ¹​t_site_icd
-# ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
 > 
 > 
 > 
@@ -21007,7 +20999,6 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 # … with 8,736 more rows, 6 more variables: fc_age <int>, datedeath <date>,
 #   p_alive <chr>, p_dodmin <date>, fc_agegroup <chr>, t_yeardiag <chr>, and
 #   abbreviated variable name ¹​t_site_icd
-# ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
 > 
 > 
 > 
@@ -21056,7 +21047,6 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 # … with 8,736 more rows, 6 more variables: fc_age <int>, datedeath <date>,
 #   p_alive <chr>, p_dodmin <date>, fc_agegroup <chr>, t_yeardiag <chr>, and
 #   abbreviated variable name ¹​t_site_icd
-# ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
 > 
 > 
 > 
@@ -43353,7 +43343,6 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 #   fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
 #   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, and abbreviated variable names
 #   ¹​datebirth.1, ²​t_datediag.1, ³​t_site_icd.1, ⁴​fc_age.1
-# ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
 > 
 > 
 > 
@@ -43399,7 +43388,6 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 #   fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
 #   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, and abbreviated variable names
 #   ¹​datebirth.1, ²​t_datediag.1, ³​t_site_icd.1, ⁴​fc_age.1
-# ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
 > 
 > 
 > 
@@ -43631,7 +43619,6 @@ detaching ‘package:dplyr’
 #   fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
 #   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, registry.3 <chr>, sex.3 <chr>,
 #   race.3 <chr>, datebirth.3 <date>, t_datediag.3 <date>, …
-# ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
 > 
 > 
 > 
@@ -43731,7 +43718,6 @@ detaching ‘package:dplyr’
 #   fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
 #   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, registry.3 <chr>, sex.3 <chr>,
 #   race.3 <chr>, datebirth.3 <date>, t_datediag.3 <date>, …
-# ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
 > 
 > 
 > 
@@ -43741,7 +43727,7 @@ detaching ‘package:dplyr’
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  14.811 2.94 18.068 0.003 0.005 
+Time elapsed:  15.81 2.713 18.914 0.003 0.004 
 > grDevices::dev.off()
 null device 
           1 
