@@ -25,8 +25,8 @@
 
 #### Bug fixes
 * `tidytable::'%in%'` dispatches to `base::'%in%'` when comparing with a list (#563)
-* `pivot_wider.()`: Works with column names with spaces (#569)
-* `pivot_wider.()`: `names_glue="{.value}_{somecolumn}"` assigns column names in
+* `pivot_wider()`: Works with column names with spaces (#569)
+* `pivot_wider()`: `names_glue="{.value}_{somecolumn}"` assigns column names in
   correct order (@Darxor, #579)
 * `left_join()`: Works when y matching columns in `by` is a non matching column of x (#625)
 
