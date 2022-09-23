@@ -16,12 +16,13 @@ reference:
   - select
   - summarize
 - subtitle: Other dplyr functions
-- contents:
+  contents:
   - across
   - add_count
   - between
   - starts_with("bind")
   - c_across
+  - case_match
   - case_when
   - coalesce
   - consecutive_id
@@ -31,15 +32,16 @@ reference:
   - distinct
   - enframe
   - group_by
+  - group_vars
   - group_split
   - first
   - if_all
   - if_else
   - is_grouped_df
-  - lags
+  - lag
   - left_join
   - mutate_rowwise
-  - n
+  - 'n'
   - n_distinct
   - na_if
   - nest_by
@@ -48,12 +50,13 @@ reference:
   - rename
   - rename_with
   - row_number
+  - rowwise
   - slice
   - transmute
-  - ungroups
+  - ungroup
 
 - title: tidyr
-- contents:
+  contents:
   - complete
   - crossing
   - drop_na
@@ -74,7 +77,7 @@ reference:
   - unnest_wider
 
 - title: purrr
-- contents:
+  contents:
   - map
 
 - title: reexports
@@ -90,14 +93,17 @@ reference:
 
 
     Note: All tidytable functions automatically convert data.frame/tibble inputs to a data.table/tidytable.
-- contents:
+  contents:
   - as_tidytable
   - is_tidytable
   - new_tidytable
   - tidytable
 
 - title: Read/write files
-- contents:
+  desc: >
+    `fread()` is a simple wrapper around `data.table::fread()` that returns a tidytable.
+    `fwrite()` is reexported for use by the user.
+  contents:
   - fread
 
 - title: internal
@@ -107,7 +113,6 @@ reference:
   - summarize_across.
   - case
   - get_dummies
-  - ifelse
   - inv_gc
   - top_n
 
