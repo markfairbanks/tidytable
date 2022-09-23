@@ -2,12 +2,9 @@
 % Please edit documentation in R/n_distinct.R
 \name{n_distinct}
 \alias{n_distinct}
-\alias{n_distinct.}
 \title{Count the number of unique values in a vector}
 \usage{
 n_distinct(..., na.rm = FALSE)
-
-n_distinct.(..., na.rm = FALSE)
 }
 \arguments{
 \item{...}{vectors of values}
@@ -21,4 +18,3 @@ This is a faster version of \code{length(unique(x))} that calls \code{data.table
 x <- sample(1:10, 1e5, rep = TRUE)
 n_distinct(x)
 }
-\keyword{internal}

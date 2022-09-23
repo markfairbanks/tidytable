@@ -6,7 +6,6 @@
 #' @param ... Variables to get combinations of
 #' @param .name_repair Treatment of problematic names. See `?vctrs::vec_as_names` for options/details
 #'
-#' @md
 #' @export
 #'
 #' @examples
@@ -28,7 +27,7 @@ expand_grid <- function(..., .name_repair = "check_unique") {
 
 #' @export
 #' @keywords internal
-#' @rdname expand_grid
+#' @inherit expand_grid
 expand_grid. <- expand_grid
 
 cj_expand_grid <- function(..., .name_repair = "check_unique") {

@@ -24,7 +24,7 @@ first <- function(x, default = NULL, na_rm = FALSE) {
 
 #' @export
 #' @keywords internal
-#' @rdname first
+#' @inherit first
 first. <- first
 
 #' @export
@@ -35,7 +35,7 @@ last <- function(x, default = NULL, na_rm = FALSE) {
 
 #' @export
 #' @keywords internal
-#' @rdname first
+#' @inherit first
 last. <- last
 
 #' @export
@@ -59,7 +59,7 @@ nth <- function(x, n, default = NULL, na_rm = FALSE) {
 
 #' @export
 #' @keywords internal
-#' @rdname first
+#' @inherit first
 nth. <- nth
 
 nth_default <- function(x, default) {

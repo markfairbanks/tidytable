@@ -2,12 +2,9 @@
 % Please edit documentation in R/group_by.R
 \name{is_grouped_df}
 \alias{is_grouped_df}
-\alias{is_grouped_df.}
 \title{Check if the tidytable is grouped}
 \usage{
 is_grouped_df(x)
-
-is_grouped_df.(x)
 }
 \arguments{
 \item{x}{An object}
@@ -25,4 +22,3 @@ df \%>\%
   group_by(b) \%>\%
   is_grouped_df()
 }
-\keyword{internal}

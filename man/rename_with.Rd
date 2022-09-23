@@ -2,12 +2,9 @@
 % Please edit documentation in R/rename_with.R
 \name{rename_with}
 \alias{rename_with}
-\alias{rename_with.}
 \title{Rename multiple columns}
 \usage{
 rename_with(.df, .fn = NULL, .cols = everything(), ...)
-
-rename_with.(.df, .fn = NULL, .cols = everything(), ...)
 }
 \arguments{
 \item{.df}{A data.table or data.frame}
@@ -38,4 +35,3 @@ df \%>\%
 df \%>\%
   rename_with(~ toupper(.x), .cols = c(x, double_x))
 }
-\keyword{internal}

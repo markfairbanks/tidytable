@@ -3,17 +3,11 @@
 \name{lag}
 \alias{lag}
 \alias{lead}
-\alias{lags.}
-\alias{leads.}
 \title{Get lagging or leading values}
 \usage{
 lag(x, n = 1L, default = NA)
 
 lead(x, n = 1L, default = NA)
-
-lags.(x, n = 1L, default = NA)
-
-leads.(x, n = 1L, default = NA)
 }
 \arguments{
 \item{x}{a vector of values}
@@ -39,4 +33,3 @@ df \%>\%
   mutate(lag_x = lag(x))
 
 }
-\keyword{internal}

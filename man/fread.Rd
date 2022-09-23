@@ -2,15 +2,9 @@
 % Please edit documentation in R/fread-fwrite.R
 \name{fread}
 \alias{fread}
-\alias{fread.}
-\alias{fwrite.}
 \title{Read/write files}
 \usage{
 fread(...)
-
-fread.(...)
-
-fwrite.(...)
 }
 \arguments{
 \item{...}{Arguments passed on to \code{data.table::fread}}
@@ -26,4 +20,3 @@ fake_csv <- "A,B
 
 fread(fake_csv)
 }
-\keyword{internal}

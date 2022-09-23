@@ -20,5 +20,5 @@ consecutive_id <- function(...) {
 
 #' @export
 #' @keywords internal
-#' @rdname consecutive_id
+#' @inherit consecutive_id
 consecutive_id. <- consecutive_id

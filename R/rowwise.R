@@ -26,7 +26,7 @@ rowwise <- function(.df) {
 
 #' @export
 #' @keywords internal
-#' @rdname rowwise
+#' @inherit rowwise
 rowwise. <- function(.df) {
   UseMethod("rowwise.")
 }

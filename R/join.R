@@ -36,7 +36,7 @@ left_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE
 
 #' @export
 #' @keywords internal
-#' @rdname left_join
+#' @inherit left_join
 left_join. <- left_join
 
 #' @export
@@ -55,7 +55,7 @@ right_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALS
 
 #' @export
 #' @keywords internal
-#' @rdname left_join
+#' @inherit left_join
 right_join. <- right_join
 
 #' @export
@@ -76,7 +76,7 @@ inner_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALS
 
 #' @export
 #' @keywords internal
-#' @rdname left_join
+#' @inherit left_join
 inner_join. <- inner_join
 
 #' @export
@@ -124,7 +124,7 @@ full_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE
 
 #' @export
 #' @keywords internal
-#' @rdname left_join
+#' @inherit left_join
 full_join. <- full_join
 
 temp_names_fix <- function(names, by_x, y_suffix) {
@@ -145,7 +145,7 @@ anti_join <- function(x, y, by = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname left_join
+#' @inherit left_join
 anti_join. <- anti_join
 
 #' @export
@@ -160,7 +160,7 @@ semi_join <- function(x, y, by = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname left_join
+#' @inherit left_join
 semi_join. <- semi_join
 
 get_bys <- function(x, y, by = NULL) {

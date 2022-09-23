@@ -28,7 +28,7 @@ top_n <- function(.df, n = 5, wt = NULL, .by = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname top_n
+#' @inherit top_n
 top_n. <- function(.df, n = 5, wt = NULL, .by = NULL) {
   UseMethod("top_n.")
 }

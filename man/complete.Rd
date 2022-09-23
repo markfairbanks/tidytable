@@ -2,12 +2,9 @@
 % Please edit documentation in R/complete.R
 \name{complete}
 \alias{complete}
-\alias{complete.}
 \title{Complete a data.table with missing combinations of data}
 \usage{
 complete(.df, ..., fill = list(), .by = NULL)
-
-complete.(.df, ..., fill = list(), .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -30,4 +27,3 @@ df \%>\%
 df \%>\%
   complete(x, y, fill = list(z = 10))
 }
-\keyword{internal}

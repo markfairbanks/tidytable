@@ -36,7 +36,7 @@ fill <- function(.df, ...,
 
 #' @export
 #' @keywords internal
-#' @rdname fill
+#' @inherit fill
 fill. <- function(.df, ...,
                   .direction = c("down", "up", "downup", "updown"),
                   .by = NULL) {

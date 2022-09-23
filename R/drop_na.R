@@ -29,7 +29,7 @@ drop_na <- function(.df, ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname drop_na
+#' @inherit drop_na
 drop_na. <- function(.df, ...) {
   UseMethod("drop_na.")
 }

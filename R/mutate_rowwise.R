@@ -41,7 +41,7 @@ mutate_rowwise <- function(.df, ...,
 
 #' @export
 #' @keywords internal
-#' @rdname mutate_rowwise
+#' @inherit mutate_rowwise
 mutate_rowwise. <- function(.df, ...,
                             .keep = c("all", "used", "unused", "none"),
                             .before = NULL, .after = NULL) {

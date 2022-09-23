@@ -14,7 +14,7 @@ pmap <- function(.l, .f, ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname map
+#' @inherit map
 pmap. <- pmap
 
 #' @export
@@ -25,7 +25,7 @@ pmap_lgl <- function(.l, .f, ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname map
+#' @inherit map
 pmap_lgl. <- pmap_lgl
 
 #' @export
@@ -36,7 +36,7 @@ pmap_int <- function(.l, .f, ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname map
+#' @inherit map
 pmap_int. <- pmap_int
 
 #' @export
@@ -47,7 +47,7 @@ pmap_dbl <- function(.l, .f, ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname map
+#' @inherit map
 pmap_dbl. <- pmap_dbl
 
 #' @export
@@ -58,7 +58,7 @@ pmap_chr <- function(.l, .f, ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname map
+#' @inherit map
 pmap_chr. <- pmap_chr
 
 #' @export
@@ -70,7 +70,7 @@ pmap_dfc <- function(.l, .f, ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname map
+#' @inherit map
 pmap_dfc. <- pmap_dfc
 
 #' @export
@@ -82,7 +82,7 @@ pmap_dfr <- function(.l, .f, ..., .id = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname map
+#' @inherit map
 pmap_dfr. <- pmap_dfr
 
 #' @export
@@ -91,7 +91,7 @@ pmap_df <- pmap_dfr
 
 #' @export
 #' @keywords internal
-#' @rdname map
+#' @inherit map
 pmap_df. <- pmap_df
 
 .args_recycle <- function(args) {

@@ -21,5 +21,5 @@ na_if <- function(x, y) {
 
 #' @export
 #' @keywords internal
-#' @rdname na_if
+#' @inherit na_if
 na_if. <- na_if

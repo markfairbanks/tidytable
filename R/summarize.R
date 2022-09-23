@@ -22,7 +22,6 @@
 #'   The user must opt in to this option as it can lead to a reduction in performance.
 #'
 #' @export
-#' @md
 #' @examples
 #' df <- data.table(
 #'   a = 1:3,
@@ -53,7 +52,7 @@ summarize <- function(.df, ...,
 
 #' @export
 #' @keywords internal
-#' @rdname summarize
+#' @inherit summarize
 summarize. <- function(.df, ...,
                       .by = NULL,
                       .sort = TRUE,
@@ -151,7 +150,7 @@ summarise <- summarize
 
 #' @export
 #' @keywords internal
-#' @rdname summarize
+#' @inherit summarize
 summarise. <- summarize.
 
 

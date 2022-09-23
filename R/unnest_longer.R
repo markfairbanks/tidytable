@@ -35,7 +35,7 @@ unnest_longer <- function(.df, col, values_to = NULL, indices_to = NULL,
 
 #' @export
 #' @keywords internal
-#' @rdname unnest_longer
+#' @inherit unnest_longer
 unnest_longer. <- function(.df, col, values_to = NULL, indices_to = NULL,
                           indices_include = NULL, names_repair = "check_unique",
                           simplify = NULL, ptype = NULL, transform = NULL) {

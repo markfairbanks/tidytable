@@ -9,7 +9,6 @@
 #' @param ... Other parameters to pass to the function
 #'
 #' @export
-#' @md
 #'
 #' @examples
 #' df <- data.table(
@@ -33,7 +32,7 @@ rename_with <- function(.df, .fn = NULL, .cols = everything(), ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname rename_with
+#' @inherit rename_with
 rename_with. <- function(.df, .fn = NULL, .cols = everything(), ...) {
   UseMethod("rename_with.")
 }

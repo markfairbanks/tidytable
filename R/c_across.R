@@ -19,5 +19,5 @@ c_across <- function(cols = everything()) {
 
 #' @export
 #' @keywords internal
-#' @rdname c_across
+#' @inherit c_across
 c_across. <- c_across

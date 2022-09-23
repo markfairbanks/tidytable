@@ -30,7 +30,7 @@ distinct <- function(.df, ..., .keep_all = FALSE) {
 
 #' @export
 #' @keywords internal
-#' @rdname distinct
+#' @inherit distinct
 distinct. <- function(.df, ..., .keep_all = FALSE) {
   UseMethod("distinct.")
 }

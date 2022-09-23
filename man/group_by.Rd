@@ -2,18 +2,12 @@
 % Please edit documentation in R/group_by.R
 \name{group_by}
 \alias{group_by}
-\alias{group_by.}
 \alias{ungroup}
-\alias{ungroup.}
 \title{Grouping}
 \usage{
 group_by(.df, ...)
 
-group_by.(.df, ...)
-
 ungroup(.df)
-
-ungroup.(.df)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -45,4 +39,3 @@ df \%>\%
   summarize(mean_a = mean(a)) \%>\%
   ungroup()
 }
-\keyword{internal}

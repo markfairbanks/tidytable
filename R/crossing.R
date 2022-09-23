@@ -37,5 +37,5 @@ sort_unique <- function(x) {
 
 #' @export
 #' @keywords internal
-#' @rdname crossing
+#' @inherit crossing
 crossing. <- crossing

@@ -37,7 +37,7 @@ extract <- function(.df, col, into, regex = "([[:alnum:]]+)",
 
 #' @export
 #' @keywords internal
-#' @rdname extract
+#' @inherit extract
 extract. <- function(.df, col, into, regex = "([[:alnum:]]+)",
                      remove = TRUE, convert = FALSE, ...) {
   check_required(col)

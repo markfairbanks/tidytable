@@ -27,7 +27,7 @@ separate_rows <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
 
 #' @export
 #' @keywords internal
-#' @rdname separate_rows
+#' @inherit separate_rows
 separate_rows. <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
   UseMethod("separate_rows.")
 }

@@ -28,7 +28,7 @@ case_match <- function(.x, ..., .default = NA, .ptype = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname case_match
+#' @inherit case_match
 case_match. <- case_match
 
 prep_case_match_dot <- function(dot, .x) {

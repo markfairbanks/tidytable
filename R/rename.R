@@ -20,7 +20,7 @@ rename <- function(.df, ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname rename
+#' @inherit rename
 rename. <- function(.df, ...) {
   UseMethod("rename.")
 }

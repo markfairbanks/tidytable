@@ -57,5 +57,5 @@ case_when <- function(..., .default = NA, .ptype = NULL, .size = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname case_when
+#' @inherit case_when
 case_when. <- case_when

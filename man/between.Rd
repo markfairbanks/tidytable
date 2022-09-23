@@ -2,12 +2,9 @@
 % Please edit documentation in R/between.R
 \name{between}
 \alias{between}
-\alias{between.}
 \title{Do the values from x fall between the left and right bounds?}
 \usage{
 between(x, left, right)
-
-between.(x, left, right)
 }
 \arguments{
 \item{x}{A numeric vector}
@@ -34,4 +31,3 @@ df \%>\%
 df \%>\%
   filter(x \%between\% c(2, 4))
 }
-\keyword{internal}

@@ -2,12 +2,9 @@
 % Please edit documentation in R/fill.R
 \name{fill}
 \alias{fill}
-\alias{fill.}
 \title{Fill in missing values with previous or next value}
 \usage{
 fill(.df, ..., .direction = c("down", "up", "downup", "updown"), .by = NULL)
-
-fill.(.df, ..., .direction = c("down", "up", "downup", "updown"), .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -40,4 +37,3 @@ df \%>\%
 df \%>\%
   fill(a, b, .direction = "downup", .by = groups)
 }
-\keyword{internal}

@@ -2,12 +2,9 @@
 % Please edit documentation in R/across.R
 \name{across}
 \alias{across}
-\alias{across.}
 \title{Apply a function across a selection of columns}
 \usage{
 across(.cols = everything(), .fns = NULL, ..., .names = NULL)
-
-across.(.cols = everything(), .fns = NULL, ..., .names = NULL)
 }
 \arguments{
 \item{.cols}{vector \code{c()} of unquoted column names. \code{tidyselect} compatible.}
@@ -42,4 +39,3 @@ df \%>\%
 df \%>\%
   arrange(across(c(y, z)))
 }
-\keyword{internal}

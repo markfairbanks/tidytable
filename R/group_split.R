@@ -32,7 +32,7 @@ group_split <- function(.df, ..., .keep = TRUE, .named = FALSE) {
 
 #' @export
 #' @keywords internal
-#' @rdname group_split
+#' @inherit group_split
 group_split. <- function(.df, ..., .keep = TRUE, .named = FALSE) {
   UseMethod("group_split.")
 }

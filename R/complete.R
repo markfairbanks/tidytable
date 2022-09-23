@@ -24,7 +24,7 @@ complete <- function(.df, ..., fill = list(), .by = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname complete
+#' @inherit complete
 complete. <- function(.df, ..., fill = list(), .by = NULL) {
   UseMethod("complete.")
 }

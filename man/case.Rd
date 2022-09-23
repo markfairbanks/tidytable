@@ -2,12 +2,9 @@
 % Please edit documentation in R/case.R
 \name{case}
 \alias{case}
-\alias{case.}
 \title{data.table::fcase() with vectorized default}
 \usage{
 case(..., default = NA)
-
-case.(..., default = NA)
 }
 \arguments{
 \item{...}{Sequence of condition/value designations}
@@ -28,4 +25,3 @@ df \%>\%
                          x < 7, 2,
                          default = 3))
 }
-\keyword{internal}

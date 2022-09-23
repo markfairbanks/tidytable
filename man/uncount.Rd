@@ -2,12 +2,9 @@
 % Please edit documentation in R/uncount.R
 \name{uncount}
 \alias{uncount}
-\alias{uncount.}
 \title{Uncount a data.table}
 \usage{
 uncount(.df, weights, .remove = TRUE, .id = NULL)
-
-uncount.(.df, weights, .remove = TRUE, .id = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -28,4 +25,3 @@ uncount(df, n)
 
 uncount(df, n, .id = "id")
 }
-\keyword{internal}

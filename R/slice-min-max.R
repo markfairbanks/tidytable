@@ -6,7 +6,7 @@ slice_max <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname slice
+#' @inherit slice
 slice_max. <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   check_required(order_by)
   UseMethod("slice_max.")
@@ -52,7 +52,7 @@ slice_min <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname slice
+#' @inherit slice
 slice_min. <- function(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL) {
   check_required(order_by)
   UseMethod("slice_min.")

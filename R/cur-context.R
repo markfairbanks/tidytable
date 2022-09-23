@@ -44,7 +44,7 @@ cur_column <- function() {
 
 #' @export
 #' @keywords internal
-#' @rdname context
+#' @inherit context title description examples
 cur_column. <- cur_column
 
 #' @export
@@ -55,7 +55,7 @@ cur_data <- function() {
 
 #' @export
 #' @keywords internal
-#' @rdname context
+#' @inherit context title description examples
 cur_data. <- cur_data
 
 #' @export
@@ -66,7 +66,7 @@ cur_group_id <- function() {
 
 #' @export
 #' @keywords internal
-#' @rdname context
+#' @inherit context title description examples
 cur_group_id. <- cur_group_id
 
 #' @export
@@ -77,5 +77,5 @@ cur_group_rows <- function() {
 
 #' @export
 #' @keywords internal
-#' @rdname context
+#' @inherit context title description examples
 cur_group_rows. <- cur_group_rows

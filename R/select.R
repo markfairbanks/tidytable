@@ -41,7 +41,7 @@ select <- function(.df, ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname select
+#' @inherit select
 select. <- function(.df, ...) {
   UseMethod("select.")
 }

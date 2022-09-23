@@ -2,18 +2,12 @@
 % Please edit documentation in R/count.R
 \name{count}
 \alias{count}
-\alias{count.}
 \alias{tally}
-\alias{tally.}
 \title{Count observations by group}
 \usage{
 count(.df, ..., wt = NULL, sort = FALSE, name = NULL)
 
-count.(.df, ..., wt = NULL, sort = FALSE, name = NULL)
-
 tally(.df, wt = NULL, sort = FALSE, name = NULL)
-
-tally.(.df, wt = NULL, sort = FALSE, name = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -70,4 +64,3 @@ df \%>\%
   group_by(x) \%>\%
   tally()
 }
-\keyword{internal}

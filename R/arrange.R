@@ -26,7 +26,7 @@ arrange <- function(.df, ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname arrange
+#' @inherit arrange
 arrange. <- function(.df, ...) {
   UseMethod("arrange.")
 }

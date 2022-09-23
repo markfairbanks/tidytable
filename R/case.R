@@ -53,5 +53,5 @@ case <- function(..., default = NA) {
 
 #' @export
 #' @keywords internal
-#' @rdname case
+#' @inherit case
 case. <- case

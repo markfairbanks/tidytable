@@ -40,7 +40,7 @@ unite <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = F
 
 #' @export
 #' @keywords internal
-#' @rdname unite
+#' @inherit unite
 unite. <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
   UseMethod("unite.")
 }

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
       </span>
     </div>
 
@@ -95,7 +95,7 @@
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">group_split.</span><span class="op">(</span><span class="va">c</span>, <span class="va">d</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="group_split.html">group_split</a></span><span class="op">(</span><span class="va">c</span>, <span class="va">d</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 2 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       a     b c     d    </span>
@@ -111,7 +111,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">group_split.</span><span class="op">(</span><span class="va">c</span>, <span class="va">d</span>, .keep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="group_split.html">group_split</a></span><span class="op">(</span><span class="va">c</span>, <span class="va">d</span>, .keep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 2 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       a     b</span>
@@ -127,7 +127,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">group_split.</span><span class="op">(</span><span class="va">c</span>, <span class="va">d</span>, .named <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="group_split.html">group_split</a></span><span class="op">(</span><span class="va">c</span>, <span class="va">d</span>, .named <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $a_a</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 2 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       a     b c     d    </span>

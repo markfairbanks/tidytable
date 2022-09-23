@@ -2,18 +2,12 @@
 % Please edit documentation in R/expand.R
 \name{expand}
 \alias{expand}
-\alias{expand.}
 \alias{nesting}
-\alias{nesting.}
 \title{Expand a data.table to use all combinations of values}
 \usage{
 expand(.df, ..., .name_repair = "check_unique", .by = NULL)
 
-expand.(.df, ..., .name_repair = "check_unique", .by = NULL)
-
 nesting(..., .name_repair = "check_unique")
-
-nesting.(..., .name_repair = "check_unique")
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -44,4 +38,3 @@ df \%>\%
 df \%>\%
   expand(nesting(x, y))
 }
-\keyword{internal}

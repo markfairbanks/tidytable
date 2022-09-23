@@ -44,7 +44,7 @@ get_dummies <- function(.df,
 
 #' @export
 #' @keywords internal
-#' @rdname get_dummies
+#' @inherit get_dummies
 get_dummies. <- function(.df,
                          cols = where(~ is.character(.x) | is.factor(.x)),
                          prefix = TRUE,

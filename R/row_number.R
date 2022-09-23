@@ -3,7 +3,6 @@
 #' @description
 #' Returns row number. This function is designed to work inside of `mutate()`
 #'
-#' @md
 #' @export
 #'
 #' @examples
@@ -17,5 +16,5 @@ row_number <- function() {
 
 #' @export
 #' @keywords internal
-#' @rdname row_number
+#' @inherit row_number title description examples
 row_number. <- row_number

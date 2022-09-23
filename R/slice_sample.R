@@ -9,7 +9,7 @@ slice_sample <- function(.df, n, prop, weight_by = NULL,
 
 #' @export
 #' @keywords internal
-#' @rdname slice
+#' @inherit slice
 slice_sample. <- function(.df, n, prop, weight_by = NULL,
                          replace = FALSE, .by = NULL) {
   UseMethod("slice_sample.")

@@ -6,7 +6,7 @@ slice_head <- function(.df, n = 5, .by = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname slice
+#' @inherit slice
 slice_head. <- function(.df, n = 5, .by = NULL) {
   UseMethod("slice_head.")
 }
@@ -51,7 +51,7 @@ slice_tail <- function(.df, n = 5, .by = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname slice
+#' @inherit slice
 slice_tail. <- function(.df, n = 5, .by = NULL) {
   UseMethod("slice_tail.")
 }

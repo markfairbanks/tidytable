@@ -56,7 +56,7 @@ count <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname count
+#' @inherit count
 count. <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   UseMethod("count.")
 }
@@ -87,7 +87,7 @@ tally <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname count
+#' @inherit count
 tally. <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
   UseMethod("tally.")
 }

@@ -28,3 +28,4 @@ df <- data.table(x = x)
 df \%>\%
   mutate(new_col = ifelse(x < 3, 1, 0))
 }
+\keyword{internal}

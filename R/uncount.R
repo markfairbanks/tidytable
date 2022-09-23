@@ -19,7 +19,7 @@ uncount <- function(.df, weights, .remove = TRUE, .id = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname uncount
+#' @inherit uncount
 uncount. <- function(.df, weights, .remove = TRUE, .id = NULL) {
   UseMethod("uncount.")
 }
