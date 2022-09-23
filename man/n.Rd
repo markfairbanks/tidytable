@@ -2,12 +2,9 @@
 % Please edit documentation in R/n.R
 \name{n}
 \alias{n}
-\alias{n.}
 \title{Number of observations in each group}
 \usage{
 n()
-
-n.()
 }
 \description{
 Helper function that can be used to find counts by group.
@@ -24,4 +21,3 @@ df <- data.table(
 df \%>\%
   summarize(count = n(), .by = z)
 }
-\keyword{internal}

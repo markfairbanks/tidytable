@@ -2,12 +2,9 @@
 % Please edit documentation in R/if_else.R
 \name{if_else}
 \alias{if_else}
-\alias{if_else.}
 \title{Fast if_else}
 \usage{
 if_else(condition, true, false, missing = NA, ..., ptype = NULL, size = NULL)
-
-if_else.(condition, true, false, missing = NA, ..., ptype = NULL, size = NULL)
 }
 \arguments{
 \item{condition}{Conditions to test on}
@@ -37,4 +34,3 @@ df <- data.table(x = x)
 df \%>\%
   mutate(new_col = if_else(x < 3, 1, 0))
 }
-\keyword{internal}

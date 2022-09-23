@@ -33,7 +33,7 @@ group_by <- function(.df, ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname group_by
+#' @inherit group_by
 group_by. <- function(.df, ...) {
   UseMethod("group_by.")
 }
@@ -71,7 +71,7 @@ ungroup <- function(.df) {
 
 #' @export
 #' @keywords internal
-#' @rdname group_by
+#' @inherit group_by
 ungroup. <- function(.df) {
   UseMethod("ungroup.")
 }
@@ -108,7 +108,7 @@ group_vars <- function(x) {
 
 #' @export
 #' @keywords internal
-#' @rdname group_vars
+#' @inherit group_vars
 group_vars. <- group_vars
 
 #' Check if the tidytable is grouped
@@ -135,5 +135,5 @@ is_grouped_df <- function(x) {
 
 #' @export
 #' @keywords internal
-#' @rdname is_grouped_df
+#' @inherit is_grouped_df
 is_grouped_df. <- is_grouped_df

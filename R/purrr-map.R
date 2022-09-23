@@ -29,7 +29,7 @@ map <- function(.x, .f, ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname map
+#' @inherit map
 map. <- map
 
 #' @export
@@ -41,7 +41,7 @@ map_lgl <- function(.x, .f, ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname map
+#' @inherit map
 map_lgl. <- map_lgl
 
 #' @export
@@ -53,7 +53,7 @@ map_int <- function(.x, .f, ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname map
+#' @inherit map
 map_int. <- map_int
 
 #' @export
@@ -65,7 +65,7 @@ map_dbl <- function(.x, .f, ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname map
+#' @inherit map
 map_dbl. <- map_dbl
 
 #' @export
@@ -77,7 +77,7 @@ map_chr <- function(.x, .f, ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname map
+#' @inherit map
 map_chr. <- map_chr
 
 #' @export
@@ -89,7 +89,7 @@ map_dfc <- function(.x, .f, ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname map
+#' @inherit map
 map_dfc. <- map_dfc
 
 #' @export
@@ -105,12 +105,12 @@ map_df <- map_dfr
 
 #' @export
 #' @keywords internal
-#' @rdname map
+#' @inherit map
 map_dfr. <- map_dfr
 
 #' @export
 #' @keywords internal
-#' @rdname map
+#' @inherit map
 map_df. <- map_dfr
 
 #' @export
@@ -119,3 +119,8 @@ walk <- function(.x, .f, ...) {
   map(.x, .f, ...)
   invisible(.x)
 }
+
+#' @export
+#' @keywords internal
+#' @inherit map
+walk. <- walk

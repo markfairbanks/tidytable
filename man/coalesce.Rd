@@ -2,12 +2,9 @@
 % Please edit documentation in R/coalesce.R
 \name{coalesce}
 \alias{coalesce}
-\alias{coalesce.}
 \title{Coalesce missing values}
 \usage{
 coalesce(..., .ptype = NULL, .size = NULL)
-
-coalesce.(..., .ptype = NULL, .size = NULL)
 }
 \arguments{
 \item{...}{Input vectors. Supports dynamic dots.}
@@ -36,4 +33,3 @@ vecs <- list(
 )
 coalesce(!!!vecs)
 }
-\keyword{internal}

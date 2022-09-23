@@ -49,7 +49,7 @@ slice <- function(.df, ..., .by = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname slice
+#' @inherit slice
 slice. <- function(.df, ..., .by = NULL) {
   UseMethod("slice.")
 }

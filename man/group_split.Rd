@@ -2,12 +2,9 @@
 % Please edit documentation in R/group_split.R
 \name{group_split}
 \alias{group_split}
-\alias{group_split.}
 \title{Split data frame by groups}
 \usage{
 group_split(.df, ..., .keep = TRUE, .named = FALSE)
-
-group_split.(.df, ..., .keep = TRUE, .named = FALSE)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -38,4 +35,3 @@ df \%>\%
 df \%>\%
   group_split(c, d, .named = TRUE)
 }
-\keyword{internal}

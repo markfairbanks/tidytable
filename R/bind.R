@@ -8,10 +8,8 @@
 #' @param .name_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details.
 #'
 #' @export
-#' @md
 #'
 #' @examples
-#'
 #' # Binding data together by row
 #' df1 <- data.table(x = 1:3, y = 10:12)
 #' df2 <- data.table(x = 4:6, y = 13:15)
@@ -68,10 +66,10 @@ bind_rows <- function(..., .id = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname bind_cols
+#' @inherit bind_cols
 bind_cols. <- bind_cols
 
 #' @export
 #' @keywords internal
-#' @rdname bind_cols
+#' @inherit bind_cols
 bind_rows. <- bind_rows

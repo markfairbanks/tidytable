@@ -2,12 +2,9 @@
 % Please edit documentation in R/desc.R
 \name{desc}
 \alias{desc}
-\alias{desc.}
 \title{Descending order}
 \usage{
 desc(x)
-
-desc.(x)
 }
 \arguments{
 \item{x}{Variable to arrange in descending order}
@@ -25,4 +22,3 @@ df <- data.table(
 df \%>\%
   arrange(c, desc(a))
 }
-\keyword{internal}

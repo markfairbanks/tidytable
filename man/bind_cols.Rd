@@ -3,17 +3,11 @@
 \name{bind_cols}
 \alias{bind_cols}
 \alias{bind_rows}
-\alias{bind_cols.}
-\alias{bind_rows.}
 \title{Bind data.tables by row and column}
 \usage{
 bind_cols(..., .name_repair = "unique")
 
 bind_rows(..., .id = NULL)
-
-bind_cols.(..., .name_repair = "unique")
-
-bind_rows.(..., .id = NULL)
 }
 \arguments{
 \item{...}{data.tables or data.frames to bind}
@@ -26,7 +20,6 @@ bind_rows.(..., .id = NULL)
 Bind multiple data.tables into one row-wise or col-wise.
 }
 \examples{
-
 # Binding data together by row
 df1 <- data.table(x = 1:3, y = 10:12)
 df2 <- data.table(x = 4:6, y = 13:15)
@@ -49,4 +42,3 @@ df1 \%>\%
 # Can pass a list of data frames
 bind_cols(list(df1, df2))
 }
-\keyword{internal}

@@ -41,7 +41,7 @@ separate <- function(.df, col, into,
 
 #' @export
 #' @keywords internal
-#' @rdname separate
+#' @inherit separate
 separate. <- function(.df, col, into,
                       sep = "[^[:alnum:]]+",
                       remove = TRUE,

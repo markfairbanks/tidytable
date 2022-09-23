@@ -24,7 +24,7 @@ transmute <- function(.df, ..., .by = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname transmute
+#' @inherit transmute
 transmute. <- function(.df, ..., .by = NULL) {
   UseMethod("transmute.")
 }

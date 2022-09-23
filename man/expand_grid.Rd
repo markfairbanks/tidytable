@@ -2,12 +2,9 @@
 % Please edit documentation in R/expand_grid.R
 \name{expand_grid}
 \alias{expand_grid}
-\alias{expand_grid.}
 \title{Create a data.table from all combinations of inputs}
 \usage{
 expand_grid(..., .name_repair = "check_unique")
-
-expand_grid.(..., .name_repair = "check_unique")
 }
 \arguments{
 \item{...}{Variables to get combinations of}
@@ -25,4 +22,3 @@ expand_grid(x, y)
 
 expand_grid(stuff = x, y)
 }
-\keyword{internal}

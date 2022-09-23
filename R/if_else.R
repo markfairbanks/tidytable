@@ -38,7 +38,7 @@ if_else <- function(condition, true, false, missing = NA, ..., ptype = NULL, siz
 
 #' @export
 #' @keywords internal
-#' @rdname if_else
+#' @inherit if_else
 if_else. <- if_else
 
 #' Fast ifelse
@@ -62,6 +62,7 @@ if_else. <- if_else
 #'
 #' df %>%
 #'   mutate(new_col = ifelse(x < 3, 1, 0))
+#' @keywords internal
 ifelse. <- function(conditions, true, false, na = NA) {
   if_else(conditions, true, false, na)
 }

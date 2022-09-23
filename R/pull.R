@@ -35,7 +35,7 @@ pull <- function(.df, var = -1, name = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname pull
+#' @inherit pull
 pull. <- function(.df, var = -1, name = NULL) {
   UseMethod("pull.")
 }

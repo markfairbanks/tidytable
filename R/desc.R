@@ -5,7 +5,6 @@
 #'
 #' @param x  Variable to arrange in descending order
 #'
-#' @md
 #' @export
 #'
 #' @examples
@@ -23,5 +22,5 @@ desc <- function(x) {
 
 #' @export
 #' @keywords internal
-#' @rdname desc
+#' @inherit desc
 desc. <- desc

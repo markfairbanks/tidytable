@@ -12,7 +12,6 @@
 #' @param .keep Should the grouping columns be kept in the list column.
 #'
 #' @export
-#' @md
 #'
 #' @examples
 #' df <- data.table(
@@ -39,7 +38,7 @@ nest_by <- function(.df, ..., .key = "data", .keep = FALSE) {
 
 #' @export
 #' @keywords internal
-#' @rdname nest_by
+#' @inherit nest_by
 nest_by. <- function(.df, ..., .key = "data", .keep = FALSE) {
   UseMethod("nest_by.")
 }

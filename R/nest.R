@@ -30,7 +30,7 @@ nest <- function(.df, ..., .names_sep = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname nest
+#' @inherit nest
 nest. <- function(.df, ..., .names_sep = NULL) {
   UseMethod("nest.")
 }

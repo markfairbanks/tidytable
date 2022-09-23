@@ -3,42 +3,24 @@
 %   R/slice.R, R/slice_sample.R
 \name{slice_head}
 \alias{slice_head}
-\alias{slice_head.}
 \alias{slice_tail}
-\alias{slice_tail.}
 \alias{slice_max}
-\alias{slice_max.}
 \alias{slice_min}
-\alias{slice_min.}
 \alias{slice}
-\alias{slice.}
 \alias{slice_sample}
-\alias{slice_sample.}
 \title{Choose rows in a data.table}
 \usage{
 slice_head(.df, n = 5, .by = NULL)
 
-slice_head.(.df, n = 5, .by = NULL)
-
 slice_tail(.df, n = 5, .by = NULL)
-
-slice_tail.(.df, n = 5, .by = NULL)
 
 slice_max(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL)
 
-slice_max.(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL)
-
 slice_min(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL)
-
-slice_min.(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL)
 
 slice(.df, ..., .by = NULL)
 
-slice.(.df, ..., .by = NULL)
-
 slice_sample(.df, n, prop, weight_by = NULL, replace = FALSE, .by = NULL)
-
-slice_sample.(.df, n, prop, weight_by = NULL, replace = FALSE, .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -92,4 +74,3 @@ df \%>\%
 df \%>\%
   slice_min(order_by = y, .by = z)
 }
-\keyword{internal}

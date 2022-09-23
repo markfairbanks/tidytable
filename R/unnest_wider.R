@@ -32,6 +32,9 @@ unnest_wider <- function(.df, col, names_sep = NULL,
   )
 }
 
+#' @export
+#' @keywords internal
+#' @inherit unnest_wider
 unnest_wider. <- function(.df, col, names_sep = NULL,
                           simplify = NULL, names_repair = "check_unique",
                           ptype = NULL, transform = NULL) {

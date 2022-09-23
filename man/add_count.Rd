@@ -2,18 +2,12 @@
 % Please edit documentation in R/add_count.R
 \name{add_count}
 \alias{add_count}
-\alias{add_count.}
 \alias{add_tally}
-\alias{add_tally.}
 \title{Add a count column to the data frame}
 \usage{
 add_count(.df, ..., wt = NULL, sort = FALSE, name = NULL)
 
-add_count.(.df, ..., wt = NULL, sort = FALSE, name = NULL)
-
 add_tally(.df, wt = NULL, sort = FALSE, name = NULL)
-
-add_tally.(.df, wt = NULL, sort = FALSE, name = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -47,4 +41,3 @@ df <- data.table(
 df \%>\%
   add_count(a)
 }
-\keyword{internal}

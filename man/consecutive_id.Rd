@@ -2,12 +2,9 @@
 % Please edit documentation in R/consecutive_id.R
 \name{consecutive_id}
 \alias{consecutive_id}
-\alias{consecutive_id.}
 \title{Generate a unique id for consecutive values}
 \usage{
 consecutive_id(...)
-
-consecutive_id.(...)
 }
 \arguments{
 \item{...}{Vectors of values}
@@ -19,4 +16,3 @@ Generate a unique id for runs of consecutive values
 x <- c(1, 1, 2, 2, 1, 1)
 consecutive_id(x)
 }
-\keyword{internal}

@@ -32,7 +32,7 @@ relocate <- function(.df, ..., .before = NULL, .after = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname relocate
+#' @inherit relocate
 relocate. <- function(.df, ..., .before = NULL, .after = NULL) {
   UseMethod("relocate.")
 }

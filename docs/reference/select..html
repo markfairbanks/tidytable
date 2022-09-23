@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@ Use named arguments, e.g. new_name = old_name, to rename selected variables.
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">select.</span><span class="op">(</span><span class="va">x1</span>, <span class="va">y</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="select.html">select</a></span><span class="op">(</span><span class="va">x1</span>, <span class="va">y</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 3 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      x1 y    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
@@ -98,7 +98,7 @@ Use named arguments, e.g. new_name = old_name, to rename selected variables.
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3 c    </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">select.</span><span class="op">(</span><span class="va">x1</span><span class="op">:</span><span class="va">y</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="select.html">select</a></span><span class="op">(</span><span class="va">x1</span><span class="op">:</span><span class="va">y</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      x1    x2 y    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
@@ -107,7 +107,7 @@ Use named arguments, e.g. new_name = old_name, to rename selected variables.
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3     3 c    </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">select.</span><span class="op">(</span><span class="op">-</span><span class="va">y</span>, <span class="op">-</span><span class="va">z</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span>, <span class="op">-</span><span class="va">z</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 3 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      x1    x2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
@@ -116,7 +116,7 @@ Use named arguments, e.g. new_name = old_name, to rename selected variables.
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3     3</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">select.</span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"x"</span><span class="op">)</span>, <span class="va">z</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"x"</span><span class="op">)</span>, <span class="va">z</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      x1    x2 z    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
@@ -125,7 +125,7 @@ Use named arguments, e.g. new_name = old_name, to rename selected variables.
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3     3 c    </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">select.</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.character</span><span class="op">)</span>, <span class="va">x1</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="select.html">select</a></span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.character</span><span class="op">)</span>, <span class="va">x1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   y     z        x1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
@@ -134,7 +134,7 @@ Use named arguments, e.g. new_name = old_name, to rename selected variables.
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> c     c         3</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">select.</span><span class="op">(</span>new <span class="op">=</span> <span class="va">x1</span>, <span class="va">y</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="select.html">select</a></span><span class="op">(</span>new <span class="op">=</span> <span class="va">x1</span>, <span class="va">y</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 3 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     new y    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>

@@ -2,153 +2,81 @@
 % Please edit documentation in R/purrr-map.R, R/purrr-map2.R, R/purrr-pmap.R
 \name{map}
 \alias{map}
-\alias{map.}
 \alias{map_lgl}
-\alias{map_lgl.}
 \alias{map_int}
-\alias{map_int.}
 \alias{map_dbl}
-\alias{map_dbl.}
 \alias{map_chr}
-\alias{map_chr.}
 \alias{map_dfc}
-\alias{map_dfc.}
 \alias{map_dfr}
 \alias{map_df}
-\alias{map_dfr.}
-\alias{map_df.}
 \alias{walk}
 \alias{map2}
-\alias{map2.}
 \alias{map2_lgl}
-\alias{map2_lgl.}
 \alias{map2_int}
-\alias{map2_int.}
 \alias{map2_dbl}
-\alias{map2_dbl.}
 \alias{map2_chr}
-\alias{map2_chr.}
 \alias{map2_dfc}
-\alias{map2_dfc.}
 \alias{map2_dfr}
-\alias{map2_dfr.}
 \alias{map2_df}
-\alias{map2_df.}
 \alias{pmap}
-\alias{pmap.}
 \alias{pmap_lgl}
-\alias{pmap_lgl.}
 \alias{pmap_int}
-\alias{pmap_int.}
 \alias{pmap_dbl}
-\alias{pmap_dbl.}
 \alias{pmap_chr}
-\alias{pmap_chr.}
 \alias{pmap_dfc}
-\alias{pmap_dfc.}
 \alias{pmap_dfr}
-\alias{pmap_dfr.}
 \alias{pmap_df}
-\alias{pmap_df.}
 \title{Apply a function to each element of a vector or list}
 \usage{
 map(.x, .f, ...)
 
-map.(.x, .f, ...)
-
 map_lgl(.x, .f, ...)
-
-map_lgl.(.x, .f, ...)
 
 map_int(.x, .f, ...)
 
-map_int.(.x, .f, ...)
-
 map_dbl(.x, .f, ...)
-
-map_dbl.(.x, .f, ...)
 
 map_chr(.x, .f, ...)
 
-map_chr.(.x, .f, ...)
-
 map_dfc(.x, .f, ...)
-
-map_dfc.(.x, .f, ...)
 
 map_dfr(.x, .f, ..., .id = NULL)
 
 map_df(.x, .f, ..., .id = NULL)
 
-map_dfr.(.x, .f, ..., .id = NULL)
-
-map_df.(.x, .f, ..., .id = NULL)
-
 walk(.x, .f, ...)
 
 map2(.x, .y, .f, ...)
 
-map2.(.x, .y, .f, ...)
-
 map2_lgl(.x, .y, .f, ...)
-
-map2_lgl.(.x, .y, .f, ...)
 
 map2_int(.x, .y, .f, ...)
 
-map2_int.(.x, .y, .f, ...)
-
 map2_dbl(.x, .y, .f, ...)
-
-map2_dbl.(.x, .y, .f, ...)
 
 map2_chr(.x, .y, .f, ...)
 
-map2_chr.(.x, .y, .f, ...)
-
 map2_dfc(.x, .y, .f, ...)
-
-map2_dfc.(.x, .y, .f, ...)
 
 map2_dfr(.x, .y, .f, ..., .id = NULL)
 
-map2_dfr.(.x, .y, .f, ..., .id = NULL)
-
 map2_df(.x, .y, .f, ..., .id = NULL)
-
-map2_df.(.x, .y, .f, ..., .id = NULL)
 
 pmap(.l, .f, ...)
 
-pmap.(.l, .f, ...)
-
 pmap_lgl(.l, .f, ...)
-
-pmap_lgl.(.l, .f, ...)
 
 pmap_int(.l, .f, ...)
 
-pmap_int.(.l, .f, ...)
-
 pmap_dbl(.l, .f, ...)
-
-pmap_dbl.(.l, .f, ...)
 
 pmap_chr(.l, .f, ...)
 
-pmap_chr.(.l, .f, ...)
-
 pmap_dfc(.l, .f, ...)
-
-pmap_dfc.(.l, .f, ...)
 
 pmap_dfr(.l, .f, ..., .id = NULL)
 
-pmap_dfr.(.l, .f, ..., .id = NULL)
-
 pmap_df(.l, .f, ..., .id = NULL)
-
-pmap_df.(.l, .f, ..., .id = NULL)
 }
 \arguments{
 \item{.x}{A list or vector}
@@ -179,4 +107,3 @@ map_dbl(c(1,2,3), ~ .x + 1)
 
 map_chr(c(1,2,3), as.character)
 }
-\keyword{internal}

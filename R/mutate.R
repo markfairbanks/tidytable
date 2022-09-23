@@ -59,7 +59,7 @@ mutate <- function(.df, ..., .by = NULL,
 
 #' @export
 #' @keywords internal
-#' @rdname mutate
+#' @inherit mutate
 mutate. <- function(.df, ..., .by = NULL,
                     .keep = c("all", "used", "unused", "none"),
                     .before = NULL, .after = NULL) {

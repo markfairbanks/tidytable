@@ -3,30 +3,18 @@
 \name{context}
 \alias{context}
 \alias{cur_column}
-\alias{cur_column.}
 \alias{cur_data}
-\alias{cur_data.}
 \alias{cur_group_id}
-\alias{cur_group_id.}
 \alias{cur_group_rows}
-\alias{cur_group_rows.}
 \title{Context functions}
 \usage{
 cur_column()
 
-cur_column.()
-
 cur_data()
-
-cur_data.()
 
 cur_group_id()
 
-cur_group_id.()
-
 cur_group_rows()
-
-cur_group_rows.()
 }
 \description{
 These functions give information about the "current" group.
@@ -62,4 +50,3 @@ df \%>\%
   mutate(group_rows = cur_group_rows(),
          .by = y)
 }
-\keyword{internal}

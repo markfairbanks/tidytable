@@ -2,12 +2,9 @@
 % Please edit documentation in R/crossing.R
 \name{crossing}
 \alias{crossing}
-\alias{crossing.}
 \title{Create a data.table from all unique combinations of inputs}
 \usage{
 crossing(..., .name_repair = "check_unique")
-
-crossing.(..., .name_repair = "check_unique")
 }
 \arguments{
 \item{...}{Variables to get unique combinations of}
@@ -25,4 +22,3 @@ crossing(x, y)
 
 crossing(stuff = x, y)
 }
-\keyword{internal}

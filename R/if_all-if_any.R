@@ -27,10 +27,10 @@ if_any <- function(.cols = everything(), .fns = NULL, ...) {
 
 #' @export
 #' @keywords internal
-#' @rdname if_all
+#' @inherit if_all
 if_all. <- if_all
 
 #' @export
 #' @keywords internal
-#' @rdname if_all
+#' @inherit if_all
 if_any. <- if_any

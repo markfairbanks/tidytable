@@ -40,5 +40,5 @@ coalesce <- function(..., .ptype = NULL, .size = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname coalesce
+#' @inherit coalesce
 coalesce. <- coalesce

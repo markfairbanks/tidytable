@@ -21,11 +21,12 @@ fread <- function(...) {
 
 #' @export
 #' @keywords internal
-#' @rdname fread
+#' @inherit fread
 fread. <- fread
 
 #' @export
-#' @rdname fread
+#' @keywords internal
+#' @inherit fread
 fwrite. <- function(...) {
   fwrite(...)
 }

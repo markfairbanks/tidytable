@@ -33,10 +33,10 @@ lead <- function(x, n = 1L, default = NA) {
 
 #' @export
 #' @keywords internal
-#' @rdname lag
+#' @inherit lag
 lags. <- lag
 
 #' @export
 #' @keywords internal
-#' @rdname lag
+#' @inherit lag
 leads. <- lead

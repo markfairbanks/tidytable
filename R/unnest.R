@@ -49,7 +49,7 @@ unnest <- function(.df,
 
 #' @export
 #' @keywords internal
-#' @rdname unnest
+#' @inherit unnest
 unnest. <- function(.df,
                     ...,
                     keep_empty = FALSE,

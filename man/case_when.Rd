@@ -2,12 +2,9 @@
 % Please edit documentation in R/case_when.R
 \name{case_when}
 \alias{case_when}
-\alias{case_when.}
 \title{Case when}
 \usage{
 case_when(..., .default = NA, .ptype = NULL, .size = NULL)
-
-case_when.(..., .default = NA, .ptype = NULL, .size = NULL)
 }
 \arguments{
 \item{...}{A sequence of two-sided formulas. The left hand side gives the conditions,
@@ -33,4 +30,3 @@ df \%>\%
                             x < 7 ~ 2,
                             TRUE ~ 3))
 }
-\keyword{internal}

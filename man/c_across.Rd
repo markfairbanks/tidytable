@@ -2,12 +2,9 @@
 % Please edit documentation in R/c_across.R
 \name{c_across}
 \alias{c_across}
-\alias{c_across.}
 \title{Combine values from multiple columns}
 \usage{
 c_across(cols = everything())
-
-c_across.(cols = everything())
 }
 \arguments{
 \item{cols}{Columns to transform.}
@@ -22,4 +19,3 @@ df <- data.table(x = runif(6), y = runif(6), z = runif(6))
 df \%>\%
   mutate_rowwise(row_mean = mean(c_across(x:z)))
 }
-\keyword{internal}

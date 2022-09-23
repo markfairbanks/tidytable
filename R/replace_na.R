@@ -8,7 +8,6 @@
 #' If `.x` is a vector, a single replacement value.
 #'
 #' @export
-#' @md
 #'
 #' @examples
 #' df <- data.table(
@@ -29,7 +28,7 @@ replace_na <- function(.x, replace) {
 
 #' @export
 #' @keywords internal
-#' @rdname replace_na
+#' @inherit replace_na
 replace_na. <- function(.x, replace) {
   UseMethod("replace_na.")
 }

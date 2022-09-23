@@ -2,24 +2,15 @@
 % Please edit documentation in R/first-last-nth.R
 \name{first}
 \alias{first}
-\alias{first.}
 \alias{last}
-\alias{last.}
 \alias{nth}
-\alias{nth.}
 \title{Extract the first, last, or nth value from a vector}
 \usage{
 first(x, default = NULL, na_rm = FALSE)
 
-first.(x, default = NULL, na_rm = FALSE)
-
 last(x, default = NULL, na_rm = FALSE)
 
-last.(x, default = NULL, na_rm = FALSE)
-
 nth(x, n, default = NULL, na_rm = FALSE)
-
-nth.(x, n, default = NULL, na_rm = FALSE)
 }
 \arguments{
 \item{x}{A vector}
@@ -42,4 +33,3 @@ first(vec)
 last(vec)
 nth(vec, 4)
 }
-\keyword{internal}

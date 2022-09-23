@@ -2,12 +2,9 @@
 % Please edit documentation in R/rowwise.R
 \name{rowwise}
 \alias{rowwise}
-\alias{rowwise.}
 \title{Convert to a rowwise tidytable}
 \usage{
 rowwise(.df)
-
-rowwise.(.df)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -29,4 +26,3 @@ df \%>\%
   mutate(row_mean = mean(c_across(x:z))) \%>\%
   ungroup()
 }
-\keyword{internal}

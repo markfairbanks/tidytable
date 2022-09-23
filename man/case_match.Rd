@@ -2,12 +2,9 @@
 % Please edit documentation in R/case_match.R
 \name{case_match}
 \alias{case_match}
-\alias{case_match.}
 \title{Vectorized \code{switch()}}
 \usage{
 case_match(.x, ..., .default = NA, .ptype = NULL)
-
-case_match.(.x, ..., .default = NA, .ptype = NULL)
 }
 \arguments{
 \item{.x}{A vector}
@@ -31,4 +28,3 @@ df \%>\%
                              "c" ~ "new_2",
                              .default = x))
 }
-\keyword{internal}

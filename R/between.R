@@ -30,5 +30,5 @@ between <- function(x, left, right) {
 
 #' @export
 #' @keywords internal
-#' @rdname between
+#' @inherit between
 between. <- between

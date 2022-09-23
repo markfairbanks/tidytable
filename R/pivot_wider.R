@@ -60,7 +60,7 @@ pivot_wider <- function(.df,
 
 #' @export
 #' @keywords internal
-#' @rdname pivot_wider
+#' @inherit pivot_wider
 pivot_wider. <- function(.df,
                          names_from = name,
                          values_from = value,

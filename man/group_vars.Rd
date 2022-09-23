@@ -2,12 +2,9 @@
 % Please edit documentation in R/group_by.R
 \name{group_vars}
 \alias{group_vars}
-\alias{group_vars.}
 \title{Get the grouping variables}
 \usage{
 group_vars(x)
-
-group_vars.(x)
 }
 \arguments{
 \item{x}{A grouped tidytable}
@@ -27,4 +24,3 @@ df \%>\%
   group_by(c, d) \%>\%
   group_vars()
 }
-\keyword{internal}

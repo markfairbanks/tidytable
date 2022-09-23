@@ -2,12 +2,9 @@
 % Please edit documentation in R/relocate.R
 \name{relocate}
 \alias{relocate}
-\alias{relocate.}
 \title{Relocate a column to a new position}
 \usage{
 relocate(.df, ..., .before = NULL, .after = NULL)
-
-relocate.(.df, ..., .before = NULL, .after = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -38,4 +35,3 @@ df \%>\%
 df \%>\%
   relocate(where(is.numeric), .after = c)
 }
-\keyword{internal}

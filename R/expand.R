@@ -30,7 +30,7 @@ expand <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname expand
+#' @inherit expand
 expand. <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
   UseMethod("expand.")
 }
@@ -89,5 +89,5 @@ nesting <- function(..., .name_repair = "check_unique") {
 
 #' @export
 #' @keywords internal
-#' @rdname expand
+#' @inherit expand
 nesting. <- nesting

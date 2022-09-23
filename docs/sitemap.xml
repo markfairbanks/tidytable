@@ -31,10 +31,25 @@
     <loc>/reference/across..html</loc>
   </url>
   <url>
+    <loc>/reference/across.html</loc>
+  </url>
+  <url>
     <loc>/reference/add_count..html</loc>
   </url>
   <url>
+    <loc>/reference/add_count.html</loc>
+  </url>
+  <url>
+    <loc>/reference/add_tally..html</loc>
+  </url>
+  <url>
+    <loc>/reference/anti_join..html</loc>
+  </url>
+  <url>
     <loc>/reference/arrange..html</loc>
+  </url>
+  <url>
+    <loc>/reference/arrange.html</loc>
   </url>
   <url>
     <loc>/reference/arrange_across..html</loc>
@@ -49,7 +64,13 @@
     <loc>/reference/between..html</loc>
   </url>
   <url>
+    <loc>/reference/between.html</loc>
+  </url>
+  <url>
     <loc>/reference/bind_cols..html</loc>
+  </url>
+  <url>
+    <loc>/reference/bind_cols.html</loc>
   </url>
   <url>
     <loc>/reference/bind_rows..html</loc>
@@ -58,19 +79,43 @@
     <loc>/reference/c_across..html</loc>
   </url>
   <url>
+    <loc>/reference/c_across.html</loc>
+  </url>
+  <url>
     <loc>/reference/case..html</loc>
+  </url>
+  <url>
+    <loc>/reference/case.html</loc>
+  </url>
+  <url>
+    <loc>/reference/case_match..html</loc>
+  </url>
+  <url>
+    <loc>/reference/case_match.html</loc>
   </url>
   <url>
     <loc>/reference/case_when..html</loc>
   </url>
   <url>
+    <loc>/reference/case_when.html</loc>
+  </url>
+  <url>
     <loc>/reference/coalesce..html</loc>
+  </url>
+  <url>
+    <loc>/reference/coalesce.html</loc>
   </url>
   <url>
     <loc>/reference/complete..html</loc>
   </url>
   <url>
+    <loc>/reference/complete.html</loc>
+  </url>
+  <url>
     <loc>/reference/consecutive_id..html</loc>
+  </url>
+  <url>
+    <loc>/reference/consecutive_id.html</loc>
   </url>
   <url>
     <loc>/reference/context.html</loc>
@@ -79,19 +124,43 @@
     <loc>/reference/count..html</loc>
   </url>
   <url>
+    <loc>/reference/count.html</loc>
+  </url>
+  <url>
     <loc>/reference/crossing..html</loc>
+  </url>
+  <url>
+    <loc>/reference/crossing.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cur_column..html</loc>
+  </url>
+  <url>
+    <loc>/reference/cur_data..html</loc>
   </url>
   <url>
     <loc>/reference/cur_group_id..html</loc>
   </url>
   <url>
+    <loc>/reference/cur_group_rows..html</loc>
+  </url>
+  <url>
     <loc>/reference/desc..html</loc>
+  </url>
+  <url>
+    <loc>/reference/desc.html</loc>
   </url>
   <url>
     <loc>/reference/distinct..html</loc>
   </url>
   <url>
+    <loc>/reference/distinct.html</loc>
+  </url>
+  <url>
     <loc>/reference/drop_na..html</loc>
+  </url>
+  <url>
+    <loc>/reference/drop_na.html</loc>
   </url>
   <url>
     <loc>/reference/dt.html</loc>
@@ -103,40 +172,97 @@
     <loc>/reference/enframe..html</loc>
   </url>
   <url>
+    <loc>/reference/enframe.html</loc>
+  </url>
+  <url>
     <loc>/reference/expand..html</loc>
+  </url>
+  <url>
+    <loc>/reference/expand.html</loc>
   </url>
   <url>
     <loc>/reference/expand_grid..html</loc>
   </url>
   <url>
+    <loc>/reference/expand_grid.html</loc>
+  </url>
+  <url>
     <loc>/reference/extract..html</loc>
+  </url>
+  <url>
+    <loc>/reference/extract.html</loc>
   </url>
   <url>
     <loc>/reference/fill..html</loc>
   </url>
   <url>
+    <loc>/reference/fill.html</loc>
+  </url>
+  <url>
     <loc>/reference/filter..html</loc>
+  </url>
+  <url>
+    <loc>/reference/filter.html</loc>
   </url>
   <url>
     <loc>/reference/first..html</loc>
   </url>
   <url>
+    <loc>/reference/first.html</loc>
+  </url>
+  <url>
     <loc>/reference/fread..html</loc>
+  </url>
+  <url>
+    <loc>/reference/fread.html</loc>
+  </url>
+  <url>
+    <loc>/reference/full_join..html</loc>
+  </url>
+  <url>
+    <loc>/reference/fwrite..html</loc>
   </url>
   <url>
     <loc>/reference/get_dummies..html</loc>
   </url>
   <url>
+    <loc>/reference/get_dummies.html</loc>
+  </url>
+  <url>
     <loc>/reference/grapes-notin-grapes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/group_by..html</loc>
+  </url>
+  <url>
+    <loc>/reference/group_by.html</loc>
   </url>
   <url>
     <loc>/reference/group_split..html</loc>
   </url>
   <url>
+    <loc>/reference/group_split.html</loc>
+  </url>
+  <url>
+    <loc>/reference/group_vars..html</loc>
+  </url>
+  <url>
+    <loc>/reference/group_vars.html</loc>
+  </url>
+  <url>
     <loc>/reference/if_all..html</loc>
   </url>
   <url>
+    <loc>/reference/if_all.html</loc>
+  </url>
+  <url>
+    <loc>/reference/if_any..html</loc>
+  </url>
+  <url>
     <loc>/reference/if_else..html</loc>
+  </url>
+  <url>
+    <loc>/reference/if_else.html</loc>
   </url>
   <url>
     <loc>/reference/ifelse..html</loc>
@@ -148,7 +274,16 @@
     <loc>/reference/index.html</loc>
   </url>
   <url>
+    <loc>/reference/inner_join..html</loc>
+  </url>
+  <url>
     <loc>/reference/inv_gc.html</loc>
+  </url>
+  <url>
+    <loc>/reference/is_grouped_df..html</loc>
+  </url>
+  <url>
+    <loc>/reference/is_grouped_df.html</loc>
   </url>
   <url>
     <loc>/reference/is_tidytable.html</loc>
@@ -157,7 +292,13 @@
     <loc>/reference/knit_print.tidytable.html</loc>
   </url>
   <url>
+    <loc>/reference/lag.html</loc>
+  </url>
+  <url>
     <loc>/reference/lags..html</loc>
+  </url>
+  <url>
+    <loc>/reference/last..html</loc>
   </url>
   <url>
     <loc>/reference/leads..html</loc>
@@ -166,10 +307,64 @@
     <loc>/reference/left_join..html</loc>
   </url>
   <url>
+    <loc>/reference/left_join.html</loc>
+  </url>
+  <url>
     <loc>/reference/map..html</loc>
   </url>
   <url>
+    <loc>/reference/map.html</loc>
+  </url>
+  <url>
+    <loc>/reference/map2..html</loc>
+  </url>
+  <url>
+    <loc>/reference/map2_chr..html</loc>
+  </url>
+  <url>
+    <loc>/reference/map2_dbl..html</loc>
+  </url>
+  <url>
+    <loc>/reference/map2_df..html</loc>
+  </url>
+  <url>
+    <loc>/reference/map2_dfc..html</loc>
+  </url>
+  <url>
+    <loc>/reference/map2_dfr..html</loc>
+  </url>
+  <url>
+    <loc>/reference/map2_int..html</loc>
+  </url>
+  <url>
+    <loc>/reference/map2_lgl..html</loc>
+  </url>
+  <url>
+    <loc>/reference/map_chr..html</loc>
+  </url>
+  <url>
+    <loc>/reference/map_dbl..html</loc>
+  </url>
+  <url>
+    <loc>/reference/map_df..html</loc>
+  </url>
+  <url>
+    <loc>/reference/map_dfc..html</loc>
+  </url>
+  <url>
+    <loc>/reference/map_dfr..html</loc>
+  </url>
+  <url>
+    <loc>/reference/map_int..html</loc>
+  </url>
+  <url>
+    <loc>/reference/map_lgl..html</loc>
+  </url>
+  <url>
     <loc>/reference/mutate..html</loc>
+  </url>
+  <url>
+    <loc>/reference/mutate.html</loc>
   </url>
   <url>
     <loc>/reference/mutate_across..html</loc>
@@ -181,22 +376,46 @@
     <loc>/reference/mutate_rowwise..html</loc>
   </url>
   <url>
+    <loc>/reference/mutate_rowwise.html</loc>
+  </url>
+  <url>
     <loc>/reference/n..html</loc>
+  </url>
+  <url>
+    <loc>/reference/n.html</loc>
   </url>
   <url>
     <loc>/reference/n_distinct..html</loc>
   </url>
   <url>
+    <loc>/reference/n_distinct.html</loc>
+  </url>
+  <url>
     <loc>/reference/na_if..html</loc>
+  </url>
+  <url>
+    <loc>/reference/na_if.html</loc>
   </url>
   <url>
     <loc>/reference/nest..html</loc>
   </url>
   <url>
+    <loc>/reference/nest.html</loc>
+  </url>
+  <url>
     <loc>/reference/nest_by..html</loc>
   </url>
   <url>
+    <loc>/reference/nest_by.html</loc>
+  </url>
+  <url>
+    <loc>/reference/nesting..html</loc>
+  </url>
+  <url>
     <loc>/reference/new_tidytable.html</loc>
+  </url>
+  <url>
+    <loc>/reference/nth..html</loc>
   </url>
   <url>
     <loc>/reference/pipe.html</loc>
@@ -205,10 +424,43 @@
     <loc>/reference/pivot_longer..html</loc>
   </url>
   <url>
+    <loc>/reference/pivot_longer.html</loc>
+  </url>
+  <url>
     <loc>/reference/pivot_wider..html</loc>
   </url>
   <url>
+    <loc>/reference/pivot_wider.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pmap..html</loc>
+  </url>
+  <url>
+    <loc>/reference/pmap_chr..html</loc>
+  </url>
+  <url>
+    <loc>/reference/pmap_dbl..html</loc>
+  </url>
+  <url>
+    <loc>/reference/pmap_df..html</loc>
+  </url>
+  <url>
+    <loc>/reference/pmap_dfc..html</loc>
+  </url>
+  <url>
+    <loc>/reference/pmap_dfr..html</loc>
+  </url>
+  <url>
+    <loc>/reference/pmap_int..html</loc>
+  </url>
+  <url>
+    <loc>/reference/pmap_lgl..html</loc>
+  </url>
+  <url>
     <loc>/reference/pull..html</loc>
+  </url>
+  <url>
+    <loc>/reference/pull.html</loc>
   </url>
   <url>
     <loc>/reference/reexports.html</loc>
@@ -217,7 +469,13 @@
     <loc>/reference/relocate..html</loc>
   </url>
   <url>
+    <loc>/reference/relocate.html</loc>
+  </url>
+  <url>
     <loc>/reference/rename..html</loc>
+  </url>
+  <url>
+    <loc>/reference/rename.html</loc>
   </url>
   <url>
     <loc>/reference/rename_all..html</loc>
@@ -226,31 +484,88 @@
     <loc>/reference/rename_with..html</loc>
   </url>
   <url>
+    <loc>/reference/rename_with.html</loc>
+  </url>
+  <url>
     <loc>/reference/replace_na..html</loc>
+  </url>
+  <url>
+    <loc>/reference/replace_na.html</loc>
+  </url>
+  <url>
+    <loc>/reference/right_join..html</loc>
   </url>
   <url>
     <loc>/reference/row_number..html</loc>
   </url>
   <url>
+    <loc>/reference/row_number.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rowwise..html</loc>
+  </url>
+  <url>
+    <loc>/reference/rowwise.html</loc>
+  </url>
+  <url>
     <loc>/reference/select..html</loc>
+  </url>
+  <url>
+    <loc>/reference/select.html</loc>
+  </url>
+  <url>
+    <loc>/reference/semi_join..html</loc>
   </url>
   <url>
     <loc>/reference/separate..html</loc>
   </url>
   <url>
+    <loc>/reference/separate.html</loc>
+  </url>
+  <url>
     <loc>/reference/separate_rows..html</loc>
+  </url>
+  <url>
+    <loc>/reference/separate_rows.html</loc>
   </url>
   <url>
     <loc>/reference/slice..html</loc>
   </url>
   <url>
+    <loc>/reference/slice.html</loc>
+  </url>
+  <url>
+    <loc>/reference/slice_head..html</loc>
+  </url>
+  <url>
+    <loc>/reference/slice_max..html</loc>
+  </url>
+  <url>
+    <loc>/reference/slice_min..html</loc>
+  </url>
+  <url>
+    <loc>/reference/slice_sample..html</loc>
+  </url>
+  <url>
+    <loc>/reference/slice_tail..html</loc>
+  </url>
+  <url>
     <loc>/reference/starts_with..html</loc>
+  </url>
+  <url>
+    <loc>/reference/summarise..html</loc>
   </url>
   <url>
     <loc>/reference/summarize..html</loc>
   </url>
   <url>
+    <loc>/reference/summarize.html</loc>
+  </url>
+  <url>
     <loc>/reference/summarize_across..html</loc>
+  </url>
+  <url>
+    <loc>/reference/tally..html</loc>
   </url>
   <url>
     <loc>/reference/tidytable-vctrs.html</loc>
@@ -262,22 +577,49 @@
     <loc>/reference/top_n..html</loc>
   </url>
   <url>
+    <loc>/reference/top_n.html</loc>
+  </url>
+  <url>
     <loc>/reference/transmute..html</loc>
+  </url>
+  <url>
+    <loc>/reference/transmute.html</loc>
   </url>
   <url>
     <loc>/reference/uncount..html</loc>
   </url>
   <url>
+    <loc>/reference/uncount.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ungroup..html</loc>
+  </url>
+  <url>
     <loc>/reference/unite..html</loc>
+  </url>
+  <url>
+    <loc>/reference/unite.html</loc>
   </url>
   <url>
     <loc>/reference/unnest..html</loc>
   </url>
   <url>
+    <loc>/reference/unnest.html</loc>
+  </url>
+  <url>
     <loc>/reference/unnest_longer..html</loc>
   </url>
   <url>
+    <loc>/reference/unnest_longer.html</loc>
+  </url>
+  <url>
     <loc>/reference/unnest_wider..html</loc>
+  </url>
+  <url>
+    <loc>/reference/unnest_wider.html</loc>
+  </url>
+  <url>
+    <loc>/reference/walk..html</loc>
   </url>
   <url>
     <loc>/reference/where.html</loc>

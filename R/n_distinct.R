@@ -25,5 +25,5 @@ n_distinct <- function(..., na.rm = FALSE) {
 
 #' @export
 #' @keywords internal
-#' @rdname n_distinct
+#' @inherit n_distinct
 n_distinct. <- n_distinct

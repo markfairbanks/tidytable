@@ -1,9 +1,9 @@
-# tidytable 0.9.0 (in development)
+# tidytable 0.9.0
 
 #### Dotless functions!
 * `tidytable` now exports dotless versions of all functions (e.g. `arrange()`/`mutate()`/etc.).
   The `verb.()` versions are still exported as well.
-  * The `verb.()` syntax will remain in the package.
+  * `verb.()` syntax is still available to users for backwards compatibility.
   * This will also allow users to use both `tidytable` and `dplyr` by simply loading
     `dplyr` _after_ `tidytable`, as the `verb.()` functions won't be overwritten by `dplyr`.
 
@@ -28,7 +28,7 @@
 * `pivot_wider.()`: Works with column names with spaces (#569)
 * `pivot_wider.()`: `names_glue="{.value}_{somecolumn}"` assigns column names in
   correct order (@Darxor, #579)
-* `left_join()`: Correctly handles when x contains a duplicate of a y by column (#625)
+* `left_join()`: Works when y matching columns in `by` is a non matching column of x (#625)
 
 # tidytable 0.8.1
 

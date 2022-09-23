@@ -2,9 +2,7 @@
 % Please edit documentation in R/summarize.R
 \name{summarize}
 \alias{summarize}
-\alias{summarize.}
 \alias{summarise}
-\alias{summarise.}
 \title{Aggregate data using summary statistics}
 \usage{
 summarize(
@@ -16,25 +14,7 @@ summarize(
   .unpack = FALSE
 )
 
-summarize.(
-  .df,
-  ...,
-  .by = NULL,
-  .sort = TRUE,
-  .groups = "drop_last",
-  .unpack = FALSE
-)
-
 summarise(
-  .df,
-  ...,
-  .by = NULL,
-  .sort = TRUE,
-  .groups = "drop_last",
-  .unpack = FALSE
-)
-
-summarise.(
   .df,
   ...,
   .by = NULL,
@@ -93,4 +73,3 @@ df \%>\%
   summarize(avg_a = mean(a),
             .by = c(c, d))
 }
-\keyword{internal}

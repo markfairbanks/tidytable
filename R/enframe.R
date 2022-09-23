@@ -35,5 +35,5 @@ enframe <- function(x, name = "name", value = "value") {
 
 #' @export
 #' @keywords internal
-#' @rdname mutate
+#' @inherit enframe
 enframe. <- enframe

@@ -2,20 +2,9 @@
 % Please edit documentation in R/extract.R
 \name{extract}
 \alias{extract}
-\alias{extract.}
 \title{Extract a character column into multiple columns using regex}
 \usage{
 extract(
-  .df,
-  col,
-  into,
-  regex = "([[:alnum:]]+)",
-  remove = TRUE,
-  convert = FALSE,
-  ...
-)
-
-extract.(
   .df,
   col,
   into,
@@ -61,4 +50,3 @@ df \%>\% extract(x, c("A", NA, "B"), "([a-d]+)-([a-d]+)-(\\\\d+)")
 # merge groups by passing same name
 df \%>\% extract(x, c("A", "B", "A"), "([a-d]+)-([a-d]+)-(\\\\d+)")
 }
-\keyword{internal}

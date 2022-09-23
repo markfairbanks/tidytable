@@ -36,5 +36,5 @@ across <- function(.cols = everything(), .fns = NULL, ..., .names = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname across
+#' @inherit across
 across. <- across

@@ -18,7 +18,7 @@ Grouped data.tables grab rows within each group."><meta property="og:image" cont
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
       </span>
     </div>
 
@@ -65,17 +65,7 @@ Grouped data.tables grab rows within each group.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">slice.</span><span class="op">(</span><span class="va">.df</span>, <span class="va">...</span>, .by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">slice_head.</span><span class="op">(</span><span class="va">.df</span>, n <span class="op">=</span> <span class="fl">5</span>, .by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">slice_tail.</span><span class="op">(</span><span class="va">.df</span>, n <span class="op">=</span> <span class="fl">5</span>, .by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">slice_max.</span><span class="op">(</span><span class="va">.df</span>, <span class="va">order_by</span>, n <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span>, with_ties <span class="op">=</span> <span class="cn">TRUE</span>, .by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">slice_min.</span><span class="op">(</span><span class="va">.df</span>, <span class="va">order_by</span>, n <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span>, with_ties <span class="op">=</span> <span class="cn">TRUE</span>, .by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">slice_sample.</span><span class="op">(</span><span class="va">.df</span>, <span class="va">n</span>, <span class="va">prop</span>, weight_by <span class="op">=</span> <span class="cn">NULL</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, .by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">slice.</span><span class="op">(</span><span class="va">.df</span>, <span class="va">...</span>, .by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -91,31 +81,6 @@ Grouped data.tables grab rows within each group.</p>
 <dt>.by</dt>
 <dd><p>Columns to group by</p></dd>
 
-
-<dt>n</dt>
-<dd><p>Number of rows to grab</p></dd>
-
-
-<dt>order_by</dt>
-<dd><p>Variable to arrange by</p></dd>
-
-
-<dt>with_ties</dt>
-<dd><p>Should ties be kept together. The default <code>TRUE</code> may return
-can return multiple rows if they are equal. Use <code>FALSE</code> to ignore ties.</p></dd>
-
-
-<dt>prop</dt>
-<dd><p>The proportion of rows to select</p></dd>
-
-
-<dt>weight_by</dt>
-<dd><p>Sampling weights</p></dd>
-
-
-<dt>replace</dt>
-<dd><p>Should sampling be performed with (<code>TRUE</code>) or without (<code>FALSE</code>, default) replacement</p></dd>
-
 </dl></div>
 
     <div id="ref-examples">
@@ -127,7 +92,7 @@ can return multiple rows if they are equal. Use <code>FALSE</code> to ignore tie
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">slice.</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="slice.html">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       x     y z    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
@@ -136,7 +101,7 @@ can return multiple rows if they are equal. Use <code>FALSE</code> to ignore tie
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3     7 a    </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">slice.</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="slice.html">slice</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 2 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       x     y z    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
@@ -144,7 +109,7 @@ can return multiple rows if they are equal. Use <code>FALSE</code> to ignore tie
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     3     7 a    </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">slice.</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, .by <span class="op">=</span> <span class="va">z</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="slice.html">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, .by <span class="op">=</span> <span class="va">z</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       x     y z    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
@@ -153,7 +118,7 @@ can return multiple rows if they are equal. Use <code>FALSE</code> to ignore tie
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     4     8 b    </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">slice_head.</span><span class="op">(</span><span class="fl">1</span>, .by <span class="op">=</span> <span class="va">z</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="slice.html">slice_head</a></span><span class="op">(</span><span class="fl">1</span>, .by <span class="op">=</span> <span class="va">z</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 2 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       x     y z    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
@@ -161,7 +126,7 @@ can return multiple rows if they are equal. Use <code>FALSE</code> to ignore tie
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     4     8 b    </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">slice_tail.</span><span class="op">(</span><span class="fl">1</span>, .by <span class="op">=</span> <span class="va">z</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="slice.html">slice_tail</a></span><span class="op">(</span><span class="fl">1</span>, .by <span class="op">=</span> <span class="va">z</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 2 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       x     y z    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
@@ -169,7 +134,7 @@ can return multiple rows if they are equal. Use <code>FALSE</code> to ignore tie
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     4     8 b    </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">slice_max.</span><span class="op">(</span>order_by <span class="op">=</span> <span class="va">x</span>, .by <span class="op">=</span> <span class="va">z</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="slice.html">slice_max</a></span><span class="op">(</span>order_by <span class="op">=</span> <span class="va">x</span>, .by <span class="op">=</span> <span class="va">z</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 2 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       x     y z    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
@@ -177,7 +142,7 @@ can return multiple rows if they are equal. Use <code>FALSE</code> to ignore tie
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     3     7 a    </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">slice_min.</span><span class="op">(</span>order_by <span class="op">=</span> <span class="va">y</span>, .by <span class="op">=</span> <span class="va">z</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="slice.html">slice_min</a></span><span class="op">(</span>order_by <span class="op">=</span> <span class="va">y</span>, .by <span class="op">=</span> <span class="va">z</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 2 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       x     y z    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>

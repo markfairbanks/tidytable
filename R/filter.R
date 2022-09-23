@@ -27,7 +27,7 @@ filter <- function(.df, ..., .by = NULL) {
 
 #' @export
 #' @keywords internal
-#' @rdname filter
+#' @inherit filter
 filter. <- function(.df, ..., .by = NULL) {
   UseMethod("filter.")
 }

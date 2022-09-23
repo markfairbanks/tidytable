@@ -2,12 +2,9 @@
 % Please edit documentation in R/unite.R
 \name{unite}
 \alias{unite}
-\alias{unite.}
 \title{Unite multiple columns by pasting strings together}
 \usage{
 unite(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE)
-
-unite.(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -48,4 +45,3 @@ df \%>\%
 df \%>\%
   unite()
 }
-\keyword{internal}

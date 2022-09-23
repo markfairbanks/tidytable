@@ -22,5 +22,5 @@ n <- function() {
 
 #' @export
 #' @keywords internal
-#' @rdname n
+#' @inherit n title description examples
 n. <- n
