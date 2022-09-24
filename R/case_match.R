@@ -1,7 +1,7 @@
 #' Vectorized `switch()`
 #'
 #' @description
-#' Allows the user to more succinctly create conditions bu `case_when()`.
+#' Allows the user to succinctly create conditions based off of a single vector.
 #'
 #' @param .x A vector
 #' @param ... A sequence of two-sided formulas. The left hand side gives the old values,
@@ -15,10 +15,12 @@
 #' df <- tidytable(x = c("a", "b", "c", "d"))
 #'
 #' df %>%
-#'   mutate(case_x = case_match(x,
-#'                              c("a", "b") ~ "new_1",
-#'                              "c" ~ "new_2",
-#'                              .default = x))
+#'   mutate(
+#'   case_x = case_match(x,
+#'                       c("a", "b") ~ "new_1",
+#'                       "c" ~ "new_2",
+#'                       .default = x)
+#'   )
 case_match <- function(.x, ..., .default = NA, .ptype = NULL) {
   .x <- enquo(.x)
   dots <- list2(...)
