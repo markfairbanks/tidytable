@@ -30,7 +30,7 @@ tidytable_fns <- c(
   "filter.", "filter",
   "mutate.", "mutate",
   "slice.", "slice",
-  "summarise.", "summarise.", "summarize.", "summarize"
+  "summarise.", "summarise", "summarize.", "summarize"
 )
 
 call_fns <- c(
