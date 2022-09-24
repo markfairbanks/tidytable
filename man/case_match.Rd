@@ -17,14 +17,16 @@ the right hand side gives the new value.}
 \item{.ptype}{Optional ptype to specify the output type.}
 }
 \description{
-Allows the user to more succinctly create conditions bu \code{case_when()}.
+Allows the user to succinctly create conditions based off of a single vector.
 }
 \examples{
 df <- tidytable(x = c("a", "b", "c", "d"))
 
 df \%>\%
-  mutate(case_x = case_match(x,
-                             c("a", "b") ~ "new_1",
-                             "c" ~ "new_2",
-                             .default = x))
+  mutate(
+  case_x = case_match(x,
+                      c("a", "b") ~ "new_1",
+                      "c" ~ "new_2",
+                      .default = x)
+  )
 }
