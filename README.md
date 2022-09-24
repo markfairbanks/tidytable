@@ -14,7 +14,7 @@ downloads](https://cranlogs.r-pkg.org/badges/last-month/tidytable?color=blue)](h
 [![R-CMD-check](https://github.com/markfairbanks/tidytable/workflows/R-CMD-check/badge.svg)](https://github.com/markfairbanks/tidytable/actions)
 <!-- badges: end -->
 
-`tidytable` is a data frame cleaning library for users who need
+`tidytable` is a data frame manipulation library for users who need
 [`data.table`
 speed](https://markfairbanks.github.io/tidytable/articles/speed_comparisons.html)
 but prefer `tidyverse`-like syntax.
@@ -248,4 +248,4 @@ df %>%
 the `data.table` and `tidyverse` teams. `data.table` is used as the main
 data frame engine in the background, while `tidyverse` packages like
 `rlang`, `vctrs`, and `tidyselect` are heavily relied upon to give users
-a similar experience to `dplyr` and `tidyr`.
+an experience similar to `dplyr` and `tidyr`.

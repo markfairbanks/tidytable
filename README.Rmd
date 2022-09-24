@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/markfairbanks/tidytable/workflows/R-CMD-check/badge.svg)](https://github.com/markfairbanks/tidytable/actions)
 <!-- badges: end -->
 
-`tidytable` is a data frame cleaning library for users who need [`data.table` speed](https://markfairbanks.github.io/tidytable/articles/speed_comparisons.html) but prefer `tidyverse`-like syntax.
+`tidytable` is a data frame manipulation library for users who need [`data.table` speed](https://markfairbanks.github.io/tidytable/articles/speed_comparisons.html) but prefer `tidyverse`-like syntax.
 
 ## Installation
 
@@ -181,4 +181,4 @@ df %>%
 ```
 
 ## Acknowledgements
-`tidytable` is only possible because of the great contributions to R by the `data.table` and `tidyverse` teams. `data.table` is used as the main data frame engine in the background, while `tidyverse` packages like `rlang`, `vctrs`, and `tidyselect` are heavily relied upon to give users a similar experience to `dplyr` and `tidyr`.
+`tidytable` is only possible because of the great contributions to R by the `data.table` and `tidyverse` teams. `data.table` is used as the main data frame engine in the background, while `tidyverse` packages like `rlang`, `vctrs`, and `tidyselect` are heavily relied upon to give users an experience similar to `dplyr` and `tidyr`.
