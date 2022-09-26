@@ -4,6 +4,10 @@ test_that("%in.% works", {
   expect_equal(c("a", "d") %in.% c("a", "b"), c(TRUE, FALSE))
 })
 
+test_that("%in% checks types when used inside a tidytable verb", {
+  expect_error(cars %>% mutate(test = "a" %in% mpg), "Can't combine")
+})
+
 test_that("properly handles character comparison with NA", {
   expect_equal(c("a", "b") %in.% NA, c(FALSE, FALSE))
 })
