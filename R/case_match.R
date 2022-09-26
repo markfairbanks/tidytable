@@ -35,7 +35,7 @@ case_match. <- case_match
 
 prep_case_match_dot <- function(dot, .x) {
   lhs <- f_lhs(dot)
-  lhs <- call2("%in%", .x, lhs, .ns = "tidytable")
+  lhs <- call2("%in.%", .x, lhs, .ns = "tidytable")
   f_lhs(dot) <- lhs
   dot
 }
