@@ -19,7 +19,7 @@
 #' df %>%
 #'   filter(x %notin% c(2, 4))
 #' @rdname in-notin
-'%in%' <- function(x, y) {
+'%in.%' <- function(x, y) {
   if (is.character(x) && is.character(y)) {
     x %chin% y
   } else if (is.list(y)) {
@@ -33,7 +33,7 @@
 #' @export
 #' @rdname in-notin
 '%notin%' <- function(x, y) {
-  !x %in% y
+  !x %in.% y
 }
 
 
