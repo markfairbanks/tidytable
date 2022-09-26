@@ -1,6 +1,6 @@
 # tidytable 0.9.1 (in development)
 #### Functionality improvements
-* tidytable::`%in%` no longer overwrites base::`%in% (#632)
+* tidytable::`%in%` no longer overwrites base::`%in%` (#632)
 
 
 # tidytable 0.9.0
