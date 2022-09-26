@@ -9,7 +9,9 @@
 #' @param y vector or NULL
 #'
 #' @details
-#' Falls back to base::`%in%` when x and y don't share a common type. This means that the behaviour of base::`%in%` is preserved (e.g. "1" %in% c(1, 2) is TRUE) but loses the speedup provided by vec_in.
+#' Falls back to base::`%in%` when x and y don't share a common type.
+#' This means that the behaviour of base::`%in%` is preserved (e.g. "1" %in% c(1, 2) is TRUE)
+#' but loses the speedup provided by vec_in.
 #'
 #' @export
 #'
