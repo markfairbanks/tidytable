@@ -1,7 +1,7 @@
 # tidytable 0.9.1 (in development)
 
 #### Functionality improvements
-* %in% falls back to base::`%in%` when input types aren't compatible with vec_in. (#632)
+* %in% falls back to base::`%in%` when input types aren't compatible with vec_in. (@krterberg, #632)
 
 # tidytable 0.9.0
 
