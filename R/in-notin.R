@@ -1,4 +1,4 @@
-#' `%in%` and `%notin%` operators
+#' `%in.%` and `%notin%` operators
 #'
 #' @description
 #' Check with values in a vector are in or not in another vector.
@@ -7,6 +7,8 @@
 #'
 #' @param x vector or NULL
 #' @param y vector or NULL
+#'
+#' @export
 #'
 #' @examples
 #' df <- tidytable(x = 1:4, y = 1:4)
