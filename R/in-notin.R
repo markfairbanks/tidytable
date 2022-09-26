@@ -27,19 +27,11 @@
 '%in%' <- function(x, y) {
   if (is.character(x) && is.character(y)) {
     x %chin% y
-  } else if (vec_ptype_compatible(x, y)) {
+  } else if (vec_ptype_common(x, y)) {
     vec_in(x, y)
   } else {
     base::'%in%'(x, y)
   }
-}
-
-#' check if inputs are not compatible with vec_in for the fast path of %in%
-#' @noRd
-needs_base_in <- function(x, y) {
-  # https://github.com/markfairbanks/tidytable/issues/565
-  # https://github.com/markfairbanks/tidytable/issues/632
-  tryCatch({vec_ptype_common(x, y); FALSE}, error = function(e) TRUE)
 }
 
 #' @export
