@@ -46,6 +46,7 @@ call_fns <- c(
   "if_all.",  "if_all",
   "if_any.", "if_any",
   "ifelse",
+  "%in%",
   "n.", "n",
   "row_number.", "row_number",
   "str_glue"
@@ -69,6 +70,10 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env()
     x <- unname(x)
     x[[1]] <- quote(tidytable::if_else)
     x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }}, j, dt_env, is_top_across)
+    x
+  } else if (is_call(x, "%in%", ns = "")) {
+    x <- call_match(x, base::`%in%`)
+    x[[1]] <- quote(tidytable::`%in.%)
     x
   } else if (is_call(x, c("c_across.", "c_across"))) {
     call <- call_match(x, tidytable::c_across.)
