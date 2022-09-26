@@ -27,10 +27,10 @@
 '%in%' <- function(x, y) {
   if (is.character(x) && is.character(y)) {
     x %chin% y
-  } else if (needs_base_in(x, y)) {
-    base::'%in%'(x, y)
-  } else {
+  } else if (vec_ptype_compatible(x, y)) {
     vec_in(x, y)
+  } else {
+    base::'%in%'(x, y)
   }
 }
 
