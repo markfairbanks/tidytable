@@ -3,26 +3,26 @@
 \name{\%in\%}
 \alias{\%in\%}
 \alias{\%notin\%}
-\title{\code{\%in\%} and \verb{\%notin\%} operators}
+\title{Fast \code{\%in\%} and \verb{\%notin\%} operators}
 \usage{
 x \%in\% y
 
 x \%notin\% y
 }
 \arguments{
-\item{x}{vector or NULL}
+\item{x}{A vector of values to check if they exist in y}
 
-\item{y}{vector or NULL}
+\item{y}{A vector of values to check if x values exist in}
 }
 \description{
-Check with values in a vector are in or not in another vector.
+Check whether values in a vector are in or not in another vector.
 
-Built using \verb{data.table::\%chin\%} and \code{vctrs::vec_in} for performance.
+Built using \code{data.table::'\%chin\%'} and \code{vctrs::vec_in()} for performance.
 }
 \details{
-Falls back to base::\code{\%in\%} when x and y don't share a common type.
-This means that the behaviour of base::\code{\%in\%} is preserved (e.g. "1" \%in\% c(1, 2) is TRUE)
-but loses the speedup provided by vec_in.
+Falls back to \code{base::'\%in\%'} when x and y don't share a common type.
+This means that the behaviour of \code{base::'\%in\%'} is preserved (e.g. \code{"1" \%in\% c(1, 2)} is \code{TRUE})
+but loses the speedup provided by \code{vctrs::vec_in()}.
 }
 \examples{
 df <- tidytable(x = 1:4, y = 1:4)
