@@ -27,11 +27,19 @@
 '%in%' <- function(x, y) {
   if (is.character(x) && is.character(y)) {
     x %chin% y
-  } else if (vec_ptype_common(x, y)) {
+  } else if (vec_ptype_compatible(x, y)) {
     vec_in(x, y)
   } else {
     base::'%in%'(x, y)
   }
+}
+
+#' Check if two vectors have compatible ptypes
+#' @noRd
+vec_ptype_compatible <- function(x, y) {
+  # https://github.com/markfairbanks/tidytable/issues/565
+  # https://github.com/markfairbanks/tidytable/issues/632
+  tryCatch({vec_ptype_common(x, y); TRUE}, error = function(e) FALSE)
 }
 
 #' @export
