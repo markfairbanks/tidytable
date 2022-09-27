@@ -158,7 +158,7 @@ check_across <- function(dots, .fn) {
 deprecate_old_across <- function(fn) {
   msg <- glue("`{fn}_across.()` is defunct as of v0.8.1 (Aug 2022).
               It has been deprecated with warnings since v0.6.4 (Jul 2021).
-              Please use `{fn}.(across.())`")
+              Please use `{fn}(across())`")
 
   stop_defunct(msg)
 }
