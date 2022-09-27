@@ -19,6 +19,11 @@ Check with values in a vector are in or not in another vector.
 
 Built using \verb{data.table::\%chin\%} and \code{vctrs::vec_in} for performance.
 }
+\details{
+Falls back to base::\code{\%in\%} when x and y don't share a common type.
+This means that the behaviour of base::\code{\%in\%} is preserved (e.g. "1" \%in\% c(1, 2) is TRUE)
+but loses the speedup provided by vec_in.
+}
 \examples{
 df <- tidytable(x = 1:4, y = 1:4)
 
