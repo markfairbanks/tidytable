@@ -9,7 +9,8 @@ across(.cols = everything(), .fns = NULL, ..., .names = NULL)
 \arguments{
 \item{.cols}{vector \code{c()} of unquoted column names. \code{tidyselect} compatible.}
 
-\item{.fns}{Functions to pass. Can pass a list of functions.}
+\item{.fns}{Function to apply. Can be a purrr-style lambda.
+Can pass also list of functions.}
 
 \item{...}{Other arguments for the passed function}
 
@@ -33,7 +34,7 @@ df \%>\%
   mutate(across(c(x, y), ~ .x * 2))
 
 df \%>\%
-  summarize(across(c(x, y), ~ mean(.x, na.rm = TRUE)),
+  summarize(across(where(is.numeric), ~ mean(.x)),
             .by = z)
 
 df \%>\%
