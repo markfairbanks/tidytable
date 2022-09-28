@@ -5,7 +5,8 @@
 #' `mutate()`, and `summarize()`.
 #'
 #' @param .cols vector `c()` of unquoted column names. `tidyselect` compatible.
-#' @param .fns Functions to pass. Can pass a list of functions.
+#' @param .fns Function to apply. Can be a purrr-style lambda.
+#'   Can pass also list of functions.
 #' @param ... Other arguments for the passed function
 #' @param .names A glue specification that helps with renaming output columns.
 #' `{.col}` stands for the selected column, and `{.fn}` stands for the name of the function being applied.
@@ -25,7 +26,7 @@
 #'   mutate(across(c(x, y), ~ .x * 2))
 #'
 #' df %>%
-#'   summarize(across(c(x, y), ~ mean(.x, na.rm = TRUE)),
+#'   summarize(across(where(is.numeric), ~ mean(.x)),
 #'             .by = z)
 #'
 #' df %>%
