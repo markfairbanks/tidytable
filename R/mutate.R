@@ -105,9 +105,10 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
     one_dot <- length(dots) == 1
 
     if (!one_dot) {
-      across_bool <- map_lgl(dots[-1], quo_is_call, "across.")
-
-      if (any(across_bool)) {
+      is_across <- map_lgl(dots[-1], quo_is_call, c("across.", "across"))
+      if (any(is_across)) {
+        # tidyselect helpers will miss columns made before an across call
+        # that is not in the first position
         abort("across() can only be used in the first position of mutate()
               when `.by` is used.")
       }
