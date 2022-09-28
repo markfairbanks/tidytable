@@ -220,6 +220,17 @@ test_that("can namespace functions, #511", {
   expect_equal(res$y, 2)
 })
 
+test_that("errors when used in not-first position when `.by` is used", {
+  df <- tidytable(x = 1:3, y = c("a", "a", "b"))
+
+  expect_error(
+    df %>% mutate(new = 1, across(x, ~ .x), .by = y)
+  )
+  expect_error(
+    df %>% mutate(new = 1, across.(x, ~ .x), .by = y)
+  )
+})
+
 # summarize -----------------------------------------------------
 test_that("single function works", {
   test_df <- tidytable(a = c(1:2, NA), b = 4:6, z = c("a", "a", "b"))
@@ -354,7 +365,7 @@ test_that("can pass list of named functions with .by and .names", {
 })
 
 # distinct -----------------------------------------------------
-test_that("throws and error in distinct()", {
+test_that("throws an error in distinct()", {
   test_df <- tidytable(a = 1:3, b = 4:6, z = c("a", "a", "b"))
 
   expect_error(distinct(test_df, across(everything())))
