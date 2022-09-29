@@ -69,6 +69,12 @@ test_that("can slice_head when all cols are in .by", {
   expect_equal(sliced_df$x, c("a", "b"))
 })
 
+test_that("_head works on 0-row data frame, #642", {
+  df <- tidytable(x = integer(), y = character())
+  res <- slice_head(df, 2)
+  expect_equal(df, res)
+})
+
 test_that("works with grouped_tt", {
   test_df <- tidytable(x = c("a", "a", "b"), y = 1:3)
 
@@ -151,6 +157,12 @@ test_that("can slice_tail when all cols are in .by", {
 
   expect_named(sliced_df, c("x"))
   expect_equal(sliced_df$x, c("a", "b"))
+})
+
+test_that("_tail works on 0-row data frame, #642", {
+  df <- tidytable(x = integer(), y = character())
+  res <- slice_tail(df, 2)
+  expect_equal(df, res)
 })
 
 test_that("works with grouped_tt", {
