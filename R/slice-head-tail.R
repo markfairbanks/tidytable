@@ -21,7 +21,7 @@ slice_head..tidytable <- function(.df, n = 5, .by = NULL) {
 
   .by <- tidyselect_names(.df, {{ .by }})
 
-  i <- expr(seq.int(min(!!n, .N)))
+  i <- expr(seq_len(min(!!n, .N)))
 
   dt_expr <- call2_i(.df, i, .by)
 
@@ -66,7 +66,7 @@ slice_tail..tidytable <- function(.df, n = 5, .by = NULL) {
 
   .by <- tidyselect_names(.df, {{ .by }})
 
-  i <- expr(seq.int(.N - min(!!n, .N) + 1, .N))
+  i <- expr(rlang::seq2(.N - min(!!n, .N) + 1, .N))
 
   dt_expr <- call2_i(.df, i, .by)
 
