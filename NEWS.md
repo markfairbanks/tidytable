@@ -7,6 +7,9 @@
 * `row_number()`: Works correctly on 0-row data frame when overwriting existing column (#639)
 * `slice_head()`/`slice_tail()`: Properly slice on 0-row data frame (#642)
 
+#### Functions with notable speed improvements
+* `fill()`
+
 # tidytable 0.9.0
 
 #### Dotless functions!

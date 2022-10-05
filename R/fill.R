@@ -49,9 +49,7 @@ fill..tidytable <- function(.df, ...,
                             .by = NULL) {
   .direction <- arg_match(.direction)
 
-  dots <- enquos(...)
-
-  mutate(.df, across(c(!!!dots), fill_na, .direction), .by = {{ .by }})
+  mutate(.df, across(c(...), ~ vec_fill_missing(.x, .direction)), .by = {{ .by }})
 }
 
 #' @export
@@ -60,27 +58,5 @@ fill..data.frame <- function(.df, ...,
                             .by = NULL) {
   .df <- as_tidytable(.df)
   fill(.df, ..., .direction = .direction, .by = {{ .by }})
-}
-
-fill_na <- function(x, direction) {
-  if (is.numeric(x)) {
-    if (direction %in% c("down", "up")) {
-      type <- switch(direction, "down" = "locf", "up" = "nocb")
-
-      nafill(x, type = type)
-    } else {
-      if (direction == "downup") {
-        type1 <- "locf"
-        type2 <- "nocb"
-      } else {
-        type1 <- "nocb"
-        type2 <- "locf"
-      }
-
-      nafill(nafill(x, type = type1), type = type2)
-    }
-  } else {
-    vec_fill_missing(x, direction = direction)
-  }
 }
 
