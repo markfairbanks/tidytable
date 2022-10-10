@@ -31,19 +31,22 @@ case <- function(..., default = NA, ptype = NULL, size = NULL) {
   conditions_locs <- as.logical(seq_len(dots_length) %% 2)
 
   conditions <- dots[conditions_locs]
+  size <- vec_size_common(!!!conditions, .size = size)
   conditions <- vec_recycle_common(!!!conditions, .size = size)
 
   values <- dots[!conditions_locs]
+  ptype <- vec_ptype_common(!!!values, .ptype = ptype)
   values <- vec_cast_common(!!!values, .to = ptype)
 
   pairs <- vec_interleave(conditions, values)
 
-  default <- vec_cast(default, vec_ptype(values[[1]]))
+  .default <- vec_cast(default, ptype)
 
   if (length(default) == 1) {
-    out <- exec(fcase, !!!pairs, default = default)
+    out <- exec(fcase, !!!pairs, default = .default)
   } else {
-    out <- exec(fcase, !!!pairs, vec_recycle(TRUE, size), .default_value)
+    .default_condition <- vec_recycle(TRUE, size)
+    out <- exec(fcase, !!!pairs, .default_condition, .default)
   }
 
   out
