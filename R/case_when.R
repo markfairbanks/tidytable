@@ -29,30 +29,21 @@ case_when <- function(..., .default = NA, .ptype = NULL, .size = NULL) {
   is_default <- map_lgl(dots, ~ is_true(f_lhs(.x)))
   if (any(is_default) && dots_length > 1) {
     .default <- dots[is_default][[1]]
-    .default <- eval_tidy(f_rhs(.default), env = caller_env())
+    .default <- f_rhs(.default)
 
     dots <- dots[!is_default]
   }
 
   conditions <- map(dots, f_lhs)
-  conditions <- map(conditions, eval_tidy, env = caller_env())
 
   values <- map(dots, f_rhs)
-  values <- map(values, eval_tidy, env = caller_env())
-
-  if (!is.null(.ptype)) {
-    values <- vec_cast_common(!!!values, .to = .ptype)
-  }
 
   pairs <- vec_interleave(conditions, values)
 
-  out <- case(!!!pairs, default = .default)
+  out <- call2("case", !!!pairs, default = .default, ptype = .ptype, size = .size, .ns = "tidytable")
+  out <- as_quosure(out, caller_env())
 
-  if (!is.null(.size)) {
-    out <- vec_recycle(out, .size)
-  }
-
-  out
+  eval_tidy(out)
 }
 
 #' @export
