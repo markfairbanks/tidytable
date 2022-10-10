@@ -60,3 +60,13 @@ test_that("case. works", {
 
   expect_equal(case_x, c(1,1,2,3,3))
 })
+
+test_that("works with vector default", {
+  x <- 1:5
+
+  case_x <- case(x < 3, 1,
+                 x < 4, 2,
+                 default = rep(3, 5))
+
+  expect_equal(case_x, c(1,1,2,3,3))
+})

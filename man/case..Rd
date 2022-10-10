@@ -2,14 +2,18 @@
 % Please edit documentation in R/case.R
 \name{case.}
 \alias{case.}
-\title{data.table::fcase() with vectorized default}
+\title{\code{data.table::fcase()} with vectorized default}
 \usage{
-case.(..., default = NA)
+case.(..., default = NA, ptype = NULL, size = NULL)
 }
 \arguments{
 \item{...}{Sequence of condition/value designations}
 
 \item{default}{Default value. Set to NA by default.}
+
+\item{ptype}{Optional ptype to specify the output type.}
+
+\item{size}{Optional size to specify the output size.}
 }
 \description{
 This function allows you to use multiple if/else statements in one call.
@@ -22,7 +26,7 @@ df <- tidytable(x = 1:10)
 
 df \%>\%
   mutate(case_x = case(x < 5, 1,
-                         x < 7, 2,
-                         default = 3))
+                       x < 7, 2,
+                       default = 3))
 }
 \keyword{internal}
