@@ -126,6 +126,6 @@ get_dummies..data.frame <- function(.df,
   get_dummies(.df, {{ cols }}, prefix, prefix_sep, drop_first, dummify_na)
 }
 
-globalVariables(c("..complete", "where"))
+globalVariables("..complete")
 
 

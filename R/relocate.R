@@ -39,42 +39,18 @@ relocate. <- function(.df, ..., .before = NULL, .after = NULL) {
 
 #' @export
 relocate..tidytable <- function(.df, ..., .before = NULL, .after = NULL) {
-  .before <- enquo(.before)
-  .after <- enquo(.after)
+  order <- eval_relocate(
+    expr(c(...)),
+    .df,
+    before = enexpr(.before),
+    after = enexpr(.after)
+  )
 
-  uses_before <- !quo_is_null(.before)
-  uses_after <- !quo_is_null(.after)
+  names <- names(order)
 
-  if (uses_before && uses_after) {
-    abort("Must supply only one of `.before` and `.after`")
-  }
+  out <- df_col_order(.df, order)
 
-  if (!uses_before && !uses_after) {
-    .before <- quo(1)
-    uses_before <- TRUE
-  }
-
-  all_locs <- seq_along(.df)
-  relocate_locs <- tidyselect_locs(.df, ...)
-
-  if (length(relocate_locs) == 0) {
-    return(.df)
-  }
-
-  if (uses_before) {
-    before <- min(tidyselect_locs(.df, !!.before))
-
-    start_locs <- all_locs[all_locs < before]
-  } else {
-    after <- max(tidyselect_locs(.df, !!.after))
-
-    start_locs <- all_locs[all_locs <= after]
-  }
-
-  start_locs <- setdiff(start_locs, relocate_locs)
-  final_order <- vec_unique(c(start_locs, relocate_locs, all_locs))
-
-  df_col_order(.df, final_order)
+  df_set_names(out, names)
 }
 
 #' @export
