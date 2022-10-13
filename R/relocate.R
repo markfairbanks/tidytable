@@ -43,7 +43,9 @@ relocate..tidytable <- function(.df, ..., .before = NULL, .after = NULL) {
     expr(c(...)),
     .df,
     before = enquo(.before),
-    after = enquo(.after)
+    after = enquo(.after),
+    before_arg = ".before",
+    after_arg = ".after"
   )
 
   names <- names(order)
