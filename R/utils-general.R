@@ -195,6 +195,15 @@ change_types <- function(.df, .cols, .ptypes = NULL, .transform = NULL) {
 }
 
 # For internal testing
-sample. <- function(x, size, replace = TRUE) {
-  sample(x, size, replace)
+vec_sample <- function(x, times = vec_size(x), replace = NULL) {
+  if (is.null(replace)) {
+    if (vec_size(x) == times) {
+      replace <- FALSE
+    } else {
+      replace <- TRUE
+    }
+  }
+  locs <- vec_seq_along(x)
+  locs <- sample(locs, times, replace)
+  vec_slice(x, locs)
 }
