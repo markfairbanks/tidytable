@@ -1,5 +1,8 @@
 # tidytable 0.9.1 (in development)
 
+#### New functions
+* `nest_join()`
+
 #### Functionality improvements
 * `%in%` falls back to `base::'%in%'` when input types aren't compatible with `vec_in()` (@krterberg, #632)
 * `relocate()`: Can rename columns that are moved
