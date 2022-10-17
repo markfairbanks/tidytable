@@ -294,3 +294,38 @@ suffix_join_names <- function(x_names, y_names, suffix, keep, by = NULL, type) {
   }
   df_names
 }
+
+#' Nest join
+#'
+#' @description
+#' Join the data from y as a list column onto x.
+#'
+#' @inheritParams left_join
+#' @param name The name of the list-column created by the join. If `NULL` the name of `y` is used.
+#'
+#' @export
+#'
+#' @examples
+#' df1 <- tidytable(x = 1:3)
+#' df2 <- tidytable(x = c(2, 3, 3), y = c("a", "b", "c"))
+#'
+#' out <- nest_join(df1, df2)
+#' out
+#' out$df2
+nest_join <- function(x, y, by = NULL, keep = FALSE, name = NULL, ...) {
+  if (is.null(name)) {
+    name <- as_name(enexpr(y))
+  }
+
+  by_y <- get_bys(x, y, by)$y
+
+  y <- nest_by(y, all_of(by_y), .key = name)
+
+  null_df <- vec_ptype(pull(y, .env$name)[[1]])
+
+  out <- left_join(x, y, by, keep = keep)
+
+  out <- mutate(out, !!name := replace_na(!!sym(name), list(.env$null_df)))
+
+  tidytable_restore(out, x)
+}
