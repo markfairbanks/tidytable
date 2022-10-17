@@ -311,3 +311,38 @@ test_that("when keep = TRUE, inner_join() preserves both sets of keys", {
   expect_equal(out$a.x, c(3))
   expect_equal(out$a.y, c(3))
 })
+
+# nest_join ----------------------------------------------------------------
+
+test_that("nest_join works",{
+  df1 <- tidytable(x = c(1, 2), y = c(2, 3))
+  df2 <- tidytable(x = c(1, 1), z = c(2, 3))
+  out <- nest_join(df1, df2, by = "x")
+
+  expect_named(out, c("x", "y", "df2"))
+  expect_true(is.list(out$df2))
+  expect_true(is_tidytable(out$df2[[1]]))
+  expect_equal(nrow(out$df2[[2]]), 0)
+})
+
+# test_that("nest_join respects types of y (#6295)",{
+#   df1 <- tidytable(x = c(1, 2), y = c(2, 3))
+#   df2 <- rowwise(tidytable(x = c(1, 1), z = c(2, 3)))
+#   out <- nest_join(df1, df2, by = "x")
+#
+#   expect_s3_class(out$df2[[1]], "rowwise_df")
+# })
+
+test_that("nest_join computes common columns", {
+  df1 <- tidytable(x = c(1, 2), y = c(2, 3))
+  df2 <- tidytable(x = c(1, 3), z = c(2, 3))
+  expect_named(nest_join(df1, df2), c("x", "y", "df2"))
+})
+
+test_that("nest_join handles multiple matches in x", {
+  df1 <- tidytable(x = c(1, 1))
+  df2 <- tidytable(x = 1, y = 1:2)
+
+  out <- nest_join(df1, df2, by = "x")
+  expect_equal(out$df2[[1]], out$df2[[2]])
+})
