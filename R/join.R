@@ -188,6 +188,9 @@ get_bys <- function(x, y, by = NULL) {
   if (is.null(by)) {
     by_x <- intersect(x_names, y_names)
     by_y <- by_x
+    if (length(by_x) == 0) {
+      abort("`by` must be supplied when `x` and `y` have no common variables.")
+    }
   } else {
     by_x <- names(by)
     by_y <- unname(by)
