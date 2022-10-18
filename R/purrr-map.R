@@ -13,6 +13,7 @@
 #' @param .f A function
 #' @param ... Other arguments to pass to a function
 #' @param .id Whether `map_dfr()` should add an id column to the finished dataset
+#' @param .ptype ptype for resulting vector in `map_vec()`
 #'
 #' @export
 #'
@@ -124,3 +125,21 @@ walk <- function(.x, .f, ...) {
 #' @keywords internal
 #' @inherit map
 walk. <- walk
+
+#' @export
+#' @rdname map
+map_vec <- function(.x, .f, ..., .ptype = NULL) {
+  out <- map(.x, .f, ...)
+  list_simplify(out, .ptype)
+}
+
+# Simplify all values of a list to a vector of their common type
+# Ensures that they all are size 1
+list_simplify <- function(x, ptype = NULL) {
+  # list_check_all_size(x, 1)
+  sizes <- list_sizes(x)
+  if (any(sizes != 1)) {
+    abort("All elements must be size 1.")
+  }
+  vec_c(!!!x, .ptype = ptype)
+}
