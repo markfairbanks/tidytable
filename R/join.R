@@ -214,7 +214,7 @@ join_prep <- function(x, y, by, keep, suffix, type) {
   by <- get_bys(x, y, by)
 
   if (length(by) == 0) {
-    # Allows cross joins
+    # Allow cross joins
     return(list(x, y, on = character(), selection = character()))
   }
 
