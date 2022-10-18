@@ -6,6 +6,7 @@
 #### Functionality improvements
 * `%in%` falls back to `base::'%in%'` when input types aren't compatible with `vec_in()` (@krterberg, #632)
 * `relocate()`: Can rename columns that are moved
+* Joins: Can now do cross joins by specifying `by = character()`
 
 #### Bug fixes
 * `row_number()`: Works correctly on 0-row data frame when overwriting existing column (#639)
