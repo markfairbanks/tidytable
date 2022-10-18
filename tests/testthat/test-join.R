@@ -23,6 +23,12 @@ test_that("joins work", {
   expect_equal(out$b, c(1:3, NA))
 })
 
+test_that("error with no common vars", {
+  df1 <- data.table(a = 1:3)
+  df2 <- data.table(b = 1:3)
+  expect_error(left_join(df1, df2))
+})
+
 test_that("works with dot", {
   df1 <- data.table(a = 1:3, b = 1:3)
   df2 <- data.table(a = 4:1, c = 1, d = 2)
