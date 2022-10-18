@@ -31,15 +31,11 @@ expand_grid <- function(..., .name_repair = "check_unique") {
 expand_grid. <- expand_grid
 
 cj_expand_grid <- function(..., .name_repair = "check_unique") {
-  dots <- list2(...)
+  out <- exec(CJ, ..., unique = FALSE, sorted = FALSE)
 
-  result_df <- exec(CJ, !!!dots, unique = FALSE, sorted = FALSE)
+  out <- df_name_repair(out, .name_repair)
 
-  setkey(result_df, NULL)
-
-  result_df <- df_name_repair(result_df, .name_repair)
-
-  as_tidytable(result_df)
+  as_tidytable(out)
 }
 
 df_expand_grid <- function(..., .name_repair = "check_unique") {
