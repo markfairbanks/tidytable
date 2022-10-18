@@ -2,6 +2,7 @@
 
 #### New functions
 * `nest_join()`
+* `map_vec()`
 
 #### Functionality improvements
 * `%in%` falls back to `base::'%in%'` when input types aren't compatible with `vec_in()` (@krterberg, #632)
