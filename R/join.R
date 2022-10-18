@@ -23,15 +23,17 @@
 left_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
   c(x, y, on, selection) %<-% join_prep(x, y, by, keep, suffix, "left")
 
-  if (keep) {
-    result_df <- dt(y, x, !!selection, on = on, allow.cartesian = TRUE)
+  if (length(on) == 0) {
+    out <- expand_grid(x, y)
+  } else if (keep) {
+    out <- dt(y, x, !!selection, on = on, allow.cartesian = TRUE)
   } else {
-    result_df <- y[x, on = on, allow.cartesian = TRUE]
+    out <- y[x, on = on, allow.cartesian = TRUE]
 
-    result_df <- df_col_order(result_df, selection)
+    out <- df_col_order(out, selection)
   }
 
-  tidytable_restore(result_df, x)
+  tidytable_restore(out, x)
 }
 
 #' @export
@@ -44,13 +46,15 @@ left_join. <- left_join
 right_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
   c(x, y, on, selection) %<-% join_prep(x, y, by, keep, suffix, "right")
 
-  if (keep) {
-    result_df <- dt(x, y, !!selection, on = on, allow.cartesian = TRUE)
+  if (length(on) == 0) {
+    out <- expand_grid(x, y)
+  } else if (keep) {
+    out <- dt(x, y, !!selection, on = on, allow.cartesian = TRUE)
   } else {
-    result_df <- x[y, on = on, allow.cartesian = TRUE]
+    out <- x[y, on = on, allow.cartesian = TRUE]
   }
 
-  tidytable_restore(result_df, x)
+  tidytable_restore(out, x)
 }
 
 #' @export
@@ -63,15 +67,15 @@ right_join. <- right_join
 inner_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
   c(x, y, on, selection) %<-% join_prep(x, y, by, keep, suffix, "inner")
 
-  if (keep) {
-    result_df <- dt(x, y, !!selection,
-                    on = on, allow.cartesian = TRUE,
-                    nomatch = 0)
+  if (length(on) == 0) {
+    out <- expand_grid(x, y)
+  } else if (keep) {
+    out <- dt(x, y, !!selection, on = on, allow.cartesian = TRUE, nomatch = 0)
   } else {
-    result_df <- x[y, on = on, allow.cartesian = TRUE, nomatch = 0]
+    out <- x[y, on = on, allow.cartesian = TRUE, nomatch = 0]
   }
 
-  tidytable_restore(result_df, x)
+  tidytable_restore(out, x)
 }
 
 #' @export
@@ -86,15 +90,17 @@ full_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE
   if (!is_tidytable(x)) x <- as_tidytable(x)
   if (!is_tidytable(y)) y <- as_tidytable(y)
 
-  if (!keep) {
-    result_df <- join_mold(
+  if (length(by) == 0 && !is.null(by)) {
+    out <- expand_grid(x, y)
+  } else if (!keep) {
+    out <- join_mold(
       x, y, by = by, suffix = suffix,
       all_x = TRUE, all_y = TRUE
     )
 
     col_order <- suffix_join_names(names(x), names(y), suffix, keep, get_bys(x, y, by), "full")
 
-    result_df <- df_col_order(result_df, col_order)
+    out <- df_col_order(out, col_order)
   } else {
     bys <- get_bys(x, y, by)
     by_x <- bys$x
@@ -114,12 +120,12 @@ full_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE
       drop_cols <- c(drop_cols, paste0(by_y[by_x == by_y], suffix[[2]]))
     }
 
-    result_df <- right_join(x, step_df, by = by, suffix = suffix, keep = TRUE)
-    result_df <- dt_j(result_df, (drop_cols) := NULL)
-    result_df <- rename_with(result_df, ~ temp_names_fix(.x, by_x, suffix[[2]]), ends_with("__temp__"))
+    out <- right_join(x, step_df, by = by, suffix = suffix, keep = TRUE)
+    out <- dt_j(out, (drop_cols) := NULL)
+    out <- rename_with(out, ~ temp_names_fix(.x, by_x, suffix[[2]]), ends_with("__temp__"))
   }
 
-  tidytable_restore(result_df, x)
+  tidytable_restore(out, x)
 }
 
 #' @export
@@ -138,9 +144,13 @@ temp_names_fix <- function(names, by_x, y_suffix) {
 anti_join <- function(x, y, by = NULL) {
   c(x, y, on, selection) %<-% join_prep(x, y, by, keep = FALSE, suffix = NULL, "anti")
 
-  result_df <- x[!y, on = on, allow.cartesian = TRUE]
+  if (length(on) == 0) {
+    out <- vec_ptype(x)
+  } else {
+    out <- x[!y, on = on, allow.cartesian = TRUE]
+  }
 
-  tidytable_restore(result_df, x)
+  tidytable_restore(out, x)
 }
 
 #' @export
@@ -153,9 +163,13 @@ anti_join. <- anti_join
 semi_join <- function(x, y, by = NULL) {
   c(x, y, on, selection) %<-% join_prep(x, y, by, keep = FALSE, suffix = NULL, "semi")
 
-  result_df <- fsetdiff(x, x[!y, on = on], all=TRUE)
+  if (length(on) == 0) {
+    out <- x
+  } else {
+    out <- fsetdiff(x, x[!y, on = on], all = TRUE)
+  }
 
-  tidytable_restore(result_df, x)
+  tidytable_restore(out, x)
 }
 
 #' @export
@@ -164,11 +178,16 @@ semi_join <- function(x, y, by = NULL) {
 semi_join. <- semi_join
 
 get_bys <- function(x, y, by = NULL) {
-  names_x <- names(x)
-  names_y <- names(y)
+  if (length(by) == 0 && !is.null(by)) {
+    return(character())
+  }
+
+  x_names <- names(x)
+  y_names <- names(y)
 
   if (is.null(by)) {
-    by_x <- by_y <- intersect(names_x, names_y)
+    by_x <- intersect(x_names, y_names)
+    by_y <- by_x
   } else {
     by_x <- names(by)
     by_y <- unname(by)
@@ -179,8 +198,8 @@ get_bys <- function(x, y, by = NULL) {
 
   by_x[by_x == ""] <- by_y[by_x == ""]
 
-  if (any(by_x %notin% names_x)) abort("by.x columns not in x")
-  if (any(by_y %notin% names_y)) abort("by.y columns not in y")
+  if (any(by_x %notin% x_names)) abort("by.x columns not in x")
+  if (any(by_y %notin% y_names)) abort("by.y columns not in y")
 
   list(x = by_x, y = by_y)
 }
@@ -192,10 +211,15 @@ join_prep <- function(x, y, by, keep, suffix, type) {
   if (!is_tidytable(x)) x <- as_tidytable(x)
   if (!is_tidytable(y)) y <- as_tidytable(y)
 
+  by <- get_bys(x, y, by)
+
+  if (length(by) == 0) {
+    # Allows cross joins
+    return(list(x, y, on = character(), selection = character()))
+  }
+
   x_names <- names(x)
   y_names <- names(y)
-
-  by <- get_bys(x, y, by)
 
   if (!keep) {
     y_names <- setdiff(y_names, by$y)
@@ -269,14 +293,14 @@ join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
 
   by <- get_bys(x, y, by)
 
-  result_df <- merge(
+  out <- merge(
     x = x, y = y, by.x = by$x, by.y = by$y, suffixes = suffix,
     all.x = all_x, all.y = all_y, allow.cartesian = TRUE, sort = FALSE
   )
 
-  setkey(result_df, NULL)
+  setkey(out, NULL)
 
-  result_df
+  out
 }
 
 suffix_join_names <- function(x_names, y_names, suffix, keep, by = NULL, type) {
