@@ -6,6 +6,7 @@
 #'
 #' @param .df A data.frame or data.table
 #' @param ... Columns to group by
+#' @param .add Should grouping cols specified be added to the current grouping
 #'
 #' @export
 #'
@@ -27,34 +28,41 @@
 #'   group_by(where(is.character)) %>%
 #'   summarize(mean_a = mean(a)) %>%
 #'   ungroup()
-group_by <- function(.df, ...) {
-  group_by.(.df, ...)
+group_by <- function(.df, ..., .add = FALSE) {
+  group_by.(.df, ..., .add = .add)
 }
 
 #' @export
 #' @keywords internal
 #' @inherit group_by
-group_by. <- function(.df, ...) {
+group_by. <- function(.df, ..., .add = FALSE) {
   UseMethod("group_by.")
 }
 
 #' @export
-group_by..tidytable <- function(.df, ...) {
+group_by..tidytable <- function(.df, ..., .add = FALSE) {
   dots <- enquos(...)
   check_across(dots, "group_by")
   .groups <- tidyselect_names(.df, !!!dots)
   if (length(.groups) == 0) {
-    return(.df)
+    out <- as_tidytable(.df)
+  } else {
+    out <- set_class(.df, c("grouped_tt", "tidytable", "data.table", "data.frame"))
+    attr(out, "groups") <- .groups
   }
-  out <- set_class(.df, c("grouped_tt", class(.df)))
-  attr(out, "groups") <- .groups
   out
 }
 
 #' @export
-group_by..grouped_tt <- function(.df, ...) {
-  out <- ungroup(.df)
-  group_by(out, ...)
+group_by..grouped_tt <- function(.df, ..., .add = FALSE) {
+  if (is_true(.add)) {
+    .groups <- group_vars(.df)
+    out <- ungroup(.df)
+    group_by(out, all_of(.groups), ...)
+  } else {
+    out <- ungroup(.df)
+    group_by(out, ...)
+  }
 }
 
 #' @export
@@ -65,21 +73,28 @@ group_by..data.frame <- function(.df, ...) {
 
 #' @export
 #' @rdname group_by
-ungroup <- function(.df) {
-  ungroup.(.df)
+ungroup <- function(.df, ...) {
+  ungroup.(.df, ...)
 }
 
 #' @export
 #' @keywords internal
 #' @inherit group_by
-ungroup. <- function(.df) {
+ungroup. <- function(.df, ...) {
   UseMethod("ungroup.")
 }
 
 #' @export
-ungroup..data.frame <- function(.df) {
-  attr(.df, "groups") <- NULL
-  as_tidytable(.df)
+ungroup..data.frame <- function(.df, ...) {
+  dots <- enquos(...)
+  if (length(dots) == 0) {
+    attr(.df, "groups") <- NULL
+    as_tidytable(.df)
+  } else {
+    cols_drop <- tidyselect_names(.df, !!!dots)
+    groups <- setdiff(group_vars(.df), cols_drop)
+    group_by(.df, all_of(groups))
+  }
 }
 
 #' Get the grouping variables

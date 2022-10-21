@@ -4,10 +4,12 @@
 \alias{ungroup.}
 \title{Grouping}
 \usage{
-ungroup.(.df)
+ungroup.(.df, ...)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
+
+\item{...}{Columns to group by}
 }
 \description{
 \itemize{
