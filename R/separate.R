@@ -70,7 +70,7 @@ separate..tidytable <- function(.df, col, into,
 
   col <- tidyselect_syms(.df, !!col)[[1]]
 
-  not_na_into <- !is.na(into)
+  not_na_into <- vec_detect_complete(into)
 
   keep <- seq_along(into)[not_na_into]
   into <- into[not_na_into]
