@@ -44,11 +44,11 @@ replace_na..default <- function(.x, replace) {
   if (is.integer(.x) || is.double(.x)) {
     nafill(.x, "const", fill = replace)
   } else if (vec_is_list(.x)) {
-    null_bool <- map_lgl(.x, is.null)
-    .x[null_bool] <- replace
+    missing <- vec_detect_missing(.x)
+    .x[missing] <- replace
     .x
   } else {
-    missing <- vec_equal_na(.x)
+    missing <- vec_detect_missing(.x)
     vec_assign(.x, missing, replace)
   }
 }

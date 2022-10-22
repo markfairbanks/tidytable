@@ -87,9 +87,7 @@ unnest..tidytable <- function(.df,
 
   unnested <- map(dots, ~ unnest_col(.df, .x, names_sep))
 
-  unnested_sizes <- list_sizes(unnested)
-
-  if (!length(vec_unique(unnested_sizes)) == 1) {
+  if (!list_all_size(unnested, vec_size(unnested[[1]]))) {
     abort("unnested data contains different row counts")
   }
 
@@ -156,7 +154,7 @@ unnest_col <- function(.df, col = NULL, names_sep = NULL) {
 }
 
 keep_empty_prep <- function(.l) {
-  .is_null <- map_lgl(.l, is.null)
+  .is_null <- vec_detect_missing(.l)
 
   if (!any(.is_null)) {
     return(.l)

@@ -120,9 +120,9 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
 
     # Check for NULL inputs so columns can be deleted
     # Only delete if the NULL is the last call
-    null_bool <- map_lgl(dots, is_null)
+    is_null <- vec_detect_missing(dots)
     is_last <- !duplicated(names(dots), fromLast = TRUE)
-    needs_removal <- null_bool & is_last
+    needs_removal <- is_null & is_last
     any_null <- any(needs_removal)
 
     if (any_null) {

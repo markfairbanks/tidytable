@@ -65,7 +65,7 @@ slice..tidytable <- function(.df, ..., .by = NULL) {
 
   .by <- tidyselect_names(.df, {{ .by }})
 
-  i <- expr({.rows = c(!!!dots); .rows[data.table::between(.rows, -.N, .N)]})
+  i <- expr(vctrs::num_as_location(c(!!!dots), .N, oob = "remove"))
 
   dt_expr <- call2_i(.df, i, .by)
 
