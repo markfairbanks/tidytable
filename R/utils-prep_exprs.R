@@ -58,7 +58,7 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env()
     x[[1]] <- sym("-")
     x[[2]] <- prep_expr(x[[2]], data, {{ .by }}, j, dt_env, is_top_across)
     x
-  } else if (is_call(x, c("row_number.", "row_number", "cur_group_rows.", "cur_group_rows"))) {
+  } else if (is_call(x, c("row_number.", "row_number", "cur_group_rows.", "cur_group_rows"), 0)) {
     quote(seq_len(.N))
   } else if (is_call(x, c("cur_group_id.", "cur_group_id"))) {
     quote(.GRP)
