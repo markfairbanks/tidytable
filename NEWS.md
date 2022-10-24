@@ -2,6 +2,11 @@
 
 #### New functions
 * `nest_join()`
+* Ranking functions:
+  * `min_rank()`
+  * `dense_rank()`
+  * `percent_rank()`
+  * `cume_dist()`
 
 #### Functionality improvements
 * `%in%` falls back to `base::'%in%'` when input types aren't compatible
