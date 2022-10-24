@@ -10,6 +10,7 @@
 * Joins: Can now do cross joins by specifying `by = character()`
 * `group_by()`: Gains `.add` argument
 * `ungroup()`: Gains `...` arguments
+* Printing of grouped tidytables now shows grouping variables
 
 #### Bug fixes
 * `row_number()`: Works correctly on 0-row data frame when overwriting existing column (#639)
