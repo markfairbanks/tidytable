@@ -3,7 +3,7 @@
 #' @import vctrs
 #' @rawNamespace import(data.table, except = c(between, fread))
 #' @rawNamespace import(rlang, except = `:=`)
-#' @importFrom glue glue glue_data
+#' @importFrom glue glue glue_data glue_collapse
 #' @importFrom pillar glimpse dim_desc tbl_sum
 #' @importFrom stats na.omit
 #' @importFrom utils head tail type.convert
