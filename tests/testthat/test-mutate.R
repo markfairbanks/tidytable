@@ -42,60 +42,6 @@ test_that("mutate. works", {
   expect_equal(df$y * 2, df$double_y)
 })
 
-test_that("row_number() works", {
-  df <- data.table(x = 1:3, y = 1:3)
-  df <- df %>%
-    mutate(row = row_number(),
-            row_check = 1:.N)
-
-  expect_equal(df$row, df$row_check)
-})
-
-test_that("row_number() works v2", {
-  df <- data.table(x = 1:3, y = 1:3)
-  df <- df %>%
-    mutate(double_x = x * 2,
-           row = row_number(),
-           row_check = 1:.N)
-
-  expect_equal(df$row, df$row_check)
-})
-
-test_that("row_number.() works", {
-  df <- data.table(x = 1:3, y = 1:3)
-  df <- df %>%
-    mutate(row = row_number.(),
-           row_check = 1:.N)
-
-  expect_equal(df$row, df$row_check)
-})
-
-test_that("row_number.() works v2", {
-  df <- data.table(x = 1:3, y = 1:3)
-  df <- df %>%
-    mutate(double_x = x * 2,
-           row = row_number.(),
-           row_check = 1:.N)
-
-  expect_equal(df$row, df$row_check)
-})
-
-test_that("row_number works on 0 row data frame, #639", {
-  df <- data.table(x = integer(), y = character())
-  res<- df %>%
-    mutate(x = row_number())
-
-  expect_equal(res$x, integer())
-})
-
-test_that("row_number() works in .by", {
-  df <- data.table(x = 1:3, y = 1:3)
-  df <- df %>%
-    mutate(row = row_number(), .by = x)
-
-  expect_equal(df$row, c(1, 1, 1))
-})
-
 test_that("modify-by-reference doesn't occur", {
   df <- data.table(x = 1:3, y = 1:3)
   df %>%
