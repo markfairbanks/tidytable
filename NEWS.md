@@ -1,4 +1,4 @@
-# tidytable 0.9.1 (in development)
+# tidytable 0.9.1
 
 #### New functions
 * `nest_join()`
@@ -28,8 +28,8 @@
 
 #### Dotless functions!
 * `tidytable` now exports dotless versions of all functions (e.g. `arrange()`/`mutate()`/etc.).
-  * `verb.()` syntax is still available to users for backwards compatibility.
-  * This will also allow users to use both `tidytable` and `dplyr` by simply loading
+* `verb.()` syntax is still available to users for backwards compatibility.
+  * Users can use both `tidytable` and `dplyr` by simply loading
     `dplyr` _after_ `tidytable`, as the `verb.()` functions won't be overwritten by `dplyr`.
 
 #### New functions

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.1</span>
       </span>
     </div>
 
@@ -58,14 +58,52 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.9.0" id="tidytable-090">tidytable 0.9.0<a class="anchor" aria-label="anchor" href="#tidytable-090"></a></h2>
+<h2 class="page-header" data-toc-text="0.9.1" id="tidytable-091">tidytable 0.9.1<a class="anchor" aria-label="anchor" href="#tidytable-091"></a></h2>
+<div class="section level5">
+<h5 id="new-functions-0-9-1">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-9-1"></a></h5>
+<ul><li><code><a href="../reference/nest_join.html">nest_join()</a></code></li>
+<li>Ranking functions:
+<ul><li><code><a href="../reference/rank.html">min_rank()</a></code></li>
+<li><code><a href="../reference/rank.html">dense_rank()</a></code></li>
+<li><code><a href="../reference/rank.html">percent_rank()</a></code></li>
+<li><code><a href="../reference/rank.html">cume_dist()</a></code></li>
+</ul></li>
+</ul></div>
+<div class="section level5">
+<h5 id="functionality-improvements-0-9-1">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-9-1"></a></h5>
+<ul><li>
+<code>%in%</code> falls back to <code><a href="https://rdrr.io/r/base/match.html" class="external-link">base::'%in%'</a></code> when input types aren’t compatible with <code>vec_in()</code> (<a href="https://github.com/krterberg" class="external-link">@krterberg</a>, <a href="https://github.com/markfairbanks/tidytable/issues/632" class="external-link">#632</a>)</li>
+<li>
+<code><a href="../reference/relocate.html">relocate()</a></code>: Can rename columns that are moved</li>
+<li>Joins: Can now do cross joins by specifying <code>by = character()</code>
+</li>
+<li>
+<code><a href="../reference/group_by.html">group_by()</a></code>: Gains <code>.add</code> argument</li>
+<li>
+<code><a href="../reference/group_by.html">ungroup()</a></code>: Gains <code>...</code> arguments</li>
+<li>Printing of grouped tidytables now shows grouping variables</li>
+</ul></div>
+<div class="section level5">
+<h5 id="bug-fixes-0-9-1">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-9-1"></a></h5>
+<ul><li>
+<code><a href="../reference/rank.html">row_number()</a></code>: Works correctly on 0-row data frame when overwriting existing column (<a href="https://github.com/markfairbanks/tidytable/issues/639" class="external-link">#639</a>)</li>
+<li>
+<code><a href="../reference/slice.html">slice_head()</a></code>/<code><a href="../reference/slice.html">slice_tail()</a></code>: Properly slice on 0-row data frame (<a href="https://github.com/markfairbanks/tidytable/issues/642" class="external-link">#642</a>)</li>
+</ul></div>
+<div class="section level5">
+<h5 id="functions-with-notable-speed-improvements-0-9-1">Functions with notable speed improvements<a class="anchor" aria-label="anchor" href="#functions-with-notable-speed-improvements-0-9-1"></a></h5>
+<ul><li><code><a href="../reference/fill.html">fill()</a></code></li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.9.0" id="tidytable-090">tidytable 0.9.0<small>2022-09-23</small><a class="anchor" aria-label="anchor" href="#tidytable-090"></a></h2>
 <div class="section level5">
 <h5 id="dotless-functions-0-9-0">Dotless functions!<a class="anchor" aria-label="anchor" href="#dotless-functions-0-9-0"></a></h5>
 <ul><li>
-<code>tidytable</code> now exports dotless versions of all functions (e.g. <code><a href="../reference/arrange.html">arrange()</a></code>/<code><a href="../reference/mutate.html">mutate()</a></code>/etc.). The <code>verb.()</code> versions are still exported as well.
-<ul><li>
-<code>verb.()</code> syntax is still available to users for backwards compatibility.</li>
-<li>This will also allow users to use both <code>tidytable</code> and <code>dplyr</code> by simply loading <code>dplyr</code> <em>after</em> <code>tidytable</code>, as the <code>verb.()</code> functions won’t be overwritten by <code>dplyr</code>.</li>
+<code>tidytable</code> now exports dotless versions of all functions (e.g. <code><a href="../reference/arrange.html">arrange()</a></code>/<code><a href="../reference/mutate.html">mutate()</a></code>/etc.).</li>
+<li>
+<code>verb.()</code> syntax is still available to users for backwards compatibility.
+<ul><li>Users can use both <code>tidytable</code> and <code>dplyr</code> by simply loading <code>dplyr</code> <em>after</em> <code>tidytable</code>, as the <code>verb.()</code> functions won’t be overwritten by <code>dplyr</code>.</li>
 </ul></li>
 </ul></div>
 <div class="section level5">
@@ -98,9 +136,9 @@
 <ul><li>
 <code><a href="../reference/in-notin.html">tidytable::'%in%'</a></code> dispatches to <code><a href="https://rdrr.io/r/base/match.html" class="external-link">base::'%in%'</a></code> when comparing with a list (<a href="https://github.com/markfairbanks/tidytable/issues/563" class="external-link">#563</a>)</li>
 <li>
-<code><a href="../reference/pivot_wider..html">pivot_wider.()</a></code>: Works with column names with spaces (<a href="https://github.com/markfairbanks/tidytable/issues/569" class="external-link">#569</a>)</li>
+<code><a href="../reference/pivot_wider.html">pivot_wider()</a></code>: Works with column names with spaces (<a href="https://github.com/markfairbanks/tidytable/issues/569" class="external-link">#569</a>)</li>
 <li>
-<code><a href="../reference/pivot_wider..html">pivot_wider.()</a></code>: <code>names_glue="{.value}_{somecolumn}"</code> assigns column names in correct order (<a href="https://github.com/Darxor" class="external-link">@Darxor</a>, <a href="https://github.com/markfairbanks/tidytable/issues/579" class="external-link">#579</a>)</li>
+<code><a href="../reference/pivot_wider.html">pivot_wider()</a></code>: <code>names_glue="{.value}_{somecolumn}"</code> assigns column names in correct order (<a href="https://github.com/Darxor" class="external-link">@Darxor</a>, <a href="https://github.com/markfairbanks/tidytable/issues/579" class="external-link">#579</a>)</li>
 <li>
 <code><a href="../reference/left_join.html">left_join()</a></code>: Works when y matching columns in <code>by</code> is a non matching column of x (<a href="https://github.com/markfairbanks/tidytable/issues/625" class="external-link">#625</a>)</li>
 </ul></div>
@@ -446,7 +484,7 @@
 <li>The following tidyverse functions are now automatically converted to their tidytable <code>verb.()</code> equivalents when used inside of tidytable’s mutate/arrange/filter/summarize/slice.
 <ul><li>Functions that previously failed but now work:
 <ul><li><code><a href="../reference/n.html">n()</a></code></li>
-<li><code><a href="../reference/row_number.html">row_number()</a></code></li>
+<li><code><a href="../reference/rank.html">row_number()</a></code></li>
 </ul></li>
 <li>Functions that previously worked with tidytable but are now converted to their faster tidytable equivalents:
 <ul><li>
@@ -766,7 +804,7 @@
 <ul><li>
 <code>tidytable</code> now works with quosures</li>
 <li>
-<code>tidyselect v0.1.1</code> compatibility: Updated functions to use <code>where()</code>
+<code>tidyselect v0.1.1</code> compatibility: Updated functions to use <code><a href="https://tidyselect.r-lib.org/reference/where.html" class="external-link">where()</a></code>
 </li>
 </ul><div class="section level5">
 <h5 id="functionality-improvements-0-5-0">Functionality improvements<a class="anchor" aria-label="anchor" href="#functionality-improvements-0-5-0"></a></h5>

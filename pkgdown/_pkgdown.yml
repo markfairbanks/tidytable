@@ -45,6 +45,7 @@ reference:
   - n_distinct
   - na_if
   - nest_by
+  - nest_join
   - pull
   - relocate
   - rename
