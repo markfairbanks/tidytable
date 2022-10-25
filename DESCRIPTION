@@ -8,7 +8,8 @@ Authors@R: c(
   person("Ivan", "Leung", role = "ctb"),
   person("Ross", "Kennedy", role = "ctb"),
   person("Robert", "On", role = "ctb"),
-  person("Alexander", "Sevostianov", role = "ctb")
+  person("Alexander", "Sevostianov", role = "ctb"),
+  person("Koen", "ter Berg", role = "ctb")
   )
 Description: A tidy interface to 'data.table',
   giving users the speed of 'data.table' while using tidyverse-like syntax.
