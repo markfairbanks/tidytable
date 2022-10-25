@@ -1,6 +1,6 @@
 Package: tidytable
 Title: Tidy Interface to 'data.table'
-Version: 0.9.0.9
+Version: 0.9.1
 Authors@R: c(
   person("Mark", "Fairbanks", role = c("aut", "cre"), email = "mark.t.fairbanks@gmail.com"),
   person("Abdessabour", "Moutik", role = "ctb"),
@@ -20,7 +20,7 @@ Imports:
     glue (>= 1.4.0),
     magrittr (>= 2.0.3),
     pillar (>= 1.8.0),
-    rlang (>= 1.0.5),
+    rlang (>= 1.0.6),
     tidyselect (>= 1.2.0),
     vctrs (>= 0.5.0)
 RoxygenNote: 7.2.1
