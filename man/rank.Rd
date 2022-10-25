@@ -18,6 +18,9 @@ percent_rank(x)
 
 cume_dist(x)
 }
+\arguments{
+\item{x}{A vector to rank}
+}
 \description{
 Ranking functions:
 \itemize{

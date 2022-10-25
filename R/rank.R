@@ -9,6 +9,8 @@
 #' * `percent_rank()`: Ranks by percentage from 0 to 1
 #' * `cume_dist()`: Cumulative distribution
 #'
+#' @param x A vector to rank
+#'
 #' @export
 #'
 #' @examples
