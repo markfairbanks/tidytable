@@ -1,4 +1,4 @@
-* using log directory ‘/Users/fairbmx/Desktop/NU/R/R_Packages/tidytable/revdep/checks.noindex/bbknnR/new/bbknnR.Rcheck’
+* using log directory ‘/Users/mfairbanks/Desktop/NU/R/R_Packages/tidytable/revdep/checks.noindex/bbknnR/new/bbknnR.Rcheck’
 * using R version 4.2.0 (2022-04-22)
 * using platform: x86_64-apple-darwin17.0 (64-bit)
 * using session charset: UTF-8
@@ -17,7 +17,7 @@
 * checking whether package ‘bbknnR’ can be installed ... WARNING
 Found the following significant warnings:
   Warning: namespace ‘rgdal’ is not available and has been replaced
-See ‘/Users/fairbmx/Desktop/NU/R/R_Packages/tidytable/revdep/checks.noindex/bbknnR/new/bbknnR.Rcheck/00install.out’ for details.
+See ‘/Users/mfairbanks/Desktop/NU/R/R_Packages/tidytable/revdep/checks.noindex/bbknnR/new/bbknnR.Rcheck/00install.out’ for details.
 * checking installed package size ... OK
 * checking package directory ... OK
 * checking ‘build’ directory ... OK
@@ -33,6 +33,7 @@ See ‘/Users/fairbmx/Desktop/NU/R/R_Packages/tidytable/revdep/checks.noindex/bb
 * checking whether the package can be unloaded cleanly ... OK
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
 * checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
