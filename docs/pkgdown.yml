@@ -1,7 +1,7 @@
-pandoc: 2.17.1.1
+pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   speed_comparisons: speed_comparisons.html
-last_built: 2022-09-23T15:36Z
+last_built: 2022-10-25T17:03Z
 
