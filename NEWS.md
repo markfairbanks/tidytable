@@ -1,5 +1,9 @@
 # tidytable 0.9.2 (in development)
 
+#### Functionality improvements
+* `separate()`: Can now handle when too many or two few new names are
+  specified in `into` arg (#666)
+
 # tidytable 0.9.1
 
 #### New functions
