@@ -62,7 +62,7 @@ unite..tidytable <- function(.df, col = ".united", ..., sep = "_", remove = TRUE
     cols <- unname(map(select(.df, any_of(unite_cols)), as.character))
     rows <- transpose(cols)
 
-    .united <- map_chr(rows, ~ paste0(.x[!is.na(.x)], collapse = sep))
+    .united <- map_chr(rows, ~ paste0(.x[vec_detect_complete(.x)], collapse = sep))
 
     out <- mutate(.df, !!col := .env$.united)
   } else {
