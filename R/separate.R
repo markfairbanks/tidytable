@@ -68,26 +68,42 @@ separate..tidytable <- function(.df, col, into,
 
   col <- enquo(col)
 
-  col <- tidyselect_syms(.df, !!col)[[1]]
+  t_str_split <- tstrsplit(pull(.df, !!col),
+                           split = sep, fixed = fixed,
+                           type.convert = convert)
 
-  not_na_into <- vec_detect_complete(into)
+  into_length <- length(into)
+  split_length <- length(t_str_split)
 
-  keep <- seq_along(into)[not_na_into]
-  into <- into[not_na_into]
-
-  t_str_split <- call2(
-    "tstrsplit", col, split = sep, fixed = fixed,
-    keep = keep, type.convert = convert,
-    .ns = "data.table"
-  )
-
-  .df <- dt_j(.df, (into) := !!t_str_split)
-
-  if (remove) {
-    .df <- dt_j(.df, !!col := NULL)
+  if (into_length > split_length) {
+    extra <- into[(split_length + 1):into_length]
+    into <- into[1:split_length]
+  } else if (into_length < split_length) {
+    t_str_split <- t_str_split[1:into_length]
+    extra <- character()
+  } else {
+    extra <- character()
   }
 
-  .df
+  is_complete <- vec_detect_complete(into)
+
+  into <- into[is_complete]
+
+  t_str_split <- set_names(t_str_split[is_complete], into)
+
+  t_str_split <- new_tidytable(t_str_split)
+
+  out <- bind_cols(.df, t_str_split)
+
+  if (length(extra) > 0) {
+    out <- dt_j(out, (extra) := NA_character_)
+  }
+
+  if (remove) {
+    out <- dt_j(out, !!col := NULL)
+  }
+
+  out
 }
 
 #' @export
