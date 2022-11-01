@@ -3,6 +3,9 @@
 #### Functionality improvements
 * `separate()`: Can now handle when too many or two few new names are
   specified in `into` arg (#666)
+  
+#### Bug fixes
+* `separate()`: Can overwrite separated column without removal (#680)
 
 # tidytable 0.9.1
 

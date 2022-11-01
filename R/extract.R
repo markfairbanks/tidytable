@@ -59,9 +59,9 @@ extract..tidytable <- function(.df, col, into, regex = "([[:alnum:]]+)",
     )
   }
 
-  keep_group <- vec_detect_complete(into)
-  groups <- groups[keep_group]
-  into <- into[keep_group]
+  keep <- vec_detect_complete(into)
+  into <- into[keep]
+  groups <- groups[keep]
 
   if (vec_duplicate_any(into)) {
     groups <- lapply(split(groups, into), pmap_chr, paste0)
@@ -72,18 +72,16 @@ extract..tidytable <- function(.df, col, into, regex = "([[:alnum:]]+)",
     groups <- lapply(groups, type.convert, as.is = TRUE)
   }
 
-  groups <- set_names(groups, into)
+  out <- dt_j(.df, (into) := ..groups)
 
-  groups <- new_tidytable(groups)
-
-  out <- bind_cols(.df, groups)
-
-  if (remove) {
+  if (remove && col %notin% into) {
     out <- dt_j(out, (col) := NULL)
   }
 
   out
 }
+
+globalVariables("..groups")
 
 #' @export
 extract..data.frame <- function(.df, col, into, regex = "([[:alnum:]]+)",

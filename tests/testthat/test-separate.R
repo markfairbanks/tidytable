@@ -94,3 +94,13 @@ test_that("works when too few columns are specified", {
   expect_named(res, "one")
   expect_equal(res$one, c("a", "b", "c"))
 })
+
+test_that("can overwrite existing col, #680", {
+  df <- tidytable(x = c("a_a", "b_b", "c_c"))
+
+  res <- df %>%
+    separate(x, c("x", "y"))
+
+  expect_named(res, c("x", "y"))
+  expect_equal(res$x, c("a", "b", "c"))
+})
