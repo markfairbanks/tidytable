@@ -66,9 +66,9 @@ separate..tidytable <- function(.df, col, into,
     fixed <- FALSE
   }
 
-  col <- enquo(col)
+  col <- tidyselect_names(.df, {{ col }})
 
-  t_str_split <- tstrsplit(pull(.df, !!col),
+  t_str_split <- tstrsplit(.df[[col]],
                            split = sep, fixed = fixed,
                            type.convert = convert)
 
@@ -89,22 +89,22 @@ separate..tidytable <- function(.df, col, into,
 
   into <- into[is_complete]
 
-  t_str_split <- set_names(t_str_split[is_complete], into)
+  t_str_split <- t_str_split[is_complete]
 
-  t_str_split <- new_tidytable(t_str_split)
-
-  out <- bind_cols(.df, t_str_split)
+  out <- dt_j(.df, (into) := ..t_str_split)
 
   if (length(extra) > 0) {
     out <- dt_j(out, (extra) := NA_character_)
   }
 
-  if (remove) {
-    out <- dt_j(out, !!col := NULL)
+  if (remove && col %notin% into) {
+    out <- dt_j(out, (col) := NULL)
   }
 
   out
 }
+
+globalVariables("..t_str_split")
 
 #' @export
 separate..data.frame <- function(.df, col, into,
