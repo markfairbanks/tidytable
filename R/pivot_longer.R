@@ -106,7 +106,7 @@ pivot_longer..tidytable <- function(.df,
 
   if (length(measure_vars) == 0) abort("At least one column must be supplied to cols")
 
-  id_vars <- names[!names %in% measure_vars]
+  id_vars <- names[names %notin% measure_vars]
 
   multiple_names_to <- length(names_to) > 1
   uses_dot_value <- ".value" %in% names_to
@@ -231,7 +231,10 @@ pivot_longer..tidytable <- function(.df,
   # data.table::melt() drops NAs using "&" logic, not "|"
   # See issue #186
   if (values_drop_na && multiple_names_to) {
-    out <- filter(out, if_any(any_of(values_to), ~ !is.na(.x)))
+    # Note: vec_detect_complete is different from !vec_detect_missing on
+    #  data frames if they have rows with only some NAs
+    not_missing <- !vec_detect_missing(select(out, any_of(values_to)))
+    out <- filter(out, .env$not_missing)
   }
 
   as_tidytable(out)

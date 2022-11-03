@@ -34,4 +34,4 @@ Deleting unused snapshots:
 > 
 > proc.time()
    user  system elapsed 
-  3.913   0.325   6.200 
+  5.459   0.349  10.738 

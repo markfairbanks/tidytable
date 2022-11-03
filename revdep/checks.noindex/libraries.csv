@@ -1,5 +1,2 @@
 package,old,new,delta
-tidytable,0.8.1,0.8.1.9,*
-lifecycle,NA,1.0.2.9000,*
-tidyselect,NA,1.1.2.9000,*
-vctrs,NA,0.4.1.9000,*
+tidytable,0.9.0,0.9.1,*

@@ -409,6 +409,9 @@
     <loc>/reference/nest_by.html</loc>
   </url>
   <url>
+    <loc>/reference/nest_join.html</loc>
+  </url>
+  <url>
     <loc>/reference/nesting..html</loc>
   </url>
   <url>
@@ -461,6 +464,12 @@
   </url>
   <url>
     <loc>/reference/pull.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rank.html</loc>
+  </url>
+  <url>
+    <loc>/reference/recode.html</loc>
   </url>
   <url>
     <loc>/reference/reexports.html</loc>

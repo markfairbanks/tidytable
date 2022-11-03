@@ -1,10 +1,10 @@
-* using log directory ‘/Users/fairbmx/Desktop/NU/R/R_Packages/tidytable/revdep/checks.noindex/ffsimulator/old/ffsimulator.Rcheck’
+* using log directory ‘/Users/mfairbanks/Desktop/NU/R/R_Packages/tidytable/revdep/checks.noindex/ffsimulator/old/ffsimulator.Rcheck’
 * using R version 4.2.0 (2022-04-22)
 * using platform: x86_64-apple-darwin17.0 (64-bit)
 * using session charset: UTF-8
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘ffsimulator/DESCRIPTION’ ... OK
-* this is package ‘ffsimulator’ version ‘1.2.1’
+* this is package ‘ffsimulator’ version ‘1.2.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK

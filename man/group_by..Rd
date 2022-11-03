@@ -4,12 +4,14 @@
 \alias{group_by.}
 \title{Grouping}
 \usage{
-group_by.(.df, ...)
+group_by.(.df, ..., .add = FALSE)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
 
 \item{...}{Columns to group by}
+
+\item{.add}{Should grouping cols specified be added to the current grouping}
 }
 \description{
 \itemize{

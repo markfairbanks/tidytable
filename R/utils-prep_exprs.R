@@ -47,6 +47,7 @@ call_fns <- c(
   "if_any.", "if_any",
   "ifelse",
   "n.", "n",
+  "pick",
   "row_number.", "row_number",
   "str_glue"
 )
@@ -58,7 +59,7 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env()
     x[[1]] <- sym("-")
     x[[2]] <- prep_expr(x[[2]], data, {{ .by }}, j, dt_env, is_top_across)
     x
-  } else if (is_call(x, c("row_number.", "row_number", "cur_group_rows.", "cur_group_rows"))) {
+  } else if (is_call(x, c("row_number.", "row_number", "cur_group_rows.", "cur_group_rows"), 0)) {
     quote(seq_len(.N))
   } else if (is_call(x, c("cur_group_id.", "cur_group_id"))) {
     quote(.GRP)
@@ -93,6 +94,17 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env()
       out <- call2("data_frame", !!!out, .ns = "vctrs")
     }
     out
+  } else if (is_call(x, "pick")) {
+    if (has_length(x, 1)) {
+      .cols <- expr(everything())
+    } else {
+      .cols <- x
+      .cols[[1]] <- sym("c")
+    }
+    .cols <- get_across_cols(data, .cols, {{ .by }}, dt_env)
+    .cols <- set_names(.cols)
+    .cols <- syms(.cols)
+    call2("data_frame", !!!.cols, .ns = "vctrs")
   } else if (is_call(x, c("glue", "str_glue")) && j) {
     if (is_call(x, "str_glue")) {
       x[[1]] <- quote(glue::glue)

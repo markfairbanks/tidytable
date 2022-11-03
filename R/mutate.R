@@ -120,9 +120,9 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
 
     # Check for NULL inputs so columns can be deleted
     # Only delete if the NULL is the last call
-    null_bool <- map_lgl(dots, is_null)
+    is_null <- vec_detect_missing(dots)
     is_last <- !duplicated(names(dots), fromLast = TRUE)
-    needs_removal <- null_bool & is_last
+    needs_removal <- is_null & is_last
     any_null <- any(needs_removal)
 
     if (any_null) {
@@ -238,7 +238,7 @@ sequential_check <- function(dots) {
 
   used_vars <- unique(unlist(map(dots[-1], extract_used)))
 
-  any(dots_names %in% used_vars) || any(vec_duplicate_detect(dots_names))
+  any(dots_names %in% used_vars) || vec_duplicate_any(dots_names)
 }
 
 get_keep_vars <- function(df, dots, .by, .keep = "all") {

@@ -1,14 +1,89 @@
-%in%                    '%in%' and %notin% operators
+%in%                    Fast '%in%' and %notin% operators
+across                  Apply a function across a selection of columns
+add_count               Add a count column to the data frame
+arrange                 Arrange/reorder rows
 arrange_across.         Arrange by a selection of variables
 as_tidytable            Coerce an object to a data.table/tidytable
+between                 Do the values from x fall between the left and
+                        right bounds?
+bind_cols               Bind data.tables by row and column
+c_across                Combine values from multiple columns
+case                    'data.table::fcase()' with vectorized default
+case_match              Vectorized 'switch()'
+case_when               Case when
+coalesce                Coalesce missing values
+complete                Complete a data.table with missing combinations
+                        of data
+consecutive_id          Generate a unique id for consecutive values
+context                 Context functions
+count                   Count observations by group
+crossing                Create a data.table from all unique
+                        combinations of inputs
+desc                    Descending order
+distinct                Select distinct/unique rows
+drop_na                 Drop rows containing missing values
 dt                      Pipeable data.table call
 enframe                 Convert a vector to a data.table/tidytable
-ifelse.                 Fast ifelse
+expand                  Expand a data.table to use all combinations of
+                        values
+expand_grid             Create a data.table from all combinations of
+                        inputs
+extract                 Extract a character column into multiple
+                        columns using regex
+fill                    Fill in missing values with previous or next
+                        value
+filter                  Filter rows on one or more conditions
+first                   Extract the first, last, or nth value from a
+                        vector
+fread                   Read/write files
+get_dummies             Convert character and factor columns to dummy
+                        variables
+group_by                Grouping
+group_split             Split data frame by groups
+group_vars              Get the grouping variables
+if_all                  Create conditions on a selection of columns
+if_else                 Fast if_else
 inv_gc                  Run invisible garbage collection
+is_grouped_df           Check if the tidytable is grouped
 is_tidytable            Test if the object is a tidytable
+lag                     Get lagging or leading values
+left_join               Join two data.tables together
+map                     Apply a function to each element of a vector or
+                        list
+mutate                  Add/modify/delete columns
 mutate_across.          Mutate multiple columns simultaneously
+mutate_rowwise          Add/modify columns by row
+n                       Number of observations in each group
+n_distinct              Count the number of unique values in a vector
+na_if                   Convert values to 'NA'
+nest                    Nest data.tables
+nest_by                 Nest data.tables
+nest_join               Nest join
 new_tidytable           Create a tidytable from a list
+pivot_longer            Pivot data from wide to long
+pivot_wider             Pivot data from long to wide
+pull                    Pull out a single variable
+relocate                Relocate a column to a new position
+rename                  Rename variables by name
+rename_with             Rename multiple columns
+replace_na              Replace missing values
+row_number              Ranking functions
+rowwise                 Convert to a rowwise tidytable
+select                  Select or drop columns
+separate                Separate a character column into multiple
+                        columns
+separate_rows           Separate a collapsed column into multiple rows
+slice_head              Choose rows in a data.table
+summarize               Aggregate data using summary statistics
 summarize_across.       Summarize multiple columns
 tidytable               Build a data.table/tidytable
+top_n                   Select top (or bottom) n rows (by value)
+transmute               Add new variables and drop all others
+uncount                 Uncount a data.table
+unite                   Unite multiple columns by pasting strings
+                        together
+unnest                  Unnest list-columns
+unnest_longer           Unnest a list-column of vectors into regular
+                        columns
 unnest_wider            Unnest a list-column of vectors into a wide
                         data frame

@@ -80,7 +80,7 @@ get_dummies..tidytable <- function(.df,
     len <- length(unique_vals)
 
     # Due to above f_sort NA will be the last value if it exists
-    any_na <- vec_equal_na(unique_vals[len])
+    any_na <- vec_detect_missing(unique_vals[len])
 
     if (any_na) {
       unique_vals <- unique_vals[-len]
