@@ -15,6 +15,10 @@ test_that("map works", {
   expect_equal(.dfr, tidytable(x = 1:3))
   .df <- map_df(1:3, ~ tidytable(x = .x))
   expect_equal(.df, tidytable(x = 1:3))
+  .vec <- map_vec(1:3, ~ .x + 1)
+  expect_equal(.vec, 2:4)
+  .vec_ptype <- map_vec(1:3, ~ .x + 1, .ptype = integer())
+  expect_equal(.dbl, as.integer(2:4))
 })
 
 test_that("map2 works", {
@@ -34,6 +38,8 @@ test_that("map2 works", {
   expect_equal(.dfr, tidytable(x = 1:3, y = 1:3))
   .df <- map2_df(1:3, 1:3, ~ tidytable(x = .x, y = .y))
   expect_equal(.df, tidytable(x = 1:3, y = 1:3))
+  .vec <- map2_vec(1:3, 1:3, ~ .x + .y)
+  expect_equal(.vec, c(2, 4, 6))
 })
 
 test_that("pmap works", {
@@ -53,6 +59,8 @@ test_that("pmap works", {
   expect_equal(.dfr, tidytable(x = 1:3, y = 1:3))
   .df <- pmap_df(list(1:3, 1:3), ~ tidytable(x = .x, y = .y))
   expect_equal(.df, tidytable(x = 1:3, y = 1:3))
+  .vec <- pmap_vec(list(1:3, 1:3), ~ .x + .y)
+  expect_equal(.vec, c(2, 4, 6))
 })
 
 test_that("map. works", {

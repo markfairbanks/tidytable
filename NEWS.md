@@ -2,6 +2,7 @@
 
 #### New functions
 * `pick()`
+* `map_vec()`
 
 #### Functionality improvements
 * `separate()`: Can now handle when too many or two few new names are
