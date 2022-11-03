@@ -48,21 +48,12 @@ select. <- function(.df, ...) {
 
 #' @export
 select..tidytable <- function(.df, ...) {
-  locs <- tidyselect_locs(.df, ...)
-
-  out <- new_data_frame(.df)[locs]
-
-  out <- df_set_names(out, names(locs))
-
-  tidytable_restore(out, .df)
+  .select(.df, ...)
 }
 
 #' @export
 select..grouped_tt <- function(.df, ...) {
-  .by <- group_vars(.df)
-  out <- ungroup(.df)
-  out <- select(out, ..., all_of(.by))
-  group_by(out, all_of(.by))
+  .select(.df, ..., group_cols())
 }
 
 #' @export
@@ -71,3 +62,12 @@ select..data.frame <- function(.df, ...) {
   select(.df, ...)
 }
 
+.select <- function(.df, ...) {
+  locs <- tidyselect_locs(.df, ...)
+
+  out <- new_data_frame(.df)[locs]
+
+  out <- df_set_names(out, names(locs))
+
+  tidytable_restore(out, .df)
+}
