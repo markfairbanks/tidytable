@@ -46,6 +46,7 @@ reference:
   - na_if
   - nest_by
   - nest_join
+  - pick
   - pull
   - relocate
   - rename
