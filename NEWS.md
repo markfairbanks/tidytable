@@ -3,6 +3,7 @@
 #### New functions
 * `pick()`
 * `map_vec()`
+* `group_cols()`
 
 #### Functionality improvements
 * `separate()`: Can now handle when too many or two few new names are
