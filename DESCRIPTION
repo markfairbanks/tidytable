@@ -1,6 +1,6 @@
 Package: tidytable
 Title: Tidy Interface to 'data.table'
-Version: 0.9.0.9
+Version: 0.9.1.9
 Authors@R: c(
   person("Mark", "Fairbanks", role = c("aut", "cre"), email = "mark.t.fairbanks@gmail.com"),
   person("Abdessabour", "Moutik", role = "ctb"),
@@ -8,7 +8,8 @@ Authors@R: c(
   person("Ivan", "Leung", role = "ctb"),
   person("Ross", "Kennedy", role = "ctb"),
   person("Robert", "On", role = "ctb"),
-  person("Alexander", "Sevostianov", role = "ctb")
+  person("Alexander", "Sevostianov", role = "ctb"),
+  person("Koen", "ter Berg", role = "ctb")
   )
 Description: A tidy interface to 'data.table',
   giving users the speed of 'data.table' while using tidyverse-like syntax.
@@ -19,9 +20,9 @@ Imports:
     glue (>= 1.4.0),
     magrittr (>= 2.0.3),
     pillar (>= 1.8.0),
-    rlang (>= 1.0.5),
+    rlang (>= 1.0.6),
     tidyselect (>= 1.2.0),
-    vctrs (>= 0.4.1)
+    vctrs (>= 0.5.0)
 RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3

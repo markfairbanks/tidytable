@@ -19,7 +19,7 @@ a vector as the default argument."><meta property="og:image" content="/logo.png"
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.1</span>
       </span>
     </div>
 
@@ -55,7 +55,7 @@ a vector as the default argument."><meta property="og:image" content="/logo.png"
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>data.table::fcase() with vectorized default</h1>
+    <h1><code>data.table::fcase()</code> with vectorized default</h1>
     <small class="dont-index">Source: <a href="https://github.com/markfairbanks/tidytable/blob/HEAD/R/case.R" class="external-link"><code>R/case.R</code></a></small>
     <div class="hidden name"><code>case.Rd</code></div>
     </div>
@@ -67,7 +67,7 @@ a vector as the <code>default</code> argument.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">case</span><span class="op">(</span><span class="va">...</span>, default <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">case</span><span class="op">(</span><span class="va">...</span>, default <span class="op">=</span> <span class="cn">NA</span>, ptype <span class="op">=</span> <span class="cn">NULL</span>, size <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -79,6 +79,14 @@ a vector as the <code>default</code> argument.</p>
 <dt>default</dt>
 <dd><p>Default value. Set to NA by default.</p></dd>
 
+
+<dt>ptype</dt>
+<dd><p>Optional ptype to specify the output type.</p></dd>
+
+
+<dt>size</dt>
+<dd><p>Optional size to specify the output size.</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
@@ -87,8 +95,8 @@ a vector as the <code>default</code> argument.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="mutate.html">mutate</a></span><span class="op">(</span>case_x <span class="op">=</span> <span class="fu">case</span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">5</span>, <span class="fl">1</span>,</span></span>
-<span class="r-in"><span>                         <span class="va">x</span> <span class="op">&lt;</span> <span class="fl">7</span>, <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>                         default <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                       <span class="va">x</span> <span class="op">&lt;</span> <span class="fl">7</span>, <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>                       default <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tidytable: 10 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        x case_x</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>

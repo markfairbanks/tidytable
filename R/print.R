@@ -31,7 +31,8 @@ print.grouped_tt <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 
 #' @export
 tbl_sum.grouped_tt_print <- function(x) {
-  c("A grouped tidytable" = dim_desc(x))
+  groups <- glue_collapse(group_vars(x), sep = ", ")
+  c("A tidytable" = dim_desc(x), "Groups" = groups)
 }
 
 #' @export

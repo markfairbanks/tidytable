@@ -91,3 +91,10 @@ map2_df <- map2_dfr
 #' @keywords internal
 #' @inherit map
 map2_df. <- map2_df
+
+#' @export
+#' @rdname map
+map2_vec <- function(.x, .y, .f, ..., .ptype = NULL) {
+  out <- map2(.x, .y, .f, ...)
+  list_simplify(out, .ptype)
+}

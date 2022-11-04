@@ -10,6 +10,7 @@
 \alias{map_dfr}
 \alias{map_df}
 \alias{walk}
+\alias{map_vec}
 \alias{map2}
 \alias{map2_lgl}
 \alias{map2_int}
@@ -18,6 +19,7 @@
 \alias{map2_dfc}
 \alias{map2_dfr}
 \alias{map2_df}
+\alias{map2_vec}
 \alias{pmap}
 \alias{pmap_lgl}
 \alias{pmap_int}
@@ -26,6 +28,7 @@
 \alias{pmap_dfc}
 \alias{pmap_dfr}
 \alias{pmap_df}
+\alias{pmap_vec}
 \title{Apply a function to each element of a vector or list}
 \usage{
 map(.x, .f, ...)
@@ -46,6 +49,8 @@ map_df(.x, .f, ..., .id = NULL)
 
 walk(.x, .f, ...)
 
+map_vec(.x, .f, ..., .ptype = NULL)
+
 map2(.x, .y, .f, ...)
 
 map2_lgl(.x, .y, .f, ...)
@@ -62,6 +67,8 @@ map2_dfr(.x, .y, .f, ..., .id = NULL)
 
 map2_df(.x, .y, .f, ..., .id = NULL)
 
+map2_vec(.x, .y, .f, ..., .ptype = NULL)
+
 pmap(.l, .f, ...)
 
 pmap_lgl(.l, .f, ...)
@@ -77,6 +84,8 @@ pmap_dfc(.l, .f, ...)
 pmap_dfr(.l, .f, ..., .id = NULL)
 
 pmap_df(.l, .f, ..., .id = NULL)
+
+pmap_vec(.l, .f, ..., .ptype = NULL)
 }
 \arguments{
 \item{.x}{A list or vector}
@@ -86,6 +95,8 @@ pmap_df(.l, .f, ..., .id = NULL)
 \item{...}{Other arguments to pass to a function}
 
 \item{.id}{Whether \code{map_dfr()} should add an id column to the finished dataset}
+
+\item{.ptype}{ptype for resulting vector in \code{map_vec()}}
 
 \item{.y}{A list or vector}
 

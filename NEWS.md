@@ -1,12 +1,35 @@
-# tidytable 0.9.1 (in development)
+# tidytable 0.9.2 (in development)
+
+#### New functions
+* `pick()`
+* `map_vec()`
+* `group_cols()`
+
+#### Functionality improvements
+* `separate()`: Can now handle when too many or two few new names are
+  specified in `into` arg (#666)
+  
+#### Bug fixes
+* `separate()`: Can overwrite separated column without removal (#680)
+
+# tidytable 0.9.1
 
 #### New functions
 * `nest_join()`
+* Ranking functions:
+  * `min_rank()`
+  * `dense_rank()`
+  * `percent_rank()`
+  * `cume_dist()`
 
 #### Functionality improvements
-* `%in%` falls back to `base::'%in%'` when input types aren't compatible with `vec_in()` (@krterberg, #632)
+* `%in%` falls back to `base::'%in%'` when input types aren't compatible
+  with `vec_in()` (@krterberg, #632)
 * `relocate()`: Can rename columns that are moved
 * Joins: Can now do cross joins by specifying `by = character()`
+* `group_by()`: Gains `.add` argument
+* `ungroup()`: Gains `...` arguments
+* Printing of grouped tidytables now shows grouping variables
 
 #### Bug fixes
 * `row_number()`: Works correctly on 0-row data frame when overwriting existing column (#639)
@@ -19,8 +42,8 @@
 
 #### Dotless functions!
 * `tidytable` now exports dotless versions of all functions (e.g. `arrange()`/`mutate()`/etc.).
-  * `verb.()` syntax is still available to users for backwards compatibility.
-  * This will also allow users to use both `tidytable` and `dplyr` by simply loading
+* `verb.()` syntax is still available to users for backwards compatibility.
+  * Users can use both `tidytable` and `dplyr` by simply loading
     `dplyr` _after_ `tidytable`, as the `verb.()` functions won't be overwritten by `dplyr`.
 
 #### New functions

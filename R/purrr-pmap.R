@@ -94,6 +94,13 @@ pmap_df <- pmap_dfr
 #' @inherit map
 pmap_df. <- pmap_df
 
+#' @export
+#' @rdname map
+pmap_vec <- function(.l, .f, ..., .ptype = NULL) {
+  out <- pmap(.l, .f, ...)
+  list_simplify(out, .ptype)
+}
+
 .args_recycle <- function(args) {
   lengths <- map_int(args, length)
   n <- max(lengths)

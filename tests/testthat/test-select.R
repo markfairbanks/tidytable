@@ -109,6 +109,7 @@ test_that("works on grouped_tt", {
     select(z)
 
   expect_named(new_df, c("z", "x"))
+  expect_true(is_grouped_df(new_df))
 
   # Can rename on grouped_tt
   new_df <- df %>%
@@ -116,4 +117,12 @@ test_that("works on grouped_tt", {
     select(new_z = z)
 
   expect_named(new_df, c("new_z", "x"))
+  expect_true(is_grouped_df(new_df))
+
+  # Can use `group_cols()`
+  new_df <- df %>%
+    group_by(z) %>%
+    select(group_cols(), y)
+
+  expect_named(new_df, c("z", "y"))
 })

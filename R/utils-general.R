@@ -1,17 +1,19 @@
 # dt starting with the j position
 dt_j <- function(.df, j, ...) {
   j <- enquo(j)
-  dt(.df, , !!j, ...)
+  i <- new_quosure(expr(), get_env(j))
+  dt(.df, !!i, !!j, ...)
 }
 
 # Create a call to `[.data.table` (j position)
 call2_j <- function(.df, j = NULL, .by = NULL, .keyby = FALSE, ...) {
+  .df <- enquo(.df)
   if (length(.by) == 0) {
-    dt_expr <- call2("[", enquo(.df), , j, ...)
+    dt_expr <- call2("[", .df, expr(), j, ...)
   } else if (.keyby) {
-    dt_expr <- call2("[", enquo(.df), , j, keyby = .by, ...)
+    dt_expr <- call2("[", .df, expr(), j, keyby = .by, ...)
   } else {
-    dt_expr <- call2("[", enquo(.df), , j, by = .by, ...)
+    dt_expr <- call2("[", .df, expr(), j, by = .by, ...)
   }
 
   if (is_call(j, c(":=", "let"))) {
@@ -143,14 +145,15 @@ tidytable_restore <- function(x, to) {
 }
 
 check_across <- function(dots, .fn) {
-  use_across <- map_lgl(dots, quo_is_call, c("across", "across."))
+  uses_across <- any(map_lgl(dots, quo_is_call, c("across", "across.", "pick")))
 
-  if (any(use_across)) {
+  if (uses_across) {
     abort(
       glue(
-      "`across()` is unnecessary in `{.fn}()`.
-      Please directly use tidyselect.
-      Ex: df %>% {.fn}(where(is.numeric))")
+        "`across()`/`pick()` are unnecessary in `{.fn}()`.
+         Please directly use tidyselect.
+         Ex: df %>% {.fn}(where(is.numeric))"
+      )
     )
   }
 }
