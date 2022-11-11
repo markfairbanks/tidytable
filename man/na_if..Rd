@@ -9,7 +9,7 @@ na_if.(x, y)
 \arguments{
 \item{x}{A vector}
 
-\item{y}{Value(s) to replace with \code{NA}}
+\item{y}{Value to replace with \code{NA}}
 }
 \description{
 Convert values to \code{NA}.
