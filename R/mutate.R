@@ -89,8 +89,7 @@ mutate..tidytable <- function(.df, ..., .by = NULL,
 
   if (quo_is_null(.by)) {
     for (i in seq_along(dots)) {
-      top_across <- quo_is_call(dots[[i]], c("across.", "across"))
-      dots_i <- prep_exprs(dots[i], .df, !!.by, j = TRUE, dt_env, top_across)
+      dots_i <- prep_exprs(dots[i], .df, !!.by, j = TRUE, dt_env)
       if (length(dots_i) == 0) next
       dots_i <- exprs_auto_name(dots_i)
       dots_i <- imap(dots_i, ~ mutate_prep(.df, .x, .y))
