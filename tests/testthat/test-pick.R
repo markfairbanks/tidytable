@@ -8,6 +8,16 @@ test_that("works", {
   expect_equal(res$row_sum, c(2, 4, 6))
 })
 
+test_that("top level works", {
+  df <- tidytable(x = 1:3, y = 1:3, z = c("a", "a", "b"))
+
+  res <- df %>%
+    transmute(pick(where(is.numeric)))
+
+  expect_named(res, c("x", "y"))
+  expect_equal(res$x, 1:3)
+})
+
 test_that("uses `everything()` when empty", {
   df <- tidytable(x = 1:3, y = 1:3)
 
