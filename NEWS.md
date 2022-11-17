@@ -1,9 +1,10 @@
 # tidytable 0.9.2 (in development)
 
 #### New functions
-* `pick()`
-* `map_vec()`
 * `group_cols()`
+* `map_vec()`
+* `pick()`
+* `separate_wider_delim()`
 
 #### Functionality improvements
 * `separate()`: Can now handle when too many or two few new names are
