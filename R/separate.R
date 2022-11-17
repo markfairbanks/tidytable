@@ -1,13 +1,17 @@
 #' Separate a character column into multiple columns
 #'
 #' @description
+#' _Superseded_
+#'
+#' `separate()` has been superseded by `separate_wider_delim()`.
+#'
 #' Separates a single column into multiple columns using a user supplied separator or regex.
 #'
 #' If a separator is not supplied one will be automatically detected.
 #'
 #' Note: Using automatic detection or regex will be slower than simple separators such as "," or ".".
 #'
-#' @param .df A data.frame or data.table
+#' @param .df A data frame
 #' @param col The column to split into multiple columns
 #' @param into New column names to split into. A character vector.
 #' Use `NA` to omit the variable in the output.

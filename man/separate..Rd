@@ -15,7 +15,7 @@ separate.(
 )
 }
 \arguments{
-\item{.df}{A data.frame or data.table}
+\item{.df}{A data frame}
 
 \item{col}{The column to split into multiple columns}
 
@@ -31,6 +31,10 @@ Use \code{NA} to omit the variable in the output.}
 \item{...}{Arguments passed on to methods}
 }
 \description{
+\emph{Superseded}
+
+\code{separate()} has been superseded by \code{separate_wider_delim()}.
+
 Separates a single column into multiple columns using a user supplied separator or regex.
 
 If a separator is not supplied one will be automatically detected.
