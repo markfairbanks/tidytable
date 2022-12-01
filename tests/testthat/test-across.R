@@ -231,6 +231,15 @@ test_that("errors when used in not-first position when `.by` is used", {
   )
 })
 
+test_that("base anonymous functions can use n()/etc., #699", {
+  df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
+  res <- df %>%
+    mutate(across(where(is.numeric), function(.x) .x + n()))
+
+  expect_equal(res$x, c(4,4,4))
+  expect_equal(res$y, c(5,5,5))
+})
+
 # summarize -----------------------------------------------------
 test_that("single function works", {
   test_df <- tidytable(a = c(1:2, NA), b = 4:6, z = c("a", "a", "b"))
@@ -247,7 +256,7 @@ test_that("n works", {
   test_df <- tidytable(a = 1:3, b = 4:6)
 
   result_df <- test_df %>%
-    summarize(across(c(a, b), n))
+    summarize(across(c(a, b), ~ n()))
 
   expect_named(result_df, c("a", "b"))
   expect_equal(result_df$a, 3)

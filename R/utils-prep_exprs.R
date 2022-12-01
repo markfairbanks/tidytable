@@ -78,22 +78,20 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env()
     call2("vec_c", !!!cols, .ns = "vctrs")
   } else if (is_call(x, c("if_all.", "if_all", "if_any.", "if_any"))) {
     call <- call_match(x, tidytable::if_all)
-    if (is.null(call$.fns)) return(TRUE)
-    .cols <- get_across_cols(data, call$.cols, {{ .by }}, dt_env)
-    call_list <- map(.cols, ~ fn_to_expr(call$.fns, .x))
+    if (is.null(call$.fns)) {
+      return(TRUE)
+    }
+    call_list <- expand_across(call, data, {{ .by }}, j, dt_env)
     reduce_fn <- if (is_call(x, c("if_all.", "if_all"))) "&" else "|"
     filter_expr <- call_reduce(call_list, reduce_fn)
-    prep_expr(filter_expr, data, {{ .by }})
+    filter_expr
   } else if (is_call(x, c("across.", "across"))) {
     call <- call_match(x, tidytable::across, dots_expand = FALSE)
-    .cols <- get_across_cols(data, call$.cols, {{ .by }}, dt_env)
-    dots <- call$...
-    call_list <- expand_across(call$.fns, .cols, call$.names, dots)
-    out <- lapply(call_list, prep_expr, data, {{ .by }})
+    call_list <- expand_across(call, data, {{ .by }}, j, dt_env)
     if (!is_top_level) {
-      out <- call2("data_frame", !!!out, .ns = "vctrs")
+      call_list <- call2("data_frame", !!!call_list, .ns = "vctrs")
     }
-    out
+    call_list
   } else if (is_call(x, "pick")) {
     if (has_length(x, 1)) {
       .cols <- expr(everything())

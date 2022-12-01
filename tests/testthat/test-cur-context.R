@@ -1,12 +1,19 @@
 test_that("cur_column() works", {
   df <- tidytable(x = 1:3, y = 4:6)
-  df <- df %>%
+  res <- df %>%
     mutate(
       across(c(x, y), ~ paste0(cur_column(), .x))
     )
+  expect_equal(res$x, c("x1", "x2", "x3"))
+  expect_equal(res$y, c("y4", "y5", "y6"))
 
-  expect_equal(df$x, c("x1", "x2", "x3"))
-  expect_equal(df$y, c("y4", "y5", "y6"))
+  # Works in an anonymous function, #699
+  res <- df %>%
+    mutate(
+      across(c(x, y), \(.x) paste0(cur_column(), .x))
+    )
+  expect_equal(res$x, c("x1", "x2", "x3"))
+  expect_equal(res$y, c("y4", "y5", "y6"))
 })
 
 test_that("cur_data() works", {

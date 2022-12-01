@@ -13,6 +13,7 @@
 #### Bug fixes
 * `separate()`: Can overwrite separated column without removal (#680)
 * `na_if()`: Properly replaces `NA`s when `y` is a vector (#689)
+* `across()`: Anonymous functions are properly translated (#699)
 
 # tidytable 0.9.1
 

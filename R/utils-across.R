@@ -1,7 +1,12 @@
 # Build across calls
-expand_across <- function(.fns, .cols, .names, dots) {
+expand_across <- function(call, data, .by, j, dt_env, is_top_level) {
+  .fns <- call$.fns
+  .cols <- get_across_cols(data, call$.cols, {{ .by }}, dt_env)
+  .names <- call$.names
+  dots <- call$...
+
   if (!is_call(.fns, c("list", "list2"))) {
-    call_list <- map(.cols, ~ fn_to_expr(.fns, .x, !!!dots))
+    call_list <- map(.cols, ~ fn_to_expr(.fns, .x, dots, data, {{ .by }}, j, dt_env, is_top_level))
 
     .names <- .names %||% "{.col}"
 
@@ -10,22 +15,24 @@ expand_across <- function(.fns, .cols, .names, dots) {
       repair = "check_unique", quiet = TRUE
     )
   } else {
-    .fns <- .fns[-1]
+    .fns <- as.list(.fns[-1])
 
-    names_bool <- have_name(.fns)
+    is_named <- have_name(.fns)
 
-    if (!all(names_bool)) names(.fns)[!names_bool] <- seq_len(length(.fns))[!names_bool]
+    if (!all(is_named)) {
+      names(.fns)[!is_named] <- seq_len(length(.fns))[!is_named]
+    }
 
     fn_names <- names(.fns)
 
-    .args <- unname(.fns)
+    .fns <- unname(.fns)
 
-    call_list <- vector("list", length(.cols) * length(.args))
+    call_list <- vector("list", length(.cols) * length(.fns))
     k <- 1
     for (i in seq_along(.cols)) {
       .col <- .cols[[i]]
-      for (j in seq_along(.args)) {
-        call_list[[k]] <- fn_to_expr(.args[[j]], .col, !!!dots)
+      for (j in seq_along(.fns)) {
+        call_list[[k]] <- fn_to_expr(.fns[[j]], .col, dots, data, {{ .by }}, j, dt_env, is_top_level)
         k <- k + 1
       }
     }
@@ -42,19 +49,22 @@ expand_across <- function(.fns, .cols, .names, dots) {
     )
   }
 
-  call_list <- imap(call_list, replace_cur_column)
-
   call_list
 }
 
 # Generate expression from function call
-fn_to_expr <- function(.fn, .col, ...) {
-  if (is_symbol(.fn) || is_string(.fn) || is_call(.fn, c("function", "::"))) {
-    call2(.fn, sym(.col), ...)
+fn_to_expr <- function(.fn, .col, dots, data, .by, j, dt_env, is_top_level) {
+  if (is_call(.fn, "function")) {
+    .fn[[3]] <- replace_cur_column(.fn[[3]], .col)
+    .fn[[3]] <- prep_expr(.fn[[3]], data, {{ .by }}, j, dt_env, is_top_level)
+    call2(.fn, sym(.col), !!!dots)
+  } else if (is_symbol(.fn) || is_string(.fn) || is_call(.fn, "::")) {
+    call2(.fn, sym(.col), !!!dots)
   } else if (is_call(.fn, "~")) {
     call <- f_rhs(.fn)
     call <- replace_dot(call, sym(.col))
-    call
+    call <- replace_cur_column(call, .col)
+    prep_expr(call, data, {{ .by }}, j, dt_env, is_top_level)
   } else if (is_null(.fn)) {
     sym(.col)
   } else {
@@ -77,20 +87,13 @@ replace_dot <- function(call, sym) {
 # Get cols for c_across/if_all/if_any/across
 # If cols is not provided defaults to everything()
 # Removes .by columns from selection
-get_across_cols <- function(data, call_cols, .by = NULL, .env = caller_env()) {
-  .cols <- call_cols %||% quote(everything())
-  .cols <- new_quosure(
-    expr(c(!!.cols, - {{ .by }})),
-    .env
-  )
+get_across_cols <- function(data, .cols, .by = NULL, .env = caller_env()) {
+  .cols <- .cols %||% quote(everything())
+  .cols <- new_quosure(expr(c(!!.cols, - {{ .by }})), .env)
   tidyselect_names(data, !!.cols)
 }
 
 replace_cur_column <- function(x, x_name) {
-  if (is_quosure(x)) {
-    x <- quo_get_expr(x)
-  }
-
   if (is_symbol(x) || is_atomic(x) || is_null(x)) {
     x
   } else if (is_call(x, c("cur_column", "cur_column."))) {
