@@ -97,3 +97,15 @@ replace_cur_column <- function(x, x_name) {
     x
   }
 }
+
+# Prep both base R anonymous functions and purrr-style lambdas
+prep_expanded_across_expr <- function(x, data, .by, j, dt_env, is_top_level) {
+  if (is_symbol(x) || is_atomic(x) || is_null(x)) {
+    x
+  } else if (is_call(x[[1]], "function")) {
+    x[[1]][[3]] <- prep_expr(x[[1]][[3]], data, {{ .by }}, j, dt_env, is_top_level)
+    x
+  } else {
+    prep_expr(x, data, {{ .by }}, j, dt_env, is_top_level)
+  }
+}
