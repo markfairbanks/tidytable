@@ -256,7 +256,7 @@ test_that("n works", {
   test_df <- tidytable(a = 1:3, b = 4:6)
 
   result_df <- test_df %>%
-    summarize(across(c(a, b), n))
+    summarize(across(c(a, b), ~ n()))
 
   expect_named(result_df, c("a", "b"))
   expect_equal(result_df$a, 3)
