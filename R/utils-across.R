@@ -10,11 +10,13 @@ expand_across <- function(.fns, .cols, .names, dots) {
       repair = "check_unique", quiet = TRUE
     )
   } else {
-    .fns <- .fns[-1]
+    .fns <- as.list(.fns[-1])
 
-    names_bool <- have_name(.fns)
+    is_named <- have_name(.fns)
 
-    if (!all(names_bool)) names(.fns)[!names_bool] <- seq_len(length(.fns))[!names_bool]
+    if (!all(is_named)) {
+      names(.fns)[!is_named] <- seq_len(length(.fns))[!is_named]
+    }
 
     fn_names <- names(.fns)
 
@@ -42,18 +44,20 @@ expand_across <- function(.fns, .cols, .names, dots) {
     )
   }
 
-  call_list <- imap(call_list, replace_cur_column)
-
   call_list
 }
 
 # Generate expression from function call
 fn_to_expr <- function(.fn, .col, ...) {
-  if (is_symbol(.fn) || is_string(.fn) || is_call(.fn, c("function", "::"))) {
+  if (is_call(.fn, "function")) {
+    .fn[[3]] <- replace_cur_column(.fn[[3]], .col)
+    call2(.fn, sym(.col), ...)
+  } else if (is_symbol(.fn) || is_string(.fn) || is_call(.fn, "::")) {
     call2(.fn, sym(.col), ...)
   } else if (is_call(.fn, "~")) {
     call <- f_rhs(.fn)
     call <- replace_dot(call, sym(.col))
+    call <- replace_cur_column(call, .col)
     call
   } else if (is_null(.fn)) {
     sym(.col)
@@ -77,20 +81,13 @@ replace_dot <- function(call, sym) {
 # Get cols for c_across/if_all/if_any/across
 # If cols is not provided defaults to everything()
 # Removes .by columns from selection
-get_across_cols <- function(data, call_cols, .by = NULL, .env = caller_env()) {
-  .cols <- call_cols %||% quote(everything())
-  .cols <- new_quosure(
-    expr(c(!!.cols, - {{ .by }})),
-    .env
-  )
+get_across_cols <- function(data, .cols, .by = NULL, .env = caller_env()) {
+  .cols <- .cols %||% quote(everything())
+  .cols <- new_quosure(expr(c(!!.cols, - {{ .by }})), .env)
   tidyselect_names(data, !!.cols)
 }
 
 replace_cur_column <- function(x, x_name) {
-  if (is_quosure(x)) {
-    x <- quo_get_expr(x)
-  }
-
   if (is_symbol(x) || is_atomic(x) || is_null(x)) {
     x
   } else if (is_call(x, c("cur_column", "cur_column."))) {
