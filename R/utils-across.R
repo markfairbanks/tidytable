@@ -1,7 +1,12 @@
 # Build across calls
-expand_across <- function(.fns, .cols, .names, dots) {
+expand_across <- function(call, data, .by, j, dt_env, is_top_level) {
+  .fns <- call$.fns
+  .cols <- get_across_cols(data, call$.cols, {{ .by }}, dt_env)
+  .names <- call$.names
+  dots <- call$...
+
   if (!is_call(.fns, c("list", "list2"))) {
-    call_list <- map(.cols, ~ fn_to_expr(.fns, .x, !!!dots))
+    call_list <- map(.cols, ~ fn_to_expr(.fns, .x, dots, data, {{ .by }}, j, dt_env, is_top_level))
 
     .names <- .names %||% "{.col}"
 
@@ -20,14 +25,14 @@ expand_across <- function(.fns, .cols, .names, dots) {
 
     fn_names <- names(.fns)
 
-    .args <- unname(.fns)
+    .fns <- unname(.fns)
 
-    call_list <- vector("list", length(.cols) * length(.args))
+    call_list <- vector("list", length(.cols) * length(.fns))
     k <- 1
     for (i in seq_along(.cols)) {
       .col <- .cols[[i]]
-      for (j in seq_along(.args)) {
-        call_list[[k]] <- fn_to_expr(.args[[j]], .col, !!!dots)
+      for (j in seq_along(.fns)) {
+        call_list[[k]] <- fn_to_expr(.fns[[j]], .col, dots, data, {{ .by }}, j, dt_env, is_top_level)
         k <- k + 1
       }
     }
@@ -48,17 +53,18 @@ expand_across <- function(.fns, .cols, .names, dots) {
 }
 
 # Generate expression from function call
-fn_to_expr <- function(.fn, .col, ...) {
+fn_to_expr <- function(.fn, .col, dots, data, .by, j, dt_env, is_top_level) {
   if (is_call(.fn, "function")) {
     .fn[[3]] <- replace_cur_column(.fn[[3]], .col)
-    call2(.fn, sym(.col), ...)
+    .fn[[3]] <- prep_expr(.fn[[3]], data, {{ .by }}, j, dt_env, is_top_level)
+    call2(.fn, sym(.col), !!!dots)
   } else if (is_symbol(.fn) || is_string(.fn) || is_call(.fn, "::")) {
-    call2(.fn, sym(.col), ...)
+    call2(.fn, sym(.col), !!!dots)
   } else if (is_call(.fn, "~")) {
     call <- f_rhs(.fn)
     call <- replace_dot(call, sym(.col))
     call <- replace_cur_column(call, .col)
-    call
+    prep_expr(call, data, {{ .by }}, j, dt_env, is_top_level)
   } else if (is_null(.fn)) {
     sym(.col)
   } else {
@@ -95,17 +101,5 @@ replace_cur_column <- function(x, x_name) {
   } else {
     x[-1] <- lapply(x[-1], replace_cur_column, x_name)
     x
-  }
-}
-
-# Prep both base R anonymous functions and purrr-style lambdas
-prep_expanded_across_expr <- function(x, data, .by, j, dt_env, is_top_level) {
-  if (is_symbol(x) || is_atomic(x) || is_null(x)) {
-    x
-  } else if (is_call(x[[1]], "function")) {
-    x[[1]][[3]] <- prep_expr(x[[1]][[3]], data, {{ .by }}, j, dt_env, is_top_level)
-    x
-  } else {
-    prep_expr(x, data, {{ .by }}, j, dt_env, is_top_level)
   }
 }
