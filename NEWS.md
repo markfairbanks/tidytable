@@ -7,7 +7,7 @@
 * `separate_wider_delim()`
 
 #### Functionality improvements
-* `separate()`: Can now handle when too many or two few new names are
+* `separate()`: Can now handle when too many or too few new names are
   specified in `into` arg (#666)
   
 #### Bug fixes

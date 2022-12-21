@@ -45,10 +45,10 @@ group_by..tidytable <- function(.df, ..., .add = FALSE) {
   check_across(dots, "group_by")
   .groups <- tidyselect_names(.df, !!!dots)
   if (length(.groups) == 0) {
-    out <- as_tidytable(.df)
+    out <- .df
   } else {
-    out <- set_class(.df, c("grouped_tt", "tidytable", "data.table", "data.frame"))
-    attr(out, "groups") <- .groups
+    out <- set_class(.df, c("grouped_tt", tidytable_class()))
+    out <- set_attr(out, "groups", .groups)
   }
   out
 }
@@ -88,8 +88,8 @@ ungroup. <- function(.df, ...) {
 ungroup..data.frame <- function(.df, ...) {
   dots <- enquos(...)
   if (length(dots) == 0) {
-    attr(.df, "groups") <- NULL
-    as_tidytable(.df)
+    out <- set_attr(.df, "groups", NULL)
+    as_tidytable(out)
   } else {
     cols_drop <- tidyselect_names(.df, !!!dots)
     groups <- setdiff(group_vars(.df), cols_drop)

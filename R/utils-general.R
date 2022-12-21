@@ -100,11 +100,8 @@ get_dt_env <- function(x, ...) {
   env(dt_env, ...)
 }
 
-# Set the class attribute of an object
-# Defaults to a basic tidytable
-set_class <- function(x, .class = c("tidytable", "data.table", "data.frame")) {
-  class(x) <- .class
-  x
+tidytable_class <- function() {
+  c("tidytable", "data.table", "data.frame")
 }
 
 # radix sort
