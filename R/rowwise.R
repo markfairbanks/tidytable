@@ -33,7 +33,7 @@ rowwise. <- function(.df) {
 
 #' @export
 rowwise..tidytable <- function(.df) {
-  set_class(.df, c("rowwise_tt", class(.df)))
+  set_class(.df, c("rowwise_tt", tidytable_class()))
 }
 
 #' @export
