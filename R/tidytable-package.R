@@ -4,6 +4,7 @@
 #' @rawNamespace import(data.table, except = c(between, fread))
 #' @rawNamespace import(rlang, except = `:=`)
 #' @importFrom glue glue glue_data glue_collapse
+#' @importFrom lifecycle deprecate_soft
 #' @importFrom magrittr set_attr set_class
 #' @importFrom pillar glimpse dim_desc tbl_sum
 #' @importFrom stats na.omit

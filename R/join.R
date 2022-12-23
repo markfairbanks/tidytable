@@ -24,6 +24,7 @@ left_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE
   c(x, y, on, selection) %<-% join_prep(x, y, by, keep, suffix, "left")
 
   if (length(on) == 0) {
+    deprecate_join_by_character()
     out <- cross_join(x, y)
   } else if (keep) {
     out <- dt(y, x, !!selection, on = on, allow.cartesian = TRUE)
@@ -47,6 +48,7 @@ right_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALS
   c(x, y, on, selection) %<-% join_prep(x, y, by, keep, suffix, "right")
 
   if (length(on) == 0) {
+    deprecate_join_by_character()
     out <- cross_join(x, y)
   } else if (keep) {
     out <- dt(x, y, !!selection, on = on, allow.cartesian = TRUE)
@@ -68,6 +70,7 @@ inner_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALS
   c(x, y, on, selection) %<-% join_prep(x, y, by, keep, suffix, "inner")
 
   if (length(on) == 0) {
+    deprecate_join_by_character()
     out <- cross_join(x, y)
   } else if (keep) {
     out <- dt(x, y, !!selection, on = on, allow.cartesian = TRUE, nomatch = 0)
@@ -91,6 +94,7 @@ full_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE
   if (!is_tidytable(y)) y <- as_tidytable(y)
 
   if (length(by) == 0 && !is.null(by)) {
+    deprecate_join_by_character()
     out <- cross_join(x, y)
   } else if (!keep) {
     out <- join_mold(
@@ -322,6 +326,16 @@ suffix_join_names <- function(x_names, y_names, suffix, keep, by = NULL, type) {
   df_names
 }
 
+deprecate_join_by_character <- function() {
+  deprecate_soft(
+    when = "0.9.2",
+    what = I("Using `by = character()` to perform a cross join"),
+    with = "cross_join()",
+    env = caller_env(),
+    user_env = caller_env(2)
+  )
+}
+
 #' Nest join
 #'
 #' @description
@@ -356,7 +370,6 @@ nest_join <- function(x, y, by = NULL, keep = FALSE, name = NULL, ...) {
 
   tidytable_restore(out, x)
 }
-
 
 #' Cross join
 #'
