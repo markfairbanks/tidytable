@@ -354,16 +354,34 @@ test_that("nest_join handles multiple matches in x", {
 })
 
 # cross join ----------------------------------------------------------------
+test_that("`by = character()` works",{
+  df1 <- tidytable(a = c("a", "b"))
+  df2 <- tidytable(b = c("c", "d"))
+  cross_join_df <- tidytable(a = vctrs::vec_rep_each(c("a", "b"), 2),
+                             b = vctrs::vec_rep(c("c", "d"), 2))
+
+  expect_equal(suppressWarnings(left_join(df1, df2, character())), cross_join_df)
+  expect_equal(suppressWarnings(right_join(df1, df2, character())), cross_join_df)
+  expect_equal(suppressWarnings(inner_join(df1, df2, character())), cross_join_df)
+  expect_equal(suppressWarnings(full_join(df1, df2, character())), cross_join_df)
+  expect_equal(anti_join(df1, df2, character()), slice(df1, 0))
+  expect_equal(semi_join(df1, df2, character()), df1)
+})
+
 test_that("cross_join works",{
   df1 <- tidytable(a = c("a", "b"))
   df2 <- tidytable(b = c("c", "d"))
   cross_join_df <- tidytable(a = vctrs::vec_rep_each(c("a", "b"), 2),
                              b = vctrs::vec_rep(c("c", "d"), 2))
 
-  expect_equal(left_join(df1, df2, character()), cross_join_df)
-  expect_equal(right_join(df1, df2, character()), cross_join_df)
-  expect_equal(inner_join(df1, df2, character()), cross_join_df)
-  expect_equal(full_join(df1, df2, character()), cross_join_df)
-  expect_equal(anti_join(df1, df2, character()), slice(df1, 0))
-  expect_equal(semi_join(df1, df2, character()), df1)
+  expect_equal(cross_join(df1, df2), cross_join_df)
+})
+
+test_that("cross_join can deal with duplicate names",{
+  df1 <- tidytable(a = c("a", "b"))
+  df2 <- tidytable(a = c("c", "d"))
+  cross_join_df <- tidytable(a.x = vctrs::vec_rep_each(c("a", "b"), 2),
+                             a.y = vctrs::vec_rep(c("c", "d"), 2))
+
+  expect_equal(cross_join(df1, df2), cross_join_df)
 })

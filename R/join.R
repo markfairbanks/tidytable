@@ -24,7 +24,8 @@ left_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE
   c(x, y, on, selection) %<-% join_prep(x, y, by, keep, suffix, "left")
 
   if (length(on) == 0) {
-    out <- expand_grid(x, y)
+    deprecate_join_by_character()
+    out <- cross_join(x, y)
   } else if (keep) {
     out <- dt(y, x, !!selection, on = on, allow.cartesian = TRUE)
   } else {
@@ -47,7 +48,8 @@ right_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALS
   c(x, y, on, selection) %<-% join_prep(x, y, by, keep, suffix, "right")
 
   if (length(on) == 0) {
-    out <- expand_grid(x, y)
+    deprecate_join_by_character()
+    out <- cross_join(x, y)
   } else if (keep) {
     out <- dt(x, y, !!selection, on = on, allow.cartesian = TRUE)
   } else {
@@ -68,7 +70,8 @@ inner_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALS
   c(x, y, on, selection) %<-% join_prep(x, y, by, keep, suffix, "inner")
 
   if (length(on) == 0) {
-    out <- expand_grid(x, y)
+    deprecate_join_by_character()
+    out <- cross_join(x, y)
   } else if (keep) {
     out <- dt(x, y, !!selection, on = on, allow.cartesian = TRUE, nomatch = 0)
   } else {
@@ -91,7 +94,8 @@ full_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE
   if (!is_tidytable(y)) y <- as_tidytable(y)
 
   if (length(by) == 0 && !is.null(by)) {
-    out <- expand_grid(x, y)
+    deprecate_join_by_character()
+    out <- cross_join(x, y)
   } else if (!keep) {
     out <- join_mold(
       x, y, by = by, suffix = suffix,
@@ -322,6 +326,16 @@ suffix_join_names <- function(x_names, y_names, suffix, keep, by = NULL, type) {
   df_names
 }
 
+deprecate_join_by_character <- function() {
+  deprecate_soft(
+    when = "0.9.2",
+    what = I("Using `by = character()` to perform a cross join"),
+    with = "cross_join()",
+    env = caller_env(),
+    user_env = caller_env(2)
+  )
+}
+
 #' Nest join
 #'
 #' @description
@@ -355,4 +369,34 @@ nest_join <- function(x, y, by = NULL, keep = FALSE, name = NULL, ...) {
   out <- mutate(out, !!name := replace_na(!!sym(name), list(.env$null_df)))
 
   tidytable_restore(out, x)
+}
+
+#' Cross join
+#'
+#' @description
+#' Cross join each row of `x` to every row in `y`.
+#'
+#' @inheritParams left_join
+#'
+#' @export
+#'
+#' @examples
+#' df1 <- tidytable(x = 1:3)
+#' df2 <- tidytable(y = 4:6)
+#'
+#' cross_join(df1, df2)
+cross_join <- function(x, y, ..., suffix = c(".x", ".y")) {
+  x <- as_tidytable(x)
+  y <- as_tidytable(y)
+
+  common_names <- intersect(names(x), names(y))
+
+  if (length(common_names) > 0) {
+    new_x_names <- paste0(common_names, suffix[[1]])
+    new_y_names <- paste0(common_names, suffix[[2]])
+    x <- df_set_names(x, new_x_names, common_names)
+    y <- df_set_names(y, new_y_names, common_names)
+  }
+
+  expand_grid(x, y, .name_repair = "minimal")
 }
