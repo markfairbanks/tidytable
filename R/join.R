@@ -305,9 +305,7 @@ join_mold <- function(x, y, by = NULL, suffix = c(".x", ".y"), all_x, all_y) {
     all.x = all_x, all.y = all_y, allow.cartesian = TRUE, sort = FALSE
   )
 
-  setkey(out, NULL)
-
-  out
+  set_key(out, NULL)
 }
 
 suffix_join_names <- function(x_names, y_names, suffix, keep, by = NULL, type) {

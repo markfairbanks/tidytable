@@ -6,6 +6,7 @@ test_that("can pivot all cols to wide", {
 
   expect_named(pivot_df, c("x", "y", "z"))
   expect_equal(nrow(pivot_df), 1)
+  expect_false(data.table::haskey(pivot_df))
 })
 
 test_that("pivot_wider. works", {

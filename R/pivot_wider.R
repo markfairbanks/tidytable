@@ -158,6 +158,8 @@ pivot_wider..tidytable <- function(.df,
 
   out <- eval_tidy(dcast_call)
 
+  out <- set_key(out, NULL)
+
   if (no_id) {
     out <- dt_j(out, . := NULL)
   }
