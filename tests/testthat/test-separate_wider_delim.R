@@ -1,14 +1,14 @@
 # These tests are borrowed from
 # https://github.com/tidyverse/tidyr/blob/main/tests/testthat/test-separate-wider.R
 
-test_that("separate_wider_delim() can create column names", {
+test_that("can create column names", {
   df <- tidytable(x = c("a b", "x y"))
   out <- df %>% separate_wider_delim(x, " ", names_sep = "")
   expect_equal(out$x1, c("a", "x"))
   expect_equal(out$x2, c("b", "y"))
 })
 
-test_that("separate_wider_delim() can ignore problems", {
+test_that("can ignore problems", {
   df <- tidytable(x = c("x", "x y", "x y z"))
   out <- df %>% separate_wider_delim(x, " ",
                                      names = c("a", "b"),
@@ -19,7 +19,7 @@ test_that("separate_wider_delim() can ignore problems", {
   expect_equal(out[3, ], tidytable(a = "x", b = "y"))
 })
 
-test_that("separate_wider_delim() doesn't count NA input as problem", {
+test_that("doesn't count NA input as problem", {
   df <- tidytable(x = NA)
   expect_equal(
     df %>% separate_wider_delim(x, ",", names = c("a", "b")),
@@ -27,7 +27,7 @@ test_that("separate_wider_delim() doesn't count NA input as problem", {
   )
 })
 
-test_that("separate_wider_delim() validates its inputs", {
+test_that("validates its inputs", {
   df <- tidytable(x = "x")
   expect_error(df %>% separate_wider_delim())
   expect_error(df %>% separate_wider_delim(x))
