@@ -6,6 +6,7 @@
 * `map_vec()`
 * `pick()`
 * `separate_wider_delim()`
+* `separate_wider_regex()`
 
 #### Functionality improvements
 * `separate()`: Can now handle when too many or too few new names are
