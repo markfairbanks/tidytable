@@ -1,6 +1,10 @@
 #' Extract a character column into multiple columns using regex
 #'
 #' @description
+#' _Superseded_
+#'
+#' `separate()` has been superseded by `separate_wider_regex()`.
+#'
 #' Given a regular expression with capturing groups, `extract()` turns each group
 #' into a new column. If the groups don't match, or the input is `NA`, the output
 #' will be `NA`. When you pass same name in the `into` argument it will merge
