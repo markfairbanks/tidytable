@@ -69,6 +69,12 @@ df_name_repair <- function(.df, .name_repair = "unique") {
   df_set_names(.df, new_names)
 }
 
+set_key <- function(.df, cols) {
+  out <- fast_copy(.df)
+  setkeyv(out, cols)
+  out
+}
+
 check_by <- function(.by) {
   .by <- enquo(.by)
   if (!quo_is_null(.by)) {
