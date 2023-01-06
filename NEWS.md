@@ -16,6 +16,7 @@
 * `separate()`: Can overwrite separated column without removal (#680)
 * `na_if()`: Properly replaces `NA`s when `y` is a vector (#689)
 * `across()`: Anonymous functions are properly translated (#699)
+* `pivot_wider()`: `names_sort = FALSE` works (#705)
 
 #### Deprecations
 * Using `by = character()` in joins is now deprecated. Users should instead use `cross_join()`.
