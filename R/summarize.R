@@ -92,7 +92,7 @@ summarize..tidytable <- function(.df, ...,
 
     out <- eval_tidy(dt_expr, .df, dt_env)
 
-    out <- set_key(out, NULL)
+    out <- remove_key(out)
 
     out <- df_name_repair(out, "unique")
   }
