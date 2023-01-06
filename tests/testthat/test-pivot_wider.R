@@ -9,6 +9,14 @@ test_that("can pivot all cols to wide", {
   expect_false(data.table::haskey(pivot_df))
 })
 
+test_that("`names_sort = FALSE` works", {
+  df <- tidytable(id = 1, names = c("b", "a", "c"), values = c(2, 1, 3))
+  pivot_df <- pivot_wider(df, names_from = names, values_from = values)
+
+  expect_named(pivot_df, c("id", "b", "a", "c"))
+  expect_equal(unlist(pivot_df, use.names = FALSE), c(1, 2, 1, 3))
+})
+
 test_that("pivot_wider. works", {
   df <- data.table(label = c("x", "y", "z"), val = 1:3)
   pivot_df <- pivot_wider.(df, names_from = label, values_from = val)
@@ -212,8 +220,8 @@ test_that("correctly labels columns when `names_glue` is used, #579", {
     names_glue = "{.value}_{lettr}"
   )
 
-  expect_named(result1, c("v1_a", "v1_b", "v1_c"))
-  expect_equal(unname(unlist(result1)), c("a", "b", "c"))
+  expect_named(result1, c("v1_b", "v1_a", "v1_c"))
+  expect_equal(unname(unlist(result1)), c("b", "a", "c"))
 
   # length(values_from) > 1
   df2 <- tidytable(
@@ -229,6 +237,6 @@ test_that("correctly labels columns when `names_glue` is used, #579", {
     names_glue = "{.value}_{lettr}"
   )
 
-  expect_named(result2, c("v1_a", "v1_b", "v1_c", "v2_a", "v2_b", "v2_c"))
-  expect_equal(unname(unlist(result2)), c("a", "b", "c", "a", "b", "c"))
+  expect_named(result2, c("v1_b", "v1_a", "v1_c", "v2_b", "v2_a", "v2_c"))
+  expect_equal(unname(unlist(result2)), c("b", "a", "c", "b", "a", "c"))
 })

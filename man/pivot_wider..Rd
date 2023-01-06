@@ -41,7 +41,7 @@ Typically used when you have additional variables that is directly related.
 \item{names_glue}{Instead of using \code{names_sep} and \code{names_prefix}, you can supply a
 glue specification that uses the \code{names_from} columns (and special \code{.value}) to create custom column names}
 
-\item{names_sort}{Should the resulting new columns be sorted}
+\item{names_sort}{Should the resulting new columns be sorted.}
 
 \item{names_repair}{Treatment of duplicate names. See \code{?vctrs::vec_as_names} for options/details.}
 
@@ -54,18 +54,18 @@ glue specification that uses the \code{names_from} columns (and special \code{.v
 decreasing the number of rows.
 }
 \examples{
-df <- data.table(
-  a = rep(c("a", "b", "c"), 2),
-  b = c(rep("x", 3), rep("y", 3)),
-  vals = 1:6
+df <- tidytable(
+  id = 1,
+  names = c("a", "b", "c"),
+  vals = 1:3
 )
 
 df \%>\%
-  pivot_wider(names_from = b, values_from = vals)
+  pivot_wider(names_from = names, values_from = vals)
 
 df \%>\%
   pivot_wider(
-    names_from = b, values_from = vals, names_prefix = "new_"
+    names_from = names, values_from = vals, names_prefix = "new_"
   )
 }
 \keyword{internal}

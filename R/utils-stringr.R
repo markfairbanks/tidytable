@@ -1,11 +1,11 @@
-# These functions are for internal use only
+# stringr utils - These functions are for internal use only
 
 str_c <- function(..., sep = "", collapse = NULL) {
   paste(..., sep = sep, collapse = collapse)
 }
 
-str_flatten <- function(...) {
-  paste(..., collapse = "")
+str_flatten <- function(string, collapse = "") {
+  str_c(string, collapse = collapse)
 }
 
 str_detect <- function(string, pattern, fixed = FALSE, perl = FALSE) {
