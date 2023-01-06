@@ -69,10 +69,14 @@ df_name_repair <- function(.df, .name_repair = "unique") {
   df_set_names(.df, new_names)
 }
 
-set_key <- function(.df, cols) {
-  out <- fast_copy(.df)
-  setkeyv(out, cols)
-  out
+# Drop the key from a keyed data.table
+remove_key <- function(.df) {
+  if (haskey(.df)) {
+    .df <- fast_copy(.df)
+    setkey(.df, NULL)
+    .df
+  }
+  .df
 }
 
 check_by <- function(.by) {
