@@ -13,8 +13,8 @@ test_that("`names_sort = FALSE` works", {
   df <- tidytable(id = 1, names = c("b", "a", "c"), values = c(2, 1, 3))
   pivot_df <- pivot_wider(df, names_from = names, values_from = values)
 
-  expect_named(pivot_df, c("b", "a", "c"))
-  expect_equal(unlist(pivot_df, use.names = FALSE), c(2, 1, 3))
+  expect_named(pivot_df, c("id", "b", "a", "c"))
+  expect_equal(unlist(pivot_df, use.names = FALSE), c(1, 2, 1, 3))
 })
 
 test_that("pivot_wider. works", {
