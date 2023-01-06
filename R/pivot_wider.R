@@ -18,24 +18,24 @@
 #' @param names_prefix prefix to add to the names of the new columns
 #' @param names_glue Instead of using `names_sep` and `names_prefix`, you can supply a
 #'   glue specification that uses the `names_from` columns (and special `.value`) to create custom column names
-#' @param names_sort Should the resulting new columns be sorted
+#' @param names_sort Should the resulting new columns be sorted.
 #' @param names_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details.
 #' @param values_fn Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.
 #' @param values_fill If values are missing, what value should be filled in
 #'
 #' @examples
-#' df <- data.table(
-#'   a = rep(c("a", "b", "c"), 2),
-#'   b = c(rep("x", 3), rep("y", 3)),
-#'   vals = 1:6
+#' df <- tidytable(
+#'   id = 1,
+#'   names = c("a", "b", "c"),
+#'   vals = 1:3
 #' )
 #'
 #' df %>%
-#'   pivot_wider(names_from = b, values_from = vals)
+#'   pivot_wider(names_from = names, values_from = vals)
 #'
 #' df %>%
 #'   pivot_wider(
-#'     names_from = b, values_from = vals, names_prefix = "new_"
+#'     names_from = names, values_from = vals, names_prefix = "new_"
 #'   )
 #' @export
 pivot_wider <- function(.df,
@@ -102,10 +102,6 @@ pivot_wider..tidytable <- function(.df,
     id_cols <- tidyselect_names(.df, !!id_cols)
   }
 
-  if (names_sort) {
-    .df <- arrange(.df, !!!syms(names_from))
-  }
-
   if (nchar(names_prefix) > 0 && is.null(names_glue)) {
     .first_name <- sym(names_from[[1]])
 
@@ -133,22 +129,26 @@ pivot_wider..tidytable <- function(.df,
     names_from <- ".names_from"
   }
 
+  if (is_false(names_sort)) {
+    .df <- mutate(.df, across(all_of(names_from), ~ factor(.x, vec_unique(.x))))
+  }
+
   no_id <- length(id_cols) == 0
 
   if (no_id) {
     lhs <- "..."
   } else {
-    lhs <- paste(glue("`{id_cols}`"), collapse = " + ")
+    lhs <- str_flatten(glue("`{id_cols}`"), " + ")
   }
 
-  rhs <- paste(glue("`{names_from}`"), collapse = " + ")
+  rhs <- str_flatten(glue("`{names_from}`"), " + ")
 
-  dcast_form <- glue("{lhs} ~ {rhs}")
+  formula <- glue("{lhs} ~ {rhs}")
 
   dcast_call <- call2(
     "dcast",
-    quo(.df), # use quo(.df) to clean up error messages (#305)
-    formula = dcast_form,
+    quo(.df),
+    formula = formula,
     value.var = values_from,
     fun.aggregate = expr(!!values_fn),
     sep = names_sep,
@@ -158,7 +158,7 @@ pivot_wider..tidytable <- function(.df,
 
   out <- eval_tidy(dcast_call)
 
-  out <- set_key(out, NULL)
+  out <- remove_key(out)
 
   if (no_id) {
     out <- dt_j(out, . := NULL)
