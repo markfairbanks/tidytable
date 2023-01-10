@@ -10,6 +10,7 @@ unnest_longer(
   values_to = NULL,
   indices_to = NULL,
   indices_include = NULL,
+  keep_empty = FALSE,
   names_repair = "check_unique",
   simplify = NULL,
   ptype = NULL,
@@ -27,6 +28,8 @@ unnest_longer(
 
 \item{indices_include}{Should an index column be included?
 Defaults to \code{TRUE} when \code{col} has inner names.}
+
+\item{keep_empty}{Return \code{NA} for any \code{NULL} elements of the list column}
 
 \item{names_repair}{Treatment of duplicate names. See \code{?vctrs::vec_as_names} for options/details.}
 
