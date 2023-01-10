@@ -28,12 +28,21 @@ test_that("can force integer indexes", {
   expect_named(out, c("x", "y", "y2"))
 })
 
-test_that("preserves empty rows", {
+test_that("drop empty rows when `keep_empty = FALSE`", {
   df <- tidytable(
     x = 1:3,
     y = list(NULL, NULL, 1)
   )
   out <- df %>% unnest_longer(y)
+  expect_equal(nrow(out), 1)
+})
+
+test_that("preserves empty rows when `keep_empty = TRUE`", {
+  df <- data.table(
+    x = 1:3,
+    y = list(NULL, NULL, 1)
+  )
+  out <- df %>% unnest_longer(y, keep_empty = TRUE)
   expect_equal(nrow(out), 3)
 })
 
