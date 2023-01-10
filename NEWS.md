@@ -11,6 +11,7 @@
 #### Functionality improvements
 * `separate()`: Can now handle when too many or too few new names are
   specified in `into` arg (#666)
+* `unnest_longer()`: Gains `keep_empty` arg
   
 #### Bug fixes
 * `separate()`: Can overwrite separated column without removal (#680)
