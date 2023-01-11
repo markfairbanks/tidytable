@@ -87,25 +87,25 @@ pivot_wider..tidytable <- function(.df,
                                    names_repair = "unique",
                                    values_fill = NULL,
                                    values_fn = NULL) {
-  id_cols <- enquo(id_cols)
-  values_fn <- quo_squash(enquo(values_fn))
-
   names_from <- tidyselect_names(.df, {{ names_from }})
   values_from <- tidyselect_names(.df, {{ values_from }})
 
-  uses_dot_value <- !is.null(names_glue) && str_detect(names_glue, "{.value}", fixed = TRUE)
-
+  id_cols <- enquo(id_cols)
   if (quo_is_null(id_cols)) {
-    data_names <- names(.df)
-    id_cols <- data_names[!data_names %in% c(names_from, values_from)]
+    id_cols <- setdiff(names(.df), c(names_from, values_from))
   } else {
     id_cols <- tidyselect_names(.df, !!id_cols)
   }
 
-  if (nchar(names_prefix) > 0 && is.null(names_glue)) {
-    .first_name <- sym(names_from[[1]])
+  values_fn <- quo_squash(enquo(values_fn))
 
-    .df <- mutate(.df, !!.first_name := paste0(!!names_prefix, !!.first_name))
+  uses_dot_value <- !is.null(names_glue) && str_detect(names_glue, "{.value}", fixed = TRUE)
+
+  # Prepare output column names
+  if (names_prefix != "" && is.null(names_glue)) {
+    first_name <- sym(names_from[[1]])
+
+    .df <- mutate(.df, !!first_name := paste0(.env$names_prefix, !!first_name))
   } else if (uses_dot_value) {
     glue_df <- distinct(.df, all_of(names_from))
     values_from_reps <- nrow(glue_df)
