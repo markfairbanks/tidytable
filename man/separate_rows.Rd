@@ -17,7 +17,12 @@ separate_rows(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE)
 Useful if the resulting column should be type integer/double.}
 }
 \description{
-If a column contains observations with multiple delimited values, separate them each into their own row.
+\emph{Superseded}
+
+\code{separate_rows()} has been superseded by \code{separate_longer_delim()}.
+
+If a column contains observations with multiple delimited values,
+separate them each into their own row.
 }
 \examples{
 df <- data.table(
