@@ -5,6 +5,7 @@
 * `group_cols()`
 * `map_vec()`
 * `pick()`
+* `separate_longer_delim()`
 * `separate_wider_delim()`
 * `separate_wider_regex()`
 
