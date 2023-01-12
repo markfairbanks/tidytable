@@ -18,7 +18,8 @@
 #'   z = c("1", "2,3,4", "5,6")
 #' )
 #'
-#' separate_longer(df, c(y, z))
+#' df %>%
+#'   separate_longer_delim(c(y, z), ",")
 separate_longer_delim <- function(.df, cols, delim, ...) {
   separate_rows(.df, {{ cols }}, sep = delim)
 }
