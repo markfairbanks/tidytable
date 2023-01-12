@@ -9,7 +9,8 @@
 #'
 #' If a separator is not supplied one will be automatically detected.
 #'
-#' Note: Using automatic detection or regex will be slower than simple separators such as "," or ".".
+#' Note: Using automatic detection or regex will be slower than simple separators
+#' such as "," or ".".
 #'
 #' @param .df A data frame
 #' @param col The column to split into multiple columns

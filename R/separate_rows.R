@@ -1,7 +1,12 @@
 #' Separate a collapsed column into multiple rows
 #'
 #' @description
-#' If a column contains observations with multiple delimited values, separate them each into their own row.
+#' _Superseded_
+#'
+#' `separate_rows()` has been superseded by `separate_longer_delim()`.
+#'
+#' If a column contains observations with multiple delimited values,
+#' separate them each into their own row.
 #'
 #' @param .df A data.frame or data.table
 #' @param ... Columns to separate across multiple rows. `tidyselect` compatible

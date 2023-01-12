@@ -34,7 +34,7 @@ Useful if the resulting column should be type integer/double.}
 \description{
 \emph{Superseded}
 
-\code{separate()} has been superseded by \code{separate_wider_regex()}.
+\code{extract()} has been superseded by \code{separate_wider_regex()}.
 
 Given a regular expression with capturing groups, \code{extract()} turns each group
 into a new column. If the groups don't match, or the input is \code{NA}, the output
