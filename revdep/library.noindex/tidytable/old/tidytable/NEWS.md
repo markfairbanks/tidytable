@@ -1,10 +1,35 @@
+# tidytable 0.9.1
+
+#### New functions
+* `nest_join()`
+* Ranking functions:
+  * `min_rank()`
+  * `dense_rank()`
+  * `percent_rank()`
+  * `cume_dist()`
+
+#### Functionality improvements
+* `%in%` falls back to `base::'%in%'` when input types aren't compatible
+  with `vec_in()` (@krterberg, #632)
+* `relocate()`: Can rename columns that are moved
+* Joins: Can now do cross joins by specifying `by = character()`
+* `group_by()`: Gains `.add` argument
+* `ungroup()`: Gains `...` arguments
+* Printing of grouped tidytables now shows grouping variables
+
+#### Bug fixes
+* `row_number()`: Works correctly on 0-row data frame when overwriting existing column (#639)
+* `slice_head()`/`slice_tail()`: Properly slice on 0-row data frame (#642)
+
+#### Functions with notable speed improvements
+* `fill()`
+
 # tidytable 0.9.0
 
 #### Dotless functions!
 * `tidytable` now exports dotless versions of all functions (e.g. `arrange()`/`mutate()`/etc.).
-  The `verb.()` versions are still exported as well.
-  * `verb.()` syntax is still available to users for backwards compatibility.
-  * This will also allow users to use both `tidytable` and `dplyr` by simply loading
+* `verb.()` syntax is still available to users for backwards compatibility.
+  * Users can use both `tidytable` and `dplyr` by simply loading
     `dplyr` _after_ `tidytable`, as the `verb.()` functions won't be overwritten by `dplyr`.
 
 #### New functions
@@ -25,8 +50,8 @@
 
 #### Bug fixes
 * `tidytable::'%in%'` dispatches to `base::'%in%'` when comparing with a list (#563)
-* `pivot_wider.()`: Works with column names with spaces (#569)
-* `pivot_wider.()`: `names_glue="{.value}_{somecolumn}"` assigns column names in
+* `pivot_wider()`: Works with column names with spaces (#569)
+* `pivot_wider()`: `names_glue="{.value}_{somecolumn}"` assigns column names in
   correct order (@Darxor, #579)
 * `left_join()`: Works when y matching columns in `by` is a non matching column of x (#625)
 

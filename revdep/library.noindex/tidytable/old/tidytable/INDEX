@@ -1,4 +1,4 @@
-%in%                    '%in%' and %notin% operators
+%in%                    Fast '%in%' and %notin% operators
 across                  Apply a function across a selection of columns
 add_count               Add a count column to the data frame
 arrange                 Arrange/reorder rows
@@ -8,7 +8,7 @@ between                 Do the values from x fall between the left and
                         right bounds?
 bind_cols               Bind data.tables by row and column
 c_across                Combine values from multiple columns
-case                    data.table::fcase() with vectorized default
+case                    'data.table::fcase()' with vectorized default
 case_match              Vectorized 'switch()'
 case_when               Case when
 coalesce                Coalesce missing values
@@ -58,6 +58,7 @@ n_distinct              Count the number of unique values in a vector
 na_if                   Convert values to 'NA'
 nest                    Nest data.tables
 nest_by                 Nest data.tables
+nest_join               Nest join
 new_tidytable           Create a tidytable from a list
 pivot_longer            Pivot data from wide to long
 pivot_wider             Pivot data from long to wide
@@ -66,7 +67,7 @@ relocate                Relocate a column to a new position
 rename                  Rename variables by name
 rename_with             Rename multiple columns
 replace_na              Replace missing values
-row_number              Return row number
+row_number              Ranking functions
 rowwise                 Convert to a rowwise tidytable
 select                  Select or drop columns
 separate                Separate a character column into multiple

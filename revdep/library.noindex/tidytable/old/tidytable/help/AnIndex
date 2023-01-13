@@ -42,6 +42,7 @@ count	count
 count.	count.
 crossing	crossing
 crossing.	crossing.
+cume_dist	rank
 cur_column	context
 cur_column.	cur_column.
 cur_data	context
@@ -53,6 +54,7 @@ cur_group_rows.	cur_group_rows.
 c_across	c_across
 c_across.	c_across.
 data.table	reexports
+dense_rank	rank
 desc	desc
 desc.	desc.
 distinct	distinct
@@ -153,6 +155,7 @@ map_int.	map_int.
 map_lgl	map
 map_lgl.	map_lgl.
 matches	reexports
+min_rank	rank
 mutate	mutate
 mutate.	mutate.
 mutate_across.	mutate_across.
@@ -168,12 +171,14 @@ nesting	expand
 nesting.	nesting.
 nest_by	nest_by
 nest_by.	nest_by.
+nest_join	nest_join
 new_tidytable	new_tidytable
 nth	first
 nth.	nth.
 num_range	reexports
 n_distinct	n_distinct
 n_distinct.	n_distinct.
+percent_rank	rank
 pivot_longer	pivot_longer
 pivot_longer.	pivot_longer.
 pivot_wider	pivot_wider
@@ -198,6 +203,7 @@ pull	pull
 pull.	pull.
 quo	reexports
 quos	reexports
+recode	recode
 reexports	reexports
 relocate	relocate
 relocate.	relocate.
@@ -211,7 +217,7 @@ right_join	left_join
 right_join.	right_join.
 rowwise	rowwise
 rowwise.	rowwise.
-row_number	row_number
+row_number	rank
 row_number.	row_number.
 select	select
 select.	select.
@@ -265,3 +271,4 @@ unnest_wider	unnest_wider
 unnest_wider.	unnest_wider.
 walk	map
 walk.	walk.
+where	reexports

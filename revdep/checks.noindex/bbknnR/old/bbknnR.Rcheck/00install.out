@@ -6,54 +6,11 @@
 /usr/local/opt/llvm/bin/clang++ -fopenmp -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/mfairbanks/Desktop/NU/R/R_Packages/tidytable/revdep/library.noindex/bbknnR/Rcpp/include' -I/usr/local/opt/gettext/include -I/usr/local/opt/llvm/include   -fPIC  -g -O3 -Wall -pedantic -std=c++11 -mtune=native -pipe -c data_manipulation.cpp -o data_manipulation.o
 /usr/local/opt/llvm/bin/clang++ -fopenmp -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/opt/gettext/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib -o bbknnR.so RcppExports.o data_manipulation.o -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
 ld: warning: directory not found for option '-L/usr/local/opt/gettext/lib'
+ld: warning: -undefined dynamic_lookup may not work with chained fixups
 installing to /Users/mfairbanks/Desktop/NU/R/R_Packages/tidytable/revdep/checks.noindex/bbknnR/old/bbknnR.Rcheck/00LOCK-bbknnR/00new/bbknnR/libs
 ** R
 ** data
 *** moving datasets to lazyload DB
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
-Warning: namespace ‘rgdal’ is not available and has been replaced
-by .GlobalEnv when processing object ‘panc8_small’
 ** inst
 ** byte-compile and prepare package for lazy loading
 ** help

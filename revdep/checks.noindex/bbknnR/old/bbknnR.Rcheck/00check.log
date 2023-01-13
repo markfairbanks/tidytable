@@ -14,10 +14,7 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘bbknnR’ can be installed ... WARNING
-Found the following significant warnings:
-  Warning: namespace ‘rgdal’ is not available and has been replaced
-See ‘/Users/mfairbanks/Desktop/NU/R/R_Packages/tidytable/revdep/checks.noindex/bbknnR/old/bbknnR.Rcheck/00install.out’ for details.
+* checking whether package ‘bbknnR’ can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
 * checking ‘build’ directory ... OK
@@ -70,4 +67,4 @@ See ‘/Users/mfairbanks/Desktop/NU/R/R_Packages/tidytable/revdep/checks.noindex
   ‘bbknnR-tutorial.Rmd’ using ‘UTF-8’... OK
 * checking re-building of vignette outputs ... SKIPPED
 * DONE
-Status: 1 WARNING
+Status: OK

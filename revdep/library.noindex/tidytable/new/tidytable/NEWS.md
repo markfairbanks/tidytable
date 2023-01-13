@@ -1,3 +1,28 @@
+# tidytable 0.9.2
+
+#### New functions
+* `cross_join()`
+* `group_cols()`
+* `map_vec()`
+* `pick()`
+* `separate_longer_delim()`
+* `separate_wider_delim()`
+* `separate_wider_regex()`
+
+#### Functionality improvements
+* `separate()`: Can now handle when too many or too few new names are
+  specified in `into` arg (#666)
+* `unnest_longer()`: Gains `keep_empty` arg
+  
+#### Bug fixes
+* `separate()`: Can overwrite separated column without removal (#680)
+* `na_if()`: Properly replaces `NA`s when `y` is a vector (#689)
+* `across()`: Anonymous functions are properly translated (#699)
+* `pivot_wider()`: `names_sort = FALSE` works (#705)
+
+#### Deprecations
+* Using `by = character()` in joins is now deprecated. Users should instead use `cross_join()`.
+
 # tidytable 0.9.1
 
 #### New functions

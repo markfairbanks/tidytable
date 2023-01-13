@@ -15,23 +15,22 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> library(testthat)
-> library(ffsimulator)
-> library(checkmate)
+> # This file is part of the standard setup for testthat.
+> # It is recommended that you do not modify it.
+> #
+> # Where should you do additional test configuration?
+> # Learn more about the roles of various files in:
+> # * https://r-pkgs.org/tests.html
+> # * https://testthat.r-lib.org/reference/test_package.html#special-files
 > 
-> test_check("ffsimulator")
-[ FAIL 0 | WARN 0 | SKIP 7 | PASS 28 ]
+> library(testthat)
+> library(journalabbr)
+> 
+> test_check("journalabbr")
+[ FAIL 0 | WARN 9 | SKIP 0 | PASS 7 ]
 
-══ Skipped tests ═══════════════════════════════════════════════════════════════
-• On CRAN (7)
-
-[ FAIL 0 | WARN 0 | SKIP 7 | PASS 28 ]
-Deleting unused snapshots:
-• ffs_autoplot/points-plot.svg
-• ffs_autoplot/rank-plot.svg
-• ffs_autoplot/weekly-luck-plot.svg
-• ffs_autoplot/weekly-points-plot.svg
+[ FAIL 0 | WARN 9 | SKIP 0 | PASS 7 ]
 > 
 > proc.time()
    user  system elapsed 
-  5.387   0.360  10.657 
+  2.331   0.215   2.596 
