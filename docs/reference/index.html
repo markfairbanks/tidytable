@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.2</span>
       </span>
     </div>
 
@@ -145,6 +145,10 @@
         </td>
         <td><p>Context functions</p></td>
       </tr><tr><td>
+          <p><code><a href="cross_join.html">cross_join()</a></code> </p>
+        </td>
+        <td><p>Cross join</p></td>
+      </tr><tr><td>
           <p><code><a href="desc.html">desc()</a></code> </p>
         </td>
         <td><p>Descending order</p></td>
@@ -160,6 +164,10 @@
           <p><code><a href="group_by.html">group_by()</a></code> <code><a href="group_by.html">ungroup()</a></code> </p>
         </td>
         <td><p>Grouping</p></td>
+      </tr><tr><td>
+          <p><code><a href="group_cols.html">group_cols()</a></code> </p>
+        </td>
+        <td><p>Selection helper for grouping columns</p></td>
       </tr><tr><td>
           <p><code><a href="group_vars.html">group_vars()</a></code> </p>
         </td>
@@ -216,6 +224,10 @@
           <p><code><a href="nest_join.html">nest_join()</a></code> </p>
         </td>
         <td><p>Nest join</p></td>
+      </tr><tr><td>
+          <p><code><a href="pick.html">pick()</a></code> </p>
+        </td>
+        <td><p>Selection version of <code><a href="../reference/across.html">across()</a></code></p></td>
       </tr><tr><td>
           <p><code><a href="pull.html">pull()</a></code> </p>
         </td>
@@ -305,6 +317,18 @@
         </td>
         <td><p>Separate a collapsed column into multiple rows</p></td>
       </tr><tr><td>
+          <p><code><a href="separate_longer_delim.html">separate_longer_delim()</a></code> </p>
+        </td>
+        <td><p>Split a string into rows</p></td>
+      </tr><tr><td>
+          <p><code><a href="separate_wider_delim.html">separate_wider_delim()</a></code> </p>
+        </td>
+        <td><p>Separate a character column into multiple columns</p></td>
+      </tr><tr><td>
+          <p><code><a href="separate_wider_regex.html">separate_wider_regex()</a></code> </p>
+        </td>
+        <td><p>Separate a character column into multiple columns using regex patterns</p></td>
+      </tr><tr><td>
           <p><code><a href="uncount.html">uncount()</a></code> </p>
         </td>
         <td><p>Uncount a data.table</p></td>
@@ -329,7 +353,7 @@
           <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="map.html">map()</a></code> <code><a href="map.html">map_lgl()</a></code> <code><a href="map.html">map_int()</a></code> <code><a href="map.html">map_dbl()</a></code> <code><a href="map.html">map_chr()</a></code> <code><a href="map.html">map_dfc()</a></code> <code><a href="map.html">map_dfr()</a></code> <code><a href="map.html">map_df()</a></code> <code><a href="map.html">walk()</a></code> <code><a href="map.html">map2()</a></code> <code><a href="map.html">map2_lgl()</a></code> <code><a href="map.html">map2_int()</a></code> <code><a href="map.html">map2_dbl()</a></code> <code><a href="map.html">map2_chr()</a></code> <code><a href="map.html">map2_dfc()</a></code> <code><a href="map.html">map2_dfr()</a></code> <code><a href="map.html">map2_df()</a></code> <code><a href="map.html">pmap()</a></code> <code><a href="map.html">pmap_lgl()</a></code> <code><a href="map.html">pmap_int()</a></code> <code><a href="map.html">pmap_dbl()</a></code> <code><a href="map.html">pmap_chr()</a></code> <code><a href="map.html">pmap_dfc()</a></code> <code><a href="map.html">pmap_dfr()</a></code> <code><a href="map.html">pmap_df()</a></code> </p>
+          <p><code><a href="map.html">map()</a></code> <code><a href="map.html">map_lgl()</a></code> <code><a href="map.html">map_int()</a></code> <code><a href="map.html">map_dbl()</a></code> <code><a href="map.html">map_chr()</a></code> <code><a href="map.html">map_dfc()</a></code> <code><a href="map.html">map_dfr()</a></code> <code><a href="map.html">map_df()</a></code> <code><a href="map.html">walk()</a></code> <code><a href="map.html">map_vec()</a></code> <code><a href="map.html">map2()</a></code> <code><a href="map.html">map2_lgl()</a></code> <code><a href="map.html">map2_int()</a></code> <code><a href="map.html">map2_dbl()</a></code> <code><a href="map.html">map2_chr()</a></code> <code><a href="map.html">map2_dfc()</a></code> <code><a href="map.html">map2_dfr()</a></code> <code><a href="map.html">map2_df()</a></code> <code><a href="map.html">map2_vec()</a></code> <code><a href="map.html">pmap()</a></code> <code><a href="map.html">pmap_lgl()</a></code> <code><a href="map.html">pmap_int()</a></code> <code><a href="map.html">pmap_dbl()</a></code> <code><a href="map.html">pmap_chr()</a></code> <code><a href="map.html">pmap_dfc()</a></code> <code><a href="map.html">pmap_dfr()</a></code> <code><a href="map.html">pmap_df()</a></code> <code><a href="map.html">pmap_vec()</a></code> </p>
         </td>
         <td><p>Apply a function to each element of a vector or list</p></td>
       </tr></tbody><tbody><tr><th colspan="2">

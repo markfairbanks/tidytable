@@ -127,6 +127,9 @@
     <loc>/reference/count.html</loc>
   </url>
   <url>
+    <loc>/reference/cross_join.html</loc>
+  </url>
+  <url>
     <loc>/reference/crossing..html</loc>
   </url>
   <url>
@@ -236,6 +239,9 @@
   </url>
   <url>
     <loc>/reference/group_by.html</loc>
+  </url>
+  <url>
+    <loc>/reference/group_cols.html</loc>
   </url>
   <url>
     <loc>/reference/group_split..html</loc>
@@ -421,6 +427,9 @@
     <loc>/reference/nth..html</loc>
   </url>
   <url>
+    <loc>/reference/pick.html</loc>
+  </url>
+  <url>
     <loc>/reference/pipe.html</loc>
   </url>
   <url>
@@ -532,10 +541,19 @@
     <loc>/reference/separate.html</loc>
   </url>
   <url>
+    <loc>/reference/separate_longer_delim.html</loc>
+  </url>
+  <url>
     <loc>/reference/separate_rows..html</loc>
   </url>
   <url>
     <loc>/reference/separate_rows.html</loc>
+  </url>
+  <url>
+    <loc>/reference/separate_wider_delim.html</loc>
+  </url>
+  <url>
+    <loc>/reference/separate_wider_regex.html</loc>
   </url>
   <url>
     <loc>/reference/slice..html</loc>

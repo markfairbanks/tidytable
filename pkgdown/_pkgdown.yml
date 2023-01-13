@@ -28,10 +28,12 @@ reference:
   - consecutive_id
   - count
   - context
+  - cross_join
   - desc
   - distinct
   - enframe
   - group_by
+  - group_cols
   - group_vars
   - group_split
   - first
@@ -72,6 +74,9 @@ reference:
   - replace_na
   - separate
   - separate_rows
+  - separate_longer_delim
+  - separate_wider_delim
+  - separate_wider_regex
   - uncount
   - unite
   - unnest

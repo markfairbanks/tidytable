@@ -246,27 +246,28 @@ inv_gc(); inv_gc();
 
 left_dt <- test_data(data_size * .1)
 
-right_dt <- tidytable(c = random_strings,
-                      e = 1:length(random_strings))
+right_dt <- left_dt %>%
+  distinct.(c, d) %>%
+  mutate.(e = row_number())
 
 left_tbl <- as_tibble(left_dt)
 right_tbl <- as_tibble(right_dt)
 
 left_join_marks <- bench_mark(
-  tidyverse = left_join(left_tbl, right_tbl, by = "c"),
-  dtplyr = as.data.table(left_join(lazy_dt(left_dt), lazy_dt(right_dt), by = "c")),
-  tidytable = left_join.(left_dt, right_dt),
-  data.table = right_dt[left_dt, on = "c", allow.cartesian = TRUE],
+  tidyverse = left_join(left_tbl, right_tbl, by = c("c", "d")),
+  dtplyr = as.data.table(left_join(lazy_dt(left_dt), lazy_dt(right_dt), by = c("c", "d"))),
+  tidytable = left_join.(left_dt, right_dt, by = c("c", "d")),
+  data.table = right_dt[left_dt, on = c("c", "d"), allow.cartesian = TRUE],
   .fn = "left_join"
 )
 
 inv_gc(); inv_gc();
 
 inner_join_marks <- bench_mark(
-  tidyverse = inner_join(left_tbl, right_tbl, by = "c"),
-  dtplyr = as.data.table(inner_join(lazy_dt(left_dt), lazy_dt(right_dt), by = "c")),
-  tidytable = inner_join.(left_dt, right_dt),
-  data.table = left_dt[right_dt, on = "c", allow.cartesian = TRUE, nomatch = 0],
+  tidyverse = inner_join(left_tbl, right_tbl, by = c("c", "d")),
+  dtplyr = as.data.table(inner_join(lazy_dt(left_dt), lazy_dt(right_dt), by = c("c", "d"))),
+  tidytable = inner_join.(left_dt, right_dt, c("c", "d")),
+  data.table = left_dt[right_dt, on = c("c", "d"), allow.cartesian = TRUE, nomatch = 0],
   .fn = "inner_join"
 )
 ```
