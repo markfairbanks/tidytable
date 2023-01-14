@@ -74,7 +74,6 @@ remove_key <- function(.df) {
   if (haskey(.df)) {
     .df <- fast_copy(.df)
     setkey(.df, NULL)
-    .df
   }
   .df
 }
