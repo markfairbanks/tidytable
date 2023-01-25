@@ -73,6 +73,14 @@ test_that("expand_grid works with splicing", {
   expect_equal(nrow(out), 4)
 })
 
+test_that("expand_grid can have inputs named 'unique', #718", {
+  x <- 1:2
+  y <- 1:2
+  out <- expand_grid(x, unique = y)
+  expect_equal(out$x, c(1, 1, 2, 2))
+  expect_equal(out$unique, c(1, 2, 1, 2))
+})
+
 test_that("crossing works when only input is a data frame", {
   test_df <- tidytable(a = c("a", "a", "b"), b = c("a", "a", "b"))
   crossing_df <- crossing(test_df)
