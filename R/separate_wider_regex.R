@@ -37,14 +37,15 @@ separate_wider_regex <- function(.df,
 
   names <- names(patterns)[has_name]
 
+  if (length(cols) > 1 && is.null(names_sep)) {
+    abort("`names_sep` must be provided when `length(cols) > 0`")
+  }
+
   for (col in cols) {
-    if (!is.null(names_sep)) {
-      names_sep <- names_sep %||% "_"
-      into <- str_c(col, names, sep = names_sep)
-    } else if (length(cols) > 1) {
-      abort("`names_sep` must be provided when `length(cols) > 0`")
-    } else {
+    if (is.null(names_sep)) {
       into <- names
+    } else {
+      into <- str_c(col, names, sep = names_sep)
     }
     .df <- extract(.df, all_of(col), into, full_match, cols_remove)
   }
