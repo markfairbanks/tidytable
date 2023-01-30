@@ -18,15 +18,18 @@
 expand_grid <- function(..., .name_repair = "check_unique") {
   dots <- dots_list(..., .named = TRUE)
 
-  is_data_frame <- map_lgl(dots, is.data.frame)
-
   out <- vec_expand_grid(!!!dots, .name_repair = "minimal")
 
-  # df_list requires data frames inputs to be unnamed to unpack
-  out <- as.list(out)
+  unpack(out, .name_repair)
+}
+
+# Unpack all data frame columns
+unpack <- function(.df, .name_repair = "check_unique") {
+  # Note: df_list requires data frame inputs to be unnamed to unpack
+  out <- as.list(.df)
+  is_data_frame <- map_lgl(out, is.data.frame)
   names(out)[is_data_frame] <- ""
   out <- df_list(!!!out, .name_repair = .name_repair)
-
   new_tidytable(out)
 }
 
