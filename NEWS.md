@@ -1,5 +1,8 @@
 # tidytable 0.9.3 (in development)
 
+#### Bug fixes
+* `expand_grid()`: Can use "unique" or "sorted" as column names (#718)
+
 # tidytable 0.9.2
 
 #### New functions
