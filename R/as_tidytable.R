@@ -32,8 +32,9 @@ as_tidytable.tidytable <- function(x, ..., .name_repair = "unique") {
 
 #' @export
 as_tidytable.data.table <- function(x, ..., .name_repair = "unique") {
-  x <- set_class(x, tidytable_class())
-  df_name_repair(x, .name_repair)
+  out <- set_class(x, tidytable_class())
+  out <- remove_key(out)
+  df_name_repair(out, .name_repair)
 }
 
 #' @export
