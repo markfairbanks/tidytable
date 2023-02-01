@@ -2,28 +2,32 @@
 % Please edit documentation in R/nest.R
 \name{nest.}
 \alias{nest.}
-\title{Nest data.tables}
+\title{Nest columns into a list-column}
 \usage{
-nest.(.df, ..., .names_sep = NULL)
+nest.(.df, ..., .by = NULL, .key = NULL, .names_sep = NULL)
 }
 \arguments{
 \item{.df}{A data.table or data.frame}
 
 \item{...}{Columns to be nested.}
 
+\item{.by}{Columns to nest by}
+
+\item{.key}{New column name if \code{.by} is used}
+
 \item{.names_sep}{If NULL, the names will be left alone. If a string,
 the names of the columns will be created by pasting together the inner
 column names and the outer column names.}
 }
 \description{
-Nest data.tables
+Nest columns into a list-column
 }
 \examples{
 df <- data.table(
-  a = 1:10,
-  b = 11:20,
-  c = c(rep("a", 6), rep("b", 4)),
-  d = c(rep("a", 4), rep("b", 6))
+  a = 1:3,
+  b = 1:3,
+  c = c("a", "a", "b"),
+  d = c("a", "a", "b")
 )
 
 df \%>\%
@@ -31,5 +35,8 @@ df \%>\%
 
 df \%>\%
   nest(data = where(is.numeric))
+
+df \%>\%
+  nest(.by = c(c, d))
 }
 \keyword{internal}
