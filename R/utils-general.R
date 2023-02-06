@@ -128,6 +128,16 @@ f_sort <- function(x) {
   }
 }
 
+# Unpack all data frame columns
+unpack <- function(.df, .name_repair = "check_unique") {
+  # Note: df_list requires data frame inputs to be unnamed to unpack
+  out <- as.list(.df)
+  is_data_frame <- map_lgl(out, is.data.frame)
+  names(out)[is_data_frame] <- ""
+  out <- df_list(!!!out, .name_repair = .name_repair)
+  new_tidytable(out)
+}
+
 # imap implementation - for internal use only
 imap <- function(.x, .f, ...) {
   map2(.x, names(.x) %||% seq_along(.x), .f, ...)

@@ -1,7 +1,13 @@
-# nocov start --- compat-zeallot --- 2020-11-23
-
+# ---
+# repo: r-lib/rlang
+# file: standalone-zeallot.R
+# last-updated: 2020-11-24
+# license: https://unlicense.org
+# ---
+#
 # This drop-in file implements a simple version of zeallot::`%<-%`.
-# Please find the most recent version in rlang's repository.
+#
+# nocov start
 
 `%<-%` <- function(lhs, value) {
   lhs <- substitute(lhs)
@@ -28,3 +34,6 @@
 
   invisible(value)
 }
+
+
+# nocov end
