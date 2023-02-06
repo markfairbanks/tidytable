@@ -12,15 +12,10 @@
 #' tidytable(x = 1:3, y = c("a", "a", "b"))
 tidytable <- function(..., .name_repair = "unique") {
   if (missing(...)) {
-    dots <- list()
+    new_tidytable()
   } else {
-    dots <- dots_list(...)
+    dots <- dots_list(..., .named = TRUE)
     dots <- map(dots, eval_tidy)
-    if (any(have_name(dots) & map_lgl(dots, is.data.frame))) {
-      abort("data frame inputs must be unnamed")
-    }
-    dots <- df_list(!!!dots, .name_repair = .name_repair)
+    unpack(dots, .name_repair)
   }
-
-  new_tidytable(dots)
 }
