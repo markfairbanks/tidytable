@@ -2,6 +2,7 @@
 
 #### Functionality improvements
 * `nest()`: Gains `.by` and `.key` args
+* `tidytable()`: Auto-names unnamed inputs
 
 #### Bug fixes
 * `expand_grid()`: Can use "unique" or "sorted" as column names (#718)
