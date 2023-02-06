@@ -1,5 +1,4 @@
 test_that("can construct a tidytable", {
-
   df <- tidytable(stuff = 1:3)
 
   expect_named(df, c("stuff"))
@@ -34,8 +33,14 @@ test_that("can splice quosures", {
 
 test_that("works with data frame inputs, #471", {
   df <- tidytable(x = 1, y = 2)
-  expect_equal(tidytable(df), tidytable(x = 1, y = 2))
+  expect_equal(tidytable(df), df)
 
-  # Errors on named data frame inputs
-  expect_error(tidytable(df = df))
+  # Unpacks named data frame inputs
+  expect_equal(tidytable(df = df), df)
+})
+
+test_that("Auto-names inputs", {
+  x <- 1:3
+  y <- 1:3
+  expect_named(tidytable(x, y), c("x", "y"))
 })
