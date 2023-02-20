@@ -43,9 +43,7 @@ add_count..tidytable <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL)
   .by <- enquos(...)
   wt <- enquo(wt)
 
-  if (is.null(name)) {
-    name <- "n"
-  }
+  name <- name %||% "n"
 
   if (quo_is_null(wt)) {
     .df <- mutate(.df, !!name := n(), .by = c(!!!.by))

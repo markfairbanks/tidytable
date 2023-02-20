@@ -107,9 +107,7 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env()
     }
     # Needed so the user doesn't need to specify .envir, #276
     glue_call <- call_match(x, glue::glue)
-    if (is.null(glue_call$.envir)) {
-      glue_call$.envir <- quote(.SD)
-    }
+    glue_call$.envir <- glue_call$.envir %||% quote(.SD)
     glue_call
   } else if (is_data_pronoun(x)) {
     var <- x[[3]]
