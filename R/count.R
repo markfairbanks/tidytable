@@ -107,9 +107,7 @@ count_tally <- function(.df, wt = NULL, sort = FALSE, name = NULL,
                         .by = NULL, .groups = "drop_last") {
   wt <- enquo(wt)
 
-  if (is.null(name)) {
-    name <- "n"
-  }
+  name <- name %||% "n"
 
   if (quo_is_null(wt)) {
     out <- summarize(.df, !!name := .N, .by = {{ .by }}, .groups = .groups)

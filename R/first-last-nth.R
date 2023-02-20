@@ -66,9 +66,7 @@ nth_default <- function(x, default) {
   if (vec_is_list(x)) {
     out <- default
   } else {
-    if (is.null(default)) {
-      default <- NA
-    }
+    default <- default %||% NA
     out <- vec_cast(default, vec_ptype(x))
   }
   out
