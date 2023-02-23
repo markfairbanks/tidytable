@@ -14,7 +14,7 @@ test_that("replace_na. works", {
   expect_equal(replace_na.(x, 0), c(1, 0))
 })
 
-test_that("can only be length 0", {
+test_that("can only be length 1", {
   expect_error(replace_na(1, 1:10))
 })
 
@@ -34,7 +34,7 @@ test_that("works on character columns", {
   expect_equal(replaced_df$y, c("a", "b", "c"))
 })
 
-test_that("tidyr::replace_na is converted to tidytable", {
+test_that("replace_na is converted to tidytable", {
   x <- c(1, NA)
   test_df <- tidytable(x = x)
   expect_equal(mutate(test_df, x = replace_na(x, 0))$x, c(1, 0))

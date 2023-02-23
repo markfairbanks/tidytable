@@ -39,17 +39,12 @@ replace_na..default <- function(.x, replace) {
     return(.x)
   }
 
-  vec_assert(replace, size = 1)
-
-  if (is.integer(.x) || is.double(.x)) {
+  if (is.numeric(.x)) {
     nafill(.x, "const", fill = replace)
-  } else if (vec_is_list(.x)) {
+  } else {
     missing <- vec_detect_missing(.x)
     .x[missing] <- replace
     .x
-  } else {
-    missing <- vec_detect_missing(.x)
-    vec_assign(.x, missing, replace)
   }
 }
 
