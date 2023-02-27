@@ -37,8 +37,6 @@ distinct. <- function(.df, ..., .keep_all = FALSE) {
 
 #' @export
 distinct..tidytable <- function(.df, ..., .keep_all = FALSE) {
-  vec_assert(.keep_all, logical(), 1)
-
   dots <- enquos(...)
 
   check_across(dots, "distinct")

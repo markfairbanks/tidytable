@@ -66,8 +66,6 @@ unnest..tidytable <- function(.df,
                               .drop = TRUE,
                               names_sep = NULL,
                               names_repair = "unique") {
-  vec_assert(.drop, logical(), 1)
-
   dots <- enquos(...)
 
   df_names <- names(.df)

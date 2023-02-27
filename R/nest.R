@@ -42,10 +42,6 @@ nest. <- function(.df, ..., .by = NULL, .key = NULL, .names_sep = NULL) {
 
 #' @export
 nest..tidytable <- function(.df, ..., .by = NULL, .key = NULL, .names_sep = NULL) {
-  if (!is.null(.names_sep)) {
-    vec_assert(.names_sep, character(), 1)
-  }
-
   dots <- enquos(...)
 
   if (length(dots) > 1) {

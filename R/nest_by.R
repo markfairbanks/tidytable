@@ -45,10 +45,7 @@ nest_by. <- function(.df, ..., .key = "data", .keep = FALSE) {
 
 #' @export
 nest_by..tidytable <- function(.df, ..., .key = "data", .keep = FALSE) {
-  vec_assert(.key, character(), 1)
-  vec_assert(.keep, logical(), 1)
-
-  if (.keep) {
+  if (is_true(.keep)) {
     split_list <- group_split(.df, ..., .keep = .keep)
 
     .df <- distinct(.df, ...)

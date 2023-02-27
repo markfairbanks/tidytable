@@ -161,6 +161,25 @@ tidytable_restore <- function(x, to) {
   vec_restore(x, to)
 }
 
+# Flatten lists - needed when `rlang::squash()` is deprecated
+list_flatten <- function(x, recursive = FALSE) {
+  is_list <- map_lgl(x, vec_is_list)
+  any_list <- any(is_list)
+  if (any_list) {
+    is_not_list <- !is_list
+    x[is_not_list] <- lapply(x[is_not_list], list)
+    out <- list_unchop(x, ptype = list())
+  } else {
+    out <- x
+  }
+
+  if (recursive && any_list) {
+    out <- list_flatten(out)
+  }
+
+  out
+}
+
 check_across <- function(dots, .fn) {
   uses_across <- any(map_lgl(dots, quo_is_call, c("across", "across.", "pick")))
 

@@ -39,9 +39,6 @@ separate_rows. <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
 
 #' @export
 separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
-  vec_assert(sep, character(), 1)
-  vec_assert(convert, logical(), 1)
-
   col_order <- names(.df)
 
   dots <- enquos(...)
