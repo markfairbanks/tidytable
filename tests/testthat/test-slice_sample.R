@@ -8,6 +8,14 @@ test_that("_sample works", {
   res <- df %>%
     slice_sample(prop = .5, .by = y)
   expect_equal(res$y, c("a", "a", "b", "b"))
+
+  res <- df %>%
+    slice_sample(n = 2, by = y)
+  expect_equal(res$y, c("a", "a", "b", "b"))
+
+  res <- df %>%
+    slice_sample(prop = .5, by = y)
+  expect_equal(res$y, c("a", "a", "b", "b"))
 })
 
 

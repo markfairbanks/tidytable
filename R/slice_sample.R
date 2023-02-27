@@ -1,9 +1,9 @@
 #' @export
 #' @rdname slice
 slice_sample <- function(.df, n, prop, weight_by = NULL,
-                                     replace = FALSE, .by = NULL) {
+                         replace = FALSE, .by = NULL, by = NULL) {
   slice_sample.(
-    .df, n, prop, {{ weight_by }}, replace, .by = {{ .by }}
+    .df, n, prop, {{ weight_by }}, replace, .by = {{ .by }}, by = {{ by }}
   )
 }
 
@@ -11,13 +11,13 @@ slice_sample <- function(.df, n, prop, weight_by = NULL,
 #' @keywords internal
 #' @inherit slice
 slice_sample. <- function(.df, n, prop, weight_by = NULL,
-                         replace = FALSE, .by = NULL) {
+                          replace = FALSE, .by = NULL, by = NULL) {
   UseMethod("slice_sample.")
 }
 
 #' @export
 slice_sample..tidytable <- function(.df, n, prop, weight_by = NULL,
-                                   replace = FALSE, .by = NULL) {
+                                    replace = FALSE, .by = NULL, by = NULL) {
   if (missing(n) && missing(prop)) {
     abort("Must supply either `n` or `prop`")
   } else if (missing(prop)) {
@@ -29,14 +29,15 @@ slice_sample..tidytable <- function(.df, n, prop, weight_by = NULL,
   slice(
     .df,
     sample_int(.N, !!n * !!prop, replace, wt = {{ weight_by }}),
-    .by = {{ .by }}
+    .by = c({{ .by }}, {{ by }})
   )
 }
 
 #' @export
 slice_sample..grouped_tt <- function(.df, n, prop, weight_by = NULL,
-                                    replace = FALSE, .by = NULL) {
+                                    replace = FALSE, .by = NULL, by = NULL) {
   check_by({{ .by }})
+  check_by({{ by }})
   .by <- group_vars(.df)
   out <- ungroup(.df)
   out <- slice_sample(
@@ -50,7 +51,7 @@ slice_sample..data.frame <- function(.df, n, prop, weight_by = NULL,
                                     replace = FALSE, .by = NULL) {
   .df <- as_tidytable(.df)
   slice_sample(
-    .df, n, prop, {{ weight_by }}, replace, .by = {{ .by }}
+    .df, n, prop, {{ weight_by }}, replace, .by = {{ .by }}, by = {{ by }}
   )
 }
 

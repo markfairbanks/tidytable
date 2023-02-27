@@ -7,7 +7,7 @@
 #' @param ... Integer row values
 #' @param order_by Variable to arrange by
 #' @param n Number of rows to grab
-#' @param .by Columns to group by
+#' @param .by,by Columns to group by
 #' @param prop The proportion of rows to select
 #' @param weight_by Sampling weights
 #' @param replace Should sampling be performed with (`TRUE`) or without (`FALSE`, default) replacement

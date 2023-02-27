@@ -32,7 +32,7 @@ test_that("_head() works with n specified", {
   expect_equal(sliced_df, head(test_df, 3))
 })
 
-test_that("_head() works with n specified with by", {
+test_that("_head() works with n specified with .by", {
   test_df <- tidytable(x = 1:10, y = 20:11, z = c(rep("a", 6), rep("b", 4)))
 
   col_order <- names(test_df)
@@ -40,6 +40,12 @@ test_that("_head() works with n specified with by", {
   datatable_df <- test_df[, head(.SD, 3), by = z][, ..col_order]
   sliced_df <- test_df %>%
     slice_head(n = 3, .by = z)
+
+  expect_named(sliced_df, names(test_df))
+  expect_equal(datatable_df, sliced_df)
+
+  sliced_df <- test_df %>%
+    slice_head(n = 3, by = z)
 
   expect_named(sliced_df, names(test_df))
   expect_equal(datatable_df, sliced_df)
@@ -122,7 +128,7 @@ test_that("_tail() works with n()", {
   expect_equal(sliced_df, test_df)
 })
 
-test_that("_tail() works with n specified with .by", {
+test_that("_tail() works with n specified with .by/by", {
   test_df <- tidytable(x = 1:10, y = 20:11, z = c(rep("a", 6), rep("b", 4)))
 
   col_order <- names(test_df)
@@ -133,7 +139,13 @@ test_that("_tail() works with n specified with .by", {
 
   expect_named(sliced_df, names(test_df))
   expect_equal(datatable_df, sliced_df)
+
+  sliced_df <- test_df %>%
+    slice_tail(n = 3, by = z)
+
+  expect_equal(datatable_df, sliced_df)
 })
+
 
 test_that("_tail() works with a custom function", {
   test_df <- tidytable(x = 1:10, y = 20:11, z = c(rep("a", 6), rep("b", 4)))
