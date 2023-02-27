@@ -63,8 +63,6 @@ separate..tidytable <- function(.df, col, into,
                                 remove = TRUE,
                                 convert = FALSE,
                                 ...) {
-  vec_assert(into, character())
-
   if (nchar(sep) == 1) {
     fixed <- TRUE
   } else {
