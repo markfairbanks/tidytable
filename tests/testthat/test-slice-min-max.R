@@ -7,7 +7,7 @@ test_that("_min() works", {
   expect_equal(sliced_df$y, c(11,12,13))
 })
 
-test_that("_min() works with .by", {
+test_that("_min() works with .by/by", {
   test_df <- tidytable(x = 1:10, y = 20:11, z = c(rep("a", 6), rep("b", 4)))
   sliced_df <- test_df %>%
     slice_min(order_by = x, n = 3, .by = z)
@@ -15,15 +15,30 @@ test_that("_min() works with .by", {
   expect_named(sliced_df, names(test_df))
   expect_equal(sliced_df$z, c("a", "a", "a", "b", "b", "b"))
   expect_equal(sliced_df$y, c(20,19,18,14,13,12))
-})
 
-test_that("_min() works with .by enhanced selection", {
-  test_df <- tidytable(x = 1:10, y = 20:11, z = c(rep("a", 6), rep("b", 4)))
   sliced_df <- test_df %>%
-    slice_min(order_by = x, n = 3, .by = where(is.character))
+    slice_min(order_by = x, n = 3, by = z)
 
+  expect_named(sliced_df, names(test_df))
   expect_equal(sliced_df$z, c("a", "a", "a", "b", "b", "b"))
   expect_equal(sliced_df$y, c(20,19,18,14,13,12))
+})
+
+test_that("_max() works with .by/by", {
+  test_df <- tidytable(x = 1:10, y = 20:11, z = c(rep("a", 6), rep("b", 4)))
+  sliced_df <- test_df %>%
+    slice_max(order_by = x, n = 3, .by = z)
+
+  expect_named(sliced_df, names(test_df))
+  expect_equal(sliced_df$z, c("b", "b", "b", "a", "a", "a"))
+  expect_equal(sliced_df$y, c(11, 12, 13, 15, 16, 17))
+
+  sliced_df <- test_df %>%
+    slice_max(order_by = x, n = 3, by = z)
+
+  expect_named(sliced_df, names(test_df))
+  expect_equal(sliced_df$z, c("b", "b", "b", "a", "a", "a"))
+  expect_equal(sliced_df$y, c(11, 12, 13, 15, 16, 17))
 })
 
 test_that("_max() works with custom function with quosures", {

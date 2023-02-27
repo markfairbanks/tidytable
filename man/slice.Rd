@@ -20,14 +20,22 @@ slice_min(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL)
 
 slice(.df, ..., .by = NULL)
 
-slice_sample(.df, n, prop, weight_by = NULL, replace = FALSE, .by = NULL)
+slice_sample(
+  .df,
+  n,
+  prop,
+  weight_by = NULL,
+  replace = FALSE,
+  .by = NULL,
+  by = NULL
+)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
 
 \item{n}{Number of rows to grab}
 
-\item{.by}{Columns to group by}
+\item{.by, by}{Columns to group by}
 
 \item{order_by}{Variable to arrange by}
 

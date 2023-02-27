@@ -38,7 +38,7 @@ top_n..tidytable <- function(.df, n = 5, wt = NULL, .by = NULL) {
   wt <- enquo(wt)
 
   if (quo_is_null(wt)) {
-    slice_head(.df, {{ n }}, {{ .by }})
+    slice_head(.df, {{ n }}, .by = {{ .by }})
   } else {
     slice_max(.df, order_by = !!wt, {{ n }}, .by = {{ .by }})
   }
