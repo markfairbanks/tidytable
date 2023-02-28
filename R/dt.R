@@ -50,9 +50,8 @@ dt.tidytable <- function(.df, ...) {
 
   args <- as.list(call[-1])
 
-  if (!is.null(args$j)) {
-    j <- args$j
-
+  j <- args$j
+  if (!is.null(j)) {
     if (is_call(j, c(":=", "let"))) {
       mut_exprs <- as.list(j[-1])
       if (length(mut_exprs) == 2 && is.null(names(mut_exprs))) {
@@ -73,14 +72,16 @@ dt.tidytable <- function(.df, ...) {
       } else {
         # .df %>% dt(, let(x = 1, double_y = y * 2))
         # .df %>% dt(, let(!!col := !!col * 2))
-        args$j <- prep_j_expr(j, ":=")
+        j <- prep_j_expr(j, ":=")
+        args$j <- j
         col_names <- names(as.list(j[-1]))
         .df <- fast_copy(.df, col_names)
       }
     } else if (is_call(j, c(".", "list"))) {
       # .df %>% dt(, .(mean_x = mean(x)))
       # .df %>% dt(, .(!!col := mean(!!col)))
-      args$j <- prep_j_expr(j, ".")
+      j <- prep_j_expr(j, ".")
+      args$j <- j
     }
   }
 
