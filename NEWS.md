@@ -1,5 +1,8 @@
 # tidytable 0.9.3 (in development)
 
+#### New functions
+* `tribble()`
+
 #### Functionality improvements
 * `nest()`: Gains `.by` and `.key` args
 * `tidytable()`: Auto-names unnamed inputs
