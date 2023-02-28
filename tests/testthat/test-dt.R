@@ -16,6 +16,13 @@ test_that("doesn't modify by reference", {
   df %>%
     dt(, c("x", "y") := NULL)
 
+  df %>%
+    dt(, ':='(x = x * 2))
+
+  col <- quo(x)
+  df %>%
+    dt(, ':='(!!col := !!col * 2))
+
   expect_named(df, c("x", "y", "z"))
   expect_equal(df$x, 1:3)
 })
