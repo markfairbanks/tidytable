@@ -10,13 +10,13 @@
 \alias{slice_sample}
 \title{Choose rows in a data.table}
 \usage{
-slice_head(.df, n = 5, .by = NULL)
+slice_head(.df, n = 5, ..., .by = NULL, by = NULL)
 
-slice_tail(.df, n = 5, .by = NULL)
+slice_tail(.df, n = 5, ..., .by = NULL, by = NULL)
 
-slice_max(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL)
+slice_max(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL, by = NULL)
 
-slice_min(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL)
+slice_min(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL, by = NULL)
 
 slice(.df, ..., .by = NULL)
 
@@ -35,11 +35,11 @@ slice_sample(
 
 \item{n}{Number of rows to grab}
 
+\item{...}{Integer row values}
+
 \item{.by, by}{Columns to group by}
 
 \item{order_by}{Variable to arrange by}
-
-\item{...}{Integer row values}
 
 \item{with_ties}{Should ties be kept together. The default \code{TRUE} may return
 can return multiple rows if they are equal. Use \code{FALSE} to ignore ties.}

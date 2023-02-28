@@ -4,14 +4,16 @@
 \alias{slice_head.}
 \title{Choose rows in a data.table}
 \usage{
-slice_head.(.df, n = 5, .by = NULL)
+slice_head.(.df, n = 5, ..., .by = NULL, by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
 
 \item{n}{Number of rows to grab}
 
-\item{.by}{Columns to group by}
+\item{...}{Integer row values}
+
+\item{.by, by}{Columns to group by}
 }
 \description{
 Choose rows in a data.table.

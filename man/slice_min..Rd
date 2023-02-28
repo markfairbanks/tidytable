@@ -4,7 +4,7 @@
 \alias{slice_min.}
 \title{Choose rows in a data.table}
 \usage{
-slice_min.(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL)
+slice_min.(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL, by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -18,7 +18,7 @@ slice_min.(.df, order_by, n = 1, ..., with_ties = TRUE, .by = NULL)
 \item{with_ties}{Should ties be kept together. The default \code{TRUE} may return
 can return multiple rows if they are equal. Use \code{FALSE} to ignore ties.}
 
-\item{.by}{Columns to group by}
+\item{.by, by}{Columns to group by}
 }
 \description{
 Choose rows in a data.table.
