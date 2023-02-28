@@ -24,7 +24,7 @@
 #' # Experimental support for tidy evaluation
 #' add_one <- function(data, col) {
 #'   data %>%
-#'     dt(, {{ col }} := {{ col }} + 1)
+#'     dt(, new_col := {{ col }} + 1)
 #' }
 #'
 #' df %>%
@@ -37,16 +37,21 @@ dt <- function(.df, ...) {
 #' @export
 dt.tidytable <- function(.df, ...) {
   dots <- enquos(..., .unquote_names = FALSE, .ignore_empty = "none")
-  dt_env <- get_dt_env(dots)
-  dots <- lapply(dots, quo_squash)
-  dots_names <- names(dots)
 
-  if (length(dots) > 1 || "j" %chin% dots_names) {
-    if ("j" %in% dots_names) {
-      j <- dots[["j"]]
-    } else {
-      j <- dots[[2]]
-    }
+  if (has_length(dots, 0)) return(.df)
+
+  dt_env <- get_dt_env(dots)
+
+  dots <- lapply(dots, quo_squash)
+
+  call <- call2("[", quo(.df), !!!dots)
+
+  call <- call_match(call, internal_dt_subset)
+
+  args <- as.list(call[-1])
+
+  if (!is.null(args$j)) {
+    j <- args$j
 
     if (is_call(j, c(":=", "let"))) {
       mut_exprs <- as.list(j[-1])
@@ -66,28 +71,20 @@ dt.tidytable <- function(.df, ...) {
         }
         .df <- fast_copy(.df, col_name)
       } else {
-        # .df[, let(x = 1, double_y = y * 2)]
-        use_walrus <- map_lgl(mut_exprs, is_call, ":=")
-        if (any(use_walrus)) {
-          # .df %>% dt(, let(!!col := !!col * 2))
-          j <- prep_j_expr(mut_exprs, use_walrus, ":=")
-          dots <- replace_j_dot(dots, dots_names, j)
-        }
+        # .df %>% dt(, let(x = 1, double_y = y * 2))
+        # .df %>% dt(, let(!!col := !!col * 2))
+        args$j <- prep_j_expr(j, ":=")
         col_names <- names(as.list(j[-1]))
         .df <- fast_copy(.df, col_names)
       }
     } else if (is_call(j, c(".", "list"))) {
-      summarize_exprs <- as.list(j[-1])
-      use_walrus <- map_lgl(summarize_exprs, is_call, ":=")
-      if (any(use_walrus)) {
-        # .df %>% dt(, .(!!col := mean(!!col)))
-        j <- prep_j_expr(summarize_exprs, use_walrus, ".")
-        dots <- replace_j_dot(dots, dots_names, j)
-      }
+      # .df %>% dt(, .(mean_x = mean(x)))
+      # .df %>% dt(, .(!!col := mean(!!col)))
+      args$j <- prep_j_expr(j, ".")
     }
   }
 
-  dt_expr <- call2("[", quo(.df), !!!dots)
+  dt_expr <- call2("[", !!!args)
 
   # Only add empty `[` when using mutate
   if (exists("mut_exprs", current_env())) {
@@ -110,23 +107,36 @@ dt.data.frame <- function(.df, ...) {
   dt(.df, ...)
 }
 
-prep_j_expr <- function(j_exprs, use_walrus, j_call) {
-  walrus_exprs <- j_exprs[use_walrus]
-  walrus_exprs <- map(walrus_exprs, ~ as.list(.x[-1]))
-  walrus_names <- map_chr(walrus_exprs, ~ as.character(.x[[1]]))
-  walrus_exprs <- map(walrus_exprs, ~ .x[[2]])
-  j_exprs[use_walrus] <- walrus_exprs
-  names(j_exprs)[use_walrus] <- walrus_names
+# Allow unquoting names in j position
+#   Ex: df %>% dt(, let({{ col }} := {{ col }} * 2))
+#   Ex: df %>% dt(, .({{ col }} := mean({{ col }})))
+prep_j_expr <- function(j, j_call) {
+  j_exprs <- as.list(j[-1])
+  use_walrus <- map_lgl(j_exprs, is_call, ":=")
+  if (any(use_walrus)) {
+    walrus_exprs <- j_exprs[use_walrus]
+    walrus_exprs <- map(walrus_exprs, ~ as.list(.x[-1]))
+    walrus_names <- map_chr(walrus_exprs, ~ as.character(.x[[1]]))
+    walrus_exprs <- map(walrus_exprs, ~ .x[[2]])
+    j_exprs[use_walrus] <- walrus_exprs
+    names(j_exprs)[use_walrus] <- walrus_names
 
-  new_j <- call2(j_call, !!!j_exprs)
-  new_j
+    j <- call2(j_call, !!!j_exprs)
+  }
+  j
 }
 
-replace_j_dot <- function(dots, dots_names, j) {
-  if ("j" %in% dots_names) {
-    dots[["j"]] <- j
-  } else {
-    dots[[2]] <- j
-  }
-  dots
+internal_dt_subset <- function(x, i, j, by, keyby, with = TRUE,
+                               nomatch = NA,
+                               mult = "all",
+                               roll = FALSE,
+                               rollends = if (roll=="nearest") c(TRUE,TRUE)
+                               else if (roll>=0) c(FALSE,TRUE)
+                               else c(TRUE,FALSE),
+                               which = FALSE,
+                               .SDcols,
+                               verbose = FALSE,
+                               allow.cartesian = FALSE,
+                               drop = NULL, on = NULL) {
+  abort("For internal call_match only.")
 }

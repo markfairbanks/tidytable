@@ -32,7 +32,7 @@ df \%>\%
 # Experimental support for tidy evaluation
 add_one <- function(data, col) {
   data \%>\%
-    dt(, {{ col }} := {{ col }} + 1)
+    dt(, new_col := {{ col }} + 1)
 }
 
 df \%>\%
