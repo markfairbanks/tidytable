@@ -9,7 +9,8 @@ test_that("can add and drop columns", {
 test_that("select. works", {
   df <- data.table(x = 1, y = 2, z = 3)
   df <- df %>%
-    select.(x, y, -y)
+    select.(x, y, -y) %>%
+    suppressWarnings()
 
   expect_named(df, c("x"))
 })

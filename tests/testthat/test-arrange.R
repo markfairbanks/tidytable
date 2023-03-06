@@ -132,7 +132,8 @@ test_that("properly orders NAs, #541", {
 test_that("works with dot", {
   df <- data.table(x = c(4, 3, 9, 7), y = 1:4)
   df <- df %>%
-    arrange.(x)
+    arrange.(x) %>%
+    suppressWarnings()
 
   expect_equal(df$x, c(3, 4, 7, 9))
 })

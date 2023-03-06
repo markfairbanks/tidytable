@@ -31,4 +31,7 @@ between <- function(x, left, right) {
 #' @export
 #' @keywords internal
 #' @inherit between
-between. <- between
+between. <- function(x, left, right) {
+  deprecate_dot_fun()
+  between(x, left, right)
+}

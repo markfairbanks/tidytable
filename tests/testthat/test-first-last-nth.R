@@ -26,7 +26,7 @@ test_that("work on lists", {
 })
 
 test_that("works with dot", {
-  expect_equal(first.(letters), "a")
-  expect_equal(last.(letters), "z")
-  expect_equal(nth.(letters, 3), "c")
+  expect_equal(suppressWarnings(first.(letters)), "a")
+  expect_equal(suppressWarnings(last.(letters)), "z")
+  expect_equal(suppressWarnings(nth.(letters, 3)), "c")
 })

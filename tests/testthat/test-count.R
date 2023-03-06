@@ -76,7 +76,8 @@ test_that("works on grouped_tt", {
 test_that("count. works", {
   df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
   out <- df %>%
-    count.()
+    count.() %>%
+    suppressWarnings()
 
   expect_named(out, c("n"))
   expect_equal(out$n, nrow(df))
@@ -115,7 +116,8 @@ test_that("works on grouped_tt", {
 test_that("tally. works", {
   df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
   out <- df %>%
-    tally..data.frame()
+    tally.() %>%
+    suppressWarnings()
 
   expect_named(out, c("n"))
   expect_equal(out$n, nrow(df))

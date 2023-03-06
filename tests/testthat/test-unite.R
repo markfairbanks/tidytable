@@ -16,7 +16,8 @@ test_that("unite. works", {
                        c = c("c", NA, "c"))
 
   unite_df <- test_df %>%
-    unite.()
+    unite.() %>%
+    suppressWarnings()
 
   expect_named(unite_df, ".united")
   expect_equal(unite_df$.united, c("a_b_c", "a_b_NA", "a_b_c"))

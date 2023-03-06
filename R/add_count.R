@@ -28,18 +28,25 @@
 #' df %>%
 #'   add_count(a)
 add_count <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
-  add_count.(.df, ..., wt = {{ wt }}, sort = sort, name = name)
+  .df <- .df_as_tidytable(.df)
+
+  if (is_ungrouped(.df)) {
+    tt_add_count(.df, ..., wt = {{ wt }}, sort = sort, name = name)
+  } else {
+    .by <- group_vars(.df)
+    tt_add_count(.df, any_of(.by), wt = {{ wt }}, sort = sort, name = name)
+  }
 }
 
 #' @export
 #' @keywords internal
 #' @inherit add_count
 add_count. <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
-  UseMethod("add_count.")
+  deprecate_dot_fun()
+  add_count(.df, ..., wt = {{ wt }}, sort = sort, name = name)
 }
 
-#' @export
-add_count..tidytable <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+tt_add_count <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   .by <- enquos(...)
   wt <- enquo(wt)
 
@@ -59,33 +66,15 @@ add_count..tidytable <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL)
 }
 
 #' @export
-add_count..grouped_tt <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
-  .by <- group_vars(.df)
-  out <- ungroup(.df)
-  out <- add_count(out, all_of(.by), wt = {{ wt }}, sort = sort, name = name)
-  group_by(out, all_of(.by))
-}
-
-#' @export
-add_count..data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
-  .df <- as_tidytable(.df)
-  add_count(.df, ..., wt = {{ wt }}, sort = sort, name = name)
-}
-
-#' @export
 #' @rdname add_count
 add_tally <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
-  add_tally.(.df, wt = {{ wt }}, sort = sort, name = name)
+  add_count(.df, wt = {{ wt }}, sort = sort, name = name)
 }
 
 #' @export
 #' @keywords internal
 #' @inherit add_count
 add_tally. <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
-  UseMethod("add_tally.")
-}
-
-#' @export
-add_tally..data.frame <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
-  add_count(.df, wt = {{ wt }}, sort = sort, name = name)
+  deprecate_dot_fun()
+  add_tally(.df, wt = {{ wt }}, sort = sort, name = name)
 }

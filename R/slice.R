@@ -44,19 +44,27 @@
 #' df %>%
 #'   slice_min(order_by = y, .by = z)
 slice <- function(.df, ..., .by = NULL) {
-  slice.(.df, ..., .by = {{ .by }})
+  .df <- .df_as_tidytable(.df)
+
+  if (is_ungrouped(.df)) {
+    tt_slice(.df, ..., .by = {{ .by }})
+  } else {
+    .by <- group_vars(.df)
+    tt_slice(.df, ..., .by = any_of(.by))
+  }
 }
 
 #' @export
 #' @keywords internal
 #' @inherit slice
 slice. <- function(.df, ..., .by = NULL) {
-  UseMethod("slice.")
+  deprecate_dot_fun()
+  slice(.df, ..., .by = {{ .by }})
 }
 
-#' @export
-slice..tidytable <- function(.df, ..., .by = NULL) {
+tt_slice <- function(.df, ..., .by = NULL) {
   dots <- enquos(...)
+
   if (length(dots) == 0) return(.df)
 
   dt_env <- get_dt_env(dots)
@@ -71,20 +79,4 @@ slice..tidytable <- function(.df, ..., .by = NULL) {
 
   eval_tidy(dt_expr, env = dt_env)
 }
-
-#' @export
-slice..grouped_tt <- function(.df, ..., .by = NULL) {
-  check_by({{ .by }})
-  .by <- group_vars(.df)
-  out <- ungroup(.df)
-  out <- slice(out, ..., .by = all_of(.by))
-  group_by(out, all_of(.by))
-}
-
-#' @export
-slice..data.frame <- function(.df, ..., .by = NULL) {
-  .df <- as_tidytable(.df)
-  slice(.df, ..., .by = {{ .by }})
-}
-
 

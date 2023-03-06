@@ -13,7 +13,10 @@ map2 <- function(.x, .y, .f, ...) {
 #' @export
 #' @keywords internal
 #' @inherit map
-map2. <- map2
+map2. <- function(.x, .y, .f, ...) {
+  deprecate_dot_fun()
+  map2(.x, .y, .f, ...)
+}
 
 #' @export
 #' @rdname map
@@ -24,7 +27,10 @@ map2_lgl <- function(.x, .y, .f, ...) {
 #' @export
 #' @keywords internal
 #' @inherit map
-map2_lgl. <- map2_lgl
+map2_lgl. <- function(.x, .y, .f, ...) {
+  deprecate_dot_fun()
+  map2_lgl(.x, .y, .f, ...)
+}
 
 #' @export
 #' @rdname map
@@ -35,7 +41,10 @@ map2_int <- function(.x, .y, .f, ...) {
 #' @export
 #' @keywords internal
 #' @inherit map
-map2_int. <- map2_int
+map2_int. <- function(.x, .y, .f, ...) {
+  deprecate_dot_fun()
+  map2_int(.x, .y, .f, ...)
+}
 
 #' @export
 #' @rdname map
@@ -46,7 +55,10 @@ map2_dbl <- function(.x, .y, .f, ...) {
 #' @export
 #' @keywords internal
 #' @inherit map
-map2_dbl. <- map2_dbl
+map2_dbl. <- function(.x, .y, .f, ...) {
+  deprecate_dot_fun()
+  map2_dbl(.x, .y, .f, ...)
+}
 
 #' @export
 #' @rdname map
@@ -57,7 +69,10 @@ map2_chr <- function(.x, .y, .f, ...) {
 #' @export
 #' @keywords internal
 #' @inherit map
-map2_chr. <- map2_chr
+map2_chr. <- function(.x, .y, .f, ...) {
+  deprecate_dot_fun()
+  map2_chr(.x, .y, .f, ...)
+}
 
 #' @export
 #' @rdname map
@@ -69,7 +84,10 @@ map2_dfc <- function(.x, .y, .f, ...) {
 #' @export
 #' @keywords internal
 #' @inherit map
-map2_dfc. <- map2_dfc
+map2_dfc. <- function(.x, .y, .f, ...) {
+  deprecate_dot_fun()
+  map2_dfc(.x, .y, .f, ...)
+}
 
 #' @export
 #' @rdname map
@@ -81,7 +99,10 @@ map2_dfr <- function(.x, .y, .f, ..., .id = NULL) {
 #' @export
 #' @keywords internal
 #' @inherit map
-map2_dfr. <- map2_dfr
+map2_dfr. <- function(.x, .y, .f, ..., .id = NULL) {
+  deprecate_dot_fun()
+  map2_dfr(.x, .y, .f, ...)
+}
 
 #' @export
 #' @rdname map
@@ -90,7 +111,10 @@ map2_df <- map2_dfr
 #' @export
 #' @keywords internal
 #' @inherit map
-map2_df. <- map2_df
+map2_df. <- function(.x, .y, .f, ..., .id = NULL) {
+  deprecate_dot_fun()
+  map2_df(.x, .y, .f, ..., .id = .id)
+}
 
 #' @export
 #' @rdname map

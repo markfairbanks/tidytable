@@ -9,7 +9,8 @@ test_that("rename() works for one column", {
 test_that("rename.() works", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
-    rename.(new_x = x)
+    rename.(new_x = x) %>%
+    suppressWarnings()
 
   expect_named(df, c("new_x", "y", "z"))
 })
@@ -67,7 +68,8 @@ test_that("rename_with() works for all variables", {
 test_that("rename_with.() works", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2))
   df <- df %>%
-    rename_with.(~ paste0(.x, "_append"))
+    rename_with.(~ paste0(.x, "_append")) %>%
+    suppressWarnings()
 
   expect_named(df, c("x_append", "y_append"))
 })
@@ -91,7 +93,7 @@ test_that("rename_with() works for all variables w/ data.frame", {
 test_that("rename_with() works with predicate", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df <- df %>%
-    rename_with.(~ paste0(.x, "_character"), where(is.character))
+    rename_with(~ paste0(.x, "_character"), where(is.character))
 
   expect_named(df, c("x","y","z_character"))
 })

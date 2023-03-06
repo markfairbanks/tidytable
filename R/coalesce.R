@@ -41,4 +41,7 @@ coalesce <- function(..., .ptype = NULL, .size = NULL) {
 #' @export
 #' @keywords internal
 #' @inherit coalesce
-coalesce. <- coalesce
+coalesce. <- function(..., .ptype = NULL, .size = NULL) {
+  deprecate_dot_fun()
+  coalesce(..., .ptype = .ptype, .size = .size)
+}

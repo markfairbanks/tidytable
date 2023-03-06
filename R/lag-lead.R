@@ -34,9 +34,15 @@ lead <- function(x, n = 1L, default = NA) {
 #' @export
 #' @keywords internal
 #' @inherit lag
-lags. <- lag
+lags. <- function(x, n = 1L, default = NA) {
+  deprecate_dot_fun()
+  lag(x, n, default)
+}
 
 #' @export
 #' @keywords internal
 #' @inherit lag
-leads. <- lead
+leads. <- function(x, n = 1L, default = NA) {
+  deprecate_dot_fun()
+  lead(x, n, default)
+}

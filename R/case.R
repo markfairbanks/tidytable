@@ -55,4 +55,7 @@ case <- function(..., default = NA, ptype = NULL, size = NULL) {
 #' @export
 #' @keywords internal
 #' @inherit case
-case. <- case
+case. <- function(..., default = NA, ptype = NULL, size = NULL) {
+  deprecate_dot_fun()
+  case(..., default = default, ptype = ptype, size = size)
+}

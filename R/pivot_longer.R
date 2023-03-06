@@ -52,54 +52,8 @@ pivot_longer <- function(.df,
                          values_transform = NULL,
                          fast_pivot = FALSE,
                          ...) {
-  pivot_longer.(
-    .df, cols = {{ cols }}, names_to = names_to,
-    values_to = values_to, names_prefix = names_prefix,
-    names_sep = names_sep, names_pattern = names_pattern,
-    names_ptypes = names_ptypes, names_transform = names_transform,
-    names_repair = names_repair, values_drop_na = values_drop_na,
-    values_ptypes = values_ptypes, values_transform = values_transform,
-    fast_pivot = fast_pivot
-  )
-}
+  .df <- .df_as_tidytable(.df)
 
-#' @export
-#' @keywords internal
-#' @inherit pivot_longer
-pivot_longer. <- function(.df,
-                          cols = everything(),
-                          names_to = "name",
-                          values_to = "value",
-                          names_prefix = NULL,
-                          names_sep = NULL,
-                          names_pattern = NULL,
-                          names_ptypes = NULL,
-                          names_transform = NULL,
-                          names_repair = "check_unique",
-                          values_drop_na = FALSE,
-                          values_ptypes = NULL,
-                          values_transform = NULL,
-                          fast_pivot = FALSE,
-                          ...) {
-  UseMethod("pivot_longer.")
-}
-
-#' @export
-pivot_longer..tidytable <- function(.df,
-                                    cols = everything(),
-                                    names_to = "name",
-                                    values_to = "value",
-                                    names_prefix = NULL,
-                                    names_sep = NULL,
-                                    names_pattern = NULL,
-                                    names_ptypes = NULL,
-                                    names_transform = NULL,
-                                    names_repair = "check_unique",
-                                    values_drop_na = FALSE,
-                                    values_ptypes = NULL,
-                                    values_transform = NULL,
-                                    fast_pivot = FALSE,
-                                    ...) {
   names <- names(.df)
 
   measure_vars <- tidyselect_names(.df, {{ cols }})
@@ -241,22 +195,24 @@ pivot_longer..tidytable <- function(.df,
 }
 
 #' @export
-pivot_longer..data.frame <- function(.df,
-                                     cols = everything(),
-                                     names_to = "name",
-                                     values_to = "value",
-                                     names_prefix = NULL,
-                                     names_sep = NULL,
-                                     names_pattern = NULL,
-                                     names_ptypes = NULL,
-                                     names_transform = NULL,
-                                     names_repair = "check_unique",
-                                     values_drop_na = FALSE,
-                                     values_ptypes = NULL,
-                                     values_transform = NULL,
-                                     fast_pivot = FALSE,
-                                     ...) {
-  .df <- as_tidytable(.df)
+#' @keywords internal
+#' @inherit pivot_longer
+pivot_longer. <- function(.df,
+                          cols = everything(),
+                          names_to = "name",
+                          values_to = "value",
+                          names_prefix = NULL,
+                          names_sep = NULL,
+                          names_pattern = NULL,
+                          names_ptypes = NULL,
+                          names_transform = NULL,
+                          names_repair = "check_unique",
+                          values_drop_na = FALSE,
+                          values_ptypes = NULL,
+                          values_transform = NULL,
+                          fast_pivot = FALSE,
+                          ...) {
+  deprecate_dot_fun()
   pivot_longer(
     .df, cols = {{ cols }}, names_to = names_to,
     values_to = values_to, names_prefix = names_prefix,
@@ -271,15 +227,13 @@ pivot_longer..data.frame <- function(.df,
 pivot_str_extract <- function(x, into, regex, convert = FALSE) {
   out <- str_extract_groups(x, pattern = regex, convert = convert)
   names(out) <- into
-  out <- new_tidytable(out)
-  out
+  new_tidytable(out)
 }
 
 pivot_str_separate <- function(x, into, sep, convert = FALSE) {
   out <- tstrsplit(x, sep, fixed = TRUE, names = TRUE, type.convert = convert)
   names(out) <- as_utf8_character(into)
-  out <- new_tidytable(out)
-  out
+  new_tidytable(out)
 }
 
 

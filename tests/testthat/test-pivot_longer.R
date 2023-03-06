@@ -11,7 +11,7 @@ test_that("can pivot all cols (unspecified) to long", {
 
 test_that("pivot_longer. works", {
   df <- data.table(x = 1:2, y = 3:4)
-  pivot_df <- pivot_longer.(df)
+  pivot_df <- pivot_longer.(df) %>% suppressWarnings()
 
   expect_named(pivot_df, c("name", "value"))
   expect_equal(pivot_df$name, c("x","x","y","y"))

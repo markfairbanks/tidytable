@@ -28,29 +28,8 @@ unnest_longer <- function(.df, col, values_to = NULL, indices_to = NULL,
                           indices_include = NULL, keep_empty = FALSE,
                           names_repair = "check_unique", simplify = NULL,
                           ptype = NULL, transform = NULL) {
-  unnest_longer.(
-    .df, col = {{ col }}, values_to = values_to, indices_to = indices_to,
-    indices_include = indices_include, keep_empty = keep_empty,
-    names_repair = names_repair, simplify = simplify,
-    ptype = ptype, transform = transform
-  )
-}
+  .df <- .df_as_tidytable(.df)
 
-#' @export
-#' @keywords internal
-#' @inherit unnest_longer
-unnest_longer. <- function(.df, col, values_to = NULL, indices_to = NULL,
-                          indices_include = NULL, keep_empty = FALSE,
-                          names_repair = "check_unique", simplify = NULL,
-                          ptype = NULL, transform = NULL) {
-  UseMethod("unnest_longer.")
-}
-
-#' @export
-unnest_longer..tidytable <- function(.df, col, values_to = NULL, indices_to = NULL,
-                                     indices_include = NULL, keep_empty = FALSE,
-                                     names_repair = "check_unique", simplify = NULL,
-                                     ptype = NULL, transform = NULL) {
   .col <- enquo(col)
 
   x <- pull(.df, !!.col)
@@ -81,24 +60,26 @@ unnest_longer..tidytable <- function(.df, col, values_to = NULL, indices_to = NU
 
   to_vec <- as.character(c(.values_to, .indices_to))
 
-  .df <- unnest(
+  out <- unnest(
     .df, all_of(to_vec),
     names_repair = names_repair,
     keep_empty = keep_empty,
     .drop = FALSE
   )
 
-  .df <- change_types(.df, to_vec, ptype, transform)
+  out <- change_types(out, to_vec, ptype, transform)
 
-  .df
+  out
 }
 
 #' @export
-unnest_longer..data.frame <- function(.df, col, values_to = NULL, indices_to = NULL,
-                                      indices_include = NULL, keep_empty = FALSE,
-                                      names_repair = "check_unique", simplify = NULL,
-                                      ptype = list(), transform = list()) {
-  .df <- as_tidytable(.df)
+#' @keywords internal
+#' @inherit unnest_longer
+unnest_longer. <- function(.df, col, values_to = NULL, indices_to = NULL,
+                          indices_include = NULL, keep_empty = FALSE,
+                          names_repair = "check_unique", simplify = NULL,
+                          ptype = NULL, transform = NULL) {
+  deprecate_dot_fun()
   unnest_longer(
     .df, col = {{ col }}, values_to = values_to, indices_to = indices_to,
     indices_include = indices_include, keep_empty = keep_empty,

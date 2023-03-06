@@ -2,9 +2,21 @@
 #' @rdname slice
 slice_max <- function(.df, order_by, n = 1, ..., with_ties = TRUE,
                       .by = NULL, by = NULL) {
-  slice_max.(
-    .df, {{ order_by }}, {{ n }}, with_ties = with_ties, .by = {{ .by }}, by = {{ by }}
-  )
+  check_required(order_by)
+
+  .df <- .df_as_tidytable(.df)
+
+  if (is_ungrouped(.df)) {
+    tt_slice_max(
+      .df, {{ order_by }}, {{ n }}, with_ties = with_ties,
+      .by = {{ .by }}, by = {{ by }}
+    )
+  } else {
+    .by <- group_vars(.df)
+    tt_slice_max(
+      .df, {{ order_by }}, {{ n }}, with_ties = with_ties, .by = all_of(.by)
+    )
+  }
 }
 
 #' @export
@@ -13,12 +25,15 @@ slice_max <- function(.df, order_by, n = 1, ..., with_ties = TRUE,
 slice_max. <- function(.df, order_by, n = 1, ..., with_ties = TRUE,
                        .by = NULL, by = NULL) {
   check_required(order_by)
-  UseMethod("slice_max.")
+  deprecate_dot_fun()
+  slice_max(
+    .df, {{ order_by }}, {{ n }}, with_ties = with_ties,
+    .by = {{ .by }}, by = {{ by }}
+  )
 }
 
-#' @export
-slice_max..tidytable <- function(.df, order_by, n = 1, ..., with_ties = TRUE,
-                                 .by = NULL, by = NULL) {
+tt_slice_max <- function(.df, order_by, n = 1, ..., with_ties = TRUE,
+                         .by = NULL, by = NULL) {
   if (is_true(with_ties)) {
     .df %>%
       filter(
@@ -33,34 +48,26 @@ slice_max..tidytable <- function(.df, order_by, n = 1, ..., with_ties = TRUE,
   }
 }
 
-#' @export
-slice_max..grouped_tt <- function(.df, order_by, n = 1, ..., with_ties = TRUE,
-                                  .by = NULL, by = NULL) {
-  check_by({{ .by }})
-  check_by({{ by }})
-  .by <- group_vars(.df)
-  out <- ungroup(.df)
-  out <- slice_max(out, {{ order_by }}, {{ n }}, with_ties = with_ties, .by = all_of(.by))
-  group_by(out, all_of(.by))
-}
-
-#' @export
-slice_max..data.frame <- function(.df, order_by, n = 1, ..., with_ties = TRUE,
-                                  .by = NULL, by = NULL) {
-  .df <- as_tidytable(.df)
-  slice_max(
-    .df, {{ order_by }}, {{ n }}, with_ties = with_ties, .by = {{ .by }}, by = {{ by }}
-  )
-}
-
 
 #' @export
 #' @rdname slice
 slice_min <- function(.df, order_by, n = 1, ..., with_ties = TRUE,
                       .by = NULL, by = NULL) {
-  slice_min.(
-    .df, {{ order_by }}, {{ n }}, with_ties = with_ties, .by = {{ .by }}, by = {{ by }}
-  )
+  check_required(order_by)
+
+  .df <- .df_as_tidytable(.df)
+
+  if (is_ungrouped(.df)) {
+    tt_slice_min(
+      .df, {{ order_by }}, {{ n }}, with_ties = with_ties,
+      .by = {{ .by }}, by = {{ by }}
+    )
+  } else {
+    .by <- group_vars(.df)
+    tt_slice_min(
+      .df, {{ order_by }}, {{ n }}, with_ties = with_ties, .by = all_of(.by)
+    )
+  }
 }
 
 #' @export
@@ -69,12 +76,15 @@ slice_min <- function(.df, order_by, n = 1, ..., with_ties = TRUE,
 slice_min. <- function(.df, order_by, n = 1, ..., with_ties = TRUE,
                        .by = NULL, by = NULL) {
   check_required(order_by)
-  UseMethod("slice_min.")
+  deprecate_dot_fun()
+  slice_min(
+    .df, {{ order_by }}, {{ n }}, with_ties = with_ties,
+    .by = {{ .by }}, by = {{ by }}
+  )
 }
 
-#' @export
-slice_min..tidytable <- function(.df, order_by, n = 1, ..., with_ties = TRUE,
-                                 .by = NULL, by = NULL) {
+tt_slice_min <- function(.df, order_by, n = 1, ..., with_ties = TRUE,
+                         .by = NULL, by = NULL) {
   if (is_true(with_ties)) {
     .df %>%
       filter(
@@ -89,24 +99,4 @@ slice_min..tidytable <- function(.df, order_by, n = 1, ..., with_ties = TRUE,
   }
 }
 
-#' @export
-slice_min..grouped_tt <- function(.df, order_by, n = 1, ..., with_ties = TRUE,
-                                  .by = NULL, by = NULL) {
-  check_by({{ .by }})
-  check_by({{ by }})
-  .by <- group_vars(.df)
-  out <- ungroup(.df)
-  out <- slice_min(out, {{ order_by }}, n = n, with_ties = with_ties, .by = all_of(.by))
-  group_by(out, all_of(.by))
-}
-
-#' @export
-slice_min..data.frame <- function(.df, order_by, n = 1, ..., with_ties = TRUE,
-                                  .by = NULL, by = NULL) {
-  .df <- as_tidytable(.df)
-  slice_min(
-    .df, {{ order_by }}, n = n, with_ties = with_ties,
-    .by = {{ .by }}, by = {{ by }}
-  )
-}
 

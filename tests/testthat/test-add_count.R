@@ -23,11 +23,8 @@ test_that("works on a grouped_tt", {
 
 test_that("add_count. works", {
   df <- tidytable(g = c(1, 2, 2, 2), val = c(1, 1, 2, 3))
-  res <- df %>% add_count.()
+  res <- df %>% add_count.() %>% suppressWarnings()
   expect_equal(res$n, c(4, 4, 4, 4))
-
-  res <- df %>% add_count.(g)
-  expect_equal(res$n, c(1, 3, 3, 3))
 })
 
 # add_tally() ----------------------------------------------------
@@ -45,6 +42,6 @@ test_that("adds sum and works on grouped_tt", {
 
 test_that("add_tally. works", {
   df <- tidytable(g = c(1, 2, 2, 2), val = c(1, 1, 2, 3))
-  res <- df %>% add_tally..data.frame()
+  res <- df %>% add_tally.() %>% suppressWarnings()
   expect_equal(res$n, c(4, 4, 4, 4))
 })

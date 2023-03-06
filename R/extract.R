@@ -36,22 +36,10 @@
 #' df %>% extract(x, c("A", "B", "A"), "([a-d]+)-([a-d]+)-(\\d+)")
 extract <- function(.df, col, into, regex = "([[:alnum:]]+)",
                     remove = TRUE, convert = FALSE, ...) {
-  extract.(.df, {{ col }}, into, regex, remove, convert, ...)
-}
-
-#' @export
-#' @keywords internal
-#' @inherit extract
-extract. <- function(.df, col, into, regex = "([[:alnum:]]+)",
-                     remove = TRUE, convert = FALSE, ...) {
   check_required(col)
   check_required(into)
-  UseMethod("extract.")
-}
 
-#' @export
-extract..tidytable <- function(.df, col, into, regex = "([[:alnum:]]+)",
-                                remove = TRUE, convert = FALSE, ...) {
+  .df <- .df_as_tidytable(.df)
 
   col <- tidyselect_names(.df, {{ col }})
 
@@ -85,14 +73,16 @@ extract..tidytable <- function(.df, col, into, regex = "([[:alnum:]]+)",
   out
 }
 
-globalVariables("..groups")
-
 #' @export
-extract..data.frame <- function(.df, col, into, regex = "([[:alnum:]]+)",
-                                remove = TRUE, convert = FALSE, ...) {
-  .df <- as_tidytable(.df)
-  extract.(.df, {{ col }}, into, regex, remove, convert, ...)
+#' @keywords internal
+#' @inherit extract
+extract. <- function(.df, col, into, regex = "([[:alnum:]]+)",
+                     remove = TRUE, convert = FALSE, ...) {
+  deprecate_dot_fun()
+  extract(.df, {{ col }}, into, regex, remove, convert, ...)
 }
+
+globalVariables("..groups")
 
 str_extract_groups <- function(string, pattern, convert = FALSE){
   groups <- regexpr(pattern, string, perl = TRUE)

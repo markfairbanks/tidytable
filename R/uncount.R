@@ -14,38 +14,30 @@
 #'
 #' uncount(df, n, .id = "id")
 uncount <- function(.df, weights, .remove = TRUE, .id = NULL) {
-  uncount.(.df, {{ weights }}, .remove, .id)
+  .df <- .df_as_tidytable(.df)
+
+  weights <- enquo(weights)
+
+  .reps <- pull(.df, !!weights)
+
+  out <- vec_rep_each(.df, .reps)
+
+  if (!is.null(.id)) {
+    out <- dt_j(out, !!.id := sequence(.reps))
+  }
+
+  if (.remove) {
+    out <- dt_j(out, !!weights := NULL)
+  }
+
+  out
 }
 
 #' @export
 #' @keywords internal
 #' @inherit uncount
 uncount. <- function(.df, weights, .remove = TRUE, .id = NULL) {
-  UseMethod("uncount.")
-}
-
-#' @export
-uncount..tidytable <- function(.df, weights, .remove = TRUE, .id = NULL) {
-  weights <- enquo(weights)
-
-  .reps <- pull(.df, !!weights)
-
-  result_df <- vec_rep_each(.df, .reps)
-
-  if (!is.null(.id)) {
-    result_df <- dt_j(result_df, !!.id := sequence(.reps))
-  }
-
-  if (.remove) {
-    result_df <- dt_j(result_df, !!weights := NULL)
-  }
-
-  result_df
-}
-
-#' @export
-uncount..data.frame <- function(.df, weights, .remove = TRUE, .id = NULL) {
-  .df <- as_tidytable(.df)
+  deprecate_dot_fun()
   uncount(.df, {{ weights }}, .remove, .id)
 }
 

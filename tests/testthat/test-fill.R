@@ -22,7 +22,7 @@ test_that("fill.works", {
   # filled down from last non-missing
   df <- data.table(x = c(NA, 1, NA, 2, NA, NA))
 
-  out <- df %>% fill.(x)
+  out <- df %>% fill.(x) %>% suppressWarnings()
   expect_equal(out$x, c(NA, 1, 1, 2, 2, 2))
 })
 

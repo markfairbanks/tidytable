@@ -9,7 +9,8 @@ test_that("keeps the grouping variables by default", {
 })
 
 test_that("group_split. works", {
-  out <- group_split.(test_df, y)
+  out <- group_split.(test_df, y) %>%
+    suppressWarnings()
 
   expect_equal(out[[1]], slice(test_df, 1:2))
   expect_equal(out[[2]], slice(test_df, 3))

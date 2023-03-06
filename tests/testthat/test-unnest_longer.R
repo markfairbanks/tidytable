@@ -7,7 +7,7 @@ test_that("uses input for default column names", {
 
 test_that("unnest_longer. works", {
   df <- tidytable(x = 1:2, y = list(1, 1:2))
-  out <- df %>% unnest_longer.(y)
+  out <- df %>% unnest_longer.(y) %>% suppressWarnings()
 
   expect_named(out, c("x", "y"))
 })

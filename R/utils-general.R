@@ -174,7 +174,7 @@ list_flatten <- function(x, recursive = FALSE) {
   }
 
   if (recursive && any_list) {
-    out <- list_flatten(out)
+    out <- list_flatten(out, recursive)
   }
 
   out
@@ -184,14 +184,44 @@ check_across <- function(dots, .fn) {
   uses_across <- any(map_lgl(dots, quo_is_call, c("across", "across.", "pick")))
 
   if (uses_across) {
-    abort(
-      glue(
-        "`across()`/`pick()` are unnecessary in `{.fn}()`.
-         Please directly use tidyselect.
-         Ex: df %>% {.fn}(where(is.numeric))"
-      )
-    )
+    msg <- glue("`across()`/`pick()` are unnecessary in `{.fn}()`.
+                Please directly use tidyselect.
+                Ex: df %>% {.fn}(where(is.numeric))")
+    abort(msg)
   }
+}
+
+# Needed until we can build S3 methods again once `verb.()` is removed
+#   Regular `as_tidytable()` strips "grouped_tt" class
+.df_as_tidytable <- function(.df) {
+  if (!is.data.frame(.df)) {
+    abort("`.df` must be a data frame.")
+  }
+
+  if (!is_tidytable(.df)) {
+    as_tidytable(.df)
+  } else {
+    .df
+  }
+}
+
+is_ungrouped <- function(.df) {
+  !is_grouped_df(.df) && !is_rowwise(.df)
+}
+
+is_rowwise <- function(.df) {
+  inherits(.df, "rowwise_tt")
+}
+
+deprecate_dot_fun <- function(fn = NULL, env = caller_env(), user_env = caller_env(2)) {
+  fn <- fn %||% call_name(caller_call())
+  what <- glue("{fn}()")
+  with <- str_replace(what, ".", "", TRUE)
+  details <- "Please note that all `verb.()` syntax has now been deprecated. \n"
+  deprecate_soft(
+    "v0.10.0", what, with, details, id = ".tidytable_dot_funs",
+    env = env, user_env = user_env
+  )
 }
 
 deprecate_old_across <- function(fn) {

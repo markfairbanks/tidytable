@@ -13,7 +13,8 @@ test_that("summarize. works", {
   df <- tidytable(x = 3:1, y = c("b", "a", "a"))
 
   result_df <- df %>%
-    summarize.(avg_x = mean(x), .by = y)
+    summarize.(avg_x = mean(x), .by = y) %>%
+    suppressWarnings()
 
   expect_named(result_df, c("y", "avg_x"))
   expect_equal(result_df$avg_x, c(1.5, 3))

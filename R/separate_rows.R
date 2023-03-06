@@ -27,18 +27,8 @@
 #'
 #' separate_rows(df, y, z, convert = TRUE)
 separate_rows <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
-  separate_rows.(.df, ..., sep = sep, convert = convert)
-}
+  .df <- .df_as_tidytable(.df)
 
-#' @export
-#' @keywords internal
-#' @inherit separate_rows
-separate_rows. <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
-  UseMethod("separate_rows.")
-}
-
-#' @export
-separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
   col_order <- names(.df)
 
   dots <- enquos(...)
@@ -86,8 +76,10 @@ separate_rows..tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert =
 }
 
 #' @export
-separate_rows..data.frame <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
-  .df <- as_tidytable(.df)
+#' @keywords internal
+#' @inherit separate_rows
+separate_rows. <- function(.df, ..., sep = "[^[:alnum:].]+", convert = FALSE) {
+  deprecate_dot_fun()
   separate_rows(.df, ..., sep = sep, convert = convert)
 }
 

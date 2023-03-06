@@ -25,7 +25,10 @@ first <- function(x, default = NULL, na_rm = FALSE) {
 #' @export
 #' @keywords internal
 #' @inherit first
-first. <- first
+first. <- function(x, default = NULL, na_rm = FALSE) {
+  deprecate_dot_fun()
+  first(x, default, na_rm)
+}
 
 #' @export
 #' @rdname first
@@ -36,7 +39,10 @@ last <- function(x, default = NULL, na_rm = FALSE) {
 #' @export
 #' @keywords internal
 #' @inherit first
-last. <- last
+last. <- function(x, default = NULL, na_rm = FALSE) {
+  deprecate_dot_fun()
+  last(x, default, na_rm)
+}
 
 #' @export
 #' @rdname first
@@ -60,7 +66,10 @@ nth <- function(x, n, default = NULL, na_rm = FALSE) {
 #' @export
 #' @keywords internal
 #' @inherit first
-nth. <- nth
+nth. <- function(x, n, default = NULL, na_rm = FALSE) {
+  deprecate_dot_fun()
+  nth(x, n, default, na_rm)
+}
 
 nth_default <- function(x, default) {
   if (vec_is_list(x)) {
