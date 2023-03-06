@@ -1,4 +1,8 @@
-# tidytable 0.9.3 (in development)
+# tidytable 0.10.0 (in development)
+
+#### Deprecations
+* `verb.()` functions are now deprecated (e.g. `mutate.()`). Users should now use
+  the `verb()` versions of functions.
 
 #### New functions
 * `tribble()`
