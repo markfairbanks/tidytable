@@ -121,3 +121,15 @@ test_that("doesn't work on list input", {
   df <- list(x = c(4,3,9,7), y = 1:4)
   expect_error(df %>% dt(, x := 1))
 })
+
+test_that("let works", {
+  df <- tidytable(x = c(1, 1, 1), y = 1:3)
+
+  col <- quo(x)
+
+  res <- df %>%
+    dt(, let(double_x = x * 2, y = NULL))
+
+  expect_named(res, c("x", "double_x"))
+  expect_equal(res$double_x, c(2, 2, 2))
+})
