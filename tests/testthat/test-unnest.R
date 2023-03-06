@@ -21,7 +21,8 @@ test_that("unnest. works", {
     nest_by(c, d)
 
   unnest_df <- nest_df %>%
-    unnest.(data)
+    unnest.(data) %>%
+    suppressWarnings()
 
   expect_named(unnest_df, c("c","d","a","b"))
   expect_equal(unnest_df$a, start_df$a)

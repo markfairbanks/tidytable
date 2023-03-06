@@ -39,7 +39,10 @@ if_else <- function(condition, true, false, missing = NA, ..., ptype = NULL, siz
 #' @export
 #' @keywords internal
 #' @inherit if_else
-if_else. <- if_else
+if_else. <- function(condition, true, false, missing = NA, ..., ptype = NULL, size = NULL) {
+  deprecate_dot_fun()
+  if_else(condition, true, false, missing, ..., ptype = ptype, size = size)
+}
 
 #' Fast ifelse
 #'
@@ -64,5 +67,6 @@ if_else. <- if_else
 #'   mutate(new_col = ifelse(x < 3, 1, 0))
 #' @keywords internal
 ifelse. <- function(conditions, true, false, na = NA) {
+  deprecate_dot_fun("if_else.")
   if_else(conditions, true, false, na)
 }

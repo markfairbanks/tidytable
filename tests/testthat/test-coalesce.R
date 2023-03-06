@@ -30,5 +30,5 @@ test_that("can specify output size", {
 
 test_that("coalesce. works", {
   x <- c(NA, 1)
-  expect_equal(coalesce.(x, 1), c(1, 1))
+  expect_equal(suppressWarnings(coalesce.(x, 1)), c(1, 1))
 })

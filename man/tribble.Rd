@@ -7,7 +7,7 @@
 tribble(...)
 }
 \arguments{
-\item{...}{Specification}
+\item{...}{Column names as formulas, values below. See example.}
 }
 \description{
 Create a tidytable using a rowwise setup.

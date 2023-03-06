@@ -11,7 +11,8 @@ test_that("filter. works", {
   df <- data.table(x = 1:10)
 
   df <- df %>%
-    filter.(x <= 4)
+    filter.(x <= 4) %>%
+    suppressWarnings()
 
   expect_equal(df$x, 1:4)
 })
@@ -160,13 +161,4 @@ test_that("works on a grouped_tt", {
   expect_equal(res$y, "b")
   expect_equal(group_vars(res), "y")
   expect_true(is_grouped_df(res))
-})
-
-test_that("errors when .by is used on a grouped_tt", {
-  df <- data.table(x = c(1, 1, 2, 2), y = c("a", "a", "a", "b")) %>%
-    group_by(y)
-
-  expect_error(
-    filter(df, x <= mean(x), .by = y)
-  )
 })

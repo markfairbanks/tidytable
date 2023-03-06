@@ -38,31 +38,11 @@ separate <- function(.df, col, into,
                      remove = TRUE,
                      convert = FALSE,
                      ...) {
-  separate.(
-    .df, col = {{ col }}, into = into, sep = sep,
-    remove = remove, convert = convert, ...
-  )
-}
-
-#' @export
-#' @keywords internal
-#' @inherit separate
-separate. <- function(.df, col, into,
-                      sep = "[^[:alnum:]]+",
-                      remove = TRUE,
-                      convert = FALSE,
-                      ...) {
   check_required(col)
   check_required(into)
-  UseMethod("separate.")
-}
 
-#' @export
-separate..tidytable <- function(.df, col, into,
-                                sep = "[^[:alnum:]]+",
-                                remove = TRUE,
-                                convert = FALSE,
-                                ...) {
+  .df <- .df_as_tidytable(.df)
+
   if (nchar(sep) == 1) {
     fixed <- TRUE
   } else {
@@ -107,18 +87,19 @@ separate..tidytable <- function(.df, col, into,
   out
 }
 
-globalVariables("..t_str_split")
-
 #' @export
-separate..data.frame <- function(.df, col, into,
-                                 sep = "[^[:alnum:]]+",
-                                 remove = TRUE,
-                                 convert = FALSE,
-                                 ...) {
-  .df <- as_tidytable(.df)
-  separate(
-    .df, col = {{ col }}, into = into, sep = sep,
-    remove = remove, convert = convert, ...
-  )
+#' @keywords internal
+#' @inherit separate
+separate. <- function(.df, col, into,
+                      sep = "[^[:alnum:]]+",
+                      remove = TRUE,
+                      convert = FALSE,
+                      ...) {
+  check_required(col)
+  check_required(into)
+  deprecate_dot_fun()
+  separate(.df, {{ col }}, into, sep, remove, convert, ...)
 }
+
+globalVariables("..t_str_split")
 

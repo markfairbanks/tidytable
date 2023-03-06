@@ -22,7 +22,8 @@ test_that("nest. works", {
                         c = c("a", "a", "b"))
 
   result_df <- df %>%
-    nest.(data = everything())
+    nest.(data = everything()) %>%
+    suppressWarnings()
 
   expect_named(result_df, c("data"))
 })

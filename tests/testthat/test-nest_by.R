@@ -21,7 +21,8 @@ test_that("works with dot", {
                         c = c("a", "a", "b"))
 
   result_df <- test_df %>%
-    nest_by.()
+    nest_by.() %>%
+    suppressWarnings()
 
   expect_named(result_df, c("data"))
 })

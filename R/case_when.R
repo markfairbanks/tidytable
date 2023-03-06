@@ -41,7 +41,7 @@ case_when <- function(..., .default = NA, .ptype = NULL, .size = NULL) {
   pairs <- vec_interleave(conditions, values)
 
   out <- call2("case", !!!pairs, default = .default, ptype = .ptype, size = .size, .ns = "tidytable")
-  out <- as_quosure(out, caller_env())
+  out <- as_quosure(out, get_dt_env(enquos(...)))
 
   eval_tidy(out)
 }
@@ -49,4 +49,7 @@ case_when <- function(..., .default = NA, .ptype = NULL, .size = NULL) {
 #' @export
 #' @keywords internal
 #' @inherit case_when
-case_when. <- case_when
+case_when. <- function(..., .default = NA, .ptype = NULL, .size = NULL) {
+  deprecate_dot_fun()
+  case_when(..., .default = .default, .ptype = .ptype, .size = .size)
+}

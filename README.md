@@ -69,10 +69,10 @@ df %>%
 
 You can use the normal `tidyverse` `group_by()`/`ungroup()` workflow, or
 you can use `.by` syntax to reduce typing. Using `.by` in a function is
-shorthand for `df %>% group_by() %>% fn() %>% ungroup()`.
+shorthand for `df %>% group_by() %>% some_function() %>% ungroup()`.
 
--   A single column can be passed with `.by = z`
--   Multiple columns can be passed with `.by = c(y, z)`
+- A single column can be passed with `.by = z`
+- Multiple columns can be passed with `.by = c(y, z)`
 
 ``` r
 df <- data.table(x = c("a", "a", "b"), y = c("a", "a", "b"), z = 1:3)
@@ -222,25 +222,6 @@ df %>%
 
 For those interested in performance, speed comparisons can be found
 [here](https://markfairbanks.github.io/tidytable/articles/speed_comparisons.html).
-
-## `verb.()` syntax
-
-For backwards compatibility `tidytable` exports `verb.()` versions of
-functions. This will also allow users to more easily combine `dplyr` and
-`tidytable` functions in one script:
-
-``` r
-df <- data.table(x = 1:3, y = 4:6, z = c("a", "a", "b"))
-
-df %>%
-  mutate.(double_x = x * 2)
-#> # A tidytable: 3 × 4
-#>       x     y z     double_x
-#>   <int> <int> <chr>    <dbl>
-#> 1     1     4 a            2
-#> 2     2     5 a            4
-#> 3     3     6 b            6
-```
 
 ## Acknowledgements
 

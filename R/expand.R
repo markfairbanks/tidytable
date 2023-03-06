@@ -25,18 +25,26 @@
 #' df %>%
 #'   expand(nesting(x, y))
 expand <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
-  expand.(.df, ..., .name_repair = .name_repair, .by = {{ .by }})
+  .df <- .df_as_tidytable(.df)
+
+  if (is_ungrouped(.df)) {
+    tt_expand(.df, ..., .name_repair = .name_repair, .by = {{ .by }})
+  } else {
+    .by <- group_vars(.df)
+    out <- tt_expand(.df, ..., .name_repair = .name_repair, .by = any_of(.by))
+    group_by(out, any_of(.by))
+  }
 }
 
 #' @export
 #' @keywords internal
 #' @inherit expand
 expand. <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
-  UseMethod("expand.")
+  deprecate_dot_fun()
+  expand(.df, ..., .name_repair = .name_repair, .by = {{ .by }})
 }
 
-#' @export
-expand..tidytable <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
+tt_expand <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
   dots <- enquos(...)
   dots <- dots[!map_lgl(dots, quo_is_null)]
   if (length(dots) == 0) return(.df)
@@ -52,21 +60,6 @@ expand..tidytable <- function(.df, ..., .name_repair = "check_unique", .by = NUL
 
     df_name_repair(out, .name_repair)
   }
-}
-
-#' @export
-expand..grouped_tt <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
-  check_by({{ .by }})
-  .by <- group_vars(.df)
-  out <- ungroup(.df)
-  out <- expand(out, ..., .name_repair = .name_repair, .by = all_of(.by))
-  group_by(out, all_of(.by))
-}
-
-#' @export
-expand..data.frame <- function(.df, ..., .name_repair = "check_unique", .by = NULL) {
-  .df <- as_tidytable(.df)
-  expand(.df, ..., .name_repair = .name_repair, .by = {{ .by }})
 }
 
 df_expand <- function(.df, ..., .name_repair = .name_repair) {

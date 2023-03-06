@@ -22,18 +22,25 @@
 #' df %>%
 #'   filter(b <= mean(b), .by = c)
 filter <- function(.df, ..., .by = NULL) {
-  filter.(.df, ..., .by = {{ .by }})
+  .df <- .df_as_tidytable(.df)
+
+  if (is_ungrouped(.df)) {
+    tt_filter(.df, ..., .by = {{ .by }})
+  } else {
+    .by <- group_vars(.df)
+    tt_filter(.df, ..., .by = any_of(.by))
+  }
 }
 
 #' @export
 #' @keywords internal
 #' @inherit filter
 filter. <- function(.df, ..., .by = NULL) {
-  UseMethod("filter.")
+  deprecate_dot_fun()
+  filter(.df, ..., .by = {{ .by }})
 }
 
-#' @export
-filter..tidytable <- function(.df, ..., .by = NULL) {
+tt_filter <- function(.df, ..., .by = NULL) {
   .by <- enquo(.by)
 
   dots <- enquos(...)
@@ -52,21 +59,6 @@ filter..tidytable <- function(.df, ..., .by = NULL) {
   dt_expr <- call2_i(.df, i, .by)
 
   eval_tidy(dt_expr, .df, dt_env)
-}
-
-#' @export
-filter..grouped_tt <- function(.df, ..., .by = NULL) {
-  check_by({{ .by }})
-  .by <- group_vars(.df)
-  out <- ungroup(.df)
-  out <- filter(out, ..., .by = all_of(.by))
-  group_by(out, all_of(.by))
-}
-
-#' @export
-filter..data.frame <- function(.df, ..., .by = NULL) {
-  .df <- as_tidytable(.df)
-  filter(.df, ..., .by = {{ .by }})
 }
 
 check_filter <- function(dots) {

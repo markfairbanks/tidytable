@@ -31,7 +31,9 @@
 fill <- function(.df, ...,
                  .direction = c("down", "up", "downup", "updown"),
                  .by = NULL) {
-  fill.(.df, ..., .direction = .direction, .by = {{ .by }})
+  .direction <- arg_match(.direction)
+
+  mutate(.df, across(c(...), ~ vec_fill_missing(.x, .direction)), .by = {{ .by }})
 }
 
 #' @export
@@ -40,23 +42,7 @@ fill <- function(.df, ...,
 fill. <- function(.df, ...,
                   .direction = c("down", "up", "downup", "updown"),
                   .by = NULL) {
-  UseMethod("fill.")
-}
-
-#' @export
-fill..tidytable <- function(.df, ...,
-                            .direction = c("down", "up", "downup", "updown"),
-                            .by = NULL) {
-  .direction <- arg_match(.direction)
-
-  mutate(.df, across(c(...), ~ vec_fill_missing(.x, .direction)), .by = {{ .by }})
-}
-
-#' @export
-fill..data.frame <- function(.df, ...,
-                            .direction = c("down", "up", "downup", "updown"),
-                            .by = NULL) {
-  .df <- as_tidytable(.df)
+  deprecate_dot_fun()
   fill(.df, ..., .direction = .direction, .by = {{ .by }})
 }
 

@@ -31,7 +31,10 @@ map <- function(.x, .f, ...) {
 #' @export
 #' @keywords internal
 #' @inherit map
-map. <- map
+map. <- function(.x, .f, ...) {
+  deprecate_dot_fun()
+  map(.x, .f, ...)
+}
 
 #' @export
 #' @rdname map
@@ -43,7 +46,10 @@ map_lgl <- function(.x, .f, ...) {
 #' @export
 #' @keywords internal
 #' @inherit map
-map_lgl. <- map_lgl
+map_lgl. <- function(.x, .f, ...) {
+  deprecate_dot_fun()
+  map_lgl(.x, .f, ...)
+}
 
 #' @export
 #' @rdname map
@@ -55,7 +61,10 @@ map_int <- function(.x, .f, ...) {
 #' @export
 #' @keywords internal
 #' @inherit map
-map_int. <- map_int
+map_int. <- function(.x, .f, ...) {
+  deprecate_dot_fun()
+  map_int(.x, .f, ...)
+}
 
 #' @export
 #' @rdname map
@@ -67,7 +76,10 @@ map_dbl <- function(.x, .f, ...) {
 #' @export
 #' @keywords internal
 #' @inherit map
-map_dbl. <- map_dbl
+map_dbl. <- function(.x, .f, ...) {
+  deprecate_dot_fun()
+  map_dbl(.x, .f, ...)
+}
 
 #' @export
 #' @rdname map
@@ -79,7 +91,10 @@ map_chr <- function(.x, .f, ...) {
 #' @export
 #' @keywords internal
 #' @inherit map
-map_chr. <- map_chr
+map_chr. <- function(.x, .f, ...) {
+  deprecate_dot_fun()
+  map_chr(.x, .f, ...)
+}
 
 #' @export
 #' @rdname map
@@ -91,7 +106,10 @@ map_dfc <- function(.x, .f, ...) {
 #' @export
 #' @keywords internal
 #' @inherit map
-map_dfc. <- map_dfc
+map_dfc. <- function(.x, .f, ...) {
+  deprecate_dot_fun()
+  map_dfc(.x, .f, ...)
+}
 
 #' @export
 #' @rdname map
@@ -107,12 +125,18 @@ map_df <- map_dfr
 #' @export
 #' @keywords internal
 #' @inherit map
-map_dfr. <- map_dfr
+map_dfr. <- function(.x, .f, ..., .id = NULL) {
+  deprecate_dot_fun()
+  map_dfr(.x, .f, ..., .id = .id)
+}
 
 #' @export
 #' @keywords internal
 #' @inherit map
-map_df. <- map_dfr
+map_df. <- function(.x, .f, ..., .id = NULL) {
+  deprecate_dot_fun()
+  map_df(.x, .f, ..., .id = .id)
+}
 
 #' @export
 #' @rdname map
@@ -124,7 +148,10 @@ walk <- function(.x, .f, ...) {
 #' @export
 #' @keywords internal
 #' @inherit map
-walk. <- walk
+walk. <- function(.x, .f, ...) {
+  deprecate_dot_fun()
+  walk(.x, .f, ...)
+}
 
 #' @export
 #' @rdname map

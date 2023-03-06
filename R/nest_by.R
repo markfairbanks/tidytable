@@ -33,18 +33,25 @@
 #' df %>%
 #'   nest_by(c, d, .keep = TRUE)
 nest_by <- function(.df, ..., .key = "data", .keep = FALSE) {
-  nest_by.(.df, ..., .key = .key, .keep = .keep)
+  .df <- .df_as_tidytable(.df)
+
+  if (is_ungrouped(.df)) {
+    tt_nest_by(.df, ..., .key = .key, .keep = .keep)
+  } else {
+    .by <- group_vars(.df)
+    tt_nest_by(.df, any_of(.by), .key = .key, .keep = .keep)
+  }
 }
 
 #' @export
 #' @keywords internal
 #' @inherit nest_by
 nest_by. <- function(.df, ..., .key = "data", .keep = FALSE) {
-  UseMethod("nest_by.")
+  deprecate_dot_fun()
+  nest_by(.df, ..., .key = .key, .keep = .keep)
 }
 
-#' @export
-nest_by..tidytable <- function(.df, ..., .key = "data", .keep = FALSE) {
+tt_nest_by <- function(.df, ..., .key = "data", .keep = FALSE) {
   if (is_true(.keep)) {
     split_list <- group_split(.df, ..., .keep = .keep)
 
@@ -58,19 +65,5 @@ nest_by..tidytable <- function(.df, ..., .key = "data", .keep = FALSE) {
   }
 
   .df
-}
-
-#' @export
-nest_by..grouped_tt <- function(.df, ..., .key = "data", .keep = FALSE) {
-  .by <- group_vars(.df)
-  out <- ungroup(.df)
-  out <- nest_by(.df, all_of(.by), .key = .key, .keep = .keep)
-  group_by(out, all_of(.by))
-}
-
-#' @export
-nest_by..data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
-  .df <- as_tidytable(.df)
-  nest_by(.df, ..., .key = .key, .keep = .keep)
 }
 

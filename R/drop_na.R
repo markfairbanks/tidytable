@@ -24,18 +24,8 @@
 #' df %>%
 #'   drop_na(where(is.numeric))
 drop_na <- function(.df, ...) {
-  drop_na.(.df, ...)
-}
+  .df <- .df_as_tidytable(.df)
 
-#' @export
-#' @keywords internal
-#' @inherit drop_na
-drop_na. <- function(.df, ...) {
-  UseMethod("drop_na.")
-}
-
-#' @export
-drop_na..tidytable <- function(.df, ...) {
   dots <- enquos(...)
 
   if (length(dots) == 0) {
@@ -48,8 +38,10 @@ drop_na..tidytable <- function(.df, ...) {
 }
 
 #' @export
-drop_na..data.frame <- function(.df, ...) {
-  .df <- as_tidytable(.df)
+#' @keywords internal
+#' @inherit drop_na
+drop_na. <- function(.df, ...) {
+  deprecate_dot_fun()
   drop_na(.df, ...)
 }
 

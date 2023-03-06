@@ -19,18 +19,14 @@
 #' df %>%
 #'   transmute(double_a = a * 2)
 transmute <- function(.df, ..., .by = NULL) {
-  transmute.(.df, ..., .by = {{ .by }})
+  mutate(.df, ..., .by = {{ .by }}, .keep = "none")
 }
 
 #' @export
 #' @keywords internal
 #' @inherit transmute
 transmute. <- function(.df, ..., .by = NULL) {
-  UseMethod("transmute.")
-}
-
-#' @export
-transmute..data.frame <- function(.df, ..., .by = NULL) {
-  mutate(.df, ..., .by = {{ .by }}, .keep = "none")
+  deprecate_dot_fun()
+  transmute(.df, ..., .by = {{ .by }})
 }
 

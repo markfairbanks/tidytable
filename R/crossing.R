@@ -24,7 +24,6 @@ crossing <- function(..., .name_repair = "check_unique") {
 
 sort_unique <- function(x) {
   if (is.factor(x)) {
-    # forcats::fct_unique
     factor(levels(x), levels(x), exclude = NULL, ordered = is.ordered(x))
   } else if (is_bare_list(x)) {
     vec_unique(x)
@@ -38,4 +37,7 @@ sort_unique <- function(x) {
 #' @export
 #' @keywords internal
 #' @inherit crossing
-crossing. <- crossing
+crossing. <- function(..., .name_repair = "check_unique") {
+  deprecate_dot_fun()
+  crossing(..., .name_repair = .name_repair)
+}

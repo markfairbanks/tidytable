@@ -16,7 +16,9 @@ test_that("can overwrite existing column without removal", {
 
 test_that("extract. works", {
   df <- data.table(y = c("a1-1", "b2-2", "c3-3"))
-  res <- df %>% extract.(y, "A", regex="([[:alnum:]]+)")
+  res <- df %>%
+    extract.(y, "A", regex="([[:alnum:]]+)") %>%
+    suppressWarnings()
 
   expect_equal(res$A, c("a1", "b2", "c3"))
   expect_null(res$y)

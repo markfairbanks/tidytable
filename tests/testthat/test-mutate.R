@@ -6,10 +6,10 @@ test_that("can remove variables with NULL", {
   # Only deletes if the the NULL is in the last position
   tidytable2_df <- df %>%
     mutate(x = NULL,
-            x = rep(1, 3),
-            x_plus_y = x + y,
-            y = NULL,
-            .by = x)
+           x = rep(1, 3),
+           x_plus_y = x + y,
+           y = NULL,
+           .by = x)
 
   df_check <- tidytable(x = rep(1, 3), x_plus_y = rep(3, 3))
 
@@ -35,7 +35,8 @@ test_that("mutate. works", {
   df <- data.table(x = 1:3, y = 1:3)
   df <- df %>%
     mutate.(double_x = x * 2,
-            double_y = y * 2)
+            double_y = y * 2) %>%
+    suppressWarnings()
 
   expect_named(df, c("x", "y", "double_x", "double_y"))
   expect_equal(df$x * 2, df$double_x)
@@ -46,7 +47,7 @@ test_that("modify-by-reference doesn't occur", {
   df <- data.table(x = 1:3, y = 1:3)
   df %>%
     mutate(double_x = x * 2,
-            double_y = y * 2)
+           double_y = y * 2)
 
   expect_named(df, c("x", "y"))
 })
@@ -57,7 +58,7 @@ test_that("modify-by-reference doesn't occur with single val", {
     mutate(x = 1)
 
   expect_named(df, c("x", "y"))
-  expect_equal(df$x, c(1,2,3))
+  expect_equal(df$x, c(1, 2, 3))
 })
 
 test_that("modify-by-reference doesn't occur with single val variable", {
@@ -114,6 +115,20 @@ test_that("works on grouped_tt", {
 
   check <- df %>%
     mutate(z = mean(x), .by = y)
+
+  expect_equal(ungroup(res), check)
+  expect_equal(group_vars(res), "y")
+  expect_true(is_grouped_df(res))
+
+  # Ensure returns grouped_tt when editing existing var
+  df <- tidytable(x = 1:5, y = c(rep("a", 4), "b"))
+
+  res <- df %>%
+    group_by(y) %>%
+    mutate(x = .N)
+
+  check <- df %>%
+    mutate(x = .N, .by = y)
 
   expect_equal(ungroup(res), check)
   expect_equal(group_vars(res), "y")

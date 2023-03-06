@@ -11,7 +11,7 @@ test_that("missing values are replaced", {
 
 test_that("replace_na. works", {
   x <- c(1, NA)
-  expect_equal(replace_na.(x, 0), c(1, 0))
+  expect_equal(suppressWarnings(replace_na.(x, 0)), c(1, 0))
 })
 
 test_that("can only be length 1", {
@@ -19,25 +19,24 @@ test_that("can only be length 1", {
 })
 
 test_that("works on numeric columns", {
-  test_df <- data.table(x = c(1, 2, NA), y = c("a", NA, "c"))
-  replaced_df <- test_df %>%
-    mutate(x = replace_na(x, 5))
+  x <- c(1, 2, NA)
+  res <- replace_na(x, 5)
 
-  expect_equal(replaced_df$x, c(1,2,5))
+  expect_equal(res, c(1, 2, 5))
 })
 
 test_that("works on character columns", {
-  test_df <- data.table(x = c(1, 2, NA), y = c("a", NA, "c"))
-  replaced_df <- test_df %>%
+  df <- data.table(x = c(1, 2, NA), y = c("a", NA, "c"))
+  res <- df %>%
     mutate(y = replace_na(y, "b"))
 
-  expect_equal(replaced_df$y, c("a", "b", "c"))
+  expect_equal(res$y, c("a", "b", "c"))
 })
 
 test_that("replace_na is converted to tidytable", {
   x <- c(1, NA)
-  test_df <- tidytable(x = x)
-  expect_equal(mutate(test_df, x = replace_na(x, 0))$x, c(1, 0))
+  df <- tidytable(x = x)
+  expect_equal(mutate(df, x = replace_na(x, 0))$x, c(1, 0))
 })
 
 # data frame -------------------------------------------------------------

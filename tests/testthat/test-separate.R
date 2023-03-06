@@ -13,7 +13,8 @@ test_that("separate. works", {
   df <- data.table(x = c("a", "a b", "a b", NA))
 
   df <- df %>%
-    separate.(x, c("c1", "c2"))
+    separate.(x, c("c1", "c2")) %>%
+    suppressWarnings()
 
   expect_named(df, c("c1", "c2"))
   expect_equal(df$c1, c("a","a","a",NA))

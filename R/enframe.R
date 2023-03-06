@@ -36,4 +36,7 @@ enframe <- function(x, name = "name", value = "value") {
 #' @export
 #' @keywords internal
 #' @inherit enframe
-enframe. <- enframe
+enframe. <- function(x, name = "name", value = "value") {
+  deprecate_dot_fun()
+  enframe(x, name, value)
+}

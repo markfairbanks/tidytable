@@ -29,7 +29,8 @@ test_that("default uses all character/factor - no NAs & no modify-by-reference",
 })
 
 test_that("get_dummies. works", {
-  dummy_df <- get_dummies.(df1)
+  dummy_df <- get_dummies.(df1) %>%
+    suppressWarnings()
 
   expect_named(dummy_df, c("col1", "col2", "var1",
                            "col1_a", "col1_b", "col1_c",

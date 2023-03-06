@@ -19,7 +19,8 @@ test_that("`names_sort = FALSE` works", {
 
 test_that("pivot_wider. works", {
   df <- data.table(label = c("x", "y", "z"), val = 1:3)
-  pivot_df <- pivot_wider.(df, names_from = label, values_from = val)
+  pivot_df <- pivot_wider.(df, names_from = label, values_from = val) %>%
+    suppressWarnings()
 
   expect_named(pivot_df, c("x", "y", "z"))
   expect_equal(nrow(pivot_df), 1)
@@ -213,7 +214,7 @@ test_that("correctly labels columns when `names_glue` is used, #579", {
     v1 = c("b", "a", "c")
   )
 
-  result1 <- pivot_wider.(
+  result1 <- pivot_wider(
     df1,
     names_from = lettr,
     values_from = v1,
@@ -230,7 +231,7 @@ test_that("correctly labels columns when `names_glue` is used, #579", {
     v2 = c("b", "a", "c")
   )
 
-  result2 <- pivot_wider.(
+  result2 <- pivot_wider(
     df2,
     names_from = lettr,
     values_from = c(v1, v2),

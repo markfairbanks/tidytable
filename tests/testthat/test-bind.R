@@ -68,7 +68,8 @@ test_that("bind_rows.() works", {
   df2 <- data.table(x = c(1,2,3), y = c(3,4,5))
 
   bind_df <- df1 %>%
-    bind_rows.(df2)
+    bind_rows.(df2) %>%
+    suppressWarnings()
 
   expect_true(is_tidytable(bind_df))
   expect_named(bind_df, c("x","y"))
@@ -175,7 +176,8 @@ test_that("bind_cols.() works", {
   df2 <- data.table(a = c(1,2,3), b = c(3,4,5))
 
   bind_df <- df1 %>%
-    bind_cols.(df2)
+    bind_cols.(df2) %>%
+    suppressWarnings()
 
   expect_named(bind_df, c("x","y","a","b"))
   expect_equal(bind_df$x, c(1,2,3))

@@ -68,7 +68,8 @@ test_that("works with quosures", {
 test_that("drop_na. works", {
   test_df <- data.table(x = c(1, 2, NA), y = c("a", NA, "b"))
   drop_df <- test_df %>%
-    drop_na.()
+    drop_na.() %>%
+    suppressWarnings()
 
   expect_named(drop_df, c("x", "y"))
   expect_equal(drop_df$x, 1)

@@ -72,7 +72,7 @@ dt.tidytable <- function(.df, ...) {
       } else {
         # .df %>% dt(, let(x = 1, double_y = y * 2))
         # .df %>% dt(, let(!!col := !!col * 2))
-        j <- prep_j_expr(j, ":=")
+        j <- prep_j_expr(j)
         args$j <- j
         col_names <- names(as.list(j[-1]))
         .df <- fast_copy(.df, col_names)
@@ -80,7 +80,7 @@ dt.tidytable <- function(.df, ...) {
     } else if (is_call(j, c(".", "list"))) {
       # .df %>% dt(, .(mean_x = mean(x)))
       # .df %>% dt(, .(!!col := mean(!!col)))
-      j <- prep_j_expr(j, ".")
+      j <- prep_j_expr(j)
       args$j <- j
     }
   }
@@ -96,13 +96,6 @@ dt.tidytable <- function(.df, ...) {
 }
 
 #' @export
-dt.grouped_tt <- function(.df, ...) {
-  warn("Output is ungrouped when using `dt()` on a grouped tidytable.")
-  .df <- ungroup(.df)
-  dt(.df, ...)
-}
-
-#' @export
 dt.data.frame <- function(.df, ...) {
   .df <- as_tidytable(.df)
   dt(.df, ...)
@@ -110,8 +103,9 @@ dt.data.frame <- function(.df, ...) {
 
 # Allow unquoting names in j position
 #   Ex: df %>% dt(, let({{ col }} := {{ col }} * 2))
-#   Ex: df %>% dt(, .({{ col }} := mean({{ col }})))
-prep_j_expr <- function(j, j_call) {
+#   Ex: df %>% dt(, .(!!col := mean(!!col)))
+prep_j_expr <- function(j) {
+  j_call <- call_name(j)
   j_exprs <- as.list(j[-1])
   use_walrus <- map_lgl(j_exprs, is_call, ":=")
   if (any(use_walrus)) {

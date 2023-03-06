@@ -26,4 +26,7 @@ n_distinct <- function(..., na.rm = FALSE) {
 #' @export
 #' @keywords internal
 #' @inherit n_distinct
-n_distinct. <- n_distinct
+n_distinct. <- function(..., na.rm = FALSE) {
+  deprecate_dot_fun()
+  n_distinct(..., na.rm = na.rm)
+}

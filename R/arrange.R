@@ -21,18 +21,8 @@
 #' df %>%
 #'   arrange(c, desc(a))
 arrange <- function(.df, ...) {
-  arrange.(.df, ...)
-}
+  .df <- .df_as_tidytable(.df)
 
-#' @export
-#' @keywords internal
-#' @inherit arrange
-arrange. <- function(.df, ...) {
-  UseMethod("arrange.")
-}
-
-#' @export
-arrange..tidytable <- function(.df, ...) {
   dots <- enquos(...)
 
   if (length(dots) == 0) return(.df)
@@ -59,7 +49,9 @@ arrange..tidytable <- function(.df, ...) {
 }
 
 #' @export
-arrange..data.frame <- function(.df, ...) {
-  .df <- as_tidytable(.df)
+#' @keywords internal
+#' @inherit arrange
+arrange. <- function(.df, ...) {
+  deprecate_dot_fun()
   arrange(.df, ...)
 }

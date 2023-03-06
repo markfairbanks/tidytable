@@ -36,33 +36,24 @@
 #' df %>%
 #'   select(new = x1, y)
 select <- function(.df, ...) {
-  select.(.df, ...)
+  if (!is_tidytable(.df)) .df <- as_tidytable(.df)
+
+  if (is_ungrouped(.df)) {
+    tt_select(.df, ...)
+  } else {
+    tt_select(.df, ..., group_cols())
+  }
 }
 
 #' @export
 #' @keywords internal
 #' @inherit select
 select. <- function(.df, ...) {
-  UseMethod("select.")
-}
-
-#' @export
-select..tidytable <- function(.df, ...) {
-  .select(.df, ...)
-}
-
-#' @export
-select..grouped_tt <- function(.df, ...) {
-  .select(.df, ..., group_cols())
-}
-
-#' @export
-select..data.frame <- function(.df, ...) {
-  .df <- as_tidytable(.df)
+  deprecate_dot_fun()
   select(.df, ...)
 }
 
-.select <- function(.df, ...) {
+tt_select <- function(.df, ...) {
   locs <- tidyselect_locs(.df, ...)
 
   out <- new_data_frame(.df)[locs]

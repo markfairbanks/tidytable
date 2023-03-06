@@ -40,7 +40,10 @@ left_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE
 #' @export
 #' @keywords internal
 #' @inherit left_join
-left_join. <- left_join
+left_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
+  deprecate_dot_fun()
+  left_join(x, y, by, suffix, keep = keep)
+}
 
 #' @export
 #' @rdname left_join
@@ -62,7 +65,10 @@ right_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALS
 #' @export
 #' @keywords internal
 #' @inherit left_join
-right_join. <- right_join
+right_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
+  deprecate_dot_fun()
+  right_join(x, y, by, suffix, keep = keep)
+}
 
 #' @export
 #' @rdname left_join
@@ -84,7 +90,10 @@ inner_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALS
 #' @export
 #' @keywords internal
 #' @inherit left_join
-inner_join. <- inner_join
+inner_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
+  deprecate_dot_fun()
+  inner_join(x, y, by, suffix, keep = keep)
+}
 
 #' @export
 #' @rdname left_join
@@ -135,7 +144,10 @@ full_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE
 #' @export
 #' @keywords internal
 #' @inherit left_join
-full_join. <- full_join
+full_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
+  deprecate_dot_fun()
+  full_join(x, y, by, suffix, keep = keep)
+}
 
 temp_names_fix <- function(names, by_x, y_suffix) {
   new_names <- str_replace(names, "__temp__", "")
@@ -160,7 +172,10 @@ anti_join <- function(x, y, by = NULL) {
 #' @export
 #' @keywords internal
 #' @inherit left_join
-anti_join. <- anti_join
+anti_join. <- function(x, y, by = NULL) {
+  deprecate_dot_fun()
+  anti_join(x, y, by = by)
+}
 
 #' @export
 #' @rdname left_join
@@ -179,7 +194,10 @@ semi_join <- function(x, y, by = NULL) {
 #' @export
 #' @keywords internal
 #' @inherit left_join
-semi_join. <- semi_join
+semi_join. <- function(x, y, by = NULL) {
+  deprecate_dot_fun()
+  semi_join(x, y, by = by)
+}
 
 get_bys <- function(x, y, by = NULL) {
   if (length(by) == 0 && !is.null(by)) {
@@ -324,13 +342,13 @@ suffix_join_names <- function(x_names, y_names, suffix, keep, by = NULL, type) {
   df_names
 }
 
-deprecate_join_by_character <- function() {
+deprecate_join_by_character <- function(env = caller_env(), user_env = caller_env(2)) {
   deprecate_soft(
     when = "0.9.2",
     what = I("Using `by = character()` to perform a cross join"),
     with = "cross_join()",
-    env = caller_env(),
-    user_env = caller_env(2)
+    env = env,
+    user_env = user_env
   )
 }
 

@@ -2,9 +2,18 @@
 #' @rdname slice
 slice_sample <- function(.df, n, prop, weight_by = NULL,
                          replace = FALSE, .by = NULL, by = NULL) {
-  slice_sample.(
-    .df, n, prop, {{ weight_by }}, replace, .by = {{ .by }}, by = {{ by }}
-  )
+  .df <- .df_as_tidytable(.df)
+
+  if (is_ungrouped(.df)) {
+    tt_slice_sample(
+      .df, n, prop, {{ weight_by }}, replace, .by = {{ .by }}, by = {{ by }}
+    )
+  } else {
+    .by <- group_vars(.df)
+    tt_slice_sample(
+      .df, n, prop, {{ weight_by }}, replace, .by = all_of(.by)
+    )
+  }
 }
 
 #' @export
@@ -12,12 +21,14 @@ slice_sample <- function(.df, n, prop, weight_by = NULL,
 #' @inherit slice
 slice_sample. <- function(.df, n, prop, weight_by = NULL,
                           replace = FALSE, .by = NULL, by = NULL) {
-  UseMethod("slice_sample.")
+  deprecate_dot_fun()
+  slice_sample(
+    .df, n, prop, {{ weight_by }}, replace, .by = {{ .by }}, by = {{ by }}
+  )
 }
 
-#' @export
-slice_sample..tidytable <- function(.df, n, prop, weight_by = NULL,
-                                    replace = FALSE, .by = NULL, by = NULL) {
+tt_slice_sample <- function(.df, n, prop, weight_by = NULL,
+                            replace = FALSE, .by = NULL, by = NULL) {
   if (missing(n) && missing(prop)) {
     abort("Must supply either `n` or `prop`")
   } else if (missing(prop)) {
@@ -30,28 +41,6 @@ slice_sample..tidytable <- function(.df, n, prop, weight_by = NULL,
     .df,
     sample_int(.N, !!n * !!prop, replace, wt = {{ weight_by }}),
     .by = c({{ .by }}, {{ by }})
-  )
-}
-
-#' @export
-slice_sample..grouped_tt <- function(.df, n, prop, weight_by = NULL,
-                                     replace = FALSE, .by = NULL, by = NULL) {
-  check_by({{ .by }})
-  check_by({{ by }})
-  .by <- group_vars(.df)
-  out <- ungroup(.df)
-  out <- slice_sample(
-    out, n, prop, {{ weight_by }}, replace, .by = all_of(.by)
-  )
-  group_by(out, all_of(.by))
-}
-
-#' @export
-slice_sample..data.frame <- function(.df, n, prop, weight_by = NULL,
-                                     replace = FALSE, .by = NULL, by = NULL) {
-  .df <- as_tidytable(.df)
-  slice_sample(
-    .df, n, prop, {{ weight_by }}, replace, .by = {{ .by }}, by = {{ by }}
   )
 }
 

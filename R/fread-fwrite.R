@@ -22,11 +22,15 @@ fread <- function(...) {
 #' @export
 #' @keywords internal
 #' @inherit fread
-fread. <- fread
+fread. <- function(...) {
+  deprecate_dot_fun()
+  fread(...)
+}
 
 #' @export
 #' @keywords internal
 #' @inherit fread
 fwrite. <- function(...) {
+  deprecate_dot_fun()
   fwrite(...)
 }

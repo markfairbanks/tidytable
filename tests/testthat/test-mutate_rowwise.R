@@ -11,7 +11,8 @@ test_that("mutate_rowwise.() adds column", {
   test_df <- data.table(x = 1:3, y = 1:3, z = c("a", "a", "b"))
 
   results_df <- test_df %>%
-    mutate_rowwise.(row_mean = mean(c(x, y)))
+    mutate_rowwise.(row_mean = mean(c(x, y))) %>%
+    suppressWarnings()
 
   expect_equal(results_df$row_mean, 1:3)
 })

@@ -13,7 +13,8 @@ test_that("transmute. works", {
   df <- data.table(x = 1:3, y = 1:3)
   df <- df %>%
     transmute.(double_x = x * 2,
-               double_y = y * 2)
+               double_y = y * 2) %>%
+    suppressWarnings()
 
   expect_named(df, c("double_x", "double_y"))
   expect_equal(df$double_x, c(2,4,6))

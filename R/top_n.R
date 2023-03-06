@@ -23,18 +23,8 @@
 #' df %>%
 #'   top_n(2, wt = y, .by = z)
 top_n <- function(.df, n = 5, wt = NULL, .by = NULL) {
-  top_n.(.df, {{ n }}, {{ wt }}, .by = {{ .by }})
-}
+  .df <- .df_as_tidytable(.df)
 
-#' @export
-#' @keywords internal
-#' @inherit top_n
-top_n. <- function(.df, n = 5, wt = NULL, .by = NULL) {
-  UseMethod("top_n.")
-}
-
-#' @export
-top_n..tidytable <- function(.df, n = 5, wt = NULL, .by = NULL) {
   wt <- enquo(wt)
 
   if (quo_is_null(wt)) {
@@ -45,8 +35,10 @@ top_n..tidytable <- function(.df, n = 5, wt = NULL, .by = NULL) {
 }
 
 #' @export
-top_n..data.frame <- function(.df, n = 5, wt = NULL, .by = NULL) {
-  .df <- as_tidytable(.df)
+#' @keywords internal
+#' @inherit top_n
+top_n. <- function(.df, n = 5, wt = NULL, .by = NULL) {
+  deprecate_dot_fun()
   top_n(.df, {{ n }}, {{ wt }}, .by = {{ .by }})
 }
 

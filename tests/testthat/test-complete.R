@@ -28,7 +28,7 @@ test_that("not drop unspecified levels in complete", {
 
 test_that("complete. works", {
   df <- tidytable(x = 1:2, y = 1:2, z = 3:4)
-  out <- complete.(df, x, y)
+  out <- suppressWarnings(complete.(df, x, y))
   expect_equal(nrow(out), 4)
   expect_equal(out$z, c(3, NA, NA, 4))
 })

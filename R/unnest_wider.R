@@ -26,25 +26,8 @@
 unnest_wider <- function(.df, col, names_sep = NULL,
                          simplify = NULL, names_repair = "check_unique",
                          ptype = NULL, transform = NULL) {
-  unnest_wider.(
-    .df, col = {{ col }}, names_sep = names_sep, simplify = simplify,
-    names_repair = names_repair, ptype = ptype, transform = transform
-  )
-}
+  .df <- .df_as_tidytable(.df)
 
-#' @export
-#' @keywords internal
-#' @inherit unnest_wider
-unnest_wider. <- function(.df, col, names_sep = NULL,
-                          simplify = NULL, names_repair = "check_unique",
-                          ptype = NULL, transform = NULL) {
-  UseMethod("unnest_wider.")
-}
-
-#' @export
-unnest_wider..tidytable <- function(.df, col, names_sep = NULL,
-                                    simplify = NULL, names_repair = "check_unique",
-                                    ptype = NULL, transform = NULL) {
   .col <- enquo(col)
 
   .l <- pull(.df, !!.col)
@@ -84,16 +67,17 @@ unnest_wider..tidytable <- function(.df, col, names_sep = NULL,
 }
 
 #' @export
-unnest_wider..data.frame <- function(.df, col, names_sep = NULL,
-                                     simplify = NULL, names_repair = "check_unique",
-                                     ptype = NULL, transform = NULL) {
-  .df <- as_tidytable(.df)
+#' @keywords internal
+#' @inherit unnest_wider
+unnest_wider. <- function(.df, col, names_sep = NULL,
+                          simplify = NULL, names_repair = "check_unique",
+                          ptype = NULL, transform = NULL) {
+  deprecate_dot_fun()
   unnest_wider(
     .df, col = {{ col }}, names_sep = names_sep, simplify = simplify,
     names_repair = names_repair, ptype = ptype, transform = transform
   )
 }
-
 
 unnest_wider_tidytable <- function(...) {
   dots <- list2(...)

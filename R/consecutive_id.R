@@ -21,4 +21,7 @@ consecutive_id <- function(...) {
 #' @export
 #' @keywords internal
 #' @inherit consecutive_id
-consecutive_id. <- consecutive_id
+consecutive_id. <- function(...) {
+  deprecate_dot_fun()
+  consecutive_id(...)
+}
