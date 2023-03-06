@@ -15,7 +15,7 @@ expand_across <- function(call, data, .by, j, dt_env, is_top_level) {
       repair = "check_unique", quiet = TRUE
     )
   } else {
-    .fns <- as.list(.fns[-1])
+    .fns <- call_args(.fns)
 
     is_named <- have_name(.fns)
 

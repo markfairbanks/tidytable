@@ -48,15 +48,15 @@ dt.tidytable <- function(.df, ...) {
 
   call <- call_match(call, internal_dt_subset)
 
-  args <- as.list(call[-1])
+  args <- call_args(call)
 
   j <- args$j
   if (!is.null(j)) {
     if (is_call(j, c(":=", "let"))) {
-      mut_exprs <- as.list(j[-1])
-      if (length(mut_exprs) == 2 && is.null(names(mut_exprs))) {
-        col_name <- mut_exprs[[1]]
-        if (is.null(mut_exprs[[2]])) {
+      mutate_exprs <- call_args(j)
+      if (is_basic_mutate(mutate_exprs)) {
+        col_name <- mutate_exprs[[1]]
+        if (is.null(mutate_exprs[[2]])) {
           # .df[, col := NULL]
           col_name <- character()
         } else if (is.symbol(col_name)) {
@@ -74,7 +74,7 @@ dt.tidytable <- function(.df, ...) {
         # .df %>% dt(, let(!!col := !!col * 2))
         j <- prep_j_expr(j)
         args$j <- j
-        col_names <- names(as.list(j[-1]))
+        col_names <- call_args_names(j)
         .df <- fast_copy(.df, col_names)
       }
     } else if (is_call(j, c(".", "list"))) {
@@ -88,7 +88,7 @@ dt.tidytable <- function(.df, ...) {
   dt_expr <- call2("[", !!!args)
 
   # Only add empty `[` when using mutate
-  if (exists("mut_exprs", current_env())) {
+  if (env_has(current_env(), "mutate_exprs")) {
     dt_expr <- call2("[", dt_expr)
   }
 
@@ -101,16 +101,26 @@ dt.data.frame <- function(.df, ...) {
   dt(.df, ...)
 }
 
-# Allow unquoting names in j position
+# Checks if j is a single call to `:=` or let
+is_basic_mutate <- function(mutate_exprs) {
+  no_names <- !any(have_name(mutate_exprs))
+  no_walrus <- !any(map_lgl(mutate_exprs, is_call, ":="))
+  has_length(mutate_exprs, 2) && no_names && no_walrus
+}
+
+# Allow unquoting names in j position & allow using let
 #   Ex: df %>% dt(, let({{ col }} := {{ col }} * 2))
 #   Ex: df %>% dt(, .(!!col := mean(!!col)))
 prep_j_expr <- function(j) {
+  if (is_call(j, "let")) {
+    j[[1]] <- expr(`:=`)
+  }
   j_call <- call_name(j)
-  j_exprs <- as.list(j[-1])
+  j_exprs <- call_args(j)
   use_walrus <- map_lgl(j_exprs, is_call, ":=")
   if (any(use_walrus)) {
     walrus_exprs <- j_exprs[use_walrus]
-    walrus_exprs <- map(walrus_exprs, ~ as.list(.x[-1]))
+    walrus_exprs <- map(walrus_exprs, ~ call_args(.x))
     walrus_names <- map_chr(walrus_exprs, ~ as.character(.x[[1]]))
     walrus_exprs <- map(walrus_exprs, ~ .x[[2]])
     j_exprs[use_walrus] <- walrus_exprs
