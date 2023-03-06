@@ -63,7 +63,7 @@ df %>%
 
 ## Applying functions by group
 
-You can use the normal `tidyverse` `group_by()`/`ungroup()` workflow, or you can use `.by` syntax to reduce typing. Using `.by` in a function is shorthand for `df %>% group_by() %>% fn() %>% ungroup()`.
+You can use the normal `tidyverse` `group_by()`/`ungroup()` workflow, or you can use `.by` syntax to reduce typing. Using `.by` in a function is shorthand for `df %>% group_by() %>% some_function() %>% ungroup()`.
 
 * A single column can be passed with `.by = z`
 * Multiple columns can be passed with `.by = c(y, z)`
@@ -168,17 +168,6 @@ df %>%
 ## Speed Comparisons
 
 For those interested in performance, speed comparisons can be found [here](https://markfairbanks.github.io/tidytable/articles/speed_comparisons.html).
-
-## `verb.()` syntax
-
-For backwards compatibility `tidytable` exports `verb.()` versions of functions. This will also allow users to more easily combine `dplyr` and `tidytable` functions in one script:
-
-```{r}
-df <- data.table(x = 1:3, y = 4:6, z = c("a", "a", "b"))
-
-df %>%
-  mutate.(double_x = x * 2)
-```
 
 ## Acknowledgements
 `tidytable` is only possible because of the great contributions to R by the `data.table` and `tidyverse` teams. `data.table` is used as the main data frame engine in the background, while `tidyverse` packages like `rlang`, `vctrs`, and `tidyselect` are heavily relied upon to give users an experience similar to `dplyr` and `tidyr`.
