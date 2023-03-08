@@ -46,37 +46,37 @@ dt.tidytable <- function(.df, ...) {
 
   call <- call2("[", quo(.df), !!!dots)
 
-  call <- call_match(call, internal_dt_subset)
+  call <- call_match(call, internal_dt)
 
   args <- call_args(call)
 
   j <- args$j
   if (!is.null(j)) {
     if (is_call(j, c(":=", "let"))) {
+      # Find cols mutated for `fast_copy()`
       mutate_exprs <- call_args(j)
       if (is_basic_mutate(mutate_exprs)) {
-        col_name <- mutate_exprs[[1]]
+        cols <- mutate_exprs[[1]]
         if (is.null(mutate_exprs[[2]])) {
           # .df[, col := NULL]
-          col_name <- character()
-        } else if (is.symbol(col_name)) {
+          cols <- character()
+        } else if (is.symbol(cols)) {
           # .df[, x := x * 2]
-          col_name <- as.character(col_name)
+          cols <- as.character(cols)
         } else {
           # .df[, "double_x" := x * 2]
           # .df[, (new_col) := x * 2] # Note: needs dt_env
           # .df[, c("x", "y") := lapply(.SD, \(x) x + 1), .SDcols = c("x", "y")]
-          col_name <- eval_tidy(col_name, env = dt_env)
+          cols <- eval_tidy(cols, env = dt_env)
         }
-        .df <- fast_copy(.df, col_name)
       } else {
         # .df %>% dt(, let(x = 1, double_y = y * 2))
         # .df %>% dt(, let(!!col := !!col * 2))
         j <- prep_j_expr(j)
         args$j <- j
-        col_names <- call_args_names(j)
-        .df <- fast_copy(.df, col_names)
+        cols <- call_args_names(j)
       }
+      .df <- fast_copy(.df, cols)
     } else if (is_call(j, c(".", "list"))) {
       # .df %>% dt(, .(mean_x = mean(x)))
       # .df %>% dt(, .(!!col := mean(!!col)))
@@ -131,17 +131,19 @@ prep_j_expr <- function(j) {
   j
 }
 
-internal_dt_subset <- function(x, i, j, by, keyby, with = TRUE,
-                               nomatch = NA,
-                               mult = "all",
-                               roll = FALSE,
-                               rollends = if (roll=="nearest") c(TRUE,TRUE)
-                               else if (roll>=0) c(FALSE,TRUE)
-                               else c(TRUE,FALSE),
-                               which = FALSE,
-                               .SDcols,
-                               verbose = FALSE,
-                               allow.cartesian = FALSE,
-                               drop = NULL, on = NULL) {
+# Dummy function with `[.data.table` arguments
+# For use with call_match in `dt()`
+internal_dt <- function(x, i, j, by, keyby, with = TRUE,
+                        nomatch = NA,
+                        mult = "all",
+                        roll = FALSE,
+                        rollends = if (roll=="nearest") c(TRUE,TRUE)
+                        else if (roll>=0) c(FALSE,TRUE)
+                        else c(TRUE,FALSE),
+                        which = FALSE,
+                        .SDcols,
+                        verbose = FALSE,
+                        allow.cartesian = FALSE,
+                        drop = NULL, on = NULL) {
   abort("For internal call_match only.")
 }
