@@ -44,15 +44,16 @@ dt.tidytable <- function(.df, ...) {
 
   dots <- lapply(dots, quo_squash)
 
-  call <- call2("[", quo(.df), !!!dots)
+  dt_expr <- call2("[", quo(.df), !!!dots)
 
-  call <- call_match(call, internal_dt)
+  dt_expr <- call_match(dt_expr, internal_dt)
 
-  args <- call_args(call)
+  args <- call_args(dt_expr)
 
   j <- args$j
   if (!is.null(j)) {
-    if (is_call(j, c(":=", "let"))) {
+    is_mutate <- is_call(j, c(":=", "let"))
+    if (is_mutate) {
       # Find cols mutated for `fast_copy()`
       mutate_exprs <- call_args(j)
       if (is_basic_mutate(mutate_exprs)) {
@@ -83,13 +84,13 @@ dt.tidytable <- function(.df, ...) {
       j <- prep_j_expr(j)
       args$j <- j
     }
-  }
 
-  dt_expr <- call2("[", !!!args)
+    dt_expr <- call2("[", !!!args)
 
-  # Only add empty `[` when using mutate
-  if (env_has(current_env(), "mutate_exprs")) {
-    dt_expr <- call2("[", dt_expr)
+    # Only add empty `[` when using mutate
+    if (is_mutate) {
+      dt_expr <- call2("[", dt_expr)
+    }
   }
 
   eval_tidy(dt_expr, env = dt_env)
