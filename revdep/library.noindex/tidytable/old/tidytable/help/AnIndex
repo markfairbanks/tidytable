@@ -42,6 +42,7 @@ count	count
 count.	count.
 crossing	crossing
 crossing.	crossing.
+cross_join	cross_join
 cume_dist	rank
 cur_column	context
 cur_column.	cur_column.
@@ -96,6 +97,7 @@ get_dummies.	get_dummies.
 glimpse	reexports
 group_by	group_by
 group_by.	group_by.
+group_cols	group_cols
 group_split	group_split
 group_split.	group_split.
 group_vars	group_vars
@@ -140,6 +142,7 @@ map2_int	map
 map2_int.	map2_int.
 map2_lgl	map
 map2_lgl.	map2_lgl.
+map2_vec	map
 map_chr	map
 map_chr.	map_chr.
 map_dbl	map
@@ -154,6 +157,7 @@ map_int	map
 map_int.	map_int.
 map_lgl	map
 map_lgl.	map_lgl.
+map_vec	map
 matches	reexports
 min_rank	rank
 mutate	mutate
@@ -179,6 +183,7 @@ num_range	reexports
 n_distinct	n_distinct
 n_distinct.	n_distinct.
 percent_rank	rank
+pick	pick
 pivot_longer	pivot_longer
 pivot_longer.	pivot_longer.
 pivot_wider	pivot_wider
@@ -199,6 +204,7 @@ pmap_int	map
 pmap_int.	pmap_int.
 pmap_lgl	map
 pmap_lgl.	pmap_lgl.
+pmap_vec	map
 pull	pull
 pull.	pull.
 quo	reexports
@@ -225,8 +231,11 @@ semi_join	left_join
 semi_join.	semi_join.
 separate	separate
 separate.	separate.
+separate_longer_delim	separate_longer_delim
 separate_rows	separate_rows
 separate_rows.	separate_rows.
+separate_wider_delim	separate_wider_delim
+separate_wider_regex	separate_wider_regex
 setDTthreads	reexports
 slice	slice
 slice.	slice.

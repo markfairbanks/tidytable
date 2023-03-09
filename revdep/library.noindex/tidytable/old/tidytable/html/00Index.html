@@ -12,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;tidytable&rsquo; version 0.9.1</h2>
+</div><h2>Documentation for package &lsquo;tidytable&rsquo; version 0.9.2</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 </ul>
@@ -93,6 +93,8 @@
 <td>Count observations by group</td></tr>
 <tr><td style="width: 25%;"><a href="crossing.html">crossing</a></td>
 <td>Create a data.table from all unique combinations of inputs</td></tr>
+<tr><td style="width: 25%;"><a href="cross_join.html">cross_join</a></td>
+<td>Cross join</td></tr>
 <tr><td style="width: 25%;"><a href="rank.html">cume_dist</a></td>
 <td>Ranking functions</td></tr>
 <tr><td style="width: 25%;"><a href="context.html">cur_column</a></td>
@@ -157,6 +159,8 @@
 <td>Convert character and factor columns to dummy variables</td></tr>
 <tr><td style="width: 25%;"><a href="group_by.html">group_by</a></td>
 <td>Grouping</td></tr>
+<tr><td style="width: 25%;"><a href="group_cols.html">group_cols</a></td>
+<td>Selection helper for grouping columns</td></tr>
 <tr><td style="width: 25%;"><a href="group_split.html">group_split</a></td>
 <td>Split data frame by groups</td></tr>
 <tr><td style="width: 25%;"><a href="group_vars.html">group_vars</a></td>
@@ -216,6 +220,8 @@
 <td>Apply a function to each element of a vector or list</td></tr>
 <tr><td style="width: 25%;"><a href="map.html">map2_lgl</a></td>
 <td>Apply a function to each element of a vector or list</td></tr>
+<tr><td style="width: 25%;"><a href="map.html">map2_vec</a></td>
+<td>Apply a function to each element of a vector or list</td></tr>
 <tr><td style="width: 25%;"><a href="map.html">map_chr</a></td>
 <td>Apply a function to each element of a vector or list</td></tr>
 <tr><td style="width: 25%;"><a href="map.html">map_dbl</a></td>
@@ -229,6 +235,8 @@
 <tr><td style="width: 25%;"><a href="map.html">map_int</a></td>
 <td>Apply a function to each element of a vector or list</td></tr>
 <tr><td style="width: 25%;"><a href="map.html">map_lgl</a></td>
+<td>Apply a function to each element of a vector or list</td></tr>
+<tr><td style="width: 25%;"><a href="map.html">map_vec</a></td>
 <td>Apply a function to each element of a vector or list</td></tr>
 <tr><td style="width: 25%;"><a href="rank.html">min_rank</a></td>
 <td>Ranking functions</td></tr>
@@ -268,6 +276,8 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="rank.html">percent_rank</a></td>
 <td>Ranking functions</td></tr>
+<tr><td style="width: 25%;"><a href="pick.html">pick</a></td>
+<td>Selection version of 'across()'</td></tr>
 <tr><td style="width: 25%;"><a href="pivot_longer.html">pivot_longer</a></td>
 <td>Pivot data from wide to long</td></tr>
 <tr><td style="width: 25%;"><a href="pivot_wider.html">pivot_wider</a></td>
@@ -287,6 +297,8 @@
 <tr><td style="width: 25%;"><a href="map.html">pmap_int</a></td>
 <td>Apply a function to each element of a vector or list</td></tr>
 <tr><td style="width: 25%;"><a href="map.html">pmap_lgl</a></td>
+<td>Apply a function to each element of a vector or list</td></tr>
+<tr><td style="width: 25%;"><a href="map.html">pmap_vec</a></td>
 <td>Apply a function to each element of a vector or list</td></tr>
 <tr><td style="width: 25%;"><a href="pull.html">pull</a></td>
 <td>Pull out a single variable</td></tr>
@@ -320,8 +332,14 @@
 <td>Join two data.tables together</td></tr>
 <tr><td style="width: 25%;"><a href="separate.html">separate</a></td>
 <td>Separate a character column into multiple columns</td></tr>
+<tr><td style="width: 25%;"><a href="separate_longer_delim.html">separate_longer_delim</a></td>
+<td>Split a string into rows</td></tr>
 <tr><td style="width: 25%;"><a href="separate_rows.html">separate_rows</a></td>
 <td>Separate a collapsed column into multiple rows</td></tr>
+<tr><td style="width: 25%;"><a href="separate_wider_delim.html">separate_wider_delim</a></td>
+<td>Separate a character column into multiple columns</td></tr>
+<tr><td style="width: 25%;"><a href="separate_wider_regex.html">separate_wider_regex</a></td>
+<td>Separate a character column into multiple columns using regex patterns</td></tr>
 <tr><td style="width: 25%;"><a href="slice.html">slice</a></td>
 <td>Choose rows in a data.table</td></tr>
 <tr><td style="width: 25%;"><a href="slice.html">slice_head</a></td>

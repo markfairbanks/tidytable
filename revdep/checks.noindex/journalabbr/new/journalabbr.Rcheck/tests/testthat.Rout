@@ -27,10 +27,10 @@ Type 'q()' to quit R.
 > library(journalabbr)
 > 
 > test_check("journalabbr")
-[ FAIL 0 | WARN 9 | SKIP 0 | PASS 7 ]
+[ FAIL 0 | WARN 15 | SKIP 0 | PASS 7 ]
 
-[ FAIL 0 | WARN 9 | SKIP 0 | PASS 7 ]
+[ FAIL 0 | WARN 15 | SKIP 0 | PASS 7 ]
 > 
 > proc.time()
    user  system elapsed 
-  2.286   0.177   2.507 
+  2.836   0.191   3.248 

@@ -58,7 +58,7 @@ mutate_rowwise          Add/modify columns by row
 n                       Number of observations in each group
 n_distinct              Count the number of unique values in a vector
 na_if                   Convert values to 'NA'
-nest                    Nest data.tables
+nest                    Nest columns into a list-column
 nest_by                 Nest data.tables
 nest_join               Nest join
 new_tidytable           Create a tidytable from a list
@@ -87,6 +87,7 @@ summarize_across.       Summarize multiple columns
 tidytable               Build a data.table/tidytable
 top_n                   Select top (or bottom) n rows (by value)
 transmute               Add new variables and drop all others
+tribble                 Rowwise tidytable creation
 uncount                 Uncount a data.table
 unite                   Unite multiple columns by pasting strings
                         together

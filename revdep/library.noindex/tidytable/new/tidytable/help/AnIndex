@@ -266,6 +266,7 @@ top_n	top_n
 top_n.	top_n.
 transmute	transmute
 transmute.	transmute.
+tribble	tribble
 uncount	uncount
 uncount.	uncount.
 ungroup	group_by

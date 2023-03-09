@@ -169,18 +169,13 @@ The following regions, age groups, years, sexes and ICD codes are considered:  S
 +                         lifedat_var = "datedeath.1", 
 +                         fcdat_var = "t_datediag.1", 
 +                         spcdat_var = "t_datediag.2")
-Warning in min(.data[["p_futimeyrs"]], na.rm = TRUE) :
-  no non-missing arguments to min; returning Inf
-Warning in min(.data[["p_futimeyrs"]], na.rm = TRUE) :
-  no non-missing arguments to min; returning Inf
-Warning in min(.data[["p_futimeyrs"]], na.rm = TRUE) :
-  no non-missing arguments to min; returning Inf
-Warning in max(.data[["p_futimeyrs"]], na.rm = TRUE) :
-  no non-missing arguments to max; returning -Inf
-Warning in max(.data[["p_futimeyrs"]], na.rm = TRUE) :
-  no non-missing arguments to max; returning -Inf
-Warning in max(.data[["p_futimeyrs"]], na.rm = TRUE) :
-  no non-missing arguments to max; returning -Inf
+Warning: There were 6 warnings in `dplyr::summarise()`.
+The first warning was:
+ℹ In argument: `min_futime = min(.data[["p_futimeyrs"]], na.rm = TRUE)`.
+ℹ In group 5: `p_status = 97`.
+Caused by warning in `min()`:
+! no non-missing arguments to min; returning Inf
+ℹ Run `dplyr::last_dplyr_warnings()` to see the 5 remaining warnings.
 # A tibble: 7 × 5
   p_status mean_futime min_futime max_futime median_futime
      <dbl>       <dbl>      <dbl>      <dbl>         <dbl>
@@ -447,18 +442,13 @@ Warning in max(p_futimeyrs, na.rm = TRUE) :
 +                         lifedat_var = "datedeath.1", 
 +                         fcdat_var = "t_datediag.1", 
 +                         spcdat_var = "t_datediag.2")
-Warning in min(.data[["p_futimeyrs"]], na.rm = TRUE) :
-  no non-missing arguments to min; returning Inf
-Warning in min(.data[["p_futimeyrs"]], na.rm = TRUE) :
-  no non-missing arguments to min; returning Inf
-Warning in min(.data[["p_futimeyrs"]], na.rm = TRUE) :
-  no non-missing arguments to min; returning Inf
-Warning in max(.data[["p_futimeyrs"]], na.rm = TRUE) :
-  no non-missing arguments to max; returning -Inf
-Warning in max(.data[["p_futimeyrs"]], na.rm = TRUE) :
-  no non-missing arguments to max; returning -Inf
-Warning in max(.data[["p_futimeyrs"]], na.rm = TRUE) :
-  no non-missing arguments to max; returning -Inf
+Warning: There were 6 warnings in `dplyr::summarise()`.
+The first warning was:
+ℹ In argument: `min_futime = min(.data[["p_futimeyrs"]], na.rm = TRUE)`.
+ℹ In group 5: `p_status = 97`.
+Caused by warning in `min()`:
+! no non-missing arguments to min; returning Inf
+ℹ Run `dplyr::last_dplyr_warnings()` to see the 5 remaining warnings.
 # A tibble: 7 × 5
   p_status mean_futime min_futime max_futime median_futime
      <dbl>       <dbl>      <dbl>      <dbl>         <dbl>
@@ -564,10 +554,13 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 +                         lifedat_var = "datedeath.1", 
 +                         fcdat_var = "t_datediag.1", 
 +                         spcdat_var = "t_datediag.2")
-Warning in min(.data[["p_futimeyrs"]], na.rm = TRUE) :
-  no non-missing arguments to min; returning Inf
-Warning in max(.data[["p_futimeyrs"]], na.rm = TRUE) :
-  no non-missing arguments to max; returning -Inf
+Warning: There were 2 warnings in `dplyr::summarise()`.
+The first warning was:
+ℹ In argument: `min_futime = min(.data[["p_futimeyrs"]], na.rm = TRUE)`.
+ℹ In group 5: `p_status = 98`.
+Caused by warning in `min()`:
+! no non-missing arguments to min; returning Inf
+ℹ Run `dplyr::last_dplyr_warnings()` to see the 1 remaining warning.
 # A tibble: 5 × 5
   p_status mean_futime min_futime max_futime median_futime
      <dbl>       <dbl>      <dbl>      <dbl>         <dbl>
@@ -43727,7 +43720,7 @@ detaching ‘package:dplyr’
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  21.535 3.426 25.861 0.002 0.004 
+Time elapsed:  24.865 2.889 28.085 0.002 0.003 
 > grDevices::dev.off()
 null device 
           1 

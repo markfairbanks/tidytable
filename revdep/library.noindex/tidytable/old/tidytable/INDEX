@@ -17,6 +17,7 @@ complete                Complete a data.table with missing combinations
 consecutive_id          Generate a unique id for consecutive values
 context                 Context functions
 count                   Count observations by group
+cross_join              Cross join
 crossing                Create a data.table from all unique
                         combinations of inputs
 desc                    Descending order
@@ -39,6 +40,7 @@ fread                   Read/write files
 get_dummies             Convert character and factor columns to dummy
                         variables
 group_by                Grouping
+group_cols              Selection helper for grouping columns
 group_split             Split data frame by groups
 group_vars              Get the grouping variables
 if_all                  Create conditions on a selection of columns
@@ -60,6 +62,7 @@ nest                    Nest data.tables
 nest_by                 Nest data.tables
 nest_join               Nest join
 new_tidytable           Create a tidytable from a list
+pick                    Selection version of 'across()'
 pivot_longer            Pivot data from wide to long
 pivot_wider             Pivot data from long to wide
 pull                    Pull out a single variable
@@ -72,7 +75,12 @@ rowwise                 Convert to a rowwise tidytable
 select                  Select or drop columns
 separate                Separate a character column into multiple
                         columns
+separate_longer_delim   Split a string into rows
 separate_rows           Separate a collapsed column into multiple rows
+separate_wider_delim    Separate a character column into multiple
+                        columns
+separate_wider_regex    Separate a character column into multiple
+                        columns using regex patterns
 slice_head              Choose rows in a data.table
 summarize               Aggregate data using summary statistics
 summarize_across.       Summarize multiple columns

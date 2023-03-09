@@ -1,3 +1,25 @@
+# tidytable 0.10.0 (in development)
+
+#### Deprecations
+* `verb.()` functions are now deprecated (e.g. `mutate.()`). Users should now use
+  the `verb()` versions of functions.
+
+#### New functions
+* `tribble()`
+
+#### Functionality improvements
+* `nest()`: Gains `.by` and `.key` args
+* `tidytable()`: Auto-names unnamed inputs
+* `slice_*()` family: `by` arg added to match `dplyr` semantics.
+  `.by` can still be called by the user instead of `by`.
+* `dt()`: Can use `let()` to add columns even on older versions of `data.table`
+
+#### Bug fixes
+* `expand_grid()`: Can use "unique" or "sorted" as column names (#718)
+
+#### Breaking changes
+`slice_head()`/`_tail()`: `.by` arg must be explicitly named when slicing by group
+
 # tidytable 0.9.2
 
 #### New functions

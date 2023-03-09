@@ -1,6 +1,6 @@
 Package: tidytable
 Title: Tidy Interface to 'data.table'
-Version: 0.9.2
+Version: 0.9.2.9
 Authors@R: c(
   person("Mark", "Fairbanks", role = c("aut", "cre"), email = "mark.t.fairbanks@gmail.com"),
   person("Abdessabour", "Moutik", role = "ctb"),
@@ -17,8 +17,8 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Imports: data.table (>= 1.14.0), glue (>= 1.4.0), lifecycle(>= 1.0.3),
         magrittr (>= 2.0.3), pillar (>= 1.8.0), rlang (>= 1.0.6),
-        tidyselect (>= 1.2.0), vctrs (>= 0.5.0)
-RoxygenNote: 7.2.2
+        tidyselect (>= 1.2.0), vctrs (>= 0.5.2)
+RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
 URL: https://github.com/markfairbanks/tidytable
@@ -27,7 +27,7 @@ Suggests: testthat (>= 2.1.0), bit64, knitr, rmarkdown, crayon
 RemoteType: local
 RemoteUrl: /Users/mfairbanks/Desktop/NU/R/R_Packages/tidytable
 NeedsCompilation: no
-Packaged: 2023-01-13 18:04:29 UTC; mfairbanks
+Packaged: 2023-03-09 20:50:10 UTC; mfairbanks
 Author: Mark Fairbanks [aut, cre],
   Abdessabour Moutik [ctb],
   Matt Carlson [ctb],
@@ -37,4 +37,4 @@ Author: Mark Fairbanks [aut, cre],
   Alexander Sevostianov [ctb],
   Koen ter Berg [ctb]
 Maintainer: Mark Fairbanks <mark.t.fairbanks@gmail.com>
-Built: R 4.2.0; ; 2023-01-13 18:04:30 UTC; unix
+Built: R 4.2.0; ; 2023-03-09 20:50:11 UTC; unix
