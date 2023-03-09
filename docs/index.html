@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.10.0</span>
       </span>
     </div>
 
@@ -129,7 +129,7 @@
 <div class="section level2">
 <h2 id="applying-functions-by-group">Applying functions by group<a class="anchor" aria-label="anchor" href="#applying-functions-by-group"></a>
 </h2>
-<p>You can use the normal <code>tidyverse</code> <code><a href="reference/group_by.html">group_by()</a></code>/<code><a href="reference/group_by.html">ungroup()</a></code> workflow, or you can use <code>.by</code> syntax to reduce typing. Using <code>.by</code> in a function is shorthand for <code>df %&gt;% group_by() %&gt;% fn() %&gt;% ungroup()</code>.</p>
+<p>You can use the normal <code>tidyverse</code> <code><a href="reference/group_by.html">group_by()</a></code>/<code><a href="reference/group_by.html">ungroup()</a></code> workflow, or you can use <code>.by</code> syntax to reduce typing. Using <code>.by</code> in a function is shorthand for <code>df %&gt;% group_by() %&gt;% some_function() %&gt;% ungroup()</code>.</p>
 <ul>
 <li>A single column can be passed with <code>.by = z</code>
 </li>
@@ -261,23 +261,6 @@
 <p>For those interested in performance, speed comparisons can be found <a href="https://markfairbanks.github.io/tidytable/articles/speed_comparisons.html" class="external-link">here</a>.</p>
 </div>
 <div class="section level2">
-<h2 id="verb-syntax">
-<code>verb.()</code> syntax<a class="anchor" aria-label="anchor" href="#verb-syntax"></a>
-</h2>
-<p>For backwards compatibility <code>tidytable</code> exports <code>verb.()</code> versions of functions. This will also allow users to more easily combine <code>dplyr</code> and <code>tidytable</code> functions in one script:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">df</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/mutate..html">mutate.</a></span><span class="op">(</span>double_x <span class="op">=</span> <span class="va">x</span> <span class="op">*</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tidytable: 3 × 4</span></span>
-<span><span class="co">#&gt;       x     y z     double_x</span></span>
-<span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1     1     4 a            2</span></span>
-<span><span class="co">#&gt; 2     2     5 a            4</span></span>
-<span><span class="co">#&gt; 3     3     6 b            6</span></span></code></pre></div>
-</div>
-<div class="section level2">
 <h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
 </h2>
 <p><code>tidytable</code> is only possible because of the great contributions to R by the <code>data.table</code> and <code>tidyverse</code> teams. <code>data.table</code> is used as the main data frame engine in the background, while <code>tidyverse</code> packages like <code>rlang</code>, <code>vctrs</code>, and <code>tidyselect</code> are heavily relied upon to give users an experience similar to <code>dplyr</code> and <code>tidyr</code>.</p>
@@ -340,7 +323,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

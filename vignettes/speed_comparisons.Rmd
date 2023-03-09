@@ -40,7 +40,7 @@ does not. Testing only included numeric columns due to this constraint.
 * Lastly I'd like to mention that these tests were not rigorously created to cover all angles equally. They are just meant to be used as general insight into the performance of these packages.
 
 ```{r echo = FALSE}
-pacman::p_load(tidytable, tidyverse, data.table, dtplyr)
+pacman::p_load(tidytable, dtplyr, data.table)
 
 setDTthreads(4)
 
@@ -54,11 +54,11 @@ bench_mark <- function(..., .fn = NULL) {
               check = FALSE, iterations = 11,
               memory = FALSE, time_unit = 'ms') %>%
     suppressWarnings() %>%
-    mutate.(expression = as.character(expression),
+    mutate(expression = as.character(expression),
             median = round(median, 1),
             func_tested = .env$.fn) %>%
-    select.(func_tested, expression, median) %>%
-    pivot_wider.(names_from = expression, values_from = median)
+    select(func_tested, expression, median) %>%
+    pivot_wider(names_from = expression, values_from = median)
 }
 
 test_data <- function(.size) {
@@ -72,16 +72,16 @@ data_size <- 10000000
 
 test_dt <- test_data(data_size)
 
-test_tbl <- as_tibble(test_dt)
+test_tbl <- dplyr::as_tibble(test_dt)
 ```
 
 ```{r echo = FALSE}
 inv_gc(); inv_gc();
 
 filter_marks <- bench_mark(
-  tidyverse = filter(test_tbl, a <= 7, c == 'OoVt'),
-  dtplyr = as.data.table(filter(lazy_dt(test_dt), a <= 7, c == 'OoVt')),
-  tidytable = filter.(test_dt, a <= 7, c == 'OoVt'),
+  tidyverse = dplyr::filter(test_tbl, a <= 7, c == 'OoVt'),
+  dtplyr = as.data.table(dplyr::filter(lazy_dt(test_dt), a <= 7, c == 'OoVt')),
+  tidytable = filter(test_dt, a <= 7, c == 'OoVt'),
   data.table = test_dt[a <= 7 & c == 'OoVt'],
   .fn = "filter"
 )
@@ -90,13 +90,13 @@ inv_gc(); inv_gc();
 
 summarize_marks <- bench_mark(
   tidyverse = test_tbl %>%
-    group_by(c, d) %>%
-    summarize(avg_a = mean(a), med_b = median(b), .groups = "drop"),
+    dplyr::group_by(c, d) %>%
+    dplyr::summarize(avg_a = mean(a), med_b = median(b), .groups = "drop"),
   dtplyr = lazy_dt(test_dt) %>%
-    group_by(c, d) %>%
-    summarize(avg_a = mean(a), med_b = median(b), .groups = "drop") %>%
+    dplyr::group_by(c, d) %>%
+    dplyr::summarize(avg_a = mean(a), med_b = median(b), .groups = "drop") %>%
     as.data.table(),
-  tidytable = summarize.(test_dt, avg_a = mean(a), med_b = median(b), .by = c(c, d)),
+  tidytable = summarize(test_dt, avg_a = mean(a), med_b = median(b), .by = c(c, d)),
   data.table = test_dt[, list(avg_a = mean(a), med_b = median(b)), by = .(c, d)],
   .fn = "summarize"
 )
@@ -106,9 +106,9 @@ inv_gc(); inv_gc();
 mut_dt <- copy(test_dt)
 
 mutate_marks <- bench_mark(
-  tidyverse = mutate(test_tbl, double_a = a * 2, a_plus_b = a + b),
-  dtplyr = as.data.table(mutate(lazy_dt(test_dt), double_a = a * 2, a_plus_b = a + b)),
-  tidytable = mutate.(test_dt, double_a = a * 2, a_plus_b = a + b),
+  tidyverse = dplyr::mutate(test_tbl, double_a = a * 2, a_plus_b = a + b),
+  dtplyr = as.data.table(dplyr::mutate(lazy_dt(test_dt), double_a = a * 2, a_plus_b = a + b)),
+  tidytable = mutate(test_dt, double_a = a * 2, a_plus_b = a + b),
   data.table = mut_dt[, ':='(double_a = a * 2, a_b = a + b)][],
   .fn = "mutate"
 )
@@ -120,12 +120,12 @@ inv_gc(); inv_gc();
 
 test_dt <- test_data(data_size * .1)
 
-test_tbl <- as_tibble(test_dt)
+test_tbl <- dplyr::as_tibble(test_dt)
 
 arrange_marks <- bench_mark(
-  tidyverse = arrange(test_tbl, c, a),
-  dtplyr = as.data.table(arrange(lazy_dt(test_dt), c, a)),
-  tidytable = arrange.(test_dt, c, a),
+  tidyverse = dplyr::arrange(test_tbl, c, a),
+  dtplyr = as.data.table(dplyr::arrange(lazy_dt(test_dt), c, a)),
+  tidytable = arrange(test_dt, c, a),
   data.table = test_dt[order(c, a)],
   .fn = "arrange"
 )
@@ -133,9 +133,9 @@ arrange_marks <- bench_mark(
 inv_gc(); inv_gc();
 
 distinct_marks <- bench_mark(
-  tidyverse = distinct(test_tbl),
-  dtplyr = as.data.table(distinct(lazy_dt(test_dt))),
-  tidytable = distinct.(test_dt),
+  tidyverse = dplyr::distinct(test_tbl),
+  dtplyr = as.data.table(dplyr::distinct(lazy_dt(test_dt))),
+  tidytable = distinct(test_dt),
   data.table = unique(test_dt),
   .fn = "distinct"
 )
@@ -152,12 +152,12 @@ fill_dt <- tidytable(
   int2 = sample(c(1:5, NA), fill_size, replace = TRUE)
 )
 
-fill_tbl <- as_tibble(fill_dt)
+fill_tbl <- dplyr::as_tibble(fill_dt)
 
 fill_marks <- bench_mark(
-  tidyverse = fill(group_by(fill_tbl, id), int1, int2),
-  dtplyr = as.data.table(fill(group_by(lazy_dt(fill_dt), id), int1, int2)),
-  tidytable = fill.(fill_dt, int1, int2, .by = id),
+  tidyverse = tidyr::fill(group_by(fill_tbl, id), int1, int2),
+  dtplyr = as.data.table(tidyr::fill(dplyr::group_by(lazy_dt(fill_dt), id), int1, int2)),
+  tidytable = fill(fill_dt, int1, int2, .by = id),
   # needs a copy or subsequent runs won't have NAs to fill
   data.table = tidytable:::shallow(fill_dt)[
     ,
@@ -176,12 +176,12 @@ case_size <- data_size * .3
 x <- runif(case_size * .3)
 
 case_marks <- bench_mark(
-  tidyverse = case_when(x < .5 ~ 1,
+  tidyverse = dplyr::case_when(x < .5 ~ 1,
                         x >= .5 ~ 2,
                         TRUE ~ 3),
-  tidytable = case.(x < .5, 1,
-                    x >= .5, 2,
-                    default = 3),
+  tidytable = case(x < .5, 1,
+                   x >= .5, 2,
+                   default = 3),
   data.table = fcase(x < .5, 1,
                      x >= .5, 2,
                      rep(TRUE, length(x)), 3),
@@ -196,20 +196,22 @@ remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$"));
 inv_gc(); inv_gc();
 
 wider_dt <- 1:3 %>%
-  map_dfr.(
-    ~ expand_grid.(a = letters, b = LETTERS, c = paste0(letters, LETTERS)) %>%
-    unite.("name") %>%
-    mutate.(value = sample(as.double(1:n()), n())) %>%
-    mutate.(id = .x)
+  map_dfr(
+    ~ expand_grid(a = letters, b = LETTERS, c = paste0(letters, LETTERS)) %>%
+    unite("name") %>%
+    mutate(value = sample(as.double(1:n()), n())) %>%
+    mutate(id = .x)
   ) %>%
-  relocate.(id)
+  relocate(id)
 
-wider_tbl <- as_tibble(wider_dt)
+wider_tbl <- dplyr::as_tibble(wider_dt)
 
 wider_marks <- bench_mark(
-  tidyverse = pivot_wider(wider_tbl, names_from = name, values_from = value),
-  dtplyr = as.data.table(pivot_wider(lazy_dt(wider_dt), names_from = name, values_from = value)),
-  tidytable = pivot_wider.(wider_dt, names_from = name, values_from = value),
+  tidyverse = tidyr::pivot_wider(wider_tbl, names_from = name, values_from = value),
+  dtplyr = lazy_dt(wider_dt) %>%
+    tidyr::pivot_wider(names_from = name, values_from = value) %>%
+    as.data.table(),
+  tidytable = pivot_wider(wider_dt, names_from = name, values_from = value),
   data.table = data.table::dcast.data.table(wider_dt, id ~ name),
   .fn = "pivot_wider"
 )
@@ -222,16 +224,16 @@ inv_gc(); inv_gc();
 longer_size <- 100000
 longer_dt <-
   tidytable(id = 1:longer_size) %>%
-  bind_cols.(
-    map_dfc.(letters, ~ tidytable(!!.x := sample(c(letters, LETTERS), longer_size, TRUE)))
+  bind_cols(
+    map_dfc(letters, ~ tidytable(!!.x := sample(c(letters, LETTERS), longer_size, TRUE)))
   )
 
-longer_tbl <- as_tibble(longer_dt)
+longer_tbl <- dplyr::as_tibble(longer_dt)
 
 longer_marks <- bench_mark(
-  tidyverse = pivot_longer(longer_tbl, cols = -id),
-  dtplyr = as.data.table(pivot_longer(lazy_dt(longer_dt), cols = -id)),
-  tidytable = pivot_longer.(longer_dt, cols = -id, fast_pivot = TRUE),
+  tidyverse = tidyr::pivot_longer(longer_tbl, cols = -id),
+  dtplyr = as.data.table(tidyr::pivot_longer(lazy_dt(longer_dt), cols = -id)),
+  tidytable = pivot_longer(longer_dt, cols = -id, fast_pivot = TRUE),
   data.table = melt(longer_dt,
                     measure.vars = names(longer_dt)[names(longer_dt) != "id"],
                     variable.name = "name",
@@ -247,16 +249,16 @@ inv_gc(); inv_gc();
 left_dt <- test_data(data_size * .1)
 
 right_dt <- left_dt %>%
-  distinct.(c, d) %>%
-  mutate.(e = row_number())
+  distinct(c, d) %>%
+  mutate(e = row_number())
 
-left_tbl <- as_tibble(left_dt)
-right_tbl <- as_tibble(right_dt)
+left_tbl <- dplyr::as_tibble(left_dt)
+right_tbl <- dplyr::as_tibble(right_dt)
 
 left_join_marks <- bench_mark(
-  tidyverse = left_join(left_tbl, right_tbl, by = c("c", "d")),
-  dtplyr = as.data.table(left_join(lazy_dt(left_dt), lazy_dt(right_dt), by = c("c", "d"))),
-  tidytable = left_join.(left_dt, right_dt, by = c("c", "d")),
+  tidyverse = dplyr::left_join(left_tbl, right_tbl, by = c("c", "d")),
+  dtplyr = as.data.table(dplyr::left_join(lazy_dt(left_dt), lazy_dt(right_dt), by = c("c", "d"))),
+  tidytable = left_join(left_dt, right_dt, by = c("c", "d")),
   data.table = right_dt[left_dt, on = c("c", "d"), allow.cartesian = TRUE],
   .fn = "left_join"
 )
@@ -264,9 +266,9 @@ left_join_marks <- bench_mark(
 inv_gc(); inv_gc();
 
 inner_join_marks <- bench_mark(
-  tidyverse = inner_join(left_tbl, right_tbl, by = c("c", "d")),
-  dtplyr = as.data.table(inner_join(lazy_dt(left_dt), lazy_dt(right_dt), by = c("c", "d"))),
-  tidytable = inner_join.(left_dt, right_dt, c("c", "d")),
+  tidyverse = dplyr::inner_join(left_tbl, right_tbl, by = c("c", "d")),
+  dtplyr = as.data.table(dplyr::inner_join(lazy_dt(left_dt), lazy_dt(right_dt), by = c("c", "d"))),
+  tidytable = inner_join(left_dt, right_dt, c("c", "d")),
   data.table = left_dt[right_dt, on = c("c", "d"), allow.cartesian = TRUE, nomatch = 0],
   .fn = "inner_join"
 )
@@ -277,15 +279,15 @@ remove(list = ls(pattern = "tbl$")); remove(list = ls(pattern = "dt$"));
 inv_gc(); inv_gc();
 
 unnest_dt <- test_data(data_size * .3) %>%
-  nest_by.(c, d, .key = "list_column")
+  nest_by(c, d, .key = "list_column")
 
 unnest_tbl <- unnest_dt %>%
-  mutate.(list_column = map.(list_column, as_tibble)) %>%
-  as_tibble()
+  mutate(list_column = map(list_column, dplyr::as_tibble)) %>%
+  dplyr::as_tibble()
 
 unnest_marks <- bench_mark(
-  tidyverse = unnest(unnest_tbl, list_column),
-  tidytable = unnest.(unnest_dt, list_column),
+  tidyverse = tidyr::unnest(unnest_tbl, list_column),
+  tidytable = unnest(unnest_dt, list_column),
   data.table = unnest_dt[, unlist(list_column, recursive = FALSE), by = .(c, d)],
   .fn = "unnest"
 )
@@ -297,12 +299,12 @@ inv_gc(); inv_gc();
 
 nest_dt <- test_data(data_size * .1)
 
-nest_tbl <- as_tibble(nest_dt)
+nest_tbl <- dplyr::as_tibble(nest_dt)
 
 nest_marks <- bench_mark(
-  tidyverse = group_nest(nest_tbl, c, d),
-  dtplyr = as.data.table(nest(lazy_dt(nest_dt), data = c(c, d))),
-  tidytable = nest_by.(nest_dt, c, d),
+  tidyverse = dplyr::group_nest(nest_tbl, c, d),
+  dtplyr = as.data.table(tidyr::nest(lazy_dt(nest_dt), data = c(c, d))),
+  tidytable = nest_by(nest_dt, c, d),
   data.table = nest_dt[, list(data = list(.SD)), by = .(c, d)],
   .fn = "nest"
 )
@@ -407,8 +409,8 @@ marks_names <- setdiff(
 )
 
 all_marks <- marks_names %>%
-  map_dfr.(get) %>%
-  arrange.(func_tested)
+  map_dfr(get) %>%
+  arrange(func_tested)
 ```
 
 ```{r pandas, echo = FALSE, message = FALSE}
@@ -422,15 +424,15 @@ pandas_marks <-
     mutate = 780.1,
     summarize = 3079.8
   ) %>%
-  pivot_longer.(everything(), names_to = "func_tested", values_to = "pandas")
+  pivot_longer(everything(), names_to = "func_tested", values_to = "pandas")
 
 all_marks <- all_marks %>%
-  left_join.(pandas_marks) %>%
-  select.(func_tested, data.table, tidytable, dtplyr, tidyverse, pandas)
+  left_join(pandas_marks) %>%
+  select(func_tested, data.table, tidytable, dtplyr, tidyverse, pandas)
 ```
 
 ```{r echo = FALSE}
-print(str_glue("Date last run: {lubridate::today()}"))
+print(glue::glue("Date last run: {lubridate::today()}"))
 ```
 
 ```{r echo = FALSE}

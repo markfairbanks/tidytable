@@ -1,4 +1,4 @@
-# tidytable 0.10.0 (in development)
+# tidytable 0.10.0
 
 #### Deprecations
 * `verb.()` functions are now deprecated (e.g. `mutate.()`). Users should now use
@@ -18,7 +18,11 @@
 * `expand_grid()`: Can use "unique" or "sorted" as column names (#718)
 
 #### Breaking changes
-`slice_head()`/`_tail()`: `.by` arg must be explicitly named when slicing by group
+* `slice_head()`/`_tail()`: `.by` arg must be explicitly named when slicing by group
+
+#### Functions with notable speed improvements
+* `mutate()`: When overwriting existing columns on data frames with a high
+  number of columns (>1000)
 
 # tidytable 0.9.2
 

@@ -18,7 +18,7 @@ Grouped data.tables grab rows within each group."><meta property="og:image" cont
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.10.0</span>
       </span>
     </div>
 
@@ -65,17 +65,25 @@ Grouped data.tables grab rows within each group.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">slice_head</span><span class="op">(</span><span class="va">.df</span>, n <span class="op">=</span> <span class="fl">5</span>, .by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">slice_head</span><span class="op">(</span><span class="va">.df</span>, n <span class="op">=</span> <span class="fl">5</span>, <span class="va">...</span>, .by <span class="op">=</span> <span class="cn">NULL</span>, by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">slice_tail</span><span class="op">(</span><span class="va">.df</span>, n <span class="op">=</span> <span class="fl">5</span>, .by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="fu">slice_tail</span><span class="op">(</span><span class="va">.df</span>, n <span class="op">=</span> <span class="fl">5</span>, <span class="va">...</span>, .by <span class="op">=</span> <span class="cn">NULL</span>, by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">slice_max</span><span class="op">(</span><span class="va">.df</span>, <span class="va">order_by</span>, n <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span>, with_ties <span class="op">=</span> <span class="cn">TRUE</span>, .by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="fu">slice_max</span><span class="op">(</span><span class="va">.df</span>, <span class="va">order_by</span>, n <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span>, with_ties <span class="op">=</span> <span class="cn">TRUE</span>, .by <span class="op">=</span> <span class="cn">NULL</span>, by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">slice_min</span><span class="op">(</span><span class="va">.df</span>, <span class="va">order_by</span>, n <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span>, with_ties <span class="op">=</span> <span class="cn">TRUE</span>, .by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="fu">slice_min</span><span class="op">(</span><span class="va">.df</span>, <span class="va">order_by</span>, n <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span>, with_ties <span class="op">=</span> <span class="cn">TRUE</span>, .by <span class="op">=</span> <span class="cn">NULL</span>, by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">slice</span><span class="op">(</span><span class="va">.df</span>, <span class="va">...</span>, .by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">slice_sample</span><span class="op">(</span><span class="va">.df</span>, <span class="va">n</span>, <span class="va">prop</span>, weight_by <span class="op">=</span> <span class="cn">NULL</span>, replace <span class="op">=</span> <span class="cn">FALSE</span>, .by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">slice_sample</span><span class="op">(</span></span>
+<span>  <span class="va">.df</span>,</span>
+<span>  <span class="va">n</span>,</span>
+<span>  <span class="va">prop</span>,</span>
+<span>  weight_by <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  replace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .by <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  by <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -88,16 +96,16 @@ Grouped data.tables grab rows within each group.</p>
 <dd><p>Number of rows to grab</p></dd>
 
 
-<dt>.by</dt>
+<dt>...</dt>
+<dd><p>Integer row values</p></dd>
+
+
+<dt>.by, by</dt>
 <dd><p>Columns to group by</p></dd>
 
 
 <dt>order_by</dt>
 <dd><p>Variable to arrange by</p></dd>
-
-
-<dt>...</dt>
-<dd><p>Integer row values</p></dd>
 
 
 <dt>with_ties</dt>
@@ -197,7 +205,7 @@ can return multiple rows if they are equal. Use <code>FALSE</code> to ignore tie
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
