@@ -17,7 +17,7 @@ tbl_sum.tidytable_print <- function(x) {
 }
 
 #' @export
-vec_ptype_abbr.tidytable <- function(x) {
+vec_ptype_abbr.tidytable <- function(x, ..., prefix_named = FALSE, suffix_shape = TRUE) {
   "tidytable"
 }
 
@@ -36,7 +36,7 @@ tbl_sum.grouped_tt_print <- function(x) {
 }
 
 #' @export
-vec_ptype_abbr.grouped_tt <- function(x) {
+vec_ptype_abbr.grouped_tt <- function(x, ..., prefix_named = FALSE, suffix_shape = TRUE) {
   "grouped_tt"
 }
 
@@ -54,10 +54,10 @@ tbl_sum.rowwise_tt_print <- function(x) {
 }
 
 #' @export
-vec_ptype_abbr.rowwise_tt <- function(x) {
+vec_ptype_abbr.rowwise_tt <- function(x, ..., prefix_named = FALSE, suffix_shape = TRUE) {
   "rowwise_tt"
 }
 
 print_class <- function(.class) {
-  c("paged_df", .class, "tbl", "tidytable", "data.table", "data.frame")
+  c("paged_df", .class, "tbl", tidytable_class())
 }
