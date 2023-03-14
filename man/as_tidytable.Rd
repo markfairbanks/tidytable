@@ -4,7 +4,7 @@
 \alias{as_tidytable}
 \title{Coerce an object to a data.table/tidytable}
 \usage{
-as_tidytable(x, ..., .name_repair = "unique", .keep_rownames = NULL)
+as_tidytable(x, ..., .name_repair = "unique", .keep_rownames = FALSE)
 }
 \arguments{
 \item{x}{An R object}
