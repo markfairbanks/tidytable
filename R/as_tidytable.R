@@ -21,12 +21,12 @@
 #'   as_tidytable()
 as_tidytable <- function(x, ...,
                          .name_repair = "unique",
-                         .keep_rownames = NULL) {
+                         .keep_rownames = FALSE) {
   UseMethod("as_tidytable")
 }
 
 #' @export
-as_tidytable.tidytable <- function(x, ..., .name_repair = "unique") {
+as_tidytable.tidytable <- function(x, ...) {
   x
 }
 
