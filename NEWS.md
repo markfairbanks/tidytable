@@ -1,5 +1,8 @@
 # tidytable 0.10.1 (in development)
 
+#### Bug fixes
+* `case_when()`: `.default` is used when calculating a common ptype (#751)
+
 # tidytable 0.10.0
 
 #### Deprecations
