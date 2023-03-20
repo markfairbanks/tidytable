@@ -63,6 +63,17 @@ test_that("passes through `.size` correctly", {
   expect_identical(res, c(1, 1))
 })
 
+test_that("use `.default` to find common ptype", {
+  df <- tidytable(x = 1:3, y = c("a", "b", "c"))
+
+  res <- df %>%
+    mutate(case = case_when(y == "a" ~ NA,
+                            .default = x)) %>%
+    pull(case)
+
+  expect_equal(res, c(NA, 2, 3))
+})
+
 test_that("case_when. works", {
   x <- 1:5
 
