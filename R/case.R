@@ -28,14 +28,15 @@ case <- function(..., default = NA, ptype = NULL, size = NULL) {
     abort("The length of conditions does not equal the length of values")
   }
 
-  conditions_locs <- as.logical(seq_len(dots_length) %% 2)
+  is_condition <- as.logical(seq_len(dots_length) %% 2)
 
-  conditions <- dots[conditions_locs]
+  conditions <- dots[is_condition]
   size <- vec_size_common(!!!conditions, .size = size)
   conditions <- vec_recycle_common(!!!conditions, .size = size)
 
-  values <- dots[!conditions_locs]
-  ptype <- vec_ptype_common(!!!values, .ptype = ptype)
+  values <- dots[!is_condition]
+  ptype <- vec_ptype_common(!!!values, default, .ptype = ptype)
+
   values <- vec_cast_common(!!!values, .to = ptype)
 
   pairs <- vec_interleave(conditions, values)
