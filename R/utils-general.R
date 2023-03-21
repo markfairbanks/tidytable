@@ -78,14 +78,6 @@ remove_key <- function(.df) {
   .df
 }
 
-check_by <- function(.by) {
-  .by <- enquo(.by)
-  if (!quo_is_null(.by)) {
-    msg <- "`.by` cannot be used on a grouped tidytable. Please `ungroup()` your data."
-    stop(msg, call. = FALSE)
-  }
-}
-
 # Extract environment from quosures to build the evaluation environment
 get_dt_env <- function(x, ...) {
   default <- caller_env(2)
@@ -161,9 +153,9 @@ tidytable_restore <- function(x, to) {
   vec_restore(x, to)
 }
 
-# Flatten lists - needed when `rlang::squash()` is deprecated
+# Flatten lists
 list_flatten <- function(x, recursive = FALSE) {
-  is_list <- map_lgl(x, vec_is_list)
+  is_list <- map_lgl(x, obj_is_list)
   any_list <- any(is_list)
   if (any_list) {
     is_not_list <- !is_list
@@ -235,7 +227,7 @@ deprecate_old_across <- function(fn) {
 #   For use in pivot_longer/unnest_longer/unnest_wider
 change_types <- function(.df, .cols, .ptypes = NULL, .transform = NULL) {
   if (!is.null(.ptypes)) {
-    if (!vec_is_list(.ptypes)) {
+    if (!obj_is_list(.ptypes)) {
       # Allow providing a single ptype for all cols
       .ptypes <- vec_rep(list(.ptypes), length(.cols))
       .ptypes <- set_names(.ptypes, .cols)
@@ -247,7 +239,7 @@ change_types <- function(.df, .cols, .ptypes = NULL, .transform = NULL) {
   }
 
   if (!is.null(.transform)) {
-    if (!vec_is_list(.transform)) {
+    if (!obj_is_list(.transform)) {
       # Allow providing a single transform for all cols
       .transform <- vec_rep(list(.transform), length(.cols))
       .transform <- set_names(.transform, .cols)

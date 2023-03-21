@@ -28,7 +28,7 @@ replace_na <- function(.x, replace) {
   if (is.data.frame(.x)) {
     .x <- .df_as_tidytable(.x)
 
-    stopifnot(vec_is_list(replace))
+    stopifnot(obj_is_list(replace))
 
     keep <- names(replace) %in% names(.x)
 
