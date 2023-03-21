@@ -21,9 +21,9 @@ Imports:
     lifecycle(>= 1.0.3),
     magrittr (>= 2.0.3),
     pillar (>= 1.8.0),
-    rlang (>= 1.0.6),
+    rlang (>= 1.1.0),
     tidyselect (>= 1.2.0),
-    vctrs (>= 0.5.2)
+    vctrs (>= 0.6.0)
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3

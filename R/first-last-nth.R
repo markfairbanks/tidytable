@@ -72,7 +72,7 @@ nth. <- function(x, n, default = NULL, na_rm = FALSE) {
 }
 
 nth_default <- function(x, default) {
-  if (vec_is_list(x)) {
+  if (obj_is_list(x)) {
     out <- default
   } else {
     default <- default %||% NA
@@ -82,7 +82,7 @@ nth_default <- function(x, default) {
 }
 
 vec_slice2 <- function(x, n) {
-  if (vec_is_list(x)) {
+  if (obj_is_list(x)) {
     .subset2(x, n)
   } else {
     vec_slice(x, n)

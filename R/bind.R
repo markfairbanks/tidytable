@@ -34,7 +34,7 @@
 #' @export
 bind_cols <- function(..., .name_repair = "unique") {
   dots <- list2(...)
-  dots <- squash(dots)
+  dots <- list_flatten(dots, TRUE)
 
   out <- vec_cbind(!!!dots, .ptype = tidytable(), .name_repair = .name_repair)
 
@@ -51,7 +51,7 @@ bind_cols <- function(..., .name_repair = "unique") {
 #' @rdname bind_cols
 bind_rows <- function(..., .id = NULL) {
   dots <- list2(...)
-  dots <- squash(dots)
+  dots <- list_flatten(dots, TRUE)
 
   out <- as_tidytable(rbindlist(dots, idcol = .id, use.names = TRUE, fill = TRUE))
 
