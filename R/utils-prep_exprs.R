@@ -4,7 +4,7 @@
 #   Adapted from dt_squash found here: https://github.com/tidyverse/dtplyr/blob/master/R/tidyeval.R
 prep_exprs <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env(), is_top_level = FALSE) {
   x <- lapply(x, prep_expr, data, {{ .by }}, j = j, dt_env = dt_env, TRUE)
-  squash(x)
+  list_flatten(x)
 }
 
 prep_expr <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env(), is_top_level = FALSE) {
