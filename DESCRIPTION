@@ -27,7 +27,7 @@ Imports:
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
-URL: https://github.com/markfairbanks/tidytable
+URL: https://markfairbanks.github.io/tidytable, https://github.com/markfairbanks/tidytable
 BugReports: https://github.com/markfairbanks/tidytable/issues
 Suggests: 
     testthat (>= 2.1.0),
