@@ -94,7 +94,7 @@ pivot_wider <- function(.df,
   }
 
   if (is_false(names_sort)) {
-    .df <- mutate(.df, across(all_of(names_from), ~ factor(.x, vec_unique(.x))))
+    .df <- mutate(.df, across(all_of(names_from), ~ safe_as_factor(.x)))
   }
 
   no_id <- length(id_cols) == 0
@@ -137,6 +137,16 @@ pivot_wider <- function(.df,
   out <- df_name_repair(out, names_repair)
 
   as_tidytable(out)
+}
+
+safe_as_factor <- function(x) {
+  if (vec_ptype_compatible(x, factor())) {
+    vec_cast(x, factor())
+  } else if (is.numeric(x)) {
+    factor(x, vec_unique(x))
+  } else {
+    x
+  }
 }
 
 #' @export
