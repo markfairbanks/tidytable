@@ -172,6 +172,11 @@ list_flatten <- function(x, recursive = FALSE) {
   out
 }
 
+# Check if two vectors have compatible ptypes
+vec_ptype_compatible <- function(x, y) {
+  tryCatch({vec_ptype_common(x, y); TRUE}, error = function(e) FALSE)
+}
+
 check_across <- function(dots, .fn) {
   uses_across <- any(map_lgl(dots, quo_is_call, c("across", "across.", "pick")))
 

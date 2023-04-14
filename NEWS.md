@@ -2,6 +2,7 @@
 
 #### Bug fixes
 * `case_when()`: `.default` is used when calculating a common ptype (#751)
+* `pivot_wider()`: Works correctly with dates (#759)
 
 # tidytable 0.10.0
 
