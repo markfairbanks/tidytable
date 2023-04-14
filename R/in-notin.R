@@ -35,11 +35,6 @@
   }
 }
 
-# Check if two vectors have compatible ptypes
-vec_ptype_compatible <- function(x, y) {
-  tryCatch({vec_ptype_common(x, y); TRUE}, error = function(e) FALSE)
-}
-
 #' @export
 #' @rdname in-notin
 '%notin%' <- function(x, y) {
