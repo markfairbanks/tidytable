@@ -1,5 +1,3 @@
-# tests from tidyr regarding pivot_wider
-
 test_that("can pivot all cols to wide", {
   df <- data.table(label = c("x", "y", "z"), val = 1:3)
   pivot_df <- pivot_wider(df, names_from = label, values_from = val)
@@ -53,6 +51,16 @@ test_that("can override default keys", {
   expect_equal(nrow(pv), 2)
 })
 
+test_that("works with dates", {
+  df <- tidytable(employee = c("Bob", "Cindy", "Murph"),
+                  employee_id = 1:3,
+                  start_date = as.Date(paste0("2020-01-0", c(3, 1, 2))))
+
+  res <- pivot_wider(df, c(employee, start_date), employee_id)
+
+  expect_named(res, c("Bob_2020-01-03", "Cindy_2020-01-01", "Murph_2020-01-02"))
+})
+
 # multiple values ----------------------------------------------------------
 
 test_that("can pivot from multiple measure cols", {
@@ -74,7 +82,6 @@ test_that("can pivot from multiple measure cols using all keys", {
 })
 
 # select helpers ----------------------------------------------------------
-
 test_that("can pivot from multiple measure cols using helpers", {
   df <- data.table(row = 1, var = c("x", "y"), a = 1:2, b = 3:4)
   pv <- pivot_wider(
