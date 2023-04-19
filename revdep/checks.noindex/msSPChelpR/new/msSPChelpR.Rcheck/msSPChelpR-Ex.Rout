@@ -80,21 +80,21 @@ Be careful, in this calculation it is assumed that all included regions have col
                        If you have included registries with differing times, please check this assumption by looking at groups with 0 incidence and specify option 'inclusion_restrictions' if needed.
 The following regions, age groups, years, sexes and ICD codes are considered:  SEER Reg 01 - San Francisco-Oakland SMSA, SEER Reg 02 - Connecticut, SEER Reg 20 - Detroit (Metropolitan), SEER Reg 21 - Hawaii 1995 - 1999, 2000 - 2004, 2005 - 2009, 2010 - 2014, 1990 - 1994 00 - 04, 05 - 09, 10 - 14, 15 - 19, 20 - 24, 25 - 29, 30 - 34, 35 - 39, 40 - 44, 45 - 49, 50 - 54, 55 - 59, 60 - 64, 65 - 69, 70 - 74, 75 - 79, 80 - 84, 85 - 120 Female, Male C18, C34, C44, C50, C54, C64, C80, C14
 # A tibble: 320 × 17
-   age     region sex   year  t_site  asir obser…¹   pyar abs_ir abs_i…² abs_i…³
-   <chr>   <chr>  <chr> <chr> <chr>  <dbl>   <dbl>  <dbl>  <dbl>   <dbl>   <dbl>
- 1 Age st… SEER … Fema… 1990… C14        0       0 1.92e7      0       0    0.02
- 2 Age st… SEER … Fema… 1990… C18        0       0 1.92e7      0       0    0.02
- 3 Age st… SEER … Fema… 1990… C34        0       0 1.92e7      0       0    0.02
- 4 Age st… SEER … Fema… 1990… C44        0       0 1.92e7      0       0    0.02
- 5 Age st… SEER … Fema… 1990… C50        0       0 1.92e7      0       0    0.02
- 6 Age st… SEER … Fema… 1990… C54        0       0 1.92e7      0       0    0.02
- 7 Age st… SEER … Fema… 1990… C64        0       0 1.92e7      0       0    0.02
- 8 Age st… SEER … Fema… 1990… C80        0       0 1.92e7      0       0    0.02
- 9 Age st… SEER … Fema… 1995… C14        0       0 2.01e7      0       0    0.02
-10 Age st… SEER … Fema… 1995… C18        0       0 2.01e7      0       0    0.02
-# … with 310 more rows, 6 more variables: asir_copy <dbl>, asir_lci <dbl>,
-#   asir_lci_gam <dbl>, asir_uci <dbl>, asir_uci_gam <dbl>, asir_e6 <dbl>, and
-#   abbreviated variable names ¹​observed, ²​abs_ir_lci, ³​abs_ir_uci
+   age         region sex   year  t_site  asir observed   pyar abs_ir abs_ir_lci
+   <chr>       <chr>  <chr> <chr> <chr>  <dbl>    <dbl>  <dbl>  <dbl>      <dbl>
+ 1 Age standa… SEER … Fema… 1990… C14        0        0 1.92e7      0          0
+ 2 Age standa… SEER … Fema… 1990… C18        0        0 1.92e7      0          0
+ 3 Age standa… SEER … Fema… 1990… C34        0        0 1.92e7      0          0
+ 4 Age standa… SEER … Fema… 1990… C44        0        0 1.92e7      0          0
+ 5 Age standa… SEER … Fema… 1990… C50        0        0 1.92e7      0          0
+ 6 Age standa… SEER … Fema… 1990… C54        0        0 1.92e7      0          0
+ 7 Age standa… SEER … Fema… 1990… C64        0        0 1.92e7      0          0
+ 8 Age standa… SEER … Fema… 1990… C80        0        0 1.92e7      0          0
+ 9 Age standa… SEER … Fema… 1995… C14        0        0 2.01e7      0          0
+10 Age standa… SEER … Fema… 1995… C18        0        0 2.01e7      0          0
+# ℹ 310 more rows
+# ℹ 7 more variables: abs_ir_uci <dbl>, asir_copy <dbl>, asir_lci <dbl>,
+#   asir_lci_gam <dbl>, asir_uci <dbl>, asir_uci_gam <dbl>, asir_e6 <dbl>
 > 
 > 
 > 
@@ -187,25 +187,25 @@ Caused by warning in `min()`:
 6       98      NaN      Inf          -Inf           NA   
 7       NA      NaN      Inf          -Inf           NA   
 # A tibble: 68,060 × 122
-   fake_id registry.1 sex.1 race.1 datebirt…¹ t_datedi…² t_sit…³ t_dco.1 fc_ag…⁴
-   <chr>   <chr>      <chr> <chr>  <date>     <date>     <chr>   <chr>     <int>
- 1 100004  SEER Reg … Male  White  1926-01-01 1992-07-15 C50     histol…      66
- 2 100034  SEER Reg … Male  White  1979-01-01 2000-06-15 C50     histol…      21
- 3 100037  SEER Reg … Fema… White  1938-01-01 1996-01-15 C54     histol…      58
- 4 100038  SEER Reg … Male  White  1989-01-01 1991-04-15 C50     histol…       2
- 5 100039  SEER Reg … Fema… White  1946-01-01 2003-08-15 C50     histol…      57
- 6 100047  SEER Reg … Fema… White  1927-01-01 1998-04-15 C50     histol…      71
- 7 100057  SEER Reg … Male  Black  1961-01-01 2010-04-15 C18     histol…      49
- 8 100060  SEER Reg … Fema… White  1947-01-01 2003-08-15 C50     histol…      56
- 9 100063  SEER Reg … Fema… Black  1938-01-01 1995-12-15 C50     histol…      57
-10 100073  SEER Reg … Male  White  1960-01-01 1993-11-15 C44     histol…      33
-# … with 68,050 more rows, 113 more variables: datedeath.1 <date>,
-#   p_alive.1 <chr>, p_dodmin.1 <date>, fc_agegroup.1 <chr>,
-#   t_yeardiag.1 <chr>, registry.2 <chr>, sex.2 <chr>, race.2 <chr>,
-#   datebirth.2 <date>, t_datediag.2 <date>, t_site_icd.2 <chr>, t_dco.2 <chr>,
-#   fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
-#   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, registry.3 <chr>, sex.3 <chr>,
-#   race.3 <chr>, datebirth.3 <date>, t_datediag.3 <date>, …
+   fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1
+   <chr>   <chr>      <chr> <chr>  <date>      <date>       <chr>        <chr>  
+ 1 100004  SEER Reg … Male  White  1926-01-01  1992-07-15   C50          histol…
+ 2 100034  SEER Reg … Male  White  1979-01-01  2000-06-15   C50          histol…
+ 3 100037  SEER Reg … Fema… White  1938-01-01  1996-01-15   C54          histol…
+ 4 100038  SEER Reg … Male  White  1989-01-01  1991-04-15   C50          histol…
+ 5 100039  SEER Reg … Fema… White  1946-01-01  2003-08-15   C50          histol…
+ 6 100047  SEER Reg … Fema… White  1927-01-01  1998-04-15   C50          histol…
+ 7 100057  SEER Reg … Male  Black  1961-01-01  2010-04-15   C18          histol…
+ 8 100060  SEER Reg … Fema… White  1947-01-01  2003-08-15   C50          histol…
+ 9 100063  SEER Reg … Fema… Black  1938-01-01  1995-12-15   C50          histol…
+10 100073  SEER Reg … Male  White  1960-01-01  1993-11-15   C44          histol…
+# ℹ 68,050 more rows
+# ℹ 114 more variables: fc_age.1 <int>, datedeath.1 <date>, p_alive.1 <chr>,
+#   p_dodmin.1 <date>, fc_agegroup.1 <chr>, t_yeardiag.1 <chr>,
+#   registry.2 <chr>, sex.2 <chr>, race.2 <chr>, datebirth.2 <date>,
+#   t_datediag.2 <date>, t_site_icd.2 <chr>, t_dco.2 <chr>, fc_age.2 <int>,
+#   datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
+#   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, registry.3 <chr>, sex.3 <chr>, …
 > 
 > 
 > 
@@ -302,25 +302,25 @@ Warning in max(p_futimeyrs, na.rm = TRUE) :
 6       97      NaN      Inf          -Inf           NA   
 7       98      NaN      Inf          -Inf           NA   
 # A tidytable: 68,060 × 122
-   fake_id registry.1 sex.1 race.1 datebirt…¹ t_datedi…² t_sit…³ t_dco.1 fc_ag…⁴
-   <chr>   <chr>      <chr> <chr>  <date>     <date>     <chr>   <chr>     <int>
- 1 100004  SEER Reg … Male  White  1926-01-01 1992-07-15 C50     histol…      66
- 2 100034  SEER Reg … Male  White  1979-01-01 2000-06-15 C50     histol…      21
- 3 100037  SEER Reg … Fema… White  1938-01-01 1996-01-15 C54     histol…      58
- 4 100038  SEER Reg … Male  White  1989-01-01 1991-04-15 C50     histol…       2
- 5 100039  SEER Reg … Fema… White  1946-01-01 2003-08-15 C50     histol…      57
- 6 100047  SEER Reg … Fema… White  1927-01-01 1998-04-15 C50     histol…      71
- 7 100057  SEER Reg … Male  Black  1961-01-01 2010-04-15 C18     histol…      49
- 8 100060  SEER Reg … Fema… White  1947-01-01 2003-08-15 C50     histol…      56
- 9 100063  SEER Reg … Fema… Black  1938-01-01 1995-12-15 C50     histol…      57
-10 100073  SEER Reg … Male  White  1960-01-01 1993-11-15 C44     histol…      33
-# … with 68,050 more rows, 113 more variables: datedeath.1 <date>,
-#   p_alive.1 <chr>, p_dodmin.1 <date>, fc_agegroup.1 <chr>,
-#   t_yeardiag.1 <chr>, registry.2 <chr>, sex.2 <chr>, race.2 <chr>,
-#   datebirth.2 <date>, t_datediag.2 <date>, t_site_icd.2 <chr>, t_dco.2 <chr>,
-#   fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
-#   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, registry.3 <chr>, sex.3 <chr>,
-#   race.3 <chr>, datebirth.3 <date>, t_datediag.3 <date>, …
+   fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1
+   <chr>   <chr>      <chr> <chr>  <date>      <date>       <chr>        <chr>  
+ 1 100004  SEER Reg … Male  White  1926-01-01  1992-07-15   C50          histol…
+ 2 100034  SEER Reg … Male  White  1979-01-01  2000-06-15   C50          histol…
+ 3 100037  SEER Reg … Fema… White  1938-01-01  1996-01-15   C54          histol…
+ 4 100038  SEER Reg … Male  White  1989-01-01  1991-04-15   C50          histol…
+ 5 100039  SEER Reg … Fema… White  1946-01-01  2003-08-15   C50          histol…
+ 6 100047  SEER Reg … Fema… White  1927-01-01  1998-04-15   C50          histol…
+ 7 100057  SEER Reg … Male  Black  1961-01-01  2010-04-15   C18          histol…
+ 8 100060  SEER Reg … Fema… White  1947-01-01  2003-08-15   C50          histol…
+ 9 100063  SEER Reg … Fema… Black  1938-01-01  1995-12-15   C50          histol…
+10 100073  SEER Reg … Male  White  1960-01-01  1993-11-15   C44          histol…
+# ℹ 68,050 more rows
+# ℹ 114 more variables: fc_age.1 <int>, datedeath.1 <date>, p_alive.1 <chr>,
+#   p_dodmin.1 <date>, fc_agegroup.1 <chr>, t_yeardiag.1 <chr>,
+#   registry.2 <chr>, sex.2 <chr>, race.2 <chr>, datebirth.2 <date>,
+#   t_datediag.2 <date>, t_site_icd.2 <chr>, t_dco.2 <chr>, fc_age.2 <int>,
+#   datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
+#   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, registry.3 <chr>, sex.3 <chr>, …
 > 
 > 
 > 
@@ -355,20 +355,20 @@ Warning in max(p_futimeyrs, na.rm = TRUE) :
 ! Check attribute `problems_missing_refpop_strata` of results to see what strata are affected.
  
 # A tidytable: 6,181 × 9
-   t_site region               year  sex   age   incid…¹ incid…² popul…³ popul…⁴
-   <chr>  <fct>                <chr> <fct> <chr>   <dbl>   <dbl>   <dbl>   <dbl>
- 1 C14    SEER Reg 01 - San F… 1990… Fema… 00 -…       1   0.145  687542 137508.
- 2 C14    SEER Reg 01 - San F… 1990… Fema… 25 -…       1   0.118  845090 169018 
- 3 C14    SEER Reg 01 - San F… 1990… Fema… 35 -…       2   0.231  864741 172948.
- 4 C14    SEER Reg 01 - San F… 1990… Fema… 45 -…       3   0.486  616774 123355.
- 5 C14    SEER Reg 01 - San F… 1990… Fema… 50 -…       1   0.208  480901  96180.
- 6 C14    SEER Reg 01 - San F… 1990… Fema… 60 -…       2   0.518  385787  77157.
- 7 C14    SEER Reg 01 - San F… 1990… Fema… 70 -…       1   0.303  329891  65978.
- 8 C14    SEER Reg 01 - San F… 1990… Fema… 75 -…       1   0.381  262494  52499.
- 9 C14    SEER Reg 01 - San F… 1990… Male  00 -…       1   0.138  723699 144740.
-10 C14    SEER Reg 01 - San F… 1990… Male  25 -…       1   0.113  881328 176266.
-# … with 6,171 more rows, and abbreviated variable names ¹​incidence_cases,
-#   ²​incidence_crude_rate, ³​population_pyar, ⁴​population_n_per_year
+   t_site region          year  sex   age   incidence_cases incidence_crude_rate
+   <chr>  <fct>           <chr> <fct> <chr>           <dbl>                <dbl>
+ 1 C14    SEER Reg 01 - … 1990… Fema… 00 -…               1                0.145
+ 2 C14    SEER Reg 01 - … 1990… Fema… 25 -…               1                0.118
+ 3 C14    SEER Reg 01 - … 1990… Fema… 35 -…               2                0.231
+ 4 C14    SEER Reg 01 - … 1990… Fema… 45 -…               3                0.486
+ 5 C14    SEER Reg 01 - … 1990… Fema… 50 -…               1                0.208
+ 6 C14    SEER Reg 01 - … 1990… Fema… 60 -…               2                0.518
+ 7 C14    SEER Reg 01 - … 1990… Fema… 70 -…               1                0.303
+ 8 C14    SEER Reg 01 - … 1990… Fema… 75 -…               1                0.381
+ 9 C14    SEER Reg 01 - … 1990… Male  00 -…               1                0.138
+10 C14    SEER Reg 01 - … 1990… Male  25 -…               1                0.113
+# ℹ 6,171 more rows
+# ℹ 2 more variables: population_pyar <dbl>, population_n_per_year <dbl>
 > 
 > 
 > 
@@ -472,15 +472,14 @@ Caused by warning in `min()`:
 +       futime_var = "p_futimeyrs",
 +       alpha = 0.05)
 # A tibble: 6 × 8
-  yvar_name  yvar_label             n_base obser…¹   pyar abs_ir abs_i…² abs_i…³
-  <chr>      <chr>                   <int>   <dbl>  <dbl>  <dbl>   <dbl>   <dbl>
-1 sex.1      Female                  33786   18218 279226  6524.   6430.   6620.
-2 sex.1      Male                    34274   18375 281930  6518.   6424.   6613.
-3 registry.1 SEER Reg 01 - San Fra…  22738   12194 187898  6490.   6375.   6606.
-4 registry.1 SEER Reg 02 - Connect…  15156    8233 124511  6612.   6470.   6757.
-5 registry.1 SEER Reg 20 - Detroit…  22722   12241 188025  6510.   6395.   6627.
-6 registry.1 SEER Reg 21 - Hawaii     7444    3925  60721  6464.   6263.   6669.
-# … with abbreviated variable names ¹​observed, ²​abs_ir_lci, ³​abs_ir_uci
+  yvar_name  yvar_label      n_base observed   pyar abs_ir abs_ir_lci abs_ir_uci
+  <chr>      <chr>            <int>    <dbl>  <dbl>  <dbl>      <dbl>      <dbl>
+1 sex.1      Female           33786    18218 279226  6524.      6430.      6620.
+2 sex.1      Male             34274    18375 281930  6518.      6424.      6613.
+3 registry.1 SEER Reg 01 - …  22738    12194 187898  6490.      6375.      6606.
+4 registry.1 SEER Reg 02 - …  15156     8233 124511  6612.      6470.      6757.
+5 registry.1 SEER Reg 20 - …  22722    12241 188025  6510.      6395.      6627.
+6 registry.1 SEER Reg 21 - …   7444     3925  60721  6464.      6263.      6669.
 > 
 > 
 > 
@@ -722,25 +721,25 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 6       98  2670
 7       NA     5
 # A tibble: 68,060 × 121
-   fake_id registry.1 sex.1 race.1 datebirt…¹ t_datedi…² t_sit…³ t_dco.1 fc_ag…⁴
-   <chr>   <chr>      <chr> <chr>  <date>     <date>     <chr>   <chr>     <int>
- 1 100004  SEER Reg … Male  White  1926-01-01 1992-07-15 C50     histol…      66
- 2 100034  SEER Reg … Male  White  1979-01-01 2000-06-15 C50     histol…      21
- 3 100037  SEER Reg … Fema… White  1938-01-01 1996-01-15 C54     histol…      58
- 4 100038  SEER Reg … Male  White  1989-01-01 1991-04-15 C50     histol…       2
- 5 100039  SEER Reg … Fema… White  1946-01-01 2003-08-15 C50     histol…      57
- 6 100047  SEER Reg … Fema… White  1927-01-01 1998-04-15 C50     histol…      71
- 7 100057  SEER Reg … Male  Black  1961-01-01 2010-04-15 C18     histol…      49
- 8 100060  SEER Reg … Fema… White  1947-01-01 2003-08-15 C50     histol…      56
- 9 100063  SEER Reg … Fema… Black  1938-01-01 1995-12-15 C50     histol…      57
-10 100073  SEER Reg … Male  White  1960-01-01 1993-11-15 C44     histol…      33
-# … with 68,050 more rows, 112 more variables: datedeath.1 <date>,
-#   p_alive.1 <chr>, p_dodmin.1 <date>, fc_agegroup.1 <chr>,
-#   t_yeardiag.1 <chr>, registry.2 <chr>, sex.2 <chr>, race.2 <chr>,
-#   datebirth.2 <date>, t_datediag.2 <date>, t_site_icd.2 <chr>, t_dco.2 <chr>,
-#   fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
-#   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, registry.3 <chr>, sex.3 <chr>,
-#   race.3 <chr>, datebirth.3 <date>, t_datediag.3 <date>, …
+   fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1
+   <chr>   <chr>      <chr> <chr>  <date>      <date>       <chr>        <chr>  
+ 1 100004  SEER Reg … Male  White  1926-01-01  1992-07-15   C50          histol…
+ 2 100034  SEER Reg … Male  White  1979-01-01  2000-06-15   C50          histol…
+ 3 100037  SEER Reg … Fema… White  1938-01-01  1996-01-15   C54          histol…
+ 4 100038  SEER Reg … Male  White  1989-01-01  1991-04-15   C50          histol…
+ 5 100039  SEER Reg … Fema… White  1946-01-01  2003-08-15   C50          histol…
+ 6 100047  SEER Reg … Fema… White  1927-01-01  1998-04-15   C50          histol…
+ 7 100057  SEER Reg … Male  Black  1961-01-01  2010-04-15   C18          histol…
+ 8 100060  SEER Reg … Fema… White  1947-01-01  2003-08-15   C50          histol…
+ 9 100063  SEER Reg … Fema… Black  1938-01-01  1995-12-15   C50          histol…
+10 100073  SEER Reg … Male  White  1960-01-01  1993-11-15   C44          histol…
+# ℹ 68,050 more rows
+# ℹ 113 more variables: fc_age.1 <int>, datedeath.1 <date>, p_alive.1 <chr>,
+#   p_dodmin.1 <date>, fc_agegroup.1 <chr>, t_yeardiag.1 <chr>,
+#   registry.2 <chr>, sex.2 <chr>, race.2 <chr>, datebirth.2 <date>,
+#   t_datediag.2 <date>, t_site_icd.2 <chr>, t_dco.2 <chr>, fc_age.2 <int>,
+#   datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
+#   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, registry.3 <chr>, sex.3 <chr>, …
 >                        
 > 
 > 
@@ -811,25 +810,25 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 6       97    21
 7       98  2670
 # A tidytable: 68,060 × 121
-   fake_id registry.1 sex.1 race.1 datebirt…¹ t_datedi…² t_sit…³ t_dco.1 fc_ag…⁴
-   <chr>   <chr>      <chr> <chr>  <date>     <date>     <chr>   <chr>     <int>
- 1 100004  SEER Reg … Male  White  1926-01-01 1992-07-15 C50     histol…      66
- 2 100034  SEER Reg … Male  White  1979-01-01 2000-06-15 C50     histol…      21
- 3 100037  SEER Reg … Fema… White  1938-01-01 1996-01-15 C54     histol…      58
- 4 100038  SEER Reg … Male  White  1989-01-01 1991-04-15 C50     histol…       2
- 5 100039  SEER Reg … Fema… White  1946-01-01 2003-08-15 C50     histol…      57
- 6 100047  SEER Reg … Fema… White  1927-01-01 1998-04-15 C50     histol…      71
- 7 100057  SEER Reg … Male  Black  1961-01-01 2010-04-15 C18     histol…      49
- 8 100060  SEER Reg … Fema… White  1947-01-01 2003-08-15 C50     histol…      56
- 9 100063  SEER Reg … Fema… Black  1938-01-01 1995-12-15 C50     histol…      57
-10 100073  SEER Reg … Male  White  1960-01-01 1993-11-15 C44     histol…      33
-# … with 68,050 more rows, 112 more variables: datedeath.1 <date>,
-#   p_alive.1 <chr>, p_dodmin.1 <date>, fc_agegroup.1 <chr>,
-#   t_yeardiag.1 <chr>, registry.2 <chr>, sex.2 <chr>, race.2 <chr>,
-#   datebirth.2 <date>, t_datediag.2 <date>, t_site_icd.2 <chr>, t_dco.2 <chr>,
-#   fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
-#   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, registry.3 <chr>, sex.3 <chr>,
-#   race.3 <chr>, datebirth.3 <date>, t_datediag.3 <date>, …
+   fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1
+   <chr>   <chr>      <chr> <chr>  <date>      <date>       <chr>        <chr>  
+ 1 100004  SEER Reg … Male  White  1926-01-01  1992-07-15   C50          histol…
+ 2 100034  SEER Reg … Male  White  1979-01-01  2000-06-15   C50          histol…
+ 3 100037  SEER Reg … Fema… White  1938-01-01  1996-01-15   C54          histol…
+ 4 100038  SEER Reg … Male  White  1989-01-01  1991-04-15   C50          histol…
+ 5 100039  SEER Reg … Fema… White  1946-01-01  2003-08-15   C50          histol…
+ 6 100047  SEER Reg … Fema… White  1927-01-01  1998-04-15   C50          histol…
+ 7 100057  SEER Reg … Male  Black  1961-01-01  2010-04-15   C18          histol…
+ 8 100060  SEER Reg … Fema… White  1947-01-01  2003-08-15   C50          histol…
+ 9 100063  SEER Reg … Fema… Black  1938-01-01  1995-12-15   C50          histol…
+10 100073  SEER Reg … Male  White  1960-01-01  1993-11-15   C44          histol…
+# ℹ 68,050 more rows
+# ℹ 113 more variables: fc_age.1 <int>, datedeath.1 <date>, p_alive.1 <chr>,
+#   p_dodmin.1 <date>, fc_agegroup.1 <chr>, t_yeardiag.1 <chr>,
+#   registry.2 <chr>, sex.2 <chr>, race.2 <chr>, datebirth.2 <date>,
+#   t_datediag.2 <date>, t_site_icd.2 <chr>, t_dco.2 <chr>, fc_age.2 <int>,
+#   datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
+#   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, registry.3 <chr>, sex.3 <chr>, …
 >                        
 > 
 > 
@@ -855,21 +854,21 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 +                              dattype = "seer",
 +                              case_id_var = "fake_id")
 # A tibble: 10,000 × 16
-   fake_id SEQ_NUM registry      sex   race  datebirth  t_datediag t_sit…¹ t_dco
-   <chr>     <int> <chr>         <chr> <chr> <date>     <date>     <chr>   <chr>
- 1 100004        1 SEER Reg 20 … Male  White 1926-01-01 1992-07-15 C50     hist…
- 2 100004        2 SEER Reg 20 … Male  White 1926-01-01 2004-01-15 C54     hist…
- 3 100004        3 SEER Reg 20 … Male  White 1926-01-01 2006-06-15 C34     hist…
- 4 100004        4 SEER Reg 20 … Male  White 1926-01-01 2018-06-15 C14     DCO …
- 5 100034        1 SEER Reg 21 … Male  White 1979-01-01 2000-06-15 C50     hist…
- 6 100037        1 SEER Reg 01 … Fema… White 1938-01-01 1996-01-15 C54     hist…
- 7 100038        1 SEER Reg 20 … Male  White 1989-01-01 1991-04-15 C50     hist…
- 8 100038        2 SEER Reg 20 … Male  White 1989-01-01 2000-03-15 C80     hist…
- 9 100039        1 SEER Reg 02 … Fema… White 1946-01-01 2003-08-15 C50     hist…
-10 100039        2 SEER Reg 02 … Fema… White 1946-01-01 2011-04-15 C34     hist…
-# … with 9,990 more rows, 7 more variables: fc_age <int>, datedeath <date>,
-#   p_alive <chr>, p_dodmin <date>, fc_agegroup <chr>, t_yeardiag <chr>,
-#   t_tumid <int>, and abbreviated variable name ¹​t_site_icd
+   fake_id SEQ_NUM registry   sex   race  datebirth  t_datediag t_site_icd t_dco
+   <chr>     <int> <chr>      <chr> <chr> <date>     <date>     <chr>      <chr>
+ 1 100004        1 SEER Reg … Male  White 1926-01-01 1992-07-15 C50        hist…
+ 2 100004        2 SEER Reg … Male  White 1926-01-01 2004-01-15 C54        hist…
+ 3 100004        3 SEER Reg … Male  White 1926-01-01 2006-06-15 C34        hist…
+ 4 100004        4 SEER Reg … Male  White 1926-01-01 2018-06-15 C14        DCO …
+ 5 100034        1 SEER Reg … Male  White 1979-01-01 2000-06-15 C50        hist…
+ 6 100037        1 SEER Reg … Fema… White 1938-01-01 1996-01-15 C54        hist…
+ 7 100038        1 SEER Reg … Male  White 1989-01-01 1991-04-15 C50        hist…
+ 8 100038        2 SEER Reg … Male  White 1989-01-01 2000-03-15 C80        hist…
+ 9 100039        1 SEER Reg … Fema… White 1946-01-01 2003-08-15 C50        hist…
+10 100039        2 SEER Reg … Fema… White 1946-01-01 2011-04-15 C34        hist…
+# ℹ 9,990 more rows
+# ℹ 7 more variables: fc_age <int>, datedeath <date>, p_alive <chr>,
+#   p_dodmin <date>, fc_agegroup <chr>, t_yeardiag <chr>, t_tumid <int>
 >                              
 > 
 > 
@@ -896,21 +895,21 @@ Warning: The variable for follow-up time has: 309 missings. These will be omitte
 +                              dattype = "seer",
 +                              case_id_var = "fake_id")
 # A tidytable: 10,000 × 16
-   fake_id SEQ_NUM registry      sex   race  datebirth  t_datediag t_sit…¹ t_dco
-   <chr>     <int> <chr>         <chr> <chr> <date>     <date>     <chr>   <chr>
- 1 100004        1 SEER Reg 20 … Male  White 1926-01-01 1992-07-15 C50     hist…
- 2 100004        2 SEER Reg 20 … Male  White 1926-01-01 2004-01-15 C54     hist…
- 3 100004        3 SEER Reg 20 … Male  White 1926-01-01 2006-06-15 C34     hist…
- 4 100004        4 SEER Reg 20 … Male  White 1926-01-01 2018-06-15 C14     DCO …
- 5 100034        1 SEER Reg 21 … Male  White 1979-01-01 2000-06-15 C50     hist…
- 6 100037        1 SEER Reg 01 … Fema… White 1938-01-01 1996-01-15 C54     hist…
- 7 100038        1 SEER Reg 20 … Male  White 1989-01-01 1991-04-15 C50     hist…
- 8 100038        2 SEER Reg 20 … Male  White 1989-01-01 2000-03-15 C80     hist…
- 9 100039        1 SEER Reg 02 … Fema… White 1946-01-01 2003-08-15 C50     hist…
-10 100039        2 SEER Reg 02 … Fema… White 1946-01-01 2011-04-15 C34     hist…
-# … with 9,990 more rows, 7 more variables: fc_age <int>, datedeath <date>,
-#   p_alive <chr>, p_dodmin <date>, fc_agegroup <chr>, t_yeardiag <chr>,
-#   t_tumid <int>, and abbreviated variable name ¹​t_site_icd
+   fake_id SEQ_NUM registry   sex   race  datebirth  t_datediag t_site_icd t_dco
+   <chr>     <int> <chr>      <chr> <chr> <date>     <date>     <chr>      <chr>
+ 1 100004        1 SEER Reg … Male  White 1926-01-01 1992-07-15 C50        hist…
+ 2 100004        2 SEER Reg … Male  White 1926-01-01 2004-01-15 C54        hist…
+ 3 100004        3 SEER Reg … Male  White 1926-01-01 2006-06-15 C34        hist…
+ 4 100004        4 SEER Reg … Male  White 1926-01-01 2018-06-15 C14        DCO …
+ 5 100034        1 SEER Reg … Male  White 1979-01-01 2000-06-15 C50        hist…
+ 6 100037        1 SEER Reg … Fema… White 1938-01-01 1996-01-15 C54        hist…
+ 7 100038        1 SEER Reg … Male  White 1989-01-01 1991-04-15 C50        hist…
+ 8 100038        2 SEER Reg … Male  White 1989-01-01 2000-03-15 C80        hist…
+ 9 100039        1 SEER Reg … Fema… White 1946-01-01 2003-08-15 C50        hist…
+10 100039        2 SEER Reg … Fema… White 1946-01-01 2011-04-15 C34        hist…
+# ℹ 9,990 more rows
+# ℹ 7 more variables: fc_age <int>, datedeath <date>, p_alive <chr>,
+#   p_dodmin <date>, fc_agegroup <chr>, t_yeardiag <chr>, t_tumid <int>
 > 
 > 
 > 
@@ -20977,21 +20976,21 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 +                          case_id_var = "fake_id", 
 +                          time_id_var = "SEQ_NUM")
 # A tibble: 8,746 × 15
-   fake_id SEQ_NUM registry      sex   race  datebirth  t_datediag t_sit…¹ t_dco
-   <chr>     <dbl> <chr>         <chr> <chr> <date>     <date>     <chr>   <chr>
- 1 100004        1 SEER Reg 20 … Male  White 1926-01-01 1992-07-15 C50     hist…
- 2 100004        2 SEER Reg 20 … Male  White 1926-01-01 2004-01-15 C54     hist…
- 3 100034        1 SEER Reg 21 … Male  White 1979-01-01 2000-06-15 C50     hist…
- 4 100037        1 SEER Reg 01 … Fema… White 1938-01-01 1996-01-15 C54     hist…
- 5 100038        1 SEER Reg 20 … Male  White 1989-01-01 1991-04-15 C50     hist…
- 6 100038        2 SEER Reg 20 … Male  White 1989-01-01 2000-03-15 C80     hist…
- 7 100039        1 SEER Reg 02 … Fema… White 1946-01-01 2003-08-15 C50     hist…
- 8 100039        2 SEER Reg 02 … Fema… White 1946-01-01 2011-04-15 C34     hist…
- 9 100047        1 SEER Reg 20 … Fema… White 1927-01-01 1998-04-15 C50     hist…
-10 100047        2 SEER Reg 20 … Fema… White 1927-01-01 2003-10-15 C14     hist…
-# … with 8,736 more rows, 6 more variables: fc_age <int>, datedeath <date>,
-#   p_alive <chr>, p_dodmin <date>, fc_agegroup <chr>, t_yeardiag <chr>, and
-#   abbreviated variable name ¹​t_site_icd
+   fake_id SEQ_NUM registry   sex   race  datebirth  t_datediag t_site_icd t_dco
+   <chr>     <dbl> <chr>      <chr> <chr> <date>     <date>     <chr>      <chr>
+ 1 100004        1 SEER Reg … Male  White 1926-01-01 1992-07-15 C50        hist…
+ 2 100004        2 SEER Reg … Male  White 1926-01-01 2004-01-15 C54        hist…
+ 3 100034        1 SEER Reg … Male  White 1979-01-01 2000-06-15 C50        hist…
+ 4 100037        1 SEER Reg … Fema… White 1938-01-01 1996-01-15 C54        hist…
+ 5 100038        1 SEER Reg … Male  White 1989-01-01 1991-04-15 C50        hist…
+ 6 100038        2 SEER Reg … Male  White 1989-01-01 2000-03-15 C80        hist…
+ 7 100039        1 SEER Reg … Fema… White 1946-01-01 2003-08-15 C50        hist…
+ 8 100039        2 SEER Reg … Fema… White 1946-01-01 2011-04-15 C34        hist…
+ 9 100047        1 SEER Reg … Fema… White 1927-01-01 1998-04-15 C50        hist…
+10 100047        2 SEER Reg … Fema… White 1927-01-01 2003-10-15 C14        hist…
+# ℹ 8,736 more rows
+# ℹ 6 more variables: fc_age <int>, datedeath <date>, p_alive <chr>,
+#   p_dodmin <date>, fc_agegroup <chr>, t_yeardiag <chr>
 > 
 > 
 > 
@@ -21025,21 +21024,21 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 +                          case_id_var = "fake_id", 
 +                          time_id_var = "SEQ_NUM")
 # A tidytable: 8,746 × 15
-   fake_id SEQ_NUM registry      sex   race  datebirth  t_datediag t_sit…¹ t_dco
-   <chr>     <dbl> <chr>         <chr> <chr> <date>     <date>     <chr>   <chr>
- 1 100004        1 SEER Reg 20 … Male  White 1926-01-01 1992-07-15 C50     hist…
- 2 100004        2 SEER Reg 20 … Male  White 1926-01-01 2004-01-15 C54     hist…
- 3 100034        1 SEER Reg 21 … Male  White 1979-01-01 2000-06-15 C50     hist…
- 4 100037        1 SEER Reg 01 … Fema… White 1938-01-01 1996-01-15 C54     hist…
- 5 100038        1 SEER Reg 20 … Male  White 1989-01-01 1991-04-15 C50     hist…
- 6 100038        2 SEER Reg 20 … Male  White 1989-01-01 2000-03-15 C80     hist…
- 7 100039        1 SEER Reg 02 … Fema… White 1946-01-01 2003-08-15 C50     hist…
- 8 100039        2 SEER Reg 02 … Fema… White 1946-01-01 2011-04-15 C34     hist…
- 9 100047        1 SEER Reg 20 … Fema… White 1927-01-01 1998-04-15 C50     hist…
-10 100047        2 SEER Reg 20 … Fema… White 1927-01-01 2003-10-15 C14     hist…
-# … with 8,736 more rows, 6 more variables: fc_age <int>, datedeath <date>,
-#   p_alive <chr>, p_dodmin <date>, fc_agegroup <chr>, t_yeardiag <chr>, and
-#   abbreviated variable name ¹​t_site_icd
+   fake_id SEQ_NUM registry   sex   race  datebirth  t_datediag t_site_icd t_dco
+   <chr>     <dbl> <chr>      <chr> <chr> <date>     <date>     <chr>      <chr>
+ 1 100004        1 SEER Reg … Male  White 1926-01-01 1992-07-15 C50        hist…
+ 2 100004        2 SEER Reg … Male  White 1926-01-01 2004-01-15 C54        hist…
+ 3 100034        1 SEER Reg … Male  White 1979-01-01 2000-06-15 C50        hist…
+ 4 100037        1 SEER Reg … Fema… White 1938-01-01 1996-01-15 C54        hist…
+ 5 100038        1 SEER Reg … Male  White 1989-01-01 1991-04-15 C50        hist…
+ 6 100038        2 SEER Reg … Male  White 1989-01-01 2000-03-15 C80        hist…
+ 7 100039        1 SEER Reg … Fema… White 1946-01-01 2003-08-15 C50        hist…
+ 8 100039        2 SEER Reg … Fema… White 1946-01-01 2011-04-15 C34        hist…
+ 9 100047        1 SEER Reg … Fema… White 1927-01-01 1998-04-15 C50        hist…
+10 100047        2 SEER Reg … Fema… White 1927-01-01 2003-10-15 C14        hist…
+# ℹ 8,736 more rows
+# ℹ 6 more variables: fc_age <int>, datedeath <date>, p_alive <chr>,
+#   p_dodmin <date>, fc_agegroup <chr>, t_yeardiag <chr>
 > 
 > 
 > 
@@ -43317,25 +43316,25 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 +                          datsize = 10000)
 Long dataset had too many cases per patient. Wide dataset is limited to  2  cases per id as defined in timevar_max option.
 # A tibble: 6,003 × 27
-   fake_id registry.1 sex.1 race.1 datebirt…¹ t_datedi…² t_sit…³ t_dco.1 fc_ag…⁴
-   <chr>   <chr>      <chr> <chr>  <date>     <date>     <chr>   <chr>     <int>
- 1 100004  SEER Reg … Male  White  1926-01-01 1992-07-15 C50     histol…      66
- 2 100034  SEER Reg … Male  White  1979-01-01 2000-06-15 C50     histol…      21
- 3 100037  SEER Reg … Fema… White  1938-01-01 1996-01-15 C54     histol…      58
- 4 100038  SEER Reg … Male  White  1989-01-01 1991-04-15 C50     histol…       2
- 5 100039  SEER Reg … Fema… White  1946-01-01 2003-08-15 C50     histol…      57
- 6 100047  SEER Reg … Fema… White  1927-01-01 1998-04-15 C50     histol…      71
- 7 100057  SEER Reg … Male  Black  1961-01-01 2010-04-15 C18     histol…      49
- 8 100060  SEER Reg … Fema… White  1947-01-01 2003-08-15 C50     histol…      56
- 9 100063  SEER Reg … Fema… Black  1938-01-01 1995-12-15 C50     histol…      57
-10 100073  SEER Reg … Male  White  1960-01-01 1993-11-15 C44     histol…      33
-# … with 5,993 more rows, 18 more variables: datedeath.1 <date>,
-#   p_alive.1 <chr>, p_dodmin.1 <date>, fc_agegroup.1 <chr>,
-#   t_yeardiag.1 <chr>, registry.2 <chr>, sex.2 <chr>, race.2 <chr>,
-#   datebirth.2 <date>, t_datediag.2 <date>, t_site_icd.2 <chr>, t_dco.2 <chr>,
-#   fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
-#   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, and abbreviated variable names
-#   ¹​datebirth.1, ²​t_datediag.1, ³​t_site_icd.1, ⁴​fc_age.1
+   fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1
+   <chr>   <chr>      <chr> <chr>  <date>      <date>       <chr>        <chr>  
+ 1 100004  SEER Reg … Male  White  1926-01-01  1992-07-15   C50          histol…
+ 2 100034  SEER Reg … Male  White  1979-01-01  2000-06-15   C50          histol…
+ 3 100037  SEER Reg … Fema… White  1938-01-01  1996-01-15   C54          histol…
+ 4 100038  SEER Reg … Male  White  1989-01-01  1991-04-15   C50          histol…
+ 5 100039  SEER Reg … Fema… White  1946-01-01  2003-08-15   C50          histol…
+ 6 100047  SEER Reg … Fema… White  1927-01-01  1998-04-15   C50          histol…
+ 7 100057  SEER Reg … Male  Black  1961-01-01  2010-04-15   C18          histol…
+ 8 100060  SEER Reg … Fema… White  1947-01-01  2003-08-15   C50          histol…
+ 9 100063  SEER Reg … Fema… Black  1938-01-01  1995-12-15   C50          histol…
+10 100073  SEER Reg … Male  White  1960-01-01  1993-11-15   C44          histol…
+# ℹ 5,993 more rows
+# ℹ 19 more variables: fc_age.1 <int>, datedeath.1 <date>, p_alive.1 <chr>,
+#   p_dodmin.1 <date>, fc_agegroup.1 <chr>, t_yeardiag.1 <chr>,
+#   registry.2 <chr>, sex.2 <chr>, race.2 <chr>, datebirth.2 <date>,
+#   t_datediag.2 <date>, t_site_icd.2 <chr>, t_dco.2 <chr>, fc_age.2 <int>,
+#   datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
+#   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>
 > 
 > 
 > 
@@ -43362,25 +43361,25 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 +                          datsize = 10000)
 Long dataset had too many cases per patient. Wide dataset is limited to  2  cases per id as defined in timevar_max option.
 # A tidytable: 6,003 × 27
-   fake_id registry.1 sex.1 race.1 datebirt…¹ t_datedi…² t_sit…³ t_dco.1 fc_ag…⁴
-   <chr>   <chr>      <chr> <chr>  <date>     <date>     <chr>   <chr>     <int>
- 1 100004  SEER Reg … Male  White  1926-01-01 1992-07-15 C50     histol…      66
- 2 100034  SEER Reg … Male  White  1979-01-01 2000-06-15 C50     histol…      21
- 3 100037  SEER Reg … Fema… White  1938-01-01 1996-01-15 C54     histol…      58
- 4 100038  SEER Reg … Male  White  1989-01-01 1991-04-15 C50     histol…       2
- 5 100039  SEER Reg … Fema… White  1946-01-01 2003-08-15 C50     histol…      57
- 6 100047  SEER Reg … Fema… White  1927-01-01 1998-04-15 C50     histol…      71
- 7 100057  SEER Reg … Male  Black  1961-01-01 2010-04-15 C18     histol…      49
- 8 100060  SEER Reg … Fema… White  1947-01-01 2003-08-15 C50     histol…      56
- 9 100063  SEER Reg … Fema… Black  1938-01-01 1995-12-15 C50     histol…      57
-10 100073  SEER Reg … Male  White  1960-01-01 1993-11-15 C44     histol…      33
-# … with 5,993 more rows, 18 more variables: datedeath.1 <date>,
-#   p_alive.1 <chr>, p_dodmin.1 <date>, fc_agegroup.1 <chr>,
-#   t_yeardiag.1 <chr>, registry.2 <chr>, sex.2 <chr>, race.2 <chr>,
-#   datebirth.2 <date>, t_datediag.2 <date>, t_site_icd.2 <chr>, t_dco.2 <chr>,
-#   fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
-#   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, and abbreviated variable names
-#   ¹​datebirth.1, ²​t_datediag.1, ³​t_site_icd.1, ⁴​fc_age.1
+   fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1
+   <chr>   <chr>      <chr> <chr>  <date>      <date>       <chr>        <chr>  
+ 1 100004  SEER Reg … Male  White  1926-01-01  1992-07-15   C50          histol…
+ 2 100034  SEER Reg … Male  White  1979-01-01  2000-06-15   C50          histol…
+ 3 100037  SEER Reg … Fema… White  1938-01-01  1996-01-15   C54          histol…
+ 4 100038  SEER Reg … Male  White  1989-01-01  1991-04-15   C50          histol…
+ 5 100039  SEER Reg … Fema… White  1946-01-01  2003-08-15   C50          histol…
+ 6 100047  SEER Reg … Fema… White  1927-01-01  1998-04-15   C50          histol…
+ 7 100057  SEER Reg … Male  Black  1961-01-01  2010-04-15   C18          histol…
+ 8 100060  SEER Reg … Fema… White  1947-01-01  2003-08-15   C50          histol…
+ 9 100063  SEER Reg … Fema… Black  1938-01-01  1995-12-15   C50          histol…
+10 100073  SEER Reg … Male  White  1960-01-01  1993-11-15   C44          histol…
+# ℹ 5,993 more rows
+# ℹ 19 more variables: fc_age.1 <int>, datedeath.1 <date>, p_alive.1 <chr>,
+#   p_dodmin.1 <date>, fc_agegroup.1 <chr>, t_yeardiag.1 <chr>,
+#   registry.2 <chr>, sex.2 <chr>, race.2 <chr>, datebirth.2 <date>,
+#   t_datediag.2 <date>, t_site_icd.2 <chr>, t_dco.2 <chr>, fc_age.2 <int>,
+#   datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
+#   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>
 > 
 > 
 > 
@@ -43593,25 +43592,25 @@ detaching ‘package:dplyr’
 6       98          98  2670
 7       NA          NA     5
 # A tibble: 68,060 × 122
-   fake_id registry.1 sex.1 race.1 datebirt…¹ t_datedi…² t_sit…³ t_dco.1 fc_ag…⁴
-   <chr>   <chr>      <chr> <chr>  <date>     <date>     <chr>   <chr>     <int>
- 1 100004  SEER Reg … Male  White  1926-01-01 1992-07-15 C50     histol…      66
- 2 100034  SEER Reg … Male  White  1979-01-01 2000-06-15 C50     histol…      21
- 3 100037  SEER Reg … Fema… White  1938-01-01 1996-01-15 C54     histol…      58
- 4 100038  SEER Reg … Male  White  1989-01-01 1991-04-15 C50     histol…       2
- 5 100039  SEER Reg … Fema… White  1946-01-01 2003-08-15 C50     histol…      57
- 6 100047  SEER Reg … Fema… White  1927-01-01 1998-04-15 C50     histol…      71
- 7 100057  SEER Reg … Male  Black  1961-01-01 2010-04-15 C18     histol…      49
- 8 100060  SEER Reg … Fema… White  1947-01-01 2003-08-15 C50     histol…      56
- 9 100063  SEER Reg … Fema… Black  1938-01-01 1995-12-15 C50     histol…      57
-10 100073  SEER Reg … Male  White  1960-01-01 1993-11-15 C44     histol…      33
-# … with 68,050 more rows, 113 more variables: datedeath.1 <date>,
-#   p_alive.1 <chr>, p_dodmin.1 <date>, fc_agegroup.1 <chr>,
-#   t_yeardiag.1 <chr>, registry.2 <chr>, sex.2 <chr>, race.2 <chr>,
-#   datebirth.2 <date>, t_datediag.2 <date>, t_site_icd.2 <chr>, t_dco.2 <chr>,
-#   fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
-#   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, registry.3 <chr>, sex.3 <chr>,
-#   race.3 <chr>, datebirth.3 <date>, t_datediag.3 <date>, …
+   fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1
+   <chr>   <chr>      <chr> <chr>  <date>      <date>       <chr>        <chr>  
+ 1 100004  SEER Reg … Male  White  1926-01-01  1992-07-15   C50          histol…
+ 2 100034  SEER Reg … Male  White  1979-01-01  2000-06-15   C50          histol…
+ 3 100037  SEER Reg … Fema… White  1938-01-01  1996-01-15   C54          histol…
+ 4 100038  SEER Reg … Male  White  1989-01-01  1991-04-15   C50          histol…
+ 5 100039  SEER Reg … Fema… White  1946-01-01  2003-08-15   C50          histol…
+ 6 100047  SEER Reg … Fema… White  1927-01-01  1998-04-15   C50          histol…
+ 7 100057  SEER Reg … Male  Black  1961-01-01  2010-04-15   C18          histol…
+ 8 100060  SEER Reg … Fema… White  1947-01-01  2003-08-15   C50          histol…
+ 9 100063  SEER Reg … Fema… Black  1938-01-01  1995-12-15   C50          histol…
+10 100073  SEER Reg … Male  White  1960-01-01  1993-11-15   C44          histol…
+# ℹ 68,050 more rows
+# ℹ 114 more variables: fc_age.1 <int>, datedeath.1 <date>, p_alive.1 <chr>,
+#   p_dodmin.1 <date>, fc_agegroup.1 <chr>, t_yeardiag.1 <chr>,
+#   registry.2 <chr>, sex.2 <chr>, race.2 <chr>, datebirth.2 <date>,
+#   t_datediag.2 <date>, t_site_icd.2 <chr>, t_dco.2 <chr>, fc_age.2 <int>,
+#   datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
+#   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, registry.3 <chr>, sex.3 <chr>, …
 > 
 > 
 > 
@@ -43692,25 +43691,25 @@ detaching ‘package:dplyr’
 6       98          98  2670
 7       NA          NA     5
 # A tidytable: 68,060 × 122
-   fake_id registry.1 sex.1 race.1 datebirt…¹ t_datedi…² t_sit…³ t_dco.1 fc_ag…⁴
-   <chr>   <chr>      <chr> <chr>  <date>     <date>     <chr>   <chr>     <int>
- 1 100004  SEER Reg … Male  White  1926-01-01 1992-07-15 C50     histol…      66
- 2 100034  SEER Reg … Male  White  1979-01-01 2000-06-15 C50     histol…      21
- 3 100037  SEER Reg … Fema… White  1938-01-01 1996-01-15 C54     histol…      58
- 4 100038  SEER Reg … Male  White  1989-01-01 1991-04-15 C50     histol…       2
- 5 100039  SEER Reg … Fema… White  1946-01-01 2003-08-15 C50     histol…      57
- 6 100047  SEER Reg … Fema… White  1927-01-01 1998-04-15 C50     histol…      71
- 7 100057  SEER Reg … Male  Black  1961-01-01 2010-04-15 C18     histol…      49
- 8 100060  SEER Reg … Fema… White  1947-01-01 2003-08-15 C50     histol…      56
- 9 100063  SEER Reg … Fema… Black  1938-01-01 1995-12-15 C50     histol…      57
-10 100073  SEER Reg … Male  White  1960-01-01 1993-11-15 C44     histol…      33
-# … with 68,050 more rows, 113 more variables: datedeath.1 <date>,
-#   p_alive.1 <chr>, p_dodmin.1 <date>, fc_agegroup.1 <chr>,
-#   t_yeardiag.1 <chr>, registry.2 <chr>, sex.2 <chr>, race.2 <chr>,
-#   datebirth.2 <date>, t_datediag.2 <date>, t_site_icd.2 <chr>, t_dco.2 <chr>,
-#   fc_age.2 <int>, datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
-#   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, registry.3 <chr>, sex.3 <chr>,
-#   race.3 <chr>, datebirth.3 <date>, t_datediag.3 <date>, …
+   fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1
+   <chr>   <chr>      <chr> <chr>  <date>      <date>       <chr>        <chr>  
+ 1 100004  SEER Reg … Male  White  1926-01-01  1992-07-15   C50          histol…
+ 2 100034  SEER Reg … Male  White  1979-01-01  2000-06-15   C50          histol…
+ 3 100037  SEER Reg … Fema… White  1938-01-01  1996-01-15   C54          histol…
+ 4 100038  SEER Reg … Male  White  1989-01-01  1991-04-15   C50          histol…
+ 5 100039  SEER Reg … Fema… White  1946-01-01  2003-08-15   C50          histol…
+ 6 100047  SEER Reg … Fema… White  1927-01-01  1998-04-15   C50          histol…
+ 7 100057  SEER Reg … Male  Black  1961-01-01  2010-04-15   C18          histol…
+ 8 100060  SEER Reg … Fema… White  1947-01-01  2003-08-15   C50          histol…
+ 9 100063  SEER Reg … Fema… Black  1938-01-01  1995-12-15   C50          histol…
+10 100073  SEER Reg … Male  White  1960-01-01  1993-11-15   C44          histol…
+# ℹ 68,050 more rows
+# ℹ 114 more variables: fc_age.1 <int>, datedeath.1 <date>, p_alive.1 <chr>,
+#   p_dodmin.1 <date>, fc_agegroup.1 <chr>, t_yeardiag.1 <chr>,
+#   registry.2 <chr>, sex.2 <chr>, race.2 <chr>, datebirth.2 <date>,
+#   t_datediag.2 <date>, t_site_icd.2 <chr>, t_dco.2 <chr>, fc_age.2 <int>,
+#   datedeath.2 <date>, p_alive.2 <chr>, p_dodmin.2 <date>,
+#   fc_agegroup.2 <chr>, t_yeardiag.2 <chr>, registry.3 <chr>, sex.3 <chr>, …
 > 
 > 
 > 
@@ -43720,7 +43719,7 @@ detaching ‘package:dplyr’
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  25.054 2.966 28.231 0.002 0.002 
+Time elapsed:  18.251 3.264 22.278 0.002 0.002 
 > grDevices::dev.off()
 null device 
           1 

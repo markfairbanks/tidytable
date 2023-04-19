@@ -20,12 +20,12 @@ Type 'q()' to quit R.
 > library(checkmate)
 > 
 > test_check("ffsimulator")
-[ FAIL 0 | WARN 1 | SKIP 7 | PASS 28 ]
+[ FAIL 0 | WARN 8 | SKIP 7 | PASS 28 ]
 
 ══ Skipped tests ═══════════════════════════════════════════════════════════════
 • On CRAN (7)
 
-[ FAIL 0 | WARN 1 | SKIP 7 | PASS 28 ]
+[ FAIL 0 | WARN 8 | SKIP 7 | PASS 28 ]
 Deleting unused snapshots:
 • ffs_autoplot/points-plot.svg
 • ffs_autoplot/rank-plot.new.svg
@@ -35,4 +35,4 @@ Deleting unused snapshots:
 > 
 > proc.time()
    user  system elapsed 
-  4.946   0.301   7.220 
+  6.166   0.378   8.800 

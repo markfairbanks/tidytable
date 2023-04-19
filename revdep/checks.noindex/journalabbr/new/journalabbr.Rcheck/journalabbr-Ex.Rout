@@ -207,7 +207,7 @@ xu2014ordinal
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  3.262 0.179 3.462 0 0 
+Time elapsed:  2.946 0.187 3.151 0 0 
 > grDevices::dev.off()
 null device 
           1 

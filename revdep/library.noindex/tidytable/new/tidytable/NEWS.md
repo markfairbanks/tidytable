@@ -1,4 +1,16 @@
-# tidytable 0.10.0 (in development)
+# tidytable 0.10.1 (in development)
+
+#### New functions
+* `reframe()`
+
+#### Bug fixes
+* `case_when()`: `.default` is used when calculating a common ptype (#751)
+* `pivot_wider()`: Works correctly with dates (#759)
+
+#### Functions with notable speed improvements
+* `case_match()`: When comparing input vector to a length 1 literal
+
+# tidytable 0.10.0
 
 #### Deprecations
 * `verb.()` functions are now deprecated (e.g. `mutate.()`). Users should now use
@@ -18,7 +30,11 @@
 * `expand_grid()`: Can use "unique" or "sorted" as column names (#718)
 
 #### Breaking changes
-`slice_head()`/`_tail()`: `.by` arg must be explicitly named when slicing by group
+* `slice_head()`/`_tail()`: `.by` arg must be explicitly named when slicing by group
+
+#### Functions with notable speed improvements
+* `mutate()`: When overwriting existing columns on data frames with a high
+  number of columns (>1000)
 
 # tidytable 0.9.2
 
