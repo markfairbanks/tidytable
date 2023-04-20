@@ -1,6 +1,6 @@
 Package: tidytable
 Title: Tidy Interface to 'data.table'
-Version: 0.10.0.9
+Version: 0.10.1
 Authors@R: c(
   person("Mark", "Fairbanks", role = c("aut", "cre"), email = "mark.t.fairbanks@gmail.com"),
   person("Abdessabour", "Moutik", role = "ctb"),
@@ -18,7 +18,7 @@ Encoding: UTF-8
 Imports: 
     data.table (>= 1.14.0),
     glue (>= 1.4.0),
-    lifecycle(>= 1.0.3),
+    lifecycle (>= 1.0.3),
     magrittr (>= 2.0.3),
     pillar (>= 1.8.0),
     rlang (>= 1.1.0),
@@ -27,7 +27,7 @@ Imports:
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
-URL: https://markfairbanks.github.io/tidytable, https://github.com/markfairbanks/tidytable
+URL: https://markfairbanks.github.io/tidytable/, https://github.com/markfairbanks/tidytable
 BugReports: https://github.com/markfairbanks/tidytable/issues
 Suggests: 
     testthat (>= 2.1.0),

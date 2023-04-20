@@ -1,4 +1,4 @@
-# tidytable 0.10.1 (in development)
+# tidytable 0.10.1
 
 #### New functions
 * `reframe()`

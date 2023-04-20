@@ -53,6 +53,7 @@ reference:
   - relocate
   - rename
   - rename_with
+  - reframe
   - row_number
   - rowwise
   - slice

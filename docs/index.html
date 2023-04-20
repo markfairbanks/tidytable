@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.10.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.10.1</span>
       </span>
     </div>
 
@@ -100,16 +100,16 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"tidytable"</span><span class="op">)</span></span></code></pre></div>
 <p>Or install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"markfairbanks/tidytable"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"markfairbanks/tidytable"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="general-syntax">General syntax<a class="anchor" aria-label="anchor" href="#general-syntax"></a>
 </h2>
-<p><code>tidytable</code> replicates <code>tidyverse</code> syntax but uses <code>data.table</code> in the background. In general you can simply use <code><a href="https://github.com/markfairbanks/tidytable" class="external-link">library(tidytable)</a></code> to replace your existing <code>dplyr</code> and <code>tidyr</code> code with <code>data.table</code> backed equivalents.</p>
+<p><code>tidytable</code> replicates <code>tidyverse</code> syntax but uses <code>data.table</code> in the background. In general you can simply use <code><a href="https://markfairbanks.github.io/tidytable/" class="external-link">library(tidytable)</a></code> to replace your existing <code>dplyr</code> and <code>tidyr</code> code with <code>data.table</code> backed equivalents.</p>
 <p>A full list of implemented functions can be found <a href="https://markfairbanks.github.io/tidytable/reference/index.html" class="external-link">here</a>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/markfairbanks/tidytable" class="external-link">tidytable</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://markfairbanks.github.io/tidytable/" class="external-link">tidytable</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span>, z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
