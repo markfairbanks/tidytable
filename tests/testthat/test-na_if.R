@@ -27,10 +27,4 @@ test_that("follows vctrs recycling rules", {
   expect_error(na_if(vec, 1:2))
 })
 
-test_that("na_if. works", {
-  vec <- 1:3
-  res <- na_if.(vec, 3) %>% suppressWarnings()
-  expect_equal(res, c(1, 2, NA))
-})
-
 

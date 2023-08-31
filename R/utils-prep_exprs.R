@@ -26,44 +26,44 @@ prep_expr <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env(), is_
 }
 
 tidytable_fns <- c(
-  "arrange.", "arrange",
-  "filter.", "filter",
-  "mutate.", "mutate",
-  "slice.", "slice",
-  "summarise.", "summarise", "summarize.", "summarize"
+  "arrange",
+  "filter",
+  "mutate",
+  "slice",
+  "summarise", "summarize"
 )
 
 call_fns <- c(
   "$", "[[",
-  "across.", "across",
-  "c_across.", "c_across",
-  "cur_data.", "cur_data",
-  "cur_group_rows.", "cur_group_rows",
-  "cur_group_id.", "cur_group_id",
-  "desc.", "desc",
+  "across",
+  "c_across",
+  "cur_data",
+  "cur_group_rows",
+  "cur_group_id",
+  "desc",
   "function",
   "glue",
-  "if_all.",  "if_all",
-  "if_any.", "if_any",
+  "if_all",
+  "if_any",
   "ifelse",
-  "n.", "n",
+  "n",
   "pick",
-  "row_number.", "row_number",
+  "row_number",
   "str_glue"
 )
 
 prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env(), is_top_level) {
-  if (is_call(x, c("n.", "n"))) {
+  if (is_call(x, "n")) {
     quote(.N)
-  } else if (is_call(x, c("desc.", "desc"))) {
+  } else if (is_call(x, "desc")) {
     x[[1]] <- sym("-")
     x[[2]] <- prep_expr(x[[2]], data, {{ .by }}, j, dt_env)
     x
-  } else if (is_call(x, c("row_number.", "row_number", "cur_group_rows.", "cur_group_rows"), 0)) {
+  } else if (is_call(x, c("row_number", "cur_group_rows"), 0)) {
     quote(seq_len(.N))
-  } else if (is_call(x, c("cur_group_id.", "cur_group_id"))) {
+  } else if (is_call(x, "cur_group_id")) {
     quote(.GRP)
-  } else if (is_call(x, c("cur_data.", "cur_data"))) {
+  } else if (is_call(x, "cur_data")) {
     quote(.SD)
   } else if (is_call(x, "ifelse", ns = "")) {
     x <- call_match(x, base::ifelse)
@@ -71,21 +71,21 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env()
     x[[1]] <- quote(tidytable::if_else)
     x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }}, j, dt_env)
     x
-  } else if (is_call(x, c("c_across.", "c_across"))) {
-    call <- call_match(x, tidytable::c_across.)
+  } else if (is_call(x, "c_across")) {
+    call <- call_match(x, tidytable::c_across)
     cols <- get_across_cols(data, call$cols, {{ .by }}, dt_env)
     cols <- syms(cols)
     call2("vec_c", !!!cols, .ns = "vctrs")
-  } else if (is_call(x, c("if_all.", "if_all", "if_any.", "if_any"))) {
+  } else if (is_call(x, c("if_all", "if_any"))) {
     call <- call_match(x, tidytable::if_all)
     if (is.null(call$.fns)) {
       return(TRUE)
     }
     call_list <- expand_across(call, data, {{ .by }}, j, dt_env)
-    reduce_fn <- if (is_call(x, c("if_all.", "if_all"))) "&" else "|"
+    reduce_fn <- if (is_call(x, "if_all")) "&" else "|"
     filter_expr <- call_reduce(call_list, reduce_fn)
     filter_expr
-  } else if (is_call(x, c("across.", "across"))) {
+  } else if (is_call(x, "across")) {
     call <- call_match(x, tidytable::across, dots_expand = FALSE)
     call_list <- expand_across(call, data, {{ .by }}, j, dt_env)
     if (!is_top_level) {

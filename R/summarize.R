@@ -43,56 +43,15 @@ summarize <- function(.df, ...,
                       .sort = TRUE,
                       .groups = "drop_last",
                       .unpack = FALSE) {
-  if (!is_tidytable(.df)) .df <- as_tidytable(.df)
-
-  if (is_ungrouped(.df)) {
-    tt_summarize(.df, ...,
-                 .by = {{ .by }},
-                 .sort = .sort,
-                 .groups = .groups,
-                 .unpack = .unpack)
-  } else if (is_grouped_df(.df)) {
-    .by <- group_vars(.df)
-     out <-  tt_summarize(.df, ...,
-                          .by = any_of(.by),
-                          .sort = .sort,
-                          .groups = .groups,
-                          .unpack = .unpack)
-
-     .groups <- arg_match0(.groups, c("drop_last", "drop", "keep"))
-     if (.groups == "drop_last") {
-       .by <- .by[-length(.by)]
-     } else if (.groups == "drop") {
-       .by <- character()
-     }
-
-     group_by(out, any_of(.by))
-  } else {
-    abort("`summarize()` is not yet supported on a rowwise tidytable.")
-  }
+  UseMethod("summarize")
 }
 
 #' @export
-#' @keywords internal
-#' @inherit summarize
-summarize. <- function(.df, ...,
-                      .by = NULL,
-                      .sort = TRUE,
-                      .groups = "drop_last",
-                      .unpack = FALSE) {
-  deprecate_dot_fun()
-  summarize(.df, ...,
-            .by = {{ .by }},
-            .sort = .sort,
-            .groups = .groups,
-            .unpack = .unpack)
-}
-
-tt_summarize <- function(.df, ...,
-                                 .by = NULL,
-                                 .sort = TRUE,
-                                 .groups = "drop",
-                                 .unpack = FALSE) {
+summarize.tidytable <- function(.df, ...,
+                                .by = NULL,
+                                .sort = TRUE,
+                                .groups = "drop_last",
+                                .unpack = FALSE) {
   dots <- enquos(...)
 
   .by <- enquo(.by)
@@ -127,12 +86,54 @@ tt_summarize <- function(.df, ...,
 }
 
 #' @export
-#' @rdname summarize
-summarise <- summarize
+summarize.grouped_tt <- function(.df, ...,
+                                 .by = NULL,
+                                 .sort = TRUE,
+                                 .groups = "drop_last",
+                                 .unpack = FALSE) {
+  .by <- group_vars(.df)
+  out <- ungroup(.df)
+  out <- summarize(out, ...,
+                   .by = {{ .by }},
+                   .sort = .sort,
+                   .groups = .groups,
+                   .unpack = .unpack)
+
+  .groups <- arg_match0(.groups, c("drop_last", "drop", "keep"))
+  if (.groups == "drop_last") {
+    .by <- .by[-length(.by)]
+  } else if (.groups == "drop") {
+    .by <- character()
+  }
+
+  group_by(out, any_of(.by))
+}
 
 #' @export
-#' @keywords internal
-#' @inherit summarize
-summarise. <- summarize.
+summarize.rowwise_tt <- function(.df, ...,
+                                 .by = NULL,
+                                 .sort = TRUE,
+                                 .groups = "drop_last",
+                                 .unpack = FALSE) {
+  abort("`summarize()` is not yet supported on a rowwise tidytable.")
+}
+
+#' @export
+summarize.data.frame <- function(.df, ...,
+                                 .by = NULL,
+                                 .sort = TRUE,
+                                 .groups = "drop_last",
+                                 .unpack = FALSE) {
+  .df <- as_tidytable(.df)
+  summarize(.df, ...,
+            .by = {{ .by }},
+            .sort = .sort,
+            .groups = .groups,
+            .unpack = .unpack)
+}
+
+#' @export
+#' @rdname summarize
+summarise <- summarize
 
 

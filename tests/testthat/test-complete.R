@@ -25,10 +25,3 @@ test_that("not drop unspecified levels in complete", {
   expect <- df[, c("z", "x", "y")]
   expect_equal(df2, expect)
 })
-
-test_that("complete. works", {
-  df <- tidytable(x = 1:2, y = 1:2, z = 3:4)
-  out <- suppressWarnings(complete.(df, x, y))
-  expect_equal(nrow(out), 4)
-  expect_equal(out$z, c(3, NA, NA, 4))
-})

@@ -35,38 +35,3 @@ if_else <- function(condition, true, false, missing = NA, ..., ptype = NULL, siz
 
   out
 }
-
-#' @export
-#' @keywords internal
-#' @inherit if_else
-if_else. <- function(condition, true, false, missing = NA, ..., ptype = NULL, size = NULL) {
-  deprecate_dot_fun()
-  if_else(condition, true, false, missing, ..., ptype = ptype, size = size)
-}
-
-#' Fast ifelse
-#'
-#' @description
-#' Fast version of `base::ifelse()`.
-#'
-#' @param conditions Conditions to test on
-#' @param true Values to return if conditions evaluate to `TRUE`
-#' @param false Values to return if conditions evaluate to `FALSE`
-#' @param na Value to return if an element of test is `NA`
-#'
-#' @export
-#'
-#' @examples
-#' x <- 1:5
-#' ifelse(x < 3, 1, 0)
-#'
-#' # Can also be used inside of mutate()
-#' df <- data.table(x = x)
-#'
-#' df %>%
-#'   mutate(new_col = ifelse(x < 3, 1, 0))
-#' @keywords internal
-ifelse. <- function(conditions, true, false, na = NA) {
-  deprecate_dot_fun("if_else.")
-  if_else(conditions, true, false, na)
-}

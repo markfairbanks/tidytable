@@ -16,18 +16,6 @@ test_that("can nest all data & can specify name", {
   expect_equal(nrow(result_df), 1)
 })
 
-test_that("nest. works", {
-  df <- data.table(a = 1:3,
-                        b = 4:6,
-                        c = c("a", "a", "b"))
-
-  result_df <- df %>%
-    nest.(data = everything()) %>%
-    suppressWarnings()
-
-  expect_named(result_df, c("data"))
-})
-
 test_that("can specify columns in `...`", {
   df <- data.table(a = 1:3,
                    b = 4:6,

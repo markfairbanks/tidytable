@@ -10,19 +10,6 @@ test_that("works with no input & works with NA", {
   expect_equal(unite_df$.united, c("a_b_c", "a_b_NA", "a_b_c"))
 })
 
-test_that("unite. works", {
-  test_df <- tidytable(a = c("a", "a", "a"),
-                       b = c("b", "b", "b"),
-                       c = c("c", NA, "c"))
-
-  unite_df <- test_df %>%
-    unite.() %>%
-    suppressWarnings()
-
-  expect_named(unite_df, ".united")
-  expect_equal(unite_df$.united, c("a_b_c", "a_b_NA", "a_b_c"))
-})
-
 test_that("works with selected cols", {
 
   test_df <- tidytable(a = c("a", "a", "a"),

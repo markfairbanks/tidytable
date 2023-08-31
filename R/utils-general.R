@@ -188,20 +188,6 @@ check_across <- function(dots, .fn) {
   }
 }
 
-# Needed until we can build S3 methods again once `verb.()` is removed
-#   Regular `as_tidytable()` strips "grouped_tt" class
-.df_as_tidytable <- function(.df) {
-  if (!is.data.frame(.df)) {
-    abort("`.df` must be a data frame.")
-  }
-
-  if (!is_tidytable(.df)) {
-    as_tidytable(.df)
-  } else {
-    .df
-  }
-}
-
 is_ungrouped <- function(.df) {
   !is_grouped_df(.df) && !is_rowwise(.df)
 }

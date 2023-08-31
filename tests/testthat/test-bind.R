@@ -63,20 +63,6 @@ test_that("bind_rows() preserves attributes", {
   expect_true(is_tidytable(bind_df))
 })
 
-test_that("bind_rows.() works", {
-  df1 <- data.table(x = c(1,2,3), y = c(3,4,5))
-  df2 <- data.table(x = c(1,2,3), y = c(3,4,5))
-
-  bind_df <- df1 %>%
-    bind_rows.(df2) %>%
-    suppressWarnings()
-
-  expect_true(is_tidytable(bind_df))
-  expect_named(bind_df, c("x","y"))
-  expect_equal(bind_df$x, c(1,2,3,1,2,3))
-  expect_equal(bind_df$y, c(3,4,5,3,4,5))
-})
-
 ##### bind_cols()
 test_that("bind_cols() works with data.tables", {
   df1 <- data.table(x = c(1,2,3), y = c(3,4,5))
@@ -169,19 +155,4 @@ test_that("bind_cols - correctly handles list inputs, (#446)", {
   out <- map_dfc(df, identity)
   expect_true(is_tidytable(out))
   expect_equal(out, df)
-})
-
-test_that("bind_cols.() works", {
-  df1 <- data.table(x = c(1,2,3), y = c(3,4,5))
-  df2 <- data.table(a = c(1,2,3), b = c(3,4,5))
-
-  bind_df <- df1 %>%
-    bind_cols.(df2) %>%
-    suppressWarnings()
-
-  expect_named(bind_df, c("x","y","a","b"))
-  expect_equal(bind_df$x, c(1,2,3))
-  expect_equal(bind_df$y, c(3,4,5))
-  expect_equal(bind_df$a, c(1,2,3))
-  expect_equal(bind_df$b, c(3,4,5))
 })

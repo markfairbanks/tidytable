@@ -38,14 +38,6 @@ left_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE
 }
 
 #' @export
-#' @keywords internal
-#' @inherit left_join
-left_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  deprecate_dot_fun()
-  left_join(x, y, by, suffix, keep = keep)
-}
-
-#' @export
 #' @rdname left_join
 right_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
   c(x, y, on, selection) %<-% join_prep(x, y, by, keep, suffix, "right")
@@ -63,14 +55,6 @@ right_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALS
 }
 
 #' @export
-#' @keywords internal
-#' @inherit left_join
-right_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  deprecate_dot_fun()
-  right_join(x, y, by, suffix, keep = keep)
-}
-
-#' @export
 #' @rdname left_join
 inner_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
   c(x, y, on, selection) %<-% join_prep(x, y, by, keep, suffix, "inner")
@@ -85,14 +69,6 @@ inner_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALS
   }
 
   tidytable_restore(out, x)
-}
-
-#' @export
-#' @keywords internal
-#' @inherit left_join
-inner_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  deprecate_dot_fun()
-  inner_join(x, y, by, suffix, keep = keep)
 }
 
 #' @export
@@ -141,14 +117,6 @@ full_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE
   tidytable_restore(out, x)
 }
 
-#' @export
-#' @keywords internal
-#' @inherit left_join
-full_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  deprecate_dot_fun()
-  full_join(x, y, by, suffix, keep = keep)
-}
-
 temp_names_fix <- function(names, by_x, y_suffix) {
   new_names <- str_replace(names, "__temp__", "")
 
@@ -170,14 +138,6 @@ anti_join <- function(x, y, by = NULL) {
 }
 
 #' @export
-#' @keywords internal
-#' @inherit left_join
-anti_join. <- function(x, y, by = NULL) {
-  deprecate_dot_fun()
-  anti_join(x, y, by = by)
-}
-
-#' @export
 #' @rdname left_join
 semi_join <- function(x, y, by = NULL) {
   c(x, y, on, selection) %<-% join_prep(x, y, by, keep = FALSE, suffix = NULL, "semi")
@@ -189,14 +149,6 @@ semi_join <- function(x, y, by = NULL) {
   }
 
   tidytable_restore(out, x)
-}
-
-#' @export
-#' @keywords internal
-#' @inherit left_join
-semi_join. <- function(x, y, by = NULL) {
-  deprecate_dot_fun()
-  semi_join(x, y, by = by)
 }
 
 get_bys <- function(x, y, by = NULL) {

@@ -18,19 +18,3 @@ fread <- function(...) {
   .df <- data.table::fread(...)
   as_tidytable(.df)
 }
-
-#' @export
-#' @keywords internal
-#' @inherit fread
-fread. <- function(...) {
-  deprecate_dot_fun()
-  fread(...)
-}
-
-#' @export
-#' @keywords internal
-#' @inherit fread
-fwrite. <- function(...) {
-  deprecate_dot_fun()
-  fwrite(...)
-}

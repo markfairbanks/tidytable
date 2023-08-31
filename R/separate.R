@@ -40,9 +40,15 @@ separate <- function(.df, col, into,
                      ...) {
   check_required(col)
   check_required(into)
+  UseMethod("separate")
+}
 
-  .df <- .df_as_tidytable(.df)
-
+#' @export
+separate.tidytable <- function(.df, col, into,
+                               sep = "[^[:alnum:]]+",
+                               remove = TRUE,
+                               convert = FALSE,
+                               ...) {
   if (nchar(sep) == 1) {
     fixed <- TRUE
   } else {
@@ -88,16 +94,12 @@ separate <- function(.df, col, into,
 }
 
 #' @export
-#' @keywords internal
-#' @inherit separate
-separate. <- function(.df, col, into,
-                      sep = "[^[:alnum:]]+",
-                      remove = TRUE,
-                      convert = FALSE,
-                      ...) {
-  check_required(col)
-  check_required(into)
-  deprecate_dot_fun()
+separate.data.frame <- function(.df, col, into,
+                                sep = "[^[:alnum:]]+",
+                                remove = TRUE,
+                                convert = FALSE,
+                                ...) {
+  .df <- as_tidytable(.df)
   separate(.df, {{ col }}, into, sep, remove, convert, ...)
 }
 

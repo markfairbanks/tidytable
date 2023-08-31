@@ -9,11 +9,6 @@ test_that("missing values are replaced", {
   expect_equal(replace_na(x, 0), c(1, 0))
 })
 
-test_that("replace_na. works", {
-  x <- c(1, NA)
-  expect_equal(suppressWarnings(replace_na.(x, 0)), c(1, 0))
-})
-
 test_that("can only be length 1", {
   expect_error(replace_na(1, 1:10))
 })

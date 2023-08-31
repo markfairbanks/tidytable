@@ -20,7 +20,3 @@ n <- function() {
   abort("n() should only be used inside tidytable verbs")
 }
 
-#' @export
-#' @keywords internal
-#' @inherit n title description examples
-n. <- n

@@ -5,13 +5,6 @@ test_that("can handle collapsed rows", {
   expect_equal(result$y, c("a", "d", "e", "f", "g", "h"))
 })
 
-test_that("separate_rows. works", {
-  df <- data.table(x = 1:3, y = c("a", "d,e,f", "g,h"))
-  result <- separate_rows.(df, y) %>% suppressWarnings()
-  expect_equal(result$x, c(1, 2, 2, 2, 3, 3))
-  expect_equal(result$y, c("a", "d", "e", "f", "g", "h"))
-})
-
 test_that("default pattern does not split decimals in nested strings", {
   df <- data.table(x = 1:3, y = c("1", "1.0,1.1", "2.1"))
   result <- separate_rows(df, y)

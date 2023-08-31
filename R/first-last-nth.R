@@ -23,25 +23,9 @@ first <- function(x, default = NULL, na_rm = FALSE) {
 }
 
 #' @export
-#' @keywords internal
-#' @inherit first
-first. <- function(x, default = NULL, na_rm = FALSE) {
-  deprecate_dot_fun()
-  first(x, default, na_rm)
-}
-
-#' @export
 #' @rdname first
 last <- function(x, default = NULL, na_rm = FALSE) {
   nth(x, -1L, default, na_rm)
-}
-
-#' @export
-#' @keywords internal
-#' @inherit first
-last. <- function(x, default = NULL, na_rm = FALSE) {
-  deprecate_dot_fun()
-  last(x, default, na_rm)
 }
 
 #' @export
@@ -61,14 +45,6 @@ nth <- function(x, n, default = NULL, na_rm = FALSE) {
   } else {
     vec_slice2(x, n)
   }
-}
-
-#' @export
-#' @keywords internal
-#' @inherit first
-nth. <- function(x, n, default = NULL, na_rm = FALSE) {
-  deprecate_dot_fun()
-  nth(x, n, default, na_rm)
 }
 
 nth_default <- function(x, default) {

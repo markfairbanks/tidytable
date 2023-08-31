@@ -25,8 +25,11 @@
 #' df %>%
 #'   distinct(z)
 distinct <- function(.df, ..., .keep_all = FALSE) {
-  .df <- .df_as_tidytable(.df)
+  UseMethod("distinct")
+}
 
+#' @export
+distinct.tidytable <- function(.df, ..., .keep_all = FALSE) {
   dots <- enquos(...)
 
   check_across(dots, "distinct")
@@ -56,9 +59,7 @@ distinct <- function(.df, ..., .keep_all = FALSE) {
 }
 
 #' @export
-#' @keywords internal
-#' @inherit distinct
-distinct. <- function(.df, ..., .keep_all = FALSE) {
-  deprecate_dot_fun()
+distinct.data.frame <- function(.df, ..., .keep_all = FALSE) {
+  .df <- as_tidytable(.df)
   distinct(.df, ..., .keep_all = .keep_all)
 }

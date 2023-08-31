@@ -7,16 +7,6 @@ test_that("can filter the data.table", {
   expect_equal(df$x, 1:4)
 })
 
-test_that("filter. works", {
-  df <- data.table(x = 1:10)
-
-  df <- df %>%
-    filter.(x <= 4) %>%
-    suppressWarnings()
-
-  expect_equal(df$x, 1:4)
-})
-
 test_that("can filter a data.frame", {
   df <- data.frame(x = 1:10)
 

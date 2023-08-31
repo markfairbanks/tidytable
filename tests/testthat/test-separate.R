@@ -9,18 +9,6 @@ test_that("works automatically with space", {
   expect_equal(df$c2, c(NA,"b","b",NA))
 })
 
-test_that("separate. works", {
-  df <- data.table(x = c("a", "a b", "a b", NA))
-
-  df <- df %>%
-    separate.(x, c("c1", "c2")) %>%
-    suppressWarnings()
-
-  expect_named(df, c("c1", "c2"))
-  expect_equal(df$c1, c("a","a","a",NA))
-  expect_equal(df$c2, c(NA,"b","b",NA))
-})
-
 test_that("works automatically with comma", {
   df <- data.table(x = c("a", "a,b", "a,b", NA))
 

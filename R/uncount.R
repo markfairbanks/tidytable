@@ -14,8 +14,11 @@
 #'
 #' uncount(df, n, .id = "id")
 uncount <- function(.df, weights, .remove = TRUE, .id = NULL) {
-  .df <- .df_as_tidytable(.df)
+  UseMethod("uncount")
+}
 
+#' @export
+uncount.tidytable <- function(.df, weights, .remove = TRUE, .id = NULL) {
   weights <- enquo(weights)
 
   .reps <- pull(.df, !!weights)
@@ -34,10 +37,8 @@ uncount <- function(.df, weights, .remove = TRUE, .id = NULL) {
 }
 
 #' @export
-#' @keywords internal
-#' @inherit uncount
-uncount. <- function(.df, weights, .remove = TRUE, .id = NULL) {
-  deprecate_dot_fun()
+uncount.data.frame <- function(.df, weights, .remove = TRUE, .id = NULL) {
+  .df <- as_tidytable(.df)
   uncount(.df, {{ weights }}, .remove, .id)
 }
 

@@ -31,18 +31,3 @@ lead <- function(x, n = 1L, default = NA) {
   shift(x = x, n = n, fill = default, type = "lead", give.names = FALSE)
 }
 
-#' @export
-#' @keywords internal
-#' @inherit lag
-lags. <- function(x, n = 1L, default = NA) {
-  deprecate_dot_fun()
-  lag(x, n, default)
-}
-
-#' @export
-#' @keywords internal
-#' @inherit lag
-leads. <- function(x, n = 1L, default = NA) {
-  deprecate_dot_fun()
-  lead(x, n, default)
-}

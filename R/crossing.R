@@ -33,11 +33,3 @@ sort_unique <- function(x) {
     f_sort(vec_unique(x))
   }
 }
-
-#' @export
-#' @keywords internal
-#' @inherit crossing
-crossing. <- function(..., .name_repair = "check_unique") {
-  deprecate_dot_fun()
-  crossing(..., .name_repair = .name_repair)
-}
