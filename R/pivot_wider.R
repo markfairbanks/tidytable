@@ -144,7 +144,7 @@ pivot_wider.tidytable <- function(.df,
   if (uses_dot_value) {
     new_vars <- setdiff(names(out), id_cols)
 
-    out <- df_set_names(out, glue_vars[new_vars], new_vars)
+    out <- set_col_names(out, glue_vars[new_vars], new_vars)
   }
 
   out <- df_name_repair(out, names_repair)

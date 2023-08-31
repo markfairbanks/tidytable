@@ -31,7 +31,7 @@ left_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE
   } else {
     out <- y[x, on = on, allow.cartesian = TRUE]
 
-    out <- df_col_order(out, selection)
+    out <- set_col_order(out, selection)
   }
 
   tidytable_restore(out, x)
@@ -89,7 +89,7 @@ full_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE
 
     col_order <- suffix_join_names(names(x), names(y), suffix, keep, get_bys(x, y, by), "full")
 
-    out <- df_col_order(out, col_order)
+    out <- set_col_order(out, col_order)
   } else {
     bys <- get_bys(x, y, by)
     by_x <- bys$x
@@ -206,8 +206,8 @@ join_prep <- function(x, y, by, keep, suffix, type) {
   }
 
   if (length(suffix_names) > 0) {
-    x <- df_set_names(x, paste0(suffix_names, suffix[[1]]), suffix_names)
-    y <- df_set_names(y, paste0(suffix_names, suffix[[2]]), suffix_names)
+    x <- set_col_names(x, paste0(suffix_names, suffix[[1]]), suffix_names)
+    y <- set_col_names(y, paste0(suffix_names, suffix[[2]]), suffix_names)
 
     x_names <- names(x)
     y_names <- names(y)
@@ -247,7 +247,7 @@ join_prep <- function(x, y, by, keep, suffix, type) {
     if (type == "left") {
       # Rename y's by cols before join
       # https://github.com/markfairbanks/tidytable/issues/625
-      y <- df_set_names(y, by$x, by$y)
+      y <- set_col_names(y, by$x, by$y)
       on <- by$x
       # For use in `left_join` for column order
       #   x_names contains by cols and x cols
@@ -362,8 +362,8 @@ cross_join <- function(x, y, ..., suffix = c(".x", ".y")) {
   if (length(common_names) > 0) {
     new_x_names <- paste0(common_names, suffix[[1]])
     new_y_names <- paste0(common_names, suffix[[2]])
-    x <- df_set_names(x, new_x_names, common_names)
-    y <- df_set_names(y, new_y_names, common_names)
+    x <- set_col_names(x, new_x_names, common_names)
+    y <- set_col_names(y, new_y_names, common_names)
   }
 
   expand_grid(x, y, .name_repair = "minimal")

@@ -46,7 +46,7 @@ call2_i_by <- function(.df, i, .by) {
 globalVariables("V1")
 
 # setnames without modify-by-reference
-df_set_names <- function(.df, new_names = NULL, old_names = NULL) {
+set_col_names <- function(.df, new_names = NULL, old_names = NULL) {
   if (is.null(old_names)) {
     out <- set_names(.df, new_names)
   } else {
@@ -57,7 +57,7 @@ df_set_names <- function(.df, new_names = NULL, old_names = NULL) {
 }
 
 # setcolorder without modify-by-reference
-df_col_order <- function(.df, new_order) {
+set_col_order <- function(.df, new_order) {
   out <- fast_copy(.df)
   setcolorder(out, new_order)
   out
@@ -66,7 +66,7 @@ df_col_order <- function(.df, new_order) {
 # Repair names of a data.table
 df_name_repair <- function(.df, .name_repair = "unique") {
   new_names <- vec_as_names(names(.df), repair = .name_repair)
-  df_set_names(.df, new_names)
+  set_col_names(.df, new_names)
 }
 
 # Drop the key from a keyed data.table

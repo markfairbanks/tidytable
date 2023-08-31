@@ -48,6 +48,6 @@ rename.data.frame <- function(.df, ...) {
   names <- names(.df)
   names[locs] <- names(locs)
 
-  df_set_names(.df, names)
+  set_col_names(.df, names)
 }
 

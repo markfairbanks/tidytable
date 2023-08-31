@@ -69,7 +69,7 @@ separate_rows.tidytable <- function(.df, ..., sep = "[^[:alnum:].]+", convert = 
     out <- dt_j(out, .separate_id := NULL)
   }
 
-  out <- df_col_order(out, col_order)
+  out <- set_col_order(out, col_order)
 
   if (convert) {
     out <- mutate(out, across(all_of(col_names), ~ type.convert(.x, as.is = TRUE)))

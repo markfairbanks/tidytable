@@ -60,7 +60,7 @@ tt_select <- function(.df, ...) {
 
   out <- new_data_frame(.df)[locs]
 
-  out <- df_set_names(out, names(locs))
+  out <- set_col_names(out, names(locs))
 
   tidytable_restore(out, .df)
 }
