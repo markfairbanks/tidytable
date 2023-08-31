@@ -29,31 +29,6 @@ test_that("error with no common vars", {
   expect_error(left_join(df1, df2))
 })
 
-test_that("works with dot", {
-  df1 <- data.table(a = 1:3, b = 1:3)
-  df2 <- data.table(a = 4:1, c = 1, d = 2)
-
-  out <- left_join.(df1, df2, by = "a") %>% suppressWarnings()
-  expect_named(out, c("a", "b", "c", "d"))
-  expect_equal(out$a, 1:3)
-  expect_equal(out$c, c(1, 1, 1))
-
-  out <- right_join.(df1, df2, by = "a") %>% suppressWarnings()
-  expect_named(out, c("a", "b", "c", "d"))
-  expect_equal(out$a, 4:1)
-  expect_equal(out$b, c(NA, 3:1))
-
-  out <- inner_join.(df1, df2 %>% filter(a <= 2), by = "a") %>% suppressWarnings()
-  expect_named(out, c("a", "b", "c", "d"))
-  expect_equal(out$a, 2:1)
-  expect_equal(out$c, c(1, 1))
-
-  out <- full_join.(df1, df2, by = "a") %>% suppressWarnings()
-  expect_named(out, c("a", "b", "c", "d"))
-  expect_equal(out$a, 1:4)
-  expect_equal(out$b, c(1:3, NA))
-})
-
 test_that("preserve attributes", {
   df1 <- tidytable(a = 1:3)
   df2 <- tidytable(b = 1, c = 2, a = 4:1)

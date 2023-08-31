@@ -13,25 +13,9 @@ pmap <- function(.l, .f, ...) {
 }
 
 #' @export
-#' @keywords internal
-#' @inherit map
-pmap. <- function(.l, .f, ...) {
-  deprecate_dot_fun()
-  pmap(.l, .f, ...)
-}
-
-#' @export
 #' @rdname map
 pmap_lgl <- function(.l, .f, ...) {
   as.logical(pmap(.l, .f, ...))
-}
-
-#' @export
-#' @keywords internal
-#' @inherit map
-pmap_lgl. <- function(.l, .f, ...) {
-  deprecate_dot_fun()
-  pmap_lgl(.l, .f, ...)
 }
 
 #' @export
@@ -41,39 +25,15 @@ pmap_int <- function(.l, .f, ...) {
 }
 
 #' @export
-#' @keywords internal
-#' @inherit map
-pmap_int. <- function(.l, .f, ...) {
-  deprecate_dot_fun()
-  pmap_int(.l, .f, ...)
-}
-
-#' @export
 #' @rdname map
 pmap_dbl <- function(.l, .f, ...) {
   as.double(pmap(.l, .f, ...))
 }
 
 #' @export
-#' @keywords internal
-#' @inherit map
-pmap_dbl. <- function(.l, .f, ...) {
-  deprecate_dot_fun()
-  pmap_dbl(.l, .f, ...)
-}
-
-#' @export
 #' @rdname map
 pmap_chr <- function(.l, .f, ...) {
   as.character(pmap(.l, .f, ...))
-}
-
-#' @export
-#' @keywords internal
-#' @inherit map
-pmap_chr. <- function(.l, .f, ...) {
-  deprecate_dot_fun()
-  pmap_chr(.l, .f, ...)
 }
 
 #' @export
@@ -84,14 +44,6 @@ pmap_dfc <- function(.l, .f, ...) {
 }
 
 #' @export
-#' @keywords internal
-#' @inherit map
-pmap_dfc. <- function(.l, .f, ...) {
-  deprecate_dot_fun()
-  pmap_dfc(.l, .f, ...)
-}
-
-#' @export
 #' @rdname map
 pmap_dfr <- function(.l, .f, ..., .id = NULL) {
   result_list <- pmap(.l, .f, ...)
@@ -99,24 +51,8 @@ pmap_dfr <- function(.l, .f, ..., .id = NULL) {
 }
 
 #' @export
-#' @keywords internal
-#' @inherit map
-pmap_dfr. <- function(.l, .f, ..., .id = NULL) {
-  deprecate_dot_fun()
-  pmap_dfr(.l, .f, ..., .id = .id)
-}
-
-#' @export
 #' @rdname map
 pmap_df <- pmap_dfr
-
-#' @export
-#' @keywords internal
-#' @inherit map
-pmap_df. <- function(.l, .f, ..., .id = NULL) {
-  deprecate_dot_fun()
-  pmap_df(.l, .f, ..., .id = .id)
-}
 
 #' @export
 #' @rdname map

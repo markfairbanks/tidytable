@@ -35,8 +35,11 @@
 #' df %>%
 #'   unite()
 unite <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
-  .df <- .df_as_tidytable(.df)
+  UseMethod("unite")
+}
 
+#' @export
+unite.tidytable <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
   col <- as_name(enquo(col))
 
   dots <- enquos(...)
@@ -70,10 +73,8 @@ unite <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = F
 }
 
 #' @export
-#' @keywords internal
-#' @inherit unite
-unite. <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
-  deprecate_dot_fun()
+unite.data.frame <- function(.df, col = ".united", ..., sep = "_", remove = TRUE, na.rm = FALSE) {
+  .df <- as_tidytable(.df)
   unite(.df, {{ col }}, ..., sep = sep, remove = remove, na.rm = na.rm)
 }
 

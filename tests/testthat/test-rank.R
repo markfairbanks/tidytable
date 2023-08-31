@@ -7,14 +7,6 @@ test_that("row_number() in mutate works", {
   expect_equal(df$row_num, c(1, 2, 3))
 })
 
-test_that("row_number.() in mutate works", {
-  df <- data.table(x = 1:3, y = 1:3)
-  df <- df %>%
-    mutate(row_num = row_number.())
-
-  expect_equal(df$row_num, c(1, 2, 3))
-})
-
 test_that("row_number works on 0 row data frame, #639", {
   df <- data.table(x = integer(), y = character())
   res<- df %>%

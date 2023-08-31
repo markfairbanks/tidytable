@@ -22,11 +22,3 @@ transmute <- function(.df, ..., .by = NULL) {
   mutate(.df, ..., .by = {{ .by }}, .keep = "none")
 }
 
-#' @export
-#' @keywords internal
-#' @inherit transmute
-transmute. <- function(.df, ..., .by = NULL) {
-  deprecate_dot_fun()
-  transmute(.df, ..., .by = {{ .by }})
-}
-

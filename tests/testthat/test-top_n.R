@@ -12,20 +12,6 @@ test_that("works with no wt/no .by", {
   expect_equal(top_df$z, rep("a", 3))
 })
 
-test_that("top_n. works", {
-  local_options(lifecycle_verbosity = "quiet")
-  test_df <- data.table(x = 1:5,
-                        y = 6:10,
-                        z = c(rep("a", 3), rep("b", 2)))
-
-  top_df <- test_df %>%
-    top_n(3)
-
-  expect_equal(top_df$x, 1:3)
-  expect_equal(top_df$y, 6:8)
-  expect_equal(top_df$z, rep("a", 3))
-})
-
 test_that("works with no wt, no .by, and .N", {
   local_options(lifecycle_verbosity = "quiet")
   test_df <- tidytable(x = 1:5,

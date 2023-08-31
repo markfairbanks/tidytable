@@ -32,19 +32,3 @@ test_that("lead works with mutate on df", {
 
   expect_equal(df$x_lead, c(3,9,7,NA))
 })
-
-test_that("lags. works on a vector", {
-
-  x <- c(1:5)
-  vec <- lags.(x, 1) %>% suppressWarnings()
-
-  expect_equal(vec, c(NA, 1,2,3,4))
-})
-
-test_that("leads. works on a vector", {
-
-  x <- c(1:5)
-  vec <- leads.(x, 1) %>% suppressWarnings()
-
-  expect_equal(vec, c(2,3,4,5, NA))
-})

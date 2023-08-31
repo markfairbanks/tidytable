@@ -51,17 +51,6 @@ test_that("multiple NAs can be used as inputs", {
   expect_equal(new_x, c(1,1,2,2,2,NA,NA,NA,NA,NA))
 })
 
-test_that("case. works", {
-  x <- 1:5
-
-  case_x <- case.(x < 3, 1,
-                  x < 4, 2,
-                  TRUE, 3) %>%
-    suppressWarnings()
-
-  expect_equal(case_x, c(1,1,2,3,3))
-})
-
 test_that("works with vector default", {
   x <- 1:5
 

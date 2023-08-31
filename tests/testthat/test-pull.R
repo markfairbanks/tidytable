@@ -12,15 +12,6 @@ test_that("returns a vec", {
   expect_equal(df$y, res)
 })
 
-test_that("pull. works", {
-  df <- data.table(x = 1:3, y = 4:6)
-  res <- df %>%
-    pull.(y) %>%
-    suppressWarnings()
-
-  expect_equal(df$y, res)
-})
-
 test_that("numerical selection works with negatives", {
   df <- data.table(x = 1:3, y = 4:6)
   res <- df %>%

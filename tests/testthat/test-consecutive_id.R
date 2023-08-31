@@ -11,7 +11,3 @@ test_that("follows recycling rules", {
   expect_equal(consecutive_id(double(), 1), integer())
   expect_equal(consecutive_id(1:2, 1), 1:2)
 })
-
-test_that("consecutive_id. works", {
-  expect_equal(suppressWarnings(consecutive_id.(c(1, 1, 2, 1, 2))), c(1, 1, 2, 3, 4))
-})

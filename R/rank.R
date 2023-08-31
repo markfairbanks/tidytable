@@ -28,11 +28,6 @@ row_number <- function(x) {
 }
 
 #' @export
-#' @keywords internal
-#' @inherit row_number title description examples
-row_number. <- row_number
-
-#' @export
 #' @rdname rank
 min_rank <- function(x) {
   if (is.data.frame(x)) {

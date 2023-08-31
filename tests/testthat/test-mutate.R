@@ -31,18 +31,6 @@ test_that("can add multiple columns", {
   expect_equal(df$y * 2, df$double_y)
 })
 
-test_that("mutate. works", {
-  df <- data.table(x = 1:3, y = 1:3)
-  df <- df %>%
-    mutate.(double_x = x * 2,
-            double_y = y * 2) %>%
-    suppressWarnings()
-
-  expect_named(df, c("x", "y", "double_x", "double_y"))
-  expect_equal(df$x * 2, df$double_x)
-  expect_equal(df$y * 2, df$double_y)
-})
-
 test_that("modify-by-reference doesn't occur", {
   df <- data.table(x = 1:3, y = 1:3)
   df %>%

@@ -1,5 +1,8 @@
-# tidytable 0.10.2 (in development)
+# tidytable 0.11.0 (in development)
 
+#### Deprecations
+* `verb.()` functions have been removed
+  
 # tidytable 0.10.1
 
 #### New functions

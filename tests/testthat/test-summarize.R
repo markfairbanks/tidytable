@@ -9,18 +9,6 @@ test_that("can do group aggregation with .by", {
   expect_false(data.table::haskey(result_df))
 })
 
-test_that("summarize. works", {
-  df <- tidytable(x = 3:1, y = c("b", "a", "a"))
-
-  result_df <- df %>%
-    summarize.(avg_x = mean(x), .by = y) %>%
-    suppressWarnings()
-
-  expect_named(result_df, c("y", "avg_x"))
-  expect_equal(result_df$avg_x, c(1.5, 3))
-  expect_false(data.table::haskey(result_df))
-})
-
 test_that("n() works", {
   df <- tidytable(x = 1:4, y = c("a","a","a","b"))
 

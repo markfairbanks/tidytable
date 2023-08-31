@@ -6,15 +6,6 @@ test_that("rename() works for one column", {
   expect_named(df, c("new_x", "y", "z"))
 })
 
-test_that("rename.() works", {
-  df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
-  df <- df %>%
-    rename.(new_x = x) %>%
-    suppressWarnings()
-
-  expect_named(df, c("new_x", "y", "z"))
-})
-
 test_that("rename() doesn't modify-by-reference", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   df %>%
@@ -61,15 +52,6 @@ test_that("rename_with() works for all variables", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2))
   df <- df %>%
     rename_with(~ paste0(.x, "_append"))
-
-  expect_named(df, c("x_append", "y_append"))
-})
-
-test_that("rename_with.() works", {
-  df <- data.table(x = c(1,1,1), y = c(2,2,2))
-  df <- df %>%
-    rename_with.(~ paste0(.x, "_append")) %>%
-    suppressWarnings()
 
   expect_named(df, c("x_append", "y_append"))
 })

@@ -23,10 +23,3 @@ n_distinct <- function(..., na.rm = FALSE) {
   uniqueN(x, na.rm = na.rm)
 }
 
-#' @export
-#' @keywords internal
-#' @inherit n_distinct
-n_distinct. <- function(..., na.rm = FALSE) {
-  deprecate_dot_fun()
-  n_distinct(..., na.rm = na.rm)
-}

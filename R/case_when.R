@@ -45,11 +45,3 @@ case_when <- function(..., .default = NA, .ptype = NULL, .size = NULL) {
 
   eval_tidy(out)
 }
-
-#' @export
-#' @keywords internal
-#' @inherit case_when
-case_when. <- function(..., .default = NA, .ptype = NULL, .size = NULL) {
-  deprecate_dot_fun()
-  case_when(..., .default = .default, .ptype = .ptype, .size = .size)
-}

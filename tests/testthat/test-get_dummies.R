@@ -28,25 +28,6 @@ test_that("default uses all character/factor - no NAs & no modify-by-reference",
   expect_named(df1, c("col1", "col2", "var1"))
 })
 
-test_that("get_dummies. works", {
-  dummy_df <- get_dummies.(df1) %>%
-    suppressWarnings()
-
-  expect_named(dummy_df, c("col1", "col2", "var1",
-                           "col1_a", "col1_b", "col1_c",
-                           "col2_a", "col2_b", "col2_c"))
-
-  expect_equal(dummy_df$col1_a, c(1, 0, 0, 1, 0, 0))
-  expect_equal(dummy_df$col1_b, c(0, 1, 0, 0, 1, 0))
-  expect_equal(dummy_df$col1_c, c(0, 0, 1, 0, 0, 1))
-
-  expect_equal(dummy_df$col2_a, c(0, 0, 1, 0, 0, 1))
-  expect_equal(dummy_df$col2_b, c(0, 1, 0, 0, 1, 0))
-  expect_equal(dummy_df$col2_c, c(1, 0, 0, 1, 0, 0))
-
-  expect_named(df1, c("col1", "col2", "var1"))
-})
-
 test_that("works with data.frame input", {
   df <- as.data.frame(df1)
 

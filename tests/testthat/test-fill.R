@@ -18,14 +18,6 @@ test_that("missings are filled correctly & doesn't modify-by-reference", {
   expect_equal(df$x, c(NA, 1, NA, 2, NA, NA))
 })
 
-test_that("fill.works", {
-  # filled down from last non-missing
-  df <- data.table(x = c(NA, 1, NA, 2, NA, NA))
-
-  out <- df %>% fill.(x) %>% suppressWarnings()
-  expect_equal(out$x, c(NA, 1, 1, 2, 2, 2))
-})
-
 test_that("missings filled down for each atomic vector", {
   df <- data.table(
     lgl = c(T, NA),

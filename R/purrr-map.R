@@ -29,26 +29,10 @@ map <- function(.x, .f, ...) {
 }
 
 #' @export
-#' @keywords internal
-#' @inherit map
-map. <- function(.x, .f, ...) {
-  deprecate_dot_fun()
-  map(.x, .f, ...)
-}
-
-#' @export
 #' @rdname map
 map_lgl <- function(.x, .f, ...) {
   .f <- as_function(.f)
   vapply(.x, .f, logical(1), ...)
-}
-
-#' @export
-#' @keywords internal
-#' @inherit map
-map_lgl. <- function(.x, .f, ...) {
-  deprecate_dot_fun()
-  map_lgl(.x, .f, ...)
 }
 
 #' @export
@@ -59,26 +43,10 @@ map_int <- function(.x, .f, ...) {
 }
 
 #' @export
-#' @keywords internal
-#' @inherit map
-map_int. <- function(.x, .f, ...) {
-  deprecate_dot_fun()
-  map_int(.x, .f, ...)
-}
-
-#' @export
 #' @rdname map
 map_dbl <- function(.x, .f, ...) {
   .f <- as_function(.f)
   vapply(.x, .f, double(1), ...)
-}
-
-#' @export
-#' @keywords internal
-#' @inherit map
-map_dbl. <- function(.x, .f, ...) {
-  deprecate_dot_fun()
-  map_dbl(.x, .f, ...)
 }
 
 #' @export
@@ -89,26 +57,10 @@ map_chr <- function(.x, .f, ...) {
 }
 
 #' @export
-#' @keywords internal
-#' @inherit map
-map_chr. <- function(.x, .f, ...) {
-  deprecate_dot_fun()
-  map_chr(.x, .f, ...)
-}
-
-#' @export
 #' @rdname map
 map_dfc <- function(.x, .f, ...) {
   result_list <- map(.x, .f, ...)
   bind_cols(result_list)
-}
-
-#' @export
-#' @keywords internal
-#' @inherit map
-map_dfc. <- function(.x, .f, ...) {
-  deprecate_dot_fun()
-  map_dfc(.x, .f, ...)
 }
 
 #' @export
@@ -123,34 +75,10 @@ map_dfr <- function(.x, .f, ..., .id = NULL) {
 map_df <- map_dfr
 
 #' @export
-#' @keywords internal
-#' @inherit map
-map_dfr. <- function(.x, .f, ..., .id = NULL) {
-  deprecate_dot_fun()
-  map_dfr(.x, .f, ..., .id = .id)
-}
-
-#' @export
-#' @keywords internal
-#' @inherit map
-map_df. <- function(.x, .f, ..., .id = NULL) {
-  deprecate_dot_fun()
-  map_df(.x, .f, ..., .id = .id)
-}
-
-#' @export
 #' @rdname map
 walk <- function(.x, .f, ...) {
   map(.x, .f, ...)
   invisible(.x)
-}
-
-#' @export
-#' @keywords internal
-#' @inherit map
-walk. <- function(.x, .f, ...) {
-  deprecate_dot_fun()
-  walk(.x, .f, ...)
 }
 
 #' @export

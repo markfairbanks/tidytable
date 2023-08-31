@@ -7,16 +7,6 @@ test_that("mutate_rowwise() adds column", {
   expect_equal(results_df$row_mean, 1:3)
 })
 
-test_that("mutate_rowwise.() adds column", {
-  test_df <- data.table(x = 1:3, y = 1:3, z = c("a", "a", "b"))
-
-  results_df <- test_df %>%
-    mutate_rowwise.(row_mean = mean(c(x, y))) %>%
-    suppressWarnings()
-
-  expect_equal(results_df$row_mean, 1:3)
-})
-
 test_that("mutate_rowwise() doesn't modify by reference", {
   test_df <- data.table(x = 1:3, y = 4:6, z = c("a", "a", "b"))
 

@@ -40,8 +40,16 @@ unnest <- function(.df,
                    .drop = TRUE,
                    names_sep = NULL,
                    names_repair = "unique") {
-  .df <- .df_as_tidytable(.df)
+  UseMethod("unnest")
+}
 
+#' @export
+unnest.tidytable <- function(.df,
+                             ...,
+                             keep_empty = FALSE,
+                             .drop = TRUE,
+                             names_sep = NULL,
+                             names_repair = "unique") {
   dots <- enquos(...)
 
   df_names <- names(.df)
@@ -89,15 +97,13 @@ unnest <- function(.df,
 
 
 #' @export
-#' @keywords internal
-#' @inherit unnest
-unnest. <- function(.df,
+unnest.data.frame <- function(.df,
                     ...,
                     keep_empty = FALSE,
                     .drop = TRUE,
                     names_sep = NULL,
                     names_repair = "unique") {
-  deprecate_dot_fun()
+  .df <- as_tidytable(.df)
   unnest(
     .df, ..., keep_empty = keep_empty, .drop = .drop,
     names_sep = names_sep, names_repair = names_repair

@@ -17,10 +17,3 @@ na_if <- function(x, y) {
   vec_assign(x, x == y, NA)
 }
 
-#' @export
-#' @keywords internal
-#' @inherit na_if
-na_if. <- function(x, y) {
-  deprecate_dot_fun()
-  na_if(x, y)
-}

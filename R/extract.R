@@ -36,10 +36,14 @@
 #' df %>% extract(x, c("A", "B", "A"), "([a-d]+)-([a-d]+)-(\\d+)")
 extract <- function(.df, col, into, regex = "([[:alnum:]]+)",
                     remove = TRUE, convert = FALSE, ...) {
+  UseMethod("extract")
+}
+
+#' @export
+extract.tidytable <- function(.df, col, into, regex = "([[:alnum:]]+)",
+                               remove = TRUE, convert = FALSE, ...) {
   check_required(col)
   check_required(into)
-
-  .df <- .df_as_tidytable(.df)
 
   col <- tidyselect_names(.df, {{ col }})
 
@@ -67,18 +71,16 @@ extract <- function(.df, col, into, regex = "([[:alnum:]]+)",
   out <- dt_j(.df, (into) := ..groups)
 
   if (remove && col %notin% into) {
-    out <- dt_j(out, (col) := NULL)
+    out <- select(out, -any_of(col))
   }
 
   out
 }
 
 #' @export
-#' @keywords internal
-#' @inherit extract
-extract. <- function(.df, col, into, regex = "([[:alnum:]]+)",
+extract.data.frame <- function(.df, col, into, regex = "([[:alnum:]]+)",
                      remove = TRUE, convert = FALSE, ...) {
-  deprecate_dot_fun()
+  .df <- as_tidytable(.df)
   extract(.df, {{ col }}, into, regex, remove, convert, ...)
 }
 

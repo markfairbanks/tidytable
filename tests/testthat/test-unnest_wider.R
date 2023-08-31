@@ -16,11 +16,6 @@ test_that("list_of columns can be unnested", {
   expect_named(unnest_wider(df, y), c("x", "a", "b1", "b2"))
 })
 
-test_that("unnest_wider. works", {
-  df <- tidytable(x = 1:2, y = list_of(c(a = 1L), c(a = 1L, b = 2L)))
-  expect_named(suppressWarnings(unnest_wider.(df, y)), c("x", "a", "b"))
-})
-
 test_that("names_sep creates unique names", {
   df <- tidytable(
     x = list("a", c("a", "b", "c"))

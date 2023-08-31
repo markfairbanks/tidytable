@@ -21,21 +21,28 @@
 #'   mutate(row_mean = mean(c_across(x:z))) %>%
 #'   ungroup()
 rowwise <- function(.df) {
-  .df <- .df_as_tidytable(.df)
-
-  if (is_ungrouped(.df)) {
-    set_class(.df, c("rowwise_tt", tidytable_class()))
-  } else {
-    out <- ungroup(.df)
-    rowwise(out)
-  }
+  UseMethod("rowwise")
 }
 
 #' @export
-#' @keywords internal
-#' @inherit rowwise
-rowwise. <- function(.df) {
-  deprecate_dot_fun()
+rowwise.tidytable <- function(.df) {
+  set_class(.df, c("rowwise_tt", tidytable_class()))
+}
+
+#' @export
+rowwise.grouped_tt <- function(.df) {
+  .df <- ungroup(.df)
+  rowwise(.df)
+}
+
+#' @export
+rowwise.rowwise_tt <- function(.df) {
+  .df
+}
+
+#' @export
+rowwise.data.frame <- function(.df) {
+  .df <- as_tidytable(.df)
   rowwise(.df)
 }
 

@@ -20,7 +20,3 @@ desc <- function(x) {
   -xtfrm(x)
 }
 
-#' @export
-#' @keywords internal
-#' @inherit desc
-desc. <- desc
