@@ -74,7 +74,7 @@ nest.tidytable <- function(.df, ..., .by = NULL, .key = NULL, .names_sep = NULL)
   if (!is.null(.names_sep)) {
     new_names <- paste(.key, cols, sep = .names_sep)
 
-    .df <- df_set_names(.df, new_names, cols)
+    .df <- set_col_names(.df, new_names, cols)
 
     cols <- new_names
   }

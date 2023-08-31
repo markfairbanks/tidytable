@@ -102,7 +102,7 @@ pivot_longer.tidytable <- function(.df,
       names_glue <- paste0("{", names_to, "}", collapse = "___")
       new_names <- glue_data(names_to_setup, names_glue)
 
-      .df <- df_set_names(.df, new_names, measure_vars)
+      .df <- set_col_names(.df, new_names, measure_vars)
 
       measure_vars <- new_names
     } else {

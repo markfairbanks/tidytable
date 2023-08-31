@@ -43,9 +43,9 @@ relocate.tidytable <- function(.df, ..., .before = NULL, .after = NULL) {
 
   names <- names(order)
 
-  out <- df_col_order(.df, order)
+  out <- set_col_order(.df, order)
 
-  df_set_names(out, names)
+  set_col_names(out, names)
 }
 
 #' @export
