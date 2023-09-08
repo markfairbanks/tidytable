@@ -188,32 +188,6 @@ check_across <- function(dots, .fn) {
   }
 }
 
-is_ungrouped <- function(.df) {
-  !is_grouped_df(.df) && !is_rowwise(.df)
-}
-
-is_rowwise <- function(.df) {
-  inherits(.df, "rowwise_tt")
-}
-
-deprecate_dot_fun <- function(fn = NULL, env = caller_env(), user_env = caller_env(2)) {
-  fn <- fn %||% call_name(caller_call())
-  what <- glue("{fn}()")
-  with <- str_replace(what, ".", "", TRUE)
-  details <- "Please note that all `verb.()` syntax has now been deprecated. \n"
-  deprecate_soft(
-    "v0.10.0", what, with, details, id = ".tidytable_dot_funs",
-    env = env, user_env = user_env
-  )
-}
-
-deprecate_old_across <- function(fn) {
-  msg <- glue("`{fn}_across.()` is defunct as of v0.8.1 (Aug 2022).
-              It has been deprecated with warnings since v0.6.4 (Jul 2021).
-              Please use `{fn}(across())`")
-  abort(msg)
-}
-
 # Does type changes with ptype & transform logic
 #   For use in pivot_longer/unnest_longer/unnest_wider
 change_types <- function(.df, .cols, .ptypes = NULL, .transform = NULL) {
