@@ -34,7 +34,7 @@ call2_i <- function(.df, i = NULL, .by = NULL) {
 }
 
 # Uses fast `by` trick for i position using .I
-#   See: https://stackoverflow.com/a/16574176/13254470
+# See: https://stackoverflow.com/a/16574176/13254470
 call2_i_by <- function(.df, i, .by) {
   j <- expr(.I[!!i])
   dt_expr <- call2_j(.df, j, .by)
@@ -107,9 +107,9 @@ tidytable_class <- function() {
 }
 
 # radix sort
-#   Proxy for data.table::fsort since negative values aren't supported, #282
-#   Can switch to data.table::fsort once negative doubles are handled
-#   See: https://github.com/Rdatatable/data.table/issues/5051
+# Proxy for data.table::fsort since negative values aren't supported, #282
+# Can switch to data.table::fsort once negative doubles are handled
+# See: https://github.com/Rdatatable/data.table/issues/5051
 f_sort <- function(x) {
   if (is.character(x)) {
     suppressWarnings(
@@ -146,8 +146,8 @@ call_reduce <- function(x, fun) {
 }
 
 # Restore user defined attributes
-#   Ensures auto-index is removed
-#   See: https://github.com/Rdatatable/data.table/issues/5042
+# Also ensures auto-index is removed
+# See: https://github.com/Rdatatable/data.table/issues/5042
 tidytable_restore <- function(x, to) {
   to <- set_attr(to, "index", NULL)
   vec_restore(x, to)
@@ -189,7 +189,7 @@ check_across <- function(dots, .fn) {
 }
 
 # Does type changes with ptype & transform logic
-#   For use in pivot_longer/unnest_longer/unnest_wider
+# For use in pivot_longer/unnest_longer/unnest_wider
 change_types <- function(.df, .cols, .ptypes = NULL, .transform = NULL) {
   if (!is.null(.ptypes)) {
     if (!obj_is_list(.ptypes)) {

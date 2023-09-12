@@ -1,7 +1,7 @@
 # "Prepare" quosures/expressions for use in a `[.data.table` call
-#   Allows the use of functions like n() and across()
-#   Replaces these functions with the necessary data.table translations
-#   Adapted from dt_squash found here: https://github.com/tidyverse/dtplyr/blob/master/R/tidyeval.R
+# Allows the use of functions like n() and across()
+# Replaces these functions with the necessary data.table translations
+# Adapted from dt_squash found here: https://github.com/tidyverse/dtplyr/blob/master/R/tidyeval.R
 prep_exprs <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env(), is_top_level = FALSE) {
   x <- lapply(x, prep_expr, data, {{ .by }}, j = j, dt_env = dt_env, TRUE)
   list_flatten(x)

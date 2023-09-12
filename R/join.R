@@ -250,8 +250,8 @@ join_prep <- function(x, y, by, keep, suffix, type) {
       y <- set_col_names(y, by$x, by$y)
       on <- by$x
       # For use in `left_join` for column order
-      #   x_names contains by cols and x cols
-      #   y_names only contains new cols
+      # x_names contains by cols and x cols
+      # y_names only contains new cols
       selection <- c(x_names, y_names)
     } else {
       selection <- NULL

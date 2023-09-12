@@ -203,7 +203,7 @@ pivot_longer.tidytable <- function(.df,
   # See issue #186
   if (values_drop_na && multiple_names_to) {
     # Note: vec_detect_complete is different from !vec_detect_missing on
-    #  data frames if they have rows with only some NAs
+    # data frames if they have rows with only some NAs
     not_missing <- !vec_detect_missing(select(out, any_of(values_to)))
     out <- filter(out, .env$not_missing)
   }
