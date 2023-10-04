@@ -137,7 +137,7 @@ imap <- function(.x, .f, ...) {
 
 # Is object a vector and not a matrix
 is_simple_vector <- function(x) {
-  is.atomic(x) && !is.matrix(x)
+  is_atomic(x) && !is.matrix(x)
 }
 
 # Reduce a list of calls to a single combined call
