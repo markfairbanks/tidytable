@@ -32,7 +32,8 @@ unnest_wider <- function(.df, col, names_sep = NULL,
 
   .l <- pull(.df, !!.col)
 
-  if (!is_simple_vector(.l[[1]])) {
+  .l_val <- list_drop_empty(.l)[[1]]
+  if (!is_simple_vector(.l_val)) {
     abort("Only vectors are currently supported")
   }
 
