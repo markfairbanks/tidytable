@@ -1,6 +1,10 @@
-* using log directory ‘/Users/mfairbanks/Desktop/NU/R/R_Packages/tidytable/revdep/checks.noindex/journalabbr/new/journalabbr.Rcheck’
-* using R version 4.2.0 (2022-04-22)
-* using platform: x86_64-apple-darwin17.0 (64-bit)
+* using log directory ‘/Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/checks.noindex/journalabbr/new/journalabbr.Rcheck’
+* using R version 4.3.1 (2023-06-16)
+* using platform: aarch64-apple-darwin20 (64-bit)
+* R was compiled by
+    Apple clang version 14.0.0 (clang-1400.0.29.202)
+    GNU Fortran (GCC) 12.2.0
+* running under: macOS Ventura 13.5
 * using session charset: UTF-8
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘journalabbr/DESCRIPTION’ ... OK

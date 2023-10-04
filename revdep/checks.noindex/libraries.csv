@@ -1,2 +1,3 @@
 package,old,new,delta
-tidytable,0.10.0,0.10.0.9,*
+tidytable,0.10.1,0.10.2,*
+withr,NA,2.5.1,*

@@ -66,6 +66,7 @@ pick                    Selection version of 'across()'
 pivot_longer            Pivot data from wide to long
 pivot_wider             Pivot data from long to wide
 pull                    Pull out a single variable
+reframe                 Reframe a data frame
 relocate                Relocate a column to a new position
 rename                  Rename variables by name
 rename_with             Rename multiple columns

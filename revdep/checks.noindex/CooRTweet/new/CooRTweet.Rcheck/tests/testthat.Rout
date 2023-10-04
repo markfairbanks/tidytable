@@ -1,0 +1,47 @@
+
+R version 4.3.1 (2023-06-16) -- "Beagle Scouts"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: aarch64-apple-darwin20 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # This file is part of the standard setup for testthat.
+> # It is recommended that you do not modify it.
+> #
+> # Where should you do additional test configuration?
+> # Learn more about the roles of various files in:
+> # * https://r-pkgs.org/tests.html
+> # * https://testthat.r-lib.org/reference/test_package.html#special-files
+> 
+> library(testthat)
+> library(CooRTweet)
+> library(data.table)
+> 
+> if (testthat:::on_cran()) {
++     data.table::setDTthreads(threads = 2)
++ }
+> 
+> test_check("CooRTweet")
+[ FAIL 0 | WARN 0 | SKIP 7 | PASS 9 ]
+
+══ Skipped tests (7) ═══════════════════════════════════════════════════════════
+• On CRAN (7): 'test-simulated_data.R:73:3', 'test-simulated_data.R:86:3',
+  'test-simulated_data.R:113:3', 'test-simulated_data.R:139:3',
+  'test-simulated_data.R:168:3', 'test-simulated_data.R:193:3',
+  'test-simulated_data.R:218:3'
+
+[ FAIL 0 | WARN 0 | SKIP 7 | PASS 9 ]
+> 
+> proc.time()
+   user  system elapsed 
+  4.156   0.187   4.374 
