@@ -83,3 +83,9 @@ test_that("can find environment vars in custom functions, #392", {
   expect_named(result_df, c("y"))
   expect_equal(result_df$y, c("a", "b"))
 })
+
+test_that("works with lists, #773", {
+  df <- tidytable(x = 1, l = list(1, 1))
+  res <- distinct(df)
+  expect_true(length(res$l) == 1)
+})

@@ -35,23 +35,17 @@ distinct.tidytable <- function(.df, ..., .keep_all = FALSE) {
   check_across(dots, "distinct")
 
   if (length(dots) == 0) {
-    out <- unique(.df)
+    out <- vec_unique(.df)
   } else {
     cols <- tidyselect_locs(.df, ...)
 
-    out <- unique(.df, by = cols)
-
-    if (!.keep_all) {
-      cols_keep <- unname(cols)
-      out <- select(out, any_of(cols_keep))
-    }
-
-    .is_named <- have_name(dots)
-
-    if (any(.is_named)) {
-      named_dots <- dots[.is_named]
-
-      out <- rename(out, !!!named_dots)
+    if (.keep_all) {
+      locs <- vec_unique_loc(select(.df, any_of(cols)))
+      out <- vec_slice(.df, locs)
+      out <- rename(out, any_of(cols))
+    } else {
+      out <- select(.df, any_of(cols))
+      out <- vec_unique(out)
     }
   }
 

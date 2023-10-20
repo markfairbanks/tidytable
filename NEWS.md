@@ -1,7 +1,13 @@
 # tidytable 0.11.0 (in development)
 
+#### Functionality improvements
+* `distinct()` now works on data frames with list columns (#773)
+
 #### Deprecations
 * `verb.()` functions have been removed
+
+#### Functions with notable speed improvements
+* `distinct()`
   
 # tidytable 0.10.1
 
