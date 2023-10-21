@@ -177,10 +177,11 @@ vec_ptype_compatible <- function(x, y) {
   tryCatch({vec_ptype_common(x, y); TRUE}, error = function(e) FALSE)
 }
 
-check_across <- function(dots, .fn) {
-  uses_across <- any(map_lgl(dots, quo_is_call, c("across", "across.", "pick")))
-
-  if (uses_across) {
+check_no_across <- function(dots) {
+  any_across <- any(map_lgl(dots, quo_is_call, c("across", "pick")))
+  if (any_across) {
+    .fn <- as.character(caller_call()[[1]])
+    .fn <- str_replace(.fn, ".tidytable", "")
     msg <- glue("`across()`/`pick()` are unnecessary in `{.fn}()`.
                 Please directly use tidyselect.
                 Ex: df %>% {.fn}(where(is.numeric))")

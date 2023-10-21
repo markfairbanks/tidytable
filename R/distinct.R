@@ -32,7 +32,7 @@ distinct <- function(.df, ..., .keep_all = FALSE) {
 distinct.tidytable <- function(.df, ..., .keep_all = FALSE) {
   dots <- enquos(...)
 
-  check_across(dots, "distinct")
+  check_no_across(dots)
 
   if (length(dots) == 0) {
     out <- vec_unique(.df)
