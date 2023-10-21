@@ -35,7 +35,7 @@ group_by <- function(.df, ..., .add = FALSE) {
 #' @export
 group_by.tidytable <- function(.df, ..., .add = FALSE) {
   dots <- enquos(...)
-  check_across(dots, "group_by")
+  check_no_across(dots)
   .groups <- tidyselect_names(.df, !!!dots)
   if (length(.groups) == 0) {
     out <- .df
