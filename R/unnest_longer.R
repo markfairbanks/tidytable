@@ -40,7 +40,8 @@ unnest_longer.tidytable <- function(.df, col, values_to = NULL, indices_to = NUL
 
   x <- pull(.df, !!.col)
 
-  if (!is_simple_vector(x[[1]])) {
+  x_val <- list_drop_empty(x)[[1]]
+  if (!is_simple_vector(x_val)) {
     abort("Only vectors are currently supported")
   }
 

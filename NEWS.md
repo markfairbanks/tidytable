@@ -8,7 +8,11 @@
 
 #### Functions with notable speed improvements
 * `distinct()`
-  
+
+# tidytable 0.10.2
+
+* Patch release to pass CRAN checks for future R release
+
 # tidytable 0.10.1
 
 #### New functions

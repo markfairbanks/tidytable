@@ -1,6 +1,6 @@
 Package: tidytable
 Title: Tidy Interface to 'data.table'
-Version: 0.10.0
+Version: 0.10.1
 Authors@R: c(
   person("Mark", "Fairbanks", role = c("aut", "cre"), email = "mark.t.fairbanks@gmail.com"),
   person("Abdessabour", "Moutik", role = "ctb"),
@@ -15,16 +15,17 @@ Description: A tidy interface to 'data.table',
   giving users the speed of 'data.table' while using tidyverse-like syntax.
 License: MIT + file LICENSE
 Encoding: UTF-8
-Imports: data.table (>= 1.14.0), glue (>= 1.4.0), lifecycle(>= 1.0.3),
-        magrittr (>= 2.0.3), pillar (>= 1.8.0), rlang (>= 1.0.6),
-        tidyselect (>= 1.2.0), vctrs (>= 0.5.2)
+Imports: data.table (>= 1.14.0), glue (>= 1.4.0), lifecycle (>= 1.0.3),
+        magrittr (>= 2.0.3), pillar (>= 1.8.0), rlang (>= 1.1.0),
+        tidyselect (>= 1.2.0), vctrs (>= 0.6.0)
 RoxygenNote: 7.2.3
 Config/testthat/edition: 3
-URL: https://github.com/markfairbanks/tidytable
+URL: https://markfairbanks.github.io/tidytable/,
+        https://github.com/markfairbanks/tidytable
 BugReports: https://github.com/markfairbanks/tidytable/issues
 Suggests: testthat (>= 2.1.0), bit64, knitr, rmarkdown, crayon
 NeedsCompilation: no
-Packaged: 2023-03-09 23:46:16 UTC; mfairbanks
+Packaged: 2023-04-20 14:17:05 UTC; mfairbanks
 Author: Mark Fairbanks [aut, cre],
   Abdessabour Moutik [ctb],
   Matt Carlson [ctb],
@@ -35,5 +36,5 @@ Author: Mark Fairbanks [aut, cre],
   Koen ter Berg [ctb]
 Maintainer: Mark Fairbanks <mark.t.fairbanks@gmail.com>
 Repository: CRAN
-Date/Publication: 2023-03-10 00:10:02 UTC
-Built: R 4.2.0; ; 2023-03-10 14:18:06 UTC; unix
+Date/Publication: 2023-04-20 14:40:02 UTC
+Built: R 4.3.0; ; 2023-04-20 16:51:07 UTC; unix

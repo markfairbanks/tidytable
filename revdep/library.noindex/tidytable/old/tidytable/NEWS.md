@@ -1,3 +1,15 @@
+# tidytable 0.10.1
+
+#### New functions
+* `reframe()`
+
+#### Bug fixes
+* `case_when()`: `.default` is used when calculating a common ptype (#751)
+* `pivot_wider()`: Works correctly with dates (#759)
+
+#### Functions with notable speed improvements
+* `case_match()`: When comparing input vector to a length 1 literal
+
 # tidytable 0.10.0
 
 #### Deprecations
