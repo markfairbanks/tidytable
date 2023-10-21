@@ -84,12 +84,8 @@ test_that("can find environment vars in custom functions, #392", {
   expect_equal(result_df$y, c("a", "b"))
 })
 
-test_that("distinct. works", {
-  test_df <- tidytable(a = rep(1, 3), b = rep(2, 3), c = c("a", "a", "b"))
-  distinct_df <- test_df %>%
-    distinct.() %>%
-    suppressWarnings()
-
-  expect_equal(names(test_df), names(distinct_df))
-  expect_equal(distinct_df$c, c("a", "b"))
+test_that("works with lists, #773", {
+  df <- tidytable(x = 1, l = list(1, 1))
+  res <- distinct(df)
+  expect_true(length(res$l) == 1)
 })

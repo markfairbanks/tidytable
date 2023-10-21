@@ -32,11 +32,3 @@ enframe <- function(x, name = "name", value = "value") {
 
   new_tidytable(l)
 }
-
-#' @export
-#' @keywords internal
-#' @inherit enframe
-enframe. <- function(x, name = "name", value = "value") {
-  deprecate_dot_fun()
-  enframe(x, name, value)
-}

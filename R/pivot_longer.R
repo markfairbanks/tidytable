@@ -52,8 +52,25 @@ pivot_longer <- function(.df,
                          values_transform = NULL,
                          fast_pivot = FALSE,
                          ...) {
-  .df <- .df_as_tidytable(.df)
+  UseMethod("pivot_longer")
+}
 
+#' @export
+pivot_longer.tidytable <- function(.df,
+                                   cols = everything(),
+                                   names_to = "name",
+                                   values_to = "value",
+                                   names_prefix = NULL,
+                                   names_sep = NULL,
+                                   names_pattern = NULL,
+                                   names_ptypes = NULL,
+                                   names_transform = NULL,
+                                   names_repair = "check_unique",
+                                   values_drop_na = FALSE,
+                                   values_ptypes = NULL,
+                                   values_transform = NULL,
+                                   fast_pivot = FALSE,
+                                   ...) {
   names <- names(.df)
 
   measure_vars <- tidyselect_names(.df, {{ cols }})
@@ -85,7 +102,7 @@ pivot_longer <- function(.df,
       names_glue <- paste0("{", names_to, "}", collapse = "___")
       new_names <- glue_data(names_to_setup, names_glue)
 
-      .df <- df_set_names(.df, new_names, measure_vars)
+      .df <- set_col_names(.df, new_names, measure_vars)
 
       measure_vars <- new_names
     } else {
@@ -186,7 +203,7 @@ pivot_longer <- function(.df,
   # See issue #186
   if (values_drop_na && multiple_names_to) {
     # Note: vec_detect_complete is different from !vec_detect_missing on
-    #  data frames if they have rows with only some NAs
+    # data frames if they have rows with only some NAs
     not_missing <- !vec_detect_missing(select(out, any_of(values_to)))
     out <- filter(out, .env$not_missing)
   }
@@ -195,24 +212,22 @@ pivot_longer <- function(.df,
 }
 
 #' @export
-#' @keywords internal
-#' @inherit pivot_longer
-pivot_longer. <- function(.df,
-                          cols = everything(),
-                          names_to = "name",
-                          values_to = "value",
-                          names_prefix = NULL,
-                          names_sep = NULL,
-                          names_pattern = NULL,
-                          names_ptypes = NULL,
-                          names_transform = NULL,
-                          names_repair = "check_unique",
-                          values_drop_na = FALSE,
-                          values_ptypes = NULL,
-                          values_transform = NULL,
-                          fast_pivot = FALSE,
-                          ...) {
-  deprecate_dot_fun()
+pivot_longer.data.frame <- function(.df,
+                                    cols = everything(),
+                                    names_to = "name",
+                                    values_to = "value",
+                                    names_prefix = NULL,
+                                    names_sep = NULL,
+                                    names_pattern = NULL,
+                                    names_ptypes = NULL,
+                                    names_transform = NULL,
+                                    names_repair = "check_unique",
+                                    values_drop_na = FALSE,
+                                    values_ptypes = NULL,
+                                    values_transform = NULL,
+                                    fast_pivot = FALSE,
+                                    ...) {
+  .df <- as_tidytable(.df)
   pivot_longer(
     .df, cols = {{ cols }}, names_to = names_to,
     values_to = values_to, names_prefix = names_prefix,

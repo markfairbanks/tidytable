@@ -3,11 +3,6 @@ test_that("works", {
   expect_equal(uncount(df, w), tidytable(x = c("a", "a", "b")))
 })
 
-test_that("uncount. works", {
-  df <- tidytable(x = c("a", "b"), w = c(2, 1))
-  expect_equal(suppressWarnings(uncount.(df, w)), tidytable(x = c("a", "a", "b")))
-})
-
 test_that("can request to preserve symbols", {
   df <- tidytable(x = 1, w = 1)
   expect_equal(uncount(df, w, .remove = FALSE), df)

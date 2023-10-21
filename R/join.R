@@ -31,18 +31,10 @@ left_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE
   } else {
     out <- y[x, on = on, allow.cartesian = TRUE]
 
-    out <- df_col_order(out, selection)
+    out <- set_col_order(out, selection)
   }
 
   tidytable_restore(out, x)
-}
-
-#' @export
-#' @keywords internal
-#' @inherit left_join
-left_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  deprecate_dot_fun()
-  left_join(x, y, by, suffix, keep = keep)
 }
 
 #' @export
@@ -63,14 +55,6 @@ right_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALS
 }
 
 #' @export
-#' @keywords internal
-#' @inherit left_join
-right_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  deprecate_dot_fun()
-  right_join(x, y, by, suffix, keep = keep)
-}
-
-#' @export
 #' @rdname left_join
 inner_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
   c(x, y, on, selection) %<-% join_prep(x, y, by, keep, suffix, "inner")
@@ -85,14 +69,6 @@ inner_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALS
   }
 
   tidytable_restore(out, x)
-}
-
-#' @export
-#' @keywords internal
-#' @inherit left_join
-inner_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  deprecate_dot_fun()
-  inner_join(x, y, by, suffix, keep = keep)
 }
 
 #' @export
@@ -113,7 +89,7 @@ full_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE
 
     col_order <- suffix_join_names(names(x), names(y), suffix, keep, get_bys(x, y, by), "full")
 
-    out <- df_col_order(out, col_order)
+    out <- set_col_order(out, col_order)
   } else {
     bys <- get_bys(x, y, by)
     by_x <- bys$x
@@ -141,14 +117,6 @@ full_join <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE
   tidytable_restore(out, x)
 }
 
-#' @export
-#' @keywords internal
-#' @inherit left_join
-full_join. <- function(x, y, by = NULL, suffix = c(".x", ".y"), ..., keep = FALSE) {
-  deprecate_dot_fun()
-  full_join(x, y, by, suffix, keep = keep)
-}
-
 temp_names_fix <- function(names, by_x, y_suffix) {
   new_names <- str_replace(names, "__temp__", "")
 
@@ -170,14 +138,6 @@ anti_join <- function(x, y, by = NULL) {
 }
 
 #' @export
-#' @keywords internal
-#' @inherit left_join
-anti_join. <- function(x, y, by = NULL) {
-  deprecate_dot_fun()
-  anti_join(x, y, by = by)
-}
-
-#' @export
 #' @rdname left_join
 semi_join <- function(x, y, by = NULL) {
   c(x, y, on, selection) %<-% join_prep(x, y, by, keep = FALSE, suffix = NULL, "semi")
@@ -189,14 +149,6 @@ semi_join <- function(x, y, by = NULL) {
   }
 
   tidytable_restore(out, x)
-}
-
-#' @export
-#' @keywords internal
-#' @inherit left_join
-semi_join. <- function(x, y, by = NULL) {
-  deprecate_dot_fun()
-  semi_join(x, y, by = by)
 }
 
 get_bys <- function(x, y, by = NULL) {
@@ -254,8 +206,8 @@ join_prep <- function(x, y, by, keep, suffix, type) {
   }
 
   if (length(suffix_names) > 0) {
-    x <- df_set_names(x, paste0(suffix_names, suffix[[1]]), suffix_names)
-    y <- df_set_names(y, paste0(suffix_names, suffix[[2]]), suffix_names)
+    x <- set_col_names(x, paste0(suffix_names, suffix[[1]]), suffix_names)
+    y <- set_col_names(y, paste0(suffix_names, suffix[[2]]), suffix_names)
 
     x_names <- names(x)
     y_names <- names(y)
@@ -295,11 +247,11 @@ join_prep <- function(x, y, by, keep, suffix, type) {
     if (type == "left") {
       # Rename y's by cols before join
       # https://github.com/markfairbanks/tidytable/issues/625
-      y <- df_set_names(y, by$x, by$y)
+      y <- set_col_names(y, by$x, by$y)
       on <- by$x
       # For use in `left_join` for column order
-      #   x_names contains by cols and x cols
-      #   y_names only contains new cols
+      # x_names contains by cols and x cols
+      # y_names only contains new cols
       selection <- c(x_names, y_names)
     } else {
       selection <- NULL
@@ -410,8 +362,8 @@ cross_join <- function(x, y, ..., suffix = c(".x", ".y")) {
   if (length(common_names) > 0) {
     new_x_names <- paste0(common_names, suffix[[1]])
     new_y_names <- paste0(common_names, suffix[[2]])
-    x <- df_set_names(x, new_x_names, common_names)
-    y <- df_set_names(y, new_y_names, common_names)
+    x <- set_col_names(x, new_x_names, common_names)
+    y <- set_col_names(y, new_y_names, common_names)
   }
 
   expand_grid(x, y, .name_repair = "minimal")

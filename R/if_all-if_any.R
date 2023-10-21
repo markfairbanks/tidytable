@@ -24,13 +24,3 @@ if_all <- function(.cols = everything(), .fns = NULL, ...) {
 if_any <- function(.cols = everything(), .fns = NULL, ...) {
   abort("if_any() can only work inside of tidytable verbs")
 }
-
-#' @export
-#' @keywords internal
-#' @inherit if_all
-if_all. <- if_all
-
-#' @export
-#' @keywords internal
-#' @inherit if_all
-if_any. <- if_any

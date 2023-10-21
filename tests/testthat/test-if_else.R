@@ -13,12 +13,3 @@ test_that("works with false = NA", {
 
   expect_equal(res, c(NA, NA, 2, 3))
 })
-
-test_that("if_else. works", {
-  x <- 1:4
-
-  res <- if_else.(x > 2L, NA, x - 1L) %>%
-    suppressWarnings()
-
-  expect_equal(res, c(0, 1, NA, NA))
-})

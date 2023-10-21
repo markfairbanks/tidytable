@@ -6,15 +6,6 @@ test_that("can add and drop columns", {
   expect_named(df, c("x"))
 })
 
-test_that("select. works", {
-  df <- data.table(x = 1, y = 2, z = 3)
-  df <- df %>%
-    select.(x, y, -y) %>%
-    suppressWarnings()
-
-  expect_named(df, c("x"))
-})
-
 test_that("can add and drop columns w/ data.frame", {
   df <- data.frame(x = 1, y = 2, z = 3)
   df <- df %>%
@@ -58,7 +49,7 @@ test_that("can rename columns & doesn't modify by reference", {
   expect_named(new_df, c("new", "y", "stuff"))
 })
 
-test_that("doesn't modify by reference", {
+test_that("doesn't modify-by-reference", {
   df <- data.table(x = c(1,1,1), y = c(2,2,2), z = c("a", "a", "b"))
   new_df <- df %>%
     select(x, y)

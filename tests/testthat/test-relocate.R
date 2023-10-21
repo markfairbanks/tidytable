@@ -4,12 +4,6 @@ test_that(".before and .after relocate individual cols", {
   expect_named(relocate(df, x, .after = y), c("y", "x"))
 })
 
-test_that("relocate. works", {
-  df <- data.table(x = 1, y = 2)
-  expect_named(suppressWarnings(relocate.(df, y, .before = x)), c("y", "x"))
-  expect_named(suppressWarnings(relocate.(df, x, .after = y)), c("y", "x"))
-})
-
 test_that("can move blocks of variables", {
   df <- data.table(x = 1, a = "a", y = 2, b = "a")
   expect_named(relocate(df, where(is.character)), c("a", "b", "x", "y"))

@@ -64,18 +64,3 @@ bind_rows <- function(..., .id = NULL) {
   out
 }
 
-#' @export
-#' @keywords internal
-#' @inherit bind_cols
-bind_cols. <- function(..., .name_repair = "unique") {
-  deprecate_dot_fun()
-  bind_cols(..., .name_repair = .name_repair)
-}
-
-#' @export
-#' @keywords internal
-#' @inherit bind_cols
-bind_rows. <- function(..., .id = NULL) {
-  deprecate_dot_fun()
-  bind_rows(..., .id = NULL)
-}

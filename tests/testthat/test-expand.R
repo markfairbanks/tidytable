@@ -17,12 +17,6 @@ test_that("auto-converts data.frame inputs", {
   expect_equal(nrow(out), 4)
 })
 
-test_that("expand. works", {
-  df <- data.table(x = 1:2, y = 1:2)
-  out <- expand.(df, x, y) %>% suppressWarnings()
-  expect_equal(nrow(out), 4)
-})
-
 test_that("preserves ordered factors", {
   df <- data.table(a = ordered("a"))
   out <- expand(df, a)

@@ -24,9 +24,3 @@ test_that("work on lists", {
   expect_equal(last(l), "y")
   expect_equal(nth(l, 3), NULL)
 })
-
-test_that("works with dot", {
-  expect_equal(suppressWarnings(first.(letters)), "a")
-  expect_equal(suppressWarnings(last.(letters)), "z")
-  expect_equal(suppressWarnings(nth.(letters, 3)), "c")
-})

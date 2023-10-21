@@ -34,8 +34,3 @@
 across <- function(.cols = everything(), .fns = NULL, ..., .names = NULL) {
   abort("`across()` can only work inside of tidytable verbs")
 }
-
-#' @export
-#' @keywords internal
-#' @inherit across
-across. <- across

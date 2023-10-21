@@ -28,8 +28,14 @@ unnest_longer <- function(.df, col, values_to = NULL, indices_to = NULL,
                           indices_include = NULL, keep_empty = FALSE,
                           names_repair = "check_unique", simplify = NULL,
                           ptype = NULL, transform = NULL) {
-  .df <- .df_as_tidytable(.df)
+  UseMethod("unnest_longer")
+}
 
+#' @export
+unnest_longer.tidytable <- function(.df, col, values_to = NULL, indices_to = NULL,
+                                    indices_include = NULL, keep_empty = FALSE,
+                                    names_repair = "check_unique", simplify = NULL,
+                                    ptype = NULL, transform = NULL) {
   .col <- enquo(col)
 
   x <- pull(.df, !!.col)
@@ -74,13 +80,11 @@ unnest_longer <- function(.df, col, values_to = NULL, indices_to = NULL,
 }
 
 #' @export
-#' @keywords internal
-#' @inherit unnest_longer
-unnest_longer. <- function(.df, col, values_to = NULL, indices_to = NULL,
-                          indices_include = NULL, keep_empty = FALSE,
-                          names_repair = "check_unique", simplify = NULL,
-                          ptype = NULL, transform = NULL) {
-  deprecate_dot_fun()
+unnest_longer.data.frame <- function(.df, col, values_to = NULL, indices_to = NULL,
+                                     indices_include = NULL, keep_empty = FALSE,
+                                     names_repair = "check_unique", simplify = NULL,
+                                     ptype = NULL, transform = NULL) {
+  .df <- as_tidytable(.df)
   unnest_longer(
     .df, col = {{ col }}, values_to = values_to, indices_to = indices_to,
     indices_include = indices_include, keep_empty = keep_empty,

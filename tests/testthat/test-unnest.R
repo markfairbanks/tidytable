@@ -16,18 +16,6 @@ test_that("unnesting works with nested data.table", {
   expect_equal(unnest_df$a, start_df$a)
 })
 
-test_that("unnest. works", {
-  nest_df <- start_df %>%
-    nest_by(c, d)
-
-  unnest_df <- nest_df %>%
-    unnest.(data) %>%
-    suppressWarnings()
-
-  expect_named(unnest_df, c("c","d","a","b"))
-  expect_equal(unnest_df$a, start_df$a)
-})
-
 test_that("names_sep works", {
   nest_df <- start_df %>%
     nest_by(c, d)

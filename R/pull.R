@@ -30,25 +30,17 @@
 #' df %>%
 #'   pull()
 pull <- function(.df, var = -1, name = NULL) {
-  vec <- tt_pull(.df, {{ var }})
+  vec <- .pull(.df, {{ var }})
 
   name <- enquo(name)
   if (!quo_is_null(name)) {
-    names(vec) <- tt_pull(.df, !!name)
+    names(vec) <- .pull(.df, !!name)
   }
 
   vec
 }
 
-#' @export
-#' @keywords internal
-#' @inherit pull
-pull. <- function(.df, var = -1, name = NULL) {
-  deprecate_dot_fun()
-  pull(.df, {{ var }}, {{ name }})
-}
-
-tt_pull <- function(.df, var) {
+.pull <- function(.df, var) {
   vars <- as.list(seq_along(.df))
 
   names(vars) <- names(.df)

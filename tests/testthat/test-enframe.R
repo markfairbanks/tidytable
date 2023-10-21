@@ -50,9 +50,3 @@ test_that("can enframe without names", {
   )
 })
 
-test_that("enframe. works", {
-  expect_identical(
-    enframe.(3:1) %>% suppressWarnings(),
-    tidytable(name = 1:3, value = 3:1)
-  )
-})

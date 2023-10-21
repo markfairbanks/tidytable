@@ -28,25 +28,11 @@
 #' df %>%
 #'   add_count(a)
 add_count <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
-  .df <- .df_as_tidytable(.df)
-
-  if (is_ungrouped(.df)) {
-    tt_add_count(.df, ..., wt = {{ wt }}, sort = sort, name = name)
-  } else {
-    .by <- group_vars(.df)
-    tt_add_count(.df, any_of(.by), wt = {{ wt }}, sort = sort, name = name)
-  }
+  UseMethod("add_count")
 }
 
 #' @export
-#' @keywords internal
-#' @inherit add_count
-add_count. <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
-  deprecate_dot_fun()
-  add_count(.df, ..., wt = {{ wt }}, sort = sort, name = name)
-}
-
-tt_add_count <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+add_count.tidytable <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
   .by <- enquos(...)
   wt <- enquo(wt)
 
@@ -66,15 +52,21 @@ tt_add_count <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
 }
 
 #' @export
-#' @rdname add_count
-add_tally <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
-  add_count(.df, wt = {{ wt }}, sort = sort, name = name)
+add_count.grouped_tt <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+  .by <- group_vars(.df)
+  out <- ungroup(.df)
+  out <- add_count(out, any_of(.by), wt = {{ wt }}, sort = sort, name = name)
+  group_by(out, any_of(.by))
 }
 
 #' @export
-#' @keywords internal
-#' @inherit add_count
-add_tally. <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
-  deprecate_dot_fun()
-  add_tally(.df, wt = {{ wt }}, sort = sort, name = name)
+add_count.data.frame <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+  .df <- as_tidytable(.df)
+  add_count(.df, ..., wt = {{ wt }}, sort = sort, name = name)
+}
+
+#' @export
+#' @rdname add_count
+add_tally <- function(.df, wt = NULL, sort = FALSE, name = NULL) {
+  add_count(.df, wt = {{ wt }}, sort = sort, name = name)
 }

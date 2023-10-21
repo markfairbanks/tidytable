@@ -30,27 +30,11 @@
 #' df %>%
 #'   nest(.by = c(c, d))
 nest <- function(.df, ..., .by = NULL, .key = NULL, .names_sep = NULL) {
-  .df <- .df_as_tidytable(.df)
-
-  if (is_ungrouped(.df)) {
-    tt_nest(.df, ..., .by = {{ .by }}, .key = .key, .names_sep = .names_sep)
-  } else {
-    .by <- group_vars(.df)
-    out <- tt_nest(.df, ..., .by = any_of(.by), .key = .key, .names_sep = .names_sep)
-    group_by(out, any_of(.by))
-  }
-
+  UseMethod("nest")
 }
 
 #' @export
-#' @keywords internal
-#' @inherit nest
-nest. <- function(.df, ..., .by = NULL, .key = NULL, .names_sep = NULL) {
-  deprecate_dot_fun()
-  nest(.df, ..., .by = {{ .by }}, .key = .key, .names_sep = .names_sep)
-}
-
-tt_nest <- function(.df, ..., .by = NULL, .key = NULL, .names_sep = NULL) {
+nest.tidytable <- function(.df, ..., .by = NULL, .key = NULL, .names_sep = NULL) {
   dots <- enquos(...)
 
   if (length(dots) > 1) {
@@ -90,11 +74,25 @@ tt_nest <- function(.df, ..., .by = NULL, .key = NULL, .names_sep = NULL) {
   if (!is.null(.names_sep)) {
     new_names <- paste(.key, cols, sep = .names_sep)
 
-    .df <- df_set_names(.df, new_names, cols)
+    .df <- set_col_names(.df, new_names, cols)
 
     cols <- new_names
   }
 
   dt_j(.df, .(!!.key := list(.SD)), by = .by, .SDcols = cols)
+}
+
+#' @export
+nest.grouped_tt <- function(.df, ..., .by = NULL, .key = NULL, .names_sep = NULL) {
+  .by <- group_vars(.df)
+  out <- ungroup(.df)
+  out <- nest(out, ..., .by = any_of(.by), .key = .key, .names_sep = .names_sep)
+  group_by(out, any_of(.by))
+}
+
+#' @export
+nest.data.frame <- function(.df, ..., .by = NULL, .key = NULL, .names_sep = NULL) {
+  .df <- as_tidytable(.df)
+  nest(.df, ..., .by = {{ .by }}, .key = .key, .names_sep = .names_sep)
 }
 

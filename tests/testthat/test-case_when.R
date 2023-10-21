@@ -73,14 +73,3 @@ test_that("use `.default` to find common ptype", {
 
   expect_equal(res, c(NA, 2, 3))
 })
-
-test_that("case_when. works", {
-  x <- 1:5
-
-  case_x <- case_when.(x < 3 ~ 1,
-                       x < 4 ~ 2,
-                       TRUE ~ 3) %>%
-    suppressWarnings()
-
-  expect_equal(case_x, c(1, 1, 2, 3, 3))
-})

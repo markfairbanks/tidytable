@@ -9,14 +9,6 @@ test_that("ascending order works", {
   expect_equal(across_df, check_df)
 })
 
-test_that("descending order works with desc.", {
-  across_df <- arrange(test_df, across(everything(), desc.))
-
-  check_df <- arrange(test_df, -a, -b)
-
-  expect_equal(across_df, check_df)
-})
-
 test_that("descending order works with desc", {
   across_df <- arrange(test_df, across(everything(), desc))
 
@@ -29,14 +21,6 @@ test_that("descending order works with rlang lambda", {
   across_df <- arrange(test_df, across(everything(), ~ desc(.x)))
 
   check_df <- arrange(test_df, -a, -b)
-
-  expect_equal(across_df, check_df)
-})
-
-test_that("works with dot", {
-  across_df <- arrange(test_df, across.())
-
-  check_df <- arrange(test_df, a, b)
 
   expect_equal(across_df, check_df)
 })

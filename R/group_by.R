@@ -29,31 +29,11 @@
 #'   summarize(mean_a = mean(a)) %>%
 #'   ungroup()
 group_by <- function(.df, ..., .add = FALSE) {
-  .df <- .df_as_tidytable(.df)
-
-  if (is_ungrouped(.df)) {
-    tt_group_by(.df, ..., .add = .add)
-  } else {
-    if (is_true(.add)) {
-      .groups <- group_vars(.df)
-      out <- ungroup(.df)
-      tt_group_by(out, all_of(.groups), ...)
-    } else {
-      out <- ungroup(.df)
-      tt_group_by(out, ...)
-    }
-  }
+  UseMethod("group_by")
 }
 
 #' @export
-#' @keywords internal
-#' @inherit group_by
-group_by. <- function(.df, ..., .add = FALSE) {
-  deprecate_dot_fun()
-  group_by(.df, ..., .add = .add)
-}
-
-tt_group_by <- function(.df, ..., .add = FALSE) {
+group_by.tidytable <- function(.df, ..., .add = FALSE) {
   dots <- enquos(...)
   check_across(dots, "group_by")
   .groups <- tidyselect_names(.df, !!!dots)
@@ -67,10 +47,31 @@ tt_group_by <- function(.df, ..., .add = FALSE) {
 }
 
 #' @export
+group_by.grouped_tt <- function(.df, ..., .add = FALSE) {
+  if (is_true(.add)) {
+    .groups <- group_vars(.df)
+    out <- ungroup(.df)
+    group_by(out, all_of(.groups), ...)
+  } else {
+    out <- ungroup(.df)
+    group_by(out, ...)
+  }
+}
+
+#' @export
+group_by.data.frame <- function(.df, ..., .add = FALSE) {
+  .df <- as_tidytable(.df)
+  group_by(.df, ..., .add = .add)
+}
+
+#' @export
 #' @rdname group_by
 ungroup <- function(.df, ...) {
-  .df <- .df_as_tidytable(.df)
+  UseMethod("ungroup")
+}
 
+#' @export
+ungroup.tidytable <- function(.df, ...) {
   dots <- enquos(...)
   if (length(dots) == 0) {
     out <- set_attr(.df, "groups", NULL)
@@ -83,10 +84,8 @@ ungroup <- function(.df, ...) {
 }
 
 #' @export
-#' @keywords internal
-#' @inherit group_by
-ungroup. <- function(.df, ...) {
-  deprecate_dot_fun()
+ungroup.data.frame <- function(.df, ...) {
+  .df <- as_tidytable(.df)
   ungroup(.df, ...)
 }
 
@@ -114,14 +113,6 @@ group_vars <- function(x) {
   attr(x, "groups")
 }
 
-#' @export
-#' @keywords internal
-#' @inherit group_vars
-group_vars. <- function(x) {
-  deprecate_dot_fun()
-  group_vars(x)
-}
-
 #' Check if the tidytable is grouped
 #'
 #' @description
@@ -142,12 +133,4 @@ group_vars. <- function(x) {
 #'   is_grouped_df()
 is_grouped_df <- function(x) {
   inherits(x, "grouped_tt")
-}
-
-#' @export
-#' @keywords internal
-#' @inherit is_grouped_df
-is_grouped_df. <- function(x) {
-  deprecate_dot_fun()
-  is_grouped_df(x)
 }

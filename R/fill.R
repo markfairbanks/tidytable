@@ -31,18 +31,15 @@
 fill <- function(.df, ...,
                  .direction = c("down", "up", "downup", "updown"),
                  .by = NULL) {
-  .direction <- arg_match(.direction)
-
-  mutate(.df, across(c(...), ~ vec_fill_missing(.x, .direction)), .by = {{ .by }})
+  UseMethod("fill")
 }
 
 #' @export
-#' @keywords internal
-#' @inherit fill
-fill. <- function(.df, ...,
-                  .direction = c("down", "up", "downup", "updown"),
-                  .by = NULL) {
-  deprecate_dot_fun()
-  fill(.df, ..., .direction = .direction, .by = {{ .by }})
+fill.data.frame <- function(.df, ...,
+                            .direction = c("down", "up", "downup", "updown"),
+                            .by = NULL) {
+  .direction <- arg_match(.direction)
+
+  mutate(.df, across(c(...), ~ vec_fill_missing(.x, .direction)), .by = {{ .by }})
 }
 

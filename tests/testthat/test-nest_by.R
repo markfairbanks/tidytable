@@ -15,18 +15,6 @@ test_that("can nest all data", {
   expect_equal(nrow(result_df), 1)
 })
 
-test_that("works with dot", {
-  test_df <- data.table(a = 1:3,
-                        b = 4:6,
-                        c = c("a", "a", "b"))
-
-  result_df <- test_df %>%
-    nest_by.() %>%
-    suppressWarnings()
-
-  expect_named(result_df, c("data"))
-})
-
 test_that("can nest by group", {
   test_df <- data.table(a = 1:3,
                         b = 4:6,

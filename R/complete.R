@@ -19,25 +19,11 @@
 #' df %>%
 #'   complete(x, y, fill = list(z = 10))
 complete <- function(.df, ..., fill = list(), .by = NULL) {
-  .df <- .df_as_tidytable(.df)
-
-  if (is_ungrouped(.df)) {
-    tt_complete(.df, ..., fill = fill, .by = {{ .by }})
-  } else {
-    .by <- group_vars(.by)
-    tt_complete(.df, ..., fill = fill, .by = any_of(.by))
-  }
+  UseMethod("complete")
 }
 
 #' @export
-#' @keywords internal
-#' @inherit complete
-complete. <- function(.df, ..., fill = list(), .by = NULL) {
-  deprecate_dot_fun()
-  complete(.df, ..., fill = fill, .by = {{ .by }})
-}
-
-tt_complete <- function(.df, ..., fill = list(), .by = NULL) {
+complete.tidytable <- function(.df, ..., fill = list(), .by = NULL) {
   dots <- enquos(...)
   dots <- dots[!map_lgl(dots, quo_is_null)]
   if (length(dots) == 0) return(.df)
@@ -50,5 +36,19 @@ tt_complete <- function(.df, ..., fill = list(), .by = NULL) {
   full_df <- replace_na(full_df, replace = fill)
 
   full_df
+}
+
+#' @export
+complete.grouped_tt <- function(.df, ..., fill = list(), .by = NULL) {
+  .by <- group_vars(.df)
+  out <- ungroup(.df)
+  out <- complete(out, ..., fill = fill, .by = {{ .by }})
+  group_by(out, any_of(.by))
+}
+
+#' @export
+complete.data.frame <- function(.df, ..., fill = list(), .by = NULL) {
+  .df <- as_tidytable(.df)
+  complete(.df, ..., fill = fill, .by = {{ .by }})
 }
 

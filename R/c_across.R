@@ -17,7 +17,3 @@ c_across <- function(cols = everything()) {
   abort("c_across() can only be used inside of tidytable verbs")
 }
 
-#' @export
-#' @keywords internal
-#' @inherit c_across
-c_across. <- c_across

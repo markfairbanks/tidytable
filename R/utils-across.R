@@ -96,7 +96,7 @@ get_across_cols <- function(data, .cols, .by = NULL, .env = caller_env()) {
 replace_cur_column <- function(x, x_name) {
   if (is_symbol(x) || is_atomic(x) || is_null(x)) {
     x
-  } else if (is_call(x, c("cur_column", "cur_column."))) {
+  } else if (is_call(x, "cur_column")) {
     x_name
   } else {
     x[-1] <- lapply(x[-1], replace_cur_column, x_name)

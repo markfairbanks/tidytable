@@ -110,8 +110,8 @@ is_basic_mutate <- function(mutate_exprs) {
 }
 
 # Allow unquoting names in j position & allow using let
-#   Ex: df %>% dt(, let({{ col }} := {{ col }} * 2))
-#   Ex: df %>% dt(, .(!!col := mean(!!col)))
+# Ex: df %>% dt(, let({{ col }} := {{ col }} * 2))
+# Ex: df %>% dt(, .(!!col := mean(!!col)))
 prep_j_expr <- function(j) {
   if (is_call(j, "let")) {
     j[[1]] <- expr(`:=`)

@@ -49,8 +49,21 @@ pivot_wider <- function(.df,
                         names_repair = "unique",
                         values_fill = NULL,
                         values_fn = NULL) {
-  .df <- .df_as_tidytable(.df)
+  UseMethod("pivot_wider")
+}
 
+#' @export
+pivot_wider.tidytable <- function(.df,
+                                  names_from = name,
+                                  values_from = value,
+                                  id_cols = NULL,
+                                  names_sep = "_",
+                                  names_prefix = "",
+                                  names_glue = NULL,
+                                  names_sort = FALSE,
+                                  names_repair = "unique",
+                                  values_fill = NULL,
+                                  values_fn = NULL) {
   names_from <- tidyselect_names(.df, {{ names_from }})
   values_from <- tidyselect_names(.df, {{ values_from }})
 
@@ -131,12 +144,34 @@ pivot_wider <- function(.df,
   if (uses_dot_value) {
     new_vars <- setdiff(names(out), id_cols)
 
-    out <- df_set_names(out, glue_vars[new_vars], new_vars)
+    out <- set_col_names(out, glue_vars[new_vars], new_vars)
   }
 
   out <- df_name_repair(out, names_repair)
 
   as_tidytable(out)
+}
+
+#' @export
+pivot_wider.data.frame <- function(.df,
+                                   names_from = name,
+                                   values_from = value,
+                                   id_cols = NULL,
+                                   names_sep = "_",
+                                   names_prefix = "",
+                                   names_glue = NULL,
+                                   names_sort = FALSE,
+                                   names_repair = "unique",
+                                   values_fill = NULL,
+                                   values_fn = NULL) {
+  .df <- as_tidytable(.df)
+  pivot_wider(
+    .df, names_from = {{ names_from }}, values_from = {{ values_from }},
+    id_cols = {{ id_cols }}, names_sep = names_sep,
+    names_prefix = names_prefix, names_glue = names_glue,
+    names_sort = names_sort, names_repair = names_repair,
+    values_fill = values_fill, values_fn = {{ values_fn }}
+  )
 }
 
 safe_as_factor <- function(x) {
@@ -147,30 +182,6 @@ safe_as_factor <- function(x) {
   } else {
     x
   }
-}
-
-#' @export
-#' @keywords internal
-#' @inherit pivot_wider
-pivot_wider. <- function(.df,
-                         names_from = name,
-                         values_from = value,
-                         id_cols = NULL,
-                         names_sep = "_",
-                         names_prefix = "",
-                         names_glue = NULL,
-                         names_sort = FALSE,
-                         names_repair = "unique",
-                         values_fill = NULL,
-                         values_fn = NULL) {
-  deprecate_dot_fun()
-  pivot_wider(
-    .df, names_from = {{ names_from }}, values_from = {{ values_from }},
-    id_cols = {{ id_cols }}, names_sep = names_sep,
-    names_prefix = names_prefix, names_glue = names_glue,
-    names_sort = names_sort, names_repair = names_repair,
-    values_fill = values_fill, values_fn = {{ values_fn }}
-  )
 }
 
 globalVariables(c(".", ".names_from", "name", "value", ".value"))

@@ -34,7 +34,7 @@ call2_i <- function(.df, i = NULL, .by = NULL) {
 }
 
 # Uses fast `by` trick for i position using .I
-#   See: https://stackoverflow.com/a/16574176/13254470
+# See: https://stackoverflow.com/a/16574176/13254470
 call2_i_by <- function(.df, i, .by) {
   j <- expr(.I[!!i])
   dt_expr <- call2_j(.df, j, .by)
@@ -46,7 +46,7 @@ call2_i_by <- function(.df, i, .by) {
 globalVariables("V1")
 
 # setnames without modify-by-reference
-df_set_names <- function(.df, new_names = NULL, old_names = NULL) {
+set_col_names <- function(.df, new_names = NULL, old_names = NULL) {
   if (is.null(old_names)) {
     out <- set_names(.df, new_names)
   } else {
@@ -57,7 +57,7 @@ df_set_names <- function(.df, new_names = NULL, old_names = NULL) {
 }
 
 # setcolorder without modify-by-reference
-df_col_order <- function(.df, new_order) {
+set_col_order <- function(.df, new_order) {
   out <- fast_copy(.df)
   setcolorder(out, new_order)
   out
@@ -66,7 +66,7 @@ df_col_order <- function(.df, new_order) {
 # Repair names of a data.table
 df_name_repair <- function(.df, .name_repair = "unique") {
   new_names <- vec_as_names(names(.df), repair = .name_repair)
-  df_set_names(.df, new_names)
+  set_col_names(.df, new_names)
 }
 
 # Drop the key from a keyed data.table
@@ -107,9 +107,9 @@ tidytable_class <- function() {
 }
 
 # radix sort
-#   Proxy for data.table::fsort since negative values aren't supported, #282
-#   Can switch to data.table::fsort once negative doubles are handled
-#   See: https://github.com/Rdatatable/data.table/issues/5051
+# Proxy for data.table::fsort since negative values aren't supported, #282
+# Can switch to data.table::fsort once negative doubles are handled
+# See: https://github.com/Rdatatable/data.table/issues/5051
 f_sort <- function(x) {
   if (is.character(x)) {
     suppressWarnings(
@@ -146,8 +146,8 @@ call_reduce <- function(x, fun) {
 }
 
 # Restore user defined attributes
-#   Ensures auto-index is removed
-#   See: https://github.com/Rdatatable/data.table/issues/5042
+# Also ensures auto-index is removed
+# See: https://github.com/Rdatatable/data.table/issues/5042
 tidytable_restore <- function(x, to) {
   to <- set_attr(to, "index", NULL)
   vec_restore(x, to)
@@ -188,48 +188,8 @@ check_across <- function(dots, .fn) {
   }
 }
 
-# Needed until we can build S3 methods again once `verb.()` is removed
-#   Regular `as_tidytable()` strips "grouped_tt" class
-.df_as_tidytable <- function(.df) {
-  if (!is.data.frame(.df)) {
-    abort("`.df` must be a data frame.")
-  }
-
-  if (!is_tidytable(.df)) {
-    as_tidytable(.df)
-  } else {
-    .df
-  }
-}
-
-is_ungrouped <- function(.df) {
-  !is_grouped_df(.df) && !is_rowwise(.df)
-}
-
-is_rowwise <- function(.df) {
-  inherits(.df, "rowwise_tt")
-}
-
-deprecate_dot_fun <- function(fn = NULL, env = caller_env(), user_env = caller_env(2)) {
-  fn <- fn %||% call_name(caller_call())
-  what <- glue("{fn}()")
-  with <- str_replace(what, ".", "", TRUE)
-  details <- "Please note that all `verb.()` syntax has now been deprecated. \n"
-  deprecate_soft(
-    "v0.10.0", what, with, details, id = ".tidytable_dot_funs",
-    env = env, user_env = user_env
-  )
-}
-
-deprecate_old_across <- function(fn) {
-  msg <- glue("`{fn}_across.()` is defunct as of v0.8.1 (Aug 2022).
-              It has been deprecated with warnings since v0.6.4 (Jul 2021).
-              Please use `{fn}(across())`")
-  abort(msg)
-}
-
 # Does type changes with ptype & transform logic
-#   For use in pivot_longer/unnest_longer/unnest_wider
+# For use in pivot_longer/unnest_longer/unnest_wider
 change_types <- function(.df, .cols, .ptypes = NULL, .transform = NULL) {
   if (!is.null(.ptypes)) {
     if (!obj_is_list(.ptypes)) {

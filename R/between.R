@@ -27,11 +27,3 @@
 between <- function(x, left, right) {
   data.table::between(x = x, lower = left, upper = right)
 }
-
-#' @export
-#' @keywords internal
-#' @inherit between
-between. <- function(x, left, right) {
-  deprecate_dot_fun()
-  between(x, left, right)
-}

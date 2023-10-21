@@ -1,7 +1,7 @@
 # Fast copying
-#   Deep copy of columns that are being overwritten.
-#   Only does a shallow copy of the other columns.
-#   Faster than running `copy()` on an entire data frame.
+# Deep copy of columns that are being overwritten.
+# Only does a shallow copy of the other columns.
+# Faster than running `copy()` on an entire data frame.
 fast_copy <- function(x, cols = character()) {
   if (length(cols) == 0) {
     return(shallow(x))

@@ -14,16 +14,6 @@ test_that("can overwrite existing column without removal", {
   expect_equal(res$y, c("a1", "b2", "c3"))
 })
 
-test_that("extract. works", {
-  df <- data.table(y = c("a1-1", "b2-2", "c3-3"))
-  res <- df %>%
-    extract.(y, "A", regex="([[:alnum:]]+)") %>%
-    suppressWarnings()
-
-  expect_equal(res$A, c("a1", "b2", "c3"))
-  expect_null(res$y)
-})
-
 test_that("doesn't modify-by-reference", {
   df <- data.table(y = c("a1-1", "b2-2", "c3-3"))
   res <- df %>% extract(y, "A", regex="([[:alnum:]]+)")

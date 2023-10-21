@@ -27,9 +27,12 @@
 #' df %>%
 #'   rename_with(~ toupper(.x), .cols = c(x, double_x))
 rename_with <- function(.df, .fn = NULL, .cols = everything(), ...) {
-  if (is.null(.fn)) return(.df)
+  UseMethod("rename_with")
+}
 
-  .df <- .df_as_tidytable(.df)
+#' @export
+rename_with.tidytable <- function(.df, .fn = NULL, .cols = everything(), ...) {
+  if (is.null(.fn)) return(.df)
 
   .cols <- tidyselect_names(.df, {{ .cols }})
 
@@ -39,14 +42,12 @@ rename_with <- function(.df, .fn = NULL, .cols = everything(), ...) {
 
   new_names <- .fn(.cols, ...)
 
-  df_set_names(.df, new_names, .cols)
+  set_col_names(.df, new_names, .cols)
 }
 
 #' @export
-#' @keywords internal
-#' @inherit rename_with
-rename_with. <- function(.df, .fn = NULL, .cols = everything(), ...) {
-  deprecate_dot_fun()
+rename_with.data.frame <- function(.df, .fn = NULL, .cols = everything(), ...) {
+  .df <- as_tidytable(.df)
   rename_with(.df, .fn = .fn, .cols = {{ .cols }}, ...)
 }
 

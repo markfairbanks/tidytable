@@ -8,15 +8,6 @@ test_that("keeps the grouping variables by default", {
   expect_equal(names(out), NULL)
 })
 
-test_that("group_split. works", {
-  out <- group_split.(test_df, y) %>%
-    suppressWarnings()
-
-  expect_equal(out[[1]], slice(test_df, 1:2))
-  expect_equal(out[[2]], slice(test_df, 3))
-  expect_equal(names(out), NULL)
-})
-
 test_that("can return a named list", {
   out <- group_split(test_df, y, z, .named = TRUE)
 

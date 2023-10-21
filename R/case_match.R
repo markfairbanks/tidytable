@@ -28,14 +28,6 @@ case_match <- function(.x, ..., .default = NA, .ptype = NULL) {
   case_when(!!!dots, .default = .default, .ptype = .ptype)
 }
 
-#' @export
-#' @keywords internal
-#' @inherit case_match
-case_match. <- function(.x, ..., .default = NA, .ptype = NULL) {
-  deprecate_dot_fun()
-  case_match(.x, ..., .default = NA, .ptype = NULL)
-}
-
 prep_case_match_dot <- function(dot, .x) {
   lhs <- f_lhs(dot)
   if (is.character(lhs) || is.numeric(lhs)) {

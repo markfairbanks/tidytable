@@ -27,8 +27,11 @@
 #' df %>%
 #'   relocate(where(is.numeric), .after = c)
 relocate <- function(.df, ..., .before = NULL, .after = NULL) {
-  .df <- .df_as_tidytable(.df)
+  UseMethod("relocate")
+}
 
+#' @export
+relocate.tidytable <- function(.df, ..., .before = NULL, .after = NULL) {
   order <- eval_relocate(
     expr(c(...)),
     .df,
@@ -40,16 +43,14 @@ relocate <- function(.df, ..., .before = NULL, .after = NULL) {
 
   names <- names(order)
 
-  out <- df_col_order(.df, order)
+  out <- set_col_order(.df, order)
 
-  df_set_names(out, names)
+  set_col_names(out, names)
 }
 
 #' @export
-#' @keywords internal
-#' @inherit relocate
-relocate. <- function(.df, ..., .before = NULL, .after = NULL) {
-  deprecate_dot_fun()
+relocate.data.frame <- function(.df, ..., .before = NULL, .after = NULL) {
+  .df <- as_tidytable(.df)
   relocate(.df, ..., .before = {{ .before }}, .after = {{ .after }})
 }
 

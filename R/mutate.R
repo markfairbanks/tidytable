@@ -48,60 +48,13 @@
 mutate <- function(.df, ..., .by = NULL,
                    .keep = c("all", "used", "unused", "none"),
                    .before = NULL, .after = NULL) {
-  .df <- .df_as_tidytable(.df)
-
-  if (is_ungrouped(.df)) {
-    tt_mutate(
-      .df, ...,
-      .by = {{ .by }},
-      .keep = .keep,
-      .before = {{ .before }},
-      .after = {{ .after }}
-    )
-  } else if (is_grouped_df(.df)) {
-    .by <- group_vars(.df)
-    tt_mutate(
-      .df, ...,
-      .by = any_of(.by),
-      .keep = .keep,
-      .before = {{ .before }},
-      .after = {{ .after }}
-    )
-  } else {
-    out <- tt_mutate(.df, .rowwise_id = .I)
-
-    out <- tt_mutate(
-      out, ...,
-      .by = .rowwise_id,
-      .keep = .keep,
-      .before = {{ .before }},
-      .after = {{ .after }}
-    )
-
-    dt_j(out, .rowwise_id := NULL)
-  }
+  UseMethod("mutate")
 }
 
 #' @export
-#' @keywords internal
-#' @inherit mutate
-mutate. <- function(.df, ..., .by = NULL,
-                    .keep = c("all", "used", "unused", "none"),
-                    .before = NULL, .after = NULL) {
-  deprecate_dot_fun()
-  mutate(
-    .df, ...,
-    .by = {{ .by }},
-    .keep = .keep,
-    .before = {{ .before }},
-    .after = {{ .after }}
-  )
-}
-
-
-tt_mutate <- function(.df, ..., .by = NULL,
-                      .keep = c("all", "used", "unused", "none"),
-                      .before = NULL, .after = NULL) {
+mutate.tidytable <- function(.df, ..., .by = NULL,
+                             .keep = c("all", "used", "unused", "none"),
+                             .before = NULL, .after = NULL) {
   .df <- fast_copy(.df)
 
   .by <- enquo(.by)
@@ -205,6 +158,57 @@ tt_mutate <- function(.df, ..., .by = NULL,
   }
 
   .df
+}
+
+#' @export
+mutate.grouped_tt <- function(.df, ..., .by = NULL,
+                              .keep = c("all", "used", "unused", "none"),
+                              .before = NULL, .after = NULL) {
+  .by <- group_vars(.df)
+  out <- ungroup(.df)
+  out <- mutate(
+    out, ...,
+    .by = any_of(.by),
+    .keep = .keep,
+    .before = {{ .before }},
+    .after = {{ .after }}
+  )
+  group_by(out, any_of(.by))
+}
+
+#' @export
+mutate.data.frame <- function(.df, ..., .by = NULL,
+                              .keep = c("all", "used", "unused", "none"),
+                              .before = NULL, .after = NULL) {
+  .df <- as_tidytable(.df)
+  mutate(
+    .df, ...,
+    .by = {{ .by }},
+    .keep = .keep,
+    .before = {{ .before }},
+    .after = {{ .after }}
+  )
+}
+
+#' @export
+mutate.rowwise_tt <- function(.df, ..., .by = NULL,
+                              .keep = c("all", "used", "unused", "none"),
+                              .before = NULL, .after = NULL) {
+  out <- ungroup(.df)
+
+  out <- mutate(out, .rowwise_id = .I)
+
+  out <- mutate(
+    out, ...,
+    .by = .rowwise_id,
+    .keep = .keep,
+    .before = {{ .before }},
+    .after = {{ .after }}
+  )
+
+  out <- dt_j(out, .rowwise_id := NULL)
+
+  rowwise(out)
 }
 
 # vec_recycle() prevents modify-by-reference if the column already exists in the data.table

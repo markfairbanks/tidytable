@@ -15,37 +15,39 @@
 #'   rename(new_x = x,
 #'          new_y = y)
 rename <- function(.df, ...) {
-  .df <- .df_as_tidytable(.df)
-
-  if (is_ungrouped(.df)) {
-    tt_rename(.df, ...)
-  } else {
-    # Ensure "groups" attribute has new names
-    groups <- group_vars(.df)
-    groups <- select(.df, all_of(groups))
-    groups <- names(tt_rename(groups, ..., .strict = FALSE))
-
-    out <- ungroup(.df)
-    out <- tt_rename(out, ...)
-
-    group_by(out, all_of(groups))
-  }
+  UseMethod("rename")
 }
 
 #' @export
-#' @keywords internal
-#' @inherit rename
-rename. <- function(.df, ...) {
-  deprecate_dot_fun()
+rename.tidytable <- function(.df, ...) {
+  .rename(.df, ...)
+}
+
+#' @export
+rename.grouped_tt <- function(.df, ...) {
+  # Ensure "groups" attribute has new names
+  groups <- group_vars(.df)
+  groups <- select(.df, all_of(groups))
+  groups <- names(.rename(groups, ..., .strict = FALSE))
+
+  out <- ungroup(.df)
+  out <- rename(out, ...)
+
+  group_by(out, all_of(groups))
+}
+
+#' @export
+rename.data.frame <- function(.df, ...) {
+  .df <- as_tidytable(.df)
   rename(.df, ...)
 }
 
-tt_rename <- function(.df, ..., .strict = TRUE) {
+.rename <- function(.df, ..., .strict = TRUE) {
   locs <- eval_rename(expr(c(...)), .df, strict = .strict)
 
   names <- names(.df)
   names[locs] <- names(locs)
 
-  set_names(.df, names)
+  set_col_names(.df, names)
 }
 

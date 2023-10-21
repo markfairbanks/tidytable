@@ -33,61 +33,49 @@
 mutate_rowwise <- function(.df, ...,
                            .keep = c("all", "used", "unused", "none"),
                            .before = NULL, .after = NULL) {
-  .df <- .df_as_tidytable(.df)
-
-  if (is_ungrouped(.df)) {
-    tt_mutate_rowwise(.df, ...,
-                      .keep = .keep,
-                      .before = {{ .before }},
-                      .after = {{ .after }})
-  } else if (is_grouped_df(.df)) {
-    warn("Using `mutate_rowwise()` on a grouped tidytable.
-       The output will be ungrouped.")
-    out <- ungroup(.df)
-    tt_mutate_rowwise(out, ...,
-                      .keep = .keep,
-                      .before = {{ .before }},
-                      .after = {{ .after }})
-  } else {
-    warn("Using `mutate_rowwise()` on a rowwise tidytable.
-       You can use `mutate()` directly.")
-    out <- ungroup(.df)
-    out <- mutate_rowwise(out, ...,
-                          .keep = .keep,
-                          .before = {{ .before }},
-                          .after = {{ .after }})
-    rowwise(out)
-  }
+  UseMethod("mutate_rowwise")
 }
 
 #' @export
-#' @keywords internal
-#' @inherit mutate_rowwise
-mutate_rowwise. <- function(.df, ...,
-                            .keep = c("all", "used", "unused", "none"),
-                            .before = NULL, .after = NULL) {
-  deprecate_dot_fun()
-  mutate_rowwise(.df, ...,
-                 .keep = .keep,
-                 .before = {{ .before }},
-                 .after = {{ .after }})
-}
-
-tt_mutate_rowwise <- function(.df, ...,
-                              .keep = c("all", "used", "unused", "none"),
-                              .before = NULL, .after = NULL) {
+mutate_rowwise.tidytable <- function(.df, ...,
+                                      .keep = c("all", "used", "unused", "none"),
+                                      .before = NULL, .after = NULL) {
   dots <- enquos(...)
   if (length(dots) == 0) return(.df)
 
-  .df <- mutate(.df, .rowwise_id = .I)
+  out <- mutate(.df, .rowwise_id = .I)
 
-  .df <- mutate(.df, !!!dots,
+  out <- mutate(out, !!!dots,
                 .by = .rowwise_id,
                 .keep = .keep,
                 .before = {{ .before }},
                 .after = {{ .after }})
 
-  mutate(.df, .rowwise_id = NULL)
+  mutate(out, .rowwise_id = NULL)
+}
+
+#' @export
+mutate_rowwise.grouped_tt <- function(.df, ...,
+                                      .keep = c("all", "used", "unused", "none"),
+                                      .before = NULL, .after = NULL) {
+  warn("Using `mutate_rowwise()` on a grouped tidytable.
+       The output will be ungrouped.")
+  out <- ungroup(.df)
+  mutate_rowwise(out, ...,
+                 .keep = .keep,
+                 .before = {{ .before }},
+                 .after = {{ .after }})
+}
+
+#' @export
+mutate_rowwise.data.frame <- function(.df, ...,
+                            .keep = c("all", "used", "unused", "none"),
+                            .before = NULL, .after = NULL) {
+  .df <- as_tidytable(.df)
+  mutate_rowwise(.df, ...,
+                 .keep = .keep,
+                 .before = {{ .before }},
+                 .after = {{ .after }})
 }
 
 globalVariables(".rowwise_id")

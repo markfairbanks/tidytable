@@ -73,16 +73,6 @@ test_that("works on grouped_tt", {
   expect_equal(group_vars(out), c("c", "d"))
 })
 
-test_that("count. works", {
-  df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
-  out <- df %>%
-    count.() %>%
-    suppressWarnings()
-
-  expect_named(out, c("n"))
-  expect_equal(out$n, nrow(df))
-})
-
 # tally() ----------------------------------------------
 test_that("empty tally returns number of rows", {
   df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
@@ -111,14 +101,4 @@ test_that("works on grouped_tt", {
   expect_named(out, c("d", "n"))
   expect_equal(out$d, c("a", "b"))
   expect_equal(out$n, c(2, 1))
-})
-
-test_that("tally. works", {
-  df <- data.table(a = 1:3, b = 4:6, c = c("a", "a", "a"), d = c("a", "a", "b"))
-  out <- df %>%
-    tally.() %>%
-    suppressWarnings()
-
-  expect_named(out, c("n"))
-  expect_equal(out$n, nrow(df))
 })

@@ -39,8 +39,16 @@ get_dummies <- function(.df,
                         prefix_sep = "_",
                         drop_first = FALSE,
                         dummify_na = TRUE) {
-  .df <- .df_as_tidytable(.df)
+  UseMethod("get_dummies")
+}
 
+#' @export
+get_dummies.tidytable <- function(.df,
+                                  cols = where(~ is.character(.x) | is.factor(.x)),
+                                  prefix = TRUE,
+                                  prefix_sep = "_",
+                                  drop_first = FALSE,
+                                  dummify_na = TRUE) {
   cols <- tidyselect_syms(.df, {{ cols }})
 
   for (col in cols) {
@@ -96,15 +104,13 @@ get_dummies <- function(.df,
 }
 
 #' @export
-#' @keywords internal
-#' @inherit get_dummies
-get_dummies. <- function(.df,
-                         cols = where(~ is.character(.x) | is.factor(.x)),
-                         prefix = TRUE,
-                         prefix_sep = "_",
-                         drop_first = FALSE,
-                         dummify_na = TRUE) {
-  deprecate_dot_fun()
+get_dummies.data.frame <- function(.df,
+                                   cols = where(~ is.character(.x) | is.factor(.x)),
+                                   prefix = TRUE,
+                                   prefix_sep = "_",
+                                   drop_first = FALSE,
+                                   dummify_na = TRUE) {
+  .df <- as_tidytable(.df)
   get_dummies(.df, {{ cols }}, prefix, prefix_sep, drop_first, dummify_na)
 }
 

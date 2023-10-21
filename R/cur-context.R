@@ -43,20 +43,10 @@ cur_column <- function() {
 }
 
 #' @export
-#' @keywords internal
-#' @inherit context title description examples
-cur_column. <- cur_column
-
-#' @export
 #' @rdname context
 cur_data <- function() {
   abort("cur_data() should only be used inside tidytable verbs")
 }
-
-#' @export
-#' @keywords internal
-#' @inherit context title description examples
-cur_data. <- cur_data
 
 #' @export
 #' @rdname context
@@ -65,17 +55,7 @@ cur_group_id <- function() {
 }
 
 #' @export
-#' @keywords internal
-#' @inherit context title description examples
-cur_group_id. <- cur_group_id
-
-#' @export
 #' @rdname context
 cur_group_rows <- function() {
   abort("cur_group_rows() should only be used inside tidytable verbs")
 }
-
-#' @export
-#' @keywords internal
-#' @inherit context title description examples
-cur_group_rows. <- cur_group_rows

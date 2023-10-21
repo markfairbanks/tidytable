@@ -8,15 +8,6 @@ test_that("_head() works when empty", {
   expect_equal(sliced_df, head(test_df, 5))
 })
 
-test_that("_head.() works", {
-  test_df <- tidytable(x = 1:10, y = 20:11, z = c(rep("a", 6), rep("b", 4)))
-  sliced_df <- test_df %>%
-    slice_head.() %>%
-    suppressWarnings()
-
-  expect_equal(sliced_df, head(test_df, 5))
-})
-
 test_that("_head() works when empty, doesn't return NAs", {
   test_df <- tidytable(x = 1:3, y = 1:3)
   sliced_df <- test_df %>%
@@ -101,15 +92,6 @@ test_that("_tail() works when empty", {
   test_df <- tidytable(x = 1:10, y = 20:11, z = c(rep("a", 6), rep("b", 4)))
   sliced_df <- test_df %>%
     slice_tail()
-
-  expect_equal(sliced_df, tail(test_df, 5))
-})
-
-test_that("_tail.() works", {
-  test_df <- tidytable(x = 1:10, y = 20:11, z = c(rep("a", 6), rep("b", 4)))
-  sliced_df <- test_df %>%
-    slice_tail.() %>%
-    suppressWarnings()
 
   expect_equal(sliced_df, tail(test_df, 5))
 })
