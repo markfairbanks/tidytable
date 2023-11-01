@@ -9,7 +9,7 @@ dt(.df, ...)
 \arguments{
 \item{.df}{A data.frame or data.table}
 
-\item{...}{Arguments passed to data.table call. See \verb{?data.table::[.data.table}}
+\item{...}{Arguments passed to data.table call. See \code{?data.table::`[.data.table` }}
 }
 \description{
 Pipeable data.table call.
