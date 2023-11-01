@@ -6,6 +6,9 @@
 #### Deprecations
 * `verb.()` functions have been removed
 
+#### Bug fixes
+* `count()` has a more helpful error message when `pick()` is used (#778)
+
 #### Functions with notable speed improvements
 * `distinct()`
 

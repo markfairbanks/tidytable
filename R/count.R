@@ -56,13 +56,14 @@ count <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
 
 #' @export
 count.tidytable <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
+  check_no_across(enquos(...))
   .by <- quo(c(...))
   count_tally(.df, {{ wt }}, sort, name, .by = !!.by, .groups = "keep")
 }
 
 #' @export
 count.grouped_tt <- function(.df, ..., wt = NULL, sort = FALSE, name = NULL) {
-  .by <- quo(c(...))
+  check_no_across(enquos(...))
   count_tally(.df, {{ wt }}, sort, name, .groups = "keep")
 }
 
