@@ -117,9 +117,6 @@ reference:
 
 - title: internal
   contents:
-  - arrange_across.
-  - mutate_across.
-  - summarize_across.
   - case
   - get_dummies
   - inv_gc

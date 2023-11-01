@@ -8,7 +8,7 @@
 #' Has experimental support for tidy evaluation for custom functions.
 #'
 #' @param .df A data.frame or data.table
-#' @param ... Arguments passed to data.table call. See `?data.table::[.data.table`
+#' @param ... Arguments passed to data.table call. See ``?data.table::`[.data.table` ``
 #'
 #' @examples
 #' df <- tidytable(
