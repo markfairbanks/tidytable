@@ -21,7 +21,7 @@
 #'   dt(, double_x := x * 2) %>%
 #'   dt(order(-double_x))
 #'
-#' # Experimental support for tidy evaluation
+#' # Experimental support for tidy evaluation for custom functions
 #' add_one <- function(data, col) {
 #'   data %>%
 #'     dt(, new_col := {{ col }} + 1)
@@ -145,6 +145,6 @@ internal_dt <- function(x, i, j, by, keyby, with = TRUE,
                         .SDcols,
                         verbose = FALSE,
                         allow.cartesian = FALSE,
-                        drop = NULL, on = NULL) {
+                        drop = NULL, on = NULL, env = NULL) {
   abort("For internal call_match only.")
 }
