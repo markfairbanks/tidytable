@@ -29,7 +29,7 @@ df \%>\%
   dt(, double_x := x * 2) \%>\%
   dt(order(-double_x))
 
-# Experimental support for tidy evaluation
+# Experimental support for tidy evaluation for custom functions
 add_one <- function(data, col) {
   data \%>\%
     dt(, new_col := {{ col }} + 1)
