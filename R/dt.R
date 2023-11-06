@@ -50,13 +50,12 @@ dt.tidytable <- function(.df, ...) {
 
   args <- call_args(dt_expr)
 
-  j <- args$j
-  if (!is.null(j)) {
-    is_mutate <- is_call(j, c(":=", "let"))
+  if (!is.null(args$j)) {
+    is_mutate <- is_call(args$j, c(":=", "let"))
     if (is_mutate) {
       # Find cols mutated for `fast_copy()`
-      mutate_exprs <- call_args(j)
-      if (is_basic_mutate(mutate_exprs)) {
+      mutate_exprs <- call_args(args$j)
+      if (is_single_mutate(mutate_exprs)) {
         cols <- mutate_exprs[[1]]
         if (is.null(mutate_exprs[[2]])) {
           # .df[, col := NULL]
@@ -73,16 +72,14 @@ dt.tidytable <- function(.df, ...) {
       } else {
         # .df %>% dt(, let(x = 1, double_y = y * 2))
         # .df %>% dt(, let(!!col := !!col * 2))
-        j <- prep_j_expr(j)
-        args$j <- j
-        cols <- call_args_names(j)
+        args$j <- prep_j_expr(args$j)
+        cols <- call_args_names(args$j)
       }
       .df <- fast_copy(.df, cols)
-    } else if (is_call(j, c(".", "list"))) {
+    } else if (is_call(args$j, c(".", "list"))) {
       # .df %>% dt(, .(mean_x = mean(x)))
       # .df %>% dt(, .(!!col := mean(!!col)))
-      j <- prep_j_expr(j)
-      args$j <- j
+      args$j <- prep_j_expr(args$j)
     }
 
     dt_expr <- call2("[", !!!args)
@@ -103,7 +100,7 @@ dt.data.frame <- function(.df, ...) {
 }
 
 # Checks if j is a single call to `:=` or let
-is_basic_mutate <- function(mutate_exprs) {
+is_single_mutate <- function(mutate_exprs) {
   no_names <- !any(have_name(mutate_exprs))
   no_walrus <- !any(map_lgl(mutate_exprs, is_call, ":="))
   has_length(mutate_exprs, 2) && no_names && no_walrus
