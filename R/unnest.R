@@ -136,23 +136,48 @@ unnest_col <- function(.df, col = NULL, names_sep = NULL) {
   out_df
 }
 
-keep_empty_prep <- function(.l) {
-  is_null <- vec_detect_missing(.l)
+keep_empty_prep <- function(l) {
+  # Need to catch cases with both length 0 vectors and NULLs
+  is_empty <- list_sizes(l) == 0
 
-  if (!any(is_null)) {
-    return(.l)
+  if (!any(is_empty)) {
+    return(l)
   }
 
-  first <- .l[!is_null][[1]]
+  first <- l[!is_empty][[1]]
   is_vec <- is_simple_vector(first)
 
   if (is_vec) {
-    .replace <- NA
+    l[is_empty] <- list(NA)
   } else {
     null_df <- vec_init(first, 1)
 
-    .replace <- list(null_df)
+    l[is_empty] <- list(null_df)
   }
 
-  replace_na(.l, .replace)
+  l
 }
+
+# keep_empty_prep <- function(l) {
+#   # Need to catch cases with both length 0 vectors and NULLs
+#   is_empty <- list_sizes(l) == 0
+#
+#   if (!any(is_empty)) {
+#     return(l)
+#   }
+#
+#   l[is_empty] <- list(NULL)
+#
+#   first <- l[!is_empty][[1]]
+#   is_vec <- is_simple_vector(first)
+#
+#   if (is_vec) {
+#     replace <- NA
+#   } else {
+#     null_df <- vec_init(first, 1)
+#
+#     replace <- list(null_df)
+#   }
+#
+#   replace_na(l, replace)
+# }
