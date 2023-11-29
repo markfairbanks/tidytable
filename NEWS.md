@@ -8,6 +8,7 @@
 
 #### Bug fixes
 * `count()` has a more helpful error message when `pick()` is used (#778)
+* `unnest(keep_empty = TRUE)` preserves vectors of length 0 (#783)
 
 #### Functions with notable speed improvements
 * `distinct()`
