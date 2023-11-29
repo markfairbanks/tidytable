@@ -157,27 +157,3 @@ keep_empty_prep <- function(l) {
 
   l
 }
-
-# keep_empty_prep <- function(l) {
-#   # Need to catch cases with both length 0 vectors and NULLs
-#   is_empty <- list_sizes(l) == 0
-#
-#   if (!any(is_empty)) {
-#     return(l)
-#   }
-#
-#   l[is_empty] <- list(NULL)
-#
-#   first <- l[!is_empty][[1]]
-#   is_vec <- is_simple_vector(first)
-#
-#   if (is_vec) {
-#     replace <- NA
-#   } else {
-#     null_df <- vec_init(first, 1)
-#
-#     replace <- list(null_df)
-#   }
-#
-#   replace_na(l, replace)
-# }
