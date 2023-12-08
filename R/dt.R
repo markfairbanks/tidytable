@@ -46,7 +46,7 @@ dt.tidytable <- function(.df, ...) {
 
   dt_expr <- call2("[", quo(.df), !!!dots)
 
-  dt_expr <- call_match(dt_expr, internal_dt)
+  dt_expr <- call_match(dt_expr, data.table::`[.data.table`)
 
   args <- call_args(dt_expr)
 
@@ -127,21 +127,4 @@ prep_j_expr <- function(j) {
     j <- call2(j_call, !!!j_exprs)
   }
   j
-}
-
-# Dummy function with `[.data.table` arguments
-# For use with call_match in `dt()`
-internal_dt <- function(x, i, j, by, keyby, with = TRUE,
-                        nomatch = NA,
-                        mult = "all",
-                        roll = FALSE,
-                        rollends = if (roll=="nearest") c(TRUE,TRUE)
-                        else if (roll>=0) c(FALSE,TRUE)
-                        else c(TRUE,FALSE),
-                        which = FALSE,
-                        .SDcols,
-                        verbose = FALSE,
-                        allow.cartesian = FALSE,
-                        drop = NULL, on = NULL, env = NULL) {
-  abort("For internal call_match only.")
 }
