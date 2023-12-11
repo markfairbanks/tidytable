@@ -26,8 +26,7 @@
 #' )
 #' coalesce(!!!vecs)
 coalesce <- function(..., .ptype = NULL, .size = NULL) {
-  args <- list2(...)
-  args <- vec_cast_common(!!!args, .to = .ptype)
+  args <- vec_cast_common(..., .to = .ptype)
 
   out <- do.call(fcoalesce, args)
 
