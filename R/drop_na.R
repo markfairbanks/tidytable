@@ -29,14 +29,12 @@ drop_na <- function(.df, ...) {
 
 #' @export
 drop_na.tidytable <- function(.df, ...) {
-  dots <- enquos(...)
-
-  if (length(dots) == 0) {
+  if (missing(...)) {
     na.omit(.df)
   } else {
-    drop_cols <- tidyselect_locs(.df, ...)
+    cols <- tidyselect_locs(.df, ...)
 
-    na.omit(.df, cols = drop_cols)
+    na.omit(.df, cols = cols)
   }
 }
 
