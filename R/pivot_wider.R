@@ -128,18 +128,18 @@ pivot_wider.tidytable <- function(.df,
 
   formula <- glue("{lhs} ~ {rhs}")
 
-  dcast_call <- call2(
+  .dcast_df <- select(.df, any_of(c(id_cols, names_from, values_from)))
+
+  out <- eval_tidy(call2(
     "dcast",
-    quo(.df),
+    quo(.dcast_df),
     formula = formula,
     value.var = values_from,
     fun.aggregate = expr(!!values_fn),
     sep = names_sep,
     fill = values_fill,
     .ns = "data.table"
-  )
-
-  out <- eval_tidy(dcast_call)
+  ))
 
   out <- remove_key(out)
 
@@ -163,7 +163,8 @@ pivot_wider.tidytable <- function(.df,
                            .by = any_of(id_cols))
     out <- left_join(out, unused_df, by = id_cols)
   }
-  out
+
+  as_tidytable(out)
 }
 
 #' @export
