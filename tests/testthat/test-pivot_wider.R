@@ -242,6 +242,25 @@ test_that("correctly labels columns when `names_glue` is used, #579", {
 
 # unused -------------------------------------------------------------------
 
+test_that("only uses used columns when `unused_fn = NULL`, #698", {
+  df <- data.frame(
+    a   = LETTERS[1:2],
+    b   = LETTERS[3:4],
+    val = 1:2
+  )
+
+  res <- df %>%
+    pivot_wider(
+      id_cols = character(0),
+      names_from = a,
+      values_from = val
+    )
+
+  expect_named(res, c("A", "B"))
+  expect_equal(res$A, 1)
+  expect_equal(res$B, 2)
+})
+
 test_that("`unused_fn` can summarize unused columns (#990)", {
   df <- tidytable(
     id = c(1, 1, 2, 2),
