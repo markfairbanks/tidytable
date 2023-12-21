@@ -102,13 +102,11 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env()
     call <- call2("across", .cols)
     prep_expr(call, data, {{ .by }}, j, dt_env, is_top_level)
   } else if (is_call(x, c("glue", "str_glue")) && j) {
-    if (is_call(x, "str_glue")) {
-      x[[1]] <- quote(glue::glue)
-    }
     # Needed so the user doesn't need to specify .envir, #276
+    # Also convert to glue_data, #788
     glue_call <- call_match(x, glue::glue)
-    glue_call$.envir <- glue_call$.envir %||% quote(.SD)
-    glue_call
+    args <- call_args(glue_call)
+    call2("glue_data", .x = quote(.SD), !!!args, .ns = "glue")
   } else if (is_data_pronoun(x)) {
     var <- x[[3]]
     if (is_call(x, "[[")) {
