@@ -2,6 +2,7 @@
 
 #### Functionality improvements
 * `distinct()` now works on data frames with list columns (#773)
+* `pivot_wider()`: Gains `unused_fn` argument (#698)
 
 #### Deprecations
 * `verb.()` functions have been removed
