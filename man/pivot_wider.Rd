@@ -15,7 +15,8 @@ pivot_wider(
   names_sort = FALSE,
   names_repair = "unique",
   values_fill = NULL,
-  values_fn = NULL
+  values_fn = NULL,
+  unused_fn = NULL
 )
 }
 \arguments{
@@ -48,6 +49,9 @@ glue specification that uses the \code{names_from} columns (and special \code{.v
 \item{values_fill}{If values are missing, what value should be filled in}
 
 \item{values_fn}{Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.}
+
+\item{unused_fn}{Aggregation function to be applied to unused columns.
+Default is to ignore unused columns.}
 }
 \description{
 "Widens" data, increasing the number of columns and

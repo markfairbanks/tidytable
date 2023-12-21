@@ -22,6 +22,8 @@
 #' @param names_repair Treatment of duplicate names. See `?vctrs::vec_as_names` for options/details.
 #' @param values_fn Should the data be aggregated before casting? If the formula doesn't identify a single observation for each cell, then aggregation defaults to length with a message.
 #' @param values_fill If values are missing, what value should be filled in
+#' @param unused_fn Aggregation function to be applied to unused columns.
+#'   Default is to ignore unused columns.
 #'
 #' @examples
 #' df <- tidytable(
@@ -48,7 +50,8 @@ pivot_wider <- function(.df,
                         names_sort = FALSE,
                         names_repair = "unique",
                         values_fill = NULL,
-                        values_fn = NULL) {
+                        values_fn = NULL,
+                        unused_fn = NULL) {
   UseMethod("pivot_wider")
 }
 
@@ -63,15 +66,18 @@ pivot_wider.tidytable <- function(.df,
                                   names_sort = FALSE,
                                   names_repair = "unique",
                                   values_fill = NULL,
-                                  values_fn = NULL) {
+                                  values_fn = NULL,
+                                  unused_fn = NULL) {
   names_from <- tidyselect_names(.df, {{ names_from }})
   values_from <- tidyselect_names(.df, {{ values_from }})
 
   id_cols <- enquo(id_cols)
-  if (quo_is_null(id_cols)) {
+  id_cols_is_null <- quo_is_null(id_cols)
+  if (id_cols_is_null) {
     id_cols <- setdiff(names(.df), c(names_from, values_from))
   } else {
     id_cols <- tidyselect_names(.df, !!id_cols)
+    unused_cols <- setdiff(names(.df), c(names_from, values_from, id_cols))
   }
 
   values_fn <- quo_squash(enquo(values_fn))
@@ -138,7 +144,7 @@ pivot_wider.tidytable <- function(.df,
   out <- remove_key(out)
 
   if (no_id) {
-    out <- dt_j(out, . := NULL)
+    out <- select(out, -any_of("."))
   }
 
   if (uses_dot_value) {
@@ -149,7 +155,15 @@ pivot_wider.tidytable <- function(.df,
 
   out <- df_name_repair(out, names_repair)
 
-  as_tidytable(out)
+  if (!id_cols_is_null && !is.null(unused_fn)) {
+    unused_fn <- as_function(unused_fn)
+    unused_df <- select(.df, all_of(id_cols), all_of(unused_cols))
+    unused_df <- summarize(unused_df,
+                           across(any_of(unused_cols), unused_fn),
+                           .by = any_of(id_cols))
+    out <- left_join(out, unused_df, by = id_cols)
+  }
+  out
 }
 
 #' @export
@@ -163,14 +177,16 @@ pivot_wider.data.frame <- function(.df,
                                    names_sort = FALSE,
                                    names_repair = "unique",
                                    values_fill = NULL,
-                                   values_fn = NULL) {
+                                   values_fn = NULL,
+                                   unused_fn = NULL) {
   .df <- as_tidytable(.df)
   pivot_wider(
     .df, names_from = {{ names_from }}, values_from = {{ values_from }},
     id_cols = {{ id_cols }}, names_sep = names_sep,
     names_prefix = names_prefix, names_glue = names_glue,
     names_sort = names_sort, names_repair = names_repair,
-    values_fill = values_fill, values_fn = {{ values_fn }}
+    values_fill = values_fill, values_fn = {{ values_fn }},
+    unused_fn = unused_fn
   )
 }
 
