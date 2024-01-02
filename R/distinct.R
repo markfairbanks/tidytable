@@ -30,14 +30,14 @@ distinct <- function(.df, ..., .keep_all = FALSE) {
 
 #' @export
 distinct.tidytable <- function(.df, ..., .keep_all = FALSE) {
-  dots <- enquos(...)
-
-  check_no_across(dots)
-
-  if (length(dots) == 0) {
+  if (missing(...)) {
     out <- vec_unique(.df)
   } else {
-    cols <- tidyselect_locs(.df, ...)
+    dots <- enquos(...)
+
+    check_no_across(dots)
+
+    cols <- tidyselect_locs(.df, !!!dots)
 
     if (.keep_all) {
       locs <- vec_unique_loc(select(.df, any_of(cols)))
