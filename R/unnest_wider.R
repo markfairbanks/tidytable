@@ -58,7 +58,7 @@ unnest_wider.tidytable <- function(.df, col, names_sep = NULL,
 
     out <- set_col_names(out, new_names, out_names)
   } else {
-    out <- df_name_repair(out, "universal")
+    out <- df_name_repair(out, "universal_quiet")
   }
 
   .df <- dt_j(.df, !!.col := NULL)
