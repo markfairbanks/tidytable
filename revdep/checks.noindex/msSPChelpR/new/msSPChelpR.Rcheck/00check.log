@@ -4,7 +4,7 @@
 * R was compiled by
     Apple clang version 14.0.0 (clang-1400.0.29.202)
     GNU Fortran (GCC) 12.2.0
-* running under: macOS Ventura 13.5
+* running under: macOS Ventura 13.6
 * using session charset: UTF-8
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘msSPChelpR/DESCRIPTION’ ... OK
@@ -35,7 +35,18 @@
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking loading without being on the library search path ... OK
-* checking dependencies in R code ... OK
+* checking dependencies in R code ... WARNING
+Missing or unexported objects:
+  ‘tidytable::across.’ ‘tidytable::add_count.’ ‘tidytable::anti_join.’
+  ‘tidytable::arrange.’ ‘tidytable::bind_rows.’ ‘tidytable::case.’
+  ‘tidytable::case_when.’ ‘tidytable::complete.’ ‘tidytable::count.’
+  ‘tidytable::distinct.’ ‘tidytable::filter.’ ‘tidytable::first.’
+  ‘tidytable::full_join.’ ‘tidytable::left_join.’ ‘tidytable::mutate.’
+  ‘tidytable::nest_by.’ ‘tidytable::pivot_longer.’
+  ‘tidytable::pivot_wider.’ ‘tidytable::relocate.’ ‘tidytable::rename.’
+  ‘tidytable::replace_na.’ ‘tidytable::row_number.’
+  ‘tidytable::select.’ ‘tidytable::summarise.’ ‘tidytable::summarize.’
+  ‘tidytable::unite.’
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
@@ -54,7 +65,75 @@
 * checking data for ASCII and uncompressed saves ... OK
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
-* checking examples ... OK
+* checking examples ... ERROR
+Running examples in ‘msSPChelpR-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: calc_futime_tt
+> ### Title: Calculate follow-up time per case until end of follow-up
+> ###   depending on pat_status - tidytable version
+> ### Aliases: calc_futime_tt
+> 
+> ### ** Examples
+> 
+> #load sample data
+> data("us_second_cancer")
+> 
+> #make wide data as this is the required format
+> usdata_wide <- us_second_cancer %>%
++                     msSPChelpR::reshape_wide_tidyr(case_id_var = "fake_id", 
++                     time_id_var = "SEQ_NUM", timevar_max = 10)
+>                     
+> #prep step - calculate p_spc variable
+> usdata_wide <- usdata_wide %>%
++                  dplyr::mutate(p_spc = dplyr::case_when(is.na(t_site_icd.2)   ~ "No SPC",
++                                                        !is.na(t_site_icd.2)   ~ "SPC developed",
++                                                        TRUE ~ NA_character_)) %>%
++                  dplyr::mutate(count_spc = dplyr::case_when(is.na(t_site_icd.2)   ~ 1,
++                                                               TRUE ~ 0))
+>                                                               
+> #prep step - create patient status variable
+> usdata_wide <- usdata_wide %>%
++                   msSPChelpR::pat_status(., fu_end = "2017-12-31", dattype = "seer",
++                                          status_var = "p_status", life_var = "p_alive.1",
++                                          birthdat_var = "datebirth.1", lifedat_var = "datedeath.1")
+# A tibble: 11 × 3
+   p_alive.1 p_status     n
+   <chr>        <dbl> <int>
+ 1 Alive            1 15884
+ 2 Alive            2 17609
+ 3 Alive           97    19
+ 4 Alive           98  2488
+ 5 Dead             1  2544
+ 6 Dead             2  2147
+ 7 Dead             3 18358
+ 8 Dead             4  8822
+ 9 Dead            97     2
+10 Dead            98   182
+11 Dead            NA     5
+# A tibble: 7 × 2
+  p_status     n
+     <dbl> <int>
+1        1 18428
+2        2 19756
+3        3 18358
+4        4  8822
+5       97    21
+6       98  2670
+7       NA     5
+>  
+> #now we can run the function
+> msSPChelpR::calc_futime_tt(usdata_wide, 
++                         futime_var_new = "p_futimeyrs", 
++                         fu_end = "2017-12-31",
++                         dattype = "seer", 
++                         time_unit = "years",
++                         status_var = "p_status",
++                         lifedat_var = "datedeath.1", 
++                         fcdat_var = "t_datediag.1", 
++                         spcdat_var = "t_datediag.2")
+Error: 'mutate.' is not an exported object from 'namespace:tidytable'
+Execution halted
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... OK
   Running ‘testthat.R’
@@ -64,4 +143,4 @@
   ‘introduction.Rmd’ using ‘UTF-8’... OK
 * checking re-building of vignette outputs ... SKIPPED
 * DONE
-Status: OK
+Status: 1 ERROR, 1 WARNING

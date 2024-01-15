@@ -1,0 +1,25 @@
+* using log directory ‘/Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/checks.noindex/bbknnR/new/bbknnR.Rcheck’
+* using R version 4.3.1 (2023-06-16)
+* using platform: aarch64-apple-darwin20 (64-bit)
+* R was compiled by
+    Apple clang version 14.0.0 (clang-1400.0.29.202)
+    GNU Fortran (GCC) 12.2.0
+* running under: macOS Ventura 13.6
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘bbknnR/DESCRIPTION’ ... OK
+* this is package ‘bbknnR’ version ‘1.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘bbknnR’ can be installed ... ERROR
+Installation failed.
+See ‘/Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/checks.noindex/bbknnR/new/bbknnR.Rcheck/00install.out’ for details.
+* DONE
+Status: 1 ERROR

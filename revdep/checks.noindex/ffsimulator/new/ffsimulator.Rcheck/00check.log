@@ -4,7 +4,7 @@
 * R was compiled by
     Apple clang version 14.0.0 (clang-1400.0.29.202)
     GNU Fortran (GCC) 12.2.0
-* running under: macOS Ventura 13.5
+* running under: macOS Ventura 13.6
 * using session charset: UTF-8
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘ffsimulator/DESCRIPTION’ ... OK
@@ -36,7 +36,8 @@
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking loading without being on the library search path ... OK
 * checking startup messages can be suppressed ... OK
-* checking dependencies in R code ... OK
+* checking dependencies in R code ... WARNING
+Missing or unexported object: ‘tidytable::unnest.’
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
@@ -57,8 +58,25 @@
 * checking files in ‘vignettes’ ... OK
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
+* checking tests ... ERROR
   Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  Backtrace:
+      ▆
+   1. └─ffsimulator::ffs_build_schedules(...) at test-ffs_components.R:136:3
+   2.   ├─ffsimulator:::.ff_roundrobin_size(...)
+   3.   └─ffsimulator:::.ff_roundrobin_build(n_teams)
+  
+  [ FAIL 2 | WARN 1 | SKIP 7 | PASS 18 ]
+  Deleting unused snapshots:
+  • ffs_autoplot/points-plot.svg
+  • ffs_autoplot/rank-plot.new.svg
+  • ffs_autoplot/rank-plot.svg
+  • ffs_autoplot/weekly-luck-plot.svg
+  • ffs_autoplot/weekly-points-plot.svg
+  Error: Test failures
+  Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... NONE
@@ -66,4 +84,4 @@
   ‘custom.Rmd’ using ‘UTF-8’... OK
 * checking re-building of vignette outputs ... SKIPPED
 * DONE
-Status: OK
+Status: 1 ERROR, 1 WARNING
