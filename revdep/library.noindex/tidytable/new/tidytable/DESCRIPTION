@@ -28,7 +28,7 @@ Suggests: testthat (>= 2.1.0), bit64, knitr, rmarkdown, crayon
 RemoteType: local
 RemoteUrl: /Users/xmxf129/MyDocs/R/Packages/tidytable
 NeedsCompilation: no
-Packaged: 2024-01-10 14:44:53 UTC; xmxf129
+Packaged: 2024-02-02 15:22:56 UTC; xmxf129
 Author: Mark Fairbanks [aut, cre],
   Abdessabour Moutik [ctb],
   Matt Carlson [ctb],
@@ -38,4 +38,4 @@ Author: Mark Fairbanks [aut, cre],
   Alexander Sevostianov [ctb],
   Koen ter Berg [ctb]
 Maintainer: Mark Fairbanks <mark.t.fairbanks@gmail.com>
-Built: R 4.3.1; ; 2024-01-10 14:44:53 UTC; unix
+Built: R 4.3.1; ; 2024-02-02 15:22:56 UTC; unix

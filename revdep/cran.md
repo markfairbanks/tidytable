@@ -2,7 +2,7 @@
 
 We checked 6 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 2 new problems
+ * We saw 1 new problems
  * We failed to check 2 packages
 
 Issues with CRAN packages are summarised below.
@@ -12,10 +12,6 @@ Issues with CRAN packages are summarised below.
 
 * ffsimulator
   checking tests ...
-  checking dependencies in R code ... WARNING
-
-* msSPChelpR
-  checking examples ... ERROR
   checking dependencies in R code ... WARNING
 
 ### Failed to check

@@ -22,24 +22,24 @@ Type 'q()' to quit R.
 # A tibble: 11 x 3
    p_alive.1 other_var_name     n
    <chr>              <dbl> <int>
- 1 Alive                  1 15884
- 2 Alive                  2 17609
+ 1 Alive                  1 16051
+ 2 Alive                  2 17816
  3 Alive                 97    19
- 4 Alive                 98  2488
- 5 Dead                   1  2544
- 6 Dead                   2  2147
- 7 Dead                   3 18358
- 8 Dead                   4  8822
+ 4 Alive                 98  2523
+ 5 Dead                   1  2566
+ 6 Dead                   2  2086
+ 7 Dead                   3 18169
+ 8 Dead                   4  8676
  9 Dead                  97     2
-10 Dead                  98   182
+10 Dead                  98   147
 11 Dead                  NA     5
 # A tibble: 7 x 2
   other_var_name     n
            <dbl> <int>
-1              1 18428
-2              2 19756
-3              3 18358
-4              4  8822
+1              1 18617
+2              2 19902
+3              3 18169
+4              4  8676
 5             97    21
 6             98  2670
 7             NA     5
@@ -48,4 +48,4 @@ Long dataset had too many cases per patient. Wide dataset is limited to  2  case
 > 
 > proc.time()
    user  system elapsed 
-  1.121   0.074   1.201 
+  1.128   0.094   1.325 

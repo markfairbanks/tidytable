@@ -186,6 +186,30 @@ us_second_cancer %>%
 
 
 cleanEx()
+nameEx("histgroup_iarc")
+### * histgroup_iarc
+
+flush(stderr()); flush(stdout())
+
+### Name: histgroup_iarc
+### Title: Create variable for groups of malignant neoplasms considered to
+###   be histologically 'different' for the purpose of defining multiple
+###   tumors, ICD-O-3
+### Aliases: histgroup_iarc
+
+### ** Examples
+
+#load sample data
+data("us_second_cancer")
+
+us_second_cancer %>% 
+   msSPChelpR::histgroup_iarc(., hist_var = t_hist) %>%
+   dplyr::select(fake_id, t_hist, t_histgroupiarc) 
+                
+
+
+
+cleanEx()
 nameEx("ir_crosstab")
 ### * ir_crosstab
 
@@ -319,7 +343,7 @@ nameEx("pat_status")
 flush(stderr()); flush(stdout())
 
 ### Name: pat_status
-### Title: Calculate patient status at specific end of follow-up -
+### Title: Determine patient status at specific end of follow-up -
 ###   tidyverse version
 ### Aliases: pat_status
 
@@ -364,7 +388,7 @@ nameEx("pat_status_tt")
 flush(stderr()); flush(stdout())
 
 ### Name: pat_status_tt
-### Title: Calculate patient status at specific end of follow-up -
+### Title: Determine patient status at specific end of follow-up -
 ###   tidytable version
 ### Aliases: pat_status_tt
 
@@ -730,7 +754,7 @@ nameEx("vital_status")
 flush(stderr()); flush(stdout())
 
 ### Name: vital_status
-### Title: Calculate vital status at end of follow-up depending on
+### Title: Determine vital status at end of follow-up depending on
 ###   pat_status - tidyverse version
 ### Aliases: vital_status
 
@@ -775,7 +799,7 @@ nameEx("vital_status_tt")
 flush(stderr()); flush(stdout())
 
 ### Name: vital_status_tt
-### Title: Calculate vital status at end of follow-up depending on
+### Title: Determine vital status at end of follow-up depending on
 ###   pat_status - tidytable version
 ### Aliases: vital_status_tt
 

@@ -32,16 +32,8 @@ Type 'q()' to quit R.
 + }
 > 
 > test_check("CooRTweet")
-[ FAIL 0 | WARN 0 | SKIP 7 | PASS 9 ]
-
-══ Skipped tests (7) ═══════════════════════════════════════════════════════════
-• On CRAN (7): 'test-simulated_data.R:73:3', 'test-simulated_data.R:86:3',
-  'test-simulated_data.R:113:3', 'test-simulated_data.R:139:3',
-  'test-simulated_data.R:168:3', 'test-simulated_data.R:193:3',
-  'test-simulated_data.R:218:3'
-
-[ FAIL 0 | WARN 0 | SKIP 7 | PASS 9 ]
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 3 ]
 > 
 > proc.time()
    user  system elapsed 
-  4.651   0.209   5.079 
+ 11.245   0.681  14.643 
