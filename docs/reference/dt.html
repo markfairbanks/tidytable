@@ -19,7 +19,7 @@ Has experimental support for tidy evaluation for custom functions."><meta proper
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.10.2.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.11.0</span>
       </span>
     </div>
 
@@ -77,7 +77,7 @@ Has experimental support for tidy evaluation for custom functions."><meta proper
 
 
 <dt>...</dt>
-<dd><p>Arguments passed to data.table call. See <code><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">?data.table::`[.data.table` </a></code></p></dd>
+<dd><p>Arguments passed to data.table call. See <code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">?data.table::`[.data.table` </a></code></p></dd>
 
 </dl></div>
 
@@ -99,7 +99,7 @@ Has experimental support for tidy evaluation for custom functions."><meta proper
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     2     5 a            4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     1     4 a            2</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Experimental support for tidy evaluation</span></span></span>
+<span class="r-in"><span><span class="co"># Experimental support for tidy evaluation for custom functions</span></span></span>
 <span class="r-in"><span><span class="va">add_one</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">col</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="va">data</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>    <span class="fu">dt</span><span class="op">(</span>, <span class="va">new_col</span> <span class="op">:=</span> <span class="op">{</span><span class="op">{</span> <span class="va">col</span> <span class="op">}</span><span class="op">}</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span></span></span>

@@ -1,4 +1,4 @@
-# tidytable 0.11.0 (in development)
+# tidytable 0.11.0
 
 #### Functionality improvements
 * `distinct()` now works on data frames with list columns (#773)
