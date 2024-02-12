@@ -1,5 +1,8 @@
 # tidytable 0.11.1 (in development)
 
+#### Bug fixes
+* Attempting to rename columns using `group_by()` now leads to an error (#799)
+
 # tidytable 0.11.0
 
 #### Functionality improvements
