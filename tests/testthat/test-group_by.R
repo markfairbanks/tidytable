@@ -18,6 +18,16 @@ test_that("group_by works with .add", {
   expect_true(is_grouped_df(res))
 })
 
+test_that("group_by errors on rename, #799", {
+  df <- tidytable(x = c("a", "a", "b"),
+                  y = 1:3)
+  expect_error(
+    group_by(df, new_x = x)
+  )
+})
+
+##### ungroup() -------------------------------------------
+
 test_that("works on rowwise_tt", {
   df <- rowwise(tidytable(x = 1:3, y = 1:3))
   res <- ungroup(df)
