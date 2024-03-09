@@ -2,6 +2,7 @@
 
 #### Bug fixes
 * Attempting to rename columns using `group_by()` now leads to an error (#799)
+* `pmap()` family works with data frame inputs (#803)
 
 # tidytable 0.11.0
 
