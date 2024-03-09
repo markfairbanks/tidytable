@@ -61,6 +61,10 @@ test_that("pmap works", {
   expect_equal(.df, tidytable(x = 1:3, y = 1:3))
   .vec <- pmap_vec(list(1:3, 1:3), ~ .x + .y)
   expect_equal(.vec, c(2, 4, 6))
+  # Works on data.frame inputs, #803
+  df <- tidytable(a = 1:3, b = 4:6)
+  out <- pmap(df, ~ .x + .y)
+  expect_equal(out, list(5, 7, 9))
 })
 
 
