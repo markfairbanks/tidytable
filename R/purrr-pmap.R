@@ -62,12 +62,11 @@ pmap_vec <- function(.l, .f, ..., .ptype = NULL) {
 }
 
 .args_recycle <- function(args) {
-  lengths <- map_int(args, length)
-  n <- max(lengths)
+  args <- as.list(args)
+  sizes <- list_sizes(args)
+  n <- max(sizes)
 
-  stopifnot(all(lengths == 1L | lengths == n))
-  to_recycle <- lengths == 1L
-  args[to_recycle] <- map(args[to_recycle], function(x) rep.int(x, n))
+  args <- map(args, vec_recycle, n)
 
   args
 }
