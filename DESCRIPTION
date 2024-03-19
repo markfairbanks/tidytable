@@ -24,7 +24,7 @@ Imports:
     rlang (>= 1.1.0),
     tidyselect (>= 1.2.0),
     vctrs (>= 0.6.0)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
 URL: https://markfairbanks.github.io/tidytable/, https://github.com/markfairbanks/tidytable
