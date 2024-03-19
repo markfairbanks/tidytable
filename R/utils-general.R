@@ -1,8 +1,6 @@
 # dt starting with the j position
 dt_j <- function(.df, j, ...) {
-  j <- enquo(j)
-  i <- new_quosure(expr(), get_env(j))
-  dt(.df, !!i, !!j, ...)
+  dt(.df, , {{ j }}, ...)
 }
 
 # Create a call to `[.data.table` (j position)
