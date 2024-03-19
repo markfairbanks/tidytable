@@ -8,7 +8,9 @@
 #' Has experimental support for tidy evaluation for custom functions.
 #'
 #' @param .df A data.frame or data.table
-#' @param ... Arguments passed to data.table call. See ``?data.table::`[.data.table` ``
+#' @param i i position of a data.table call. See `?data.table::data.table`
+#' @param j j position of a data.table call. See `?data.table::data.table`
+#' @param ... Other arguments passed to data.table call. See `?data.table::data.table`
 #'
 #' @examples
 #' df <- tidytable(
@@ -30,13 +32,13 @@
 #' df %>%
 #'   add_one(x)
 #' @export
-dt <- function(.df, ...) {
+dt <- function(.df, i, j, ...) {
   UseMethod("dt")
 }
 
 #' @export
-dt.tidytable <- function(.df, ...) {
-  dots <- enquos(..., .unquote_names = FALSE, .ignore_empty = "none")
+dt.tidytable <- function(.df, i, j, ...) {
+  dots <- enquos(i, j, ..., .unquote_names = FALSE, .ignore_empty = "none")
 
   if (has_length(dots, 0)) return(.df)
 
@@ -94,9 +96,9 @@ dt.tidytable <- function(.df, ...) {
 }
 
 #' @export
-dt.data.frame <- function(.df, ...) {
+dt.data.frame <- function(.df, i, j, ...) {
   .df <- as_tidytable(.df)
-  dt(.df, ...)
+  dt(.df, {{ i }}, {{ j }}, ...)
 }
 
 # Checks if j is a single call to `:=` or let

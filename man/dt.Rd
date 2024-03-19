@@ -4,12 +4,16 @@
 \alias{dt}
 \title{Pipeable data.table call}
 \usage{
-dt(.df, ...)
+dt(.df, i, j, ...)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
 
-\item{...}{Arguments passed to data.table call. See \code{?data.table::`[.data.table` }}
+\item{i}{i position of a data.table call. See \code{?data.table::data.table}}
+
+\item{j}{j position of a data.table call. See \code{?data.table::data.table}}
+
+\item{...}{Other arguments passed to data.table call. See \code{?data.table::data.table}}
 }
 \description{
 Pipeable data.table call.
