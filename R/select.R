@@ -41,12 +41,12 @@ select <- function(.df, ...) {
 
 #' @export
 select.tidytable <- function(.df, ...) {
-  tt_select(.df, ...)
+  .select(.df, ...)
 }
 
 #' @export
 select.grouped_tt <- function(.df, ...) {
-  tt_select(.df, ..., group_cols())
+  .select(.df, ..., group_cols())
 }
 
 #' @export
@@ -55,7 +55,7 @@ select.data.frame <- function(.df, ...) {
   select(.df, ...)
 }
 
-tt_select <- function(.df, ...) {
+.select <- function(.df, ...) {
   locs <- tidyselect_locs(.df, ...)
 
   out <- new_data_frame(.df)[locs]

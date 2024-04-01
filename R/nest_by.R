@@ -65,7 +65,3 @@ nest_by.data.frame <- function(.df, ..., .key = "data", .keep = FALSE) {
   nest_by(.df, ..., .key = .key, .keep = .keep)
 }
 
-tt_nest_by <- function(.df, ..., .key = "data", .keep = FALSE) {
-
-}
-
