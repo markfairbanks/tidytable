@@ -1,6 +1,6 @@
 Package: tidytable
 Title: Tidy Interface to 'data.table'
-Version: 0.11.1
+Version: 0.11.0.9
 Authors@R: c(
   person("Mark", "Fairbanks", role = c("aut", "cre"), email = "mark.t.fairbanks@gmail.com"),
   person("Abdessabour", "Moutik", role = "ctb"),
