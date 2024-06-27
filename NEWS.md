@@ -1,5 +1,8 @@
 # tidytable 0.11.1 (in development)
 
+#### Functionality improvements
+* `pmap()` now preserves names (#809)
+
 #### Bug fixes
 * Attempting to rename columns using `group_by()` now leads to an error (#799)
 * `pmap()` family works with data frame inputs (#803)
