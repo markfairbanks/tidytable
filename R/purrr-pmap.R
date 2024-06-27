@@ -5,11 +5,17 @@
 pmap <- function(.l, .f, ...) {
   .f <- as_function(.f)
   args <- .args_recycle(.l)
-  do.call("mapply", c(
+  out <- do.call("mapply", c(
     FUN = list(quote(.f)),
     args, MoreArgs = quote(list(...)),
     SIMPLIFY = FALSE, USE.NAMES = FALSE
   ))
+  if (obj_is_list(args)) {
+    if (is_named(args[[1]])) {
+      names(out) <- names(args[[1]])
+    }
+  }
+  out
 }
 
 #' @export
