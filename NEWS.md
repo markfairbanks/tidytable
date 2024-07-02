@@ -6,6 +6,7 @@
 #### Bug fixes
 * Attempting to rename columns using `group_by()` now leads to an error (#799)
 * `pmap()` family works with data frame inputs (#803)
+* `filter()` properly handles when comparing to `NA` when `.by` is used (#812)
 
 # tidytable 0.11.0
 
