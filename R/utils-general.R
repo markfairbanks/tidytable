@@ -37,6 +37,8 @@ call2_i_by <- function(.df, i, .by) {
   j <- expr(.I[!!i])
   dt_expr <- call2_j(.df, j, .by)
   dt_expr <- call2("$", dt_expr, expr(V1))
+  # Properly handle NA equality, #812
+  dt_expr <- call2("replace_na", dt_expr, expr(FALSE), .ns = "tidytable")
   dt_expr <- call2_i(.df, dt_expr)
   dt_expr
 }
