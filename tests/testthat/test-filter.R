@@ -152,3 +152,14 @@ test_that("works on a grouped_tt", {
   expect_equal(group_vars(res), "y")
   expect_true(is_grouped_df(res))
 })
+
+test_that("properly handles NA comparisons when `.by` is used, #812", {
+  df <- data.table(x = c(1, NA), y = c("a", "b"))
+
+  res <- df %>%
+    filter(x == 1, .by = y)
+
+  expect_named(res, c("x", "y"))
+  expect_equal(res$x, 1)
+  expect_equal(res$y, "a")
+})
