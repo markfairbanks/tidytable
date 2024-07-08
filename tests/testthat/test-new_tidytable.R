@@ -3,4 +3,5 @@ test_that("can create a tidytable from a list", {
   out <- new_tidytable(l)
   expect_named(out, c("x", "y"))
   expect_true(is_tidytable(out))
+  expect_true(inherits(out, "tbl"))
 })

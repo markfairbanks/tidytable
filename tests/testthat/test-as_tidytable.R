@@ -9,6 +9,7 @@ test_that("works", {
   .df <- as_tidytable(data.frame(x = 1:3, y = 1:3))
   expect_named(.df, c("x", "y"))
   expect_true(is_tidytable(.df))
+  expect_true(inherits(.df, "tbl"))
 
   # data.table
   .dt <- as_tidytable(data.table(x = 1:3, y = 1:3))

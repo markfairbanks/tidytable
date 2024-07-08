@@ -103,7 +103,7 @@ get_dt_env <- function(x, ...) {
 }
 
 tidytable_class <- function() {
-  c("tidytable", "data.table", "data.frame")
+  c("tidytable", "tbl", "data.table", "data.frame")
 }
 
 # radix sort

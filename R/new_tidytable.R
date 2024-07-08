@@ -13,5 +13,5 @@
 #'
 #' new_tidytable(l)
 new_tidytable <- function(x = list()) {
-  new_data_frame(x, class = c("tidytable", "data.table"))
+  new_data_frame(x, class = c("tidytable", "tbl", "data.table"))
 }
