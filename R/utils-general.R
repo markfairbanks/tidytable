@@ -99,7 +99,7 @@ get_dt_env <- function(x, ...) {
     }
   }
 
-  env(dt_env, ...)
+  env(dt_env, ..., .datatable.aware = TRUE)
 }
 
 tidytable_class <- function() {
