@@ -108,7 +108,6 @@ tidytable_class <- function() {
 
 # radix sort
 # Proxy for data.table::fsort since negative values aren't supported, #282
-# Can switch to data.table::fsort once negative doubles are handled
 # See: https://github.com/Rdatatable/data.table/issues/5051
 f_sort <- function(x) {
   if (is.character(x)) {
