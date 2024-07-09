@@ -16,7 +16,7 @@ Description: A tidy interface to 'data.table',
 License: MIT + file LICENSE
 Encoding: UTF-8
 Imports: 
-    data.table (>= 1.14.0),
+    data.table (>= 1.15.0),
     glue (>= 1.4.0),
     lifecycle (>= 1.0.3),
     magrittr (>= 2.0.3),
