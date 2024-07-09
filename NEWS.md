@@ -2,7 +2,8 @@
 
 #### Functionality improvements
 * `pmap()` now preserves names (#809)
-* Package developers no longer need to define `.datatable.aware = TRUE` when using `tidytable in their package (#269)
+* Package developers no longer need to define `.datatable.aware = TRUE` when
+  using `tidytable` in their package (#269)
 
 #### Bug fixes
 * Attempting to rename columns using `group_by()` now leads to an error (#799)
