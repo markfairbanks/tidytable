@@ -4,12 +4,12 @@
 * R was compiled by
     Apple clang version 14.0.0 (clang-1400.0.29.202)
     GNU Fortran (GCC) 12.2.0
-* running under: macOS Sonoma 14.2.1
+* running under: macOS Sonoma 14.5
 * using session charset: UTF-8
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘journalabbr/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘journalabbr’ version ‘0.4.0’
+* this is package ‘journalabbr’ version ‘0.4.3’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK

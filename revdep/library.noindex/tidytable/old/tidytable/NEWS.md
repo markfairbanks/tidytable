@@ -1,3 +1,19 @@
+# tidytable 0.11.0
+
+#### Functionality improvements
+* `distinct()` now works on data frames with list columns (#773)
+* `pivot_wider()`: Gains `unused_fn` argument (#698)
+
+#### Deprecations
+* `verb.()` functions have been removed
+
+#### Bug fixes
+* `count()` has a more helpful error message when `pick()` is used (#778)
+* `unnest(keep_empty = TRUE)` preserves vectors of length 0 (#783)
+
+#### Functions with notable speed improvements
+* `distinct()`
+
 # tidytable 0.10.2
 
 * Patch release to pass CRAN checks for future R release

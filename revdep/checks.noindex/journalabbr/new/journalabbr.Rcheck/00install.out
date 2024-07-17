@@ -4,7 +4,10 @@
 ** R
 ** inst
 ** byte-compile and prepare package for lazy loading
-Error: object ‘enframe.’ is not exported by 'namespace:tidytable'
-Execution halted
-ERROR: lazy loading failed for package ‘journalabbr’
-* removing ‘/Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/checks.noindex/journalabbr/new/journalabbr.Rcheck/journalabbr’
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (journalabbr)

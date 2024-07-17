@@ -1,0 +1,49 @@
+Package: glue
+Title: Interpreted String Literals
+Version: 1.7.0.9000
+Authors@R: c(
+    person("Jim", "Hester", role = "aut",
+           comment = c(ORCID = "0000-0002-2739-7082")),
+    person("Jennifer", "Bryan", , "jenny@posit.co", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-6983-2759")),
+    person("Posit Software, PBC", role = c("cph", "fnd"))
+  )
+Description: An implementation of interpreted string literals, inspired by
+    Python's Literal String Interpolation
+    <https://www.python.org/dev/peps/pep-0498/> and Docstrings
+    <https://www.python.org/dev/peps/pep-0257/> and Julia's Triple-Quoted
+    String Literals
+    <https://docs.julialang.org/en/v1.3/manual/strings/#Triple-Quoted-String-Literals-1>.
+License: MIT + file LICENSE
+URL: https://glue.tidyverse.org/, https://github.com/tidyverse/glue
+BugReports: https://github.com/tidyverse/glue/issues
+Depends: R (>= 3.6)
+Imports: methods
+Suggests: crayon, DBI (>= 1.2.0), dplyr, knitr, magrittr, rlang,
+        rmarkdown, RSQLite, testthat (>= 3.2.0), vctrs (>= 0.3.0),
+        waldo (>= 0.3.0), withr
+VignetteBuilder: knitr
+ByteCompile: true
+Config/Needs/website: bench, forcats, ggbeeswarm, ggplot2, R.utils,
+        rprintf, tidyr, tidyverse/tidytemplate
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: glue
+RemoteUsername: tidyverse
+RemoteRef: HEAD
+RemoteSha: 5e9c87829542e47236467154a3416744f7f2459e
+GithubRepo: glue
+GithubUsername: tidyverse
+GithubRef: HEAD
+GithubSHA1: 5e9c87829542e47236467154a3416744f7f2459e
+NeedsCompilation: yes
+Packaged: 2024-07-17 18:21:47 UTC; xmxf129
+Author: Jim Hester [aut] (<https://orcid.org/0000-0002-2739-7082>),
+  Jennifer Bryan [aut, cre] (<https://orcid.org/0000-0002-6983-2759>),
+  Posit Software, PBC [cph, fnd]
+Maintainer: Jennifer Bryan <jenny@posit.co>
+Built: R 4.3.1; aarch64-apple-darwin20; 2024-07-17 18:21:47 UTC; unix

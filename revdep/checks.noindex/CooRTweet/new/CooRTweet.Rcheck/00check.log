@@ -4,12 +4,12 @@
 * R was compiled by
     Apple clang version 14.0.0 (clang-1400.0.29.202)
     GNU Fortran (GCC) 12.2.0
-* running under: macOS Sonoma 14.2.1
+* running under: macOS Sonoma 14.5
 * using session charset: UTF-8
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘CooRTweet/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘CooRTweet’ version ‘2.0.0’
+* this is package ‘CooRTweet’ version ‘2.0.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -61,7 +61,7 @@
   Running ‘testthat.R’
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
-* checking running R code from vignettes ... NONE
+* checking running R code from vignettes ... OK
   ‘vignette.Rmd’ using ‘UTF-8’... OK
 * checking re-building of vignette outputs ... SKIPPED
 * DONE

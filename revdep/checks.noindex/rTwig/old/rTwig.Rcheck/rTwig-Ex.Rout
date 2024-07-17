@@ -1,0 +1,402 @@
+
+R version 4.3.1 (2023-06-16) -- "Beagle Scouts"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: aarch64-apple-darwin20 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "rTwig"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('rTwig')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("box_dimension")
+> ### * box_dimension
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: box_dimension
+> ### Title: Box Dimension
+> ### Aliases: box_dimension
+> 
+> ### ** Examples
+> 
+> ## Calculate Box Dimension
+> file <- system.file("extdata/cloud.txt", package = "rTwig")
+> cloud <- read.table(file, header = FALSE)
+> output <- box_dimension(cloud, plot = "ALL")
+> output
+[[1]]
+# A tidytable: 9 × 2
+  log.box.size log.voxels
+         <dbl>      <dbl>
+1        0           1.10
+2        0.693       1.95
+3        1.39        3.09
+4        2.08        4.11
+5        2.77        5.18
+6        3.47        6.14
+7        4.16        7.16
+8        4.85        8.23
+9        5.55        9.27
+
+[[2]]
+# A tidytable: 1 × 4
+  intercept slope r.squared adj.r.squared
+      <dbl> <dbl>     <dbl>         <dbl>
+1      1.02  1.48      1.00          1.00
+
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("correct_radii")
+> ### * correct_radii
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: correct_radii
+> ### Title: Correct Radii
+> ### Aliases: correct_radii
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("export_mat")
+> ### * export_mat
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: export_mat
+> ### Title: Export MAT
+> ### Aliases: export_mat
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("export_mesh")
+> ### * export_mesh
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: export_mesh
+> ### Title: Export Mesh
+> ### Aliases: export_mesh
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("import_qsm")
+> ### * import_qsm
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: import_qsm
+> ### Title: Import QSM
+> ### Aliases: import_qsm
+> 
+> ### ** Examples
+> 
+> 
+> ## Read a TreeQSM MATLAB file in the 2.3.x - 2.4.x format
+> file <- system.file("extdata/QSM.mat", package = "rTwig")
+> qsm <- import_qsm(file, version = "2.x.x")
+Importing TreeQSM .mat
+> summary(qsm)
+              Length Class      Mode
+cylinder      17     data.frame list
+branch        10     data.frame list
+treedata      91     -none-     list
+rundata       45     data.frame list
+pmdistance    21     -none-     list
+triangulation 12     -none-     list
+> 
+> ## Read a TreeQSM MATLAB file in the 2.0 format
+> file <- system.file("extdata/QSM_2.mat", package = "rTwig")
+> qsm <- import_qsm(file, version = "2.0")
+Importing TreeQSM .mat
+> names(qsm)
+[1] "cylinder" "treedata"
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plot_qsm")
+> ### * plot_qsm
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plot_qsm
+> ### Title: Plot QSM
+> ### Aliases: plot_qsm
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plot_stand")
+> ### * plot_stand
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plot_stand
+> ### Title: Plot Stand
+> ### Aliases: plot_stand
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("qsm_summary")
+> ### * qsm_summary
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: qsm_summary
+> ### Title: QSM Summary
+> ### Aliases: qsm_summary
+> 
+> ### ** Examples
+> 
+> 
+> ## TreeQSM Processing Chain
+> file <- system.file("extdata/QSM.mat", package = "rTwig")
+> qsm <- import_qsm(file)
+Importing TreeQSM .mat
+> cylinder <- qsm$cylinder
+> cylinder <- update_cylinders(cylinder)
+Updating Cylinder Ordering
+Calculating Growth Length
+Calculating Reverse Branch Order
+> qsm_summary(cylinder)
+Creating QSM Summary
+[[1]]
+# A tidytable: 6 × 3
+  BranchOrder Tot.vol.L Tot.sa.m2
+        <int>     <dbl>     <dbl>
+1           0   10.8      0.644  
+2           1    5.80     0.827  
+3           2    3.86     0.732  
+4           3    1.06     0.237  
+5           4    0.622    0.0785 
+6           5    0.0346   0.00693
+
+[[2]]
+# A tidytable: 1 × 8
+  QSM.dbh.cm QSM.ht.m Stem.vol.L Branch.vol.L Tot.vol.L Stem.sa.m2 Branch.sa.m2
+       <dbl>    <dbl>      <dbl>        <dbl>     <dbl>      <dbl>        <dbl>
+1       7.18     3.69       10.8         11.4      22.2      0.644         1.88
+# ℹ 1 more variable: Tot.sa.m2 <dbl>
+
+> 
+> # TreeQSM Triangulation
+> file <- system.file("extdata/QSM.mat", package = "rTwig")
+> qsm <- import_qsm(file)
+Importing TreeQSM .mat
+> cylinder <- qsm$cylinder
+> cylinder <- update_cylinders(cylinder)
+Updating Cylinder Ordering
+Calculating Growth Length
+Calculating Reverse Branch Order
+> triangulation <- qsm$triangulation
+> qsm_summary(cylinder = cylinder, triangulation = triangulation)
+Creating QSM Summary
+[[1]]
+# A tidytable: 6 × 3
+  BranchOrder Tot.vol.L Tot.sa.m2
+        <int>     <dbl>     <dbl>
+1           0   29.0      0.645  
+2           1    5.80     0.827  
+3           2    3.86     0.732  
+4           3    1.06     0.237  
+5           4    0.622    0.0785 
+6           5    0.0346   0.00693
+
+[[2]]
+# A tidytable: 1 × 8
+  QSM.dbh.cm QSM.ht.m Stem.vol.L Branch.vol.L Tot.vol.L Stem.sa.m2 Branch.sa.m2
+       <dbl>    <dbl>      <dbl>        <dbl>     <dbl>      <dbl>        <dbl>
+1       7.18     3.69       29.0         11.4      40.4      0.645         1.88
+# ℹ 1 more variable: Tot.sa.m2 <dbl>
+
+> 
+> ## SimpleForest Processing Chain
+> file <- system.file("extdata/QSM.csv", package = "rTwig")
+> cylinder <- read.csv(file)
+> cylinder <- update_cylinders(cylinder)
+> qsm_summary(cylinder)
+Creating QSM Summary
+[[1]]
+# A tidytable: 5 × 3
+  BranchOrder Tot.vol.L Tot.sa.m2
+        <int>     <dbl>     <dbl>
+1           0   12.9       0.768 
+2           1    8.70      1.07  
+3           2    6.46      0.871 
+4           3    1.82      0.298 
+5           4    0.0723    0.0148
+
+[[2]]
+# A tidytable: 1 × 8
+  QSM.dbh.cm QSM.ht.m Stem.vol.L Branch.vol.L Tot.vol.L Stem.sa.m2 Branch.sa.m2
+       <dbl>    <dbl>      <dbl>        <dbl>     <dbl>      <dbl>        <dbl>
+1       7.39     3.67       12.9         17.1      30.0      0.768         2.26
+# ℹ 1 more variable: Tot.sa.m2 <dbl>
+
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("smooth_qsm")
+> ### * smooth_qsm
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: smooth_qsm
+> ### Title: Smooth QSM
+> ### Aliases: smooth_qsm
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("update_cylinders")
+> ### * update_cylinders
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: update_cylinders
+> ### Title: Update Cylinders
+> ### Aliases: update_cylinders
+> 
+> ### ** Examples
+> 
+> 
+> ## TreeQSM Processing Chain
+> file <- system.file("extdata/QSM.mat", package = "rTwig")
+> qsm <- import_qsm(file)
+Importing TreeQSM .mat
+> cylinder <- qsm$cylinder
+> cylinder <- update_cylinders(cylinder)
+Updating Cylinder Ordering
+Calculating Growth Length
+Calculating Reverse Branch Order
+> str(cylinder)
+Classes ‘tidytable’, ‘data.table’ and 'data.frame':	1136 obs. of  26 variables:
+ $ radius            : num  0.0465 0.0454 0.0442 0.0437 0.0429 ...
+ $ length            : num  0.09392 0.07216 0.06654 0.00938 0.06795 ...
+ $ start.x           : num  0.768 0.768 0.768 0.769 0.769 ...
+ $ start.y           : num  -16.4 -16.4 -16.4 -16.3 -16.3 ...
+ $ start.z           : num  254 254 254 254 254 ...
+ $ axis.x            : num  0.00995 -0.0111 0.01364 0.01571 0.01449 ...
+ $ axis.y            : num  0.0912 0.0391 0.0367 0.0271 0.0267 ...
+ $ axis.z            : num  0.996 0.999 0.999 1 1 ...
+ $ end.x             : num  0.769 0.768 0.769 0.769 0.77 ...
+ $ end.y             : num  -16.4 -16.4 -16.3 -16.3 -16.3 ...
+ $ end.z             : num  254 254 254 254 254 ...
+ $ mad               : num  0.00072 0.000538 0.000523 0.000335 0.000438 ...
+ $ SurfCov           : num  0.875 1 1 1 1 1 1 1 1 1 ...
+ $ UnmodRadius       : num  0.0465 0.0454 0.0442 0.0437 0.0429 ...
+ $ OldRadius         : num  0.0465 0.0454 0.0442 0.0437 0.0429 ...
+ $ GrowthLength      : num  32.8 32.7 32.6 32.6 32.6 ...
+ $ branch            : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ parent            : num  0 1 2 3 4 5 6 7 8 9 ...
+ $ extension         : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ added             : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ BranchOrder       : int  0 0 0 0 0 0 0 0 0 0 ...
+ $ reverseBranchOrder: num  20 20 20 20 20 20 20 20 20 20 ...
+ $ PositionInBranch  : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ segment           : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ parentSegment     : int  0 0 0 0 0 0 0 0 0 0 ...
+ $ totalChildren     : int  1 1 1 1 1 1 1 1 1 1 ...
+ - attr(*, ".internal.selfref")=<externalptr> 
+> 
+> ## SimpleForest Processing Chain
+> file <- system.file("extdata/QSM.csv", package = "rTwig")
+> cylinder <- read.csv(file)
+> cylinder <- update_cylinders(cylinder)
+> str(cylinder)
+Classes ‘tidytable’, ‘data.table’ and 'data.frame':	1149 obs. of  24 variables:
+ $ ID                  : int  0 1 2 3 4 5 6 7 8 9 ...
+ $ parentID            : int  -1 0 1 2 3 4 5 6 7 8 ...
+ $ startX              : num  0.761 0.759 0.771 0.768 0.765 ...
+ $ startY              : num  -16.4 -16.4 -16.4 -16.3 -16.4 ...
+ $ startZ              : num  254 254 254 254 254 ...
+ $ endX                : num  0.759 0.771 0.768 0.765 0.769 ...
+ $ endY                : num  -16.4 -16.4 -16.3 -16.4 -16.4 ...
+ $ endZ                : num  254 254 254 254 254 ...
+ $ axisX               : num  -0.0286 0.2148 -0.0473 -0.0498 0.0678 ...
+ $ axisY               : num  -0.078889 0.163918 0.03933 -0.011114 -0.000265 ...
+ $ axisZ               : num  0.996 0.963 0.998 0.999 0.998 ...
+ $ radius              : num  0.0472 0.0479 0.0469 0.0467 0.0453 ...
+ $ length              : num  0.0497 0.0529 0.0535 0.0525 0.0528 ...
+ $ growthLength        : num  31.4 31.4 31.3 31.3 31.2 ...
+ $ averagePointDistance: num  0.00589 0.00378 0.00205 0.00246 0.00251 ...
+ $ segmentID           : int  0 0 0 0 0 0 0 0 0 0 ...
+ $ parentSegmentID     : int  -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 ...
+ $ branchOrder         : int  0 0 0 0 0 0 0 0 0 0 ...
+ $ reverseBranchOrder  : int  18 18 18 18 18 18 18 18 18 18 ...
+ $ branchID            : int  0 0 0 0 0 0 0 0 0 0 ...
+ $ branchNew           : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ positionInBranch    : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ UnmodRadius         : num  0.0472 0.0479 0.0469 0.0467 0.0453 ...
+ $ totalChildren       : int  1 1 1 1 1 1 1 1 1 1 ...
+ - attr(*, ".internal.selfref")=<externalptr> 
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  1.639 0.271 2.062 0.001 0.002 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

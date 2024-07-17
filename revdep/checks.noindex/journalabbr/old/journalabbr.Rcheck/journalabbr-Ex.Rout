@@ -78,7 +78,7 @@ NULL
 > ### ** Examples
 > 
 > csvpath <- system.file("extdata", "myabbr.csv", package = "journalabbr", mustWork = TRUE)
-> abbrtable_user <- add_abbrtable(file = csvpath, header = FALSE, sep = ";")
+> abbrtable_user <- add_abbrtable(file = csvpath, header = FALSE, sep = ",")
 > colnames(abbrtable_user)
 [1] "journal_lower" "journal_abbr"  "originFile"   
 > 
@@ -151,7 +151,7 @@ xu2014ordinal
 > ### ** Examples
 > 
 > csvpath <- system.file("extdata", "myabbr.csv", package = "journalabbr", mustWork = TRUE)
-> abbrtable_user <- add_abbrtable(file = csvpath, header = FALSE, sep = ";")
+> abbrtable_user <- add_abbrtable(file = csvpath, header = FALSE, sep = ",")
 > colnames(abbrtable_user)
 [1] "journal_lower" "journal_abbr"  "originFile"   
 > 
@@ -207,7 +207,7 @@ xu2014ordinal
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.238 0.059 1.325 0 0 
+Time elapsed:  1.455 0.071 1.589 0 0 
 > grDevices::dev.off()
 null device 
           1 

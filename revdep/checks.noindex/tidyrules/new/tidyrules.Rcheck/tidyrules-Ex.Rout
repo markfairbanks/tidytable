@@ -1,0 +1,1609 @@
+
+R version 4.3.1 (2023-06-16) -- "Beagle Scouts"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: aarch64-apple-darwin20 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "tidyrules"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('tidyrules')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("addBackquotes")
+> ### * addBackquotes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: addBackquotes
+> ### Title: Add backquotes
+> ### Aliases: addBackquotes
+> ### Keywords: internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("as_rulelist.data.frame")
+> ### * as_rulelist.data.frame
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as_rulelist.data.frame
+> ### Title: as_rulelist method for a data.frame
+> ### Aliases: as_rulelist.data.frame
+> 
+> ### ** Examples
+> 
+> rules_df = tidytable::tidytable(rule_nbr = 1:2,
++                                 LHS      = c("var_1 > 50", "var_2 < 30"),
++                                 RHS      = c(2, 1)
++                                 )
+> as_rulelist(rules_df, estimation_type = "regression")
+---- Rulelist --------------------------------
+▶ Keys: NULL
+▶ Number of rules: 2
+▶ Model Type: NULL
+▶ Estimation type: regression
+▶ Is validation data set: FALSE
+
+
+  rule_nbr LHS          RHS
+     <int> <chr>      <dbl>
+1        1 var_1 > 50     2
+2        2 var_2 < 30     1
+----------------------------------------------> 
+> 
+> 
+> cleanEx()
+> nameEx("as_ruleset")
+> ### * as_ruleset
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as_ruleset
+> ### Title: Get a ruleset from a rulelist
+> ### Aliases: as_ruleset
+> 
+> ### ** Examples
+> 
+> model_class_party = partykit::ctree(species ~ .,
++                                     data = palmerpenguins::penguins
++                                     )
+> as_ruleset(tidy(model_class_party))
+---- Ruleset -------------------------------
+▶ Keys: NULL
+▶ Number of rules: 6
+▶ Model type: constparty
+▶ Estimation type: classification
+▶ Is validation data set: FALSE
+
+
+  rule_nbr LHS                   RHS   support confidence  lift terminal_node_id
+     <int> <chr>                 <fct>   <dbl>      <dbl> <dbl> <chr>           
+1        1 ( island %in% c('Bis… Gent…     123      1      2.77 6               
+2        2 ( island %in% c('Bis… Adel…      38      1      2.26 4               
+3        3 ( island %in% c('Dre… Adel…      99      0.990  2.24 9               
+4        4 ( island %in% c('Dre… Chin…      65      0.954  4.83 11              
+5        5 ( island %in% c('Bis… Adel…       7      0.857  1.94 5               
+6        6 ( island %in% c('Dre… Adel…      12      0.583  1.32 10              
+--------------------------------------------> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("augment.rulelist")
+> ### * augment.rulelist
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: augment.rulelist
+> ### Title: Augment a rulelist
+> ### Aliases: augment.rulelist
+> 
+> ### ** Examples
+> 
+> # Examples for augment ------------------------------------------------------
+> library("magrittr")
+> 
+> # C5 ----
+> att = modeldata::attrition
+> set.seed(100)
+> train_index = sample(c(TRUE, FALSE), nrow(att), replace = TRUE)
+> 
+> model_c5 = C50::C5.0(Attrition ~., data = att[train_index, ], rules = TRUE)
+> tidy_c5  =
++   model_c5 %>%
++   tidy() %>%
++   set_validation_data(att[!train_index, ], "Attrition")
+> 
+> tidy_c5
+---- Rulelist --------------------------------
+▶ Keys: trial_nbr
+▶ Number of distinct keys: 1
+▶ Number of rules: 23
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: TRUE
+
+
+   rule_nbr trial_nbr LHS                         RHS   support confidence  lift
+      <int>     <int> <chr>                       <fct>   <int>      <dbl> <dbl>
+ 1        1         1 ( Age > 30 ) & ( DistanceF… No         69      0.986   1.2
+ 2        2         1 ( DistanceFromHome <= 12 )… No        149      0.960   1.1
+ 3        3         1 ( Department == 'Research_… No        211      0.953   1.1
+ 4        4         1 ( Age > 30 ) & ( DistanceF… No        249      0.948   1.1
+ 5        5         1 ( JobInvolvement %in% c('M… No        353      0.944   1.1
+ 6        6         1 ( OverTime == 'No' ) & ( S… No        263      0.943   1.1
+ 7        7         1 ( Education %in% c('Master… No        101      0.942   1.1
+ 8        8         1 ( OverTime == 'No' ) & ( R… No         95      0.938   1.1
+ 9        9         1 ( BusinessTravel %in% c('N… No        352      0.915   1.1
+10       10         1 ( Education %in% c('Below_… No        265      0.910   1.1
+# ℹ 13 more rows
+----------------------------------------------> 
+> augment(tidy_c5) %>%
++   tidytable::unnest(augmented_stats, names_sep = "__") %>%
++   tidytable::glimpse()
+Rows: 23
+Columns: 10
+$ rule_nbr                    <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,…
+$ trial_nbr                   <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ LHS                         <chr> "( Age > 30 ) & ( DistanceFromHome <= 12 )…
+$ RHS                         <fct> No, No, No, No, No, No, No, No, No, No, Ye…
+$ support                     <int> 69, 149, 211, 249, 353, 263, 101, 95, 352,…
+$ confidence                  <dbl> 0.9859155, 0.9603000, 0.9531000, 0.9482000…
+$ lift                        <dbl> 1.2, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.…
+$ augmented_stats__support    <dbl> 77, 122, 245, 282, 376, 305, 84, 111, 390,…
+$ augmented_stats__confidence <dbl> 0.9220779, 0.9098361, 0.9346939, 0.9113475…
+$ augmented_stats__lift       <dbl> 9.3667749, 1.0091812, 1.0367533, 1.0108577…
+> 
+> # augment with custom aggregator
+> augment(tidy_c5,output_counts = list(table(Attrition))) %>%
++   tidytable::unnest(augmented_stats, names_sep = "__") %>%
++   tidytable::glimpse()
+Rows: 23
+Columns: 11
+$ rule_nbr                       <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, …
+$ trial_nbr                      <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ LHS                            <chr> "( Age > 30 ) & ( DistanceFromHome <= 1…
+$ RHS                            <fct> No, No, No, No, No, No, No, No, No, No,…
+$ support                        <int> 69, 149, 211, 249, 353, 263, 101, 95, 3…
+$ confidence                     <dbl> 0.9859155, 0.9603000, 0.9531000, 0.9482…
+$ lift                           <dbl> 1.2, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1,…
+$ augmented_stats__support       <dbl> 77, 122, 245, 282, 376, 305, 84, 111, 3…
+$ augmented_stats__confidence    <dbl> 0.9220779, 0.9098361, 0.9346939, 0.9113…
+$ augmented_stats__output_counts <list> <<table[2]>>, <<table[2]>>, <<table[2]…
+$ augmented_stats__lift          <dbl> 9.3667749, 1.0091812, 1.0367533, 1.0108…
+> 
+> # rpart ----
+> set.seed(100)
+> train_index = sample(c(TRUE, FALSE), nrow(iris), replace = TRUE)
+> 
+> model_class_rpart = rpart::rpart(Species ~ ., data = iris[train_index, ])
+> tidy_class_rpart  = tidy(model_class_rpart) %>%
++   set_validation_data(iris[!train_index, ], "Species")
+> tidy_class_rpart
+---- Rulelist --------------------------------
+▶ Keys: NULL
+▶ Number of rules: 3
+▶ Model type: rpart
+▶ Estimation type: classification
+▶ Is validation data set: TRUE
+
+
+  rule_nbr LHS                                    RHS   support confidence  lift
+     <int> <chr>                                  <fct>   <int>      <dbl> <dbl>
+1        1 ( Petal.Width < 1.7 ) & ( Petal.Lengt… vers…      28      0.967  2.53
+2        2 ( Petal.Width < 1.7 ) & ( Petal.Lengt… seto…      21      0.957  3.46
+3        3 ( Petal.Width >= 1.7 )                 virg…      27      0.931  2.72
+----------------------------------------------> 
+> model_regr_rpart = rpart::rpart(Sepal.Length ~ ., data = iris[train_index, ])
+> tidy_regr_rpart  = tidy(model_regr_rpart) %>%
++   set_validation_data(iris[!train_index, ], "Sepal.Length")
+> tidy_regr_rpart
+---- Rulelist --------------------------------
+▶ Keys: NULL
+▶ Number of rules: 5
+▶ Model type: rpart
+▶ Estimation type: regression
+▶ Is validation data set: TRUE
+
+
+  rule_nbr LHS                                                       RHS support
+     <int> <chr>                                                   <dbl>   <int>
+1        1 ( Petal.Length >= 4.25 ) & ( Petal.Length < 5.85 ) & (…  6.15      23
+2        2 ( Petal.Length < 4.25 ) & ( Petal.Length < 1.65 )        4.99      17
+3        3 ( Petal.Length < 4.25 ) & ( Petal.Length >= 1.65 )       5.6       16
+4        4 ( Petal.Length >= 4.25 ) & ( Petal.Length < 5.85 ) & (…  6.53      12
+5        5 ( Petal.Length >= 4.25 ) & ( Petal.Length >= 5.85 )      7.34       8
+----------------------------------------------> 
+> # augment (classification case)
+> augment(tidy_class_rpart) %>%
++   tidytable::unnest(augmented_stats, names_sep = "__") %>%
++   tidytable::glimpse()
+Rows: 3
+Columns: 9
+$ rule_nbr                    <int> 1, 2, 3
+$ LHS                         <chr> "( Petal.Width < 1.7 ) & ( Petal.Length >=…
+$ RHS                         <fct> versicolor, setosa, virginica
+$ support                     <int> 28, 21, 27
+$ confidence                  <dbl> 0.9666667, 0.9565217, 0.9310345
+$ lift                        <dbl> 2.533333, 3.461698, 2.721485
+$ augmented_stats__support    <dbl> 24, 29, 21
+$ augmented_stats__confidence <dbl> 0.8333333, 1.0000000, 0.9523810
+$ augmented_stats__lift       <dbl> 2.936508, 2.551724, 3.356009
+> 
+> # augment (regression case)
+> augment(tidy_regr_rpart) %>%
++   tidytable::unnest(augmented_stats, names_sep = "__") %>%
++   tidytable::glimpse()
+Rows: 5
+Columns: 7
+$ rule_nbr                 <int> 1, 2, 3, 4, 5
+$ LHS                      <chr> "( Petal.Length >= 4.25 ) & ( Petal.Length < …
+$ RHS                      <dbl> 6.147826, 4.988235, 5.600000, 6.533333, 7.337…
+$ support                  <int> 23, 17, 16, 12, 8
+$ augmented_stats__support <dbl> 20, 27, 13, 9, 5
+$ augmented_stats__IQR     <dbl> 0.60, 0.45, 0.60, 0.50, 0.40
+$ augmented_stats__RMSE    <dbl> 0.5085832, 0.3548713, 0.4497863, 0.3294215, 0…
+> 
+> # party ----
+> pen = palmerpenguins::penguins %>%
++   tidytable::drop_na(bill_length_mm)
+> set.seed(100)
+> train_index = sample(c(TRUE, FALSE), nrow(pen), replace = TRUE)
+> 
+> model_class_party = partykit::ctree(species ~ ., data = pen[train_index, ])
+> tidy_class_party  = tidy(model_class_party) %>%
++   set_validation_data(pen[!train_index, ], "species")
+> tidy_class_party
+---- Rulelist --------------------------------
+▶ Keys: NULL
+▶ Number of rules: 5
+▶ Model type: constparty
+▶ Estimation type: classification
+▶ Is validation data set: TRUE
+
+
+  rule_nbr LHS                   RHS   support confidence  lift terminal_node_id
+     <int> <chr>                 <fct>   <dbl>      <dbl> <dbl> <chr>           
+1        1 ( flipper_length_mm … Gent…      50      1      3.02 8               
+2        2 ( flipper_length_mm … Adel…      73      0.986  2.08 3               
+3        3 ( flipper_length_mm … Chin…      17      0.941  4.86 5               
+4        4 ( flipper_length_mm … Chin…       7      0.714  3.69 9               
+5        5 ( flipper_length_mm … Chin…      13      0.692  3.57 6               
+----------------------------------------------> 
+> model_regr_party =
++   partykit::ctree(bill_length_mm ~ ., data = pen[train_index, ])
+> tidy_regr_party  = tidy(model_regr_party) %>%
++   set_validation_data(pen[!train_index, ], "bill_length_mm")
+> tidy_regr_party
+---- Rulelist --------------------------------
+▶ Keys: NULL
+▶ Number of rules: 5
+▶ Model type: constparty
+▶ Estimation type: regression
+▶ Is validation data set: TRUE
+
+
+  rule_nbr LHS                          RHS support   IQR  RMSE terminal_node_id
+     <int> <chr>                      <dbl>   <dbl> <dbl> <dbl> <chr>           
+1        1 ( species %in% c('Chinstr…  51.6      13  2     1.78 9               
+2        2 ( species %in% c('Adelie'…  37.3      41  2.80  1.83 3               
+3        3 ( species %in% c('Adelie'…  40.4      35  2.55  2.08 4               
+4        4 ( species %in% c('Chinstr…  49.0      29  2     2.12 8               
+5        5 ( species %in% c('Chinstr…  45.9      42  2.88  2.50 6               
+----------------------------------------------> 
+> # augment (classification case)
+> augment(tidy_class_party) %>%
++   tidytable::unnest(augmented_stats, names_sep = "__") %>%
++   tidytable::glimpse()
+Rows: 5
+Columns: 10
+$ rule_nbr                    <int> 1, 2, 3, 4, 5
+$ LHS                         <chr> "( flipper_length_mm > 205 ) & ( bill_dept…
+$ RHS                         <fct> Gentoo, Adelie, Chinstrap, Chinstrap, Chin…
+$ support                     <dbl> 50, 73, 17, 7, 13
+$ confidence                  <dbl> 1.0000000, 0.9863014, 0.9411765, 0.7142857…
+$ lift                        <dbl> 3.018868, 2.076424, 4.857685, 3.686636, 3.…
+$ terminal_node_id            <chr> "8", "3", "5", "9", "6"
+$ augmented_stats__support    <dbl> 69, 66, 19, 4, 24
+$ augmented_stats__confidence <dbl> 1.0000000, 1.0000000, 0.8947368, 0.2500000…
+$ augmented_stats__lift       <dbl> 2.6000000, 2.4266667, 2.1712281, 0.6066667…
+> 
+> # augment (regression case)
+> augment(tidy_regr_party) %>%
++   tidytable::unnest(augmented_stats, names_sep = "__") %>%
++   tidytable::glimpse()
+Rows: 5
+Columns: 10
+$ rule_nbr                 <int> 1, 2, 3, 4, 5
+$ LHS                      <chr> "( species %in% c('Chinstrap', 'Gentoo') ) & …
+$ RHS                      <dbl> 51.59231, 37.29512, 40.37143, 49.04828, 45.87…
+$ support                  <dbl> 13, 41, 35, 29, 42
+$ IQR                      <dbl> 2.000, 2.800, 2.550, 2.000, 2.875
+$ RMSE                     <dbl> 1.778704, 1.827694, 2.080875, 2.124183, 2.499…
+$ terminal_node_id         <chr> "9", "3", "4", "8", "6"
+$ augmented_stats__support <dbl> 16, 32, 39, 39, 51
+$ augmented_stats__IQR     <dbl> 1.525, 2.900, 2.750, 3.100, 1.500
+$ augmented_stats__RMSE    <dbl> 1.336547, 2.232729, 2.420163, 3.048512, 2.499…
+> 
+> # cubist ----
+> att         = modeldata::attrition
+> set.seed(100)
+> train_index = sample(c(TRUE, FALSE), nrow(att), replace = TRUE)
+> cols_att    = setdiff(colnames(att), c("MonthlyIncome", "Attrition"))
+> 
+> model_cubist = Cubist::cubist(x = att[train_index, cols_att],
++                               y = att[train_index, "MonthlyIncome"]
++                               )
+> 
+> tidy_cubist = tidy(model_cubist) %>%
++   set_validation_data(att[!train_index, ], "MonthlyIncome")
+> tidy_cubist
+---- Rulelist --------------------------------
+▶ Keys: committee
+▶ Number of distinct keys: 1
+▶ Number of rules: 4
+▶ Model type: cubist
+▶ Estimation type: regression
+▶ Is validation data set: TRUE
+
+
+  rule_nbr committee LHS                  RHS   support   mean   min   max error
+     <int>     <int> <chr>                <chr>   <int>  <dbl> <dbl> <dbl> <dbl>
+1        1         1 ( JobLevel > 1 ) & … (455…      33  4436.  2272  5301  392.
+2        2         1 ( JobLevel <= 1 )    (110…     251  2789   1081  4968  563.
+3        3         1 ( JobRole %in% c('M… (299…      89 16714  11031 19999  761 
+4        4         1 ( JobLevel > 1 ) & … (-14…     334  6843.  2306 13973 1036.
+----------------------------------------------> 
+> augment(tidy_cubist) %>%
++   tidytable::unnest(augmented_stats, names_sep = "__") %>%
++   tidytable::glimpse()
+Rows: 4
+Columns: 12
+$ rule_nbr                 <int> 1, 2, 3, 4
+$ committee                <int> 1, 1, 1, 1
+$ LHS                      <chr> "( JobLevel > 1 ) & ( TotalWorkingYears <= 5 …
+$ RHS                      <chr> "(4559)", "(1108) + (874 * JobLevel) + (48 * …
+$ support                  <int> 33, 251, 89, 334
+$ mean                     <dbl> 4435.6, 2789.0, 16714.0, 6842.9
+$ min                      <dbl> 2272, 1081, 11031, 2306
+$ max                      <dbl> 5301, 4968, 19999, 13973
+$ error                    <dbl> 391.7, 562.7, 761.0, 1035.9
+$ augmented_stats__support <dbl> 24, 292, 93, 354
+$ augmented_stats__IQR     <dbl> 439.25, 906.00, 4950.00, 3685.50
+$ augmented_stats__RMSE    <dbl> 283.9729, 754.9632, 865.8137, 1446.1057
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:magrittr’
+
+> nameEx("calculate.rulelist")
+> ### * calculate.rulelist
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: calculate.rulelist
+> ### Title: 'calculate' metrics for a rulelist
+> ### Aliases: calculate.rulelist
+> 
+> ### ** Examples
+> 
+> library("magrittr")
+> model_c5  = C50::C5.0(Attrition ~., data = modeldata::attrition, rules = TRUE)
+> tidy_c5   = tidy(model_c5) %>%
++             set_validation_data(modeldata::attrition, "Attrition") %>%
++             set_keys(NULL)
+> 
+> # calculate default metrics (classification)
+> calculate(tidy_c5)
+# A tidytable: 24 × 4
+   rule_nbr cumulative_coverage cumulative_overlap cumulative_accuracy
+      <int>               <dbl>              <dbl>               <dbl>
+ 1        1                  16                  0               1    
+ 2        2                 537                  0               0.944
+ 3        3                 545                  5               0.945
+ 4        4                 656                 89               0.941
+ 5        5                 664                 89               0.941
+ 6        6                 667                 94               0.942
+ 7        7                 681                 94               0.941
+ 8        8                 687                 94               0.942
+ 9        9                 699                 95               0.941
+10       10                1425                633               0.900
+# ℹ 14 more rows
+> 
+> model_rpart = rpart::rpart(MonthlyIncome ~., data = modeldata::attrition)
+> tidy_rpart  =
++   tidy(model_rpart) %>%
++   set_validation_data(modeldata::attrition, "MonthlyIncome") %>%
++   set_keys(NULL)
+> 
+> # calculate default metrics (regression)
+> calculate(tidy_rpart)
+# A tidytable: 6 × 4
+  rule_nbr cumulative_coverage cumulative_overlap cumulative_RMSE
+     <int>               <dbl>              <dbl>           <dbl>
+1        1                 543                  0            748.
+2        2                1077                  0           1125.
+3        3                1255                  0           1153.
+4        4                1397                  0           1198.
+5        5                1437                  0           1191.
+6        6                1470                  0           1182.
+> 
+> # calculate default metrics with a custom metric
+> #' custom function to get cumulative MAE
+> library("tidytable")
+
+Attaching package: ‘tidytable’
+
+The following object is masked from ‘package:magrittr’:
+
+    extract
+
+The following objects are masked from ‘package:stats’:
+
+    dt, filter, lag
+
+The following object is masked from ‘package:base’:
+
+    %in%
+
+> get_cumulative_MAE = function(rulelist, new_data, y_name, weight){
++ 
++   priority_df =
++     rulelist %>%
++     select(rule_nbr) %>%
++     mutate(priority = 1:nrow(rulelist)) %>%
++     select(rule_nbr, priority)
++ 
++   pred_df =
++     predict(rulelist, new_data) %>%
++     left_join(priority_df, by = "rule_nbr") %>%
++     mutate(weight = local(weight)) %>%
++     select(rule_nbr, row_nbr, weight, priority)
++ 
++   new_data2 =
++     new_data %>%
++     mutate(row_nbr = 1:n()) %>%
++     select(all_of(c("row_nbr", y_name)))
++ 
++   rmse_till_rule = function(rn){
++ 
++     if (is.character(rulelist$RHS)) {
++       inter_df =
++         pred_df %>%
++         tidytable::filter(priority <= rn) %>%
++         left_join(mutate(new_data, row_nbr = 1:n()), by = "row_nbr") %>%
++         left_join(select(rulelist, rule_nbr, RHS), by = "rule_nbr") %>%
++         nest(.by = c("RHS", "rule_nbr", "row_nbr", "priority", "weight")) %>%
++         mutate(RHS = purrr::map2_dbl(RHS,
++                                      data,
++                                      ~ eval(parse(text = .x), envir = .y)
++                                      )
++                ) %>%
++         unnest(data)
++     } else {
++ 
++       inter_df =
++         pred_df %>%
++         tidytable::filter(priority <= rn) %>%
++         left_join(new_data2, by = "row_nbr") %>%
++         left_join(select(rulelist, rule_nbr, RHS), by = "rule_nbr")
++     }
++ 
++     inter_df %>%
++       summarise(rmse = MetricsWeighted::mae(RHS,
++                                              .data[[y_name]],
++                                              weight,
++                                              na.rm = TRUE
++                                              )
++                 ) %>%
++       `[[`("rmse")
++   }
++ 
++   res = purrr::map_dbl(1:nrow(rulelist), rmse_till_rule)
++   return(res)
++ }
+> 
+> calculate(tidy_rpart,
++           metrics_to_exclude = NULL,
++           list("cumulative_mae" = get_cumulative_MAE)
++           )
+# A tidytable: 6 × 5
+  rule_nbr cumulative_coverage cumulative_overlap cumulative_RMSE cumulative_mae
+     <int>               <dbl>              <dbl>           <dbl>          <dbl>
+1        1                 543                  0            748.           577.
+2        2                1077                  0           1125.           812.
+3        3                1255                  0           1153.           860.
+4        4                1397                  0           1198.           907.
+5        5                1437                  0           1191.           905.
+6        6                1470                  0           1182.           896.
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:tidytable’, ‘package:magrittr’
+
+> nameEx("plot.rulelist")
+> ### * plot.rulelist
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plot.rulelist
+> ### Title: Plot method for rulelist
+> ### Aliases: plot.rulelist
+> 
+> ### ** Examples
+> 
+> library("magrittr")
+> att = modeldata::attrition
+> tidy_c5 =
++   C50::C5.0(Attrition ~., data = att, rules = TRUE) %>%
++   tidy() %>%
++   set_validation_data(att, "Attrition") %>%
++   set_keys(NULL)
+> 
+> plot(tidy_c5)
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:magrittr’
+
+> nameEx("positionSpaceOutsideSinglequotes")
+> ### * positionSpaceOutsideSinglequotes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: positionSpaceOutsideSinglequotes
+> ### Title: Position of space outside single quotes
+> ### Aliases: positionSpaceOutsideSinglequotes
+> ### Keywords: internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("predict.rulelist")
+> ### * predict.rulelist
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: predict.rulelist
+> ### Title: 'predict' method for a rulelist
+> ### Aliases: predict.rulelist
+> 
+> ### ** Examples
+> 
+> model_c5 = C50::C5.0(species ~.,
++                      data = palmerpenguins::penguins,
++                      trials = 5,
++                      rules = TRUE
++                      )
+> tidy_c5 = tidy(model_c5)
+> tidy_c5
+---- Rulelist --------------------------------
+▶ Keys: trial_nbr
+▶ Number of distinct keys: 5
+▶ Number of rules: 26
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: FALSE
+
+
+   rule_nbr trial_nbr LHS                         RHS   support confidence  lift
+      <int>     <int> <chr>                       <fct>   <int>      <dbl> <dbl>
+ 1        1         1 ( island == 'Biscoe' ) & (… Gent…     122      0.992   2.8
+ 2        2         1 ( bill_length_mm <= 43.3 )… Adel…      68      0.986   2.2
+ 3        3         1 ( island == 'Dream' ) & ( … Chin…      48      0.98    5  
+ 4        4         1 ( bill_length_mm > 42.3 ) … Chin…      34      0.944   4.8
+ 5        5         1 ( flipper_length_mm <= 206… Adel…     213      0.698   1.6
+ 6        1         2 ( bill_length_mm <= 40.8 )  Adel…      86      0.989   3  
+ 7        2         2 ( island == 'Torgersen' )   Adel…      39      0.976   2.9
+ 8        3         2 ( island == 'Biscoe' ) & (… Adel…      32      0.971   2.9
+ 9        4         2 ( island == 'Dream' ) & ( … Chin…      87      0.910   3.9
+10        5         2 ( island == 'Biscoe' )      Gent…     183      0.816   1.9
+# ℹ 16 more rows
+----------------------------------------------> 
+> output_1 = predict(tidy_c5, palmerpenguins::penguins)
+> output_1 # different rules per 'keys' (`trial_nbr` here)
+# A tidytable: 1,720 × 3
+   row_nbr trial_nbr rule_nbr
+     <int>     <int>    <int>
+ 1       1         1        2
+ 2       1         2        1
+ 3       1         3        1
+ 4       1         4        1
+ 5       1         5        2
+ 6       2         1        5
+ 7       2         2        1
+ 8       2         3        1
+ 9       2         4        1
+10       2         5        2
+# ℹ 1,710 more rows
+> 
+> output_2 = predict(tidy_c5, palmerpenguins::penguins, multiple = TRUE)
+> output_2 # `rule_nbr` is a list-column of integer vectors
+# A tidytable: 1,720 × 3
+   row_nbr trial_nbr rule_nbr 
+     <int>     <int> <list>   
+ 1       1         1 <int [2]>
+ 2       1         2 <int [2]>
+ 3       1         3 <int [2]>
+ 4       1         4 <int [2]>
+ 5       1         5 <int [1]>
+ 6       2         1 <int [1]>
+ 7       2         2 <int [2]>
+ 8       2         3 <int [2]>
+ 9       2         4 <int [2]>
+10       2         5 <int [1]>
+# ℹ 1,710 more rows
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("predict.ruleset")
+> ### * predict.ruleset
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: predict.ruleset
+> ### Title: 'predict' method for a ruleset
+> ### Aliases: predict.ruleset
+> 
+> ### ** Examples
+> 
+> model_c5 = C50::C5.0(species ~.,
++                      data = palmerpenguins::penguins,
++                      trials = 5,
++                      rules = TRUE
++                      )
+> tidy_c5_ruleset = as_ruleset(tidy(model_c5))
+> tidy_c5_ruleset
+---- Ruleset -------------------------------
+▶ Keys: trial_nbr
+▶ Number of distinct keys: 5
+▶ Number of rules: 26
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: FALSE
+
+
+   rule_nbr trial_nbr LHS                         RHS   support confidence  lift
+      <int>     <int> <chr>                       <fct>   <int>      <dbl> <dbl>
+ 1        1         1 ( island == 'Biscoe' ) & (… Gent…     122      0.992   2.8
+ 2        2         1 ( bill_length_mm <= 43.3 )… Adel…      68      0.986   2.2
+ 3        3         1 ( island == 'Dream' ) & ( … Chin…      48      0.98    5  
+ 4        4         1 ( bill_length_mm > 42.3 ) … Chin…      34      0.944   4.8
+ 5        5         1 ( flipper_length_mm <= 206… Adel…     213      0.698   1.6
+ 6        1         2 ( bill_length_mm <= 40.8 )  Adel…      86      0.989   3  
+ 7        2         2 ( island == 'Torgersen' )   Adel…      39      0.976   2.9
+ 8        3         2 ( island == 'Biscoe' ) & (… Adel…      32      0.971   2.9
+ 9        4         2 ( island == 'Dream' ) & ( … Chin…      87      0.910   3.9
+10        5         2 ( island == 'Biscoe' )      Gent…     183      0.816   1.9
+# ℹ 16 more rows
+--------------------------------------------> 
+> predict(tidy_c5_ruleset, palmerpenguins::penguins)
+# A tidytable: 1,720 × 3
+   row_nbr trial_nbr rule_nbr 
+     <int>     <int> <list>   
+ 1       1         1 <int [2]>
+ 2       1         2 <int [2]>
+ 3       1         3 <int [2]>
+ 4       1         4 <int [2]>
+ 5       1         5 <int [1]>
+ 6       2         1 <int [1]>
+ 7       2         2 <int [2]>
+ 8       2         3 <int [2]>
+ 9       2         4 <int [2]>
+10       2         5 <int [1]>
+# ℹ 1,710 more rows
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("print.ruleset")
+> ### * print.ruleset
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: print.ruleset
+> ### Title: Print method for ruleset class
+> ### Aliases: print.ruleset
+> 
+> ### ** Examples
+> 
+> model_class_party = partykit::ctree(species ~ .,
++                                     data = palmerpenguins::penguins
++                                     )
+> as_ruleset(tidy(model_class_party))
+---- Ruleset -------------------------------
+▶ Keys: NULL
+▶ Number of rules: 6
+▶ Model type: constparty
+▶ Estimation type: classification
+▶ Is validation data set: FALSE
+
+
+  rule_nbr LHS                   RHS   support confidence  lift terminal_node_id
+     <int> <chr>                 <fct>   <dbl>      <dbl> <dbl> <chr>           
+1        1 ( island %in% c('Bis… Gent…     123      1      2.77 6               
+2        2 ( island %in% c('Bis… Adel…      38      1      2.26 4               
+3        3 ( island %in% c('Dre… Adel…      99      0.990  2.24 9               
+4        4 ( island %in% c('Dre… Chin…      65      0.954  4.83 11              
+5        5 ( island %in% c('Bis… Adel…       7      0.857  1.94 5               
+6        6 ( island %in% c('Dre… Adel…      12      0.583  1.32 10              
+--------------------------------------------> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("prune.rulelist")
+> ### * prune.rulelist
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: prune.rulelist
+> ### Title: 'prune' rules of a rulelist
+> ### Aliases: prune.rulelist
+> 
+> ### ** Examples
+> 
+> library("magrittr")
+> model_c5  = C50::C5.0(Attrition ~., data = modeldata::attrition, rules = TRUE)
+> tidy_c5   = tidy(model_c5) %>%
++             set_validation_data(modeldata::attrition, "Attrition") %>%
++             set_keys(NULL)
+> 
+> #' prune with defaults
+> prune_obj = prune(tidy_c5)
+> #' note that all other metrics are visible in the print output
+> prune_obj
+── Prune Suggestion ────────────────────────────────────────────────────────────
+
+✔ Keep first 10 out of 24
+
+ℹ Metrics after 10 rules: 
+# A tidytable: 6 × 3
+  rule_nbr metric                           value
+     <int> <chr>                            <dbl>
+1       10 cumulative_coverage           1425    
+2       10 cumulative_overlap             633    
+3       10 cumulative_accuracy              0.900
+4       10 relative__cumulative_coverage    0.971
+5       10 relative__cumulative_overlap     0.872
+6       10 relative__cumulative_accuracy    0.900
+
+ℹ Run `plot(x)` for details; `x$pruned` to get pruned rulelist
+────────────────────────────────────────────────────────────────────────────────
+> plot(prune_obj)
+> prune_obj$pruned
+---- Rulelist --------------------------------
+▶ Keys: NULL
+▶ Number of rules: 10
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: TRUE
+
+
+   rule_nbr trial_nbr LHS                         RHS   support confidence  lift
+      <int>     <int> <chr>                       <fct>   <int>      <dbl> <dbl>
+ 1        1         1 ( JobLevel <= 1 ) & ( Mont… Yes        16      0.944   5.9
+ 2        2         1 ( EnvironmentSatisfaction … No        521      0.941   1.1
+ 3        3         1 ( DailyRate <= 722 ) & ( J… Yes        13      0.933   5.8
+ 4        4         1 ( JobRole == 'Research_Sci… No        195      0.924   1.1
+ 5        5         1 ( EnvironmentSatisfaction … Yes         9      0.909   5.6
+ 6        6         1 ( EnvironmentSatisfaction … Yes         9      0.909   5.6
+ 7        7         1 ( JobRole %in% c('Laborato… Yes        14      0.875   5.4
+ 8        8         1 ( JobRole == 'Laboratory_T… Yes         6      0.875   5.4
+ 9        9         1 ( Department == 'Sales' ) … Yes        13      0.867   5.4
+10       10         1 ( TotalWorkingYears > 2 )   No       1347      0.864   1  
+----------------------------------------------> 
+> #' prune with a different stop_expr_string threshold
+> prune_obj = prune(tidy_c5,
++                   stop_expr_string = "relative__cumulative_coverage >= 0.2"
++                   )
+> prune_obj #' as expected, has smaller then 10 rules as compared to default args
+── Prune Suggestion ────────────────────────────────────────────────────────────
+
+✔ Keep first 2 out of 24
+
+ℹ Metrics after 2 rules: 
+# A tidytable: 6 × 3
+  rule_nbr metric                          value
+     <int> <chr>                           <dbl>
+1        2 cumulative_coverage           537    
+2        2 cumulative_overlap              0    
+3        2 cumulative_accuracy             0.944
+4        2 relative__cumulative_coverage   0.366
+5        2 relative__cumulative_overlap    0    
+6        2 relative__cumulative_accuracy   0.944
+
+ℹ Run `plot(x)` for details; `x$pruned` to get pruned rulelist
+────────────────────────────────────────────────────────────────────────────────
+> plot(prune_obj)
+> prune_obj$pruned
+---- Rulelist --------------------------------
+▶ Keys: NULL
+▶ Number of rules: 2
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: TRUE
+
+
+  rule_nbr trial_nbr LHS                          RHS   support confidence  lift
+     <int>     <int> <chr>                        <fct>   <int>      <dbl> <dbl>
+1        1         1 ( JobLevel <= 1 ) & ( Month… Yes        16      0.944   5.9
+2        2         1 ( EnvironmentSatisfaction %… No        521      0.941   1.1
+----------------------------------------------> 
+> #' prune with a different stop_expr_string metric
+> st = "relative__cumulative_overlap <= 0.7 & relative__cumulative_overlap > 0"
+> prune_obj = prune(tidy_c5, stop_expr_string = st)
+> prune_obj #' as expected, has smaller then 10 rules as compared to default args
+── Prune Suggestion ────────────────────────────────────────────────────────────
+
+✔ Keep first 3 out of 24
+
+ℹ Metrics after 3 rules: 
+# A tidytable: 6 × 3
+  rule_nbr metric                            value
+     <int> <chr>                             <dbl>
+1        3 cumulative_coverage           545      
+2        3 cumulative_overlap              5      
+3        3 cumulative_accuracy             0.945  
+4        3 relative__cumulative_coverage   0.371  
+5        3 relative__cumulative_overlap    0.00689
+6        3 relative__cumulative_accuracy   0.945  
+
+ℹ Run `plot(x)` for details; `x$pruned` to get pruned rulelist
+────────────────────────────────────────────────────────────────────────────────
+> plot(prune_obj)
+> prune_obj$pruned
+---- Rulelist --------------------------------
+▶ Keys: NULL
+▶ Number of rules: 3
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: TRUE
+
+
+  rule_nbr trial_nbr LHS                          RHS   support confidence  lift
+     <int>     <int> <chr>                        <fct>   <int>      <dbl> <dbl>
+1        1         1 ( JobLevel <= 1 ) & ( Month… Yes        16      0.944   5.9
+2        2         1 ( EnvironmentSatisfaction %… No        521      0.941   1.1
+3        3         1 ( DailyRate <= 722 ) & ( Jo… Yes        13      0.933   5.8
+----------------------------------------------> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:magrittr’
+
+> nameEx("removeEmptyLines")
+> ### * removeEmptyLines
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: removeEmptyLines
+> ### Title: Remove empty lines
+> ### Aliases: removeEmptyLines
+> ### Keywords: internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("reorder.rulelist")
+> ### * reorder.rulelist
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: reorder.rulelist
+> ### Title: Reorder the rules/rows of a rulelist
+> ### Aliases: reorder.rulelist
+> 
+> ### ** Examples
+> 
+> library("magrittr")
+> att = modeldata::attrition
+> tidy_c5 =
++   C50::C5.0(Attrition ~., data = att, rules = TRUE) %>%
++   tidy() %>%
++   set_validation_data(att, "Attrition") %>%
++   set_keys(NULL) %>%
++   head(5)
+> 
+> # with defaults
+> reorder(tidy_c5)
+---- Rulelist --------------------------------
+▶ Keys: NULL
+▶ Number of rules: 5
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: TRUE
+
+
+  rule_nbr trial_nbr LHS      RHS   support confidence  lift cumulative_coverage
+     <int>     <int> <chr>    <fct>   <int>      <dbl> <dbl>               <dbl>
+1        3         1 ( Daily… Yes        13      0.933   5.8                  13
+2        4         1 ( JobRo… No        195      0.924   1.1                 208
+3        2         1 ( Envir… No        521      0.941   1.1                 645
+4        1         1 ( JobLe… Yes        16      0.944   5.9                 656
+5        5         1 ( Envir… Yes         9      0.909   5.6                 664
+----------------------------------------------> 
+> # use 'cumulative_overlap' to break ties (if any)
+> reorder(tidy_c5, metric = c("cumulative_coverage", "cumulative_overlap"))
+---- Rulelist --------------------------------
+▶ Keys: NULL
+▶ Number of rules: 5
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: TRUE
+
+
+  rule_nbr trial_nbr LHS      RHS   support confidence  lift cumulative_coverage
+     <int>     <int> <chr>    <fct>   <int>      <dbl> <dbl>               <dbl>
+1        3         1 ( Daily… Yes        13      0.933   5.8                  13
+2        4         1 ( JobRo… No        195      0.924   1.1                 208
+3        2         1 ( Envir… No        521      0.941   1.1                 645
+4        1         1 ( JobLe… Yes        16      0.944   5.9                 656
+5        5         1 ( Envir… Yes         9      0.909   5.6                 664
+# ℹ 1 more variable: cumulative_overlap <dbl>
+----------------------------------------------> 
+> # reorder after 2 rules
+> reorder(tidy_c5, init = 2)
+---- Rulelist --------------------------------
+▶ Keys: NULL
+▶ Number of rules: 5
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: TRUE
+
+
+  rule_nbr trial_nbr LHS      RHS   support confidence  lift cumulative_coverage
+     <int>     <int> <chr>    <fct>   <int>      <dbl> <dbl>               <dbl>
+1        1         1 ( JobLe… Yes        16      0.944   5.9                  16
+2        2         1 ( Envir… No        521      0.941   1.1                 537
+3        4         1 ( JobRo… No        195      0.924   1.1                 648
+4        3         1 ( Daily… Yes        13      0.933   5.8                 656
+5        5         1 ( Envir… Yes         9      0.909   5.6                 664
+----------------------------------------------> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:magrittr’
+
+> nameEx("set_keys")
+> ### * set_keys
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: set_keys
+> ### Title: Set keys for a rulelist
+> ### Aliases: set_keys
+> 
+> ### ** Examples
+> 
+> model_c5 = C50::C5.0(Attrition ~., data = modeldata::attrition, rules = TRUE)
+> tidy_c5 = tidy(model_c5)
+> tidy_c5 # keys are: "trial_nbr"
+---- Rulelist --------------------------------
+▶ Keys: trial_nbr
+▶ Number of distinct keys: 1
+▶ Number of rules: 24
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: FALSE
+
+
+   rule_nbr trial_nbr LHS                         RHS   support confidence  lift
+      <int>     <int> <chr>                       <fct>   <int>      <dbl> <dbl>
+ 1        1         1 ( JobLevel <= 1 ) & ( Mont… Yes        16      0.944   5.9
+ 2        2         1 ( EnvironmentSatisfaction … No        521      0.941   1.1
+ 3        3         1 ( DailyRate <= 722 ) & ( J… Yes        13      0.933   5.8
+ 4        4         1 ( JobRole == 'Research_Sci… No        195      0.924   1.1
+ 5        5         1 ( EnvironmentSatisfaction … Yes         9      0.909   5.6
+ 6        6         1 ( EnvironmentSatisfaction … Yes         9      0.909   5.6
+ 7        7         1 ( JobRole %in% c('Laborato… Yes        14      0.875   5.4
+ 8        8         1 ( JobRole == 'Laboratory_T… Yes         6      0.875   5.4
+ 9        9         1 ( Department == 'Sales' ) … Yes        13      0.867   5.4
+10       10         1 ( TotalWorkingYears > 2 )   No       1347      0.864   1  
+# ℹ 14 more rows
+----------------------------------------------> 
+> tidy_c5[["rule_nbr"]] = 1:nrow(tidy_c5)
+> new_tidy_c5 = set_keys(tidy_c5, NULL) # remove all keys
+> new_tidy_c5
+---- Rulelist --------------------------------
+▶ Keys: NULL
+▶ Number of rules: 24
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: FALSE
+
+
+   rule_nbr trial_nbr LHS                         RHS   support confidence  lift
+      <int>     <int> <chr>                       <fct>   <int>      <dbl> <dbl>
+ 1        1         1 ( JobLevel <= 1 ) & ( Mont… Yes        16      0.944   5.9
+ 2        2         1 ( EnvironmentSatisfaction … No        521      0.941   1.1
+ 3        3         1 ( DailyRate <= 722 ) & ( J… Yes        13      0.933   5.8
+ 4        4         1 ( JobRole == 'Research_Sci… No        195      0.924   1.1
+ 5        5         1 ( EnvironmentSatisfaction … Yes         9      0.909   5.6
+ 6        6         1 ( EnvironmentSatisfaction … Yes         9      0.909   5.6
+ 7        7         1 ( JobRole %in% c('Laborato… Yes        14      0.875   5.4
+ 8        8         1 ( JobRole == 'Laboratory_T… Yes         6      0.875   5.4
+ 9        9         1 ( Department == 'Sales' ) … Yes        13      0.867   5.4
+10       10         1 ( TotalWorkingYears > 2 )   No       1347      0.864   1  
+# ℹ 14 more rows
+----------------------------------------------> 
+> new_2_tidy_c5 = set_keys(new_tidy_c5, "trial_nbr") # set "trial_nbr" as key
+> new_2_tidy_c5
+---- Rulelist --------------------------------
+▶ Keys: trial_nbr
+▶ Number of distinct keys: 1
+▶ Number of rules: 24
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: FALSE
+
+
+   rule_nbr trial_nbr LHS                         RHS   support confidence  lift
+      <int>     <int> <chr>                       <fct>   <int>      <dbl> <dbl>
+ 1        1         1 ( JobLevel <= 1 ) & ( Mont… Yes        16      0.944   5.9
+ 2        2         1 ( EnvironmentSatisfaction … No        521      0.941   1.1
+ 3        3         1 ( DailyRate <= 722 ) & ( J… Yes        13      0.933   5.8
+ 4        4         1 ( JobRole == 'Research_Sci… No        195      0.924   1.1
+ 5        5         1 ( EnvironmentSatisfaction … Yes         9      0.909   5.6
+ 6        6         1 ( EnvironmentSatisfaction … Yes         9      0.909   5.6
+ 7        7         1 ( JobRole %in% c('Laborato… Yes        14      0.875   5.4
+ 8        8         1 ( JobRole == 'Laboratory_T… Yes         6      0.875   5.4
+ 9        9         1 ( Department == 'Sales' ) … Yes        13      0.867   5.4
+10       10         1 ( TotalWorkingYears > 2 )   No       1347      0.864   1  
+# ℹ 14 more rows
+----------------------------------------------> 
+> # Note that `tidy_c5` and `new_tidy_c5` are not altered.
+> tidy_c5
+---- Rulelist --------------------------------
+▶ Keys: trial_nbr
+▶ Number of distinct keys: 1
+▶ Number of rules: 24
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: FALSE
+
+
+   rule_nbr trial_nbr LHS                         RHS   support confidence  lift
+      <int>     <int> <chr>                       <fct>   <int>      <dbl> <dbl>
+ 1        1         1 ( JobLevel <= 1 ) & ( Mont… Yes        16      0.944   5.9
+ 2        2         1 ( EnvironmentSatisfaction … No        521      0.941   1.1
+ 3        3         1 ( DailyRate <= 722 ) & ( J… Yes        13      0.933   5.8
+ 4        4         1 ( JobRole == 'Research_Sci… No        195      0.924   1.1
+ 5        5         1 ( EnvironmentSatisfaction … Yes         9      0.909   5.6
+ 6        6         1 ( EnvironmentSatisfaction … Yes         9      0.909   5.6
+ 7        7         1 ( JobRole %in% c('Laborato… Yes        14      0.875   5.4
+ 8        8         1 ( JobRole == 'Laboratory_T… Yes         6      0.875   5.4
+ 9        9         1 ( Department == 'Sales' ) … Yes        13      0.867   5.4
+10       10         1 ( TotalWorkingYears > 2 )   No       1347      0.864   1  
+# ℹ 14 more rows
+----------------------------------------------> new_tidy_c5
+---- Rulelist --------------------------------
+▶ Keys: NULL
+▶ Number of rules: 24
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: FALSE
+
+
+   rule_nbr trial_nbr LHS                         RHS   support confidence  lift
+      <int>     <int> <chr>                       <fct>   <int>      <dbl> <dbl>
+ 1        1         1 ( JobLevel <= 1 ) & ( Mont… Yes        16      0.944   5.9
+ 2        2         1 ( EnvironmentSatisfaction … No        521      0.941   1.1
+ 3        3         1 ( DailyRate <= 722 ) & ( J… Yes        13      0.933   5.8
+ 4        4         1 ( JobRole == 'Research_Sci… No        195      0.924   1.1
+ 5        5         1 ( EnvironmentSatisfaction … Yes         9      0.909   5.6
+ 6        6         1 ( EnvironmentSatisfaction … Yes         9      0.909   5.6
+ 7        7         1 ( JobRole %in% c('Laborato… Yes        14      0.875   5.4
+ 8        8         1 ( JobRole == 'Laboratory_T… Yes         6      0.875   5.4
+ 9        9         1 ( Department == 'Sales' ) … Yes        13      0.867   5.4
+10       10         1 ( TotalWorkingYears > 2 )   No       1347      0.864   1  
+# ℹ 14 more rows
+----------------------------------------------> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("set_validation_data")
+> ### * set_validation_data
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: set_validation_data
+> ### Title: Add 'validation_data' to a rulelist
+> ### Aliases: set_validation_data
+> 
+> ### ** Examples
+> 
+> att = modeldata::attrition
+> set.seed(100)
+> index = sample(c(TRUE, FALSE), nrow(att), replace = TRUE)
+> model_c5 = C50::C5.0(Attrition ~., data = att[index, ], rules = TRUE)
+> 
+> tidy_c5 = tidy(model_c5)
+> tidy_c5
+---- Rulelist --------------------------------
+▶ Keys: trial_nbr
+▶ Number of distinct keys: 1
+▶ Number of rules: 23
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: FALSE
+
+
+   rule_nbr trial_nbr LHS                         RHS   support confidence  lift
+      <int>     <int> <chr>                       <fct>   <int>      <dbl> <dbl>
+ 1        1         1 ( Age > 30 ) & ( DistanceF… No         69      0.986   1.2
+ 2        2         1 ( DistanceFromHome <= 12 )… No        149      0.960   1.1
+ 3        3         1 ( Department == 'Research_… No        211      0.953   1.1
+ 4        4         1 ( Age > 30 ) & ( DistanceF… No        249      0.948   1.1
+ 5        5         1 ( JobInvolvement %in% c('M… No        353      0.944   1.1
+ 6        6         1 ( OverTime == 'No' ) & ( S… No        263      0.943   1.1
+ 7        7         1 ( Education %in% c('Master… No        101      0.942   1.1
+ 8        8         1 ( OverTime == 'No' ) & ( R… No         95      0.938   1.1
+ 9        9         1 ( BusinessTravel %in% c('N… No        352      0.915   1.1
+10       10         1 ( Education %in% c('Below_… No        265      0.910   1.1
+# ℹ 13 more rows
+----------------------------------------------> 
+> tidy_c5_2 = set_validation_data(tidy_c5,
++                                 validation_data = att[!index, ],
++                                 y_name = "Attrition",
++                                 weight = 1 # default
++                                 )
+> tidy_c5_2
+---- Rulelist --------------------------------
+▶ Keys: trial_nbr
+▶ Number of distinct keys: 1
+▶ Number of rules: 23
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: TRUE
+
+
+   rule_nbr trial_nbr LHS                         RHS   support confidence  lift
+      <int>     <int> <chr>                       <fct>   <int>      <dbl> <dbl>
+ 1        1         1 ( Age > 30 ) & ( DistanceF… No         69      0.986   1.2
+ 2        2         1 ( DistanceFromHome <= 12 )… No        149      0.960   1.1
+ 3        3         1 ( Department == 'Research_… No        211      0.953   1.1
+ 4        4         1 ( Age > 30 ) & ( DistanceF… No        249      0.948   1.1
+ 5        5         1 ( JobInvolvement %in% c('M… No        353      0.944   1.1
+ 6        6         1 ( OverTime == 'No' ) & ( S… No        263      0.943   1.1
+ 7        7         1 ( Education %in% c('Master… No        101      0.942   1.1
+ 8        8         1 ( OverTime == 'No' ) & ( R… No         95      0.938   1.1
+ 9        9         1 ( BusinessTravel %in% c('N… No        352      0.915   1.1
+10       10         1 ( Education %in% c('Below_… No        265      0.910   1.1
+# ℹ 13 more rows
+----------------------------------------------> tidy_c5 # not altered
+---- Rulelist --------------------------------
+▶ Keys: trial_nbr
+▶ Number of distinct keys: 1
+▶ Number of rules: 23
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: FALSE
+
+
+   rule_nbr trial_nbr LHS                         RHS   support confidence  lift
+      <int>     <int> <chr>                       <fct>   <int>      <dbl> <dbl>
+ 1        1         1 ( Age > 30 ) & ( DistanceF… No         69      0.986   1.2
+ 2        2         1 ( DistanceFromHome <= 12 )… No        149      0.960   1.1
+ 3        3         1 ( Department == 'Research_… No        211      0.953   1.1
+ 4        4         1 ( Age > 30 ) & ( DistanceF… No        249      0.948   1.1
+ 5        5         1 ( JobInvolvement %in% c('M… No        353      0.944   1.1
+ 6        6         1 ( OverTime == 'No' ) & ( S… No        263      0.943   1.1
+ 7        7         1 ( Education %in% c('Master… No        101      0.942   1.1
+ 8        8         1 ( OverTime == 'No' ) & ( R… No         95      0.938   1.1
+ 9        9         1 ( BusinessTravel %in% c('N… No        352      0.915   1.1
+10       10         1 ( Education %in% c('Below_… No        265      0.910   1.1
+# ℹ 13 more rows
+----------------------------------------------> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("strHead")
+> ### * strHead
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: strHead
+> ### Title: Vectorized semantic equivalent of 'head' for a string
+> ### Aliases: strHead
+> ### Keywords: internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("strReplaceReduce")
+> ### * strReplaceReduce
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: strReplaceReduce
+> ### Title: Sequential string replace
+> ### Aliases: strReplaceReduce
+> ### Keywords: internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("strSplitSingle")
+> ### * strSplitSingle
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: strSplitSingle
+> ### Title: String split a string
+> ### Aliases: strSplitSingle
+> ### Keywords: internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("strTail")
+> ### * strTail
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: strTail
+> ### Title: Vectorized semantic equivalent of tail for a string
+> ### Aliases: strTail
+> ### Keywords: internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("tidy.C5.0")
+> ### * tidy.C5.0
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: tidy.C5.0
+> ### Title: Get the rulelist from a C5 model
+> ### Aliases: tidy.C5.0
+> 
+> ### ** Examples
+> 
+> model_c5 = C50::C5.0(Attrition ~., data = modeldata::attrition, rules = TRUE)
+> tidy(model_c5)
+---- Rulelist --------------------------------
+▶ Keys: trial_nbr
+▶ Number of distinct keys: 1
+▶ Number of rules: 24
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: FALSE
+
+
+   rule_nbr trial_nbr LHS                         RHS   support confidence  lift
+      <int>     <int> <chr>                       <fct>   <int>      <dbl> <dbl>
+ 1        1         1 ( JobLevel <= 1 ) & ( Mont… Yes        16      0.944   5.9
+ 2        2         1 ( EnvironmentSatisfaction … No        521      0.941   1.1
+ 3        3         1 ( DailyRate <= 722 ) & ( J… Yes        13      0.933   5.8
+ 4        4         1 ( JobRole == 'Research_Sci… No        195      0.924   1.1
+ 5        5         1 ( EnvironmentSatisfaction … Yes         9      0.909   5.6
+ 6        6         1 ( EnvironmentSatisfaction … Yes         9      0.909   5.6
+ 7        7         1 ( JobRole %in% c('Laborato… Yes        14      0.875   5.4
+ 8        8         1 ( JobRole == 'Laboratory_T… Yes         6      0.875   5.4
+ 9        9         1 ( Department == 'Sales' ) … Yes        13      0.867   5.4
+10       10         1 ( TotalWorkingYears > 2 )   No       1347      0.864   1  
+# ℹ 14 more rows
+----------------------------------------------> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("tidy.constparty")
+> ### * tidy.constparty
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: tidy.constparty
+> ### Title: Get the rulelist from a party model
+> ### Aliases: tidy.constparty
+> 
+> ### ** Examples
+> 
+> pen = palmerpenguins::penguins
+> model_class_party = partykit::ctree(species ~ ., data = pen)
+> tidy(model_class_party)
+---- Rulelist --------------------------------
+▶ Keys: NULL
+▶ Number of rules: 6
+▶ Model type: constparty
+▶ Estimation type: classification
+▶ Is validation data set: FALSE
+
+
+  rule_nbr LHS                   RHS   support confidence  lift terminal_node_id
+     <int> <chr>                 <fct>   <dbl>      <dbl> <dbl> <chr>           
+1        1 ( island %in% c('Bis… Gent…     123      1      2.77 6               
+2        2 ( island %in% c('Bis… Adel…      38      1      2.26 4               
+3        3 ( island %in% c('Dre… Adel…      99      0.990  2.24 9               
+4        4 ( island %in% c('Dre… Chin…      65      0.954  4.83 11              
+5        5 ( island %in% c('Bis… Adel…       7      0.857  1.94 5               
+6        6 ( island %in% c('Dre… Adel…      12      0.583  1.32 10              
+----------------------------------------------> model_regr_party = partykit::ctree(bill_length_mm ~ ., data = pen)
+> tidy(model_regr_party)
+---- Rulelist --------------------------------
+▶ Keys: NULL
+▶ Number of rules: 9
+▶ Model type: constparty
+▶ Estimation type: regression
+▶ Is validation data set: FALSE
+
+
+  rule_nbr LHS                          RHS support   IQR  RMSE terminal_node_id
+     <int> <chr>                      <dbl>   <dbl> <dbl> <dbl> <chr>           
+1        1 ( species %in% c('Chinstr…  48.3       8  1.03 0.884 15              
+2        2 ( species %in% c('Adelie'…  39.3      30  2.35 1.32  5               
+3        3 ( species %in% c('Chinstr…  50.2      29  1.28 1.88  16              
+4        4 ( species %in% c('Chinstr…  47.4      19  2.80 1.99  13              
+5        5 ( species %in% c('Adelie'…  37.3      77  2.85 2.05  3               
+6        6 ( species %in% c('Chinstr…  45.5      77  3.1  2.08  9               
+7        7 ( species %in% c('Chinstr…  51.3      42  1.95 2.31  17              
+8        8 ( species %in% c('Adelie'…  40.9      45  2.80 2.66  6               
+9        9 ( species %in% c('Chinstr…  47.7      17  4.1  3.27  10              
+----------------------------------------------> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("tidy.cubist")
+> ### * tidy.cubist
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: tidy.cubist
+> ### Title: Get the rulelist from a cubist model
+> ### Aliases: tidy.cubist
+> 
+> ### ** Examples
+> 
+> att = modeldata::attrition
+> cols_att    = setdiff(colnames(att), c("MonthlyIncome", "Attrition"))
+> model_cubist = Cubist::cubist(x = att[, cols_att],
++                               y = att[["MonthlyIncome"]]
++                               )
+> tidy(model_cubist)
+---- Rulelist --------------------------------
+▶ Keys: committee
+▶ Number of distinct keys: 1
+▶ Number of rules: 8
+▶ Model type: cubist
+▶ Estimation type: regression
+▶ Is validation data set: FALSE
+
+
+  rule_nbr committee LHS                  RHS   support   mean   min   max error
+     <int>     <int> <chr>                <chr>   <int>  <dbl> <dbl> <dbl> <dbl>
+1        1         1 ( JobLevel > 1 ) & … (-20…      57  4459   2272  5301  328.
+2        2         1 ( JobLevel > 4 )     (136…      69 19192. 18041 19999  416 
+3        3         1 ( JobRole %in% c('M… (-13…      26 12857. 11031 17603  517.
+4        4         1 ( JobLevel <= 1 )    (226…     543  2787.  1009  4968  559.
+5        5         1 ( JobLevel <= 4 ) &… (416…      87 15824  12061 17924  694.
+6        6         1 ( JobRole %in% c('H… (-11…     245  8469.  2592 13973  932.
+7        7         1 ( JobLevel > 1 ) & … (185…     387  6261.  2176  9998  995.
+8        8         1 ( JobLevel > 1 ) & … (-39…     124  4672.  2042  9724 1013.
+----------------------------------------------> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("tidy.rpart")
+> ### * tidy.rpart
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: tidy.rpart
+> ### Title: Get the rulelist from a rpart model
+> ### Aliases: tidy.rpart
+> 
+> ### ** Examples
+> 
+> model_class_rpart = rpart::rpart(Species ~ ., data = iris)
+> tidy(model_class_rpart)
+---- Rulelist --------------------------------
+▶ Keys: NULL
+▶ Number of rules: 3
+▶ Model type: rpart
+▶ Estimation type: classification
+▶ Is validation data set: FALSE
+
+
+  rule_nbr LHS                                    RHS   support confidence  lift
+     <int> <chr>                                  <fct>   <int>      <dbl> <dbl>
+1        1 ( Petal.Length < 2.45 )                seto…      50      0.981  2.94
+2        2 ( Petal.Length >= 2.45 ) & ( Petal.Wi… virg…      46      0.958  2.88
+3        3 ( Petal.Length >= 2.45 ) & ( Petal.Wi… vers…      54      0.893  2.68
+----------------------------------------------> 
+> model_regr_rpart = rpart::rpart(Sepal.Length ~ ., data = iris)
+> tidy(model_regr_rpart)
+---- Rulelist --------------------------------
+▶ Keys: NULL
+▶ Number of rules: 7
+▶ Model type: rpart
+▶ Estimation type: regression
+▶ Is validation data set: FALSE
+
+
+  rule_nbr LHS                                                       RHS support
+     <int> <chr>                                                   <dbl>   <int>
+1        1 ( Petal.Length < 4.25 ) & ( Petal.Length < 3.4 ) & ( S…  5.17      33
+2        2 ( Petal.Length >= 4.25 ) & ( Petal.Length < 6.05 ) & (…  6.05      33
+3        3 ( Petal.Length >= 4.25 ) & ( Petal.Length < 6.05 ) & (…  6.60      25
+4        4 ( Petal.Length < 4.25 ) & ( Petal.Length < 3.4 ) & ( S…  4.73      20
+5        5 ( Petal.Length < 4.25 ) & ( Petal.Length >= 3.4 )        5.64      20
+6        6 ( Petal.Length >= 4.25 ) & ( Petal.Length < 6.05 ) & (…  6.53      10
+7        7 ( Petal.Length >= 4.25 ) & ( Petal.Length >= 6.05 )      7.58       9
+----------------------------------------------> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("to_sql_case")
+> ### * to_sql_case
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: to_sql_case
+> ### Title: Extract SQL case statement from a rulelist
+> ### Aliases: to_sql_case
+> 
+> ### ** Examples
+> 
+> model_c5 = C50::C5.0(Attrition ~., data = modeldata::attrition, rules = TRUE)
+> tidy(model_c5)
+---- Rulelist --------------------------------
+▶ Keys: trial_nbr
+▶ Number of distinct keys: 1
+▶ Number of rules: 24
+▶ Model type: C5
+▶ Estimation type: classification
+▶ Is validation data set: FALSE
+
+
+   rule_nbr trial_nbr LHS                         RHS   support confidence  lift
+      <int>     <int> <chr>                       <fct>   <int>      <dbl> <dbl>
+ 1        1         1 ( JobLevel <= 1 ) & ( Mont… Yes        16      0.944   5.9
+ 2        2         1 ( EnvironmentSatisfaction … No        521      0.941   1.1
+ 3        3         1 ( DailyRate <= 722 ) & ( J… Yes        13      0.933   5.8
+ 4        4         1 ( JobRole == 'Research_Sci… No        195      0.924   1.1
+ 5        5         1 ( EnvironmentSatisfaction … Yes         9      0.909   5.6
+ 6        6         1 ( EnvironmentSatisfaction … Yes         9      0.909   5.6
+ 7        7         1 ( JobRole %in% c('Laborato… Yes        14      0.875   5.4
+ 8        8         1 ( JobRole == 'Laboratory_T… Yes         6      0.875   5.4
+ 9        9         1 ( Department == 'Sales' ) … Yes        13      0.867   5.4
+10       10         1 ( TotalWorkingYears > 2 )   No       1347      0.864   1  
+# ℹ 14 more rows
+----------------------------------------------> to_sql_case(tidy(model_c5))
+CASE
+WHEN ( JobLevel <= 1 ) AND ( MonthlyIncome <= 2468 ) AND ( OverTime = 'Yes' ) AND ( TotalWorkingYears > 2 ) AND ( YearsAtCompany <= 3 ) THEN 'Yes'
+WHEN ( EnvironmentSatisfaction IN ('Medium', 'High', 'Very_High') ) AND ( JobInvolvement IN ('Medium', 'High', 'Very_High') ) AND ( OverTime = 'No' ) AND ( TrainingTimesLastYear > 1 ) AND ( WorkLifeBalance IN ('Better', 'Best') ) THEN 'No'
+WHEN ( DailyRate <= 722 ) AND ( JobLevel <= 1 ) AND ( MonthlyIncome <= 2468 ) AND ( OverTime = 'Yes' ) AND ( TotalWorkingYears > 2 ) THEN 'Yes'
+WHEN ( JobRole = 'Research_Scientist' ) AND ( OverTime = 'No' ) THEN 'No'
+WHEN ( EnvironmentSatisfaction IN ('Low', 'Medium') ) AND ( MaritalStatus IN ('Divorced', 'Married') ) AND ( NumCompaniesWorked > 4 ) AND ( OverTime = 'Yes' ) AND ( PerformanceRating = 'Excellent' ) AND ( RelationshipSatisfaction IN ('Low', 'Medium', 'High') ) THEN 'Yes'
+WHEN ( EnvironmentSatisfaction IN ('Low', 'Medium') ) AND ( Gender = 'Male' ) AND ( MaritalStatus IN ('Divorced', 'Married') ) AND ( NumCompaniesWorked > 4 ) AND ( OverTime = 'Yes' ) AND ( PerformanceRating = 'Excellent' ) THEN 'Yes'
+WHEN ( JobRole IN ('Laboratory_Technician', 'Sales_Representative') ) AND ( MonthlyIncome <= 2657 ) AND ( TotalWorkingYears <= 2 ) AND ( WorkLifeBalance IN ('Bad', 'Good') ) THEN 'Yes'
+WHEN ( JobRole = 'Laboratory_Technician' ) AND ( MaritalStatus = 'Single' ) AND ( MonthlyIncome > 2468 ) AND ( OverTime = 'Yes' ) AND ( TrainingTimesLastYear <= 2 ) THEN 'Yes'
+WHEN ( Department = 'Sales' ) AND ( MaritalStatus = 'Single' ) AND ( OverTime = 'Yes' ) AND ( YearsSinceLastPromotion > 1 ) THEN 'Yes'
+WHEN ( TotalWorkingYears > 2 ) THEN 'No'
+WHEN ( Age <= 44 ) AND ( OverTime = 'No' ) AND ( TotalWorkingYears > 2 ) AND ( WorkLifeBalance = 'Bad' ) AND ( YearsWithCurrManager <= 0 ) THEN 'Yes'
+WHEN ( EducationField = 'Life_Sciences' ) AND ( EnvironmentSatisfaction IN ('Low', 'Medium') ) AND ( JobInvolvement = 'Low' ) AND ( MonthlyIncome > 2468 ) AND ( OverTime = 'Yes' ) THEN 'Yes'
+WHEN ( JobInvolvement = 'Low' ) AND ( OverTime = 'No' ) AND ( TotalWorkingYears <= 2 ) THEN 'Yes'
+WHEN ( Department = 'Sales' ) AND ( JobInvolvement IN ('Low', 'Medium') ) AND ( JobSatisfaction IN ('Medium', 'High') ) AND ( MaritalStatus = 'Single' ) AND ( OverTime = 'Yes' ) AND ( YearsSinceLastPromotion <= 1 ) THEN 'Yes'
+WHEN ( JobRole IN ('Laboratory_Technician', 'Sales_Representative') ) AND ( TotalWorkingYears <= 2 ) AND ( TrainingTimesLastYear <= 1 ) THEN 'Yes'
+WHEN ( JobSatisfaction = 'High' ) AND ( OverTime = 'No' ) AND ( WorkLifeBalance = 'Bad' ) AND ( YearsSinceLastPromotion > 6 ) THEN 'Yes'
+WHEN ( Department = 'Sales' ) AND ( JobInvolvement = 'Very_High' ) AND ( MaritalStatus = 'Single' ) AND ( OverTime = 'Yes' ) THEN 'Yes'
+WHEN ( EnvironmentSatisfaction = 'Low' ) AND ( JobRole = 'Laboratory_Technician' ) AND ( TotalWorkingYears <= 2 ) THEN 'Yes'
+WHEN ( JobRole = 'Human_Resources' ) AND ( TotalWorkingYears <= 2 ) THEN 'Yes'
+WHEN ( OverTime = 'Yes' ) AND ( TotalWorkingYears <= 2 ) THEN 'Yes'
+WHEN ( OverTime = 'No' ) AND ( TotalWorkingYears > 2 ) AND ( WorkLifeBalance = 'Bad' ) AND ( YearsWithCurrManager <= 0 ) THEN 'Yes'
+WHEN ( Department = 'Sales' ) AND ( MaritalStatus = 'Single' ) AND ( OverTime = 'Yes' ) THEN 'Yes'
+WHEN ( OverTime = 'No' ) AND ( WorkLifeBalance = 'Bad' ) AND ( YearsSinceLastPromotion > 6 ) THEN 'Yes'
+WHEN ( EnvironmentSatisfaction IN ('Low', 'Medium') ) AND ( MonthlyRate > 16620 ) AND ( OverTime = 'Yes' ) THEN 'Yes'
+ELSE NULL
+END AS output
+> 
+> 
+> 
+> cleanEx()
+> nameEx("varSpec")
+> ### * varSpec
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: varSpec
+> ### Title: Get variable specification for a Cubist/C5 object
+> ### Aliases: varSpec
+> ### Keywords: internal
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D data("attrition", package = "modeldata")
+> ##D cols_att = setdiff(colnames(attrition), c("MonthlyIncome", "Attrition"))
+> ##D 
+> ##D cb_att = Cubist::cubist(x = attrition[, cols_att],
+> ##D                         y = attrition[["MonthlyIncome"]]
+> ##D                         )
+> ##D varSpec(cb_att)
+> ## End(Not run)
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  6.039 0.112 6.175 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

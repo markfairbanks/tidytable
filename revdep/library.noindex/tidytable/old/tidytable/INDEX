@@ -2,7 +2,6 @@
 across                  Apply a function across a selection of columns
 add_count               Add a count column to the data frame
 arrange                 Arrange/reorder rows
-arrange_across.         Arrange by a selection of variables
 as_tidytable            Coerce an object to a data.table/tidytable
 between                 Do the values from x fall between the left and
                         right bounds?
@@ -53,7 +52,6 @@ left_join               Join two data.tables together
 map                     Apply a function to each element of a vector or
                         list
 mutate                  Add/modify/delete columns
-mutate_across.          Mutate multiple columns simultaneously
 mutate_rowwise          Add/modify columns by row
 n                       Number of observations in each group
 n_distinct              Count the number of unique values in a vector
@@ -84,7 +82,6 @@ separate_wider_regex    Separate a character column into multiple
                         columns using regex patterns
 slice_head              Choose rows in a data.table
 summarize               Aggregate data using summary statistics
-summarize_across.       Summarize multiple columns
 tidytable               Build a data.table/tidytable
 top_n                   Select top (or bottom) n rows (by value)
 transmute               Add new variables and drop all others

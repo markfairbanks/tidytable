@@ -4,11 +4,11 @@
 * R was compiled by
     Apple clang version 14.0.0 (clang-1400.0.29.202)
     GNU Fortran (GCC) 12.2.0
-* running under: macOS Sonoma 14.2.1
+* running under: macOS Sonoma 14.5
 * using session charset: UTF-8
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘bbknnR/DESCRIPTION’ ... OK
-* this is package ‘bbknnR’ version ‘1.1.0’
+* this is package ‘bbknnR’ version ‘1.1.1’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -19,8 +19,8 @@
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
 * checking whether package ‘bbknnR’ can be installed ... OK
-* used C++ compiler: ‘Apple clang version 15.0.0 (clang-1500.1.0.2.5)’
-* used SDK: ‘MacOSX14.2.sdk’
+* used C++ compiler: ‘Apple clang version 15.0.0 (clang-1500.3.9.4)’
+* used SDK: ‘MacOSX14.4.sdk’
 * checking installed package size ... OK
 * checking package directory ... OK
 * checking ‘build’ directory ... OK
@@ -68,7 +68,7 @@
   Running ‘testthat.R’
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
-* checking running R code from vignettes ... NONE
+* checking running R code from vignettes ... OK
   ‘bbknnR-tutorial.Rmd’ using ‘UTF-8’... OK
 * checking re-building of vignette outputs ... SKIPPED
 * DONE

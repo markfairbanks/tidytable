@@ -1,0 +1,30 @@
+
+R version 4.3.1 (2023-06-16) -- "Beagle Scouts"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: aarch64-apple-darwin20 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> library(bbknnR)
+> 
+> test_check("bbknnR")
+Running BBKNN using RcppAnnoy...
+Running UMAP...
+Running tSNE...
+All done!
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 1 ]
+> 
+> proc.time()
+   user  system elapsed 
+  3.747   0.162   4.237 
