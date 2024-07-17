@@ -1,4 +1,4 @@
-# tidytable 0.11.1 (in development)
+# tidytable 0.11.1
 
 #### Functionality improvements
 * `pmap()` now preserves names (#809)
