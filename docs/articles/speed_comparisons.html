@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/lumen/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/lumen/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidytable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.10.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.11.1</span>
       </span>
     </div>
 
@@ -108,13 +108,13 @@ different dataset from <code><a href="../reference/case_when.html">case_when()</
 <code>setDTthreads(4)</code> was used for <code>data.table</code>
 &amp; <code>tidytable</code> timings.</li>
 <li>Modify-by-reference was used in <code>data.table</code> when being
-compared to <code><a href="../reference/mutate..html">mutate.()</a></code> &amp;
+compared to <code>mutate.()</code> &amp;
 <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code>
 </li>
 <li>
-<code><a href="../reference/fill..html">fill.()</a></code> &amp; <code><a href="https://tidyr.tidyverse.org/reference/fill.html" class="external-link">tidyr::fill()</a></code> both work with
+<code>fill.()</code> &amp; <code><a href="https://tidyr.tidyverse.org/reference/fill.html" class="external-link">tidyr::fill()</a></code> both work with
 character/factor/logical columns, whereas
-<code><a href="https://Rdatatable.gitlab.io/data.table/reference/nafill.html" class="external-link">data.table::nafill()</a></code> does not. Testing only included
+<code><a href="https://rdatatable.gitlab.io/data.table/reference/nafill.html" class="external-link">data.table::nafill()</a></code> does not. Testing only included
 numeric columns due to this constraint.</li>
 <li>
 <code>dtplyr</code> is missing timings for functions that are not
@@ -144,23 +144,23 @@ datasets).</li>
 created to cover all angles equally. They are just meant to be used as
 general insight into the performance of these packages.</li>
 </ul>
-<pre><code><span><span class="co">#&gt; Date last run: 2023-04-20</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Date last run: 2024-07-18</span></span></code></pre>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tidytable: 13 × 6</span></span></span>
 <span><span class="co">#&gt;    func_tested  data.table tidytable dtplyr tidyverse pandas</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> arrange            61.4      33.5   71.1      79.1  716. </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> case_when          10.2       9.9   <span style="color: #BB0000;">NA</span>        53.6   64.4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> distinct           29.5      30.7   33.4      68.4  309. </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> fill               40        74     58.3      37.8  724  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> filter            189.      190.   205.      218.   904. </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> inner_join         39.7      40     49.1     102.    <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> left_join          68.1      67.2   79.9     196.    <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> mutate             61.8      67.3  133.       63.3  780. </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> nest               19.6      20.3   95.8      56.8   <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> pivot_longer       61.3      37.7   70.1     213.    <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> pivot_wider        61.3      73.9  184.      141.    <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> summarize         433.      390.   397.      802.  <span style="text-decoration: underline;">3</span>080. </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> unnest            264.       75.4   <span style="color: #BB0000;">NA</span>        92.7   <span style="color: #BB0000;">NA</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> arrange            17.3      11.3   19.7      24    716. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> case_when           5.3       5.5   <span style="color: #BB0000;">NA</span>        23.6   64.4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> distinct           14.6      16.7   15.3      16    309. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> fill               15.2      21.3   18.1       8.5  724  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> filter             67.4      68.4   69.2      91.5  904. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> inner_join         21        22.2   23.7      44.9   <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> left_join          27.9      27.3   28.7      81.5   <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> mutate             37.8      39.3   57.6      38.5  780. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> nest                6.8       6.7   29.4      18.6   <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> pivot_longer       27.6      15.1   31        93.8   <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> pivot_wider        35.2      36     68.7      53.4   <span style="color: #BB0000;">NA</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> summarize         201.      185.   192.      368.  <span style="text-decoration: underline;">3</span>080. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> unnest             87.7      30.9   <span style="color: #BB0000;">NA</span>        38.2   <span style="color: #BB0000;">NA</span></span></span></code></pre>
 </div>
   </div>
 
@@ -179,7 +179,7 @@ general insight into the performance of these packages.</li>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
       </footer>
