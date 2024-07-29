@@ -38,15 +38,15 @@ dt <- function(.df, i, j, ...) {
 
 #' @export
 dt.tidytable <- function(.df, i, j, ...) {
-  dots <- enquos(i, j, ..., .unquote_names = FALSE, .ignore_empty = "none")
+  args <- enquos(i, j, ..., .unquote_names = FALSE, .ignore_empty = "none")
 
-  if (has_length(dots, 0)) return(.df)
+  if (has_length(args, 0)) return(.df)
 
-  dt_env <- get_dt_env(dots)
+  dt_env <- get_dt_env(args)
 
-  dots <- lapply(dots, quo_squash)
+  args <- lapply(args, quo_squash)
 
-  dt_expr <- call2("[", quo(.df), !!!dots)
+  dt_expr <- call2("[", quo(.df), !!!args)
 
   dt_expr <- call_match(dt_expr, internal_dt)
 
