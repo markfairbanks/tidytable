@@ -8,10 +8,8 @@ call2_j <- function(.df, j = NULL, .by = NULL, .keyby = FALSE, ...) {
   .df <- enquo(.df)
   if (length(.by) == 0) {
     dt_expr <- call2("[", .df, expr(), j, ...)
-  } else if (.keyby) {
-    dt_expr <- call2("[", .df, expr(), j, keyby = .by, ...)
   } else {
-    dt_expr <- call2("[", .df, expr(), j, by = .by, ...)
+    dt_expr <- call2("[", .df, expr(), j, by = .by, keyby = .keyby, ...)
   }
 
   if (is_call(j, c(":=", "let"))) {
