@@ -40,7 +40,7 @@ dt <- function(.df, i, j, ...) {
 dt.tidytable <- function(.df, i, j, ...) {
   args <- enquos(i, j, ..., .unquote_names = FALSE, .ignore_empty = "none")
 
-  if (has_length(args, 0)) return(.df)
+  if (all(map_lgl(args, quo_is_missing))) return(.df)
 
   dt_env <- get_dt_env(args)
 

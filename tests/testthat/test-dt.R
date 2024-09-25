@@ -133,3 +133,9 @@ test_that("let works", {
   expect_named(res, c("x", "double_x"))
   expect_equal(res$double_x, c(2, 2, 2))
 })
+
+test_that("no warning on empty dt, #824", {
+  df <- tidytable(x = c(1, 1, 1), y = 1:3)
+
+  expect_no_warning(df %>% dt())
+})
