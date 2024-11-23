@@ -36,19 +36,13 @@ case <- function(..., default = NA, ptype = NULL, size = NULL) {
 
   values <- dots[!is_condition]
   ptype <- vec_ptype_common(!!!values, default, .ptype = ptype)
-
   values <- vec_cast_common(!!!values, .to = ptype)
 
   pairs <- vec_interleave(conditions, values)
 
   .default <- vec_cast(default, ptype)
 
-  if (length(default) == 1) {
-    out <- exec(fcase, !!!pairs, default = .default)
-  } else {
-    .default_condition <- vec_recycle(TRUE, size)
-    out <- exec(fcase, !!!pairs, .default_condition, .default)
-  }
+  out <- exec(fcase, !!!pairs, default = .default)
 
   out
 }
