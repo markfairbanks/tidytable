@@ -3,8 +3,8 @@
 # Replaces these functions with the necessary data.table translations
 # Adapted from dt_squash found here: https://github.com/tidyverse/dtplyr/blob/master/R/tidyeval.R
 prep_exprs <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env(), is_top_level = FALSE) {
-  x <- lapply(x, prep_expr, data, {{ .by }}, j = j, dt_env = dt_env, TRUE)
-  list_flatten(x)
+  out <- lapply(x, prep_expr, data, {{ .by }}, j = j, dt_env = dt_env, TRUE)
+  list_flatten(out)
 }
 
 prep_expr <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env(), is_top_level = FALSE) {
@@ -12,8 +12,10 @@ prep_expr <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env(), is_
     x <- get_expr(x)
   }
 
-  if (is_symbol(x) || is_atomic(x) || is_null(x)) {
+  if (is_atomic(x) || is_null(x)) {
     x
+  } else if (is_symbol(x)) {
+    prep_expr_sym(x, data, dt_env)
   } else if (is_call(x, tidytable_fns)) {
     # Ignore nested calls to tidytable functions, #505
     x
@@ -118,7 +120,24 @@ prep_expr_call <- function(x, data, .by = NULL, j = FALSE, dt_env = caller_env()
     x
   } else {
     # Catches case when "$" or "[[" is used but is not using .data pronoun
-    x[-1] <- lapply(x[-1], prep_expr, data, {{ .by }}, j, dt_env)
+    x
+  }
+}
+
+prep_expr_sym <- function(x, data, dt_env) {
+  data_vars <- names(data)
+  name <- as_string(x)
+  if (name %in% data_vars) {
+    x
+  } else if (env_has(dt_env, name, inherit = TRUE)) {
+    val <- eval_bare(x, dt_env)
+    if (is.data.frame(val)) {
+      out <- list2(!!!val)
+    } else {
+      out <- x
+    }
+    out
+  } else {
     x
   }
 }
