@@ -1,17 +1,19 @@
 * installing *source* package ‘rTwig’ ...
 ** package ‘rTwig’ successfully unpacked and MD5 sums checked
 ** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-*** copying figures
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (rTwig)
+** libs
+using C++ compiler: ‘Apple clang version 16.0.0 (clang-1600.0.26.4)’
+using SDK: ‘MacOSX15.1.sdk’
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG -I../inst/include -I'/Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/library.noindex/rTwig/Rcpp/include' -I'/Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/library.noindex/rTwig/RcppArmadillo/include' -I/opt/R/arm64/include -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+In file included from RcppExports.cpp:4:
+In file included from /Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/library.noindex/rTwig/RcppArmadillo/include/RcppArmadillo.h:29:
+In file included from /Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/library.noindex/rTwig/RcppArmadillo/include/RcppArmadillo/interface/RcppArmadilloForward.h:25:
+In file included from /Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/library.noindex/rTwig/Rcpp/include/RcppCommon.h:30:
+In file included from /Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/library.noindex/rTwig/Rcpp/include/Rcpp/r/headers.h:66:
+/Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/library.noindex/rTwig/Rcpp/include/Rcpp/platform/compiler.h:100:10: fatal error: 'cmath' file not found
+  100 | #include <cmath>
+      |          ^~~~~~~
+1 error generated.
+make: *** [RcppExports.o] Error 1
+ERROR: compilation failed for package ‘rTwig’
+* removing ‘/Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/checks.noindex/rTwig/old/rTwig.Rcheck/rTwig’

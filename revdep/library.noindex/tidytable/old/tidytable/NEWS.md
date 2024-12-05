@@ -1,3 +1,16 @@
+# tidytable 0.11.1
+
+#### Functionality improvements
+* `pmap()` now preserves names (#809)
+* Package developers no longer need to define `.datatable.aware = TRUE` when
+  using `tidytable` in their package (#269)
+
+#### Bug fixes
+* Attempting to rename columns using `group_by()` now leads to an error (#799)
+* `pmap()` family works with data frame inputs (#803)
+* `filter()` properly handles when comparing to `NA` when `.by` is used (#812)
+* `paged.print` has been removed since it was breaking console printing (#810)
+
 # tidytable 0.11.0
 
 #### Functionality improvements

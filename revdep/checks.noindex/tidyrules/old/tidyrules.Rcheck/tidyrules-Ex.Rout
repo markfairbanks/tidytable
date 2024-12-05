@@ -455,6 +455,7 @@ detaching ‘package:magrittr’
 > # calculate default metrics with a custom metric
 > #' custom function to get cumulative MAE
 > library("tidytable")
+Warning: package ‘tidytable’ was built under R version 4.3.3
 
 Attaching package: ‘tidytable’
 
@@ -1597,7 +1598,7 @@ END AS output
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  7.439 0.179 8.654 0 0 
+Time elapsed:  12.94 1.347 7.309 0 0 
 > grDevices::dev.off()
 null device 
           1 

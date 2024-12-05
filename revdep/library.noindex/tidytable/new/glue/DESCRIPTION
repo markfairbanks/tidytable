@@ -1,6 +1,6 @@
 Package: glue
 Title: Interpreted String Literals
-Version: 1.7.0.9000
+Version: 1.8.0.9000
 Authors@R: c(
     person("Jim", "Hester", role = "aut",
            comment = c(ORCID = "0000-0002-2739-7082")),
@@ -21,7 +21,7 @@ Depends: R (>= 3.6)
 Imports: methods
 Suggests: crayon, DBI (>= 1.2.0), dplyr, knitr, magrittr, rlang,
         rmarkdown, RSQLite, testthat (>= 3.2.0), vctrs (>= 0.3.0),
-        waldo (>= 0.3.0), withr
+        waldo (>= 0.5.3), withr
 VignetteBuilder: knitr
 ByteCompile: true
 Config/Needs/website: bench, forcats, ggbeeswarm, ggplot2, R.utils,
@@ -35,15 +35,15 @@ RemoteHost: api.github.com
 RemoteRepo: glue
 RemoteUsername: tidyverse
 RemoteRef: HEAD
-RemoteSha: 5e9c87829542e47236467154a3416744f7f2459e
+RemoteSha: a3f80d678274ef634c10c2cb094c939b1543222a
 GithubRepo: glue
 GithubUsername: tidyverse
 GithubRef: HEAD
-GithubSHA1: 5e9c87829542e47236467154a3416744f7f2459e
+GithubSHA1: a3f80d678274ef634c10c2cb094c939b1543222a
 NeedsCompilation: yes
-Packaged: 2024-07-17 18:21:47 UTC; xmxf129
+Packaged: 2024-12-05 17:13:11 UTC; xmxf129
 Author: Jim Hester [aut] (<https://orcid.org/0000-0002-2739-7082>),
   Jennifer Bryan [aut, cre] (<https://orcid.org/0000-0002-6983-2759>),
   Posit Software, PBC [cph, fnd]
 Maintainer: Jennifer Bryan <jenny@posit.co>
-Built: R 4.3.1; aarch64-apple-darwin20; 2024-07-17 18:21:47 UTC; unix
+Built: R 4.3.1; aarch64-apple-darwin20; 2024-12-05 17:13:11 UTC; unix

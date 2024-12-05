@@ -145,7 +145,7 @@ p-value is 0, and test is significant at level 0.05
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.642 0.046 0.74 0 0 
+Time elapsed:  0.607 0.046 0.662 0 0 
 > grDevices::dev.off()
 null device 
           1 

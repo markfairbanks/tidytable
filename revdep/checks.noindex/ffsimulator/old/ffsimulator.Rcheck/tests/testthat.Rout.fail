@@ -18,6 +18,8 @@ Type 'q()' to quit R.
 > library(testthat)
 > library(ffsimulator)
 > library(checkmate)
+Warning message:
+package 'checkmate' was built under R version 4.3.3 
 > 
 > test_check("ffsimulator")
 [ FAIL 2 | WARN 1 | SKIP 7 | PASS 18 ]

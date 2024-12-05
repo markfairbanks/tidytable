@@ -1,4 +1,9 @@
-# tidytable 0.11.1 (in development)
+# tidytable 0.11.2 (in development)
+
+#### Bug fixes
+* Empty `dt()` works with no warning, #824
+
+# tidytable 0.11.1
 
 #### Functionality improvements
 * `pmap()` now preserves names (#809)

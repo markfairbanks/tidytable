@@ -1,12 +1,30 @@
 # glue (development version)
 
+# glue 1.8.0
+
+* glue has a two new articles:
+  - "Get started", with contributions from @stephhazlitt and @BrennanAntone
+    (#137, #170, #332).
+  - How to write a function that wraps glue (#281).
+
+* If the last argument of `glue()` is empty, it is dropped (#320). This makes
+  it easy to structure `glue()` calls with one argument per line, and to anticipate adding arguments:
+  
+  ``` r
+  glue(
+    "here's some text, ",
+    "and maybe more text will be added in the future?",
+  )
+  ```
+
 * `glue_sql("{var*}")` once again generates `NULL` if var is empty.  
   This reverts #292. (#318).
 
 * The `.envir` argument to `glue()` and `glue_data()` really must be an
-  environment now, as documented. Previously a list-ish object worked in some
-  cases (by accident, not really by design). When you need to lookup values in
-  a list-ish object, use `glue_data(.x =)` (#308, #317).
+  environment now, as documented. Previously a list-ish object worked in
+  some cases (by accident, not really by design). When you need to lookup
+  values in a list-ish object, use `glue_data(.x =)` (#308, #317).
+  Ditto for `glue_sql()` and `glue_data_sql()`.
 
 # glue 1.7.0
 

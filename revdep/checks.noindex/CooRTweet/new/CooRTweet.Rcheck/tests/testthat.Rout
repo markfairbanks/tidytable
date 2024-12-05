@@ -26,6 +26,8 @@ Type 'q()' to quit R.
 > library(testthat)
 > library(CooRTweet)
 > library(data.table)
+Warning message:
+package 'data.table' was built under R version 4.3.3 
 > 
 > if (testthat:::on_cran()) {
 +     data.table::setDTthreads(threads = 2)
@@ -36,4 +38,4 @@ Type 'q()' to quit R.
 > 
 > proc.time()
    user  system elapsed 
-  8.586   0.590   9.298 
+ 11.200   1.024   9.539 

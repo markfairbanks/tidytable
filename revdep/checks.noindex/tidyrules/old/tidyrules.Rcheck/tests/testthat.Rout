@@ -63,10 +63,10 @@ Type 'q()' to quit R.
  9        9         1 ( Department == 'Sales' ) … Yes        13      0.867   5.4
 10       10         1 ( TotalWorkingYears > 2 )   No       1347      0.864   1  
 # ℹ 14 more rows
-----------------------------------------------[ FAIL 0 | WARN 1 | SKIP 0 | PASS 80 ]
+----------------------------------------------[ FAIL 0 | WARN 2 | SKIP 0 | PASS 80 ]
 
-[ FAIL 0 | WARN 1 | SKIP 0 | PASS 80 ]
+[ FAIL 0 | WARN 2 | SKIP 0 | PASS 80 ]
 > 
 > proc.time()
    user  system elapsed 
- 10.265   0.217  10.949 
+ 15.172   1.389  10.593 
