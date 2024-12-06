@@ -55,7 +55,7 @@ slice.tidytable <- function(.df, ..., .by = NULL) {
 
   dt_env <- get_dt_env(dots)
 
-  dots <- prep_exprs(dots)
+  dots <- prep_exprs(dots, .df, dt_env = dt_env)
 
   .by <- tidyselect_names(.df, {{ .by }})
 
