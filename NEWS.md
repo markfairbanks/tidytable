@@ -1,3 +1,5 @@
+# tidytable 0.11.3 (in development)
+
 # tidytable 0.11.2
 
 #### Bug fixes
