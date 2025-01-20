@@ -1,5 +1,7 @@
 # tidytable 0.11.3 (in development)
 
+* use `set()` instead of `!!` to support `pivot_longer(names_to=NA)`.
+
 # tidytable 0.11.2
 
 #### Bug fixes
