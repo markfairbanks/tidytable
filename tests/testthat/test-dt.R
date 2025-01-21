@@ -139,3 +139,23 @@ test_that("no warning on empty dt, #824", {
 
   expect_no_warning(df %>% dt())
 })
+
+test_that("names(.SD) works with no modify-by-reference", {
+  df <- tidytable(x = 1:3, y = 4:6)
+
+  # No .SDcols specified
+  res <- df %>%
+    dt(, names(.SD) := lapply(.SD, \(.x) 1))
+
+  expect_equal(res$x, c(1, 1, 1))
+  expect_equal(res$y, c(1, 1, 1))
+  expect_equal(df$x, 1:3)
+  expect_equal(df$y, 4:6)
+
+  # With .SDcols specified
+  res <- df %>%
+    dt(, names(.SD) := lapply(.SD, \(.x) .x + 1), .SDcols = c("x"))
+
+  expect_equal(res$x, 2:4)
+  expect_equal(res$y, 4:6)
+})
