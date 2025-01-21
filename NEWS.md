@@ -1,5 +1,8 @@
 # tidytable 0.11.3 (in development)
 
+#### Functionality improvements
+* `names(.SD)` is now supported in `j` assignment in `dt()`
+
 # tidytable 0.11.2
 
 #### Bug fixes
