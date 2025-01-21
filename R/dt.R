@@ -65,6 +65,9 @@ dt.tidytable <- function(.df, i, j, ...) {
         } else if (is.symbol(cols)) {
           # .df[, x := x * 2]
           cols <- as.character(cols)
+        } else if (cols == expr(names(.SD))) {
+          cols <- args$.SDcols %||% names(.df)
+          cols <- eval_tidy(cols, env = dt_env)
         } else {
           # .df[, "double_x" := x * 2]
           # .df[, (new_col) := x * 2] # Note: needs dt_env
