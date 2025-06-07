@@ -160,6 +160,15 @@ test_that("filtering joins preserve row and column order of x", {
   expect_equal(out$a, c(4L, 1L))
 })
 
+test_that("semi_join works with dataframes with list cols, #834", {
+  df1 <- tidytable(x = 1:2, y = list(1:2, c("a", "b")))
+  df2 <- tidytable(x = 1:2, z = 3:4)
+
+  out <- semi_join(df1, df2, by = "x")
+  expect_named(out, c("x", "y"))
+  expect_equal(out, df1)
+})
+
 test_that("joins matches NAs by default", {
   df1 <- tidytable(x = c(NA_character_, 1))
   df2 <- tidytable(x = c(NA_character_, 2))

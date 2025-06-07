@@ -3,6 +3,9 @@
 #### Functionality improvements
 * `names(.SD)` is now supported in `j` assignment in `dt()`
 
+#### Bug fixes
+* `semi_join()` works if list columns are present, #834
+
 # tidytable 0.11.2
 
 #### Bug fixes
