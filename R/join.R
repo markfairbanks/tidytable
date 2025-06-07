@@ -145,7 +145,12 @@ semi_join <- function(x, y, by = NULL) {
   if (length(on) == 0) {
     out <- x
   } else {
-    out <- fsetdiff(x, x[!y, on = on], all = TRUE)
+    any_list_cols <- any(map_lgl(x, vec_is_list))
+    if (any_list_cols) {
+      out <- vec_set_difference(x, x[!y, on = on])
+    } else {
+      out <- fsetdiff(x, x[!y, on = on], all = TRUE)
+    }
   }
 
   tidytable_restore(out, x)
