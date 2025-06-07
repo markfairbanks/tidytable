@@ -37,7 +37,7 @@
 unnest <- function(.df,
                    ...,
                    keep_empty = FALSE,
-                   .drop = TRUE,
+                   .drop = FALSE,
                    names_sep = NULL,
                    names_repair = "unique") {
   UseMethod("unnest")
@@ -47,7 +47,7 @@ unnest <- function(.df,
 unnest.tidytable <- function(.df,
                              ...,
                              keep_empty = FALSE,
-                             .drop = TRUE,
+                             .drop = FALSE,
                              names_sep = NULL,
                              names_repair = "unique") {
   dots <- enquos(...)
@@ -100,7 +100,7 @@ unnest.tidytable <- function(.df,
 unnest.data.frame <- function(.df,
                     ...,
                     keep_empty = FALSE,
-                    .drop = TRUE,
+                    .drop = FALSE,
                     names_sep = NULL,
                     names_repair = "unique") {
   .df <- as_tidytable(.df)
