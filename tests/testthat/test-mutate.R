@@ -206,7 +206,7 @@ test_that("can use .y in map2() in nested data.tables", {
     nest_by(id) %>%
     mutate(example_1 = map2(data, id,
                               ~ mutate(.x, id1 = .y))) %>%
-    unnest(example_1)
+    unnest(example_1, .drop = TRUE)
 
   expect_named(result_df1, c("id","val_1", "val_2", "id1"))
   expect_equal(result_df1$id1, c(1,2,3))
@@ -215,7 +215,7 @@ test_that("can use .y in map2() in nested data.tables", {
     nest_by(id) %>%
     mutate(example_1 = map2(data, id,
                               ~ .x %>% mutate(id1 = .y))) %>%
-    unnest(example_1)
+    unnest(example_1, .drop = TRUE)
 
   expect_named(result_df2, c("id","val_1", "val_2", "id1"))
   expect_equal(result_df2$id1, c(1,2,3))

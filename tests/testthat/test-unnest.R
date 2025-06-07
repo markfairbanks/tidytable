@@ -60,7 +60,7 @@ test_that("unnesting works with nested vector", {
 
 
   unnest_df <- nest_df %>%
-    unnest(vec_col)
+    unnest(vec_col, .drop = TRUE)
 
   expect_named(unnest_df, c("c","d","vec_col"))
   expect_equal(unnest_df$vec_col, c(1,2,3,4,5))
