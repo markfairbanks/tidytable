@@ -8,7 +8,7 @@ unnest(
   .df,
   ...,
   keep_empty = FALSE,
-  .drop = TRUE,
+  .drop = FALSE,
   names_sep = NULL,
   names_repair = "unique"
 )
