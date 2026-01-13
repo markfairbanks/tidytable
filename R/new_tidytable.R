@@ -13,5 +13,7 @@
 #'
 #' new_tidytable(l)
 new_tidytable <- function(x = list()) {
-  new_data_frame(x, class = c("tidytable", "tbl", "data.table"))
+  x <- new_data_frame(x, class = c("tidytable", "tbl", "data.table"))
+  setalloccol(x)
+  x
 }
