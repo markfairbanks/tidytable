@@ -1,4 +1,15 @@
-# tidytable 0.11.2 (in development)
+# tidytable 0.12.0 (in development)
+
+#### Functionality improvements
+* `names(.SD)` is now supported in `j` assignment in `dt()`
+
+#### Bug fixes
+* `semi_join()` works if list columns are present, #834
+
+#### Breaking changes
+* `unnest(.drop = FALSE)` is now the default to match `tidyr` behavior, #836
+
+# tidytable 0.11.2
 
 #### Bug fixes
 * Empty `dt()` works with no warning, #824

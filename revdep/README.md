@@ -1,26 +1,25 @@
 # Platform
 
-|field    |value                                                                                      |
-|:--------|:------------------------------------------------------------------------------------------|
-|version  |R version 4.3.1 (2023-06-16)                                                               |
-|os       |macOS 15.1                                                                                 |
-|system   |aarch64, darwin20                                                                          |
-|ui       |RStudio                                                                                    |
-|language |(EN)                                                                                       |
-|collate  |en_US.UTF-8                                                                                |
-|ctype    |en_US.UTF-8                                                                                |
-|tz       |America/Chicago                                                                            |
-|date     |2024-12-05                                                                                 |
-|rstudio  |2023.06.1+524 Mountain Hydrangea (desktop)                                                 |
-|pandoc   |3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown) |
+|field    |value                                 |
+|:--------|:-------------------------------------|
+|version  |R version 4.5.2 (2025-10-31)          |
+|os       |macOS Sequoia 15.7.2                  |
+|system   |aarch64, darwin20                     |
+|ui       |RStudio                               |
+|language |(EN)                                  |
+|collate  |en_US.UTF-8                           |
+|ctype    |en_US.UTF-8                           |
+|tz       |America/Denver                        |
+|date     |2026-01-13                            |
+|rstudio  |2026.01.0+392 Apple Blossom (desktop) |
+|pandoc   |NA                                    |
+|quarto   |1.4.549 @ /usr/local/bin/quarto       |
 
 # Dependencies
 
-|package   |old    |new        |Δ  |
-|:---------|:------|:----------|:--|
-|tidytable |0.11.1 |0.11.1.9   |*  |
-|glue      |NA     |1.8.0.9000 |*  |
-|withr     |NA     |3.0.2      |*  |
+|package   |old    |new      |Δ  |
+|:---------|:------|:--------|:--|
+|tidytable |0.11.2 |0.11.2.9 |*  |
 
 # Revdeps
 
@@ -28,6 +27,6 @@
 
 |package |version |error |warning |note |
 |:-------|:-------|:-----|:-------|:----|
-|bbknnR  |1.1.1   |1     |        |     |
-|rTwig   |1.3.0   |1     |        |     |
+|bbknnR  |2.0.2   |1     |        |     |
+|rTwig   |1.4.0   |1     |        |     |
 

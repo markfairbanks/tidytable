@@ -1,17 +1,16 @@
 * installing *source* package ‘bbknnR’ ...
+** this is package ‘bbknnR’ version ‘2.0.2’
 ** package ‘bbknnR’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** libs
-using C++ compiler: ‘Apple clang version 16.0.0 (clang-1600.0.26.4)’
-using SDK: ‘MacOSX15.1.sdk’
-clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/library.noindex/bbknnR/Rcpp/include' -I/opt/R/arm64/include -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+using C++ compiler: ‘Apple clang version 17.0.0 (clang-1700.0.13.5)’
+using SDK: ‘MacOSX15.5.sdk’
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/library.noindex/bbknnR/Rcpp/include' -I'/Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/library.noindex/bbknnR/RcppEigen/include' -I/opt/R/arm64/include -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2   -c RcppExports.cpp -o RcppExports.o
 In file included from RcppExports.cpp:4:
-In file included from /Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/library.noindex/bbknnR/Rcpp/include/Rcpp.h:27:
-In file included from /Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/library.noindex/bbknnR/Rcpp/include/RcppCommon.h:30:
-In file included from /Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/library.noindex/bbknnR/Rcpp/include/Rcpp/r/headers.h:66:
-/Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/library.noindex/bbknnR/Rcpp/include/Rcpp/platform/compiler.h:100:10: fatal error: 'cmath' file not found
-  100 | #include <cmath>
-      |          ^~~~~~~
+In file included from /Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/library.noindex/bbknnR/RcppEigen/include/RcppEigen.h:25:
+/Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/library.noindex/bbknnR/RcppEigen/include/RcppEigenForward.h:25:10: fatal error: 'iterator' file not found
+   25 | #include <iterator>
+      |          ^~~~~~~~~~
 1 error generated.
 make: *** [RcppExports.o] Error 1
 ERROR: compilation failed for package ‘bbknnR’

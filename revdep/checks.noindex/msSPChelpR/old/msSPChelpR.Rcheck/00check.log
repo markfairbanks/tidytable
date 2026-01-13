@@ -1,10 +1,10 @@
 * using log directory ‘/Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/checks.noindex/msSPChelpR/old/msSPChelpR.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: aarch64-apple-darwin20 (64-bit)
+* using R version 4.5.2 (2025-10-31)
+* using platform: aarch64-apple-darwin20
 * R was compiled by
-    Apple clang version 14.0.0 (clang-1400.0.29.202)
-    GNU Fortran (GCC) 12.2.0
-* running under: macOS 15.1
+    Apple clang version 16.0.0 (clang-1600.0.26.6)
+    GNU Fortran (GCC) 14.2.0
+* running under: macOS Sequoia 15.7.2
 * using session charset: UTF-8
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘msSPChelpR/DESCRIPTION’ ... OK
@@ -27,7 +27,7 @@
 * checking for left-over files ... OK
 * checking index information ... OK
 * checking package subdirectories ... OK
-* checking R files for non-ASCII characters ... OK
+* checking code files for non-ASCII characters ... OK
 * checking R files for syntax errors ... OK
 * checking whether the package can be loaded ... OK
 * checking whether the package can be loaded with stated dependencies ... OK
@@ -59,7 +59,7 @@
 * checking tests ... OK
   Running ‘testthat.R’
 * checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in ‘inst/doc’ ... OK
+* checking package vignettes ... OK
 * checking running R code from vignettes ... OK
   ‘introduction.Rmd’ using ‘UTF-8’... OK
 * checking re-building of vignette outputs ... SKIPPED

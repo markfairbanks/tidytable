@@ -1,0 +1,24 @@
+* installing *source* package ‘pangoling’ ...
+** this is package ‘pangoling’ version ‘1.0.3’
+** package ‘pangoling’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+Downloading uv...Done!
+Downloading cpython-3.12.12-macos-aarch64-none (download) (16.2MiB)
+ Downloaded cpython-3.12.12-macos-aarch64-none (download)
+Downloading numpy (5.0MiB)
+ Downloaded numpy
+Installed 1 package in 11ms
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (pangoling)

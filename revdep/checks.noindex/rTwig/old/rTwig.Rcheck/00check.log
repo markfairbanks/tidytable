@@ -1,14 +1,14 @@
 * using log directory ‘/Users/xmxf129/MyDocs/R/Packages/tidytable/revdep/checks.noindex/rTwig/old/rTwig.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: aarch64-apple-darwin20 (64-bit)
+* using R version 4.5.2 (2025-10-31)
+* using platform: aarch64-apple-darwin20
 * R was compiled by
-    Apple clang version 14.0.0 (clang-1400.0.29.202)
-    GNU Fortran (GCC) 12.2.0
-* running under: macOS 15.1
+    Apple clang version 16.0.0 (clang-1600.0.26.6)
+    GNU Fortran (GCC) 14.2.0
+* running under: macOS Sequoia 15.7.2
 * using session charset: UTF-8
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘rTwig/DESCRIPTION’ ... OK
-* this is package ‘rTwig’ version ‘1.3.0’
+* this is package ‘rTwig’ version ‘1.4.0’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK

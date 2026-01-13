@@ -1,3 +1,8 @@
+# tidytable 0.11.2
+
+#### Bug fixes
+* Empty `dt()` works with no warning, #824
+
 # tidytable 0.11.1
 
 #### Functionality improvements

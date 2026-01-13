@@ -1,7 +1,7 @@
 
-R version 4.3.1 (2023-06-16) -- "Beagle Scouts"
-Copyright (C) 2023 The R Foundation for Statistical Computing
-Platform: aarch64-apple-darwin20 (64-bit)
+R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: aarch64-apple-darwin20
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -63,10 +63,10 @@ Type 'q()' to quit R.
  9        9         1 ( Department == 'Sales' ) … Yes        13      0.867   5.4
 10       10         1 ( TotalWorkingYears > 2 )   No       1347      0.864   1  
 # ℹ 14 more rows
-----------------------------------------------[ FAIL 0 | WARN 2 | SKIP 0 | PASS 80 ]
+----------------------------------------------[ FAIL 0 | WARN 1 | SKIP 0 | PASS 80 ]
 
-[ FAIL 0 | WARN 2 | SKIP 0 | PASS 80 ]
+[ FAIL 0 | WARN 1 | SKIP 0 | PASS 80 ]
 > 
 > proc.time()
    user  system elapsed 
- 15.172   1.389  10.593 
+ 12.144   0.605  14.561 

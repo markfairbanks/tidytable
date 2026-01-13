@@ -1,6 +1,6 @@
 Package: tidytable
 Title: Tidy Interface to 'data.table'
-Version: 0.11.1.9
+Version: 0.11.2.9
 Authors@R: c(
   person("Mark", "Fairbanks", role = c("aut", "cre"), email = "mark.t.fairbanks@gmail.com"),
   person("Abdessabour", "Moutik", role = "ctb"),
@@ -28,7 +28,7 @@ Suggests: testthat (>= 2.1.0), bit64, knitr, rmarkdown, crayon
 RemoteType: local
 RemoteUrl: /Users/xmxf129/MyDocs/R/Packages/tidytable
 NeedsCompilation: no
-Packaged: 2024-12-05 17:13:17 UTC; xmxf129
+Packaged: 2026-01-13 18:36:39 UTC; xmxf129
 Author: Mark Fairbanks [aut, cre],
   Abdessabour Moutik [ctb],
   Matt Carlson [ctb],
@@ -38,4 +38,4 @@ Author: Mark Fairbanks [aut, cre],
   Alexander Sevostianov [ctb],
   Koen ter Berg [ctb]
 Maintainer: Mark Fairbanks <mark.t.fairbanks@gmail.com>
-Built: R 4.3.1; ; 2024-12-05 17:13:17 UTC; unix
+Built: R 4.5.2; ; 2026-01-13 18:36:39 UTC; unix

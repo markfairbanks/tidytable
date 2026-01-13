@@ -1,7 +1,7 @@
 
-R version 4.3.1 (2023-06-16) -- "Beagle Scouts"
-Copyright (C) 2023 The R Foundation for Statistical Computing
-Platform: aarch64-apple-darwin20 (64-bit)
+R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: aarch64-apple-darwin20
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -39,8 +39,7 @@ Type 'q()' to quit R.
 > require(journalabbr)
 > path <- system.file("extdata", "testfile_2.bib", package = "journalabbr", mustWork = TRUE)
 > temptab <- abbr_bib(file = path, out.file = tempfile(fileext = ".bib"))
-Warning in read_bib2dt(file) :
-  
+Warning in read_bib2dt(file) : 
 ====== Duplicate key in uploaded Bib file =======:
 meenakshi2019fuzzy
 xu2014ordinal
@@ -50,8 +49,7 @@ xu2014ordinal
 > # add user csv
 > csvpath <- system.file("extdata", "myabbr.csv", package = "journalabbr", mustWork = TRUE)
 > temptab1 <- abbr_bib(file = path, out.file = tempfile(fileext = ".bib"), user.csv = csvpath)
-Warning in read_bib2dt(file) :
-  
+Warning in read_bib2dt(file) : 
 ====== Duplicate key in uploaded Bib file =======:
 meenakshi2019fuzzy
 xu2014ordinal
@@ -102,8 +100,7 @@ NULL
 > dt1 <- read_bib2dt(file1)
 Warning in read_bib2dt(file1) :
   NA value exists in Citation Key, please check the bib file
-Warning in read_bib2dt(file1) :
-  
+Warning in read_bib2dt(file1) : 
 ====== Duplicate key in uploaded Bib file =======:
 Binmore2008
 Binmore2008
@@ -121,8 +118,7 @@ Osborne1994
 > 
 > file2 <- system.file("extdata", "testfile_2.bib", package = "journalabbr", mustWork = TRUE)
 > dt2 <- read_bib2dt(file2)
-Warning in read_bib2dt(file2) :
-  
+Warning in read_bib2dt(file2) : 
 ====== Duplicate key in uploaded Bib file =======:
 meenakshi2019fuzzy
 xu2014ordinal
@@ -157,8 +153,7 @@ xu2014ordinal
 > 
 > file <- system.file("extdata", "testfile_2.bib", package = "journalabbr", mustWork = TRUE)
 > dt <- read_bib2dt(file)
-Warning in read_bib2dt(file) :
-  
+Warning in read_bib2dt(file) : 
 ====== Duplicate key in uploaded Bib file =======:
 meenakshi2019fuzzy
 xu2014ordinal
@@ -188,8 +183,7 @@ xu2014ordinal
 > require(journalabbr)
 > file <- system.file("extdata", "testfile_2.bib", package = "journalabbr", mustWork = TRUE)
 > bib <- read_bib2dt(file)
-Warning in read_bib2dt(file) :
-  
+Warning in read_bib2dt(file) : 
 ====== Duplicate key in uploaded Bib file =======:
 meenakshi2019fuzzy
 xu2014ordinal
@@ -207,7 +201,7 @@ xu2014ordinal
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  3.115 1.101 2.8 0 0 
+Time elapsed:  2.172 0.095 1.742 0 0 
 > grDevices::dev.off()
 null device 
           1 

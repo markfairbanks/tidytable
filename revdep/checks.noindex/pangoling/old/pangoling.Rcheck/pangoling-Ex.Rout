@@ -1,0 +1,580 @@
+
+R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: aarch64-apple-darwin20
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "pangoling"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('pangoling')
+pangoling version 1.0.3The package needs some python dependencies, to install them use `install_py_pangoling()`
+
+An introduction to the package can be found in https://docs.ropensci.org/pangoling/articles/
+Notice that pretrained models and tokenizers are downloaded from https://huggingface.co/ the first time they are used.
+For changing the cache folder use:
+set_cache_folder(my_new_path)
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("causal_config")
+> ### * causal_config
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: causal_config
+> ### Title: Returns the configuration of a causal model
+> ### Aliases: causal_config
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> if (installed_py_pangoling()) (if (getRversion() >= "3.4") withAutoprint else force)({ # examplesIf
++ ## End(Don't show)
++ causal_config(model = "gpt2")
++ ## Don't show: 
++ }) # examplesIf
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("causal_next_tokens_pred_tbl")
+> ### * causal_next_tokens_pred_tbl
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: causal_next_tokens_pred_tbl
+> ### Title: Generate next tokens after a context and their predictability
+> ###   using a causal transformer model
+> ### Aliases: causal_next_tokens_pred_tbl
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> if (installed_py_pangoling()) (if (getRversion() >= "3.4") withAutoprint else force)({ # examplesIf
++ ## End(Don't show)
++ causal_next_tokens_pred_tbl(
++   context = "The apple doesn't fall far from the",
++   model = "gpt2"
++ )
++ ## Don't show: 
++ }) # examplesIf
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("causal_pred_mats")
+> ### * causal_pred_mats
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: causal_pred_mats
+> ### Title: Generate a list of predictability matrices using a causal
+> ###   transformer model
+> ### Aliases: causal_pred_mats
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> if (installed_py_pangoling()) (if (getRversion() >= "3.4") withAutoprint else force)({ # examplesIf
++ ## End(Don't show)
++ data("df_sent")
++ df_sent
++ list_of_mats <- causal_pred_mats(
++                        x = df_sent$word,
++                        by = df_sent$sent_n,  
++                        model = "gpt2"
++                 )
++ 
++ # View the structure of the resulting list
++ list_of_mats |> str()
++ 
++ # Inspect the last rows of the first matrix
++ list_of_mats[[1]] |> tail()
++ 
++ # Inspect the last rows of the second matrix
++ list_of_mats[[2]] |> tail()
++ ## Don't show: 
++ }) # examplesIf
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("causal_predictability")
+> ### * causal_predictability
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: causal_words_pred
+> ### Title: Compute predictability using a causal transformer model
+> ### Aliases: causal_words_pred causal_tokens_pred_lst causal_targets_pred
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> if (installed_py_pangoling()) (if (getRversion() >= "3.4") withAutoprint else force)({ # examplesIf
++ ## End(Don't show)
++ # Using causal_targets_pred
++ causal_targets_pred(
++   contexts = c("The apple doesn't fall far from the",
++                "Don't judge a book by its"),
++   targets = c("tree.", "cover."),
++   model = "gpt2"
++ )
++ 
++ # Using causal_words_pred
++ causal_words_pred(
++   x = df_sent$word,
++   by = df_sent$sent_n,
++   model = "gpt2"
++ )
++ 
++ # Using causal_tokens_pred_lst
++ preds <- causal_tokens_pred_lst(
++   texts = c("The apple doesn't fall far from the tree.",
++             "Don't judge a book by its cover."),
++   model = "gpt2"
++ )
++ preds
++ 
++ # Convert the output to a tidy table
++ suppressPackageStartupMessages(library(tidytable))
++ map2_dfr(preds, seq_along(preds), 
++ ~ data.frame(tokens = names(.x), pred = .x, id = .y))
++ ## Don't show: 
++ }) # examplesIf
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("causal_preload")
+> ### * causal_preload
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: causal_preload
+> ### Title: Preloads a causal language model
+> ### Aliases: causal_preload
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> if (installed_py_pangoling()) (if (getRversion() >= "3.4") withAutoprint else force)({ # examplesIf
++ ## End(Don't show)
++ causal_preload(model = "gpt2")
++ ## Don't show: 
++ }) # examplesIf
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("df_jaeger14")
+> ### * df_jaeger14
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: df_jaeger14
+> ### Title: Self-Paced Reading Dataset on Chinese Relative Clauses
+> ### Aliases: df_jaeger14
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> # Basic exploration
+> head(df_jaeger14)
+# A data frame: 6 × 14
+  subject  item cond  word   wordn    rt region question accuracy correct_answer
+* <chr>   <int> <chr> <chr>  <int> <int> <fct>  <chr>       <int>          <int>
+1 1m1         1 a     那個       1   360 Det+CL 那個顧客聽說過…        1              1
+2 1m1         1 a     昨晚       2   359 Adv    那個顧客聽說過…        1              1
+3 1m1         1 a     揍了服務生…     3   344 VN     那個顧客聽說過…        1              1
+4 1m1         1 a     一頓       4   313 FreqP  那個顧客聽說過…        1              1
+5 1m1         1 a     的         5   297 DE     那個顧客聽說過…        1              1
+6 1m1         1 a     顧客       6   312 head   那個顧客聽說過…        1              1
+# ℹ 4 more variables: question_type <int>, experiment <chr>, list <int>,
+#   sentence <chr>
+> 
+> # Summarize reaction times by region
+>  library(tidytable)
+
+Attaching package: ‘tidytable’
+
+The following objects are masked from ‘package:stats’:
+
+    dt, filter, lag
+
+The following object is masked from ‘package:base’:
+
+    %in%
+
+> df_jaeger14 |>
++   group_by(region) |>
++   summarize(mean_rt = mean(rt, na.rm = TRUE))
+# A tidytable: 13 × 2
+   region mean_rt
+   <fct>    <dbl>
+ 1 N         614.
+ 2 V         538.
+ 3 Det+CL    513.
+ 4 Adv       541.
+ 5 VN        618.
+ 6 FreqP     603.
+ 7 DE        439.
+ 8 head      653.
+ 9 hd1       604.
+10 hd2       538.
+11 hd3       704.
+12 hd4       479.
+13 hd5       865.
+> 
+> 
+> 
+> cleanEx()
+
+detaching ‘package:tidytable’
+
+> nameEx("df_sent")
+> ### * df_sent
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: df_sent
+> ### Title: Example dataset: Two word-by-word sentences
+> ### Aliases: df_sent
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> # Load the dataset
+> data("df_sent")
+> df_sent
+# A tidytable: 15 × 2
+   sent_n word   
+    <int> <chr>  
+ 1      1 The    
+ 2      1 apple  
+ 3      1 doesn't
+ 4      1 fall   
+ 5      1 far    
+ 6      1 from   
+ 7      1 the    
+ 8      1 tree.  
+ 9      2 Don't  
+10      2 judge  
+11      2 a      
+12      2 book   
+13      2 by     
+14      2 its    
+15      2 cover. 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("install_py_pangoling")
+> ### * install_py_pangoling
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: install_py_pangoling
+> ### Title: Install the Python packages needed for 'pangoling'
+> ### Aliases: install_py_pangoling
+> 
+> ### ** Examples
+> 
+> 
+> # Install with default settings:
+> ## Not run: 
+> ##D  install_py_pangoling()
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("installed_py_pangoling")
+> ### * installed_py_pangoling
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: installed_py_pangoling
+> ### Title: Check if the required Python dependencies for 'pangoling' are
+> ###   installed
+> ### Aliases: installed_py_pangoling
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D if (installed_py_pangoling()) {
+> ##D  message("Python dependencies are installed.")
+> ##D } else {
+> ##D  warning("Python dependencies are missing. Please install `torch` and `transformers`.")
+> ##D }
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("masked_config")
+> ### * masked_config
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: masked_config
+> ### Title: Returns the configuration of a masked model
+> ### Aliases: masked_config
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> if (installed_py_pangoling()) (if (getRversion() >= "3.4") withAutoprint else force)({ # examplesIf
++ ## End(Don't show)
++ masked_config(model = "bert-base-uncased")
++ ## Don't show: 
++ }) # examplesIf
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("masked_preload")
+> ### * masked_preload
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: masked_preload
+> ### Title: Preloads a masked language model
+> ### Aliases: masked_preload
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> if (installed_py_pangoling()) (if (getRversion() >= "3.4") withAutoprint else force)({ # examplesIf
++ ## End(Don't show)
++ causal_preload(model = "bert-base-uncased")
++ ## Don't show: 
++ }) # examplesIf
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("masked_targets_pred")
+> ### * masked_targets_pred
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: masked_targets_pred
+> ### Title: Get the predictability of a target word (or phrase) given a left
+> ###   and right context
+> ### Aliases: masked_targets_pred
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> if (installed_py_pangoling()) (if (getRversion() >= "3.4") withAutoprint else force)({ # examplesIf
++ ## End(Don't show)
++ masked_targets_pred(
++   prev_contexts = c("The", "The"),
++   targets = c("apple", "pear"),
++   after_contexts = c(
++     "doesn't fall far from the tree.",
++     "doesn't fall far from the tree."
++   ),
++   model = "bert-base-uncased"
++ )
++ ## Don't show: 
++ }) # examplesIf
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("masked_tokens_pred_tbl")
+> ### * masked_tokens_pred_tbl
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: masked_tokens_pred_tbl
+> ### Title: Get the possible tokens and their log probabilities for each
+> ###   mask in a sentence
+> ### Aliases: masked_tokens_pred_tbl
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> if (installed_py_pangoling()) (if (getRversion() >= "3.4") withAutoprint else force)({ # examplesIf
++ ## End(Don't show)
++ masked_tokens_pred_tbl("The [MASK] doesn't fall far from the tree.",
++   model = "bert-base-uncased"
++ )
++ ## Don't show: 
++ }) # examplesIf
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("ntokens")
+> ### * ntokens
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ntokens
+> ### Title: The number of tokens in a string or vector of strings
+> ### Aliases: ntokens
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> if (installed_py_pangoling()) (if (getRversion() >= "3.4") withAutoprint else force)({ # examplesIf
++ ## End(Don't show)
++ ntokens(x = c("The apple doesn't fall far from the tree."), model = "gpt2")
++ ## Don't show: 
++ }) # examplesIf
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("pangoling-package")
+> ### * pangoling-package
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: pangoling-package
+> ### Title: pangoling: Access to Large Language Model Predictions
+> ### Aliases: pangoling pangoling-package
+> ### Keywords: internal
+> 
+> ### ** Examples
+> 
+> options(pangoling.verbose = FALSE) # Removes messages
+> options(pangoling.verbose = TRUE) # Show messages 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("perplexity_calc")
+> ### * perplexity_calc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: perplexity_calc
+> ### Title: Calculates perplexity
+> ### Aliases: perplexity_calc
+> 
+> ### ** Examples
+> 
+> probs <- c(.3, .5, .6)
+> perplexity_calc(probs, log.p = FALSE)
+[1] 2.231443
+> lprobs <- log(probs)
+> perplexity_calc(lprobs, log.p = TRUE)
+[1] 2.231443
+> 
+> 
+> 
+> cleanEx()
+> nameEx("set_cache_folder")
+> ### * set_cache_folder
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: set_cache_folder
+> ### Title: Set cache folder for HuggingFace transformers
+> ### Aliases: set_cache_folder
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> if (installed_py_pangoling()) (if (getRversion() >= "3.4") withAutoprint else force)({ # examplesIf
++ ## End(Don't show)
++ ## Not run: 
++ ##D set_cache_folder("~/new_cache_dir")
++ ## End(Not run)
++ ## Don't show: 
++ }) # examplesIf
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("tokenize_lst")
+> ### * tokenize_lst
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: tokenize_lst
+> ### Title: Tokenize an input
+> ### Aliases: tokenize_lst
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> if (installed_py_pangoling()) (if (getRversion() >= "3.4") withAutoprint else force)({ # examplesIf
++ ## End(Don't show)
++ tokenize_lst(x = c("The apple doesn't fall far from the tree."), 
++              model = "gpt2")
++ ## Don't show: 
++ }) # examplesIf
+> ## End(Don't show)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("transformer_vocab")
+> ### * transformer_vocab
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: transformer_vocab
+> ### Title: Returns the vocabulary of a model
+> ### Aliases: transformer_vocab
+> 
+> ### ** Examples
+> 
+> ## Don't show: 
+> if (installed_py_pangoling()) (if (getRversion() >= "3.4") withAutoprint else force)({ # examplesIf
++ ## End(Don't show)
++ transformer_vocab(model = "gpt2") |>
++  head()
++ ## Don't show: 
++ }) # examplesIf
+> ## End(Don't show)
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.874 0.106 2.937 1.121 0.382 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
