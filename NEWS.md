@@ -10,6 +10,8 @@
 #### Breaking changes
 * `unnest(.drop = FALSE)` is now the default to match `tidyr` behavior, #836
 
+* use `set()` instead of `!!` to support `pivot_longer(names_to=NA)`.
+
 # tidytable 0.11.2
 
 #### Bug fixes
