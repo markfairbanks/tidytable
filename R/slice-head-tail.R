@@ -10,7 +10,7 @@ slice_head.tidytable <- function(.df, n = 5, ..., .by = NULL, by = NULL) {
 
   dt_env <- get_dt_env(n)
 
-  n <- prep_expr(n)
+  n <- prep_expr(n, .df, dt_env = dt_env)
 
   .by <- tidyselect_names(.df, c({{ .by }}, {{ by }}))
 
@@ -47,7 +47,7 @@ slice_tail.tidytable <- function(.df, n = 5, ..., .by = NULL, by = NULL) {
 
   dt_env <- get_dt_env(n)
 
-  n <- prep_expr(n)
+  n <- prep_expr(n, .df, dt_env = dt_env)
 
   .by <- tidyselect_names(.df, c({{ .by }}, {{ by }}))
 
