@@ -11,6 +11,8 @@
 * `unnest(.drop = FALSE)` is now the default to match `tidyr` behavior, #836
 * `map2_*()` and `pmap_*()` vector variants now use `purrr`/`vctrs` type and size rules rather than base R coercion, #843
 
+* use `set()` instead of `!!` to support `pivot_longer(names_to=NA)`.
+
 # tidytable 0.11.2
 
 #### Bug fixes

@@ -177,7 +177,7 @@ pivot_longer.tidytable <- function(.df,
       .value_ids <- NULL
     }
 
-    out <- mutate(out, !!variable_name := .env$.value_ids)
+    set(out, j=variable_name, value=.value_ids)
   } else if (multiple_names_to && !uses_dot_value) {
     if (!is.null(names_sep)) {
       out <- separate(out, !!sym(variable_name), into = names_to, sep = names_sep)
