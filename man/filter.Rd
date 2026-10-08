@@ -2,9 +2,12 @@
 % Please edit documentation in R/filter.R
 \name{filter}
 \alias{filter}
+\alias{filter_out}
 \title{Filter rows on one or more conditions}
 \usage{
 filter(.df, ..., .by = NULL)
+
+filter_out(.df, ..., .by = NULL)
 }
 \arguments{
 \item{.df}{A data.frame or data.table}
@@ -14,7 +17,8 @@ filter(.df, ..., .by = NULL)
 \item{.by}{Columns to group by if filtering with a summary function}
 }
 \description{
-Filters a dataset to choose rows where conditions are true.
+Filters a dataset to choose rows to keep or drop where
+conditions are true.
 }
 \examples{
 df <- tidytable(
@@ -27,5 +31,11 @@ df \%>\%
   filter(a >= 2, b >= 4)
 
 df \%>\%
+  filter_out(a >= 2, b >= 4)
+
+df \%>\%
   filter(b <= mean(b), .by = c)
+
+df \%>\%
+  filter_out(b <= mean(b), .by = c)
 }

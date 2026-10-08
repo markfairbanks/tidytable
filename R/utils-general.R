@@ -43,6 +43,28 @@ call2_i_by <- function(.df, i, .by) {
 
 globalVariables("V1")
 
+# these return calls to get indices, not a call to
+# subset the .df itself
+call2_i_inv_ind <- function(.df, i = NULL, .by = NULL) {
+  if (length(.by) == 0) {
+    j <- expr(.I[!!i])
+    dt_expr <- call2_j(.df, j, .by)
+    dt_expr <- call2("na.omit", dt_expr)
+    call2("-", dt_expr)
+  } else {
+    call2_i_by_inv_ind(.df, i, .by)
+  }
+}
+
+call2_i_by_inv_ind <- function(.df, i, .by) {
+  j <- expr(.I[!!i])
+  dt_expr <- call2_j(.df, j, .by)
+  dt_expr <- call2("$", dt_expr, expr(V1))
+  dt_expr <- call2("na.omit", dt_expr)
+  dt_expr <- call2("-", dt_expr)
+  dt_expr
+}
+
 # setnames without modify-by-reference
 set_col_names <- function(.df, new_names = NULL, old_names = NULL) {
   if (is.null(old_names)) {

@@ -1,5 +1,8 @@
 # tidytable 0.12.0
 
+#### New functions
+* `filter_out()`
+
 #### Functionality improvements
 * `names(.SD)` is now supported in `j` assignment in `dt()`
 

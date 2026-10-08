@@ -38,12 +38,12 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{data.table}{\code{\link[data.table:between]{\%between\%}}, \code{\link[data.table:chmatch]{\%chin\%}}, \code{\link[data.table:like]{\%like\%}}, \code{\link[data.table]{data.table}}, \code{\link[data.table]{fwrite}}, \code{\link[data.table:openmp-utils]{getDTthreads}}, \code{\link[data.table:openmp-utils]{setDTthreads}}}
+  \item{data.table}{\code{\link[data.table:\%between\%]{\%between\%}}, \code{\link[data.table:\%chin\%]{\%chin\%}}, \code{\link[data.table:\%like\%]{\%like\%}}, \code{\link[data.table:data.table]{data.table()}}, \code{\link[data.table:fwrite]{fwrite()}}, \code{\link[data.table:getDTthreads]{getDTthreads()}}, \code{\link[data.table:setDTthreads]{setDTthreads()}}}
 
-  \item{pillar}{\code{\link[pillar]{glimpse}}}
+  \item{pillar}{\code{\link[pillar:glimpse]{glimpse()}}}
 
-  \item{rlang}{\code{\link[rlang:defusing-advanced]{enexpr}}, \code{\link[rlang:defusing-advanced]{enexprs}}, \code{\link[rlang]{enquo}}, \code{\link[rlang:enquo]{enquos}}, \code{\link[rlang]{expr}}, \code{\link[rlang:defusing-advanced]{exprs}}, \code{\link[rlang:defusing-advanced]{quo}}, \code{\link[rlang:defusing-advanced]{quos}}, \code{\link[rlang]{sym}}, \code{\link[rlang:sym]{syms}}}
+  \item{rlang}{\code{\link[rlang:enexpr]{enexpr()}}, \code{\link[rlang:enexprs]{enexprs()}}, \code{\link[rlang:enquo]{enquo()}}, \code{\link[rlang:enquos]{enquos()}}, \code{\link[rlang:expr]{expr()}}, \code{\link[rlang:exprs]{exprs()}}, \code{\link[rlang:quo]{quo()}}, \code{\link[rlang:quos]{quos()}}, \code{\link[rlang:sym]{sym()}}, \code{\link[rlang:syms]{syms()}}}
 
-  \item{tidyselect}{\code{\link[tidyselect]{all_of}}, \code{\link[tidyselect:all_of]{any_of}}, \code{\link[tidyselect:starts_with]{contains}}, \code{\link[tidyselect:starts_with]{ends_with}}, \code{\link[tidyselect]{everything}}, \code{\link[tidyselect:everything]{last_col}}, \code{\link[tidyselect:starts_with]{matches}}, \code{\link[tidyselect:starts_with]{num_range}}, \code{\link[tidyselect]{starts_with}}, \code{\link[tidyselect]{where}}}
+  \item{tidyselect}{\code{\link[tidyselect:all_of]{all_of()}}, \code{\link[tidyselect:any_of]{any_of()}}, \code{\link[tidyselect:contains]{contains()}}, \code{\link[tidyselect:ends_with]{ends_with()}}, \code{\link[tidyselect:everything]{everything()}}, \code{\link[tidyselect:last_col]{last_col()}}, \code{\link[tidyselect:matches]{matches()}}, \code{\link[tidyselect:num_range]{num_range()}}, \code{\link[tidyselect:starts_with]{starts_with()}}, \code{\link[tidyselect:where]{where()}}}
 }}
 
